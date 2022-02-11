@@ -56,12 +56,13 @@ class DragonbornChampionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(game.getControllerId(event.getSourceId())) && event.getAmount() >= 5;
+        return isControlledBy(game.getControllerId(event.getSourceId()))
+                && event.getAmount() >= 5;
     }
 
     @Override

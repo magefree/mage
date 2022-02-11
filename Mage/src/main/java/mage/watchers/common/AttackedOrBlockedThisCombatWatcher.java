@@ -1,15 +1,15 @@
 package mage.watchers.common;
 
-import java.util.HashSet;
-import java.util.Set;
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- *
  * @author LevelX2
  */
 public class AttackedOrBlockedThisCombatWatcher extends Watcher {
@@ -23,14 +23,16 @@ public class AttackedOrBlockedThisCombatWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
-            this.getAttackedThisTurnCreatures().clear();
-        }
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            this.getAttackedThisTurnCreatures().add(new MageObjectReference(event.getSourceId(), game));
-        }
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            this.getBlockedThisTurnCreatures().add(new MageObjectReference(event.getSourceId(), game));
+        switch (event.getType()) {
+            case BEGIN_COMBAT_STEP_PRE:
+                this.attackedThisTurnCreatures.clear();
+                this.blockedThisTurnCreatures.clear();
+                return;
+            case ATTACKER_DECLARED:
+                this.attackedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
+                return;
+            case BLOCKER_DECLARED:
+                this.blockedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
         }
     }
 

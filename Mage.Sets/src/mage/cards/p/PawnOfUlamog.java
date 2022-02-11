@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.EldraziSpawnToken;
 
@@ -24,7 +23,7 @@ public final class PawnOfUlamog extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
     
     public PawnOfUlamog(UUID ownerId, CardSetInfo setInfo) {

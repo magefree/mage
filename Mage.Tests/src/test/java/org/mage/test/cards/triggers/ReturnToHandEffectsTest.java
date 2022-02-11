@@ -63,7 +63,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stormfront Riders");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lab Rats");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Boomerang", "Rat");
 

@@ -20,7 +20,7 @@ public final class FatefulEnd extends CardImpl {
         // Fateful End deals 3 damage to any target. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "any target"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
     }
 
     private FatefulEnd(final FatefulEnd card) {

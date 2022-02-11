@@ -44,4 +44,9 @@ public class HexproofFromPlaneswalkersAbility extends HexproofBaseAbility {
     public String getRule() {
         return "hexproof from planeswalkers";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from planeswalkers";
+    }
 }

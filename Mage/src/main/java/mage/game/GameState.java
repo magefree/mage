@@ -105,6 +105,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
     private boolean manaBurn = false;
+    private boolean hasDayNight = false;
+    private boolean isDaytime = true;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -172,6 +174,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                 this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
             } else if (entry.getValue() instanceof HashMap) {
                 this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());
+            } else if (entry.getValue() instanceof List) {
+                this.values.put(entry.getKey(), ((List) entry.getValue()).stream().collect(Collectors.toList()));
             } else {
                 this.values.put(entry.getKey(), entry.getValue());
             }
@@ -191,6 +195,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
                 -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
         this.commandersToStay.addAll(state.commandersToStay);
+        this.hasDayNight = state.hasDayNight;
+        this.isDaytime = state.isDaytime;
     }
 
     public void clearOnGameRestart() {
@@ -278,6 +284,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
                 -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
         this.commandersToStay = state.commandersToStay;
+        this.hasDayNight = state.hasDayNight;
+        this.isDaytime = state.isDaytime;
     }
 
     @Override
@@ -870,7 +878,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -944,8 +952,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * span
      *
      * @param ability
-     * @param sourceId - if source object can be moved between zones then you
-     * must set it here (each game cycle clear all source related triggers)
+     * @param sourceId   - if source object can be moved between zones then you
+     *                   must set it here (each game cycle clear all source related triggers)
      * @param attachedTo
      */
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
@@ -1151,8 +1159,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     * state (allows to have multiple instances in one object, e.g. false param
-     * will simulate keyword/singleton)
+     *                    state (allows to have multiple instances in one object, e.g. false param
+     *                    will simulate keyword/singleton)
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         checkWrongDynamicAbilityUsage(attachedTo, ability);
@@ -1409,6 +1417,21 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean isManaBurn() {
         return manaBurn;
+    }
+
+    boolean isHasDayNight() {
+        return hasDayNight;
+    }
+
+    boolean setDaytime(boolean daytime) {
+        boolean flag = this.hasDayNight && this.isDaytime != daytime;
+        this.hasDayNight = true;
+        this.isDaytime = daytime;
+        return flag;
+    }
+
+    boolean isDaytime() {
+        return isDaytime;
     }
 
     @Override

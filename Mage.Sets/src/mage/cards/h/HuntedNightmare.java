@@ -34,7 +34,7 @@ public final class HuntedNightmare extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Hunted Nightmare enters the battlefield, target opponent puts a deathtouch counter on a creature they control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HuntedNightmareEffect());

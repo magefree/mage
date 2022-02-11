@@ -22,7 +22,7 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Witchbane Orb");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
-        setChoice(playerA, "No"); // use normal cost
+        setChoice(playerA, false); // use normal cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -46,7 +46,7 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Witchbane Orb");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         addTarget(playerA, playerB); // select opponent
 
         setStrictChooseMode(true);
@@ -72,12 +72,12 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
 
         // cast 1 - alternative
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         addTarget(playerA, playerB); // select opponent
 
         // cast 2 - normal
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Grizzly Bears");
-        setChoice(playerA, "No"); // normal cast
+        setChoice(playerA, false); // normal cast
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -105,7 +105,7 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
 
         // cast 1 - with alternative
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         addTarget(playerA, playerB); // select opponent
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after cast 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", 1);
@@ -123,7 +123,7 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         // cast 2 - without alternative
         // possible bug: cost status can be found from previous object (e.g. it ask about opponent select, but must not)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Grizzly Bears");
-        setChoice(playerA, "No"); // do not use alternative cost
+        setChoice(playerA, false); // do not use alternative cost
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after cast 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", 1);
         checkHandCount("after cast 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
@@ -155,10 +155,10 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         // cast with alternative
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         // copy spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Cast Baleful Mastery", "Cast Baleful Mastery");
-        setChoice(playerA, "Yes"); // change target
+        setChoice(playerA, true); // change target
         addTarget(playerA, "Grizzly Bears"); // new target
         checkStackSize("before copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);

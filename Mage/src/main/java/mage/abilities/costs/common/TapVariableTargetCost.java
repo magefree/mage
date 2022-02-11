@@ -1,19 +1,17 @@
-
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapVariableTargetCost extends VariableCostImpl  {
+public class TapVariableTargetCost extends VariableCostImpl {
 
     protected FilterControlledPermanent filter;
 
@@ -21,10 +19,11 @@ public class TapVariableTargetCost extends VariableCostImpl  {
         this(filter, false, "X");
     }
 
-    public TapVariableTargetCost(FilterControlledPermanent filter, boolean additionalCostText, String xText) {
-        super(xText, new StringBuilder(filter.getMessage()).append(" to tap").toString());
+    public TapVariableTargetCost(FilterControlledPermanent filter, boolean useAsAdditionalCost, String xText) {
+        super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
+                xText, new StringBuilder(filter.getMessage()).append(" to tap").toString());
         this.filter = filter;
-        this.text = new StringBuilder(additionalCostText ? "as an additional cost to cast this spell, tap ":"Tap ")
+        this.text = new StringBuilder(useAsAdditionalCost ? "as an additional cost to cast this spell, tap " : "Tap ")
                 .append(this.xText).append(' ').append(filter.getMessage()).toString();
     }
 

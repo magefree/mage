@@ -13,23 +13,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public final class MerEkNightblade extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public MerEkNightblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -43,7 +34,14 @@ public final class MerEkNightblade extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{B}")));
         
         // Each creature you control with a +1/+1 counter on it has deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has deathtouch")));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(
+                        DeathtouchAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+                )
+        );
     }
 
     private MerEkNightblade(final MerEkNightblade card) {

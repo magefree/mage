@@ -1,5 +1,6 @@
 package org.mage.test.cards.cost.modaldoublefaces;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.PhaseStep;
@@ -9,6 +10,7 @@ import mage.game.permanent.PermanentCard;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -670,7 +672,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // cast and make copy of bear
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glasspool Mimic");
-        setChoice(playerA, "Yes"); // as copy
+        setChoice(playerA, true); // as copy
         setChoice(playerA, "Balduvian Bears"); // copy of
 
         setStrictChooseMode(true);
@@ -695,16 +697,16 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Aether Vial", 1);
 
         // prepare charge counters
-        setChoice(playerA, "Yes"); // +1 charge on turn 1
-        setChoice(playerA, "Yes"); // +1 charge on turn 3
-        setChoice(playerA, "Yes"); // +1 charge on turn 5
+        setChoice(playerA, true); // +1 charge on turn 1
+        setChoice(playerA, true); // +1 charge on turn 3
+        setChoice(playerA, true); // +1 charge on turn 5
 
         // put card from hand to battlefield
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: You may put a creature card");
-        setChoice(playerA, "Yes"); // put card
+        setChoice(playerA, true); // put card
         setChoice(playerA, "Glasspool Mimic"); // select card with cmc 3 from hand
         //
-        setChoice(playerA, "Yes"); // put to battlefield as copy
+        setChoice(playerA, true); // put to battlefield as copy
         setChoice(playerA, "Balduvian Bears"); // copy of
 
         setStrictChooseMode(true);
@@ -820,7 +822,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // play elf with cascade
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
-        setChoice(playerA, "Yes"); // use free cast
+        setChoice(playerA, true); // use free cast
         //setChoice(playerA, "Cast Valki, God of Lies"); possible bug: you can see two spell abilities to choose, but only one allows here
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
@@ -853,7 +855,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // play elf with cascade
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
-        setChoice(playerA, "Yes"); // use free cast
+        setChoice(playerA, true); // use free cast
         setChoice(playerA, "Cast The Omenkeel"); // can cast any side here
 
         setStrictChooseMode(true);
@@ -862,5 +864,140 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "The Omenkeel", 1);
+    }
+
+    @Test
+    public void test_Copy_AsSpell() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major", 1); // {G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        // prepare copy of spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Akoum Warrior", "Akoum Warrior");
+        checkStackSize("before copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkStackSize("after copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Copy_AsCloneFromPermanent() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerA, "Clone", 1); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // copy permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "Akoum Warrior"); // copy source
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    @Ignore // TODO: Zam Wesell must be reworked to use on cast + etb abilities
+    public void test_Copy_AsCloneFromCard_ZamWesell() {
+        // When you cast Zam Wesell, target opponent reveals their hand. You may choose a creature card from it
+        // and have Zam Wesell enter the battlefield as a copy of that creature card.
+        addCard(Zone.HAND, playerA, "Zam Wesell"); // {2}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        //
+        addCard(Zone.HAND, playerB, "Akoum Warrior", 1);
+
+        // cast as copy of mdf card
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zam Wesell");
+        addTarget(playerA, playerB); // target opponent
+        setChoice(playerA, "Akoum Warrior"); // creature card to copy
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Copy_AsCloneFromCard_ValkiGodOfLies() {
+        // When Valki enters the battlefield, each opponent reveals their hand. For each opponent,
+        // exile a creature card they revealed this way until Valki leaves the battlefield.
+        // X: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
+        addCard(Zone.HAND, playerA, "Valki, God of Lies"); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2 + 3); // 3 for X
+        //
+        addCard(Zone.HAND, playerB, "Birgi, God of Storytelling", 1); // {2}{R}
+
+        // prepare valki
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Valki, God of Lies");
+        setChoice(playerA, "Birgi, God of Storytelling"); // exile
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // copy exiled card
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}:");
+        setChoice(playerA, "X=3");
+        setChoice(playerA, "Birgi, God of Storytelling");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Valki, God of Lies", 0);
+        assertPermanentCount(playerA, "Birgi, God of Storytelling", 1);
+    }
+
+    @Test
+    public void test_FindMovedPermanentByCard() {
+        // original problem: you must be able to find a card after move it to battlefield
+        // https://github.com/magefree/mage/issues/8474
+
+        // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste.
+        // Sacrifice the creature at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Sneak Attack");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1);
+
+        // move
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:");
+        setChoice(playerA, true); // yes, activate
+        setChoice(playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after move", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkAbility("must have haste after etb", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", HasteAbility.class, true);
+
+        // must sacrifice
+        checkPermanentCount("after sacrifice", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

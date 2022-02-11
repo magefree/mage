@@ -66,7 +66,7 @@ class GoblinTutorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
 
             Effect effect = null;
             // 2 - A card named Goblin Tutor

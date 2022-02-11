@@ -90,7 +90,7 @@ class KarrthusEffect extends OneShotEffect {
         List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
         for (Permanent dragon : dragons) {
             ContinuousEffect effect = new KarrthusControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(dragon.getId()));
+            effect.setTargetPointer(new FixedTarget(dragon.getId(), game));
             game.addEffect(effect, source);
         }
         for (Permanent dragon : dragons) {

@@ -1,11 +1,7 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,12 +12,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.LostControlWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class Willbreaker extends CardImpl {
@@ -34,9 +29,7 @@ public final class Willbreaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), null);
-        effect.setText("gain control of that creature for as long as you control {this}");
-        this.addAbility(new WillbreakerTriggeredAbility(effect), new LostControlWatcher());
+        this.addAbility(new WillbreakerTriggeredAbility());
     }
 
     private Willbreaker(final Willbreaker card) {
@@ -51,11 +44,11 @@ public final class Willbreaker extends CardImpl {
 
 class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WillbreakerTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
+    WillbreakerTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.WhileControlled));
     }
 
-    public WillbreakerTriggeredAbility(WillbreakerTriggeredAbility ability) {
+    private WillbreakerTriggeredAbility(final WillbreakerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,22 +59,26 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature(game)) {
-                Player controller = game.getPlayer(getControllerId());
-                if (controller != null && controller.hasOpponent(permanent.getControllerId(), game)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-                    return true;
-                }
-            }
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent willbreaker = game.getPermanent(sourceId);
+        if (willbreaker == null // If you lose control of Willbreaker before its ability resolves, you won’t gain control of the creature at all.
+                || permanent == null
+                || !permanent.isCreature(game)
+                || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
+            return false;
+        }
+        // always call this method for FixedTargets in case it is blinked
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        return true;
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, " ;
+    public String getRule() {
+        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, "
+                + "gain control of that creature for as long as you control {this}";
     }
 
     @Override

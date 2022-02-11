@@ -68,7 +68,7 @@ class StingingStudyEffect extends OneShotEffect {
         for (Card commander : game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY, Zone.BATTLEFIELD, Zone.COMMAND)) {
             manaValues.add(commander.getManaValue());
         }
-        int chosenValue = 0;
+        int chosenValue;
         if (manaValues.size() > 1) {
             Choice choice = new ChoiceImpl(true);
             choice.setChoices(manaValues.stream().map(x -> "" + x).collect(Collectors.toSet()));

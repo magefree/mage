@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -11,9 +10,7 @@ import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,12 +19,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class MaliciousAffliction extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creatures");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public MaliciousAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
@@ -43,7 +34,7 @@ public final class MaliciousAffliction extends CardImpl {
 
         // Destroy target nonblack creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
     }
 
     private MaliciousAffliction(final MaliciousAffliction card) {

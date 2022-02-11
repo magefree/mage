@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -56,7 +55,7 @@ class HedonistsTroveExileEffect extends OneShotEffect {
 
     HedonistsTroveExileEffect() {
         super(Outcome.Exile);
-        staticText = "exile all cards from target opponent's graveyard";
+        staticText = "exile target opponent's graveyard";
     }
 
     private HedonistsTroveExileEffect(final HedonistsTroveExileEffect effect) {
@@ -72,13 +71,14 @@ class HedonistsTroveExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObject(game);
+        UUID exileId = CardUtil.getExileZoneId(game, source);
+        // save the exileId associated with this specific source
+        game.getState().setValue(source.getSourceId().toString(), exileId);
         return controller != null
                 && targetPlayer != null
-                && sourceObject != null
                 && controller.moveCardsToExile(
                 targetPlayer.getGraveyard().getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+                exileId, CardUtil.getSourceName(game, source)
         );
     }
 }
@@ -107,11 +107,16 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card cardToCheck = game.getCard(objectId);
-        if (cardToCheck == null || !cardToCheck.isLand(game) || !source.isControlledBy(affectedControllerId)) {
+        if (cardToCheck == null
+                || !cardToCheck.isLand(game)
+                || !source.isControlledBy(affectedControllerId)) {
             return false;
         }
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return exileZone != null && exileZone.contains(cardToCheck.getMainCard());
+        // use the correct exileId
+        UUID exileId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        return exileZone != null
+                && exileZone.contains(cardToCheck.getMainCard().getId());
     }
 }
 
@@ -119,8 +124,8 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     HedonistsTroveCastNonlandCardsEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast spells from among cards exiled with {this}. " +
-                "You can't cast more than one spell this way each turn.";
+        staticText = "You may cast spells from among cards exiled with {this}. "
+                + "You can't cast more than one spell this way each turn.";
     }
 
     private HedonistsTroveCastNonlandCardsEffect(final HedonistsTroveCastNonlandCardsEffect effect) {
@@ -140,16 +145,19 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         HedonistsTroveWatcher watcher = game.getState().getWatcher(HedonistsTroveWatcher.class);
-        if (watcher == null || !watcher.checkPlayer(affectedControllerId, source, game)) {
+        if (watcher == null
+                || !watcher.checkPlayer(affectedControllerId, source, game)) {
             return false;
         }
         Card cardToCheck = game.getCard(objectId);
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        // use the correct exileId
+        UUID exileId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
         return cardToCheck != null
                 && !cardToCheck.isLand(game)
                 && source.isControlledBy(affectedControllerId)
                 && exileZone != null
-                && exileZone.contains(cardToCheck.getMainCard());
+                && exileZone.contains(cardToCheck.getMainCard().getId());
     }
 }
 
@@ -164,7 +172,8 @@ class HedonistsTroveWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST
+                || event.getAdditionalReference() == null) {
             return;
         }
         playerMap

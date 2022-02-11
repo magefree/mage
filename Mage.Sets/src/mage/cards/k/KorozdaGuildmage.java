@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -34,7 +33,7 @@ public final class KorozdaGuildmage extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public KorozdaGuildmage(UUID ownerId, CardSetInfo setInfo) {

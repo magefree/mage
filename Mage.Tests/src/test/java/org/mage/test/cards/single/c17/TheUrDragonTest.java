@@ -33,7 +33,7 @@ public class TheUrDragonTest extends CardTestPlayerBase {
         attack(3, playerA, "The Ur-Dragon");
         attack(3, playerA, "Dragon Hatchling");
         attack(3, playerA, "Dragon Hatchling");
-        setChoice(playerA, "Yes"); // Put a permanent card from your hand onto the battlefield?
+        setChoice(playerA, true); // Put a permanent card from your hand onto the battlefield?
         setChoice(playerA, "Silvercoat Lion");
         
         setStopAt(3, PhaseStep.END_COMBAT);

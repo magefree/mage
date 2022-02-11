@@ -108,7 +108,7 @@ class TidalFlatsEffect extends OneShotEffect {
                     Permanent blocker = game.getPermanent(blockerId);
                     if (blocker != null && Objects.equals(blocker.getControllerId(), controller.getId())) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(blocker.getId()));
+                        effect.setTargetPointer(new FixedTarget(blocker.getId(), game));
                         game.addEffect(effect, source);
                     }
                 }

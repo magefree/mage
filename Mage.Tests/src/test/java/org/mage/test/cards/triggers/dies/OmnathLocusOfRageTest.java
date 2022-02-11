@@ -27,8 +27,12 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Diabolic Edict", 1); // {1}{B}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict");
+        addTarget(playerB, playerA);
+        addTarget(playerA, "Omnath, Locus of Rage"); // sacrifice target
+        addTarget(playerA, playerB); // target for dies trigger with damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
@@ -55,7 +59,9 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Lightning Elemental"); // Dying Lightning Elemental does no longer trigger ability of Omnath
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Blastfire Bolt", "Omnath, Locus of Rage");
+        addTarget(playerA, playerB); // target for dies trigger with damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
@@ -67,7 +73,6 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
-
     }
 
     @Test
@@ -84,6 +89,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         setChoice(playerB, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Stave Off", "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();

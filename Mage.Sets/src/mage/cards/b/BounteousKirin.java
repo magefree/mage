@@ -32,7 +32,7 @@ public final class BounteousKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true, true));
     }
 
     private BounteousKirin(final BounteousKirin card) {

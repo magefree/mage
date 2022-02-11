@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.cards.AdventureCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -69,12 +70,14 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
     }
 
     /**
-     * Internal method to do the neccessary to allow the card from objectId to be cast or played (if it's a land) without paying any mana.
-     * Additional costs (like sacrificing or discarding) have still to be payed.
-     * Checks if the card is of the correct type or in the correct zone have to be done before.
+     * Internal method to do the necessary to allow the card from objectId to be
+     * cast or played (if it's a land) without paying any mana. Additional costs
+     * (like sacrificing or discarding) have still to be payed. Checks if the
+     * card is of the correct type or in the correct zone have to be done
+     * before.
      *
-     * @param objectId             sourceId of the card to play
-     * @param source               source ability that allows this effect
+     * @param objectId sourceId of the card to play
+     * @param source source ability that allows this effect
      * @param affectedControllerId player allowed to play the card
      * @param game
      * @return
@@ -93,12 +96,21 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
                 player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
             } else if (card instanceof ModalDoubleFacesCard) {
                 Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
                 Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
-            } else {
-                player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+                // some MDFC's are land.  IE: sea gate restoration
+                if (!leftCard.isLand(game)) {
+                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
+                }
+                if (!rightCard.isLand(game)) {
+                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
+                }
+            } else if (card instanceof AdventureCard) {
+                Card creatureCard = card.getMainCard();
+                Card spellCard = ((AdventureCard) card).getSpellCard();
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts());
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts());
             }
+            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
         }
         return true;
     }

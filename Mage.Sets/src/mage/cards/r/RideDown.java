@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -34,8 +33,7 @@ public final class RideDown extends CardImpl {
     }
 
     public RideDown(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");
 
         // Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.
         this.getSpellAbility().addEffect(new RideDownEffect());
@@ -77,9 +75,9 @@ class RideDownEffect extends OneShotEffect {
             if (blockingCreature != null) {
                 for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                     if (combatGroup.getBlockers().contains(blockingCreature.getId())) {
-                        for (UUID attackerId: combatGroup.getAttackers()) {
+                        for (UUID attackerId : combatGroup.getAttackers()) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                            effect.setTargetPointer(new FixedTarget(attackerId));
+                            effect.setTargetPointer(new FixedTarget(attackerId, game));
                             game.addEffect(effect, source);
                         }
                         break;

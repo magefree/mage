@@ -376,7 +376,7 @@ public final class SystemUtil {
             // 3. system commands
             if (runGroup.isSpecialCommand) {
 
-                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).iterator().next());
+                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).stream().findFirst().orElse(null));
 
                 String info;
                 switch (runGroup.name) {

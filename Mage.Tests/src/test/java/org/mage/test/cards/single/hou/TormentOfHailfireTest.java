@@ -51,24 +51,24 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Torment of Hailfire");
         setChoice(playerA, "X=10");
         
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
 
-        setChoice(playerB, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerB, true);// Sacrifices a nonland permanent?
         setChoice(playerB, "Silvercoat Lion");
 
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
 
-        setChoice(playerB, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerB, true);// Sacrifices a nonland permanent?
         setChoice(playerB, "Silvercoat Lion");
 
-        setChoice(playerD, "No");// Sacrifices a nonland permanent?
-        setChoice(playerD, "Yes");// Discard a card?
+        setChoice(playerD, false);// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Discard a card?
         
-        setChoice(playerB, "Yes");// Discard a card?
+        setChoice(playerB, true);// Discard a card?
 
-        setChoice(playerD, "Yes");// Sacrifices a nonland permanent?
+        setChoice(playerD, true);// Sacrifices a nonland permanent?
         setChoice(playerD, "Silvercoat Lion");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

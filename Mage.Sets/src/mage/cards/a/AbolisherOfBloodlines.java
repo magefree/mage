@@ -1,26 +1,21 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AbolisherOfBloodlines extends CardImpl {
@@ -39,7 +34,11 @@ public final class AbolisherOfBloodlines extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures.
-        this.addAbility(new AbolisherOfBloodlinesAbility());
+        Ability ability = new TransformIntoSourceTriggeredAbility(new SacrificeEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE, 3, "target opponent"
+        ));
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     private AbolisherOfBloodlines(final AbolisherOfBloodlines card) {
@@ -49,46 +48,5 @@ public final class AbolisherOfBloodlines extends CardImpl {
     @Override
     public AbolisherOfBloodlines copy() {
         return new AbolisherOfBloodlines(this);
-    }
-}
-
-class AbolisherOfBloodlinesAbility extends TriggeredAbilityImpl {
-
-    static final String RULE_TEXT = "When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures";
-
-    public AbolisherOfBloodlinesAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 3, "Target opponent"), false);
-        Target target = new TargetOpponent();
-        this.addTarget(target);
-    }
-
-    public AbolisherOfBloodlinesAbility(final AbolisherOfBloodlinesAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AbolisherOfBloodlinesAbility copy() {
-        return new AbolisherOfBloodlinesAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return RULE_TEXT + '.';
     }
 }

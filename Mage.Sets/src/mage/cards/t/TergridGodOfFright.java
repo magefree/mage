@@ -46,7 +46,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         this.getLeftHalfCard().setPT(4, 5);
 
         // Menace
-        this.getLeftHalfCard().addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card onto the battlefield under your control from their graveyard.
         this.getLeftHalfCard().addAbility(new TergridGodOfFrightTriggeredAbility());
@@ -106,8 +106,9 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
         if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
+        // it must be in the graveyard IE: Rest in Peace effect
         switch (event.getType()) {
-            case SACRIFICE_PERMANENT:
+            case SACRIFICED_PERMANENT:
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
                 if (permanent == null
                         || permanent instanceof PermanentToken
@@ -117,7 +118,9 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case DISCARDED_CARD:
                 Card discardedCard = game.getCard(event.getTargetId());
-                if (discardedCard == null || !discardedCard.isPermanent(game)) {
+                if (discardedCard == null
+                        || !discardedCard.isPermanent(game)
+                        || game.getState().getZone(discardedCard.getId()) != Zone.GRAVEYARD) {
                     return false;
                 }
                 break;
@@ -208,6 +211,10 @@ class TergridsLaternEffect extends OneShotEffect {
             choice.setChoices(choiceSet);
             targetedPlayer.choose(aiOutcome, choice, game);
             chosen = choice.getChoice();
+            if (chosen == null) {
+                // on disconnect
+                chosen = LIFE_LOSS_CHOICE;
+            }
         } else {
             chosen = LIFE_LOSS_CHOICE;
         }

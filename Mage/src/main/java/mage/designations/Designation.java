@@ -9,14 +9,12 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.Copyable;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
@@ -28,7 +26,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public abstract class Designation implements MageObject, Copyable<Designation> {
+public abstract class Designation implements MageObject {
 
     private static final List<CardType> emptySet = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
@@ -68,6 +66,9 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
         this.expansionSetCodeForImage = designation.expansionSetCodeForImage;
         this.unique = designation.unique;
     }
+
+    @Override
+    public abstract Designation copy();
 
     @Override
     public FrameStyle getFrameStyle() {
@@ -117,6 +118,7 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     public void addAbility(Ability ability) {
         ability.setSourceId(id);
         abilites.add(ability);
+        abilites.addAll(ability.getSubAbilities());
     }
 
     @Override
@@ -266,16 +268,6 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public boolean isUnique() {

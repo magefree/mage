@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -84,7 +83,7 @@ enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                 int xValue = GetXValue.instance.calculate(game, ability, null);
                 ability.getTargets().clear();
-                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, new FilterCreatureCard("creature cards from your graveyard")));
+                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
             }
         }
     }

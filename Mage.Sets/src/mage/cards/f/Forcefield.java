@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -19,7 +18,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -33,7 +31,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Forcefield extends CardImpl {
 
     public Forcefield(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ForcefieldEffect(), new GenericManaCost(1)));
@@ -50,26 +48,27 @@ public final class Forcefield extends CardImpl {
 }
 
 class ForcefieldEffect extends OneShotEffect {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("an unblocked creature");
+
     static {
         filter.add(UnblockedPredicate.instance);
     }
-    
+
     ForcefieldEffect() {
         super(Outcome.PreventDamage);
         this.staticText = "The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage";
     }
-    
+
     ForcefieldEffect(final ForcefieldEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ForcefieldEffect copy() {
         return new ForcefieldEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -82,7 +81,7 @@ class ForcefieldEffect extends OneShotEffect {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + creature.getLogName());
                 }
                 ContinuousEffect effect = new ForcefieldPreventionEffect();
-                effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
                 game.addEffect(effect, source);
             }
             return true;

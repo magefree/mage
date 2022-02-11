@@ -88,7 +88,7 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
                 sacrificeEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);

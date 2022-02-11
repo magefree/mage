@@ -74,7 +74,7 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sidisi, Brood Tyrant");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Satyr Wayfinder");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

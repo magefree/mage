@@ -78,7 +78,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Raise the Alarm"); //  Instant {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of Replication", "Cobblebrute");
-        setChoice(playerA, "No"); // no kicker
+        setChoice(playerA, false); // no kicker
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Raise the Alarm");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enchanted Evening");
         setStopAt(1, PhaseStep.END_TURN);

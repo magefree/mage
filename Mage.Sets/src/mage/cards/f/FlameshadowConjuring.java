@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class FlameshadowConjuring extends CardImpl {
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filterNontoken.add(Predicates.not(TokenPredicate.instance));
+        filterNontoken.add(TokenPredicate.FALSE);
     }
 
     public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {
@@ -82,7 +81,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
             if (effect.apply(game, source)) {
-                for (Permanent tokenPermanent : effect.getAddedPermanent()) {
+                for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

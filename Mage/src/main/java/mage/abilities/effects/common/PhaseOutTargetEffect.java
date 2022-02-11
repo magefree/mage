@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +8,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class PhaseOutTargetEffect extends OneShotEffect {
@@ -64,7 +64,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
-            return staticText + " phases out";
+            return staticText;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -73,7 +73,12 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         } else {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         }
-        sb.append(" phases out");
+        sb.append(" phase");
+        if (mode.getTargets().isEmpty()
+                || mode.getTargets().get(0).getMaxNumberOfTargets() <= 1) {
+            sb.append('s');
+        }
+        sb.append(" out");
         return sb.toString();
     }
 

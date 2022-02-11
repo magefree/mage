@@ -96,7 +96,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}:");
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}: Gain control", "Mutavault");
 
-        setChoice(playerA, "No"); // Don't untap the Shackles
+        setChoice(playerA, false); // Don't untap the Shackles
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -171,9 +171,9 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, leovold);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
-        setChoice(playerA, "Yes"); // opt to use Kirin's ability
+        setChoice(playerA, true); // opt to use Kirin's ability
         addTarget(playerA, leovold); // attempt to target Leovold with Kirin's take control ability
-        setChoice(playerB, "Yes"); // opt to use Leovold's ability to draw a card when targetted (should not occur)
+        setChoice(playerB, true); // opt to use Leovold's ability to draw a card when targetted (should not occur)
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -218,7 +218,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, aLight);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
-        setChoice(playerA, "Yes"); // opt to use Kirin's ability
+        setChoice(playerA, true); // opt to use Kirin's ability
         addTarget(playerA, aLight); // target Angel of Light with Kirin's take control ability
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

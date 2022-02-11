@@ -23,7 +23,7 @@ public final class SparkHarvest extends CardImpl {
         // As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
         this.getSpellAbility().addCost(new OrCost(
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
-                new ManaCostsImpl("{3}{B}"), "sacrifice a creature or pay {3}{B}"
+                new ManaCostsImpl<>("{3}{B}"), "sacrifice a creature or pay {3}{B}"
         ));
 
         // Destroy target creature or planeswalker.

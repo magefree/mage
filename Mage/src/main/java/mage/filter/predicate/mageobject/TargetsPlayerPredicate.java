@@ -14,7 +14,7 @@ import mage.target.Target;
  *
  * @author jeffwadsworth
  */
-public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<MageObject> {
 
     public TargetsPlayerPredicate() {
     }

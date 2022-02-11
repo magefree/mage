@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -69,7 +68,7 @@ class DreadSlaverEffect extends OneShotEffect {
         if (card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

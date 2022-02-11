@@ -11,7 +11,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -67,7 +66,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         // Tibalt, Cosmic Impostor
         // Legendary Planeswalker — Tibalt
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.getRightHalfCard().setStartingLoyalty(5);
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new GetEmblemEffect(new TibaltCosmicImpostorEmblem())));
@@ -247,7 +246,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
                     ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());
-                    copyEffect.setTargetPointer(new FixedTarget(Valki.getId()));
+                    copyEffect.setTargetPointer(new FixedTarget(Valki.getId(), game));
                     game.addEffect(copyEffect, source);
                     return true;
                 }
@@ -283,14 +282,16 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
                 && Tibalt != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null
+                        && player.getLibrary().hasCards()) {
                     Card topCard = player.getLibrary().getFromTop(game);
                     cardsToExile.add(topCard);
                 }
             }
             // exile all cards at one time
-            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
-            return true;
+            if (!cardsToExile.isEmpty()) {
+                return controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
+            }
         }
         return false;
     }
@@ -333,7 +334,7 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
 
     public ExileAllCardsFromAllGraveyards() {
         super(Outcome.Benefit);
-        this.staticText = "Exile all cards from all graveyards. Add {R}{R}{R}";
+        this.staticText = "Exile all graveyards. Add {R}{R}{R}";
     }
 
     public ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {

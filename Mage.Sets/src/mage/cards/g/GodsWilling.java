@@ -22,7 +22,7 @@ public final class GodsWilling extends CardImpl {
         // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false).concatBy("<br>"));
     }
 
     private GodsWilling(final GodsWilling card) {

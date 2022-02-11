@@ -32,7 +32,7 @@ public class KrarkTheThumblessTest extends CardTestPlayerBase {
         // prepare two legendary creatures (for two flipcoin events)
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor");
-        setChoice(playerA, "Yes"); // enter as copy
+        setChoice(playerA, true); // enter as copy
         setChoice(playerA, "Krark, the Thumbless"); // copy target
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -56,7 +56,7 @@ public class KrarkTheThumblessTest extends CardTestPlayerBase {
         // resolve second trigger and win (copy the spell)
         setFlipCoinResult(playerA, true);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "No"); // do not change a target of the copy
+        setChoice(playerA, false); // do not change a target of the copy
         checkStackSize("after win trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // copied bolt
         checkStackObject("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast L", 1);
         checkStackObject("after win trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 0);
@@ -67,9 +67,9 @@ public class KrarkTheThumblessTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, "Whenever"); // 2x triggers raise
         setFlipCoinResult(playerA, true); // win and copy second bolt
-        setChoice(playerA, "No"); // keep target
+        setChoice(playerA, false); // keep target
         setFlipCoinResult(playerA, true); // win and copy second bolt
-        setChoice(playerA, "No"); // keep target
+        setChoice(playerA, false); // keep target
 
         // TOTAL to resolve:
         // * 1 copied bolt from first bolt cast

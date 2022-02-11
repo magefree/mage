@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,12 +25,6 @@ import mage.util.CardUtil;
  */
 public final class ConstrictingSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filterTarget.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public ConstrictingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.subtype.add(SubType.SLIVER);
@@ -42,7 +35,7 @@ public final class ConstrictingSliver extends CardImpl {
         // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls
         // until this creature leaves the battlefield."
         Ability ability = new EntersBattlefieldTriggeredAbility(new ConstrictingSliverExileEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,

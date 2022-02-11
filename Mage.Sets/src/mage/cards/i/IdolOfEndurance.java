@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -275,6 +276,6 @@ class IdolOfEnduranceWatcher extends Watcher {
                 source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
         );
         morMap.computeIfAbsent(mor, m -> new HashMap<>())
-                .compute(source.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+                .compute(source.getControllerId(), CardUtil::setOrIncrementValue);
     }
 }

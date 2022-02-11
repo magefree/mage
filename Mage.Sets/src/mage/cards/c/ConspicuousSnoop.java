@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 
 import java.util.UUID;
@@ -36,7 +37,7 @@ public final class ConspicuousSnoop extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may cast Goblin spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // As long as the top card of your library is a Goblin card, Conspicuous Snoop has all activated abilities of that card.
         this.addAbility(new SimpleStaticAbility(new GainActivatedAbilitiesOfTopCardEffect(filter.copy().withMessage("a Goblin card"))));

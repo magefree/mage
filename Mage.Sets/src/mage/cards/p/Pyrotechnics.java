@@ -18,7 +18,7 @@ public final class Pyrotechnics extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
-        // Pyrotechnics deals 4 damage divided as you choose among any number of target creatures and/or players.
+        // Pyrotechnics deals 4 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
     }

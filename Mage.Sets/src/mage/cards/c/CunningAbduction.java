@@ -89,7 +89,7 @@ class CunningAbductionExileEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                     // and you may spend mana as though it were mana of any color to cast it
                     effect = new CunningAbductionSpendAnyManaEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
                 return true;

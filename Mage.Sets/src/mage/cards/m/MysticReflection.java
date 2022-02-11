@@ -88,7 +88,7 @@ class MysticReflectionEffect extends OneShotEffect {
         // The zone is ALL because if the targeted permanent leaves the battlefield, the replacement effect still applies.
         SimpleStaticAbility staticAbilityOnCard = new SimpleStaticAbility(Zone.ALL, new MysticReflectionReplacementEffect(watcher.getEnteredThisTurn(), source.getSourceId().toString()));
         MysticReflectionGainAbilityEffect gainAbilityEffect = new MysticReflectionGainAbilityEffect(staticAbilityOnCard);
-        gainAbilityEffect.setTargetPointer(new FixedTarget(targetedPermanent.getMainCard().getId()));
+        gainAbilityEffect.setTargetPointer(new FixedTarget(targetedPermanent.getMainCard().getId(), game));
         game.addEffect(gainAbilityEffect, source);
         return true;
     }

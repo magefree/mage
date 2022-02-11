@@ -20,6 +20,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -147,6 +148,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return 0;
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
@@ -232,6 +238,16 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean canPlayCardsFromGraveyard() {
+        return false;
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
         return false;
     }
 
@@ -586,6 +602,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
     }
 
@@ -595,7 +616,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         return false;
     }
 
@@ -630,22 +651,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
-        return false;
-    }
-
-    @Override
     public boolean flipCoinResult(Game game) {
         return false;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return 1;
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+        return null;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDieResult(int sides, Game game) {
         return 1;
     }
 
@@ -1360,17 +1376,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

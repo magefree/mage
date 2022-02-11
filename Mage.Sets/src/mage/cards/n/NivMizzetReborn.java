@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -9,15 +9,16 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -52,64 +53,6 @@ public final class NivMizzetReborn extends CardImpl {
 
 class NivMizzetRebornEffect extends OneShotEffect {
 
-    private static enum Guild {
-        G0("W", "U"), G1("W", "B"), G2("U", "B"), G3("U", "R"), G4("B", "R"),
-        G5("B", "G"), G6("R", "G"), G7("R", "W"), G8("G", "W"), G9("G", "U");
-
-        private static final Map<String, String> nameMap = new HashMap();
-
-        static {
-            nameMap.put("W", "white");
-            nameMap.put("U", "blue");
-            nameMap.put("B", "black");
-            nameMap.put("R", "red");
-            nameMap.put("G", "green");
-        }
-
-        private final String color1;
-        private final String color2;
-
-        private Guild(String color1, String color2) {
-            this.color1 = color1;
-            this.color2 = color2;
-        }
-
-        private FilterCard makeFilter() {
-            FilterCard filter = new FilterCard(getDescription());
-            filter.add(new ColorPredicate(new ObjectColor(color1)));
-            filter.add(new ColorPredicate(new ObjectColor(color2)));
-            for (char c : getOtherColors().toCharArray()) {
-                filter.add(Predicates.not(new ColorPredicate(new ObjectColor("" + c))));
-            }
-            return filter;
-        }
-
-        private TargetCard getTarget() {
-            return new TargetCard(Zone.LIBRARY, makeFilter());
-        }
-
-        private String getDescription() {
-            return "card that is exactly " + nameMap.get(color1) + " and " + nameMap.get(color2);
-        }
-
-        private String getOtherColors() {
-            String colors = color1 + color2;
-            String otherColors = "";
-            for (char c : "WUBRG".toCharArray()) {
-                if (color1.charAt(0) == c || color2.charAt(0) == c) {
-                    continue;
-                }
-                otherColors += c;
-            }
-            return otherColors;
-        }
-
-        private boolean isInCards(Cards cards, Game game) {
-            FilterCard filter = makeFilter();
-            return cards.getCards(game).stream().anyMatch(card -> filter.match(card, game));
-        }
-    }
-
     NivMizzetRebornEffect() {
         super(Outcome.Benefit);
         staticText = "reveal the top ten cards of your library. For each color pair, "
@@ -133,33 +76,73 @@ class NivMizzetRebornEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
-        game.informPlayers(player.getLogName() + " reveals " +
-                cards.getCards(game).stream().map(card -> card.getName() + " ").reduce((a, b) -> a + b));
-        Cards cards2 = new CardsImpl();
+        game.informPlayers(player.getLogName() + " reveals " + CardUtil.concatWithAnd(
+                cards.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
+        ));
         if (cards.isEmpty()) {
             return false;
         }
         player.revealCards(source, cards, game);
-        for (Guild guild : Guild.values()) {
-            if (!guild.isInCards(cards, game)) {
-                continue;
-            }
-            TargetCard target = guild.getTarget();
-            if (player.choose(outcome, cards, target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    cards2.add(card);
-                }
-            }
-        }
-        cards.removeAll(cards2);
+        TargetCard target = new NivMizzetRebornTarget();
+        player.choose(outcome, cards, target, game);
+        Cards toHand = new CardsImpl(target.getTargets());
+        player.moveCards(toHand, Zone.HAND, source, game);
+        game.informPlayers(player.getLogName() + " moves " + CardUtil.concatWithAnd(
+                toHand.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
+        ) + " to hand");
+        cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        if (player.moveCards(cards2, Zone.HAND, source, game)) {
-            for (Card card : cards2.getCards(game)) {
-                game.informPlayers(player.getLogName() + " chose " + card.getName() + " and put it into their hand.");
-            }
-        }
         return true;
     }
 }
-// I think this is my favorite card I've ever implemented
+
+class NivMizzetRebornTarget extends TargetCardInLibrary {
+
+    private static enum NivMizzetRebornPredicate implements Predicate<Card> {
+        instance;
+
+        @Override
+        public boolean apply(Card input, Game game) {
+            return input.getColor(game).getColorCount() == 2;
+        }
+    }
+
+    private static final FilterCard filter
+            = new FilterCard("a card of each color pair");
+
+    static {
+        filter.add(NivMizzetRebornPredicate.instance);
+    }
+
+    NivMizzetRebornTarget() {
+        super(0, 10, filter);
+    }
+
+    private NivMizzetRebornTarget(final NivMizzetRebornTarget target) {
+        super(target);
+    }
+
+    @Override
+    public NivMizzetRebornTarget copy() {
+        return new NivMizzetRebornTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        return this.getTargets().isEmpty()
+                || this
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(c -> c.getColor(game))
+                .noneMatch(card.getColor(game)::equals);
+    }
+}

@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -52,6 +51,7 @@ public final class LingeringDeath extends CardImpl {
 }
 
 class LingeringDeathAbility extends TriggeredAbilityImpl {
+
     public LingeringDeathAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
     }
@@ -59,7 +59,6 @@ class LingeringDeathAbility extends TriggeredAbilityImpl {
     public LingeringDeathAbility(final LingeringDeathAbility ability) {
         super(ability);
     }
-
 
     @Override
     public LingeringDeathAbility copy() {
@@ -78,7 +77,7 @@ class LingeringDeathAbility extends TriggeredAbilityImpl {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
                 if (event.getPlayerId().equals(enchantedCreature.getControllerId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                     return true;
                 }
             }

@@ -1,7 +1,9 @@
 package mage.watchers.common;
 
+import mage.constants.RollDieType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
@@ -25,9 +27,10 @@ public class PlanarRollWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.PLANAR_DIE_ROLLED) {
-            UUID playerId = event.getPlayerId();
-            if (playerId != null) {
+        if (event.getType() == GameEvent.EventType.DIE_ROLLED) {
+            DieRolledEvent drEvent = (DieRolledEvent) event;
+            UUID playerId = drEvent.getPlayerId();
+            if (playerId != null && drEvent.getRollDieType() == RollDieType.PLANAR) {
                 Integer amount = numberTimesPlanarDieRolled.get(playerId);
                 if (amount == null) {
                     amount = 1;

@@ -38,7 +38,7 @@ public final class KariZevSkyshipRaider extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Kari Zev, Skyship Raider attacks, create a legendary 2/1 red Monkey creature token named Ragavan that's tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new KariZevSkyshipRaiderEffect(), false));

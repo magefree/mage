@@ -6,6 +6,8 @@ import mage.util.CircularList;
 import java.util.UUID;
 
 /**
+ * Default players order: left (next player seated to the active player's left)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerList extends CircularList<UUID> {
@@ -34,7 +36,9 @@ public class PlayerList extends CircularList<UUID> {
     }
 
     /**
-     * checkNextTurnReached - use it turns/priority code only to mark leaved player as "reached next turn end" (need for some continous effects)
+     * Find next player. Default order: next player from the left
+     *
+     * @checkNextTurnReached - use it turns/priority code only to mark leaved player as "reached next turn end" (need for some continous effects)
      */
     public Player getNext(Game game, boolean checkNextTurnReached) {
         UUID start = this.get();

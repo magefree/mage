@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -30,13 +29,13 @@ public final class RalStormConduit extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Whenever you cast or copy an instant or sorcery spell, Ral, Storm Conduit deals 1 damage to target opponent or planeswalker.
         this.addAbility(new RalStormConduitTriggeredAbility());
 
         // +2: Scry 1.
-        this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
+        this.addAbility(new LoyaltyAbility(new ScryEffect(1, false), 2));
 
         // -2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
         this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(

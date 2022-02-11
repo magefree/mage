@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.mana.BasicManaEffect;
@@ -11,14 +10,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class CryptGhast extends CardImpl {
@@ -49,18 +48,12 @@ public final class CryptGhast extends CardImpl {
 
 class CryptGhastTriggeredAbility extends TriggeredManaAbility {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
-
-    static {
-        filter.add(SubType.SWAMP.getPredicate());
-    }
-
-    public CryptGhastTriggeredAbility() {
+    CryptGhastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(1)), false);
         this.usesStack = false;
     }
 
-    public CryptGhastTriggeredAbility(CryptGhastTriggeredAbility ability) {
+    private CryptGhastTriggeredAbility(CryptGhastTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,8 +64,8 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return filter.match(land, this.getSourceId(), this.getControllerId(), game);
+        Permanent land = ((TappedForManaEvent) event).getPermanent();
+        return land != null && land.isControlledBy(getControllerId()) && land.hasSubtype(SubType.SWAMP, game);
     }
 
     @Override

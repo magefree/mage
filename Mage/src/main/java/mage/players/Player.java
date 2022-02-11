@@ -21,11 +21,10 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -128,6 +127,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void exchangeLife(Player player, Ability source, Game game);
 
+    int damage(int damage, Ability source, Game game);
+
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
@@ -178,6 +179,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard);
 
     boolean canPlayCardsFromGraveyard();
+
+    void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
+
+    boolean isDrawsOnOpponentsTurn();
 
     /**
      * Returns alternative casting costs a player can cast spells for
@@ -431,6 +436,12 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
 
     /**
+     * Gets a random card which matches the given filter and puts it into its owner's hand
+     * Doesn't reveal the card
+     */
+    boolean seekCard(FilterCard filter, Ability source, Game game);
+
+    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.
@@ -444,19 +455,15 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean canPlayLand();
 
     /**
-     * Plays a card if possible
+     * Plays a card (play land or cast spell). Works from any zones without timing restriction
      *
      * @param card            the card that can be cast
      * @param game
-     * @param noMana          if it's a spell i can be cast without paying mana
-     * @param ignoreTiming    if it's cast during the resolution of another
-     *                        spell no sorcery or play land timing restriction
-     *                        are checked. For a land it has to be the turn of
-     *                        the player playing that card.
+     * @param noMana          if it's a spell it can be cast without paying mana
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject);
+    boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
      * @param card         the land card to play
@@ -479,19 +486,21 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
-
     boolean flipCoinResult(Game game);
 
-    int rollDice(Ability source, Game game, int numSides);
+    default int rollDice(Outcome outcome, Ability source, Game game, int numSides) {
+        return rollDice(outcome, source, game, numSides, 1, 0).stream().findFirst().orElse(0);
+    }
 
-    int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides);
+    List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount);
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game);
+    int rollDieResult(int sides, Game game);
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects);
+    default PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game) {
+        return rollPlanarDie(outcome, source, game, GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES, GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES);
+    }
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+    PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, boolean payForCost, Ability source, Game game);
 
@@ -534,11 +543,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetStoredBookmark(Game game);
 
-    default void restoreState(int bookmark, String text, Game game) {
-        game.restoreState(bookmark, text);
+    default GameState restoreState(int bookmark, String text, Game game) {
+        GameState state = game.restoreState(bookmark, text);
         if (getStoredBookmark() >= bookmark) {
             resetStoredBookmark(game);
         }
+        return state;
     }
 
     void revealCards(Ability source, Cards cards, Game game);

@@ -33,7 +33,7 @@ public class DivineVisitationTest extends CardTestPlayerBase {
         // Let the opponent draw
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Recall", playerB);
         setChoice(playerA, "Whenever an opponent draws a card", 2); // choose order of triggers
-        setChoice(playerB, "No", 3); // Decline to pay 2
+        setChoice(playerB, false, 3); // Decline to pay 2
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         
         setStrictChooseMode(true);

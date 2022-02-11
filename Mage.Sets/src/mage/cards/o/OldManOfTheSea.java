@@ -21,8 +21,8 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -48,7 +48,7 @@ public final class OldManOfTheSea extends CardImpl {
         FilterCreaturePermanent controllableCreatures = new FilterCreaturePermanent("creature with power less than or equal to Old Man of the Sea's power");
         controllableCreatures.add(new PowerLowerEqualSourcePredicate(this.getId()));
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new OldManOfTheSeaGainControlTargetEffect(Duration.Custom, true), new CompoundCondition(SourceTappedCondition.instance, new SourcePowerGreaterEqualTargetCondition()),
+                new OldManOfTheSeaGainControlTargetEffect(Duration.Custom, true), new CompoundCondition(SourceTappedCondition.TAPPED, new SourcePowerGreaterEqualTargetCondition()),
                 "Gain control of target creature with power less than or equal to {this}'s power for as long as {this} remains tapped and that creature's power remains less than or equal to {this}'s power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(controllableCreatures));
@@ -148,7 +148,7 @@ class SourcePowerGreaterEqualTargetCondition implements Condition {
     }
 }
 
-class PowerLowerEqualSourcePredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class PowerLowerEqualSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     UUID sourceId;
 
@@ -157,7 +157,7 @@ class PowerLowerEqualSourcePredicate implements ObjectPlayerPredicate<ObjectPlay
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent sourcePermanent = game.getPermanent(sourceId);
         Permanent permanent = input.getObject();
         if (permanent != null && sourcePermanent != null) {

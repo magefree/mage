@@ -160,8 +160,8 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
 
     TheBookOfVileDarknessEffect() {
         super(Outcome.Benefit);
-        staticText = "create Vecna, a legendary 8/8 black Zombie God creature token " +
-                "with indestructible and all triggered abilities of the exiled cards";
+        staticText = "create Vecna, a legendary 8/8 black Zombie God creature token "
+                + "with indestructible and all triggered abilities of the exiled cards";
     }
 
     private TheBookOfVileDarknessEffect(final TheBookOfVileDarknessEffect effect) {
@@ -181,13 +181,17 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
         }
         Token token = new VecnaToken();
         for (MageObjectReference mor : morSet) {
-            Card card = mor.getCard(game);
+            // the card object in the mor doesn't work, so the permanent object is used
+            Permanent card = mor.getPermanentOrLKIBattlefield(game);
             if (card == null) {
                 continue;
             }
             for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof TriggeredAbility) {
-                    token.addAbility(ability.copy());
+                    Ability copyAbility = ability.copy();
+                    copyAbility.newId();
+                    copyAbility.setControllerId(source.getControllerId());
+                    token.addAbility(copyAbility);
                 }
             }
         }

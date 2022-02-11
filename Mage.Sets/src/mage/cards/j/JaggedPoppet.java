@@ -33,7 +33,7 @@ public final class JaggedPoppet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Jagged Poppet is dealt damage, discard that many cards.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new JaggedPoppetDealtDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new JaggedPoppetDealtDamageEffect(), false, false));
 
         // Hellbent - Whenever Jagged Poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
         Ability hellbentAbility = new ConditionalInterveningIfTriggeredAbility(

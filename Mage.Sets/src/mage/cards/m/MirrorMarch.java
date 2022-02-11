@@ -12,7 +12,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -27,7 +26,7 @@ public final class MirrorMarch extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public MirrorMarch(UUID ownerId, CardSetInfo setInfo) {

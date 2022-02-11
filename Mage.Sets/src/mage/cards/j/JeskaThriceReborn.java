@@ -38,13 +38,14 @@ public final class JeskaThriceReborn extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JESKA);
+        this.setStartingLoyalty(0);
 
         // Jeska, Thrice Reborn enters the battlefield with a loyalty counter on it for each time you've cast a commander from the command zone this game.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.LOYALTY.createInstance(0), JeskaThriceRebornValue.instance, false
         ), "with a loyalty counter on her for each time " +
                 "you've cast a commander from the command zone this game"
-        ).addHint(JeskaThriceRebornValue.getHint()), new CommanderPlaysCountWatcher());
+        ).addHint(JeskaThriceRebornValue.getHint()));
 
         // +0: Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.
         Ability ability = new LoyaltyAbility(new JeskaThriceRebornEffect(), 0);

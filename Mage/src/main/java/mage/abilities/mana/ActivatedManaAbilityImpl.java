@@ -42,18 +42,6 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (!super.hasMoreActivationsThisTurn(game) || !(condition == null || condition.apply(game, this))) {
-            return ActivationStatus.getFalse();
-        }
-        if (!controlsAbility(playerId, game)) {
-            return ActivationStatus.getFalse();
-        }
-        if (timing == TimingRule.SORCERY
-                && !game.canPlaySorcery(playerId)
-                && null == game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
-            return ActivationStatus.getFalse();
-        }
-
         // check if player is in the process of playing spell costs and they are no longer allowed to use
         // activated mana abilities (e.g. because they started to use improvise or convoke)
         if (!game.getStack().isEmpty()) {
@@ -69,8 +57,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
             }
         }
 
-        //20091005 - 605.3a
-        return new ActivationStatus(costs.canPay(this, this, controllerId, game), null);
+        return super.canActivate(playerId, game);
     }
 
     /**

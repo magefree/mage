@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.MinotaurToken;
 
@@ -35,7 +34,7 @@ public final class SethronHurloonGeneral extends CardImpl {
     private static final FilterPermanent filter3 = new FilterPermanent(SubType.MINOTAUR, "");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SethronHurloonGeneral(UUID ownerId, CardSetInfo setInfo) {

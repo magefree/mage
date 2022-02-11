@@ -47,7 +47,7 @@ public final class AlibouAncientWitness extends CardImpl {
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new AlibouAncientWitnessEffect(), 1,
                 StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE
-        );
+        ).setTriggerPhrase("Whenever one or more artifact creatures you control attack, ");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.addHint(AlibouAncientWitnessEffect.getHint()));
     }

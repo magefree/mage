@@ -121,13 +121,13 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Temporal Mastery", 1); // Sorcery {5}{U}{U}
         skipInitShuffling();
 
-        setChoice(playerB, "Yes"); // Would you like to reveal first drawn card (Temporal Mastery, you can copy it and cast {2} less)?
-        setChoice(playerB, "Yes"); // Would you like to copy Temporal Mastery and cast it {2} less?
-        setChoice(playerB, "Yes"); // Reveal Temporal Mastery to be able to use Miracle?
-        setChoice(playerB, "Yes"); // Miracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+        setChoice(playerB, true); // Would you like to reveal first drawn card (Temporal Mastery, you can copy it and cast {2} less)?
+        setChoice(playerB, true); // Would you like to copy Temporal Mastery and cast it {2} less?
+        setChoice(playerB, true); // Reveal Temporal Mastery to be able to use Miracle?
+        setChoice(playerB, true); // Miracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
 
-        setChoice(playerB, "No"); // Would you like to reveal first drawn card? (Turn 3)
-        setChoice(playerB, "No"); // Would you like to reveal first drawn card? (Turn 4)
+        setChoice(playerB, false); // Would you like to reveal first drawn card? (Turn 3)
+        setChoice(playerB, false); // Would you like to reveal first drawn card? (Turn 4)
 
         // Turn 3 + 4 are extra turns
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);

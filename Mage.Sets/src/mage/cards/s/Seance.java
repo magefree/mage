@@ -75,7 +75,7 @@ class SeanceEffect extends OneShotEffect {
             effect.setAdditionalSubType(SubType.SPIRIT);
             effect.apply(game, source);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+            exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;

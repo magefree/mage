@@ -313,6 +313,11 @@ public class GameController implements GameCallback {
 
     private synchronized void startGame() {
         if (gameFuture == null) {
+            // workaround to fill range info (cause real range fills after game start, but users must get start event with game data already)
+            for (Player player : game.getPlayers().values()) {
+                player.updateRange(game);
+            }
+
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
                 gameSessionPlayer.init();
             }
@@ -598,6 +603,12 @@ public class GameController implements GameCallback {
             case VIEW_LIMITED_DECK:
                 viewLimitedDeck(getPlayerId(userId), userId);
                 break;
+            case VIEW_SIDEBOARD:
+                if (data instanceof UUID) {
+                    UUID targetPlayerId = (UUID) data;
+                    viewSideboard(getPlayerId(userId), userId, targetPlayerId);
+                }
+                break;
             default:
                 game.sendPlayerAction(playerAction, getPlayerId(userId), data);
         }
@@ -656,17 +667,29 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void viewLimitedDeck(UUID userIdRequester, UUID origId) {
-        Player viewLimitedDeckPlayer = game.getPlayer(userIdRequester);
+    private void viewLimitedDeck(UUID playerId, UUID userId) {
+        Player viewLimitedDeckPlayer = game.getPlayer(playerId);
         if (viewLimitedDeckPlayer != null) {
             if (viewLimitedDeckPlayer.isHuman()) {
                 for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                    if (p.getPlayer().getId().equals(userIdRequester)) {
-                        Optional<User> u = managerFactory.userManager().getUser(origId);
+                    if (p.getPlayer().getId().equals(playerId)) {
+                        Optional<User> u = managerFactory.userManager().getUser(userId);
                         if (u.isPresent() && p.getDeck() != null) {
                             u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void viewSideboard(UUID playerId, UUID userId, UUID targetPlayerId) {
+        Player needPlayer = game.getPlayer(playerId);
+        if (needPlayer != null && needPlayer.isHuman()) {
+            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
+                if (p.getPlayer().getId().equals(playerId)) {
+                    Optional<User> u = managerFactory.userManager().getUser(userId);
+                    u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
                 }
             }
         }
@@ -787,7 +810,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices, String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), objectName, choices, message)));
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
@@ -795,7 +818,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes, final String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(modes, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), modes, message)));
     }
 
     private synchronized void chooseChoice(UUID playerId, final Choice choice) throws MageException {

@@ -109,7 +109,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rite of Replication", "Mogg Fanatic");
-        setChoice(playerB, "No"); // no kicker
+        setChoice(playerB, false); // no kicker
 
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Orzhov Charm", "Mogg Fanatic");
         setModeChoice(playerA, "1");

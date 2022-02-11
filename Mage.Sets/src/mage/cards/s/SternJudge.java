@@ -1,23 +1,23 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SternJudge extends CardImpl {
@@ -46,11 +46,7 @@ public final class SternJudge extends CardImpl {
 
 class SternJudgeEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("Swamp");
-
-    static {
-        filter.add(SubType.SWAMP.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SWAMP);
 
     SternJudgeEffect() {
         super(Outcome.Benefit);
@@ -68,12 +64,14 @@ class SternJudgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getSourceId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int lifeToLose = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
-                player.loseLife(lifeToLose, game, source, false);
+            if (player == null) {
+                continue;
             }
+            player.loseLife(game.getBattlefield().count(
+                    filter, playerId, source.getSourceId(), game
+            ), game, source, false);
         }
         return true;
     }

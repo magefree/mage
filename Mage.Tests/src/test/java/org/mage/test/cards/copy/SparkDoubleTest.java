@@ -40,7 +40,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Abbey Griffin");
 
         setStrictChooseMode(true);
@@ -66,9 +66,8 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Ajani, the Greathearted");
-        setChoice(playerA, "Ajani, the Greathearted"); // two etb effects (own + copy)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -90,7 +89,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Abbey Griffin");
 
         setStrictChooseMode(true);
@@ -118,9 +117,8 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Gideon, Ally of Zendikar");
-        setChoice(playerA, "Gideon, Ally of Zendikar"); // two etb effects (own + copy)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -147,7 +145,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // copy
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Gideon Blackblade");
 
         setStrictChooseMode(true);
@@ -188,7 +186,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // make copy of legendary creature (it's not legendary now)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Akroma, Angel of Wrath");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 2);
@@ -224,7 +222,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // make copy of legendary creature (it's not legendary now)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Akroma, Angel of Wrath");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 2);
@@ -266,7 +264,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // cast first spark
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Grizzly Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 2);
@@ -274,7 +272,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         // cast second spark
         // rules 706.9e affected, so must get only 1 counter
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Grizzly Bears[only copy]");
         //setChoice(playerA, "Grizzly Bears"); // possible bug: two etb effects
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

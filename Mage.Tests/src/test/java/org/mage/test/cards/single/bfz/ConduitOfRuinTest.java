@@ -28,7 +28,7 @@ public class ConduitOfRuinTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 13);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conduit of Ruin");
-        setChoice(playerA, "Yes"); // When you cast this spell, you may search...
+        setChoice(playerA, true); // When you cast this spell, you may search...
         addTarget(playerA, "Emrakul, the Aeons Torn");
         
         setStopAt(3, PhaseStep.DRAW);

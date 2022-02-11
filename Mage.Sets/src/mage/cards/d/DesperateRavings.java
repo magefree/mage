@@ -29,7 +29,7 @@ public final class DesperateRavings extends CardImpl {
         // Draw two cards, then discard a card at random.
         this.getSpellAbility().addEffect(new DesperateRavingsEffect());
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
     private DesperateRavings(final DesperateRavings card) {

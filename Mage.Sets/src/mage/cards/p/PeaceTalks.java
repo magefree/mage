@@ -24,11 +24,8 @@ public final class PeaceTalks extends CardImpl {
     public PeaceTalks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-        // This turn and next turn, creatures can't attack, 
-        // and players and permanents can't be the targets 
-        // of spells or activated abilities.
+        // This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.
         this.getSpellAbility().addEffect(new PeaceTalksEffect());
-
     }
 
     private PeaceTalks(final PeaceTalks card) {
@@ -136,23 +133,22 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL
-                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.TARGET;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             if (event.getTargetId().equals(playerId)) {
-                return false;
+                return true;
             }
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (event.getTargetId().equals(permanent.getId())) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

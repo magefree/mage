@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -33,8 +34,8 @@ public final class CrystalShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CrystalShardEffect(),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), ""),
-                        new CompositeCost(new ManaCostsImpl("{U}"), new TapSourceCost(), ""),
+                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}"),
                         "{3}, {T} or {U}, {T}"
                 )
         );
@@ -79,7 +80,7 @@ class CrystalShardEffect extends OneShotEffect {
         if (player == null) {
             return true;
         }
-        Cost cost = new GenericManaCost(1);
+        Cost cost = ManaUtil.createManaCost(1, false);
         String message = "Pay {1}? (Otherwise " + targetCreature.getName() + " will be returned to its owner's hand)";
         if (player.chooseUse(Outcome.Benefit, message, source, game)) {
             cost.pay(source, game, source, targetCreature.getControllerId(), false, null);

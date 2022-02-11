@@ -28,7 +28,6 @@ public final class TerrorOfKruinPass extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.color.setRed(true);
         this.power = new MageInt(3);
@@ -38,7 +37,7 @@ public final class TerrorOfKruinPass extends CardImpl {
 
         // Werewolves you control have menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false), Duration.WhileOnBattlefield, filter, false
+                new MenaceAbility(), Duration.WhileOnBattlefield, filter, false
         )));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.

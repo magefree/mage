@@ -66,7 +66,7 @@ enum OathOfDruidsAdjuster implements TargetAdjuster {
     }
 }
 
-class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -38,7 +37,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURRA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you.
         Ability ability = new LoyaltyAbility(new AurraSingBaneOfJediEffect(), +1);

@@ -1,8 +1,9 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -28,7 +29,9 @@ public final class ZendikarRising extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 7.4;
+        this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialRare = 5.5;
+        this.ratioBoosterSpecialMythic = 5.4;   // 5 mythic MDFCs, 11 rare MDFCs
         this.maxCardNumberInBooster = 280;
 
         cards.add(new SetCardInfo("Acquisitions Expert", 89, Rarity.UNCOMMON, mage.cards.a.AcquisitionsExpert.class));
@@ -425,8 +428,13 @@ public final class ZendikarRising extends ExpansionSet {
     }
 
     @Override
-    protected boolean boosterIsValid(List<Card> booster) {
-        return super.boosterIsValid(booster)
-                && booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count() == 1;
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .modalDoubleFaced(true)
+                .maxCardNumber(maxCardNumberInBooster)));
+        return cardInfos;
     }
 }

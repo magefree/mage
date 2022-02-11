@@ -24,7 +24,7 @@ public final class ValorInAkros extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn),
-                StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false)
         );
     }

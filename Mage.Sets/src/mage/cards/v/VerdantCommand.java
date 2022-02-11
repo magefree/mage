@@ -77,10 +77,10 @@ enum VerdantCommandPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        if (!(input instanceof LoyaltyAbility)) {
+        if (!(input.getStackAbility() instanceof LoyaltyAbility)) {
             return false;
         }
-        Permanent permanent = ((LoyaltyAbility) input).getSourcePermanentOrLKI(game);
+        Permanent permanent = ((LoyaltyAbility) input.getStackAbility()).getSourcePermanentOrLKI(game);
         return permanent != null && permanent.isPlaneswalker(game);
     }
 }

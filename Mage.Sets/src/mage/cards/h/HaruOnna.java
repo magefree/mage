@@ -29,7 +29,7 @@ public final class HaruOnna extends CardImpl {
         // When Haru-Onna enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
     }
 
     private HaruOnna(final HaruOnna card) {

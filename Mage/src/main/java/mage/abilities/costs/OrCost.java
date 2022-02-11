@@ -1,13 +1,14 @@
 
 package mage.abilities.costs;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Targets;
+
+import java.util.UUID;
 
 public class OrCost implements Cost {
 
@@ -36,8 +37,9 @@ public class OrCost implements Cost {
     }
 
     @Override
-    public void setText(String text) {
+    public OrCost setText(String text) {
         this.description = text;
+        return this;
     }
 
     @Override

@@ -67,7 +67,7 @@ class ResoluteArchangelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.setLife(game.getLife(), game, source);
+            controller.setLife(game.getStartingLife(), game, source);
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ enum ControllerLifeLowerThanStrtingLife implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.getLife() < game.getLife();
+            return controller.getLife() < game.getStartingLife();
         }
         return false;
     }

@@ -80,7 +80,7 @@ class TheDeckOfManyThingsEffect extends RollDieWithResultTableEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, sides) - player.getHand().size();
+        int result = player.rollDice(outcome, source, game, sides) - player.getHand().size();
         if (result <= 0) {
             player.discard(player.getHand(), false, source, game);
         }
@@ -114,7 +114,8 @@ class TheDeckOfManyThingsRandomEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD);
         target.setRandom(true);
         target.setNotTarget(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
+
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(card, Zone.HAND, source, game);
     }

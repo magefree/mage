@@ -113,15 +113,22 @@ Ice Age|IceAge|
 IconicMasters|IconicMasters|
 Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
+Innistrad: Midnight Hunt|InnistradMidnightHunt|
+Midnight Hunt Commander|MidnightHuntCommander|
+Innistrad: Crimson Vow|InnistradCrimsonVow|
+Crimson Vow Commander|CrimsonVowCommander|
 Invasion|Invasion|
 Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
+Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
+Kamigawa: Neon Dynasty|KamigawaNeonDynasty|
+Neon Dynasty Commander|NeonDynastyCommander|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
 Legends|Legends|
@@ -209,6 +216,7 @@ Torment|Torment|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
+Unfinity|Unfinity|
 Unlimited Edition|UnlimitedEdition|
 Unstable|Unstable|
 Urza's Destiny|UrzasDestiny|

@@ -7,8 +7,7 @@ import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -16,20 +15,15 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class UnityOfPurpose extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     public UnityOfPurpose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Support 2.
-        getSpellAbility().addEffect(new SupportEffect(this, 2, false));
+        this.getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Untap each creature you control with a +1/+1 counter on it.
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "Untap each creature you control with a +1/+1 counter on it"));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1, "Untap each creature you control with a +1/+1 counter on it"));
     }
 
     private UnityOfPurpose(final UnityOfPurpose card) {

@@ -4,7 +4,6 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -34,7 +33,7 @@ public final class NicolBolasTheDeceiver extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{U}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +3: Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
         this.addAbility(new LoyaltyAbility(new NicolBolasTheDeceiverFirstEffect(), 3));

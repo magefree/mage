@@ -57,4 +57,6 @@ public interface TriggeredAbility extends Ability {
     GameEvent getTriggerEvent();
 
     String getTriggerPhrase();
+
+    TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }

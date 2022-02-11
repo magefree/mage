@@ -1,6 +1,8 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -36,10 +38,10 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Aspect of Wolf", 186, Rarity.RARE, mage.cards.a.AspectOfWolf.class));
         cards.add(new SetCardInfo("Atog", 139, Rarity.COMMON, mage.cards.a.Atog.class));
         cards.add(new SetCardInfo("Bad Moon", 94, Rarity.RARE, mage.cards.b.BadMoon.class));
-        cards.add(new SetCardInfo("Badlands", 282, Rarity.RARE, mage.cards.b.Badlands.class));
+        cards.add(new SetCardInfo("Badlands", 282, Rarity.RARE, mage.cards.b.Badlands.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Balance", 3, Rarity.RARE, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Basalt Monolith", 235, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class));
-        cards.add(new SetCardInfo("Bayou", 283, Rarity.RARE, mage.cards.b.Bayou.class));
+        cards.add(new SetCardInfo("Bayou", 283, Rarity.RARE, mage.cards.b.Bayou.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Benalish Hero", 4, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Birds of Paradise", 187, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Black Knight", 95, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
@@ -220,7 +222,7 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 292, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 293, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 294, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plateau", 284, Rarity.RARE, mage.cards.p.Plateau.class));
+        cards.add(new SetCardInfo("Plateau", 284, Rarity.RARE, mage.cards.p.Plateau.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Power Leak", 73, Rarity.COMMON, mage.cards.p.PowerLeak.class));
         cards.add(new SetCardInfo("Power Sink", 74, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Power Surge", 170, Rarity.RARE, mage.cards.p.PowerSurge.class));
@@ -246,10 +248,10 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Sacrifice", 126, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class));
         cards.add(new SetCardInfo("Samite Healer", 38, Rarity.COMMON, mage.cards.s.SamiteHealer.class));
         cards.add(new SetCardInfo("Savannah Lions", 39, Rarity.RARE, mage.cards.s.SavannahLions.class));
-        cards.add(new SetCardInfo("Savannah", 285, Rarity.RARE, mage.cards.s.Savannah.class));
+        cards.add(new SetCardInfo("Savannah", 285, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Scathe Zombies", 127, Rarity.COMMON, mage.cards.s.ScatheZombies.class));
         cards.add(new SetCardInfo("Scavenging Ghoul", 128, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class));
-        cards.add(new SetCardInfo("Scrubland", 286, Rarity.RARE, mage.cards.s.Scrubland.class));
+        cards.add(new SetCardInfo("Scrubland", 286, Rarity.RARE, mage.cards.s.Scrubland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Scryb Sprites", 215, Rarity.COMMON, mage.cards.s.ScrybSprites.class));
         cards.add(new SetCardInfo("Sea Serpent", 78, Rarity.COMMON, mage.cards.s.SeaSerpent.class));
         cards.add(new SetCardInfo("Sedge Troll", 174, Rarity.RARE, mage.cards.s.SedgeTroll.class));
@@ -277,7 +279,7 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 299, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 300, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 41, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
-        cards.add(new SetCardInfo("Taiga", 287, Rarity.RARE, mage.cards.t.Taiga.class));
+        cards.add(new SetCardInfo("Taiga", 287, Rarity.RARE, mage.cards.t.Taiga.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Terror", 132, Rarity.COMMON, mage.cards.t.Terror.class));
         cards.add(new SetCardInfo("The Hive", 277, Rarity.RARE, mage.cards.t.TheHive.class));
         cards.add(new SetCardInfo("The Rack", 278, Rarity.UNCOMMON, mage.cards.t.TheRack.class));
@@ -287,11 +289,11 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Timber Wolves", 219, Rarity.RARE, mage.cards.t.TimberWolves.class));
         cards.add(new SetCardInfo("Titania's Song", 220, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Tranquility", 221, Rarity.COMMON, mage.cards.t.Tranquility.class));
-        cards.add(new SetCardInfo("Tropical Island", 288, Rarity.RARE, mage.cards.t.TropicalIsland.class));
+        cards.add(new SetCardInfo("Tropical Island", 288, Rarity.RARE, mage.cards.t.TropicalIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Tsunami", 222, Rarity.UNCOMMON, mage.cards.t.Tsunami.class));
-        cards.add(new SetCardInfo("Tundra", 289, Rarity.RARE, mage.cards.t.Tundra.class));
+        cards.add(new SetCardInfo("Tundra", 289, Rarity.RARE, mage.cards.t.Tundra.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Tunnel", 181, Rarity.UNCOMMON, mage.cards.t.Tunnel.class));
-        cards.add(new SetCardInfo("Underground Sea", 290, Rarity.RARE, mage.cards.u.UndergroundSea.class));
+        cards.add(new SetCardInfo("Underground Sea", 290, Rarity.RARE, mage.cards.u.UndergroundSea.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Unholy Strength", 133, Rarity.COMMON, mage.cards.u.UnholyStrength.class));
         cards.add(new SetCardInfo("Unstable Mutation", 86, Rarity.COMMON, mage.cards.u.UnstableMutation.class));
         cards.add(new SetCardInfo("Unsummon", 87, Rarity.COMMON, mage.cards.u.Unsummon.class));
@@ -300,7 +302,7 @@ public final class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Vesuvan Doppelganger", 88, Rarity.RARE, mage.cards.v.VesuvanDoppelganger.class));
         cards.add(new SetCardInfo("Veteran Bodyguard", 42, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Eruption", 89, Rarity.RARE, mage.cards.v.VolcanicEruption.class));
-        cards.add(new SetCardInfo("Volcanic Island", 291, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
+        cards.add(new SetCardInfo("Volcanic Island", 291, Rarity.RARE, mage.cards.v.VolcanicIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Wall of Air", 90, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class));
         cards.add(new SetCardInfo("Wall of Bone", 134, Rarity.UNCOMMON, mage.cards.w.WallOfBone.class));
         cards.add(new SetCardInfo("Wall of Brambles", 224, Rarity.UNCOMMON, mage.cards.w.WallOfBrambles.class));

@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class GeneralHux extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public GeneralHux(UUID ownerId, CardSetInfo setInfo) {

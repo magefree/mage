@@ -285,6 +285,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Specter", 169, Rarity.RARE, mage.cards.s.SilentSpecter.class));
         cards.add(new SetCardInfo("Silklash Spider", 281, Rarity.RARE, mage.cards.s.SilklashSpider.class));
         cards.add(new SetCardInfo("Silvos, Rogue Elemental", 282, Rarity.RARE, mage.cards.s.SilvosRogueElemental.class));
+        cards.add(new SetCardInfo("Skirk Commando", 228, Rarity.COMMON, mage.cards.s.SkirkCommando.class));
         cards.add(new SetCardInfo("Skirk Fire Marshal", 229, Rarity.RARE, mage.cards.s.SkirkFireMarshal.class));
         cards.add(new SetCardInfo("Skirk Prospector", 230, Rarity.COMMON, mage.cards.s.SkirkProspector.class));
         cards.add(new SetCardInfo("Skittish Valesk", 231, Rarity.UNCOMMON, mage.cards.s.SkittishValesk.class));

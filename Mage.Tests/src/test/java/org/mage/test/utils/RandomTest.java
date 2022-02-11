@@ -3,7 +3,8 @@ package org.mage.test.utils;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.MultiplayerAttackOption;
-import mage.constants.PlanarDieRoll;
+import mage.constants.Outcome;
+import mage.constants.PlanarDieRollResult;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.TwoPlayerDuel;
@@ -101,7 +102,7 @@ public class RandomTest {
         for (int x = 0; x < weight; x++) {
             for (int y = 0; y < height; y++) {
                 // roll dice
-                int diceVal = player.rollDice(null, game, 12);
+                int diceVal = player.rollDice(Outcome.Neutral, null, game, 12);
                 int colorMult = Math.floorDiv(255, 12);
 
                 image.setRGB(x, y, new Color(colorMult * diceVal, colorMult * diceVal, colorMult * diceVal).getRGB());
@@ -124,11 +125,11 @@ public class RandomTest {
         for (int x = 0; x < weight; x++) {
             for (int y = 0; y < height; y++) {
                 // roll planar dice
-                PlanarDieRoll res = player.rollPlanarDie(null, game);
+                PlanarDieRollResult res = player.rollPlanarDie(Outcome.Neutral, null, game);
                 image.setRGB(x, y, new Color(
-                        res.equals(PlanarDieRoll.CHAOS_ROLL) ? 255 : 0,
-                        res.equals(PlanarDieRoll.PLANAR_ROLL) ? 255 : 0,
-                        res.equals(PlanarDieRoll.NIL_ROLL) ? 255 : 0
+                        res.equals(PlanarDieRollResult.CHAOS_ROLL) ? 255 : 0,
+                        res.equals(PlanarDieRollResult.PLANAR_ROLL) ? 255 : 0,
+                        res.equals(PlanarDieRollResult.BLANK_ROLL) ? 255 : 0
                 ).getRGB());
             }
         }

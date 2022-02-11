@@ -156,6 +156,9 @@ class CharmedPendantManaEffect extends ManaEffect {
                                 for (Mana manaOption : manaOptions) {
                                     manaChoice.getChoices().add(manaOption.toString());
                                 }
+                                if (manaChoice.getChoices().isEmpty()) {  // no mana choices available
+                                    return mana;
+                                }
                                 if (controller.choose(outcome, manaChoice, game)) {
                                     for (Mana manaOption : manaOptions) {
                                         if (manaChoice.getChoice().equals(manaOption.toString())) {

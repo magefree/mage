@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +71,7 @@ class HintOfInsanityEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .map(MageObject::getName)
-                .forEach(s -> nameCounts.compute(s, (u, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(s -> nameCounts.compute(s, CardUtil::setOrIncrementValue));
         Cards cards = new CardsImpl(
                 player.getHand()
                         .getCards(game)

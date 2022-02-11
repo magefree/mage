@@ -28,12 +28,12 @@ public class TinyLeaders extends Constructed {
             }
         }
         //Banned list from tinyleaders.blodspot.ca/p/ban-list.html
-        //Ban list updated as of 11/08/14
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Black Lotus");
         banned.add("Black Vise");
         banned.add("Channel");
+        banned.add("Codie, Vociferous Codex");
         banned.add("Counterbalance");
         banned.add("Demonic Tutor");
         banned.add("Earthcraft");
@@ -57,14 +57,16 @@ public class TinyLeaders extends Constructed {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
-        banned.add("Najeela, the Blade Blossom");
+        banned.add("Najeela, the Blade-Blossom");
         banned.add("Necropotence");
         banned.add("Shahrazad");
+        banned.add("Sisay, Weatherlight Captain");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
         banned.add("Sword of Body and Mind");
+        banned.add("Thassa's Oracle");
         banned.add("The Tabernacle at Pendrell Vale");
         banned.add("Time Vault");
         banned.add("Time Walk");

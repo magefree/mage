@@ -32,7 +32,7 @@ public class NimDeathmantleTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // Message: Nim Deathmantle - Pay {4}?
+        setChoice(playerA, true); // Message: Nim Deathmantle - Pay {4}?
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

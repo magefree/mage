@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -28,19 +27,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class MarkForDeath extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public MarkForDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
-
         // Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new MarkForDeathEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private MarkForDeath(final MarkForDeath card) {

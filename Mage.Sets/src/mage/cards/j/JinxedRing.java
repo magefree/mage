@@ -18,7 +18,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.predicate.Predicates;
+
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +34,7 @@ public final class JinxedRing extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public JinxedRing(UUID ownerId, CardSetInfo setInfo) {

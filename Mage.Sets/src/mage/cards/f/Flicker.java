@@ -6,7 +6,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 
@@ -20,7 +19,7 @@ public final class Flicker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public Flicker(UUID ownerId, CardSetInfo setInfo) {

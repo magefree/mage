@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
 
@@ -39,10 +39,10 @@ public final class BorborygmosEnraged extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         //Whenever Borborygmous Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterLandCard(), Zone.GRAVEYARD), false, false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, StaticFilters.FILTER_CARD_LANDS, Zone.GRAVEYARD), false, false));
 
         //Discard a land card: Borborygmos Enraged deals 3 damage to any target
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_LAND_A)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

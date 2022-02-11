@@ -19,6 +19,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -34,6 +35,10 @@ public final class KelpieGuide extends CardImpl {
             = new FilterControlledPermanent("another target permanent you control");
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 7);
+    
+    static {
+        filter2.add(AnotherPredicate.instance);
+    }
 
     public KelpieGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

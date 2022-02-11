@@ -20,7 +20,7 @@ public class AlpineHoundmasterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Igneous Cur");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpine Houndmaster");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Alpine Watchdog");
 
         setStrictChooseMode(true);
@@ -43,7 +43,7 @@ public class AlpineHoundmasterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Igneous Cur");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpine Houndmaster");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Igneous Cur");
 
         setStrictChooseMode(true);
@@ -66,7 +66,7 @@ public class AlpineHoundmasterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Igneous Cur");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpine Houndmaster");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Igneous Cur^Alpine Watchdog");
         //addTarget(playerA, "");
 

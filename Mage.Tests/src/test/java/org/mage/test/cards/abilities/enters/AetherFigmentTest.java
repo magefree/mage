@@ -24,7 +24,7 @@ public class AetherFigmentTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

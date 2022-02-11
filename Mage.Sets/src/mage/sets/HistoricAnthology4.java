@@ -39,7 +39,7 @@ public final class HistoricAnthology4 extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Statuary", 23, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Lys Alana Huntmaster", 15, Rarity.COMMON, mage.cards.l.LysAlanaHuntmaster.class));
         cards.add(new SetCardInfo("Marit Lage's Slumber", 6, Rarity.RARE, mage.cards.m.MaritLagesSlumber.class));
-        cards.add(new SetCardInfo("Sawtusk Demolisher", 16, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class));
+        // cards.add(new SetCardInfo("Sawtusk Demolisher", 16, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class)); TODO: reenable when mutate is implemented
         cards.add(new SetCardInfo("Spider Spawning", 17, Rarity.UNCOMMON, mage.cards.s.SpiderSpawning.class));
         cards.add(new SetCardInfo("Sword of Body and Mind", 24, Rarity.MYTHIC, mage.cards.s.SwordOfBodyAndMind.class));
         cards.add(new SetCardInfo("Think Twice", 7, Rarity.COMMON, mage.cards.t.ThinkTwice.class));

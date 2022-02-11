@@ -34,19 +34,19 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         // clone the opponent's creature
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
-        setChoice(playerA, "Yes"); // use clone on etb
+        setChoice(playerA, true); // use clone on etb
         setChoice(playerA, "Silvercoat Lion");
 
         // kill clone and exile it (imprint into vat)
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
         setChoice(playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // exile killed card by vat
+        setChoice(playerA, true); // exile killed card by vat
 
         // turn 3
 
         // create a token from exile (imprinted card: clone)
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token");
-        setChoice(playerA, "Yes"); // use clone on etb
+        setChoice(playerA, true); // use clone on etb
         setChoice(playerA, "Silvercoat Lion");
 
         setStrictChooseMode(true);
@@ -74,13 +74,13 @@ public class MimicVatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -115,14 +115,14 @@ public class MimicVatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shred Memory", "Silvercoat Lion", "Whenever a nontoken creature dies");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);

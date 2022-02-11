@@ -34,9 +34,9 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 53;
+    private static final long CARD_DB_VERSION = 54;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 238;
+    private static final long CARD_CONTENT_VERSION = 241;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
     private final RepositoryEventSource eventSource = new RepositoryEventSource();
@@ -369,38 +369,44 @@ public enum CardRepository {
         return Collections.emptyList();
     }
 
+    public CardInfo findCard(String name) {
+        return findCard(name, false);
+    }
+
     /**
      * @param name
+     * @param returnAnySet return card from first available set (WARNING, it's a performance optimization for tests,
+     *                     don't use it in real games - users must get random set)
      * @return random card with the provided name or null if none is found
      */
-    public CardInfo findCard(String name) {
-        List<CardInfo> cards = findCards(name);
+    public CardInfo findCard(String name, boolean returnAnySet) {
+        List<CardInfo> cards = returnAnySet ? findCards(name, 1) : findCards(name);
         if (!cards.isEmpty()) {
             return cards.get(RandomUtil.nextInt(cards.size()));
         }
         return null;
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive) {
-        return findPreferedCoreExpansionCard(name, caseInsensitive, null);
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive) {
+        return findPreferredCoreExpansionCard(name, caseInsensitive, null);
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive, String preferredSetCode) {
         List<CardInfo> cards;
         if (caseInsensitive) {
             cards = findCardsCaseInsensitive(name);
         } else {
             cards = findCards(name);
         }
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    public CardInfo findPreferedCoreExpansionCardByClassName(String canonicalClassName, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
         List<CardInfo> cards = findCardsByClass(canonicalClassName);
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    private CardInfo findPreferedOrLatestCard(List<CardInfo> cards, String preferedSetCode) {
+    private CardInfo findPreferredOrLatestCard(List<CardInfo> cards, String preferredSetCode) {
         if (!cards.isEmpty()) {
             Date lastReleaseDate = null;
             Date lastExpansionDate = null;
@@ -409,7 +415,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferedSetCode != null) && (preferedSetCode.equals(set.getCode()))) {
+                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
                         return cardinfo;
                     }
 
@@ -436,23 +442,52 @@ public enum CardRepository {
             cards = findCards(name);
         }
         if (!cards.isEmpty()) {
-            CardInfo cardToUse = null;
             for (CardInfo cardinfo : cards) {
                 if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
                     return cardinfo;
                 }
             }
         }
-        return findPreferedCoreExpansionCard(name, true);
+        return findPreferredCoreExpansionCard(name, true);
     }
 
     public List<CardInfo> findCards(String name) {
+        return findCards(name, 0);
+    }
+
+    /**
+     * Find card's reprints from all sets
+     *
+     * @param name
+     * @param limitByMaxAmount return max amount of different cards (if 0 then return card from all sets)
+     * @return
+     */
+    public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
-            return cardDao.query(queryBuilder.prepare());
+            if (limitByMaxAmount > 0) {
+                queryBuilder.limit(limitByMaxAmount);
+            }
+
+            List<CardInfo> result = cardDao.query(queryBuilder.prepare());
+
+            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
+            if (result.isEmpty() && name.contains(" // ")) {
+                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
+                // OR a split card (e.g. Assault // Battery).
+                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
+                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
+                queryBuilder.where().eq("name", new SelectArg(name.split(" // ", 2)[0]));
+
+                result = cardDao.query(queryBuilder.prepare());
+            }
+
+            return result;
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
+
         return Collections.emptyList();
     }
 
@@ -462,6 +497,7 @@ public enum CardRepository {
             queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
         return Collections.emptyList();
     }
@@ -472,19 +508,34 @@ public enum CardRepository {
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
                     "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());
-            List<CardInfo> result = new ArrayList<>();
-            for (CardInfo cardinfo : rawResults) {
-                result.add(cardinfo);
+
+            List<CardInfo> result = rawResults.getResults();
+
+            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
+            if (result.isEmpty() && sqlName.contains(" // ")) {
+                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
+                // OR a split card (e.g. Assault // Battery).
+                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
+                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
+                String leftCardName = sqlName.split(" // ", 2)[0];
+
+                GenericRawResults<CardInfo> rawResults2 = cardDao.queryRaw(
+                        "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + leftCardName + '\'',
+                        cardDao.getRawRowMapper());
+
+                result = rawResults2.getResults();
             }
+
             return result;
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
+
         return Collections.emptyList();
     }
 
     /**
-     * Warning, don't use db functions in card's code - it generate heavy db loading in AI simulations. If you
+     * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
      *
      * @param criteria

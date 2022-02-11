@@ -10,9 +10,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 
@@ -22,18 +20,12 @@ import mage.target.TargetSpell;
  */
 public final class CrueltyOfTheSith extends CardImpl {
 
-    private static final FilterSpell filterNoncreature = new FilterSpell("noncreature spell");
-
-    static {
-        filterNoncreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public CrueltyOfTheSith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
 
         // Choose one - Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filterNoncreature));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
         // Target player sacrifices a creture.
         Mode mode = new Mode();

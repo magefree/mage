@@ -12,12 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -52,7 +50,7 @@ class SpectralBearsTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SpectralBearsTriggeredAbility() {

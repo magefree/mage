@@ -40,23 +40,23 @@ public final class MagnigothTreefolk extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new PlainswalkAbility()), 
-                        new PermanentsOnTheBattlefieldCondition(filterPlains, ComparisonType.MORE_THAN, 0, true),
+                        new PermanentsOnTheBattlefieldCondition(filterPlains),
                         "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type."));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterIsland, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filterIsland),
                 ""));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterSwamp, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filterSwamp),
                 ""));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterMountain, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filterMountain),
                 ""));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterForest, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filterForest),
                 ""));
         this.addAbility(ability);
     }

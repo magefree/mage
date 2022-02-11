@@ -35,7 +35,7 @@ public final class FractalHarness extends CardImpl {
 
         // Whenever equipped creature attacks, double the number of +1/+1 counters on it.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new FractalHarnessDoubleEffect(), AttachmentType.EQUIPMENT, false
+                new FractalHarnessDoubleEffect(), AttachmentType.EQUIPMENT, false, true
         ));
 
         // Equip {2}
@@ -56,8 +56,8 @@ class FractalHarnessTokenEffect extends OneShotEffect {
 
     FractalHarnessTokenEffect() {
         super(Outcome.Benefit);
-        staticText = "create a 0/0 green and blue Fractal creature token. " +
-                "Put X +1/+1 counters on it and attach {this} to it";
+        staticText = "create a 0/0 green and blue Fractal creature token. "
+                + "Put X +1/+1 counters on it and attach {this} to it";
     }
 
     private FractalHarnessTokenEffect(final FractalHarnessTokenEffect effect) {
@@ -80,7 +80,8 @@ class FractalHarnessTokenEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            if (flag && permanent.addAttachment(tokenId, source, game)) {
+            if (flag
+                    && permanent.addAttachment(source.getSourceId(), source, game)) {
                 flag = false;
             }
             permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
@@ -107,9 +108,11 @@ class FractalHarnessDoubleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue("attachedPermanent");
-        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(
-                permanent.getCounters(game).getCount(CounterType.P1P1)
-        ), source.getControllerId(), source, game);
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent == null) {
+            return false;
+        }
+        return permanent.addCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)),
+                 source.getControllerId(), source, game);
     }
 }

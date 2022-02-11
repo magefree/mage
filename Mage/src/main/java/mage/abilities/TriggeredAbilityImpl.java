@@ -25,6 +25,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnce = false;
     private GameEvent triggerEvent = null;
+    private String triggerPhrase = null;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -51,6 +52,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnce = ability.triggersOnce;
+        this.triggerPhrase = ability.triggerPhrase;
     }
 
     @Override
@@ -69,6 +71,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         game.getState().setValue(CardUtil.getCardZoneString(
                 "lastTurnTriggered" + originalId, sourceId, game
         ), game.getTurnNum());
+    }
+
+    @Override
+    public TriggeredAbilityImpl setTriggerPhrase(String triggerPhrase) {
+        this.triggerPhrase = triggerPhrase;
+        return this;
     }
 
     @Override
@@ -182,7 +190,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             prefix = "";
         }
 
-        return prefix + getTriggerPhrase() + sb;
+        return prefix + (triggerPhrase == null ? getTriggerPhrase() : triggerPhrase) + sb;
     }
 
     @Override
@@ -288,6 +296,34 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());
         } else {
+            // TODO: multiple calls of ApplyEffects all around the code are breaking a short living lki idea
+            //  (PlayerImpl's call to move to battlefield do the worse thing)
+            //  -
+            //  Original idea: short living LKI must help to find a moment in the inner of resolve
+            //  -
+            //  Example:
+            //   --!---------------!-------------!-----!-----------!
+            //   - !     steps     !  perm zone  ! LKI ! short LKI !
+            //   --!---------------!-------------!-----!-----------!
+            //   - ! resolve start ! battlefield ! no  !   no      !
+            //   - ! step 1        ! battlefield ! no  !   no      ! permanent moving to graveyard by step's command
+            //   - ! step 2        !  graveyard  ! yes !   yes     ! other commands
+            //   - ! step 3        !  graveyard  ! yes !   yes     ! other commands
+            //   - ! raise triggers!  graveyard  ! yes !   yes     ! handle and put triggers that was raised in resolve steps
+            //   - ! resolve end   !  graveyard  ! yes !   no      !
+            //   - ! resolve next  !  graveyard  ! yes !   no      ! resolve next spell
+            //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
+            //   --!---------------!-------------!-----!-----------!
+            //  -
+            //  - Problem 1: move code (well, not only move) calls ApplyEffects in the middle of the resolve
+            //  - and reset short LKI (after short LKI reset dies trigger will not work)
+            //  - Example: Goblin Welder calls sacrifice and card move in the same effect - but move call do
+            //  - a reset and dies trigger ignored (trigger thinks that permanent already dies)
+            //  -
+            //  - Possible fix:
+            //  - replace ApplyEffects in the move code by game.getState().processAction(game);
+            //  - check and fix many broken (is it was a false positive test or something broken)
+            //sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }

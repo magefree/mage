@@ -24,6 +24,7 @@ public class PlayerView implements Serializable {
     private final UUID playerId;
     private final String name;
     private final boolean controlled; // gui: player is current user
+    private final boolean isHuman; // human or computer
     private final int life;
     private final Counters counters;
     private final int wins;
@@ -38,6 +39,7 @@ public class PlayerView implements Serializable {
     private final ManaPoolView manaPool;
     private final CardsView graveyard = new CardsView();
     private final CardsView exile = new CardsView();
+    private final CardsView sideboard = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserData userData;
@@ -58,6 +60,7 @@ public class PlayerView implements Serializable {
         this.playerId = player.getId();
         this.name = player.getName();
         this.controlled = player.getId().equals(createdForPlayerId);
+        this.isHuman = player.isHuman();
         this.life = player.getLife();
         this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
@@ -85,6 +88,13 @@ public class PlayerView implements Serializable {
                 }
             }
         }
+        if (this.controlled || !player.isHuman()) {
+            // sideboard available for itself or for computer only
+            for (Card card : player.getSideboard().getCards(game)) {
+                sideboard.put(card.getId(), new CardView(card, game, false));
+            }
+        }
+
         try {
             for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
                 if (showInBattlefield(permanent, state)) {
@@ -167,6 +177,10 @@ public class PlayerView implements Serializable {
         return this.controlled;
     }
 
+    public boolean isHuman() {
+        return this.isHuman;
+    }
+
     public int getLife() {
         return this.life;
     }
@@ -205,6 +219,10 @@ public class PlayerView implements Serializable {
 
     public CardsView getExile() {
         return exile;
+    }
+
+    public CardsView getSideboard() {
+        return this.sideboard;
     }
 
     public Map<UUID, PermanentView> getBattlefield() {

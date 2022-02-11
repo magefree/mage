@@ -76,7 +76,7 @@ enum DestinySpinnerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().countAll(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, sourceAbility.getControllerId(), game);
+        return game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, sourceAbility.getControllerId(), game);
     }
 
     @Override

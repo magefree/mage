@@ -28,8 +28,8 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
-        super(attackOption, range, mulligan, startLife, startingSize);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
+        super(attackOption, range, mulligan, startingLife, startingHandSize);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
@@ -44,8 +44,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected void init(UUID choosingPlayerId) {
         // Karn Liberated calls it to restart game, all data and commanders must be re-initialized
 
-        // plays watcher
-        state.addWatcher(new CommanderPlaysCountWatcher());
+        // add game mode specific watchers here
+        //state.addWatcher(new CommanderPlaysCountWatcher());
 
         // move commanders to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {

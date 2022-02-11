@@ -62,7 +62,7 @@ class MindsDesireEffect extends OneShotEffect {
         if (controller != null) {
             controller.shuffleLibrary(source, game);
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true, false);
+                    TargetController.YOU, Duration.EndOfTurn, true, false, false);
         }
         return false;
     }

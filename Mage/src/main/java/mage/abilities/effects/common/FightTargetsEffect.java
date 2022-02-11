@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.UUID;
 
@@ -15,17 +16,20 @@ import java.util.UUID;
  */
 public class FightTargetsEffect extends OneShotEffect {
 
+    protected boolean showEffectHint;
+
     public FightTargetsEffect() {
-        super(Outcome.Damage);
+        this(true);
     }
 
-    public FightTargetsEffect(String effectText) {
-        this();
-        this.staticText = effectText;
+    public FightTargetsEffect(boolean showEffectHint) {
+        super(Outcome.Benefit);
+        this.showEffectHint = showEffectHint;
     }
 
     public FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
+        this.showEffectHint = effect.showEffectHint;
     }
 
     @Override
@@ -70,18 +74,26 @@ public class FightTargetsEffect extends OneShotEffect {
     @Override
     public FightTargetsEffect copy() {
         return new FightTargetsEffect(this);
-
     }
 
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
-
         }
-        return "target " + mode
-                .getTargets().get(0).getTargetName() + " fights another target " + mode
-                .getTargets().get(1).getTargetName();
-    }
+        Target target=mode.getTargets().get(1);
+        StringBuilder sb=new StringBuilder("target ");
+        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" fights ");
+        if(!target.getTargetName().contains("other")){
+            sb.append("target ");
+        }
+        sb.append(target.getTargetName());
 
+        if (showEffectHint) {
+            sb.append(". <i>(Each deals damage equal to its power to the other.)</i>");
+        }
+
+        return sb.toString();
+    }
 }

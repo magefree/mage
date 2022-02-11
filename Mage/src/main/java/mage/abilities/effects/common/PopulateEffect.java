@@ -33,7 +33,7 @@ public class PopulateEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature token for populate");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
@@ -78,7 +78,7 @@ public class PopulateEffect extends OneShotEffect {
         Effect effect = new CreateTokenCopyTargetEffect(
                 null, null, false, 1, tappedAndAttacking, tappedAndAttacking
         );
-        effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
         return effect.apply(game, source);
     }
 

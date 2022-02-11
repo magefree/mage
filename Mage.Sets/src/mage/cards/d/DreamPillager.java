@@ -84,7 +84,7 @@ class DreamPillagerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.";
+        return "Whenever {this} deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards.";
     }
 }
 

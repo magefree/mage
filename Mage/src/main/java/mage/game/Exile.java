@@ -16,7 +16,7 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     private static final UUID PERMANENT = UUID.randomUUID();
 
-    private Map<UUID, ExileZone> exileZones = new HashMap<>();
+    private final Map<UUID, ExileZone> exileZones = new HashMap<>();
 
     public Exile() {
         createZone(PERMANENT, "Permanent");
@@ -71,12 +71,36 @@ public class Exile implements Serializable, Copyable<Exile> {
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
+    @Deprecated // TODO: must use related request due game range
     public List<Card> getAllCards(Game game) {
-        List<Card> cards = new ArrayList<>();
+        return getAllCards(game, null);
+    }
+
+    /**
+     * Return exiled cards from specific player. Use it in effects to find all cards in range.
+     *
+     * @param game
+     * @param fromPlayerId
+     * @return
+     */
+    public List<Card> getAllCards(Game game, UUID fromPlayerId) {
+        List<Card> res = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
-            cards.addAll(exile.getCards(game));
+            for (Card card : exile.getCards(game)) {
+                if (fromPlayerId == null || card.getOwnerId().equals(fromPlayerId)) {
+                    res.add(card);
+                }
+            }
         }
-        return cards;
+        return res;
+    }
+
+    public List<Card> getAllCardsByRange(Game game, UUID controllerId) {
+        List<Card> res = new ArrayList<>();
+        for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
+            res.addAll(getAllCards(game, playerId));
+        }
+        return res;
     }
 
     public boolean removeCard(Card card, Game game) {
@@ -86,6 +110,25 @@ public class Exile implements Serializable, Copyable<Exile> {
             }
         }
         return false;
+    }
+
+    /**
+     * Move card from one exile zone to another. Use case example: create special zone for exiled and castable card.
+     *
+     * @param card
+     * @param game
+     * @param toZoneId
+     */
+    public void moveToAnotherZone(Card card, Game game, ExileZone exileZone) {
+        if (getCard(card.getId(), game) == null) {
+            throw new IllegalArgumentException("Card must be in exile zone: " + card.getIdName());
+        }
+        if (exileZone == null) {
+            throw new IllegalArgumentException("Exile zone must exists: " + card.getIdName());
+        }
+
+        removeCard(card, game);
+        exileZone.add(card);
     }
 
     @Override

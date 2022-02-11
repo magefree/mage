@@ -50,7 +50,7 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, tarrasque);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -83,11 +83,11 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, sakashima);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, tarrasque);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sakashima);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

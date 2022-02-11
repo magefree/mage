@@ -12,13 +12,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInGraveyardOrBattlefield;
 
 import java.util.UUID;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author LevelX2
@@ -27,10 +26,13 @@ public final class AngelOfSerenity extends CardImpl {
 
     private static final String rule = "you may exile up to three other target creatures " +
             "from the battlefield and/or creature cards from graveyards.";
-    private static final FilterPermanent filter = new FilterCreaturePermanent("other target creatures");
-
+    
+    private static final FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card in a graveyard");
+    
+    private static final FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("other target creature");
+    
     static {
-        filter.add(AnotherPredicate.instance);
+        filterCreaturePermanent.add(AnotherPredicate.instance);
     }
 
     public AngelOfSerenity(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +50,7 @@ public final class AngelOfSerenity extends CardImpl {
                 new ExileTargetForSourceEffect().setText(rule), true
         );
         ability.addTarget(new TargetCardInGraveyardOrBattlefield(
-                0, 3, StaticFilters.FILTER_CARD_CREATURE, filter
+                0, 3, filterCreatureCard, filterCreaturePermanent
         ));
         this.addAbility(ability);
 

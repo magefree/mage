@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,16 +19,17 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public final class StrengthOfCedars extends CardImpl {
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
+
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("lands you control");
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
 
     public StrengthOfCedars (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
         this.subtype.add(SubType.ARCANE);
 
-
         // Target creature gets +X/+X until end of turn, where X is the number of lands you control.
-        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter, null);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -41,5 +41,4 @@ public final class StrengthOfCedars extends CardImpl {
     public StrengthOfCedars copy() {
         return new StrengthOfCedars(this);
     }
-
 }

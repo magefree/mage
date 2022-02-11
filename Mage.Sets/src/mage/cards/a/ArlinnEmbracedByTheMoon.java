@@ -35,7 +35,6 @@ public final class ArlinnEmbracedByTheMoon extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // +1: Creatures you control get +1/+1 and gain trample until end of turn.
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE);
@@ -50,7 +49,7 @@ public final class ArlinnEmbracedByTheMoon extends CardImpl {
         this.addAbility(new TransformAbility());
         ability = new LoyaltyAbility(new DamageTargetEffect(3), -1);
         ability.addTarget(new TargetAnyTarget());
-        ability.addEffect(new TransformSourceEffect(false));
+        ability.addEffect(new TransformSourceEffect());
         this.addAbility(ability);
 
         // -6: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"

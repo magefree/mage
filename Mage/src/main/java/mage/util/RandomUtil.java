@@ -1,6 +1,7 @@
 package mage.util;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import java.util.UUID;
  */
 public final class RandomUtil {
 
-    private static Random random = new Random(); // thread safe with seed support
+    private static final Random random = new Random(); // thread safe with seed support
 
     private RandomUtil() {
     }
@@ -43,15 +44,15 @@ public final class RandomUtil {
         random.setSeed(newSeed);
     }
 
-    public static UUID randomFromSet(Set<UUID> uuids) {
-        if (uuids.size() < 2) {
-            return uuids.stream().findFirst().orElse(null);
+    public static <T> T randomFromCollection(Collection<T> collection) {
+        if (collection.size() < 2) {
+            return collection.stream().findFirst().orElse(null);
         }
-        int rand = nextInt(uuids.size());
+        int rand = nextInt(collection.size());
         int count = 0;
-        for (UUID currentId : uuids) {
+        for (T current : collection) {
             if (count == rand) {
-                return currentId;
+                return current;
             }
             count++;
         }

@@ -419,18 +419,7 @@ public abstract class TournamentImpl implements Tournament {
                 }
             }
         }
-        resetBufferedCards();
         nextStep();
-    }
-
-    public void resetBufferedCards() {
-        Set<ExpansionSet> setsDone = new HashSet<>();
-        for (ExpansionSet set : sets) {
-            if (!setsDone.contains(set)) {
-                set.removeSavedCards();
-                setsDone.add(set);
-            }
-        }
     }
 
     public void playMatch(TournamentPairing pair) {

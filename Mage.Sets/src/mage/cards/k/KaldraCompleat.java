@@ -60,11 +60,12 @@ public final class KaldraCompleat extends CardImpl {
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new DealsDamageToACreatureTriggeredAbility(
-                        new ExileTargetEffect("exile that creature"),
+                        // if a creature is dealt lethal damage, it is dies as a state-based action and can't be found to exile
+                        new ExileTargetEffect(null, "exile that creature", Zone.BATTLEFIELD).setToSourceExileZone(true),
                         true,
                         false,
                         true,
-                        StaticFilters.FILTER_PERMANENT_CREATURE_A
+                        StaticFilters.FILTER_PERMANENT_A_CREATURE
                 ),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,

@@ -26,7 +26,7 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
 
         // clone
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Spectral Bears");
 
         setStopAt(1, PhaseStep.END_TURN);

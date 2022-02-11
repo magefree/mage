@@ -9,13 +9,13 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -33,6 +33,7 @@ public final class RingOfMaruf extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
+        ability.addHint(OpenSideboardHint.instance);
         this.addAbility(ability);
     }
 
@@ -66,7 +67,7 @@ class RingOfMarufEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            new WishEffect(new FilterCard(), false).apply(game, source);
+            new WishEffect().apply(game, source);
             this.discard();
             return true;
         }

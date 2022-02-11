@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
@@ -33,7 +34,7 @@ public final class InfernalHarvest extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast Infernal Harvest, return X Swamps you control to their owner's hand.
-        this.getSpellAbility().addCost(new InfernalHarvestVariableCost());
+        this.getSpellAbility().addCost(new InfernalHarvestAdditionalCost());
 
         // Infernal Harvest deals X damage divided as you choose among any number of target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(GetXValue.instance));
@@ -50,22 +51,22 @@ public final class InfernalHarvest extends CardImpl {
     }
 }
 
-class InfernalHarvestVariableCost extends VariableCostImpl {
+class InfernalHarvestAdditionalCost extends VariableCostImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SWAMP);
 
-    InfernalHarvestVariableCost() {
-        super("Swamps to return");
+    InfernalHarvestAdditionalCost() {
+        super(VariableCostType.ADDITIONAL, "Swamps to return");
         this.text = "return " + xText + " Swamps you control to their owner's hand";
     }
 
-    private InfernalHarvestVariableCost(final InfernalHarvestVariableCost cost) {
+    private InfernalHarvestAdditionalCost(final InfernalHarvestAdditionalCost cost) {
         super(cost);
     }
 
     @Override
-    public InfernalHarvestVariableCost copy() {
-        return new InfernalHarvestVariableCost(this);
+    public InfernalHarvestAdditionalCost copy() {
+        return new InfernalHarvestAdditionalCost(this);
     }
 
     @Override

@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -18,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.BasriKetEmblem;
@@ -40,7 +38,7 @@ public final class BasriKet extends CardImpl {
         
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
@@ -74,7 +72,7 @@ class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public BasriKetTriggeredAbility() {

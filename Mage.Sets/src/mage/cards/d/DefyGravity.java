@@ -26,7 +26,7 @@ public final class DefyGravity extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{U}")));
     }
 
     private DefyGravity(final DefyGravity card) {

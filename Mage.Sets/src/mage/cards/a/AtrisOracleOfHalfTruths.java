@@ -34,7 +34,7 @@ public final class AtrisOracleOfHalfTruths extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Atris, Oracle of Half-Truths enters the battlefield, target opponent looks at the top three cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AtrisOracleOfHalfTruthsEffect());

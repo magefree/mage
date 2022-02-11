@@ -23,7 +23,7 @@ public class CopyAnthemEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Copy Enchantment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Glorious Anthem");
 
         rollbackTurns(3, PhaseStep.UPKEEP, playerA, 0);

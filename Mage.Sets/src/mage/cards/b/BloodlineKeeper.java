@@ -41,7 +41,6 @@ public final class BloodlineKeeper extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LordOfLineage.class;
 
         this.addAbility(FlyingAbility.getInstance());
@@ -50,7 +49,7 @@ public final class BloodlineKeeper extends CardImpl {
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
         this.addAbility(new TransformAbility());
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new TransformSourceEffect(true),
+                new TransformSourceEffect(),
                 new ManaCostsImpl("{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
         this.addAbility(ability);

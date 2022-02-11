@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -128,7 +129,7 @@ class ConfoundingConundrumWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isLand(game)) {
-            playerMap.compute(permanent.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(permanent.getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
 

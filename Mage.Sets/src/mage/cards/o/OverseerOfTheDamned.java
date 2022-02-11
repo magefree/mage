@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
@@ -27,11 +26,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class OverseerOfTheDamned extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public OverseerOfTheDamned(UUID ownerId, CardSetInfo setInfo) {

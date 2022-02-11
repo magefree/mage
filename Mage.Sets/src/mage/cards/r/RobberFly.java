@@ -5,12 +5,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -32,8 +32,7 @@ public final class RobberFly extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Robber Fly becomes blocked, defending player discards all the cards in their hand, then draws that many cards.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardsDefendingPlayerEffect(), false, true));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardsDefendingPlayerEffect(), false, true));
     }
 
     private RobberFly(final RobberFly card) {
@@ -76,5 +75,4 @@ class DrawCardsDefendingPlayerEffect extends OneShotEffect {
         }
         return false;
     }
-
 }

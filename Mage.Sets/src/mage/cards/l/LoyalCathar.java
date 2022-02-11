@@ -32,7 +32,6 @@ public final class LoyalCathar extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.u.UnhallowedCathar.class;
 
         this.power = new MageInt(2);

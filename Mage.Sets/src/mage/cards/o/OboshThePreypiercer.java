@@ -58,10 +58,10 @@ enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int startingHandSize) {
         return deck
                 .stream()
-                .filter(card -> !card.isLand())
+                .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))
                 .mapToInt(MageObject::getManaValue)
                 .map(i -> i % 2)
                 .allMatch(i -> i == 1);
@@ -88,7 +88,7 @@ class OboshThePreypiercerEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PERMANENT);
+                || event.getType().equals(GameEvent.EventType.DAMAGE_PERMANENT);
     }
 
     @Override

@@ -90,7 +90,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         skipInitShuffling(); // to keep this card on top of library
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");

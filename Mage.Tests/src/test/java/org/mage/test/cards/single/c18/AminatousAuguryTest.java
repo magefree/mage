@@ -39,7 +39,7 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
                 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
-        setChoice(playerA, "Yes"); // Put a land from among the exiled cards into play?
+        setChoice(playerA, true); // Put a land from among the exiled cards into play?
         setChoice(playerA, "Badlands"); // Select a land card
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel");

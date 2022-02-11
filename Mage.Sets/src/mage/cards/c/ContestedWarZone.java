@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -7,14 +6,14 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -26,8 +25,6 @@ import mage.game.permanent.Permanent;
  */
 public final class ContestedWarZone extends CardImpl {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
-
     public ContestedWarZone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
@@ -38,7 +35,7 @@ public final class ContestedWarZone extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Attacking creatures get +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

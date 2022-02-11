@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -31,7 +30,7 @@ public final class MaskOfTheMimic extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public MaskOfTheMimic(UUID ownerId, CardSetInfo setInfo) {

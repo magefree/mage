@@ -34,7 +34,7 @@ public final class TenthDistrictLegionnaire extends CardImpl {
         Ability ability = new HeroicAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance()
         ), false, false);
-        ability.addEffect(new ScryEffect(1).concatBy(", then"));
+        ability.addEffect(new ScryEffect(1, false).concatBy(", then"));
         this.addAbility(ability);
     }
 

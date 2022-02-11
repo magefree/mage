@@ -19,7 +19,7 @@ public final class ThatcherHumanToken extends TokenImpl {
         this.subtype.add(SubType.HUMAN);
         addAbility(HasteAbility.getInstance());
 
-        this.color = ObjectColor.RED;
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

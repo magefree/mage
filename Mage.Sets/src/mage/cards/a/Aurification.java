@@ -89,7 +89,7 @@ public final class Aurification extends CardImpl {
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null && permanent.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     }
                     return true;
                 }

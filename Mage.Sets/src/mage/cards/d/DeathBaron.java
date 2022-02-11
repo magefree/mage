@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -12,7 +13,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -21,13 +24,11 @@ import java.util.UUID;
  */
 public final class DeathBaron extends CardImpl {
 
-    private static final FilterCreaturePermanent filterSkeletons = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("Skeletons you control and other Zombies");
 
     static {
-        filterSkeletons.add(SubType.SKELETON.getPredicate());
-        filterZombie.add(SubType.ZOMBIE.getPredicate());
-        filterZombie.add(Predicates.not(SubType.SKELETON.getPredicate()));
+        filter.add(DeathBaronPredicate.instance);
     }
 
     public DeathBaron(UUID ownerId, CardSetInfo setInfo) {
@@ -40,16 +41,10 @@ public final class DeathBaron extends CardImpl {
 
         // Skeletons you control and other Zombies you control get +1/+1 and have deathtouch.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filterSkeletons, false
-        ).setText("Skeletons you control"));
+                1, 1, Duration.WhileOnBattlefield, filter, false
+        ));
         ability.addEffect(new GainAbilityControlledEffect(
-                DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterSkeletons, false
-        ).setText("and other Zombies you control"));
-        ability.addEffect(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filterZombie, true
-        ).setText("get +1/+1"));
-        ability.addEffect(new GainAbilityControlledEffect(
-                DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterZombie, true
+                DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
         ).setText("and have deathtouch"));
         this.addAbility(ability);
     }
@@ -61,5 +56,18 @@ public final class DeathBaron extends CardImpl {
     @Override
     public DeathBaron copy() {
         return new DeathBaron(this);
+    }
+}
+
+enum DeathBaronPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        if (input.getObject().hasSubtype(SubType.SKELETON, game)) {
+            return true;
+        }
+        return !input.getObject().getId().equals(input.getSourceId())
+                && input.getObject().hasSubtype(SubType.ZOMBIE, game);
     }
 }

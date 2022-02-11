@@ -1,7 +1,5 @@
 package mage.cards.o;
 
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -21,16 +19,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.FilterCard;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class OrbOfDragonkind extends CardImpl {
 
-    private static final FilterBySubtypeCard filter = new FilterBySubtypeCard(SubType.DRAGON);
+    private static final FilterCard filter = new FilterCard("a Dragon card");
+
+    static {
+        filter.add(SubType.DRAGON.getPredicate());
+    }
 
     public OrbOfDragonkind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
@@ -46,7 +49,7 @@ public final class OrbOfDragonkind extends CardImpl {
                 StaticValue.get(7), false, StaticValue.get(1), filter,
                 Zone.LIBRARY, false, true, false, Zone.HAND,
                 true, false, false).setBackInRandomOrder(true),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -72,7 +75,7 @@ class OrbOfDragonkindManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast Dragon spells or to activate abilities of Dragons";
+        return "Spend this mana only to cast Dragon spells or activate abilities of Dragons";
     }
 }
 
@@ -80,7 +83,7 @@ class OrbOfDragonkindConditionalMana extends ConditionalMana {
 
     public OrbOfDragonkindConditionalMana(Mana mana) {
         super(mana);
-        this.staticText = "Spend this mana only to cast Dragon spells or to activate abilities of Dragons";
+        this.staticText = "Spend this mana only to cast Dragon spells or activate abilities of Dragons";
         addCondition(OrbOfDragonkindManaCondition.instance);
     }
 }

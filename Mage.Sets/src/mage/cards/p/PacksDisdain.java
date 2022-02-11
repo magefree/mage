@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
@@ -66,12 +65,13 @@ class PacksDisdainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-        if (player != null && player.choose(Outcome.UnboostCreature, typeChoice, game)) {
+        if (player != null
+                && player.choose(Outcome.UnboostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
             filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
             DynamicValue negativePermanentsCount = new PermanentsOnBattlefieldCount(filter, -1);
             ContinuousEffect effect = new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn, true);
-            effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
             game.addEffect(effect, source);
             return true;
         }

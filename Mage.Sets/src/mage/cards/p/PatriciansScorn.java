@@ -15,7 +15,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
@@ -34,7 +33,7 @@ public final class PatriciansScorn extends CardImpl {
         // If you've cast another white spell this turn, you may cast this spell without paying its mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()), new PatriciansScornWatcher());
         // Destroy all enchantments.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
     }
 
     private PatriciansScorn(final PatriciansScorn card) {

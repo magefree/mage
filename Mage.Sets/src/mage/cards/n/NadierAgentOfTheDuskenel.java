@@ -31,7 +31,7 @@ public final class NadierAgentOfTheDuskenel extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("a token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public NadierAgentOfTheDuskenel(UUID ownerId, CardSetInfo setInfo) {

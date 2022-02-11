@@ -17,18 +17,23 @@ public class BoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
-        while (!isAbort() && boosterNum < numberBoosters) {
+        cardNum = 1;
+        boosterNum = 1;
+        while (!isAbort() && boosterNum <= numberBoosters) {
             openBooster();
+            cardNum = 1;
+            fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
+                // pass booster order: left -> right -> left
                 if (boosterNum % 2 == 1) {
-                    passLeft();
+                    passBoosterToLeft();
                 } else {
-                    passRight();
+                    passBoosterToRight();
                 }
                 fireUpdatePlayersEvent();
             }
+            boosterNum++;
         }
-        resetBufferedCards();
         this.fireEndDraftEvent();
     }
 

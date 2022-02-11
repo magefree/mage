@@ -46,7 +46,7 @@ public final class NeganTheColdBlooded extends CardImpl {
 
         // Whenever an opponent sacrifices a creature, you create a Treasure token.
         this.addAbility(new SacrificeAllTriggeredAbility(
-                new CreateTokenEffect(new TreasureToken()),
+                new CreateTokenEffect(new TreasureToken()).setText("you create a Treasure token"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 TargetController.OPPONENT, false
         ));

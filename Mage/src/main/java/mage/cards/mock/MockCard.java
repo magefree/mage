@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Mock card for GUI (deck editor and panels)
+ * Mock card for GUI (deck editor and panels, contains only texts)
  *
  * @author North
  */
@@ -63,7 +63,6 @@ public class MockCard extends CardImpl {
 
         this.flipCard = card.isFlipCard();
 
-        this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
@@ -180,6 +179,6 @@ public class MockCard extends CardImpl {
     @Override
     public boolean isTransformable() {
         // must enable toggle mode in deck editor (switch between card sides);
-        return super.isTransformable() || this.isModalDoubleFacesCard;
+        return super.isTransformable() || this.isModalDoubleFacesCard || this.secondSideCard != null;
     }
 }

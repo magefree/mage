@@ -18,8 +18,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -44,7 +44,7 @@ public final class VedalkenShackles extends CardImpl {
 
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.instance,
+                new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.TAPPED,
                 "Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
@@ -62,7 +62,7 @@ public final class VedalkenShackles extends CardImpl {
     }
 }
 
-class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class PowerIslandPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
@@ -70,7 +70,7 @@ class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permane
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         if (permanent != null) {
             int islands = game.getBattlefield().countAll(filter, input.getPlayerId(), game);

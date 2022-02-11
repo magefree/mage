@@ -29,7 +29,7 @@ public final class TeamPennant extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public TeamPennant(UUID ownerId, CardSetInfo setInfo) {

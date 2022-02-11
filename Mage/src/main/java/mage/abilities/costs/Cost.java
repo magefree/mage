@@ -14,7 +14,7 @@ public interface Cost extends Serializable, Copyable<Cost> {
 
     String getText();
 
-    void setText(String text);
+    Cost setText(String text);
 
     /**
      * Check is it possible to pay

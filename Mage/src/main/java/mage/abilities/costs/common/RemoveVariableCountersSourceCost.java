@@ -1,21 +1,20 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class RemoveVariableCountersSourceCost extends VariableCostImpl {
 
     protected int minimalCountersToPay = 0;
-    private String counterName;
+    private final String counterName;
 
     public RemoveVariableCountersSourceCost(Counter counter) {
         this(counter, 0);
@@ -30,7 +29,7 @@ public class RemoveVariableCountersSourceCost extends VariableCostImpl {
     }
 
     public RemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay, String text) {
-        super(counter.getName() + " counters to remove");
+        super(VariableCostType.NORMAL, counter.getName() + " counters to remove");
         this.minimalCountersToPay = minimalCountersToPay;
         this.counterName = counter.getName();
         if (text == null || text.isEmpty()) {
@@ -63,12 +62,7 @@ public class RemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            maxValue = permanent.getCounters(game).getCount(counterName);
-        }
-        return maxValue;
+        return permanent != null ? permanent.getCounters(game).getCount(counterName) : 0;
     }
-
 }

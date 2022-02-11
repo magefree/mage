@@ -23,7 +23,7 @@ public final class ChillOfForeboding extends CardImpl {
         this.getSpellAbility().addEffect(new MillCardsEachPlayerEffect(5, TargetController.ANY));
 
         // Flashback {7}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{U}")));
     }
 
     private ChillOfForeboding(final ChillOfForeboding card) {

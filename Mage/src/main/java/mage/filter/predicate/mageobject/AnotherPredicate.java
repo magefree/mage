@@ -9,7 +9,7 @@ import mage.game.Game;
 /**
  * @author North
  */
-public enum AnotherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public enum AnotherPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -11,6 +10,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.DashedCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.costs.AlternativeCost2;
 import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -18,7 +18,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -37,7 +37,9 @@ import mage.target.targetpointer.FixedTarget;
 public class DashAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String KEYWORD = "Dash";
-    protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)";
+    protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. "
+            + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
+            + "hand at the beginning of the next end step.)";
 
     protected List<AlternativeCost2> alternativeSourceCosts = new LinkedList<>();
 
@@ -84,7 +86,8 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
+        if (card != null
+                && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
             for (AlternativeCost2 cost : alternativeSourceCosts) {
                 if (cost.isActivated(game)) {
                     return true;
@@ -102,12 +105,14 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            // we must use the controller of the ability here IE: Hedonist's Trove (play from not own hand when you aren't the owner)
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetDash();
                 for (AlternativeCost2 dashCost : alternativeSourceCosts) {
-                    if (dashCost.canPay(ability, this, controllerId, game)
-                            && player.chooseUse(Outcome.Benefit, KEYWORD + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
+                    if (dashCost.canPay(ability, this, player.getId(), game)
+                            && player.chooseUse(Outcome.Benefit, KEYWORD
+                                    + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
                         activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
@@ -202,11 +207,12 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getPermanentEntering(source.getSourceId()) != null) {
-            Effect effect = new ReturnToHandTargetEffect();
-            effect.setText("return the dashed creature from the battlefield to its owner's hand");
+            OneShotEffect returnToHandEffect = new ReturnToHandTargetEffect();
+            ConditionalOneShotEffect mustBeOnBattlefieldToReturn = new ConditionalOneShotEffect(returnToHandEffect, SourceOnBattlefieldCondition.instance);
+            mustBeOnBattlefieldToReturn.setText("return the dashed creature from the battlefield to its owner's hand");
             // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
-            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            mustBeOnBattlefieldToReturn.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(mustBeOnBattlefieldToReturn);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

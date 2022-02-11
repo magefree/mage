@@ -65,7 +65,7 @@ public final class SilverquillSilencer extends CardImpl {
     }
 }
 
-enum SilverquillSilencerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum SilverquillSilencerPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

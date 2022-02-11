@@ -64,7 +64,7 @@ enum OathOfScholarsAdjuster implements TargetAdjuster {
     }
 }
 
-class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

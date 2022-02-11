@@ -105,7 +105,7 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -128,10 +128,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -154,10 +154,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
@@ -180,9 +180,9 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -203,9 +203,9 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
@@ -228,16 +228,16 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
 
         rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
 
         rollbackAfterActionsStart();
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Storeroom
+        setChoice(playerA, true); // Storeroom
         addTarget(playerA, SILVERCOAT_LION);
         rollbackAfterActionsEnd();
 
@@ -265,10 +265,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
         setChoice(playerB, DUNGEON_OF_THE_MAD_MAGE);
@@ -276,7 +276,7 @@ public class DungeonTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
-        setChoice(playerB, "Yes"); // Goblin Bazaar
+        setChoice(playerB, true); // Goblin Bazaar
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
 
@@ -305,10 +305,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
@@ -346,10 +346,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
 
@@ -370,13 +370,13 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // return Dungeon Crawler
+        setChoice(playerA, true); // return Dungeon Crawler
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -396,10 +396,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -423,10 +423,10 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "Yes"); // Goblin Lair
+        setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
-        setChoice(playerA, "No"); // Dark Pool
+        setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

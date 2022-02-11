@@ -51,7 +51,7 @@ public final class SyrGwynHeroOfAshvale extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever an equipped creature you control attacks, you draw a card and you lose 1 life.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(

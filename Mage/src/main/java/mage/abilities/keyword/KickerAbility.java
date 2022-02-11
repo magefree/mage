@@ -95,31 +95,31 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     public final OptionalAdditionalCost addKickerCost(String manaString) {
-        OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(
+        OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
                 keywordText, reminderText, new ManaCostsImpl(manaString));
-        kickerCosts.add(kickerCost);
-        return kickerCost;
+        addKickerCostAndSetup(newCost);
+        return newCost;
     }
 
     public final OptionalAdditionalCost addKickerCost(Cost cost) {
-        OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(
+        OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
                 keywordText, "-", reminderText, cost);
-        kickerCosts.add(kickerCost);
-        return kickerCost;
+        addKickerCostAndSetup(newCost);
+        return newCost;
     }
 
-    public void resetKicker(Game game, Ability source) {
+    private void addKickerCostAndSetup(OptionalAdditionalCost newCost) {
+        this.kickerCosts.add(newCost);
+        this.kickerCosts.forEach(cost -> {
+            cost.setCostType(VariableCostType.ADDITIONAL);
+        });
+    }
+
+    private void resetKicker() {
         for (OptionalAdditionalCost cost : kickerCosts) {
             cost.reset();
         }
-        String key = getActivationKey(source, "", game);
-        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext(); ) {
-            String activationKey = iterator.next();
-            if (activationKey.startsWith(key)
-                    && activations.get(activationKey) > 0) {
-                activations.put(key, 0);
-            }
-        }
+        activations.clear();
     }
 
     private int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
@@ -234,7 +234,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                this.resetKicker(game, ability);
+                this.resetKicker();
                 for (OptionalAdditionalCost kickerCost : kickerCosts) {
                     boolean again = true;
                     while (player.canRespond() && again) {
@@ -250,6 +250,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                 "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
+                                // as multiple costs
                                 for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs)) {
@@ -262,6 +263,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                     }
                                 }
                             } else {
+                                // as single cost
                                 addKickerCostsToAbility(kickerCost, ability, game);
                             }
                             again = kickerCost.isRepeatable();
@@ -275,7 +277,8 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     private void addKickerCostsToAbility(Cost cost, Ability ability, Game game) {
-        // can contains multiple costs from multikicker ability
+        // can contain multiple costs from multikicker ability
+        // must be additional cost type
         if (cost instanceof ManaCostsImpl) {
             ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
         } else {

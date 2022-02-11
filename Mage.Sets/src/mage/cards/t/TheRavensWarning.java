@@ -7,6 +7,7 @@ import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.*;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
@@ -14,7 +15,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -34,7 +34,7 @@ public final class TheRavensWarning extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Create a 1/1 blue Bird creature token with flying. You gain 2 life.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
@@ -49,8 +49,9 @@ public final class TheRavensWarning extends CardImpl {
 
         // III — You may put a card you own from outside the game on top of your library.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new WishEffect(StaticFilters.FILTER_CARD_A, false, false, true)
+                new WishEffect(true)
         );
+        sagaAbility.addHint(OpenSideboardHint.instance);
         this.addAbility(sagaAbility);
     }
 

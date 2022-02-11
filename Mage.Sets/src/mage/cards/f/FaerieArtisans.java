@@ -14,7 +14,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class FaerieArtisans extends CardImpl {
     private static final FilterCreaturePermanent filterNontoken = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filterNontoken.add(Predicates.not(TokenPredicate.instance));
+        filterNontoken.add(TokenPredicate.FALSE);
         filterNontoken.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
@@ -87,7 +86,7 @@ class FaerieArtisansEffect extends OneShotEffect {
             if (effect.apply(game, source)) {
                 String oldTokens = (String) game.getState().getValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter());
                 StringBuilder sb = new StringBuilder();
-                for (Permanent permanent : effect.getAddedPermanent()) {
+                for (Permanent permanent : effect.getAddedPermanents()) {
                     if (sb.length() > 0) {
                         sb.append(';');
                     }

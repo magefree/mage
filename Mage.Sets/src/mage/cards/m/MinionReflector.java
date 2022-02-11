@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +30,7 @@ public final class MinionReflector extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
@@ -84,7 +83,7 @@ class MinionReflectorEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 ContinuousEffect continuousEffect = new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false), Duration.Custom);
                 continuousEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
                 game.addEffect(continuousEffect, source);

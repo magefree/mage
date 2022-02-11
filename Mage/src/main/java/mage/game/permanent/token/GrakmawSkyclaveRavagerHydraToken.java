@@ -11,6 +11,10 @@ import java.util.Arrays;
  */
 public final class GrakmawSkyclaveRavagerHydraToken extends TokenImpl {
 
+    public GrakmawSkyclaveRavagerHydraToken() {
+        this(0);
+    }
+
     public GrakmawSkyclaveRavagerHydraToken(int xValue) {
         super("Hydra", "X/X black and green Hydra creature token");
         cardType.add(CardType.CREATURE);

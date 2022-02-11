@@ -15,9 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -68,12 +66,6 @@ public final class SwarmShambler extends CardImpl {
 
 class SwarmShamblerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     SwarmShamblerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()), false);
     }
@@ -98,7 +90,7 @@ class SwarmShamblerTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return sourceObject != null
                 && permanent != null
-                && filter.match(permanent, getSourceId(), getControllerId(), game)
+                && StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1.match(permanent, getSourceId(), getControllerId(), game)
                 && StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS.match(sourceObject, getSourceId(), getControllerId(), game);
     }
 

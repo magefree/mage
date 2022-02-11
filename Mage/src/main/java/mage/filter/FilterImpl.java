@@ -67,10 +67,12 @@ public abstract class FilterImpl<E> implements Filter<E> {
         return message;
     }
 
+    @Override
     public boolean isLockedFilter() {
         return lockedFilter;
     }
 
+    @Override
     public void setLockedFilter(boolean lockedFilter) {
         this.lockedFilter = lockedFilter;
     }

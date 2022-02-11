@@ -34,7 +34,7 @@ public final class TheAntiquitiesWar extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,

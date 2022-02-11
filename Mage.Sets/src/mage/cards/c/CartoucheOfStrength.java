@@ -108,7 +108,8 @@ class FightEnchantedTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "you may have enchanted creature fight target creature an opponent controls.";
+        return "you may have enchanted creature fight target creature an opponent controls. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
 }

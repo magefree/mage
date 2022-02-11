@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -20,12 +19,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class ScabClanGiant extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public ScabClanGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
@@ -38,7 +31,7 @@ public final class ScabClanGiant extends CardImpl {
         // When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
                 .setText("it fights target creature an opponent controls chosen at random"));
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         target.setRandom(true);
         ability.addTarget(target);
         this.addAbility(ability);

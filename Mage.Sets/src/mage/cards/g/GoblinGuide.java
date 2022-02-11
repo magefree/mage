@@ -81,7 +81,7 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
             if (defenderId != null) {
                 for (Effect effect : this.getEffects()) {
                     // set here because attacking creature can be removed until effect resolves
-                    effect.setTargetPointer(new FixedTarget(defenderId));
+                    effect.setTargetPointer(new FixedTarget(defenderId, game));
                 }
                 return true;
             }

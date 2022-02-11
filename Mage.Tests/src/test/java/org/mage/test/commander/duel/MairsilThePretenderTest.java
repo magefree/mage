@@ -47,16 +47,16 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
         // {2}{U}{U}: Return Arcanis the Omnipotent to its owner's hand.        
         addCard(Zone.HAND, playerA, "Arcanis the Omnipotent", 1); // Creature {3}{U}{U}{U}
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mairsil, the Pretender");        
-        setChoice(playerA, "Yes"); // Exile a card
+        setChoice(playerA, true); // Exile a card
         setChoice(playerA, "Arcanis the Omnipotent");
         
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Shifting Shadow", "Mairsil, the Pretender");
 
-        setChoice(playerA, "Yes"); // Move commander to command zone
+        setChoice(playerA, true); // Move commander to command zone
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
 
         setStrictChooseMode(true);
@@ -106,17 +106,17 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
         // {2}{U}{U}: Return Arcanis the Omnipotent to its owner's hand.        
         addCard(Zone.HAND, playerA, "Arcanis the Omnipotent", 1); // Creature {3}{U}{U}{U}
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mairsil, the Pretender");        
-        setChoice(playerA, "Yes"); // Exile a card
+        setChoice(playerA, true); // Exile a card
         setChoice(playerA, "Arcanis the Omnipotent");
         
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Shifting Shadow", "Mairsil, the Pretender");
 
         activateAbility(5, PhaseStep.UPKEEP, playerA, "{2}{U}{U}: Return", NO_TARGET, "At the beginning of your upkeep");
-        setChoice(playerA, "No"); // Don't move commander to command zone because it goes to hand
+        setChoice(playerA, false); // Don't move commander to command zone because it goes to hand
 
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
 
@@ -162,18 +162,18 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
         
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mairsil, the Pretender");                
-        setChoice(playerA, "Yes"); // Exile a card
-        setChoice(playerA, "Yes"); // Exile from Hand
+        setChoice(playerA, true); // Exile a card
+        setChoice(playerA, true); // Exile from Hand
         setChoice(playerA, "Endling");
         
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Shifting Shadow", "Mairsil, the Pretender");
 
         activateAbility(5, PhaseStep.UPKEEP, playerA, "{B}: {this} gains undying", NO_TARGET, "At the beginning of your upkeep");
-        setChoice(playerA, "No"); // Don't move commander to command zone because can come back by Undying
+        setChoice(playerA, false); // Don't move commander to command zone because can come back by Undying
         
-        setChoice(playerA, "Yes"); // Exile a card (Mairsil comes back from Undying)
-        setChoice(playerA, "Yes"); // Exile from hand
+        setChoice(playerA, true); // Exile a card (Mairsil comes back from Undying)
+        setChoice(playerA, true); // Exile from hand
         setChoice(playerA, "Arcanis the Omnipotent");
         
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);

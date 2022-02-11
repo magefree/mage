@@ -33,7 +33,7 @@ public final class SavingGrasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{W}")));
     }
 
     private SavingGrasp(final SavingGrasp card) {

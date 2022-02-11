@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -19,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -31,8 +29,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class TowerAbove extends CardImpl {
 
     public TowerAbove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/G}{2/G}{2/G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2/G}{2/G}{2/G}");
 
         // <i>({2G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)</i>
         // Until end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able."
@@ -73,10 +70,10 @@ class TowerAboveEffect extends OneShotEffect {
         ContinuousEffect effect2 = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         ContinuousEffect effect3 = new GainAbilityTargetEffect(WitherAbility.getInstance(), Duration.EndOfTurn);
         ContinuousEffect effect4 = new GainAbilityTargetEffect(new TowerAboveTriggeredAbility(), Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(target.getId()));
-        effect2.setTargetPointer(new FixedTarget(target.getId()));
-        effect3.setTargetPointer(new FixedTarget(target.getId()));
-        effect4.setTargetPointer(new FixedTarget(target.getId()));
+        effect.setTargetPointer(new FixedTarget(target.getId(), game));
+        effect2.setTargetPointer(new FixedTarget(target.getId(), game));
+        effect3.setTargetPointer(new FixedTarget(target.getId(), game));
+        effect4.setTargetPointer(new FixedTarget(target.getId(), game));
         effect4.setText("");
         game.addEffect(effect, source);
         game.addEffect(effect2, source);

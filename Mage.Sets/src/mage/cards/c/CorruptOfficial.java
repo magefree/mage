@@ -2,22 +2,16 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.combat.Combat;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -36,7 +30,9 @@ public final class CorruptOfficial extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
 
         // Whenever Corrupt Official becomes blocked, defending player discards a card at random.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new CorruptOfficialDiscardEffect(), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(
+                new DiscardTargetEffect(1, true).setText("defending player discards a card at random"),
+                false, true));
     }
 
     private CorruptOfficial(final CorruptOfficial card) {
@@ -46,36 +42,5 @@ public final class CorruptOfficial extends CardImpl {
     @Override
     public CorruptOfficial copy() {
         return new CorruptOfficial(this);
-    }
-}
-
-class CorruptOfficialDiscardEffect extends OneShotEffect {
-
-    public CorruptOfficialDiscardEffect() {
-        super(Outcome.Discard);
-        this.staticText = "defending player discards a card at random";
-    }
-
-    public CorruptOfficialDiscardEffect(final CorruptOfficialDiscardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CorruptOfficialDiscardEffect copy() {
-        return new CorruptOfficialDiscardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent corruptOfficial = game.getPermanent(source.getSourceId());
-        if (corruptOfficial != null) {
-            Combat combat = game.getCombat();
-            Player defendingPlayer = game.getPlayer(combat.getDefendingPlayerId(corruptOfficial.getId(), game));
-            if (defendingPlayer != null) {
-                defendingPlayer.discard(1, true, false, source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -24,7 +24,8 @@ public final class StruggleForSkemfar extends CardImpl {
         // Put a +1/+1 counter on target creature you control. Then that creature fights up to one target creature you don't control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new FightTargetsEffect().setText(
-                "Then that creature fights up to one target creature you don't control"
+                "Then that creature fights up to one target creature you don't control. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(

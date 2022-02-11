@@ -148,6 +148,12 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
+        VEHICLE_CREWED,
+        /* VEHICLE_CREWED
+         targetId    the id of the vehicle
+         sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
         X_MANA_ANNOUNCE,
         /* X_MANA_ANNOUNCE
          mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
@@ -156,10 +162,16 @@ public class GameEvent implements Serializable {
          amount      X multiplier to change X value, default 1
          */
         CAST_SPELL,
-        /* SPELL_CAST
-         x-Costs are already defined
-         */
         CAST_SPELL_LATE,
+        /* SPELL_CAST, CAST_SPELL_LATE
+         targetId    id of the spell that's try to cast
+         sourceId    sourceId of the spell that's try to cast
+         playerId    player that try to cast the spell
+         amount      not used for this event
+         flag        not used for this event
+         zone        zone the spell is cast from (main card)
+         */
+        SPELL_CAST,
         /* SPELL_CAST
          targetId    id of the spell that's cast
          sourceId    sourceId of the spell that's cast
@@ -168,7 +180,6 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          zone        zone the spell is cast from
          */
-        SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
          targetId    id of the ability to activate / use
@@ -296,8 +307,9 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
+        REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
+        ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
-        ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
@@ -328,7 +340,7 @@ public class GameEvent implements Serializable {
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMED,
+        TRANSFORM, TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED
@@ -350,6 +362,7 @@ public class GameEvent implements Serializable {
          */
         BECOME_MONARCH,
         BECOMES_MONARCH,
+        BECOMES_DAY_NIGHT,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
@@ -387,6 +400,7 @@ public class GameEvent implements Serializable {
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,
         ETERNALIZED_CREATURE,
+        TRAINED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         /* ATTACH, ATTACHED,
@@ -457,6 +471,9 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
+        FORETOLD, // targetId   id of card foretold
+        FORETELL, // targetId   id of card foretell  playerId   id of the controller
         //custom events
         CUSTOM_EVENT
     }
@@ -620,7 +637,7 @@ public class GameEvent implements Serializable {
 
     /**
      * used to store which replacement effects were already applied to an event
-     * or or any modified events that may replace it
+     * or any modified events that may replace it
      * <p>
      * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets
      * only one opportunity to affect an event or any modified events that may

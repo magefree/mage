@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -44,7 +43,7 @@ public final class TeferiTimeRaveler extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Each opponent can cast spells only any time they could cast a sorcery.
         this.addAbility(new SimpleStaticAbility(new TeferiTimeRavelerReplacementEffect()));

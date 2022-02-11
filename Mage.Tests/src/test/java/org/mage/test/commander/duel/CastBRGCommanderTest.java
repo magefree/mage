@@ -113,7 +113,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         // exile commander
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-3: Exile target permanent", "Daxos of Meletis");
-        setChoice(playerB, "No"); // Move commander NOT to command zone
+        setChoice(playerB, false); // Move commander NOT to command zone
 
         // exile from hand 3
         activateAbility(7, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
@@ -126,7 +126,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         // - current version ignores a card's ZCC
         // - so ZCC are same after game restart and SBA can't react on commander new move
         // - logic can be changed in the future, so game can ask commander move again here
-        //setChoice(playerB, "No"); // Move commander NOT to command zone
+        //setChoice(playerB, false); // Move commander NOT to command zone
 
         setStopAt(9, PhaseStep.BEGIN_COMBAT);
 
@@ -162,7 +162,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Daxos of Meletis");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mogg Infestation");
         addTarget(playerA, playerB);
-        setChoice(playerB, "Yes"); // Move commander to command zone
+        setChoice(playerB, true); // Move commander to command zone
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 

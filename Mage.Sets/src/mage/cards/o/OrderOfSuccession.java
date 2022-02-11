@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.HashMap;
@@ -116,7 +115,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                     Permanent creature = game.getPermanent(entry.getValue());
                     if (creature != null) {
                         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, player.getId());
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                         game.addEffect(effect, source);
                         game.informPlayers(new StringBuilder(player.getLogName()).append(" gains control of ").append(creature.getName()).toString());
                     }

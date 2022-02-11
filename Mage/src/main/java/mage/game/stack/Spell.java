@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
-import mage.abilities.text.TextPart;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -66,21 +66,29 @@ public class Spell extends StackObjectImpl implements Card {
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
-        this.card = card;
-        this.color = card.getColor(null).copy();
-        this.frameColor = card.getFrameColor(null).copy();
-        this.frameStyle = card.getFrameStyle();
+        Card affectedCard = card;
+
+        // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.DISTURB && affectedCard.getSecondCardFace() != null) {
+            // simulate another side as new card (another code part in continues effect from disturb ability)
+            affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
+        }
+
+        this.card = affectedCard;
+        this.color = affectedCard.getColor(null).copy();
+        this.frameColor = affectedCard.getFrameColor(null).copy();
+        this.frameStyle = affectedCard.getFrameStyle();
         this.id = ability.getId();
-        this.zoneChangeCounter = card.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
+        this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            spellCards.add(((SplitCard) card).getLeftHalfCard());
-            spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());
-            spellCards.add(((SplitCard) card).getRightHalfCard());
-            spellAbilities.add(((SplitCard) card).getRightHalfCard().getSpellAbility().copy());
+            spellCards.add(((SplitCard) affectedCard).getLeftHalfCard());
+            spellAbilities.add(((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy());
+            spellCards.add(((SplitCard) affectedCard).getRightHalfCard());
+            spellAbilities.add(((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy());
         } else {
-            spellCards.add(card);
+            spellCards.add(affectedCard);
             spellAbilities.add(ability);
         }
         this.controllerId = controllerId;
@@ -233,7 +241,10 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    if (!isCopy()) {
+                    if (isCopy()) {
+                        // copied spell, only remove from stack
+                        game.getStack().remove(this, game);
+                    } else {
                         controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
                 }
@@ -438,7 +449,7 @@ public class Spell extends StackObjectImpl implements Card {
                 }
             }
         } else {
-            // Copied spell, only remove from stack
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
         }
     }
@@ -847,6 +858,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isCopy()) {
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
             return true;
         }
@@ -900,11 +912,6 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public void assignNewId() {
-        throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    @Override
-    public void setTransformable(boolean value) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
@@ -986,6 +993,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return card.addCounters(counter, source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return card.addCounters(counter, playerAddingCounters, source, game);
     }
@@ -1003,6 +1015,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters);
     }
 
     @Override
@@ -1054,18 +1071,21 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate predicate, Game game, Ability source, boolean chooseNewTargets) {
+    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Spell spellCopy = this.copySpell(game, source, newControllerId);
         if (applier != null) {
             applier.modifySpell(spellCopy, game);
         }
         spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
         game.getStack().push(spellCopy);
-        if (predicate != null) {
-            spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
+
+        // new targets
+        if (newTargetFilterPredicate != null) {
+            spellCopy.chooseNewTargets(game, newControllerId, true, false, newTargetFilterPredicate);
         } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
             spellCopy.chooseNewTargets(game, newControllerId);
         }
+
         game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
     }
 
@@ -1080,16 +1100,6 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -136,14 +136,14 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Neutral, "Remove a counter?", source, game)) {
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect();
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 effect.apply(game, source);
             } else {
                 Counter counter = selectCounterType(game, source, permanent);
 
                 if (counter != null) {
                     AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
-                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                     effect.apply(game, source);
                 }
             }
@@ -155,13 +155,13 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.Neutral, "Remove a counter?", source, game)) {
                 Counter counter = selectCounterType(game, source, card);
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect(counter);
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 effect.apply(game, source);
             } else {
                 Counter counter = selectCounterType(game, source, card);
                 if (counter != null) {
                     AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
-                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                     effect.apply(game, source);
                 }
             }

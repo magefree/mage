@@ -24,7 +24,7 @@ public final class MomentsPeace extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
 
         // Flashback {2}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}")));
     }
 
     private MomentsPeace(final MomentsPeace card) {

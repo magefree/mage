@@ -34,7 +34,6 @@ public final class PriceOfLoyalty extends CardImpl {
         ).setText("It gains haste until end of turn."));
         this.getSpellAbility().addEffect(new PriceOfLoyaltyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private PriceOfLoyalty(final PriceOfLoyalty card) {

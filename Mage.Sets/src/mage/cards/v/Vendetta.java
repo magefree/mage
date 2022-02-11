@@ -1,8 +1,6 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -10,9 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -24,18 +20,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class Vendetta extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public Vendetta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
-
         // Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new VendettaEffect());
     }

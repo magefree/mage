@@ -46,7 +46,7 @@ public final class BergStrider extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new BergStriderEffect());
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new ManaPaidSourceWatcher());
+        this.addAbility(ability);
     }
 
     private BergStrider(final BergStrider card) {

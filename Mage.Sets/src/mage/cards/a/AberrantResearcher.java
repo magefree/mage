@@ -28,7 +28,6 @@ public final class AberrantResearcher extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PerfectedForm.class;
 
         // Flying
@@ -71,7 +70,7 @@ class AberrantResearcherEffect extends OneShotEffect {
                 .noneMatch(card -> card.isInstantOrSorcery(game))) {
             return false;
         }
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 

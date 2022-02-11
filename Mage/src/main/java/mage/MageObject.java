@@ -4,7 +4,6 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
@@ -13,6 +12,7 @@ import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.Copyable;
 import mage.util.SubTypes;
 
 import java.io.Serializable;
@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public interface MageObject extends MageItem, Serializable {
+public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
     String getName();
 
@@ -136,6 +136,7 @@ public interface MageObject extends MageItem, Serializable {
     void adjustTargets(Ability ability, Game game);
 
     // memory object copy (not mtg)
+    @Override
     MageObject copy();
 
     // copied card info (mtg)
@@ -506,13 +507,5 @@ public interface MageObject extends MageItem, Serializable {
      */
     void setIsAllCreatureTypes(Game game, boolean value);
 
-    List<TextPart> getTextParts();
-
-    TextPart addTextPart(TextPart textPart);
-
     void removePTCDA();
-
-    default void changeSubType(SubType fromSubType, SubType toSubType) {
-
-    }
 }

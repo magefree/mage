@@ -24,8 +24,6 @@ public final class MtgJsonService {
         for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {
             xMageToMtgJsonCodes.put(entry.getValue(), entry.getKey());
         }
-        xMageToMtgJsonCodes.put("8EB", "8ED");
-        xMageToMtgJsonCodes.put("9EB", "9ED");
     }
 
     private static Map<String, MtgJsonCard> loadAllCards() throws IOException {

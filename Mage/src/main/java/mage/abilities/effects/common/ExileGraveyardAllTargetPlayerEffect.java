@@ -16,7 +16,7 @@ public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
 
     public ExileGraveyardAllTargetPlayerEffect() {
         super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        staticText = "exile target player's graveyard";
     }
 
     private ExileGraveyardAllTargetPlayerEffect(final ExileGraveyardAllTargetPlayerEffect effect) {

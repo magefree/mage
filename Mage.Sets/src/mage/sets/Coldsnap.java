@@ -1,9 +1,13 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 /**
  * @author North
@@ -20,7 +24,7 @@ public final class Coldsnap extends ExpansionSet {
         super("Coldsnap", "CSP", ExpansionSet.buildDate(2006, 6, 21), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
+        this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
@@ -183,5 +187,15 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Woolly Razorback", 25, Rarity.RARE, mage.cards.w.WoollyRazorback.class));
         cards.add(new SetCardInfo("Zombie Musher", 75, Rarity.COMMON, mage.cards.z.ZombieMusher.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 135, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
+    }
+
+    @Override
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON) {
+            // Snow basic lands are included in boosters as regular commons
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).rarities(Rarity.LAND)));
+        }
+        return cardInfos;
     }
 }

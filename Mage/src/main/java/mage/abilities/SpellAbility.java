@@ -80,12 +80,16 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
+                || object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || game.canPlaySorcery(playerId);
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // spells can be cast from non hand zones, so must use custom check
+        // no super.canActivate() call
+
         if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
@@ -104,8 +108,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // play restrict
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (game.inCheckPlayableState()) {
+                Card card = game.getCard(sourceId);
+                GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId);
+                castEvent.setZone(card == null ? null : game.getState().getZone(card.getMainCard().getId()));
                 if (game.getContinuousEffects().preventedByRuleModification(
-                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId), this, game, true)) {
+                        castEvent, this, game, true)) {
                     return ActivationStatus.getFalse();
                 }
             }
@@ -120,7 +127,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
 
-            // can pay all costs
+            // can pay all costs and choose targets
             if (costs.canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());

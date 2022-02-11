@@ -28,7 +28,6 @@ public final class UlvenwaldCaptive extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = UlvenwaldAbomination.class;
 
         // Defender
@@ -39,7 +38,7 @@ public final class UlvenwaldCaptive extends CardImpl {
 
         // {5}{G}{G}: Transform Ulvenwald Captive.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{5}{G}{G}")));
     }
 
     private UlvenwaldCaptive(final UlvenwaldCaptive card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -20,12 +19,11 @@ public final class VolleyOfBoulders extends CardImpl {
     public VolleyOfBoulders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
 
-
-        // Volley of Boulders deals 6 damage divided as you choose among any number of target creatures and/or players.
+        // Volley of Boulders deals 6 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(6));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(6));
         // Flashback {R}{R}{R}{R}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{R}{R}{R}{R}{R}{R}"),TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{R}{R}{R}{R}{R}{R}")));
     }
 
     private VolleyOfBoulders(final VolleyOfBoulders card) {

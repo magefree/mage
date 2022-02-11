@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperToken;
 
@@ -23,7 +22,7 @@ public final class CommanderCody extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-token Trooper creatures");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(SubType.TROOPER.getPredicate());
     }
 

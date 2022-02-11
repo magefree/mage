@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,9 +18,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -41,8 +42,7 @@ public final class HoardingDragon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(), true));
 
         // When Hoarding Dragon dies, you may put the exiled card into its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileEffect(Zone.HAND)
-                .setText("put the exiled card into its owner's hand"), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND), true));
     }
 
     private HoardingDragon(final HoardingDragon card) {
@@ -78,10 +78,9 @@ class HoardingDragonEffect extends OneShotEffect {
         controller.searchLibrary(target, source, game);
         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
         if (card != null) {
-            controller.moveCardsToExile(
-                    card, source, game, true,
-                    CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
-            );
+            ExileTargetForSourceEffect effect = new ExileTargetForSourceEffect();
+            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+            effect.apply(game, source);
         }
         controller.shuffleLibrary(source, game);
         return true;

@@ -124,7 +124,7 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Silvercoat Lion");
 
-        setChoice(playerA, "No"); //  Pay {1}?  Energy Storm - CumulativeUpkeepAbility: Cumulative upkeep {1}
+        setChoice(playerA, false); //  Pay {1}?  Energy Storm - CumulativeUpkeepAbility: Cumulative upkeep {1}
         
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);        
         execute();

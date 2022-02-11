@@ -60,7 +60,9 @@ class BlizzardBrawlEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Choose target creature you control and target creature you don't control. " +
                 "If you control three or more snow permanents, the creature you control gets +1/+0 " +
-                "and gains indestructible until end of turn. Then those creatures fight each other.";
+                "and gains indestructible until end of turn. " +
+                "Then those creatures fight each other." +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private BlizzardBrawlEffect(final BlizzardBrawlEffect effect) {

@@ -81,7 +81,8 @@ public abstract class MageTestPlayerBase {
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
 
-    protected static Map<String, DeckCardLists> loadedDeckCardLists = new HashMap<>(); // test decks buffer
+    protected static Map<String, DeckCardLists> loadedDecks = new HashMap<>(); // deck's cache
+    protected static Map<String, CardInfo> loadedCardInfo = new HashMap<>(); // db card's cache
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -131,12 +132,15 @@ public abstract class MageTestPlayerBase {
         logger.debug("Logging level: " + logger.getLevel());
         logger.debug("Default charset: " + Charset.defaultCharset());
 
-        deleteSavedGames();
-        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
-        for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+        // one time init for all tests
+        if (GameFactory.instance.getGameTypes().isEmpty()) {
+            deleteSavedGames();
+            ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
+            for (GamePlugin plugin : config.getGameTypes()) {
+                GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            }
+            Copier.setLoader(classLoader);
         }
-        Copier.setLoader(classLoader);
     }
 
     private static Class<?> loadPlugin(Plugin plugin) {
@@ -265,7 +269,7 @@ public abstract class MageTestPlayerBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                                 PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -418,7 +422,7 @@ public abstract class MageTestPlayerBase {
 
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
         Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
 
         switch (putAtZone) {

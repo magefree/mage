@@ -10,7 +10,7 @@ import mage.game.events.Listener;
 import java.util.*;
 
 /**
- * Utility class for constructed formats (expansions and other editions).
+ * Utility class for constructed formats (expansions and other editions). Uses in GUI for set's combobox.
  *
  * @author nantuko
  */
@@ -73,7 +73,6 @@ public final class ConstructedFormats {
             return underlyingSetCodesPerFormat.get(format);
         }
         return all;
-
     }
 
     public static void ensureLists() {

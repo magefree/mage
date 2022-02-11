@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -66,15 +66,14 @@ class BottledCloisterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getHand());
         if (cards.isEmpty()) {
             return false;
         }
-        controller.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        controller.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         cards.getCards(game)
                 .stream()
                 .filter(c -> game.getState().getZone(c.getId()) == Zone.EXILED)
@@ -102,10 +101,11 @@ class BottledCloisterReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (player == null || exileZone == null || exileZone.isEmpty()) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)).getCards(game));
+        Cards cards = new CardsImpl(exileZone.getCards(game));
         cards.removeIf(uuid -> !player.getId().equals(game.getOwnerId(uuid)));
         player.moveCards(cards, Zone.HAND, source, game);
         player.drawCards(1, source, game);

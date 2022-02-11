@@ -17,7 +17,6 @@ import java.util.UUID;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -29,7 +28,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public AnaxHardenedInTheForge(UUID ownerId, CardSetInfo setInfo) {

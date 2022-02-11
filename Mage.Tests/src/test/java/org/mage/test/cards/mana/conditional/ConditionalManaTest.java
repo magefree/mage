@@ -377,7 +377,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
        
         
-        setChoice(playerA, "No"); // Put [Top Card of Library] into your graveyard?
+        setChoice(playerA, false); // Put [Top Card of Library] into your graveyard?
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

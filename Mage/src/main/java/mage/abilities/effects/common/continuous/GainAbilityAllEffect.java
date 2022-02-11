@@ -102,18 +102,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                     perm.addAbility(ability, source.getSourceId(), game);
                 }
             }
-            // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
-            Map<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
-            if (LKIBattlefield != null) {
-                for (MageObject mageObject : LKIBattlefield.values()) {
-                    Permanent perm = (Permanent) mageObject;
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                        if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
-                            perm.addAbility(ability, source.getSourceId(), game);
-                        }
-                    }
-                }
-            }
         }
         return true;
     }
@@ -149,20 +137,15 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
 
         boolean quotes = forceQuotes || (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
-        if (excludeSource) {
-            sb.append("Other ");
+        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
+        if (excludeSource && !each) {
+            sb.append("other ");
         }
         sb.append(filter.getMessage());
         if (duration == Duration.WhileOnBattlefield) {
-            if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
-                sb.append(" has ");
-            } else {
-                sb.append(" have ");
-            }
-        } else if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
-            sb.append(" gains ");
+            sb.append(each ? " has " : " have ");
         } else {
-            sb.append(" gain ");
+            sb.append(each ? " gains " : " gain ");
         }
         if (quotes) {
             sb.append('"');

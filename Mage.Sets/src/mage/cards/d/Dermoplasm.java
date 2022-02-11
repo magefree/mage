@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -81,7 +80,7 @@ class DermoplasmEffect extends OneShotEffect {
         if (effect.apply(game, source)) {
             if (thisCreature != null) {
                 effect = new ReturnToHandTargetEffect();
-                effect.setTargetPointer(new FixedTarget(thisCreature.getId()));
+                effect.setTargetPointer(new FixedTarget(thisCreature.getId(), game));
                 effect.apply(game, source);
                 return true;
             }

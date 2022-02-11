@@ -62,7 +62,7 @@ class GruesomeMenagerieEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature card with mana value 1 "
                 + "in your graveyard, then do the same for creature cards "
-                + "with mana values 2 and 3. "
+                + "with mana value 2 and 3. "
                 + "Return those cards to the battlefield.";
     }
 

@@ -30,7 +30,7 @@ public final class BogardanHellkite extends CardImpl {
 
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5, "it"), false);
         ability.addTarget(new TargetAnyTargetAmount(5));
         this.addAbility(ability);
     }

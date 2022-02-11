@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -22,10 +22,10 @@ public final class Stampede extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
         // Attacking creatures get +1/+0 and gain trample until end of turn.
-        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), false);
+        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false);
         effect.setText("attacking creatures get +1/+0");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature());
+        effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES);
         effect.setText("and gain trample until end of turn");
         this.getSpellAbility().addEffect(effect);
     }

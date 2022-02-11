@@ -101,7 +101,7 @@ public final class CardRendererUtils {
         g.setColor(new Color(0, 0, 0, 150));
         g.drawOval(x - 1, y - 1, bevel * 2, h);
         g.setPaint(border);
-        g.drawOval(x, y, bevel * 2 - 1, h - 1);
+        g.fillOval(x, y, bevel * 2 - 1, h - 2);
         g.drawOval(x + w - bevel * 2, y, bevel * 2 - 1, h - 1);
         g.drawOval(x + 1, y + 1, bevel * 2 - 3, h - 3);
         g.drawOval(x + 1 + w - bevel * 2, y + 1, bevel * 2 - 3, h - 3);
@@ -244,7 +244,7 @@ public final class CardRendererUtils {
         // boost colorizing
         if (value != null) {
             int current = value.getValue();
-            int origin = value.getBaseValue();
+            int origin = value.getBaseValueModified();
             if (origin != 0) {
                 if (current < origin) {
                     return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;

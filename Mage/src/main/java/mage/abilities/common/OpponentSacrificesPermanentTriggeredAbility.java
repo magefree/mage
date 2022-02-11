@@ -31,7 +31,7 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
             MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (object instanceof Permanent) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
                 return true;
             }

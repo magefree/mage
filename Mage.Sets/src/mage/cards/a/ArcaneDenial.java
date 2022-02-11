@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -19,8 +18,9 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ArcaneDenial extends CardImpl {
@@ -35,7 +35,10 @@ public final class ArcaneDenial extends CardImpl {
         // You draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1)), false));
+                        new DrawCardSourceControllerEffect(1)
+                                .setText("you draw a card")
+                ), false).concatBy("<br>")
+        );
     }
 
     private ArcaneDenial(final ArcaneDenial card) {

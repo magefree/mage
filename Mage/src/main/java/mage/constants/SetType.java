@@ -36,7 +36,7 @@ public enum SetType {
 
     public boolean isEternalLegal() {
         // any official sets except un-sets
-        return this != SetType.CUSTOM_SET && this != SetType.JOKESET;
+        return this != SetType.CUSTOM_SET && this != SetType.JOKESET && this != SetType.MAGIC_ARENA;
     }
 
     public boolean isStandardLegal() {

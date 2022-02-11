@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,12 +37,12 @@ public final class TheaterOfHorrors extends CardImpl {
         ));
 
         // During your turn, if an opponent lost life this turn, you may play cards exiled with Theater of Horrors.
-        this.addAbility(new SimpleStaticAbility(new TheaterOfHorrorsCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheaterOfHorrorsCastEffect()).addHint(OpponentsLostLifeHint.instance));
 
         // {3}{R}: Theater of Horrors deals 1 damage to target opponent or planeswalker.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(1),
-                new ManaCostsImpl("{3}{R}")
+                new ManaCostsImpl<>("{3}{R}")
         );
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
@@ -94,8 +95,8 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
 
     TheaterOfHorrorsCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "During your turn, if an opponent lost life this turn, " +
-                "you may play cards exiled with {this}";
+        staticText = "during your turn, if an opponent lost life this turn, "
+                + "you may play lands and cast spells from among cards exiled with {this}";
     }
 
     private TheaterOfHorrorsCastEffect(final TheaterOfHorrorsCastEffect effect) {
@@ -114,13 +115,20 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards and mdfc
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null && game.isActivePlayer(source.getControllerId())
+        if (watcher != null
+                && game.isActivePlayer(source.getControllerId())
                 && watcher.getAllOppLifeLost(source.getControllerId(), game) > 0
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(objectId);
+            return zone != null
+                    && zone.contains(objectId);
         }
         return false;
     }

@@ -26,7 +26,7 @@ import mage.constants.Duration;
 
 /**
  *
- * @author anonymous
+ * @author zeffirojoe
  */
 public final class FeySteed extends CardImpl {
 
@@ -100,7 +100,7 @@ class FeySteedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature or planeswalker you control becomes the target of a spell or ability an opponent controls, you may draw a card";
+        return "Whenever a creature or planeswalker you control becomes the target of a spell or ability an opponent controls, you may draw a card.";
     }
 
     @Override

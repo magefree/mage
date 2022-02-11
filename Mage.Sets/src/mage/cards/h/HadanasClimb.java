@@ -27,14 +27,13 @@ public final class HadanasClimb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
 
         this.secondSideCardClazz = mage.cards.w.WingedTempleOfOrazca.class;
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if that creature has three or more +1/+1 counters on it, transform Hadana's Climb.
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
-        ability.addEffect(new ConditionalOneShotEffect(new TransformSourceEffect(true), new TargetHasCounterCondition(CounterType.P1P1, 3, Integer.MAX_VALUE),
+        ability.addEffect(new ConditionalOneShotEffect(new TransformSourceEffect(), new TargetHasCounterCondition(CounterType.P1P1, 3, Integer.MAX_VALUE),
                 "Then if that creature has three or more +1/+1 counters on it, transform {this}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

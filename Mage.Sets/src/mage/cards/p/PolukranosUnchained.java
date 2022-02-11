@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class PolukranosUnchained extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -96,8 +96,7 @@ class PolukranosUnchainedEffect extends OneShotEffect {
         int counters = 12;
         if (!(spellAbility instanceof EscapeAbility)
                 || !spellAbility.getSourceId().equals(source.getSourceId())
-                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()
-                || !spellAbility.getSourceId().equals(source.getSourceId())) {
+                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
             counters = 6;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");

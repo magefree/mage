@@ -1,8 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,13 +11,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class RitualOfSubdual extends CardImpl {
@@ -32,8 +31,7 @@ public final class RitualOfSubdual extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
 
         // If a land is tapped for mana, it produces colorless mana instead of any other type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RitualOfSubdualReplacementEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new RitualOfSubdualReplacementEffect()));
     }
 
     private RitualOfSubdual(final RitualOfSubdual card) {
@@ -53,7 +51,7 @@ class RitualOfSubdualReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a land is tapped for mana, it produces colorless mana instead of any other type.";
     }
 
-    RitualOfSubdualReplacementEffect(final RitualOfSubdualReplacementEffect effect) {
+    private RitualOfSubdualReplacementEffect(final RitualOfSubdualReplacementEffect effect) {
         super(effect);
     }
 
@@ -82,7 +80,7 @@ class RitualOfSubdualReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return mageObject != null && mageObject.isLand(game);
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.isLand(game);
     }
 }

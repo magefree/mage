@@ -34,7 +34,6 @@ public final class JourneyToEternity extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURA);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AtzalCaveOfEternity.class;
 
         // Enchant creature you control

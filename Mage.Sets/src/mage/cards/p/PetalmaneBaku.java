@@ -32,7 +32,7 @@ public final class PetalmaneBaku extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color.
         Ability ability = new DynamicManaAbility(

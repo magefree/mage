@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 
@@ -39,7 +40,7 @@ public final class OracleOfMulDaya extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may play lands from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
     }
 
     private OracleOfMulDaya(final OracleOfMulDaya card) {

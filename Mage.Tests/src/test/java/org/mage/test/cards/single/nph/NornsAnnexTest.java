@@ -20,8 +20,8 @@ public class NornsAnnexTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Brindle Boar"); // Creature 2/2
 
         attack(2, playerB, "Brindle Boar", playerA);
-        setChoice(playerB, "Yes"); // Pay {W/P} to attack?
-        setChoice(playerB, "Yes"); // Pay 2 life instead of {W}?
+        setChoice(playerB, true); // Pay {W/P} to attack?
+        setChoice(playerB, true); // Pay 2 life instead of {W}?
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();

@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieToken;
@@ -32,7 +31,7 @@ public final class LilianaHereticalHealer extends CardImpl {
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public LilianaHereticalHealer(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +42,6 @@ public final class LilianaHereticalHealer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = LilianaDefiantNecromancer.class;
         this.addAbility(new TransformAbility());
 
@@ -51,7 +49,7 @@ public final class LilianaHereticalHealer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, create a 2/2 black Zombie creature token.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.FEMALE,
+        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Pronoun.SHE,
                 new CreateTokenEffect(new ZombieToken())), false, filter));
     }
 

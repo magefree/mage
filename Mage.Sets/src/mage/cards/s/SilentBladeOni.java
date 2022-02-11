@@ -33,7 +33,7 @@ public final class SilentBladeOni extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Ninjutsu {4}{U}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{4}{U}{B}")));
+        this.addAbility(new NinjutsuAbility("{4}{U}{B}"));
 
         // Whenever Silent-Blade Oni deals combat damage to a player, look at that player's hand. 
         // You may cast a nonland card in it without paying that card's mana cost.

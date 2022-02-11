@@ -12,7 +12,7 @@ public class CardLookup {
     public static final CardLookup instance = new CardLookup();
 
     public Optional<CardInfo> lookupCardInfo(String name) {
-        return Optional.ofNullable(CardRepository.instance.findPreferedCoreExpansionCard(name, true));
+        return Optional.ofNullable(CardRepository.instance.findPreferredCoreExpansionCard(name, true));
     }
 
     public List<CardInfo> lookupCardInfo(CardCriteria criteria) {

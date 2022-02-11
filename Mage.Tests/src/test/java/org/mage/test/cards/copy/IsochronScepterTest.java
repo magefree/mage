@@ -44,12 +44,12 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Lightning Bolt"); // target for imprint (excile from hand)
 
         // copy and cast imprinted card
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -70,8 +70,8 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         addTarget(playerA, "Lightning Bolt");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -113,8 +113,8 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         attack(2, playerB, "Dross Crocodile");
 
         activateAbility(2, PhaseStep.DECLARE_BLOCKERS, playerA, "{2}, {T}:");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
 
         // Damage life loss is reduced to 0 because of Angel's Grace effect active
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
@@ -157,8 +157,8 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addTarget(playerA, "Silence");
 
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{2}, {T}:");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
 

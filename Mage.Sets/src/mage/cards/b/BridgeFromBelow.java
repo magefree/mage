@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -31,7 +30,7 @@ public final class BridgeFromBelow extends CardImpl {
 
     static {
         filter1.add(TargetController.YOU.getOwnerPredicate());
-        filter1.add(Predicates.not(TokenPredicate.instance));
+        filter1.add(TokenPredicate.FALSE);
         filter2.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 

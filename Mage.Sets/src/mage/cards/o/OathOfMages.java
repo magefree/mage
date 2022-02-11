@@ -66,7 +66,7 @@ enum OathOfMagesAdjuster implements TargetAdjuster {
     }
 }
 
-enum OathOfMagesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+enum OathOfMagesPredicate implements ObjectSourcePlayerPredicate<Player> {
     instance;
 
     @Override

@@ -3,7 +3,6 @@ package mage.cards.u;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
@@ -55,7 +54,7 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Head to AskUrza.com and click +1.
         this.addAbility(new LoyaltyAbility(new UrzaAcademyHeadmasterRandomEffect(1, setInfo), 1));

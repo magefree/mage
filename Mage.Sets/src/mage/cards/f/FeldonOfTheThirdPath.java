@@ -81,7 +81,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), CardType.ARTIFACT, true);
             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
                 sacrificeEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);

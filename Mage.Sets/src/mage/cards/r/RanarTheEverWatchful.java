@@ -45,7 +45,7 @@ public final class RanarTheEverWatchful extends CardImpl {
 
         // The first card you foretell each turn costs 0 to foretell
         Ability ability = new SimpleStaticAbility(new RanarTheEverWatchfulCostReductionEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, new ForetoldWatcher());
 
         // Whenever you exile one or more cards from your hand and/or permanents from the battlefield, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new RanarTheEverWatchfulTriggeredAbility());
@@ -87,7 +87,7 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        ForetoldWatcher watcher = game.getState().getWatcher(ForetoldWatcher.class, source.getControllerId());
+        ForetoldWatcher watcher = game.getState().getWatcher(ForetoldWatcher.class);
         return (watcher != null
                 && watcher.countNumberForetellThisTurn() == 0
                 && abilityToModify.isControlledBy(source.getControllerId())
@@ -125,7 +125,8 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
         }
         switch (zEvent.getFromZone()) {
             case BATTLEFIELD:
-                return controllerId.equals(zEvent.getSource().getControllerId())
+                return zEvent.getSource() != null  // source ability/spell that exiled the permanent
+                        && controllerId.equals(zEvent.getSource().getControllerId())
                         && numberExiled > 0;  // must include both card permanents and tokens on the battlefield
             case HAND:
                 return zEvent

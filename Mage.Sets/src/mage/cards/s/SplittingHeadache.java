@@ -1,20 +1,12 @@
-
 package mage.cards.s;
 
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -28,14 +20,16 @@ public final class SplittingHeadache extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
 
-        // Choose one - Target player discards two cards; or target player reveals their hand, you choose a card from it, then that player discards that card.
+        // Choose one —
+        // • Target player discards two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+
+        // • Target player reveals their hand. You choose a card from it. That player discards that card.
         Mode mode = new Mode();
-        mode.addEffect(new SplittingHeadacheEffect());
+        mode.addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
-
     }
 
     private SplittingHeadache(final SplittingHeadache card) {
@@ -45,40 +39,5 @@ public final class SplittingHeadache extends CardImpl {
     @Override
     public SplittingHeadache copy() {
         return new SplittingHeadache(this);
-    }
-}
-
-class SplittingHeadacheEffect extends OneShotEffect {
-
-    public SplittingHeadacheEffect() {
-        super(Outcome.Discard);
-        this.staticText = "Target player reveals their hand, you choose a card from it, then that player discards that card.";
-    }
-
-    public SplittingHeadacheEffect(final SplittingHeadacheEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SplittingHeadacheEffect copy() {
-        return new SplittingHeadacheEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Splitting Headache", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    return player.discard(card, false, source, game);
-
-                }
-            }
-        }
-        return false;
     }
 }

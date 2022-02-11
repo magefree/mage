@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -48,7 +47,7 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     RemembranceTriggeredAbility() {

@@ -8,8 +8,10 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 
 public enum ManacostVariableValue implements DynamicValue {
 
-    REGULAR, // if you need X on cast/activate (in stack)
-    ETB; // if you need X after ETB (in battlefield)
+    REGULAR, // if you need X on cast/activate (in stack) - reset each turn
+    ETB, // if you need X after ETB (in battlefield) - reset each turn
+    END_GAME; // if you need X until end game - keep data forever
+
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -18,7 +20,11 @@ public enum ManacostVariableValue implements DynamicValue {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            return watcher.getAndResetLastXValue(sourceAbility);
+            if (this == END_GAME) {
+                return watcher.getLastXValue(sourceAbility, true);
+            } else {
+                return watcher.getLastXValue(sourceAbility, false);
+            }
         }
         return 0;
     }

@@ -55,7 +55,7 @@ public class ConditionalOneShotEffectTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unlicensed Disintegration", "Silvercoat Lion");
         
-        setChoice(playerA, "Yes"); // Get life from Dragon's Claw
+        setChoice(playerA, true); // Get life from Dragon's Claw
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         

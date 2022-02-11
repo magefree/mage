@@ -33,7 +33,7 @@ public final class ParadoxicalOutcome extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ParadoxicalOutcome(UUID ownerId, CardSetInfo setInfo) {

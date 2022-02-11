@@ -26,6 +26,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
+import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -76,9 +77,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> revealed = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> lookedAt = new HashMap<>();
+    private final Map<String, CardsView> graveyards = new HashMap<>(); // need to sync selection
     private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> companion = new HashMap<>();
-    private final Map<String, CardsView> graveyards = new HashMap<>();
+    private final Map<String, CardsView> sideboards = new HashMap<>(); // need to sync selection
+    private final Map<String, CardInfoWindowDialog> sideboardWindows = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
     private UUID gameId;
@@ -125,6 +128,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Map<String, Serializable> options;
         Set<UUID> targets;
     }
+
     private final LastGameData lastGameData = new LastGameData();
 
 
@@ -245,29 +249,32 @@ public final class GamePanel extends javax.swing.JPanel {
         if (pickMultiNumber != null) {
             pickMultiNumber.removeDialog();
         }
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.cleanUp();
-            exileDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.cleanUp();
-            graveyardDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.cleanUp();
-            revealDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.cleanUp();
-            lookedAtDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.cleanUp();
-            companionDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
+        }
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
 
-        clearPickTargetDialogs();
-        clearPickPileDialogs();
+        clearPickDialogs();
 
         Plugins.instance.getActionCallback().hideOpenComponents();
         try {
@@ -280,18 +287,34 @@ public final class GamePanel extends javax.swing.JPanel {
         this.bigCard = null;
     }
 
+    private void hidePickDialogs() {
+        // temporary hide opened dialog on redraw/update
+        for (ShowCardsDialog dialog : this.pickTarget) {
+            dialog.setVisible(false);
+        }
+        for (PickPileDialog dialog : this.pickPile) {
+            dialog.setVisible(false);
+        }
+    }
+
+    private void clearPickDialogs() {
+        // remove dialogs forever on clean or full update
+        clearPickTargetDialogs();
+        clearPickPileDialogs();
+    }
+
     private void clearPickTargetDialogs() {
-        for (ShowCardsDialog pickTargetDialog : this.pickTarget) {
-            pickTargetDialog.cleanUp();
-            pickTargetDialog.removeDialog();
+        for (ShowCardsDialog dialog : this.pickTarget) {
+            dialog.cleanUp();
+            dialog.removeDialog();
         }
         this.pickTarget.clear();
     }
 
     private void clearPickPileDialogs() {
-        for (PickPileDialog pickPileDialog : this.pickPile) {
-            pickPileDialog.cleanUp();
-            pickPileDialog.removeDialog();
+        for (PickPileDialog dialog : this.pickPile) {
+            dialog.cleanUp();
+            dialog.removeDialog();
         }
         this.pickPile.clear();
     }
@@ -307,26 +330,29 @@ public final class GamePanel extends javax.swing.JPanel {
             playAreaPanel.changeGUISize();
         }
 
-        for (CardInfoWindowDialog cardInfoWindowDialog : exiles.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : revealed.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : lookedAt.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : companion.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.changeGUISize();
         }
-        for (ShowCardsDialog showCardsDialog : pickTarget) {
-            showCardsDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.changeGUISize();
         }
-        for (PickPileDialog pickPileDialog : pickPile) {
-            pickPileDialog.changeGUISize();
+        for (ShowCardsDialog windowDialog : pickTarget) {
+            windowDialog.changeGUISize();
+        }
+        for (PickPileDialog windowDialog : pickPile) {
+            windowDialog.changeGUISize();
         }
 
         this.revalidate();
@@ -454,6 +480,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnCancelSkip.setVisible(true);
         this.btnToggleMacro.setVisible(true);
 
+        // cards popup info in chats
+        this.gameChatPanel.setGameData(gameId, bigCard);
+        this.userChatPanel.setGameData(gameId, bigCard);
+
         this.btnSkipToNextTurn.setVisible(true);
         this.btnSkipToEndTurn.setVisible(true);
         this.btnSkipToNextMain.setVisible(true);
@@ -574,7 +604,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         PlayerView player = game.getPlayers().get(playerSeat);
         PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
+                new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
         players.put(player.getPlayerId(), playAreaPanel);
         playersWhoLeft.put(player.getPlayerId(), false);
         GridBagConstraints c = new GridBagConstraints();
@@ -618,7 +648,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
             player = game.getPlayers().get(playerNum);
             PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed(), row == 0));
+                    new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), false, game.isRollbackTurnsAllowed(), row == 0));
             players.put(player.getPlayerId(), playerPanel);
             playersWhoLeft.put(player.getPlayerId(), false);
             c = new GridBagConstraints();
@@ -789,16 +819,29 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
+
                 // update open or remove closed graveyard windows
                 graveyards.put(player.getName(), player.getGraveyard());
                 if (graveyardWindows.containsKey(player.getName())) {
-                    CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(player.getName());
-                    if (cardInfoWindowDialog.isClosed()) {
+                    CardInfoWindowDialog windowDialog = graveyardWindows.get(player.getName());
+                    if (windowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        windowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
+
+                // update open or remove closed sideboard windows
+                sideboards.put(player.getName(), player.getSideboard());
+                if (sideboardWindows.containsKey(player.getName())) {
+                    CardInfoWindowDialog windowDialog = sideboardWindows.get(player.getName());
+                    if (windowDialog.isClosed()) {
+                        sideboardWindows.remove(player.getName());
+                    } else {
+                        windowDialog.loadCards(player.getSideboard(), bigCard, gameId, false);
+                    }
+                }
+
                 // show top card window
                 if (player.getTopCard() != null) {
                     CardsView cardsView = new CardsView();
@@ -851,8 +894,12 @@ public final class GamePanel extends javax.swing.JPanel {
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
         }
 
+        // reveal and look at dialogs can unattached, so windows opened by game doesn't have it
         showRevealed(lastGameData.game);
         showLookedAt(lastGameData.game);
+
+        // sideboard dialogs is unattached all the time -- user opens it by command
+
         showCompanion(lastGameData.game);
         if (!lastGameData.game.getCombat().isEmpty()) {
             CombatManager.instance.showCombat(lastGameData.game.getCombat(), gameId);
@@ -897,6 +944,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         feedbackPanel.disableUndo();
+        feedbackPanel.updateOptions(lastGameData.options);
 
         this.revalidate();
         this.repaint();
@@ -1146,40 +1194,46 @@ public final class GamePanel extends javax.swing.JPanel {
     // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
     public void deactivated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.hideDialog();
+        }
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.hideDialog();
         }
     }
 
     // Called if the game frame comes to front again
     public void activated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.show();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.show();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.show();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.show();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.show();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.show();
+        }
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.show();
         }
     }
 
@@ -1196,7 +1250,38 @@ public final class GamePanel extends javax.swing.JPanel {
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
+        // use graveyards to sync selection (don't use player data here)
         newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+    }
+
+    public void openSideboardWindow(UUID playerId) {
+        if (lastGameData == null) {
+            return;
+        }
+
+        PlayerView playerView = lastGameData.game.getPlayers().stream()
+                .filter(p -> p.getPlayerId().equals(playerId))
+                .findFirst()
+                .orElse(null);
+        if (playerView == null) {
+            return;
+        }
+
+        if (sideboardWindows.containsKey(playerView.getName())) {
+            CardInfoWindowDialog windowDialog = sideboardWindows.get(playerView.getName());
+            if (windowDialog.isVisible()) {
+                windowDialog.hideDialog();
+            } else {
+                windowDialog.show();
+            }
+            return;
+        }
+
+        CardInfoWindowDialog windowDialog = new CardInfoWindowDialog(ShowType.SIDEBOARD, playerView.getName());
+        sideboardWindows.put(playerView.getName(), windowDialog);
+        MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
+        // use sideboards to sync selection (don't use player data here)
+        windowDialog.loadCards(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
@@ -1275,7 +1360,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView, false, options, null);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
     private void keepLastGameData(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
@@ -1386,6 +1471,25 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        // sideboard
+        if (needZone == Zone.OUTSIDE || needZone == Zone.ALL) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
+                for (Map.Entry<UUID, CardView> card : player.getSideboard().entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                    if (needPlayable.containsObject(card.getKey())) {
+                        card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
+                    }
+                }
+            }
+        }
+        // sideboards (old windows all the time, e.g. unattached from game data)
+        prepareSelectableWindows(sideboardWindows.values(), needSelectable, needChoosen, needPlayable);
+
         // exile
         if (needZone == Zone.EXILED || needZone == Zone.ALL) {
             // exile from player panel
@@ -1402,6 +1506,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
             }
+
             // exile from windows
             for (ExileView exile : lastGameData.game.getExile()) {
                 for (Map.Entry<UUID, CardView> card : exile.entrySet()) {
@@ -1435,21 +1540,6 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        // revealed
-        for (RevealedView rev : lastGameData.game.getRevealed()) {
-            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
-                if (needSelectable.contains(card.getKey())) {
-                    card.getValue().setChoosable(true);
-                }
-                if (needChoosen.contains(card.getKey())) {
-                    card.getValue().setSelected(true);
-                }
-                if (needPlayable.containsObject(card.getKey())) {
-                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
-                }
-            }
-        }
-
         // companion
         for (RevealedView rev : lastGameData.game.getCompanion()) {
             for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
@@ -1465,12 +1555,55 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        // looked at
+        // revealed (current cards)
+        for (RevealedView rev : lastGameData.game.getRevealed()) {
+            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
+                }
+            }
+        }
+        // revealed (old windows)
+        prepareSelectableWindows(revealed.values(), needSelectable, needChoosen, needPlayable);
+
+        // looked at (current cards)
         for (LookedAtView look : lastGameData.game.getLookedAt()) {
             for (Map.Entry<UUID, SimpleCardView> card : look.getCards().entrySet()) {
                 if (needPlayable.containsObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
+            }
+        }
+        // looked at (old windows)
+        prepareSelectableWindows(lookedAt.values(), needSelectable, needChoosen, needPlayable);
+    }
+
+    private void prepareSelectableWindows(
+            Collection<CardInfoWindowDialog> windows,
+            Set<UUID> needSelectable,
+            List<UUID> needChoosen,
+            PlayableObjectsList needPlayable
+    ) {
+        // lookAt or reveals windows clean up on next priority, so users can see dialogs, but xmage can't restore it
+        // so it must be updated manually (it's ok to keep outdated cards in dialog, but not ok to show wrong selections)
+        for (CardInfoWindowDialog window : windows) {
+            for (MageCard mageCard : window.getMageCardsForUpdate().values()) {
+                CardView cardView = mageCard.getOriginal();
+                cardView.setChoosable(needSelectable.contains(cardView.getId()));
+                cardView.setSelected(needChoosen.contains(cardView.getId()));
+                if (needPlayable.containsObject(cardView.getId())) {
+                    cardView.setPlayableStats(needPlayable.getStats(cardView.getId()));
+                } else {
+                    cardView.setPlayableStats(new PlayableObjectStats());
+                }
+                // TODO: little bug with toggled night card after update/clicks, but that's ok (can't click on second side)
+                mageCard.update(cardView);
             }
         }
     }
@@ -1487,11 +1620,16 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param options
      * @param messageId
      */
-    public void pickTarget(String message, CardsView cardsView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
+    public void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
+        updateGame(gameView, false, options, targets);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+        clearPickTargetDialogs();
+
         PopUpMenuType popupMenuType = null;
-        if (options != null) {
+        if (lastGameData.options != null) {
             if (options.containsKey("queryType")) {
-                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) options.get("queryType");
+                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) lastGameData.options.get("queryType");
                 switch (needType) {
                     case PICK_ABILITY:
                         popupMenuType = PopUpMenuType.TRIGGER_ORDER;
@@ -1505,17 +1643,13 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        updateGame(gameView, false, options, targets);
-
-        Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
+        Map<String, Serializable> options0 = lastGameData.options == null ? new HashMap<>() : lastGameData.options;
         ShowCardsDialog dialog = null;
         if (cardsView != null && !cardsView.isEmpty()) {
-            // clear old dialogs before the new
-            clearPickTargetDialogs();
-            dialog = showCards(message, cardsView, required, options0, popupMenuType);
+            dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
@@ -1523,15 +1657,23 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void inform(String information, GameView gameView, int messageId) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
     }
 
-    public void endMessage(String message, int messageId) {
-        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
+    public void endMessage(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
-    public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+    public void select(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, true, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         this.abilityPicker.setVisible(false);
 
         holdingPriority = false;
@@ -1541,8 +1683,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
                 PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 false);
-
-        updateGame(gameView, true, options, null);
 
         boolean controllingPlayer = false;
         for (PlayerView playerView : gameView.getPlayers()) {
@@ -1558,8 +1698,8 @@ public final class GamePanel extends javax.swing.JPanel {
 
         }
         Map<String, Serializable> panelOptions = new HashMap<>();
-        if (options != null) {
-            panelOptions.putAll(options);
+        if (lastGameData.options != null) {
+            panelOptions.putAll(lastGameData.options);
         }
         panelOptions.put("your_turn", true);
         String activePlayerText;
@@ -1573,39 +1713,45 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
     }
 
-    public void playMana(String message, GameView gameView, Map<String, Serializable> options, int messageId) {
+    public void playMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
         updateGame(gameView, true, options, null);
+        hideAll();
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
     }
 
-    public void playXMana(String message, GameView gameView, int messageId) {
-        updateGame(gameView, true, null, null);
+    public void playXMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, true, options, null);
+        hideAll();
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {
         //TODO: implement this
     }
 
-    public void pickAbility(AbilityPickerView choices) {
+    public void pickAbility(GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
+        updateGame(gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
+
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
     private void hideAll() {
+        hidePickDialogs();
         this.abilityPicker.setVisible(false);
         ActionCallback callback = Plugins.instance.getActionCallback();
         ((MageActionCallback) callback).hideGameUpdate(gameId);
     }
 
-    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options, PopUpMenuType popupMenuType) {
-        hideAll();
+    private ShowCardsDialog prepareCardsDialog(String title, CardsView cards, boolean required, Map<String, Serializable> options, PopUpMenuType popupMenuType) {
         ShowCardsDialog showCards = new ShowCardsDialog();
         JPopupMenu popupMenu = null;
         if (PopUpMenuType.TRIGGER_ORDER == popupMenuType) {
@@ -1615,7 +1761,11 @@ public final class GamePanel extends javax.swing.JPanel {
         return showCards;
     }
 
-    public void getAmount(int min, int max, String message) {
+    public void getAmount(GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         pickNumber.showDialog(min, max, message);
         if (pickNumber.isCancel()) {
             SessionHandler.sendPlayerBoolean(gameId, false);
@@ -1624,33 +1774,45 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(List<String> messages, int min, int max, Map<String, Serializable> options) {
-        pickMultiNumber.showDialog(messages, min, max, options);
+    public void getMultiAmount(List<String> messages, GameView gameView, Map<String, Serializable> options, int min, int max) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
+        pickMultiNumber.showDialog(messages, min, max, lastGameData.options);
         SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
     }
 
-    public void getChoice(Choice choice, UUID objectId) {
+    public void getChoice(GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
+        updateGame(gameView, false, options, null);
         hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, objectId, choiceWindowState);
+        pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard);
+
+        // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
+        String specialPrefix = choice.isChosenSpecial() ? "#" : "";
+
+        String valueToSend;
         if (choice.isKeyChoice()) {
-            SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            /* // old code, auto complete was for auto scripting?
-            if (pickChoice.isAutoSelect()) {
-                SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
-            } else {
-                SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            }*/
+            valueToSend = choice.getChoiceKey();
         } else {
-            SessionHandler.sendPlayerString(gameId, choice.getChoice());
+            valueToSend = choice.getChoice();
         }
+        SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
+
+        // keep dialog position
         choiceWindowState = new MageDialogState(pickChoice);
+
         pickChoice.removeDialog();
     }
 
-    public void pickPile(String message, CardsView pile1, CardsView pile2) {
+    public void pickPile(GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
+        updateGame(gameView, false, options, null);
         hideAll();
+        DialogManager.getManager(gameId).fadeOut();
 
         // remove old dialogs before the new
         clearPickPileDialogs();
@@ -1797,6 +1959,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority.setText("Priority Player:");
 
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
+
+        // CHATS and HINTS support
 
         // HOTKEYS
 

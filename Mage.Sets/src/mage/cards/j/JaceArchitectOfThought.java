@@ -3,7 +3,6 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.*;
@@ -16,7 +15,6 @@ import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -40,7 +38,7 @@ public final class JaceArchitectOfThought extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtStartEffect1(), 1));
@@ -113,7 +111,7 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             getEffects().forEach((effect) -> {
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             });
             return true;
         }
@@ -276,10 +274,9 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
             } else {
                 break;
             }
-            playerList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player == null
-                    || !player.canRespond())).forEachOrdered((player) -> {
-                playerList.remove(player.getId());
-            });
+
+            // remove disconnected or quit players
+            playerList.removeIf(playerId -> game.getPlayer(playerId) == null || !game.getPlayer(playerId).canRespond());
         }
         checkList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
             player.shuffleLibrary(source, game);

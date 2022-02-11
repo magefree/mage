@@ -43,7 +43,7 @@ public class PossibilityStormTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -102,9 +102,9 @@ public class PossibilityStormTest extends CardTestPlayerBase {
         setModeChoice(playerA, "3");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remand", "Izzet Charm", "Whenever a player casts");
-        setChoice(playerA, "No"); // Don't play  Pact of Negotiation
+        setChoice(playerA, false); // Don't play  Pact of Negotiation
 
-        setChoice(playerA, "Yes"); // Play Cryptic Command
+        setChoice(playerA, true); // Play Cryptic Command
         setModeChoice(playerA, "3");
         setModeChoice(playerA, "4");
 

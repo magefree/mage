@@ -30,7 +30,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Thragtusk");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Public Execution", "Thragtusk");
@@ -70,7 +70,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Thragtusk");
 
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Tortoise Formation");

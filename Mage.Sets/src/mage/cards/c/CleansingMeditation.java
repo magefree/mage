@@ -72,7 +72,7 @@ class CleansingMeditationEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ENCHANTMENT_PERMANENT, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), source.getSourceId(), game)) {
             if (permanent != null && permanent.destroy(source, game, false)) {
                 if (threshold && controller != null && permanent.isOwnedBy(controller.getId())) {
                     cardsToBattlefield.add(permanent);

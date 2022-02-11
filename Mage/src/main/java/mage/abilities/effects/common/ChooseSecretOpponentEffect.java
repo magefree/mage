@@ -78,10 +78,13 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
     }
 
     private static String getthing(Ability source, Game game) {
-        if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-            return "" + source.getSourceId() + '_' + source.getSourceObjectZoneChangeCounter();
+        if (game.getPermanentEntering(source.getSourceId()) != null) { // Emissary of Grudges and Guardian Archon
+            return "" + source.getSourceId() + '_' + (game.getPermanentEntering(source.getSourceId()).getZoneChangeCounter(game) + 1);
         }
-        return "" + source.getSourceId() + '_' + (source.getSourceObjectZoneChangeCounter() + 1);
+        if (game.getPermanentOrLKIBattlefield(source.getSourceId()) != null) { // Stalking Leonin
+        return "" + source.getSourceId() + '_' + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
+        }
+        return "Does not exist";
     }
 
     @Override

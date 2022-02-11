@@ -9,7 +9,6 @@ import mage.game.Game;
  * @author JayDi85
  */
 public enum OpponentsLostLifeCondition implements Condition {
-
     instance;
 
     @Override
@@ -19,6 +18,6 @@ public enum OpponentsLostLifeCondition implements Condition {
 
     @Override
     public String toString() {
-        return "opponents lost life";
+        return "an opponent lost life this turn";
     }
 }

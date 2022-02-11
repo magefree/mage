@@ -1,7 +1,5 @@
-    
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,10 +19,10 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoatToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class SpringjackPasture extends CardImpl {
 
@@ -35,7 +33,7 @@ public final class SpringjackPasture extends CardImpl {
     }
 
     public SpringjackPasture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -45,11 +43,11 @@ public final class SpringjackPasture extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Sacrifice X Goats: Add X mana of any one color. You gain X life.
+        // {T}, Sacrifice X Goats: Add X mana of any one color. You gain X life.
         ability = new DynamicManaAbility(
-                new Mana(0, 0, 0, 0,0, 0,1,0),
+                new Mana(0, 0, 0, 0, 0, 0, 1, 0),
                 GetXValue.instance,
-                new TapSourceCost(), 
+                new TapSourceCost(),
                 "Add X mana of any one color",
                 true);
         ability.addCost(new SacrificeXTargetCost(filter));

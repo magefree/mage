@@ -66,8 +66,8 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
 
-        setChoice(playerA, "No"); // move commander from graveyard to command zone
-        setChoice(playerA, "No"); // move commander from exile to command zone
+        setChoice(playerA, false); // move commander from graveyard to command zone
+        setChoice(playerA, false); // move commander from exile to command zone
 
         // must return
         checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
@@ -106,8 +106,8 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
 
         // possible bug: Promise of Tomorrow tries to move commander card to exile from command zone with error
-        setChoice(playerA, "Yes"); // move commander from graveyard to command zone
-        setChoice(playerA, "No"); // move commander from exile to command zone
+        setChoice(playerA, true); // move commander from graveyard to command zone
+        setChoice(playerA, false); // move commander from exile to command zone
 
         // must return
         checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);

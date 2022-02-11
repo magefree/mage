@@ -1,15 +1,13 @@
 package mage.filter.predicate.card;
 
-import java.util.UUID;
 import mage.cards.Card;
-import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 // Use this predicate if a aura card comes into play attached to a permanent without targeting
@@ -23,19 +21,15 @@ public class AuraCardCanAttachToPermanentId implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        final Permanent permanent = game.getPermanent(toBeCheckedPermanentId);
-        Filter filter;
-        if (permanent != null
-                && input != null
-                && input.isEnchantment(game)) {
-            for (Target target : input.getSpellAbility().getTargets()) {
-                filter = target.getFilter();
-                if (filter.match(permanent, game)) {
-                    return true;
-                }
-            }
+         Permanent permanent = game.getPermanent(toBeCheckedPermanentId);
+        if (permanent == null || input == null || !input.isEnchantment(game)) {
+            return false;
         }
-        return false;
+        return input
+                .getSpellAbility()
+                .getTargets()
+                .stream()
+                .anyMatch(target -> target.getFilter().match(permanent, game));
     }
 
     @Override

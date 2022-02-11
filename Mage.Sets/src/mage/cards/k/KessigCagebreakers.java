@@ -47,7 +47,7 @@ class KessigCagebreakersEffect extends OneShotEffect {
 
     public KessigCagebreakersEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a 2/2 green Wolf creature token tapped and attacking for each creature card in your graveyard";
+        this.staticText = "create a 2/2 green Wolf creature token that's tapped and attacking for each creature card in your graveyard";
     }
 
     public KessigCagebreakersEffect(final KessigCagebreakersEffect effect) {

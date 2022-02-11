@@ -25,7 +25,6 @@ public final class GravenLore extends CardImpl {
 
         // Scry X, where is the amount of {S} spent to cast this spell, then draw three cards.
         this.getSpellAbility().addEffect(new GravenLoreEffect());
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private GravenLore(final GravenLore card) {

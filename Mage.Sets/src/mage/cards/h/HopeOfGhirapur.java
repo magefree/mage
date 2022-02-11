@@ -114,7 +114,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     }
 }
 
-class HopeOfGhirapurPlayerLostLifePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class HopeOfGhirapurPlayerLostLifePredicate implements ObjectSourcePlayerPredicate<Player> {
 
     public HopeOfGhirapurPlayerLostLifePredicate() {
     }

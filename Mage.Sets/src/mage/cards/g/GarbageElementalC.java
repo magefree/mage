@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -17,8 +15,10 @@ import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GarbageElementalC extends CardImpl {
@@ -71,8 +71,9 @@ class GarbageElementalCEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int thisRoll = controller.rollDice(source, game, 6);
-            int thatRoll = controller.rollDice(source, game, 6);
+            List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
+            int thisRoll = results.get(0);
+            int thatRoll = results.get(1);
 
             Token token = new GoblinToken();
             return token.putOntoBattlefield(Math.abs(thatRoll - thisRoll), game, source, source.getControllerId());

@@ -20,7 +20,6 @@ public final class GrizzledOutcasts extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.k.KrallenhordeWantons.class;
 
         this.power = new MageInt(4);

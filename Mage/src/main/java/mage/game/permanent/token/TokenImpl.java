@@ -3,7 +3,13 @@ package mage.game.permanent.token;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
@@ -12,18 +18,14 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.RandomUtil;
 
 import java.util.*;
 
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.target.Target;
-
+/**
+ * Each token must have default constructor without params (GUI require for card viewer)
+ */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;
@@ -125,6 +127,41 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
+        abilities.addAll(ability.getSubAbilities());
+    }
+
+    // Directly from PermanentImpl
+    @Override
+    public void removeAbility(Ability abilityToRemove) {
+        if (abilityToRemove == null) {
+            return;
+        }
+
+        // 112.10b  Effects that remove an ability remove all instances of it.
+        List<Ability> toRemove = new ArrayList<>();
+        abilities.forEach(a -> {
+            if (a.isSameInstance(abilityToRemove)) {
+                toRemove.add(a);
+            }
+        });
+
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        toRemove.forEach(r -> abilities.remove(r));
+    }
+
+    // Directly from PermanentImpl
+    @Override
+    public void removeAbilities(List<Ability> abilitiesToRemove) {
+        if (abilitiesToRemove == null) {
+            return;
+        }
+
+        abilitiesToRemove.forEach(a -> removeAbility(a));
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source) {
+        return this.putOntoBattlefield(amount, game, source, source.getControllerId());
     }
 
     @Override
@@ -186,7 +223,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             if (amountToRemove > 0) {
                 game.informPlayers(
                         "The token limit per player is " + MAX_TOKENS_PER_GAME + ", " + controller.getName()
-                        + " will only create " + tokenSlots + " tokens."
+                                + " will only create " + tokenSlots + " tokens."
                 );
                 Iterator<Map.Entry<Token, Integer>> it = event.getTokens().entrySet().iterator();
                 while (it.hasNext() && amountToRemove > 0) {

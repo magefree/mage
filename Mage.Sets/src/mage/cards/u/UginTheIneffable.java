@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
@@ -57,7 +56,7 @@ public final class UginTheIneffable extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Colorless spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(
@@ -137,7 +136,7 @@ class UginTheIneffableEffect extends OneShotEffect {
 
             // look at face-down card in exile
             UginTheIneffableLookAtFaceDownEffect lookAtEffect = new UginTheIneffableLookAtFaceDownEffect();
-            lookAtEffect.setTargetPointer(new FixedTarget(card.getId()));
+            lookAtEffect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(lookAtEffect, source);
 
             tokenObjs.add(new MageObjectReference(addedTokenId, game));

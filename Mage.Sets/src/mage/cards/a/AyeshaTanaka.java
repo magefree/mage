@@ -28,7 +28,7 @@ public final class AyeshaTanaka extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
     }
 
     public AyeshaTanaka(UUID ownerId, CardSetInfo setInfo) {

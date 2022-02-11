@@ -34,7 +34,7 @@ public class EchoEffect extends OneShotEffect {
 
     public EchoEffect(final EchoEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost == null ? null : effect.cost.copy();
         this.amount = effect.amount;
     }
 

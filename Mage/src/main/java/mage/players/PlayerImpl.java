@@ -8,10 +8,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -25,6 +22,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -139,6 +138,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPayLifeCost = true;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
 
@@ -240,11 +240,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
 
         this.inRange.addAll(player.inRange);
         this.userData = player.userData;
+        this.matchPlayer = player.matchPlayer;
+
         this.canPayLifeCost = player.canPayLifeCost;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
         this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
@@ -295,13 +298,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.human = player.isHuman();
         this.life = player.getLife();
 
+        this.passed = player.isPassed();
+
         // Don't restore more global states. If restored they are probably cause for unintended draws (https://github.com/magefree/mage/issues/1205).
 //        this.wins = player.hasWon();
 //        this.loses = player.hasLost();
 //        this.left = player.hasLeft();
 //        this.quit = player.hasQuit();
         // Makes no sense to restore
-//        this.passed = player.isPassed();
 //        this.priorityTimeLeft = player.getPriorityTimeLeft();
 //        this.idleTimeout = player.hasIdleTimeout();
 //        this.timerTimeout = player.hasTimerTimeout();
@@ -345,6 +349,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
@@ -441,7 +446,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.payManaMode = false;
-        this.setLife(game.getLife(), game, null);
+        this.setLife(game.getStartingLife(), game, null);
         this.setReachedNextTurnAfterLeaving(false);
 
         this.clearCastSourceIdManaCosts();
@@ -468,6 +473,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
         this.clearCastSourceIdManaCosts();
@@ -495,6 +501,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void updateRange(Game game) {
         // 20100423 - 801.2c
         // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
+        // BUT it also uses before game start to fill game and card data in starting game events
         inRange.clear();
         inRange.add(this.playerId);
         inRange.addAll(getAllNearPlayers(game, true));
@@ -627,12 +634,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         if (source != null) {
-            if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
+            if (abilities.containsKey(ShroudAbility.getInstance().getId())
+                    && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game)) {
                 return false;
             }
+
             if (sourceControllerId != null
                     && this.hasOpponent(sourceControllerId, game)
-                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
+                    && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
@@ -640,9 +649,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            return !hasProtectionFrom(source, game);
-        }
+            if (hasProtectionFrom(source, game)) {
+                return false;
+            }
 
+            // example: Peace Talks
+            return !game.getContinuousEffects().preventedByRuleModification(
+                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    null,
+                    game,
+                    true
+            );
+        }
         return true;
     }
 
@@ -993,7 +1011,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
-                        game.informPlayers(withName ? cardInLib.getLogName() : "A card"
+                        game.informPlayers((withName ? cardInLib.getLogName() : "A card")
                                 + " is put into "
                                 + getLogName()
                                 + "'s library "
@@ -1125,16 +1143,21 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         if (card == null) {
             return false;
         }
+
+        // play without timing and from any zone
         boolean result;
         if (card.isLand(game)) {
-            result = playLand(card, game, ignoreTiming);
+            result = playLand(card, game, true);
         } else {
-            result = cast(card.getSpellAbility(), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            result = cast(this.chooseAbilityForCast(card, game, noMana), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
+
         if (!result) {
             game.informPlayer(this, "You can't play " + card.getIdName() + '.');
         }
@@ -1166,11 +1189,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                    ability.getId(), ability, playerId, approvingObject), ability)) {
+            Zone fromZone = game.getState().getZone(card.getMainCard().getId());
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                    ability.getId(), ability, playerId, approvingObject);
+            castEvent.setZone(fromZone);
+            if (!game.replaceEvent(castEvent, ability)) {
                 int bookmark = game.bookmarkState();
                 setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
-                Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
                 if (spell == null) {
@@ -1204,14 +1229,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
 
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
                         spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                game.fireEvent(event);
+                castEvent.setZone(fromZone);
+                game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
-                    event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
+                    GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                    event.setZone(fromZone);
-                    game.fireEvent(event);
+                    castedEvent.setZone(fromZone);
+                    game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
                         game.informPlayers(getLogName() + spell.getActivatedMessage(game));
                     }
@@ -1534,17 +1560,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Return spells for possible cast
-     * Uses in GUI to show only playable spells for choosing from the card
-     * (example: effect allow to cast card and player must choose the spell ability)
+     * Return spells for possible cast Uses in GUI to show only playable spells
+     * for choosing from the card (example: effect allow to cast card and player
+     * must choose the spell ability)
      *
+     * @param game
      * @param playerId
      * @param object
      * @param zone
-     * @param game
+     * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
+    public static LinkedHashMap<UUID, ActivatedAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
@@ -1557,16 +1584,29 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         for (Ability ability : allAbilities) {
             if (ability instanceof SpellAbility) {
-                switch (((SpellAbility) ability).getSpellAbilityType()) {
+                SpellAbility spellAbility = (SpellAbility) ability;
+
+                switch (spellAbility.getSpellAbilityType()) {
                     case BASE_ALTERNATE:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
+                        // rules:
+                        // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
+                        // any alternative costs. You can, however, pay additional costs, such as kicker costs.
+                        // If the card has any mandatory additional costs, those must be paid to cast the spell.
+                        // (2021-02-05)
+                        if (!noMana) {
+                            if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                                useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
+                            }
+                            return useable;
                         }
-                        return useable;
+                        break;
                     case SPLIT_FUSED:
+                        // rules:
+                        // If you cast a split card with fuse from your hand without paying its mana cost,
+                        // you can choose to use its fuse ability and cast both halves without paying their mana costs.
                         if (zone == Zone.HAND) {
-                            if (ability.canChooseTarget(game, playerId)) {
-                                useable.put(ability.getId(), (SpellAbility) ability);
+                            if (spellAbility.canChooseTarget(game, playerId)) {
+                                useable.put(spellAbility.getId(), spellAbility);
                             }
                         }
                     case SPLIT:
@@ -1593,8 +1633,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         return useable;
                     default:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);
+                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(spellAbility.getId(), spellAbility);
                         }
                 }
             }
@@ -2023,11 +2063,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life"
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
-            if (amount > 0) {
+            if (event.getAmount() > 0) {
                 game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, amount, atCombat));
+                        playerId, source, playerId, event.getAmount(), atCombat));
             }
-            return amount;
+            return event.getAmount();
         }
         return 0;
     }
@@ -2079,6 +2119,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             this.setLife(lifePlayer2, game, source);
             player.setLife(lifePlayer1, game, source);
         }
+    }
+
+    @Override
+    public int damage(int damage, Ability source, Game game) {
+        return doDamage(damage, source.getSourceId(), source, game, false, true, null);
     }
 
     @Override
@@ -2258,6 +2303,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void addAbility(Ability ability) {
         ability.setSourceId(playerId);
         this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override
@@ -2437,7 +2483,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 userData.resetRequestedHandPlayersList(game.getId()); // users can send request again
                 break;
         }
-        logger.trace("PASS Priority: " + playerAction.toString());
+        logger.trace("PASS Priority: " + playerAction);
     }
 
     @Override
@@ -2708,6 +2754,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        Set<Card> cards = this.getLibrary()
+                .getCards(game)
+                .stream()
+                .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
+                .collect(Collectors.toSet());
+        Card card = RandomUtil.randomFromCollection(cards);
+        if (card == null) {
+            return false;
+        }
+        game.informPlayers(this.getLogName() + " seeks a card from their library");
+        this.moveCards(card, Zone.HAND, source, game);
+        return true;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -2757,7 +2819,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // AI NOTICE: if you want AI implement here then remove selected card from castable after each
             // choice (otherwise you catch infinite freeze on uncastable use case)
-
             // casting selected card
             // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
@@ -2769,21 +2830,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         return casted;
     }
 
-    @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable) {
-        return this.flipCoin(source, game, winnable, null);
-    }
-
     /**
      * @param source
      * @param game
      * @param winnable
-     * @param appliedEffects
      * @return if winnable, true if player won the toss, if not winnable, true
      * for heads and false for tails
      */
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
         boolean chosen = false;
         if (winnable) {
             chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
@@ -2791,7 +2846,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         boolean result = this.flipCoinResult(game);
         FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
-        event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
         game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult())
                 + CardUtil.getSourceLogName(game, source));
@@ -2818,7 +2872,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip"
                     + CardUtil.getSourceLogName(game, source));
         }
-        event.setAppliedEffects(appliedEffects);
         game.fireEvent(event.createFlippedEvent());
         if (event.isWinnable()) {
             return event.getResult() == event.getChosen();
@@ -2836,85 +2889,351 @@ public abstract class PlayerImpl implements Player, Serializable {
         return RandomUtil.nextBoolean();
     }
 
+    private static final class RollDieResult {
+
+        // 706.2.
+        // After the roll, the number indicated on the top face of the die before any modifiers is
+        // the natural result. The instruction may include modifiers to the roll which add to or
+        // subtract from the natural result. Modifiers may also come from other sources. After
+        // considering all applicable modifiers, the final number is the result of the die roll.
+        private final int naturalResult;
+        private final int modifier;
+        private final PlanarDieRollResult planarResult;
+
+        RollDieResult(int naturalResult, int modifier, PlanarDieRollResult planarResult) {
+            this.naturalResult = naturalResult;
+            this.modifier = modifier;
+            this.planarResult = planarResult;
+        }
+
+        public int getResult() {
+            return this.naturalResult + this.modifier;
+        }
+
+        public PlanarDieRollResult getPlanarResult() {
+            return this.planarResult;
+        }
+    }
+
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return this.rollDice(source, game, null, numSides);
+    public int rollDieResult(int sides, Game game) {
+        return RandomUtil.nextInt(sides) + 1;
+    }
+
+    /**
+     * Roll single die. Support both die types: planar and numerical.
+     *
+     * @param outcome
+     * @param game
+     * @param source
+     * @param rollDieType
+     * @param sidesAmount
+     * @param chaosSidesAmount
+     * @param planarSidesAmount
+     * @param rollsAmount
+     * @return
+     */
+    private Object rollDieInner(Outcome outcome, Game game, Ability source, RollDieType rollDieType,
+                                int sidesAmount, int chaosSidesAmount, int planarSidesAmount, int rollsAmount) {
+        if (rollsAmount == 1) {
+            return rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount);
+        }
+        Set<Object> choices = new HashSet<>();
+        for (int j = 0; j < rollsAmount; j++) {
+            choices.add(rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount));
+        }
+        if (choices.size() == 1) {
+            return choices.stream().findFirst().orElse(0);
+        }
+
+        // AI hint - use max/min values
+        if (this.isComputer()) {
+            if (rollDieType == RollDieType.NUMERICAL) {
+                // numerical
+                if (outcome.isGood()) {
+                    return choices.stream()
+                            .map(Integer.class::cast)
+                            .max(Comparator.naturalOrder())
+                            .orElse(null);
+                } else {
+                    return choices.stream()
+                            .map(Integer.class::cast)
+                            .min(Comparator.naturalOrder())
+                            .orElse(null);
+                }
+            } else {
+                // planar
+                // priority: chaos -> planar -> blank
+                return choices.stream()
+                        .map(PlanarDieRollResult.class::cast)
+                        .max(Comparator.comparingInt(PlanarDieRollResult::getAIPriority))
+                        .orElse(null);
+            }
+        }
+
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
+        choice.setChoices(choices.stream().sorted().map(Object::toString).collect(Collectors.toSet()));
+
+        this.choose(Outcome.Neutral, choice, game);
+        Object defaultChoice = choices.iterator().next();
+        return choices.stream()
+                .filter(o -> o.toString().equals(choice.getChoice()))
+                .findFirst()
+                .orElse(defaultChoice);
+    }
+
+    private Object rollDieInnerWithReplacement(Game game, Ability source, RollDieType rollDieType, int numSides, int numChaosSides, int numPlanarSides) {
+        switch (rollDieType) {
+
+            case NUMERICAL: {
+                int result = rollDieResult(numSides, game);
+                // Clam-I-Am workaround:
+                // If you roll a 3 on a six-sided die, you may reroll that die.
+                if (numSides == 6
+                        && result == 3
+                        && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.REPLACE_ROLLED_DIE, source.getControllerId(), source, source.getControllerId()))
+                        && chooseUse(Outcome.Neutral, "Re-roll the 3?", source, game)) {
+                    result = rollDieResult(numSides, game);
+                }
+                return result;
+            }
+
+            case PLANAR: {
+                if (numChaosSides + numPlanarSides > numSides) {
+                    numChaosSides = GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES;
+                    numPlanarSides = GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES;
+                }
+                // for 9 sides:
+                // 1..2 - chaos
+                // 3..7 - blank
+                // 8..9 - planar
+                int result = this.rollDieResult(numSides, game);
+                PlanarDieRollResult roll;
+                if (result <= numChaosSides) {
+                    roll = PlanarDieRollResult.CHAOS_ROLL;
+                } else if (result > numSides - numPlanarSides) {
+                    roll = PlanarDieRollResult.PLANAR_ROLL;
+                } else {
+                    roll = PlanarDieRollResult.BLANK_ROLL;
+                }
+                return roll;
+            }
+
+            default: {
+                throw new IllegalArgumentException("Unknown roll die type " + rollDieType);
+            }
+        }
+    }
+
+    /**
+     * @param outcome
+     * @param source
+     * @param game
+     * @param sidesAmount        number of sides the dice has
+     * @param rollsAmount        number of tries to roll the dice
+     * @param ignoreLowestAmount remove the lowest rolls from the results
+     * @return the number that the player rolled
+     */
+    @Override
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int sidesAmount, int rollsAmount, int ignoreLowestAmount) {
+        return rollDiceInner(outcome, source, game, RollDieType.NUMERICAL, sidesAmount, 0, 0, rollsAmount, ignoreLowestAmount)
+                .stream()
+                .map(Integer.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Inner code to roll a dice. Support normal and planar types.
+     *
+     * @param outcome
+     * @param source
+     * @param game
+     * @param rollDieType        die type to roll, e.g. planar or numerical
+     * @param sidesAmount        sides per die
+     * @param chaosSidesAmount   for planar die: chaos sides
+     * @param planarSidesAmount  for planar die: planar sides
+     * @param rollsAmount        rolls
+     * @param ignoreLowestAmount for numerical die: ignore multiple rolls with
+     *                           the lowest values
+     * @return
+     */
+    private List<Object> rollDiceInner(Outcome outcome, Ability source, Game game, RollDieType rollDieType,
+                                       int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
+                                       int rollsAmount, int ignoreLowestAmount) {
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
+        if (ignoreLowestAmount > 0) {
+            rollDiceEvent.incIgnoreLowestAmount(ignoreLowestAmount);
+        }
+        game.replaceEvent(rollDiceEvent);
+
+        // 706.6.
+        // In a Planechase game, rolling the planar die will cause any ability that triggers whenever a
+        // player rolls one or more dice to trigger. However, any effect that refers to a numerical
+        // result of a die roll, including ones that compare the results of that roll to other rolls
+        // or to a given number, ignores the rolling of the planar die. See rule 901, “Planechase.”
+        // ROLL MULTIPLE dies
+        // results amount can be less than a rolls amount (example: The Big Idea allows rolling 2x instead 1x)
+        List<Object> dieResults = new ArrayList<>();
+        List<RollDieResult> dieRolls = new ArrayList<>();
+        for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
+            // ROLL SINGLE die
+            RollDieEvent rollDieEvent = new RollDieEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
+            game.replaceEvent(rollDieEvent);
+
+            Object rollResult;
+            // big idea logic for numerical rolls only
+            if (rollDieEvent.getRollDieType() == RollDieType.NUMERICAL && rollDieEvent.getBigIdeaRollsAmount() > 0) {
+                // rolls 2x + sum results
+                // The Big Idea: roll two six-sided dice and use the total of those results
+                int totalSum = 0;
+                for (int j = 0; j < rollDieEvent.getBigIdeaRollsAmount() + 1; j++) {
+                    int singleResult = (Integer) rollDieInner(
+                            outcome,
+                            game,
+                            source,
+                            rollDieEvent.getRollDieType(),
+                            rollDieEvent.getSides(),
+                            chaosSidesAmount,
+                            planarSidesAmount,
+                            rollDieEvent.getRollsAmount());
+                    totalSum += singleResult;
+                    dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier(), null));
+                }
+                rollResult = totalSum;
+            } else {
+                // rolls 1x
+                switch (rollDieEvent.getRollDieType()) {
+                    default:
+                    case NUMERICAL: {
+                        int naturalResult = (Integer) rollDieInner(
+                                outcome,
+                                game,
+                                source,
+                                rollDieEvent.getRollDieType(),
+                                rollDieEvent.getSides(),
+                                chaosSidesAmount,
+                                planarSidesAmount,
+                                rollDieEvent.getRollsAmount()
+                        );
+                        dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier(), null));
+                        rollResult = naturalResult;
+                        break;
+                    }
+
+                    case PLANAR: {
+                        PlanarDieRollResult planarResult = (PlanarDieRollResult) rollDieInner(
+                                outcome,
+                                game,
+                                source,
+                                rollDieEvent.getRollDieType(),
+                                rollDieEvent.getSides(),
+                                chaosSidesAmount,
+                                planarSidesAmount,
+                                rollDieEvent.getRollsAmount()
+                        );
+                        dieRolls.add(new RollDieResult(0, 0, planarResult));
+                        rollResult = planarResult;
+                        break;
+                    }
+                }
+            }
+            dieResults.add(rollResult);
+        }
+
+        // ignore the lowest results
+        // planar dies: due to 706.6. planar die results must be fully ignored
+        //
+        // 706.5.
+        // If a player is instructed to roll two or more dice and ignore the lowest roll, the roll
+        // that yielded the lowest result is considered to have never happened. No abilities trigger
+        // because of the ignored roll, and no effects apply to that roll. If multiple results are tied
+        // for the lowest, the player chooses one of those rolls to be ignored.
+        int diceRolledTotal = dieRolls.size();
+        String ignoreMessage;
+        if (rollDiceEvent.getRollDieType() == RollDieType.NUMERICAL && rollDiceEvent.getIgnoreLowestAmount() > 0) {
+            // find ignored values
+            List<Integer> ignoredResults = new ArrayList<>();
+            for (int i = 0; i < rollDiceEvent.getIgnoreLowestAmount(); i++) {
+                int min = dieResults.stream().map(Integer.class::cast).mapToInt(Integer::intValue).min().orElse(0);
+                dieResults.remove(Integer.valueOf(min));
+                ignoredResults.add(min);
+            }
+            ignoreMessage = String.format(
+                    ignoredResults.size() > 1 ? ", ignoring [%s]" : ", ignoring %s",
+                    ignoredResults
+                            .stream()
+                            .map(x -> "" + x)
+                            .collect(Collectors.joining(", "))
+            );
+            // remove ignored rolls (they not exist anymore)
+            List<RollDieResult> newRolls = new ArrayList<>();
+            for (RollDieResult rollDieResult : dieRolls) {
+                if (ignoredResults.contains(rollDieResult.getResult())) {
+                    ignoredResults.remove((Integer) rollDieResult.getResult());
+                } else {
+                    newRolls.add(rollDieResult);
+                }
+            }
+            dieRolls.clear();
+            dieRolls.addAll(newRolls);
+        } else {
+            ignoreMessage = "";
+        }
+
+        // raise affected roll events
+        for (RollDieResult result : dieRolls) {
+            game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
+        }
+        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
+
+        String resultString = dieResults
+                .stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+        String message;
+        switch (rollDiceEvent.getRollDieType()) {
+            default:
+            case NUMERICAL:
+                // [Roll a die] user rolled 4d6, results: [4, 6], ignoring [1, 3] (source: xxx)
+                message = String.format("[Roll a die] %s rolled %sd%s, result%s: %s%s%s",
+                        getLogName(),
+                        diceRolledTotal > 1 ? diceRolledTotal : "a ",
+                        rollDiceEvent.getSides(),
+                        dieResults.size() > 1 ? 's' : "",
+                        dieResults.size() > 1 ? '[' + resultString + ']' : resultString,
+                        ignoreMessage,
+                        CardUtil.getSourceLogName(game, source));
+                break;
+            case PLANAR:
+                // [Roll a planar die] user rolled CHAOS (source: xxx)
+                message = String.format("[Roll a planar die] %s rolled %s%s",
+                        getLogName(),
+                        dieResults.size() > 1 ? '[' + resultString + ']' : resultString,
+                        CardUtil.getSourceLogName(game, source));
+                break;
+        }
+        game.informPlayers(message);
+        return dieResults;
     }
 
     /**
      * @param source
      * @param game
-     * @param appliedEffects
-     * @param numSides       Number of sides the dice has
-     * @return the number that the player rolled
-     */
-    @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
-        int result = RandomUtil.nextInt(numSides) + 1;
-        if (!game.isSimulation()) {
-            game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
-                    + result + " on a " + numSides + " sided die" + CardUtil.getSourceLogName(game, source));
-        }
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, source, playerId, result, true);
-        event.setAppliedEffects(appliedEffects);
-        event.setAmount(result);
-        event.setData(numSides + "");
-        if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, source, playerId, event.getAmount(), event.getFlag());
-            ge.setData(numSides + "");
-            game.fireEvent(ge);
-        }
-        return event.getAmount();
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        return this.rollPlanarDie(source, game, null);
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        return rollPlanarDie(source, game, appliedEffects, 2, 2);
-    }
-
-    /**
-     * @param game
-     * @param appliedEffects
-     * @param numberChaosSides  The number of chaos sides the planar die
+     * @param chaosSidesAmount  The number of chaos sides the planar die
      *                          currently has (normally 1 but can be 5)
-     * @param numberPlanarSides The number of chaos sides the planar die
+     * @param planarSidesAmount The number of chaos sides the planar die
      *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
-     * or NilRoll
+     * or BlankRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
-        int result = RandomUtil.nextInt(9) + 1;
-        PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
-        if (numberChaosSides + numberPlanarSides > 9) {
-            numberChaosSides = 2;
-            numberPlanarSides = 2;
-        }
-        if (result <= numberChaosSides) {
-            roll = PlanarDieRoll.CHAOS_ROLL;
-        } else if (result > 9 - numberPlanarSides) {
-            roll = PlanarDieRoll.PLANAR_ROLL;
-        }
-        if (!game.isSimulation()) {
-            game.informPlayers("[Roll the planar die] " + getLogName()
-                    + " rolled a " + roll + " on the planar die" + CardUtil.getSourceLogName(game, source));
-        }
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE,
-                playerId, source, playerId, result, true);
-        event.setAppliedEffects(appliedEffects);
-        event.setData(roll + "");
-        if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANAR_DIE_ROLLED,
-                    playerId, source, playerId, event.getAmount(), event.getFlag());
-            ge.setData(roll + "");
-            game.fireEvent(ge);
-        }
-        return roll;
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
+        return rollDiceInner(outcome, source, game, RollDieType.PLANAR, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES, chaosSidesAmount, planarSidesAmount, 1, 0)
+                .stream()
+                .map(o -> (PlanarDieRollResult) o)
+                .findFirst()
+                .orElse(PlanarDieRollResult.BLANK_ROLL);
     }
 
     @Override
@@ -3287,8 +3606,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (alternateSourceCostsAbility.getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
+                                if (cost instanceof AlternativeCost2) {
+                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                    }
+                                } else {
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
                                 }
                             }
 
@@ -3329,8 +3655,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (((Ability) alternateSourceCosts).getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
+                                if (cost instanceof AlternativeCost2) {
+                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                    }
+                                } else {
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
                                 }
                             }
 
@@ -3419,8 +3752,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             // Even mana cost can't be checked here without lookahead
             // So make it available all the time
             boolean canUse;
-            if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId()) ||
-                    (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
+            if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId())
+                    || (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
                 canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
@@ -3484,21 +3817,24 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
             // cast spell restrictions 1
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability, this.getId());
+            castEvent.setZone(fromZone);
             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(),
-                            ability, this.getId()), ability, game, true)) {
+                    castEvent, ability, game, true)) {
                 continue;
             }
             // cast spell restrictions 2
+            GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
+                    ability.getId(), ability, this.getId());
+            castLateEvent.setZone(fromZone);
             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, ability.getSourceId(),
-                            ability, this.getId()), ability, game, true)) {
+                    castLateEvent, ability, game, true)) {
                 continue;
             }
 
             ApprovingObject approvingObject;
-            if (isPlaySpell || isPlayLand) {
-                // play hand from non hand zone
+            if ((isPlaySpell || isPlayLand) && (fromZone != Zone.BATTLEFIELD)) {
+                // play hand from non hand zone (except battlefield - you can't play already played permanents)
                 approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
             } else {
@@ -3508,16 +3844,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             boolean canActivateAsHandZone = approvingObject != null
                     || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
-            boolean possibleToPlay = false;
+            boolean possibleToPlay = canActivateAsHandZone
+                    && ability.getZone().match(Zone.HAND)
+                    && (isPlaySpell || isPlayLand);
 
             // spell/hand abilities (play from all zones)
             // need permitingObject or canPlayCardsFromGraveyard
-            if (canActivateAsHandZone
-                    && ability.getZone().match(Zone.HAND)
-                    && (isPlaySpell || isPlayLand)) {
-                possibleToPlay = true;
-            }
-
             // zone's abilities (play from specific zone)
             // no need in permitingObject
             if (fromZone != Zone.ALL && ability.getZone().match(fromZone)) {
@@ -3558,13 +3890,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * Returns a list of all available spells and abilities the player can
-     * currently cast/activate with his available ressources
+     * currently cast/activate with his available resources.
+     * Without target validation.
      *
      * @param game
-     * @param hidden                  also from hidden objects (e.g. turned face
-     *                                down cards ?)
-     * @param fromZone                of objects from which zone (ALL = from all
-     *                                zones)
+     * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
+     * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
      * @return
@@ -3594,15 +3925,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 continue;
                             }
                             // cast spell restrictions 1
+                            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                                    ability.getId(), ability, this.getId());
+                            castEvent.setZone(fromZone);
                             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(),
-                                            ability, this.getId()), ability, game, true)) {
+                                    castEvent, ability, game, true)) {
                                 continue;
                             }
                             // cast spell restrictions 2
+                            GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
+                                    ability.getId(), ability, this.getId());
+                            castLateEvent.setZone(fromZone);
                             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, ability.getSourceId(),
-                                            ability, this.getId()), ability, game, true)) {
+                                    castLateEvent, ability, game, true)) {
                                 continue;
                             }
 
@@ -3645,11 +3980,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            // check to play companion cards
+            // outside cards
             if (fromAll || fromZone == Zone.OUTSIDE) {
+                // companion cards
                 for (Cards companionCards : game.getState().getCompanion().values()) {
                     for (Card card : companionCards.getCards(game)) {
                         getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                    }
+                }
+
+                // sideboard cards (example: Wish)
+                for (UUID sideboardCardId : this.getSideboard()) {
+                    Card sideboardCard = game.getCard(sideboardCardId);
+                    if (sideboardCard != null) {
+                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
                     }
                 }
             }
@@ -3662,6 +4006,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                         Card card = player.getLibrary().getFromTop(game);
                         if (card != null) {
                             getPlayableFromObjectAll(game, Zone.LIBRARY, card, availableMana, playable);
+                        }
+                    }
+                }
+            }
+
+            // check the hand zone (Sen Triplets)
+            // TODO: remove direct hand check (reveal fix in Sen Triplets)?
+            // human games: cards from opponent's hand must be revealed before play
+            // AI games: computer can see and play cards from opponent's hand without reveal
+            if (fromAll || fromZone == Zone.HAND) {
+                for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                    Player player = game.getPlayer(playerInRangeId);
+                    if (player != null && !player.getHand().isEmpty()) {
+                        for (Card card : player.getHand().getCards(game)) {
+                            if (card != null) {
+                                getPlayableFromObjectAll(game, Zone.HAND, card, availableMana, playable);
+                            }
                         }
                     }
                 }
@@ -3770,7 +4131,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         playableObjects.get(objectId).add(ability);
     }
-
 
     /**
      * Skip "silent" phase step when players are not allowed to cast anything.
@@ -3997,6 +4357,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return drawsOnOpponentsTurn;
+    }
+
+    @Override
     public boolean autoLoseGame() {
         return false;
     }
@@ -4164,6 +4534,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
+                // TODO: must be replaced by game.getState().processAction(game), see isInUseableZoneDiesTrigger comments
+                //  about short living LKI problem
+                //game.getState().processAction(game);
                 game.applyEffects();
                 break;
             case HAND:
@@ -4221,7 +4594,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 break;
             default:
-                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+                throw new UnsupportedOperationException("to Zone" + toZone + " not supported yet");
         }
         return !successfulMovedCards.isEmpty();
     }
@@ -4449,7 +4822,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else if (card instanceof Spell) {
                     final Spell spell = (Spell) card;
                     if (spell.isCopy()) {
-                        // Copied spell, only remove from stack
+                        // copied spell, only remove from stack
                         game.getStack().remove(spell, game);
                     }
                 }

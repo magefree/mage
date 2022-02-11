@@ -10,18 +10,22 @@ Bloodthirst|number|
 Bushido|number|
 Buyback|manaString|
 Cascade|new|
-Changeling|instance|
+Changeling|new|
+Cleave|card, manaString|
+Compleated|instance|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|
+Daybound|new|
 Deathtouch|instance|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disturb|cost|
 Dredge|number|
 Double Strike|instance|
 Dredge|number|
@@ -41,11 +45,12 @@ Fear|instance|
 First strike|instance|
 Flanking|new|
 Flash|instance|
-Flashback|cost|
+Flashback|card, cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
 Improvise|new|
@@ -71,7 +76,8 @@ Mountainwalk|new|
 Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
-Ninjutsu|cost|
+Nightbound|new|
+Ninjutsu|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
@@ -83,13 +89,14 @@ Provoke|new|
 Prowess|new|
 Reach|instance|
 Rebound|new|
+Reconfigure|manaString|
 Renown|number|
 Replicate|card, manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
-Soulbond|instance|
+Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
@@ -99,6 +106,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|

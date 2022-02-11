@@ -244,24 +244,26 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void selectAttackers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
-            Player player = game.getPlayer(attackingPlayerId);
             //20101001 - 508.1d
-            game.getCombat().checkAttackRequirements(player, game);
-            boolean firstTime = true;
-            do {
-                if (!firstTime
-                        || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
-                    player.selectAttackers(game, attackingPlayerId);
-                }
-                firstTime = false;
-                if (game.isPaused()
-                        || game.checkIfGameIsOver()
-                        || game.executingRollback()) {
-                    return;
-                }
-                // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
-                // I don't like it too - it has to be redesigned
-            } while (!game.getCombat().checkAttackRestrictions(player, game));
+            Player player = game.getPlayer(attackingPlayerId);
+            if (player != null) {
+                game.getCombat().checkAttackRequirements(player, game);
+                boolean firstTime = true;
+                do {
+                    if (!firstTime
+                            || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
+                        player.selectAttackers(game, attackingPlayerId);
+                    }
+                    firstTime = false;
+                    if (game.isPaused()
+                            || game.checkIfGameIsOver()
+                            || game.executingRollback()) {
+                        return;
+                    }
+                    // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
+                    // I don't like it too - it has to be redesigned
+                } while (!game.getCombat().checkAttackRestrictions(player, game));
+            }
             game.getCombat().resumeSelectAttackers(game);
         }
     }
@@ -354,8 +356,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                    (isBanded ? "Band " + attacker.getLogName()
-                            + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
+                            (isBanded ? "Band " + attacker.getLogName()
+                                    + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }
@@ -586,7 +588,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     *                        defender is the controller
+     * defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Ability source, Game game) {
@@ -1402,7 +1404,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     *                     attackerId
+     * attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
@@ -1475,6 +1477,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             creature.clearBandedCards();
             blockingGroups.remove(creatureId);
             if (result && withInfo) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }
         }

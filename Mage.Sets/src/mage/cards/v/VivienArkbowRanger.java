@@ -2,11 +2,11 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.WishEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class VivienArkbowRanger extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(
@@ -57,8 +57,9 @@ public final class VivienArkbowRanger extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
 
-        // −5: You may choose a creature card you own from outside the game, reveal it, and put it into your hand.
-        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE_A), -5));
+        // −5: You may reveal a creature card you own from outside the game and put it into your hand.
+        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE), -5)
+                .addHint(OpenSideboardHint.instance));
     }
 
     private VivienArkbowRanger(final VivienArkbowRanger card) {

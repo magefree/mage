@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -111,12 +110,11 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
         TargetCard target = new TargetCardInHand().withChooseHint("to exile");
         controller.chooseTarget(outcome, controller.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        MageObject sourceObject = source.getSourcePermanentOrLKI(game);
-        if (card == null || sourceObject == null) {
+        if (card == null) {
             return false;
         }
         if (!controller.moveCardsToExile(
-                card, source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+                card, source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         )) {
             return false;
         }

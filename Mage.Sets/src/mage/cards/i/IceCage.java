@@ -1,9 +1,6 @@
-
-
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -27,15 +24,13 @@ public final class IceCage extends CardImpl {
 
     public IceCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
-
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));

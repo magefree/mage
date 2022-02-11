@@ -73,10 +73,10 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int startingHandSize) {
         return deck
                 .stream()
-                .filter(card -> card.isPermanent())
+                .filter(MageObject::isPermanent)
                 .map(MageObject::getAbilities)
                 .flatMap(Collection::stream)
                 .anyMatch(ActivatedAbility.class::isInstance);

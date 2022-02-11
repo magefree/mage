@@ -27,7 +27,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade");
         addTarget(playerB, "Reality Smasher");
-        setChoice(playerB, "Yes"); // discard to prevent counter
+        setChoice(playerB, true); // discard to prevent counter
         setChoice(playerB, "Sigiled Starfish");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -51,7 +51,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade");
         addTarget(playerB, "Reality Smasher");
-        setChoice(playerB, "No"); // no discard
+        setChoice(playerB, false); // no discard
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -76,10 +76,10 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
         addTarget(playerA, "Reality Smasher");        
-        setChoice(playerA, "Yes"); // discard a card to prevent counter (bolt targetting)
+        setChoice(playerA, true); // discard a card to prevent counter (bolt targetting)
         setChoice(playerA, "Swamp");
-        setChoice(playerA, "No"); // do not choose new targets for copy (goggles)
-        setChoice(playerA, "Yes"); // discard a card to prevent counter (copy of bolt targetting)
+        setChoice(playerA, false); // do not choose new targets for copy (goggles)
+        setChoice(playerA, true); // discard a card to prevent counter (copy of bolt targetting)
         setChoice(playerA, "Swamp");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

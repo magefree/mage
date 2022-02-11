@@ -18,9 +18,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,12 +32,6 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 public final class PalaceJailer extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public PalaceJailer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -53,7 +46,7 @@ public final class PalaceJailer extends CardImpl {
 
         // When Palace Jailer enters the battlefield, exile target creature an opponent controls until an opponent becomes the monarch. (That creature returns under its owner's control.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new PalaceJailerExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }

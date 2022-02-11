@@ -1,15 +1,14 @@
-
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * Cards in controller hand condition. This condition can decorate other
@@ -19,10 +18,10 @@ import mage.util.CardUtil;
  */
 public class CardsInHandCondition implements Condition {
 
-    private Condition condition;
-    private ComparisonType type;
-    private int count;
-    private TargetController targetController;
+    private final Condition condition;
+    private final ComparisonType type;
+    private final int count;
+    private final TargetController targetController;
 
     public CardsInHandCondition() {
         this(ComparisonType.EQUAL_TO, 0);
@@ -116,5 +115,4 @@ public class CardsInHandCondition implements Condition {
         sb.append(" cards in hand");
         return sb.toString();
     }
-
 }

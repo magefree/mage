@@ -26,7 +26,7 @@ public class PermanentView extends CardView {
     private final boolean summoningSickness;
     private final int damage;
     private List<UUID> attachments;
-    private final CardView original;
+    private final CardView original; // original card before transforms and modifications
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
     private final boolean controlled;
@@ -52,14 +52,14 @@ public class PermanentView extends CardView {
         }
         this.attachedTo = permanent.getAttachedTo();
         if (isToken()) {
-            original = new CardView(((PermanentToken) permanent).getToken(), game);
+            original = new CardView(((PermanentToken) permanent).getToken().copy(), (Game) null);
             original.expansionSetCode = permanent.getExpansionSetCode();
             tokenSetCode = original.getTokenSetCode();
             tokenDescriptor = original.getTokenDescriptor();
         } else {
             if (card != null) {
                 // original may not be face down
-                original = new CardView(card, game);
+                original = new CardView(card.copy(), (Game) null);
             } else {
                 original = null;
             }
@@ -71,12 +71,10 @@ public class PermanentView extends CardView {
         if (original != null && !original.getName().equals(this.getName())) {
             if (permanent.isCopy() && permanent.isFlipCard()) {
                 this.alternateName = permanent.getFlipCardName();
-                this.originalName = this.getName();
             } else {
                 if (controlled // controller may always know
                         || (!morphed && !manifested)) { // others don't know for morph or transformed cards
                     this.alternateName = original.getName();
-                    this.originalName = this.getName();
                 }
             }
         }

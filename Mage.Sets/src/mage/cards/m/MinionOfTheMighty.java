@@ -34,7 +34,7 @@ public final class MinionOfTheMighty extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Pack tactics — Whenever Minion of the Mighty attacks, if you attacked with creatures wih total power 6 or greater this combat, you may put a Dragon creature card from your hand onto the battlefield tapped and attacking.
         this.addAbility(new PackTacticsAbility(new MinionOfTheMightyEffect()));

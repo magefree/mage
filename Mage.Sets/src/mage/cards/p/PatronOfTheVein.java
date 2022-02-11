@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -18,11 +17,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -37,12 +35,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class PatronOfTheVein extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public PatronOfTheVein(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
@@ -56,7 +48,7 @@ public final class PatronOfTheVein extends CardImpl {
 
         // When Patron of the Vein enters the battlefield, destroy target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.
@@ -99,9 +91,10 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 Card creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (creature != null && creature.isCreature(game)) {
+                if (creature != null
+                        && creature.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                     }
                     return true;
                 }
@@ -112,7 +105,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control";
+        return "Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.";
     }
 }
 
@@ -141,7 +134,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null){
+        if (controller == null) {
             return false;
         }
         MageObject sourceObject = source.getSourceObject(game);
@@ -149,7 +142,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
         if (card != null) {
             Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
             effect.apply(game, source);
         }
 

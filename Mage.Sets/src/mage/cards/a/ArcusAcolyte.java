@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public final class ArcusAcolyte extends CardImpl {
             = new FilterControlledCreaturePermanent("creature you control without a +1/+1 counter on it");
 
     static {
-        filter.add(CounterType.P1P1.getPredicate());
+        filter.add(Predicates.not(CounterType.P1P1.getPredicate()));
     }
 
     public ArcusAcolyte(UUID ownerId, CardSetInfo setInfo) {

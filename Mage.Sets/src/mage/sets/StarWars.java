@@ -28,7 +28,9 @@ public final class StarWars extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
+        this.numBoosterDoubleFaced = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("A-Wing", 96, Rarity.UNCOMMON, mage.cards.a.AWing.class));
         cards.add(new SetCardInfo("AAT-1", 160, Rarity.UNCOMMON, mage.cards.a.AAT1.class));
         cards.add(new SetCardInfo("Acklay of the Arena", 161, Rarity.RARE, mage.cards.a.AcklayOfTheArena.class));

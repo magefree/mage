@@ -73,7 +73,7 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
 
         // activate damage - 2x damage with copy
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
-        setChoice(playerA, "No"); // no new target for copy
+        setChoice(playerA, false); // no new target for copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkLife("damage 2", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1 - 1);
         checkExileCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 2);

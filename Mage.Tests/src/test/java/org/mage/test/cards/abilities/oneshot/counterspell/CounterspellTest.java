@@ -80,7 +80,7 @@ public class CounterspellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Memory Lapse", "Lightning Bolt");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Memory Lapse");
 
         setStrictChooseMode(true);
@@ -116,7 +116,7 @@ public class CounterspellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Lightning Bolt");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Counterspell");
 
         setStrictChooseMode(true);
@@ -152,7 +152,7 @@ public class CounterspellTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Dissipate", "Lightning Bolt");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate");
 
-        setChoice(playerA, "Yes"); // change the target
+        setChoice(playerA, true); // change the target
         addTarget(playerA, "Dissipate");
 
         setStrictChooseMode(true);

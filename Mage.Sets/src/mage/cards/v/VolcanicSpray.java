@@ -32,7 +32,7 @@ public final class VolcanicSpray extends CardImpl {
         // Volcanic Spray deals 1 damage to each creature without flying and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1, filter));
         // Flashback {1}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
     private VolcanicSpray(final VolcanicSpray card) {

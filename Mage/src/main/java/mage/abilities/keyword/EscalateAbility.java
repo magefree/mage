@@ -45,7 +45,7 @@ class EscalateEffect extends CostModificationEffectImpl {
 
     EscalateEffect(final EscalateEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override

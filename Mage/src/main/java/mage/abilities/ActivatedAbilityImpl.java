@@ -6,9 +6,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
@@ -60,19 +60,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     public ActivatedAbilityImpl(Zone zone, Effect effect) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
+        this.addEffect(effect);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
-        if (cost != null) {
-            this.addManaCost(cost);
-        }
+        this.addEffect(effect);
+        this.addManaCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
@@ -82,30 +76,18 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 this.addEffect(effect);
             }
         }
-        if (cost != null) {
-            this.addManaCost(cost);
-        }
+        this.addManaCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
-        if (cost != null) {
-            if (cost instanceof PhyrexianManaCost) {
-                this.addManaCost((PhyrexianManaCost) cost);
-            } else {
-                this.addCost(cost);
-            }
-        }
+        this.addEffect(effect);
+        this.addCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
+        this.addEffect(effect);
         if (costs != null) {
             for (Cost cost : costs) {
                 this.addCost(cost);
@@ -120,15 +102,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 this.addEffect(effect);
             }
         }
-        if (cost != null) {
-            this.addCost(cost);
-        }
+        this.addCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
         super(AbilityType.ACTIVATED, zone);
-        for (Effect effect : effects) {
-            if (effect != null) {
+        if (effects != null) {
+            for (Effect effect : effects) {
                 this.addEffect(effect);
             }
         }
@@ -145,6 +125,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     protected boolean checkTargetController(UUID playerId, Game game) {
         switch (mayActivate) {
             case ANY:
+            case EACH_PLAYER:
                 return true;
             case ACTIVE:
                 return game.getActivePlayerId() == playerId;
@@ -170,6 +151,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return true;
     }
 
+    /**
+     * Activated ability check, not spells. It contains costs and targets legality too.
+     * <p>
+     * WARNING, don't forget to call super.canActivate on override in card's code in most cases.
+     *
+     * @param playerId
+     * @param game
+     * @return
+     */
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
@@ -178,26 +168,44 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 || condition.apply(game, this)))) {
             return ActivationStatus.getFalse();
         }
+
         if (!this.checkTargetController(playerId, game)) {
             return ActivationStatus.getFalse();
         }
+
+        // timing check
         //20091005 - 602.5d/602.5e
+        boolean asInstant;
         ApprovingObject approvingObject = game.getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
                         controllerId,
                         game);
-        if (timing == TimingRule.INSTANT
-                || game.canPlaySorcery(playerId)
-                || null != approvingObject) {
-            if (costs.canPay(this, this, playerId, game)
-                    && canChooseTarget(game, playerId)) {
-                this.activatorId = playerId;
-                return new ActivationStatus(true, approvingObject);
-            }
+        asInstant = approvingObject != null;
+        asInstant |= (timing == TimingRule.INSTANT);
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            asInstant |= card.isInstant(game);
+            asInstant |= card.hasAbility(FlashAbility.getInstance(), game);
         }
-        return ActivationStatus.getFalse();
+        if (!asInstant && !game.canPlaySorcery(playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        // targets and costs check
+        if (!costs.canPay(this, this, playerId, game)
+                || !canChooseTarget(game, playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        // all fine, can be activated
+        // TODO: WTF, must be rework to remove data change in canActivate call
+        //  (it can be called from any place by any player or card).
+        //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
+        //  activatorId must be removed
+        this.activatorId = playerId;
+        return new ActivationStatus(true, approvingObject);
     }
 
     @Override

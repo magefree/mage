@@ -132,11 +132,11 @@ class SwordOfDungeonsAndDragonsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int count = 1;
-            int amount = controller.rollDice(source, game, 20);
+            int amount = controller.rollDice(outcome, source, game, 20);
 
             while (amount == 20) {
                 count += 1;
-                amount = controller.rollDice(source, game, 20);
+                amount = controller.rollDice(outcome, source, game, 20);
             }
             return new CreateTokenEffect(new DragonTokenGold(), count).apply(game, source);
         }

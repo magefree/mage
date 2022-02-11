@@ -62,9 +62,11 @@ public final class DroolingOgre extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             Player newController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (newController != null && controller != null && !controller.equals(newController)) {
+            if (newController != null 
+                    && controller != null 
+                    && !controller.equals(newController)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

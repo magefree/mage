@@ -29,7 +29,6 @@ public final class ArguelsBloodFast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TempleOfAclazotz.class;
 
         // {1}{B}, Pay 2 life: Draw a card.
@@ -40,7 +39,7 @@ public final class ArguelsBloodFast extends CardImpl {
         // At the beginning of your upkeep, if you have 5 or less life, you may transform Arguel's Blood Fast.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, true),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, true),
                 FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, you may transform {this}"
         ));

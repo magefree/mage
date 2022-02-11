@@ -1,25 +1,20 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -29,8 +24,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MerchantsDockhand extends CardImpl {
@@ -118,7 +114,7 @@ class TapXTargetCost extends VariableCostImpl {
     }
 
     public TapXTargetCost() {
-        super("controlled untapped artifacts you would like to tap");
+        super(VariableCostType.NORMAL, "controlled untapped artifacts you would like to tap");
         this.text = "Tap X untapped artifacts you control";
     }
 

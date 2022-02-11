@@ -28,7 +28,7 @@ public final class IgniteTheFuture extends CardImpl {
         this.getSpellAbility().addEffect(new IgniteTheFutureEffect());
 
         // Flashback {7}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{R}")));
     }
 
     private IgniteTheFuture(final IgniteTheFuture card) {
@@ -69,6 +69,6 @@ class IgniteTheFutureEffect extends OneShotEffect {
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false);
+                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false, false);
     }
 }

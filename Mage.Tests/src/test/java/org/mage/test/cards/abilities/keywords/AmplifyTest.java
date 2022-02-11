@@ -25,7 +25,7 @@ public class AmplifyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kilnmouth Dragon");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Kilnmouth Dragon");
 
         setStrictChooseMode(true);
@@ -49,7 +49,7 @@ public class AmplifyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kilnmouth Dragon");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Kilnmouth Dragon^Phantasmal Dragon");
 
         setStrictChooseMode(true);
@@ -76,13 +76,13 @@ public class AmplifyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kilnmouth Dragon");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Kilnmouth Dragon");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        setChoice(playerB, "Yes"); // use clone
+        setChoice(playerB, true); // use clone
         setChoice(playerB, "Kilnmouth Dragon"); // what clone
-        setChoice(playerB, "Yes"); // use amplify
+        setChoice(playerB, true); // use amplify
         addTarget(playerB, "Phantasmal Dragon"); // reveal
 
         setStrictChooseMode(true);
@@ -115,9 +115,9 @@ public class AmplifyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Through the Breach");
-        setChoice(playerA, "Yes");  // Put a creature into play with Through the Breach?
+        setChoice(playerA, true);  // Put a creature into play with Through the Breach?
         setChoice(playerA, "Kilnmouth Dragon");
-        //setChoice(playerA, "Yes");  // no reveal request cause no cards to show
+        //setChoice(playerA, true);  // no reveal request cause no cards to show
         //addTarget(playerA, "Kilnmouth Dragon");
 
         setStrictChooseMode(true);

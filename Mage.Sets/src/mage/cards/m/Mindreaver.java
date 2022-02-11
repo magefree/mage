@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -112,14 +111,13 @@ class MindreaverExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        MageObject mageObject = source.getSourceObject(game);
-        if (controller == null || player == null || mageObject == null) {
+        if (controller == null || player == null) {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         return controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), mageObject.getIdName()
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 }

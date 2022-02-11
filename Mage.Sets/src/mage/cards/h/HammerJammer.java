@@ -1,14 +1,10 @@
 
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
@@ -20,12 +16,16 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj & L_J
  */
 public final class HammerJammer extends CardImpl {
@@ -39,7 +39,7 @@ public final class HammerJammer extends CardImpl {
 
         // As Hammer Jammer enters the battlefield, roll a six-sided die. Hammer Jammer enters the battlefield with a number of +1/+1 counters on it equal to the result.
         this.addAbility(new EntersBattlefieldAbility(new HammerJammerEntersEffect(CounterType.P1P1.createInstance())));
-        
+
         // Whenever you roll a die, remove all +1/+1 counters from Hammer Jammer, then put a number of +1/+1 counters on it equal to the result.
         this.addAbility(new HammerJammerTriggeredAbility());
 
@@ -70,7 +70,7 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
             permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
             return super.apply(game, source);
@@ -79,7 +79,7 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
     }
 
     @Override
-    public EntersBattlefieldWithXCountersEffect copy() {
+    public HammerJammerEntersEffect copy() {
         return new HammerJammerEntersEffect(this);
     }
 }
@@ -101,15 +101,16 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.getControllerId().equals(event.getPlayerId()) && event.getFlag()) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("rolled", event.getAmount());
-            }
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        // planar die will trigger it with 0 amount
+        if (this.isControlledBy(drEvent.getPlayerId())) {
+            this.getEffects().setValue("rolled", drEvent.getResult());
             return true;
         }
         return false;
@@ -142,10 +143,12 @@ class HammerJammerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (getValue("rolled") != null) {
-                int amount = (Integer) getValue("rolled");
+            Integer amount = (Integer) getValue("rolled");
+            if (amount != null) {
                 permanent.removeCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)), source, game);
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
+                }
                 return true;
             }
         }

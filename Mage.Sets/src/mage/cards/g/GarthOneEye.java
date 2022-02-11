@@ -14,6 +14,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
@@ -105,7 +106,7 @@ class GarthOneEyeEffect extends OneShotEffect {
                 chosen = choices.stream().findAny().orElse(null);
                 break;
             default:
-                Choice choice = new ChoiceImpl(true);
+                Choice choice = new ChoiceImpl(true, ChoiceHintType.CARD);
                 choice.setChoices(choices);
                 player.choose(outcome, choice, game);
                 chosen = choice.getChoice();

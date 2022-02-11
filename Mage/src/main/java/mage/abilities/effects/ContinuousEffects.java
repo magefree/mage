@@ -177,6 +177,7 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layeredEffects) {
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
+                case WhileControlled:
                 case WhileOnStack:
                 case WhileInGraveyard:
                     Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
@@ -189,7 +190,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        logger.error("No abilities for continuous effect: " + effect.toString());
+                        logger.error("No abilities for continuous effect: " + effect);
                     }
                     break;
                 default:
@@ -592,9 +593,14 @@ public class ContinuousEffects implements Serializable {
                 Map<String, String> keyChoices = new HashMap<>();
                 for (ApprovingObject approvingObject : possibleApprovingObjects) {
                     MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    keyChoices.put(approvingObject.getApprovingAbility().getId().toString(),
-                            (approvingObject.getApprovingAbility().getRule(mageObject == null ? "" : mageObject.getName()))
-                                    + (mageObject == null ? "" : " (" + mageObject.getIdName() + ")"));
+                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                    String choiceValue;
+                    if (mageObject == null) {
+                        choiceValue = approvingObject.getApprovingAbility().getRule();
+                    } else {
+                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
+                    }
+                    keyChoices.put(choiceKey, choiceValue);
                 }
                 Choice choicePermitting = new ChoiceImpl(true);
                 choicePermitting.setMessage("Choose the permitting object");
@@ -1277,7 +1283,7 @@ public class ContinuousEffects implements Serializable {
             logger.error("Effect is null: " + source.toString());
             return;
         } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect.toString());
+            logger.warn("Adding effect without ability : " + effect);
         }
         switch (effect.getEffectType()) {
             case REPLACEMENT:
@@ -1328,7 +1334,7 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    public void setController(UUID cardId, UUID controllerId) {
+    public synchronized void setController(UUID cardId, UUID controllerId) {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             setControllerForEffect(effectsList, cardId, controllerId);
         }
@@ -1364,6 +1370,8 @@ public class ContinuousEffects implements Serializable {
     }
 
     public Map<String, String> getReplacementEffectsTexts(Map<ReplacementEffect, Set<Ability>> rEffects, Game game) {
+        // warning, autoSelectReplacementEffects uses [object id] in texts as different settings,
+        // so if you change keys or texts logic then don't forget to change auto-choose too
         Map<String, String> texts = new LinkedHashMap<>();
         for (Map.Entry<ReplacementEffect, Set<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {
@@ -1426,7 +1434,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Prints out a status of the currently existing continuous effects
+     * Debug only: prints out a status of the currently existing continuous effects
      *
      * @param game
      */

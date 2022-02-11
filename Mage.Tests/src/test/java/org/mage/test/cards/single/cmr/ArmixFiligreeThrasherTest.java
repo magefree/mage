@@ -25,7 +25,7 @@ public class ArmixFiligreeThrasherTest extends CardTestPlayerBase {
 
         // attack and discard to kill bear
         attack(1, playerA, "Armix, Filigree Thrasher", playerB);
-        setChoice(playerA, "Yes"); // pay discard cost
+        setChoice(playerA, true); // pay discard cost
         setChoice(playerA, "Alpha Myr");
         addTarget(playerA, "Grizzly Bears"); // target for trigger (must kill)
 

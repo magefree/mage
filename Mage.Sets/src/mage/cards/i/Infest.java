@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -7,7 +6,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -20,7 +18,7 @@ public final class Infest extends CardImpl {
 
 
         // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
     private Infest(final Infest card) {

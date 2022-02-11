@@ -6,7 +6,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -37,7 +36,7 @@ public final class SarkhanTheMad extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
+        this.setStartingLoyalty(7);
 
         this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
 

@@ -104,20 +104,6 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                     }
                 }
             }
-            // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
-            Map<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
-            if (LKIBattlefield != null) {
-                for (MageObject mageObject : LKIBattlefield.values()) {
-                    Permanent perm = (Permanent) mageObject;
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                        if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
-                            for (Ability abilityToAdd : ability) {
-                                perm.addAbility(abilityToAdd, source.getSourceId(), game);
-                            }
-                        }
-                    }
-                }
-            }
         }
         return true;
     }

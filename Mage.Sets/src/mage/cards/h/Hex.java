@@ -6,6 +6,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,7 +22,7 @@ public final class Hex extends CardImpl {
 
         // Destroy six target creatures.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(6));
+        this.getSpellAbility().addTarget(new TargetPermanent(6, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private Hex(final Hex card) {

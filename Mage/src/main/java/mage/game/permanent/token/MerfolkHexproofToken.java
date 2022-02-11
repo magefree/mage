@@ -17,7 +17,7 @@ public final class MerfolkHexproofToken extends TokenImpl {
         super("Merfolk", "1/1 blue Merfolk creature token with hexproof");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.MERFOLK);
-        this.color = ObjectColor.BLUE;
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HexproofAbility.getInstance());
@@ -30,5 +30,4 @@ public final class MerfolkHexproofToken extends TokenImpl {
     public MerfolkHexproofToken copy() {
         return new MerfolkHexproofToken(this);
     }
-
 }

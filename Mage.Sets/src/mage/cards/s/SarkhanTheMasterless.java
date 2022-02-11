@@ -5,7 +5,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -30,7 +29,7 @@ public final class SarkhanTheMasterless extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Whenever a creature attacks you or a planeswalker you control, each Dragon you control deals 1 damage to that creature.
         this.addAbility(new AttacksAllTriggeredAbility(

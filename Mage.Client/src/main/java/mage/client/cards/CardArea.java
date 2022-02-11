@@ -1,5 +1,6 @@
 package mage.client.cards;
 
+import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.CardIconOrder;
 import mage.abilities.icon.CardIconPosition;
 import mage.abilities.icon.CardIconRenderSettings;
@@ -49,6 +50,7 @@ public class CardArea extends JPanel implements CardEventProducer {
     private int customXOffsetBetweenCardsOrColumns = 0;
     private CardIconPosition customCardIconPosition = null;
     private CardIconOrder customCardIconOrder = null;
+    private CardIconColor customCardIconColor = null;
     private int customCardIconsMaxVisibleCount = 0;
 
     /**
@@ -184,13 +186,22 @@ public class CardArea extends JPanel implements CardEventProducer {
             card = tmp;
         }
 
-        CardIconRenderSettings customIconsRender = new CardIconRenderSettings()
-                .withDebugMode(true)
-                .withCustomPosition(customCardIconPosition)
-                .withCustomOrder(customCardIconOrder)
-                .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
-                .withCustomIconSizePercent(30);
-        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, customIconsRender, cardDimension, gameId, true, true,
+        CardIconRenderSettings currentIconsRender;
+        if (this.customRenderMode >= 0) {
+            // debug
+            currentIconsRender = new CardIconRenderSettings()
+                    .withDebugMode(true)
+                    .withCustomPosition(customCardIconPosition)
+                    .withCustomOrder(customCardIconOrder)
+                    .withCustomColor(customCardIconColor)
+                    .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
+                    .withCustomIconSizePercent(30);
+        } else {
+            // default
+            currentIconsRender = new CardIconRenderSettings();
+        }
+
+        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, currentIconsRender, cardDimension, gameId, true, true,
                 customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode(), customNeedFullPermanentRender);
         cardPanel.setCardContainerRef(this);
         cardPanel.update(card);
@@ -292,6 +303,10 @@ public class CardArea extends JPanel implements CardEventProducer {
 
     public void setCustomCardIconsPanelOrder(CardIconOrder panelOrder) {
         this.customCardIconOrder = panelOrder;
+    }
+
+    public void setCustomCardIconsPanelColor(CardIconColor cardIconColor) {
+        this.customCardIconColor = cardIconColor;
     }
 
     public void setCustomCardIconsMaxVisibleCount(int maxVisibleCount) {

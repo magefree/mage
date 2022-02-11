@@ -6,6 +6,7 @@ import mage.ManaSymbol;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -648,7 +649,7 @@ public final class ManaUtil {
      */
     public static ManaCost createManaCost(int genericManaCount, boolean payAsX) {
         if (payAsX) {
-            VariableManaCost xCost = new VariableManaCost();
+            VariableManaCost xCost = new VariableManaCost(VariableCostType.NORMAL);
             xCost.setAmount(genericManaCount, genericManaCount, false);
             return xCost;
         } else {

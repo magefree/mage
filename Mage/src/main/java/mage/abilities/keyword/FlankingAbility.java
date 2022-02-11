@@ -38,7 +38,7 @@ public class FlankingAbility extends TriggeredAbilityImpl {
 
                 if (!hasFlankingAbility) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     }
                     return true;
                 }

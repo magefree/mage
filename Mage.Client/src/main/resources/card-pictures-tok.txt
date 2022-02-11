@@ -108,6 +108,13 @@
 |Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
 |Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
 |Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|
+|Generate|EMBLEM:AFR|Ellywick Tumblestrum||Emblem Ellywick|EllywickTumblestrumEmblem|
+|Generate|EMBLEM:AFR|Lolth, Spider Queen||Emblem Lolth|LolthSpiderQueenEmblem|
+|Generate|EMBLEM:AFR|Mordenkainen||Emblem Mordenkainen|MordenkainenEmblem|
+|Generate|EMBLEM:AFR|Zariel, Archduke of Avernus||Emblem Zariel|ZarielArchdukeOfAvernusEmblem|
+|Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
+|Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
+|Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -176,6 +183,11 @@
 |Generate|TOK:AER|Etherium Cell|||EtheriumCellToken|
 |Generate|TOK:AER|Gremlin|||GremlinToken|
 |Generate|TOK:AER|Ragavan|||RagavanToken|
+
+# Dungeons
+|Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
+|Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
+|Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
 
 # AKH
 |Generate|TOK:AKH|Beast|||BeastToken3|
@@ -273,8 +285,8 @@
 |Generate|TOK:BNG|Wolf|||WolfToken|
 |Generate|TOK:BNG|Zombie|||ForlornPseudammaZombieToken|
 |Generate|TOK:BOK|Snake|||SnakeToken|
-|Generate|TOK:BOK|Spirit|||AnotherSpiritToken|
-|Generate|TOK:BOK|Spirit|||SpiritToken|
+|Generate|TOK:BOK|Spirit|1||AnotherSpiritToken|
+|Generate|TOK:BOK|Spirit|2||SpiritToken|
 |Generate|TOK:C13|Assembly-Worker|||AssembleWorkerToken|
 |Generate|TOK:C13|Beast|1||BeastToken2|
 |Generate|TOK:C13|Beast|2||CarnivoreToken|
@@ -880,10 +892,9 @@
 |Generate|TOK:MIR|Wall|||TidalWaveWallToken|
 |Generate|TOK:MIR|Wall|||WoodToken|
 |Generate|TOK:MIR|Zombie|||ZombieToken|
-|Generate|TOK:MM2|Eldrazi Spawn|1|
-|Generate|TOK:MM2|Eldrazi Spawn|2|
-|Generate|TOK:MM2|Eldrazi Spawn|3|
-|Generate|TOK:MM2|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|1||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|2||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|3||EldraziSpawnToken|
 |Generate|TOK:MM2|Elephant|||ElephantToken|
 |Generate|TOK:MM2|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MM2|Germ|||PhyrexianGermToken|
@@ -1564,3 +1575,93 @@
 |Generate|TOK:MH2|Treasure|2||TreasureToken|
 |Generate|TOK:MH2|Zombie|||ZombieToken|
 |Generate|TOK:MH2|Zombie Army|||ZombieArmyToken|
+
+# AFR
+|Generate|TOK:AFR|Angel|||Angel33Token|
+|Generate|TOK:AFR|Boo|||BooToken|
+|Generate|TOK:AFR|Devil|||DevilToken|
+|Generate|TOK:AFR|Dog Illusion|||DogIllusionToken|
+# |Generate|TOK:AFR|Faerie Dragon|||xxx| TODO: add after dice pr merge
+|Generate|TOK:AFR|Goblin|||GoblinToken|
+|Generate|TOK:AFR|Guenhwyvar|||GuenhwyvarToken|
+|Generate|TOK:AFR|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
+|Generate|TOK:AFR|Skeleton|||SkeletonToken|
+|Generate|TOK:AFR|Spider|||LolthSpiderToken|
+|Generate|TOK:AFR|The Atropal|||TheAtropalToken|
+|Generate|TOK:AFR|Treasure|||TreasureToken|
+|Generate|TOK:AFR|Vecna|||VecnaToken|
+|Generate|TOK:AFR|Wolf|||WolfToken|
+|Generate|TOK:AFR|Zombie|||ZombieToken|
+
+# AFC
+|Generate|TOK:AFC|Angel|||AngelToken|
+|Generate|TOK:AFC|Beast|||BeastToken|
+# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tafc/4/champion-of-wits
+|Generate|TOK:AFC|Clue|||ClueArtifactToken|
+|Generate|TOK:AFC|Dragon|||DragonToken2|
+|Generate|TOK:AFC|Dragon Spirit|||VrondissRageOfAncientsToken|
+|Generate|TOK:AFC|Illusion|||MinnWilyIllusionistToken|
+|Generate|TOK:AFC|Knight|||KnightToken|
+|Generate|TOK:AFC|Rat|||RatToken|
+|Generate|TOK:AFC|Saproling|||SaprolingToken|
+|Generate|TOK:AFC|Servo|||ServoToken|
+|Generate|TOK:AFC|Thopter|||ThopterColorlessToken|
+
+# MIC
+|Generate|TOK:MIC|Beast|||BeastToken|
+|Generate|TOK:MIC|Centaur|||CentaurToken|
+|Generate|TOK:MIC|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:MIC|Elephant|||ElephantToken|
+|Generate|TOK:MIC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:MIC|Knight|||KnightToken|
+|Generate|TOK:MIC|Rhino|||RhinoToken|
+|Generate|TOK:MIC|Snake|||SnakeToken|
+|Generate|TOK:MIC|Zombie|1||ZombieToken|
+|Generate|TOK:MIC|Zombie|2||StitcherGeralfZombieToken|
+|Generate|TOK:MIC|Zombie Army|||ZombieArmyToken|
+
+# MID
+|Generate|TOK:MID|Bat|||BatToken|
+|Generate|TOK:MID|Beast|||BeastToken2|
+|Generate|TOK:MID|Bird|||OminousRoostBirdToken|
+|Generate|TOK:MID|Clue|||ClueArtifactToken|
+|Generate|TOK:MID|Devil|||DevilToken|
+|Generate|TOK:MID|Elemental|||SeizeTheStormElementalToken|
+|Generate|TOK:MID|Human|||HumanToken|
+|Generate|TOK:MID|Insect|||RiseOfTheAntsInsectToken|
+|Generate|TOK:MID|Ooze|||ConsumingBlobOozeToken|
+|Generate|TOK:MID|Spider|||SpiderToken|
+|Generate|TOK:MID|Spirit|||SpiritWhiteToken|
+|Generate|TOK:MID|Treefolk|||WrennAndSevenTreefolkToken|
+|Generate|TOK:MID|Vampire|||HungryForMoreVampireToken|
+|Generate|TOK:MID|Wolf|||WolfToken|
+|Generate|TOK:MID|Zombie|1||ZombieDecayedToken|
+|Generate|TOK:MID|Zombie|2||ZombieMenaceToken|
+
+# VOC
+|Generate|TOK:VOC|Angel|||AngelToken|
+|Generate|TOK:VOC|Bat|||BatToken|
+|Generate|TOK:VOC|Clue|||ClueArtifactToken|
+|Generate|TOK:VOC|Spirit|1||SpiritToken|
+|Generate|TOK:VOC|Spirit|2||AnotherSpiritToken|
+|Generate|TOK:VOC|Thopter|||ThopterColorlessToken|
+
+# VOW
+|Generate|TOK:VOW|Blood|||BloodToken|
+|Generate|TOK:VOW|Boar|||Boar3Token|
+|Generate|TOK:VOW|Dragon Illusion|||DragonIllusionToken|
+|Generate|TOK:VOW|Human|1||RedHumanToken|
+|Generate|TOK:VOW|Human|2||HumanToken|
+|Generate|TOK:VOW|Human Soldier|||HumanSoldierTrainingToken|
+|Generate|TOK:VOW|Insect|||InsectToken|
+|Generate|TOK:VOW|Slug|||SlugToken|
+|Generate|TOK:VOW|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:VOW|Spirit|2||DorotheasRetributionSpiritToken|
+|Generate|TOK:VOW|Spirit Cleric|||SpiritClericToken|
+|Generate|TOK:VOW|Treasure|||TreasureToken|
+|Generate|TOK:VOW|Vampire|1||EdgarMarkovsCoffinVampireToken|
+|Generate|TOK:VOW|Vampire|2||VampireLifelinkToken|
+|Generate|TOK:VOW|Wolf|1||WolfToken|
+|Generate|TOK:VOW|Wolf|2||RedWolfToken|
+|Generate|TOK:VOW|Zombie|1||ZombieToken|
+|Generate|TOK:VOW|Zombie|2||StitcherGeralfZombieToken|

@@ -81,7 +81,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
     public static final String KEY_CARD_IMAGES_THREADS_DEFAULT = "3";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
-    public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
+    public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
 
     public static final String KEY_CARD_RENDERING_FALLBACK = "cardRenderingFallback";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
@@ -134,6 +134,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PASS_PRIORITY_CAST = "passPriorityCast";
     public static final String KEY_PASS_PRIORITY_ACTIVATION = "passPriorityActivation";
     public static final String KEY_AUTO_ORDER_TRIGGER = "autoOrderTrigger";
+    public static final String KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS = "useSameSettingsForSameReplacementEffects";
     public static final String KEY_USE_FIRST_MANA_ABILITY = "useFirstManaAbility";
 
     // mana auto payment
@@ -399,7 +400,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbTheme.setModel(new DefaultComboBoxModel<>(ThemeType.values()));
         addAvatars();
 
-        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
+        cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
     }
 
@@ -501,14 +502,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbPassPriorityCast = new javax.swing.JCheckBox();
         cbPassPriorityActivation = new javax.swing.JCheckBox();
         cbAutoOrderTrigger = new javax.swing.JCheckBox();
+        cbUseSameSettingsForReplacementEffect = new javax.swing.JCheckBox();
         tabImages = new javax.swing.JPanel();
         panelCardImages = new javax.swing.JPanel();
         cbUseDefaultImageFolder = new javax.swing.JCheckBox();
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
-        labelPreferedImageLanguage = new javax.swing.JLabel();
+        cbPreferredImageLanguage = new javax.swing.JComboBox<>();
+        labelPreferredImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
         labelHint1 = new javax.swing.JLabel();
@@ -1405,7 +1407,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabelEndOfTurn.setText("End of turn:");
 
         phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "SKIP settings"));
-        phases_stopSettings.setLayout(new java.awt.GridLayout(9, 1));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(10, 1));
 
         cbStopAttack.setSelected(true);
         cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
@@ -1493,8 +1495,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbPassPriorityActivation);
 
-        cbAutoOrderTrigger.setText("Set order for your triggers automatically if all have the same text");
-        cbAutoOrderTrigger.setToolTipText("<HTML>If activated the order to put on the stack your triggers that trigger at the same time<br/>\nis set automatically if all have the same text.");
+        cbAutoOrderTrigger.setText("TRIGGERS: auto-choose triggers order for same rule texts (put same triggers to the stack at default order)");
+        cbAutoOrderTrigger.setToolTipText("<HTML>If you put same triggers with same texts on the stack then auto-choose their order.<br/>\nYou can change that settings anytime at the game.");
         cbAutoOrderTrigger.setActionCommand("");
         cbAutoOrderTrigger.setPreferredSize(new java.awt.Dimension(300, 25));
         cbAutoOrderTrigger.addActionListener(new java.awt.event.ActionListener() {
@@ -1503,6 +1505,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
         phases_stopSettings.add(cbAutoOrderTrigger);
+
+        cbUseSameSettingsForReplacementEffect.setText("REPLACEMENT EFFECTS: use same auto-choose settings for same cards (choose replacement effects order dialog)");
+        cbUseSameSettingsForReplacementEffect.setToolTipText("<HTML>If you setup auto-choose for one object/card then it will be applied for all other objects with same name.<br/>\nYou can change that settings anytime at the game.");
+        cbUseSameSettingsForReplacementEffect.setActionCommand("");
+        cbUseSameSettingsForReplacementEffect.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbUseSameSettingsForReplacementEffect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseSameSettingsForReplacementEffectActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbUseSameSettingsForReplacementEffect);
 
         org.jdesktop.layout.GroupLayout tabPhasesLayout = new org.jdesktop.layout.GroupLayout(tabPhases);
         tabPhases.setLayout(tabPhasesLayout);
@@ -1614,8 +1627,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(jLabelEndOfTurn)
                     .add(checkBoxEndTurnOthers))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabsPanel.addTab("Phases & Priority", tabPhases);
@@ -1645,11 +1658,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setMaximumRowCount(20);
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferredImageLanguage.setMaximumRowCount(20);
+        cbPreferredImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        labelPreferedImageLanguage.setText("Default images language:");
-        labelPreferedImageLanguage.setFocusable(false);
+        labelPreferredImageLanguage.setText("Default images language:");
+        labelPreferredImageLanguage.setFocusable(false);
 
         labelNumberOfDownloadThreads.setText("Default download threads:");
 
@@ -1676,10 +1689,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(panelCardImagesLayout.createSequentialGroup()
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(labelNumberOfDownloadThreads)
-                                    .add(labelPreferedImageLanguage))
+                                    .add(labelPreferredImageLanguage))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(panelCardImagesLayout.createSequentialGroup()
                                         .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -1703,8 +1716,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(labelHint1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelPreferedImageLanguage)
-                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(labelPreferredImageLanguage)
+                    .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         panelCardStyles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
@@ -2925,13 +2938,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbUseSameSettingsForReplacementEffect, KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS, "true", "false", UPDATE_CACHE_POLICY);
 
         // images
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
         save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbNumberOfDownloadThreads, KEY_CARD_IMAGES_THREADS);
-        save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
+        save(prefs, dialog.cbPreferredImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
 
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -3309,6 +3323,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_sliderGUISizeStateChanged
 
+    private void cbUseSameSettingsForReplacementEffectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseSameSettingsForReplacementEffectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUseSameSettingsForReplacementEffectActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3465,7 +3483,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false");
         load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
-
+        load(prefs, dialog.cbUseSameSettingsForReplacementEffect, KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS, "true", "true");
     }
 
     private static void loadGuiSize(Preferences prefs) {
@@ -3500,7 +3518,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
-        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
+        dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
         load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false");
@@ -3996,6 +4014,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 userStrId
         );
@@ -4054,7 +4073,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox cbNumberOfDownloadThreads;
     private javax.swing.JCheckBox cbPassPriorityActivation;
     private javax.swing.JCheckBox cbPassPriorityCast;
-    private javax.swing.JComboBox<String> cbPreferedImageLanguage;
+    private javax.swing.JComboBox<String> cbPreferredImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbShowStormCounter;
@@ -4069,6 +4088,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
     private javax.swing.JCheckBox cbUseRandomBattleImage;
+    private javax.swing.JCheckBox cbUseSameSettingsForReplacementEffect;
     private javax.swing.JLabel chatFontSizeLabel;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
@@ -4156,7 +4176,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelMainStep;
     private javax.swing.JLabel labelNextTurn;
     private javax.swing.JLabel labelNumberOfDownloadThreads;
-    private javax.swing.JLabel labelPreferedImageLanguage;
+    private javax.swing.JLabel labelPreferredImageLanguage;
     private javax.swing.JLabel labelPriorEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;

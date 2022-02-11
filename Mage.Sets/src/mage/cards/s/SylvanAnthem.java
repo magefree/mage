@@ -34,7 +34,7 @@ public final class SylvanAnthem extends CardImpl {
         ).setText("green creatures you control get +1/+1")));
 
         // Whenever a green creature enters the battlefield under your control, scry 1.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1, false), filter));
     }
 
     private SylvanAnthem(final SylvanAnthem card) {

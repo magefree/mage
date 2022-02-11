@@ -20,7 +20,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class VeryCrypticCommandD extends CardImpl {
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));
-        filter2.add(Predicates.not(TokenPredicate.instance));
+        filter2.add(TokenPredicate.FALSE);
     }
 
     public VeryCrypticCommandD(UUID ownerId, CardSetInfo setInfo) {

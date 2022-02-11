@@ -83,7 +83,7 @@ class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getTargetId().equals(player.getId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId(), game));
                        return true;
                 }
             }

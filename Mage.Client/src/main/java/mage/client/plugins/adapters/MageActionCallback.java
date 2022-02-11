@@ -43,11 +43,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Class that handles the callbacks from the card panels to mage to display big
  * card images from the cards the mouse hovers on. Also handles tooltip text
- * window.
+ * window (from non-card calls, example: chats)
  * <p>
  * Only ONE action callback possible for the app
  * <p>
  * If you want to process card events in your component then use CardEventProducer, see example with mouseClicked here
+ *
+ * If you want virtual popup hint (without real card) then use VirtualCardInfo
  *
  * @author Nantuko, noxx, JayDi85
  */
@@ -132,6 +134,7 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseEntered(MouseEvent e, final TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
         this.popupData = data;
         handleMouseMoveOverNewCard(data);
     }
@@ -139,8 +142,15 @@ public class MageActionCallback implements ActionCallback {
     private void startCardHintPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+        if (data.getTooltipDelay() > 0) {
+            // custom tooltip
+            tooltipDelay = data.getTooltipDelay();
+        } else {
+            // from preferences
+            tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+        }
         if (tooltipDelay == 0) {
+            // disabled
             return;
         }
 
@@ -288,10 +298,13 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseMoved(MouseEvent e, TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
+
         if (!Plugins.instance.isCardPluginLoaded()) {
             return;
         }
-        if (!popupData.getCard().equals(data.getCard())) {
+        if (this.popupData == null
+                || !popupData.getCard().equals(data.getCard())) {
             this.popupData = data;
             handleMouseMoveOverNewCard(data);
         }
@@ -336,6 +349,7 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
         if (data != null) {
             hideAll(data.getGameId());
         } else {
@@ -444,7 +458,7 @@ public class MageActionCallback implements ActionCallback {
         // Prevent to show tooltips from panes not in front
         MagePane topPane = MageFrame.getTopMost(null);
         if (topPane instanceof GamePane) {
-            if (!((GamePane) topPane).getGameId().equals(data.getGameId())) {
+            if (data.getGameId() != null && !((GamePane) topPane).getGameId().equals(data.getGameId())) {
                 return;
             }
         }
@@ -452,6 +466,10 @@ public class MageActionCallback implements ActionCallback {
         hideTooltipPopup();
         cancelTimeout();
         Component parentComponent = SwingUtilities.getRoot(cardPanel);
+        if (parentComponent == null) {
+            // virtual card (example: show card popup in non cards panel like PickChoiceDialog)
+            parentComponent = MageFrame.getDesktop();
+        }
         Point parentPoint = parentComponent.getLocationOnScreen();
 
         if (data.getLocationOnScreen() == null) {
@@ -481,7 +499,7 @@ public class MageActionCallback implements ActionCallback {
                         }
                         popupTextWindowOpen = true;
                         Image image = cardPanel.getImage();
-                        displayCardInfo(cardPanel, image, bigCard);
+                        displayCardInfo(cardPanel.getOriginal(), image, bigCard);
                     }
                 }
             } else {
@@ -653,7 +671,9 @@ public class MageActionCallback implements ActionCallback {
                     popupContainer.setLocation(location);
                     popupContainer.setVisible(true);
 
+                    // popup hint mode
                     Image image = null;
+                    CardView displayCard = cardPanel.getOriginal();
                     switch (enlargeMode) {
                         case COPY:
                             if (cardView instanceof PermanentView) {
@@ -669,6 +689,7 @@ public class MageActionCallback implements ActionCallback {
                                     image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
                                 } else {
                                     image = ImageCache.getImageOriginalAlternateName(cardView);
+                                    displayCard = displayCard.getSecondCardFace();
                                 }
                             }
                             break;
@@ -679,7 +700,7 @@ public class MageActionCallback implements ActionCallback {
                         image = cardPanel.getImage();
                     }
                     // shows the card in the popup Container
-                    displayCardInfo(cardPanel, image, (BigCard) cardPreviewPane);
+                    displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
 
                 } else {
                     logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
@@ -691,21 +712,21 @@ public class MageActionCallback implements ActionCallback {
         });
     }
 
-    private void displayCardInfo(MageCard mageCard, Image image, BigCard bigCard) {
+    private void displayCardInfo(CardView card, Image image, BigCard bigCard) {
         if (image instanceof BufferedImage) {
             // XXX: scaled to fit width
-            bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
+            bigCard.setCard(card.getId(), enlargeMode, image, card.getRules(), card.isToRotate());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
+            if (card.isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();
             }
         } else {
-            JXPanel panel = GuiDisplayUtil.getDescription(mageCard.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+            JXPanel panel = GuiDisplayUtil.getDescription(card, bigCard.getWidth(), bigCard.getHeight());
             panel.setVisible(true);
             bigCard.hideTextComponent();
-            bigCard.addJXPanel(mageCard.getOriginal().getId(), panel);
+            bigCard.addJXPanel(card.getId(), panel);
         }
         enlargeredViewOpened = new Date();
     }

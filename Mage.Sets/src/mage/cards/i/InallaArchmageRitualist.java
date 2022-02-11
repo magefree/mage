@@ -27,7 +27,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -48,7 +47,7 @@ public final class InallaArchmageRitualist extends CardImpl {
 
     static {
         filter.add(SubType.WIZARD.getPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(AnotherPredicate.instance);
         filter2.add(SubType.WIZARD.getPredicate());
         filter2.add(TappedPredicate.UNTAPPED);
@@ -115,7 +114,7 @@ class InallaArchmageRitualistEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
             if (effect.apply(game, source)) {
-                for (Permanent tokenPermanent : effect.getAddedPermanent()) {
+                for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

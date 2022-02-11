@@ -8,7 +8,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
+import java.util.Objects;
 
 /**
  * @author North
@@ -25,23 +25,22 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public CardsInAllGraveyardsCount(final CardsInAllGraveyardsCount dynamicValue) {
+    private CardsInAllGraveyardsCount(final CardsInAllGraveyardsCount dynamicValue) {
         this.filter = dynamicValue.filter.copy();
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (UUID playerUUID : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerUUID);
-                if (player != null) {
-                    amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-                }
-            }
-        }
-        return amount;
+        return game.getState()
+                .getPlayersInRange(sourceAbility.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .mapToInt(graveyard -> graveyard.count(
+                        filter, sourceAbility.getSourceId(),
+                        sourceAbility.getControllerId(), game
+                )).sum();
     }
 
     @Override

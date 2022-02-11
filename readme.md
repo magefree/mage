@@ -1,6 +1,6 @@
 # XMage — Magic, Another Game Engine
 
-[![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage) [![latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/) [![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/) [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=JayDi85_mage&metric=coverage)](https://sonarcloud.io/dashboard?id=JayDi85_mage) [![latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/) [![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/) [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
 It includes full rules enforcement for over **20 000** unique cards and more than 50.000 reprints from different editions. 
@@ -12,7 +12,7 @@ pauper, oathbreaker, historic, freeform and much more.
 Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for 
 testing combos and other game situations with pre-defined conditions.
 
-There are [public servers](http://xmageservers.online/) where you can play XMage against other players. 
+There are [public servers](http://xmage.today/servers/) where you can play XMage against other players. 
 You can also host your own server to play against the AI and/or your friends.
 
 XMage community and resources:
@@ -25,7 +25,7 @@ XMage community and resources:
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
 Servers status:
-* http://xmageservers.online/
+* http://xmage.today/servers/
 
 Beta server with un-released or under development features:
 * http://xmage.today/

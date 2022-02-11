@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -25,6 +24,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.NissaWhoShakesTheWorldEmblem;
 import mage.game.events.GameEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
@@ -51,7 +51,7 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Whenever you tap a Forest for mana, add an additional {G}.
         this.addAbility(new NissaWhoShakesTheWorldTriggeredAbility());
@@ -87,15 +87,8 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
 
 class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forest");
-
-    static {
-        filter.add(SubType.FOREST.getPredicate());
-    }
-
     NissaWhoShakesTheWorldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), false);
-        this.usesStack = false;
     }
 
     private NissaWhoShakesTheWorldTriggeredAbility(final NissaWhoShakesTheWorldTriggeredAbility ability) {
@@ -109,8 +102,11 @@ class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.hasSubtype(SubType.FOREST, game);
     }
 
     @Override

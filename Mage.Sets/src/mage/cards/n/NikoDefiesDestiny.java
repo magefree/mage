@@ -55,7 +55,7 @@ public final class NikoDefiesDestiny extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — You gain 2 life for each foretold card you own in exile.
         sagaAbility.addChapterEffect(
@@ -110,7 +110,6 @@ enum NikoDefiesDestinyValue implements DynamicValue {
         Cards cardsForetoldInExileZones = new CardsImpl();
         FilterCard filter = new FilterCard();
         filter.add(new OwnerIdPredicate(controller.getId()));
-        filter.add(new AbilityPredicate(ForetellAbility.class));
         for (ExileZone exile : exileZones) {
             for (Card card : exile.getCards(filter, game)) {
                 // verify that the card is actually Foretold

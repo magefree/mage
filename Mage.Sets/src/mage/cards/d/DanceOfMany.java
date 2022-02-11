@@ -19,7 +19,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,7 +37,7 @@ public final class DanceOfMany extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public DanceOfMany(UUID ownerId, CardSetInfo setInfo) {
@@ -94,8 +93,8 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanent());
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanents());
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice Dance of Many");
                 sacrificeEffect.setTargetPointer(new FixedTarget(sourceObject, game));
                 LeavesBattlefieldTriggeredAbility triggerAbility = new LeavesBattlefieldTriggeredAbility(sacrificeEffect, false);

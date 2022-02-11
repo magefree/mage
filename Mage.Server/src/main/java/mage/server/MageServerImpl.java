@@ -34,8 +34,8 @@ import mage.server.util.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.unbescape.html.HtmlEscape;
 
 import javax.management.timer.Timer;
 import java.security.SecureRandom;
@@ -83,15 +83,17 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean emailAuthToken(String sessionId, String email) throws MageException {
         if (!managerFactory.configSettings().isAuthenticationActivated()) {
-            sendErrorMessageToClient(sessionId, "Registration is disabled by the server config");
+            sendErrorMessageToClient(sessionId, Session.REGISTRATION_DISABLED_MESSAGE);
             return false;
         }
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.getInstance().getByEmail(email);
         if (authorizedUser == null) {
             sendErrorMessageToClient(sessionId, "No user was found with the email address " + email);
             logger.info("Auth token is requested for " + email + " but there's no such user in DB");
             return false;
         }
+
         String authToken = generateAuthToken();
         activeAuthTokens.put(email, authToken);
         String subject = "XMage Password Reset Auth Token";
@@ -113,23 +115,31 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException {
         if (!managerFactory.configSettings().isAuthenticationActivated()) {
-            sendErrorMessageToClient(sessionId, "Registration is disabled by the server config");
+            sendErrorMessageToClient(sessionId, Session.REGISTRATION_DISABLED_MESSAGE);
             return false;
         }
+
+        // multi-step reset:
+        // - send auth token
+        // - check auth token to confirm reset
+
         String storedAuthToken = activeAuthTokens.get(email);
         if (storedAuthToken == null || !storedAuthToken.equals(authToken)) {
             sendErrorMessageToClient(sessionId, "Invalid auth token");
             logger.info("Invalid auth token " + authToken + " is sent for " + email);
             return false;
         }
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.getInstance().getByEmail(email);
         if (authorizedUser == null) {
-            sendErrorMessageToClient(sessionId, "The user is no longer in the DB");
+            sendErrorMessageToClient(sessionId, "User with that email doesn't exists");
             logger.info("Auth token is valid, but the user with email address " + email + " is no longer in the DB");
             return false;
         }
-        AuthorizedUserRepository.instance.remove(authorizedUser.getName());
-        AuthorizedUserRepository.instance.add(authorizedUser.getName(), password, email);
+
+        // recreate user with new password
+        AuthorizedUserRepository.getInstance().remove(authorizedUser.getName());
+        AuthorizedUserRepository.getInstance().add(authorizedUser.getName(), password, email);
         activeAuthTokens.remove(email);
         return true;
     }
@@ -200,12 +210,14 @@ public class MageServerImpl implements MageServer {
                         return null;
                     }
                     User user = _user.get();
+
                     // check if user can create another table
                     int notStartedTables = user.getNumberOfNotStartedTables();
                     if (notStartedTables > 1) {
                         user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
                         throw new MageException("No message");
                     }
+
                     // check AI players max
                     String maxAiOpponents = managerFactory.configSettings().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
@@ -221,6 +233,7 @@ public class MageServerImpl implements MageServer {
                             throw new MageException("No message");
                         }
                     }
+
                     // check if the user satisfies the quitRatio requirement.
                     int quitRatio = options.getQuitRatio();
                     if (quitRatio < user.getTourneyQuitRatio()) {
@@ -229,6 +242,7 @@ public class MageServerImpl implements MageServer {
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
+
                     // check if the user satisfies the minimumRating requirement.
                     int minimumRating = options.getMinimumRating();
                     int userRating;
@@ -475,7 +489,7 @@ public class MageServerImpl implements MageServer {
     public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
         try {
             callExecutor.execute(
-                    () -> managerFactory.chatManager().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
+                    () -> managerFactory.chatManager().broadcast(chatId, userName, HtmlEscape.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
             );
         } catch (Exception ex) {
             handleException(ex);
@@ -1038,7 +1052,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void setActivation(final String sessionId, final String userName, boolean active) throws MageException {
         execute("setActivation", sessionId, () -> {
-            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+            AuthorizedUser authorizedUser = AuthorizedUserRepository.getInstance().getByName(userName);
             Optional<User> u = managerFactory.userManager().getUserByName(userName);
             if (u.isPresent()) {
                 User user = u.get();

@@ -33,11 +33,11 @@ public final class ArniSlaysTheTroll extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Target creature you control fights up to one target creature you don't control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
-                new Effects(new FightTargetsEffect(
+                new Effects(new FightTargetsEffect().setText(
                         "Target creature you control fights up to one target creature you don't control"
                 )), new Targets(
                         new TargetControlledCreaturePermanent(),

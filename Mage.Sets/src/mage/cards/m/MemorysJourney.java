@@ -26,7 +26,7 @@ public final class MemorysJourney extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInTargetPlayersGraveyard(3));
 
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
     }
 
     private MemorysJourney(final MemorysJourney card) {
