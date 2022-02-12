@@ -109,6 +109,7 @@ class ArcaneAdaptationEffect extends ContinuousEffectImpl {
                 }
             }
         }
+        // TODO: Why is this not using the for-in loop like all the others?
         // creature spells you control
         for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
             StackObject stackObject = iterator.next();
