@@ -6,7 +6,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.keyword.FlashAbility;
@@ -61,19 +60,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     public ActivatedAbilityImpl(Zone zone, Effect effect) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
+        this.addEffect(effect);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
-        if (cost != null) {
-            this.addManaCost(cost);
-        }
+        this.addEffect(effect);
+        this.addManaCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
@@ -83,30 +76,18 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 this.addEffect(effect);
             }
         }
-        if (cost != null) {
-            this.addManaCost(cost);
-        }
+        this.addManaCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
-        if (cost != null) {
-            if (cost instanceof PhyrexianManaCost) {
-                this.addManaCost((PhyrexianManaCost) cost);
-            } else {
-                this.addCost(cost);
-            }
-        }
+        this.addEffect(effect);
+        this.addCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
         super(AbilityType.ACTIVATED, zone);
-        if (effect != null) {
-            this.addEffect(effect);
-        }
+        this.addEffect(effect);
         if (costs != null) {
             for (Cost cost : costs) {
                 this.addCost(cost);
@@ -121,15 +102,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 this.addEffect(effect);
             }
         }
-        if (cost != null) {
-            this.addCost(cost);
-        }
+        this.addCost(cost);
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
         super(AbilityType.ACTIVATED, zone);
-        for (Effect effect : effects) {
-            if (effect != null) {
+        if (effects != null) {
+            for (Effect effect : effects) {
                 this.addEffect(effect);
             }
         }

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class SevenTailMentor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("creature or Vehicle");
+    private static final FilterPermanent filter = new FilterControlledPermanent("creature or Vehicle you control");
 
     static {
         filter.add(Predicates.or(

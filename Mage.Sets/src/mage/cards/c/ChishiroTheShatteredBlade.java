@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ModifiedPredicate;
 import mage.game.permanent.token.SpiritRedToken;
@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class ChishiroTheShatteredBlade extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("an Aura or Equipment");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent("modified creature you control");
+    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent("modified creature you control");
 
     static {
         filter.add(Predicates.or(

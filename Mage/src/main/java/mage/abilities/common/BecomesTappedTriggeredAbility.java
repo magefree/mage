@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author jeffwadsworth
@@ -66,6 +67,6 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " becomes tapped, ";
+        return "Whenever " + CardUtil.addArticle(filter.getMessage()) + " becomes tapped, ";
     }
 }

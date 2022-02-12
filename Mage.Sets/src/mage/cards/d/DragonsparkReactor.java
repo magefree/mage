@@ -31,13 +31,16 @@ public final class DragonsparkReactor extends CardImpl {
 
         // Whenever Dragonspark Reactor or another artifact enters the battlefield under your control, put a charge counter on Dragonspark Reactor.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true
         ));
 
         // {4}, Sacrifice Dragonspark Reactor: It deals damage equal to the number of charge counters on it to target player and that much damage to up to one target creature.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(xValue, "it"), new GenericManaCost(4)
+                new DamageTargetEffect(xValue).setText(
+                        "it deals damage equal to the number of charge counters on it to target player " +
+                                "and that much damage to up to one target creature"
+                ), new GenericManaCost(4)
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

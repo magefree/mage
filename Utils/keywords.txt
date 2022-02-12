@@ -12,6 +12,7 @@ Buyback|manaString|
 Cascade|new|
 Changeling|new|
 Cleave|card, manaString|
+Compleated|instance|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|

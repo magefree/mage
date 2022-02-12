@@ -165,6 +165,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Kirin-Touched Orochi", 212, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class));
         cards.add(new SetCardInfo("Kitsune Ace", 22, Rarity.COMMON, mage.cards.k.KitsuneAce.class));
         cards.add(new SetCardInfo("Kodama of the West Tree", 199, Rarity.MYTHIC, mage.cards.k.KodamaOfTheWestTree.class));
+        cards.add(new SetCardInfo("Kotose, the Silent Spider", 351, Rarity.RARE, mage.cards.k.KotoseTheSilentSpider.class));
         cards.add(new SetCardInfo("Kumano Faces Kakkazan", 152, Rarity.UNCOMMON, mage.cards.k.KumanoFacesKakkazan.class));
         cards.add(new SetCardInfo("Kura, the Boundless Sky", 200, Rarity.MYTHIC, mage.cards.k.KuraTheBoundlessSky.class));
         cards.add(new SetCardInfo("Kyodai, Soul of Kamigawa", 23, Rarity.RARE, mage.cards.k.KyodaiSoulOfKamigawa.class));
@@ -172,6 +173,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Lethal Exploit", 107, Rarity.COMMON, mage.cards.l.LethalExploit.class));
         cards.add(new SetCardInfo("Life of Toshiro Umezawa", 108, Rarity.UNCOMMON, mage.cards.l.LifeOfToshiroUmezawa.class));
         cards.add(new SetCardInfo("Light the Way", 24, Rarity.COMMON, mage.cards.l.LightTheWay.class));
+        cards.add(new SetCardInfo("Light-Paws, Emperor's Voice", 25, Rarity.RARE, mage.cards.l.LightPawsEmperorsVoice.class));
         cards.add(new SetCardInfo("Likeness of the Seeker", 172, Rarity.UNCOMMON, mage.cards.l.LikenessOfTheSeeker.class));
         cards.add(new SetCardInfo("Lion Sash", 26, Rarity.RARE, mage.cards.l.LionSash.class));
         cards.add(new SetCardInfo("Living Breakthrough", 57, Rarity.RARE, mage.cards.l.LivingBreakthrough.class));
@@ -180,10 +182,12 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Malicious Malfunction", 110, Rarity.UNCOMMON, mage.cards.m.MaliciousMalfunction.class));
         cards.add(new SetCardInfo("March of Burgeoning Life", 201, Rarity.RARE, mage.cards.m.MarchOfBurgeoningLife.class));
         cards.add(new SetCardInfo("March of Otherworldly Light", 28, Rarity.RARE, mage.cards.m.MarchOfOtherworldlyLight.class));
+        cards.add(new SetCardInfo("March of Reckless Joy", 154, Rarity.RARE, mage.cards.m.MarchOfRecklessJoy.class));
         cards.add(new SetCardInfo("March of Swirling Mist", 61, Rarity.RARE, mage.cards.m.MarchOfSwirlingMist.class));
         cards.add(new SetCardInfo("March of Wretched Sorrow", 111, Rarity.RARE, mage.cards.m.MarchOfWretchedSorrow.class));
         cards.add(new SetCardInfo("Master's Rebuke", 202, Rarity.COMMON, mage.cards.m.MastersRebuke.class));
         cards.add(new SetCardInfo("Mech Hangar", 270, Rarity.UNCOMMON, mage.cards.m.MechHangar.class));
+        cards.add(new SetCardInfo("Mechtitan Core", 249, Rarity.RARE, mage.cards.m.MechtitanCore.class));
         cards.add(new SetCardInfo("Memory of Toshiro", 108, Rarity.UNCOMMON, mage.cards.m.MemoryOfToshiro.class));
         cards.add(new SetCardInfo("Michiko's Reign of Truth", 29, Rarity.UNCOMMON, mage.cards.m.MichikosReignOfTruth.class));
         cards.add(new SetCardInfo("Mindlink Mech", 62, Rarity.RARE, mage.cards.m.MindlinkMech.class));
@@ -201,6 +205,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mukotai Soulripper", 113, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class));
         cards.add(new SetCardInfo("Nameless Conqueror", 162, Rarity.COMMON, mage.cards.n.NamelessConqueror.class));
         cards.add(new SetCardInfo("Naomi, Pillar of Order", 229, Rarity.UNCOMMON, mage.cards.n.NaomiPillarOfOrder.class));
+        cards.add(new SetCardInfo("Nashi, Moon Sage's Scion", 114, Rarity.MYTHIC, mage.cards.n.NashiMoonSagesScion.class));
         cards.add(new SetCardInfo("Network Disruptor", 71, Rarity.COMMON, mage.cards.n.NetworkDisruptor.class));
         cards.add(new SetCardInfo("Network Terminal", 251, Rarity.COMMON, mage.cards.n.NetworkTerminal.class));
         cards.add(new SetCardInfo("Nezumi Bladeblesser", 115, Rarity.COMMON, mage.cards.n.NezumiBladeblesser.class));
@@ -219,6 +224,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Patchwork Automaton", 254, Rarity.UNCOMMON, mage.cards.p.PatchworkAutomaton.class));
         cards.add(new SetCardInfo("Peerless Samurai", 156, Rarity.COMMON, mage.cards.p.PeerlessSamurai.class));
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Incision", 72, Rarity.COMMON, mage.cards.p.PlanarIncision.class));
         cards.add(new SetCardInfo("Portrait of Michiko", 29, Rarity.UNCOMMON, mage.cards.p.PortraitOfMichiko.class));
         cards.add(new SetCardInfo("Prodigy's Prototype", 231, Rarity.UNCOMMON, mage.cards.p.ProdigysPrototype.class));
         cards.add(new SetCardInfo("Prosperous Thief", 73, Rarity.UNCOMMON, mage.cards.p.ProsperousThief.class));
@@ -279,6 +285,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Tameshi, Reality Architect", 82, Rarity.RARE, mage.cards.t.TameshiRealityArchitect.class));
         cards.add(new SetCardInfo("Tamiyo's Compleation", 83, Rarity.COMMON, mage.cards.t.TamiyosCompleation.class));
         cards.add(new SetCardInfo("Tamiyo's Safekeeping", 211, Rarity.COMMON, mage.cards.t.TamiyosSafekeeping.class));
+        cards.add(new SetCardInfo("Tamiyo, Compleated Sage", 238, Rarity.MYTHIC, mage.cards.t.TamiyoCompleatedSage.class));
         cards.add(new SetCardInfo("Tatsunari, Toad Rider", 123, Rarity.RARE, mage.cards.t.TatsunariToadRider.class));
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));

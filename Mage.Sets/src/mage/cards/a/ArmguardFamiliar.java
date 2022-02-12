@@ -37,6 +37,7 @@ public final class ArmguardFamiliar extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new WardAbility(new GenericManaCost(2)), AttachmentType.EQUIPMENT
         ).setText("and has ward {2}"));
+        this.addAbility(ability);
 
         // Reconfigure {4}
         this.addAbility(new ReconfigureAbility("{4}"));

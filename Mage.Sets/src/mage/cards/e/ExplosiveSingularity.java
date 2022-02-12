@@ -30,7 +30,7 @@ public final class ExplosiveSingularity extends CardImpl {
         // As an additional cost to cast this spell, you may tap any number of untapped creatures you control. This spell costs {1} less to cast for each creature tapped this way.
         this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES, false
-        )).setText("as an additional cost to cast this spell, you may tap any number of untapped creatures you control. " +
+        )).setText("you may tap any number of untapped creatures you control. " +
                 "This spell costs {1} less to cast for each creature tapped this way"));
         Ability ability = new SimpleStaticAbility(Zone.ALL, new ExplosiveSingularityEffect());
         ability.setRuleVisible(false);

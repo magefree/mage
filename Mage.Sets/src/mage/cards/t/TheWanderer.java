@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PreventAllNonCombatDamageToAllEffect;
@@ -40,7 +39,7 @@ public final class TheWanderer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Prevent all noncombat damage that would be dealt to you and other permanents you control.
         this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(

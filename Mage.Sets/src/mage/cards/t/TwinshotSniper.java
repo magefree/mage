@@ -31,12 +31,12 @@ public final class TwinshotSniper extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Twinshot Sniper enters the battlefield, it deals 2 damage to any target.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // Channel — {1}{R}, Discard Twinshot Sniper: It deals 2 damage to any target.
-        ability = new ChannelAbility("{1}{R}", new DamageTargetEffect(2));
+        ability = new ChannelAbility("{1}{R}", new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
