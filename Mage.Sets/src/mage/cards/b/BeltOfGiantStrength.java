@@ -51,10 +51,28 @@ enum BeltOfGiantStrengthAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Permanent permanent = game.getPermanent(ability.getFirstTarget());
-        if (permanent == null) {
-            return;
+        if (game.inCheckPlayableState()) {
+            int maxPower = 0;
+            for (UUID permId : CardUtil.getAllPossibleTargets(ability, game)) {
+                Permanent permanent = game.getPermanent(permId);
+                if (permanent != null) {
+                    int power = permanent.getPower().getValue();
+                    if (power > maxPower) {
+                        maxPower = power;
+                    }
+                }
+            }
+            if (maxPower > 0) {
+                CardUtil.reduceCost(ability, maxPower);
+            }
+        } else {
+            Permanent permanent = game.getPermanent(ability.getFirstTarget());
+            if (permanent != null) {
+                int power = permanent.getPower().getValue();
+                if (power > 0) {
+                    CardUtil.reduceCost(ability, power);
+                }
+            }
         }
-        CardUtil.reduceCost(ability, Integer.max(permanent.getPower().getValue(), 0));
     }
 }

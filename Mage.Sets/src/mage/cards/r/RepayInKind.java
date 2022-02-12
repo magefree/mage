@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -11,15 +9,16 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RepayInKind extends CardImpl {
 
     public RepayInKind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
 
         // Each player's life total becomes the lowest life total among all players.
         this.getSpellAbility().addEffect(new RepayInKindEffect());
@@ -48,17 +47,19 @@ class RepayInKindEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int lowestLife = game.getPlayer(source.getControllerId()).getLife();
-        for (Player playerid : game.getPlayers().values()) {
-            if (playerid != null) {
-                if (lowestLife > playerid.getLife()) {
-                    lowestLife = playerid.getLife();
-                }
-            }  
-        }
-        for (Player playerId : game.getPlayers().values()) {
-            if (playerId != null) {
-                playerId.setLife(lowestLife, game, source);
+        int lowestLife = game
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .mapToInt(Player::getLife)
+                .min()
+                .orElse(0);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.setLife(lowestLife, game, source);
             }
         }
         return true;
@@ -68,5 +69,4 @@ class RepayInKindEffect extends OneShotEffect {
     public RepayInKindEffect copy() {
         return new RepayInKindEffect(this);
     }
-
 }

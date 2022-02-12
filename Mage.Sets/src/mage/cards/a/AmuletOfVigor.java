@@ -63,7 +63,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null && permanent.isTapped() && permanent.isControlledBy(this.getControllerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(
-                        new FixedTarget(event.getTargetId())
+                        new FixedTarget(event.getTargetId(), game)
                                 .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(permanent))
                 );
             }

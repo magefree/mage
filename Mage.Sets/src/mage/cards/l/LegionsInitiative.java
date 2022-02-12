@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -97,8 +96,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || sourceObject == null) {
+        if (player == null) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -108,7 +106,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
         ).stream().filter(Objects::nonNull).forEach(cards::add);
         return player.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 

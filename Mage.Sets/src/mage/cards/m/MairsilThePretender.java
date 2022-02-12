@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -12,14 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -29,9 +20,12 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class MairsilThePretender extends CardImpl {
@@ -90,27 +84,27 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCardInPlay, "Exile a card from your hand? (No = from graveyard)", source, game)) {
-                Target target = new TargetCardInHand(0, 1, filter);
-                controller.choose(outcome, target, source.getSourceId(), game);
-                Card card = controller.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.EXILED, source, game);
-                    card.addCounters(CounterType.CAGE.createInstance(), source.getControllerId(), source, game);
-                }
-            } else {
-                Target target = new TargetCardInYourGraveyard(0, 1, filter);
-                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
-                Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.EXILED, source, game);
-                    card.addCounters(CounterType.CAGE.createInstance(), source.getControllerId(), source, game);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        // Outcome.Detriment - AI must exile from grave only, not hand
+        Target target;
+        if (controller.chooseUse(Outcome.Detriment, "Exile a card from your hand? (No = from graveyard)", source, game)) {
+            // from hand
+            target = new TargetCardInHand(0, 1, filter);
+            controller.choose(outcome, target, source.getSourceId(), game);
+        } else {
+            // from graveyard
+            target = new TargetCardInYourGraveyard(0, 1, filter);
+            target.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+        }
+
+        Card card = controller.getHand().get(target.getFirstTarget(), game);
+        if (card != null) {
+            CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
+        }
+        return true;
     }
 }
 

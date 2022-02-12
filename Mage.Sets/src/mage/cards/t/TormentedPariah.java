@@ -21,7 +21,6 @@ public final class TormentedPariah extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.r.RampagingWerewolf.class;
 
         this.power = new MageInt(3);

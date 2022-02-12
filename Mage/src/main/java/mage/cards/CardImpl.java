@@ -43,7 +43,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean transformable;
     protected Class<?> secondSideCardClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
@@ -121,7 +120,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        transformable = card.transformable;
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
@@ -305,9 +303,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        for (Ability subAbility : ability.getSubAbilities()) {
-            abilities.add(subAbility);
-        }
+        abilities.addAll(ability.getSubAbilities());
 
         // dynamic check: you can't add ability to the PermanentCard, use permanent.addAbility(a, source, game) instead
         // reason: triggered abilities are not processing here
@@ -620,12 +616,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
-        return this.transformable;
-    }
-
-    @Override
-    public void setTransformable(boolean transformable) {
-        this.transformable = transformable;
+        return this.secondSideCardClazz != null || this.nightCard;
     }
 
     @Override
@@ -688,6 +679,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return addCounters(counter, source.getControllerId(), source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return addCounters(counter, playerAddingCounters, source, game, null, true);
     }
@@ -704,12 +700,21 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+        return addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, Integer.MAX_VALUE);
+    }
+
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, playerAddingCounters, counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);
         addingAllEvent.setFlag(isEffect);
         if (!game.replaceEvent(addingAllEvent)) {
-            int amount = addingAllEvent.getAmount();
+            int amount;
+            if (maxCounters < Integer.MAX_VALUE) {
+                amount = Integer.min(addingAllEvent.getAmount(), maxCounters - this.getCounters(game).getCount(counter.getName()));
+            } else {
+                amount = addingAllEvent.getAmount();
+            }
             boolean isEffectFlag = addingAllEvent.getFlag();
             int finalAmount = amount;
             for (int i = 0; i < amount; i++) {

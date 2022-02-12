@@ -7,6 +7,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -26,7 +27,11 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect);
+        this(effect, filter, setTargetPointer, false);
+    }
+
+    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
@@ -50,14 +55,16 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(event.getPlayerId())
-                && filter.match(game.getPermanentOrLKIBattlefield(event.getTargetId()), getSourceId(), getControllerId(), game)) {
-            if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-            }
-            return true;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (!isControlledBy(event.getPlayerId()) || permanent == null
+                || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("sacrificedPermanent", permanent);
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 
     @Override

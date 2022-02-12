@@ -1,9 +1,15 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -275,5 +281,101 @@ public final class Theros extends ExpansionSet {
         cards.add(new SetCardInfo("Witches' Eye", 222, Rarity.UNCOMMON, mage.cards.w.WitchesEye.class));
         cards.add(new SetCardInfo("Xenagos, the Reveler", 209, Rarity.MYTHIC, mage.cards.x.XenagosTheReveler.class));
         cards.add(new SetCardInfo("Yoked Ox", 37, Rarity.COMMON, mage.cards.y.YokedOx.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new TherosCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/ths.html
+// Using USA collation for common/uncommon, rare collation inferred from other sets
+class TherosCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "88", "2", "167", "64", "165", "94", "130", "5", "55", "109", "127", "171", "8", "217", "59", "118", "161", "16", "165", "96", "119", "164", "212", "10", "106", "64", "125", "161", "5", "171", "169", "130", "56", "1", "164", "109", "119", "57", "89", "8", "106", "212", "129", "55", "2", "95", "169", "216", "118", "10", "88", "56", "167", "94", "129", "16", "89", "59", "216", "125", "217", "1", "95", "57", "96", "127");
+    private final CardRun commonB = new CardRun(true, "178", "80", "72", "29", "221", "115", "176", "84", "27", "74", "218", "179", "114", "28", "70", "81", "177", "87", "73", "29", "117", "176", "30", "84", "74", "221", "178", "115", "29", "70", "73", "179", "80", "111", "30", "72", "87", "178", "117", "218", "27", "74", "81", "115", "177", "28", "84", "73", "111", "176", "218", "27", "72", "117", "114", "80", "177", "30", "70", "221", "111", "81", "179", "28", "87", "114");
+    private final CardRun commonC1 = new CardRun(true, "155", "104", "21", "52", "100", "137", "158", "103", "19", "48", "133", "24", "156", "148", "45", "140", "22", "105", "50", "174", "139", "23", "158", "48", "67", "21", "134", "157", "103", "50", "155", "19", "140", "104", "44", "100", "156", "23", "134", "101", "67", "52", "148", "157", "139", "24", "105", "44", "137", "174", "101", "22", "229", "45", "133");
+    private final CardRun commonC2 = new CardRun(true, "229", "39", "77", "36", "146", "183", "38", "145", "37", "182", "147", "41", "181", "78", "34", "146", "39", "31", "79", "36", "141", "43", "183", "77", "182", "145", "78", "41", "38", "34", "147", "31", "181", "79", "43", "39", "141", "183", "37", "78", "38", "36", "147", "146", "181", "77", "43", "31", "145", "34", "37", "79", "41", "182", "141");
+    private final CardRun uncommonA = new CardRun(true, "97", "194", "25", "154", "142", "61", "108", "189", "35", "160", "136", "99", "195", "47", "213", "25", "159", "93", "189", "49", "142", "15", "192", "151", "97", "51", "211", "35", "185", "131", "58", "163", "99", "194", "18", "61", "128", "211", "154", "93", "190", "47", "132", "15", "163", "213", "185", "102", "136", "159", "192", "26", "131", "108", "51", "190", "151", "18", "128", "102", "49", "195", "160", "26", "132", "58");
+    private final CardRun uncommonB = new CardRun(true, "7", "123", "222", "71", "92", "168", "13", "116", "203", "202", "83", "62", "11", "121", "219", "86", "69", "184", "197", "6", "123", "204", "71", "202", "82", "7", "121", "170", "68", "215", "86", "197", "168", "6", "222", "92", "113", "62", "170", "219", "13", "83", "175", "68", "116", "204", "11", "215", "203", "69", "113", "184", "82", "175");
+    private final CardRun rare = new CardRun(false, "3", "4", "12", "14", "20", "32", "33", "40", "42", "46", "54", "60", "63", "65", "75", "76", "90", "98", "107", "110", "112", "120", "122", "124", "126", "138", "144", "149", "150", "152", "153", "162", "173", "180", "186", "191", "193", "198", "199", "200", "201", "205", "206", "207", "210", "214", "220", "223", "224", "225", "226", "227", "228", "3", "4", "12", "14", "20", "32", "33", "40", "42", "46", "54", "60", "63", "65", "75", "76", "90", "98", "107", "110", "112", "120", "122", "124", "126", "138", "144", "149", "150", "152", "153", "162", "173", "180", "186", "191", "193", "198", "199", "200", "201", "205", "206", "207", "210", "214", "220", "223", "224", "225", "226", "227", "228", "9", "17", "53", "66", "85", "91", "135", "143", "166", "172", "187", "188", "196", "208", "209");
+    private final CardRun land = new CardRun(false, "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244", "245", "246", "247", "248", "249");
+
+    private final BoosterStructure AABBC1C1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAAABBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBBBC2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC2, commonC2
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure L1 = new BoosterStructure(land);
+
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBBBC2C2,
+            AAAABBBBC2C2
+    );
+    // In order for equal numbers of each uncommon to exist, the average booster must contain:
+    // 1.65 A uncommons (33 / 20)
+    // 1.35 B uncommons (27 / 20)
+    // These numbers are the same for all sets with 60 uncommons in asymmetrical A/B print runs
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB,
+            ABB, ABB, ABB, ABB, ABB, ABB, ABB
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }

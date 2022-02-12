@@ -27,7 +27,6 @@ public final class GhostlyCastigator extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.color.setBlue(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Flying

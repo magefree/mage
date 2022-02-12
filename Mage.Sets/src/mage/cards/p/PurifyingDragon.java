@@ -62,7 +62,7 @@ class PurifyingDragonEffect extends OneShotEffect {
     PurifyingDragonEffect() {
         super(Outcome.Benefit);
         staticText = "it deals 1 damage to target creature defending player controls. " +
-                "If that creature is a Zombie, {this} deals 2 damage to that creature instead";
+                "If that creature is a Zombie, {this} deals 2 damage to it instead";
     }
 
     private PurifyingDragonEffect(final PurifyingDragonEffect effect) {

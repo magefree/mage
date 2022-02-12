@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -39,7 +40,9 @@ public final class CurseOfThePiercedHeart extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
-        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new CurseOfThePiercedHeartEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CurseOfThePiercedHeartEffect(), TargetController.ENCHANTED, false
+        ));
     }
 
     private CurseOfThePiercedHeart(final CurseOfThePiercedHeart card) {

@@ -30,7 +30,7 @@ public final class ArcboundTracker extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Modular 2
         this.addAbility(new ModularAbility(this, 2));

@@ -64,7 +64,7 @@ public final class MartialImpetus extends CardImpl {
     }
 }
 
-enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

@@ -1,28 +1,28 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.permanent.token.GoblinToken;
-import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  */
 public final class GoblinRabblemaster extends CardImpl {
@@ -47,8 +47,7 @@ public final class GoblinRabblemaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Goblin creatures you control attack each turn if able.
-        Effect effect = new AttacksIfAbleAllEffect(otherGoblinFilter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(otherGoblinFilter, Duration.WhileOnBattlefield, true)));
 
         // At the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinToken(true)), TargetController.YOU, false));

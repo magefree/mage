@@ -30,7 +30,7 @@ public final class ZelyonSword extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {3}, {tap}: Target creature gets +2/+0 for as long as Zelyon Sword remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(2, 0, Duration.Custom), SourceTappedCondition.instance,
+            new BoostTargetEffect(2, 0, Duration.Custom), SourceTappedCondition.TAPPED,
             "target creature gets +2/+0 for as long as {this} remains tapped"), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

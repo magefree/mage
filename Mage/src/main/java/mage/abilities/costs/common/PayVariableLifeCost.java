@@ -19,7 +19,7 @@ public class PayVariableLifeCost extends VariableCostImpl {
     public PayVariableLifeCost(boolean useAsAdditionalCost) {
         super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
                 "life to pay");
-        this.text = new StringBuilder(useAsAdditionalCost ? "as an additional cost to cast this spell, pay " : "Pay ")
+        this.text = new StringBuilder(useAsAdditionalCost ? "As an additional cost to cast this spell, pay " : "Pay ")
                 .append(xText).append(' ').append("life").toString();
     }
 

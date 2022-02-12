@@ -817,7 +817,7 @@ public class User {
             authorizedUser.chatLockedUntil = this.chatLockedUntil;
             authorizedUser.lockedUntil = this.lockedUntil;
             authorizedUser.active = this.active;
-            AuthorizedUserRepository.instance.update(authorizedUser);
+            AuthorizedUserRepository.getInstance().update(authorizedUser);
         }
     }
 }

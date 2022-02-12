@@ -64,7 +64,7 @@ public final class CragSaurian extends CardImpl {
             Player newController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (newController != null && controller != null && !controller.equals(newController)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

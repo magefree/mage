@@ -27,6 +27,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     private final String prefixText;
     private final List<TableEntry> resultsTable = new ArrayList<>();
     private final DynamicValue modifier;
+    private final int toIgnore;
 
     public RollDieWithResultTableEffect() {
         this(20);
@@ -37,14 +38,15 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     }
 
     public RollDieWithResultTableEffect(int sides, String prefixText) {
-        this(sides, prefixText, StaticValue.get(0));
+        this(sides, prefixText, StaticValue.get(0), 0);
     }
 
-    public RollDieWithResultTableEffect(int sides, String prefixText, DynamicValue modifier) {
+    public RollDieWithResultTableEffect(int sides, String prefixText, DynamicValue modifier, int toIgnore) {
         super(Outcome.Benefit);
         this.sides = sides;
         this.prefixText = prefixText;
         this.modifier = modifier;
+        this.toIgnore = toIgnore;
     }
 
     protected RollDieWithResultTableEffect(final RollDieWithResultTableEffect effect) {
@@ -55,6 +57,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
             this.resultsTable.add(tableEntry.copy());
         }
         this.modifier = effect.modifier.copy();
+        this.toIgnore = effect.toIgnore;
     }
 
     @Override
@@ -68,7 +71,9 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(outcome, source, game, sides) + modifier.calculate(game, source, this);
+        int result = player.rollDice(
+                outcome, source, game, sides, 1 + toIgnore, toIgnore
+        ).get(0) + modifier.calculate(game, source, this);
         this.applyResult(result, game, source);
         return true;
     }

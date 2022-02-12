@@ -101,7 +101,7 @@ class EtrataTheSilencerTriggeredAbility extends TriggeredAbilityImpl {
                 + "and put a hit counter on that card. "
                 + "That player loses the game if they own three or more "
                 + "exiled cards with hit counters on them. "
-                + "{this}'s owner shuffles {this} into their library";
+                + "{this}'s owner shuffles {this} into their library.";
     }
 }
 

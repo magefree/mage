@@ -75,7 +75,7 @@ class EvilTwinCopyApplier extends CopyApplier {
 
 }
 
-class EvilTwinPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class EvilTwinPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

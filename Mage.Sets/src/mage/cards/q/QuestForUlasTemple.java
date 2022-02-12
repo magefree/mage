@@ -1,47 +1,59 @@
-
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class QuestForUlasTemple extends CardImpl {
+
+    private static final FilterCard filter
+            = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card");
+
+    static {
+        filter.add(Predicates.or(
+                SubType.KRAKEN.getPredicate(),
+                SubType.LEVIATHAN.getPredicate(),
+                SubType.OCTOPUS.getPredicate(),
+                SubType.SERPENT.getPredicate()
+        ));
+    }
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, 3);
 
     public QuestForUlasTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new QuestForUlasTempleEffect(), TargetController.YOU, true
+        ));
 
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
-        FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card");
-        filter.add(Predicates.or(
-                SubType.KRAKEN.getPredicate(),
-                SubType.LEVIATHAN.getPredicate(),
-                SubType.OCTOPUS.getPredicate(),
-                SubType.SERPENT.getPredicate()));
-        this.addAbility(new QuestForUlasTempleTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter)));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter),
+                TargetController.ANY, condition, false
+        ));
     }
 
     private QuestForUlasTemple(final QuestForUlasTemple card) {
@@ -56,12 +68,13 @@ public final class QuestForUlasTemple extends CardImpl {
 
 class QuestForUlasTempleEffect extends OneShotEffect {
 
-    public QuestForUlasTempleEffect() {
+    QuestForUlasTempleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on {this}";
+        this.staticText = "you may look at the top card of your library. " +
+                "If it's a creature card, you may reveal it and put a quest counter on {this}";
     }
 
-    public QuestForUlasTempleEffect(final QuestForUlasTempleEffect effect) {
+    private QuestForUlasTempleEffect(final QuestForUlasTempleEffect effect) {
         super(effect);
     }
 
@@ -73,54 +86,27 @@ class QuestForUlasTempleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null && controller != null && controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.lookAtCards(sourcePermanent.getName(), cards, game);
-            if (card.isCreature(game)) {
-                if (controller.chooseUse(Outcome.DrawCard, "Reveal the top card of your library?", source, game)) {
-                    controller.revealCards(sourcePermanent.getName(), cards, game);
-                    Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
-                    if (questForUlasTemple != null) {
-                        questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), source.getControllerId(), source, game);
-                        return true;
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
-
-    public QuestForUlasTempleTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, true);
-    }
-
-    public QuestForUlasTempleTriggeredAbility(final QuestForUlasTempleTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuestForUlasTempleTriggeredAbility copy() {
-        return new QuestForUlasTempleTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent quest = game.getPermanent(super.getSourceId());
-        return quest != null && quest.getCounters(game).getCount(CounterType.QUEST) >= 3;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each end step, if there are three or more quest counters on {this}, " ;
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        controller.lookAtCards("Top of library", card, game);
+        if (!card.isCreature(game) || !controller.chooseUse(
+                Outcome.DrawCard, "Reveal the top card of your library?", source, game
+        )) {
+            return true;
+        }
+        controller.revealCards(source, new CardsImpl(card), game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            permanent.addCounters(
+                    CounterType.QUEST.createInstance(),
+                    source.getControllerId(), source, game
+            );
+        }
+        return true;
     }
 }

@@ -31,7 +31,7 @@ public final class VigilantMartyr extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell that targets an enchantment");
 
     static {
-        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
     }
 
     public VigilantMartyr(UUID ownerId, CardSetInfo setInfo) {

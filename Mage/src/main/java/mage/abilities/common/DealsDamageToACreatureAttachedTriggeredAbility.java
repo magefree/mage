@@ -51,7 +51,7 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
                     && attachment.isAttachedTo(event.getSourceId())) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                         effect.setValue("damage", event.getAmount());
                     }
                 }

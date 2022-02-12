@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public final class DranaLiberatorOfMalakir extends CardImpl {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("each attacking creature you control");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

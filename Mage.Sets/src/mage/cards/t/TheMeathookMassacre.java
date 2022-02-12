@@ -43,7 +43,7 @@ public final class TheMeathookMassacre extends CardImpl {
         // Whenever a creature an opponent controls dies, you gain 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new GainLifeEffect(1), false,
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         ));
     }
 

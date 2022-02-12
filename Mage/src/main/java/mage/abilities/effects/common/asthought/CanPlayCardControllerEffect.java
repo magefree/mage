@@ -24,22 +24,25 @@ import java.util.UUID;
 public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
 
     private final MageObjectReference mor;
+    private final UUID playerId;
     private final Condition condition;
 
     public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration) {
-        this(game, cardId, cardZCC, duration, null);
+        this(game, cardId, cardZCC, duration, null, null);
     }
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration, Condition condition) {
+    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration, UUID playerId, Condition condition) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         this.staticText = "You may play those card";
         this.mor = new MageObjectReference(cardId, cardZCC, game);
+        this.playerId = playerId;
         this.condition = condition;
     }
 
     public CanPlayCardControllerEffect(final CanPlayCardControllerEffect effect) {
         super(effect);
         this.mor = effect.mor;
+        this.playerId = effect.playerId;
         this.condition = effect.condition;
     }
 
@@ -65,6 +68,7 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
         }
 
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId); // affected to all card's parts
-        return mor.refersTo(objectIdToCast, game) && source.isControlledBy(affectedControllerId);
+        return mor.refersTo(objectIdToCast, game)
+                && (playerId == null ? source.isControlledBy(affectedControllerId) : playerId.equals(affectedControllerId));
     }
 }

@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterBlockingCreature;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -20,8 +19,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author TheElk801
  */
 public final class FightingChance extends CardImpl {
-
-    private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
 
     public FightingChance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
@@ -63,7 +60,7 @@ class FightingChanceEffect extends OneShotEffect {
             for (UUID blocker : game.getCombat().getBlockers()) {
                 if (player.flipCoin(source, game, true)) {
                     PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-                    effect.setTargetPointer(new FixedTarget(blocker));
+                    effect.setTargetPointer(new FixedTarget(blocker, game));
                     game.addEffect(effect, source);
                 }
             }

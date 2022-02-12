@@ -34,7 +34,9 @@ public final class PathToTheFestival extends CardImpl {
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ScryEffect(1), PathToTheFestivalCondition.instance,
-                "Then if there are three or more basic land types among lands you control, scry 1"
+                "Then if there are three or more basic land types among lands you control, scry 1 " +
+                        "<i>(Look at the top card of your library. " +
+                        "You may put that card on the bottom of your library.)</i>"
         ));
         this.getSpellAbility().addHint(DomainHint.instance);
 

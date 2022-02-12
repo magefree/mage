@@ -1,8 +1,16 @@
 package mage.sets;
 
+import mage.abilities.Ability;
+import mage.abilities.keyword.PartnerWithAbility;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -20,7 +28,6 @@ public final class Battlebond extends ExpansionSet {
         this.blockName = "Battlebond";
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.hasPartnerMechanic = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
@@ -287,4 +294,85 @@ public final class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Zndrsplt, Eye of Wisdom", 5, Rarity.RARE, mage.cards.z.ZndrspltEyeOfWisdom.class));
     }
 
+    @Override
+    public List<Card> tryBooster() {
+        List<Card> booster = new ArrayList<>();
+        boolean partnerAllowed = true;
+        List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
+        for (int i = 0; i < numBoosterUncommon; i++) {
+            while (true) {
+                addToBooster(booster, uncommons);
+                int check = addMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
+                if (check == 1) {
+                    break;
+                }
+                if (check == 2) {
+                    partnerAllowed = false;
+                    //Be sure to account for the added card
+                    if (i != numBoosterUncommon - 1) {
+                        i += 1;
+                    }
+                    break;
+                }
+            }
+        }
+
+        List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
+        for (int i = 0; i < numBoosterCommon; i++) {
+            addToBooster(booster, commons);
+        }
+
+        List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
+        List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
+        for (int i = 0; i < numBoosterRare; i++) {
+            List<CardInfo> cards = (checkMythic() ? mythics : rares);
+            while (true) {
+                addToBooster(booster, cards);
+                int check = addMissingPartner(booster, partnerAllowed, -1, 1);
+                if (check == 1) {
+                    break;
+                }
+                if (check == 2) {
+                    partnerAllowed = false;
+                    break;
+                }
+            }
+        }
+
+        List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
+        for (int i = 0; i < numBoosterLands; i++) {
+            addToBooster(booster, basicLands);
+        }
+
+        return booster;
+    }
+
+    private int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
+
+        Card sourceCard = booster.get(booster.size() - 1);
+        for (Ability ability : sourceCard.getAbilities()) {
+
+            //Check if fetched card has the PartnerWithAbility
+            if (ability instanceof PartnerWithAbility) {
+                String partnerName = ((PartnerWithAbility) ability).getPartnerName();
+                //Check if the pack already contains a partner pair
+                if (partnerAllowed) {
+                    //Added card always replaces an uncommon card
+                    Card card = CardRepository.instance.findCardWPreferredSet(partnerName, sourceCard.getExpansionSetCode(), false).getCard();
+                    if (i < max) {
+                        booster.add(card);
+                    } else {
+                        booster.set(0, card);
+                    }
+                    //2 return value indicates found partner
+                    return 2;
+                } else {
+                    //If partner already exists, remove card and loop again
+                    booster.remove(booster.size() - 1);
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
 }

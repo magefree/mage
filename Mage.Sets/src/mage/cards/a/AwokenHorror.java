@@ -1,29 +1,30 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class AwokenHorror extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Horror creatures");
+
+    static {
+        filter.add(Predicates.not(SubType.HORROR.getPredicate()));
+    }
+
     public AwokenHorror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.KRAKEN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);
@@ -33,7 +34,7 @@ public final class AwokenHorror extends CardImpl {
         this.nightCard = true;
 
         // When this creature transforms into Awoken Horrow, return all non-Horror creatures to their owners' hands.
-        this.addAbility(new AwokenHorrorAbility());
+        this.addAbility(new TransformIntoSourceTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
     }
 
     private AwokenHorror(final AwokenHorror card) {
@@ -43,48 +44,5 @@ public final class AwokenHorror extends CardImpl {
     @Override
     public AwokenHorror copy() {
         return new AwokenHorror(this);
-    }
-}
-
-class AwokenHorrorAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Horror creatures");
-
-    static {
-        filter.add(Predicates.not(SubType.HORROR.getPredicate()));
-    }
-
-    public AwokenHorrorAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandFromBattlefieldAllEffect(filter), false);
-    }
-
-    public AwokenHorrorAbility(final AwokenHorrorAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AwokenHorrorAbility copy() {
-        return new AwokenHorrorAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.";
     }
 }

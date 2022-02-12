@@ -50,7 +50,7 @@ public final class SoaringThoughtThief extends CardImpl {
         // Whenever one or more Rogues you control attack, each opponent mills two cards.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
                 new MillCardsEachPlayerEffect(2, TargetController.OPPONENT), 1, filter
-        ));
+        ).setTriggerPhrase("Whenever one or more Rogues you control attack, "));
     }
 
     private SoaringThoughtThief(final SoaringThoughtThief card) {

@@ -13,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -57,17 +56,11 @@ public final class SoulbladeCorrupter extends CardImpl {
 
 class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
-
-    static {
-        filter2.add(CounterType.P1P1.getPredicate());
-    }
-
     SoulbladeCorrupterTriggeredAbility() {
         super(new GainAbilityTargetEffect(
                 DeathtouchAbility.getInstance(),
                 Duration.EndOfTurn
-        ).setText("that creature gains deathtouch until end of turn"), false, filter2, SetTargetPointer.PERMANENT, false);
+        ).setText("that creature gains deathtouch until end of turn"), false, StaticFilters.FILTER_CREATURE_P1P1, SetTargetPointer.PERMANENT, false);
     }
 
     SoulbladeCorrupterTriggeredAbility(final SoulbladeCorrupterTriggeredAbility effect) {

@@ -13,8 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -23,13 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DuelingCoach extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public DuelingCoach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -48,7 +40,10 @@ public final class DuelingCoach extends CardImpl {
 
         // {4}{W}, {T}: Put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new ManaCostsImpl("{4}{W}")
+                new AddCountersAllEffect(
+                        CounterType.P1P1.createInstance(),
+                        StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1),
+                new ManaCostsImpl("{4}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

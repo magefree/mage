@@ -45,7 +45,7 @@ public final class ReaverDrone extends CardImpl {
         // At the beginning of your upkeep, you lose 1 life unless you control another colorless creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new LoseLifeSourceControllerEffect(1),
-                new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, true)),
+                new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
                 "you lose 1 life unless you control another colorless creature"), TargetController.YOU, false));
     }
 

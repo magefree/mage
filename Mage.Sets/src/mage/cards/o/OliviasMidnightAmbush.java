@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.NightCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.hint.common.NightHint;
+import mage.abilities.hint.common.DayNightHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class OliviasMidnightAmbush extends CardImpl {
         // Target creature gets -2/-2 until end of turn. If it's night, that creature gets -13/-13 until end of turn instead.
         this.getSpellAbility().addEffect(new OliviasMidnightAmbushEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addHint(NightHint.instance);
+        this.getSpellAbility().addHint(DayNightHint.instance);
     }
 
     private OliviasMidnightAmbush(final OliviasMidnightAmbush card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -26,7 +25,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,7 +58,7 @@ public final class TaigamSidisisHand extends CardImpl {
         // {B}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TaigamSidisisHandEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCard("cards from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -103,7 +101,7 @@ class TaigamSidisisHandEffect extends OneShotEffect {
                     if (cost instanceof ExileFromGraveCost) {
                         amount = ((ExileFromGraveCost) cost).getExiledCards().size();
                         ContinuousEffect effect = new BoostTargetEffect(-amount, -amount, Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(source.getTargets().getFirstTarget()));
+                        effect.setTargetPointer(new FixedTarget(source.getTargets().getFirstTarget(), game));
                         game.addEffect(effect, source);
                     }
                 }

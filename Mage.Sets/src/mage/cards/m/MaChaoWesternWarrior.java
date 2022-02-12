@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
@@ -34,7 +34,7 @@ public final class MaChaoWesternWarrior extends CardImpl {
         // Whenever Ma Chao, Western Warrior attacks alone, it can't be blocked this combat.
         Effect effect = new CantBeBlockedSourceEffect(Duration.EndOfCombat);
         effect.setText("it can't be blocked this combat");
-        this.addAbility(new AttacksAloneTriggeredAbility(effect));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }
 
     private MaChaoWesternWarrior(final MaChaoWesternWarrior card) {

@@ -36,7 +36,6 @@ public final class AzorsGateway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
 
         // {1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
@@ -94,7 +93,7 @@ class AzorsGatewayEffect extends OneShotEffect {
                 if (usedCMC.size() > 4) {
                     controller.gainLife(4, game, source);
                     new UntapSourceEffect().apply(game, source);
-                    new TransformSourceEffect(true).apply(game, source);
+                    new TransformSourceEffect().apply(game, source);
                 }
             }
             return true;

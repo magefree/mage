@@ -58,7 +58,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact(game)
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
-            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
+            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId(), game));
             return true;
         }
         return false;

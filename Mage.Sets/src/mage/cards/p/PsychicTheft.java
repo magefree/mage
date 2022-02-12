@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -71,11 +70,10 @@ class PsychicTheftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (opponent == null || sourceObject == null) {
+        if (opponent == null) {
             return false;
         }
-        opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
+        opponent.revealCards(CardUtil.getSourceName(game, source), opponent.getHand(), game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -91,8 +89,7 @@ class PsychicTheftEffect extends OneShotEffect {
         if (chosenCard == null) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        controller.moveCardToExileWithInfo(chosenCard, exileId, sourceObject.getIdName(), source, game, Zone.HAND, true);
+        controller.moveCardToExileWithInfo(chosenCard, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source), source, game, Zone.HAND, true);
 
         CardUtil.makeCardPlayable(game, source, chosenCard, Duration.Custom, false);
 

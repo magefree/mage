@@ -8,7 +8,6 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +28,6 @@ public final class FangbladeBrigand extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.FangbladeEviscerator.class;
 
         // {1}{R}: Fangblade Brigand gets +1/+0 and gains first strike until end of turn.
@@ -42,7 +40,6 @@ public final class FangbladeBrigand extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

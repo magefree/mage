@@ -77,7 +77,7 @@ class LittjaraMirrorlakeEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
-        for (Permanent permanent : effect.getAddedPermanent()) {
+        for (Permanent permanent : effect.getAddedPermanents()) {
             if (permanent == null) {
                 continue;
             }

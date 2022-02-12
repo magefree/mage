@@ -1,8 +1,6 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -11,9 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,9 +58,7 @@ class HellfireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int destroyedCreature = 0;
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("all nonblack creatures");
-            filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
+            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, controller.getId(), game)) {
                 if (creature.destroy(source, game, false)
                         && game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die) {
                     destroyedCreature++;

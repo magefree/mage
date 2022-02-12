@@ -30,7 +30,7 @@ public final class ContrabandKingpin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever an artifact enters the battlefield under your control, scry 1.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1), new FilterControlledArtifactPermanent(), false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new FilterControlledArtifactPermanent(), false, null, true));
     }
 
     private ContrabandKingpin(final ContrabandKingpin card) {

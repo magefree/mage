@@ -77,7 +77,7 @@ class TwinflameCopyEffect extends OneShotEffect {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
                     effect.setTargetPointer(new FixedTarget(creature, game));
                     effect.apply(game, source);
-                    toExile.addAll(effect.getAddedPermanent());
+                    toExile.addAll(effect.getAddedPermanents());
                 }
             }
             ExileTargetEffect exileEffect = new ExileTargetEffect();

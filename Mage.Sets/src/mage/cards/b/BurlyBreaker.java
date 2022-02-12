@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,14 +23,12 @@ public final class BurlyBreaker extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DireStrainDemolisher.class;
 
         // Ward {1}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

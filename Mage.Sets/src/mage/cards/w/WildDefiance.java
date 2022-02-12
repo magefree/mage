@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class WildDefiance extends CardImpl {
 
     public WildDefiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn)));
@@ -63,14 +62,16 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isControlledBy(this.controllerId) && permanent.isCreature(game)) {
+        if (permanent != null 
+                && permanent.isControlledBy(this.controllerId) 
+                && permanent.isCreature(game)) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof Spell) {
                 Card c = (Spell) object;
                 if (c.isInstantOrSorcery(game)) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                         }
                     }
                     return true;

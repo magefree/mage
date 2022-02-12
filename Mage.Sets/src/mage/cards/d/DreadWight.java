@@ -29,7 +29,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -88,11 +87,11 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) { // Dread Wight is the blocker
-            getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+            getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         if (event.getTargetId().equals(getSourceId())) { // Dread Wight is the attacker
-            getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+            getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             return true;
         }
         return false;

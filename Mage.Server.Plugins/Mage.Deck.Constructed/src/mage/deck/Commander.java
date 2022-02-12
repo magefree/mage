@@ -1,9 +1,11 @@
 package mage.deck;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.keyword.CompanionAbility;
+import mage.abilities.keyword.FriendsForeverAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
@@ -14,6 +16,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
 import mage.constants.CardType;
 import mage.filter.FilterMana;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.*;
@@ -40,7 +43,9 @@ public class Commander extends Constructed {
         banned.add("Black Lotus");
         banned.add("Braids, Cabal Minion");
         banned.add("Channel");
+        banned.add("Cleanse");
         banned.add("Coalition Victory");
+        banned.add("Crusade");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Erayo, Soratami Ascendant");
         banned.add("Fastbond");
@@ -49,7 +54,10 @@ public class Commander extends Constructed {
         banned.add("Golos, Tireless Pilgrim");
         banned.add("Griselbrand");
         banned.add("Hullbreacher");
+        banned.add("Imprison");
+        banned.add("Invoke Prejudice");
         banned.add("Iona, Shield of Emeria");
+        banned.add("Jihad");
         banned.add("Karakas");
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
@@ -62,10 +70,12 @@ public class Commander extends Constructed {
         banned.add("Mox Sapphire");
         banned.add("Panoptic Mirror");
         banned.add("Paradox Engine");
+        banned.add("Pradesh Gypsies");
         banned.add("Primeval Titan");
         banned.add("Prophet of Kruphix");
         banned.add("Recurring Nightmare");
         banned.add("Rofellos, Llanowar Emissary");
+        banned.add("Stone-Throwing Devils");
         banned.add("Sundering Titan");
         banned.add("Sway of the Stars");
         banned.add("Sylvan Primordial");
@@ -183,6 +193,26 @@ public class Commander extends Constructed {
         for (Card commander : commanders) {
             commanderNames.add(commander.getName());
         }
+        if (commanders.size() == 2
+                && commanders
+                .stream()
+                .map(MageObject::getAbilities)
+                .filter(abilities -> abilities.contains(PartnerAbility.getInstance()))
+                .count() != 2
+                && commanders
+                .stream()
+                .map(MageObject::getAbilities)
+                .filter(abilities -> abilities.contains(FriendsForeverAbility.getInstance()))
+                .count() != 2
+                && !CardUtil
+                .castStream(commanders.stream().map(MageObject::getAbilities), PartnerWithAbility.class)
+                .map(PartnerWithAbility::getPartnerName)
+                .allMatch(commanderNames::contains)) {
+            for (Card commander : commanders) {
+                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander with invalid Partner (" + commander.getName() + ')', true);
+                valid = false;
+            }
+        }
         for (Card commander : commanders) {
             if (bannedCommander.contains(commander.getName())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
@@ -193,24 +223,9 @@ public class Commander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if (commanders.size() == 2) {
-                if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    if (bannedPartner.contains(commander.getName())) {
-                        addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander Partner banned (" + commander.getName() + ')', true);
-                        valid = false;
-                    }
-                } else {
-                    boolean partnersWith = commander.getAbilities()
-                            .stream()
-                            .filter(PartnerWithAbility.class::isInstance)
-                            .map(PartnerWithAbility.class::cast)
-                            .map(PartnerWithAbility::getPartnerName)
-                            .anyMatch(commanderNames::contains);
-                    if (!partnersWith) {
-                        addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander without Partner (" + commander.getName() + ')', true);
-                        valid = false;
-                    }
-                }
+            if (commanders.size() == 2 && bannedPartner.contains(commander.getName())) {
+                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander Partner banned (" + commander.getName() + ')', true);
+                valid = false;
             }
             ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
         }

@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
@@ -30,7 +29,7 @@ public final class DomriAnarchOfBolas extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // Creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(
@@ -41,7 +40,7 @@ public final class DomriAnarchOfBolas extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DomriAnarchOfBolasEffect(), 1));
 
         // -2: Target creature you control fights target creature you don't control.
-        Ability ability = new LoyaltyAbility(new FightTargetsEffect(), -2);
+        Ability ability = new LoyaltyAbility(new FightTargetsEffect(false), -2);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

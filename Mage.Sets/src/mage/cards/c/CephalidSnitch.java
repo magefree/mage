@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.*;
@@ -65,21 +64,9 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
         return new CephalidSnitchEffect(this);
     }
 
-    public String filterNameAssembler(List<ObjectColor> unsortedColors) {
-        //Order colors properly by WUBRG (skipping black of course) and construct string to be displayed for ability.
-        List<ObjectColor> colors = new ArrayList<>();
-        if(unsortedColors.contains(ObjectColor.WHITE)){
-            colors.add(ObjectColor.WHITE);
-        }
-        if(unsortedColors.contains(ObjectColor.BLUE)){
-            colors.add(ObjectColor.BLUE);
-        }
-        if(unsortedColors.contains(ObjectColor.RED)){
-            colors.add(ObjectColor.RED);
-        }
-        if(unsortedColors.contains(ObjectColor.GREEN)){
-            colors.add(ObjectColor.GREEN);
-        }
+    private static final ObjectColor NONBLACK = new ObjectColor("WURG");
+
+    private static String filterNameAssembler(List<ObjectColor> colors) {
         if (colors.size() == 1) {
             return colors.get(0).getDescription();
         } else if (colors.size() == 2) {
@@ -87,7 +74,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
         } else if (colors.size() == 3) {
             return colors.get(0).getDescription() + ", from " + colors.get(1).getDescription() + " and from " + colors.get(2).getDescription();
         } else if (colors.size() == 4) {
-            return colors.get(0).getDescription() + ", from " + colors.get(1).getDescription() + ", from " + colors.get(2).getDescription() + " and  from " + colors.get(3).getDescription();
+            return colors.get(0).getDescription() + ", from " + colors.get(1).getDescription() + ", from " + colors.get(2).getDescription() + " and from " + colors.get(3).getDescription();
         }
         return "";
     }
@@ -96,29 +83,31 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetCreature != null) {
-
-            //Go through protection abilities and sort out any containing black, then record the colors other than black
-            for(ProtectionAbility a: targetCreature.getAbilities().getProtectionAbilities()) {
-                List<ObjectColor> objectColors = new ArrayList<>();
-                if(a.getColors().contains(ObjectColor.BLACK))
-                    for (ObjectColor o : a.getColors()) {
-                        if (!objectColors.contains(o) && !o.isBlack())
-                            objectColors.add(o);
+            List<Ability> toRemove = new ArrayList<>();
+            //Go through protection abilities and sort out any containing black
+            for (ProtectionAbility a: targetCreature.getAbilities().getProtectionAbilities()) {
+                ObjectColor colors = a.getFromColor();
+                if (colors.isBlack()) {
+                    List<ObjectColor> nonBlackColors = colors.intersection(NONBLACK).getColors();
+                    if (!nonBlackColors.isEmpty()) {
+                        //If the ability is protection from multiple colors, construct a new filter excluding black
+                        FilterCard filter = new FilterCard(filterNameAssembler(nonBlackColors));
+                        if (nonBlackColors.size() == 1)
+                            filter.add(new ColorPredicate(nonBlackColors.get(0)));
+                        else if (nonBlackColors.size() == 2)
+                            filter.add(Predicates.or(new ColorPredicate(nonBlackColors.get(0)), new ColorPredicate(nonBlackColors.get(1))));
+                        else if (nonBlackColors.size() == 3)
+                            filter.add(Predicates.or(new ColorPredicate(nonBlackColors.get(0)), new ColorPredicate(nonBlackColors.get(1)), new ColorPredicate(nonBlackColors.get(2))));
+                        else if (nonBlackColors.size() == 4)
+                            filter.add(Predicates.or(new ColorPredicate(nonBlackColors.get(0)), new ColorPredicate(nonBlackColors.get(1)), new ColorPredicate(nonBlackColors.get(2)), new ColorPredicate(nonBlackColors.get(3))));
+                        a.setFilter(filter);
+                    } else {
+                        //if the ability is just protection from black, remove it from the creature
+                        toRemove.add(a);
                     }
-                //Construct a card filter excluding black
-                if(!objectColors.isEmpty()) {
-                    FilterCard filter = new FilterCard(filterNameAssembler(objectColors));
-                    if (objectColors.size() == 1)
-                        filter.add(new ColorPredicate(objectColors.get(0)));
-                    else if (objectColors.size() == 2)
-                        filter.add(Predicates.or(new ColorPredicate(objectColors.get(0)), new ColorPredicate(objectColors.get(1))));
-                    else if (objectColors.size() == 3)
-                        filter.add(Predicates.or(new ColorPredicate(objectColors.get(0)), new ColorPredicate(objectColors.get(1)), new ColorPredicate(objectColors.get(2))));
-                    else if (objectColors.size() == 4)
-                        filter.add(Predicates.or(new ColorPredicate(objectColors.get(0)), new ColorPredicate(objectColors.get(1)), new ColorPredicate(objectColors.get(2)), new ColorPredicate(objectColors.get(3))));
-                    a.setFilter(filter);
                 }
             }
+            targetCreature.removeAbilities(toRemove, source.getSourceId(), game);
             return true;
         }
         return false;

@@ -1,9 +1,9 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -27,6 +27,8 @@ public final class CennsHeir extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public CennsHeir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add(SubType.KITHKIN);
@@ -35,8 +37,7 @@ public final class CennsHeir extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Cenn's Heir attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.
-        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(count, count, Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
     }
 
     private CennsHeir(final CennsHeir card) {

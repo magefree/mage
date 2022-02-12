@@ -41,7 +41,7 @@ public final class Grief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Grief enters the battlefield, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(

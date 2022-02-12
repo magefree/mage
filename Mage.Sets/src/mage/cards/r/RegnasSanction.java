@@ -10,7 +10,9 @@ import mage.choices.ChooseFriendsAndFoes;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -47,6 +49,12 @@ public final class RegnasSanction extends CardImpl {
 
 class RegnasSanctionEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+    }
+
     RegnasSanctionEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each player, choose friend or foe. "
@@ -67,27 +75,29 @@ class RegnasSanctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
-        if (controller == null) {
-            return false;
-        }
         if (!choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
-        FilterCreaturePermanent filterToTap = new FilterCreaturePermanent();
+        FilterPermanent filterToTap = new FilterCreaturePermanent();
         for (Player player : choice.getFoes()) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature you control");
-            filter.add(TappedPredicate.UNTAPPED);
-            filter.add(new ControllerIdPredicate(player.getId()));
-            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            TargetPermanent target = new TargetPermanent(filter);
+            target.setNotTarget(true);
+            if (game.getBattlefield().contains(filter, source, game, 1)
+                    && player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                 filterToTap.add(Predicates.not(new PermanentIdPredicate(target.getFirstTarget())));
             }
         }
+        choice.getFriends()
+                .stream()
+                .map(MageItem::getId)
+                .map(ControllerIdPredicate::new)
+                .map(Predicates::not)
+                .forEach(filterToTap::add);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game
         )) {
             if (choice.getFriends().stream().map(MageItem::getId).anyMatch(permanent::isControlledBy)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), permanent.getControllerId(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
         }
         return new TapAllEffect(filterToTap).apply(game, source);

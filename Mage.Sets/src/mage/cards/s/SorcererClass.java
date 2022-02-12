@@ -27,6 +27,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -182,7 +183,7 @@ class SorcererClassWatcher extends Watcher {
         if (spell == null || !spell.isInstantOrSorcery(game)) {
             return;
         }
-        spellMap.compute(spell.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        spellMap.compute(spell.getControllerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

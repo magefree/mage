@@ -96,7 +96,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true, 1, true, true);
         effect.setTargetPointer(new FixedTarget(card, game));
         effect.apply(game, source);
-        for (Permanent addedToken : effect.getAddedPermanent()) {
+        for (Permanent addedToken : effect.getAddedPermanents()) {
             Effect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
             new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), false).apply(game, source);
@@ -105,7 +105,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
     }
 }
 
-class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

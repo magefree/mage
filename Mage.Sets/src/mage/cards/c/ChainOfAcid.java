@@ -75,7 +75,7 @@ class ChainOfAcidEffect extends OneShotEffect {
                 Player affectedPlayer = game.getPlayer(permanent.getControllerId());
                 if (affectedPlayer != null) {
                     Effect effect = new DestroyTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(targetId));
+                    effect.setTargetPointer(new FixedTarget(targetId, game));
                     effect.apply(game, source);
                     if (affectedPlayer.chooseUse(Outcome.Copy, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());

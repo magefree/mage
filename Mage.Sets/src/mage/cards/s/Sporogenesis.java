@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -52,7 +51,7 @@ public final class Sporogenesis extends CardImpl {
         this.addAbility(new SporogenesisTriggeredAbility());
 
         // When Sporogenesis leaves the battlefield, remove all fungus counters from all creatures.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SporogenesisRemoveCountersEffect(), false)); 
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SporogenesisRemoveCountersEffect(), false));
     }
 
     private Sporogenesis(final Sporogenesis card) {
@@ -94,7 +93,7 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.isCreature(game)
                     && permanent.getCounters(game).containsKey(CounterType.FUNGUS)) {
                 Effect effect = this.getEffects().get(0);
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 return true;
             }
         }

@@ -36,7 +36,6 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.ItlimocCradleOfTheSun.class;
 
         // When Growing Rites of Itlimoc enters the battlefield, look at the top four cards of your library.
@@ -47,7 +46,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
         // At the beginning of your end step, if you control four or more creatures, transform Growing Rites of Itlimoc.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_A_CREATURE, ComparisonType.MORE_THAN, 3),
                 "At the beginning of your end step, if you control four or more creatures, transform {this}"));
     }

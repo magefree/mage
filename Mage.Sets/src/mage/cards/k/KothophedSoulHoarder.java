@@ -48,9 +48,9 @@ public final class KothophedSoulHoarder extends CardImpl {
 
         // Whenever a permanent owned by another player is put into the graveyard from the battlefield, you draw one card and lose 1 life.
         Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("you draw one card");
+        effect.setText("you draw a card");
         Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, filter,
-                "Whenever a permanent owned by another player is put into the graveyard from the battlefield, ", false);
+                "Whenever a permanent owned by another player is put into a graveyard from the battlefield, ", false);
         effect = new LoseLifeSourceControllerEffect(1);
         effect.setText("and lose 1 life");
         ability.addEffect(effect);

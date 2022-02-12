@@ -83,12 +83,8 @@ class DarkImpostorExileTargetEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null) {
-            return player.moveCards(permanent, Zone.EXILED, source, game);
-        }
         return player.moveCardsToExile(
-                permanent, source, game, true, CardUtil.getExileZoneId(game, source), sourcePermanent.getIdName()
+                permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 }

@@ -43,7 +43,7 @@ public final class CarnifexDemon extends CardImpl {
 
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
-                "{this} enters the battlefield with two -1/-1 counters on it"
+                "with two -1/-1 counters on it"
         ));
 
         Ability ability = new SimpleActivatedAbility(

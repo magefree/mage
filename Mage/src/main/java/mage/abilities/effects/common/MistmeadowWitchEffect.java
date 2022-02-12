@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -29,11 +28,10 @@ public class MistmeadowWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || permanent == null || sourceObject == null) {
+        if (player == null || permanent == null) {
             return false;
         }
-        player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), sourceObject.getName());
+        player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(Zone.BATTLEFIELD, "return the exiled card to the battlefield under its owner's control")), source);
         return true;
     }

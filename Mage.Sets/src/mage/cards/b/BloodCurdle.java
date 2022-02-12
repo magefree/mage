@@ -45,7 +45,8 @@ class BloodCurdleEffect extends OneShotEffect {
 
     BloodCurdleEffect() {
         super(Outcome.Benefit);
-        staticText = "Put a menace counter on a creature you control";
+        staticText = "Put a menace counter on a creature you control. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>";
     }
 
     private BloodCurdleEffect(final BloodCurdleEffect effect) {

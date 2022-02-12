@@ -97,7 +97,7 @@ class ParoxysmEffect extends OneShotEffect {
                             creatureAttachedTo.destroy(source, game, false);
                         } else {
                             ContinuousEffect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-                            effect.setTargetPointer(new FixedTarget(creatureAttachedTo.getId()));
+                            effect.setTargetPointer(new FixedTarget(creatureAttachedTo.getId(), game));
                             game.addEffect(effect, source);
                         }
                         return true;

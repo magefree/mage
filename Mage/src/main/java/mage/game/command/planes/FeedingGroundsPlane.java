@@ -20,7 +20,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -36,7 +36,6 @@ import mage.watchers.common.PlanarRollWatcher;
  */
 public class FeedingGroundsPlane extends Plane {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
     private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's mana value";
 
     public FeedingGroundsPlane() {
@@ -49,7 +48,7 @@ public class FeedingGroundsPlane extends Plane {
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
         Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
-        Target chaosTarget = new TargetCreaturePermanent(1, 1, filter, false);
+        Target chaosTarget = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_A_CREATURE, false);
 
         List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);

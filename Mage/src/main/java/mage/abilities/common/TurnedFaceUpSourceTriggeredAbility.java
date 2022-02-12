@@ -52,7 +52,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(this.getSourceId())) {
             if (setTargetPointer) {
                 for (Effect effect: getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
             }
             return true;

@@ -27,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class EaterOfHope extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent destroyFilter = new FilterControlledCreaturePermanent("two other creatures");
+    private static final FilterControlledCreaturePermanent destroyFilter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         destroyFilter.add(AnotherPredicate.instance);

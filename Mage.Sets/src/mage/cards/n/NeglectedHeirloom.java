@@ -28,7 +28,6 @@ public final class NeglectedHeirloom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AshmouthBlade.class;
 
         // Equipped creature gets +1/+1.
@@ -56,7 +55,7 @@ public final class NeglectedHeirloom extends CardImpl {
 class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
 
     public NeglectedHeirloomTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(), false);
     }
 
     public NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {

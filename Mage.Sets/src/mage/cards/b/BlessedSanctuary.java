@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.UnicornToken;
@@ -18,7 +18,6 @@ import java.util.UUID;
 
 public class BlessedSanctuary extends CardImpl {
 
-    private static final FilterPermanent filterYourCreatures = new FilterControlledCreaturePermanent("creatures you control");
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
@@ -30,7 +29,7 @@ public class BlessedSanctuary extends CardImpl {
 
         //Prevent all noncombat damage that would be dealt to you and creatures you control.
         this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(
-                Duration.WhileOnBattlefield, filterYourCreatures, true)));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, true)));
 
         //Whenever a nontoken creature enters the battlefield under your control, create a 2/2 white Unicorn creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,

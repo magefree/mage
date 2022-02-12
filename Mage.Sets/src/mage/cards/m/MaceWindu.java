@@ -26,7 +26,8 @@ public final class MaceWindu extends CardImpl {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature you don't control");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.getPermanentFilter().add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.getSpellFilter().add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {

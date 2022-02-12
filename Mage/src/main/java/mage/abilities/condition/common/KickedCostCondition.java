@@ -1,5 +1,6 @@
 package mage.abilities.condition.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.KickerAbility;
@@ -21,9 +22,9 @@ public class KickedCostCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject instanceof Card) {
+            for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
                 if (ability instanceof KickerAbility) {
                     return ((KickerAbility) ability).isKicked(game, source, kickerCostText);
                 }

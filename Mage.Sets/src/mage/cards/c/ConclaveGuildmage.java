@@ -36,8 +36,8 @@ public final class ConclaveGuildmage extends CardImpl {
                 new GainAbilityControlledEffect(
                         TrampleAbility.getInstance(),
                         Duration.EndOfTurn,
-                        StaticFilters.FILTER_CONTROLLED_CREATURES
-                ), new ManaCostsImpl("{G}")
+                        StaticFilters.FILTER_PERMANENT_CREATURES
+                ), new ManaCostsImpl<>("{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

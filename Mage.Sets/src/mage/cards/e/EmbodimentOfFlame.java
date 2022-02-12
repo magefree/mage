@@ -34,7 +34,6 @@ public final class EmbodimentOfFlame extends CardImpl {
         this.toughness = new MageInt(3);
         this.color.setRed(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever a spell you control deals damage, put a flame counter on Embodiment of Flame.
         this.addAbility(new EmbodimentOfFlameTriggeredAbility());
@@ -83,7 +82,7 @@ class EmbodimentOfFlameTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-        return spell != null && isControlledBy(spell.getControllerId());
+        return spell != null && isControlledBy(spell.getControllerId()) && spell.isInstantOrSorcery(game);
     }
 
     @Override

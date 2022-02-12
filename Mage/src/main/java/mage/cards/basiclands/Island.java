@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 public class Island extends BasicLand {
     public Island(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new BlueManaAbility());
-        this.frameColor = ObjectColor.BLUE;
+        this.frameColor.setBlue(true);
     }
 
     public Island(Island land) {

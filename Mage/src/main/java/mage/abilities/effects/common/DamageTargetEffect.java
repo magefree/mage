@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -159,10 +160,21 @@ public class DamageTargetEffect extends OneShotEffect {
             sb.append(targetDescription);
         } else {
             if (!mode.getTargets().isEmpty()) {
-                String targetName = mode.getTargets().get(0).getTargetName();
+                Target firstTarget = mode.getTargets().get(0);
+                String targetName = firstTarget.getTargetName();
                 if (targetName.contains("any")) {
                     sb.append(targetName);
                 } else {
+                    if (firstTarget.getMinNumberOfTargets() == 0) {
+                        int maxTargets = firstTarget.getMaxNumberOfTargets();
+                        if (maxTargets == Integer.MAX_VALUE) {
+                            sb.append("any number of ");
+                        } else {
+                            sb.append("up to ");
+                            sb.append(CardUtil.numberToText(maxTargets));
+                            sb.append(' ');
+                        }
+                    }
                     sb.append("target ").append(targetName);
                 }
             } else {

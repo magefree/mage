@@ -60,7 +60,7 @@ public final class SkullportMerchant extends CardImpl {
     }
 }
 
-enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,7 +50,7 @@ public final class RogueClass extends CardImpl {
         // Creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new GainAbilityControlledEffect(
-                        new MenaceAbility(), Duration.WhileOnBattlefield,
+                        new MenaceAbility(false), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURES
                 ), 2
         )));
@@ -103,11 +102,10 @@ class RogueClassExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        MageObject sourceObject = source.getSourcePermanentOrLKI(game);
         controller.moveCardsToExile(
                 card, source, game, false,
                 CardUtil.getExileZoneId(game, source),
-                sourceObject != null ? sourceObject.getName() : null
+                CardUtil.getSourceName(game, source)
         );
         card.setFaceDown(true, game);
         game.addEffect(new RogueClassLookEffect().setTargetPointer(new FixedTarget(card, game)), source);

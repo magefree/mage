@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -9,11 +8,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -22,13 +19,9 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public final class RockSlide extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creatures without flying");
+    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creatures without flying");
 
     static {
-        filter.add(Predicates.or(
-                AttackingPredicate.instance,
-                BlockingPredicate.instance
-        ));
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

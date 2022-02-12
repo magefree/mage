@@ -11,6 +11,10 @@ import java.util.Arrays;
  */
 public final class CustomIllusionToken extends TokenImpl {
 
+    public CustomIllusionToken() {
+        this(0);
+    }
+
     public CustomIllusionToken(int xValue) {
         super("Illusion", "X/X blue Illusion creature token");
         cardType.add(CardType.CREATURE);

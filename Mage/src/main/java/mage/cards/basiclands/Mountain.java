@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 public class Mountain extends BasicLand {
     public Mountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new RedManaAbility());
-        this.frameColor = ObjectColor.RED;
+        this.frameColor.setRed(true);
     }
 
     public Mountain(Mountain land) {

@@ -88,7 +88,7 @@ class RippleEffect extends OneShotEffect {
             if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)) {
                 return true; //fizzle
             }
-            // reveal to/**/p cards from library
+            // reveal top cards from library
             Cards cards = new CardsImpl();
             cards.addAll(player.getLibrary().getTopCards(game, rippleNumber));
             player.revealCards(sourceObject.getIdName(), cards, game);
@@ -104,7 +104,10 @@ class RippleEffect extends OneShotEffect {
             while (player.canRespond() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
-                    player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
                     cards.remove(card);
                 }
                 target1.clearChosen();

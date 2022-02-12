@@ -4,7 +4,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -29,6 +28,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static mage.constants.Outcome.Benefit;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -54,7 +54,7 @@ public final class CalixDestinysHand extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALIX);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
@@ -105,21 +105,24 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (source.getTargets().size() > 2) {
             return false;
         }
         source.getTargets();
         Permanent theirPerm = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         Permanent myPerm = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (player == null || theirPerm == null || myPerm == null) {
+        if (controller == null 
+                || theirPerm == null 
+                || myPerm == null) {
             return false;
         }
         MageObjectReference theirMor = new MageObjectReference(
                 theirPerm.getId(), theirPerm.getZoneChangeCounter(game) + 1, game
         );
         MageObjectReference myMor = new MageObjectReference(myPerm, game);
-        player.moveCards(theirPerm, Zone.EXILED, source, game);
+        UUID exileId = CardUtil.getExileZoneId(myPerm.toString(), game);
+        controller.moveCardsToExile(theirPerm, source, game, true, exileId, myPerm.getIdName());
         game.addDelayedTriggeredAbility(new CalixDestinysHandDelayedTriggeredAbility(theirMor, myMor), source);
         return true;
     }

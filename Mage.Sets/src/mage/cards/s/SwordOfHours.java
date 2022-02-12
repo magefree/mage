@@ -75,7 +75,7 @@ class SwordOfHoursEffect extends OneShotEffect {
         }
         int result = player.rollDice(outcome, source, game, 12);
         int damage = (Integer) getValue("damage");
-        if (result != 12 && damage <= result) {
+        if (result != 12 && damage >= result) {
             return true;
         }
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);

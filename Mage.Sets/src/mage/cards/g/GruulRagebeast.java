@@ -79,7 +79,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
             for (Effect effect : this.getEffects()) {
                 if (effect instanceof GruulRagebeastEffect) {
                     effect.setTargetPointer(
-                            new FixedTarget(event.getTargetId())
+                            new FixedTarget(event.getTargetId(), game)
                                     .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(sourceObject))
                     );
                 }

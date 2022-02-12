@@ -46,10 +46,10 @@ class MuseVortexEffect extends OneShotEffect {
 
     MuseVortexEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top X cards of your library. You may cast an instant or sorcery spell " +
-                "with mana value X or less from among them without paying its mana cost. " +
-                "Then put the exiled instant and sorcery cards that weren't cast this way into your hand " +
-                "and the rest on the bottom of your library in a random order";
+        staticText = "exile the top X cards of your library. You may cast an instant or sorcery spell "
+                + "with mana value X or less from among them without paying its mana cost. "
+                + "Then put the exiled instant and sorcery cards that weren't cast this way into your hand "
+                + "and the rest on the bottom of your library in a random order";
     }
 
     private MuseVortexEffect(final MuseVortexEffect effect) {

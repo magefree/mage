@@ -29,8 +29,6 @@ import java.util.UUID;
  */
 public final class GontiLordOfLuxury extends CardImpl {
 
-    protected static final String VALUE_PREFIX = "ExileZones";
-
     public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
@@ -62,6 +60,8 @@ public final class GontiLordOfLuxury extends CardImpl {
 
 class GontiLordOfLuxuryEffect extends OneShotEffect {
 
+    private static final String VALUE_PREFIX = "ExileZones";
+
     public GontiLordOfLuxuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell";
@@ -81,48 +81,47 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && opponent != null && sourceObject != null) {
-            Cards topCards = new CardsImpl();
-            topCards.addAll(opponent.getLibrary().getTopCards(game, 4));
-            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
-            if (controller.choose(outcome, topCards, target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    topCards.remove(card);
-                    // move card to exile
-                    UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                    card.setFaceDown(true, game);
-                    if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
-                        card.setFaceDown(true, game);
-                        Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
-                        if (exileZones == null) {
-                            exileZones = new HashSet<>();
-                            game.getState().setValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
-                        }
-                        exileZones.add(exileZoneId);
-                        // allow to cast the card
-                        ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                        game.addEffect(effect, source);
-                        // and you may spend mana as though it were mana of any color to cast it
-                        effect = new GontiLordOfLuxurySpendAnyManaEffect();
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                        game.addEffect(effect, source);
-                        // For as long as that card remains exiled, you may look at it
-                        effect = new GontiLordOfLuxuryLookEffect(controller.getId());
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                        game.addEffect(effect, source);
-                    }
-                }
-            }
-            // then put the rest on the bottom of that library in a random order
+        if (controller == null || opponent == null || sourceObject == null) {
+            return false;
+        }
+        Cards topCards = new CardsImpl();
+        topCards.addAll(opponent.getLibrary().getTopCards(game, 4));
+        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
+        controller.choose(outcome, topCards, target, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card == null) {
             controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
             return true;
         }
-
-        return false;
+        topCards.remove(card);
+        // move card to exile
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        card.setFaceDown(true, game);
+        if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
+            card.setFaceDown(true, game);
+            Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(VALUE_PREFIX + source.getSourceId().toString());
+            if (exileZones == null) {
+                exileZones = new HashSet<>();
+                game.getState().setValue(VALUE_PREFIX + source.getSourceId().toString(), exileZones);
+            }
+            exileZones.add(exileZoneId);
+            // allow to cast the card
+            ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
+            game.addEffect(effect, source);
+            // and you may spend mana as though it were mana of any color to cast it
+            effect = new GontiLordOfLuxurySpendAnyManaEffect();
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
+            game.addEffect(effect, source);
+            // For as long as that card remains exiled, you may look at it
+            effect = new GontiLordOfLuxuryLookEffect(controller.getId());
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
+            game.addEffect(effect, source);
+        }
+        // then put the rest on the bottom of that library in a random order
+        controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
+        return true;
     }
-
 }
 
 class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {

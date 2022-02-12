@@ -18,7 +18,7 @@ import mage.target.Target;
  *
  * @author LevelX2
  */
-public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     private final int targetTag;
     private final boolean crossModalCheck;

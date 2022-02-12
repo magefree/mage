@@ -1,5 +1,3 @@
-
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -16,7 +14,6 @@ import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.target.targetpointer.FixedTarget;
@@ -28,10 +25,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class FinestHour extends CardImpl {
 
     public FinestHour(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{W}{U}");
-
-
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
 
         // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());
@@ -76,8 +70,8 @@ class FinestHourAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0), game));
                 }
                 return true;
             }

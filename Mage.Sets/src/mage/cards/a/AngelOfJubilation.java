@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,9 +14,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -27,12 +26,6 @@ import java.util.UUID;
  * @author noxx
  */
 public final class AngelOfJubilation extends CardImpl {
-
-    private static final FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("nonblack creatures");
-
-    static {
-        filterNonBlack.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public AngelOfJubilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{W}");
@@ -44,7 +37,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other nonblack creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterNonBlack, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
         Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());

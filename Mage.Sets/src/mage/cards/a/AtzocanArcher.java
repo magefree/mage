@@ -41,7 +41,8 @@ public final class AtzocanArcher extends CardImpl {
 
         // When Atzocan Archer enters the battlefield, you may have it fight another target creature.
         Effect effect = new FightTargetSourceEffect();
-        effect.setText("you may have it fight another target creature");
+        effect.setText("you may have it fight another target creature. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

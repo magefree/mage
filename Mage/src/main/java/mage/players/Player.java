@@ -127,6 +127,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void exchangeLife(Player player, Ability source, Game game);
 
+    int damage(int damage, Ability source, Game game);
+
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
@@ -177,6 +179,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard);
 
     boolean canPlayCardsFromGraveyard();
+
+    void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
+
+    boolean isDrawsOnOpponentsTurn();
 
     /**
      * Returns alternative casting costs a player can cast spells for
@@ -449,19 +455,15 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean canPlayLand();
 
     /**
-     * Plays a card if possible
+     * Plays a card (play land or cast spell). Works from any zones without timing restriction
      *
      * @param card            the card that can be cast
      * @param game
-     * @param noMana          if it's a spell i can be cast without paying mana
-     * @param ignoreTiming    if it's cast during the resolution of another
-     *                        spell no sorcery or play land timing restriction
-     *                        are checked. For a land it has to be the turn of
-     *                        the player playing that card.
+     * @param noMana          if it's a spell it can be cast without paying mana
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject);
+    boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
      * @param card         the land card to play

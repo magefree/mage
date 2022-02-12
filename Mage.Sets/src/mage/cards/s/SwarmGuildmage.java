@@ -40,7 +40,8 @@ public final class SwarmGuildmage extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-        ).setText("and gain menace until end of turn"));
+        ).setText("and gain menace until end of turn. " +
+                "<i>(They can't be blocked except by two or more creatures.)</i>"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

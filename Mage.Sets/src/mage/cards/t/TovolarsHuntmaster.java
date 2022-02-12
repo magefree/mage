@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,14 +24,12 @@ public final class TovolarsHuntmaster extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TovolarsPackleader.class;
 
         // Whenever Tovolar's Huntmaster enters the battlefield, create two 2/2 green Wolf creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), 2)));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

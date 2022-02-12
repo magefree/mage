@@ -7,7 +7,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public final class AngelicRenewal extends CardImpl {
         // Whenever a creature is put into your graveyard from the battlefield, you may sacrifice Angelic Renewal. If you do, return that card to the battlefield.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DoIfCostPaid(
                 new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false), new SacrificeSourceCost()), false,
-                new FilterCreaturePermanent("a creature"), true, true));
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, true, true));
     }
 
     private AngelicRenewal(final AngelicRenewal card) {

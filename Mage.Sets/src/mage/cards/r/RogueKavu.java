@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class RogueKavu extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Rogue Kavu attacks alone, it gets +2/+0 until end of turn.
-        this.addAbility(new AttacksAloneTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
     }
 
     private RogueKavu(final RogueKavu card) {

@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -35,7 +34,7 @@ public final class DakkonShadowSlayer extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DAKKON);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(0));
+        this.setStartingLoyalty(0);
 
         // Dakkon, Shadow Slayer enters the battlefield with a number of loyalty counters on him equal to the number of lands you control.
         this.addAbility(new EntersBattlefieldAbility(

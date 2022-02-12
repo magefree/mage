@@ -1,16 +1,15 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -28,7 +27,9 @@ public final class CoalhaulerSwine extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new CoalhaulerSwineEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new DamagePlayersEffect(
+                Outcome.Neutral, SavedDamageValue.instance, TargetController.ANY, "it"
+        ), false, false));
     }
 
     private CoalhaulerSwine(final CoalhaulerSwine card) {
@@ -38,34 +39,5 @@ public final class CoalhaulerSwine extends CardImpl {
     @Override
     public CoalhaulerSwine copy() {
         return new CoalhaulerSwine(this);
-    }
-
-    static class CoalhaulerSwineEffect extends OneShotEffect {
-
-        public CoalhaulerSwineEffect() {
-            super(Outcome.Damage);
-            staticText = "it deals that much damage to each player";
-        }
-
-        public CoalhaulerSwineEffect(final CoalhaulerSwineEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public CoalhaulerSwineEffect copy() {
-            return new CoalhaulerSwineEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            for (UUID playerId : game.getPlayers().keySet()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.damage((Integer) this.getValue("damage"), source.getSourceId(), source, game);
-                }
-            }
-            return true;
-        }
-
     }
 }

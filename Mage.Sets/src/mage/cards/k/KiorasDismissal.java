@@ -24,7 +24,7 @@ public final class KiorasDismissal extends CardImpl {
         this.addAbility(new StriveAbility("{U}"));
 
         // Return any number of target enchantments to their owners' hands.
-        this.getSpellAbility().addTarget(new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_ENCHANTMENT_PERMANENT, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_ENCHANTMENT, false));
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return any number of target enchantments to their owners' hands");
         this.getSpellAbility().addEffect(effect);

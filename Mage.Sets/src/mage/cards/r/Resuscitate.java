@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -19,15 +19,13 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class Resuscitate extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-
     public Resuscitate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Until end of turn, creatures you control gain "{1}: Regenerate this creature."
         Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect().setText("Regenerate this creature"), new GenericManaCost(1));
         this.getSpellAbility().addEffect(
-                new GainAbilityAllEffect(ability, Duration.EndOfTurn, filter,
+                new GainAbilityAllEffect(ability, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES,
                         "Until end of turn, creatures you control gain \"{1}: Regenerate this creature.\""
                 )
         );

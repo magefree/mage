@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.MoltenBirthElementalToken;
+import mage.game.permanent.token.RedElementalToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -25,7 +25,7 @@ public final class MoltenBirth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new MoltenBirthElementalToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new RedElementalToken(), 2));
         this.getSpellAbility().addEffect(new MoltenBirthEffect());
     }
 

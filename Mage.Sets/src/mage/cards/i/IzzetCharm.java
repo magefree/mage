@@ -10,8 +10,7 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -21,18 +20,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class IzzetCharm extends CardImpl {
 
-    static private final FilterSpell filter = new FilterSpell("noncreature spell");
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public IzzetCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}");
 
-
         // Choose one — Counter target noncreature spell unless its controller pays {2};
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
-        this.getSpellAbility().getTargets().add(new TargetSpell(filter));
+        this.getSpellAbility().getTargets().add(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
         // or Izzet Charm deals 2 damage to target creature;
         Mode mode = new Mode();

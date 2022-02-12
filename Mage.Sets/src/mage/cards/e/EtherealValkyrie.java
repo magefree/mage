@@ -177,6 +177,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     foretellAbility.activate(game, true);
                     ContinuousEffect effect = foretellAbility.new ForetellAddCostEffect(new MageObjectReference(exileCard, game));
                     game.addEffect(effect, source);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETOLD, exileCard.getId(), null, null));
                     return true;
                 }
             }

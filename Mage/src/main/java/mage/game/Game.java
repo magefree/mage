@@ -316,30 +316,16 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean replaceEvent(GameEvent event, Ability targetAbility);
 
     /**
-     * Creates and fires an damage prevention event
+     * Creates and fires a damage prevention event
      *
      * @param damageEvent     damage event that will be replaced (instanceof
      *                        check will be done)
      * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
-     * @return true prevention was successfull / false prevention was replaced
+     * @return true prevention was successful / false prevention was replaced
      */
     PreventionEffectData preventDamage(GameEvent damageEvent, Ability source, Game game, int amountToPrevent);
-
-    /**
-     * Creates and fires an damage prevention event
-     *
-     * @param event            damage event that will be replaced (instanceof
-     *                         check will be done)
-     * @param source           ability that's the source of the prevention
-     *                         effect
-     * @param game
-     * @param preventAllDamage true if there is no limit to the damage that can
-     *                         be prevented
-     * @return true prevention was successfull / false prevention was replaced
-     */
-    PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
 
     void start(UUID choosingPlayerId);
 
@@ -399,6 +385,26 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
     void ventureIntoDungeon(UUID playerId);
+
+    /**
+     * Tells whether the current game has day or night, defaults to false
+     */
+    boolean hasDayNight();
+
+    /**
+     * Sets game to day or night, sets hasDayNight to true
+     *
+     * @param daytime day is true, night is false
+     */
+    void setDaytime(boolean daytime);
+
+    /**
+     * Returns true if hasDayNight is true and parameter matches current day/night value
+     * Returns false if hasDayNight is false
+     *
+     * @param daytime day is true, night is false
+     */
+    boolean checkDayNight(boolean daytime);
 
     /**
      * Adds a permanent to the battlefield

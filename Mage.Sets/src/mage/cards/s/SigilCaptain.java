@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -25,11 +23,9 @@ import mage.target.targetpointer.FixedTarget;
 public final class SigilCaptain extends CardImpl {
 
     public SigilCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{W}");
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
-
-
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -73,7 +69,7 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
                 && permanent.getPower().getValue() == 1
                 && permanent.getToughness().getValue() == 1) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
             }
             return true;
         }

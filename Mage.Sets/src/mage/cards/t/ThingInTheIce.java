@@ -42,7 +42,6 @@ public final class ThingInTheIce extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AwokenHorror.class;
 
         // Defender
@@ -58,7 +57,7 @@ public final class ThingInTheIce extends CardImpl {
         effect = new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1));
         effect.setText("remove an ice counter from {this}");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, false);
-        effect = new ConditionalOneShotEffect(new TransformSourceEffect(true), new SourceHasCounterCondition(CounterType.ICE, 0, 0),
+        effect = new ConditionalOneShotEffect(new TransformSourceEffect(), new SourceHasCounterCondition(CounterType.ICE, 0, 0),
                 "if there are no ice counters on it, transform it");
         ability.addEffect(effect);
         this.addAbility(ability);

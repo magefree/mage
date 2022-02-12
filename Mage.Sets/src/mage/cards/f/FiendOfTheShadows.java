@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -77,8 +76,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || sourceObject == null || player.getHand().isEmpty()) {
+        if (player == null || player.getHand().isEmpty()) {
             return false;
         }
         TargetCard targetCard = new TargetDiscard(player.getId());
@@ -88,7 +86,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
             return false;
         }
         player.moveCardToExileWithInfo(
-                card, CardUtil.getExileZoneId(game, source), sourceObject.getName(),
+                card, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source),
                 source, game, Zone.HAND, true
         );
         CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false);

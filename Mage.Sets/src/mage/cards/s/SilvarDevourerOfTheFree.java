@@ -42,7 +42,7 @@ public final class SilvarDevourerOfTheFree extends CardImpl {
         this.addAbility(new PartnerWithAbility("Trynn, Champion of Freedom"));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Sacrifice a Human: Put a +1/+1 counter on Silvar, Devourer of the Free. It gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(

@@ -15,6 +15,8 @@ public class DuelCommander extends Commander {
         banned.add("Cavern of Souls");
         banned.add("Channel");
         banned.add("Chrome Mox");
+        banned.add("Cleanse");
+        banned.add("Crusade");
         banned.add("Deflecting Swat");
         banned.add("Dig Through Time");
         banned.add("Eidolon of the Great Revel");
@@ -32,12 +34,16 @@ public class DuelCommander extends Commander {
         banned.add("High Tide");
         banned.add("Humility");
         banned.add("Imperial Seal");
+        banned.add("Imprison");
+        banned.add("Invoke Prejudice");
         banned.add("Jeweled Lotus");
+        banned.add("Jihad");
         banned.add("Karakas");
         banned.add("Library of Alexandria");
         banned.add("Lion's Eye Diamond");
+        banned.add("Lutri, The Spellchaser");
         banned.add("Loyal Retainers");
-        banned.add("Lutri, the Spellchaser");
+        banned.add("Maddening Hex");
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
@@ -54,11 +60,13 @@ public class DuelCommander extends Commander {
         banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
         banned.add("Polymorph");
+        banned.add("Pradesh Gypsies");
         banned.add("Price of Progress");
         banned.add("Protean Hulk");
         banned.add("Scapeshift");
         banned.add("Sensei's Divining Top");
         banned.add("Sol Ring");
+        banned.add("Stone-Throwing Devils");
         banned.add("Strip Mine");
         banned.add("Temporal Manipulation");
         banned.add("Thassa's Oracle");
@@ -77,6 +85,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Akiri, Line-Slinger");
         bannedCommander.add("Arahbo, Roar of the World");
         bannedCommander.add("Ardenn, Intrepid Archaeologist");
+        bannedCommander.add("Asmoranomardicadaistinaculdacar");
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
@@ -90,8 +99,9 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Jeska, Thrice Reborn");
         bannedCommander.add("Keleth, Sunmane Familiar");
         bannedCommander.add("Krark, the Thumbless");
+        bannedCommander.add("Kraum, Ludevic's Opus");
+        bannedCommander.add("Livio, Oathsworn Sentinel");
         bannedCommander.add("Ludevic, Necro-Alchemist");
-        bannedCommander.add("Marath, Will of the Wild");
         bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Omnath, Locus of Creation");
@@ -101,11 +111,11 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Rograkh, Son of Rohgahh");
         bannedCommander.add("Tasigur, the Golden Fang");
-        bannedCommander.add("Teferi, Temporal Archmage");
         bannedCommander.add("Thrasios, Triton Hero");
         bannedCommander.add("Tymna, the Weaver");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
+        bannedCommander.add("Winota, Joiner of Forces");
         bannedCommander.add("Yuriko, the Tiger's Shadow");
         bannedCommander.add("Zurgo Bellstriker");
     }

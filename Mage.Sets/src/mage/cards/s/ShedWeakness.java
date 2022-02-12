@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -71,7 +70,7 @@ class MayRemoveM1M1CouterTargetEffect extends OneShotEffect {
         if (target.getCounters(game).getCount(CounterType.M1M1) > 0) {
             if (controller.chooseUse(outcome, "Remove a -1/-1 counter from " + target.getIdName() + "?", source, game)) {
                 Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance());
-                effect.setTargetPointer(new FixedTarget(target.getId()));
+                effect.setTargetPointer(new FixedTarget(target.getId(), game));
                 effect.apply(game, source);
             }
         }
@@ -84,4 +83,3 @@ class MayRemoveM1M1CouterTargetEffect extends OneShotEffect {
         return new MayRemoveM1M1CouterTargetEffect(this);
     }
 }
-

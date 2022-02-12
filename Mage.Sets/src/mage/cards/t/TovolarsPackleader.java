@@ -45,7 +45,6 @@ public final class TovolarsPackleader extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Whenever Tovolar's Packleader enters the battlefield or attacks, create two 2/2 green Wolf creature tokens.
@@ -54,7 +53,7 @@ public final class TovolarsPackleader extends CardImpl {
         ));
 
         // {2}{G}{G}: Another target Wolf or Werewolf you control fights target creature you don't control.
-        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect(
+        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect().setText(
                 "another target Wolf or Werewolf you control fights target creature you don't control"
         ), new ManaCostsImpl<>("{2}{G}{G}"));
         ability.addTarget(new TargetPermanent(filter));

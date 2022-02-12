@@ -33,7 +33,6 @@ public final class DelverOfSecrets extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.InsectileAberration.class;
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
@@ -73,25 +72,25 @@ class DelverOfSecretsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().getFromTop(game);
-                if(card == null){
-                    return false;
-                }
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.lookAtCards(sourcePermanent.getName(), cards, game);
-                if (player.chooseUse(Outcome.DrawCard, "Reveal the top card of your library?", source, game)) {
-                    player.revealCards(sourcePermanent.getName(), cards, game);
-                    if (filter.match(card, game)) {
-                        return new TransformSourceEffect(true, true).apply(game, source);
-                    }
-                }
-
-            }
-            return true;
+        if (player == null || sourcePermanent == null) {
+            return false;
         }
-        return false;
+        if (player.getLibrary().hasCards()) {
+            Card card = player.getLibrary().getFromTop(game);
+            if(card == null){
+                return false;
+            }
+            Cards cards = new CardsImpl();
+            cards.add(card);
+            player.lookAtCards(sourcePermanent.getName(), cards, game);
+            if (player.chooseUse(Outcome.DrawCard, "Reveal the top card of your library?", source, game)) {
+                player.revealCards(sourcePermanent.getName(), cards, game);
+                if (filter.match(card, game)) {
+                    return new TransformSourceEffect().apply(game, source);
+                }
+            }
+
+        }
+        return true;
     }
 }

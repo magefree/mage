@@ -33,7 +33,6 @@ public final class SmolderingEgg extends CardImpl {
         this.subtype.add(SubType.EGG);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AshmouthDragon.class;
 
         // Defender
@@ -42,7 +41,7 @@ public final class SmolderingEgg extends CardImpl {
         // Whenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
         this.addAbility(new TransformAbility());
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SmolderingEggEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+                new SmolderingEggEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true
         ));
     }
 
@@ -92,7 +91,7 @@ class SmolderingEggEffect extends OneShotEffect {
             return true;
         }
         permanent.removeCounters(CounterType.EMBER.createInstance(counters), source, game);
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 }

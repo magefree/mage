@@ -17,7 +17,7 @@ import mage.players.Player;
 public class ExileSourceFromGraveCost extends CostImpl {
 
     public ExileSourceFromGraveCost() {
-        this.text = "Exile {this} from your graveyard";
+        this.text = "exile {this} from your graveyard";
     }
 
     public ExileSourceFromGraveCost(ExileSourceFromGraveCost cost) {

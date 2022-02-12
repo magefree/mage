@@ -38,15 +38,13 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AbilityResolvedWatcher watcher = game.getState().getWatcher(AbilityResolvedWatcher.class);
-        if (watcher != null && watcher.getResolutionCount(game, source) == resolutionNumber) {
-            if (effect instanceof OneShotEffect) {
-                return effect.apply(game, source);
-            } else {
-                game.addEffect((ContinuousEffect) effect, source);
-                return true;
-            }
+        if (AbilityResolvedWatcher.getResolutionCount(game, source) != resolutionNumber) {
+            return true;
         }
+        if (effect instanceof OneShotEffect) {
+            return effect.apply(game, source);
+        }
+        game.addEffect((ContinuousEffect) effect, source);
         return true;
     }
 }

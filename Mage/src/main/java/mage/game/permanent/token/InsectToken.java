@@ -24,7 +24,7 @@ public final class InsectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("M10", "MM2", "SOI", "ZNR");
+        availableImageSetCodes = Arrays.asList("M10", "MM2", "SOI", "ZNR", "VOW");
     }
 
     public InsectToken(final InsectToken token) {

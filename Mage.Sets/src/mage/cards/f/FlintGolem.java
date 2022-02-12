@@ -2,17 +2,12 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -26,8 +21,10 @@ public final class FlintGolem extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Flint Golem becomes blocked, defending player puts the top three cards of their library into their graveyard.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new FlintGolemEffect(), false));
+        // Whenever Flint Golem becomes blocked, defending player mills three cards
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(
+                new MillCardsTargetEffect(3).setText("defending player mills three cards"),
+                false, true));
     }
 
     private FlintGolem(final FlintGolem card) {
@@ -37,35 +34,5 @@ public final class FlintGolem extends CardImpl {
     @Override
     public FlintGolem copy() {
         return new FlintGolem(this);
-    }
-}
-
-class FlintGolemEffect extends OneShotEffect {
-
-    public FlintGolemEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "defending player mills three cards";
-    }
-
-    public FlintGolemEffect(final FlintGolemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FlintGolemEffect copy() {
-        return new FlintGolemEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent blockingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (blockingCreature != null) {
-            Player opponent = game.getPlayer(blockingCreature.getControllerId());
-            if (opponent != null) {
-                opponent.millCards(3, source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -28,10 +27,9 @@ public final class ArlinnTheMoonsFury extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Nightbound

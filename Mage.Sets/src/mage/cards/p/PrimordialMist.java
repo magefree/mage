@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -98,12 +97,13 @@ class PrimordialMistCost extends CostImpl {
                     if (sourcePermanent != null) {
                         Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                         Card targetCard = game.getCard(target.getFirstTarget());
-                        if (targetPermanent != null && targetCard != null) {
+                        if (targetPermanent != null
+                                && targetCard != null) {
                             String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
                             controller.moveCardsToExile(targetPermanent, source, game, true, source.getSourceId(), exileName);
                             targetPermanent.setFaceDown(false, game);
-                            ContinuousEffect effect = new PrimordialMistCastFromExileEffect();
-                            effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
+                            PrimordialMistCastFromExileEffect effect = new PrimordialMistCastFromExileEffect();
+                            effect.setTargetPointer(new FixedTarget(targetCard.getId()));
                             game.addEffect(effect, ability);
                             this.setPaid();
                         }
@@ -141,6 +141,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
-                && (game.getCard(getTargetPointer().getFirst(game, source)) != null);
+                && (game.getCard(targetPointer.getFirst(game, source)) != null)
+                && objectId == targetPointer.getFirst(game, source);
     }
 }

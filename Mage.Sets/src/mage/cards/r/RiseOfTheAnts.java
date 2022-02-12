@@ -7,7 +7,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.RiseOfTheAntsToken;
+import mage.game.permanent.token.RiseOfTheAntsInsectToken;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class RiseOfTheAnts extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Create two 3/3 green Insect creature tokens. You gain 2 life.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfTheAntsToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfTheAntsInsectToken(), 2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("."));
 
         // Flashback {6}{G}{G}

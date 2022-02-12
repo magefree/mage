@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,14 +22,12 @@ public final class TirelessHauler extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DireStrainBrawler.class;
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

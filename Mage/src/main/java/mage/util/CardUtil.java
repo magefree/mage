@@ -11,13 +11,18 @@ import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.cards.*;
 import mage.constants.*;
+import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -48,6 +53,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author nantuko
@@ -855,20 +861,43 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(int power, int toughness) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
-        String signedP = String.format("%1$+d", power);
-        String signedT = String.format("%1$+d", toughness);
-        if (signedP.equals("+0") && signedT.startsWith("-")) {
-            signedP = "-0";
+        String p = power.toString();
+        String t = toughness.toString();
+        if (!p.startsWith("-")) {
+            p = (t.startsWith("-") && p.equals("0") ? "-" : "+") + p;
         }
-        if (signedT.equals("+0") && signedP.startsWith("-")) {
-            signedT = "-0";
+        if (!t.startsWith("-")) {
+            t = (p.startsWith("-") && t.equals("0") ? "-" : "+") + t;
         }
+        return p + "/" + t;
+    }
 
-        return signedP + "/" + signedT;
+    public static String getBoostCountAsStr(int power, int toughness) {
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+    }
+
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration) {
+        String boostCount = getBoostCountAsStr(power, toughness);
+        StringBuilder sb = new StringBuilder(boostCount);
+        // don't include "for the rest of the game" for emblems, etc.
+        if (duration != Duration.EndOfGame) {
+            String d = duration.toString();
+            if (!d.isEmpty()) {
+                sb.append(" ").append(d);
+            }
+        }
+        String message = power.getMessage();
+        if (message.isEmpty()) {
+            message = toughness.getMessage();
+        }
+        if (!message.isEmpty()) {
+            sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+        }
+        return sb.toString();
     }
 
     public static boolean isSpliceAbility(Ability ability, Game game) {
@@ -913,6 +942,14 @@ public final class CardUtil {
     public static String getTextWithFirstCharUpperCase(String text) {
         if (text != null && text.length() >= 1) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
+
+    public static String getTextWithFirstCharLowerCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
         }
@@ -967,7 +1004,7 @@ public final class CardUtil {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
-        Card permCard = getDefaultCardSideForBattlefield(newCard);
+        Card permCard = getDefaultCardSideForBattlefield(game, newCard);
 
         // prepare card and permanent
         permCard.setZone(Zone.BATTLEFIELD, game);
@@ -1005,12 +1042,17 @@ public final class CardUtil {
 
     /**
      * Choose default card's part to put on battlefield (for cheats and tests only)
+     * or to find a default card side (for copy effect)
      *
      * @param card
      * @return
      */
-    public static Card getDefaultCardSideForBattlefield(Card card) {
-        // chose left side all time
+    public static Card getDefaultCardSideForBattlefield(Game game, Card card) {
+        if (card instanceof PermanentCard) {
+            return card;
+        }
+
+        // must choose left side all time
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
@@ -1021,6 +1063,12 @@ public final class CardUtil {
         } else {
             permCard = card;
         }
+
+        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
+        if (permCard.isInstantOrSorcery(game)) {
+            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
+        }
+
         return permCard;
     }
 
@@ -1127,7 +1175,7 @@ public final class CardUtil {
     }
 
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null);
+        makeCardPlayable(game, source, card, duration, anyColor, null, null);
     }
 
     /**
@@ -1142,16 +1190,16 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
         if (anyColor) {
-            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
     }
 
@@ -1303,6 +1351,11 @@ public final class CardUtil {
         }
 
         return false;
+    }
+
+    public static String getSourceName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getName() : "";
     }
 
     /**
@@ -1488,5 +1541,48 @@ public final class CardUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
+        return stream.filter(clazz::isInstance).map(clazz::cast);
+    }
+
+    /**
+     * Move card or permanent to dest zone and add counter to it
+     *
+     * @param game
+     * @param source
+     * @param controller
+     * @param card       can be card or permanent
+     * @param toZone
+     * @param counter
+     */
+    public static boolean moveCardWithCounter(Game game, Ability source, Player controller, Card card, Zone toZone, Counter counter) {
+        if (toZone == Zone.BATTLEFIELD) {
+            throw new IllegalArgumentException("Wrong code usage - method doesn't support moving to battlefield zone");
+        }
+
+        // workaround:
+        // in ZONE_CHANGE replace events you must set new zone by event's setToZone,
+        // BUT for counter effect you need to complete zone change event first (so moveCards calls here)
+        // TODO: must be fixed someday by:
+        //  * or by new event ZONE_CHANGED to apply counter effect on it
+        //  * or by counter effects applier in ZONE_CHANGE event (see copy or token as example)
+
+        // move to zone
+        if (!controller.moveCards(card, toZone, source, game)) {
+            return false;
+        }
+
+        // add counter
+        // after move it's a new object (not a permanent), so must work with main card
+        Effect effect = new AddCountersTargetEffect(counter);
+        effect.setTargetPointer(new FixedTarget(card.getMainCard(), game));
+        effect.apply(game, source);
+        return true;
+    }
+
+    public static <T> int setOrIncrementValue(T u, Integer i) {
+        return i == null ? 1 : Integer.sum(i, 1);
     }
 }

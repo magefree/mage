@@ -56,7 +56,7 @@ public final class ShacklesOfTreachery extends CardImpl {
 
 class ShacklesOfTreacheryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    private enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<MageObject> {
         instance;
 
         @Override

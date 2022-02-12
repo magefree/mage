@@ -23,7 +23,7 @@ public final class DoubleMasters extends ExpansionSet {
     }
 
     private DoubleMasters() {
-        super("Double Masters", "2XM", ExpansionSet.buildDate(2020, 8, 7), SetType.SUPPLEMENTAL, new DoubleMastersCollator());
+        super("Double Masters", "2XM", ExpansionSet.buildDate(2020, 8, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = true;
         this.hasBoosters = true;
@@ -418,361 +418,227 @@ public final class DoubleMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Wurmcoil Engine", 368, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yavimaya's Embrace", 229, Rarity.UNCOMMON, mage.cards.y.YavimayasEmbrace.class));
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new DoubleMastersCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/2xm.html
 // Using USA collation for all rarities
 // Foil slot partially inferred to match standard booster rarity as best as possible
 // Foil odds (approximate): 10/14 to be common, 3/14 to be uncommon, 0.875/14 to be rare, 0.125/14 to be mythic
-// Regular common sheets used for foil commons as foil common sheet is currently incomplete
 // TODO: write a test, not sure how right now
 class DoubleMastersCollator implements BoosterCollator {
 
-    private static class DoubleMastersRun extends CardRun {
-        private static final DoubleMastersRun commonA = new DoubleMastersRun(true, "160", "108", "146", "79", "247", "165", "114", "111", "163", "29", "143", "105", "162", "135", "154", "78", "144", "151", "140", "84", "187", "304", "87", "133", "173", "95", "126", "28", "176", "90", "137", "165", "83", "159", "116", "168", "92", "121", "154", "79", "150", "181", "247", "146", "111", "160", "143", "96", "114", "108", "151", "78", "135", "95", "162", "144", "87", "140", "105", "163", "304", "84", "126", "173", "111", "133", "29", "187", "83", "137", "176", "90", "159", "150", "96", "247", "146", "165", "92", "116", "28", "160", "108", "121", "79", "168", "144", "162", "87", "163", "114", "84", "154", "304", "105", "135", "173", "95", "126", "29", "151", "83", "140", "181", "133", "78", "143", "187", "28", "150", "96", "159", "176", "90", "137", "168", "116", "92", "181", "121");
-        private static final DoubleMastersRun commonB = new DoubleMastersRun(true, "250", "70", "259", "305", "45", "80", "261", "60", "288", "331", "294", "63", "255", "263", "46", "230", "262", "50", "257", "256", "44", "283", "237", "74", "157", "277", "59", "330", "280", "52", "254", "329", "250", "69", "239", "331", "45", "287", "288", "42", "115", "273", "40", "305", "269", "63", "294", "257", "50", "80", "230", "60", "256", "259", "46", "261", "283", "44", "237", "330", "70", "263", "255", "52", "262", "254", "40", "157", "287", "115", "69", "277", "273", "59", "329", "280", "74", "250", "257", "60", "331", "261", "45", "239", "269", "42", "288", "305", "63", "80", "283", "50", "294", "259", "70", "263", "237", "44", "255", "262", "46", "230", "157", "59", "256", "330", "52", "254", "277", "74", "280", "329", "69", "287", "115", "42", "239", "269", "40", "273");
-        private static final DoubleMastersRun commonC = new DoubleMastersRun(true, "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33");
-        private static final DoubleMastersRun uncommonA = new DoubleMastersRun(true, "315", "244", "73", "274", "208", "147", "202", "169", "290", "102", "65", "285", "220", "67", "186", "246", "112", "222", "22", "301", "86", "62", "228", "161", "101", "302", "54", "184", "220", "307", "73", "93", "15", "119", "202", "291", "169", "323", "102", "244", "201", "172", "312", "290", "37", "208", "246", "6", "65", "307", "86", "186", "67", "222", "141", "15", "315", "22", "274", "161", "37", "101", "285", "228", "184", "112", "147", "302", "172", "54", "220", "141", "301", "6", "93", "119", "169", "323", "291", "312", "201", "62", "244", "184", "102", "15", "222", "37", "290", "112", "147", "65", "285", "101", "315", "67", "202", "186", "274", "208", "323", "73", "307", "228", "86", "161", "119", "246", "312", "6", "22", "172", "301", "62", "302", "141", "93", "291", "54", "201");
-        private static final DoubleMastersRun uncommonB = new DoubleMastersRun(true, "217", "23", "49", "245", "91", "194", "148", "71", "16", "125", "238", "198", "180", "36", "278", "99", "224", "38", "232", "123", "68", "258", "229", "310", "120", "242", "188", "25", "66", "267", "138", "178", "281", "199", "89", "194", "241", "23", "49", "91", "245", "166", "134", "238", "217", "148", "36", "265", "16", "125", "198", "232", "71", "100", "267", "229", "180", "68", "278", "123", "25", "99", "241", "38", "120", "258", "199", "188", "224", "281", "310", "49", "23", "66", "138", "178", "245", "217", "166", "134", "242", "89", "36", "265", "148", "100", "242", "198", "180", "25", "238", "16", "194", "38", "91", "71", "125", "278", "229", "310", "68", "232", "123", "178", "99", "258", "188", "120", "267", "199", "89", "224", "241", "66", "134", "166", "281", "138", "100", "265");
-        private static final DoubleMastersRun rareA = new DoubleMastersRun(false, "76", "231", "153", "77", "117", "118", "10", "43", "313", "158", "48", "85", "124", "252", "14", "167", "316", "318", "196", "127", "320", "130", "321", "97", "175", "271", "210", "272", "282", "26", "139", "103", "64", "325", "104", "179", "289", "32", "293", "326", "299", "327", "72", "109", "223", "225", "226", "75", "332", "113", "76", "231", "153", "77", "117", "118", "10", "43", "313", "158", "48", "85", "124", "252", "14", "167", "316", "318", "196", "127", "320", "130", "321", "97", "175", "271", "210", "272", "282", "26", "139", "103", "64", "325", "104", "179", "289", "32", "293", "326", "299", "327", "72", "109", "223", "225", "226", "75", "332", "113", "190", "8", "192", "240", "81", "314", "248", "164", "253", "51", "131", "204", "205", "20", "206", "136", "275", "214", "218", "303");
-        private static final DoubleMastersRun rareB = new DoubleMastersRun(false, "122", "82", "317", "55", "264", "174", "324", "24", "284", "215", "328");
-        private static final DoubleMastersRun rareC = new DoubleMastersRun(false, "189", "7", "311", "155", "236", "193", "11", "47", "249", "195", "128", "170", "260", "132", "203", "21", "268", "98", "57", "322", "209", "177", "279", "61", "212", "219", "292", "34", "183", "110", "149", "227", "306");
-        private static final DoubleMastersRun rareD = new DoubleMastersRun(false, "309", "191", "233", "9", "156", "243", "88", "251", "319", "53", "129", "200", "171", "19", "266", "207", "58", "211", "276", "213", "142", "286", "106", "31", "221", "182", "39");
-        private static final DoubleMastersRun rareE = new DoubleMastersRun(false, "5", "41", "152", "234", "235", "197", "94", "56", "1", "270", "107", "145", "295", "296", "297", "298", "300", "216", "185", "308");
-        private static final DoubleMastersRun foilUncommonA = new DoubleMastersRun(false, "6", "119", "312", "244", "161", "246", "315", "86", "93", "15", "169", "201", "54", "172", "202", "208", "22", "274", "323", "101", "102", "62", "141", "65", "285", "67", "220", "290", "291", "147", "222", "301", "302", "73", "184", "37", "112", "186", "228", "307");
-        private static final DoubleMastersRun foilUncommonB = new DoubleMastersRun(false, "310", "232", "120", "238", "241", "242", "245", "194", "123", "89", "91", "166", "49", "16", "125", "198", "199", "258", "265", "134", "267", "99", "23", "278", "100", "25", "281", "138", "178", "66", "217", "68", "180", "71", "36", "148", "224", "38", "188", "229");
-        private static final DoubleMastersRun foilRareA = new DoubleMastersRun(false, "309", "231", "76", "189", "7", "153", "191", "233", "77", "9", "117", "311", "118", "155", "10", "236", "43", "193", "313", "156", "158", "243", "11", "122", "47", "82", "48", "85", "88", "124", "249", "251", "252", "14", "167", "195", "316", "317", "318", "196", "319", "127", "128", "53", "320", "170", "129", "260", "200", "171", "130", "321", "55", "132", "264", "203", "19", "266", "21", "174", "268", "207", "97", "98", "175", "57", "58", "271", "322", "209", "210", "211", "272", "276", "324", "177", "279", "24", "61", "282", "212", "26", "139", "284", "103", "64", "213", "142", "325", "104", "215", "286", "179", "219", "106", "289", "31", "32", "292", "293", "326", "221", "299", "34", "182", "327", "72", "109", "183", "223", "110", "149", "328", "225", "226", "227", "306", "75", "332", "113", "39");
-        private static final DoubleMastersRun foilRareB = new DoubleMastersRun(false, "5", "41", "190", "8", "152", "234", "235", "192", "240", "81", "314", "248", "164", "253", "51", "197", "94", "131", "56", "204", "1", "205", "20", "206", "270", "136", "275", "214", "218", "107", "145", "295", "296", "297", "298", "300", "216", "303", "185", "308");
+    private final CardRun commonA = new CardRun(true, "160", "108", "146", "79", "247", "165", "114", "111", "163", "29", "143", "105", "162", "135", "154", "78", "144", "151", "140", "84", "187", "304", "87", "133", "173", "95", "126", "28", "176", "90", "137", "165", "83", "159", "116", "168", "92", "121", "154", "79", "150", "181", "247", "146", "111", "160", "143", "96", "114", "108", "151", "78", "135", "95", "162", "144", "87", "140", "105", "163", "304", "84", "126", "173", "111", "133", "29", "187", "83", "137", "176", "90", "159", "150", "96", "247", "146", "165", "92", "116", "28", "160", "108", "121", "79", "168", "144", "162", "87", "163", "114", "84", "154", "304", "105", "135", "173", "95", "126", "29", "151", "83", "140", "181", "133", "78", "143", "187", "28", "150", "96", "159", "176", "90", "137", "168", "116", "92", "181", "121");
+    private final CardRun commonB = new CardRun(true, "250", "70", "259", "305", "45", "80", "261", "60", "288", "331", "294", "63", "255", "263", "46", "230", "262", "50", "257", "256", "44", "283", "237", "74", "157", "277", "59", "330", "280", "52", "254", "329", "250", "69", "239", "331", "45", "287", "288", "42", "115", "273", "40", "305", "269", "63", "294", "257", "50", "80", "230", "60", "256", "259", "46", "261", "283", "44", "237", "330", "70", "263", "255", "52", "262", "254", "40", "157", "287", "115", "69", "277", "273", "59", "329", "280", "74", "250", "257", "60", "331", "261", "45", "239", "269", "42", "288", "305", "63", "80", "283", "50", "294", "259", "70", "263", "237", "44", "255", "262", "46", "230", "157", "59", "256", "330", "52", "254", "277", "74", "280", "329", "69", "287", "115", "42", "239", "269", "40", "273");
+    private final CardRun commonC = new CardRun(true, "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33", "12", "4", "13", "18", "27", "17", "33", "30", "35", "3", "2", "18", "35", "4", "17", "2", "30", "12", "27", "3", "13", "33", "30", "18", "12", "35", "27", "4", "3", "17", "13", "2", "33");
+    private final CardRun uncommonA = new CardRun(true, "315", "244", "73", "274", "208", "147", "202", "169", "290", "102", "65", "285", "220", "67", "186", "246", "112", "222", "22", "301", "86", "62", "228", "161", "101", "302", "54", "184", "220", "307", "73", "93", "15", "119", "202", "291", "169", "323", "102", "244", "201", "172", "312", "290", "37", "208", "246", "6", "65", "307", "86", "186", "67", "222", "141", "15", "315", "22", "274", "161", "37", "101", "285", "228", "184", "112", "147", "302", "172", "54", "220", "141", "301", "6", "93", "119", "169", "323", "291", "312", "201", "62", "244", "184", "102", "15", "222", "37", "290", "112", "147", "65", "285", "101", "315", "67", "202", "186", "274", "208", "323", "73", "307", "228", "86", "161", "119", "246", "312", "6", "22", "172", "301", "62", "302", "141", "93", "291", "54", "201");
+    private final CardRun uncommonB = new CardRun(true, "217", "23", "49", "245", "91", "194", "148", "71", "16", "125", "238", "198", "180", "36", "278", "99", "224", "38", "232", "123", "68", "258", "229", "310", "120", "242", "188", "25", "66", "267", "138", "178", "281", "199", "89", "194", "241", "23", "49", "91", "245", "166", "134", "238", "217", "148", "36", "265", "16", "125", "198", "232", "71", "100", "267", "229", "180", "68", "278", "123", "25", "99", "241", "38", "120", "258", "199", "188", "224", "281", "310", "49", "23", "66", "138", "178", "245", "217", "166", "134", "242", "89", "36", "265", "148", "100", "242", "198", "180", "25", "238", "16", "194", "38", "91", "71", "125", "278", "229", "310", "68", "232", "123", "178", "99", "258", "188", "120", "267", "199", "89", "224", "241", "66", "134", "166", "281", "138", "100", "265");
+    private final CardRun rareSlot1 = new CardRun(false, "76", "231", "153", "77", "117", "118", "10", "43", "313", "158", "48", "85", "124", "252", "14", "167", "316", "318", "196", "127", "320", "130", "321", "97", "175", "271", "210", "272", "282", "26", "139", "103", "64", "325", "104", "179", "289", "32", "293", "326", "299", "327", "72", "109", "223", "225", "226", "75", "332", "113", "76", "231", "153", "77", "117", "118", "10", "43", "313", "158", "48", "85", "124", "252", "14", "167", "316", "318", "196", "127", "320", "130", "321", "97", "175", "271", "210", "272", "282", "26", "139", "103", "64", "325", "104", "179", "289", "32", "293", "326", "299", "327", "72", "109", "223", "225", "226", "75", "332", "113", "190", "8", "192", "240", "81", "314", "248", "164", "253", "51", "131", "204", "205", "20", "206", "136", "275", "214", "218", "303", "122", "82", "317", "55", "264", "174", "324", "24", "284", "215", "328", "122", "82", "317", "55", "264", "174", "324", "24", "284", "215", "328");
+    private final CardRun rareSlot2 = new CardRun(false, "189", "7", "311", "155", "236", "193", "11", "47", "249", "195", "128", "170", "260", "132", "203", "21", "268", "98", "57", "322", "209", "177", "279", "61", "212", "219", "292", "34", "183", "110", "149", "227", "306", "189", "7", "311", "155", "236", "193", "11", "47", "249", "195", "128", "170", "260", "132", "203", "21", "268", "98", "57", "322", "209", "177", "279", "61", "212", "219", "292", "34", "183", "110", "149", "227", "306", "309", "191", "233", "9", "156", "243", "88", "251", "319", "53", "129", "200", "171", "19", "266", "207", "58", "211", "276", "213", "142", "286", "106", "31", "221", "182", "39", "309", "191", "233", "9", "156", "243", "88", "251", "319", "53", "129", "200", "171", "19", "266", "207", "58", "211", "276", "213", "142", "286", "106", "31", "221", "182", "39", "5", "41", "152", "234", "235", "197", "94", "56", "1", "270", "107", "145", "295", "296", "297", "298", "300", "216", "185", "308");
+    private final CardRun foilCommonA = new CardRun(true, "126", "40", "28", "144", "69", "35", "114", "63", "4", "146", "74", "30", "143", "52", "33", "137", "60", "2", "121", "46", "269", "12", "135", "42", "29", "115", "59", "17", "140", "44", "18", "116", "70", "28", "133", "63", "13", "114", "52", "3", "150", "40", "27", "126", "50", "35", "135", "69", "4", "137", "269", "60", "30", "144", "74", "17", "18", "133", "44", "13", "150", "70", "29", "115", "59", "3", "116", "121", "45", "33", "146", "46", "12", "140", "42", "2", "143", "50", "144", "74", "12", "121", "50", "4", "269", "143", "63", "28", "17", "69", "35", "135", "45", "27", "126", "40", "30", "114", "52", "116", "60", "33", "137", "46", "2", "146", "42", "29", "133", "70", "13", "150", "44", "18", "140", "59", "3", "115", "45", "27");
+    private final CardRun foilCommonB = new CardRun(true, "95", "160", "168", "277", "80", "159", "230", "108", "157", "330", "78", "163", "287", "83", "173", "329", "108", "168", "247", "90", "154", "283", "80", "261", "262", "105", "187", "294", "79", "165", "331", "304", "84", "163", "162", "277", "111", "151", "330", "92", "157", "304", "96", "160", "230", "95", "181", "331", "78", "176", "287", "84", "159", "256", "87", "165", "261", "79", "330", "154", "294", "105", "173", "259", "83", "187", "329", "111", "168", "283", "92", "151", "262", "108", "162", "230", "80", "163", "247", "95", "157", "277", "90", "159", "331", "96", "176", "287", "78", "154", "259", "84", "160", "256", "105", "329", "181", "261", "79", "165", "304", "83", "151", "262", "111", "173", "283", "87", "187", "294", "92", "90", "162", "259", "96", "181", "247", "87", "176", "256");
+    private final CardRun foilCommonC = new CardRun(false, "237", "239", "250", "254", "255", "257", "263", "273", "280", "288", "305");
+    private final CardRun foilUncommonA = new CardRun(false, "6", "119", "312", "244", "161", "246", "315", "86", "93", "15", "169", "201", "54", "172", "202", "208", "22", "274", "323", "101", "102", "62", "141", "65", "285", "67", "220", "290", "291", "147", "222", "301", "302", "73", "184", "37", "112", "186", "228", "307");
+    private final CardRun foilUncommonB = new CardRun(false, "310", "232", "120", "238", "241", "242", "245", "194", "123", "89", "91", "166", "49", "16", "125", "198", "199", "258", "265", "134", "267", "99", "23", "278", "100", "25", "281", "138", "178", "66", "217", "68", "180", "71", "36", "148", "224", "38", "188", "229");
+    private final CardRun foilRare = new CardRun(false, "309", "231", "76", "189", "7", "153", "191", "233", "77", "9", "117", "311", "118", "155", "10", "236", "43", "193", "313", "156", "158", "243", "11", "122", "47", "82", "48", "85", "88", "124", "249", "251", "252", "14", "167", "195", "316", "317", "318", "196", "319", "127", "128", "53", "320", "170", "129", "260", "200", "171", "130", "321", "55", "132", "264", "203", "19", "266", "21", "174", "268", "207", "97", "98", "175", "57", "58", "271", "322", "209", "210", "211", "272", "276", "324", "177", "279", "24", "61", "282", "212", "26", "139", "284", "103", "64", "213", "142", "325", "104", "215", "286", "179", "219", "106", "289", "31", "32", "292", "293", "326", "221", "299", "34", "182", "327", "72", "109", "183", "223", "110", "149", "328", "225", "226", "227", "306", "75", "332", "113", "39");
+    private final CardRun foilMythic = new CardRun(false, "5", "41", "190", "8", "152", "234", "235", "192", "240", "81", "314", "248", "164", "253", "51", "197", "94", "131", "56", "204", "1", "205", "20", "206", "270", "136", "275", "214", "218", "107", "145", "295", "296", "297", "298", "300", "216", "303", "185", "308");
 
-        private DoubleMastersRun(boolean keepOrder, String... numbers) {
-            super(keepOrder, numbers);
-        }
-    }
+    private final BoosterStructure AAAABBBC = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonC
+    );
+    private final BoosterStructure AAABBBBC = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC
+    );
+    private final BoosterStructure AAAABBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rareSlot1, rareSlot2);
 
-    private static class DoubleMastersStructure extends BoosterStructure {
-        private static final DoubleMastersStructure C1 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonC
-        );
-        private static final DoubleMastersStructure C2 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonC
-        );
-        private static final DoubleMastersStructure C3 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonB
-        );
-        private static final DoubleMastersStructure U1 = new DoubleMastersStructure(
-                DoubleMastersRun.uncommonA,
-                DoubleMastersRun.uncommonB,
-                DoubleMastersRun.uncommonB
-        );
-        private static final DoubleMastersStructure U2 = new DoubleMastersStructure(
-                DoubleMastersRun.uncommonA,
-                DoubleMastersRun.uncommonA,
-                DoubleMastersRun.uncommonB
-        );
-        private static final DoubleMastersStructure R1 = new DoubleMastersStructure(
-                DoubleMastersRun.rareA,
-                DoubleMastersRun.rareC
-        );
-        private static final DoubleMastersStructure R2 = new DoubleMastersStructure(
-                DoubleMastersRun.rareA,
-                DoubleMastersRun.rareD
-        );
-        private static final DoubleMastersStructure R3 = new DoubleMastersStructure(
-                DoubleMastersRun.rareA,
-                DoubleMastersRun.rareE
-        );
-        private static final DoubleMastersStructure R4 = new DoubleMastersStructure(
-                DoubleMastersRun.rareB,
-                DoubleMastersRun.rareC
-        );
-        private static final DoubleMastersStructure R5 = new DoubleMastersStructure(
-                DoubleMastersRun.rareB,
-                DoubleMastersRun.rareD
-        );
-        private static final DoubleMastersStructure R6 = new DoubleMastersStructure(
-                DoubleMastersRun.rareB,
-                DoubleMastersRun.rareE
-        );
-        private static final DoubleMastersStructure F01 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonB
-        );
-        private static final DoubleMastersStructure F02 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.commonC
-        );
-        private static final DoubleMastersStructure F03 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.foilUncommonA
-        );
-        private static final DoubleMastersStructure F04 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.foilUncommonB
-        );
-        private static final DoubleMastersStructure F05 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.foilRareA
-        );
-        private static final DoubleMastersStructure F06 = new DoubleMastersStructure(
-                DoubleMastersRun.commonA,
-                DoubleMastersRun.foilRareB
-        );
-        private static final DoubleMastersStructure F07 = new DoubleMastersStructure(
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.commonC
-        );
-        private static final DoubleMastersStructure F08 = new DoubleMastersStructure(
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.foilUncommonA
-        );
-        private static final DoubleMastersStructure F09 = new DoubleMastersStructure(
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.foilUncommonB
-        );
-        private static final DoubleMastersStructure F10 = new DoubleMastersStructure(
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.foilRareA
-        );
-        private static final DoubleMastersStructure F11 = new DoubleMastersStructure(
-                DoubleMastersRun.commonB,
-                DoubleMastersRun.foilRareB
-        );
-        private static final DoubleMastersStructure F12 = new DoubleMastersStructure(
-                DoubleMastersRun.commonC,
-                DoubleMastersRun.foilUncommonA
-        );
-        private static final DoubleMastersStructure F13 = new DoubleMastersStructure(
-                DoubleMastersRun.commonC,
-                DoubleMastersRun.foilUncommonB
-        );
-        private static final DoubleMastersStructure F14 = new DoubleMastersStructure(
-                DoubleMastersRun.commonC,
-                DoubleMastersRun.foilRareA
-        );
-        private static final DoubleMastersStructure F15 = new DoubleMastersStructure(
-                DoubleMastersRun.commonC,
-                DoubleMastersRun.foilRareB
-        );
-        private static final DoubleMastersStructure F16 = new DoubleMastersStructure(
-                DoubleMastersRun.foilUncommonA,
-                DoubleMastersRun.foilUncommonB
-        );
-        private static final DoubleMastersStructure F17 = new DoubleMastersStructure(
-                DoubleMastersRun.foilUncommonA,
-                DoubleMastersRun.foilRareA
-        );
-        private static final DoubleMastersStructure F18 = new DoubleMastersStructure(
-                DoubleMastersRun.foilUncommonA,
-                DoubleMastersRun.foilRareB
-        );
-        private static final DoubleMastersStructure F19 = new DoubleMastersStructure(
-                DoubleMastersRun.foilUncommonB,
-                DoubleMastersRun.foilRareA
-        );
-        private static final DoubleMastersStructure F20 = new DoubleMastersStructure(
-                DoubleMastersRun.foilUncommonB,
-                DoubleMastersRun.foilRareB
-        );
-        private static final DoubleMastersStructure F21 = new DoubleMastersStructure(
-                DoubleMastersRun.foilRareA,
-                DoubleMastersRun.foilRareB
-        );
+    private final BoosterStructure F01 = new BoosterStructure(foilCommonA, foilCommonB);
+    private final BoosterStructure F02 = new BoosterStructure(foilCommonA, foilCommonC);
+    private final BoosterStructure F03 = new BoosterStructure(foilCommonA, foilUncommonA);
+    private final BoosterStructure F04 = new BoosterStructure(foilCommonA, foilUncommonB);
+    private final BoosterStructure F05 = new BoosterStructure(foilCommonA, foilRare);
+    private final BoosterStructure F06 = new BoosterStructure(foilCommonA, foilMythic);
+    private final BoosterStructure F07 = new BoosterStructure(foilCommonB, foilCommonC);
+    private final BoosterStructure F08 = new BoosterStructure(foilCommonB, foilUncommonA);
+    private final BoosterStructure F09 = new BoosterStructure(foilCommonB, foilUncommonB);
+    private final BoosterStructure F10 = new BoosterStructure(foilCommonB, foilRare);
+    private final BoosterStructure F11 = new BoosterStructure(foilCommonB, foilMythic);
+    private final BoosterStructure F12 = new BoosterStructure(foilCommonC, foilUncommonA);
+    private final BoosterStructure F13 = new BoosterStructure(foilCommonC, foilUncommonB);
+    private final BoosterStructure F14 = new BoosterStructure(foilCommonC, foilRare);
+    private final BoosterStructure F15 = new BoosterStructure(foilCommonC, foilMythic);
+    private final BoosterStructure F16 = new BoosterStructure(foilUncommonA, foilUncommonB);
+    private final BoosterStructure F17 = new BoosterStructure(foilUncommonA, foilRare);
+    private final BoosterStructure F18 = new BoosterStructure(foilUncommonA, foilMythic);
+    private final BoosterStructure F19 = new BoosterStructure(foilUncommonB, foilRare);
+    private final BoosterStructure F20 = new BoosterStructure(foilUncommonB, foilMythic);
+    private final BoosterStructure F21 = new BoosterStructure(foilRare, foilMythic);
 
-
-        private DoubleMastersStructure(CardRun... runs) {
-            super(runs);
-        }
-    }
-
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.52 A commons (320 / 91)
+    // 3.52 B commons (320 / 91)
+    // 0.97 C commons (88 / 91)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            false,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C1, DoubleMastersStructure.C2, DoubleMastersStructure.C1, DoubleMastersStructure.C2,
-            DoubleMastersStructure.C3, DoubleMastersStructure.C3, DoubleMastersStructure.C3
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBB, AAAABBBB, AAAABBBB
     );
-    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            DoubleMastersStructure.U1, DoubleMastersStructure.U2
-    );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(
-            false,
-            DoubleMastersStructure.R1, DoubleMastersStructure.R2, DoubleMastersStructure.R3,
-            DoubleMastersStructure.R4, DoubleMastersStructure.R5, DoubleMastersStructure.R6
-    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(AAB, ABB);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
     private final RarityConfiguration foilRuns = new RarityConfiguration(
-            false,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
-            DoubleMastersStructure.F01, DoubleMastersStructure.F01, DoubleMastersStructure.F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
+            F01, F01, F01,
 
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
-            DoubleMastersStructure.F02, DoubleMastersStructure.F02, DoubleMastersStructure.F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
+            F02, F02, F02,
 
-            DoubleMastersStructure.F03, DoubleMastersStructure.F03, DoubleMastersStructure.F03,
-            DoubleMastersStructure.F03, DoubleMastersStructure.F03, DoubleMastersStructure.F03,
-            DoubleMastersStructure.F03, DoubleMastersStructure.F03, DoubleMastersStructure.F03,
-            DoubleMastersStructure.F03, DoubleMastersStructure.F03, DoubleMastersStructure.F03,
-            DoubleMastersStructure.F03, DoubleMastersStructure.F03, DoubleMastersStructure.F03,
-            DoubleMastersStructure.F03,
+            F03, F03, F03,
+            F03, F03, F03,
+            F03, F03, F03,
+            F03, F03, F03,
+            F03, F03, F03,
+            F03,
 
-            DoubleMastersStructure.F04, DoubleMastersStructure.F04, DoubleMastersStructure.F04,
-            DoubleMastersStructure.F04, DoubleMastersStructure.F04, DoubleMastersStructure.F04,
-            DoubleMastersStructure.F04, DoubleMastersStructure.F04, DoubleMastersStructure.F04,
-            DoubleMastersStructure.F04, DoubleMastersStructure.F04, DoubleMastersStructure.F04,
-            DoubleMastersStructure.F04, DoubleMastersStructure.F04, DoubleMastersStructure.F04,
-            DoubleMastersStructure.F04,
+            F04, F04, F04,
+            F04, F04, F04,
+            F04, F04, F04,
+            F04, F04, F04,
+            F04, F04, F04,
+            F04,
 
-            DoubleMastersStructure.F05, DoubleMastersStructure.F05, DoubleMastersStructure.F05,
-            DoubleMastersStructure.F05, DoubleMastersStructure.F05, DoubleMastersStructure.F05,
-            DoubleMastersStructure.F05, DoubleMastersStructure.F05,
+            F05, F05, F05,
+            F05, F05, F05,
+            F05, F05,
 
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
-            DoubleMastersStructure.F07, DoubleMastersStructure.F07, DoubleMastersStructure.F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
+            F07, F07, F07,
 
-            DoubleMastersStructure.F08, DoubleMastersStructure.F08, DoubleMastersStructure.F08,
-            DoubleMastersStructure.F08, DoubleMastersStructure.F08, DoubleMastersStructure.F08,
-            DoubleMastersStructure.F08, DoubleMastersStructure.F08, DoubleMastersStructure.F08,
-            DoubleMastersStructure.F08, DoubleMastersStructure.F08, DoubleMastersStructure.F08,
-            DoubleMastersStructure.F08, DoubleMastersStructure.F08, DoubleMastersStructure.F08,
-            DoubleMastersStructure.F08,
+            F08, F08, F08,
+            F08, F08, F08,
+            F08, F08, F08,
+            F08, F08, F08,
+            F08, F08, F08,
+            F08,
 
-            DoubleMastersStructure.F09, DoubleMastersStructure.F09, DoubleMastersStructure.F09,
-            DoubleMastersStructure.F09, DoubleMastersStructure.F09, DoubleMastersStructure.F09,
-            DoubleMastersStructure.F09, DoubleMastersStructure.F09, DoubleMastersStructure.F09,
-            DoubleMastersStructure.F09, DoubleMastersStructure.F09, DoubleMastersStructure.F09,
-            DoubleMastersStructure.F09, DoubleMastersStructure.F09, DoubleMastersStructure.F09,
-            DoubleMastersStructure.F09,
+            F09, F09, F09,
+            F09, F09, F09,
+            F09, F09, F09,
+            F09, F09, F09,
+            F09, F09, F09,
+            F09,
 
-            DoubleMastersStructure.F10, DoubleMastersStructure.F10, DoubleMastersStructure.F10,
-            DoubleMastersStructure.F10, DoubleMastersStructure.F10, DoubleMastersStructure.F10,
-            DoubleMastersStructure.F10, DoubleMastersStructure.F10,
+            F10, F10, F10,
+            F10, F10, F10,
+            F10, F10,
 
-            DoubleMastersStructure.F12, DoubleMastersStructure.F12, DoubleMastersStructure.F12,
-            DoubleMastersStructure.F12, DoubleMastersStructure.F12, DoubleMastersStructure.F12,
-            DoubleMastersStructure.F12, DoubleMastersStructure.F12, DoubleMastersStructure.F12,
-            DoubleMastersStructure.F12, DoubleMastersStructure.F12, DoubleMastersStructure.F12,
-            DoubleMastersStructure.F12, DoubleMastersStructure.F12, DoubleMastersStructure.F12,
-            DoubleMastersStructure.F12,
+            F12, F12, F12,
+            F12, F12, F12,
+            F12, F12, F12,
+            F12, F12, F12,
+            F12, F12, F12,
+            F12,
 
-            DoubleMastersStructure.F13, DoubleMastersStructure.F13, DoubleMastersStructure.F13,
-            DoubleMastersStructure.F13, DoubleMastersStructure.F13, DoubleMastersStructure.F13,
-            DoubleMastersStructure.F13, DoubleMastersStructure.F13, DoubleMastersStructure.F13,
-            DoubleMastersStructure.F13, DoubleMastersStructure.F13, DoubleMastersStructure.F13,
-            DoubleMastersStructure.F13, DoubleMastersStructure.F13, DoubleMastersStructure.F13,
-            DoubleMastersStructure.F13,
+            F13, F13, F13,
+            F13, F13, F13,
+            F13, F13, F13,
+            F13, F13, F13,
+            F13, F13, F13,
+            F13,
 
-            DoubleMastersStructure.F14, DoubleMastersStructure.F14, DoubleMastersStructure.F14,
-            DoubleMastersStructure.F14, DoubleMastersStructure.F14, DoubleMastersStructure.F14,
-            DoubleMastersStructure.F14, DoubleMastersStructure.F14,
+            F14, F14, F14,
+            F14, F14, F14,
+            F14, F14,
 
-            DoubleMastersStructure.F16, DoubleMastersStructure.F16, DoubleMastersStructure.F16,
-            DoubleMastersStructure.F16, DoubleMastersStructure.F16, DoubleMastersStructure.F16,
-            DoubleMastersStructure.F16, DoubleMastersStructure.F16, DoubleMastersStructure.F16,
-            DoubleMastersStructure.F16, DoubleMastersStructure.F16, DoubleMastersStructure.F16,
-            DoubleMastersStructure.F16, DoubleMastersStructure.F16, DoubleMastersStructure.F16,
-            DoubleMastersStructure.F16,
+            F16, F16, F16,
+            F16, F16, F16,
+            F16, F16, F16,
+            F16, F16, F16,
+            F16, F16, F16,
+            F16,
 
-            DoubleMastersStructure.F17, DoubleMastersStructure.F17, DoubleMastersStructure.F17,
-            DoubleMastersStructure.F17, DoubleMastersStructure.F17, DoubleMastersStructure.F17,
-            DoubleMastersStructure.F17, DoubleMastersStructure.F17,
+            F17, F17, F17,
+            F17, F17, F17,
+            F17, F17,
 
-            DoubleMastersStructure.F19, DoubleMastersStructure.F19, DoubleMastersStructure.F19,
-            DoubleMastersStructure.F19, DoubleMastersStructure.F19, DoubleMastersStructure.F19,
-            DoubleMastersStructure.F19, DoubleMastersStructure.F19,
+            F19, F19, F19,
+            F19, F19, F19,
+            F19, F19,
 
-            DoubleMastersStructure.F06, DoubleMastersStructure.F11, DoubleMastersStructure.F15,
-            DoubleMastersStructure.F18, DoubleMastersStructure.F20, DoubleMastersStructure.F21
+            F06, F11, F15,
+            F18, F20, F21
     );
-
-    @Override
-    public void shuffle() {
-        commonRuns.shuffle();
-        uncommonRuns.shuffle();
-        rareRuns.shuffle();
-        foilRuns.shuffle();
-    }
 
     @Override
     public List<String> makeBooster() {

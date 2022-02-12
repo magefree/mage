@@ -16,7 +16,7 @@ import mage.filter.FilterCard;
  */
 public final class CunningWish extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an instant card");
+    private static final FilterCard filter = new FilterCard("instant card");
 
     static {
         filter.add(CardType.INSTANT.getPredicate());
@@ -25,7 +25,7 @@ public final class CunningWish extends CardImpl {
     public CunningWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand.
+        // You may reveal an instant card you own from outside the game and put it into your hand.
         this.getSpellAbility().addEffect(new WishEffect(filter));
         this.getSpellAbility().addHint(OpenSideboardHint.instance);
 

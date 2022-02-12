@@ -26,7 +26,7 @@ public final class ElfDruidToken extends TokenImpl {
     public ElfDruidToken(String setCode, int tokenType) {
         super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
         this.cardType.add(CardType.CREATURE);
-        this.color = ObjectColor.GREEN;
+        this.color.setGreen(true);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
 

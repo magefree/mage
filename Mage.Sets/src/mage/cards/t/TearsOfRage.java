@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -17,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
@@ -36,8 +36,7 @@ public final class TearsOfRage extends CardImpl {
 
         // Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
         BoostControlledEffect effect = new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), StaticValue.get(0),
-                Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setLockedIn(true);
+                Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, true);
         getSpellAbility().addEffect(effect);
         getSpellAbility().addEffect(new TearsOfRageEffect());
     }

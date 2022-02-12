@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -19,7 +18,7 @@ public final class RollingThunder extends CardImpl {
     public RollingThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
-        // Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
+        // Rolling Thunder deals X damage divided as you choose among any number of targets.
         DynamicValue xValue = ManacostVariableValue.REGULAR;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  

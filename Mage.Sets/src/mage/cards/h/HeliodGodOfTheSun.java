@@ -44,7 +44,7 @@ public final class HeliodGodOfTheSun extends CardImpl {
         // Other creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // {2}{W}{W}: Create a 2/1 white Cleric enchantment creature token.

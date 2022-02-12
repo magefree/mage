@@ -1,9 +1,9 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -22,12 +22,14 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class Aurochs extends CardImpl {
 
-    private static final FilterAttackingCreature filter1 = new FilterAttackingCreature("other attacking Aurochs");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Aurochs");
 
     static {
-        filter1.add(SubType.AUROCHS.getPredicate());
-        filter1.add(AnotherPredicate.instance);
+        filter.add(SubType.AUROCHS.getPredicate());
+        filter.add(AnotherPredicate.instance);
     }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public Aurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -38,8 +40,7 @@ public final class Aurochs extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter1, 1);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private Aurochs(final Aurochs card) {

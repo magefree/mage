@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author TheElk801
  */
-public abstract class BoosterStructure {
+public class BoosterStructure {
 
     private final List<CardRun> slots;
 
-    protected BoosterStructure(CardRun... runs) {
+    public BoosterStructure(CardRun... runs) {
         this.slots = Arrays.asList(runs);
     }
 
@@ -26,11 +26,5 @@ public abstract class BoosterStructure {
             cards.add(run.getNext());
         }
         return cards;
-    }
-
-    public void shuffle() {
-        for (CardRun run : this.slots) {
-            run.shuffle();
-        }
     }
 }

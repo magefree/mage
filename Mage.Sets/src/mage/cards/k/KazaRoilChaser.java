@@ -141,7 +141,7 @@ class KazaRoilChaserWatcher extends Watcher {
         }
         Spell spell = game.getSpell(event.getSourceId());
         if (spell != null && spell.isInstantOrSorcery(game)) {
-            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

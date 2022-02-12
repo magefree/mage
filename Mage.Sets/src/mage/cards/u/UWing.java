@@ -38,7 +38,7 @@ public final class UWing extends CardImpl {
         // As long as U-Wing is tapped, it gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                SourceTappedCondition.instance,
+                SourceTappedCondition.TAPPED,
                 "As long as {this} is tapped, it gets +1/+0")));
 
         // As long as U-Wing is untapped, it gets +0/+1.

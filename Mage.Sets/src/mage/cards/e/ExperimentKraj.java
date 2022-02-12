@@ -56,7 +56,8 @@ public final class ExperimentKraj extends CardImpl {
 
 class ExperimentKrajEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature with a +1/+1 counter on it");
+
     static {
         filter.add(CounterType.P1P1.getPredicate());
         filter.add(AnotherPredicate.instance);

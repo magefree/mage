@@ -103,7 +103,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
                         case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                            effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
                             break;
                         case PLAYER:
                             UUID playerId = controlledText ? attacker.getControllerId() : game.getCombat().getDefendingPlayerId(attacker.getId(), game);

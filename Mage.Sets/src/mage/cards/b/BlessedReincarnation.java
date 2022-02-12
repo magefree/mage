@@ -8,9 +8,8 @@ import mage.abilities.keyword.ReboundAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -23,12 +22,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BlessedReincarnation extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public BlessedReincarnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
@@ -36,7 +29,7 @@ public final class BlessedReincarnation extends CardImpl {
         // That player reveals cards from the top of their library until a creature card is revealed.
         // The player puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new BlessedReincarnationEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
 
         // Rebound
         this.addAbility(new ReboundAbility());

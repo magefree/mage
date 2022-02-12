@@ -1,10 +1,7 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +11,9 @@ import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SpellSwindle extends CardImpl {
@@ -42,8 +40,7 @@ class SpellSwindleEffect extends OneShotEffect {
 
     public SpellSwindleEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's mana value. "
-                + "They have \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
+        staticText = "Counter target spell. Create X Treasure tokens, where X is that spell's mana value.";
     }
 
     public SpellSwindleEffect(final SpellSwindleEffect effect) {
@@ -60,7 +57,7 @@ class SpellSwindleEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            return new CreateTokenEffect(new TreasureToken(), stackObject.getManaValue()).apply(game, source);
+            return new TreasureToken().putOntoBattlefield(stackObject.getManaValue(), game, source);
         }
         return false;
     }

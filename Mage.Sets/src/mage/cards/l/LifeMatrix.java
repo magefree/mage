@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.IsStepCondition;
@@ -20,8 +19,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class LifeMatrix extends CardImpl {
@@ -37,8 +37,8 @@ public final class LifeMatrix extends CardImpl {
                 new AddCountersTargetEffect(CounterType.MATRIX.createInstance()),
                 new GenericManaCost(4),
                 new IsStepCondition(PhaseStep.UPKEEP), "Put a matrix counter on target creature and "
-                + "that creature gains “Remove a matrix counter from this creature: "
-                + "Regenerate this creature.” Activate only during your upkeep.");
+                + "that creature gains \"Remove a matrix counter from this creature: "
+                + "Regenerate this creature.\" Activate only during your upkeep.");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(),
                 new RemoveCountersSourceCost(CounterType.MATRIX.createInstance()));

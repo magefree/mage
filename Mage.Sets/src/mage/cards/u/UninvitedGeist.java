@@ -24,7 +24,6 @@ public final class UninvitedGeist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = UnimpededTrespasser.class;
 
         // Skulk (This creature can't be blocked by creatures with greater power.)
@@ -32,7 +31,7 @@ public final class UninvitedGeist extends CardImpl {
 
         // When Uninvited Geist deals combat damage to a player, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TransformSourceEffect(true), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TransformSourceEffect(), false));
 
     }
 

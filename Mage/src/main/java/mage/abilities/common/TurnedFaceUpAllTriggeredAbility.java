@@ -70,7 +70,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
             }
             return true;

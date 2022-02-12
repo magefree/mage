@@ -148,6 +148,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return 0;
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
@@ -233,6 +238,16 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean canPlayCardsFromGraveyard() {
+        return false;
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
         return false;
     }
 
@@ -601,7 +616,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         return false;
     }
 

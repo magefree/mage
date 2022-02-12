@@ -48,7 +48,7 @@ public final class HavengulRunebinder extends CardImpl {
                 new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
-        ability.addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterPermanent));
+        ability.addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterPermanent).concatBy(", then"));
         this.addAbility(ability);
     }
 

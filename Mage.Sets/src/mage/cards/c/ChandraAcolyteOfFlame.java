@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.*;
 import mage.abilities.effects.common.InfoEffect;
@@ -55,7 +54,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // 0: Put a loyalty counter on each red planeswalker you control.
         this.addAbility(new LoyaltyAbility(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(), filter), 0));

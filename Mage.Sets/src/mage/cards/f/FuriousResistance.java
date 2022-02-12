@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -25,12 +24,11 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeffwadsworth
  */
 public final class FuriousResistance extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public FuriousResistance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Target blocking creature gets +3/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new FuriousResistanceEffect());
@@ -64,11 +62,11 @@ class FuriousResistanceEffect extends OneShotEffect {
         if (target == null) {
             return false;
         }
-        
+
         ContinuousEffect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
         ContinuousEffect effect2 = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(target.getId()));
-        effect2.setTargetPointer(new FixedTarget(target.getId()));
+        effect.setTargetPointer(new FixedTarget(target.getId(), game));
+        effect2.setTargetPointer(new FixedTarget(target.getId(), game));
         game.addEffect(effect, source);
         game.addEffect(effect2, source);
         return true;
