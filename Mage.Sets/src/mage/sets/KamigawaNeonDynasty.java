@@ -89,6 +89,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Enthusiastic Mechanaut", 218, Rarity.UNCOMMON, mage.cards.e.EnthusiasticMechanaut.class));
         cards.add(new SetCardInfo("Era of Enlightenment", 11, Rarity.COMMON, mage.cards.e.EraOfEnlightenment.class));
         cards.add(new SetCardInfo("Essence Capture", 52, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
+        cards.add(new SetCardInfo("Etching of Kumano", 152, Rarity.UNCOMMON, mage.cards.e.EtchingOfKumano.class));
         cards.add(new SetCardInfo("Experimental Synthesizer", 138, Rarity.COMMON, mage.cards.e.ExperimentalSynthesizer.class));
         cards.add(new SetCardInfo("Explosive Entry", 139, Rarity.COMMON, mage.cards.e.ExplosiveEntry.class));
         cards.add(new SetCardInfo("Explosive Singularity", 140, Rarity.MYTHIC, mage.cards.e.ExplosiveSingularity.class));
@@ -165,6 +166,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Kitsune Ace", 22, Rarity.COMMON, mage.cards.k.KitsuneAce.class));
         cards.add(new SetCardInfo("Kodama of the West Tree", 199, Rarity.MYTHIC, mage.cards.k.KodamaOfTheWestTree.class));
         cards.add(new SetCardInfo("Kotose, the Silent Spider", 351, Rarity.RARE, mage.cards.k.KotoseTheSilentSpider.class));
+        cards.add(new SetCardInfo("Kumano Faces Kakkazan", 152, Rarity.UNCOMMON, mage.cards.k.KumanoFacesKakkazan.class));
         cards.add(new SetCardInfo("Kura, the Boundless Sky", 200, Rarity.MYTHIC, mage.cards.k.KuraTheBoundlessSky.class));
         cards.add(new SetCardInfo("Kyodai, Soul of Kamigawa", 23, Rarity.RARE, mage.cards.k.KyodaiSoulOfKamigawa.class));
         cards.add(new SetCardInfo("Leech Gauntlet", 106, Rarity.UNCOMMON, mage.cards.l.LeechGauntlet.class));
