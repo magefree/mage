@@ -77,6 +77,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Dockside Chef", 93, Rarity.UNCOMMON, mage.cards.d.DocksideChef.class));
         cards.add(new SetCardInfo("Dokuchi Shadow-Walker", 94, Rarity.COMMON, mage.cards.d.DokuchiShadowWalker.class));
         cards.add(new SetCardInfo("Dokuchi Silencer", 95, Rarity.UNCOMMON, mage.cards.d.DokuchiSilencer.class));
+        cards.add(new SetCardInfo("Dragon-Kami's Egg", 181, Rarity.RARE, mage.cards.d.DragonKamisEgg.class));
         cards.add(new SetCardInfo("Dragonfly Suit", 9, Rarity.COMMON, mage.cards.d.DragonflySuit.class));
         cards.add(new SetCardInfo("Dragonspark Reactor", 137, Rarity.UNCOMMON, mage.cards.d.DragonsparkReactor.class));
         cards.add(new SetCardInfo("Dramatist's Puppet", 244, Rarity.COMMON, mage.cards.d.DramatistsPuppet.class));
@@ -291,6 +292,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
         cards.add(new SetCardInfo("Tezzeret, Betrayer of Flesh", 84, Rarity.MYTHIC, mage.cards.t.TezzeretBetrayerOfFlesh.class));
+        cards.add(new SetCardInfo("The Dragon-Kami Reborn", 181, Rarity.RARE, mage.cards.t.TheDragonKamiReborn.class));
         cards.add(new SetCardInfo("The Fall of Lord Konda", 12, Rarity.UNCOMMON, mage.cards.t.TheFallOfLordKonda.class));
         cards.add(new SetCardInfo("The Kami War", 227, Rarity.MYTHIC, mage.cards.t.TheKamiWar.class));
         cards.add(new SetCardInfo("The Long Reach of Night", 109, Rarity.UNCOMMON, mage.cards.t.TheLongReachOfNight.class));
