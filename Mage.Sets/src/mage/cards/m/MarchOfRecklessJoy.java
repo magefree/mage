@@ -12,10 +12,10 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.CostsLessForExiledCardsEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public final class MarchOfRecklessJoy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}");
 
         // As an additional cost to cast this spell, you may exile any number of red cards from your hand. This spell costs {2} less to cast for each card exiled this way.
-        CostsLessForExiledCardsEffect.addCostAndEffect(this, filter);
+        ExileCardsFromHandAdjuster.addAdjusterAndMessage(this, filter);
 
         // Exile the top X cards of your library. You may play up to two of those cards until the end of your next turn.
         this.getSpellAbility().addEffect(new MarchOfRecklessJoyEffect());

@@ -1,8 +1,8 @@
 package mage.cards.m;
 
 import mage.ObjectColor;
+import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.CostsLessForExiledCardsEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class MarchOfWretchedSorrow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");
 
         // As an additional cost to cast this spell, you may exile any number of black cards from your hand. This spell costs {2} less to cast for each card exiled this way.
-        CostsLessForExiledCardsEffect.addCostAndEffect(this, filter);
+        ExileCardsFromHandAdjuster.addAdjusterAndMessage(this, filter);
 
         // March of Wretched Sorrow deals X damage to target creature or planeswalker and you gain X life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));

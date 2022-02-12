@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.effects.CostsLessForExiledCardsEffect;
+import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class MarchOfSwirlingMist extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // As an additional cost to cast this spell, you may exile any number of blue cards from your hand. This spell costs {2} less to cast for each card exiled this way.
-        CostsLessForExiledCardsEffect.addCostAndEffect(this, filter);
+        ExileCardsFromHandAdjuster.addAdjusterAndMessage(this, filter);
 
         // Up to X target creatures phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("up to X target creatures phase out"));
