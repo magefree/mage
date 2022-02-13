@@ -106,7 +106,7 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
                 source.getControllerId(), source.getSourceId(), game
         )) {
-            Abilities abilities = permanent.getAbilities(game);
+            Abilities<Ability> abilities = permanent.getAbilities(game);
             int count = classes
                     .stream()
                     .map(clazz -> abilities.stream().anyMatch(clazz::isInstance))

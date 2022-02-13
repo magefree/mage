@@ -102,7 +102,7 @@ class ArcaneAdaptationEffect extends ContinuousEffectImpl {
         // commander in command zone
         for (CommandObject commandObject : game.getState().getCommand()) {
             if (commandObject instanceof Commander) {
-                Card card = game.getCard(((Commander) commandObject).getId());
+                Card card = game.getCard((commandObject).getId());
                 if (card != null && card.isOwnedBy(controller.getId())
                         && card.isCreature(game) && !card.hasSubtype(subType, game)) {
                     game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
