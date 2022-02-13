@@ -8,7 +8,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.abilities.keyword.FlashAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
@@ -184,11 +183,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                         game);
         asInstant = approvingObject != null;
         asInstant |= (timing == TimingRule.INSTANT);
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            asInstant |= card.isInstant(game);
-            asInstant |= card.hasAbility(FlashAbility.getInstance(), game);
-        }
         if (!asInstant && !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
         }
