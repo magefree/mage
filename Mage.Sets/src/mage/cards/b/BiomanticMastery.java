@@ -26,7 +26,6 @@ public final class BiomanticMastery extends CardImpl {
         // Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
         this.getSpellAbility().addEffect(new BiomanticMasteryEffect());
         this.getSpellAbility().addTarget(new TargetPlayer(2));
-
     }
 
     private BiomanticMastery(final BiomanticMastery card) {
@@ -58,16 +57,15 @@ class BiomanticMasteryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : getTargetPointer().getTargets(game, source)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
-                    controller.drawCards(creatures, source, game);
-                }
-            }
-            return true;
+        if (controller == null) { return false; }
+
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) { continue; }
+
+            int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game);
+            controller.drawCards(creatures, source, game);
         }
-        return false;
+        return true;
     }
 }

@@ -70,13 +70,12 @@ class BudokaGardenerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (game.getBattlefield().count(filterLands, source.getSourceId(), source.getControllerId(), game) >= 10) {
-                new FlipSourceEffect(new DokaiWeaverofLife()).apply(game, source);
-            }
-            return true;
+        if (controller == null) { return false; }
+        if (game.getBattlefield().count(filterLands, source.getSourceId(), source.getControllerId(), game) < 10) {
+            return false;
         }
-        return false;
+
+        return new FlipSourceEffect(new DokaiWeaverofLife()).apply(game, source);
     }
 
     @Override

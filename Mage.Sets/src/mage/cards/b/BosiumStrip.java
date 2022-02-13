@@ -109,13 +109,13 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = (Card) game.getState().getValue("BosiumStrip");
-            if (card != null) {
-                ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-            }
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        Card card = (Card) game.getState().getValue("BosiumStrip");
+        if (card == null) { return false; }
+
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return true;
     }
 
     @Override
@@ -126,16 +126,16 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null
-                    && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) {
-                CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
-                return watcher != null
-                        && watcher.spellWasCastFromGraveyard(event.getTargetId(),
-                                game.getState().getZoneChangeCounter(event.getTargetId()));
-            }
-        }
-        return false;
+        if (zEvent.getToZone() != Zone.GRAVEYARD) { return false; }
+
+        Card card = game.getCard(event.getSourceId());
+        if (card == null) { return false; }
+
+        if (!StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) { return false; }
+
+        CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
+        return watcher != null
+                && watcher.spellWasCastFromGraveyard(event.getTargetId(),
+                game.getState().getZoneChangeCounter(event.getTargetId()));
     }
 }

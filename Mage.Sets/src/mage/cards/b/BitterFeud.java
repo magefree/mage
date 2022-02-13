@@ -63,23 +63,27 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) { return false; }
+
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (controller != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer(2, 2, true);
-            controller.chooseTarget(outcome, target, source, game);
-            Player player1 = game.getPlayer(target.getFirstTarget());
-            if (target.getTargets().size() > 1) {
-                Player player2 = game.getPlayer(target.getTargets().get(1));
-                if (player1 != null && player2 != null) {
-                    game.getState().setValue(source.getSourceId() + "_player1", player1);
-                    game.getState().setValue(source.getSourceId() + "_player2", player2);
-                    game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + player1.getLogName() + " and " + player2.getLogName());
-                    permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() + ", " + player2.getName() + "</font>", game);
-                    return true;
-                }
-            }
-        }
-        return false;
+        if (permanent == null) { return false; }
+
+        TargetPlayer target = new TargetPlayer(2, 2, true);
+        controller.chooseTarget(outcome, target, source, game);
+        Player player1 = game.getPlayer(target.getFirstTarget());
+        if (player1 == null) { return false; }
+
+        if (target.getTargets().size() <= 1) { return false; }
+
+        Player player2 = game.getPlayer(target.getTargets().get(1));
+        if (player2 == null) { return false; }
+
+        game.getState().setValue(source.getSourceId() + "_player1", player1);
+        game.getState().setValue(source.getSourceId() + "_player2", player2);
+        game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + player1.getLogName() + " and " + player2.getLogName());
+        permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() + ", " + player2.getName() + "</font>", game);
+
+        return true;
     }
 
     @Override
@@ -91,8 +95,8 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
 
 class BitterFeudEffect extends ReplacementEffectImpl {
 
-    Player player1;
-    Player player2;
+    private Player player1;
+    private Player player2;
 
     public BitterFeudEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
@@ -101,6 +105,8 @@ class BitterFeudEffect extends ReplacementEffectImpl {
 
     public BitterFeudEffect(final BitterFeudEffect effect) {
         super(effect);
+        this.player1 = effect.player1;
+        this.player2 = effect.player2;
     }
 
     @Override
@@ -110,54 +116,50 @@ class BitterFeudEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PERMANENT:
-            case DAMAGE_PLAYER:
-                return true;
-            default:
-                return false;
-        }
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT && event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         player1 = (Player) game.getState().getValue(source.getSourceId() + "_player1");
-        player2 = (Player) game.getState().getValue(source.getSourceId() + "_player2");
-        if (player1 != null && player2 != null) {
-            UUID targetPlayerId = null;
-            switch (event.getType()) {
-                case DAMAGE_PLAYER:
-                    targetPlayerId = event.getTargetId();
-                    break;
-                case DAMAGE_PERMANENT:
-                    Permanent permanent = game.getPermanent(event.getTargetId());
-                    if (permanent != null) {
-                        targetPlayerId = permanent.getControllerId();
-                    }
-                    break;
-                default:
-                    return false;
-            }
+        if (player1 == null) { return false; }
 
-            if (player1.getId().equals(targetPlayerId) || player2.getId().equals(targetPlayerId)) {
-                UUID sourcePlayerId = null;
-                MageObject damageSource = game.getObject(event.getSourceId());
-                if (damageSource instanceof StackObject) {
-                    sourcePlayerId = ((StackObject) damageSource).getControllerId();
-                } else if (damageSource instanceof Permanent) {
-                    sourcePlayerId = ((Permanent) damageSource).getControllerId();
-                } else if (damageSource instanceof Card) {
-                    sourcePlayerId = ((Card) damageSource).getOwnerId();
-                }
-                if (sourcePlayerId != null
-                        && (player1.getId().equals(sourcePlayerId) || player2.getId().equals(sourcePlayerId))
-                        && !sourcePlayerId.equals(targetPlayerId)) {
-                    return true;
-                }
-            }
+        player2 = (Player) game.getState().getValue(source.getSourceId() + "_player2");
+        if (player2 == null) { return false; }
+
+        UUID targetPlayerId;
+        switch (event.getType()) {
+            case DAMAGE_PLAYER:
+                targetPlayerId = event.getTargetId();
+                break;
+            case DAMAGE_PERMANENT:
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent == null) { return false; }
+
+                targetPlayerId = permanent.getControllerId();
+                break;
+            default:
+                return false;
         }
 
-        return false;
+        if (!player1.getId().equals(targetPlayerId) && !player2.getId().equals(targetPlayerId)) { return false; }
+
+        UUID sourcePlayerId;
+        MageObject damageSource = game.getObject(event.getSourceId());
+
+        if (damageSource instanceof StackObject) {
+            sourcePlayerId = ((StackObject) damageSource).getControllerId();
+        } else if (damageSource instanceof Permanent) {
+            sourcePlayerId = ((Permanent) damageSource).getControllerId();
+        } else if (damageSource instanceof Card) {
+            sourcePlayerId = ((Card) damageSource).getOwnerId();
+        } else {
+            return false;
+        }
+
+        return sourcePlayerId != null
+                && (player1.getId().equals(sourcePlayerId) || player2.getId().equals(sourcePlayerId))
+                && !sourcePlayerId.equals(targetPlayerId);
     }
 
     @Override

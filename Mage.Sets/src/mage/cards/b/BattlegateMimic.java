@@ -31,7 +31,7 @@ public final class BattlegateMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    private String rule = "Whenever you cast a spell that's both red and white, {this} has base power and toughness 4/2 and gains first strike until end of turn.";
+    private static final String rule = "Whenever you cast a spell that's both red and white, {this} has base power and toughness 4/2 and gains first strike until end of turn.";
 
     public BattlegateMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R/W}");
