@@ -219,6 +219,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar's Expertise", 170, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Riverwise Augur", 93, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Robe of Stars", 11, Rarity.RARE, mage.cards.r.RobeOfStars.class));
+        cards.add(new SetCardInfo("Rod of Absorption", 19, Rarity.RARE, mage.cards.r.RodOfAbsorption.class));
         cards.add(new SetCardInfo("Ronom Unicorn", 71, Rarity.COMMON, mage.cards.r.RonomUnicorn.class));
         cards.add(new SetCardInfo("Savage Ventmaw", 191, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 137, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
