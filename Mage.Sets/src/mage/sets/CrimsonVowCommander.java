@@ -139,6 +139,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skycloud Expanse", 182, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 183, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 168, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Spectral Arcanist", 15, Rarity.RARE, mage.cards.s.SpectralArcanist.class));
         cards.add(new SetCardInfo("Spectral Sailor", 114, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spectral Shepherd", 98, Rarity.UNCOMMON, mage.cards.s.SpectralShepherd.class));
         cards.add(new SetCardInfo("Stensia Masquerade", 150, Rarity.UNCOMMON, mage.cards.s.StensiaMasquerade.class));
