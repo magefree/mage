@@ -210,4 +210,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public void retainZone(Zone zone, Game game) {
         removeIf(uuid -> game.getState().getZone(uuid) != zone);
     }
+
+    @Override
+    public void removeZone(Zone zone, Game game) {
+        removeIf(uuid -> game.getState().getZone(uuid) == zone);
+    }
 }

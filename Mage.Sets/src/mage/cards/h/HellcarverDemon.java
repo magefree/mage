@@ -12,7 +12,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -83,7 +82,7 @@ class HellcarverDemonEffect extends OneShotEffect {
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, new CardsImpl(
                         controller.getLibrary().getTopCards(game, 6)
-                ), StaticFilters.FILTER_CARD, Zone.EXILED
+                ), StaticFilters.FILTER_CARD
         );
         return true;
     }

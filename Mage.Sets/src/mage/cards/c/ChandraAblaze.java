@@ -166,7 +166,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
         CardUtil.castMultipleWithAttributeForFree(
                 player, source, game,
                 new CardsImpl(player.getGraveyard().getCards(filter, game)),
-                StaticFilters.FILTER_CARD, Zone.GRAVEYARD
+                StaticFilters.FILTER_CARD
         );
         return true;
     }

@@ -139,6 +139,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Intercessor's Arrest", 20, Rarity.COMMON, mage.cards.i.IntercessorsArrest.class));
         cards.add(new SetCardInfo("Inventive Iteration", 57, Rarity.RARE, mage.cards.i.InventiveIteration.class));
         cards.add(new SetCardInfo("Invigorating Hot Spring", 223, Rarity.UNCOMMON, mage.cards.i.InvigoratingHotSpring.class));
+        cards.add(new SetCardInfo("Invoke Calamity", 147, Rarity.RARE, mage.cards.i.InvokeCalamity.class));
         cards.add(new SetCardInfo("Invoke Despair", 101, Rarity.RARE, mage.cards.i.InvokeDespair.class));
         cards.add(new SetCardInfo("Invoke Justice", 21, Rarity.RARE, mage.cards.i.InvokeJustice.class));
         cards.add(new SetCardInfo("Invoke the Ancients", 193, Rarity.RARE, mage.cards.i.InvokeTheAncients.class));

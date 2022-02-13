@@ -82,7 +82,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
         opponent.revealCards(source, cards, game);
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, cards, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY,
-                Zone.LIBRARY, SpellMasteryCondition.instance.apply(game, source) ? 2 : 1
+                SpellMasteryCondition.instance.apply(game, source) ? 2 : 1
         );
         cards.retainZone(Zone.LIBRARY, game);
         opponent.moveCards(cards, Zone.GRAVEYARD, source, game);

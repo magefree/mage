@@ -69,7 +69,7 @@ class EpicExperimentEffect extends OneShotEffect {
         controller.moveCards(cards, Zone.EXILED, source, game);
         FilterCard filter = new FilterInstantOrSorceryCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
-        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter, Zone.EXILED);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
     }

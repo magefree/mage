@@ -39,10 +39,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInExile;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
@@ -1203,7 +1199,14 @@ public final class CardUtil {
         }
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+    public interface SpellCastTracker {
+
+        boolean checkCard(Card card, Game game);
+
+        void addCard(Card card, Ability source, Game game);
+    }
+
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
@@ -1216,33 +1219,22 @@ public final class CardUtil {
         }
         cards.removeIf(Objects::isNull);
         cards.removeIf(card -> !filter.match(card, sourceId, playerId, game));
+        if (spellCastTracker != null) {
+            cards.removeIf(card -> spellCastTracker.checkCard(card, game));
+        }
         return cards;
     }
 
     private static final FilterCard defaultFilter = new FilterCard("card to cast");
 
-    private static TargetCard getTarget(Set<UUID> cardIds, Game game) {
-        Zone zone = game.getState().getZone(cardIds.stream().findFirst().orElse(null));
-        switch (zone) {
-            case HAND:
-                return new TargetCardInHand(0, 1, defaultFilter);
-            case GRAVEYARD:
-                return new TargetCardInGraveyard(0, 1, defaultFilter);
-            case EXILED:
-                return new TargetCardInExile(0, 1, defaultFilter, null);
-            case LIBRARY:
-                return new TargetCardInLibrary(0, 1, defaultFilter);
-            case COMMAND:
-                return new TargetCard(0, 1, Zone.COMMAND, defaultFilter);
-            default:
-                throw new UnsupportedOperationException("can't choose a card from zone: " + zone);
-        }
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        return castSpellWithAttributesForFree(player, source, game, cards, filter, null);
     }
 
-    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
-            List<Card> castableComponents = getCastableComponents(card, filter, source.getSourceId(), player.getId(), game);
+            List<Card> castableComponents = getCastableComponents(card, filter, source.getSourceId(), player.getId(), game, spellCastTracker);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
@@ -1256,7 +1248,7 @@ public final class CardUtil {
                 break;
             default:
                 Cards castableCards = new CardsImpl(cardMap.keySet());
-                TargetCard target = getTarget(cardMap.keySet(), game);
+                TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.setNotTarget(true);
                 player.choose(Outcome.PlayForFree, castableCards, target, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
@@ -1282,36 +1274,43 @@ public final class CardUtil {
                 game, true, new ApprovingObject(source, game)
         );
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+        if (result && spellCastTracker != null) {
+            spellCastTracker.addCard(cardToCast, source, game);
+        }
         if (player.isComputer() && !result) {
             cards.remove(cardToCast);
         }
         return result;
     }
 
-    private static boolean checkForPlayable(Cards cards, FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
         return cards
                 .getCards(game)
                 .stream()
-                .anyMatch(card -> !getCastableComponents(card, filter, sourceId, playerId, game).isEmpty());
+                .anyMatch(card -> !getCastableComponents(card, filter, sourceId, playerId, game, spellCastTracker).isEmpty());
     }
 
-    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
-        castMultipleWithAttributeForFree(player, source, game, cards, filter, zone, Integer.MAX_VALUE);
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, Integer.MAX_VALUE);
     }
 
-    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone, int maxSpells) {
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, maxSpells, null);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker) {
         if (maxSpells == 1) {
             CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
             return;
         }
         int spellsCast = 0;
-        cards.retainZone(zone, game);
+        cards.removeZone(Zone.STACK, game);
         while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
-            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter)) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker)) {
                 spellsCast++;
-                cards.retainZone(zone, game);
+                cards.removeZone(Zone.STACK, game);
             } else if (!checkForPlayable(
-                    cards, filter, source.getSourceId(), player.getId(), game
+                    cards, filter, source.getSourceId(), player.getId(), game, spellCastTracker
             ) || !player.chooseUse(
                     Outcome.PlayForFree, "Continue casting spells?", source, game
             )) {

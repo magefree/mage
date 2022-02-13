@@ -81,7 +81,7 @@ class FeveredSuspicionEffect extends OneShotEffect {
         nonlands.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, nonlands,
-                StaticFilters.FILTER_CARD, Zone.EXILED
+                StaticFilters.FILTER_CARD
         );
         return true;
     }

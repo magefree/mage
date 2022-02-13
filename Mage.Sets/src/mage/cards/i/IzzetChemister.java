@@ -15,7 +15,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -91,7 +90,7 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
         }
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, new CardsImpl(exile),
-                StaticFilters.FILTER_CARD, Zone.EXILED
+                StaticFilters.FILTER_CARD
         );
         return true;
     }
