@@ -45,6 +45,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Concord with the Kami", 25, Rarity.RARE, mage.cards.c.ConcordWithTheKami.class));
         cards.add(new SetCardInfo("Crush Contraband", 82, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 149, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
+        cards.add(new SetCardInfo("Cyberdrive Awakener", 12, Rarity.RARE, mage.cards.c.CyberdriveAwakener.class));
         cards.add(new SetCardInfo("Dance of the Manse", 136, Rarity.RARE, mage.cards.d.DanceOfTheManse.class));
         cards.add(new SetCardInfo("Decimate", 137, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dispatch", 83, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
