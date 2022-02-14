@@ -68,6 +68,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gruul Turf", 170, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 139, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Hunter's Insight", 119, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
+        cards.add(new SetCardInfo("Imposter Mech", 13, Rarity.RARE, mage.cards.i.ImposterMech.class));
         cards.add(new SetCardInfo("Indomitable Archangel", 85, Rarity.MYTHIC, mage.cards.i.IndomitableArchangel.class));
         cards.add(new SetCardInfo("Ironsoul Enforcer", 7, Rarity.RARE, mage.cards.i.IronsoulEnforcer.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 93, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
