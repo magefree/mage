@@ -40,6 +40,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Warp", 104, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chishiro, the Shattered Blade", 1, Rarity.MYTHIC, mage.cards.c.ChishiroTheShatteredBlade.class));
         cards.add(new SetCardInfo("Cinder Glade", 166, Rarity.RARE, mage.cards.c.CinderGlade.class));
+        cards.add(new SetCardInfo("Collision of Realms", 19, Rarity.RARE, mage.cards.c.CollisionOfRealms.class));
         cards.add(new SetCardInfo("Colossal Plow", 148, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
         cards.add(new SetCardInfo("Command Tower", 167, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Concord with the Kami", 25, Rarity.RARE, mage.cards.c.ConcordWithTheKami.class));
