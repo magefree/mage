@@ -92,6 +92,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class));
         cards.add(new SetCardInfo("Myrsmith", 86, Rarity.UNCOMMON, mage.cards.m.Myrsmith.class));
         cards.add(new SetCardInfo("Nissa, Voice of Zendikar", 122, Rarity.MYTHIC, mage.cards.n.NissaVoiceOfZendikar.class));
+        cards.add(new SetCardInfo("One with the Kami", 27, Rarity.RARE, mage.cards.o.OneWithTheKami.class));
         cards.add(new SetCardInfo("Opal Palace", 172, Rarity.COMMON, mage.cards.o.OpalPalace.class));
         cards.add(new SetCardInfo("Oran-Rief, the Vastwood", 173, Rarity.RARE, mage.cards.o.OranRiefTheVastwood.class));
         cards.add(new SetCardInfo("Ordeal of Nylea", 123, Rarity.UNCOMMON, mage.cards.o.OrdealOfNylea.class));
