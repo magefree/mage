@@ -133,6 +133,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spire of Industry", 178, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 88, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Starstorm", 110, Rarity.RARE, mage.cards.s.Starstorm.class));
+        cards.add(new SetCardInfo("Swift Reconfiguration", 10, Rarity.RARE, mage.cards.s.SwiftReconfiguration.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 163, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Sword of Vengeance", 164, Rarity.RARE, mage.cards.s.SwordOfVengeance.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
