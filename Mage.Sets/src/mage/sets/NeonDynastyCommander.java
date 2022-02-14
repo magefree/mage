@@ -149,6 +149,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thoughtcast", 99, Rarity.COMMON, mage.cards.t.Thoughtcast.class));
         cards.add(new SetCardInfo("Ulasht, the Hate Seed", 143, Rarity.RARE, mage.cards.u.UlashtTheHateSeed.class));
         cards.add(new SetCardInfo("Universal Surveillance", 17, Rarity.RARE, mage.cards.u.UniversalSurveillance.class));
+        cards.add(new SetCardInfo("Unquenchable Fury", 23, Rarity.RARE, mage.cards.u.UnquenchableFury.class));
         cards.add(new SetCardInfo("Vastwood Surge", 133, Rarity.UNCOMMON, mage.cards.v.VastwoodSurge.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 100, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
         cards.add(new SetCardInfo("Weatherlight", 165, Rarity.MYTHIC, mage.cards.w.Weatherlight.class));
