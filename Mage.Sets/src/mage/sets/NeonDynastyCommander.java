@@ -115,6 +115,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riddlesmith", 96, Rarity.UNCOMMON, mage.cards.r.Riddlesmith.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 127, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 126, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
+        cards.add(new SetCardInfo("Ruthless Technomancer", 35, Rarity.RARE, mage.cards.r.RuthlessTechnomancer.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 97, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 128, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 129, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
