@@ -40,11 +40,13 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Warp", 104, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chishiro, the Shattered Blade", 1, Rarity.MYTHIC, mage.cards.c.ChishiroTheShatteredBlade.class));
         cards.add(new SetCardInfo("Cinder Glade", 166, Rarity.RARE, mage.cards.c.CinderGlade.class));
+        cards.add(new SetCardInfo("Collision of Realms", 19, Rarity.RARE, mage.cards.c.CollisionOfRealms.class));
         cards.add(new SetCardInfo("Colossal Plow", 148, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
         cards.add(new SetCardInfo("Command Tower", 167, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Concord with the Kami", 25, Rarity.RARE, mage.cards.c.ConcordWithTheKami.class));
         cards.add(new SetCardInfo("Crush Contraband", 82, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 149, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
+        cards.add(new SetCardInfo("Cyberdrive Awakener", 12, Rarity.RARE, mage.cards.c.CyberdriveAwakener.class));
         cards.add(new SetCardInfo("Dance of the Manse", 136, Rarity.RARE, mage.cards.d.DanceOfTheManse.class));
         cards.add(new SetCardInfo("Decimate", 137, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dispatch", 83, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
@@ -68,11 +70,14 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gruul Turf", 170, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 139, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Hunter's Insight", 119, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
+        cards.add(new SetCardInfo("Imposter Mech", 13, Rarity.RARE, mage.cards.i.ImposterMech.class));
         cards.add(new SetCardInfo("Indomitable Archangel", 85, Rarity.MYTHIC, mage.cards.i.IndomitableArchangel.class));
         cards.add(new SetCardInfo("Ironsoul Enforcer", 7, Rarity.RARE, mage.cards.i.IronsoulEnforcer.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 93, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Kaima, the Fractured Calm", 3, Rarity.MYTHIC, mage.cards.k.KaimaTheFracturedCalm.class));
+        cards.add(new SetCardInfo("Kami of Celebration", 20, Rarity.RARE, mage.cards.k.KamiOfCelebration.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 14, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
+        cards.add(new SetCardInfo("Katsumasa, the Animator", 15, Rarity.RARE, mage.cards.k.KatsumasaTheAnimator.class));
         cards.add(new SetCardInfo("Kodama's Reach", 120, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Komainu Battle Armor", 21, Rarity.RARE, mage.cards.k.KomainuBattleArmor.class));
         cards.add(new SetCardInfo("Kosei, Penitent Warlord", 26, Rarity.RARE, mage.cards.k.KoseiPenitentWarlord.class));
@@ -90,6 +95,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class));
         cards.add(new SetCardInfo("Myrsmith", 86, Rarity.UNCOMMON, mage.cards.m.Myrsmith.class));
         cards.add(new SetCardInfo("Nissa, Voice of Zendikar", 122, Rarity.MYTHIC, mage.cards.n.NissaVoiceOfZendikar.class));
+        cards.add(new SetCardInfo("One with the Kami", 27, Rarity.RARE, mage.cards.o.OneWithTheKami.class));
         cards.add(new SetCardInfo("Opal Palace", 172, Rarity.COMMON, mage.cards.o.OpalPalace.class));
         cards.add(new SetCardInfo("Oran-Rief, the Vastwood", 173, Rarity.RARE, mage.cards.o.OranRiefTheVastwood.class));
         cards.add(new SetCardInfo("Ordeal of Nylea", 123, Rarity.UNCOMMON, mage.cards.o.OrdealOfNylea.class));
@@ -112,6 +118,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riddlesmith", 96, Rarity.UNCOMMON, mage.cards.r.Riddlesmith.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 127, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 126, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
+        cards.add(new SetCardInfo("Ruthless Technomancer", 35, Rarity.RARE, mage.cards.r.RuthlessTechnomancer.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 97, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 128, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 129, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
@@ -122,6 +129,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Myr", 158, Rarity.COMMON, mage.cards.s.SilverMyr.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 177, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 159, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class));
+        cards.add(new SetCardInfo("Smoke Spirits' Aid", 22, Rarity.RARE, mage.cards.s.SmokeSpiritsAid.class));
         cards.add(new SetCardInfo("Smuggler's Copter", 160, Rarity.RARE, mage.cards.s.SmugglersCopter.class));
         cards.add(new SetCardInfo("Snake Umbra", 130, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));
         cards.add(new SetCardInfo("Sol Ring", 161, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
@@ -131,6 +139,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spire of Industry", 178, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 88, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Starstorm", 110, Rarity.RARE, mage.cards.s.Starstorm.class));
+        cards.add(new SetCardInfo("Swift Reconfiguration", 10, Rarity.RARE, mage.cards.s.SwiftReconfiguration.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 163, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Sword of Vengeance", 164, Rarity.RARE, mage.cards.s.SwordOfVengeance.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
@@ -143,6 +152,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thoughtcast", 99, Rarity.COMMON, mage.cards.t.Thoughtcast.class));
         cards.add(new SetCardInfo("Ulasht, the Hate Seed", 143, Rarity.RARE, mage.cards.u.UlashtTheHateSeed.class));
         cards.add(new SetCardInfo("Universal Surveillance", 17, Rarity.RARE, mage.cards.u.UniversalSurveillance.class));
+        cards.add(new SetCardInfo("Unquenchable Fury", 23, Rarity.RARE, mage.cards.u.UnquenchableFury.class));
         cards.add(new SetCardInfo("Vastwood Surge", 133, Rarity.UNCOMMON, mage.cards.v.VastwoodSurge.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 100, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
         cards.add(new SetCardInfo("Weatherlight", 165, Rarity.MYTHIC, mage.cards.w.Weatherlight.class));

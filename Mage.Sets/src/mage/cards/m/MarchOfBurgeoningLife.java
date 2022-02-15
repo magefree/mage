@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.effects.CostsLessForExiledCardsEffect;
+import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class MarchOfBurgeoningLife extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // As an additional cost to cast this spell, you may exile any number of green cards from your hand. This spell costs {2} less to cast for each card exiled this way.
-        CostsLessForExiledCardsEffect.addCostAndEffect(this, filter);
+        ExileCardsFromHandAdjuster.addAdjusterAndMessage(this, filter);
 
         // Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new MarchOfBurgeoningLifeEffect());

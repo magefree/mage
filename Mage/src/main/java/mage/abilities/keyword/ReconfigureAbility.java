@@ -2,8 +2,8 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -50,10 +50,26 @@ public class ReconfigureAbility extends ActivatedAbilityImpl {
     }
 }
 
-class ReconfigureUnattachAbility extends ActivateAsSorceryActivatedAbility {
+class ReconfigureUnattachAbility extends ActivatedAbilityImpl {
+
+    private static enum ReconfigureUnattachAbilityCondition implements Condition {
+        instance;
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
+            if (equipment == null) {
+                return false;
+            }
+            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+            return permanent != null && permanent.isCreature(game);
+        }
+    }
 
     protected ReconfigureUnattachAbility(String manaString) {
         super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), new ManaCostsImpl<>(manaString));
+        this.condition = ReconfigureUnattachAbilityCondition.instance;
+        this.timing = TimingRule.SORCERY;
         this.setRuleVisible(false);
     }
 
@@ -65,13 +81,18 @@ class ReconfigureUnattachAbility extends ActivateAsSorceryActivatedAbility {
     public ReconfigureUnattachAbility copy() {
         return new ReconfigureUnattachAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return super.getRule() + " Activate only if this permanent is attached to a creature and only as a sorcery.";
+    }
 }
 
 class ReconfigureUnattachEffect extends OneShotEffect {
 
     ReconfigureUnattachEffect() {
         super(Outcome.Benefit);
-        staticText = "unattach {this}";
+        staticText = "unattach this permanent";
     }
 
     private ReconfigureUnattachEffect(final ReconfigureUnattachEffect effect) {
