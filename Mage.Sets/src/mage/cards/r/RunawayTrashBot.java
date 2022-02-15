@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class RunawayTrashBot extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterArtifactOrEnchantmentCard("artifact and/or enchantment card in your graveyard");
+            = new FilterArtifactOrEnchantmentCard("artifact and/or enchantment card");
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
     private static final Hint hint = new ValueHint("Artifacts and enchantments in your graveyard", xValue);
 

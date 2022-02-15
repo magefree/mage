@@ -64,7 +64,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
-            return staticText + " phases out";
+            return staticText;
         }
 
         StringBuilder sb = new StringBuilder();

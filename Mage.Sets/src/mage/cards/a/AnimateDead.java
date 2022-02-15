@@ -94,7 +94,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
 
         if (controller != null && animateDead != null) {
             Card cardInGraveyard = game.getCard(animateDead.getAttachedTo());
-            if (cardInGraveyard == null) {
+            if (cardInGraveyard == null || game.getState().getZone(cardInGraveyard.getId()) != Zone.GRAVEYARD) {
                 return true;
             }
             // put card into play from Graveyard

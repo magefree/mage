@@ -2,8 +2,9 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.common.GoadAttachedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -36,7 +37,9 @@ public final class PsychicImpetus extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and is goaded.
-        this.addAbility(new GoadAttachedAbility(new BoostEnchantedEffect(2, 2)));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
+        ability.addEffect(new GoadAttachedEffect());
+        this.addAbility(ability);
 
         // Whenever enchanted creature attacks, you scry 2.
         this.addAbility(new AttacksAttachedTriggeredAbility(

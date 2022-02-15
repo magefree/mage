@@ -52,8 +52,8 @@ public final class AnimusOfNightsReach extends CardImpl {
 
         // Whenever Animus of Night's Reach attacks, it gets +X/+0 until end of turn, where X is the number of creature cards in defending player's graveyard.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true)
-        ).addHint(AnimusOfNightsReachHint.instance));
+                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+        ).setText("it gets +X/+0 until end of turn, where X is the number of creature cards in defending player's graveyard")).addHint(AnimusOfNightsReachHint.instance));
     }
 
     private AnimusOfNightsReach(final AnimusOfNightsReach card) {

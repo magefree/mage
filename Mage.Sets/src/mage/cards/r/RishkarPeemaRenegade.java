@@ -43,7 +43,7 @@ public final class RishkarPeemaRenegade extends CardImpl {
 
         // When Rishkar, Peema Renegade enters the battlefield, put a +1/+1 counter on each of up to two target creatures.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setText("Put a +1/+1 counter on each of up to two target creatures");
+        effect.setText("put a +1/+1 counter on each of up to two target creatures");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);

@@ -25,6 +25,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected Mana cost;
     protected ManaOptions options;
     protected Filter sourceFilter;
+    protected boolean phyrexian = false;
 
     public ManaCostImpl() {
         payment = new Mana();
@@ -41,6 +42,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         if (manaCost.sourceFilter != null) {
             this.sourceFilter = manaCost.sourceFilter.copy();
         }
+        this.phyrexian = manaCost.phyrexian;
     }
 
     @Override
@@ -287,5 +289,18 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     @Override
     public String toString() {
         return getText();
+    }
+
+    @Override
+    public boolean isPhyrexian() {
+        return phyrexian;
+    }
+
+    @Override
+    public void setPhyrexian(boolean phyrexian) {
+        if (phyrexian) {
+            this.options.add(Mana.GenericMana(0));
+        }
+        this.phyrexian = phyrexian;
     }
 }

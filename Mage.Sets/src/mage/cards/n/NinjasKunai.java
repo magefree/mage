@@ -33,7 +33,7 @@ public final class NinjasKunai extends CardImpl {
 
         // Equipped creature has "{1}, {T}, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3 damage to any target."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{1}, {T}, Sacrifice {this}: {this} deals 2 damage to any target.\"",
+                "equipped creature has \"{1}, {T}, Sacrifice {this}: {this} deals 3 damage to any target.\"",
                 new NinjasKunaiEffect(), new TargetAnyTarget(), new SacrificeAttachmentCost(), new GenericManaCost(1), new TapSourceCost()
         )));
 

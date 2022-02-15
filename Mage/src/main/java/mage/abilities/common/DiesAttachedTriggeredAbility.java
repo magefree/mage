@@ -110,6 +110,19 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
+        // set targetpointer to the creature that died
+        if (setTargetPointer == SetTargetPointer.CARD
+                || setTargetPointer == SetTargetPointer.PERMANENT) {
+            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+            if (attachment != null
+                    && attachment.getAttachedTo() != null) {
+                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
+                        Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
+                if (attachedTo != null) {
+                    getEffects().setTargetPointer(new FixedTarget(attachedTo.getId()));
+                }
+            }
+        }
         return true;
     }
 

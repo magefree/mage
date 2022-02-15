@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,7 +36,7 @@ public final class NicolBolasDragonGod extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Nicol Bolas, Dragon-God has all loyalty abilities of all other planeswalkers on the battlefield.
         this.addAbility(new SimpleStaticAbility(new NicolBolasDragonGodGainAbilitiesEffect()));

@@ -2,9 +2,12 @@ package mage.verify;
 
 import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -59,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "VOC"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "NEO"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -237,7 +240,7 @@ public class VerifyCardDataTest {
     }
 
     private static boolean evergreenCheck(String s) {
-        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from");
+        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from") || s.startsWith("ward ");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
@@ -1593,6 +1596,17 @@ public class VerifyCardDataTest {
         return cardText.replace(name, name.split(" ")[0]).equals(refText);
     }
 
+    private static final boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
+        return card.getAbilities()
+                .stream()
+                .map(Ability::getModes)
+                .map(LinkedHashMap::values)
+                .flatMap(Collection::stream)
+                .map(Mode::getEffects)
+                .flatMap(Collection::stream)
+                .anyMatch(effectClazz::isInstance);
+    }
+
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
@@ -1609,7 +1623,7 @@ public class VerifyCardDataTest {
             refText = refText.substring(1, refText.length() - 1);
         }
         // planeswalker fix [-7]: xxx
-        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ");
+        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
         // evergreen keyword fix
         for (String s : refText.split("[\\$\\\n]")) {

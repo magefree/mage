@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -53,7 +52,7 @@ public final class NahiriHeirOfTheAncients extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriHeirOfTheAncientsEffect(), 1));

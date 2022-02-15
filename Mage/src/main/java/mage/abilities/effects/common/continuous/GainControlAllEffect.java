@@ -30,7 +30,7 @@ public class GainControlAllEffect extends OneShotEffect {
         this.filter = filter;
         this.duration = duration;
         this.controllingPlayerId = controllingPlayerId;
-        this.staticText = "Gain control of " + filter.getMessage();
+        this.staticText = "gain control of " + filter.getMessage();
     }
 
     public GainControlAllEffect(final GainControlAllEffect effect) {

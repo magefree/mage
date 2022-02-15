@@ -64,7 +64,7 @@ class MobilizerMechTriggeredAbility extends TriggeredAbilityImpl {
 
     MobilizerMechTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE));
-        this.addTarget(new TargetPermanent(0,1,filter));
+        this.addTarget(new TargetPermanent(0, 1, filter));
     }
 
     private MobilizerMechTriggeredAbility(final MobilizerMechTriggeredAbility ability) {
@@ -78,7 +78,7 @@ class MobilizerMechTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREWED_VEHICLE;
+        return event.getType() == GameEvent.EventType.VEHICLE_CREWED;
     }
 
     @Override
