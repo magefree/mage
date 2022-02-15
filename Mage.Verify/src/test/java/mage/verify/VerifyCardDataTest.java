@@ -2,9 +2,12 @@ package mage.verify;
 
 import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -1591,6 +1594,17 @@ public class VerifyCardDataTest {
             return true;
         }
         return cardText.replace(name, name.split(" ")[0]).equals(refText);
+    }
+
+    private static final boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
+        return card.getAbilities()
+                .stream()
+                .map(Ability::getModes)
+                .map(LinkedHashMap::values)
+                .flatMap(Collection::stream)
+                .map(Mode::getEffects)
+                .flatMap(Collection::stream)
+                .anyMatch(effectClazz::isInstance);
     }
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {

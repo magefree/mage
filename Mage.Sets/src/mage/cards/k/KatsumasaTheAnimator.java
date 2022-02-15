@@ -59,9 +59,7 @@ public final class KatsumasaTheAnimator extends CardImpl {
 
         // At the beginning of your upkeep, put a +1/+1 counter on each of up to three target noncreature artifacts.
         ability = new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                        .setText("put a +1/+1 counter on each of up to three target noncreature artifacts"),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false
         );
         ability.addTarget(new TargetPermanent(0, 3, filter2));
         this.addAbility(ability);
