@@ -127,6 +127,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Myr", 158, Rarity.COMMON, mage.cards.s.SilverMyr.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 177, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 159, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class));
+        cards.add(new SetCardInfo("Smoke Spirits' Aid", 22, Rarity.RARE, mage.cards.s.SmokeSpiritsAid.class));
         cards.add(new SetCardInfo("Smuggler's Copter", 160, Rarity.RARE, mage.cards.s.SmugglersCopter.class));
         cards.add(new SetCardInfo("Snake Umbra", 130, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));
         cards.add(new SetCardInfo("Sol Ring", 161, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
