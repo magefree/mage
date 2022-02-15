@@ -46,8 +46,8 @@ public class ExileCardsFromHandAdjuster implements CostAdjuster {
     public static final void addAdjusterAndMessage(Card card, FilterCard filter) {
         card.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new InfoEffect("you may exile any number of " + filter.getMessage()
-                        + ". This spell costs {2} less to cast for each card exiled this way")
+                new InfoEffect("as an additional cost to cast this spell, you may exile any number of "
+                        + filter.getMessage() + ". This spell costs {2} less to cast for each card exiled this way")
         ));
         card.getSpellAbility().setCostAdjuster(new ExileCardsFromHandAdjuster(filter));
     }
