@@ -61,7 +61,7 @@ public class CrewAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "crew " + value + " <i>(Tap any number of creatures you control with total power "
+        return "Crew " + value + " <i>(Tap any number of creatures you control with total power "
                 + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
     }
 }
