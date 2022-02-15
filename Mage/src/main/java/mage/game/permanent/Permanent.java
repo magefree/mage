@@ -87,6 +87,10 @@ public interface Permanent extends Card, Controllable {
      */
     boolean setClassLevel(int classLevel);
 
+    void addGoadingPlayer(UUID playerId);
+
+    Set<UUID> getGoadingPlayers();
+
     void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);

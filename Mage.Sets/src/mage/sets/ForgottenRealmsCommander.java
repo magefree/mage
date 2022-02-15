@@ -273,6 +273,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Stance", 76, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 148, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanish into Memory", 196, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
+        cards.add(new SetCardInfo("Vengeful Ancestor", 35, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Verdant Embrace", 173, Rarity.RARE, mage.cards.v.VerdantEmbrace.class));
         cards.add(new SetCardInfo("Victimize", 112, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viridian Longbow", 221, Rarity.COMMON, mage.cards.v.ViridianLongbow.class));
