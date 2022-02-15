@@ -11,8 +11,9 @@ import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.HumanMonkToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -36,7 +37,8 @@ public final class JuganDefendsTheTemple extends CardImpl {
         // II — Put a +1/+1 counter on each of up to two target creatures.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TargetCreaturePermanent(0, 2)
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES)
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.

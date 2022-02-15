@@ -90,7 +90,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
 
     public KotoseTheSilentSpiderEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile target card in an opponent's graveyard other than a basic land card. Search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. For as long as you control Kotose, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it.";
+        this.staticText = "exile target card other than a basic land card from an opponent's graveyard. Search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles. For as long as you control {this}, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it";
     }
 
     public KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {

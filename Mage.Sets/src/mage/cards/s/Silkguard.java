@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class Silkguard extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("Auras, Equipment, and modified creatures you control");
+            = new FilterControlledPermanent("Auras, Equipment, and modified creatures");
 
     static {
         filter.add(Predicates.or(
@@ -50,7 +50,7 @@ public final class Silkguard extends CardImpl {
         // Auras, Equipment, and modified creatures you control gain hexproof until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn, filter
-        ));
+        ).concatBy("<br>"));
     }
 
     private Silkguard(final Silkguard card) {

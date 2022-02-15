@@ -91,7 +91,7 @@ class AgitatorAntEffect extends OneShotEffect {
             if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(2), player.getId(), source, game)) {
                 continue;
             }
-            new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
+            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
         }
         return true;
     }

@@ -1737,7 +1737,6 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         } else {
             TargetDefender target = new TargetDefender(possibleDefender, attackerId);
-            target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
             if (forcedToAttack) {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
@@ -1757,7 +1756,6 @@ public class HumanPlayer extends PlayerImpl {
 
     protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
         TargetDefender target = new TargetDefender(defenders, null);
-        target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
         if (chooseTarget(Outcome.Damage, target, null, game)) {
             return getFixedResponseUUID(game);
         }

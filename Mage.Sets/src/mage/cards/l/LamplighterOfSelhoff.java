@@ -41,7 +41,7 @@ public final class LamplighterOfSelhoff extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control another Zombie, you may a draw card. If you do, discard a card."));
+                "When {this} enters the battlefield, if you control another Zombie, you may draw a card. If you do, discard a card."));
     }
 
     private LamplighterOfSelhoff(final LamplighterOfSelhoff card) {

@@ -976,24 +976,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetDefender) {
-            // TODO: Improve, now planeswalker is always chosen if it exits
-            List<Permanent> targets;
-            targets = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, randomOpponentId, game);
-            if (targets != null && !targets.isEmpty()) {
-                for (Permanent planeswalker : targets) {
-                    if (target.canTarget(abilityControllerId, planeswalker.getId(), source, game)) {
-                        target.addTarget(planeswalker.getId(), source, game);
-                    }
-                    if (target.isChosen()) {
-                        return true;
-                    }
-                }
-            }
-            if (!target.isChosen()) {
-                if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
-                    target.addTarget(randomOpponentId, source, game);
-                }
-            }
+            UUID randomDefender = RandomUtil.randomFromCollection(possibleTargets);
+            target.addTarget(randomDefender, source, game);
             return target.isChosen();
         }
 
@@ -2997,21 +2981,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      * @return
      */
     private UUID getRandomOpponent(UUID abilityControllerId, Game game) {
-        UUID randomOpponentId = null;
-        Set<UUID> opponents = game.getOpponents(abilityControllerId);
-        if (opponents.size() > 1) {
-            int rand = RandomUtil.nextInt(opponents.size());
-            int count = 0;
-            for (UUID currentId : opponents) {
-                if (count == rand) {
-                    randomOpponentId = currentId;
-                    break;
-                }
-            }
-        } else if (opponents.size() == 1) {
-            randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
-        }
-        return randomOpponentId;
+        return RandomUtil.randomFromCollection(game.getOpponents(abilityControllerId));
     }
 
     @Override
