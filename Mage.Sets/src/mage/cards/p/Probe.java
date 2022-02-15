@@ -32,7 +32,7 @@ public final class Probe extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardTargetEffect(2),
                 KickedCondition.instance,
-                "<br><br>If this spell was kicked, target player discards two cards"));
+                "If this spell was kicked, target player discards two cards"));
         this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.instance);
     }
 
