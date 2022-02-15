@@ -30,7 +30,7 @@ import java.util.UUID;
 public final class OneWithTheKami extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("{this} or another modified creature you control");
+            = new FilterControlledCreaturePermanent("enchanted creature or another modified creature you control");
 
     static {
         filter.add(ModifiedPredicate.instance);

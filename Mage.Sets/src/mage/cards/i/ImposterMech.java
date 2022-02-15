@@ -40,10 +40,11 @@ public final class ImposterMech extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except its a Vehicle artifact with crew 3 and it loses all other card types.
-        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, applier
-        ).setText("You may have {this} enter the battlefield as a copy of a creature an opponent controls, " +
-                "except its a Vehicle artifact with crew 3 and it loses all other card types.")));
+        this.addAbility(new EntersBattlefieldAbility(
+                new CopyPermanentEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, applier),
+                null, "You may have {this} enter the battlefield as a copy of a creature " +
+                "an opponent controls, except its a Vehicle artifact with crew 3 and it loses all other card types.", null
+        ));
 
         // Crew 3
         this.addAbility(new CrewAbility(3));

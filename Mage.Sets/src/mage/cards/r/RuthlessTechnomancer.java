@@ -52,8 +52,8 @@ public final class RuthlessTechnomancer extends CardImpl {
         // {2}{B}, Sacrifice X artifacts: Return target creature card with power X or less from your graveyard to the battlefield. X can't be 0.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
-                        .setText("return target creature card with power X " +
-                                "or less from your graveyard to the battlefield"),
+                        .setText("return target creature card with power X or less " +
+                                "from your graveyard to the battlefield. X can't be 0"),
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeXTargetCost(filter, false, 1));
@@ -90,7 +90,7 @@ class RuthlessTechnomancerEffect extends OneShotEffect {
     RuthlessTechnomancerEffect() {
         super(Outcome.Benefit);
         staticText = "you may sacrifice another creature you control. If you do, " +
-                "create a number of Treasure tokens equal to that creature's power. X can't be 0";
+                "create a number of Treasure tokens equal to that creature's power";
     }
 
     private RuthlessTechnomancerEffect(final RuthlessTechnomancerEffect effect) {

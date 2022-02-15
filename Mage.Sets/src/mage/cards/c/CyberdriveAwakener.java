@@ -41,7 +41,7 @@ public final class CyberdriveAwakener extends CardImpl {
         // Other artifact creatures you control have flying.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 FlyingAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE
+                StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE, true
         )));
 
         // When Cyberdrive Awakener enters the battlefield, until end of turn, each noncreature artifact you control becomes an artifact creature with base power and toughness 4/4.
