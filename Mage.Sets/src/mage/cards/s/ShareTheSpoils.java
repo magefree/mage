@@ -109,26 +109,22 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (source == null) { return false; }
 
-        // Create an exile zone unique to this card
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-
-        if (exileZone == null) {
-            exileZone = game.getExile().createZone(
-                    CardUtil.getExileZoneId(game, source),
-                    "Share the Spoils");
-        }
-
         PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
         for (UUID playerId : players) {
             Player player = game.getPlayer(playerId);
-
             if (player == null) { continue; }
 
             Card topLibraryCard = player.getLibrary().getFromTop(game);
-
             if (topLibraryCard == null) { continue; }
 
-            player.moveCardsToExile(topLibraryCard, source, game, true, exileZone.getId(), exileZone.getName());
+            player.moveCardsToExile(
+                    topLibraryCard,
+                    source,
+                    game,
+                    true,
+                    CardUtil.getExileZoneId(game, source),
+                    CardUtil.getSourceName(game, source)
+            );
         }
         return true;
     }
@@ -165,12 +161,9 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         if (exileZone == null) { return false; }
         if (!exileZone.contains(sourceId)) { return false; }
 
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject == null) { return false; }
-
         ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
 
-        return watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(sourceObject, game));
+        return watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(source));
     }
 
     @Override
