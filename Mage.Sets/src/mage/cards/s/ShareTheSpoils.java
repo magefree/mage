@@ -13,7 +13,6 @@ import mage.game.CardState;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -260,18 +259,20 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (source == null) { return false; }
 
-        // Not a card exiled with this Share the Spoils
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        if (exileZone == null) { return false; }
-
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) { return false; }
 
         Card topLibraryCard = player.getLibrary().getFromTop(game);
         if (topLibraryCard == null) { return false; }
 
-        player.moveCardsToExile(topLibraryCard, source, game, true, exileZone.getId(), exileZone.getName());
-
+        player.moveCardsToExile(
+                topLibraryCard,
+                source,
+                game,
+                true,
+                CardUtil.getExileZoneId(game, source),
+                CardUtil.getSourceName(game, source)
+        );
         return true;
     }
 
