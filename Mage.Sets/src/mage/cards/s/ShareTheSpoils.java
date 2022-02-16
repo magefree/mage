@@ -101,8 +101,9 @@ class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When Share the Spoils enters the battlefield or an opponent loses the game";
+    public String getRule() {
+        return "When {this} enters the battlefield or an opponent loses the game, " +
+                "exile the top card of each player's library.";
     }
 }
 
@@ -112,7 +113,6 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
 
     public ShareTheSpoilsExileCardFromEveryoneEffect(String exileZoneIdString) {
         super(Outcome.Exile);
-        staticText = ", exile the top card of each player's library.";
         this.exileZoneIdString = exileZoneIdString;
     }
 
@@ -161,7 +161,7 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
     ShareTheSpoilsPlayExiledCardEffect(String exileZoneIdString) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay);
         staticText = "During each player's turn, " +
-                "that player may play a land or cast a spell from among cards exiled with Share the Spoils, " +
+                "that player may play a land or cast a spell from among cards exiled with {this}, " +
                 "and they may spend mana as though it were mana of any color to cast that spell";
         this.exileZoneIdString = exileZoneIdString;
     }
@@ -254,8 +254,7 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
     }
 }
 
-
-//-- Exile when a card is played that was exiled with Share the Spoil's  --//
+//-- Exile another card when a card is played that was exiled with Share the Spoils  --//
 class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
     ShareTheSpoilsExileCardWhenPlayACardAbility(String exileZoneIdString) {
