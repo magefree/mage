@@ -34,7 +34,7 @@ public final class BoseijuWhoEndures extends CardImpl {
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate(),
-                Predicates.or(
+                Predicates.and(
                         Predicates.not(SuperType.BASIC.getPredicate()),
                         CardType.LAND.getPredicate()
                 )
