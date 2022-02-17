@@ -191,35 +191,24 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         addCard(Zone.HAND, playerA, shareTheSpoils);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
 
-        // 3rd from the top, exiled when card is played with Share the Spoils
-        addCard(Zone.LIBRARY, playerA, "Reliquary Tower");
         // 2nd from the top, exile when Share the Spoils is cast
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // {R}
         // Topmost, draw at beginning of turn
         addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
 
+        addCard(Zone.LIBRARY, playerB, "Reliquary Tower");
+
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-        addTarget(playerA, playerB);
+        checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
+        // TODO: How to do this properly for land?
+        checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Reliquary Tower", false);
 
         setStopAt(2, PhaseStep.END_TURN);
 
         execute();
-
-        boolean threwError = false;
-        try {
-            assertAllCommandsUsed();
-        } catch (AssertionError error) {
-            // Cannot cast Lightning Bolt through Share the Spoils on another player's turn, even though it's an instant.
-            assert error.getMessage().equals("Player PlayerA must have 0 actions but found 1");
-            threwError = true;
-        }
-
-        assert threwError;
-
-        assertLife(playerB, 20);
+        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Lightning Bolt", 1);
         assertExileCount(playerA, "Reliquary Tower", 0);
@@ -241,46 +230,32 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
 
         // 3rd from the top, exiled when card is played with Share the Spoils
-        addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
-        // 2nd from the top, exile when Share the Spoils is cast
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // {R}
+        // 2nd from the top, exile when Share the Spoils is cast
+        addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
         // Topmost, draw at beginning of turn
         addCard(Zone.LIBRARY, playerA, "Reliquary Tower");
 
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-        addTarget(playerA, playerB);
-        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+
+        checkPlayableAbility("normal cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
 
         setStopAt(2, PhaseStep.END_TURN);
 
         execute();
 
-        boolean threwError = false;
+        assertAllCommandsUsed();
 
-        try {
-            assertAllCommandsUsed();
-        } catch (AssertionError error) {
-            // Cannot play Exotic Orchard since it would be the second card of the turn
-            assert error.getMessage().equals("Player PlayerA must have 0 actions but found 1");
-            threwError = true;
-        }
-
-        assert threwError;
-
-        assertLife(playerB, 17);
-
-        assertExileCount(playerA, "Lightning Bolt", 0);
-        assertExileCount(playerA, "Exotic Orchard", 1);
+        assertExileCount(playerA, "Exotic Orchard", 0);
+        assertExileCount(playerA, "Lightning Bolt", 1);
 
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
         assertExileCount(playerD, 1);
-
-        assertGraveyardCount(playerA, 1);
     }
 
     /**
@@ -288,7 +263,47 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
      */
     @Test
     public void checkManaSpendingForOtherExileSource() {
-        // TODO
+        addCard(Zone.HAND, playerA, shareTheSpoils);
+        addCard(Zone.HAND, playerA, "Augury Raven");
+        addCard(Zone.BATTLEFIELD, playerA, "Prosper, Tome-Bound");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        // 3rd from the top, exile at end of turn with propser
+        addCard(Zone.LIBRARY, playerA, "Tana, the Bloodsower", 1); // {2}{R}{G}
+        // 2nd from the top, exile when Share the Spoils is cast
+        addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
+        // Topmost, draw at beginning of turn
+        addCard(Zone.LIBRARY, playerA, "Ardenvale Tactician");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower", false);
+        // TODO How to make sure that the fortell can't be activated?
+        //checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower", false);
+
+        // TODO: Adventure
+        //       Cast from hand as an adventure, then make sure I can't cast it again from exile since I don't have the mana
+
+
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Tana, the Bloodsower", 0);
+
+        assertExileCount(playerA, "Exotic Orchard", 1);
+        assertExileCount(playerA, "Tana, the Bloodsower", 1);
+
+        assertExileCount(playerA, 2);
+        assertExileCount(playerB, 1);
+        assertExileCount(playerC, 1);
+        assertExileCount(playerD, 1);
     }
 
     /**
@@ -296,10 +311,54 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
      */
     @Test
     public void checkDifficultCards() {
-        // TODO
-        // Adventure
-        // Modal Dualfaced cards, check both sides
+        addCard(Zone.HAND, playerA, shareTheSpoils);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+
+        // 3rd from the top, exile Lovestruck Beast is cast
+        addCard(Zone.LIBRARY, playerA, "Ardenvale Tactician"); // Adventure, creature half {1}{W}{W}
+        // 2nd from the top, exile when Share the Spoils is cast
+        addCard(Zone.LIBRARY, playerA, "Lovestruck Beast"); // Adventure, adventure half {G}
+        // Topmost, draw at beginning of turn
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+
+        // Modal dual face, cast front
+        addCard(Zone.LIBRARY, playerB, "Alrund, God of the Cosmos // Hakka, Whispering Raven");
+        // Modal fual face, cast back
+        addCard(Zone.LIBRARY, playerC, "Esika, God of the Tree // The Prismatic Bridge");
         // Split card
+        addCard(Zone.LIBRARY, playerD, "Fire // Ice");
+
+        skipInitShuffling();
+
+        // Cast the Adventure half of an Adventure card
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lovestruck Beast");
+        // Cast the Creature half of an Adventure card
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician");
+        // Cast split card
+        castSpell(9, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice");
+        addTarget(playerA, "Mountain");
+        // Cast front side of Modal dual face card
+        castSpell(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Alrund, God of the Cosmos");
+        // Cast back side of Modal dual face card
+        castSpell(17, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+
+        setStopAt(17, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Ardenvale Tactician", 1);
+
+        assertExileCount(playerA, "Lovestruck Beast", 1);
+
+        assertExileCount(playerA, 2); // One from Share the spoils, and another for the adventure half of the adventure card
+        assertExileCount(playerB, 1);
+        assertExileCount(playerC, 1);
+        assertExileCount(playerD, 1);
+
+        // Ice is the only card that went in here
+        assertGraveyardCount(playerA, 1);
     }
 
     /**
