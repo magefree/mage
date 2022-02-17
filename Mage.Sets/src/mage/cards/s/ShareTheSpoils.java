@@ -146,14 +146,11 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card == null) { return false; }
-
         // Have to play on your turn
         if (!game.getActivePlayerId().equals(affectedControllerId)) { return false; }
 
         // Not in exile
-        if (game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) { return false; }
+        if (game.getState().getZone(CardUtil.getMainCardId(game, sourceId)) != Zone.EXILED) { return false; }
 
         // TODO: This is a workaround for #8706, remove when that's fixed.
         int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
@@ -193,9 +190,6 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card == null) { return false; }
-
         // TODO: This is a workaround for #8706, remove when that's fixed.
         int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Check Exile
@@ -204,15 +198,7 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
         if (exileZone.contains(sourceId)) { return true; }
 
         // Check Stack
-        UUID cardID;
-        Card mainCard = card.getMainCard();
-        if (mainCard instanceof ModalDoubleFacesCard) {
-            cardID = ((ModalDoubleFacesCard) mainCard).getLeftHalfCard().getId();
-        } else {
-            cardID = mainCard.getId();
-        }
-
-        CardState cardState = game.getLastKnownInformationCard(cardID, Zone.EXILED);
+        CardState cardState = game.getLastKnownInformationCard(CardUtil.getMainCardId(game, sourceId), Zone.EXILED);
 
         // TODO: Currently works for all cards from exile
         return cardState != null;
