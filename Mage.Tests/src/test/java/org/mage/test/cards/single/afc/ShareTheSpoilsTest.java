@@ -274,20 +274,28 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         // 2nd from the top, exile when Share the Spoils is cast
         addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
         // Topmost, draw at beginning of turn
-        addCard(Zone.LIBRARY, playerA, "Ardenvale Tactician");
+        addCard(Zone.LIBRARY, playerA, "Ardenvale Tactician"); // Adventure part is "Dizzying Swoop"
 
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore");
+
+        // Foretell Augury Raven
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Try to cast Tana, you should not be able to since there isn't the {G} for it since she was exiled by Proser
         checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower", false);
-        // TODO How to make sure that the fortell can't be activated?
-        //checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower", false);
 
-        // TODO: Adventure
-        //       Cast from hand as an adventure, then make sure I can't cast it again from exile since I don't have the mana
+        // Try to activate the foretell on Augury Raven, but we can't since we don't have the {U} for it.
+        checkPlayableAbility("foretell creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}", false);
 
+        // Cast an adventure card from hand
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dizzying Swoop");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Make sure the creature card can't be played from exile since there isn't the {W}{W} for it
+        checkPlayableAbility("creature cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician", false);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -295,12 +303,11 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Tana, the Bloodsower", 0);
-
-        assertExileCount(playerA, "Exotic Orchard", 1);
-        assertExileCount(playerA, "Tana, the Bloodsower", 1);
-
-        assertExileCount(playerA, 2);
+        // 1 exiled with Share the Spoils
+        // 1 exiled Prosper (he only exiles one since we stop before the end step of playerA's second turn)
+        // 1 for the foretold Augury Raven
+        // 1 for the Dizzying Swoop Adventure
+        assertExileCount(playerA, 4);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
         assertExileCount(playerD, 1);
@@ -317,21 +324,23 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         // 3rd from the top, exile Lovestruck Beast is cast
         addCard(Zone.LIBRARY, playerA, "Ardenvale Tactician"); // Adventure, creature half {1}{W}{W}
         // 2nd from the top, exile when Share the Spoils is cast
-        addCard(Zone.LIBRARY, playerA, "Lovestruck Beast"); // Adventure, adventure half {G}
+        addCard(Zone.LIBRARY, playerA, "Lovestruck Beast"); // Adventure, adventure half "Heart's Desire" {G}
         // Topmost, draw at beginning of turn
         addCard(Zone.LIBRARY, playerA, "Mountain");
 
         // Modal dual face, cast front
-        addCard(Zone.LIBRARY, playerB, "Alrund, God of the Cosmos // Hakka, Whispering Raven");
+        addCard(Zone.LIBRARY, playerB, "Alrund, God of the Cosmos"); // Backside is "Hakka, Whispering Raven"
         // Modal fual face, cast back
-        addCard(Zone.LIBRARY, playerC, "Esika, God of the Tree // The Prismatic Bridge");
+        addCard(Zone.LIBRARY, playerC, "Esika, God of the Tree"); // Backside is "The Prismatic Bridge"
         // Split card
         addCard(Zone.LIBRARY, playerD, "Fire // Ice");
 
         skipInitShuffling();
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+
         // Cast the Adventure half of an Adventure card
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lovestruck Beast");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heart's Desire");
         // Cast the Creature half of an Adventure card
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician");
         // Cast split card
