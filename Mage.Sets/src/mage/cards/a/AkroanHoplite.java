@@ -1,9 +1,9 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -13,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
@@ -22,12 +21,13 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  */
 public final class AkroanHoplite extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures you control");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(AttackingPredicate.instance);
     }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
 
     public AkroanHoplite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
@@ -38,7 +38,7 @@ public final class AkroanHoplite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Akroan Hoplite attacks, it gets +X/+0 until end of turn, where X is the number of attacking creatures you control.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private AkroanHoplite(final AkroanHoplite card) {

@@ -36,7 +36,8 @@ public final class InscriptionOfAbundance extends CardImpl {
 
         // Choose one. If this spell was kicked, choose any number instead.
         // • Put two +1/+1 counters on target creature.
-        this.getSpellAbility().getModes().setChooseText("choose one. If this spell was kicked, choose any number instead.");
+        this.getSpellAbility().getModes().setChooseText("choose one. " +
+                "If this spell was kicked, choose any number instead.");
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -46,7 +47,7 @@ public final class InscriptionOfAbundance extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // • Target creature you control fights target creature you don't control.
-        mode = new Mode(new FightTargetsEffect());
+        mode = new Mode(new FightTargetsEffect(false));
         mode.addTarget(new TargetControlledCreaturePermanent());
         mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addMode(mode);

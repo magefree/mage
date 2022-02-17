@@ -57,6 +57,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Mutation", 84, Rarity.UNCOMMON, mage.cards.d.DarksteelMutation.class));
         cards.add(new SetCardInfo("Disorder in the Court", 29, Rarity.RARE, mage.cards.d.DisorderInTheCourt.class));
         cards.add(new SetCardInfo("Distant Melody", 103, Rarity.COMMON, mage.cards.d.DistantMelody.class));
+        cards.add(new SetCardInfo("Donal, Herald of Wings", 3, Rarity.MYTHIC, mage.cards.d.DonalHeraldOfWings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Donal, Herald of Wings", 41, Rarity.MYTHIC, mage.cards.d.DonalHeraldOfWings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Weaver", 34, Rarity.RARE, mage.cards.d.DoomWeaver.class));
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 153, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
         cards.add(new SetCardInfo("Drogskol Captain", 154, Rarity.UNCOMMON, mage.cards.d.DrogskolCaptain.class));
@@ -97,6 +99,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Arsonist", 27, Rarity.RARE, mage.cards.m.MidnightArsonist.class));
         cards.add(new SetCardInfo("Midnight Clock", 108, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Millicent, Restless Revenant", 1, Rarity.MYTHIC, mage.cards.m.MillicentRestlessRevenant.class));
+        cards.add(new SetCardInfo("Mirage Phalanx", 35, Rarity.RARE, mage.cards.m.MiragePhalanx.class));
         cards.add(new SetCardInfo("Mirror Entity", 94, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mob Rule", 147, Rarity.RARE, mage.cards.m.MobRule.class));
         cards.add(new SetCardInfo("Molten Echoes", 148, Rarity.RARE, mage.cards.m.MoltenEchoes.class));
@@ -113,6 +116,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Patron of the Vein", 135, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
         cards.add(new SetCardInfo("Port Town", 178, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 179, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Predators' Hour", 21, Rarity.RARE, mage.cards.p.PredatorsHour.class));
         cards.add(new SetCardInfo("Priest of the Blessed Graf", 7, Rarity.RARE, mage.cards.p.PriestOfTheBlessedGraf.class));
         cards.add(new SetCardInfo("Promise of Bunrei", 96, Rarity.RARE, mage.cards.p.PromiseOfBunrei.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 180, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
@@ -127,6 +131,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of Opulence", 28, Rarity.RARE, mage.cards.s.ScionOfOpulence.class));
         cards.add(new SetCardInfo("Shacklegeist", 112, Rarity.RARE, mage.cards.s.Shacklegeist.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 181, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
+        cards.add(new SetCardInfo("Shadowgrange Archfiend", 22, Rarity.RARE, mage.cards.s.ShadowgrangeArchfiend.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadowgrange Archfiend", 60, Rarity.RARE, mage.cards.s.ShadowgrangeArchfiend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sinister Waltz", 30, Rarity.RARE, mage.cards.s.SinisterWaltz.class));
         cards.add(new SetCardInfo("Sire of the Storm", 113, Rarity.UNCOMMON, mage.cards.s.SireOfTheStorm.class));
         cards.add(new SetCardInfo("Sky Diamond", 167, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
@@ -136,6 +142,10 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Sailor", 114, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spectral Shepherd", 98, Rarity.UNCOMMON, mage.cards.s.SpectralShepherd.class));
         cards.add(new SetCardInfo("Stensia Masquerade", 150, Rarity.UNCOMMON, mage.cards.s.StensiaMasquerade.class));
+        cards.add(new SetCardInfo("Storm of Souls", 9, Rarity.RARE, mage.cards.s.StormOfSouls.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm of Souls", 47, Rarity.RARE, mage.cards.s.StormOfSouls.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strefan, Maurer Progenitor", 2, Rarity.MYTHIC, mage.cards.s.StrefanMaurerProgenitor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strefan, Maurer Progenitor", 40, Rarity.MYTHIC, mage.cards.s.StrefanMaurerProgenitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stromkirk Captain", 157, Rarity.UNCOMMON, mage.cards.s.StromkirkCaptain.class));
         cards.add(new SetCardInfo("Stromkirk Condemned", 137, Rarity.RARE, mage.cards.s.StromkirkCondemned.class));
         cards.add(new SetCardInfo("Stromkirk Occultist", 151, Rarity.RARE, mage.cards.s.StromkirkOccultist.class));
@@ -149,6 +159,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 187, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Thundering Mightmare", 37, Rarity.RARE, mage.cards.t.ThunderingMightmare.class));
         cards.add(new SetCardInfo("Timin, Youthful Geist", 16, Rarity.RARE, mage.cards.t.TiminYouthfulGeist.class));
+        cards.add(new SetCardInfo("Timothar, Baron of Bats", 4, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timothar, Baron of Bats", 42, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Drover", 100, Rarity.RARE, mage.cards.t.TwilightDrover.class));
         cards.add(new SetCardInfo("Umbris, Fear Manifest", 38, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 188, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));

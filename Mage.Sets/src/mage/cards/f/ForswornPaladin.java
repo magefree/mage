@@ -39,7 +39,7 @@ public final class ForswornPaladin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {1}{B}, {T}, Pay 1 life: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{1}{B}"));

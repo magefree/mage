@@ -3,18 +3,18 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -42,19 +42,22 @@ public final class UndercityNecrolisk extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {1}, Sacrifice another creature: Put a +1/+1 counter on Undercity Necrolisk. It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
+        // {1}, Sacrifice another creature:
+        // Put a +1/+1 counter on Undercity Necrolisk.
+        Ability ability = new SilencedActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new GenericManaCost(1)
         );
-        ability.addEffect(new GainAbilitySourceEffect(
-                new MenaceAbility(),
-                Duration.EndOfTurn
-        ).setText("It gains menace until end of turn."));
         ability.addCost(new SacrificeTargetCost(
                 new TargetControlledPermanent(filter)
         ));
+        // It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
+        ability.addEffect(new GainAbilitySourceEffect(
+                new MenaceAbility(),
+                Duration.EndOfTurn
+        ).setText("It gains menace until end of turn. Activate only as a sorcery. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 
@@ -66,4 +69,24 @@ public final class UndercityNecrolisk extends CardImpl {
     public UndercityNecrolisk copy() {
         return new UndercityNecrolisk(this);
     }
+}
+
+// Needed in order to move menace hint text to the very end.
+class SilencedActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
+    SilencedActivateAsSorceryActivatedAbility(Zone zone, Effect effect, Cost cost) {
+        super(zone, effect, cost);
+        timing = TimingRule.SORCERY;
+    }
+
+    private SilencedActivateAsSorceryActivatedAbility(final SilencedActivateAsSorceryActivatedAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SilencedActivateAsSorceryActivatedAbility copy() {
+        return new SilencedActivateAsSorceryActivatedAbility(this);
+    }
+
+    @Override
+    public String getRule() { return super.getRule(); }
 }

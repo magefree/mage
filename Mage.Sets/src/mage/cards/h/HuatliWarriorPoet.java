@@ -3,7 +3,6 @@ package mage.cards.h;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -34,7 +33,7 @@ public final class HuatliWarriorPoet extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: You gain life equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(

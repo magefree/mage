@@ -31,7 +31,7 @@ public final class UlvenwaldTracker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, {tap}: Target creature you control fights another target creature.
-        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect(), new ManaCostsImpl<>("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect(false), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         Target controlledTarget = new TargetControlledCreaturePermanent();
         controlledTarget.setTargetTag(1);

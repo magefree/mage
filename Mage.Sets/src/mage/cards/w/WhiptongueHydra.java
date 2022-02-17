@@ -60,7 +60,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
     public WhiptongueHydraEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all creatures with flying. "
-                + "Put a +1/+1 counter on {this} for each permanent destroyed this way";
+                + "Put a +1/+1 counter on {this} for each creature destroyed this way";
     }
 
     public WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {

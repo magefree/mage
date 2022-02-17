@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -39,7 +38,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Chandra, Flame's Catalyst deals 3 damage to each opponent.
         this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(3, TargetController.OPPONENT), 1));

@@ -5,7 +5,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -38,7 +37,7 @@ public final class DomriChaosBringer extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Add {R} or {G}. If that mana is spent on a creature spell, it gains riot.
         this.addAbility(new LoyaltyAbility(new DomriChaosBringerEffect(), 1));

@@ -43,7 +43,7 @@ public final class PrepareFight extends SplitCard {
         // Fight
         // Target creature you control fights target creature you don't control.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect(false));
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }

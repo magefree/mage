@@ -11,23 +11,13 @@ import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class ExavaRakdosBloodWitch extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
 
     static final String rule = "Each other creature you control with a +1/+1 counter on it has haste";
     public ExavaRakdosBloodWitch(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +36,11 @@ public final class ExavaRakdosBloodWitch extends CardImpl {
         // Unleash
         this.addAbility(new UnleashAbility());
         // Each other creature you control with a +1/+1 counter on it has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                HasteAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1,
+                rule)));
 
     }
 

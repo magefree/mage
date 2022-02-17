@@ -4,7 +4,6 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -31,7 +30,7 @@ public final class TeferiTemporalArchmage extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(

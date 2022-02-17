@@ -55,7 +55,7 @@ public final class NikoDefiesDestiny extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — You gain 2 life for each foretold card you own in exile.
         sagaAbility.addChapterEffect(

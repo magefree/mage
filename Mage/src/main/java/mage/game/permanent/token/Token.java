@@ -27,6 +27,10 @@ public interface Token extends MageObject {
 
     void addAbility(Ability ability);
 
+    void removeAbility(Ability abilityToRemove);
+
+    void removeAbilities(List<Ability> abilitiesToRemove);
+
     boolean putOntoBattlefield(int amount, Game game, Ability source);
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId);

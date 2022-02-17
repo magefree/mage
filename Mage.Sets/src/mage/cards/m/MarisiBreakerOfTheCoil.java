@@ -1,12 +1,10 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
@@ -15,7 +13,10 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -86,8 +87,6 @@ class MarisiBreakerOfTheCoilSpellEffect extends ContinuousRuleModifyingEffectImp
 
 class MarisiBreakerOfTheCoilEffect extends OneShotEffect {
 
-    private static final Effect effect = new GoadTargetEffect();
-
     MarisiBreakerOfTheCoilEffect() {
         super(Outcome.Benefit);
         staticText = "goad each creature that player controls "
@@ -105,13 +104,12 @@ class MarisiBreakerOfTheCoilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getBattlefield().getAllActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 targetPointer.getFirst(game, source), game
-        ).stream().forEach(permanent -> {
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            effect.apply(game, source);
-        });
+        )) {
+            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
         return true;
     }
 }

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -24,16 +22,17 @@ import mage.game.permanent.Permanent;
  */
 
 public class TotemArmorAbility extends SimpleStaticAbility {
+
     public TotemArmorAbility() {
         super(Zone.BATTLEFIELD, new TotemArmorEffect());
     }
 
-    public TotemArmorAbility(final TotemArmorAbility ability) {
+    private TotemArmorAbility(final TotemArmorAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public TotemArmorAbility copy() {
         return new TotemArmorAbility(this);
     }
 
@@ -44,27 +43,27 @@ public class TotemArmorAbility extends SimpleStaticAbility {
 }
 
 class TotemArmorEffect extends ReplacementEffectImpl {
+
     TotemArmorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
-    TotemArmorEffect(final TotemArmorEffect effect) {
+    private TotemArmorEffect(final TotemArmorEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            Permanent equipedPermanent = game.getPermanent(event.getTargetId());
-            if (equipedPermanent != null) {
-                equipedPermanent.removeAllDamage(game);
-                sourcePermanent.destroy(source, game, false);
-                return true;
-            }
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent enchantedPermanent = game.getPermanent(event.getTargetId());
+        if (sourcePermanent == null || enchantedPermanent == null) {
+            return false;
         }
-        return false;
+        enchantedPermanent.removeAllDamage(game);
+        sourcePermanent.destroy(source, game, false);
+        return true;
     }
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
@@ -72,7 +71,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         return sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo());
     }
 

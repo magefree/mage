@@ -15,5 +15,6 @@ public enum MageIdentifier {
     LurrusOfTheDreamDenWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
-    WishWatcher
+    WishWatcher,
+    GlimpseTheCosmosWatcher
 }

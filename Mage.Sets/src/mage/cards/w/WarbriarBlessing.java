@@ -59,7 +59,8 @@ class WarbriarBlessingEffect extends OneShotEffect {
 
     WarbriarBlessingEffect() {
         super(Outcome.Benefit);
-        staticText = "enchanted creature fights up to one target creature you don't control";
+        staticText = "enchanted creature fights up to one target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private WarbriarBlessingEffect(final WarbriarBlessingEffect effect) {

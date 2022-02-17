@@ -2,7 +2,6 @@ package mage.cards.o;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
@@ -37,7 +36,7 @@ public final class OkoThiefOfCrowns extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.OKO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Create a Food token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FoodToken()), 2));

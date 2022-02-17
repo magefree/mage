@@ -77,14 +77,14 @@ class MirrorMatchEffect extends OneShotEffect {
                     CombatGroup group = game.getCombat().findGroup(attacker.getId());
                     boolean isCreature = false;
                     if (group != null) {
-                        for (Permanent addedToken : effect.getAddedPermanent()) {
+                        for (Permanent addedToken : effect.getAddedPermanents()) {
                             if (addedToken.isCreature(game)) {
                                 group.addBlockerToGroup(addedToken.getId(), attackerId, game);
                                 isCreature = true;
                             }
                         }
                         ExileTargetEffect exileEffect = new ExileTargetEffect("Exile those tokens at end of combat");
-                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game));
                         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
                         if (isCreature) {
                             group.pickBlockerOrder(attacker.getControllerId(), game);

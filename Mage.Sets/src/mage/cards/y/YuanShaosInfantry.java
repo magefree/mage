@@ -3,7 +3,7 @@ package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class YuanShaosInfantry extends CardImpl {
         // Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry can't be blocked this combat.
         Effect effect = new CantBeBlockedSourceEffect(Duration.EndOfCombat);
         effect.setText("{this} can't be blocked this combat");
-        this.addAbility(new AttacksAloneTriggeredAbility(effect));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }
 
     private YuanShaosInfantry(final YuanShaosInfantry card) {

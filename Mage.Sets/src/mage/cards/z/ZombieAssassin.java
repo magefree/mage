@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -36,7 +35,7 @@ public final class ZombieAssassin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
         Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,new FilterCard("cards from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

@@ -1,13 +1,11 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -20,10 +18,8 @@ public final class DeftDismissal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Deft Dismissal deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
-        Effect effect = new DamageMultiEffect(3);
-        effect.setText("{this} deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, new FilterAttackingOrBlockingCreature("attacking or blocking creatures")));
+        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
     }
 
     private DeftDismissal(final DeftDismissal card) {

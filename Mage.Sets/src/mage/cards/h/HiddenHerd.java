@@ -32,7 +32,7 @@ public final class HiddenHerd extends CardImpl {
         // When an opponent plays a nonbasic land, if Hidden Herd is an enchantment, Hidden Herd becomes a 3/3 Beast creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new HiddenHerdAbility(),
-                new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
+                new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent plays a nonbasic land, if {this} is an enchantment, {this} becomes a 3/3 Beast creature."
         ));
     }

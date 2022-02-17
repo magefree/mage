@@ -3,7 +3,6 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DrawSecondCardTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -29,7 +28,7 @@ public final class JaceArcaneStrategist extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.
         Ability ability = new DrawSecondCardTriggeredAbility(

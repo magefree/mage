@@ -20,7 +20,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
-import mage.game.permanent.token.EdgarMarkovsCoffinToken;
+import mage.game.permanent.token.EdgarMarkovsCoffinVampireToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -49,7 +49,7 @@ public final class GlassCastHeart extends CardImpl {
 
         // {B}, {T}, Pay 1 life: Create a 1/1 white and black Vampire creature token with lifelink.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new EdgarMarkovsCoffinToken()), new ManaCostsImpl<>("{B}")
+                new CreateTokenEffect(new EdgarMarkovsCoffinVampireToken()), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(1));

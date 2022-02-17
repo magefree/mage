@@ -126,8 +126,6 @@ public class SuspendAbility extends SpecialAction {
     public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
         super(Zone.HAND);
         this.addCost(cost);
-        // suspend uses both sorcery/instant timing depends on object, so it checks with object, see canActivate
-        this.setTiming(TimingRule.SORCERY);
         this.addEffect(new SuspendExileEffect(suspend));
         this.usesStack = false;
         if (suspend == Integer.MAX_VALUE) {
@@ -210,7 +208,14 @@ public class SuspendAbility extends SpecialAction {
         if (game.getState().getZone(getSourceId()) != Zone.HAND) {
             return ActivationStatus.getFalse();
         }
-
+        // suspend uses card's timing restriction
+        Card card = game.getCard(getSourceId());
+        if (card == null) {
+            return ActivationStatus.getFalse();
+        }
+        if (!card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)) {
+            return ActivationStatus.getFalse();
+        }
         return super.canActivate(playerId, game);
     }
 

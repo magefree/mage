@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -38,7 +37,7 @@ public final class NarsetOfTheAncientWay extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: You gain 2 life. Add {U}, {R}, or {W}. Spend this mana only to cast a noncreature spell.
         this.addAbility(new LoyaltyAbility(new NarsetOfTheAncientWayManaEffect(), 1));

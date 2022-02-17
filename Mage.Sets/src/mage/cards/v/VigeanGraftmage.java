@@ -13,8 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,11 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author JotaPeRL
  */
 public final class VigeanGraftmage extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }    
 
     public VigeanGraftmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -41,7 +35,7 @@ public final class VigeanGraftmage extends CardImpl {
         
         // {1}{U}: Untap target creature with a +1/+1 counter on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);        
     }
 

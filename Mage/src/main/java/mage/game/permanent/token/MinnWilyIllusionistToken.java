@@ -13,6 +13,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -36,6 +38,8 @@ public final class MinnWilyIllusionistToken extends TokenImpl {
         addAbility(new SimpleStaticAbility(new BoostSourceEffect(
                 xValue, StaticValue.get(0), Duration.WhileOnBattlefield
         ).setText("this creature gets +1/+0 for each other Illusion you control")));
+
+        availableImageSetCodes = Arrays.asList("AFC");
     }
 
     public MinnWilyIllusionistToken(final MinnWilyIllusionistToken token) {

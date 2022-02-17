@@ -15,20 +15,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Quercitron
  */
 public final class AltacBloodseeker extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
     
     public AltacBloodseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
@@ -41,7 +34,7 @@ public final class AltacBloodseeker extends CardImpl {
         // Whenever a creature an opponent controls dies, Altac Bloodseeker gets +2/+0 and gains first strike and haste until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
-        Ability ability = new DiesCreatureTriggeredAbility(effect, false, filter);
+        Ability ability = new DiesCreatureTriggeredAbility(effect, false, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike");

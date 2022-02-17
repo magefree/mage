@@ -34,7 +34,7 @@ public final class WakingTheTrolls extends CardImpl {
 
         this.subtype.add(SubType.SAGA);
 
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Destroy target land.
         sagaAbility.addChapterEffect(

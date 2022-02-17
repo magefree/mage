@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
@@ -22,7 +21,7 @@ public final class TibaltRakishInstigator extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIBALT);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Your opponents can't gain life.
         this.addAbility(new SimpleStaticAbility(

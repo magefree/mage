@@ -7,8 +7,10 @@ import mage.filter.common.FilterAttackingCreature;
 
 public class BattleCryAbility extends AttacksTriggeredAbility {
 
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
+
     public BattleCryAbility() {
-        super(new BoostControlledEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), true), false);
+        super(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, true), false);
     }
 
     public BattleCryAbility(final BattleCryAbility ability) {

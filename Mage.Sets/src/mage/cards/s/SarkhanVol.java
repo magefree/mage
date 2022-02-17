@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -34,7 +33,7 @@ public final class SarkhanVol extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Creatures you control get +1/+1 and gain haste until end of turn.
         Effects effects1 = new Effects();

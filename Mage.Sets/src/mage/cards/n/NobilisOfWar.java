@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -9,10 +8,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -30,9 +28,9 @@ public final class NobilisOfWar extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Attacking creatures you control get +2/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES)));
     }
 
     private NobilisOfWar(final NobilisOfWar card) {

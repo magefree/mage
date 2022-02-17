@@ -47,7 +47,7 @@ public final class BontuTheGlorified extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BontuTheGlorifiedRestrictionEffect()), new CreaturesDiedWatcher());
 
         // {1}{B}, Sacrifice another creature: Scry 1.  Each opponent loses 1 life and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new ManaCostsImpl("{1}{B}"));
         ability.addEffect(new LoseLifeOpponentsEffect(1));
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");

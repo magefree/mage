@@ -45,7 +45,7 @@ public final class FaeOfWishes extends AdventureCard {
         this.addAbility(ability);
 
         // Granted
-        // You may choose a noncreature card you own from outside the game, reveal it, and put it into your hand.
+        // You may reveal a noncreature card you own from outside the game and put it into your hand.
         this.getSpellCard().getSpellAbility().addEffect(new WishEffect(StaticFilters.FILTER_CARD_A_NON_CREATURE));
         this.getSpellCard().getSpellAbility().addHint(OpenSideboardHint.instance);
     }

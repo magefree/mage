@@ -32,7 +32,7 @@ public final class RograkhSonOfRohgahh extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

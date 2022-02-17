@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -13,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -30,7 +32,10 @@ public final class MartonStromgald extends CardImpl {
         attackingFilter.add(AnotherPredicate.instance);
         blockingFilter.add(AnotherPredicate.instance);
     }
-        
+
+    private static final DynamicValue attackingValue = new PermanentsOnBattlefieldCount(attackingFilter);
+    private static final DynamicValue blockingValue = new PermanentsOnBattlefieldCount(blockingFilter);
+
     public MartonStromgald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
@@ -40,13 +45,10 @@ public final class MartonStromgald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Marton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Marton Stromgald.
-        PermanentsOnBattlefieldCount attackingValue = new PermanentsOnBattlefieldCount(attackingFilter);
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(attackingValue, attackingValue, Duration.EndOfTurn, new FilterAttackingCreature(), true, null, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(attackingValue, attackingValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true, null, true), false));
 
         // Whenever Marton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Marton Stromgald.
-        PermanentsOnBattlefieldCount blockingValue = new PermanentsOnBattlefieldCount(blockingFilter);
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostAllEffect(blockingValue, blockingValue, Duration.EndOfTurn, new FilterBlockingCreature(), true, null, true), false));
-        
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostAllEffect(blockingValue, blockingValue, Duration.EndOfTurn, StaticFilters.FILTER_BLOCKING_CREATURES, true, null, true), false));
     }
 
     private MartonStromgald(final MartonStromgald card) {

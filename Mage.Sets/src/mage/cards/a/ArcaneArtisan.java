@@ -112,7 +112,7 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
             } else {
                 tokensCreated = new HashSet<>();
             }
-            for (Permanent perm : effect.getAddedPermanent()) {
+            for (Permanent perm : effect.getAddedPermanents()) {
                 if (perm != null) {
                     tokensCreated.add(perm.getId());
                 }

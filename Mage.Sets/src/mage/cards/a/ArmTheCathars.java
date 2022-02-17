@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.target.targetpointer.ThirdTargetPointer;
 
@@ -34,7 +34,6 @@ public final class ArmTheCathars extends CardImpl {
 
         // Until end of turn, target creature gets +3/+3, up to one other target creature gets +2/+2, and up to one other target creature gets +1/+1. Those creatures gain vigilance until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3)
-                .setTargetPointer(new FirstTargetPointer())
                 .setText("until end of turn, target creature gets +3/+3"));
         TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter1);
         target1.setTargetTag(1);
@@ -54,9 +53,10 @@ public final class ArmTheCathars extends CardImpl {
         target3.setTargetTag(3);
         this.getSpellAbility().addTarget(target3.withChooseHint("+1/+1"));
 
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                VigilanceAbility.getInstance()
-        ).setText("Those creatures gain vigilance until end of turn"));
+        this.getSpellAbility().addEffect(
+                new GainAbilityTargetEffect(VigilanceAbility.getInstance())
+                .setTargetPointer(new EachTargetPointer())
+                .setText("Those creatures gain vigilance until end of turn"));
     }
 
     private ArmTheCathars(final ArmTheCathars card) {

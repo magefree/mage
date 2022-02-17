@@ -29,7 +29,7 @@ public final class OggyarBattleSeer extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1, false), new TapSourceCost()));
     }
 
     private OggyarBattleSeer(final OggyarBattleSeer card) {

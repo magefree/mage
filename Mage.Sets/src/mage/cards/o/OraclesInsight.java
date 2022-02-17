@@ -38,8 +38,9 @@ public final class OraclesInsight extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted creature has "{T}: Scry 1, then draw a card."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost());
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new TapSourceCost());
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("then draw a card");
         ability.addEffect(effect);

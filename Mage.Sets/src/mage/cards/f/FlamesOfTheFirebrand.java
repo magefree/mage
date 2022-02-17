@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -17,8 +16,7 @@ public final class FlamesOfTheFirebrand extends CardImpl {
     public FlamesOfTheFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-
-        // Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+        // Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }

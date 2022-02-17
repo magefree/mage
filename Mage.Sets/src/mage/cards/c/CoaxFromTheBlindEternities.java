@@ -16,7 +16,7 @@ import mage.filter.FilterCard;
  */
 public final class CoaxFromTheBlindEternities extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an Eldrazi card");
+    private static final FilterCard filter = new FilterCard("Eldrazi card");
 
     static {
         filter.add(SubType.ELDRAZI.getPredicate());
@@ -25,8 +25,10 @@ public final class CoaxFromTheBlindEternities extends CardImpl {
     public CoaxFromTheBlindEternities(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        // You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.
-        this.getSpellAbility().addEffect(new WishEffect(filter, true, true));
+        // You may reveal an Eldrazi card you own from outside the game
+        // or choose a face-up Eldrazi card you own in exile.
+        // Put that card into your hand.
+        this.getSpellAbility().addEffect(new WishEffect(filter, true));
         this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 

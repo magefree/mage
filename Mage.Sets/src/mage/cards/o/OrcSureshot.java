@@ -11,10 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,11 +24,9 @@ import mage.target.common.TargetCreaturePermanent;
 public final class OrcSureshot extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature under your control");
-    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OrcSureshot(UUID ownerId, CardSetInfo setInfo) {
@@ -41,9 +38,8 @@ public final class OrcSureshot extends CardImpl {
 
         // Whenever another creature enters the battlefield under your control, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1,-1, Duration.EndOfTurn),filter,false);
-        ability.addTarget(new TargetCreaturePermanent(filterOpponentCreature));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
-        
     }
 
     private OrcSureshot(final OrcSureshot card) {

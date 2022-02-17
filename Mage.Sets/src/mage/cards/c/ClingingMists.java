@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
@@ -51,8 +51,6 @@ public final class ClingingMists extends CardImpl {
 
 class ClingingMistsEffect extends OneShotEffect {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
-
     public ClingingMistsEffect() {
         super(Outcome.Tap);
         staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
@@ -65,7 +63,7 @@ class ClingingMistsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ATTACKING_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(source, game);
             doNotUntapNextUntapStep.add(creature);
         }
@@ -81,5 +79,4 @@ class ClingingMistsEffect extends OneShotEffect {
     public ClingingMistsEffect copy() {
         return new ClingingMistsEffect(this);
     }
-
 }

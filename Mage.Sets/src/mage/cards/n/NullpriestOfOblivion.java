@@ -35,7 +35,7 @@ public final class NullpriestOfOblivion extends CardImpl {
         this.addAbility(new KickerAbility("{3}{B}"));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());

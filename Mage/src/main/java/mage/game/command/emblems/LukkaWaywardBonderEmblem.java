@@ -23,7 +23,7 @@ public final class LukkaWaywardBonderEmblem extends Emblem {
         this.setExpansionSetCodeForImage("STX");
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.COMMAND, new LukkaWaywardBonderEmblemEffect(),
-                StaticFilters.FILTER_PERMANENT_CREATURE_A, false
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, false
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
@@ -57,8 +57,8 @@ class LukkaWaywardBonderEmblemEffect extends OneShotEffect {
             return targetPermanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
         }
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPermanent != null) {
-            return targetPermanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
+        if (targetPlayer != null) {
+            return targetPlayer.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
         }
         return false;
     }

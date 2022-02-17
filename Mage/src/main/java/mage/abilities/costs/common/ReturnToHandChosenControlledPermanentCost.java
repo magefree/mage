@@ -1,9 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -16,8 +13,11 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
@@ -31,7 +31,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
                     + (target.getTargetName().endsWith(" you control") ? "" : " you control")
                     + " to their owner's hand";
         } else {
-            this.text = "return " + target.getTargetName()
+            this.text = "return " + CardUtil.addArticle(target.getTargetName())
                     + (target.getTargetName().endsWith(" you control") ? "" : " you control")
                     + " to its owner's hand";
         }

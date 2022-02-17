@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
@@ -22,18 +21,12 @@ import java.util.UUID;
  */
 public final class PromiseOfBunrei extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public PromiseOfBunrei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When a creature you control dies, sacrifice Promise of Bunrei. If you do, create four 1/1 colorless Spirit creature tokens.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new PromiseOfBunreiEffect(), false, filter
+                new PromiseOfBunreiEffect(), false, StaticFilters.FILTER_CONTROLLED_A_CREATURE
         ).setTriggerPhrase("When a creature you control dies, "));
     }
 

@@ -27,7 +27,7 @@ public final class SenateGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Senate Griffin enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private SenateGriffin(final SenateGriffin card) {

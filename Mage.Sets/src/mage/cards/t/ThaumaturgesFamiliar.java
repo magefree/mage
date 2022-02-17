@@ -27,7 +27,7 @@ public final class ThaumaturgesFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Thaumaturge's Familiar enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private ThaumaturgesFamiliar(final ThaumaturgesFamiliar card) {

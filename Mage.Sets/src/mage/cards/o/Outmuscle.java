@@ -51,7 +51,8 @@ class OutmuscleEffect extends OneShotEffect {
     OutmuscleEffect() {
         super(Outcome.Benefit);
         staticText = "Put a +1/+1 counter on target creature you control, " +
-                "then it fights target creature you don't control." +
+                "then it fights target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i> " +
                 "<br><i>Adamant</i> &mdash; If at least three green mana was spent to cast this spell, " +
                 "the creature you control gains indestructible until end of turn.";
     }

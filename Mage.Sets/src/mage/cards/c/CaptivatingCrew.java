@@ -16,9 +16,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,12 +25,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author TheElk801
  */
 public final class CaptivatingCrew extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public CaptivatingCrew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -49,7 +42,7 @@ public final class CaptivatingCrew extends CardImpl {
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("It gains haste until end of turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

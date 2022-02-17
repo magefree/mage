@@ -20,6 +20,7 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  * @author Plopman
@@ -54,11 +55,11 @@ public final class GoblinWelder extends CardImpl {
 
         public GoblinWelderEffect() {
             super(Outcome.PutCardInPlay);
-            staticText = "Choose target artifact a player controls " +
-                    "and target artifact card in that player's graveyard. " +
-                    "If both targets are still legal as this ability resolves, " +
-                    "that player simultaneously sacrifices the artifact " +
-                    "and returns the artifact card to the battlefield";
+            staticText = "Choose target artifact a player controls "
+                    + "and target artifact card in that player's graveyard. "
+                    + "If both targets are still legal as this ability resolves, "
+                    + "that player simultaneously sacrifices the artifact "
+                    + "and returns the artifact card to the battlefield";
             this.setTargetPointer(new EachTargetPointer());
         }
 
@@ -74,7 +75,9 @@ public final class GoblinWelder extends CardImpl {
             Permanent artifact = game.getPermanent(getTargetPointer().getFirst(game, source));
             Card card = game.getCard(getTargetPointer().getTargets(game, source).get(1));
             Player controller = game.getPlayer(source.getControllerId());
-            if (artifact == null || card == null || controller == null) {
+            if (artifact == null
+                    || card == null
+                    || controller == null) {
                 return false;
             }
             Player owner = game.getPlayer(card.getOwnerId());
@@ -82,6 +85,7 @@ public final class GoblinWelder extends CardImpl {
                 return false;
             }
             boolean sacrifice = artifact.sacrifice(source, game);
+            game.getState().processAction(game); // bug #7672
             boolean putOnBF = owner.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (sacrifice || putOnBF) {
                 return true;
@@ -99,7 +103,7 @@ public final class GoblinWelder extends CardImpl {
     private static class GoblinWelderTarget extends TargetCardInGraveyard {
 
         public GoblinWelderTarget() {
-            super();
+            super(new FilterArtifactCard());
             targetName = "target artifact card in that player's graveyard";
         }
 

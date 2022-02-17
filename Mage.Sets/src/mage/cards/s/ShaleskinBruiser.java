@@ -4,6 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -29,6 +30,7 @@ public final class ShaleskinBruiser extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 3);
     
     public ShaleskinBruiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
@@ -39,8 +41,7 @@ public final class ShaleskinBruiser extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 3);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private ShaleskinBruiser(final ShaleskinBruiser card) {

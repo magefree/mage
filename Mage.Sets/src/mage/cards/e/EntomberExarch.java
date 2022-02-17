@@ -1,23 +1,16 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
@@ -36,11 +29,14 @@ public final class EntomberExarch extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals their hand, you choose a noncreature card from it, then that player discards that card.
+        // When Entomber Exarch enters the battlefield, choose one —
+        // • Return target creature card from your graveyard to your hand
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
+        // • Target opponent reveals their hand. You choose a noncreature card from it. That player discards that card.
         Mode mode = new Mode();
-        mode.addEffect(new EntomberExarchEffect());
+        mode.addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_CREATURE));
         mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);
@@ -53,40 +49,5 @@ public final class EntomberExarch extends CardImpl {
     @Override
     public EntomberExarch copy() {
         return new EntomberExarch(this);
-    }
-}
-
-class EntomberExarchEffect extends OneShotEffect {
-
-    EntomberExarchEffect() {
-        super(Outcome.Discard);
-        staticText = "target opponent reveals their hand, you choose a noncreature card from it, then that player discards that card";
-    }
-
-    EntomberExarchEffect(final EntomberExarchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Entomber Exarch", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_CREATURE);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    return player.discard(card, false, source, game);
-
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public EntomberExarchEffect copy() {
-        return new EntomberExarchEffect(this);
     }
 }

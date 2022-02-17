@@ -33,7 +33,7 @@ public final class GlintSleeveSiphoner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Glint-Sleeve Siphoner enters the battlefield or attacks, you get {E}.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(1)));

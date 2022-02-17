@@ -4,7 +4,6 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
@@ -508,13 +507,5 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
      */
     void setIsAllCreatureTypes(Game game, boolean value);
 
-    List<TextPart> getTextParts();
-
-    TextPart addTextPart(TextPart textPart);
-
     void removePTCDA();
-
-    default void changeSubType(SubType fromSubType, SubType toSubType) {
-
-    }
 }

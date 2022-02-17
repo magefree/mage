@@ -13,9 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,13 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class OllenbockEscort extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public OllenbockEscort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
@@ -50,7 +41,7 @@ public final class OllenbockEscort extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and indestructible until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1));
         this.addAbility(ability);
     }
 

@@ -68,7 +68,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
         setChoice(playerA, true);
         setChoice(playerA, "Ajani, the Greathearted");
-        setChoice(playerA, "Ajani, the Greathearted"); // two etb effects (own + copy)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -120,7 +119,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Spark Double");
         setChoice(playerA, true);
         setChoice(playerA, "Gideon, Ally of Zendikar");
-        setChoice(playerA, "Gideon, Ally of Zendikar"); // two etb effects (own + copy)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

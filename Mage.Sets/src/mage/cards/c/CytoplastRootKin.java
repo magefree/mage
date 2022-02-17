@@ -17,8 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -28,12 +27,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author emerald000
  */
 public final class CytoplastRootKin extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control that has a +1/+1 counter on it");
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public CytoplastRootKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
@@ -45,8 +38,8 @@ public final class CytoplastRootKin extends CardImpl {
         // Graft 4
         this.addAbility(new GraftAbility(this, 4));
         
-        // When Cytoplast Root-Kin enters the battlefield, put a +1/+1 counter on each other creature you control that has a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
+        // When Cytoplast Root-Kin enters the battlefield, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1)));
         
         // {2}: Move a +1/+1 counter from target creature you control onto Cytoplast Root-Kin.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CytoplastRootKinEffect(), new GenericManaCost(2));
