@@ -155,8 +155,10 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         // Not in exile
         if (game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) { return false; }
 
+        // TODO: This is a workaround for #8706, remove when that's fixed.
+        int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Not a card exiled with this Share the Spoils
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
         if (exileZone == null) { return false; }
         if (!exileZone.contains(sourceId)) { return false; }
 
@@ -194,8 +196,10 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
         Card card = game.getCard(sourceId);
         if (card == null) { return false; }
 
+        // TODO: This is a workaround for #8706, remove when that's fixed.
+        int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Check Exile
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
         if (exileZone == null) { return false; }
         if (exileZone.contains(sourceId)) { return true; }
 
@@ -225,6 +229,7 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
         super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
+        setRuleVisible(false);
     }
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
