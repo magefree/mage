@@ -374,6 +374,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Krark's Thumb", "383b", Rarity.RARE, mage.cards.k.KrarksThumb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 384, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 385, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Blanka, Ferocious Friend", 431, Rarity.RARE, mage.cards.b.BlankaFerociousFriend.class));
         cards.add(new SetCardInfo("Path to Exile", 477, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rhystic Study", 478, Rarity.RARE, mage.cards.r.RhysticStudy.class));
         cards.add(new SetCardInfo("Duress", 479, Rarity.RARE, mage.cards.d.Duress.class));
