@@ -177,7 +177,7 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         if (exileZone == null) {
             return false;
         }
-        if (!exileZone.contains(sourceId)) {
+        if (!exileZone.contains(CardUtil.getMainCardId(game, sourceId))) {
             return false;
         }
 
