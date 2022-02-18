@@ -49,7 +49,7 @@ class KayaBaneOfTheDeadEffect extends AsThoughEffectImpl {
 
     KayaBaneOfTheDeadEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "your opponents and creatures with hexproof they control " +
+        staticText = "your opponents and permanents with hexproof your oppponents control " +
                 "can be the targets of spells and abilities you control as though they didn't have hexproof";
     }
 

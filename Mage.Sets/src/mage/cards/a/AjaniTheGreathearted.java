@@ -51,7 +51,7 @@ public final class AjaniTheGreathearted extends CardImpl {
 
         // -2: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
         Ability ability = new LoyaltyAbility(new AddCountersAllEffect(
-                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURES
+                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
         ), -2);
         ability.addEffect(new AddCountersAllEffect(
                 CounterType.LOYALTY.createInstance(), filter

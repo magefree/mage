@@ -50,7 +50,7 @@ class ArlinnVoiceOfThePackReplacementEffect extends ReplacementEffectImpl {
 
     ArlinnVoiceOfThePackReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each creature you control that's a Wolf or Werewolf " +
+        staticText = "Each creature you control that's a Wolf or a Werewolf " +
                 "enters the battlefield with an additional +1/+1 counter on it";
     }
 
