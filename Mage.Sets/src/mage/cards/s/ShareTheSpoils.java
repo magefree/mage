@@ -183,7 +183,7 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
 
         ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
 
-        return watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(source));
+        return watcher.hasNotUsedAbilityThisTurn();
     }
 
     @Override
@@ -323,7 +323,7 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
 
 class ShareTheSpoilsWatcher extends Watcher {
 
-    private final Set<MageObjectReference> usedFrom = new HashSet<>();
+    private boolean usedThisTurn;
 
     public ShareTheSpoilsWatcher() {
         super(WatcherScope.GAME);
@@ -335,20 +335,18 @@ class ShareTheSpoilsWatcher extends Watcher {
             return;
         }
 
-        if (!event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) {
-            return;
+        if (event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) {
+            usedThisTurn = true;
         }
-
-        usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
     }
 
     @Override
     public void reset() {
         super.reset();
-        usedFrom.clear();
+        usedThisTurn = false;
     }
 
-    public boolean hasNotUsedAbilityThisTurn(MageObjectReference mor) {
-        return !usedFrom.contains(mor);
+    public boolean hasNotUsedAbilityThisTurn() {
+        return !usedThisTurn;
     }
 }
