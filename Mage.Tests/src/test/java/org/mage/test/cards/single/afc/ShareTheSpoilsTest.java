@@ -256,6 +256,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
 
+        // TODO: This can fail silently
         checkPlayableAbility("normal cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -366,6 +367,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         addTarget(playerA, "Mountain");
         // Cast front side of Modal dual face card
         castSpell(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Alrund, God of the Cosmos");
+        setChoice(playerA, "Land");
         // Cast back side of Modal dual face card
         castSpell(17, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
 
@@ -380,13 +382,21 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         assertExileCount(playerA, "Lovestruck Beast", 1);
 
-        assertExileCount(playerA, 2); // One from Share the spoils, and another for the adventure half of the adventure card
-        assertExileCount(playerB, 1);
-        assertExileCount(playerC, 1);
-        assertExileCount(playerD, 1);
+        // 1 from Share the Spoils exiling a card for ETB
+        // 1 from casting the Adventur half of a card (Heart's Desire) and leaving it in exile
+        // 1 from casting "Ice"
+        // 1 from casting "Alrund, God of the Cosmos"
+        // 1 from casting "The Prismatic Bridge
+        assertExileCount(playerA, 5);
+        // 0 since playerA cast their card and replaced it with one of their own
+        assertExileCount(playerB, 0);
+        // 0 since playerA cast their card and replaced it with one of their own
+        assertExileCount(playerC, 0);
+        // 0 since playerA cast their card and replaced it with one of their own
+        assertExileCount(playerD, 0);
 
         // Ice is the only card that went in here
-        assertGraveyardCount(playerA, 1);
+        assertGraveyardCount(playerD, 1);
     }
 
     /**
