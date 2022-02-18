@@ -374,7 +374,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Krark's Thumb", "383b", Rarity.RARE, mage.cards.k.KrarksThumb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 384, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 385, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("E. Honda, Sumo Champion", 428, Rarity.RARE, mage.cards.e.EHondaSumoChampion.class));
+        cards.add(new SetCardInfo("Ryu, World Warrior", 429, Rarity.RARE, mage.cards.r.RyuWorldWarrior.class));
+        cards.add(new SetCardInfo("Ken, Burning Brawler", 430, Rarity.RARE, mage.cards.k.KenBurningBrawler.class));
         cards.add(new SetCardInfo("Blanka, Ferocious Friend", 431, Rarity.RARE, mage.cards.b.BlankaFerociousFriend.class));
+        cards.add(new SetCardInfo("Chun-Li, Countless Kicks", 432, Rarity.RARE, mage.cards.c.ChunLiCountlessKicks.class));
+        cards.add(new SetCardInfo("Dhalsim, Pliable Pacifist", 433, Rarity.RARE, mage.cards.d.DhalsimPliablePacifist.class));
+        cards.add(new SetCardInfo("Guile, Sonic Soldier", 434, Rarity.RARE, mage.cards.g.GuileSonicSoldier.class));
+        cards.add(new SetCardInfo("Zangief, the Red Cyclone", 435, Rarity.RARE, mage.cards.z.ZangiefTheRedCyclone.class));
         cards.add(new SetCardInfo("Path to Exile", 477, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rhystic Study", 478, Rarity.RARE, mage.cards.r.RhysticStudy.class));
         cards.add(new SetCardInfo("Duress", 479, Rarity.RARE, mage.cards.d.Duress.class));
