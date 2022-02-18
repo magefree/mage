@@ -20,6 +20,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -41,6 +43,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         attack(1, playerA, "Banehound", playerD);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -59,6 +63,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         concede(1, PhaseStep.PRECOMBAT_MAIN, playerD);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -79,6 +85,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         concede(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -102,6 +110,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         attack(2, playerD, "Banehound", playerA);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -133,7 +143,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
+
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Tana, the Bloodsower", 1);
@@ -169,7 +181,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
+
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Exotic Orchard", 1);
@@ -202,12 +216,13 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
         checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
-        // TODO: How to do this properly for land?
-        checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Reliquary Tower", false);
+        checkPlayableAbility("before play", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Reliquary Tower", false);
 
         setStopAt(2, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
+
         assertAllCommandsUsed();
 
         assertExileCount(playerA, "Lightning Bolt", 1);
@@ -245,6 +260,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStopAt(2, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -292,6 +308,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         // Cast an adventure card from hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dizzying Swoop");
+        addTarget(playerA, "Prosper, Tome-Bound");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Make sure the creature card can't be played from exile since there isn't the {W}{W} for it
@@ -299,6 +316,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
 
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -353,6 +371,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStopAt(17, PhaseStep.POSTCOMBAT_MAIN);
 
+        setStrictChooseMode(true);
         execute();
 
         assertAllCommandsUsed();
@@ -395,23 +414,14 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         addTarget(playerA, shareTheSpoils);
         addTarget(playerA, "Aether Spellbomb");
 
-        playLand(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+        checkPlayableAbility("before play", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Exotic Orchard", false);
 
         setStopAt(5, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
 
-        boolean threwError = false;
-
-        try {
-            assertAllCommandsUsed();
-        } catch (AssertionError error) {
-            // Cannot play Exotic Orchard since it would be the second card of the turn
-            assert error.getMessage().equals("Player PlayerA must have 0 actions but found 1");
-            threwError = true;
-        }
-
-        assert threwError;
+        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
@@ -446,29 +456,23 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        // Casting Aether Helix from exile with Share the spoils.
+        // Doing so exiles Exotic Orchard.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Helix");
         addTarget(playerA, shareTheSpoils);
         addTarget(playerA, "Aether Spellbomb");
         // Recast, exile a new set of cards
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
 
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+        // Exotic Orchard was exile by the first Share the Spoils, so can't be cast again with the new one
+        checkPlayableAbility("before play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Exotic Orchard", false);
 
         setStopAt(1, PhaseStep.END_TURN);
 
+        setStrictChooseMode(true);
         execute();
 
-        boolean threwError = false;
-
-        try {
-            assertAllCommandsUsed();
-        } catch (AssertionError error) {
-            // Cannot play Exotic Orchard since it would be the second card of the turn
-            assert error.getMessage().equals("Player PlayerA must have 0 actions but found 1");
-            threwError = true;
-        }
-
-        assert threwError;
+        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
