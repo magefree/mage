@@ -1,10 +1,10 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,6 +34,7 @@ public final class PitTrap extends CardImpl {
 
         // {2}, {tap}, Sacrifice Pit Trap: Destroy target attacking creature without flying. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
         this.addAbility(ability);

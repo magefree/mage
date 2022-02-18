@@ -1,7 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -11,23 +10,23 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileSourceCost extends CostImpl {
 
-    private boolean toUniqueExileZone;
+    private final boolean toUniqueExileZone;
 
     public ExileSourceCost() {
-        this.text = "exile {this}";
+        this(false);
     }
 
     /**
-     *
      * @param toUniqueExileZone moves the card to a source object dependant
-     * unique exile zone, so another effect of the same source object (e.g.
-     * Deadeye Navigator) can identify the card
+     *                          unique exile zone, so another effect of the same source object (e.g.
+     *                          Deadeye Navigator) can identify the card
      */
     public ExileSourceCost(boolean toUniqueExileZone) {
         this.text = "exile {this}";
@@ -52,7 +51,7 @@ public class ExileSourceCost extends CostImpl {
                 game.getState().setValue(sourceObject.getId().toString(), ability.getSourceObjectZoneChangeCounter());
             }
             controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, source, game, game.getState().getZone(sourceObject.getId()), true);
-                // 117.11. The actions performed when paying a cost may be modified by effects.
+            // 117.11. The actions performed when paying a cost may be modified by effects.
             // Even if they are, meaning the actions that are performed don't match the actions
             // that are called for, the cost has still been paid.
             // so return state here is not important because the user indended to exile the target anyway

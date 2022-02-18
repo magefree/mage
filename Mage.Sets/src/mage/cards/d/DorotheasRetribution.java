@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.AngelToken;
+import mage.game.permanent.token.DorotheasRetributionSpiritToken;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -86,7 +86,7 @@ class DorotheasRetributionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new AngelToken();
+        Token token = new DorotheasRetributionSpiritToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
                 new SacrificeTargetEffect()

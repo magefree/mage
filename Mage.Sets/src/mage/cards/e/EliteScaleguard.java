@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -26,12 +25,6 @@ import mage.target.targetpointer.FirstTargetPointer;
  */
 public final class EliteScaleguard extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     public EliteScaleguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.subtype.add(SubType.HUMAN);
@@ -43,7 +36,11 @@ public final class EliteScaleguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(2)));
 
         // Whenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls.
-        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new TapTargetEffect(), false, filter, true);
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(
+                new TapTargetEffect(),
+                false,
+                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1,
+                true);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         ability.setTargetAdjuster(EliteScaleguardTargetAdjuster.instance);
         this.addAbility(ability);

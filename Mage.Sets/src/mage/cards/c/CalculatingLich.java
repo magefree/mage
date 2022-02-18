@@ -30,7 +30,7 @@ public final class CalculatingLich extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a creature attacks one of your opponents, that player loses 1 life.
         this.addAbility(new CalculatingLichTriggeredAbility());

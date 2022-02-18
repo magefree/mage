@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -14,8 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -26,21 +25,15 @@ import mage.game.permanent.Permanent;
  */
 public final class Thunderstaff extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking creatures");
-    static {
-        filter.add(AttackingPredicate.instance);
-    }
-
     public Thunderstaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As long as Thunderstaff is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThunderstaffPreventionEffect()));
         // {2}, {tap}: Attacking creatures get +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,0,Duration.EndOfTurn, filter, false), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,0,Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     private Thunderstaff(final Thunderstaff card) {

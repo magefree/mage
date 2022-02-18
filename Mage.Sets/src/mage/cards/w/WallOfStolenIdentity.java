@@ -4,14 +4,11 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffect;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,8 +32,8 @@ import java.util.UUID;
  */
 public final class WallOfStolenIdentity extends CardImpl {
 
-    final static private String rule = "You may have Wall of Stolen Identity enter the battlefield as a copy of any "
-            + "creature on the battlefield, except it's a wall in addition to its other types and it has defender. "
+    final static private String rule = "You may have {this} enter the battlefield as a copy of any "
+            + "creature on the battlefield, except it's a Wall in addition to its other types and it has defender. "
             + "When you do, tap the copied creature and it doesn't untap during its "
             + "controller's untap step for as long as you control {this}";
 
@@ -49,9 +46,9 @@ public final class WallOfStolenIdentity extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Wall of Stolen Identity enter the battlefield as a copy of any creature on the battlefield, except it's a wall in addition to its other types and it has defender. When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control Wall of Stolen Identity.
-        Ability ability = new SimpleStaticAbility(
-                new EntersBattlefieldEffect(new WallOfStolenIdentityCopyEffect(), rule, true)
-        );
+        Ability ability = new SimpleStaticAbility(new EntersBattlefieldEffect(
+                new WallOfStolenIdentityCopyEffect(), rule, true
+        ));
         this.addAbility(ability);
     }
 
@@ -67,8 +64,7 @@ public final class WallOfStolenIdentity extends CardImpl {
 
 class WallOfStolenIdentityCopyEffect extends OneShotEffect {
 
-    private static final String rule2 = "When you do, tap the copied creature and it doesn't untap during its "
-            + "controller's untap step for as long as you control {this}.";
+    private static final String rule2 = "When you do, .";
 
     public WallOfStolenIdentityCopyEffect() {
         super(Outcome.Copy);
@@ -115,47 +111,18 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
             }
         });
 
-        copyFromPermanent.tap(source, game);
-        // Incredibly, you can't just add a fixed target to a continuousrulemodifyingeffect, thus the workaround.
-        ContinuousRuleModifyingEffect effect = new DontUntapInControllersUntapStepSourceEffect();
-        Ability ability = new SimpleStaticAbility(effect);
-        ContinuousEffect effect2 = new GainAbilityTargetEffect(ability, Duration.Custom);
-        ConditionalContinuousEffect conditionalEffect = new ConditionalContinuousEffect(
-                effect2, new WallOfStolenIdentityCondition(
-                        source,
-                        source.getControllerId(),
-                        sourcePermanent.getZoneChangeCounter(game)), "");
-        conditionalEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-        game.addEffect(conditionalEffect, source);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new TapTargetEffect(), false, "tap the copied creature " +
+                "and it doesn't untap during its controller's untap step for as long as you control {this}"
+        );
+        ability.addEffect(new DontUntapInControllersUntapStepTargetEffect(Duration.WhileControlled));
+        ability.getEffects().setTargetPointer(new FixedTarget(copyFromPermanent, game));
+        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
 
     @Override
     public WallOfStolenIdentityCopyEffect copy() {
         return new WallOfStolenIdentityCopyEffect(this);
-    }
-}
-
-class WallOfStolenIdentityCondition implements Condition {
-
-    // Checks for when it leaves play or changes control
-    private final Ability ability;
-    private final UUID controllerId;
-    private final int zcc;
-
-    public WallOfStolenIdentityCondition(Ability ability, UUID controllerId, int zcc) {
-        this.ability = ability;
-        this.controllerId = controllerId;
-        this.zcc = zcc;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanentSource = game.getPermanent(ability.getSourceId());
-        if (permanentSource != null) {
-            return permanentSource.getZoneChangeCounter(game) == zcc + 1
-                    && permanentSource.getControllerId() == controllerId;
-        }
-        return false;
     }
 }

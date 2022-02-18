@@ -49,7 +49,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Summoner's Pact", 1);
         pointMap.put("Survival of the Fittest", 2);
         pointMap.put("Tainted Pact", 1);
-        pointMap.put("Thassa's Oracle", 2);
+        pointMap.put("Thassa's Oracle", 7);
         pointMap.put("Time Vault", 7);
         pointMap.put("Time Walk", 7);
         pointMap.put("Tinker", 3);

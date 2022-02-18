@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -143,22 +142,29 @@ class KnowledgePoolEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell == null) {
+            return false;
+        }
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && spell != null && sourceObject != null) {
+        Player spellController = game.getPlayer(spell.getControllerId());
+        if (spellController != null
+                && sourceObject != null) {
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-            if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
-                Player player = game.getPlayer(spell.getControllerId());
-                if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
+            if (exileZoneId == null) {
+                return false;
+            }
+            if (spellController.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
+                if (spellController.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
                     FilterNonlandCard realFilter = filter.copy();
                     realFilter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
                     TargetCardInExile target = new TargetCardInExile(0, 1, realFilter, source.getSourceId());
                     target.setNotTarget(true);
-                    if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
+                    if (spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null && !card.getId().equals(spell.getSourceId())) {
+                        if (card != null
+                                && !card.getId().equals(spell.getSourceId())) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                            player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                            spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         }
                     }

@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -25,15 +24,13 @@ public final class KirtarsWrath extends CardImpl {
     public KirtarsWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
-
         // Destroy all creatures. They can't be regenerated.
         // Threshold - If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new KirtarsWrathEffect(),
-                new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true),
+                new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, true),
                 new CardsInControllerGraveyardCondition(7),
                 "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated"));
-
     }
 
     private KirtarsWrath(final KirtarsWrath card) {
@@ -64,7 +61,7 @@ class KirtarsWrathEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true).apply(game, source);
+        new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, true).apply(game, source);
         return new CreateTokenEffect(new SpiritWhiteToken(), 2).apply(game, source);
     }
 }

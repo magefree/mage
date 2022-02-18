@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -30,6 +31,8 @@ public final class GoblinPiledriver extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 2);
+
     public GoblinPiledriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add(SubType.GOBLIN);
@@ -41,8 +44,7 @@ public final class GoblinPiledriver extends CardImpl {
         // Protection from blue
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         // Whenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 2);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private GoblinPiledriver(final GoblinPiledriver card) {

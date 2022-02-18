@@ -39,7 +39,7 @@ public final class Johan extends CardImpl {
 
         // At the beginning of combat on your turn, you may have Johan gain "Johan can't attack" until end of combat. If you do, attacking doesn't cause creatures you control to tap this combat if Johan is untapped.
         Condition condition = new CompoundCondition("if {this} is untapped",
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 SourceOnBattlefieldCondition.instance);
         Ability ability = new BeginningOfCombatTriggeredAbility(new CantAttackSourceEffect(Duration.EndOfCombat).setText("you may have {this} gain \"{this} can't attack\" until end of combat"), TargetController.YOU, true);
         ability.addEffect(new ConditionalContinuousEffect(

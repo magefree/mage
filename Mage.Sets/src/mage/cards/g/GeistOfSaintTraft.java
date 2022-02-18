@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -34,6 +33,7 @@ public final class GeistOfSaintTraft extends CardImpl {
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
+
         // Whenever Geist of Saint Traft attacks, create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
     }

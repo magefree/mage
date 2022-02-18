@@ -44,7 +44,7 @@ public final class TheFirstEruption extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — The First Eruption deals 1 damage to each creature without flying.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DamageAllEffect(1, filter));

@@ -1,7 +1,6 @@
 
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,18 +8,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author Styxo
  */
 public final class QuarryHauler extends CardImpl {
@@ -52,7 +53,8 @@ class QuarryHaulerEffect extends OneShotEffect {
 
     public QuarryHaulerEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "for each kind of counter on target permanent, put another counter of that kind on it or remove one from it";
+        this.staticText = "for each kind of counter on target permanent, " +
+                "put another counter of that kind on it or remove one from it";
 
     }
 
@@ -69,33 +71,27 @@ class QuarryHaulerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller != null) {
-            if (permanent != null) {
-                Counters counters = permanent.getCounters(game).copy();
-                CounterType counterType;
-                for (Counter counter : counters.values()) {
-                    if (controller.chooseUse(Outcome.BoostCreature, "Choose whether to add or remove a " + counter.getName() + " counter", null, "Add", "Remove", source, game)) {
-                        counterType = CounterType.findByName(counter.getName());
-                        Counter counterToAdd;
-                        if (counterType != null) {
-                            counterToAdd = counterType.createInstance();
-                        } else {
-                            counterToAdd = new Counter(counter.getName());
-                        }
-                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game);
-                    } else {
-                        counterType = CounterType.findByName(counter.getName());
-                        if (counterType != null) {
-                            permanent.removeCounters(counterType.createInstance(), source, game);
-                        } else {
-                            permanent.removeCounters(counter.getName(), 1, source, game);
-                        }
-                    }
-                }
-            }
-            return true;
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        List<String> counterNames = permanent
+                .getCounters(game)
+                .values()
+                .stream()
+                .map(Counter::getName)
+                .collect(Collectors.toList());
+        for (String counterName : counterNames) {
+            Counter newCounter = CounterType.findByName(counterName).createInstance();
+            if (controller.chooseUse(
+                    Outcome.BoostCreature, "Add or remove a " + counterName + " counter?",
+                    null, "Add", "Remove", source, game
+            )) {
+                permanent.addCounters(newCounter, source.getControllerId(), source, game);
+            } else {
+                permanent.removeCounters(newCounter, source, game);
+            }
+        }
+        return true;
     }
 
 }

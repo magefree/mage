@@ -15,7 +15,6 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.*;
@@ -73,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected int classLevel = 1;
+    protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -166,6 +166,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.classLevel = permanent.classLevel;
+        this.goadingPlayers.addAll(permanent.goadingPlayers);
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
@@ -210,9 +211,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
         this.copy = false;
-        for (TextPart textPart : textParts) {
-            textPart.reset();
-        }
+        this.goadingPlayers.clear();
     }
 
     @Override
@@ -1127,19 +1126,35 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             MorphAbility.setPermanentToFaceDownCreature(this, game);
         }
 
-        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF);
+        if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {
+            return false;
+        }
+        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
         if (game.replaceEvent(event)) {
             return false;
         }
-        event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
-        if (!game.replaceEvent(event)) {
-            if (fireEvent) {
-                game.addSimultaneousEvent(event);
-                return true;
+        if (this.isPlaneswalker(game)) {
+            int loyalty;
+            if (this.getStartingLoyalty() == -2) {
+                loyalty = source.getManaCostsToPay().getX();
+            } else {
+                loyalty = this.getStartingLoyalty();
             }
-
+            int countersToAdd;
+            if (this.hasAbility(CompleatedAbility.getInstance(), game)) {
+                countersToAdd = loyalty - 2 * source.getManaCostsToPay().getPhyrexianPaid();
+            } else {
+                countersToAdd = loyalty;
+            }
+            if (countersToAdd > 0) {
+                this.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
+            }
         }
-        return false;
+        if (!fireEvent) {
+            return false;
+        }
+        game.addSimultaneousEvent(event);
+        return true;
     }
 
     @Override
@@ -1333,14 +1348,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         //20101001 - 508.1c
         if (defenderId == null) {
-            boolean oneCanBeAttacked = false;
-            for (UUID defenderToCheckId : game.getCombat().getDefenders()) {
-                if (canAttackCheckRestrictionEffects(defenderToCheckId, game)) {
-                    oneCanBeAttacked = true;
-                    break;
-                }
-            }
-            if (!oneCanBeAttacked) {
+            if (game.getCombat()
+                    .getDefenders()
+                    .stream()
+                    .noneMatch(defenderToCheckId -> canAttackCheckRestrictionEffects(defenderToCheckId, game))) {
                 return false;
             }
         } else if (!canAttackCheckRestrictionEffects(defenderId, game)) {
@@ -1568,6 +1579,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void addGoadingPlayer(UUID playerId) {
+        this.goadingPlayers.add(playerId);
+    }
+
+    @Override
+    public Set<UUID> getGoadingPlayers() {
+        return goadingPlayers;
     }
 
     @Override

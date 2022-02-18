@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -30,7 +29,7 @@ public final class MuYanlingSkyDancer extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANLING);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
+        this.setStartingLoyalty(2);
 
         // +2: Until your next turn, up to one target creature gets -2/-0 and loses flying.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(

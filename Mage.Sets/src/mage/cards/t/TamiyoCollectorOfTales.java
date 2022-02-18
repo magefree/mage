@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +30,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Spells and abilities your opponents control can't cause you to discard cards or sacrifice permanents.
         this.addAbility(new SimpleStaticAbility(new TamiyoCollectorOfTalesRuleEffect()));

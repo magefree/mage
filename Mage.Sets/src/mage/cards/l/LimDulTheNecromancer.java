@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,11 +30,9 @@ import java.util.UUID;
  */
 public final class LimDulTheNecromancer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterPermanent filter2 = new FilterPermanent("Zombie");
 
     static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter2.add(SubType.ZOMBIE.getPredicate());
     }
 
@@ -46,7 +45,7 @@ public final class LimDulTheNecromancer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), false, filter, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
 
         // {1}{B}: Regenerate target Zombie.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));

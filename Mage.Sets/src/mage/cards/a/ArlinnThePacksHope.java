@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
@@ -33,7 +32,7 @@ public final class ArlinnThePacksHope extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
         this.secondSideCardClazz = mage.cards.a.ArlinnTheMoonsFury.class;
 
         // Daybound

@@ -12,10 +12,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,15 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ZeganaUtopianSpeaker extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-        filter.add(AnotherPredicate.instance);
-        filter2.add(CounterType.P1P1.getPredicate());
-    }
 
     public ZeganaUtopianSpeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
@@ -46,11 +34,12 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
-                ), new PermanentsOnTheBattlefieldCondition(filter),
+                ), new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1),
                 "When {this} enters the battlefield, " +
                         "if you control another creature " +
                         "with a +1/+1 counter on it, draw a card."
-        ));
+                )
+        );
 
         // {4}{G}{U}: Adapt 4.
         this.addAbility(new AdaptAbility(4, "{4}{G}{U}"));
@@ -60,9 +49,9 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
                 Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
-                        filter2, "Each creature you control with a +1/+1 counter on it has trample"
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
                 )
-        ));
+        );
     }
 
     private ZeganaUtopianSpeaker(final ZeganaUtopianSpeaker card) {

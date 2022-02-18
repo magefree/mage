@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 public final class GlitteringWish extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a multicolored card");
+    private static final FilterCard filter = new FilterCard("multicolored card");
 
     static {
         filter.add(MulticoloredPredicate.instance);
@@ -26,7 +26,7 @@ public final class GlitteringWish extends CardImpl {
     public GlitteringWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{W}");
 
-        // You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. 
+        // You may reveal a multicolored card you own from outside the game and put it into your hand.
         this.getSpellAbility().addEffect(new WishEffect(filter));
         this.getSpellAbility().addHint(OpenSideboardHint.instance);
 

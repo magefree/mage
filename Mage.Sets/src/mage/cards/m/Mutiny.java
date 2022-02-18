@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -24,18 +24,12 @@ import java.util.UUID;
  */
 public final class Mutiny extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public Mutiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new MutinyEffect());
-        this.getSpellAbility().addTarget(new MutinyFirstTarget(filter));
+        this.getSpellAbility().addTarget(new MutinyFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
 
     }

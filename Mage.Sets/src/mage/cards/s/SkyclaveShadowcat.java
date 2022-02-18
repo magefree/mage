@@ -13,9 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -24,13 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SkyclaveShadowcat extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public SkyclaveShadowcat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -50,7 +41,10 @@ public final class SkyclaveShadowcat extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new DrawCardSourceControllerEffect(1),
+                false,
+                StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1));
     }
 
     private SkyclaveShadowcat(final SkyclaveShadowcat card) {

@@ -1,8 +1,6 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -19,10 +17,8 @@ public final class FireIce extends SplitCard {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", SpellAbilityType.SPLIT);
 
         // Fire
-        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
-        Effect effect = new DamageMultiEffect(2);
-        effect.setText("Fire deals 2 damage divided as you choose among one or two target creatures and/or players");
-        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        // Fire deals 2 damage divided as you choose among one or two targets.
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageMultiEffect(2, "Fire"));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
 
         // Ice

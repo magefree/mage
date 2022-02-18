@@ -34,7 +34,7 @@ public final class NighthawkScavenger extends CardImpl {
 
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(0);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Flying
@@ -50,7 +50,8 @@ public final class NighthawkScavenger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetPowerSourceEffect(xValue, Duration.EndOfGame)
                 .setText("{this}'s power is equal to 1 plus the number of " +
-                        "card types among cards in your opponents' graveyards.")
+                        "card types among cards in your opponents' graveyards. " +
+                        "<i>(Cards in graveyards have only the characteristics of their front face.)</i>")
         ).addHint(CardTypesInGraveyardHint.OPPONENTS));
     }
 

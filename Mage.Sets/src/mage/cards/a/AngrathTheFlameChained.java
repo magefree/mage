@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -41,7 +40,7 @@ public final class AngrathTheFlameChained extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Each opponent discards a card and loses 2 life.
         LoyaltyAbility ability = new LoyaltyAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), 1);

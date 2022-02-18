@@ -29,6 +29,7 @@ public final class DreamLeash extends CardImpl {
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast();
+        auraTarget.withChooseHint("must be tapped");
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

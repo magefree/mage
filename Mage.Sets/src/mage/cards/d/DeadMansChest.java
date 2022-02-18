@@ -14,7 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
@@ -31,19 +31,13 @@ import java.util.UUID;
  */
 public final class DeadMansChest extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public DeadMansChest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature an opponent controls
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

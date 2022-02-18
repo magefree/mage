@@ -12,7 +12,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.abilities.text.TextPart;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -1101,16 +1100,6 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

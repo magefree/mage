@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -14,7 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.WrennAndSevenEmblem;
-import mage.game.permanent.token.WrennAndSevenToken;
+import mage.game.permanent.token.WrennAndSevenTreefolkToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -30,7 +29,7 @@ public final class WrennAndSeven extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WRENN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(
@@ -41,7 +40,7 @@ public final class WrennAndSeven extends CardImpl {
         this.addAbility(new LoyaltyAbility(new WrennAndSevenLandEffect(), 0));
 
         // −3: Create a green Treefolk creature token with reach and "This creature's power and toughness are each equal to the number of lands you control."
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WrennAndSevenToken()), -3));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WrennAndSevenTreefolkToken()), -3));
 
         // −8: Return all permanent cards from your graveyard to your hand. You get an emblem with "You have no maximum hand size."
         Ability ability = new LoyaltyAbility(new WrennAndSevenReturnEffect(), -8);

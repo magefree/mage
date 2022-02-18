@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -25,12 +23,6 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class NissasJudgment extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        FILTER.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public NissasJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
@@ -41,7 +33,7 @@ public final class NissasJudgment extends CardImpl {
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
         effect = new NissasJudgmentEffect();
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
-        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, FILTER, false));
+        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
         getSpellAbility().addEffect(effect);
     }
 
@@ -56,14 +48,6 @@ public final class NissasJudgment extends CardImpl {
 }
 
 class NissasJudgmentEffect extends OneShotEffect {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    private static final FilterCreaturePermanent filterWithCounter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filterWithCounter.add(CounterType.P1P1.getPredicate());
-    }
 
     public NissasJudgmentEffect() {
         super(Outcome.Damage);
@@ -85,7 +69,7 @@ class NissasJudgmentEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterWithCounter, controller.getId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, controller.getId(), game)) {
                     if (permanent.getPower().getValue() > 0) {
                         targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);
                     }

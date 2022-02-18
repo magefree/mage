@@ -19,7 +19,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     private final boolean setTargetPointer;
 
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE_A, false);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_A_CREATURE, false);
     }
 
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {

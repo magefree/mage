@@ -45,7 +45,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(

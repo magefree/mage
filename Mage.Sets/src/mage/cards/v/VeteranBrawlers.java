@@ -31,8 +31,6 @@ public final class VeteranBrawlers extends CardImpl {
         filter.add(TappedPredicate.UNTAPPED);
     }
 
-    static final private String rule = "{this} can't block if you control an untapped land";
-
     public VeteranBrawlers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
@@ -64,7 +62,7 @@ class VeteranBrawlersCantBlockEffect extends RestrictionEffect {
     public VeteranBrawlersCantBlockEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = "{this} can't attack if you control " + filter.getMessage();
+        staticText = "{this} can't block if you control " + filter.getMessage();
     }
 
     public VeteranBrawlersCantBlockEffect(final VeteranBrawlersCantBlockEffect effect) {

@@ -38,7 +38,7 @@ public final class HiddenStockpile extends CardImpl {
         this.addAbility(ability);
 
         // {1}, Sacrifice a creature: Scry 1.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }

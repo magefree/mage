@@ -9,10 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,14 +20,7 @@ import java.util.UUID;
  */
 public final class TitanicBrawl extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
-    private static final Condition condition = new SourceTargetsPermanentCondition(filter);
+    private static final Condition condition = new SourceTargetsPermanentCondition(StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1);
 
     public TitanicBrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

@@ -15,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,11 +23,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author JotaPeRL
  */
 public final class PlaxcasterFrogling extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }       
 
     public PlaxcasterFrogling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
@@ -42,7 +36,7 @@ public final class PlaxcasterFrogling extends CardImpl {
         
         // {2}: Target creature with a +1/+1 counter on it gains shroud until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);        
     }
 

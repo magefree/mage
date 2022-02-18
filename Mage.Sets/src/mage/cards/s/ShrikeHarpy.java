@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -32,10 +32,12 @@ public final class ShrikeHarpy extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Tribute 2</i>
         this.addAbility(new TributeAbility(2));
+
         // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "target opponent"), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));

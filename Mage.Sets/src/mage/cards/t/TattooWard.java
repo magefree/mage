@@ -58,7 +58,7 @@ public final class TattooWard extends CardImpl {
 
         // Sacrifice Tattoo Ward: Destroy target enchantment.
         Ability ability3 = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
-        ability3.addTarget(new TargetPermanent(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+        ability3.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
         this.addAbility(ability3);
 
     }

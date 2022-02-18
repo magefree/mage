@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,13 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TemperedVeteran extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public TemperedVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -43,7 +35,7 @@ public final class TemperedVeteran extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{W}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);
 
         // {4}{W}{W}, {T}: Put a +1/+1 counter on target creature.

@@ -26,7 +26,10 @@ public final class FerociousTigorilla extends CardImpl {
 
         // Ferocious Tigorilla enters the battlefield with your choice of a trample counter or a menace counter on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCounterChoiceSourceEffect(CounterType.TRAMPLE, CounterType.MENACE)
+                new AddCounterChoiceSourceEffect(CounterType.TRAMPLE, CounterType.MENACE),
+                "Ferocious Tigorilla enters the battlefield with your choice of " +
+                        "a trample counter or a menace counter on it. " +
+                        "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"
         ));
     }
 

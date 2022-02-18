@@ -60,7 +60,7 @@ class ReinterpretEffect extends OneShotEffect {
             return false;
         }
         int manaValue = spell.getManaValue();
-        spell.counter(source, game);
+        game.getStack().counter(spell.getId(), source, game);
         new CastWithoutPayingManaCostEffect(manaValue).apply(game, source);
         return true;
     }

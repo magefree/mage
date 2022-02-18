@@ -4,7 +4,10 @@ import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.*;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -102,7 +105,7 @@ public abstract class AbilityImpl implements Ability {
         this.zone = ability.zone;
         this.name = ability.name;
         this.usesStack = ability.usesStack;
-        this.manaCosts = ability.manaCosts;
+        this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         for (Watcher watcher : ability.getWatchers()) {
@@ -536,14 +539,15 @@ public abstract class AbilityImpl implements Ability {
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
 
-            if (cost instanceof PhyrexianManaCost) {
-                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
-                PayLifeCost payLifeCost = new PayLifeCost(2);
-                if (payLifeCost.canPay(this, this, controller.getId(), game)
-                        && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
-                    costIterator.remove();
-                    costs.add(payLifeCost);
-                }
+            if (!cost.isPhyrexian()) {
+                continue;
+            }
+            PayLifeCost payLifeCost = new PayLifeCost(2);
+            if (payLifeCost.canPay(this, this, controller.getId(), game)
+                    && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + cost.getText().replace("/P", "") + '?', this, game)) {
+                costIterator.remove();
+                costs.add(payLifeCost);
+                manaCostsToPay.incrPhyrexianPaid();
             }
         }
     }
@@ -1325,8 +1329,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+    public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
         this.targetAdjuster = targetAdjuster;
+        return this;
     }
 
     @Override

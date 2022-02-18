@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -28,10 +27,9 @@ import mage.target.common.TargetCardInHand;
 public final class Commandeer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two blue cards");
-    private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filterSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Commandeer(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +41,7 @@ public final class Commandeer extends CardImpl {
 
         // Gain control of target noncreature spell. You may choose new targets for it.
         this.getSpellAbility().addEffect(new CommandeerEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filterSpell));
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
     }
 
     private Commandeer(final Commandeer card) {
@@ -60,7 +58,10 @@ class CommandeerEffect extends OneShotEffect {
 
     public CommandeerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Gain control of target noncreature spell. You may choose new targets for it";
+        this.staticText = "Gain control of target noncreature spell. " +
+                "You may choose new targets for it. " +
+                "<i> (If that spell is an artifact, enchantment, or planeswalker, " +
+                "the permanent enters the battlefield under your control.)</i>";
     }
 
     public CommandeerEffect(final CommandeerEffect effect) {

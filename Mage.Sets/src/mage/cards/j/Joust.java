@@ -49,7 +49,7 @@ class JoustEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Choose target creature you control and target creature you don't control. " +
                 "The creature you control gets +2/+1 until end of turn if it's a Knight. " +
-                "Then those creatures fight each other.";
+                "Then those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private JoustEffect(final JoustEffect effect) {

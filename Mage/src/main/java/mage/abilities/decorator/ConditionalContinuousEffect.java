@@ -104,8 +104,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!conditionState && effect.getDuration() == Duration.Custom) {
-            this.discard();
+        switch (effect.getDuration()) {
+            case OneUse:
+                used = true;
+                break;
+            case Custom:
+            case WhileControlled:
+                this.discard();
         }
         return false;
     }
@@ -123,11 +128,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
-        if (effect.getDuration() == Duration.OneUse) {
-            used = true;
-        }
-        if (effect.getDuration() == Duration.Custom) {
-            this.discard();
+        switch (effect.getDuration()) {
+            case OneUse:
+                used = true;
+                break;
+            case Custom:
+            case WhileControlled:
+                this.discard();
         }
         return false;
     }
@@ -176,7 +183,8 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     /**
      * Return all effects list, for tests only
-     * @return 
+     *
+     * @return
      */
     public List<ContinuousEffect> getAllEffects() {
         List<ContinuousEffect> res = new ArrayList<>();

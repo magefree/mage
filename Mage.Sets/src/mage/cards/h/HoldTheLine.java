@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterBlockingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -15,13 +14,11 @@ import mage.filter.common.FilterBlockingCreature;
  */
 public final class HoldTheLine extends CardImpl {
 
-    private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
-
     public HoldTheLine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
         // Blocking creatures get +7/+7 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(7, 7, Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(7, 7, Duration.EndOfTurn, StaticFilters.FILTER_BLOCKING_CREATURES, false));
     }
 
     private HoldTheLine(final HoldTheLine card) {

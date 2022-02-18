@@ -20,6 +20,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Ancestral Recall", 5);
         pointMap.put("Time Walk", 5);
         pointMap.put("Black Lotus", 4);
+        pointMap.put("Thassa's Oracle", 4);
         pointMap.put("Time Vault", 4);
         pointMap.put("Demonic Tutor", 3);
         pointMap.put("Mana Crypt", 3);
@@ -29,7 +30,6 @@ public class AusHighlander extends Constructed {
         pointMap.put("Mox Ruby", 3);
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Sol Ring", 3);
-        pointMap.put("Thassa's Oracle", 3);
         pointMap.put("Underworld Breach", 3);
         pointMap.put("Vampiric Tutor", 3);
         pointMap.put("Channel", 2);
@@ -61,6 +61,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Library of Alexandria", 1);
         pointMap.put("Life from the Loam", 1);
         pointMap.put("Lim-Dul's Vault", 1);
+        pointMap.put("Lurrus of the Dream-Den", 1);
         pointMap.put("Lutri, the Spellchaser", 1);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
@@ -70,6 +71,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Natural Order", 1);
         pointMap.put("Oath of Druids", 1);
         pointMap.put("Personal Tutor", 1);
+        pointMap.put("Profane Tutor", 1);
         pointMap.put("Sensei's Divining Top", 1);
         pointMap.put("Skullclamp", 1);
         pointMap.put("Snapcaster Mage", 1);
@@ -80,6 +82,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Tolarian Academy", 1);
         pointMap.put("Umezawa's Jitte", 1);
         pointMap.put("Uro, Titan of Nature's Wrath", 1);
+        pointMap.put("Urza's Saga", 1);
         pointMap.put("Wasteland", 1);
         pointMap.put("Wishclaw Talisman", 1);
         pointMap.put("Wrenn and Six", 1);

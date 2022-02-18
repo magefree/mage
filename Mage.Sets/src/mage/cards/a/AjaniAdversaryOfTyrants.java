@@ -1,27 +1,27 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.command.emblems.AjaniAdversaryOfTyrantsEmblem;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class AjaniAdversaryOfTyrants extends CardImpl {
@@ -38,11 +38,11 @@ public final class AjaniAdversaryOfTyrants extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Put a +1/+1 counter on each of up to two target creatures.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1);
-        ability.addTarget(new TargetCreaturePermanent(0, 2));
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(ability);
 
         // −2: Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.

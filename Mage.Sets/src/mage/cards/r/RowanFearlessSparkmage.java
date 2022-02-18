@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
@@ -18,8 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -29,14 +27,12 @@ import java.util.UUID;
  */
 public final class RowanFearlessSparkmage extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("all creatures");
-
     public RowanFearlessSparkmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Up to one target creature gets +3/+0 and gains first strike until end of turn.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
@@ -57,11 +53,11 @@ public final class RowanFearlessSparkmage extends CardImpl {
         this.addAbility(ability);
 
         // −9: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
-        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, filter)
+        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)
                 .setText("gain control of all creatures until end of turn."), -9);
-        ability.addEffect(new UntapAllEffect(filter).setText("Untap them."));
+        ability.addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES).setText("Untap them."));
         ability.addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn, filter
+                HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES
         ).setText("They gain haste until end of turn"));
         this.addAbility(ability);
     }

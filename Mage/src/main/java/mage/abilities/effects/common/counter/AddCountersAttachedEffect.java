@@ -74,12 +74,21 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         // put a +1/+1 counter on it
         sb.append("put ");
-        if (counter.getCount() > 1) {
+        boolean plural = true;
+        if (amount.toString().equals("X")) {
+            sb.append("X ");
+        } else if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
             sb.append(CounterType.findArticle(counter.getName())).append(' ');
+            plural = false;
         }
-        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on ");
+        sb.append(counter.getName().toLowerCase(Locale.ENGLISH));
+        if (plural) {
+            sb.append(" counters on ");
+        } else {
+            sb.append(" counter on ");
+        }
         sb.append(textEnchanted);
         if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());

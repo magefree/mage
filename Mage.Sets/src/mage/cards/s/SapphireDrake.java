@@ -9,24 +9,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author jeffwadsworth
  */
 public final class SapphireDrake extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-    
-    static final String rule = "Each creature you control with a +1/+1 counter on it has flying";
 
     public SapphireDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
@@ -39,7 +28,13 @@ public final class SapphireDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Each creature you control with a +1/+1 counter on it has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(FlyingAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+                )
+        );
     }
 
     private SapphireDrake(final SapphireDrake card) {

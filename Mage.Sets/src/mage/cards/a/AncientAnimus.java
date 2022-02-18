@@ -33,7 +33,8 @@ public final class AncientAnimus extends CardImpl {
         effect.setText("Put a +1/+1 counter on target creature you control if it's legendary");
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
-        effect.setText("Then it fights target creature an opponent controls");
+        effect.setText("Then it fights target creature an opponent controls. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetOpponentsCreaturePermanent();

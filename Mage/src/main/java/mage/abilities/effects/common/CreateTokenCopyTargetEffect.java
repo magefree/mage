@@ -3,10 +3,12 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -17,42 +19,42 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.EmptyCopyApplier;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
-    private final UUID playerId;
-    private final CardType additionalCardType;
-    private boolean hasHaste;
-    private int number;
+    private final Set<Class<? extends Ability>> abilityClazzesToRemove;
     private final List<Permanent> addedTokenPermanents;
+    private final List<Ability> additionalAbilities;
+    private final CardType additionalCardType;
     private SubType additionalSubType;
-    private SubType onlySubType;
-    private final boolean tapped;
-    private final boolean attacking;
     private final UUID attackedPlayer;
-    private final int tokenPower;
-    private final int tokenToughness;
-    private final boolean gainsFlying;
+    private final boolean attacking;
     private boolean becomesArtifact;
     private ObjectColor color;
-    private boolean useLKI = false;
-    private boolean isntLegendary = false;
-    private int startingLoyalty = -1;
-    private final List<Ability> additionalAbilities = new ArrayList();
-    private Permanent savedPermanent = null;
     private CounterType counter;
+    private final boolean gainsFlying;
+    private boolean hasHaste;
+    private boolean isntLegendary = false;
+    private int number;
     private int numberOfCounters;
+    private SubType onlySubType;
+    private final UUID playerId;
+    private final boolean tapped;
+    private Permanent savedPermanent = null;
+    private int startingLoyalty = -1;
+    private final int tokenPower;
+    private final int tokenToughness;
+    private boolean useLKI = false;
+
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -111,27 +113,37 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = power;
         this.tokenToughness = toughness;
         this.gainsFlying = gainsFlying;
+
+        this.abilityClazzesToRemove = new HashSet<>();
+        this.additionalAbilities = new ArrayList<>();
     }
 
     public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
-        this.playerId = effect.playerId;
-        this.additionalCardType = effect.additionalCardType;
-        this.hasHaste = effect.hasHaste;
+
+        this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
-        this.number = effect.number;
+        this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
+        this.additionalCardType = effect.additionalCardType;
         this.additionalSubType = effect.additionalSubType;
-        this.onlySubType = effect.onlySubType;
-        this.tapped = effect.tapped;
-        this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
-        this.tokenPower = effect.tokenPower;
-        this.tokenToughness = effect.tokenToughness;
-        this.gainsFlying = effect.gainsFlying;
+        this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
-        this.useLKI = effect.useLKI;
+        this.counter = effect.counter;
+        this.gainsFlying = effect.gainsFlying;
+        this.hasHaste = effect.hasHaste;
         this.isntLegendary = effect.isntLegendary;
+        this.number = effect.number;
+        this.numberOfCounters = effect.numberOfCounters;
+        this.onlySubType = effect.onlySubType;
+        this.playerId = effect.playerId;
+        this.savedPermanent = effect.savedPermanent;
+        this.startingLoyalty = effect.startingLoyalty;
+        this.tapped = effect.tapped;
+        this.tokenPower = effect.tokenPower;
+        this.tokenToughness = effect.tokenToughness;
+        this.useLKI = effect.useLKI;
     }
 
     @Override
@@ -224,6 +236,25 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         additionalAbilities.stream().forEach(token::addAbility);
 
+        if (!this.abilityClazzesToRemove.isEmpty()) {
+            List<Ability> abilitiesToRemoveTmp = new ArrayList<>();
+
+            // Find the ones to remove
+            for (Ability ability : token.getAbilities()) {
+                if (this.abilityClazzesToRemove.contains(ability.getClass())) {
+                    abilitiesToRemoveTmp.add(ability);
+                }
+            }
+
+            // Remove them
+            for (Ability ability : abilitiesToRemoveTmp) {
+                // Remove subabilities
+                token.removeAbilities(ability.getSubAbilities());
+                // Remove the ability
+                token.removeAbility(ability);
+            }
+        }
+
         token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
@@ -280,7 +311,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return sb.toString();
     }
 
-    public List<Permanent> getAddedPermanent() {
+    public List<Permanent> getAddedPermanents() {
         return addedTokenPermanents;
     }
 
@@ -320,26 +351,55 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.number = number;
     }
 
+    public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, false);
+    }
+
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
-        for (Permanent tokenPermanent : addedTokenPermanents) {
-            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-        }
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, true);
+    }
+
+    public void sacrificeTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, false);
     }
 
     public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
-        for (Permanent tokenPermanent : addedTokenPermanents) {
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, true);
+    }
 
-            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+    private void removeTokensCreatedAtEndOf(Game game, Ability source, PhaseStep phaseStepToExileCards, boolean exile) {
+        Effect effect;
+        if (exile) {
+            effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile the token copies");
+        } else {
+            effect = new SacrificeTargetEffect("sacrifice the token copies");
         }
+        effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
+
+        DelayedTriggeredAbility exileAbility;
+
+        switch (phaseStepToExileCards) {
+            case END_TURN:
+                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                break;
+            case END_COMBAT:
+                exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
+                break;
+            default:
+                return;
+        }
+
+        game.addDelayedTriggeredAbility(exileAbility, source);
+    }
+
+    public void addAbilityClassesToRemoveFromTokens(Class<? extends Ability> clazz) {
+        this.abilityClazzesToRemove.add(clazz);
     }
 
     public void addAdditionalAbilities(Ability... abilities) {
-        Arrays.stream(abilities).forEach(this.additionalAbilities::add);
+        this.additionalAbilities.addAll(Arrays.asList(abilities));
     }
+
 
     public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
         this.savedPermanent = savedPermanent;

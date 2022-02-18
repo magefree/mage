@@ -442,7 +442,6 @@ public enum CardRepository {
             cards = findCards(name);
         }
         if (!cards.isEmpty()) {
-            CardInfo cardToUse = null;
             for (CardInfo cardinfo : cards) {
                 if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
                     return cardinfo;
@@ -470,9 +469,25 @@ public enum CardRepository {
             if (limitByMaxAmount > 0) {
                 queryBuilder.limit(limitByMaxAmount);
             }
-            return cardDao.query(queryBuilder.prepare());
+
+            List<CardInfo> result = cardDao.query(queryBuilder.prepare());
+
+            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
+            if (result.isEmpty() && name.contains(" // ")) {
+                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
+                // OR a split card (e.g. Assault // Battery).
+                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
+                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
+                queryBuilder.where().eq("name", new SelectArg(name.split(" // ", 2)[0]));
+
+                result = cardDao.query(queryBuilder.prepare());
+            }
+
+            return result;
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
+
         return Collections.emptyList();
     }
 
@@ -482,6 +497,7 @@ public enum CardRepository {
             queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
         return Collections.emptyList();
     }
@@ -492,14 +508,29 @@ public enum CardRepository {
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
                     "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());
-            List<CardInfo> result = new ArrayList<>();
-            for (CardInfo cardinfo : rawResults) {
-                result.add(cardinfo);
+
+            List<CardInfo> result = rawResults.getResults();
+
+            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
+            if (result.isEmpty() && sqlName.contains(" // ")) {
+                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
+                // OR a split card (e.g. Assault // Battery).
+                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
+                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
+                String leftCardName = sqlName.split(" // ", 2)[0];
+
+                GenericRawResults<CardInfo> rawResults2 = cardDao.queryRaw(
+                        "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + leftCardName + '\'',
+                        cardDao.getRawRowMapper());
+
+                result = rawResults2.getResults();
             }
+
             return result;
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
+
         return Collections.emptyList();
     }
 

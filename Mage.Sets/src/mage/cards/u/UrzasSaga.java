@@ -45,7 +45,7 @@ public final class UrzasSaga extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Urza's Saga gains "{T}: Add {C}."
         sagaAbility.addChapterEffect(

@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -36,7 +35,7 @@ public final class NarsetParterOfVeils extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Each opponent can't draw more than one card each turn.
         this.addAbility(new SimpleStaticAbility(new NarsetParterOfVeilsEffect()), new CardsAmountDrawnThisTurnWatcher());

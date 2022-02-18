@@ -21,8 +21,6 @@ import mage.constants.*;
  */
 public final class ScroungedScythe extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it has menace";
-
     public ScroungedScythe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"");
         this.subtype.add(SubType.EQUIPMENT);
@@ -33,9 +31,13 @@ public final class ScroungedScythe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
         // As long as equipped creature is a Human, it has menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT),
-                new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT),
+                        new EquippedHasSubtypeCondition(SubType.HUMAN),
+                        "As long as equipped creature is a Human, it has menace. " +
+                                "<i>(It can't be blocked except by two or more creatures.)</i>")));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

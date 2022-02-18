@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -15,13 +14,11 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public final class TrumpetBlast extends CardImpl {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
-
     public TrumpetBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Attacking creatures get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));
     }
 
     private TrumpetBlast(final TrumpetBlast card) {

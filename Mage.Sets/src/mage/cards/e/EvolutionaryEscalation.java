@@ -12,7 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -24,11 +24,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author spjspj
  */
 public final class EvolutionaryEscalation extends CardImpl {
-    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
-    
-    static {
-        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
-    }    
 
     public EvolutionaryEscalation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -37,7 +32,7 @@ public final class EvolutionaryEscalation extends CardImpl {
         EvolutionaryEscalationEffect effect = new EvolutionaryEscalationEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent(filterOpponentCreature));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

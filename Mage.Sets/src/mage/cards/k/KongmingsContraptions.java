@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -16,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
@@ -38,7 +36,7 @@ public final class KongmingsContraptions extends CardImpl {
                 new CompoundCondition("during the declare attackers step and only if you've been attacked this step", 
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false), AttackedThisStepCondition.instance)
         );
-        ability.addTarget(new TargetPermanent(new FilterAttackingCreature()));
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability, new PlayerAttackedStepWatcher());
     }
 
@@ -50,5 +48,4 @@ public final class KongmingsContraptions extends CardImpl {
     public KongmingsContraptions copy() {
         return new KongmingsContraptions(this);
     }
-
 }

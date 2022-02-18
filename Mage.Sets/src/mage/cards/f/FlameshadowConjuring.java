@@ -81,7 +81,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
             effect.setTargetPointer(getTargetPointer());
             if (effect.apply(game, source)) {
-                for (Permanent tokenPermanent : effect.getAddedPermanent()) {
+                for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

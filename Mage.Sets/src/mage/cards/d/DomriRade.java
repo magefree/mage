@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -31,13 +30,13 @@ public final class DomriRade extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.
         this.addAbility(new LoyaltyAbility(new DomriRadeEffect1(), 1));
 
         // -2: Target creature you control fights another target creature.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(false), -2);
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         ability2.addTarget(target);

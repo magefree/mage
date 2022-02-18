@@ -29,7 +29,7 @@ public final class SeasonOfGrowth extends CardImpl {
 
         // Whenever a creature enters the battlefield under your control, scry 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new ScryEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE_A
+                new ScryEffect(1), StaticFilters.FILTER_PERMANENT_A_CREATURE
         ));
 
         // Whenever you cast a spell that targets a creature you control, draw a card.

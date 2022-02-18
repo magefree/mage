@@ -30,7 +30,7 @@ public final class OupheVandals extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("ability from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
     }
 
     public OupheVandals(UUID ownerId, CardSetInfo setInfo) {

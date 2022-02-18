@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -8,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,10 +28,8 @@ public final class ArcMage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {2}{R}, {tap}, Discard a card: Arc Mage deals 2 damage divided as you choose among one or two target creatures and/or players.
-        Effect effect = new DamageMultiEffect(2);
-        effect.setText("{this} deals 2 damage divided as you choose among one or two target creatures and/or players");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
+        // {2}{R}, {tap}, Discard a card: Arc Mage deals 2 damage divided as you choose among one or two targets.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageMultiEffect(2), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetAnyTargetAmount(2));

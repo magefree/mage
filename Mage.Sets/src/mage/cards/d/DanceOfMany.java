@@ -93,8 +93,8 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanent());
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            game.getState().setValue(source.getSourceId() + "_token", effect.getAddedPermanents());
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice Dance of Many");
                 sacrificeEffect.setTargetPointer(new FixedTarget(sourceObject, game));
                 LeavesBattlefieldTriggeredAbility triggerAbility = new LeavesBattlefieldTriggeredAbility(sacrificeEffect, false);

@@ -14,8 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -24,12 +23,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class SapphireCharm extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public SapphireCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
@@ -50,7 +43,7 @@ public final class SapphireCharm extends CardImpl {
         // or target creature an opponent controls phases out.
         mode = new Mode();
         mode.addEffect(new PhaseOutTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.getSpellAbility().addMode(mode);
     }
 

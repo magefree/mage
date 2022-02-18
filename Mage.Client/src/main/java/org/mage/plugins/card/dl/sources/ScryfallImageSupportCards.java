@@ -503,6 +503,7 @@ public class ScryfallImageSupportCards {
             add("MIC"); // Midnight Hunt Commander
             add("VOW"); // Innistrad: Crimson Vow
             add("VOC"); // Crimson Vow Commander
+            add("NEO"); // Kamigawa: Neon Dynasty
         }
     };
 
