@@ -34,8 +34,7 @@ public final class CallForBlood extends CardImpl {
         // As an additional cost to cast Call for Blood, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Target creature gets -X/-X until end of turn, where X is the sacrificed creature's power.
-        DynamicValue xValue = new CallForBloodDynamicValue();
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(CallForBloodDynamicValue.instance, CallForBloodDynamicValue.instance, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
@@ -50,7 +49,8 @@ public final class CallForBlood extends CardImpl {
     }
 }
 
-class CallForBloodDynamicValue implements DynamicValue {
+enum CallForBloodDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -70,12 +70,12 @@ class CallForBloodDynamicValue implements DynamicValue {
 
     @Override
     public CallForBloodDynamicValue copy() {
-        return this;
+        return instance;
     }
 
     @Override
     public String getMessage() {
-        return ", where X is the sacrificed creature's power";
+        return "the sacrificed creature's power";
     }
 
     @Override

@@ -1,12 +1,14 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.PartnerAbility;
@@ -19,8 +21,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -36,6 +36,11 @@ public final class ArmixFiligreeThrasher extends CardImpl {
         filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(new AdditiveDynamicValue(
+            new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS),
+            new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_ARTIFACT)
+    ));
+
     public ArmixFiligreeThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
 
@@ -46,11 +51,8 @@ public final class ArmixFiligreeThrasher extends CardImpl {
 
         // Whenever Armix, Filigree Thrasher attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new BoostTargetEffect(
-                        ArmixFiligreeThrasherValue.instance,
-                        ArmixFiligreeThrasherValue.instance,
-                        Duration.EndOfTurn, true
-                ), false, "target creature defending player controls gets -X/-X until end of turn, " +
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), false,
+                "target creature defending player controls gets -X/-X until end of turn, " +
                 "where X is the number of artifacts you control plus the number of artifact cards in your graveyard"
         );
         ability.addTarget(new TargetPermanent(filter));
@@ -69,34 +71,5 @@ public final class ArmixFiligreeThrasher extends CardImpl {
     @Override
     public ArmixFiligreeThrasher copy() {
         return new ArmixFiligreeThrasher(this);
-    }
-}
-
-enum ArmixFiligreeThrasherValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player == null) {
-            return 0;
-        }
-        return -(player.getGraveyard().count(
-                StaticFilters.FILTER_CARD_ARTIFACT, player.getId(), game
-        ) + game.getBattlefield().count(
-                StaticFilters.FILTER_PERMANENT_ARTIFACT,
-                sourceAbility.getSourceId(),
-                sourceAbility.getControllerId(), game
-        ));
-    }
-
-    @Override
-    public ArmixFiligreeThrasherValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }
