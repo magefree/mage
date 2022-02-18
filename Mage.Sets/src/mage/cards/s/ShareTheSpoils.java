@@ -52,7 +52,9 @@ public final class ShareTheSpoils extends CardImpl {
     }
 
     @Override
-    public ShareTheSpoils copy() { return new ShareTheSpoils(this); }
+    public ShareTheSpoils copy() {
+        return new ShareTheSpoils(this);
+    }
 }
 
 //-- Exile from Everyone --//
@@ -102,19 +104,27 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) { super(effect); }
+    public ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
+        super(effect);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source == null) { return false; }
+        if (source == null) {
+            return false;
+        }
 
         PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
         for (UUID playerId : players) {
             Player player = game.getPlayer(playerId);
-            if (player == null) { continue; }
+            if (player == null) {
+                continue;
+            }
 
             Card topLibraryCard = player.getLibrary().getFromTop(game);
-            if (topLibraryCard == null) { continue; }
+            if (topLibraryCard == null) {
+                continue;
+            }
 
             player.moveCardsToExile(
                     topLibraryCard,
@@ -129,7 +139,9 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
     }
 
     @Override
-    public ShareTheSpoilsExileCardFromEveryoneEffect copy() { return new ShareTheSpoilsExileCardFromEveryoneEffect(this); }
+    public ShareTheSpoilsExileCardFromEveryoneEffect copy() {
+        return new ShareTheSpoilsExileCardFromEveryoneEffect(this);
+    }
 }
 
 //-- Play a card Exiled by Share the Spoils --//
@@ -142,22 +154,32 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
                 "and they may spend mana as though it were mana of any color to cast that spell";
     }
 
-    private ShareTheSpoilsPlayExiledCardEffect(final ShareTheSpoilsPlayExiledCardEffect effect) { super(effect); }
+    private ShareTheSpoilsPlayExiledCardEffect(final ShareTheSpoilsPlayExiledCardEffect effect) {
+        super(effect);
+    }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         // Have to play on your turn
-        if (!game.getActivePlayerId().equals(affectedControllerId)) { return false; }
+        if (!game.getActivePlayerId().equals(affectedControllerId)) {
+            return false;
+        }
 
         // Not in exile
-        if (game.getState().getZone(CardUtil.getMainCardId(game, sourceId)) != Zone.EXILED) { return false; }
+        if (game.getState().getZone(CardUtil.getMainCardId(game, sourceId)) != Zone.EXILED) {
+            return false;
+        }
 
         // TODO: This is a workaround for #8706, remove when that's fixed.
         int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Not a card exiled with this Share the Spoils
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
-        if (exileZone == null) { return false; }
-        if (!exileZone.contains(sourceId)) { return false; }
+        if (exileZone == null) {
+            return false;
+        }
+        if (!exileZone.contains(sourceId)) {
+            return false;
+        }
 
         ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
 
@@ -165,10 +187,14 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public ShareTheSpoilsPlayExiledCardEffect copy() { return new ShareTheSpoilsPlayExiledCardEffect(this); }
+    public ShareTheSpoilsPlayExiledCardEffect copy() {
+        return new ShareTheSpoilsPlayExiledCardEffect(this);
+    }
 
     @Override
-    public boolean apply(Game game, Ability source) { return true; }
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 }
 
 //-- Spend mana as any color --//
@@ -183,10 +209,14 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
     }
 
     @Override
-    public boolean apply(Game game, Ability source) { return true; }
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
     @Override
-    public ShareTheSpoilsSpendAnyManaEffect copy() { return new ShareTheSpoilsSpendAnyManaEffect(this); }
+    public ShareTheSpoilsSpendAnyManaEffect copy() {
+        return new ShareTheSpoilsSpendAnyManaEffect(this);
+    }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
@@ -194,8 +224,12 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
         int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Check Exile
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
-        if (exileZone == null) { return false; }
-        if (exileZone.contains(sourceId)) { return true; }
+        if (exileZone == null) {
+            return false;
+        }
+        if (exileZone.contains(sourceId)) {
+            return true;
+        }
 
         // Check Stack
         CardState cardState = game.getLastKnownInformationCard(CardUtil.getMainCardId(game, sourceId), Zone.EXILED);
@@ -233,10 +267,14 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() { return new ShareTheSpoilsExileCardWhenPlayACardAbility(this); }
+    public TriggeredAbility copy() {
+        return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
+    }
 
     @Override
-    public String getTriggerPhrase() { return "When they do"; }
+    public String getTriggerPhrase() {
+        return "When they do";
+    }
 }
 
 class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
@@ -248,13 +286,19 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source == null) { return false; }
+        if (source == null) {
+            return false;
+        }
 
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         Card topLibraryCard = player.getLibrary().getFromTop(game);
-        if (topLibraryCard == null) { return false; }
+        if (topLibraryCard == null) {
+            return false;
+        }
 
         player.moveCardsToExile(
                 topLibraryCard,
@@ -267,10 +311,14 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
         return true;
     }
 
-    private ShareTheSpoilsExileSingleCardEffect(final ShareTheSpoilsExileSingleCardEffect effect) { super(effect); }
+    private ShareTheSpoilsExileSingleCardEffect(final ShareTheSpoilsExileSingleCardEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public ShareTheSpoilsExileSingleCardEffect copy() { return new ShareTheSpoilsExileSingleCardEffect(this); }
+    public ShareTheSpoilsExileSingleCardEffect copy() {
+        return new ShareTheSpoilsExileSingleCardEffect(this);
+    }
 }
 
 class ShareTheSpoilsWatcher extends Watcher {
@@ -287,7 +335,9 @@ class ShareTheSpoilsWatcher extends Watcher {
             return;
         }
 
-        if (!event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) { return; }
+        if (!event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) {
+            return;
+        }
 
         usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
     }
@@ -298,5 +348,7 @@ class ShareTheSpoilsWatcher extends Watcher {
         usedFrom.clear();
     }
 
-    public boolean hasNotUsedAbilityThisTurn(MageObjectReference mor) { return !usedFrom.contains(mor); }
+    public boolean hasNotUsedAbilityThisTurn(MageObjectReference mor) {
+        return !usedFrom.contains(mor);
+    }
 }
