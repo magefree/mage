@@ -192,24 +192,19 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
      * @param source - connected ability
      */
     public void addEffect(T effect, Ability source) {
-        if (effectAbilityMap.containsKey(effect.getId())) {
-            Set<Ability> set = effectAbilityMap.get(effect.getId());
-            for (Ability ability : set) {
-                if (ability.getId().equals(source.getId()) && ability.getSourceId().equals(source.getSourceId())) {
-                    return;
-                }
-            }
-            set.add(source);
+        Set<Ability> set = effectAbilityMap.computeIfAbsent(effect.getId(), x -> new HashSet<>());
+        if (set.stream()
+                .filter(ability -> ability.getId().equals(source.getId()))
+                .map(Ability::getId)
+                .anyMatch(source.getId()::equals)) {
             return;
         }
-        Set<Ability> set = new HashSet<>();
         set.add(source);
-        this.effectAbilityMap.put(effect.getId(), set);
         this.add(effect);
     }
 
     public Set<Ability> getAbility(UUID effectId) {
-        return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
+        return effectAbilityMap.computeIfAbsent(effectId, x -> new HashSet<>());
     }
 
     public void removeTemporaryEffects() {
@@ -230,7 +225,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     @Override
     public boolean contains(Object object) {
-        if (object == null || !(object instanceof ContinuousEffect)) {
+        if (!(object instanceof ContinuousEffect)) {
             return false;
         }
 
