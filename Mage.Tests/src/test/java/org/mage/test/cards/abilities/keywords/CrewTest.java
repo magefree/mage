@@ -24,6 +24,8 @@ public class CrewTest extends CardTestPlayerBase {
     private static final String plow = "Colossal Plow";
     private static final String kotori = "Kotori, Pilot Prodigy";
     private static final String crusher = "Irontread Crusher";
+    private static final String mechanic = "Hotshot Mechanic";
+    private static final String express = "Aradara Express";
 
     @Test
     public void crewBasicTest() {
@@ -38,6 +40,7 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertTappedCount(lion, true, 2);
         assertPowerToughness(playerA, caravan, 5, 5);
@@ -58,6 +61,7 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertTappedCount(fanatic, true, 1);
         assertPowerToughness(playerA, copter, 3, 3);
@@ -83,6 +87,7 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // Only crewed vehicles have card type creature
         assertNotType(copter, CardType.CREATURE);
@@ -97,6 +102,7 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertTapped(ox, true);
         assertType(plow, CardType.CREATURE, true);
@@ -111,9 +117,26 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertTapped(kotori, true);
         assertType(crusher, CardType.ARTIFACT, true);
         assertType(crusher, CardType.CREATURE, SubType.VEHICLE);
+    }
+
+    @Test
+    public void testHotshotMechanic() {
+        addCard(Zone.BATTLEFIELD, playerA, mechanic);
+        addCard(Zone.BATTLEFIELD, playerA, express);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 4");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped(mechanic, true);
+        assertType(express, CardType.ARTIFACT, true);
+        assertType(express, CardType.CREATURE, SubType.VEHICLE);
     }
 }
