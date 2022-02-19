@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageIdentifier;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -9,13 +8,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.*;
 import mage.cards.*;
 import mage.constants.*;
-import mage.game.CardState;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -36,9 +35,8 @@ public final class ShareTheSpoils extends CardImpl {
         this.addAbility(new ShareTheSpoilsExileETBAndPlayerLossAbility());
 
         // During each player’s turn, that player may play a land or cast a spell from among cards exiled with Share the Spoils,
-        Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayExiledCardEffect());
         // and they may spend mana as though it were mana of any color to cast that spell.
-        castAbility.addEffect(new ShareTheSpoilsSpendAnyManaEffect());
+        Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayExiledCardEffect());
         castAbility.setIdentifier(MageIdentifier.ShareTheSpoilsWatcher);
         this.addAbility(castAbility, new ShareTheSpoilsWatcher());
 
@@ -126,7 +124,7 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
                 continue;
             }
 
-            player.moveCardsToExile(
+            boolean moved = player.moveCardsToExile(
                     topLibraryCard,
                     source,
                     game,
@@ -134,6 +132,12 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
                     CardUtil.getExileZoneId(game, source),
                     CardUtil.getSourceName(game, source)
             );
+
+            if (moved) {
+                ShareTheSpoilsSpendAnyManaEffect effect = new ShareTheSpoilsSpendAnyManaEffect();
+                effect.setTargetPointer(new FixedTarget(topLibraryCard, game));
+                game.addEffect(effect, source);
+            }
         }
         return true;
     }
@@ -220,22 +224,29 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        // TODO: This is a workaround for #8706, remove when that's fixed.
-        int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
-        // Check Exile
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
-        if (exileZone == null) {
+        UUID mainCardId = CardUtil.getMainCardId(game, sourceId);
+
+        if (getTargetPointer() == null) {
             return false;
         }
-        if (exileZone.contains(sourceId)) {
-            return true;
+        UUID targetUUID = ((FixedTarget) getTargetPointer()).getTarget();
+
+        // Not the right card
+        if (mainCardId != targetUUID) {
+            return false;
         }
 
-        // Check Stack
-        CardState cardState = game.getLastKnownInformationCard(CardUtil.getMainCardId(game, sourceId), Zone.EXILED);
+        int mainCardZCC = game.getState().getZoneChangeCounter(mainCardId);
+        int targetZCC = game.getState().getZoneChangeCounter(targetUUID);
 
-        // TODO: Currently works for all cards from exile
-        return cardState != null;
+        if (mainCardZCC <= targetZCC + 1) {
+            // card moved one zone, from exile to being cast
+            return true;
+        } else {
+            // card moved zones, effect can be discarded
+            this.discard();
+            return false;
+        }
     }
 
     @Override
@@ -300,7 +311,7 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
             return false;
         }
 
-        player.moveCardsToExile(
+        boolean moved = player.moveCardsToExile(
                 topLibraryCard,
                 source,
                 game,
@@ -308,7 +319,13 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
-        return true;
+
+        if (moved) {
+            ShareTheSpoilsSpendAnyManaEffect effect = new ShareTheSpoilsSpendAnyManaEffect();
+            effect.setTargetPointer(new FixedTarget(topLibraryCard, game));
+            game.addEffect(effect, source);
+        }
+        return moved;
     }
 
     private ShareTheSpoilsExileSingleCardEffect(final ShareTheSpoilsExileSingleCardEffect effect) {
