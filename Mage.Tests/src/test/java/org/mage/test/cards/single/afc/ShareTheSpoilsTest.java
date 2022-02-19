@@ -308,12 +308,12 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         checkPlayableAbility("foretell creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}", false);
 
         // Cast an adventure card from hand
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dizzying Swoop");
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Dizzying Swoop");
         addTarget(playerA, "Prosper, Tome-Bound");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
 
         // Make sure the creature card can't be played from exile since there isn't the {W}{W} for it
-        checkPlayableAbility("creature cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician", false);
+        checkPlayableAbility("creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician", false);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
 
