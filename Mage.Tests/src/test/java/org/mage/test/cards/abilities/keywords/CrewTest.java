@@ -6,6 +6,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -26,6 +27,8 @@ public class CrewTest extends CardTestPlayerBase {
     private static final String crusher = "Irontread Crusher";
     private static final String mechanic = "Hotshot Mechanic";
     private static final String express = "Aradara Express";
+    private static final String heart = "Heart of Kiran";
+    private static final String jace = "Jace Beleren";
 
     @Test
     public void crewBasicTest() {
@@ -138,5 +141,21 @@ public class CrewTest extends CardTestPlayerBase {
         assertTapped(mechanic, true);
         assertType(express, CardType.ARTIFACT, true);
         assertType(express, CardType.CREATURE, SubType.VEHICLE);
+    }
+
+    @Test
+    public void testHeartOfKiran() {
+        addCard(Zone.BATTLEFIELD, playerA, jace);
+        addCard(Zone.BATTLEFIELD, playerA, heart);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 3");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, jace, CounterType.LOYALTY, 2);
+        assertType(heart, CardType.ARTIFACT, true);
+        assertType(heart, CardType.CREATURE, SubType.VEHICLE);
     }
 }
