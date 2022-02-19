@@ -504,6 +504,7 @@ public class ScryfallImageSupportCards {
             add("VOW"); // Innistrad: Crimson Vow
             add("VOC"); // Crimson Vow Commander
             add("NEO"); // Kamigawa: Neon Dynasty
+            add("NEC"); // Neon Dynasty Commander
         }
     };
 
