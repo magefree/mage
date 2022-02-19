@@ -194,7 +194,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void addEffect(T effect, Ability source) {
         Set<Ability> set = effectAbilityMap.computeIfAbsent(effect.getId(), x -> new HashSet<>());
         if (set.stream()
-                .filter(ability -> ability.getId().equals(source.getId()))
+                .filter(ability -> ability.getSourceId().equals(source.getSourceId()))
                 .map(Ability::getId)
                 .anyMatch(source.getId()::equals)) {
             return;
