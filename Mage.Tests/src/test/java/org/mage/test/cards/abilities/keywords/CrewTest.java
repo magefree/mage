@@ -15,23 +15,33 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 // http://magic.wizards.com/en/articles/archive/feature/kaladesh-mechanics-2016-09-02
 public class CrewTest extends CardTestPlayerBase {
 
+    private static final String lion = "Silvercoat Lion";
+    private static final String caravan = "Cultivator's Caravan";
+    private static final String fanatic = "Speedway Fanatic";
+    private static final String copter = "Smuggler's Copter";
+    private static final String evacuation = "Evacuation";
+    private static final String ox = "Giant Ox";
+    private static final String plow = "Colossal Plow";
+    private static final String kotori = "Kotori, Pilot Prodigy";
+    private static final String crusher = "Irontread Crusher";
+
     @Test
     public void crewBasicTest() {
         // {T}: Add one mana of any color.
         // Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)";
-        addCard(Zone.BATTLEFIELD, playerA, "Cultivator's Caravan", 1);
+        addCard(Zone.BATTLEFIELD, playerA, caravan, 1);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, lion, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 3");
-        setChoice(playerA, "Silvercoat Lion^Silvercoat Lion");
+        setChoice(playerA, lion + "^" + lion);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertTappedCount("Silvercoat Lion", true, 2);
-        assertPowerToughness(playerA, "Cultivator's Caravan", 5, 5);
-        assertType("Cultivator's Caravan", CardType.CREATURE, SubType.VEHICLE);
+        assertTappedCount(lion, true, 2);
+        assertPowerToughness(playerA, caravan, 5, 5);
+        assertType(caravan, CardType.CREATURE, SubType.VEHICLE);
     }
 
     @Test
@@ -39,56 +49,71 @@ public class CrewTest extends CardTestPlayerBase {
         // Flying
         // Whenever Smuggler's Copter attacks or blocks, you may draw a card. If you do, discard a card.
         // Crew 1 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)";
-        addCard(Zone.BATTLEFIELD, playerA, "Smuggler's Copter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, copter, 1);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Speedway Fanatic", 1);
+        addCard(Zone.BATTLEFIELD, playerA, fanatic, 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 1");
-        setChoice(playerA, "Speedway Fanatic");
+        setChoice(playerA, fanatic);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertTappedCount("Speedway Fanatic", true, 1);
-        assertPowerToughness(playerA, "Smuggler's Copter", 3, 3);
-        assertAbility(playerA, "Smuggler's Copter", HasteAbility.getInstance(), true);
-        assertType("Smuggler's Copter", CardType.CREATURE, SubType.VEHICLE);
+        assertTappedCount(fanatic, true, 1);
+        assertPowerToughness(playerA, copter, 3, 3);
+        assertAbility(playerA, copter, HasteAbility.getInstance(), true);
+        assertType(copter, CardType.CREATURE, SubType.VEHICLE);
     }
 
     @Test
     public void testThatBouncingACrewedVehicleWillUncrewIt() {
-        addCard(Zone.BATTLEFIELD, playerA, "Smuggler's Copter", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Speedway Fanatic", 1);
+        addCard(Zone.BATTLEFIELD, playerA, copter, 1);
+        addCard(Zone.BATTLEFIELD, playerA, fanatic, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
-        addCard(Zone.HAND, playerA, "Evacuation", 1);
+        addCard(Zone.HAND, playerA, evacuation, 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 1");
-        setChoice(playerA, "Speedway Fanatic");
+        setChoice(playerA, fanatic);
 
         // Return all creatures to there owners hands
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Evacuation");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, evacuation);
 
         // (Re)Cast Smugglers Copter
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Smuggler's Copter");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, copter);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         // Only crewed vehicles have card type creature
-        assertNotType("Smuggler's Copter", CardType.CREATURE);
+        assertNotType(copter, CardType.CREATURE);
     }
 
     @Test
     public void testGiantOx() {
-        addCard(Zone.BATTLEFIELD, playerA, "Giant Ox");
-        addCard(Zone.BATTLEFIELD, playerA, "Colossal Plow");
+        addCard(Zone.BATTLEFIELD, playerA, ox);
+        addCard(Zone.BATTLEFIELD, playerA, plow);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertTapped("Giant Ox", true);
-        assertType("Colossal Plow", CardType.CREATURE, true);
+        assertTapped(ox, true);
+        assertType(plow, CardType.CREATURE, true);
+    }
+
+    @Test
+    public void testGrantedAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, kotori);
+        addCard(Zone.BATTLEFIELD, playerA, crusher);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 2");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(kotori, true);
+        assertType(crusher, CardType.ARTIFACT, true);
+        assertType(crusher, CardType.CREATURE, SubType.VEHICLE);
     }
 }
