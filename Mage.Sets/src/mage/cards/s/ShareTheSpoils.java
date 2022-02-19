@@ -186,6 +186,9 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         }
 
         ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
 
         return watcher.hasNotUsedAbilityThisTurn();
     }
