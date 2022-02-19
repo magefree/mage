@@ -175,8 +175,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         sb.append(" unless they ");
 
         if (cost != null) {
-            sb.append(CardUtil.checkCostWords(cost.getText()) ? "" : "pay ");
-            sb.append(cost.getText());
+            sb.append(CardUtil.addCostVerb(cost.getText()));
         } else {
             sb.append("pay {X}");
         }

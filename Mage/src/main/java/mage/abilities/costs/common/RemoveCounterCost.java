@@ -23,10 +23,9 @@ import java.util.UUID;
  */
 public class RemoveCounterCost extends CostImpl {
 
-    protected TargetPermanent target;
-    private String name;
-    private CounterType counterTypeToRemove;
-    protected int countersToRemove;
+    protected final TargetPermanent target;
+    private final CounterType counterTypeToRemove;
+    protected final int countersToRemove;
 
     public RemoveCounterCost(TargetPermanent target) {
         this(target, null);
@@ -47,7 +46,6 @@ public class RemoveCounterCost extends CostImpl {
     public RemoveCounterCost(final RemoveCounterCost cost) {
         super(cost);
         this.target = cost.target.copy();
-        this.name = cost.name;
         this.countersToRemove = cost.countersToRemove;
         this.counterTypeToRemove = cost.counterTypeToRemove;
     }
@@ -128,7 +126,7 @@ public class RemoveCounterCost extends CostImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Remove ");
+        StringBuilder sb = new StringBuilder("remove ");
         if (counterTypeToRemove != null) {
             sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ').append(counterTypeToRemove.getName());
         } else {

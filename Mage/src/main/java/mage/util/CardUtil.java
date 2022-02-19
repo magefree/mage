@@ -1284,8 +1284,11 @@ public final class CardUtil {
         return zcc;
     }
 
-    public static boolean checkCostWords(String text) {
-        return text != null && costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith);
+    public static String addCostVerb(String text) {
+        if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
+            return text;
+        }
+        return "pay " + text;
     }
 
     /**
