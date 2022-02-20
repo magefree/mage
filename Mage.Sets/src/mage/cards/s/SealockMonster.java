@@ -40,7 +40,7 @@ public final class SealockMonster extends CardImpl {
 
         // When Sealock Monster becomes monstrous, target land becomes an island in addition to its other types.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(
-                new AddCardSubTypeTargetEffect(SubType.ISLAND, Duration.EndOfTurn)
+                new AddCardSubTypeTargetEffect(SubType.ISLAND, Duration.Custom)
         );
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
