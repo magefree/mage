@@ -138,7 +138,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (diesRuleText) {
             sb.append(" dies, ");
         } else {
-            sb.append(" is put into graveyard, ");
+            sb.append(" is put into a graveyard, ");
         }
         return sb.toString();
     }
