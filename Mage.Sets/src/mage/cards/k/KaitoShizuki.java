@@ -22,6 +22,7 @@ import mage.game.Game;
 import mage.game.command.emblems.KaitoShizukiEmblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NinjaToken;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ public final class KaitoShizuki extends CardImpl {
                 new DiscardControllerEffect(1), condition,
                 "Then discard a card unless you attacked this turn"
         ));
-        this.addAbility(ability.addHint(RaidHint.instance));
+        this.addAbility(ability.addHint(RaidHint.instance), new PlayerAttackedWatcher());
 
         // −2: Create a 1/1 blue Ninja creature token with "This creature can't be blocked."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new NinjaToken()), -2));
