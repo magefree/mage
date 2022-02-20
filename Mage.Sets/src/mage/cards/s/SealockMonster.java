@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
-import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class SealockMonster extends CardImpl {
 
         // When Sealock Monster becomes monstrous, target land becomes an island in addition to its other types.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(
-                new AddCardSubTypeTargetEffect(SubType.ISLAND, Duration.Custom)
+                new BecomesBasicLandTargetEffect(Duration.EndOfGame, false, false, SubType.ISLAND)
         );
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

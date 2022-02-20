@@ -6,10 +6,12 @@ import mage.abilities.mana.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
@@ -18,7 +20,11 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
     public BecomesBasicLandEnchantedEffect(SubType... landNames) {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         landTypes.addAll(Arrays.asList(landNames));
-        this.staticText = setText();
+        this.staticText = "enchanted land is " + CardUtil.addArticle(CardUtil.concatWithAnd(landTypes
+                .stream()
+                .map(SubType::getDescription)
+                .collect(Collectors.toList())
+        ));
     }
 
     public BecomesBasicLandEnchantedEffect(final BecomesBasicLandEnchantedEffect effect) {
@@ -75,22 +81,5 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder("Enchanted land is a ");
-        int i = 1;
-        for (SubType landType : landTypes) {
-            if (i > 1) {
-                if (i == landTypes.size()) {
-                    sb.append(" and ");
-                } else {
-                    sb.append(", ");
-                }
-            }
-            i++;
-            sb.append(landType);
-        }
-        return sb.toString();
     }
 }
