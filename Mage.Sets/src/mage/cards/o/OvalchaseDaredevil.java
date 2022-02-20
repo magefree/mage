@@ -1,22 +1,17 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class OvalchaseDaredevil extends CardImpl {
@@ -35,7 +30,10 @@ public final class OvalchaseDaredevil extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an artifact enters the battlefield under your control, you may return Ovalchase Daredevil from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), filter, true, SetTargetPointer.NONE, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter,
+                true, SetTargetPointer.NONE, null, true
+        ));
     }
 
     private OvalchaseDaredevil(final OvalchaseDaredevil card) {

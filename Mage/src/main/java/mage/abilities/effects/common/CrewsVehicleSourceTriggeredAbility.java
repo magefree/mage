@@ -43,6 +43,6 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "When {this} crews a Vehicle, " ;
+        return "Whenever {this} crews a Vehicle, " ;
     }
 }
