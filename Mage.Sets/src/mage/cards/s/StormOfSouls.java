@@ -5,9 +5,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -15,8 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -34,10 +33,14 @@ public class StormOfSouls extends CardImpl {
         this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
-    private StormOfSouls(final StormOfSouls card) { super(card); }
+    private StormOfSouls(final StormOfSouls card) {
+        super(card);
+    }
 
     @Override
-    public StormOfSouls copy() { return new StormOfSouls(this); }
+    public StormOfSouls copy() {
+        return new StormOfSouls(this);
+    }
 }
 
 class StormOfSoulsReturnEffect extends OneShotEffect {
@@ -47,39 +50,34 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
                 "Each of them is a 1/1 Spirit with flying in addition to its other types.";
     }
 
-    private StormOfSoulsReturnEffect(final StormOfSoulsReturnEffect effect) { super(effect); }
+    private StormOfSoulsReturnEffect(final StormOfSoulsReturnEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public StormOfSoulsReturnEffect copy() { return new StormOfSoulsReturnEffect(this); }
+    public StormOfSoulsReturnEffect copy() {
+        return new StormOfSoulsReturnEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-
-        if (player == null) { return false; }
-
-        Set<Card> creatureCardsToBeMovedFromGraveyard = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
-        if (creatureCardsToBeMovedFromGraveyard == null) { return false; }
-
-        if (creatureCardsToBeMovedFromGraveyard.isEmpty()) { return false; }
-
-        boolean anyCardsMoved = player.moveCards(creatureCardsToBeMovedFromGraveyard, Zone.BATTLEFIELD, source, game);
-        if (!anyCardsMoved) { return false; }
-
-        // Figure out which cards were successfuly moved so that they can be turned into 1/1 Spirits
-        Set<Card> creatureCardsMovedFromGraveyard = new LinkedHashSet<>();
-
-        for (Card card : creatureCardsToBeMovedFromGraveyard) {
-            if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
-                creatureCardsMovedFromGraveyard.add(card);
-            }
+        if (player == null) {
+            return false;
         }
 
-        // Change the creatures
-        ContinuousEffectImpl effect = new StormOfSoulsChangeCreatureEffect();
-        effect.setTargetPointer(new FixedTargets(creatureCardsMovedFromGraveyard, game));
-        game.addEffect(effect, source);
+        Cards cards = new CardsImpl(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        if (cards.isEmpty()) {
+            return false;
+        }
 
+        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+
+        // Figure out which cards were successfuly moved so that they can be turned into 1/1 Spirits
+        cards.retainZone(Zone.BATTLEFIELD, game);
+
+        // Change the creatures
+        game.addEffect(new StormOfSoulsChangeCreatureEffect().setTargetPointer(new FixedTargets(cards, game)), source);
         return true;
     }
 }
@@ -87,7 +85,7 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
 class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
 
     public StormOfSoulsChangeCreatureEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.Custom, Outcome.Benefit);
     }
 
     private StormOfSoulsChangeCreatureEffect(final StormOfSoulsChangeCreatureEffect effect) {
@@ -97,23 +95,23 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         // Each of them is a 1/1 Spirit with flying in addition to its other types
         for (UUID cardID : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(cardID);
-            if (permanent == null) { continue; }
+            if (permanent == null) {
+                continue;
+            }
 
             switch (layer) {
                 case TypeChangingEffects_4:
-                    permanent.getSubtype().add(SubType.SPIRIT);
+                    permanent.addSubType(game, SubType.SPIRIT);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    // Don't double add flying
-                    if (!permanent.getAbilities().contains(FlyingAbility.getInstance())) {
-                        // Add it index 0 so that it shows up at the top of the card's text.
-                        permanent.getAbilities().add(0, FlyingAbility.getInstance());
-                    }
+                    permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.ModifyPT_7c) {
@@ -127,7 +125,9 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) { return false; }
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
     @Override
     public StormOfSoulsChangeCreatureEffect copy() {
