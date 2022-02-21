@@ -38,7 +38,7 @@ public final class SoulReap extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    private String rule = "Its controller loses 3 life if you've cast another black spell this turn";
+    private static final String rule = "Its controller loses 3 life if you've cast another black spell this turn";
 
     public SoulReap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

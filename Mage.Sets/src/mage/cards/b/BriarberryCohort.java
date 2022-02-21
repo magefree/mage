@@ -35,7 +35,7 @@ public final class BriarberryCohort extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
     
-    private String rule = "{this} gets +1/+1 as long as you control another blue creature";
+    private static final String rule = "{this} gets +1/+1 as long as you control another blue creature";
 
     public BriarberryCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
