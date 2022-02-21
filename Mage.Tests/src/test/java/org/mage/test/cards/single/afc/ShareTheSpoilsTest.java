@@ -17,7 +17,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
     public void enterTheBattleField() {
         addCard(Zone.HAND, playerA, shareTheSpoils);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -81,10 +83,13 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
     public void ownerConcedes() {
         addCard(Zone.HAND, playerA, shareTheSpoils);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
         concede(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
 
-        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
 
         setStrictChooseMode(true);
         execute();
@@ -107,6 +112,8 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerD, "Banehound", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
         attack(2, playerD, "Banehound", playerA);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -139,7 +146,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
 
@@ -177,7 +186,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
 
@@ -215,7 +226,9 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
-        checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        checkPlayableAbility("normal cast", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
         checkPlayableAbility("before play", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Reliquary Tower", false);
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -254,12 +267,14 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exotic Orchard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
-        // TODO: This can fail silently
-        checkPlayableAbility("normal cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", false);
+        // Abilities available after casting with Share the Spoils
+        checkPlayableAbility("Available Abilities", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
 
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
 
         setStrictChooseMode(true);
         execute();
@@ -296,13 +311,14 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // Foretell Augury Raven
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Try to cast Tana, you should not be able to since there isn't the {G} for it since she was exiled by Proser
-        checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Tana, the Bloodsower", false);
+        checkPlayableAbility("normal cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tana, the Bloodsower", false);
 
         // Try to activate the foretell on Augury Raven, but we can't since we don't have the {U} for it.
         checkPlayableAbility("foretell creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}", false);
@@ -313,7 +329,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
 
         // Make sure the creature card can't be played from exile since there isn't the {W}{W} for it
-        checkPlayableAbility("creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician", false);
+        checkPlayableAbility("creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ardenvale Tactician", false);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -357,19 +373,25 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // Cast the Adventure half of an Adventure card
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heart's Desire");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Cast the Creature half of an Adventure card
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardenvale Tactician");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Cast split card
         castSpell(9, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice");
         addTarget(playerA, "Mountain");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Cast front side of Modal dual face card
         castSpell(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Alrund, God of the Cosmos");
         setChoice(playerA, "Land");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Cast back side of Modal dual face card
         castSpell(17, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(17, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -420,9 +442,12 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Helix");
         addTarget(playerA, shareTheSpoils);
         addTarget(playerA, "Aether Spellbomb");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         checkPlayableAbility("before play", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Exotic Orchard", false);
 
@@ -466,13 +491,17 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
         // Casting Aether Helix from exile with Share the spoils.
         // Doing so exiles Exotic Orchard.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Helix");
         addTarget(playerA, shareTheSpoils);
         addTarget(playerA, "Aether Spellbomb");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Recast, exile a new set of cards
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // Exotic Orchard was exile by the first Share the Spoils, so can't be cast again with the new one
         checkPlayableAbility("before play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Exotic Orchard", false);
