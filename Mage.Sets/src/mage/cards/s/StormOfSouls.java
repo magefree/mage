@@ -114,7 +114,7 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
                     permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                     break;
                 case PTChangingEffects_7:
-                    if (sublayer == SubLayer.ModifyPT_7c) {
+                    if (sublayer == SubLayer.SetPT_7b) {
                         permanent.getPower().setValue(1);
                         permanent.getToughness().setValue(1);
                     }
