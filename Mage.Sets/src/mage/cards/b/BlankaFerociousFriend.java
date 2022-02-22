@@ -47,8 +47,9 @@ public final class BlankaFerociousFriend extends CardImpl {
         // Electric Thunder—Whenever Blanka becomes the target of a spell, he gets +2/+2 until end of turn and deals 2 damage to each opponent.
         Ability ability = new BecomesTargetTriggeredAbility(new BoostSourceEffect(
                 2, 2, Duration.EndOfTurn
-        ).setText("he gets +2/+2 until end of turn"), StaticFilters.FILTER_SPELL_A);
-        ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        ).setText("he gets +2/+2 until end of turn"), StaticFilters.FILTER_SPELL_A).setTriggerPhrase("Whenever {this} becomes the target of a spell, ");
+        ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT)
+                .setText("and deals 2 damage to each opponent"));
         this.addAbility(ability.withFlavorWord("Electric Thunder"));
     }
 
