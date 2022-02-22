@@ -83,7 +83,7 @@ class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever a Sliver deals damage, its controller" ;
+        return "Whenever a Sliver deals damage, " ;
     }
 }
 
