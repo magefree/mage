@@ -1,0 +1,142 @@
+[@clear hands]
+[@clear libraries]
+
+[A0. Set up tape (tokens). End tokens must share power with neighbors due to SharedTriumph]
+token:Bobb:LhurgoyfGreenToken:3:1
+token:Bobb:ElfGreenToken:3:1
+token:Bobb:HarpyGreenToken:2:1
+token:Bobb:SliverWhiteToken:3:1
+token:Bobb:RatWhiteToken:3:1
+
+[A1. Add q1 state transition creatures (Rotlung and Xathrid)]
+battlefield:Bobb:Rotlung Reanimator Aetherborn-White-Sliver:1
+battlefield:Bobb:Rotlung Reanimator Basilisk-Green-Elf:1
+battlefield:Bobb:Rotlung Reanimator Cephalid-White-Sliver:1
+battlefield:Bobb:Rotlung Reanimator Demon-Green-Aetherborn:1
+battlefield:Bobb:Rotlung Reanimator Elf-White-Demon:1
+battlefield:Bobb:Rotlung Reanimator Faerie-Green-Harpy:1
+battlefield:Bobb:Rotlung Reanimator Giant-Green-Juggernaut:1
+battlefield:Bobb:Rotlung Reanimator Harpy-White-Faerie:1
+battlefield:Bobb:Rotlung Reanimator Illusion-Green-Faerie:1
+battlefield:Bobb:Rotlung Reanimator Juggernaut-White-Illusion:1
+battlefield:Bobb:Xathrid Necromancer Kavu-White-Leviathan:1
+battlefield:Bobb:Xathrid Necromancer Leviathan-White-Illusion:1
+battlefield:Bobb:Xathrid Necromancer Myr-White-Basilisk:1
+battlefield:Bobb:Rotlung Reanimator Noggle-Green-Orc:1
+battlefield:Bobb:Rotlung Reanimator Orc-White-Pegasus:1
+battlefield:Bobb:Xathrid Necromancer Pegasus-Green-Rhino:1
+battlefield:Bobb:Rotlung Reanimator Rhino-Blue-Assassin:1
+battlefield:Bobb:Rotlung Reanimator Sliver-Green-Cephalid:1
+
+[A1a. Add program transition cards (Cloak of Invisibility)]
+hand:Alice:Cloak of Invisibility:18
+battlefield:Alice:Island:18
+
+[A1b. During Alice pre-combat: Apply Cloaks of Invisibility to Bobb's Rotlungs and Xathrids (18 Island)]
+
+[A1c. Add land to both libraries]
+library:Bobb:Island:1
+library:Alice:Island:1
+
+[A1d. Skip Alice -> Skip Bobb -> Begin Alice pre-combat (Phase out q1 creatures)]
+
+[@clear hands]
+
+[A2. Add q2 state transition creatures (Rotlung and Xathrid)]
+battlefield:Bobb:Rotlung Reanimator Aetherborn-Green-Cephalid:1
+battlefield:Bobb:Rotlung Reanimator Basilisk-Green-Cephalid:1
+battlefield:Bobb:Rotlung Reanimator Cephalid-White-Basilisk:1
+battlefield:Bobb:Rotlung Reanimator Demon-Green-Elf:1
+battlefield:Bobb:Rotlung Reanimator Elf-White-Aetherborn:1
+battlefield:Bobb:Xathrid Necromancer Faerie-Green-Kavu:1
+battlefield:Bobb:Rotlung Reanimator Giant-Green-Harpy:1
+battlefield:Bobb:Rotlung Reanimator Harpy-White-Giant:1
+battlefield:Bobb:Rotlung Reanimator Illusion-Green-Juggernaut:1
+battlefield:Bobb:Rotlung Reanimator Juggernaut-White-Giant:1
+battlefield:Bobb:Xathrid Necromancer Kavu-Green-Faerie:1
+battlefield:Bobb:Rotlung Reanimator Leviathan-Green-Juggernaut:1
+battlefield:Bobb:Rotlung Reanimator Myr-Green-Orc:1
+battlefield:Bobb:Rotlung Reanimator Noggle-Green-Orc:1
+battlefield:Bobb:Rotlung Reanimator Orc-White-Noggle:1
+battlefield:Bobb:Rotlung Reanimator Pegasus-Green-Sliver:1
+battlefield:Bobb:Xathrid Necromancer Rhino-White-Sliver:1
+battlefield:Bobb:Rotlung Reanimator Sliver-White-Myr:1
+
+[A2a. Add second program transition cards (Cloak of Invisibility)]
+hand:Alice:Cloak of Invisibility:18
+
+[A2b. During Alice pre-combat: Apply Cloaks of Invisibility to Bobb's Rotlungs and Xathrids (18 Island)]
+
+[A2c. Add land to both libraries]
+library:Bobb:Island:1
+library:Alice:Island:1
+
+[A2d. Add Illusory Gains to Alice's hand]
+hand:Alice:Illusory Gains:1
+battlefield:Alice:Island:5
+
+[A2e. During Alice pre-combat: Cast Illusory Gains on Bobb's 3/3 token (5 Island)]
+
+[A2f. Add machine control cards]
+hand:Alice:Shared Triumph:2
+battlefield:Alice:Plains:4
+hand:Alice:Wheel of Sun and Moon:1
+hand:Alice:Steely Resolve:1
+battlefield:Alice:Forest:4
+
+[A2g. Add Armageddon]
+hand:Alice:Armageddon:1
+battlefield:Alice:Plains:4
+
+[A2h. During Alice pre-combat: Cast Shared Triumphs (target: Lhurgoyf, Rat; 2 Plains each)]
+[A2i. During Alice pre-combat: Cast Wheel of Sun and Moon (target: Alice; 2 Forest)]
+[A2j. During Alice pre-combat: Cast Steely Resolve (target: Assembly-Worker; 2 Forest)]
+[A2k. During Alice pre-combat: Cast Armageddon]
+
+[@clear libraries]
+
+[A2l. During Alice pre-combat: Add Island to battlefield]
+battlefield:Alice:Island:1
+
+[A2m. During Alice pre-combat: Tap island]
+
+[A2n. Cast Prismatic Omen for Alice]
+battlefield:Alice:Prismatic Omen:1
+
+[A2o. Add Alice State change cards]
+battlefield:Alice:Mesmeric Orb:1
+battlefield:Alice:Dread of Night Black:2
+battlefield:Alice:Choke:1
+
+[A2p. Add Unmodified creatures - Rotlung Reanimators - Fungus Sliver - Vigor]
+battlefield:Alice:Rotlung Reanimator Lhurgoyf-Black-Cephalid:1
+battlefield:Bobb:Rotlung Reanimator Lhurgoyf-Green-Lhurgoyf:1
+battlefield:Alice:Rotlung Reanimator Rat-Black-Cephalid:1
+battlefield:Bobb:Rotlung Reanimator Rat-White-Rat:1
+battlefield:Alice:Fungus Sliver Incarnation:1
+battlefield:Alice:Vigor AssemblyWorker:1
+battlefield:Bobb:Vigor AssemblyWorker:1
+battlefield:Alice:Blazing Archon AssemblyWorker:1
+battlefield:Bobb:Blazing Archon:1
+
+[A2q. Add land to Bobb's library]
+library:Bobb:Island:1
+
+[A2f. Skip to Bobb's turn pre-combat phase]
+
+[@clear hands]
+
+[B2a. During Bobb pre-combat: Enchantments]
+battlefield:Bobb:Privileged Position:1
+battlefield:Bobb:Wild Evocation:1
+battlefield:Bobb:Recycle:1
+
+[B2b. Add State change cards to Alice's library in draw order]
+library:Alice:Soul Snuffers:1
+library:Alice:Coalition Victory:1
+library:Alice:Cleansing Beam:1
+
+[B2c. Alice Infest to hand]
+hand:Alice:Infest:1
+
+[B2d. Skip Bobb's turn. Alice's Infest should automatically trigger q1 changes]

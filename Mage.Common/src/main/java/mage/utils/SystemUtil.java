@@ -73,6 +73,8 @@ public final class SystemUtil {
     private static final String COMMAND_SHOW_MY_HAND = "@show my hand";
     private static final String COMMAND_SHOW_MY_LIBRARY = "@show my library";
     private static final String COMMAND_ACTIVATE_OPPONENT_ABILITY = "@activate opponent ability";
+    private static final String COMMAND_CLEAR_HANDS = "@clear hands";
+    private static final String COMMAND_CLEAR_LIBRARIES = "@clear libraries";
     private static final Map<String, String> supportedCommands = new HashMap<>();
 
     static {
@@ -86,6 +88,8 @@ public final class SystemUtil {
         supportedCommands.put(COMMAND_SHOW_MY_HAND, "SHOW MY HAND");
         supportedCommands.put(COMMAND_SHOW_MY_LIBRARY, "SHOW MY LIBRARY");
         supportedCommands.put(COMMAND_ACTIVATE_OPPONENT_ABILITY, "ACTIVATE OPPONENT ABILITY");
+        supportedCommands.put(COMMAND_CLEAR_HANDS, "CLEAR HANDS");
+        supportedCommands.put(COMMAND_CLEAR_LIBRARIES, "CLEAR LIBRARIES");
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
@@ -418,6 +422,34 @@ public final class SystemUtil {
                         break;
                     }
 
+                    case COMMAND_CLEAR_HANDS: {
+                        if (opponent != null) {
+                            for(Card card: opponent.getHand().getCards(game)) {
+                                Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                                fakeSourceAbility.setSourceId(card.getId());
+                                card.removeFromZone(game, Zone.HAND, fakeSourceAbility);
+                            }
+                            game.informPlayers("Cleared opponent hand");
+                        }
+                        for(Card card: feedbackPlayer.getHand().getCards(game)) {
+                            Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                            fakeSourceAbility.setSourceId(card.getId());
+                            card.removeFromZone(game, Zone.HAND, fakeSourceAbility);
+                        }
+                        game.informPlayers("Cleared my hand");
+                        break;
+                    }
+
+                    case COMMAND_CLEAR_LIBRARIES: {
+                        feedbackPlayer.getLibrary().clear();
+                        game.informPlayers("Cleared my library");
+                        if (opponent != null) {
+                            opponent.getLibrary().clear();
+                            game.informPlayers("Cleared opponent library");
+                        }
+                        break;
+                    }
+
                     case COMMAND_ACTIVATE_OPPONENT_ABILITY: {
                         // WARNING, maybe very bugged if called in wrong priority
                         // uses choose triggered ability dialog to select it
@@ -603,10 +635,33 @@ public final class SystemUtil {
 
                 // SPECIAL token/emblem call (without SET name)
                 if ("token".equalsIgnoreCase(command.zone)) {
+                    int cardPower = -1;
+                    if (command.cardName.contains(":")) {
+                        String parts[] = command.cardName.split(":");
+                        command.cardName = parts[0];
+                        cardPower = Integer.parseInt(parts[1]);
+                    }
+
                     // eg: token:Human:HippoToken:1
                     Class<?> c = Class.forName("mage.game.permanent.token." + command.cardName);
-                    Constructor<?> cons = c.getConstructor();
-                    Object obj = cons.newInstance();
+                    Constructor<?> cons;
+                    if (cardPower == -1 && command.cardSet.equals("")) {
+                        cons = c.getConstructor();
+                    } else {
+                        cons = c.getConstructor(int.class, int.class);
+                    }
+
+                    Object obj;
+                    if (cardPower == -1 && command.cardSet.equals("")) {
+                        obj = cons.newInstance();
+                    } else if (cardPower >= 0) {
+                        obj = cons.newInstance(cardPower, cardPower);
+                    }
+                    else {
+                        // Hack to leverage cardSet as P/T
+                        int pt = Integer.parseInt(command.cardSet);
+                        obj = cons.newInstance(pt, pt);
+                    }
                     if (obj instanceof Token) {
                         Token token = (Token) obj;
                         Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
