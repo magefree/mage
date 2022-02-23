@@ -33,7 +33,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "intimidate <i>(This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)";
+        return "intimidate <i>(This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>";
     }
 
     @Override
