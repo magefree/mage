@@ -326,7 +326,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
-            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
+            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, ThemeType.DEFAULT.getName()));
             logger.info("Using GUI theme: " + currentTheme.getName());
             currentTheme.reload();
         }
@@ -2833,7 +2833,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -2844,7 +2843,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);

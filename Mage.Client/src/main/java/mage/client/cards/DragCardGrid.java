@@ -835,14 +835,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         deckNameAndCountLabel = new JLabel();
 
         // Count labels
-        landCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_land.png")), SwingConstants.LEFT);
+        landCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_land" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")), SwingConstants.LEFT);
         landCountLabel.setToolTipText("Number of lands in deck");
         creatureCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_creatures.png")), SwingConstants.LEFT);
         creatureCountLabel.setToolTipText("Number of creatures in deck");
 
         JPanel toolbar = new JPanel(new BorderLayout());
         JPanel toolbarInner = new JPanel();
-        toolbar.setBackground(new Color(250, 250, 250, 150));
         toolbar.setOpaque(true);
         toolbarInner.setOpaque(false);
         toolbarInner.add(deckNameAndCountLabel);
@@ -2336,7 +2335,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     public static JLabel createCountLabel(MouseListener mouseListener) {
         JLabel countLabel = new JLabel("", JLabel.CENTER);
-        countLabel.setForeground(Color.WHITE); // TODO: add theme support
+        if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) countLabel.setForeground(Color.WHITE);
         if (mouseListener != null) {
             countLabel.addMouseListener(mouseListener);
         }

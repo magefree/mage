@@ -36,6 +36,7 @@ public class AddLandDialog extends MageDialog {
 
     public AddLandDialog() {
         initComponents();
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
         this.setModal(true);
     }
 

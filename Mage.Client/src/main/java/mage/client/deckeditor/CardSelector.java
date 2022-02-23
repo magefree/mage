@@ -12,6 +12,7 @@ import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
@@ -97,11 +98,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jTextFieldSearch.addActionListener(searchAction);
 
         // make the components more readable
-        tbColor.setBackground(new Color(250, 250, 250, 150));
         tbColor.setOpaque(true); // false = transparent
-        tbTypes.setBackground(new Color(250, 250, 250, 150));
         tbTypes.setOpaque(true); // false = transparent
-        cardSelectorBottomPanel.setBackground(new Color(250, 250, 250, 150));
         cardSelectorBottomPanel.setOpaque(true); // false = transparent
     }
 
@@ -178,6 +176,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void setGUISize() {
+        tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_planeswalker" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        tbLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        btnExpansionSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
         mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());

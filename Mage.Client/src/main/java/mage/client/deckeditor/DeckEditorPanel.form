@@ -131,9 +131,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblDeckName">
                   <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="txtDeckName"/>
                     </Property>

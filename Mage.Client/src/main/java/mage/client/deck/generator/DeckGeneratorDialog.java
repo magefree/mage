@@ -103,7 +103,7 @@ public class DeckGeneratorDialog {
         }
 
         JButton btn = new JButton();
-        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png")));
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
         btn.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
         btn.setAlignmentX(1.0F);
         btn.setPreferredSize(new java.awt.Dimension(32, 32));

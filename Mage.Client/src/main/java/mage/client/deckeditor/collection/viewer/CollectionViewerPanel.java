@@ -49,6 +49,14 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     public void initComponents() {
+        Color foregroundColor;
+        if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+            foregroundColor = Color.white;
+        } else {
+            foregroundColor = UIManager.getColor("Label.foreground");
+            if (foregroundColor == null) foregroundColor = Color.white;
+        }
+
         buttonsPanel = new javax.swing.JPanel();
         buttonsPanel.setOpaque(false);
         bigCard = new BigCard();
@@ -60,7 +68,7 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel label1 = new JLabel("Choose format:");
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        label1.setForeground(Color.white);
+        label1.setForeground(foregroundColor);
         buttonsPanel.add(label1);
 
         // SELECT SET
@@ -101,7 +109,7 @@ public final class CollectionViewerPanel extends JPanel {
         setPanel.add(formats);
         // search button
         btnSetFastSearch = new JButton();
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png")));
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
         btnSetFastSearch.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setMinimumSize(new java.awt.Dimension(24, 24));
@@ -117,11 +125,11 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel label2 = new JLabel("Choose size:");
         label2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        label2.setForeground(Color.white);
+        label2.setForeground(foregroundColor);
         buttonsPanel.add(label2);
 
         small3x3 = new JRadioButton("3x3");
-        small3x3.setForeground(Color.white);
+        small3x3.setForeground(foregroundColor);
         boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3).equals(MageBook.LAYOUT_3X3);
         small3x3.setSelected(selected3x3);
         small3x3.addActionListener(e -> {
@@ -132,7 +140,7 @@ public final class CollectionViewerPanel extends JPanel {
         buttonsPanel.add(small3x3);
 
         big4x4 = new JRadioButton("4x4");
-        big4x4.setForeground(Color.white);
+        big4x4.setForeground(foregroundColor);
         big4x4.setSelected(!selected3x3);
         big4x4.addActionListener(e -> {
             small3x3.setSelected(false);
@@ -143,7 +151,7 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel label3 = new JLabel("Switch tabs:");
         label3.setAlignmentX(Component.LEFT_ALIGNMENT);
-        label3.setForeground(Color.white);
+        label3.setForeground(foregroundColor);
         buttonsPanel.add(label3);
 
         JPanel buttonPanel = new JPanel();
@@ -163,12 +171,12 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel labelCardTokenSwitch = new JLabel("Show cards or tokens:");
         labelCardTokenSwitch.setAlignmentX(Component.LEFT_ALIGNMENT);
-        labelCardTokenSwitch.setForeground(Color.white);
+        labelCardTokenSwitch.setForeground(foregroundColor);
         buttonsPanel.add(labelCardTokenSwitch);
 
         JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
         cardsOrTokens.setSelected(true);
-        cardsOrTokens.setForeground(Color.white);
+        cardsOrTokens.setForeground(foregroundColor);
         cardsOrTokens.setToolTipText("Select to show Cards for the chosen set.  When unselected, will show Tokens, Emblems and Planes for the set instead");
         cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
         buttonsPanel.add(cardsOrTokens);

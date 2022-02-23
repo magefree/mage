@@ -1,6 +1,8 @@
 
 package mage.client.util.gui.countryBox;
 
+import mage.client.dialog.PreferencesDialog;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +28,9 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         labelItem.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
         labelItem.setBorder(new EmptyBorder(0, 5, 0, 0));
         labelItem.setOpaque(false);
-        labelItem.setForeground(Color.WHITE);
+        if (PreferencesDialog.getCurrentTheme().isNimbusLookAndFeel()) {
+            labelItem.setForeground(Color.WHITE);
+        }
 
         editValue = null;
     }

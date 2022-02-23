@@ -103,6 +103,8 @@
      }
 
      private void setGUISize() {
+         lblCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_pack" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+         lblLandCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
          mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
          mainTable.setFont(GUISizeHelper.tableFont);
          mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());

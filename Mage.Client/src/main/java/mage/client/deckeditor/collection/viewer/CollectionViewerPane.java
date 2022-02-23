@@ -2,6 +2,7 @@
 package mage.client.deckeditor.collection.viewer;
 
 import mage.client.MagePane;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class CollectionViewerPane extends MagePane {
                 collectionViewerPanel = new CollectionViewerPanel();
                 initComponents(container);
                 container.add(collectionViewerPanel);
-                container.setOpaque(false);
+                container.setOpaque(!PreferencesDialog.getCurrentTheme().shouldShowBackground());
                 collectionViewerPanel.setOpaque(false);
                 initialized = true;
             }

@@ -47,6 +47,7 @@ public class ConnectDialog extends MageDialog {
      */
     public ConnectDialog() {
         initComponents();
+        btnFlagSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
 
         this.txtServer.addActionListener(connectAction);
         this.txtPort.addActionListener(connectAction);

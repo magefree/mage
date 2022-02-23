@@ -36,7 +36,7 @@
          this.modal = true;
 
          pnlText.setOpaque(true);
-         pnlText.setBackground(new Color(240, 240, 240, 140));
+         pnlText.setBackground(PreferencesDialog.getCurrentTheme().getGameEndBackgroundColor());
 
          Rectangle r = new Rectangle(610, 250);
 

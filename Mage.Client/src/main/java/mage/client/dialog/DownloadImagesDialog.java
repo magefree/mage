@@ -33,6 +33,8 @@ public class DownloadImagesDialog extends MageDialog {
         initComponents();
         this.setModal(true);
 
+        buttonSearchSet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+
         // fix for panelInfo (it's resets aligmentX after netbeans designer opened)
         panelInfo.setAlignmentX(CENTER_ALIGNMENT);
 

@@ -77,6 +77,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         fcExportDeck = new JFileChooser();
         fcExportDeck.setAcceptAllFileFilterUsed(false);
 
+        btnAddLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+            lblDeckName.setForeground(Color.white);
+        }
         deckArea.setOpaque(false);
         panelLeft.setOpaque(false);
         panelRight.setOpaque(false);
@@ -973,7 +978,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckName.setOpaque(false);
 
-        lblDeckName.setForeground(new java.awt.Color(255, 255, 255));
         lblDeckName.setLabelFor(txtDeckName);
         lblDeckName.setText("Deck Name:");
 

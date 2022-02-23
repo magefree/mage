@@ -630,12 +630,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnStateFinished.setIcon(new ImageIcon(newimg));
 
         int iconSize = 48 + GUISizeHelper.menuFont.getSize() * 2 - 15;
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"));
+        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
         btnNewTable.setIcon(new ImageIcon(newimg));
 
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"));
+        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
         btnNewTournament.setIcon(new ImageIcon(newimg));

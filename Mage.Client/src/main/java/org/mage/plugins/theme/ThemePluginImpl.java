@@ -148,7 +148,7 @@ public class ThemePluginImpl implements ThemePlugin {
 
     // Sets background for logged in user for tables/deck editor/card viewer/etc
     private synchronized ImagePanel createImagePanelInstance() {
-        if (background == null) {
+        if (background == null && PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
             try {
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                     InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getBackgroundPath());

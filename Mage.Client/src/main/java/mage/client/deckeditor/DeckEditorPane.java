@@ -3,6 +3,7 @@ package mage.client.deckeditor;
 import mage.cards.decks.Deck;
 import mage.client.MagePane;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 
 import javax.swing.*;
@@ -28,8 +29,10 @@ public class DeckEditorPane extends MagePane {
                 deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
                 initComponents(container);
                 container.add(deckEditorPanel1);
-                container.setOpaque(false);
-                deckEditorPanel1.setOpaque(false);
+                if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+                    container.setOpaque(false);
+                    deckEditorPanel1.setOpaque(false);
+                }
                 initialized = true;
             }
         }

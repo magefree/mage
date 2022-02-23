@@ -150,6 +150,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jLayeredBackgroundPane.setSize(1024, 768);
         this.add(jLayeredBackgroundPane);
         jLayeredBackgroundPane.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
+        jSplitPane0.setBackground(new Color(0, 0, 0, 0));
 
         Map<String, JComponent> myUi = getUIComponents(jLayeredBackgroundPane);
         Plugins.instance.updateGamePanel(myUi);

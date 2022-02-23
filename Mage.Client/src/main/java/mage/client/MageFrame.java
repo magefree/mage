@@ -28,6 +28,7 @@ import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.table.TablesPanel;
+import mage.client.themes.ThemeType;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
@@ -208,13 +209,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-
-            UIManager.put("nimbusBlueGrey", PreferencesDialog.getCurrentTheme().getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
-            UIManager.put("control", PreferencesDialog.getCurrentTheme().getControl()); // window bg
-            UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
-            UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
-            UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
 
             //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             // stop JSplitPane from eating F6 and F8 or any other function keys
@@ -261,6 +255,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         initComponents();
 
         desktopPane.setDesktopManager(new MageDesktopManager());
+        desktopPane.setBackground(PreferencesDialog.getCurrentTheme().getCardTooltipBackgroundColor());
+        btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
 
         setSize(1024, 768);
         SettingsManager.instance.setScreenWidthAndHeight(1024, 768);
@@ -335,7 +332,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             JLabel label = new JLabel("  Games played: " + i);
             desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
             label.setVisible(true);
-            label.setForeground(Color.white);
+            if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+                label.setForeground(Color.white);
+            }
             label.setBounds(0, 0, 180, 30);
         }
 
@@ -477,6 +476,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (Plugins.instance.isThemePluginLoaded() &&
                     !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
+            } else if (Plugins.instance.isThemePluginLoaded() &&
+                        !PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+                backgroundPane = new ImagePanel(null);
             } else {
                 InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getLoginBackgroundPath());
                 BufferedImage background = ImageIO.read(is);
@@ -1335,6 +1337,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
             try {
+                ThemeType.valueByName(getPreferences().get(PreferencesDialog.KEY_THEME, ThemeType.DEFAULT.getName())).setupLookAndFeel();
                 instance = new MageFrame();
             } catch (Throwable e) {
                 logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
