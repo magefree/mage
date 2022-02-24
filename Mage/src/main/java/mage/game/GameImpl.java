@@ -2386,8 +2386,8 @@ public abstract class GameImpl implements Game {
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
-                                if (auraFilter instanceof FilterControlledPermanent) {
-                                    if (!((FilterControlledPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
+                                if (auraFilter instanceof FilterPermanent) {
+                                    if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
