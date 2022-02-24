@@ -105,6 +105,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");
                 filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
                 Target target = new TargetCreaturePermanent(filter);
+                target.setNotTarget(true);  // Bug #7772
                 target.addTarget(enchantedCreature.getId(), source, game);
                 animateDead.getSpellAbility().getTargets().clear();
                 animateDead.getSpellAbility().getTargets().add(target);
@@ -225,6 +226,7 @@ class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements Sou
             for (Ability ability : permanent.getAbilities()) {
                 if (ability instanceof EnchantAbility) {
                     abilityToRemove = ability;
+                    ability.getTargets().clear();
                 }
             }
             permanent.removeAbility(abilityToRemove, source.getSourceId(), game);
@@ -258,6 +260,7 @@ class AnimateDeadAttachToPermanentEffect extends ContinuousEffectImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");
             filter.add(new PermanentIdPredicate(getTargetPointer().getFirst(game, source)));
             Target target = new TargetCreaturePermanent(filter);
+            target.setNotTarget(true); // Bug #7772
             target.addTarget(((FixedTarget) getTargetPointer()).getTarget(), source, game);
             animateDead.getSpellAbility().getTargets().clear();
             animateDead.getSpellAbility().getTargets().add(target);
