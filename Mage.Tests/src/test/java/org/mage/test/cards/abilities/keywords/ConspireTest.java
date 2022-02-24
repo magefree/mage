@@ -106,6 +106,41 @@ public class ConspireTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testWortTheRaidmotherTwoSpells() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 2);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.HAND, playerA, "Shock");
+
+        // prepare goblins
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother");// {4}{R/G}{R/G}
+
+        // cast with conspire
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setChoice(playerA, true); // use conspire
+        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, false); // keep targets
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Shock", playerB);
+        setChoice(playerA, false); // don't use conspire
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertTapped("Raging Goblin", false);
+        assertLife(playerB, 20 - 3 - 3 - 2);
+
+    }
+
+    @Test
     public void testWortTheRaidmotherWithConspireSpellOnce() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
         // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
