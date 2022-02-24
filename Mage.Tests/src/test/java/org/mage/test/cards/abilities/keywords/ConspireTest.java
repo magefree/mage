@@ -48,7 +48,7 @@ public class ConspireTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerB, 14);
+        assertLife(playerB, 20 - 3 - 3);
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertTapped("Goblin Roughrider", true);
         assertTapped("Raging Goblin", true);
@@ -68,7 +68,7 @@ public class ConspireTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerB, 17);
+        assertLife(playerB, 20 - 3);
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertTapped("Goblin Roughrider", false);
         assertTapped("Raging Goblin", false);
@@ -101,12 +101,35 @@ public class ConspireTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
-        assertLife(playerB, 14);
+        assertLife(playerB, 20 - 3 - 3);
 
     }
 
     @Test
-    public void testWortTheRaidmotherWithConspireSpell() {
+    public void testWortTheRaidmotherWithConspireSpellOnce() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Burn Trail");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Burn Trail", playerB);
+        setChoice(playerA, true); // use Conspire from Burn Trail itself
+        setChoice(playerA, false); // don't use Conspire gained from Wort, the Raidmother
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertLife(playerB, 20 - 3 - 3);
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, "Burn Trail", 1);
+    }
+
+    @Test
+    public void testWortTheRaidmotherWithConspireSpellTwice() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 2);
         // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
@@ -124,10 +147,64 @@ public class ConspireTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
-        assertLife(playerB, 11);
+        assertLife(playerB, 20 - 3 - 3 - 3);
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Burn Trail", 1);
 
+    }
+
+    @Test
+    public void testWortTheRaidmotherWithSakashimaOnce() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 11);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
+        setChoice(playerA, "Wort, the Raidmother");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
+        setChoice(playerA, false); // don't use Conspire gained from Sakashima the Imposter
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertPermanentCount(playerA, "Sakashima the Impostor", 1);
+        assertLife(playerB, 20 - 3 - 3);
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+    }
+
+    @Test
+    public void testWortTheRaidmotherWithSakashimaTwice() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 11);
+        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // Each red or green instant or sorcery spell you cast has conspire.
+        // (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+        addCard(Zone.HAND, playerA, "Wort, the Raidmother");
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
+        setChoice(playerA, "Wort, the Raidmother");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
+        setChoice(playerA, true); // use Conspire gained from Sakashima the Imposter
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Wort, the Raidmother", 1);
+        assertPermanentCount(playerA, "Sakashima the Impostor", 1);
+        assertLife(playerB, 20 - 3 - 3 - 3);
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
     }
 
     @Test
@@ -151,7 +228,7 @@ public class ConspireTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
-        assertLife(playerB, 20 - 3 * 2);
+        assertLife(playerB, 20 - 3 - 3);
         assertTapped("Goblin Assailant", true);
     }
 
@@ -176,7 +253,7 @@ public class ConspireTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
-        assertLife(playerB, 20 - 3 * 2);
+        assertLife(playerB, 20 - 3 - 3);
         assertTapped("Goblin Assailant", true);
     }
 

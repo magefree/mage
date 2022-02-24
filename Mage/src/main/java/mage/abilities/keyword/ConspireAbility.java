@@ -16,15 +16,14 @@ import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /*
  * 702.77. Conspire
@@ -44,7 +43,6 @@ import java.util.Objects;
 public class ConspireAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Conspire";
-    protected static final String CONSPIRE_ACTIVATION_KEY = "ConspireActivation";
     private static final FilterControlledPermanent filter
             = new FilterControlledPermanent("untapped creatures you control that share a color with it");
 
@@ -70,6 +68,8 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         }
     }
 
+    private final UUID conspireId;
+    private UUID addedById = null;
     private final String reminderText;
     private final OptionalAdditionalCost conspireCost;
 
@@ -81,17 +81,20 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
      */
     public ConspireAbility(ConspireTargets conspireTargets) {
         super(Zone.STACK, null);
+        this.conspireId = UUID.randomUUID();
         reminderText = conspireTargets.getReminder();
         this.conspireCost = new OptionalAdditionalCostImpl(
                 keywordText, " ", reminderText,
                 new TapTargetCost(new TargetControlledPermanent(2, filter))
         );
         this.conspireCost.setCostType(VariableCostType.ADDITIONAL);
-        addSubAbility(new ConspireTriggeredAbility());
+        this.addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
     public ConspireAbility(final ConspireAbility ability) {
         super(ability);
+        this.conspireId = ability.conspireId;
+        this.addedById = ability.addedById;
         this.conspireCost = ability.conspireCost.copy();
         this.reminderText = ability.reminderText;
     }
@@ -124,9 +127,11 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         }
         // AI supports conspire
         if (!conspireCost.canPay(ability, this, getControllerId(), game)
-                || !player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
+                || !player.chooseUse(Outcome.Benefit, "Pay "
+                + conspireCost.getText(false) + " ?", ability, game)) {
             return;
         }
+        ability.getEffects().setValue("ConspireActivation" + conspireId + addedById, true);
         for (Iterator<Cost> it = ((Costs<Cost>) conspireCost).iterator(); it.hasNext(); ) {
             Cost cost = (Cost) it.next();
             if (cost instanceof ManaCostsImpl) {
@@ -151,17 +156,32 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     public String getCastMessageSuffix() {
         return conspireCost != null ? conspireCost.getCastSuffixMessage(0) : "";
     }
+
+    public ConspireAbility setAddedById(UUID addedById) {
+        this.addedById = addedById;
+        CardUtil.castStream(
+                this.subAbilities.stream(),
+                ConspireTriggeredAbility.class
+        ).forEach(ability -> ability.setAddedById(addedById));
+        return this;
+    }
 }
 
 class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
 
-    public ConspireTriggeredAbility() {
+    private final UUID conspireId;
+    private UUID addedById = null;
+
+    public ConspireTriggeredAbility(UUID conspireId) {
         super(new CopySourceSpellEffect(), false);
         this.setRuleVisible(false);
+        this.conspireId = conspireId;
     }
 
     private ConspireTriggeredAbility(final ConspireTriggeredAbility ability) {
         super(ability);
+        this.conspireId = ability.conspireId;
+        this.addedById = ability.addedById;
     }
 
     @Override
@@ -175,19 +195,21 @@ class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getSourceId());
-        return spell != null && spell
+        return spell != null
+                && spell
                 .getSpellAbility()
                 .getEffects()
                 .stream()
-                .map(effect -> effect.getValue("tappedPermanents"))
-                .filter(Objects::nonNull)
-                .map(x -> (List<Permanent>) x)
-                .flatMap(Collection::stream)
-                .count() >= 2;
+                .map(effect -> effect.getValue("ConspireActivation" + conspireId + addedById))
+                .anyMatch(Objects::nonNull);
     }
 
     @Override
     public String getRule() {
         return "When you pay the conspire costs, copy it and you may choose a new target for the copy.";
+    }
+
+    public void setAddedById(UUID addedById) {
+        this.addedById = addedById;
     }
 }

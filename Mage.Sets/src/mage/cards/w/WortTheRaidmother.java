@@ -35,10 +35,12 @@ public final class WortTheRaidmother extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Wort, the Raidmother enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinWarriorToken(), 2), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new GoblinWarriorToken(), 2)
+        ));
 
         // Each red or green instant or sorcery spell you cast has conspire.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WortGainConspireEffect()));
+        this.addAbility(new SimpleStaticAbility(new WortGainConspireEffect()));
     }
 
     private WortTheRaidmother(final WortTheRaidmother card) {
@@ -59,13 +61,17 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
 
+    private final ConspireAbility conspireAbility;
+
     public WortGainConspireEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Each red or green instant or sorcery spell you cast has conspire. <i>(As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)</i>";
+        this.conspireAbility = new ConspireAbility(ConspireAbility.ConspireTargets.MORE);
     }
 
     public WortGainConspireEffect(final WortGainConspireEffect effect) {
         super(effect);
+        this.conspireAbility = effect.conspireAbility;
     }
 
     @Override
@@ -77,13 +83,13 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (StackObject stackObject : game.getStack()) {
             // only spells cast, so no copies of spells
-            if ((!(stackObject instanceof Spell)) || stackObject.isCopy()
+            if (!(stackObject instanceof Spell) || stackObject.isCopy()
                     || !stackObject.isControlledBy(source.getControllerId())) {
                 continue;
             }
             Spell spell = (Spell) stackObject;
             if (filter.match(stackObject, game)) {
-                game.getState().addOtherAbility(spell.getCard(), new ConspireAbility(ConspireAbility.ConspireTargets.MORE));
+                game.getState().addOtherAbility(spell.getCard(), conspireAbility.setAddedById(source.getSourceId()));
             }
         }
         return true;
