@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -89,7 +88,7 @@ class TritonTacticsUntapEffect extends OneShotEffect {
 class TritonTacticsDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     TritonTacticsDelayedTriggeredAbility(List<Permanent> permanents, Game game) {
-        super(TritonTacticsWatcher.makeEffect(permanents, game), Duration.EndOfTurn, true, false);
+        super(new TritonTacticsTapEffect(permanents, game), Duration.EndOfTurn, true, false);
     }
 
     private TritonTacticsDelayedTriggeredAbility(final TritonTacticsDelayedTriggeredAbility ability) {
@@ -120,12 +119,19 @@ class TritonTacticsDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class TritonTacticsTapEffect extends OneShotEffect {
 
-    TritonTacticsTapEffect() {
+    private final Set<MageObjectReference> morSet = new HashSet<>();
+
+    TritonTacticsTapEffect(List<Permanent> permanents, Game game) {
         super(Outcome.Tap);
+        permanents
+                .stream()
+                .map(permanent -> new MageObjectReference(permanent, game))
+                .forEach(morSet::add);
     }
 
     private TritonTacticsTapEffect(final TritonTacticsTapEffect effect) {
         super(effect);
+        morSet.addAll(effect.morSet);
     }
 
     @Override
@@ -135,12 +141,7 @@ class TritonTacticsTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = getTargetPointer()
-                .getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<Permanent> permanents = TritonTacticsWatcher.getPermanents(morSet, game);
         if (permanents.isEmpty()) {
             return false;
         }
@@ -175,16 +176,14 @@ class TritonTacticsWatcher extends Watcher {
         map.clear();
     }
 
-    static Effect makeEffect(List<Permanent> targets, Game game) {
+    static List<Permanent> getPermanents(Set<MageObjectReference> targets, Game game) {
         TritonTacticsWatcher watcher = game.getState().getWatcher(TritonTacticsWatcher.class);
-        List<Permanent> permanents = targets
+        return targets
                 .stream()
-                .map(permanent -> new MageObjectReference(permanent, game))
                 .map(mor -> watcher.map.getOrDefault(mor, emptySet))
                 .flatMap(Collection::stream)
                 .map(mor -> mor.getPermanent(game))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return new TritonTacticsTapEffect().setTargetPointer(new FixedTargets(permanents, game));
     }
 }
