@@ -81,8 +81,8 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
         }
         permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShiftingShadowEffect(permanent, game), TargetController.YOU, false
-        ));
+                new ShiftingShadowEffect(aura, game), TargetController.YOU, false
+        ), source.getSourceId(), game);
         return true;
     }
 }
@@ -100,7 +100,7 @@ class ShiftingShadowEffect extends OneShotEffect {
 
     private ShiftingShadowEffect(final ShiftingShadowEffect effect) {
         super(effect);
-        mor = effect.mor;
+        this.mor = effect.mor;
         this.name = effect.name;
     }
 
@@ -124,6 +124,7 @@ class ShiftingShadowEffect extends OneShotEffect {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.destroy(source, game);
+            game.getState().processAction(game);
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
@@ -143,7 +144,7 @@ class ShiftingShadowEffect extends OneShotEffect {
             creature.addAttachment(mor.getSourceId(), source, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 

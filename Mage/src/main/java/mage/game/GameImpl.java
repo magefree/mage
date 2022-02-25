@@ -30,7 +30,6 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -2389,7 +2388,13 @@ public abstract class GameImpl implements Game {
                                 if (auraFilter instanceof FilterPermanent) {
                                     if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
-                                        if (movePermanentToGraveyardWithInfo(perm)) {
+                                        Card card = this.getCard(perm.getId());
+                                        if (card != null && card.isCreature(this)) {
+                                            UUID wasAttachedTo = perm.getAttachedTo();
+                                            perm.attachTo(null, null, this);
+                                            BestowAbility.becomeCreature(perm, this);
+                                            fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
+                                        } else if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
                                         }
                                     }
