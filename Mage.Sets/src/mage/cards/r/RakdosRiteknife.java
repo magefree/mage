@@ -108,8 +108,8 @@ class RakdosRiteknifeEffect extends ContinuousEffectImpl {
                     return false;
                 }
                 int count = permanent.getCounters(game).getCount(CounterType.BLOOD);
-                if (count < 1) {
-                    creature.getPower().boostValue(count);
+                if (count > 0) {
+                    creature.addPower(count);
                     return true;
                 }
         }
