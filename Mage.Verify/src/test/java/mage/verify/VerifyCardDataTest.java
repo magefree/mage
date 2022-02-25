@@ -1550,7 +1550,7 @@ public class VerifyCardDataTest {
                         .replace("{this}", card.getName())
                         //.replace("<i>", "")
                         //.replace("</i>", "")
-                        .replace("&mdash;", "—");;
+                        .replace("&mdash;", "—");
 
                 boolean found = false;
                 for (String refRule : refRules) {
