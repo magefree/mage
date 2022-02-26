@@ -1,13 +1,9 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -17,22 +13,21 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public final class HotheadedGiant extends CardImpl {
 
     public HotheadedGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -43,8 +38,10 @@ public final class HotheadedGiant extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Hotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
-        Condition condition = new CastRedSpellThisTurnCondition();
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), new InvertCondition(condition), ""), "with two -1/-1 counters on it unless you've cast another red spell this turn"), new HotHeadedGiantWatcher(this.getId()));
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
+                new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
+                HotheadedGiantWatcher::checkSpell, ""
+        ), "with two -1/-1 counters on it unless you've cast another red spell this turn"), new HotheadedGiantWatcher());
 
     }
 
@@ -58,50 +55,40 @@ public final class HotheadedGiant extends CardImpl {
     }
 }
 
-class CastRedSpellThisTurnCondition implements Condition {
+class HotheadedGiantWatcher extends Watcher {
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        HotHeadedGiantWatcher watcher = game.getState().getWatcher(HotHeadedGiantWatcher.class, source.getControllerId());
-        if (watcher != null) {
-            return watcher.conditionMet();
-        }
-        return false;
-    }
-}
+    private final Map<UUID, List<MageObjectReference>> spellMap = new HashMap<>();
+    private static final List<MageObjectReference> emptyList = new ArrayList<>();
 
-class HotHeadedGiantWatcher extends Watcher {
-
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
-    private UUID cardId;
-
-    public HotHeadedGiantWatcher(UUID cardId) {
-        super(WatcherScope.PLAYER);
-        this.cardId = cardId;
+    HotheadedGiantWatcher() {
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
+        if (event.getType() != EventType.SPELL_CAST) {
             return;
         }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && controllerId.equals(event.getPlayerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
-                condition = true;
-            }
+        Spell spell = game.getSpell(event.getSourceId());
+        if (spell != null && spell.getColor(game).isRed()) {
+            spellMap.computeIfAbsent(event.getPlayerId(), x -> new ArrayList<>())
+                    .add(new MageObjectReference(event.getSourceId(), game));
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        condition = false;
+        spellMap.clear();
+    }
+
+    static boolean checkSpell(Game game, Ability source) {
+        return game.getState()
+                .getWatcher(HotheadedGiantWatcher.class)
+                .spellMap
+                .getOrDefault(source.getControllerId(), emptyList)
+                .stream()
+                .noneMatch(mor -> !mor.getSourceId().equals(source.getSourceId())
+                        || mor.getZoneChangeCounter() != source.getSourceObjectZoneChangeCounter());
     }
 }
