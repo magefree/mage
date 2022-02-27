@@ -67,12 +67,18 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() != Zone.BATTLEFIELD || zEvent.getToZone() != Zone.HAND) { return false; }
+        if (zEvent.getFromZone() != Zone.BATTLEFIELD || zEvent.getToZone() != Zone.HAND) {
+            return false;
+        }
 
-        if (!zEvent.getPlayerId().equals(controllerId)) { return false; }
+        if (!zEvent.getPlayerId().equals(controllerId)) {
+            return false;
+        }
 
-        if (zEvent.getTarget() == null) { return false;}
         Permanent permanentThatMoved = zEvent.getTarget();
+        if (permanentThatMoved == null) {
+            return false;
+        }
 
         return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanentThatMoved, sourceId, controllerId, game);
     }
