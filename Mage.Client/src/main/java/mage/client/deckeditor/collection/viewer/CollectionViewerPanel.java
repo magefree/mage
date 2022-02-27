@@ -110,7 +110,7 @@ public final class CollectionViewerPanel extends JPanel {
         setPanel.add(formats);
         // search button
         btnSetFastSearch = new JButton();
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png")));
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png")));
         btnSetFastSearch.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setMinimumSize(new java.awt.Dimension(24, 24));

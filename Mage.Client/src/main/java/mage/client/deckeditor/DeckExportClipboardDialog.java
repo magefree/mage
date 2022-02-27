@@ -141,7 +141,7 @@ public class DeckExportClipboardDialog extends MageDialog {
             }
         });
 
-        buttonCopy.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/copy_24.png"))); // NOI18N
+        buttonCopy.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/copy_24.png"))); // NOI18N
         buttonCopy.setToolTipText("Copy current text to clipboard");
         buttonCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

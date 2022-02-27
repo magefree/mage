@@ -107,7 +107,7 @@ public class ThemePluginImpl implements ThemePlugin {
     private BufferedImage loadbuffer_default() throws IOException {
         if (!ThemeManager.getCurrentTheme().shouldShowBattleBackground()) return null;
         BufferedImage res;
-        InputStream is = ThemeManager.getCurrentTheme().getResource("/background/battle-background.png").openStream();
+        InputStream is = ThemeManager.getCurrentTheme().getResourceStream("/background/battle-background.png");
         res = ImageIO.read(is);
         return res;
     }
@@ -155,7 +155,7 @@ public class ThemePluginImpl implements ThemePlugin {
         if (background == null && ThemeManager.getCurrentTheme().shouldShowBackground()) {
             try {
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
-                    InputStream is = ThemeManager.getCurrentTheme().getResource("/background/background.png").openStream();
+                    InputStream is = ThemeManager.getCurrentTheme().getResourceStream("/background/background.png");
                     if (is == null) {
                         throw new FileNotFoundException("Couldn't find /background/background.png in resources.");
                     }
@@ -175,7 +175,7 @@ public class ThemePluginImpl implements ThemePlugin {
                 }
                 if (background == null) {
                     String filename = "/background/background.png";
-                    InputStream is = ThemeManager.getCurrentTheme().getResource(filename).openStream();
+                    InputStream is = ThemeManager.getCurrentTheme().getResourceStream(filename);
                     if (is == null) {
                         throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                     }

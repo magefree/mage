@@ -606,14 +606,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
-        tbRed.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_red_off.png"))); // NOI18N
+        tbRed.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_red_off.png"))); // NOI18N
         tbRed.setSelected(true);
         tbRed.setToolTipText("<html><font color='red'><strong>Red</strong></font><br/>"
                 + tbColor.getToolTipText());
         tbRed.setActionCommand("Red");
         tbRed.setFocusable(false);
         tbRed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbRed.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_red.png"))); // NOI18N
+        tbRed.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_red.png"))); // NOI18N
         tbRed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -622,13 +622,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbRed);
 
-        tbGreen.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_green_off.png"))); // NOI18N
+        tbGreen.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_green_off.png"))); // NOI18N
         tbGreen.setSelected(true);
         tbGreen.setToolTipText("<html><font color='Green'><strong>Green</strong></font><br/>" + tbColor.getToolTipText());
         tbGreen.setActionCommand("Green");
         tbGreen.setFocusable(false);
         tbGreen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbGreen.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_green.png"))); // NOI18N
+        tbGreen.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_green.png"))); // NOI18N
         tbGreen.setVerifyInputWhenFocusTarget(false);
         tbGreen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbGreen.addActionListener(new java.awt.event.ActionListener() {
@@ -638,13 +638,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbGreen);
 
-        tbBlue.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_blueOff.png"))); // NOI18N
+        tbBlue.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_blueOff.png"))); // NOI18N
         tbBlue.setSelected(true);
         tbBlue.setToolTipText("<html><font color='blue'><strong>Blue</strong></font><br/>" + tbColor.getToolTipText());
         tbBlue.setActionCommand("Blue");
         tbBlue.setFocusable(false);
         tbBlue.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbBlue.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_blue.png"))); // NOI18N
+        tbBlue.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_blue.png"))); // NOI18N
         tbBlue.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -653,13 +653,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbBlue);
 
-        tbBlack.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_black_off.png"))); // NOI18N
+        tbBlack.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_black_off.png"))); // NOI18N
         tbBlack.setSelected(true);
         tbBlack.setToolTipText("<html><font color='black'><strong>Black</strong></font><br/>" + tbColor.getToolTipText());
         tbBlack.setActionCommand("Black");
         tbBlack.setFocusable(false);
         tbBlack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbBlack.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_black.png"))); // NOI18N
+        tbBlack.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_black.png"))); // NOI18N
         tbBlack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbBlack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -668,13 +668,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbBlack);
 
-        tbWhite.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_white_off.png"))); // NOI18N
+        tbWhite.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
         tbWhite.setToolTipText("<html><font color='grey'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbWhite.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/color_white.png"))); // NOI18N
+        tbWhite.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/color_white.png"))); // NOI18N
         tbWhite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbWhite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -683,13 +683,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(tbWhite);
 
-        tbColorless.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/colorless_off.png"))); // NOI18N
+        tbColorless.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/colorless_off.png"))); // NOI18N
         tbColorless.setSelected(true);
         tbColorless.setToolTipText("<html>Colorless<br/>" + tbColor.getToolTipText());
         tbColorless.setActionCommand("Colorless");
         tbColorless.setFocusable(false);
         tbColorless.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tbColorless.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/colorless.png"))); // NOI18N
+        tbColorless.setSelectedIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/colorless.png"))); // NOI18N
         tbColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbColorless.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -724,7 +724,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         ExpansionRepository.instance.subscribe(setsDbListener);
         tbColor.add(cbExpansionSet);
 
-        btnExpansionSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_32.png"))); // NOI18N
+        btnExpansionSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_32.png"))); // NOI18N
         btnExpansionSearch.setToolTipText("Fast search set or expansion");
         btnExpansionSearch.setAlignmentX(1.0F);
         btnExpansionSearch.setFocusable(false);
@@ -779,7 +779,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.setToolTipText("Hold the ALT-key while clicking to deselect all other card types or hold the CTRL-key to only select all other card types."); // NOI18N
         tbTypes.setPreferredSize(new java.awt.Dimension(732, 27));
 
-        tbLand.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_land.png"))); // NOI18N
+        tbLand.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_land.png"))); // NOI18N
         tbLand.setSelected(true);
         tbLand.setToolTipText("<html><strong>Land</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -794,7 +794,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbLand);
 
-        tbCreatures.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_creatures.png"))); // NOI18N
+        tbCreatures.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_creatures.png"))); // NOI18N
         tbCreatures.setSelected(true);
         tbCreatures.setToolTipText("<html><strong>Creatures</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -809,7 +809,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbCreatures);
 
-        tbArifiacts.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_artifact.png"))); // NOI18N
+        tbArifiacts.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_artifact.png"))); // NOI18N
         tbArifiacts.setSelected(true);
         tbArifiacts.setToolTipText("<html><strong>Artifacts</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -824,7 +824,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbArifiacts);
 
-        tbSorceries.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_sorcery.png"))); // NOI18N
+        tbSorceries.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_sorcery.png"))); // NOI18N
         tbSorceries.setSelected(true);
         tbSorceries.setToolTipText("<html><strong>Sorceries</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -839,7 +839,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbSorceries);
 
-        tbInstants.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_instant.png"))); // NOI18N
+        tbInstants.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_instant.png"))); // NOI18N
         tbInstants.setSelected(true);
         tbInstants.setToolTipText("<html><strong>Instants</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -854,7 +854,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbInstants);
 
-        tbEnchantments.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_enchantment.png"))); // NOI18N
+        tbEnchantments.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_enchantment.png"))); // NOI18N
         tbEnchantments.setSelected(true);
         tbEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -869,7 +869,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(tbEnchantments);
 
-        tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_planeswalker.png"))); // NOI18N
+        tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_planeswalker.png"))); // NOI18N
         tbPlaneswalkers.setSelected(true);
         tbPlaneswalkers.setToolTipText("<html><strong>Planeswalker</strong><br/>"
                 + tbTypes.getToolTipText());
@@ -910,7 +910,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jSeparator4);
 
         bgView.add(jToggleListView);
-        jToggleListView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/list_panel.png"))); // NOI18N
+        jToggleListView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/list_panel.png"))); // NOI18N
         jToggleListView.setSelected(true);
         jToggleListView.setToolTipText("Shows the cards as a list.");
         jToggleListView.setBorderPainted(false);
@@ -928,7 +928,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(jToggleListView);
 
         bgView.add(jToggleCardView);
-        jToggleCardView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/card_panel.png"))); // NOI18N
+        jToggleCardView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/card_panel.png"))); // NOI18N
         jToggleCardView.setToolTipText("Shows the card as images.");
         jToggleCardView.setBorderPainted(false);
         jToggleCardView.setFocusable(false);
@@ -951,7 +951,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbRarities.setRollover(true);
         tbRarities.setToolTipText("Hold the ALT-key while clicking to deselect all other card rarities or hold the CTRL-key to only select all other card rarities.");
 
-        tbCommon.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/rarity_common_20.png"))); // NOI18N
+        tbCommon.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/rarity_common_20.png"))); // NOI18N
         tbCommon.setSelected(true);
         tbCommon.setToolTipText("<html><strong>Common</strong><br/>"
                 + tbRarities.getToolTipText());
@@ -966,7 +966,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbRarities.add(tbCommon);
 
-        tbUncommon.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/rarity_uncommon_20.png"))); // NOI18N
+        tbUncommon.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/rarity_uncommon_20.png"))); // NOI18N
         tbUncommon.setSelected(true);
         tbUncommon.setToolTipText("<html><strong>Uncommon</strong><br/>"
                 + tbRarities.getToolTipText());
@@ -981,7 +981,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbRarities.add(tbUncommon);
 
-        tbRare.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/rarity_rare_20.png"))); // NOI18N
+        tbRare.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/rarity_rare_20.png"))); // NOI18N
         tbRare.setSelected(true);
         tbRare.setToolTipText("<html><strong>Rare</strong><br/>"
                 + tbRarities.getToolTipText());
@@ -996,7 +996,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbRarities.add(tbRare);
 
-        tbMythic.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/rarity_mythic_20.png"))); // NOI18N
+        tbMythic.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/rarity_mythic_20.png"))); // NOI18N
         tbMythic.setSelected(true);
         tbMythic.setToolTipText("<html><strong>Mythic</strong><br/>"
                 + tbRarities.getToolTipText());
@@ -1011,7 +1011,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbRarities.add(tbMythic);
 
-        tbSpecial.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/rarity_special_20.png"))); // NOI18N
+        tbSpecial.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/rarity_special_20.png"))); // NOI18N
         tbSpecial.setSelected(true);
         tbSpecial.setToolTipText("<html><strong>Special</strong><br/>"
                 + tbRarities.getToolTipText());
@@ -1033,7 +1033,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cardSelectorBottomPanel.setOpaque(false);
         cardSelectorBottomPanel.setPreferredSize(new java.awt.Dimension(897, 40));
 
-        jButtonAddToMain.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/deck_in.png"))); // NOI18N
+        jButtonAddToMain.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/deck_in.png"))); // NOI18N
         jButtonAddToMain.setToolTipText("<html>Add selected cards to deck.<br/>\nAlternative: <strong>Double click</strong> the card in card selector to move a card to the deck.");
         jButtonAddToMain.setMargin(null);
         jButtonAddToMain.setMaximumSize(new java.awt.Dimension(35, 23));
@@ -1045,7 +1045,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonRemoveFromMain.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/deck_out.png"))); // NOI18N
+        jButtonRemoveFromMain.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/deck_out.png"))); // NOI18N
         jButtonRemoveFromMain.setToolTipText("Remove selected cards from deck");
         jButtonRemoveFromMain.setMargin(null);
         jButtonRemoveFromMain.setMaximumSize(new java.awt.Dimension(42, 23));
@@ -1057,7 +1057,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/sideboard_in.png"))); // NOI18N
+        jButtonAddToSideboard.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/sideboard_in.png"))); // NOI18N
         jButtonAddToSideboard.setToolTipText("<html>Add selected cards to sideboard.<br/>\nAlternative: <strong>ALT key + Double click</strong> the card in card selector to move a card to the sideboard.");
         jButtonAddToSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonAddToSideboard.setMaximumSize(new java.awt.Dimension(100, 30));
@@ -1069,7 +1069,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/sideboard_out.png"))); // NOI18N
+        jButtonRemoveFromSideboard.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/sideboard_out.png"))); // NOI18N
         jButtonRemoveFromSideboard.setToolTipText("Remove selected cards from sideboard.");
         jButtonRemoveFromSideboard.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButtonRemoveFromSideboard.setMaximumSize(new java.awt.Dimension(10, 30));

@@ -14,9 +14,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.ZipFile;
 
 /**
  * @author NinthWorld
@@ -30,7 +34,7 @@ public class ThemeManager {
     private static Unmarshaller unmarshaller;
 
     private static final HashMap<String, ThemeConfigSettings> loadedThemes = new HashMap<>();
-    private static ThemeConfigSettings currentTheme = new ThemeConfigWrapper(null, null);
+    private static ThemeConfigSettings currentTheme = new ThemeConfigWrapper(null, null, false);
     static {
         loadedThemes.put(currentTheme.getName(), currentTheme);
     }
@@ -58,8 +62,8 @@ public class ThemeManager {
         File[] themeDirectories = themesFolder.listFiles();
         if (themeDirectories != null) {
             for (File f : themeDirectories) {
-                if (f.isDirectory()) {
-                    loadThemeFromDirectory(f);
+                if (f.isDirectory() || f.getName().endsWith(".zip")) {
+                    loadThemeFromDirectoryOrZip(f);
                 }
             }
         }
@@ -131,8 +135,10 @@ public class ThemeManager {
         }
 
         if (getCurrentTheme().getDefaults() != null) {
-            for (ImmutableMap.Entry<String, Color> entry : getCurrentTheme().getDefaults().entrySet()) {
-                UIManager.put(entry.getKey(), entry.getValue());
+            for (ImmutableMap.Entry<String, Object> entry : getCurrentTheme().getDefaults().entrySet()) {
+                if (entry.getValue() != null) {
+                    UIManager.put(entry.getKey(), entry.getValue());
+                }
             }
         }
     }
@@ -166,24 +172,38 @@ public class ThemeManager {
 
     /**
      * Loads theme.xml in directory, parses the XML, wraps it in a ThemeConfigWrapper, and adds it to loadedThemes map.
-     * @param themeDir
+     * @param themePath
      */
-    private static void loadThemeFromDirectory(File themeDir) {
-        final File themeXMLFile = new File(Paths.get(themeDir.toString(), "theme.xml").toString());
-        if (!themeXMLFile.exists()) {
-            logger.error("Could not find theme.xml in " + themeDir + "!");
-            return;
+    private static void loadThemeFromDirectoryOrZip(File themePath) {
+        boolean isZip = !themePath.isDirectory() && themePath.getName().endsWith(".zip");
+
+        InputStream themeXML;
+        if (isZip) {
+            try {
+                ZipFile zip = new ZipFile(themePath);
+                themeXML = zip.getInputStream(zip.getEntry("theme.xml"));
+            } catch (IOException e) {
+                logger.error("Could not load theme.xml in " + themePath + "!");
+                return;
+            }
+        } else {
+            try {
+                themeXML = new FileInputStream(Paths.get(themePath.toString(), "theme.xml").toString());
+            } catch (Exception e) {
+                logger.error("Could not load theme.xml in " + themePath + "!");
+                return;
+            }
         }
 
         try {
-            final ThemeConfigSettings themeConfig = new ThemeConfigWrapper((ThemeConfig) unmarshaller.unmarshal(themeXMLFile), themeDir.toString());
+            final ThemeConfigSettings themeConfig = new ThemeConfigWrapper((ThemeConfig) unmarshaller.unmarshal(themeXML), themePath.toString(), isZip);
             if (loadedThemes.containsKey(themeConfig.getName())) {
-                logger.error("Could not load theme in " + themeDir + " as a theme named " + themeConfig.getName() + " has already been loaded!");
+                logger.error("Could not load theme in " + themePath + " as a theme named " + themeConfig.getName() + " has already been loaded!");
                 return;
             }
             loadedThemes.put(themeConfig.getName(), themeConfig);
         } catch (JAXBException e) {
-            logger.error("Could not load theme in " + themeDir + "!", e);
+            logger.error("Could not load theme in " + themePath + "!", e);
         }
     }
 

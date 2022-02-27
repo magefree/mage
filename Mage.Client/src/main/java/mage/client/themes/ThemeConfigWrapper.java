@@ -5,11 +5,17 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.nio.file.Paths;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * @author NinthWorld
@@ -58,7 +64,7 @@ public class ThemeConfigWrapper implements ThemeConfigSettings {
     private static final Color DEFAULT_CARD_ICONS_STROKE_COLOR = new Color(0, 0, 0);
     private static final Color DEFAULT_CARD_ICONS_TEXT_COLOR = new Color(51, 98, 140);
     private static final Color DEFAULT_TEXT_ON_BACKGROUND_TEXT_COLOR = new Color(255, 255, 255);
-    private static final ImmutableMap<String, Color> DEFAULT_DEFAULTS = ImmutableMap.of(
+    private static final ImmutableMap<String, Object> DEFAULT_DEFAULTS = ImmutableMap.of(
             "nimbusBlueGrey", new Color(169, 176, 190),
             "nimbusLightBackground", new Color(255, 255, 255),
             "nimbusBase", new Color(51, 98, 140),
@@ -70,19 +76,26 @@ public class ThemeConfigWrapper implements ThemeConfigSettings {
 
     private final ThemeConfig config;
     private final String themePath;
-    private final ImmutableMap<String, Color> themeDefaults;
+    private final boolean isZippedTheme;
+    private final ImmutableMap<String, Object> themeDefaults;
     private final ImmutableMap<String, String> themeResources;
 
-    public ThemeConfigWrapper(final ThemeConfig config, final String themePath) {
+    public ThemeConfigWrapper(final ThemeConfig config, final String themePath, final boolean isZippedTheme) {
         this.config = config;
         this.themePath = themePath;
+        this.isZippedTheme = isZippedTheme;
         this.themeDefaults = config == null || config.getThemeDefaults() == null ?
                 ImmutableMap.of() :
                 config.getThemeDefaults().getDefault().stream()
                     .collect(ImmutableMap.toImmutableMap(
                             ThemeDefault::getKey,
-                            (ThemeDefault td) ->
-                                    getColorFromStringOrDefault(td.getColor(), Color.BLACK)));
+                            (ThemeDefault td) -> {
+                                if (td.color != null) return getColorFromStringOrDefault(td.getColor(), Color.BLACK);
+                                else if (td.string != null) return td.getString();
+                                else if (td.number != null) return td.getNumber();
+                                else if (td._boolean != null) return td._boolean;
+                                else return null;
+                            }));
         this.themeResources = config == null || config.getThemeResources() == null ?
                 ImmutableMap.of() :
                 config.getThemeResources().getResource().stream()
@@ -207,26 +220,26 @@ public class ThemeConfigWrapper implements ThemeConfigSettings {
     }
 
     @Override
-    public ImmutableMap<String, Color> getDefaults() {
+    public ImmutableMap<String, Object> getDefaults() {
         return config == null ? DEFAULT_DEFAULTS : themeDefaults;
     }
 
     /**
-     * Gets the URL for given resource path (EX: "/background/background.png")
+     * Gets the InputStream for given resource path (EX: "/background/background.png")
      *
      * If the theme is dark and the resource is on the DARK_MODE_VARIANTS list,
      * resource path is appended with DARK_MODE_EXT (EX: "/background/background.dark.png")
      *
      * @param name
-     * @return If the theme overrides the resource, the theme's custom resource path is returned.
+     * @return If the theme overrides the resource, the theme's custom resource returned.
      *
      * If the theme doesn't override the resource and has a parent theme,
-     * the parent theme's getResource is returned.
+     * the parent theme's getResourceStream is returned.
      *
-     * Otherwise, the default resource is returned with getClass().getResource()
+     * Otherwise, the default resource is returned with getClass().getResourceStream()
      */
     @Override
-    public URL getResource(String name) {
+    public InputStream getResourceStream(String name) throws IOException {
         if (isDark() && DARK_MODE_VARIANTS.contains(name)) {
             int extIndex = name.lastIndexOf(".");
             String ext = name.substring(extIndex);
@@ -235,9 +248,18 @@ public class ThemeConfigWrapper implements ThemeConfigSettings {
 
         if (config != null && themePath != null && themeResources.containsKey(name)) {
             try {
-                File file = Paths.get(themePath, themeResources.get(name)).toFile();
-                if (file.exists() && file.isFile()) {
-                    return file.toURI().toURL();
+                if (isZippedTheme) {
+                    ZipFile zip = new ZipFile(themePath);
+                    String themeRes = themeResources.get(name);
+                    ZipEntry entry = zip.getEntry(themeRes.startsWith("/") ? themeRes.substring(1) : themeRes);
+                    if (entry != null) {
+                        return zip.getInputStream(entry);
+                    }
+                } else {
+                    File file = Paths.get(themePath, themeResources.get(name)).toFile();
+                    if (file.exists() && file.isFile()) {
+                        return new FileInputStream(file);
+                    }
                 }
             } catch (Exception e) {
                 logger.error("Could not get theme resource for " + name, e);
@@ -248,10 +270,23 @@ public class ThemeConfigWrapper implements ThemeConfigSettings {
         if (parentThemeName != null) {
             ThemeConfigSettings parentTheme = ThemeManager.getTheme(parentThemeName);
             if (parentTheme != null) {
-                return parentTheme.getResource(name);
+                return parentTheme.getResourceStream(name);
             }
         }
-        return getClass().getResource(name);
+        return getClass().getResourceAsStream(name);
+    }
+
+    /**
+     * Gets the Image for a given resource path
+     * @param name
+     */
+    @Override
+    public BufferedImage getResourceImage(String name) {
+        try {
+            return ImageIO.read(getResourceStream(name));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

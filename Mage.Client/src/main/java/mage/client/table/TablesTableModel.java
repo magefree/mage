@@ -14,13 +14,13 @@ import java.util.Date;
 public class TablesTableModel extends AbstractTableModel {
 
     // icons with tostring for tables hints
-    final ImageIcon tourneyIcon = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/tables/tourney_icon.png")) {
+    final ImageIcon tourneyIcon = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/tables/tourney_icon.png")) {
         @Override
         public String toString() {
             return "Tourney";
         }
     };
-    final ImageIcon matchIcon = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/tables/match_icon.png")) {
+    final ImageIcon matchIcon = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/tables/match_icon.png")) {
         @Override
         public String toString() {
             return "Match";

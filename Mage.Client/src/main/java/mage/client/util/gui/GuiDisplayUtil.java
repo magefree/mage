@@ -13,8 +13,12 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.*;
 
@@ -25,6 +29,9 @@ public final class GuiDisplayUtil {
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
     private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
+
+    // To store temporary files since html doesn't accept InputStream or Image
+    private static final HashMap<String, File> tempImageFiles = new HashMap<>();
 
     public static class TextLines {
 
@@ -403,7 +410,22 @@ public final class GuiDisplayUtil {
     }
 
     private static String getResourcePath(String image) {
-        return ThemeManager.getCurrentTheme().getResource(image).toString();
+        // Necessary work-around since themes can only give resources as InputStream or Image
+        // since the resources can be contained within a zip file
+        if (tempImageFiles.containsKey(image)) {
+            return tempImageFiles.get(image).toURI().toString();
+        } else {
+            try {
+                int extIndex = image.lastIndexOf('.');
+                File tempFile = File.createTempFile(image.substring(0, extIndex).replace('/','_'), image.substring(extIndex));
+                tempFile.deleteOnExit();
+                ImageIO.write(ThemeManager.getCurrentTheme().getResourceImage(image), image.substring(extIndex + 1), tempFile);
+                tempImageFiles.put(image, tempFile);
+                return tempFile.toURI().toString();
+            } catch (IOException e) {
+                return GuiDisplayUtil.class.getClassLoader().getResource(image.startsWith("/") ? image.substring(1) : image).toString();
+            }
+        }
     }
 
     private static String getTypes(CardView card) {

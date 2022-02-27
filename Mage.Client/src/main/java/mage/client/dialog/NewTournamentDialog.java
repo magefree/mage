@@ -1074,7 +1074,7 @@ public class NewTournamentDialog extends MageDialog {
             setPanel.add(pack);
             // search button
             JButton searchButton = new JButton();
-            searchButton.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png")));
+            searchButton.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png")));
             searchButton.setToolTipText("Search and select from list");
             searchButton.setAlignmentX(1.0F);
             searchButton.setMinimumSize(new java.awt.Dimension(24, 24));

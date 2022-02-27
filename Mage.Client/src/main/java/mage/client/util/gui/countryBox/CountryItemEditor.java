@@ -63,6 +63,6 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         editValue[1] = newItem[1];
 
         labelItem.setText(editValue[0]);
-        labelItem.setIcon(new ImageIcon(ThemeManager.getCurrentTheme().getResource("/flags/"+ editValue[1] + ".png")));
+        labelItem.setIcon(new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/"+ editValue[1] + ".png")));
     }  
 }

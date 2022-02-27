@@ -128,7 +128,7 @@ public class DeckImportClipboardDialog extends MageDialog {
             }
         });
 
-        buttonPaste.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/paste_24.png"))); // NOI18N
+        buttonPaste.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/paste_24.png"))); // NOI18N
         buttonPaste.setToolTipText("Paste text from clipboard");
         buttonPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

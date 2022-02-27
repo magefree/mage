@@ -3,7 +3,9 @@ package mage.client.themes;
 import com.google.common.collect.ImmutableMap;
 
 import java.awt.*;
-import java.net.URL;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author NinthWorld
@@ -45,9 +47,11 @@ public interface ThemeConfigSettings {
 
     Color getTextOnBackgroundTextColor();
 
-    ImmutableMap<String, Color> getDefaults();
+    ImmutableMap<String, Object> getDefaults();
 
-    URL getResource(String name);
+    InputStream getResourceStream(String name) throws IOException;
+
+    BufferedImage getResourceImage(String name);
 
     boolean isNimbusLaf();
 }

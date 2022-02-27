@@ -26,10 +26,10 @@ public class MageScrollButton extends MetalScrollButton {
     private int width;
 
     static {
-        buttonLeft = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/left.png"));
-        buttonRight = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/right.png"));
-        buttonUp = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/up.png"));
-        buttonDown = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/down.png"));
+        buttonLeft = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/left.png"));
+        buttonRight = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/right.png"));
+        buttonUp = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/up.png"));
+        buttonDown = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/down.png"));
     }
 
     public MageScrollButton(int direction, int width, boolean freeStanding) {

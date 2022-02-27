@@ -327,7 +327,7 @@ public class AddLandDialog extends MageDialog {
         cbLandSet.setMinimumSize(new java.awt.Dimension(20, 20));
         panelSet.add(cbLandSet);
 
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png"))); // NOI18N
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png"))); // NOI18N
         btnSetFastSearch.setToolTipText("Search for set");
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setPreferredSize(new java.awt.Dimension(23, 23));

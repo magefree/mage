@@ -39,7 +39,7 @@ public final class ImageHelper {
     public static BufferedImage loadImage(String ref) {
         if (!images.containsKey(ref)) {
             try {
-                images.put(ref, ImageIO.read(ImageHelper.class.getResourceAsStream(ref)));
+                images.put(ref, ThemeManager.getCurrentTheme().getResourceImage(ref));
             } catch (Exception e) {
                 return null;
             }
@@ -117,7 +117,7 @@ public final class ImageHelper {
      */
     public static Image getImageFromResources(String path) {
 
-        try(InputStream stream = ThemeManager.getCurrentTheme().getResource(path).openStream()) {
+        try(InputStream stream = ThemeManager.getCurrentTheme().getResourceStream(path)) {
             ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;

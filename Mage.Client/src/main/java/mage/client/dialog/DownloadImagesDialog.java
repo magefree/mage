@@ -157,7 +157,7 @@ public class DownloadImagesDialog extends MageDialog {
         // tab caption with left sided icon
         // https://stackoverflow.com/questions/1782224/jtabbedpane-icon-on-left-side-of-tabs
         JLabel lbl = new JLabel(title);
-        Icon icon = new ImageIcon(ThemeManager.getCurrentTheme().getResource(iconResourceName));
+        Icon icon = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(iconResourceName));
         lbl.setIcon(icon);
         lbl.setIconTextGap(5);
         lbl.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -358,7 +358,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeSelect.add(comboSets);
         panelModeSelect.add(fillerMode1);
 
-        buttonSearchSet.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png"))); // NOI18N
+        buttonSearchSet.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png"))); // NOI18N
         buttonSearchSet.setToolTipText("Fast search your flag");
         buttonSearchSet.setAlignmentX(1.0F);
         buttonSearchSet.setPreferredSize(new java.awt.Dimension(25, 25));
@@ -405,10 +405,10 @@ public class DownloadImagesDialog extends MageDialog {
         tabMain.add(panelProgress);
         tabMain.add(fillerMain2);
 
-        tabsList.addTab("Standard download", new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/card_panel.png")), tabMain); // NOI18N
+        tabsList.addTab("Standard download", new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/card_panel.png")), tabMain); // NOI18N
 
         tabCustom.setLayout(new javax.swing.BoxLayout(tabCustom, javax.swing.BoxLayout.Y_AXIS));
-        tabsList.addTab("Custom download", new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/list_panel.png")), tabCustom); // NOI18N
+        tabsList.addTab("Custom download", new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/list_panel.png")), tabCustom); // NOI18N
 
         getContentPane().add(tabsList, java.awt.BorderLayout.CENTER);
 

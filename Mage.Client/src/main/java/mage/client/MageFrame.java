@@ -478,14 +478,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
             } else if (ThemeManager.getCurrentTheme().shouldShowLoginBackground()){
-                InputStream is = ThemeManager.getCurrentTheme().getResource("/background/login-background.png").openStream();
+                InputStream is = ThemeManager.getCurrentTheme().getResourceStream("/background/login-background.png");
                 if (is == null) {
                     throw new FileNotFoundException("Couldn't find /background/login-background.png in resources.");
                 }
                 BufferedImage background = ImageIO.read(is);
                 backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
             } else if (ThemeManager.getCurrentTheme().shouldShowBackground()) {
-                InputStream is = ThemeManager.getCurrentTheme().getResource("/background/background.png").openStream();
+                InputStream is = ThemeManager.getCurrentTheme().getResourceStream("/background/background.png");
                 if (is == null) {
                     throw new FileNotFoundException("Couldn't find /background/background.png in resources.");
                 }
@@ -537,7 +537,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         try {
-            InputStream is = ThemeManager.getCurrentTheme().getResource(filename).openStream();
+            InputStream is = ThemeManager.getCurrentTheme().getResourceStream(filename);
             if (is != null) {
                 titleRectangle = new Rectangle(540, (int) (640 / ratio));
 
@@ -917,7 +917,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
         mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));
 
-        btnPreferences.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/preferences.png")));
+        btnPreferences.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/preferences.png")));
         btnPreferences.setText("Preferences");
         btnPreferences.setToolTipText("By changing the settings in the preferences window you can adjust the look and behaviour of xmage.");
         btnPreferences.setFocusable(false);
@@ -930,7 +930,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnPreferences);
         mageToolbar.add(jSeparator4);
 
-        btnConnect.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/connect.png"))); // NOI18N
+        btnConnect.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/connect.png"))); // NOI18N
         btnConnect.setToolTipText("Connect to or disconnect from a XMage server.");
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -942,7 +942,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnConnect);
         mageToolbar.add(jSeparator1);
 
-        btnDeckEditor.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/deck_editor.png")));
+        btnDeckEditor.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/deck_editor.png")));
         btnDeckEditor.setText("Deck Editor");
         btnDeckEditor.setToolTipText("Start the deck editor to create or modify decks.");
         btnDeckEditor.setFocusable(false);
@@ -955,7 +955,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnDeckEditor);
         mageToolbar.add(jSeparator2);
 
-        btnCollectionViewer.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/collection.png"))); // NOI18N
+        btnCollectionViewer.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/collection.png"))); // NOI18N
         btnCollectionViewer.setText("Card Viewer");
         btnCollectionViewer.setToolTipText("Card viewer to show the cards of sets. ");
         btnCollectionViewer.setFocusable(false);
@@ -968,7 +968,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator5);
 
-        btnSendFeedback.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/feedback.png"))); // NOI18N
+        btnSendFeedback.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/feedback.png"))); // NOI18N
         btnSendFeedback.setText("Feedback");
         btnSendFeedback.setToolTipText("Send some feedback to the developers.");
         btnSendFeedback.setFocusable(false);
@@ -981,7 +981,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnSendFeedback);
         mageToolbar.add(jSeparator6);
 
-        btnSymbols.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/symbol.png"))); // NOI18N
+        btnSymbols.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/symbol.png"))); // NOI18N
         btnSymbols.setText("Symbols");
         btnSymbols.setToolTipText("<HTML>Load the mana and other card symbols from the internet.<br>\nOtherwise you only see the replacement sequence like {U} for blue mana symbol.<br>\nYou need to do that only once.");
         btnSymbols.setFocusable(false);
@@ -994,7 +994,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnSymbols);
         mageToolbar.add(jSeparatorSymbols);
 
-        btnImages.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/images.png"))); // NOI18N
+        btnImages.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/images.png"))); // NOI18N
         btnImages.setText("Images");
         btnImages.setToolTipText("<HTML>Load card images from external sources.");
         btnImages.setFocusable(false);
@@ -1007,7 +1007,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnImages);
         mageToolbar.add(jSeparatorImages);
 
-        btnAbout.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/about.png"))); // NOI18N
+        btnAbout.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/about.png"))); // NOI18N
         btnAbout.setText("About");
         btnAbout.setToolTipText("About app");
         btnAbout.setFocusable(false);
@@ -1020,7 +1020,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnAbout);
         mageToolbar.add(jSeparator7);
 
-        btnDebug.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/connect.png"))); // NOI18N
+        btnDebug.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/connect.png"))); // NOI18N
         btnDebug.setText("Debug");
         btnDebug.setToolTipText("Show debug tools");
         btnDebug.setFocusable(false);
@@ -1034,7 +1034,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(separatorDebug);
 
         jMemUsageLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMemUsageLabel.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/memory.png"))); // NOI18N
+        jMemUsageLabel.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/menu/memory.png"))); // NOI18N
         jMemUsageLabel.setText("100% Free mem");
         jMemUsageLabel.setFocusable(false);
         jMemUsageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

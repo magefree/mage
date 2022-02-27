@@ -303,7 +303,7 @@
         <Component class="javax.swing.JButton" name="btnFlagSearch">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/search_24.png&quot;))" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/search_24.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fast search your flag"/>
             <Property name="alignmentX" type="float" value="1.0"/>
@@ -360,7 +360,7 @@
         <Component class="javax.swing.JButton" name="btnFindMain">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/flags/de.png&quot;))" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/flags/de.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="X"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.de (first Europe server, most popular, registration needs)"/>
@@ -419,7 +419,7 @@
         <Component class="javax.swing.JButton" name="btnFindUs">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/flags/us.png&quot;))" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/flags/us.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="US"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to us.xmage.today (USA, use any username without registration)"/>
@@ -448,7 +448,7 @@
         <Component class="javax.swing.JButton" name="btnFindEU">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/flags/europeanunion.png&quot;))" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/flags/europeanunion.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="EU"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to eu.xmage.today (second Europe server, use any username without registration)"/>
@@ -522,7 +522,7 @@
         <Component class="javax.swing.JButton" name="btnCheckStatus">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/flags/world.png&quot;))" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/flags/world.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Check online status"/>
             <Property name="toolTipText" type="java.lang.String" value="Go to servers online statuses page"/>

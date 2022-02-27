@@ -356,7 +356,7 @@ public enum ImageManagerImpl implements ImageManager {
     public BufferedImage getCardIcon(String resourceName, int size, CardIconColor cardIconColor) {
         // icon must be same, but color can be changed by themes
         try {
-            InputStream data = ThemeManager.getCurrentTheme().getResource("/card/icons/" + resourceName).openStream();
+            InputStream data = ThemeManager.getCurrentTheme().getResourceStream("/card/icons/" + resourceName);
             // no need to resize svg (lib already do it on load)
             return SvgUtils.loadSVG(data, "card icon = " + resourceName + "; " + cardIconColor.toString(),
                     ThemeManager.getCardIconsCssFile(cardIconColor),
@@ -373,10 +373,8 @@ public enum ImageManagerImpl implements ImageManager {
         Image imageCardTransparent;
         Image resized = null;
 
-        URL imageURL = ThemeManager.getCurrentTheme().getResource(path);
-
         try {
-            image = ImageIO.read(imageURL);
+            image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
             imageCardTransparent = Transparency.makeColorTransparent(image, ThemeManager.getCurrentTheme().isDark() ? Color.BLACK : mask);
 
             resized = imageCardTransparent.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
@@ -390,10 +388,8 @@ public enum ImageManagerImpl implements ImageManager {
     protected static Image getImageFromResource(String path, Rectangle rec) {
         Image resized = null;
 
-        URL imageURL = ThemeManager.getCurrentTheme().getResource(path);
-
         try {
-            BufferedImage image = ImageIO.read(imageURL);
+            BufferedImage image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
             resized = image.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
         } catch (Exception e) {
             e.printStackTrace();
@@ -403,11 +399,10 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     protected static BufferedImage getBufferedImageFromResource(String path) {
-        URL imageURL = ThemeManager.getCurrentTheme().getResource(path);
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(imageURL);
+            image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
         } catch (Exception e) {
             e.printStackTrace();
         }

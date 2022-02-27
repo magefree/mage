@@ -564,8 +564,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public static final int COUNT_LABEL_HEIGHT = 40; // can contains 1 or 2 lines
     public static final int GRID_PADDING = 10;
 
-    private static final ImageIcon INSERT_ROW_ICON = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/editor_insert_row.png"));
-    private static final ImageIcon INSERT_COL_ICON = new ImageIcon(ThemeManager.getCurrentTheme().getResource("/editor_insert_col.png"));
+    private static final ImageIcon INSERT_ROW_ICON = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/editor_insert_row.png"));
+    private static final ImageIcon INSERT_COL_ICON = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/editor_insert_col.png"));
 
     // All of the current card views
     private final Map<UUID, MageCard> cardViews = new LinkedHashMap<>();
@@ -836,9 +836,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         deckNameAndCountLabel = new JLabel();
 
         // Count labels
-        landCountLabel = new JLabel("", new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_land.png")), SwingConstants.LEFT);
+        landCountLabel = new JLabel("", new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_land.png")), SwingConstants.LEFT);
         landCountLabel.setToolTipText("Number of lands in deck");
-        creatureCountLabel = new JLabel("", new ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/type_creatures.png")), SwingConstants.LEFT);
+        creatureCountLabel = new JLabel("", new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_creatures.png")), SwingConstants.LEFT);
         creatureCountLabel.setToolTipText("Number of creatures in deck");
 
         JPanel toolbar = new JPanel(new BorderLayout());
