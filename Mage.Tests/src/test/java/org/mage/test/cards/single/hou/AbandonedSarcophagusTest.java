@@ -8,8 +8,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AbandonedSarcophagusTest extends CardTestPlayerBase {
 
-
-    // You may cast non-land card with cycling from your graveyard
+    /**
+     * You may cast non-land card with cycling from your graveyard
+     */
     @Test
     public void castNonLandFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Abandoned Sarcophagus");
@@ -29,7 +30,9 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Astral Drift", 1);
     }
 
-    // You can only cast the card from the graveyard, you CANNOT cycle it
+    /**
+     * You can only cast the card from the graveyard, you CANNOT cycle it
+     */
     @Test
     public void cantCycleFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Abandoned Sarcophagus");
@@ -46,7 +49,9 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
     }
 
-    // When a card with cycling is cycled it still goes to the graveyard
+    /**
+     * When a card with cycling is cycled it still goes to the graveyard
+     */
     @Test
     public void cycledCardGoesToGraveyard() {
         addCard(Zone.LIBRARY, playerA, "Forest", 5);
@@ -72,7 +77,9 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 2);
     }
 
-    // When a card goes to the graveyard and it WAS NOT cycled, it gets exiled
+    /**
+     * When a card goes to the graveyard and it WAS NOT cycled, it gets exiled
+     */
     @Test
     public void nonCycledCardGoesToExile() {
         addCard(Zone.BATTLEFIELD, playerA, "Abandoned Sarcophagus");

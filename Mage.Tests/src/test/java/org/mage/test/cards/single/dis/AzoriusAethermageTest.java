@@ -7,6 +7,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AzoriusAethermageTest extends CardTestPlayerBase {
 
+    /**
+     * Whenever you bounce a permanent (tokens included) you may pay {1}, if you do, draw a card
+     */
     @Test
     public void testBouncedLand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3); // Used for paying ability cost
