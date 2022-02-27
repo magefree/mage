@@ -3,6 +3,7 @@ package mage.cards.a;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -26,6 +27,7 @@ import mage.watchers.Watcher;
 public final class AbandonedSarcophagus extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonland cards with cycling");
+
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new AbilityPredicate(CyclingAbility.class));
@@ -80,7 +82,9 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
@@ -102,17 +106,27 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) { return false; }
+        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
+            return false;
+        }
 
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Card card = game.getCard(event.getTargetId());
-        if (card == null) { return false; }
-        if (!card.isOwnedBy(controller.getId())) { return false; }
+        if (card == null) {
+            return false;
+        }
+        if (!card.isOwnedBy(controller.getId())) {
+            return false;
+        }
 
         AbandonedSarcophagusWatcher watcher = game.getState().getWatcher(AbandonedSarcophagusWatcher.class);
-        if (watcher == null) { return false; }
+        if (watcher == null) {
+            return false;
+        }
 
         boolean cardHasCycling = false;
         for (Ability ability : card.getAbilities(game)) {
@@ -146,14 +160,22 @@ class AbandonedSarcophagusWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CYCLE_CARD) { return; }
+        if (event.getType() != GameEvent.EventType.CYCLE_CARD) {
+            return;
+        }
 
         Card card = game.getCard(event.getSourceId());
-        if (card == null) { return; }
+        if (card == null) {
+            return;
+        }
 
         Player controller = game.getPlayer(event.getPlayerId());
-        if (controller == null) { return; }
-        if (!card.isOwnedBy(controller.getId())) { return; }
+        if (controller == null) {
+            return;
+        }
+        if (!card.isOwnedBy(controller.getId())) {
+            return;
+        }
 
         Cards c = getCardsCycledThisTurn(event.getPlayerId());
         c.add(card);
