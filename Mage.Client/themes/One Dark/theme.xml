@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="One Dark"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>

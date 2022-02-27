@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Hiberbee Dark"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>

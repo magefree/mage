@@ -127,8 +127,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonCopy">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/copy_24.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/copy_24.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Copy current text to clipboard"/>
           </Properties>

@@ -6,8 +6,8 @@ import javax.swing.JComponent;
 
 import mage.client.MagePane;
 import mage.client.SessionHandler;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.themes.ThemeManager;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TablesPane extends MagePane {
             if (container != null) {
                 initComponents(container);
                 container.add(tablesPanel);
-                container.setOpaque(!PreferencesDialog.getCurrentTheme().shouldShowBackground());
+                container.setOpaque(!ThemeManager.getCurrentTheme().shouldShowBackground());
                 initialized = true;
             }
         }

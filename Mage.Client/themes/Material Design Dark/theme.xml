@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Material Design Dark"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>

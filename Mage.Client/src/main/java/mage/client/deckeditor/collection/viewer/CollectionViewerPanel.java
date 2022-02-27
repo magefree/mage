@@ -6,6 +6,7 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.themes.ThemeManager;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.game.events.Listener;
@@ -50,11 +51,11 @@ public final class CollectionViewerPanel extends JPanel {
 
     public void initComponents() {
         Color foregroundColor;
-        if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
-            foregroundColor = Color.white;
+        if (ThemeManager.getCurrentTheme().shouldShowBackground()) {
+            foregroundColor = ThemeManager.getCurrentTheme().getTextOnBackgroundTextColor();
         } else {
             foregroundColor = UIManager.getColor("Label.foreground");
-            if (foregroundColor == null) foregroundColor = Color.white;
+            if (foregroundColor == null) foregroundColor = ThemeManager.getCurrentTheme().getTextOnBackgroundTextColor();
         }
 
         buttonsPanel = new javax.swing.JPanel();
@@ -109,7 +110,7 @@ public final class CollectionViewerPanel extends JPanel {
         setPanel.add(formats);
         // search button
         btnSetFastSearch = new JButton();
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png")));
         btnSetFastSearch.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setMinimumSize(new java.awt.Dimension(24, 24));

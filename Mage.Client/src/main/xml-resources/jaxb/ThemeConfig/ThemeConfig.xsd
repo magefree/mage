@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="themeConfig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="theme"/>
+				<xs:element ref="themeColors"/>
+				<xs:element ref="themeDefaults"/>
+				<xs:element ref="themeResources"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="theme">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="resourcesParentTheme" type="xs:string" use="optional"/>
+			<xs:attribute name="lafClassPath" type="xs:string" use="optional"/>
+			<xs:attribute name="dark" type="xs:boolean" use="optional"/>
+			<xs:attribute name="showBackground" type="xs:boolean" use="optional"/>
+			<xs:attribute name="showLoginBackground" type="xs:boolean" use="optional"/>
+			<xs:attribute name="showBattleBackground" type="xs:boolean" use="optional"/>
+			<xs:attribute name="shortcutsVisibleForSkipButtons" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="themeColors">
+		<xs:complexType>
+			<xs:attribute name="mageToolbarBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="gameEndTextBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="cardTooltipBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="playerPanelInactiveBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="playerPanelActiveBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="playerPanelDeadBackgroundColor" type="xs:string" use="optional"/>
+			<xs:attribute name="cardIconsFillColor" type="xs:string" use="optional"/>
+			<xs:attribute name="cardIconsStrokeColor" type="xs:string" use="optional"/>
+			<xs:attribute name="cardIconsTextColor" type="xs:string" use="optional"/>
+			<xs:attribute name="textOnBackgroundTextColor" type="xs:string" use="optional" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="themeDefault">
+		<xs:attribute name="key" type="xs:string" use="required"/>
+		<xs:attribute name="color" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="themeDefaults">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="default" type="themeDefault" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="themeResource">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="relPath" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="themeResources">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="resource" type="themeResource" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

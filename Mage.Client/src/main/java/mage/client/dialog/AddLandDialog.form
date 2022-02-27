@@ -351,8 +351,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSetFastSearch">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/search_24.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/search_24.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Search for set"/>
             <Property name="alignmentX" type="float" value="1.0"/>

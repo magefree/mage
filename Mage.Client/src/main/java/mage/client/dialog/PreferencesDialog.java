@@ -3,12 +3,14 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
-import mage.client.themes.ThemeType;
+import mage.client.themes.ThemeConfigSettings;
+import mage.client.themes.ThemeManager;
 import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.constants.PlayerAction;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
@@ -104,9 +106,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
-
-    // Themes
-    public static final String KEY_THEME = "themeSelection";
 
     // Phases
     public static final String UPKEEP_YOU = "upkeepYou";
@@ -320,29 +319,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static int selectedAvatarId;
 
-    private static ThemeType currentTheme = null;
-    
     private static boolean ignoreGUISizeSliderStateChangedEvent = false;
-    
-    public static ThemeType getCurrentTheme() {
-        if (currentTheme == null) {
-            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, ThemeType.DEFAULT.getName()));
-            logger.info("Using GUI theme: " + currentTheme.getName());
-            currentTheme.reload();
-        }
-
-        return currentTheme;
-    }
-
-    /**
-     * Set and reload current theme. App need restart to apply all new settings.
-     *
-     * @param newTheme
-     */
-    public static void setCurrentTheme(ThemeType newTheme) {
-        currentTheme = newTheme;
-        currentTheme.reload();
-    }
 
     private final JFileChooser fc = new JFileChooser();
 
@@ -397,7 +374,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         initComponents();
         txtImageFolderPath.setEditable(false);
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
-        cbTheme.setModel(new DefaultComboBoxModel<>(ThemeType.values()));
+        cbTheme.setModel(new DefaultComboBoxModel<>(ThemeManager.getLoadedThemes()));
         addAvatars();
 
         cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
@@ -2991,7 +2968,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keySwitchChat);
 
         // Themes
-        save(prefs, dialog.cbTheme, KEY_THEME);
+        save(prefs, dialog.cbTheme, ThemeManager.KEY_THEME);
+        ThemeManager.setCurrentTheme((ThemeConfigSettings) dialog.cbTheme.getSelectedItem());
 
         // Avatar
         if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -3608,7 +3586,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadThemeSettings(Preferences prefs) {
-        dialog.cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+        dialog.cbTheme.setSelectedItem(ThemeManager.getCurrentTheme());
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -4081,7 +4059,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbStopOnAllEnd;
     private javax.swing.JCheckBox cbStopOnAllMain;
     private javax.swing.JCheckBox cbStopOnNewStackObjects;
-    private javax.swing.JComboBox<ThemeType> cbTheme;
+    private javax.swing.JComboBox<ThemeConfigSettings> cbTheme;
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;

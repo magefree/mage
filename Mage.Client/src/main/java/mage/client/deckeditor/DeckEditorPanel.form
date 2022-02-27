@@ -173,8 +173,8 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnNew">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/state_active.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/state_active.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="NEW"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -185,8 +185,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGenDeck">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/card_panel.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/card_panel.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Random"/>
                     <Property name="iconTextGap" type="int" value="1"/>
@@ -230,8 +230,8 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnLoad">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/search_24.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/search_24.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="LOAD"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -242,8 +242,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnImport">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/deck_in.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/deck_in.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Import"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -287,8 +287,8 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnSave">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/sideboard_out.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/sideboard_out.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="SAVE"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -299,8 +299,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnExport">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/deck_out.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/deck_out.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Export"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -348,8 +348,8 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnSubmit">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/state_finished.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/state_finished.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="SUBMIT"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -364,8 +364,8 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="9" style="0"/>
                     </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/state_finished.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/state_finished.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&lt;html&gt;Submit&lt;br&gt;in 1 min"/>
                     <Property name="iconTextGap" type="int" value="2"/>
@@ -410,8 +410,8 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnAddLand">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/buttons/type_land.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/type_land.png&quot;))" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Lands"/>
                     <Property name="iconTextGap" type="int" value="2"/>

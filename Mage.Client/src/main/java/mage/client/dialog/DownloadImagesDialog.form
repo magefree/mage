@@ -105,8 +105,8 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Standard download">
                 <Property name="tabTitle" type="java.lang.String" value="Standard download"/>
-                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/card_panel.png"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/card_panel.png&quot;))" type="code"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -384,8 +384,8 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="buttonSearchSet">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/buttons/search_24.png"/>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/search_24.png&quot;))" type="code"/>
                             </Property>
                             <Property name="toolTipText" type="java.lang.String" value="Fast search your flag"/>
                             <Property name="alignmentX" type="float" value="1.0"/>
@@ -547,8 +547,8 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Custom download">
                 <Property name="tabTitle" type="java.lang.String" value="Custom download"/>
-                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/list_panel.png"/>
+                <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource(&quot;/buttons/list_panel.png&quot;))" type="code"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>

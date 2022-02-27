@@ -16,6 +16,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
+import mage.client.themes.ThemeManager;
 import mage.client.util.IgnoreList;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.MatchTimeLimit;
@@ -1073,7 +1074,7 @@ public class NewTournamentDialog extends MageDialog {
             setPanel.add(pack);
             // search button
             JButton searchButton = new JButton();
-            searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+            searchButton.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png")));
             searchButton.setToolTipText("Search and select from list");
             searchButton.setAlignmentX(1.0F);
             searchButton.setMinimumSize(new java.awt.Dimension(24, 24));

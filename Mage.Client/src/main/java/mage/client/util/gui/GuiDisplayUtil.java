@@ -3,6 +3,7 @@ package mage.client.util.gui;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.table.PlayersChatPanel;
+import mage.client.themes.ThemeManager;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
 import mage.view.CardView;
@@ -224,7 +225,7 @@ public final class GuiDisplayUtil {
     }
 
     public static String getHintIconHtml(String iconName, int symbolSize) {
-        return "<img src='" + getResourcePath("hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
+        return "<img src='" + getResourcePath("/hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
     }
 
     public static StringBuilder getRulesFromCardView(CardView card, TextLines textLines) {
@@ -268,19 +269,19 @@ public final class GuiDisplayUtil {
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
         String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + '>';
         if (card.getColor().isWhite()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
         if (card.getColor().isBlue()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
         }
         if (card.getColor().isBlack()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
         }
         if (card.getColor().isRed()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
         }
         if (card.getColor().isGreen()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
         }
         if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -402,7 +403,7 @@ public final class GuiDisplayUtil {
     }
 
     private static String getResourcePath(String image) {
-        return GuiDisplayUtil.class.getClassLoader().getResource(image).toString();
+        return ThemeManager.getCurrentTheme().getResource(image).toString();
     }
 
     private static String getTypes(CardView card) {

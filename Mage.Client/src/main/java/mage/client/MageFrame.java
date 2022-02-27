@@ -28,7 +28,7 @@ import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.table.TablesPanel;
-import mage.client.themes.ThemeType;
+import mage.client.themes.ThemeManager;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
@@ -68,6 +68,7 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
@@ -210,7 +211,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
 
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             // stop JSplitPane from eating F6 and F8 or any other function keys
             {
                 Object value = UIManager.get("SplitPane.ancestorInputMap");
@@ -255,9 +255,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         initComponents();
 
         desktopPane.setDesktopManager(new MageDesktopManager());
-        desktopPane.setBackground(PreferencesDialog.getCurrentTheme().getCardTooltipBackgroundColor());
-        btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
-        btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
+        desktopPane.setBackground(ThemeManager.getCurrentTheme().getCardTooltipBackgroundColor());
+        if (ThemeManager.getCurrentTheme().getMageToolbarBackgroundColor() != null) {
+            mageToolbar.getParent().setBackground(ThemeManager.getCurrentTheme().getMageToolbarBackgroundColor());
+        }
 
         setSize(1024, 768);
         SettingsManager.instance.setScreenWidthAndHeight(1024, 768);
@@ -332,8 +333,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             JLabel label = new JLabel("  Games played: " + i);
             desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
             label.setVisible(true);
-            if (PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
-                label.setForeground(Color.white);
+            if (ThemeManager.getCurrentTheme().shouldShowBackground() || ThemeManager.getCurrentTheme().shouldShowLoginBackground()) {
+                label.setForeground(ThemeManager.getCurrentTheme().getTextOnBackgroundTextColor());
             }
             label.setBounds(0, 0, 180, 30);
         }
@@ -476,13 +477,22 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (Plugins.instance.isThemePluginLoaded() &&
                     !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
-            } else if (Plugins.instance.isThemePluginLoaded() &&
-                        !PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
-                backgroundPane = new ImagePanel(null);
-            } else {
-                InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getLoginBackgroundPath());
+            } else if (ThemeManager.getCurrentTheme().shouldShowLoginBackground()){
+                InputStream is = ThemeManager.getCurrentTheme().getResource("/background/login-background.png").openStream();
+                if (is == null) {
+                    throw new FileNotFoundException("Couldn't find /background/login-background.png in resources.");
+                }
                 BufferedImage background = ImageIO.read(is);
                 backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
+            } else if (ThemeManager.getCurrentTheme().shouldShowBackground()) {
+                InputStream is = ThemeManager.getCurrentTheme().getResource("/background/background.png").openStream();
+                if (is == null) {
+                    throw new FileNotFoundException("Couldn't find /background/background.png in resources.");
+                }
+                BufferedImage background = ImageIO.read(is);
+                backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
+            } else {
+                backgroundPane = new ImagePanel(null);
             }
             backgroundPane.setSize(1024, 768);
             desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
@@ -527,7 +537,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         try {
-            InputStream is = this.getClass().getResourceAsStream(filename);
+            InputStream is = ThemeManager.getCurrentTheme().getResource(filename).openStream();
             if (is != null) {
                 titleRectangle = new Rectangle(540, (int) (640 / ratio));
 
@@ -896,7 +906,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestCardRenderModesDialog);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 500));
+        setMinimumSize(new java.awt.Dimension(1024, 768));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -907,7 +917,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
         mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));
 
-        btnPreferences.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/preferences.png"))); // NOI18N
+        btnPreferences.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/preferences.png")));
         btnPreferences.setText("Preferences");
         btnPreferences.setToolTipText("By changing the settings in the preferences window you can adjust the look and behaviour of xmage.");
         btnPreferences.setFocusable(false);
@@ -920,7 +930,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnPreferences);
         mageToolbar.add(jSeparator4);
 
-        btnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
+        btnConnect.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/connect.png"))); // NOI18N
         btnConnect.setToolTipText("Connect to or disconnect from a XMage server.");
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -932,7 +942,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnConnect);
         mageToolbar.add(jSeparator1);
 
-        btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor.png"))); // NOI18N
+        btnDeckEditor.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/deck_editor.png")));
         btnDeckEditor.setText("Deck Editor");
         btnDeckEditor.setToolTipText("Start the deck editor to create or modify decks.");
         btnDeckEditor.setFocusable(false);
@@ -945,7 +955,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnDeckEditor);
         mageToolbar.add(jSeparator2);
 
-        btnCollectionViewer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/collection.png"))); // NOI18N
+        btnCollectionViewer.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/collection.png"))); // NOI18N
         btnCollectionViewer.setText("Card Viewer");
         btnCollectionViewer.setToolTipText("Card viewer to show the cards of sets. ");
         btnCollectionViewer.setFocusable(false);
@@ -958,7 +968,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator5);
 
-        btnSendFeedback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/feedback.png"))); // NOI18N
+        btnSendFeedback.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/feedback.png"))); // NOI18N
         btnSendFeedback.setText("Feedback");
         btnSendFeedback.setToolTipText("Send some feedback to the developers.");
         btnSendFeedback.setFocusable(false);
@@ -971,7 +981,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnSendFeedback);
         mageToolbar.add(jSeparator6);
 
-        btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol.png"))); // NOI18N
+        btnSymbols.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/symbol.png"))); // NOI18N
         btnSymbols.setText("Symbols");
         btnSymbols.setToolTipText("<HTML>Load the mana and other card symbols from the internet.<br>\nOtherwise you only see the replacement sequence like {U} for blue mana symbol.<br>\nYou need to do that only once.");
         btnSymbols.setFocusable(false);
@@ -984,7 +994,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnSymbols);
         mageToolbar.add(jSeparatorSymbols);
 
-        btnImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/images.png"))); // NOI18N
+        btnImages.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/images.png"))); // NOI18N
         btnImages.setText("Images");
         btnImages.setToolTipText("<HTML>Load card images from external sources.");
         btnImages.setFocusable(false);
@@ -997,7 +1007,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnImages);
         mageToolbar.add(jSeparatorImages);
 
-        btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/about.png"))); // NOI18N
+        btnAbout.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/about.png"))); // NOI18N
         btnAbout.setText("About");
         btnAbout.setToolTipText("About app");
         btnAbout.setFocusable(false);
@@ -1010,13 +1020,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnAbout);
         mageToolbar.add(jSeparator7);
 
-        btnDebug.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
+        btnDebug.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/connect.png"))); // NOI18N
         btnDebug.setText("Debug");
         btnDebug.setToolTipText("Show debug tools");
         btnDebug.setFocusable(false);
         btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDebugMouseClicked(evt);
             }
@@ -1025,7 +1034,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(separatorDebug);
 
         jMemUsageLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMemUsageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/memory.png"))); // NOI18N
+        jMemUsageLabel.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/menu/memory.png"))); // NOI18N
         jMemUsageLabel.setText("100% Free mem");
         jMemUsageLabel.setFocusable(false);
         jMemUsageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1034,21 +1043,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
-
-        if (PreferencesDialog.getCurrentTheme().getMageToolbar() != null) {
-            mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
-        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1337,7 +1342,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
             try {
-                ThemeType.valueByName(getPreferences().get(PreferencesDialog.KEY_THEME, ThemeType.DEFAULT.getName())).setupLookAndFeel();
+                ThemeManager.loadThemes();
+                ThemeManager.setupLookAndFeel();
                 instance = new MageFrame();
             } catch (Throwable e) {
                 logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);

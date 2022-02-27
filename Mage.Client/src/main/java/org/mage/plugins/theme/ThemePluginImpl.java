@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeManager;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
@@ -71,11 +72,13 @@ public class ThemePluginImpl implements ThemePlugin {
                 backgroundImage = loadbuffer_default();
             }
 
-            if (backgroundImage == null) {
-                backgroundImage = loadbuffer_default();
-            }
-            if (backgroundImage == null) {
-                throw new FileNotFoundException("Couldn't find in resources.");
+            if (ThemeManager.getCurrentTheme().shouldShowBattleBackground()) {
+                if (backgroundImage == null) {
+                    backgroundImage = loadbuffer_default();
+                }
+                if (backgroundImage == null) {
+                    throw new FileNotFoundException("Couldn't find in resources.");
+                }
             }
 
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
@@ -102,8 +105,9 @@ public class ThemePluginImpl implements ThemePlugin {
     // Sets background for in-battle
     // loadbuffer_default - Only apply theme background if no custom user background set
     private BufferedImage loadbuffer_default() throws IOException {
+        if (!ThemeManager.getCurrentTheme().shouldShowBattleBackground()) return null;
         BufferedImage res;
-        InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getBattleBackgroundPath());
+        InputStream is = ThemeManager.getCurrentTheme().getResource("/background/battle-background.png").openStream();
         res = ImageIO.read(is);
         return res;
     }
@@ -148,12 +152,12 @@ public class ThemePluginImpl implements ThemePlugin {
 
     // Sets background for logged in user for tables/deck editor/card viewer/etc
     private synchronized ImagePanel createImagePanelInstance() {
-        if (background == null && PreferencesDialog.getCurrentTheme().shouldShowBackground()) {
+        if (background == null && ThemeManager.getCurrentTheme().shouldShowBackground()) {
             try {
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
-                    InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getBackgroundPath());
+                    InputStream is = ThemeManager.getCurrentTheme().getResource("/background/background.png").openStream();
                     if (is == null) {
-                        throw new FileNotFoundException("Couldn't find " + PreferencesDialog.getCurrentTheme().getBackgroundPath() + " in resources.");
+                        throw new FileNotFoundException("Couldn't find /background/background.png in resources.");
                     }
                     background = ImageIO.read(is);
                 } else {
@@ -171,7 +175,7 @@ public class ThemePluginImpl implements ThemePlugin {
                 }
                 if (background == null) {
                     String filename = "/background/background.png";
-                    InputStream is = this.getClass().getResourceAsStream(filename);
+                    InputStream is = ThemeManager.getCurrentTheme().getResource(filename).openStream();
                     if (is == null) {
                         throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                     }

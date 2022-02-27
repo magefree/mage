@@ -19,6 +19,7 @@ import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.themes.ThemeManager;
 import mage.client.util.Event;
 import mage.client.util.*;
 import mage.client.util.audio.AudioManager;
@@ -1869,7 +1870,7 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
-        boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
+        boolean displayButtonText = ThemeManager.getCurrentTheme().isShortcutsVisibleForSkipButtons();
 
         btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
         btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
@@ -2275,19 +2276,19 @@ public final class GamePanel extends javax.swing.JPanel {
 
         stackObjects.setBackgroundColor(new Color(0, 0, 0, 40));
 
-        btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png")));
+        btnStopReplay.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/control_stop.png")));
         btnStopReplay.addActionListener(evt -> btnStopReplayActionPerformed(evt));
 
-        btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png")));
+        btnNextPlay.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/control_stop_right.png")));
         btnNextPlay.addActionListener(evt -> btnNextPlayActionPerformed(evt));
 
-        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png")));
+        btnPlay.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/control_right.png")));
         btnPlay.addActionListener(evt -> btnPlayActionPerformed(evt));
 
-        btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png")));
+        btnSkipForward.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/control_double_stop_right.png")));
         btnSkipForward.addActionListener(evt -> btnSkipForwardActionPerformed(evt));
 
-        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png")));
+        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/control_stop_left.png")));
         btnPreviousPlay.addActionListener(evt -> btnPreviousPlayActionPerformed(evt));
 
         initPopupMenuTriggerOrder();

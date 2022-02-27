@@ -7,6 +7,7 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.themes.ThemeManager;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
@@ -36,7 +37,6 @@ public class AddLandDialog extends MageDialog {
 
     public AddLandDialog() {
         initComponents();
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24" + (PreferencesDialog.getCurrentTheme().isDark() ? "_lt" : "") + ".png")));
         this.setModal(true);
     }
 
@@ -327,7 +327,7 @@ public class AddLandDialog extends MageDialog {
         cbLandSet.setMinimumSize(new java.awt.Dimension(20, 20));
         panelSet.add(cbLandSet);
 
-        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResource("/buttons/search_24.png"))); // NOI18N
         btnSetFastSearch.setToolTipText("Search for set");
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setPreferredSize(new java.awt.Dimension(23, 23));

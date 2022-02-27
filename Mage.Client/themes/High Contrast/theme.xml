@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="High Contrast"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+    <themeDefaults>
+        <default key="ToggleButton.foreground" color="rgb(127, 127, 127)" />
+    </themeDefaults>
+</themeConfig>

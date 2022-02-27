@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <!-- <theme> parameters
+    name                            - The name of the theme that will show up in the theme selection list, must be  unique
+                                      and should be the same as the theme folder name.
+    resourcesParentTheme            - (optional) The name of the theme to use themeResources that are not defined in
+                                      this theme. Parent theme can also have a parent theme (recursive), but cyclical
+                                      dependency will throw errors.
+                                      Default: null (Default theme is the parent)
+    lafClassPath                    - (optional) The class path of the look and feel to use. Class paths that don't exist
+                                      will throw errors.
+                                      Default: javax.swing.plaf.nimbus.NimbusLookAndFeel
+    dark                            - (optional) If this is a dark mode variant theme. If true, some resources with ".dark"
+                                      suffix will be used.
+                                      Default: false
+    showBackground                  - (optional) If the "/background/background.png" resource should be displayed.
+                                      Default: true
+    showLoginBackground             - (optional) If the "/background/login-background.png" should be displayed on the
+                                      login screen.
+                                      Default: false
+    showBattleBackground            - (optional) If the "/background/battle-background.png" should be displayed in a game.
+                                      Default: true
+    shortcutsVisibleForSkipButtons  - (optional) If the shortcuts text should be displayed on the in-game skip buttons.
+                                      Default: true
+    -->
+    <theme
+            name="FlatLaf Dark"
+            lafClassPath="com.formdev.flatlaf.FlatDarkLaf"
+            dark="true"
+            showBackground="false"
+    />
+    <!-- (optional) <themeColors> parameters
+    Valid color string formats:
+     *  Hexadecimal         (EX: "#000000")
+     *  RGB int 0-255       (EX: "rgb(0, 0, 0)")
+     *  RGBA int 0-255      (EX: "rgba(0, 0, 0, 0)")
+     *  Known color name    (EX: "red")
+
+    mageToolbarBackgroundColor          - (optional) The background color for the toolbar at the top of program.
+                                          Default: null
+    gameEndTextBackgroundColor          - (optional) The background color for the text box on the game end popup.
+                                          Default: rgba(240, 240, 240, 140) or rgba(36, 37, 38, 240) if dark
+    cardTooltipBackgroundColor          - (optional) The background color for the card hover tooltip.
+                                          Default: rgb(204, 204, 204) or rgb(60, 63, 65) if dark
+    playerPanelInactiveBackgroundColor  - (optional) The background color of the player panel for inactive players.
+                                          Default: rgba(200, 200, 180, 200)
+    playerPanelActiveBackgroundColor    - (optional) The background color of the player panel for active players.
+                                          Default: rgba(200, 255, 200, 200)
+    playerPanelDeadBackgroundColor      - (optional) The background color of the player panel for dead players.
+                                          Default: rgba(131, 94, 83, 200)
+    cardIconsFillColor                  - (optional) The fill color for card icons.
+                                          Default: rgb(169, 176, 190)
+    cardIconsStrokeColor                - (optional) The stroke (outline) color for card icons.
+                                          Default: black
+    cardIconsTextColor                  - (optional) The text color for card icons.
+                                          Default: rgb(51, 98, 140)
+    textOnBackgroundTextColor           - (optional) The text color for labels displayed on top of background images.
+                                          Only applies if showBackground or showLoginBackground are true
+                                          Default: white
+    -->
+    <!-- (optional) <themeDefaults> element, <default> parameters
+
+    key     - The name of the property.
+              Example: "Button.foreground"
+    color   - The color to apply to the property.
+
+    Example:
+    <themeDefaults>
+        <default key="List.background" color="#800850">
+        ...
+    </themeDefaults>
+    -->
+    <!-- (optional) <themeResources> element, <resource> parameters
+
+    name    - The name of the resource to override. If theme is dark, must include ".dark" suffix for applicable resources.
+              Example: "/background/background.png"
+    relPath - The relative path to the resource to override with.
+              Example: "/background/background.png"
+
+    Example:
+    <themeResources>
+        <resource name="/menu/connect.png" relPath="/menu/name_of_theme_connect_icon.png">
+        ...
+    </themeResources>
+    -->
+    <themeResources>
+        <resource name="/menu/about.png" relPath="/menu/baseline_info_white_18dp.png" />
+        <resource name="/menu/collection.png" relPath="/menu/baseline_collections_white_18dp.png" />
+        <resource name="/menu/connect.png" relPath="/menu/baseline_wifi_white_18dp.png" />
+        <resource name="/menu/deck_editor.dark.png" relPath="/menu/baseline_content_copy_white_18dp.png" />
+        <resource name="/menu/feedback.png" relPath="/menu/baseline_feedback_white_18dp.png" />
+        <resource name="/menu/images.png" relPath="/menu/baseline_image_search_white_18dp.png" />
+        <resource name="/menu/memory.png" relPath="/menu/baseline_memory_white_18dp.png" />
+        <resource name="/menu/preferences.png" relPath="/menu/baseline_settings_white_18dp.png" />
+        <resource name="/menu/symbol.dark.png" relPath="/menu/baseline_download_for_offline_white_18dp.png" />
+        <resource name="/buttons/card_panel.png" relPath="/buttons/baseline_view_carousel_white_18dp.png" />
+        <resource name="/buttons/control_double_stop_left.png" relPath="/buttons/baseline_fast_rewind_white_24dp.png" />
+        <resource name="/buttons/control_double_stop_right.png" relPath="/buttons/baseline_fast_forward_white_24dp.png" />
+        <resource name="/buttons/control_right.png" relPath="/buttons/baseline_play_arrow_white_24dp.png" />
+        <resource name="/buttons/control_stop.png" relPath="/buttons/baseline_stop_white_24dp.png" />
+        <resource name="/buttons/control_stop_left.png" relPath="/buttons/baseline_skip_previous_white_24dp.png" />
+        <resource name="/buttons/control_stop_right.png" relPath="/buttons/baseline_skip_next_white_24dp.png" />
+        <resource name="/buttons/copy_24.png" relPath="/buttons/baseline_file_copy_white_18dp.png" />
+        <resource name="/buttons/copy_32.png" relPath="/buttons/baseline_file_copy_white_24dp.png" />
+        <resource name="/buttons/copy_128.png" relPath="/buttons/baseline_file_copy_white_96dp.png" />
+        <resource name="/buttons/paste_24.png" relPath="/buttons/baseline_content_paste_white_18dp.png" />
+        <resource name="/buttons/paste_32.png" relPath="/buttons/baseline_content_paste_white_24dp.png" />
+        <resource name="/buttons/paste_128.png" relPath="/buttons/baseline_content_paste_white_96dp.png" />
+        <resource name="/buttons/deck_in.png" relPath="/buttons/baseline_file_download_white_18dp.png" />
+        <resource name="/buttons/deck_out.png" relPath="/buttons/baseline_file_upload_white_18dp.png" />
+        <resource name="/buttons/deck_pack.dark.png" relPath="/buttons/baseline_content_copy_white_18dp.png" />
+        <resource name="/buttons/down.png" relPath="/buttons/baseline_arrow_drop_down_white_24dp.png" />
+        <resource name="/buttons/up.png" relPath="/buttons/baseline_arrow_drop_up_white_24dp.png" />
+        <resource name="/buttons/left.png" relPath="/buttons/baseline_arrow_left_white_24dp.png" />
+        <resource name="/buttons/right.png" relPath="/buttons/baseline_arrow_right_white_24dp.png" />
+        <resource name="/buttons/list_panel.png" relPath="/buttons/baseline_view_list_white_18dp.png" />
+        <resource name="/buttons/search_24.dark.png" relPath="/buttons/baseline_search_white_18dp.png" />
+        <resource name="/buttons/search_32.dark.png" relPath="/buttons/baseline_search_white_18dp.png" />
+        <resource name="/buttons/search_64.dark.png" relPath="/buttons/baseline_search_white_18dp.png" />
+        <resource name="/buttons/search_128.dark.png" relPath="/buttons/baseline_search_white_18dp.png" />
+        <resource name="/buttons/sideboard_in.png" relPath="/buttons/outline_download_white_18dp.png" />
+        <resource name="/buttons/sideboard_out.png" relPath="/buttons/outline_upload_white_18dp.png" />
+        <resource name="/buttons/state_active.png" relPath="/buttons/baseline_done_white_18dp.png" />
+        <resource name="/buttons/state_finished.png" relPath="/buttons/baseline_hourglass_full_white_18dp.png" />
+        <resource name="/buttons/state_waiting.png" relPath="/buttons/baseline_hourglass_empty_white_18dp.png" />
+        <resource name="/buttons/state_waiting_off.png" relPath="/buttons/baseline_hourglass_disabled_white_18dp.png" />
+        <resource name="/buttons/rarity_common_20.png" relPath="/buttons/common_20.png" />
+        <resource name="/buttons/rarity_uncommon_20.png" relPath="/buttons/uncommon_20.png" />
+        <resource name="/buttons/rarity_rare_20.png" relPath="/buttons/rare_20.png" />
+        <resource name="/buttons/rarity_mythic_20.png" relPath="/buttons/mythic_20.png" />
+        <resource name="/buttons/rarity_special_20.png" relPath="/buttons/special_20.png" />
+        <resource name="/buttons/type_artifact.png" relPath="/buttons/baseline_emoji_events_white_18dp.png" />
+        <resource name="/buttons/type_creatures.png" relPath="/buttons/baseline_pets_white_18dp.png" />
+        <resource name="/buttons/type_enchantment.png" relPath="/buttons/baseline_wb_sunny_white_18dp.png" />
+        <resource name="/buttons/type_instant.png" relPath="/buttons/baseline_bolt_white_18dp.png" />
+        <resource name="/buttons/type_land.dark.png" relPath="/buttons/baseline_landscape_white_18dp.png" />
+        <resource name="/buttons/type_planeswalker.dark.png" relPath="/buttons/type_planeswalker.png" />
+        <resource name="/buttons/type_sorcery.png" relPath="/buttons/baseline_local_fire_department_white_18dp.png" />
+        <resource name="/buttons/color_black.png" relPath="/buttons/color_black.png" />
+        <resource name="/buttons/color_blue.png" relPath="/buttons/color_blue.png" />
+        <resource name="/buttons/color_green.png" relPath="/buttons/color_green.png" />
+        <resource name="/buttons/color_white.png" relPath="/buttons/color_white.png" />
+        <resource name="/buttons/color_red.png" relPath="/buttons/color_red.png" />
+        <resource name="/buttons/colorless.png" relPath="/buttons/color_colorless.png" />
+        <resource name="/buttons/color_black_off.png" relPath="/buttons/color_white_off.png" />
+        <resource name="/buttons/color_blueOff.png" relPath="/buttons/color_blue_off.png" />
+        <resource name="/buttons/color_green_off.png" relPath="/buttons/color_green_off.png" />
+        <resource name="/buttons/color_white_off.png" relPath="/buttons/color_white_off.png" />
+        <resource name="/buttons/color_red_off.png" relPath="/buttons/color_red_off.png" />
+        <resource name="/buttons/colorless_off.png" relPath="/buttons/color_colorless_off.png" />
+        <resource name="/buttons/match_new.dark.png" relPath="/buttons/match_new.png" />
+        <resource name="/buttons/tourney_new.dark.png" relPath="/buttons/tourney_new.png" />
+        <resource name="/card/activated_ability.dark.png" relPath="/card/baseline_redo_white_18dp.png" />
+        <resource name="/card/triggered_ability.dark.png" relPath="/card/baseline_play_for_work_white_18dp.png" />
+        <resource name="/card/copy.dark.png" relPath="/card/baseline_share_white_18dp.png" />
+        <resource name="/card/day.dark.png" relPath="/card/baseline_light_mode_white_96dp.png" />
+        <resource name="/card/night.dark.png" relPath="/card/baseline_bedtime_white_96dp.png" />
+        <resource name="/card/token.dark.png" relPath="/card/baseline_pets_white_18dp.png" />
+        <resource name="/card/color_ind_black.png" relPath="/card/color_ind_black.png" />
+        <resource name="/card/color_ind_blue.png" relPath="/card/color_ind_blue.png" />
+        <resource name="/card/color_ind_green.png" relPath="/card/color_ind_green.png" />
+        <resource name="/card/color_ind_red.png" relPath="/card/color_ind_red.png" />
+        <resource name="/card/color_ind_white.png" relPath="/card/color_ind_white.png" />
+        <resource name="/card/counter_green.png" relPath="/card/counter_green.png" />
+        <resource name="/card/counter_grey.png" relPath="/card/counter_grey.png" />
+        <resource name="/card/counter_red.png" relPath="/card/counter_red.png" />
+        <resource name="/card/counter_violet.png" relPath="/card/counter_violet.png" />
+        <resource name="/dlg/dlg.cancel.hover.png" relPath="/dlg/baseline_close_red_48dp.png" />
+        <resource name="/dlg/dlg.cancel.png" relPath="/dlg/baseline_close_red_48dp.png" />
+        <resource name="/dlg/dlg.next.hover.png" relPath="/dlg/baseline_navigate_next_blue_48dp.png" />
+        <resource name="/dlg/dlg.next.png" relPath="/dlg/baseline_navigate_next_blue_48dp.png" />
+        <resource name="/dlg/dlg.prev.hover.png" relPath="/dlg/baseline_navigate_before_blue_48dp.png" />
+        <resource name="/dlg/dlg.prev.png" relPath="/dlg/baseline_navigate_before_blue_48dp.png" />
+        <resource name="/dlg/dlg.ok.hover.png" relPath="/dlg/baseline_done_green_48dp.png" />
+        <resource name="/dlg/dlg.ok.png" relPath="/dlg/baseline_done_green_48dp.png" />
+        <resource name="/tables/match_icon.png" relPath="/tables/baseline_table_restaurant_white_18dp.png" />
+        <resource name="/tables/tourney_icon.png" relPath="/tables/baseline_reduce_capacity_white_18dp.png" />
+        <resource name="/draft/table_left.png" relPath="/draft/baseline_autorenew_white_96dp.png" />
+        <resource name="/draft/table_right.png" relPath="/draft/baseline_sync_white_96dp.png" />
+        <resource name="/game/looked_at.dark.png" relPath="/game/baseline_visibility_white_18dp.png" />
+        <resource name="/game/revealed.dark.png" relPath="/game/baseline_groups_white_18dp.png" />
+        <resource name="/game/right.png" relPath="/game/baseline_chevron_right_white_18dp.png" />
+        <resource name="/game/right_hovered.png" relPath="/game/baseline_chevron_right_white_18dp.png" />
+    </themeResources>
+</themeConfig>

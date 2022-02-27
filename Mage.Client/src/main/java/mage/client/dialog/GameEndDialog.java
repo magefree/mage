@@ -2,6 +2,7 @@
 
  import mage.client.MageFrame;
  import mage.client.game.GamePanel;
+ import mage.client.themes.ThemeManager;
  import mage.client.util.Format;
  import mage.client.util.ImageHelper;
  import mage.client.util.audio.AudioManager;
@@ -36,15 +37,15 @@
          this.modal = true;
 
          pnlText.setOpaque(true);
-         pnlText.setBackground(PreferencesDialog.getCurrentTheme().getGameEndBackgroundColor());
+         pnlText.setBackground(ThemeManager.getCurrentTheme().getGameEndTextBackgroundColor());
 
          Rectangle r = new Rectangle(610, 250);
 
          Image image;
          if (gameEndView.hasWon()) {
-             image = ImageHelper.getImageFromResources(PreferencesDialog.getCurrentTheme().getWinlossPath("game_won.jpg"));
+             image = ImageHelper.getImageFromResources("/winloss/game_won.jpg");
          } else {
-             image = ImageHelper.getImageFromResources(PreferencesDialog.getCurrentTheme().getWinlossPath("game_lost.jpg"));
+             image = ImageHelper.getImageFromResources("/winloss/game_lost.jpg");
          }
 
          BufferedImage imageResult = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
