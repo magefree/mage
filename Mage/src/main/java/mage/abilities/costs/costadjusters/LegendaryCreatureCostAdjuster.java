@@ -22,7 +22,7 @@ public enum LegendaryCreatureCostAdjuster implements CostAdjuster {
     @Override
     public void adjustCosts(Ability ability, Game game) {
         int count = game.getBattlefield().count(
-                filter, ability.getSourceId(), ability.getControllerId(), game
+                filter, ability.getSourceId(), ability.getControllerId(), ability, game
         );
         if (count > 0) {
             CardUtil.reduceCost(ability, count);

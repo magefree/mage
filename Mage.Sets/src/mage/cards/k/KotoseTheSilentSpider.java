@@ -110,7 +110,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         if (controller != null) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(filter);
-            if (controller.choose(Outcome.Neutral, target, source.getSourceId(), game)
+            if (controller.choose(Outcome.Neutral, target, source.getSourceId(), source, game)
                     && game.getCard(target.getFirstTarget()) != null) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 controller.moveCardsToExile(chosenCard, source, game, true, exileId, game.getObject(source.getSourceId()).getIdName());

@@ -69,7 +69,7 @@ class ThievesAuctionEffect extends OneShotEffect {
         if (controller != null) {
             // Exile all nontoken permanents.
             Cards exiledCards = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game)) {
                 exiledCards.add(permanent);
                 controller.moveCardsToExile(permanent, source, game, true, CardUtil.getCardExileZoneId(game, source.getSourceId()), "Thieves' Auction");
             }

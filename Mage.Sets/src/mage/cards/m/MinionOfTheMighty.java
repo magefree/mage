@@ -79,7 +79,7 @@ class MinionOfTheMightyEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        target.choose(outcome, controller.getId(), source.getSourceId(), game);
+        target.choose(outcome, controller.getId(), source.getSourceId(), source, game);
         Card card = controller.getHand().get(target.getFirstTarget(), game);
         if (card == null) {
             return false;

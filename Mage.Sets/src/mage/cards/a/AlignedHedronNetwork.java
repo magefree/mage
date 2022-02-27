@@ -75,7 +75,7 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
         // the target creature won't be exiled.
         if (controller != null && permanent != null) {
             Set<Card> toExile = new LinkedHashSet<>();
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), source, game)) {
                 toExile.add(creature);
             }
             if (!toExile.isEmpty()) {

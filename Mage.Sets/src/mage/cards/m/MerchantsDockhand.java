@@ -129,7 +129,7 @@ class TapXTargetCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), source, game);
     }
 
     @Override

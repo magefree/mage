@@ -65,7 +65,7 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetOpponent(true);
-            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
@@ -100,7 +100,7 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetOpponent(true);
-            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;

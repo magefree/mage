@@ -116,7 +116,7 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return controller.moveCards(controller.getGraveyard().getCards(new FilterInstantOrSorceryCard(), source.getSourceId(),
-                    source.getControllerId(), game), Zone.HAND, source, game);
+                    source.getControllerId(), source, game), Zone.HAND, source, game);
         }
         return false;
     }

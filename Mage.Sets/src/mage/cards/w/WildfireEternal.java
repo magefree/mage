@@ -73,7 +73,7 @@ class WildfireEternalCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCard filter = new FilterInstantOrSorceryCard();
-            int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
+            int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), source, game);
             if (cardsToCast > 0
                     && controller.chooseUse(outcome, "Cast an instant or sorcery card from your "
                             + "hand without paying its mana cost?", source, game)) {

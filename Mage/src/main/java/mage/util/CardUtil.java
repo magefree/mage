@@ -980,7 +980,7 @@ public final class CardUtil {
                 .stream()
                 .map(Mode::getTargets)
                 .flatMap(Collection::stream)
-                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), game))
+                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), ability, game))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }

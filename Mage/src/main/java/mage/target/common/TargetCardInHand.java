@@ -5,7 +5,6 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -57,11 +56,11 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
+            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, source, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                     possibleTargets.add(card.getId());
                 }
@@ -71,11 +70,11 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int possibleTargets = 0;
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
+            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, source, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {

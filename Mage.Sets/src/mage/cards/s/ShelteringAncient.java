@@ -71,7 +71,7 @@ class ShelteringAncientCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (target.choose(Outcome.BoostCreature, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.BoostCreature, controllerId, source.getSourceId(), source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(), controllerId, ability, game);

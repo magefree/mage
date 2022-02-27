@@ -132,7 +132,7 @@ class SavageAllianceDamageEffect extends OneShotEffect {
         if (player != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(player.getId()));
-            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game);
             for (Permanent creature : creatures) {
                 creature.damage(1, source.getSourceId(), source, game, false, true);
             }

@@ -85,7 +85,7 @@ class CollectedConjuringEffect extends OneShotEffect {
         Cards cardsToChoose = new CardsImpl(cards);
         controller.moveCards(cards, Zone.EXILED, source, game);
         int cardsCast = 0;
-        while (!cardsToChoose.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty()
+        while (!cardsToChoose.getCards(filter, source.getSourceId(), source.getControllerId(), source, game).isEmpty()
                 && cardsCast < 2) {
             if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with "
                     + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {

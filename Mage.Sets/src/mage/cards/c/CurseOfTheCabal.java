@@ -85,10 +85,10 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
                 return true;
             }
             Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
-            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), source, game)) {
                 while (!target.isChosen() 
-                        && target.canChoose(source.getSourceId(), targetPlayer.getId(), game) && targetPlayer.canRespond()) {
-                    targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                        && target.canChoose(source.getSourceId(), targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
+                    targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), source, game);
                 }
                 //sacrifice all chosen (non null) permanents
                 target.getTargets().stream()

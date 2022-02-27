@@ -80,10 +80,10 @@ class ChooseACreature extends OneShotEffect {
         }
         Target target = new TargetCreaturePermanent();
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
+        if (!target.canChoose(source.getSourceId(), controller.getId(), source, game)) {
             return true;
         }
-        controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+        controller.choose(Outcome.Copy, target, source.getSourceId(), source, game);
         Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
         if (chosenPermanent != null) {
             game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());

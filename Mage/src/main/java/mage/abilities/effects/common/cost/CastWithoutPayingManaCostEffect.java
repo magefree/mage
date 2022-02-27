@@ -71,7 +71,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));
         Target target = new TargetCardInHand(filter);
         if (!target.canChoose(
-                source.getSourceId(), controller.getId(), game
+                source.getSourceId(), controller.getId(), source, game
         ) || !controller.chooseUse(
                 Outcome.PlayForFree,
                 "Cast " + CardUtil.addArticle(filter.getMessage())

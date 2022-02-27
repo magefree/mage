@@ -105,7 +105,7 @@ class SarulfRealmEaterEffect extends OneShotEffect {
         game.getBattlefield()
                 .getActivePermanents(
                         filter, source.getControllerId(),
-                        source.getSourceId(), game
+                        source.getSourceId(), source, game
                 )
                 .stream()
                 .filter(Objects::nonNull)

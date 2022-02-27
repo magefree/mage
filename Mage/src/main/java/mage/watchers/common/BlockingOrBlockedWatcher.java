@@ -4,6 +4,7 @@ import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -44,12 +45,12 @@ public class BlockingOrBlockedWatcher extends Watcher {
         blockerMap.clear();
     }
 
-    public static boolean check(UUID attackerId, UUID blockerId, Game game) {
+    public static boolean check(Permanent attacker, Permanent blocker, Game game) {
         return game.getState()
                 .getWatcher(BlockingOrBlockedWatcher.class)
                 .blockerMap
-                .getOrDefault(new MageObjectReference(attackerId, game), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(attacker, game), Collections.emptySet())
                 .stream()
-                .anyMatch(mor -> mor.refersTo(blockerId, game));
+                .anyMatch(mor -> mor.refersTo(blocker, game));
     }
 }

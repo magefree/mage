@@ -72,7 +72,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
             MageObject targetSource = source.getSourceObject(game);
             if (permanent != null) {
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
-                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game);
             }
             if (player != null) {
                 return player.canBeTargetedBy(targetSource, source.getControllerId(), game)
@@ -92,7 +92,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         // no max targets limit here
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
@@ -144,7 +144,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
         // max targets limit reached (only selected can be choosen again)

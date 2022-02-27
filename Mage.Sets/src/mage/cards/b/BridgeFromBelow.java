@@ -85,7 +85,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
-                    && filter.match(permanent, sourceId, controllerId, game)) {
+                    && filter.match(permanent, sourceId, controllerId, this, game)) {
                 return true;
             }
         }

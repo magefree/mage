@@ -91,7 +91,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
                 return true;
             }
             cardsToCast.addAll(hazoretsUndyingFuryExileZone.getCards(filter,
-                    source.getSourceId(), source.getControllerId(), game));
+                    source.getSourceId(), source.getControllerId(), source, game));
             while (controller.canRespond() && !cardsToCast.isEmpty()) {
                 if (!controller.chooseUse(Outcome.PlayForFree,
                         "Cast (another) a card exiled with "

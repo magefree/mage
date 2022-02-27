@@ -68,7 +68,7 @@ class SkulkingKillerEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), permanent.getControllerId(), game
+                source.getSourceId(), permanent.getControllerId(), source, game
         ) > 1) {
             return false;
         }

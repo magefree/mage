@@ -18,8 +18,8 @@ public enum BlockingOrBlockedBySourcePredicate implements ObjectSourcePlayerPred
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        UUID thisCreature = input.getSourceId();
-        UUID otherCreature = input.getObject().getId();
+        Permanent thisCreature = input.getSource().getSourcePermanentOrLKI(game);
+        Permanent otherCreature = input.getObject();
         switch (this) {
             case BLOCKING:
                 return BlockingOrBlockedWatcher.check(thisCreature, otherCreature, game);

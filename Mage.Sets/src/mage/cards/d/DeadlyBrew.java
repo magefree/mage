@@ -81,10 +81,10 @@ class DeadlyBrewEffect extends OneShotEffect {
             }
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), playerId, game)) {
+            if (!target.canChoose(source.getSourceId(), playerId, source, game)) {
                 continue;
             }
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source.getSourceId(), source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;

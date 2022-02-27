@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -61,13 +60,13 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
         if (object instanceof StackObject) {
             Player targetPlayer = game.getPlayer(((StackObject) object).getStackAbility().getFirstTarget());
             if (targetPlayer != null) {
-                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
+                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
                     if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                         possibleTargets.add(card.getId());
                     }

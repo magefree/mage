@@ -76,9 +76,9 @@ class SequesteredStashEffect extends OneShotEffect {
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Put an artifact card from your graveyard to library?", source, game)
-                && controller.choose(outcome, target, source.getSourceId(), game)) {
+                && controller.choose(outcome, target, source.getSourceId(), source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.LIBRARY, source, game);

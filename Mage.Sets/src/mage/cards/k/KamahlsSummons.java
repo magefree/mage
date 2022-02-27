@@ -69,7 +69,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0) {
                         TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURE);
-                        if (player.choose(outcome, target, source.getSourceId(), game)) {
+                        if (player.choose(outcome, target, source.getSourceId(), source, game)) {
                             Cards cards = new CardsImpl(target.getTargets());
                             controller.revealCards(sourceObject.getIdName(), cards, game);
                             revealedCards.put(playerId, target.getTargets().size());

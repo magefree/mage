@@ -39,7 +39,7 @@ public class ChoosePlayerEffect extends OneShotEffect {
         }
         if (controller != null && mageObject != null) {
             TargetPlayer target = new TargetPlayer(1, 1, true);
-            if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+            if (controller.choose(this.outcome, target, source.getSourceId(), source, game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
                     game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + chosenPlayer.getLogName());

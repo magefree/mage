@@ -1,5 +1,6 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -50,12 +51,12 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Ability source, Game game) {
         if (!this.match(permanent, game) || !permanent.isPhasedIn()) {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Permanent>(permanent, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Permanent>(permanent, sourceId, playerId, source), game);
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {

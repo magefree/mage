@@ -21,7 +21,7 @@ public enum CovenCondition implements Condition {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source.getSourceId(), source, game
                 )
                 .stream()
                 .filter(Objects::nonNull)

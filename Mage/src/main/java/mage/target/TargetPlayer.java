@@ -57,16 +57,17 @@ public class TargetPlayer extends TargetImpl {
      *
      * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
+     * @param source
      * @param game
      * @return - true if enough valid {@link Player} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
+            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, source, game)) {
                 if (player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
@@ -103,12 +104,12 @@ public class TargetPlayer extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
+            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, source, game)) {
                 if (isNotTarget() || player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     possibleTargets.add(playerId);
                 }
@@ -150,7 +151,7 @@ public class TargetPlayer extends TargetImpl {
         if (player != null) {
             if (source != null) {
                 return (isNotTarget() || player.canBeTargetedBy(game.getObject(source.getSourceId()), source.getControllerId(), game))
-                        && filter.match(player, source.getSourceId(), source.getControllerId(), game);
+                        && filter.match(player, source.getSourceId(), source.getControllerId(), source, game);
             } else {
                 return filter.match(player, game);
             }

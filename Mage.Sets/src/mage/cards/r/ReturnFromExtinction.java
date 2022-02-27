@@ -74,7 +74,7 @@ class ReturnFromExtinctionTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         MageObject targetSource = game.getObject(sourceId);
         Player player = game.getPlayer(sourceControllerId);
         if (player == null) {
@@ -84,7 +84,7 @@ class ReturnFromExtinctionTarget extends TargetCardInYourGraveyard {
             return false;
         }
         List<Card> cards = player.getGraveyard().getCards(
-                filter, sourceId, sourceControllerId, game
+                filter, sourceId, sourceControllerId, source, game
         ).stream().collect(Collectors.toList());
         if (cards.size() < 2) {
             return false;

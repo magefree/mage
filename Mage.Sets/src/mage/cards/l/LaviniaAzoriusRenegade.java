@@ -100,7 +100,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
         int landCount = 0;
         UUID playerId = event.getPlayerId();
         if(playerId != null) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, playerId, source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, playerId, source.getSourceId(), source, game);
             for (Permanent permanent : permanents) {
                 if (permanent.isControlledBy(playerId)) {
                     landCount++;

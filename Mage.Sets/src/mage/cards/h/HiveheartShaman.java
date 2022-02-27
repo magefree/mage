@@ -83,7 +83,7 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                        input.getPlayerId(), input.getSourceId(), game
+                        input.getPlayerId(), input.getSourceId(), input.getSource(), game
                 )
                 .stream()
                 .map(permanent -> permanent.getSubtype(game))

@@ -53,7 +53,7 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
             int maxPower = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game)) {
                 if (permanent.getPower().getValue() > maxPower) {
                     maxPower = permanent.getPower().getValue();
                 }
@@ -67,9 +67,9 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int maxPower = 0;
-        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game);
+        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         if(targetSource == null){
@@ -91,8 +91,8 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return !possibleTargets(sourceId, sourceControllerId, game).isEmpty();
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+        return !possibleTargets(sourceId, sourceControllerId, source, game).isEmpty();
     }
 
     @Override

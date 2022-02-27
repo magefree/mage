@@ -65,7 +65,7 @@ class AnathemancerCount implements DynamicValue {
         filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
         filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
 
-        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

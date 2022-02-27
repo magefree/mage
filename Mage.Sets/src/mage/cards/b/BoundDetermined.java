@@ -81,7 +81,7 @@ class BoundEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent("a creature (to sacrifice)"), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                     if (toSacrifice != null) {

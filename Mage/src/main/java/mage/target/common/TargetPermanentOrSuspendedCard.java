@@ -50,15 +50,15 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         MageObject sourceObject = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+            if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, source, game)) {
                 return true;
             }
         }
         for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, sourceId, sourceControllerId, game)) {
+            if (filter.match(card, sourceId, sourceControllerId, source, game)) {
                 return true;
             }
         }
@@ -66,16 +66,16 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>(20);
         MageObject sourceObject = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+            if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
         for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, sourceId, sourceControllerId, game)) {
+            if (filter.match(card, sourceId, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
             }
         }
@@ -99,7 +99,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
             if (source != null) {
                 MageObject targetSource = game.getObject(source.getSourceId());
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
-                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game);
             } else {
                 return filter.match(permanent, game);
             }
@@ -115,12 +115,12 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return this.canChoose(null, sourceControllerId, game);
+        return this.canChoose(null, sourceControllerId, null, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return this.possibleTargets(null, sourceControllerId, game);
+        return this.possibleTargets(null, sourceControllerId, null, game);
     }
 
     @Override

@@ -82,7 +82,7 @@ class SirenStormtamerTargetObject extends TargetObject {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         return canChoose(sourceControllerId, game);
     }
 
@@ -115,7 +115,7 @@ class SirenStormtamerTargetObject extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId,
-            Game game) {
+                                     Ability source, Game game) {
         return possibleTargets(sourceControllerId, game);
     }
 

@@ -100,8 +100,8 @@ class AgadeemsAwakeningTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, source, game);
         Set<Integer> cmcs = this.getTargets()
                 .stream()
                 .map(game::getCard)

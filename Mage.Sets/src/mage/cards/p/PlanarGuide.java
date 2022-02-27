@@ -71,7 +71,7 @@ class PlanarGuideExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             Set<Card> toExile = new HashSet<>();
-            toExile.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+            toExile.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), source, game));
             controller.moveCardsToExile(toExile, source, game, true, source.getSourceId(), sourceObject.getIdName());
             ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null && !exile.isEmpty()) {

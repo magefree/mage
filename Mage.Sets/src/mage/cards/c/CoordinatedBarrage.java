@@ -65,7 +65,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
                 String chosenType = choice.getChoice();
                 FilterControlledPermanent filter = new FilterControlledPermanent();
                 filter.add(SubType.byDescription(chosenType).getPredicate());
-                int damageDealt = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int damageDealt = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), source, game);
                 Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     permanent.damage(damageDealt, source.getSourceId(), source, game, false, true);

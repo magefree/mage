@@ -1,5 +1,6 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -56,14 +57,14 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, null, playerId, game);
+        return match(card, null, playerId, null, game);
     }
 
-    public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(Card card, UUID sourceId, UUID playerId, Ability source, Game game) {
         if (!this.match(card, game)) {
             return false;
         }
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Card>(card, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Card>(card, sourceId, playerId, source), game);
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {

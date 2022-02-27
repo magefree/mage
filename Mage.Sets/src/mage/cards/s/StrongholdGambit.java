@@ -68,7 +68,7 @@ class StrongholdGambitEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !player.getHand().isEmpty()) {
                     TargetCardInHand target = new TargetCardInHand();
-                    if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                    if (player.choose(Outcome.Benefit, target, source.getSourceId(), source, game)) {
                         choosenCard.put(playerId, target.getFirstTarget());
                     }
                 }

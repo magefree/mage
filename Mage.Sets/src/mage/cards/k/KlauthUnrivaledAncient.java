@@ -87,7 +87,7 @@ class KlauthUnrivaledAncientEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_ATTACKING_CREATURES,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source.getSourceId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)

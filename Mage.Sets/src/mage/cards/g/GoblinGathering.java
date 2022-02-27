@@ -57,7 +57,7 @@ enum GoblinGatheringDynamicValue implements DynamicValue {
         if (player != null) {
             amount += player.getGraveyard().count(
                     filter, sourceAbility.getSourceId(),
-                    sourceAbility.getControllerId(), game
+                    sourceAbility.getControllerId(), sourceAbility, game
             );
         }
         return amount + 2;

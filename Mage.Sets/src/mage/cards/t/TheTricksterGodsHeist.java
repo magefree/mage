@@ -108,13 +108,13 @@ class TheTricksterGodsHeistTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<CardType> cardTypes = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         if (targetSource == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, source, game)) {
             if (!permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                 continue;
             }

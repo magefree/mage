@@ -64,7 +64,7 @@ class CrystalChimesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return controller.moveCards(controller.getGraveyard().getCards(new FilterEnchantmentCard(), source.getSourceId(),
-                    source.getControllerId(), game), Zone.HAND, source, game);
+                    source.getControllerId(), source, game), Zone.HAND, source, game);
         }
         return false;
     }

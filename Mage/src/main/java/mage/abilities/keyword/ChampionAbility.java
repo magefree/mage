@@ -153,7 +153,7 @@ class ChampionExileCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
                 UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter()); // exileId important for return effect
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
@@ -172,7 +172,7 @@ class ChampionExileCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(source.getSourceId(), controllerId, source, game);
     }
 
     @Override

@@ -8,7 +8,6 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -47,7 +46,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
                         return false;
                     }
                 }
-                return filter.match(card, source.getId(), playerId, game);
+                return filter.match(card, source.getId(), playerId, source, game);
             }
         }
         return false;
@@ -72,7 +71,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+        return canChoose(null, sourceControllerId, null, game);
     }
 
    /**
@@ -80,11 +79,12 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
      *
      * @param sourceId - the target event source
      * @param sourceControllerId - controller of the target event source
-     * @param game
-     * @return - true if enough valid {@link Card} exist
+     * @param source
+    * @param game
+    * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int possibleTargets = 0;
         if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
             return true;
@@ -100,7 +100,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             if (!playerId.equals(sourceControllerId)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
+                    for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
                         if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                             possibleTargets++;
                             if (possibleTargets >= this.minNumberOfTargets) {
@@ -115,7 +115,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player sourceController = game.getPlayer(sourceControllerId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -125,7 +125,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 Set<UUID> targetsInThisGraveyeard = new HashSet<>();
-                for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
+                for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
                     if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                         targetsInThisGraveyeard.add(card.getId());
                     }

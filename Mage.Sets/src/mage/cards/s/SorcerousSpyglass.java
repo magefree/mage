@@ -63,7 +63,7 @@ class SorcerousSpyglassEntersEffect extends ChooseACardNameEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Benefit, target, source.getSourceId(), source, game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
                 if (opponent != null) {
                     MageObject sourceObject = game.getObject(source.getSourceId());

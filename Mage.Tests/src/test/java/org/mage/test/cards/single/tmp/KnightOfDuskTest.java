@@ -32,7 +32,7 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, knight, 1);
         assertPermanentCount(playerB, lion, 0);
-        assertGraveyardCount(playerB, knight, 0);
+        assertGraveyardCount(playerA, knight, 0);
         assertGraveyardCount(playerB, lion, 1);
     }
 
@@ -56,7 +56,7 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, knight, 0);
         assertPermanentCount(playerB, lion, 0);
-        assertGraveyardCount(playerB, knight, 1);
+        assertGraveyardCount(playerA, knight, 1);
         assertGraveyardCount(playerB, lion, 1);
     }
 
@@ -80,7 +80,7 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, knight, 1);
         assertPermanentCount(playerB, lion, 0);
-        assertGraveyardCount(playerB, knight, 0);
+        assertGraveyardCount(playerA, knight, 0);
         assertGraveyardCount(playerB, lion, 1);
     }
 }

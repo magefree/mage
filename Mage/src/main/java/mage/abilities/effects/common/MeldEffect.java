@@ -52,7 +52,7 @@ public class MeldEffect extends OneShotEffect {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named " + meldWithName);
             filter.add(new NamePredicate(meldWithName));
             TargetPermanent target = new TargetControlledCreaturePermanent(filter);
-            Set<UUID> meldWithList = target.possibleTargets(sourceId, source.getControllerId(), game);
+            Set<UUID> meldWithList = target.possibleTargets(sourceId, source.getControllerId(), source, game);
             if (meldWithList.isEmpty()) {
                 return false; // possible permanent has left the battlefield meanwhile
             }
@@ -60,7 +60,7 @@ public class MeldEffect extends OneShotEffect {
             if (meldWithList.size() == 1) {
                 meldWithId = meldWithList.iterator().next();
             } else {
-                if (controller.choose(Outcome.BoostCreature, target, sourceId, game)) {
+                if (controller.choose(Outcome.BoostCreature, target, sourceId, source, game)) {
                     meldWithId = target.getFirstTarget();
                 }
             }

@@ -61,11 +61,11 @@ public class TargetSpell extends TargetObject {
             return false;
         }
         Spell spell = game.getStack().getSpell(id);
-        return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(spell, source.getSourceId(), source.getControllerId(), source, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         if (this.minNumberOfTargets == 0) {
             return true;
         }
@@ -75,7 +75,7 @@ public class TargetSpell extends TargetObject {
             if (sourceId != null && sourceId.equals(stackObject.getSourceId())) {
                 continue;
             }
-            if (canBeChosen(stackObject, sourceId, sourceControllerId, game)) {
+            if (canBeChosen(stackObject, sourceId, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -87,20 +87,20 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+        return canChoose(null, sourceControllerId, null, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         return game.getStack().stream()
-                .filter(stackObject -> canBeChosen(stackObject, sourceId, sourceControllerId, game))
+                .filter(stackObject -> canBeChosen(stackObject, sourceId, sourceControllerId, source, game))
                 .map(StackObject::getId)
                 .collect(Collectors.toSet());
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return this.possibleTargets(null, sourceControllerId, game);
+        return this.possibleTargets(null, sourceControllerId, null, game);
     }
 
     @Override
@@ -108,10 +108,10 @@ public class TargetSpell extends TargetObject {
         return new TargetSpell(this);
     }
 
-    private boolean canBeChosen(StackObject stackObject, UUID sourceID, UUID sourceControllerId, Game game) {
+    private boolean canBeChosen(StackObject stackObject, UUID sourceID, UUID sourceControllerId, Ability source, Game game) {
         return stackObject instanceof Spell
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                && filter.match(stackObject, sourceID, sourceControllerId, game);
+                && filter.match(stackObject, sourceID, sourceControllerId, source, game);
     }
 
     @Override

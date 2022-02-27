@@ -82,7 +82,7 @@ class CounterlashEffect extends OneShotEffect {
                 }
                 filter.add(Predicates.or(types));
                 TargetCardInHand target = new TargetCardInHand(filter);
-                if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

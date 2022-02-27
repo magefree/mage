@@ -87,7 +87,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source.getSourceId(), source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, false, source, game);
@@ -167,7 +167,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             while (!cards.isEmpty() && player.chooseUse(outcome, message, source, game)) {
                 target.clearChosen();
-                if (player.choose(outcome, target, source.getSourceId(), game)) {
+                if (player.choose(outcome, target, source.getSourceId(), source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

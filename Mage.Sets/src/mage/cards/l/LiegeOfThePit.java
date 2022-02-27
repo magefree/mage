@@ -84,8 +84,8 @@ class LiegeOfThePitEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (target.canChoose(source.getSourceId(), player.getId(), source, game)) {
+            player.choose(Outcome.Sacrifice, target, source.getSourceId(), source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.sacrifice(source, game);

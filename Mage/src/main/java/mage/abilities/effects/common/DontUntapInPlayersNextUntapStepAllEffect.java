@@ -11,7 +11,6 @@ import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -102,7 +101,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
                 }
                 if (game.isActivePlayer(permanent.getControllerId())
                         && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                        filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game)) {
                     return true;
                 }
             }

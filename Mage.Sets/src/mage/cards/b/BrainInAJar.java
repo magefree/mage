@@ -94,7 +94,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
             FilterCard filter = new FilterInstantOrSorceryCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, counters));
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(),
-                    source.getSourceId(), game);
+                    source.getSourceId(), source, game);
             if (cardsToCast > 0 
                     && controller.chooseUse(Outcome.PlayForFree,
                     "Cast an instant or sorcery card with mana values of "

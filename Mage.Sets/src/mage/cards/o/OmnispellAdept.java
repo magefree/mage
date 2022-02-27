@@ -85,7 +85,7 @@ class OmnispellAdeptEffect extends OneShotEffect {
         FilterCard realFilter = filter.copy();
         Target target = new TargetCardInHand(realFilter);
         // choose one card until it possible to cast
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+        if (target.canChoose(source.getSourceId(), controller.getId(), source, game)
                 && controller.chooseUse(Outcome.PlayForFree, "Cast an instant or sorcery "
                 + "card from your hand without paying its mana cost?", source, game)) {
             Card cardToCast;

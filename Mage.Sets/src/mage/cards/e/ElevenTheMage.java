@@ -89,7 +89,7 @@ class ElevenTheMageEffect extends OneShotEffect {
         // TODO: change this to fit with changes made in https://github.com/magefree/mage/pull/8136 when merged
         Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
         if (!target.canChoose(
-                source.getSourceId(), player.getId(), game
+                source.getSourceId(), player.getId(), source, game
         ) || !player.chooseUse(
                 Outcome.PlayForFree, "Cast an instant or sorcery spell " +
                         "from your hand without paying its mana cost?", source, game

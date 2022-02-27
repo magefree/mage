@@ -119,8 +119,8 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
 

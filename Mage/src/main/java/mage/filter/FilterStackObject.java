@@ -1,5 +1,6 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
@@ -30,12 +31,12 @@ public class FilterStackObject extends FilterObject<StackObject> {
         this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
-    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Ability source, Game game) {
         if (!this.match(stackObject, game)) {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<StackObject>(stackObject, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<StackObject>(stackObject, sourceId, playerId, source), game);
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {

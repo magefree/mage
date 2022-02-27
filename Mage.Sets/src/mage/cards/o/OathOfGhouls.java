@@ -117,7 +117,7 @@ class OathOfGhoulsEffect extends OneShotEffect {
         filter.add(new OwnerIdPredicate(firstPlayer.getId()));
         Target target = new TargetCardInGraveyard(filter);
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), firstPlayer.getId(), game)
+        if (target.canChoose(source.getSourceId(), firstPlayer.getId(), source, game)
                 && firstPlayer.chooseUse(outcome, "Return a creature card from your graveyard to your hand?", source, game)
                 && firstPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());

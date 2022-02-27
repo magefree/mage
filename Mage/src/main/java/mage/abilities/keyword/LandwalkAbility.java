@@ -64,7 +64,7 @@ class LandwalkEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (game.getBattlefield().contains(filter, source.getSourceId(), blocker.getControllerId(), game, 1)
+        if (game.getBattlefield().contains(filter, source.getSourceId(), blocker.getControllerId(), source, game, 1)
                 && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, null, blocker.getControllerId(), game)) {
             switch (filter.getMessage()) {
                 case "plains":

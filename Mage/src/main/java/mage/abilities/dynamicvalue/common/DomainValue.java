@@ -61,7 +61,7 @@ public class DomainValue implements DynamicValue {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
-                        targetPlayer, sourceAbility.getSourceId(), game
+                        targetPlayer, sourceAbility.getSourceId(), sourceAbility, game
                 ).stream()
                 .map(permanent -> SubType
                         .getBasicLands()

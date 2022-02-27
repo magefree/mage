@@ -53,7 +53,7 @@ public class TargetDefender extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -105,7 +105,7 @@ public class TargetDefender extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {

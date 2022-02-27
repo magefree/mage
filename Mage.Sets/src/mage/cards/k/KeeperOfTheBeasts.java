@@ -64,8 +64,8 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         int creaturesController = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game);
 
@@ -78,7 +78,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         Player controller = game.getPlayer(sourceControllerId);
@@ -89,7 +89,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
                         && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)
                         < game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)
                         && !player.hasLeft()
-                        && filter.match(player, sourceId, sourceControllerId, game)
+                        && filter.match(player, sourceId, sourceControllerId, source, game)
                         && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {

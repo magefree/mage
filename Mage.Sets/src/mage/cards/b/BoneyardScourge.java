@@ -95,7 +95,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+            if (filter.match(zEvent.getTarget(), sourceId, controllerId, this, game)) {
                 return true;
             }
         }
