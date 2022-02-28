@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
+    protected final List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");
@@ -36,7 +36,7 @@ public class FilterCard extends FilterObject<Card> {
 
     public FilterCard(FilterCard filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
+        this.extraPredicates.addAll(filter.extraPredicates);
     }
 
     //20130711 708.6c
@@ -64,7 +64,8 @@ public class FilterCard extends FilterObject<Card> {
         if (!this.match(card, game)) {
             return false;
         }
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Card>(card, sourceId, playerId, source), game);
+        ObjectSourcePlayer<Card> osp = new ObjectSourcePlayer<>(card, sourceId, playerId, source);
+        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {
