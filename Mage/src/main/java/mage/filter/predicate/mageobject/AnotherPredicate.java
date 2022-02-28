@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
@@ -14,7 +13,8 @@ public enum AnotherPredicate implements ObjectSourcePlayerPredicate<MageObject> 
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return !input.getObject().getId().equals(input.getSourceId());
+        return !input.getObject().getId().equals(input.getSourceId())
+                || input.getObject().getZoneChangeCounter(game) != input.getSource().getSourceObjectZoneChangeCounter();
     }
 
     @Override

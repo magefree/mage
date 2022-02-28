@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -75,7 +75,7 @@ class ArsenalThresherEffect extends OneShotEffect {
         }
         Permanent arsenalThresher = game.getPermanentEntering(source.getSourceId());
         FilterArtifactCard filter = new FilterArtifactCard();
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
         if (controller.chooseUse(Outcome.Benefit, "Reveal other artifacts in your hand?", source, game)) {
             Cards cards = new CardsImpl();
             if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), source, game) > 0) {

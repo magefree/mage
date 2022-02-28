@@ -71,7 +71,7 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         Player controller = null;
         if (sourceObject != null) {
             controller = game.getPlayer(sourceObject.getControllerId());
