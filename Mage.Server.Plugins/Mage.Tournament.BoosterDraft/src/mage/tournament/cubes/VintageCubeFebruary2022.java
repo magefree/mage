@@ -12,7 +12,7 @@ public class VintageCubeFebruary2022 extends DraftCube {
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
         cubeCards.add(new CardIdentity("Adanto Vanguard", ""));
-        cubeCards.add(new CardIdentity("Adline, Replendent Cathar", ""));
+        cubeCards.add(new CardIdentity("Adeline, Resplendent Cathar", ""));
         cubeCards.add(new CardIdentity("Ancestral Recall", ""));
         cubeCards.add(new CardIdentity("Ancestral Vision", ""));
         cubeCards.add(new CardIdentity("Ancient Tomb", ""));
@@ -29,7 +29,7 @@ public class VintageCubeFebruary2022 extends DraftCube {
         cubeCards.add(new CardIdentity("Augur of Autumn", ""));
         cubeCards.add(new CardIdentity("Avalanche Riders", ""));
         cubeCards.add(new CardIdentity("Avenger of Zendikar", ""));
-        cubeCards.add(new CardIdentity("Azorious Signet", ""));
+        cubeCards.add(new CardIdentity("Azorius Signet", ""));
         cubeCards.add(new CardIdentity("Badlands", ""));
         cubeCards.add(new CardIdentity("Balance", ""));
         cubeCards.add(new CardIdentity("Baleful Strix", ""));
@@ -323,7 +323,7 @@ public class VintageCubeFebruary2022 extends DraftCube {
         cubeCards.add(new CardIdentity("Nighthawk Scavenger", ""));
         cubeCards.add(new CardIdentity("Nissa, Vastwood Seer", ""));
         cubeCards.add(new CardIdentity("Nissa, Who Shakes the World", ""));
-        cubeCards.add(new CardIdentity("Niv-Mizzet, Reborn", ""));
+        cubeCards.add(new CardIdentity("Niv-Mizzet Reborn", ""));
         cubeCards.add(new CardIdentity("Noble Hierarch", ""));
         cubeCards.add(new CardIdentity("Nurturing Peatland", ""));
         cubeCards.add(new CardIdentity("Oath of Druids", ""));
