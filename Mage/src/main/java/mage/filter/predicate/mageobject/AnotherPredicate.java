@@ -13,8 +13,11 @@ public enum AnotherPredicate implements ObjectSourcePlayerPredicate<MageObject> 
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return !input.getObject().getId().equals(input.getSourceId())
-                || input.getObject().getZoneChangeCounter(game) != input.getSource().getSourceObjectZoneChangeCounter();
+        if (!input.getObject().getId().equals(input.getSourceId())) {
+            return true;
+        }
+        int zcc = input.getSource().getSourceObjectZoneChangeCounter();
+        return zcc != 0 && zcc != input.getObject().getZoneChangeCounter(game);
     }
 
     @Override
