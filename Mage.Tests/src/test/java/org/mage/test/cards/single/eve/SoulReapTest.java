@@ -14,7 +14,7 @@ public class SoulReapTest extends CardTestPlayerBase {
     private static final String rats = "Muck Rats";
 
     @Test
-    public void t() {
+    public void testSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, reap);
@@ -36,7 +36,7 @@ public class SoulReapTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void t2() {
+    public void testNoSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, reap);

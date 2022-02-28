@@ -121,7 +121,6 @@ class SoulReapWatcher extends Watcher {
                 .spellMap
                 .getOrDefault(source.getControllerId(), emptyList)
                 .stream()
-                .anyMatch(mor -> !mor.getSourceId().equals(source.getSourceId())
-                        || mor.getZoneChangeCounter() != source.getSourceObjectZoneChangeCounter());
+                .anyMatch(mor -> !mor.refersTo(source, game));
     }
 }
