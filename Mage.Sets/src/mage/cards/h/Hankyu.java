@@ -145,8 +145,12 @@ class HankyuCost extends UseAttachedCost {
             if (!this.mageObjectReference.refersTo(attachmentId, game)) {
                 continue;
             }
-            int count = permanent.getCounters(game).getCount(CounterType.AIM);
-            permanent.removeCounters(CounterType.AIM.createInstance(count), source, game);
+            Permanent equipment = mageObjectReference.getPermanent(game);
+            if (equipment == null) {
+                continue;
+            }
+            int count = equipment.getCounters(game).getCount(CounterType.AIM);
+            equipment.removeCounters(CounterType.AIM.createInstance(count), source, game);
             paid = true;
             removedCounters = count;
             break;
