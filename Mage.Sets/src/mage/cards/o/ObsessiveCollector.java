@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,16 +53,21 @@ public final class ObsessiveCollector extends CardImpl {
     }
 }
 
+enum ObsessiveCollectorPredicate implements ObjectSourcePlayerPredicate<Card> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        return game.getPlayer(input.getPlayerId()).getHand().size() == input.getObject().getManaValue();
+    }
+}
+
 class ObsessiveCollectorEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(ObsessiveCollectorEffect::checkCard);
-    }
-
-    private static boolean checkCard(ObjectSourcePlayer<Card> input, Game game) {
-        return game.getPlayer(input.getPlayerId()).getHand().size() == input.getObject().getManaValue();
+        filter.add(ObsessiveCollectorPredicate.instance);
     }
 
     ObsessiveCollectorEffect() {
