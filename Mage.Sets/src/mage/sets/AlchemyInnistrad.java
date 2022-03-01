@@ -19,5 +19,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
         super("Alchemy: Innistrad", "Y22", ExpansionSet.buildDate(2021, 12, 9), SetType.MAGIC_ARENA);
         this.blockName = "Alchemy";
         this.hasBoosters = false;
+
+        cards.add(new SetCardInfo("Faithful Disciple", 7, Rarity.UNCOMMON, mage.cards.f.FaithfulDisciple.class));
     }
 }
