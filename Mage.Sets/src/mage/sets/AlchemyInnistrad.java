@@ -20,6 +20,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
         this.blockName = "Alchemy";
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Citystalker Connoisseur", 27, Rarity.RARE, mage.cards.c.CitystalkerConnoisseur.class));
         cards.add(new SetCardInfo("Cursebound Witch", 24, Rarity.UNCOMMON, mage.cards.c.CurseboundWitch.class));
         cards.add(new SetCardInfo("Faithful Disciple", 7, Rarity.UNCOMMON, mage.cards.f.FaithfulDisciple.class));
         cards.add(new SetCardInfo("Ishkanah, Broodmother", 52, Rarity.MYTHIC, mage.cards.i.IshkanahBroodmother.class));
