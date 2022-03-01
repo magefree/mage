@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -38,11 +37,11 @@ public final class HotheadedGiant extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Hotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
+        this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
-                HotheadedGiantWatcher::checkSpell, ""
-        ), "with two -1/-1 counters on it unless you've cast another red spell this turn"), new HotheadedGiantWatcher());
-
+                HotheadedGiantWatcher::checkSpell, null,
+                "\"with two -1/-1 counters on it unless you've cast another red spell this turn\""
+        ), new HotheadedGiantWatcher());
     }
 
     private HotheadedGiant(final HotheadedGiant card) {
@@ -88,7 +87,6 @@ class HotheadedGiantWatcher extends Watcher {
                 .spellMap
                 .getOrDefault(source.getControllerId(), emptyList)
                 .stream()
-                .noneMatch(mor -> !mor.getSourceId().equals(source.getSourceId())
-                        || mor.getZoneChangeCounter() != source.getSourceObjectZoneChangeCounter());
+                .noneMatch(mor -> !mor.refersTo(source, game));
     }
 }

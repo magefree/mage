@@ -53,6 +53,11 @@ enum RocketLauncherCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        return permanent != null && !permanent.wasControlledFromStartOfControllerTurn();
+        return permanent != null && permanent.wasControlledFromStartOfControllerTurn();
+    }
+
+    @Override
+    public String toString() {
+        return "you've controlled {this} continuously since the beginning of your most recent turn";
     }
 }
