@@ -1,3 +1,4 @@
+Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
 Aether Revolt|AetherRevolt|
