@@ -19,6 +19,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
         super("Alchemy: Innistrad", "Y22", ExpansionSet.buildDate(2021, 12, 9), SetType.MAGIC_ARENA);
         this.blockName = "Alchemy";
         this.hasBoosters = false;
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Citystalker Connoisseur", 27, Rarity.RARE, mage.cards.c.CitystalkerConnoisseur.class));
         cards.add(new SetCardInfo("Cursebound Witch", 24, Rarity.UNCOMMON, mage.cards.c.CurseboundWitch.class));
