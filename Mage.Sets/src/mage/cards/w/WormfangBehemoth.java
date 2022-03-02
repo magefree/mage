@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class WormfangBehemoth extends CardImpl {
 
     public WormfangBehemoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.FISH);
