@@ -85,6 +85,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Glory", 11, Rarity.RARE, mage.cards.g.Glory.class));
         cards.add(new SetCardInfo("Golden Wish", 12, Rarity.RARE, mage.cards.g.GoldenWish.class));
         cards.add(new SetCardInfo("Goretusk Firebeast", 91, Rarity.COMMON, mage.cards.g.GoretuskFirebeast.class));
+        cards.add(new SetCardInfo("Grave Consequences", 67, Rarity.UNCOMMON, mage.cards.g.GraveConsequences.class));
         cards.add(new SetCardInfo("Grip of Amnesia", 41, Rarity.COMMON, mage.cards.g.GripOfAmnesia.class));
         cards.add(new SetCardInfo("Grizzly Fate", 119, Rarity.UNCOMMON, mage.cards.g.GrizzlyFate.class));
         cards.add(new SetCardInfo("Guided Strike", 13, Rarity.COMMON, mage.cards.g.GuidedStrike.class));
