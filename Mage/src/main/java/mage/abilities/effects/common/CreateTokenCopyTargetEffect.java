@@ -222,6 +222,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (gainsFlying) {
             token.addAbility(FlyingAbility.getInstance());
         }
+        if (permanent != null && permanent.isMutateOver()) {
+            for (Permanent underPermanent : permanent.getMutatedOverList()) {
+                underPermanent.getAbilities().forEach(token::addAbility);
+            }
+        }
         if (tokenPower != Integer.MIN_VALUE) {
             token.removePTCDA();
             token.getPower().modifyBaseValue(tokenPower);

@@ -12,13 +12,6 @@ import java.util.List;
  */
 public final class Commander2020Edition extends ExpansionSet {
 
-    private static final List<String> mutateNames = Arrays.asList(
-            "Mindleecher",
-            "Otrimi, the Ever-Playful",
-            "Sawtusk Demolisher",
-            "Souvenir Snatcher"
-    );
-
     private static final Commander2020Edition instance = new Commander2020Edition();
 
     public static Commander2020Edition getInstance() {
@@ -352,7 +345,5 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Zaxara, the Exemplary", 20, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 107, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 142, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
-
-        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 }

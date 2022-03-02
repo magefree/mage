@@ -106,6 +106,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
+    protected List<Permanent> mutatedOverList = new ArrayList<>();
+    protected Permanent mutatedUnder = null;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -175,6 +177,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+
+        for (Permanent under : permanent.mutatedOverList) {
+             this.mutatedOverList.add(under.copy());
+        }
+        this.mutatedUnder = permanent.mutatedUnder;
     }
 
     @Override
@@ -363,11 +370,37 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Abilities<Ability> getAbilities() {
+        if (isMutateOver() && !faceDown) {
+            Abilities<Ability> mutatedAbilities = super.getAbilities().copy();
+            if (flipCard && isFlipped()) {
+                // Fix for flipped cards having their unflipped abilities carry over for some reason.
+                mutatedAbilities.removeAll(getMainCard().getAbilities().copy());
+            }
+            for (Permanent permanent : mutatedOverList) {
+                if (permanent instanceof PermanentImpl && !((PermanentImpl) permanent).faceDown) {
+                    mutatedAbilities.addAll(permanent.getAbilities().copy());
+                }
+            }
+            return mutatedAbilities;
+        }
         return super.getAbilities();
     }
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
+        if (isMutateOver() && !faceDown) {
+            Abilities<Ability> mutatedAbilities = super.getAbilities(game).copy();
+            if (flipCard && isFlipped()) {
+                // Fix for flipped cards having their unflipped abilities carry over for some reason.
+                mutatedAbilities.removeAll(getMainCard().getAbilities(game).copy());
+            }
+            for (Permanent permanent : mutatedOverList) {
+                if (!permanent.isFaceDown(game)) {
+                    mutatedAbilities.addAll(permanent.getAbilities().copy());
+                }
+            }
+            return mutatedAbilities;
+        }
         return super.getAbilities(game);
     }
 
@@ -379,7 +412,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             Ability copyAbility = ability.copy();
             copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
             copyAbility.setControllerId(controllerId);
-            copyAbility.setSourceId(objectId);
+            copyAbility.setSourceId(mutatedUnder != null ? mutatedUnder.getId() : objectId);
             // triggered abilities must be added to the state().triggers
             // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
             if (game != null) {
@@ -526,6 +559,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setFaceDown(boolean value, Game game) {
         this.faceDown = value;
+        for (Permanent permanent : this.mutatedOverList) {
+            permanent.setFaceDown(value, game);
+        }
     }
 
     @Override
@@ -540,9 +576,23 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean unflip(Game game) {
+        boolean success = false;
+        for (Permanent permanent : this.mutatedOverList) {
+            if (permanent.isFlipCard() && permanent instanceof PermanentImpl) {
+                if (((PermanentImpl) permanent).flipped) {
+                    ((PermanentImpl) permanent).flipped = false;
+                    success = true;
+                }
+            }
+        }
         if (flipped) {
             if (!replaceEvent(EventType.UNFLIP, game)) {
                 this.flipped = false;
+                fireEvent(EventType.UNFLIPPED, game);
+                return true;
+            }
+        } else if (success) {
+            if (!replaceEvent(EventType.UNFLIP, game)) {
                 fireEvent(EventType.UNFLIPPED, game);
                 return true;
             }
@@ -552,9 +602,23 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean flip(Game game) {
+        boolean success = false;
+        for (Permanent permanent : this.mutatedOverList) {
+            if (permanent.isFlipCard() && permanent instanceof PermanentImpl) {
+                if (!((PermanentImpl) permanent).flipped) {
+                    ((PermanentImpl) permanent).flipped = true;
+                    success = true;
+                }
+            }
+        }
         if (!flipped) {
             if (!replaceEvent(EventType.FLIP, game)) {
                 this.flipped = true;
+                fireEvent(EventType.FLIPPED, game);
+                return true;
+            }
+        } else if (success) {
+            if (!replaceEvent(EventType.FLIP, game)) {
                 fireEvent(EventType.FLIPPED, game);
                 return true;
             }
@@ -578,12 +642,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
+        boolean success = false;
+        for (Permanent permanent : this.mutatedOverList) {
+            success |= permanent.transform(source, game, ignoreDayNight);
+        }
+        PermanentImpl srcPerm = (mutatedUnder != null && mutatedUnder instanceof PermanentImpl ? (PermanentImpl) mutatedUnder : this);
         if (!this.isTransformable()
                 || (!ignoreDayNight && this.checkDayNightBound())
                 || this.getOtherFace().isInstantOrSorcery()
-                || (source != null && !source.checkTransformCount(this, game))
-                || this.replaceEvent(EventType.TRANSFORM, game)) {
-            return false;
+                || (source != null && !source.checkTransformCount(srcPerm, game))
+                || srcPerm.replaceEvent(EventType.TRANSFORM, game)) {
+            return success;
         }
         if (this.transformed) {
             Card orgCard = this.getMainCard();
@@ -595,8 +664,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.setTransformed(!this.transformed);
         this.transformCount++;
         game.applyEffects();
-        this.replaceEvent(EventType.TRANSFORMING, game);
-        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
+        srcPerm.replaceEvent(EventType.TRANSFORMING, game);
+        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, srcPerm.getId(), this.getControllerId()));
         return true;
     }
 
@@ -622,6 +691,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseIn(Game game, boolean onlyDirect) {
+        for (Permanent permanent : this.mutatedOverList) {
+            permanent.phaseIn(game, onlyDirect);
+        }
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)
                     && (!onlyDirect || !indirectPhase)) {
@@ -650,6 +722,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean phaseOut(Game game, boolean indirectPhase) {
+        for (Permanent permanent : this.mutatedOverList) {
+            permanent.phaseOut(game, indirectPhase);
+        }
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
                 for (UUID attachedId : this.getAttachments()) {
@@ -1535,7 +1610,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean isTransformed() {
-        return this.transformed;
+        if (this.transformed) return true;
+        for (Permanent permanent : mutatedOverList) {
+            if (permanent.isTransformed()) return true;
+        }
+        return false;
     }
 
     @Override
@@ -1545,22 +1624,36 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean isMonstrous() {
-        return this.monstrous;
+        if (this.monstrous) return true;
+        for (Permanent permanent : mutatedOverList) {
+            if (permanent.isMonstrous()) return true;
+        }
+        return false;
     }
 
     @Override
     public void setMonstrous(boolean value) {
         this.monstrous = value;
+        for (Permanent permanent : mutatedOverList) {
+            permanent.setMonstrous(value);
+        }
     }
 
     @Override
     public boolean isRenowned() {
-        return this.renowned;
+        if (this.renowned) return true;
+        for (Permanent permanent : mutatedOverList) {
+            if (permanent.isRenowned()) return true;
+        }
+        return false;
     }
 
     @Override
     public void setRenowned(boolean value) {
         this.renowned = value;
+        for (Permanent permanent : mutatedOverList) {
+            permanent.setRenowned(value);
+        }
     }
 
     @Override
@@ -1760,13 +1853,37 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
-            ZoneChangeInfo zoneChangeInfo;
-            if (toZone == Zone.LIBRARY) {
-                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+
+            boolean successfullyMoved;
+            if (toZone != Zone.BATTLEFIELD && isMutateOver()) {
+                List<ZoneChangeEvent> underEvents = new ArrayList<>();
+                for (Permanent permanent : getMutatedOverList()) {
+                    underEvents.add(new ZoneChangeEvent(permanent, source, controllerId, Zone.MUTATE, toZone, appliedEffects));
+                }
+
+                List<ZoneChangeInfo> list = new ArrayList<>();
+                if (toZone == Zone.LIBRARY) {
+                    list.add(new ZoneChangeInfo.Library(event, flag /* put on top */));
+                    for (ZoneChangeEvent underEvent : underEvents) {
+                        list.add(new ZoneChangeInfo.Library(underEvent, flag));
+                    }
+                } else {
+                    list.add(new ZoneChangeInfo(event));
+                    for (ZoneChangeEvent underEvent : underEvents) {
+                        list.add(new ZoneChangeInfo(underEvent));
+                    }
+                }
+                successfullyMoved = !ZonesHandler.moveCards(list, game, source).isEmpty();
             } else {
-                zoneChangeInfo = new ZoneChangeInfo(event);
+                ZoneChangeInfo zoneChangeInfo;
+                if (toZone == Zone.LIBRARY) {
+                    zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+                } else {
+                    zoneChangeInfo = new ZoneChangeInfo(event);
+                }
+                successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
             }
-            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
+
             //20180810 - 701.3d
             detachAllAttachments(game);
             return successfullyMoved;
@@ -1780,9 +1897,175 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
+        boolean successfullyMoved;
+        if (isMutateOver()) {
+            List<ZoneChangeEvent> underEvents = new ArrayList<>();
+            for (Permanent permanent : getMutatedOverList()) {
+                underEvents.add(new ZoneChangeEvent(permanent, source, ownerId, Zone.MUTATE, Zone.EXILED, appliedEffects));
+            }
+
+            List<ZoneChangeInfo> list = new ArrayList<>();
+            list.add(zcInfo);
+            for (ZoneChangeEvent underEvent : underEvents) {
+                list.add(new ZoneChangeInfo.Exile(underEvent, exileId, name));
+            }
+            successfullyMoved = !ZonesHandler.moveCards(list, game, source).isEmpty();
+        } else {
+            successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
+        }
+
         //20180810 - 701.3d
         detachAllAttachments(game);
         return successfullyMoved;
+    }
+
+    @Override
+    public boolean isMutateOver() {
+        return !mutatedOverList.isEmpty();
+    }
+
+    @Override
+    public boolean isMutatedUnder() {
+        return mutatedUnder != null;
+    }
+
+    @Override
+    public void setMutatedUnder(Permanent permanent) {
+        this.mutatedUnder = permanent;
+        this.mutatedOverList.clear(); // Permanents that are mutated under a permanent cannot have permanents mutated under them
+    }
+
+    @Override
+    public Permanent getMutatedUnder() {
+        return mutatedUnder;
+    }
+
+    @Override
+    public boolean applyMutateUnder(Permanent permanent, Game game) {
+        permanent.setMutatedUnder(this);
+        mutatedOverList.add(permanent);
+        if (permanent instanceof PermanentImpl) {
+            for (Ability ability : ((PermanentImpl) permanent).abilities) {
+                ability.setSourceId(getId());
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean applyMutateOver(Permanent permanent, Game game) {
+        List<Permanent> prevMutatedOverList = permanent.getMutatedOverList();
+        for (Permanent under : prevMutatedOverList) {
+            under.setMutatedUnder(this); // This will also clear the previous permanent's mutatedOverList
+        }
+        mutatedOverList.addAll(prevMutatedOverList);
+        applyMutateUnder(permanent, game);
+
+        ownerId = permanent.getOwnerId();
+        spellAbility = null; // will be set on first getSpellAbility call if card has one
+
+        attachments.addAll(permanent.getAttachments());
+        permanent.getAttachments().clear();
+
+        for (UUID attachmentId : attachments) {
+            Permanent attachment = game.getPermanent(attachmentId);
+            if (attachment instanceof PermanentImpl) {
+                PermanentImpl attachmentImpl = (PermanentImpl) attachment;
+                if (attachmentImpl.attachedTo.equals(permanent.getId())) {
+                    attachmentImpl.attachedTo = getId();
+                }
+            }
+        }
+
+        RegenerateSourceEffect.mutateRegenerationShieldsAmount(game, permanent.getId(), getId());
+
+        if (permanent instanceof PermanentImpl) {
+            PermanentImpl permanentImpl = (PermanentImpl) permanent;
+
+            for (Ability ability : permanentImpl.abilities) {
+                ability.setSourceId(getId());
+            }
+
+            morphCard = permanentImpl.morphCard;
+
+            this.tapped = permanentImpl.tapped;
+            this.originalControllerId = permanentImpl.originalControllerId;
+            this.controllerId = permanentImpl.controllerId;
+            this.damage = permanentImpl.damage;
+            this.controlledFromStartOfControllerTurn = permanentImpl.controlledFromStartOfControllerTurn;
+            this.turnsOnBattlefield = permanentImpl.turnsOnBattlefield;
+            this.attacking = permanentImpl.attacking;
+            this.blocking = permanentImpl.blocking;
+            this.maxBlocks = permanentImpl.maxBlocks;
+            this.deathtouched = permanentImpl.deathtouched;
+            this.markedLifelink = permanentImpl.markedLifelink;
+
+            for (Map.Entry<String, List<UUID>> entry : permanentImpl.connectedCards.entrySet()) {
+                this.connectedCards.put(entry.getKey(), entry.getValue());
+            }
+            permanentImpl.connectedCards.clear();
+
+            if (permanentImpl.dealtDamageByThisTurn != null) {
+                dealtDamageByThisTurn = new HashSet<>(permanentImpl.dealtDamageByThisTurn);
+                permanentImpl.dealtDamageByThisTurn.clear();
+            }
+
+            if (permanentImpl.markedDamage != null) {
+                markedDamage = new ArrayList<>();
+                for (MarkedDamageInfo mdi : permanentImpl.markedDamage) {
+                    markedDamage.add(new MarkedDamageInfo(mdi.counter.copy(), mdi.sourceObject, mdi.addCounters));
+                }
+                permanentImpl.markedDamage.clear();
+            }
+
+            if (permanentImpl.info != null) {
+                info = new HashMap<>();
+                info.putAll(permanentImpl.info);
+                permanentImpl.info.clear();
+            }
+
+            this.counters = permanentImpl.counters.copy();
+            permanentImpl.counters.clear();
+
+            this.attachedTo = permanentImpl.attachedTo;
+            if (this.attachedTo != null) {
+                Permanent attach = game.getPermanent(this.attachedTo);
+                if (attach instanceof PermanentImpl) {
+                    PermanentImpl attachImpl = (PermanentImpl) attach;
+                    if (attachImpl.attachments.contains(permanent.getId())) {
+                        attachImpl.attachments.set(attachImpl.attachments.indexOf(permanent.getId()), getId());
+                    }
+                }
+            }
+
+            this.attachedToZoneChangeCounter = permanentImpl.attachedToZoneChangeCounter;
+            this.minBlockedBy = permanentImpl.minBlockedBy;
+            this.maxBlockedBy = permanentImpl.maxBlockedBy;
+            this.monstrous = permanentImpl.monstrous;
+            this.renowned = permanentImpl.renowned;
+            this.classLevel = permanentImpl.classLevel;
+            this.pairedPermanent = permanentImpl.pairedPermanent;
+            if (this.pairedPermanent != null) {
+                Permanent paired = this.pairedPermanent.getPermanent(game);
+                paired.setPairedCard(new MageObjectReference(this, game));
+            }
+
+            this.timesLoyaltyUsed = permanentImpl.timesLoyaltyUsed;
+            this.transformCount = permanentImpl.transformCount;
+            this.createOrder = permanentImpl.createOrder;
+
+            this.bandedCards.addAll(permanentImpl.bandedCards);
+            permanentImpl.bandedCards.clear();
+
+            this.goadingPlayers.addAll(permanentImpl.goadingPlayers);
+            permanentImpl.goadingPlayers.clear();
+        }
+
+        return true;
+    }
+
+    @Override
+    public List<Permanent> getMutatedOverList() {
+        return new ArrayList<>(mutatedOverList);
     }
 }

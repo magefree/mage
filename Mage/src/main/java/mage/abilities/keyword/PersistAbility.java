@@ -13,6 +13,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class PersistAbility extends DiesSourceTriggeredAbility {
 
     public PersistAbility() {
@@ -69,9 +73,21 @@ class PersistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Counters countersToAdd = new Counters();
-        countersToAdd.addCounter(CounterType.M1M1.createInstance());
-        game.setEnterWithCounters(source.getSourceId(), countersToAdd);
+        List<UUID> sourceIds = new ArrayList<>();
+        if (source instanceof PersistAbility) {
+            sourceIds = ((PersistAbility) source).getMutatedSourceIds();
+        }
+
+        if (sourceIds.isEmpty()) {
+            sourceIds.add(source.getSourceId());
+        }
+
+        for (UUID sourceId : sourceIds) {
+            Counters countersToAdd = new Counters();
+            countersToAdd.addCounter(CounterType.M1M1.createInstance());
+            game.setEnterWithCounters(sourceId, countersToAdd);
+        }
+
         return true;
     }
 }

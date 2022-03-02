@@ -127,6 +127,14 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
         setRegenerationShieldsAmount(game, permanentId, amount);
         return amount;
     }
+
+    public static void mutateRegenerationShieldsAmount(Game game, UUID underPermanentId, UUID overPermanentId) {
+        int amount = getRegenerationShieldsAmount(game, underPermanentId);
+        if (amount > 0) {
+            setRegenerationShieldsAmount(game, underPermanentId, 0);
+            setRegenerationShieldsAmount(game, overPermanentId, amount);
+        }
+    }
 }
 
 enum RegenerationShieldsHint implements Hint {

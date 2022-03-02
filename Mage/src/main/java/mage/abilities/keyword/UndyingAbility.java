@@ -12,6 +12,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -66,9 +70,20 @@ class UndyingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Counters countersToAdd = new Counters();
-        countersToAdd.addCounter(CounterType.P1P1.createInstance());
-        game.setEnterWithCounters(source.getSourceId(), countersToAdd);
+        List<UUID> sourceIds = new ArrayList<>();
+        if (source instanceof UndyingAbility) {
+            sourceIds = ((UndyingAbility) source).getMutatedSourceIds();
+        }
+        if (sourceIds.isEmpty()) {
+            sourceIds.add(source.getSourceId());
+        }
+
+        for (UUID sourceId : sourceIds) {
+            Counters countersToAdd = new Counters();
+            countersToAdd.addCounter(CounterType.P1P1.createInstance());
+            game.setEnterWithCounters(sourceId, countersToAdd);
+        }
+
         return true;
     }
 }

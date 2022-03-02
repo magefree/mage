@@ -37,7 +37,14 @@ public class CommanderInfoWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (checkCommanderDamage && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
-            if (sourceId.equals(event.getSourceId())) {
+            boolean isCommander = sourceId.equals(event.getSourceId());
+            if (!isCommander) {
+                Permanent permanent = game.getPermanent(event.getSourceId());
+                if (permanent != null && permanent.isMutateOver()) {
+                    isCommander = permanent.getMutatedOverList().stream().anyMatch(p -> sourceId.equals(p.getId()));
+                }
+            }
+            if (isCommander) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     UUID playerUUID = event.getTargetId();

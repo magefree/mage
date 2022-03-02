@@ -19,6 +19,9 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -79,15 +82,11 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        // TODO: Implement this
-        //return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
-        return false;
+        return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: Implement this
-        /*
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         Permanent targetPermanent = game.getPermanent(event.getTargetId());
         if (sourcePermanent != null && targetPermanent != null) {
@@ -103,7 +102,6 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        */
         return false;
     }
 

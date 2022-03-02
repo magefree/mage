@@ -44,6 +44,9 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getTargetId().equals(this.getSourceId())) {
             this.getEffects().clear();
             this.addEffect(new GodEternalEffect(new MageObjectReference(zEvent.getTarget(), game)));
+            for (Permanent permUnder : zEvent.getTarget().getMutatedOverList()) {
+                this.addEffect(new GodEternalEffect(new MageObjectReference(permUnder, game)));
+            }
             return true;
         }
         return false;

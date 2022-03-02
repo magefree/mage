@@ -1,7 +1,12 @@
 package mage.cards.e;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -23,6 +28,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -137,10 +143,20 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
+        List<UUID> targetIds = new ArrayList<>();
+        targetIds.add(source.getFirstTarget());
+        if (creature.isMutateOver()) {
+            targetIds.addAll(creature.getMutatedOverList().stream()
+                    .filter(p -> !(p instanceof PermanentToken) && !p.isCopy())
+                    .map(MageItem::getId)
+                    .collect(Collectors.toList()));
+        }
         controller.moveCards(creature, Zone.EXILED, source, game);
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
+        for (UUID targetId : targetIds) {
+            Card card = game.getCard(targetId);
+            if (card != null) {
+                card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
+            }
         }
         int cardsFound = 0;
         cardsFound = game.getExile().getAllCards(game).stream().filter((exiledCard) -> (exiledCard.getCounters(game).getCount(CounterType.HIT) >= 1

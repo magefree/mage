@@ -57,6 +57,16 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                             this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
                         }
                     }
+                    for (Permanent permUnder : perm.getMutatedOverList()) {
+                        Card cardUnder = game.getCard(permUnder.getId());
+                        if (cardUnder != null) {
+                            for (Ability ability : cardUnder.getAbilities(game)) {
+                                if (ability instanceof MorphAbility) {
+                                    this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

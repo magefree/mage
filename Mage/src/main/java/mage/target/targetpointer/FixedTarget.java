@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class FixedTarget extends TargetPointerImpl {
 
-    private final UUID targetId;
+    private UUID targetId;
     private int zoneChangeCounter;
     private boolean initialized;
 
@@ -179,5 +179,12 @@ public class FixedTarget extends TargetPointerImpl {
             return (Permanent) mageObject;
         }
         return null;
+    }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        if (targetId.equals(originalTargetId)) {
+            targetId = newTargetId;
+        }
     }
 }

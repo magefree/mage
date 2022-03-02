@@ -140,10 +140,21 @@ class TransformEffect extends ContinuousEffectImpl {
             return true;
         }
 
+        boolean success = false;
+        for (Permanent underPermanent : permanent.getMutatedOverList()) {
+            if (!underPermanent.isCopy() && underPermanent.isTransformed()) {
+                Card card = underPermanent.getSecondCardFace();
+                if (card != null) {
+                    TransformAbility.transformPermanent(underPermanent, card, game, source);
+                    success = true;
+                }
+            }
+        }
+
         Card card = permanent.getSecondCardFace();
 
         if (card == null) {
-            return false;
+            return success;
         }
 
         TransformAbility.transformPermanent(permanent, card, game, source);

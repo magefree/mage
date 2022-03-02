@@ -2,10 +2,7 @@ package mage.game;
 
 import mage.MageItem;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -657,12 +654,23 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
         if (object instanceof Card) {
             idToCheck = ((Card) object).getMainCard().getId();
         }
-        return idToCheck != null && this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false).contains(idToCheck);
+        Set<UUID> commanderIds = this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false);
+        if (object instanceof Permanent && ((Permanent) object).isMutateOver()) {
+            List<UUID> mutatedCardIds = ((Permanent) object).getMutatedOverList().stream()
+                    .filter(p -> p instanceof PermanentCard)
+                    .map(p -> ((PermanentCard) p).getCard().getId())
+                    .collect(Collectors.toList());
+            boolean commanderFound = mutatedCardIds.stream().anyMatch(commanderIds::contains);
+            if (commanderFound) return true;
+        }
+        return idToCheck != null && commanderIds.contains(idToCheck);
     }
 
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
-    
+
     boolean isTurnOrderReversed();
+
+    boolean mutatePermanent(Card card, UUID permanentId, Spell source);
 }

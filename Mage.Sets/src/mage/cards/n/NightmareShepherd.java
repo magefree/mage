@@ -1,6 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +19,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -86,6 +89,20 @@ class NightmareShepherdEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
+
+        // Special-case: Exile any permanents that where mutated under this card.
+        MageObject cardLKI = game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
+        if (cardLKI instanceof Permanent && ((Permanent) cardLKI).isMutateOver()) {
+            for (Permanent permanent : ((Permanent) cardLKI).getMutatedOverList()) {
+                if (permanent instanceof PermanentCard && !permanent.isCopy()) {
+                    Card mutatedCard = ((PermanentCard) permanent).getCard();
+                    if (mutatedCard != null) {
+                        player.moveCards(mutatedCard, Zone.EXILED, source, game);
+                    }
+                }
+            }
+        }
+
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                 source.getControllerId(), null, false, 1, false,
                 false, null, 1, 1, false

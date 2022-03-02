@@ -117,4 +117,13 @@ public class FirstTargetPointer extends TargetPointerImpl {
         }
         return permanent;
     }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        if (zoneChangeCounter.containsKey(originalTargetId)) {
+            Integer value = zoneChangeCounter.get(originalTargetId);
+            zoneChangeCounter.remove(originalTargetId);
+            zoneChangeCounter.put(newTargetId, value);
+        }
+    }
 }

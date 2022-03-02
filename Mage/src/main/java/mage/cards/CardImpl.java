@@ -526,6 +526,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     removed = game.getState().getCommand().remove(lkiObject);
                 }
                 break;
+            case MUTATE:
             case OUTSIDE:
                 if (isCopy()) { // copied cards have no need to be removed from a previous zone
                     removed = true;
@@ -550,7 +551,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
         }
         if (removed) {
-            if (fromZone != Zone.OUTSIDE) {
+            if (fromZone != Zone.OUTSIDE && fromZone != Zone.MUTATE) {
                 game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {

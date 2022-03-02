@@ -1,9 +1,9 @@
 
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -14,20 +14,21 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  * @author nantuko
@@ -92,10 +93,21 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
         if (permanent != null
                 && zEvent.isDiesEvent()
-                && !(permanent instanceof PermanentToken)
                 && permanent.isCreature(game)) {
 
-            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), game));
+            if (!permanent.isMutateOver() && !(permanent instanceof PermanentToken)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), game));
+            } else {
+                Set<Card> cards = new HashSet<>();
+                if (!(permanent instanceof PermanentToken)) {
+                    cards.add(permanent.getMainCard());
+                }
+                cards.addAll(permanent.getMutatedOverList().stream()
+                        .filter(p -> !(p instanceof PermanentToken) && !p.isCopy())
+                        .map(Permanent::getMainCard)
+                        .collect(Collectors.toList()));
+                getEffects().get(0).setTargetPointer(new FixedTargets(cards, game));
+            }
             return true;
         }
         return false;
@@ -125,9 +137,13 @@ class MimicVatEffect extends OneShotEffect {
         if (controller == null || permanent == null) {
             return false;
         }
-        // Imprint a new one
-        Card newCard = game.getCard(getTargetPointer().getFirst(game, source));
-        if (newCard != null) {
+
+        List<UUID> targets = getTargetPointer().getTargets(game, source);
+        List<Card> targetCards = targets.stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (!targetCards.isEmpty()) {
             // return older cards to graveyard
             Set<Card> toGraveyard = new HashSet<>();
             for (UUID imprintedId : permanent.getImprinted()) {
@@ -135,10 +151,12 @@ class MimicVatEffect extends OneShotEffect {
                 if (card != null) {
                     toGraveyard.add(card);
                 }
+                controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
+                permanent.clearImprinted(game);
             }
-            controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
-            permanent.clearImprinted(game);
-
+        }
+        // Imprint new ones
+        for (Card newCard : targetCards) {
             controller.moveCardsToExile(newCard, source, game, true, source.getSourceId(), permanent.getName() + " (Imprint)");
             permanent.imprint(newCard.getId(), game);
         }
@@ -178,6 +196,22 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
 
         if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
+            if (permanent.getImprinted().size() > 1) {
+                Player player = game.getPlayer(source.getControllerId());
+                if (player != null) {
+                    TargetCard target = new TargetCard(Zone.ALL, new FilterCard());
+                    target.setRequired(true);
+                    Cards cards = new CardsImpl();
+                    for (UUID cardId : permanent.getImprinted()) {
+                        Card c = game.getCard(cardId);
+                        if (c != null) {
+                            cards.add(c);
+                        }
+                    }
+                    player.chooseTarget(Outcome.Neutral, cards, target, source, game);
+                    card = game.getCard(target.getFirstTarget());
+                }
+            }
             if (card != null) {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
                 effect.setTargetPointer(new FixedTarget(card, game));

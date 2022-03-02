@@ -15,7 +15,8 @@ public enum Zone {
     EXILED(true),
     ALL(false),
     OUTSIDE(false),
-    COMMAND(true);
+    COMMAND(true),
+    MUTATE(true);
 
     private final boolean isPublic;
 

@@ -118,4 +118,13 @@ public class ThirdTargetPointer extends TargetPointerImpl {
         }
         return null;
     }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        if (zoneChangeCounter.containsKey(originalTargetId)) {
+            Integer value = zoneChangeCounter.get(originalTargetId);
+            zoneChangeCounter.remove(originalTargetId);
+            zoneChangeCounter.put(newTargetId, value);
+        }
+    }
 }

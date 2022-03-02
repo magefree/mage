@@ -6,7 +6,6 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.ArrayList;
@@ -34,6 +33,8 @@ public class PermanentView extends CardView {
     private final boolean morphed;
     private final boolean manifested;
     private final boolean attachedToPermanent;
+    private final boolean mutatedOver;
+    private final MutateView mutateView;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, game, permanent.getControllerId() != null && permanent.getControllerId().equals(createdForPlayerId));
@@ -66,6 +67,8 @@ public class PermanentView extends CardView {
         }
         this.transformed = permanent.isTransformed();
         this.copy = permanent.isCopy();
+        this.mutatedOver = permanent.isMutateOver();
+        this.mutateView = new MutateView(permanent, game);
 
         // for fipped, transformed or copied cards, switch the names
         if (original != null && !original.getName().equals(this.getName())) {
@@ -184,5 +187,13 @@ public class PermanentView extends CardView {
 
     public boolean isManifested() {
         return manifested;
+    }
+
+    public boolean isMutatedOver() {
+        return mutatedOver;
+    }
+
+    public MutateView getMutateView() {
+        return mutateView;
     }
 }

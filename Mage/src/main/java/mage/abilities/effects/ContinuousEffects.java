@@ -23,6 +23,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
@@ -1512,5 +1513,22 @@ public class ContinuousEffects implements Serializable {
     @Override
     public String toString() {
         return "Effects: " + allEffectsLists.stream().mapToInt(ContinuousEffectsList::size).sum();
+    }
+
+    public void replaceMutatedObjects(UUID originalId, UUID newId, Game game) {
+        for (ContinuousEffectsList<?> effectsList : allEffectsLists) {
+            for (ContinuousEffect effect : effectsList) {
+                effect.getTargetPointer().replaceMutatedTarget(originalId, newId, game);
+                Set<Ability> abilities = effectsList.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (ability.getSourceId() != null && ability.getSourceId().equals(originalId)) {
+                        ability.setSourceId(newId);
+                    }
+                    for (Target target : ability.getTargets()) {
+                        target.replaceMutatedTarget(originalId, newId);
+                    }
+                }
+            }
+        }
     }
 }

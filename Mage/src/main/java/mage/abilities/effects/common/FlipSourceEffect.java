@@ -35,6 +35,15 @@ public class FlipSourceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
             if (permanent.flip(game)) {
+                // Fix for flip cards mutated under a non-flip card
+                if (permanent.isMutateOver() && !permanent.isFlipCard()) {
+                    for (Permanent underPermanent : permanent.getMutatedOverList()) {
+                        if (underPermanent.isFlipCard()) {
+                            source.setSourceId(underPermanent.getId());
+                            break;
+                        }
+                    }
+                }
                 ContinuousEffect effect = new ConditionalContinuousEffect(new CopyTokenEffect(flipToken), FlippedCondition.instance, "");
                 game.addEffect(effect, source);
                 if (!game.isSimulation()) {

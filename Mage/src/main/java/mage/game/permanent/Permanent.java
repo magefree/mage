@@ -412,4 +412,18 @@ public interface Permanent extends Card, Controllable {
         }
         return getAttachedTo().equals(otherId);
     }
+
+    boolean isMutateOver();
+
+    boolean isMutatedUnder();
+
+    void setMutatedUnder(Permanent permanent);
+
+    Permanent getMutatedUnder();
+
+    boolean applyMutateUnder(Permanent permanent, Game game);
+
+    boolean applyMutateOver(Permanent permanent, Game game);
+
+    List<Permanent> getMutatedOverList();
 }
