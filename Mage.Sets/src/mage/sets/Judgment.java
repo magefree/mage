@@ -162,6 +162,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Web of Inertia", 53, Rarity.UNCOMMON, mage.cards.w.WebOfInertia.class));
         cards.add(new SetCardInfo("Wonder", 54, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
+        cards.add(new SetCardInfo("Wormfang Behemoth", 55, Rarity.RARE, mage.cards.w.WormfangBehemoth.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));
         cards.add(new SetCardInfo("Wormfang Manta", 58, Rarity.RARE, mage.cards.w.WormfangManta.class));
         cards.add(new SetCardInfo("Wormfang Newt", 59, Rarity.COMMON, mage.cards.w.WormfangNewt.class));
