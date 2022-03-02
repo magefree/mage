@@ -28,9 +28,9 @@ public final class Graxiplon extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // Graxiplon can’t be blocked unless defending player controls three or more creatures that share a creature type.
+        // Graxiplon can't be blocked unless defending player controls three or more creatures that share a creature type.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), GraxiplonCondition.instance, "{this} can’t be blocked " +
+                new CantBeBlockedSourceEffect(), GraxiplonCondition.instance, "{this} can't be blocked " +
                 "unless defending player controls three or more creatures that share a creature type"
         )));
     }
