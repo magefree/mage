@@ -62,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "M21"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "KHC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1630,16 +1630,16 @@ public class VerifyCardDataTest {
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
         // evergreen keyword fix
-        for (String s : refText.split("[\\$\\\n]")) {
+        for (String s : refText.replaceAll(" \\(.+?\\)", "").split("[\\$\\\n]")) {
             if (Arrays
-                    .stream(s.split(", "))
+                    .stream(s.split("[,;] "))
                     .map(String::toLowerCase)
                     .allMatch(VerifyCardDataTest::evergreenCheck)) {
                 String replacement = Arrays
-                        .stream(s.split(", "))
+                        .stream(s.split("[,;] "))
                         .map(CardUtil::getTextWithFirstCharUpperCase)
-                        .reduce("", (a, b) -> a + '\n' + b);
-                refText = refText.replace(s, replacement.substring(1));
+                        .collect(Collectors.joining("\n"));
+                refText = refText.replace(s, replacement);
             }
         }
         // modal spell fix
