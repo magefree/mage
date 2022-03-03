@@ -1488,6 +1488,13 @@ public class VerifyCardDataTest {
         newRule = newRule.replaceAll("(?i) <i>\\(.+\\)</i>", "");
         newRule = newRule.replaceAll("(?i) \\(.+\\)", "");
 
+        // fix specifically for mana abilities
+        if (newRule.startsWith("({T}: Add")) {
+            newRule = newRule
+                    .replace("(", "")
+                    .replace(")", "");
+        }
+
         // replace special text and symbols
         newRule = newRule
                 .replace("{this}", cardName)
@@ -1619,10 +1626,6 @@ public class VerifyCardDataTest {
         }
 
         String refText = ref.text;
-        // lands fix
-        if (refText.startsWith("(") && refText.endsWith(")")) {
-            refText = refText.substring(1, refText.length() - 1);
-        }
         // planeswalker fix [-7]: xxx
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
