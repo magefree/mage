@@ -23,7 +23,7 @@ public final class FuneralRites extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2)
                 .setText(", lose 2 life"));
         this.getSpellAbility().addEffect(new MillCardsControllerEffect(2)
-                .concatBy(", and"));
+                .concatBy(", then"));
     }
 
     private FuneralRites(final FuneralRites card) {
