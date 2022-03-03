@@ -1654,7 +1654,8 @@ public class VerifyCardDataTest {
         }
         // mana ability fix
         for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {")) || !s.contains("} or {")) {
+            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
+                    || !(s.contains("} or {") || s.contains("}, or {"))) {
                 continue;
             }
             String newStr = "";
