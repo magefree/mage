@@ -25,8 +25,8 @@ public final class BloodPrice extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false,
                 false, false, Zone.HAND, false,
                 false, true
-        ).setText("Look at at the top four cards of your library. " +
-                "Put two of them into your hand and the rest on the bottom of your library in any order "));
+        ).setText("Look at the top four cards of your library. " +
+                "Put two of them into your hand and the rest on the bottom of your library in any order"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
