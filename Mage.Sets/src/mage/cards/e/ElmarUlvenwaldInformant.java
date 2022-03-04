@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -19,9 +19,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class MaxTheDaredevil extends CardImpl {
+public final class ElmarUlvenwaldInformant extends CardImpl {
 
-    public MaxTheDaredevil(UUID ownerId, CardSetInfo setInfo) {
+    public ElmarUlvenwaldInformant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -42,12 +42,12 @@ public final class MaxTheDaredevil extends CardImpl {
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private MaxTheDaredevil(final MaxTheDaredevil card) {
+    private ElmarUlvenwaldInformant(final ElmarUlvenwaldInformant card) {
         super(card);
     }
 
     @Override
-    public MaxTheDaredevil copy() {
-        return new MaxTheDaredevil(this);
+    public ElmarUlvenwaldInformant copy() {
+        return new ElmarUlvenwaldInformant(this);
     }
 }

@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -23,7 +23,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class MikeTheDungeonMaster extends CardImpl {
+public final class OthelmSigardianOutcast extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard(
             "creature card in your graveyard that was put there from the battlefield this turn"
@@ -33,7 +33,7 @@ public final class MikeTheDungeonMaster extends CardImpl {
         filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
     }
 
-    public MikeTheDungeonMaster(UUID ownerId, CardSetInfo setInfo) {
+    public OthelmSigardianOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -57,12 +57,12 @@ public final class MikeTheDungeonMaster extends CardImpl {
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private MikeTheDungeonMaster(final MikeTheDungeonMaster card) {
+    private OthelmSigardianOutcast(final OthelmSigardianOutcast card) {
         super(card);
     }
 
     @Override
-    public MikeTheDungeonMaster copy() {
-        return new MikeTheDungeonMaster(this);
+    public OthelmSigardianOutcast copy() {
+        return new OthelmSigardianOutcast(this);
     }
 }

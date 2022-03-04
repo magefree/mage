@@ -1,4 +1,4 @@
-package mage.cards.t;
+package mage.cards.h;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -29,19 +29,19 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TheUpsideDown extends CardImpl {
+public final class HavengulMystery extends CardImpl {
 
-    public TheUpsideDown(UUID ownerId, CardSetInfo setInfo) {
+    public HavengulMystery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.addSuperType(SuperType.LEGENDARY);
 
         this.nightCard = true;
 
         // When this land transforms into The Upside Down, return target creature card from your graveyard to the battlefield.
-        this.addAbility(new TheUpsideDownTransformAbility());
+        this.addAbility(new HavengulMysteryTransformAbility());
 
         // When the creature put onto the battlefield with The Upside Down leaves the battlefield, transform The Upside Down.
-        this.addAbility(new TheUpsideDownLeavesAbility());
+        this.addAbility(new HavengulMysteryLeavesAbility());
 
         // {T}, Pay 1 life: Add {B}.
         Ability ability = new BlackManaAbility();
@@ -49,34 +49,34 @@ public final class TheUpsideDown extends CardImpl {
         this.addAbility(ability);
     }
 
-    private TheUpsideDown(final TheUpsideDown card) {
+    private HavengulMystery(final HavengulMystery card) {
         super(card);
     }
 
     @Override
-    public TheUpsideDown copy() {
-        return new TheUpsideDown(this);
+    public HavengulMystery copy() {
+        return new HavengulMystery(this);
     }
 
     static String makeKey(Ability source, Game game) {
-        return "TheUpsideDown_" + source.getSourceId() + '_' + source.getSourceObjectZoneChangeCounter();
+        return "HavengulMystery_" + source.getSourceId() + '_' + source.getSourceObjectZoneChangeCounter();
     }
 }
 
-class TheUpsideDownTransformAbility extends TriggeredAbilityImpl {
+class HavengulMysteryTransformAbility extends TriggeredAbilityImpl {
 
-    public TheUpsideDownTransformAbility() {
-        super(Zone.BATTLEFIELD, new TheUpsideDownEffect(), false);
+    public HavengulMysteryTransformAbility() {
+        super(Zone.BATTLEFIELD, new HavengulMysteryEffect(), false);
         this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public TheUpsideDownTransformAbility(final TheUpsideDownTransformAbility ability) {
+    public HavengulMysteryTransformAbility(final HavengulMysteryTransformAbility ability) {
         super(ability);
     }
 
     @Override
-    public TheUpsideDownTransformAbility copy() {
-        return new TheUpsideDownTransformAbility(this);
+    public HavengulMysteryTransformAbility copy() {
+        return new HavengulMysteryTransformAbility(this);
     }
 
     @Override
@@ -100,19 +100,19 @@ class TheUpsideDownTransformAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TheUpsideDownEffect extends OneShotEffect {
+class HavengulMysteryEffect extends OneShotEffect {
 
-    TheUpsideDownEffect() {
+    HavengulMysteryEffect() {
         super(Outcome.Benefit);
     }
 
-    private TheUpsideDownEffect(final TheUpsideDownEffect effect) {
+    private HavengulMysteryEffect(final HavengulMysteryEffect effect) {
         super(effect);
     }
 
     @Override
-    public TheUpsideDownEffect copy() {
-        return new TheUpsideDownEffect(this);
+    public HavengulMysteryEffect copy() {
+        return new HavengulMysteryEffect(this);
     }
 
     @Override
@@ -127,7 +127,7 @@ class TheUpsideDownEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        String key = TheUpsideDown.makeKey(source, game);
+        String key = HavengulMystery.makeKey(source, game);
         Set<MageObjectReference> morSet;
         if (game.getState().getValue(key) != null) {
             morSet = (Set<MageObjectReference>) game.getState().getValue(key);
@@ -140,19 +140,19 @@ class TheUpsideDownEffect extends OneShotEffect {
     }
 }
 
-class TheUpsideDownLeavesAbility extends TriggeredAbilityImpl {
+class HavengulMysteryLeavesAbility extends TriggeredAbilityImpl {
 
-    TheUpsideDownLeavesAbility() {
+    HavengulMysteryLeavesAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
-    private TheUpsideDownLeavesAbility(final TheUpsideDownLeavesAbility ability) {
+    private HavengulMysteryLeavesAbility(final HavengulMysteryLeavesAbility ability) {
         super(ability);
     }
 
     @Override
-    public TheUpsideDownLeavesAbility copy() {
-        return new TheUpsideDownLeavesAbility(this);
+    public HavengulMysteryLeavesAbility copy() {
+        return new HavengulMysteryLeavesAbility(this);
     }
 
     @Override
@@ -163,7 +163,7 @@ class TheUpsideDownLeavesAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Set<MageObjectReference> morSet = (Set<MageObjectReference>) game.getState().getValue(TheUpsideDown.makeKey(this, game));
+        Set<MageObjectReference> morSet = (Set<MageObjectReference>) game.getState().getValue(HavengulMystery.makeKey(this, game));
         return morSet != null
                 && !morSet.isEmpty()
                 && morSet.stream().anyMatch(mor -> mor.refersTo(zEvent.getTarget(), game));

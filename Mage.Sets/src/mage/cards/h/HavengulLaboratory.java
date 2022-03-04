@@ -26,13 +26,13 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HawkinsNationalLaboratory extends CardImpl {
+public final class HavengulLaboratory extends CardImpl {
 
-    public HawkinsNationalLaboratory(UUID ownerId, CardSetInfo setInfo) {
+    public HavengulLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.secondSideCardClazz = mage.cards.t.TheUpsideDown.class;
+        this.secondSideCardClazz = mage.cards.h.HavengulMystery.class;
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -46,26 +46,26 @@ public final class HawkinsNationalLaboratory extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new TransformSourceEffect(),
-                TargetController.YOU, HawkinsNationalLaboratoryCondition.instance, false
-        ), new HawkinsNationalLaboratoryWatcher());
+                TargetController.YOU, HavengulLaboratoryCondition.instance, false
+        ), new HavengulLaboratoryWatcher());
     }
 
-    private HawkinsNationalLaboratory(final HawkinsNationalLaboratory card) {
+    private HavengulLaboratory(final HavengulLaboratory card) {
         super(card);
     }
 
     @Override
-    public HawkinsNationalLaboratory copy() {
-        return new HawkinsNationalLaboratory(this);
+    public HavengulLaboratory copy() {
+        return new HavengulLaboratory(this);
     }
 }
 
-enum HawkinsNationalLaboratoryCondition implements Condition {
+enum HavengulLaboratoryCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return HawkinsNationalLaboratoryWatcher.checkPlayer(source.getControllerId(), game);
+        return HavengulLaboratoryWatcher.checkPlayer(source.getControllerId(), game);
     }
 
     @Override
@@ -74,11 +74,11 @@ enum HawkinsNationalLaboratoryCondition implements Condition {
     }
 }
 
-class HawkinsNationalLaboratoryWatcher extends Watcher {
+class HavengulLaboratoryWatcher extends Watcher {
 
     private final Map<UUID, Integer> playerMap = new HashMap<>();
 
-    HawkinsNationalLaboratoryWatcher() {
+    HavengulLaboratoryWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -103,7 +103,7 @@ class HawkinsNationalLaboratoryWatcher extends Watcher {
     static boolean checkPlayer(UUID playerId, Game game) {
         return game
                 .getState()
-                .getWatcher(HawkinsNationalLaboratoryWatcher.class)
+                .getWatcher(HavengulLaboratoryWatcher.class)
                 .playerMap
                 .getOrDefault(playerId, 0) >= 3;
     }
