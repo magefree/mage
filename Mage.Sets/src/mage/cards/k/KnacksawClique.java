@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class KnacksawClique extends CardImpl {
 
     public KnacksawClique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.ROGUE);
 
@@ -43,13 +42,13 @@ public final class KnacksawClique extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // {1}{U}, {untap}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        
+
     }
 
     private KnacksawClique(final KnacksawClique card) {
@@ -89,7 +88,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
                 if (card != null) {
                     opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source, game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new KnacksawCliqueCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
             }

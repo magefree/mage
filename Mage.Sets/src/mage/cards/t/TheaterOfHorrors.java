@@ -95,8 +95,8 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
 
     TheaterOfHorrorsCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "during your turn, if an opponent lost life this turn, " +
-                "you may play lands and cast spells from among cards exiled with {this}";
+        staticText = "during your turn, if an opponent lost life this turn, "
+                + "you may play lands and cast spells from among cards exiled with {this}";
     }
 
     private TheaterOfHorrorsCastEffect(final TheaterOfHorrorsCastEffect effect) {
@@ -115,13 +115,20 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards and mdfc
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null && game.isActivePlayer(source.getControllerId())
+        if (watcher != null
+                && game.isActivePlayer(source.getControllerId())
                 && watcher.getAllOppLifeLost(source.getControllerId(), game) > 0
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(objectId);
+            return zone != null
+                    && zone.contains(objectId);
         }
         return false;
     }

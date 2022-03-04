@@ -4,15 +4,16 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.SubType;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,9 +36,11 @@ public final class NoviceKnight extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // As long as Novice Knight is enchanted or equipped, it can attack as though it didn't have defender.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new NoviceKnightEffect()
-        ));
+        Effect effect = new ConditionalAsThoughEffect(
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+                EnchantedOrEquippedSourceCondition.instance);
+        effect.setText("As long as {this} is enchanted or equipped, it can attack as though it didn't have defender");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     private NoviceKnight(final NoviceKnight card) {
@@ -50,44 +53,28 @@ public final class NoviceKnight extends CardImpl {
     }
 }
 
-class NoviceKnightEffect extends AsThoughEffectImpl {
+enum EnchantedOrEquippedSourceCondition implements Condition {
 
-    public NoviceKnightEffect() {
-        super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As long as {this} is enchanted or equipped, "
-                + "it can attack as though it didn't have defender.";
-    }
-
-    public NoviceKnightEffect(final NoviceKnightEffect effect) {
-        super(effect);
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public NoviceKnightEffect copy() {
-        return new NoviceKnightEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!objectId.equals(source.getSourceId())) {
-            return false;
-        }
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
                 if (attached != null
-                        && (attached.hasSubtype(SubType.EQUIPMENT, game)
-                        || attached.hasSubtype(SubType.AURA, game))) {
-                    return true;
+                        && (attached.isEnchantment(game)
+                        || attached.hasSubtype(SubType.EQUIPMENT, game))) {
+                            return true;
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "{this} is enchanted or equipped";
     }
 }

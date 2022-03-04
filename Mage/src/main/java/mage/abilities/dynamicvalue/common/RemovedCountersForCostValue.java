@@ -25,7 +25,7 @@ public enum RemovedCountersForCostValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "number of removed counters";
+        return "";
     }
 
     @Override
@@ -37,5 +37,4 @@ public enum RemovedCountersForCostValue implements DynamicValue {
     public String toString() {
         return "X";
     }
-
 }

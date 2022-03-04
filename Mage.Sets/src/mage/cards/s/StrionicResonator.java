@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,15 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.players.Player;
 import mage.target.common.TargetTriggeredAbility;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class StrionicResonator extends CardImpl {
@@ -29,7 +25,7 @@ public final class StrionicResonator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StrionicResonatorEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new StrionicResonatorEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetTriggeredAbility());
         this.addAbility(ability);
@@ -58,15 +54,11 @@ class StrionicResonatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackAbility != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (controller != null && sourcePermanent != null) {
-                stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
-            }
+        if (stackAbility == null) {
+            return false;
         }
-        return false;
+        stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
+        return true;
 
     }
 

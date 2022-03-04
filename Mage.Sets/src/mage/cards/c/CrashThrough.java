@@ -25,7 +25,7 @@ public final class CrashThrough extends CardImpl {
         getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
         
     // Draw a card.
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CrashThrough(final CrashThrough card) {

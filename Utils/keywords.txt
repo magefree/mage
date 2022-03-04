@@ -11,6 +11,8 @@ Bushido|number|
 Buyback|manaString|
 Cascade|new|
 Changeling|new|
+Cleave|card, manaString|
+Compleated|instance|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
@@ -48,6 +50,7 @@ Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
 Improvise|new|
@@ -74,7 +77,7 @@ Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
-Ninjutsu|cost|
+Ninjutsu|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
@@ -86,13 +89,14 @@ Provoke|new|
 Prowess|new|
 Reach|instance|
 Rebound|new|
+Reconfigure|manaString|
 Renown|number|
 Replicate|card, manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
-Soulbond|instance|
+Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
@@ -102,6 +106,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|

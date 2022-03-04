@@ -53,7 +53,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
                 new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
                 "When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new KozilekDiscardCost());

@@ -81,7 +81,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.getId().equals(this.getSourceId())) {
             UUID defenderId = game.getCombat().getDefenderId(event.getSourceId());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderId));
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderId, game));
             return true;
         }
         return false;

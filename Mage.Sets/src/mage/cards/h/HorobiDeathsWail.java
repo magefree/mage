@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class HorobiDeathsWail extends CardImpl {
 
     public HorobiDeathsWail(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -34,7 +33,7 @@ public final class HorobiDeathsWail extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever a creature becomes the target of a spell or ability, destroy that creature.
         this.addAbility(new HorobiDeathsWailAbility(new DestroyTargetEffect()));
     }
@@ -46,7 +45,7 @@ public final class HorobiDeathsWail extends CardImpl {
     @Override
     public HorobiDeathsWail copy() {
         return new HorobiDeathsWail(this);
-    }    
+    }
 
 }
 
@@ -74,7 +73,7 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
         if (creature != null && creature.isCreature(game)) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;

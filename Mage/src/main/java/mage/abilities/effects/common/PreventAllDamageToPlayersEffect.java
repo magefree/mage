@@ -51,7 +51,7 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
         }
         sb.append("damage that would be dealt to players");
         if (duration == Duration.EndOfTurn) {
-            sb.append("  this turn");
+            sb.append(" this turn");
         }
         return sb.toString();
     }

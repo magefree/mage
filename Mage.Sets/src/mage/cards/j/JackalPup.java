@@ -27,7 +27,7 @@ public final class JackalPup extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Jackal Pup is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new JackalPupEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new JackalPupEffect(), false, false));
 
     }
 

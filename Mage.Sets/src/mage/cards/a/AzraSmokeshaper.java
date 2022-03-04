@@ -30,7 +30,7 @@ public final class AzraSmokeshaper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ninjutsu {1}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new NinjutsuAbility("{1}{B}"));
 
         // When Azra Smokeshaper enters the battlefield, target creature you control gains indestructible until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(

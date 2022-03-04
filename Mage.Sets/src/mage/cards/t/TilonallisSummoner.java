@@ -88,7 +88,7 @@ class TilonallisSummonerEffect extends OneShotEffect {
                             .setText("exile those tokens unless you have the city's blessing");
                     exileEffect.setTargetPointer(new FixedTargets(new CardsImpl(effect.getLastAddedTokenIds()), game));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            Zone.ALL, exileEffect, TargetController.ANY, new InvertCondition(CitysBlessingCondition.instance)), source);
+                            exileEffect, TargetController.ANY, new InvertCondition(CitysBlessingCondition.instance)), source);
                 }
             }
             return true;

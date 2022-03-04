@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Feint extends CardImpl {
 
     public Feint(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText(""));
@@ -72,7 +71,7 @@ class FeintEffect extends OneShotEffect {
                         if (blocker != null) {
                             blocker.tap(source, game);
                             PreventionEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-                            effect.setTargetPointer(new FixedTarget(blocker.getId()));
+                            effect.setTargetPointer(new FixedTarget(blocker.getId(), game));
                             game.addEffect(effect, source);
                         }
                     }

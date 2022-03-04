@@ -44,7 +44,7 @@ public final class BodyOfKnowledge extends CardImpl {
 
         // Whenever Body of Knowledge is dealt damage, draw that many cards.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                new BodyOfKnowledgeEffect(), false, false, true
+                new BodyOfKnowledgeEffect(), false, false
         ));
     }
 

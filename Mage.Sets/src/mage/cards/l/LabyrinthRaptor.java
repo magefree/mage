@@ -51,7 +51,7 @@ public final class LabyrinthRaptor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a creature you control with menace becomes blocked, defending player sacrifices a creature blocking it.
         this.addAbility(new BecomesBlockedAllTriggeredAbility(

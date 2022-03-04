@@ -30,7 +30,6 @@ public final class WestvaleAbbey extends CardImpl {
     public WestvaleAbbey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.o.OrmendahlProfanePrince.class;
 
         // {T}: Add {C}.
@@ -44,7 +43,7 @@ public final class WestvaleAbbey extends CardImpl {
 
         // {5}, {T}, Sacrifice five creatures: Transform Westvale Abbey and untap it.
         this.addAbility(new TransformAbility());
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new GenericManaCost(5));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledCreaturePermanent("creatures"), true)));
         ability.addEffect(new UntapSourceEffect());

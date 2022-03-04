@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.Iterator;
@@ -19,8 +18,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,11 +29,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author emerald000
  */
 public final class SpinningDarkness extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public SpinningDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
@@ -46,7 +39,7 @@ public final class SpinningDarkness extends CardImpl {
         // Spinning Darkness deals 3 damage to target nonblack creature. You gain 3 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
     }
 
     private SpinningDarkness(final SpinningDarkness card) {
@@ -60,7 +53,7 @@ public final class SpinningDarkness extends CardImpl {
 }
 
 class SpinningDarknessCost extends CostImpl {
-    
+
     private static final FilterCard filter = new FilterCard("black card");
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

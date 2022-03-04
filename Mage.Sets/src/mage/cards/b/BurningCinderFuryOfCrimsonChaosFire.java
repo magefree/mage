@@ -86,7 +86,7 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever any player taps a permanent, " ;
+        return "Whenever any player taps a permanent, ";
     }
 }
 
@@ -133,7 +133,7 @@ class BurningCinderFuryOfCrimsonChaosFireEffect extends OneShotEffect {
                 if (chosenOpponent != null) {
                     game.informPlayers(tappingPlayer.getLogName() + " chose " + chosenOpponent.getLogName() + " to gain control of " + permanentToControl.getLogName() + " at the beginning of the next end step");
                     ContinuousEffect effect = new BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
-                    effect.setTargetPointer(new FixedTarget(permanentToControl.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanentToControl.getId(), game));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                     return true;
                 }
@@ -199,7 +199,6 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     public BurningCinderFuryOfCrimsonChaosFireWatcher() {
         super(WatcherScope.GAME);
     }
-
 
     @Override
     public void watch(GameEvent event, Game game) {

@@ -83,7 +83,7 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
 
     BenevolentOfferingEffect2() {
         super(Outcome.Sacrifice);
-        this.staticText = "Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control";
+        this.staticText = "<br>Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control";
     }
 
     BenevolentOfferingEffect2(final BenevolentOfferingEffect2 effect) {

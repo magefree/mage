@@ -37,7 +37,8 @@ public final class NimanaSkitterSneak extends CardImpl {
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility()),
-                CardsInOpponentGraveyardCondition.EIGHT, "and has menace"
+                CardsInOpponentGraveyardCondition.EIGHT, "and has menace. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>"
         ));
         this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }

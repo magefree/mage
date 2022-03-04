@@ -20,7 +20,7 @@ public final class ServoToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C18", "KLD", "WAR", "KHC");
+        availableImageSetCodes = Arrays.asList("C18", "KLD", "WAR", "KHC", "AFC");
     }
 
     @Override

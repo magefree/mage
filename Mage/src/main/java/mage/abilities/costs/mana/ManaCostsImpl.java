@@ -28,6 +28,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     protected final UUID id;
     protected String text = null;
+    protected boolean phyrexian = false;
+    private int phyrexianPaid = 0;
 
     private static final Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
 
@@ -46,6 +48,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (T cost : costs) {
             this.add(cost.copy());
         }
+        this.phyrexian = costs.phyrexian;
     }
 
     @Override
@@ -175,58 +178,53 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
         while (manaCostIterator.hasNext()) {
             ManaCost manaCost = manaCostIterator.next();
-            if (manaCost instanceof PhyrexianManaCost) {
-                PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
-                PayLifeCost payLifeCost = new PayLifeCost(2);
-                if (payLifeCost.canPay(abilityToPay, source, payingPlayer.getId(), game)
-                        && payingPlayer.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
-                    manaCostIterator.remove();
-                    tempCosts.add(payLifeCost);
-                }
+            if (!manaCost.isPhyrexian()) {
+                continue;
+            }
+            PayLifeCost payLifeCost = new PayLifeCost(2);
+            if (payLifeCost.canPay(abilityToPay, source, payingPlayer.getId(), game)
+                    && payingPlayer.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + manaCost.getText().replace("/P", "") + '?', source, game)) {
+                manaCostIterator.remove();
+                tempCosts.add(payLifeCost);
+                this.incrPhyrexianPaid();
             }
         }
 
         tempCosts.pay(source, game, source, payingPlayer.getId(), false, null);
     }
 
+
     private void handleLikePhyrexianManaCosts(Player player, Ability source, Game game) {
         if (this.isEmpty()) {
             return; // nothing to be done without any mana costs. prevents NRE from occurring here
         }
         FilterMana phyrexianColors = player.getPhyrexianColors();
-        if (player.getPhyrexianColors() != null) {
-            Costs<PayLifeCost> tempCosts = new CostsImpl<>();
-
-            Iterator<T> manaCostIterator = this.iterator();
-            while (manaCostIterator.hasNext()) {
-                ManaCost manaCost = manaCostIterator.next();
-                Mana mana = manaCost.getMana();
-                PhyrexianManaCost tempPhyrexianCost = null;
-
-                /* find which color mana is in the cost and set it in the temp Phyrexian cost */
-                if (phyrexianColors.isWhite() && mana.getWhite() > 0) {
-                    tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.W);
-                } else if (phyrexianColors.isBlue() && mana.getBlue() > 0) {
-                    tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.U);
-                } else if (phyrexianColors.isBlack() && mana.getBlack() > 0) {
-                    tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.B);
-                } else if (phyrexianColors.isRed() && mana.getRed() > 0) {
-                    tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.R);
-                } else if (phyrexianColors.isGreen() && mana.getGreen() > 0) {
-                    tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.G);
-                }
-
-                if (tempPhyrexianCost != null) {
-                    PayLifeCost payLifeCost = new PayLifeCost(2);
-                    if (payLifeCost.canPay(source, source, player.getId(), game)
-                            && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + tempPhyrexianCost.getBaseText() + '?', source, game)) {
-                        manaCostIterator.remove();
-                        tempCosts.add(payLifeCost);
-                    }
-                }
-            }
-            tempCosts.pay(source, game, source, player.getId(), false, null);
+        if (player.getPhyrexianColors() == null) {
+            return;
         }
+        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
+
+        Iterator<T> manaCostIterator = this.iterator();
+        while (manaCostIterator.hasNext()) {
+            ManaCost manaCost = manaCostIterator.next();
+            Mana mana = manaCost.getMana();
+
+            /* find which color mana is in the cost and set it in the temp Phyrexian cost */
+            if ((!phyrexianColors.isWhite() || mana.getWhite() <= 0)
+                    && (!phyrexianColors.isBlue() || mana.getBlue() <= 0)
+                    && (!phyrexianColors.isBlack() || mana.getBlack() <= 0)
+                    && (!phyrexianColors.isRed() || mana.getRed() <= 0)
+                    && (!phyrexianColors.isGreen() || mana.getGreen() <= 0)) {
+                continue;
+            }
+            PayLifeCost payLifeCost = new PayLifeCost(2);
+            if (payLifeCost.canPay(source, source, player.getId(), game)
+                    && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + manaCost.getMana() + '?', source, game)) {
+                manaCostIterator.remove();
+                tempCosts.add(payLifeCost);
+            }
+        }
+        tempCosts.pay(source, game, source, player.getId(), false, null);
     }
 
     @Override
@@ -447,49 +445,57 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             for (ManaCost cost : savedCosts) {
                 this.add(cost.copy());
             }
-        } else {
-            String[] symbols = mana.split("^\\{|}\\{|}$");
-            int modifierForX = 0;
-            for (String symbol : symbols) {
-                if (!symbol.isEmpty()) {
-                    if (symbol.length() == 1 || isNumeric(symbol)) {
-                        if (Character.isDigit(symbol.charAt(0))) {
-                            this.add(new GenericManaCost(Integer.valueOf(symbol)));
-                        } else if (symbol.equals("S")) {
-                            this.add(new SnowManaCost());
-                        } else if (symbol.equals("C")) {
-                            this.add(new ColorlessManaCost(1));
-                        } else if (!symbol.equals("X")) {
-                            this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-                        } else // check X wasn't added before
-                            if (modifierForX == 0) {
-                                // count X occurence
-                                for (String s : symbols) {
-                                    if (s.equals("X")) {
-                                        modifierForX++;
-                                    }
-                                }
-                                this.add(new VariableManaCost(VariableCostType.NORMAL, modifierForX));
-                            } //TODO: handle multiple {X} and/or {Y} symbols
-                    } else if (Character.isDigit(symbol.charAt(0))) {
-                        MonoHybridManaCost cost;
-                        if (extractMonoHybridGenericValue) {
-                            // for tests only, no usage in real game
-                            cost = new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2)), Integer.parseInt(symbol.substring(0, 1)));
-                        } else {
-                            cost = new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2)));
+            return;
+        }
+        String[] symbols = mana.split("^\\{|}\\{|}$");
+        int modifierForX = 0;
+        for (String symbol : symbols) {
+            if (symbol.isEmpty()) {
+                continue;
+            }
+            if (symbol.length() == 1 || isNumeric(symbol)) {
+                if (Character.isDigit(symbol.charAt(0))) {
+                    this.add(new GenericManaCost(Integer.valueOf(symbol)));
+                } else if (symbol.equals("S")) {
+                    this.add(new SnowManaCost());
+                } else if (symbol.equals("C")) {
+                    this.add(new ColorlessManaCost(1));
+                } else if (!symbol.equals("X")) {
+                    this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+                } else // check X wasn't added before
+                    if (modifierForX == 0) {
+                        // count X occurence
+                        for (String s : symbols) {
+                            if (s.equals("X")) {
+                                modifierForX++;
+                            }
                         }
-                        this.add(cost);
-                    } else if (symbol.contains("P")) {
-                        this.add(new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-                    } else {
-                        this.add(new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
-                    }
+                        this.add(new VariableManaCost(VariableCostType.NORMAL, modifierForX));
+                    } //TODO: handle multiple {X} and/or {Y} symbols
+            } else if (Character.isDigit(symbol.charAt(0))) {
+                MonoHybridManaCost cost;
+                if (extractMonoHybridGenericValue) {
+                    // for tests only, no usage in real game
+                    cost = new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2)), Integer.parseInt(symbol.substring(0, 1)));
+                } else {
+                    cost = new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2)));
                 }
+                this.add(cost);
+            } else {
+                boolean phyrexian = symbol.contains("/P");
+                String without = symbol.replace("/P", "");
+                ManaCost cost;
+                if (without.length() == 1) {
+                    cost = new ColoredManaCost(ColoredManaSymbol.lookup(without.charAt(0)));
+                } else {
+                    cost = new HybridManaCost(ColoredManaSymbol.lookup(without.charAt(0)), ColoredManaSymbol.lookup(without.charAt(2)));
+                }
+                cost.setPhyrexian(phyrexian);
+                this.add(cost);
             }
-            if (!extractMonoHybridGenericValue) {
-                costsCache.put(mana, this.copy());
-            }
+        }
+        if (!extractMonoHybridGenericValue) {
+            costsCache.put(mana, this.copy());
         }
     }
 
@@ -595,6 +601,29 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public ManaCosts<T> copy() {
         return new ManaCostsImpl<>(this);
+    }
+
+    @Override
+    public boolean isPhyrexian() {
+        return phyrexian;
+    }
+
+    @Override
+    public void setPhyrexian(boolean phyrexian) {
+        this.phyrexian = phyrexian;
+        for (T cost : this) {
+            cost.setPhyrexian(phyrexian);
+        }
+    }
+
+    @Override
+    public void incrPhyrexianPaid() {
+        this.phyrexianPaid++;
+    }
+
+    @Override
+    public int getPhyrexianPaid() {
+        return phyrexianPaid;
     }
 
     @Override

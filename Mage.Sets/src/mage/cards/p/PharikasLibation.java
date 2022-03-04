@@ -27,7 +27,7 @@ public final class PharikasLibation extends CardImpl {
 
         // • Target opponent sacrifices an enchantment.
         Mode mode = new Mode(new SacrificeEffect(
-                StaticFilters.FILTER_ENCHANTMENT_PERMANENT, 1, "Target opponent"
+                StaticFilters.FILTER_PERMANENT_ENCHANTMENT, 1, "Target opponent"
         ));
         mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);

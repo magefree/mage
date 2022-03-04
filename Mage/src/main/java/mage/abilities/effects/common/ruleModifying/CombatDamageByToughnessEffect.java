@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -20,11 +21,9 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
     private final boolean onlyControlled;
 
     public CombatDamageByToughnessEffect(FilterCreaturePermanent filter, boolean onlyControlled) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
         this.onlyControlled = onlyControlled;
-        staticText = "Each " + filter.getMessage() + (onlyControlled ? " you control" : "") +
-                " assigns combat damage equal to its toughness rather than its power";
     }
 
     private CombatDamageByToughnessEffect(final CombatDamageByToughnessEffect effect) {
@@ -39,11 +38,14 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         // Change the rule
-        FilterCreaturePermanent filterPermanent = filter.copy();
+        FilterCreaturePermanent filterPermanent;
         if (onlyControlled) {
+            filterPermanent = filter.copy();
             filterPermanent.add(new ControllerIdPredicate(source.getControllerId()));
+        } else {
+            filterPermanent = filter;
         }
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filterPermanent);
@@ -51,12 +53,16 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder("Each ");
+        sb.append(filter.getMessage());
+        if (onlyControlled && !filter.getMessage().contains("you control")) {
+            sb.append(" you control");
+        }
+        sb.append(" assigns combat damage equal to its toughness rather than its power");
+        return sb.toString();
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class DingusEgg extends CardImpl {
 
     public DingusEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
         this.addAbility(new DingusEggTriggeredAbility());
@@ -58,9 +57,9 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isLand(game)) {
             if (getTargets().isEmpty()) {
-                UUID targetId = zEvent.getTarget().getControllerId();
+                UUID targetControllerId = zEvent.getTarget().getControllerId();
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(targetId));
+                    effect.setTargetPointer(new FixedTarget(targetControllerId));
                 }
             }
             return true;

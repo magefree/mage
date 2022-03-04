@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,9 +9,14 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.Iterator;
+import java.util.Locale;
 
 /**
  *
@@ -32,11 +35,11 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), false);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), excludeSource);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, excludeSource);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
@@ -146,45 +149,13 @@ public class BoostAllEffect extends ContinuousEffectImpl {
 
     protected void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource) {
+        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
+        if (excludeSource && !each) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage()).append(" get ");
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-        if (duration == Duration.EndOfTurn) {
-            sb.append(" until end of turn");
-        }
-        String message = null;
-        String fixedPart = null;
-        if (t.contains("X")) {
-            message = toughness.getMessage();
-            fixedPart = ", where X is ";
-        } else if (p.contains("X")) {
-            message = power.getMessage();
-            fixedPart = ", where X is ";
-        } else if (!power.getMessage().isEmpty()) {
-            message = power.getMessage();
-            fixedPart = " for each ";
-        } else if (!toughness.getMessage().isEmpty()) {
-            message = toughness.getMessage();
-            fixedPart = " for each ";
-        }
-        if (message != null && !message.isEmpty() && fixedPart != null) {
-            sb.append(fixedPart).append(message);
-        }
+        sb.append(filter.getMessage());
+        sb.append(each ? " gets " : " get ");
+        sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }
 

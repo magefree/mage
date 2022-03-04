@@ -7,7 +7,6 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,7 +29,6 @@ public final class RecklessStormseeker extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.StormChargedSlasher.class;
 
         // At the beginning of combat on your turn, target creature you control gets +1/+0 and gains haste until end of turn.
@@ -46,7 +44,6 @@ public final class RecklessStormseeker extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

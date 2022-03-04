@@ -11,9 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,12 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TrollbredGuardian extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public TrollbredGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -46,10 +38,9 @@ public final class TrollbredGuardian extends CardImpl {
                 new GainAbilityAllEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        filter, "Each creature you control " +
-                        "with a +1/+1 counter on it has trample"
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
                 )
-        ));
+        );
     }
 
     private TrollbredGuardian(final TrollbredGuardian card) {

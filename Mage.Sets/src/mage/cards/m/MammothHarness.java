@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -80,14 +79,14 @@ class MammothHarnessTriggeredAbility extends BlocksOrBecomesBlockedSourceTrigger
             if (event.getSourceId().equals(attachedTo.getId())) {
                 Permanent blocked = game.getPermanent(event.getTargetId());
                 if (blocked != null && filter.match(blocked, game)) {
-                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     return true;
                 }
             }
             if (event.getTargetId().equals(attachedTo.getId())) {
                 Permanent blocker = game.getPermanent(event.getSourceId());
                 if (blocker != null) {
-                    this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     return true;
                 }
             }

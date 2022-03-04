@@ -1,12 +1,7 @@
-
 package mage.cards.d;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -17,44 +12,54 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class DaybreakCoronet extends CardImpl {
-    
+
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature with another Aura attached to it");
+
+    static {
+        filter.add(AuraAttachedPredicate.instance);
+    }
+
     public DaybreakCoronet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature with another Aura attached to it
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with another Aura attached to it.");
-        filter.add(new AuraAttachedPredicate(this.getId()));
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
         // Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has first strike");
-        ability.addEffect(effect);
-        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
-        effect.setText(", vigilance");
-        ability.addEffect(effect);
-        effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
-        effect.setText(", and lifelink");
-        ability.addEffect(effect);
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+                3, 3, Duration.WhileOnBattlefield
+        ));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FirstStrikeAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has first strike"));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                VigilanceAbility.getInstance(), AttachmentType.AURA
+        ).setText(", vigilance"));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                LifelinkAbility.getInstance(), AttachmentType.AURA
+        ).setText(", and lifelink"));
         this.addAbility(ability);
     }
 
@@ -68,28 +73,21 @@ public final class DaybreakCoronet extends CardImpl {
     }
 }
 
-class AuraAttachedPredicate implements Predicate<Permanent> {
-    
-    private final UUID ownId;
-    
-    public AuraAttachedPredicate(UUID ownId) {
-        this.ownId = ownId;
-    }
+enum AuraAttachedPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        List<UUID> attachments = new LinkedList();
-        attachments.addAll(input.getAttachments());
-        for (UUID uuid : attachments) {
-            if (!uuid.equals(ownId)) {
-                Permanent attachment = game.getPermanent(uuid);
-                if (attachment != null
-                        && attachment.hasSubtype(SubType.AURA, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        List<UUID> attachments = new LinkedList<>();
+        attachments.addAll(input.getObject().getAttachments());
+        return input
+                .getObject()
+                .getAttachments()
+                .stream()
+                .filter(uuid -> !uuid.equals(input.getSourceId()))
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
     }
 
     @Override

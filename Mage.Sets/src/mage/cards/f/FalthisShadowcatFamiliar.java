@@ -41,7 +41,7 @@ public final class FalthisShadowcatFamiliar extends CardImpl {
 
         // Commanders you control have menace and deathtouch.
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(), Duration.WhileOnBattlefield, filter
+                new MenaceAbility(false), Duration.WhileOnBattlefield, filter
         ));
         ability.addEffect(new GainAbilityControlledEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter

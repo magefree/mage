@@ -34,7 +34,7 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId())) {
             for (Effect effect : getEffects()) {
                 // set the vehicle id as target
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
             return true;
         }
@@ -43,6 +43,6 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "When {this} crews a Vehicle, " ;
+        return "Whenever {this} crews a Vehicle, " ;
     }
 }

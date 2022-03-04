@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -91,7 +90,7 @@ class ShowOfDominanceEffect extends OneShotEffect {
                     }
                 }
                 if (selectedCreature != null) {
-                    FixedTarget target = new FixedTarget(selectedCreature.getId());
+                    FixedTarget target = new FixedTarget(selectedCreature.getId(), game);
 
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(4));
                     effect.setTargetPointer(target);

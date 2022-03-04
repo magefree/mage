@@ -1,10 +1,14 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -27,8 +31,9 @@ public final class WarOfTheSpark extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
-        this.needsPlaneswalker = true;
+        this.ratioBoosterMythic = (40 + 40 + 12) / 12.0; // non-planeswalkers: 40 rares, 12 mythics
+        this.ratioBoosterSpecialRare = 4;
+        this.ratioBoosterSpecialMythic = (13 + 13 + 3) / 3.0; // planeswalkers: 13 rares, 3 mythics
         this.maxCardNumberInBooster = 264;
 
         cards.add(new SetCardInfo("Ahn-Crop Invader", 113, Rarity.COMMON, mage.cards.a.AhnCropInvader.class));
@@ -342,6 +347,17 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("War Screecher", 39, Rarity.COMMON, mage.cards.w.WarScreecher.class));
         cards.add(new SetCardInfo("Wardscale Crocodile", 183, Rarity.COMMON, mage.cards.w.WardscaleCrocodile.class));
         cards.add(new SetCardInfo("Widespread Brutality", 226, Rarity.RARE, mage.cards.w.WidespreadBrutality.class));
+    }
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .types(CardType.PLANESWALKER)
+                .maxCardNumber(maxCardNumberInBooster)));
+        return cardInfos;
     }
 
     @Override

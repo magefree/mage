@@ -1,15 +1,14 @@
 package mage.cards;
 
-import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
@@ -116,25 +115,35 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterSpecial;
 
     protected int numBoosterLands;
-    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
+
+    // if ratioBoosterSpecialLand > 0, one basic land may be replaced with a special card
+    // with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
+    protected int ratioBoosterSpecialLand = 0;
     protected int ratioBoosterSpecialLandNumerator = 1;
+
+    // if ratioBoosterSpecialCommon > 0, one common may be replaced with a special card
+    // with probability 1 / ratioBoosterSpecialCommon
+    protected int ratioBoosterSpecialCommon = 0;
+
+    // if ratioBoosterSpecialRare > 0, one uncommon or rare is always replaced with a special card
+    // probability that a rare rather than an uncommon is replaced is 1 / ratioBoosterSpecialRare
+    // probability that the replacement card for a rare is a mythic is 1 / ratioBoosterSpecialMythic
+    protected double ratioBoosterSpecialRare = 0;
+    protected double ratioBoosterSpecialMythic;
 
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
     protected int numBoosterRare;
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected double ratioBoosterMythic;
-    protected boolean hasPartnerMechanic = false;
 
-    protected boolean needsLegendCreature = false;
-    protected boolean needsPlaneswalker = false;
-    protected boolean validateBoosterColors = true;
-    protected double rejectMissingColorProbability = 0.8;
-    protected double rejectSameColorUncommonsProbability = 0.8;
+    protected boolean hasUnbalancedColors = false;
+    protected boolean hasOnlyMulticolorCards = false;
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
-    protected final EnumMap<Rarity, List<CardInfo>> savedCards;
+    protected final EnumMap<Rarity, List<CardInfo>> savedCards = new EnumMap<>(Rarity.class);
+    protected final EnumMap<Rarity, List<CardInfo>> savedSpecialCards = new EnumMap<>(Rarity.class);
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
@@ -143,7 +152,6 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
-        savedCards = new EnumMap<>(Rarity.class);
     }
 
     public String getName() {
@@ -214,35 +222,6 @@ public abstract class ExpansionSet implements Serializable {
         return theBooster;
     }
 
-    protected int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
-
-        Card sourceCard = booster.get(booster.size() - 1);
-        for (Ability ability : sourceCard.getAbilities()) {
-
-            //Check if fetched card has the PartnerWithAbility
-            if (ability instanceof PartnerWithAbility) {
-                String partnerName = ((PartnerWithAbility) ability).getPartnerName();
-                //Check if the pack already contains a partner pair
-                if (partnerAllowed) {
-                    //Added card always replaces an uncommon card
-                    Card card = CardRepository.instance.findCardWPreferredSet(partnerName, sourceCard.getExpansionSetCode(), false).getCard();
-                    if (i < max) {
-                        booster.add(card);
-                    } else {
-                        booster.set(0, card);
-                    }
-                    //2 return value indicates found partner
-                    return 2;
-                } else {
-                    //If partner already exists, remove card and loop again
-                    booster.remove(booster.size() - 1);
-                    return 0;
-                }
-            }
-        }
-        return 1;
-    }
-
     protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
         if (!cards.isEmpty()) {
             CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
@@ -266,16 +245,7 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
-
-            List<Card> booster;
-            if (hasPartnerMechanic) {
-                // battlebond's partners cards
-                booster = createPartnerBooster();
-            } else {
-                // all other sets
-                booster = tryBooster();
-            }
-
+            List<Card> booster = tryBooster();
             if (boosterIsValid(booster)) {
                 return booster;
             }
@@ -318,17 +288,12 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
-        if (validateBoosterColors) {
-            if (!validateColors(booster)) {
-                return false;
-            }
+        if (!validateCommonColors(booster)) {
+            return false;
         }
 
-        if (needsLegendCreature) {
-            return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
-        }
-        if (needsPlaneswalker) {
-            return booster.stream().filter(MageObject::isPlaneswalker).count() == 1;
+        if (!validateUncommonColors(booster)) {
+            return false;
         }
 
         // TODO: add partner check
@@ -336,138 +301,87 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    protected boolean validateColors(List<Card> booster) {
-        List<ObjectColor> magicColors
-                = Arrays.asList(ObjectColor.WHITE, ObjectColor.BLUE, ObjectColor.BLACK, ObjectColor.RED, ObjectColor.GREEN);
-
-        // all cards colors
-        Map<ObjectColor, Integer> colorWeight = new HashMap<>();
-        // uncommon/rare/mythic cards colors
-        Map<ObjectColor, Integer> uncommonWeight = new HashMap<>();
-
-        for (ObjectColor color : magicColors) {
-            colorWeight.put(color, 0);
-            uncommonWeight.put(color, 0);
-        }
-
-        // count colors in the booster
-        for (Card card : booster) {
-            ObjectColor cardColor = card.getColor(null);
-            if (cardColor != null) {
-                List<ObjectColor> colors = cardColor.getColors();
-                // todo: do we need gold color?
-                colors.remove(ObjectColor.GOLD);
-                if (!colors.isEmpty()) {
-                    // 60 - full card weight
-                    // multicolored cards add part of the weight to each color
-                    int cardColorWeight = 60 / colors.size();
-                    for (ObjectColor color : colors) {
-                        colorWeight.put(color, colorWeight.get(color) + cardColorWeight);
-                        if (card.getRarity() != Rarity.COMMON) {
-                            uncommonWeight.put(color, uncommonWeight.get(color) + cardColorWeight);
-                        }
-                    }
-                }
+    private static ObjectColor getColorForValidate(Card card) {
+        ObjectColor color = card.getColor();
+        // treat colorless nonland cards with exactly one ID color as cards of that color
+        // (e.g. devoid, emerge, spellbombs... but not mana fixing artifacts)
+        if (color.isColorless() && !card.isLand()) {
+            FilterMana colorIdentity = card.getColorIdentity();
+            if (colorIdentity.getColorCount() == 1) {
+                return new ObjectColor(colorIdentity.toString());
             }
         }
-
-        // check that all colors are present
-        if (magicColors.stream().anyMatch(color -> colorWeight.get(color) < 60)) {
-            // reject only part of the boosters
-            if (RandomUtil.nextDouble() < rejectMissingColorProbability) {
-                return false;
-            }
-        }
-
-        // check that we don't have 3 or more uncommons/rares of the same color
-        if (magicColors.stream().anyMatch(color -> uncommonWeight.get(color) >= 180)) {
-            // reject only part of the boosters
-            return !(RandomUtil.nextDouble() < rejectSameColorUncommonsProbability);
-        }
-
-        return true;
+        return color;
     }
 
-    private boolean checkMythic() {
+    protected boolean validateCommonColors(List<Card> booster) {
+        List<ObjectColor> commonColors = booster.stream()
+                .filter(card -> card.getRarity() == Rarity.COMMON)
+                .map(ExpansionSet::getColorForValidate)
+                .collect(Collectors.toList());
+
+        // for multicolor sets, count not just the colors present at common,
+        // but also the number of color combinations (guilds/shards/wedges)
+        // e.g. a booster with three UB commons, three RW commons and four G commons
+        // has all five colors but isn't "balanced"
+        ObjectColor colorsRepresented = new ObjectColor();
+        Set<ObjectColor> colorCombinations = new HashSet<>();
+        int colorlessCountPlusOne = 1;
+
+        for (ObjectColor color : commonColors) {
+            colorCombinations.add(color);
+            int colorCount = color.getColorCount();
+            if (colorCount == 0) {
+                ++colorlessCountPlusOne;
+            } else if (colorCount > 1 && !hasOnlyMulticolorCards) {
+                // to prevent biasing toward multicolor over monocolor cards,
+                // count them as one of their colors chosen at random
+                List<ObjectColor> multiColor = color.getColors();
+                colorsRepresented.addColor(multiColor.get(RandomUtil.nextInt(multiColor.size())));
+            } else {
+                colorsRepresented.addColor(color);
+            }
+        }
+
+        int colors = Math.min(colorsRepresented.getColorCount(), colorCombinations.size());
+
+        // if booster has all five colors in five unique combinations, or if it has
+        // one card per color and all but one of the rest are colorless, accept it
+        // ("all but one" adds some leeway for sets with small boosters)
+        if (colors >= Math.min(5, commonColors.size() - colorlessCountPlusOne)) return true;
+        // otherwise, if booster is missing more than one color, reject it
+        if (colors < 4) return false;
+        // for Torment and Judgment, always accept boosters with four out of five colors
+        if (hasUnbalancedColors) return true;
+        // if a common was replaced by a special card, increase the chance to accept four colors
+        if (commonColors.size() < numBoosterCommon) ++colorlessCountPlusOne;
+
+        // otherwise, stochiastically treat each colorless card as 1/5 of a card of the missing color
+        return (RandomUtil.nextDouble() > Math.pow(0.8, colorlessCountPlusOne));
+    }
+
+    private static final ObjectColor COLORLESS = new ObjectColor();
+
+    protected boolean validateUncommonColors(List<Card> booster) {
+        List<ObjectColor> uncommonColors = booster.stream()
+                .filter(card -> card.getRarity() == Rarity.UNCOMMON)
+                .map(ExpansionSet::getColorForValidate)
+                .collect(Collectors.toList());
+
+        // if there are only two uncommons, they can be the same color
+        if (uncommonColors.size() < 3) return true;
+        // boosters of artifact sets can have all colorless uncommons
+        if (uncommonColors.contains(COLORLESS)) return true;
+        // otherwise, reject if all uncommons are the same color combination
+        return (new HashSet<>(uncommonColors).size() > 1);
+    }
+
+    protected boolean checkMythic() {
         return ratioBoosterMythic > 0 && ratioBoosterMythic * RandomUtil.nextDouble() <= 1;
     }
 
-    public List<Card> createPartnerBooster() {
-
-        List<Card> booster = new ArrayList<>();
-
-        boolean partnerAllowed = true;
-
-        List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
-        for (int i = 0; i < numBoosterUncommon; i++) {
-            while (true) {
-                addToBooster(booster, uncommons);
-                int check = addMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
-                if (check == 1) {
-                    break;
-                }
-                if (check == 2) {
-                    partnerAllowed = false;
-                    //Be sure to account for the added card
-                    if (i != numBoosterUncommon - 1) {
-                        i += 1;
-                    }
-                    break;
-                }
-            }
-        }
-
-        int numSpecialCommons = getNumberOfSpecialCommons();
-        int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
-
-        List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-        for (int i = 0; i < numCommonsToGenerate; i++) {
-            addToBooster(booster, commons);
-        }
-
-        List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
-        List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
-        for (int i = 0; i < numBoosterRare; i++) {
-            if (checkMythic()) {
-                while (true) {
-                    addToBooster(booster, mythics);
-                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
-                    if (check == 1) {
-                        break;
-                    }
-                    if (check == 2) {
-                        partnerAllowed = false;
-                        break;
-                    }
-                }
-            } else {
-                while (true) {
-                    addToBooster(booster, rares);
-                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
-                    if (check == 1) {
-                        break;
-                    }
-                    if (check == 2) {
-                        partnerAllowed = false;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (numBoosterLands > 0) {
-            List<CardInfo> specialLands = getSpecialLand();
-            List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
-            for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
-                    addToBooster(booster, specialLands);
-                } else {
-                    addToBooster(booster, basicLands);
-                }
-            }
-        }
-
-        return booster;
+    protected boolean checkSpecialMythic() {
+        return ratioBoosterSpecialMythic > 0 && ratioBoosterSpecialMythic * RandomUtil.nextDouble() <= 1;
     }
 
     public List<Card> tryBooster() {
@@ -477,40 +391,52 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (numBoosterLands > 0) {
-            List<CardInfo> specialLands = getSpecialLand();
+            List<CardInfo> specialLands = getSpecialCardsByRarity(Rarity.LAND);
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator) {
                     addToBooster(booster, specialLands);
                 } else {
                     addToBooster(booster, basicLands);
                 }
             }
         }
-        int numSpecialCommons = getNumberOfSpecialCommons();
-        int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
+
+        int numCommonsToGenerate = numBoosterCommon;
+        int numSpecialToGenerate = numBoosterSpecial;
+        if (ratioBoosterSpecialCommon > 0 && RandomUtil.nextInt(ratioBoosterSpecialCommon) < 1) {
+            --numCommonsToGenerate;
+            ++numSpecialToGenerate;
+        }
 
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
         for (int i = 0; i < numCommonsToGenerate; i++) {
             addToBooster(booster, commons);
         }
 
-        if (numSpecialCommons > 0) { // e.g. used to conditionally replace common cards in the booster
-            addSpecialCommon(booster, numSpecialCommons);
+        int numUncommonsToGenerate = numBoosterUncommon;
+        int numRaresToGenerate = numBoosterRare;
+        if (ratioBoosterSpecialRare > 0) {
+            Rarity specialRarity = Rarity.UNCOMMON;
+            if (ratioBoosterSpecialRare * RandomUtil.nextDouble() <= 1) {
+                specialRarity = (checkSpecialMythic() ? Rarity.MYTHIC : Rarity.RARE);
+                --numRaresToGenerate;
+            } else {
+                --numUncommonsToGenerate;
+            }
+            addToBooster(booster, getSpecialCardsByRarity(specialRarity));
         }
 
         List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
-        for (int i = 0; i < numBoosterUncommon; i++) {
+        for (int i = 0; i < numUncommonsToGenerate; i++) {
             addToBooster(booster, uncommons);
         }
 
-        List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
-        List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
-        for (int i = 0; i < numBoosterRare; i++) {
-            if (checkMythic()) {
-                addToBooster(booster, mythics);
-            } else {
-                addToBooster(booster, rares);
+        if (numRaresToGenerate > 0) {
+            List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
+            List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
+            for (int i = 0; i < numRaresToGenerate; i++) {
+                addToBooster(booster, checkMythic() ? mythics : rares);
             }
         }
 
@@ -518,8 +444,8 @@ public abstract class ExpansionSet implements Serializable {
             addDoubleFace(booster);
         }
 
-        if (numBoosterSpecial > 0) {
-            addSpecial(booster);
+        if (numSpecialToGenerate > 0) {
+            addSpecialCards(booster, numSpecialToGenerate);
         }
 
         return booster;
@@ -528,96 +454,33 @@ public abstract class ExpansionSet implements Serializable {
     /* add double faced card for Innistrad booster
      * rarity near as the normal distribution
      */
-    public void addDoubleFace(List<Card> booster) {
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code).doubleFaced(true);
-            if (RandomUtil.nextInt(15) < 10) {
-                criteria.rarities(Rarity.COMMON);
-            } else if (RandomUtil.nextInt(5) < 4) {
-                criteria.rarities(Rarity.UNCOMMON);
-            } else if (RandomUtil.nextInt(8) < 7) {
-                criteria.rarities(Rarity.RARE);
+            int rarityKey = RandomUtil.nextInt(121);
+            if (rarityKey < 66) {
+                rarity = Rarity.COMMON;
+            } else if (rarityKey < 108) {
+                rarity = Rarity.UNCOMMON;
+            } else if (rarityKey < 120) {
+                rarity = Rarity.RARE;
             } else {
-                criteria.rarities(Rarity.MYTHIC);
+                rarity = Rarity.MYTHIC;
             }
-            List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
-            addToBooster(booster, doubleFacedCards);
+            addToBooster(booster, getSpecialCardsByRarity(rarity));
+        }
+    }
+
+    protected void addSpecialCards(List<Card> booster, int number) {
+        List<CardInfo> specialCards = getCardsByRarity(Rarity.SPECIAL);
+        for (int i = 0; i < number; i++) {
+            addToBooster(booster, specialCards);
         }
     }
 
     public static Date buildDate(int year, int month, int day) {
         // The month starts with 0 = jan ... dec = 11
         return new GregorianCalendar(year, month - 1, day).getTime();
-    }
-
-    /**
-     * Can be overwritten if sometimes special cards will be generated instead
-     * of common slots
-     *
-     * @return
-     */
-    public int getNumberOfSpecialCommons() {
-        return 0;
-    }
-
-    /**
-     * Can be overwritten to add a replacement for common card in boosters
-     *
-     * @param booster
-     * @param number
-     */
-    public void addSpecialCommon(List<Card> booster, int number) {
-
-    }
-
-    private void addSpecial(List<Card> booster) {
-        int specialCards = 0;
-        List<CardInfo> specialBonus = getSpecialBonus();
-        specialCards += specialBonus.size();
-
-        List<CardInfo> specialMythic = getSpecialMythic();
-        specialCards += specialMythic.size();
-
-        List<CardInfo> specialRare = getSpecialRare();
-        specialCards += specialRare.size();
-
-        List<CardInfo> specialUncommon = getSpecialUncommon();
-        specialCards += specialUncommon.size();
-
-        List<CardInfo> specialCommon = getSpecialCommon();
-        specialCards += specialCommon.size();
-
-        if (specialCards > 0) {
-            for (int i = 0; i < numBoosterSpecial; i++) {
-                if (!specialCommon.isEmpty()
-                        && RandomUtil.nextInt(15) < 10) {
-                    addToBooster(booster, specialCommon);
-                    continue;
-                }
-                if (!specialUncommon.isEmpty()
-                        && RandomUtil.nextInt(4) < 3) {
-                    addToBooster(booster, specialUncommon);
-                    continue;
-                }
-                if (!specialRare.isEmpty()
-                        && RandomUtil.nextInt(8) < 7) {
-                    addToBooster(booster, specialRare);
-                    continue;
-                }
-                if (!specialMythic.isEmpty()) {
-                    if (specialBonus.isEmpty() || RandomUtil.nextInt(3) < 2) {
-                        addToBooster(booster, specialMythic);
-                        continue;
-                    }
-                }
-                if (!specialBonus.isEmpty()) {
-                    addToBooster(booster, specialBonus);
-                    continue;
-                }
-                i--;
-            }
-        }
     }
 
     public boolean hasBoosters() {
@@ -628,58 +491,90 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-        if (savedCardsInfos == null) {
-            CardCriteria criteria = new CardCriteria();
-            if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
-                // get basic lands from parent set if this set doesn't have them
-                criteria.setCodes(parentSet.code);
-            } else {
-                criteria.setCodes(this.code);
-            }
-            criteria.rarities(rarity);
-            if (numBoosterDoubleFaced > -1) {
-                criteria.doubleFaced(false);
-            }
-            savedCardsInfos = CardRepository.instance.findCards(criteria);
-            // Workaround after card number is numeric
-            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
-            }
-
-            savedCards.put(rarity, savedCardsInfos);
+    public final synchronized List<CardInfo> getCardsByRarity(Rarity rarity) {
+        List<CardInfo> savedCardInfos = savedCards.get(rarity);
+        if (savedCardInfos == null) {
+            savedCardInfos = findCardsByRarity(rarity);
+            savedCards.put(rarity, savedCardInfos);
         }
         // Return a copy of the saved cards information, as not to let modify the original.
-        return new ArrayList<>(savedCardsInfos);
+        return new ArrayList<>(savedCardInfos);
     }
 
-    public List<CardInfo> getSpecialCommon() {
-        return new ArrayList<>();
+    public final synchronized List<CardInfo> getSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> savedCardInfos = savedSpecialCards.get(rarity);
+        if (savedCardInfos == null) {
+            savedCardInfos = findSpecialCardsByRarity(rarity);
+            savedSpecialCards.put(rarity, savedCardInfos);
+        }
+        // Return a copy of the saved cards information, as not to let modify the original.
+        return new ArrayList<>(savedCardInfos);
     }
 
-    public List<CardInfo> getSpecialUncommon() {
-        return new ArrayList<>();
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        // get basic lands from parent set if this set doesn't have them
+        if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
+            return parentSet.getCardsByRarity(rarity);
+        }
+
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .maxCardNumber(maxCardNumberInBooster));
+
+        cardInfos.removeIf(next -> (
+                next.getCardNumber().contains("*")
+                || next.getCardNumber().contains("+")));
+
+        // special slot cards must not also appear in regular slots of their rarity
+        // special land slot cards must not appear in regular common slots either
+        List<CardInfo> specialCards = getSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON && ratioBoosterSpecialLand > 0) {
+            specialCards.addAll(getSpecialCardsByRarity(Rarity.LAND));
+        }
+        cardInfos.removeAll(specialCards);
+        return cardInfos;
     }
 
-    public List<CardInfo> getSpecialRare() {
-        return new ArrayList<>();
-    }
+    /**
+     * "Special cards" are cards that have common/uncommon/rare/mythic rarities
+     * but can only appear in a specific slot in boosters. Examples are DFCs in
+     * Innistrad sets and common nonbasic lands in many post-2018 sets.
+     *
+     * Note that Rarity.SPECIAL and Rarity.BONUS cards are not normally treated
+     * as "special cards" because by default boosters don't even have slots for
+     * those rarities.
+     *
+     * Also note that getCardsByRarity calls getSpecialCardsByRarity to exclude
+     * special cards from non-special booster slots, so sets that override this
+     * method must not call getCardsByRarity in it or infinite recursion will occur.
+     */
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = new ArrayList<>();
 
-    public List<CardInfo> getSpecialMythic() {
-        return new ArrayList<>();
-    }
+        // if set has special land slot, assume all common lands are special cards
+        if (rarity == Rarity.LAND && ratioBoosterSpecialLand > 0) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .rarities(Rarity.COMMON)
+                    .types(CardType.LAND)
+                    .maxCardNumber(maxCardNumberInBooster)));
+        }
 
-    public List<CardInfo> getSpecialBonus() {
-        return new ArrayList<>();
-    }
+        // if set has special slot(s) for DFCs, they are special cards
+        if (numBoosterDoubleFaced > 0) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .rarities(rarity)
+                    .doubleFaced(true)
+                    .maxCardNumber(maxCardNumberInBooster)));
+        }
 
-    public List<CardInfo> getSpecialLand() {
-        return new ArrayList<>();
-    }
+        cardInfos.removeIf(next -> (
+                next.getCardNumber().contains("*")
+                || next.getCardNumber().contains("+")));
 
-    public void removeSavedCards() {
-        savedCards.clear();
+        return cardInfos;
     }
 
     public int getMaxCardNumberInBooster() {

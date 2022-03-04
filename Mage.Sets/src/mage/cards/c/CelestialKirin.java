@@ -35,7 +35,7 @@ public final class CelestialKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false, true));
     }
 
     private CelestialKirin(final CelestialKirin card) {

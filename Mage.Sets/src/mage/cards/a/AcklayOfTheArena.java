@@ -30,7 +30,7 @@ public final class AcklayOfTheArena extends CardImpl {
         this.addAbility(new MonstrosityAbility("{2}{R}{G}{W}", 1));
 
         // Whenever a creature you control becomes monstrous, it fights target creature an opponent controls.
-        Ability ability = new BecomesMonstrousTriggeredAbility(new FightTargetsEffect("it fights target creature an opponent controls"));
+        Ability ability = new BecomesMonstrousTriggeredAbility(new FightTargetsEffect().setText("it fights target creature an opponent controls"));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

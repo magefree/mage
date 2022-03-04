@@ -23,7 +23,7 @@ import mage.filter.FilterSpell;
  */
 public final class InspiredSprite extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Wizard");
+    private static final FilterSpell filter = new FilterSpell("a Wizard spell");
 
     static {
         filter.add(SubType.WIZARD.getPredicate());

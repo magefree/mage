@@ -1,31 +1,44 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public final class RageExtractor extends CardImpl {
 
+    private static final FilterSpell filter = new FilterSpell("a spell with {P} in its mana cost");
+
+    static {
+        filter.add(RageExtractorPredicate.instance);
+    }
+
     public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{R/P}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{R/P}");
 
-
-        this.addAbility(new RageExtractorTriggeredAbility());
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DamageTargetEffect(RageExtractorValue.instance)
+                        .setText("{this} deals damage equal to that spell's mana value to any target"),
+                filter, false
+        );
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private RageExtractor(final RageExtractor card) {
@@ -38,44 +51,31 @@ public final class RageExtractor extends CardImpl {
     }
 }
 
-class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
-    RageExtractorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
-        this.addTarget(new TargetAnyTarget());
-    }
+enum RageExtractorPredicate implements Predicate<StackObject> {
+    instance;
 
-    RageExtractorTriggeredAbility(final RageExtractorTriggeredAbility ability) {
-        super(ability);
+    @Override
+    public boolean apply(StackObject input, Game game) {
+        return ((Spell) input).getCard().getManaCost().stream().anyMatch(ManaCost::isPhyrexian);
+    }
+}
+
+enum RageExtractorValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Spell spell = (Spell) effect.getValue("spellCast");
+        return spell != null ? spell.getManaValue() : 0;
     }
 
     @Override
-    public RageExtractorTriggeredAbility copy() {
-        return new RageExtractorTriggeredAbility(this);
+    public RageExtractorValue copy() {
+        return this;
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.controllerId)) {
-            Spell spell = (Spell) game.getStack().getStackObject(event.getTargetId());
-            if (spell != null) {
-                for (ManaCost cost : spell.getCard().getManaCost()) {
-                    if (cost instanceof PhyrexianManaCost) {
-                        ((DamageTargetEffect)getEffects().get(0)).setAmount(StaticValue.get(spell.getManaValue()));
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell with {P} in its mana cost, {this} deals damage equal to that spell's mana value to any target.";
+    public String getMessage() {
+        return "";
     }
 }

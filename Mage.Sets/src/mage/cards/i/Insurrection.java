@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -24,8 +23,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Insurrection extends CardImpl {
 
     public Insurrection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
 
         // Untap all creatures and gain control of them until end of turn. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new InsurrectionEffect());
@@ -64,8 +62,8 @@ class InsurrectionEffect extends OneShotEffect {
         ContinuousEffect gainHaste = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         for (Permanent creature : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
             creature.untap(game);
-            gainControl.setTargetPointer(new FixedTarget(creature.getId()));
-            gainHaste.setTargetPointer(new FixedTarget(creature.getId()));
+            gainControl.setTargetPointer(new FixedTarget(creature.getId(), game));
+            gainHaste.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(gainControl, source);
             game.addEffect(gainHaste, source);
             result = true;

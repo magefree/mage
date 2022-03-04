@@ -18,10 +18,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.Predicates;
-
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,12 +29,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class DiscipleOfTheRing extends CardImpl {
-    
-    private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");
-
-    static {
-        filterSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public DiscipleOfTheRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
@@ -45,10 +37,11 @@ public final class DiscipleOfTheRing extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // {1}, Exile an instant or sorcery card from your graveyard: Choose one - Counter target noncreature spell unless its controller pay {2};
+        // {1}, Exile an instant or sorcery card from your graveyard:
+        // Choose one - Counter target noncreature spell unless its controller pay {2};
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), new GenericManaCost(1));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, new FilterInstantOrSorceryCard("an instant or sorcery card from your graveyard"))));
-        ability.addTarget(new TargetSpell(filterSpell));
+        ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         
         // or Disciple of the Ring gets +1/+1 until end of turn; 
         Mode mode = new Mode();

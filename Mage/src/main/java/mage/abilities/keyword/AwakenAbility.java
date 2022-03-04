@@ -103,7 +103,7 @@ public class AwakenAbility extends SpellAbility {
                     }
                 }
                 if (targetId != null) {
-                    FixedTarget fixedTarget = new FixedTarget(targetId);
+                    FixedTarget fixedTarget = new FixedTarget(targetId, game);
                     ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
                     continuousEffect.setTargetPointer(fixedTarget);
                     game.addEffect(continuousEffect, source);

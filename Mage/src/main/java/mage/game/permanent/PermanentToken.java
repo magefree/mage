@@ -86,6 +86,7 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.addAll(token.getSuperType());
         this.subtype.copyFrom(token.getSubtype(game));
         this.tokenDescriptor = token.getTokenDescriptor();
+        this.startingLoyalty = token.getStartingLoyalty();
     }
 
     @Override

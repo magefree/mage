@@ -9,9 +9,11 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -24,35 +26,41 @@ public class WishEffect extends OneShotEffect {
     private final FilterCard filter;
     private final boolean reveal;
     private final boolean alsoFromExile;
-    private final String choiceText;
     private final boolean topOfLibrary;
+    private final String choiceText;
+
+    public WishEffect() {
+        this(false);
+    }
+
+    public WishEffect(boolean topOfLibrary) {
+        super(Outcome.DrawCard);
+        this.filter = StaticFilters.FILTER_CARD;
+        this.reveal = false;
+        this.alsoFromExile = false;
+        this.topOfLibrary = topOfLibrary;
+        choiceText = "Put a card you own from outside the game " +
+                (topOfLibrary ? "on top of your library?" : "into your hand?");
+        staticText = "You may " + Character.toLowerCase(choiceText.charAt(0)) + choiceText.substring(1, choiceText.length() - 1);
+    }
 
     public WishEffect(FilterCard filter) {
-        this(filter, true);
+        this(filter, false);
     }
 
-    public WishEffect(FilterCard filter, boolean reveal) {
-        this(filter, reveal, false);
+    public WishEffect(FilterCard filter, boolean alsoFromExile) {
+        this(filter, alsoFromExile, false);
     }
 
-    public WishEffect(FilterCard filter, boolean reveal, boolean alsoFromExile) {
-        this(filter, reveal, alsoFromExile, false);
-    }
-
-    public WishEffect(FilterCard filter, boolean reveal, boolean alsoFromExile, boolean topOfLibrary) {
+    public WishEffect(FilterCard filter, boolean alsoFromExile, boolean topOfLibrary) {
         super(Outcome.DrawCard);
         this.filter = filter;
+        this.reveal = true;
         this.alsoFromExile = alsoFromExile;
-        this.reveal = reveal;
         this.topOfLibrary = topOfLibrary;
-        if (!reveal) {
-            choiceText = "Put a card you own from outside the game "
-                    + (topOfLibrary ? "on top of your library." : "into your hand.");
-        } else {
-            choiceText = (topOfLibrary ? "Put " : "Reveal ") + filter.getMessage() + " you own from outside the game"
-                    + (alsoFromExile ? " or choose " + makeExileText(filter)
-                    + " you own in exile. Put that card into your hand." : " and put it into your hand.");
-        }
+        choiceText = "Reveal " + CardUtil.addArticle(filter.getMessage()) + " you own from outside the game "
+                + (alsoFromExile ? "or choose " + makeExileText(filter) + " you own in exile. Put that card" : "and put it")
+                + (topOfLibrary ? " on top of your library?" : " into your hand?");
         staticText = "You may " + Character.toLowerCase(choiceText.charAt(0)) + choiceText.substring(1, choiceText.length() - 1);
     }
 
@@ -69,10 +77,10 @@ public class WishEffect extends OneShotEffect {
     public WishEffect(final WishEffect effect) {
         super(effect);
         this.filter = effect.filter;
-        this.alsoFromExile = effect.alsoFromExile;
         this.reveal = effect.reveal;
-        this.choiceText = effect.choiceText;
+        this.alsoFromExile = effect.alsoFromExile;
         this.topOfLibrary = effect.topOfLibrary;
+        this.choiceText = effect.choiceText;
     }
 
     @Override

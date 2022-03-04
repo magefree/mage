@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -32,8 +30,8 @@ public final class DuergarMineCaptain extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{RW}, {untap}: Attacking creatures get +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("attacking creatures"), false),
+        Ability ability = new SimpleActivatedAbility(
+                new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false),
                 new ManaCostsImpl("{1}{R/W}")
         );
         ability.addCost(new UntapSourceCost());

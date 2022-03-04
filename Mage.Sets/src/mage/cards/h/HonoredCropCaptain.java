@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class HonoredCropCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Honored Crop-Captain attacks, other attacking creatures get +1/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true), false));
 
     }
 

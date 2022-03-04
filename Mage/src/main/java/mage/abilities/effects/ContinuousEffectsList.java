@@ -1,6 +1,5 @@
 package mage.abilities.effects;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -8,8 +7,11 @@ import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @param <T>
@@ -145,6 +147,12 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         }
                         break;
                     case Custom:
+                    case UntilYourNextTurn:
+                    case UntilEndOfYourNextTurn:
+                        // until your turn effects continue until real turn reached, their used it's own inactive method
+                        // 514.2 Second, the following actions happen simultaneously: all damage marked on permanents
+                        // (including phased-out permanents) is removed and all "until end of turn" and "this turn" effects end.
+                        // This turn-based action doesn’t use the stack.
                         // custom effects must process it's own inactive method (override)
                         // custom effects may not end, if the source permanent of the effect has left the game
                         // 800.4a (only any effects which give that player control of any objects or players end)
@@ -156,18 +164,14 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         // end of turn discards on cleanup steps
                         // 514.2
                         break;
-                    case UntilYourNextTurn:
-                    case UntilEndOfYourNextTurn:
-                        // until your turn effects continue until real turn reached, their used it's own inactive method
-                        // 514.2 Second, the following actions happen simultaneously: all damage marked on permanents
-                        // (including phased-out permanents) is removed and all "until end of turn" and "this turn" effects end.
-                        // This turn-based action doesn’t use the stack.
-                        if (effect.isInactive(ability, game)) {
+                    case UntilSourceLeavesBattlefield:
+                        if (hasOwnerLeftGame || game.getState().getZone(ability.getSourceId()) != Zone.BATTLEFIELD) {
                             it.remove();
                         }
                         break;
-                    case UntilSourceLeavesBattlefield:
-                        if (hasOwnerLeftGame || Zone.BATTLEFIELD != game.getState().getZone(ability.getSourceId())) {
+                    case WhileControlled:
+                        Permanent permanent = ability.getSourcePermanentIfItStillExists(game);
+                        if (hasOwnerLeftGame || permanent == null || !permanent.isControlledBy(ability.getControllerId())) {
                             it.remove();
                         }
                         break;
@@ -188,24 +192,19 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
      * @param source - connected ability
      */
     public void addEffect(T effect, Ability source) {
-        if (effectAbilityMap.containsKey(effect.getId())) {
-            Set<Ability> set = effectAbilityMap.get(effect.getId());
-            for (Ability ability : set) {
-                if (ability.getId().equals(source.getId()) && ability.getSourceId().equals(source.getSourceId())) {
-                    return;
-                }
-            }
-            set.add(source);
+        Set<Ability> set = effectAbilityMap.computeIfAbsent(effect.getId(), x -> new HashSet<>());
+        if (set.stream()
+                .filter(ability -> ability.getSourceId().equals(source.getSourceId()))
+                .map(Ability::getId)
+                .anyMatch(source.getId()::equals)) {
             return;
         }
-        Set<Ability> set = new HashSet<>();
         set.add(source);
-        this.effectAbilityMap.put(effect.getId(), set);
         this.add(effect);
     }
 
     public Set<Ability> getAbility(UUID effectId) {
-        return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
+        return effectAbilityMap.computeIfAbsent(effectId, x -> new HashSet<>());
     }
 
     public void removeTemporaryEffects() {
@@ -226,7 +225,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     @Override
     public boolean contains(Object object) {
-        if (object == null || !(object instanceof ContinuousEffect)) {
+        if (!(object instanceof ContinuousEffect)) {
             return false;
         }
 

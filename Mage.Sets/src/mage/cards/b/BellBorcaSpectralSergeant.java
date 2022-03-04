@@ -133,8 +133,10 @@ class BellBorcaSpectralSergeantWatcher extends Watcher {
             return;
         }
         int cmc = card.getManaValue();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, game.getActivePlayerId(), game)) {
-            if (permanent == null) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            if (permanent == null
+                    || cmcMap.get(permanent.getId()) != null
+                    && cmcMap.get(permanent.getId()) >= cmc) {
                 continue;
             }
             cmcMap.put(permanent.getId(), cmc);

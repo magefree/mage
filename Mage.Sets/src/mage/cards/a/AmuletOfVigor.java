@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.GameLog;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -63,7 +64,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null && permanent.isTapped() && permanent.isControlledBy(this.getControllerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(
-                        new FixedTarget(event.getTargetId())
+                        new FixedTarget(event.getTargetId(), game)
                                 .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(permanent))
                 );
             }
@@ -75,10 +76,12 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         // that triggers depends on stack order, so make each trigger unique with extra info
-        String triggeredInfo = "";
-        if (this.getEffects().get(0).getTargetPointer() != null) {
-            triggeredInfo = " Triggered permanent: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + ".";
-        }
-        return "Whenever a permanent enters the battlefield tapped and under your control, untap it." + triggeredInfo;
+        return "Whenever a permanent enters the battlefield tapped and under your control, untap it."
+                + Optional
+                .of(this.getEffects().get(0).getTargetPointer())
+                .map(targetPointer -> targetPointer.getData("triggeredName"))
+                .filter(s -> s != null && !s.isEmpty())
+                .map(s -> " Triggered permanent: " + s)
+                .orElse("");
     }
 }

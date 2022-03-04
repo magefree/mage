@@ -91,7 +91,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
         Target target = new TargetPermanent(filter);
         if (target.choose(Outcome.GainControl, controllerId, source.getSourceId(), game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
-            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
             game.addEffect(effect, ability);
             game.getState().processAction(game);
             paid = true;

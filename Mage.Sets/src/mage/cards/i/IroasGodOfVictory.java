@@ -50,7 +50,7 @@ public final class IroasGodOfVictory extends CardImpl {
 
         // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+                new GainAbilityAllEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
         ));
 
         // Prevent all damage that would be dealt to attacking creatures you control.

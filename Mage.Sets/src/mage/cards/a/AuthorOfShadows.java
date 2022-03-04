@@ -48,7 +48,7 @@ class AuthorOfShadowsEffect extends OneShotEffect {
 
     AuthorOfShadowsEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all cards from all opponents' graveyards. Choose a nonland card exiled this way. " +
+        staticText = "exile all opponents' graveyards. Choose a nonland card exiled this way. " +
                 "You may cast that card for as long as it remains exiled, and you may spend mana " +
                 "as though it were mana of any color to cast that spell";
     }

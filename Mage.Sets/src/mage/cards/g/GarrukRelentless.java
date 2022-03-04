@@ -4,7 +4,6 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -31,10 +30,9 @@ public final class GarrukRelentless extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.transformable = true;
         this.secondSideCardClazz = GarrukTheVeilCursed.class;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // When Garruk Relentless has two or fewer loyalty counters on him, transform him.
         this.addAbility(new TransformAbility());
@@ -63,7 +61,7 @@ public final class GarrukRelentless extends CardImpl {
 class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
     public GarrukRelentlessStateTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {

@@ -1,7 +1,4 @@
-
 package mage.cards.s;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -12,18 +9,19 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward
@@ -34,7 +32,6 @@ public final class SoulSeizer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GhastlyHaunting.class;
 
         this.power = new MageInt(1);
@@ -113,16 +110,11 @@ class SoulSeizerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isTransformable()) {
-            if (permanent.transform(game)) {
-                game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
-                Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
-                if (attachTo != null) {
-                    return attachTo.addAttachment(source.getSourceId(), source, game);
-                }
-            }
+        if (permanent == null || !permanent.transform(source, game)) {
+            return false;
         }
-        return false;
+        Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
+        return attachTo != null && attachTo.addAttachment(source.getSourceId(), source, game);
     }
 
     @Override

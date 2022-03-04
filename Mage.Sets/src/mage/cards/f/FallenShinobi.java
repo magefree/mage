@@ -29,7 +29,7 @@ public final class FallenShinobi extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ninjutsu {2}{U}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{U}{B}")));
+        this.addAbility(new NinjutsuAbility("{2}{U}{B}"));
 
         // Whenever Fallen Shinobi deals combat damage to a player, that player exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

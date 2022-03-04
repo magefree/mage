@@ -46,7 +46,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
             return false;
         }
         for (Effect effect : this.getEffects()) {
-            effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+            effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
         }
         return true;
     }

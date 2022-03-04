@@ -21,7 +21,7 @@ public final class AngrathsRampage extends CardImpl {
         // Choose one:
         // • Target player sacrifices an artifact.
         this.getSpellAbility().addEffect(new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_ARTIFACT,
+                StaticFilters.FILTER_PERMANENT_ARTIFACT_AN,
                 1, "Target player"
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());

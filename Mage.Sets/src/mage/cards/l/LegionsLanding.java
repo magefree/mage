@@ -28,7 +28,6 @@ public final class LegionsLanding extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AdantoTheFirstFort.class;
 
         // When Legion's Landing enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
@@ -36,7 +35,7 @@ public final class LegionsLanding extends CardImpl {
 
         // When you attack with three or more creatures, transform Legion's Landing.
         this.addAbility(new TransformAbility());
-        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect(true)));
+        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect()));
     }
 
     private LegionsLanding(final LegionsLanding card) {

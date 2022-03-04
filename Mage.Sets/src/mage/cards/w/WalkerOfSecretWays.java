@@ -43,7 +43,7 @@ public final class WalkerOfSecretWays extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever Walker of Secret Ways deals combat damage to a player, look at that player's hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), false, true));

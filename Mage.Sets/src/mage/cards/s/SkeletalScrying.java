@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -58,13 +58,12 @@ public final class SkeletalScrying extends CardImpl {
 
 enum SkeletalScryingAdjuster implements CostAdjuster {
     instance;
-    private static final FilterCard filter = new FilterCard("cards from your graveyard");
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         if (xValue > 0) {
-            ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(xValue, xValue, filter)));
+            ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         }
     }
 }

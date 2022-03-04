@@ -48,7 +48,8 @@ class SavageSwipeEffect extends OneShotEffect {
     SavageSwipeEffect() {
         super(Outcome.Benefit);
         staticText = "Target creature you control gets +2/+2 until end of turn if its power is 2. " +
-                "Then it fights target creature you don't control.";
+                "Then it fights target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private SavageSwipeEffect(final SavageSwipeEffect effect) {

@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 
 /**
@@ -23,7 +23,7 @@ public final class AkromasBlessing extends CardImpl {
 
 
         // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")));
+        this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }

@@ -23,7 +23,6 @@ public final class DireStrainDemolisher extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(7);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Ward {3}

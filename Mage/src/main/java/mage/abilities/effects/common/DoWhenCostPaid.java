@@ -54,7 +54,9 @@ public class DoWhenCostPaid extends OneShotEffect {
         cost.clearPaid();
         int bookmark = game.bookmarkState();
         if (cost.pay(source, game, source, player.getId(), false)) {
-            ability.getEffects().setTargetPointer(getTargetPointer());
+            if (ability.getTargets().isEmpty()) {
+                ability.getEffects().setTargetPointer(getTargetPointer());
+            }
             game.fireReflexiveTriggeredAbility(ability, source);
             player.resetStoredBookmark(game);
             return true;
@@ -72,16 +74,10 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". When you do, " + ability.getText();
-    }
-
-    private String getCostText() {
-        StringBuilder sb = new StringBuilder();
-        String costText = cost.getText();
-        if (!CardUtil.checkCostWords(costText)) {
-            sb.append("pay ");
-        }
-        return sb.append(costText).toString();
+        return (optional ? "you may " : "")
+                + CardUtil.addCostVerb(cost.getText())
+                + ". When you do, "
+                + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
     @Override

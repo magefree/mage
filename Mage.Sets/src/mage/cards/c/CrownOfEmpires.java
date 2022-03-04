@@ -70,7 +70,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
         }
         if (scepter && throne) {
             ContinuousEffect effect = new CrownOfEmpiresControlEffect();
-            effect.setTargetPointer(new FixedTarget(target.getId()));
+            effect.setTargetPointer(new FixedTarget(target.getId(), game));
             game.getState().setValue(source.getSourceId().toString(), source.getControllerId());
             game.addEffect(effect, source);
         } else {

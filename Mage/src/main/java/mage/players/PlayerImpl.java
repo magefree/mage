@@ -1011,7 +1011,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
-                        game.informPlayers(withName ? cardInLib.getLogName() : "A card"
+                        game.informPlayers((withName ? cardInLib.getLogName() : "A card")
                                 + " is put into "
                                 + getLogName()
                                 + "'s library "
@@ -2063,11 +2063,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life"
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
-            if (amount > 0) {
+            if (event.getAmount() > 0) {
                 game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, amount, atCombat));
+                        playerId, source, playerId, event.getAmount(), atCombat));
             }
-            return amount;
+            return event.getAmount();
         }
         return 0;
     }
@@ -2119,6 +2119,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             this.setLife(lifePlayer2, game, source);
             player.setLife(lifePlayer1, game, source);
         }
+    }
+
+    @Override
+    public int damage(int damage, Ability source, Game game) {
+        return doDamage(damage, source.getSourceId(), source, game, false, true, null);
     }
 
     @Override
@@ -2298,6 +2303,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void addAbility(Ability ability) {
         ability.setSourceId(playerId);
         this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override
@@ -2619,10 +2625,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker != null
                 && attacker.canAttack(defenderId, game)
-                && attacker.isControlledBy(playerId)) {
-            if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
-                game.undo(playerId);
-            }
+                && attacker.isControlledBy(playerId)
+                && !game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
+            game.undo(playerId);
         }
     }
 

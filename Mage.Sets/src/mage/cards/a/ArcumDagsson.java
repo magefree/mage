@@ -87,6 +87,7 @@ class ArcumDagssonEffect extends OneShotEffect {
             Player player = game.getPlayer(artifactCreature.getControllerId());
             if (player != null) {
                 artifactCreature.sacrifice(source, game);
+                game.getState().processAction(game);  // Workaround for https://github.com/magefree/mage/issues/8501
                 if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a noncreature artifact card?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
                     if (player.searchLibrary(target, source, game)) {

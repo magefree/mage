@@ -15,7 +15,7 @@ public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
     public TitaniaProtectorOfArgothElementalToken() {
         super("Elemental", "5/3 green Elemental creature token");
         this.cardType.add(CardType.CREATURE);
-        this.color = ObjectColor.GREEN;
+        this.color.setGreen(true);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

@@ -37,12 +37,15 @@ public final class MageDuel extends CardImpl {
 
         // This spell costs {2} less to cast if you've cast another instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, MageDuelCondition.instance).setCanWorksOnStackOnly(true)
+                Zone.ALL,
+                new SpellCostReductionSourceEffect(2, MageDuelCondition.instance).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true), new SpellsCastWatcher());
 
         // Target creature you control gets +1/+2 until end of turn. Then it fights target creature you don't control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 2));
-        this.getSpellAbility().addEffect(new FightTargetsEffect().setText("Then it fights target creature you don't control"));
+        this.getSpellAbility().addEffect(new FightTargetsEffect().setText(
+                "Then it fights target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addWatcher(new SpellsCastWatcher());

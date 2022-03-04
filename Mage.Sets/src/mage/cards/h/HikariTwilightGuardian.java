@@ -33,7 +33,7 @@ public final class HikariTwilightGuardian extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
         Effect effect = new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true);
         effect.setText("you may exile {this}. If you do, return it to the battlefield under its owner's control at the beginning of the next end step");
-        this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
     }
 
     private HikariTwilightGuardian(final HikariTwilightGuardian card) {

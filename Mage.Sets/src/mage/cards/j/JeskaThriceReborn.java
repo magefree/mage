@@ -38,6 +38,7 @@ public final class JeskaThriceReborn extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JESKA);
+        this.setStartingLoyalty(0);
 
         // Jeska, Thrice Reborn enters the battlefield with a loyalty counter on it for each time you've cast a commander from the command zone this game.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(

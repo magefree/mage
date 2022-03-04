@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class ResoluteBlademaster extends CardImpl {
         // you control gain double strike until end of turn.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn,
-                        new FilterControlledCreaturePermanent("creatures you control")), false);
+                        StaticFilters.FILTER_CONTROLLED_CREATURES), false);
         this.addAbility(ability);
     }
 

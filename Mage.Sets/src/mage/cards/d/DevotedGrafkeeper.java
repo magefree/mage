@@ -7,7 +7,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DisturbAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +31,6 @@ public final class DevotedGrafkeeper extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DepartedSoulkeeper.class;
 
         // When Devoted Grafkeeper enters the battlefield, mill two cards.
@@ -42,8 +40,7 @@ public final class DevotedGrafkeeper extends CardImpl {
         this.addAbility(new DevotedGrafkeeperTriggeredAbility());
 
         // Disturb {1}{W}{U}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}{U}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}{U}"));
     }
 
     private DevotedGrafkeeper(final DevotedGrafkeeper card) {

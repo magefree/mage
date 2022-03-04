@@ -132,13 +132,13 @@ class GlyphOfDelusionEffect extends OneShotEffect {
                 SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
                         new SourceHasCounterCondition(CounterType.GLYPH)).setText("This creature doesn't untap during your untap step if it has a glyph counter on it"));
                 GainAbilityTargetEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
                 BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()),
                         TargetController.YOU, false);
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
-                effect2.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);
             }
         }

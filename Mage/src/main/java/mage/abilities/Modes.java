@@ -483,7 +483,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             throw new UnsupportedOperationException("no text available for this selection of min and max modes");
         }
 
-        if (isEachModeOnlyOnce()) {
+        if (isEachModeOnlyOnce() && this.getMaxModesFilter() == null) {
             sb.append(" that hasn't been chosen");
         }
         if (isResetEachTurn()) {

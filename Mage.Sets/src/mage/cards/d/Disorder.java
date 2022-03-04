@@ -8,13 +8,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LoneFox
@@ -47,7 +50,7 @@ public final class Disorder extends CardImpl {
 
 class DisorderEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("white creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -69,13 +72,16 @@ class DisorderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Player player : game.getPlayers().values()) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(player.getId()));
-            filter.add(new ColorPredicate(ObjectColor.WHITE));
-            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                player.damage(2, source.getSourceId(), source, game);
-            }
+        for (Player player : game
+                .getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Controllable::getControllerId)
+                .distinct()
+                .map(game::getPlayer)
+                .collect(Collectors.toList())) {
+            player.damage(2, source.getSourceId(), source, game);
         }
         return true;
     }

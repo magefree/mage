@@ -27,7 +27,7 @@ public final class ShadowOfDoubt extends CardImpl {
         // Players can't search libraries this turn.
         this.getSpellAbility().addEffect(new LibrariesCantBeSearchedEffect());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ShadowOfDoubt(final ShadowOfDoubt card) {

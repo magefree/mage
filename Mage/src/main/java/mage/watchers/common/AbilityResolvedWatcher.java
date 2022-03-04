@@ -33,7 +33,11 @@ public class AbilityResolvedWatcher extends Watcher {
         resolutionMap.clear();
     }
 
-    public int getResolutionCount(Game game, Ability source) {
-        return resolutionMap.getOrDefault(source.getOriginalId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()), 0);
+    public static int getResolutionCount(Game game, Ability source) {
+        return game
+                .getState()
+                .getWatcher(AbilityResolvedWatcher.class)
+                .resolutionMap
+                .getOrDefault(source.getOriginalId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()), 0);
     }
 }

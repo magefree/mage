@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -41,7 +40,7 @@ public final class FoeRazerRegent extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Foe-Razer Regent enters the battlefield, you may have it fight target creature you don't control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect().setText("you may have it fight target creature you don't control"), true);
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 

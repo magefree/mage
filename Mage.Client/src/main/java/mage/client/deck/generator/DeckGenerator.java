@@ -11,6 +11,7 @@ import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
+import mage.constants.SuperType;
 import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 
@@ -153,7 +154,7 @@ public final class DeckGenerator {
         final CardCriteria nonBasicLandCriteria = new CardCriteria();
         nonBasicLandCriteria.setCodes(sets);
         nonBasicLandCriteria.types(CardType.LAND);
-        nonBasicLandCriteria.notSupertypes("Basic");
+        nonBasicLandCriteria.notSupertypes(SuperType.BASIC);
 
         // Generate basic land cards
         Map<String, List<CardInfo>> basicLands = generateBasicLands(setsToUse);

@@ -685,7 +685,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.getCard();
-                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
 
                 PermanentCard p = new PermanentCard(permCard, player.getId(), currentGame);
                 p.setTapped(tapped);
@@ -1713,7 +1713,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Ends a block of actions to be added after an rollback action
      */
     public void rollbackAfterActionsEnd() throws IllegalStateException {
-        if (rollbackBlockActive = false || rollbackPlayer == null) {
+        if (!rollbackBlockActive || rollbackPlayer == null) {
             throw new IllegalStateException("There was no rollback action defined before or no rollback block started. You can use this command only after a rollback action.");
         }
         rollbackBlockActive = false;

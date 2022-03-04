@@ -27,7 +27,7 @@ public final class LoyalSubordinate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
         this.addAbility(new ConditionalTriggeredAbility(

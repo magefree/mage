@@ -39,7 +39,8 @@ public final class VowOfTorment extends CardImpl {
                 new MenaceAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield
         ).setText(", has menace"));
         ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.AURA)
-                .setText(", and can't attack you or planeswalkers you control"));
+                .setText(", and can't attack you or planeswalkers you control. " +
+                        "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 

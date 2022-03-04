@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author fireshoes
  */
 public final class NoyanDarRoilShaper extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
@@ -43,7 +42,7 @@ public final class NoyanDarRoilShaper extends CardImpl {
     }
 
     public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ALLY);
@@ -90,8 +89,8 @@ class NoyanDarEffect extends OneShotEffect {
             targetId = target.getFirstTarget();
         }
         if (targetId != null) {
-            FixedTarget fixedTarget = new FixedTarget(targetId);
-            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
+            FixedTarget fixedTarget = new FixedTarget(targetId, game);
+            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.EndOfGame);
             continuousEffect.setTargetPointer(fixedTarget);
             game.addEffect(continuousEffect, source);
             Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
@@ -101,7 +100,6 @@ class NoyanDarEffect extends OneShotEffect {
         return true;
     }
 }
-
 
 class AwakenElementalToken extends TokenImpl {
 
@@ -115,6 +113,7 @@ class AwakenElementalToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
     }
+
     public AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }

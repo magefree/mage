@@ -30,11 +30,13 @@ public final class NightfallPredator extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // {R}, {tap}: Nightfall Predator fights target creature.
         Ability activatedAbility = new SimpleActivatedAbility(
-                new FightTargetSourceEffect().setText("{this} fights target creature"), new ManaCostsImpl("{R}")
+                new FightTargetSourceEffect().setText(
+                        "{this} fights target creature. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"),
+                new ManaCostsImpl("{R}")
         );
         activatedAbility.addCost(new TapSourceCost());
         activatedAbility.addTarget(new TargetCreaturePermanent());

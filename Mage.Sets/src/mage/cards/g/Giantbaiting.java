@@ -26,7 +26,7 @@ public final class Giantbaiting extends CardImpl {
         this.getSpellAbility().addEffect(new GiantbaitingEffect());
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.NONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.NONE));
 
     }
 

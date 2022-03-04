@@ -1,24 +1,21 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DuskmantleSeer extends CardImpl {
@@ -33,9 +30,11 @@ public final class DuskmantleSeer extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DuskmantleSeerEffect(), TargetController.YOU, false, false));
 
+        // At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DuskmantleSeerEffect(), TargetController.YOU, false
+        ));
     }
 
     private DuskmantleSeer(final DuskmantleSeer card) {
@@ -52,7 +51,8 @@ class DuskmantleSeerEffect extends OneShotEffect {
 
     public DuskmantleSeerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player reveals the top card of their library, loses life equal to that card's mana value, then puts it into their hand";
+        this.staticText = "each player reveals the top card of their library, " +
+                "loses life equal to that card's mana value, then puts it into their hand";
     }
 
     public DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {
@@ -66,19 +66,18 @@ class DuskmantleSeerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceCard = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceCard == null) {
-            return false;
-        }
-        for (Player player : game.getPlayers().values()) {
-            if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().getFromTop(game);
-                if (card != null) {
-                    player.revealCards(source, ": Revealed by " + player.getName(), new CardsImpl(card), game);
-                    player.loseLife(card.getManaValue(), game, source, false);
-                    player.moveCards(card, Zone.HAND, source, game);
-                }
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
+            Card card = player.getLibrary().getFromTop(game);
+            if (card == null) {
+                continue;
+            }
+            player.revealCards(source, new CardsImpl(card), game);
+            player.loseLife(card.getManaValue(), game, source, false);
+            player.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
 
@@ -27,14 +25,14 @@ public final class Conflagrate extends CardImpl {
     public Conflagrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
-        // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
+        // Conflagrate deals X damage divided as you choose among any number of targets.
         DynamicValue xValue = new ConflagrateVariableValue();
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
 
         // Flashback-{R}{R}, Discard X cards.
         Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{R}{R}"));
-        ability.addCost(new DiscardXTargetCost(new FilterCard("cards")));
+        ability.addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
 
     }

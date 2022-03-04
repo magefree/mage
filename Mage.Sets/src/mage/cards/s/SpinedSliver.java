@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
@@ -11,14 +9,15 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion
  */
 public final class SpinedSliver extends CardImpl {
@@ -31,10 +30,11 @@ public final class SpinedSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.
-        BlockersCount value = new BlockersCount();
-        Effect effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
-        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, true));
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(
+                new BoostTargetEffect(BlockersCount.instance, BlockersCount.instance, Duration.EndOfTurn, true)
+                        .setText("that Sliver gets +1/+1 until end of turn for each creature blocking it"),
+                false, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, true
+        ).setTriggerPhrase("Whenever a Sliver becomes blocked, "));
     }
 
     private SpinedSliver(final SpinedSliver card) {
@@ -47,18 +47,8 @@ public final class SpinedSliver extends CardImpl {
     }
 }
 
-class BlockersCount implements DynamicValue {
-
-    private final String message;
-
-    public BlockersCount() {
-        this.message = "each creature blocking it";
-    }
-
-    public BlockersCount(final BlockersCount blockersCount) {
-        super();
-        this.message = blockersCount.message;
-    }
+enum BlockersCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -73,12 +63,12 @@ class BlockersCount implements DynamicValue {
 
     @Override
     public BlockersCount copy() {
-        return new BlockersCount(this);
+        return this;
     }
 
     @Override
     public String getMessage() {
-        return message;
+        return "each creature blocking it";
     }
 
     @Override

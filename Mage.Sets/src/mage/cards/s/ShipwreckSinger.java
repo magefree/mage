@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -15,11 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.target.Target;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,13 +23,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class ShipwreckSinger extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filterAttacking = new FilterCreaturePermanent("Attacking creatures");
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filterAttacking.add(AttackingPredicate.instance);
-    }
 
     public ShipwreckSinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
@@ -45,15 +34,13 @@ public final class ShipwreckSinger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}: Target creature an opponent controls attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
-        Target target = new TargetCreaturePermanent(filter);
-        ability.addTarget(target);
+        Ability ability = new SimpleActivatedAbility(new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
         // {1}{B}, {T}: Attacking creatures get -1/-1 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.EndOfTurn, filterAttacking, false), new ManaCostsImpl("{1}{B}"));
+        ability = new SimpleActivatedAbility(new BoostAllEffect(-1,-1, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     private ShipwreckSinger(final ShipwreckSinger card) {

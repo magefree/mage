@@ -31,7 +31,6 @@ public final class ThaumaticCompass extends CardImpl {
 
     public ThaumaticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SpiresOfOrazca.class;
 
         // {3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
@@ -43,7 +42,7 @@ public final class ThaumaticCompass extends CardImpl {
 
         // At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false);
+        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability2,
                 new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),

@@ -104,7 +104,7 @@ class IceCauldronExileEffect extends OneShotEffect {
             if (chosenCard != null) {
                 controller.moveCardToExileWithInfo(chosenCard, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.HAND, true);
                 AsThoughEffect effect = new IceCauldronCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(chosenCard.getId()));
+                effect.setTargetPointer(new FixedTarget(chosenCard.getId(), game));
                 game.addEffect(effect, source);
                 game.getState().setValue("IceCauldronCard" + source.getSourceId().toString(), new MageObjectReference(chosenCard.getId(), game)); //store the exiled card
                 return true;

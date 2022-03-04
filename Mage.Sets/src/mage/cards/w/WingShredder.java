@@ -18,13 +18,11 @@ public final class WingShredder extends CardImpl {
     public WingShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
         this.color.setGreen(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Reach
         this.addAbility(ReachAbility.getInstance());

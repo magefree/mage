@@ -17,7 +17,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class GoldenWish extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact or enchantment card");
+    private static final FilterCard filter = new FilterCard("artifact or enchantment card");
 
     static {
         filter.add(Predicates.or(

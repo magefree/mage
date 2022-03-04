@@ -40,8 +40,7 @@ public final class RovingKeep extends CardImpl {
         ability.addEffect(new GainAbilitySourceEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
-        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn)
-                .setText("It can attack this turn as though it didn't have defender"));
+        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn, "it"));
         this.addAbility(ability);
     }
 

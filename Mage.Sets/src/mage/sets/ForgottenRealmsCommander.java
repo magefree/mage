@@ -42,6 +42,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 179, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Behemoth Sledge", 180, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
         cards.add(new SetCardInfo("Belt of Giant Strength", 38, Rarity.RARE, mage.cards.b.BeltOfGiantStrength.class));
+        cards.add(new SetCardInfo("Berserker's Frenzy", 29, Rarity.RARE, mage.cards.b.BerserkersFrenzy.class));
         cards.add(new SetCardInfo("Bituminous Blast", 181, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Bogardan Hellkite", 115, Rarity.MYTHIC, mage.cards.b.BogardanHellkite.class));
         cards.add(new SetCardInfo("Bojuka Bog", 226, Rarity.COMMON, mage.cards.b.BojukaBog.class));
@@ -78,6 +79,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dark-Dweller Oracle", 119, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 232, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dead Man's Chest", 97, Rarity.RARE, mage.cards.d.DeadMansChest.class));
+        cards.add(new SetCardInfo("Death Tyrant", 23, Rarity.RARE, mage.cards.d.DeathTyrant.class));
         cards.add(new SetCardInfo("Decree of Savagery", 156, Rarity.RARE, mage.cards.d.DecreeOfSavagery.class));
         cards.add(new SetCardInfo("Demanding Dragon", 120, Rarity.RARE, mage.cards.d.DemandingDragon.class));
         cards.add(new SetCardInfo("Desert", 233, Rarity.UNCOMMON, mage.cards.d.Desert.class));
@@ -271,6 +273,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Stance", 76, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 148, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanish into Memory", 196, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
+        cards.add(new SetCardInfo("Vengeful Ancestor", 35, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Verdant Embrace", 173, Rarity.RARE, mage.cards.v.VerdantEmbrace.class));
         cards.add(new SetCardInfo("Victimize", 112, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viridian Longbow", 221, Rarity.COMMON, mage.cards.v.ViridianLongbow.class));

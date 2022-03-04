@@ -28,7 +28,7 @@ public final class BuiltToSmash extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new LockedInCondition(new TargetHasCardTypeCondition(CardType.ARTIFACT)),
-                "If its an artifact creature, it gains trample until end of turn"));
+                "If it's an artifact creature, it gains trample until end of turn"));
     }
 
     private BuiltToSmash(final BuiltToSmash card) {

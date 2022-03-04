@@ -77,7 +77,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseTarget(outcome, target, source, game)) {
                 ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

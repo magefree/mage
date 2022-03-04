@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -28,7 +27,7 @@ public final class TeferiMasterOfTime extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // You may activate loyalty abilities of Teferi, Master of Time on any player's turn any time you could cast an instant.
         this.addAbility(new SimpleStaticAbility(new TeferiMasterOfTimeActivationEffect()));
@@ -58,7 +57,7 @@ public final class TeferiMasterOfTime extends CardImpl {
 class TeferiMasterOfTimeActivationEffect extends AsThoughEffectImpl {
 
     TeferiMasterOfTimeActivationEffect() {
-        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of {this} " +
                 "on any player's turn any time you could cast an instant";
     }

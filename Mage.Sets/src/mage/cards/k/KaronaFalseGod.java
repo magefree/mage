@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -95,7 +94,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, newController.getId());
             effect.setValue("KaronaFalseGodSourceId", source.getSourceId());
             effect.setValue("KaronaFalseGodControllerId", newController.getId());
-            effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+            effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             effect.setText("and gains control of it");
             game.addEffect(effect, source);
             return true;

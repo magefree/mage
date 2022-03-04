@@ -44,7 +44,7 @@ public final class VoodooDoll extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new DestroySourceEffect(), TargetController.YOU, false
-                ), new InvertCondition(SourceTappedCondition.instance), "At the beginning of your end step, " +
+                ), SourceTappedCondition.UNTAPPED, "At the beginning of your end step, " +
                 "if {this} is untapped, destroy {this} and it deals damage to you equal to the number of pin counters on it."
         );
         ability.addEffect(new DamageControllerEffect(new CountersSourceCount(CounterType.PIN)));

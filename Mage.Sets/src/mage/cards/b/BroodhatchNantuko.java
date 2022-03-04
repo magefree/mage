@@ -31,7 +31,7 @@ public final class BroodhatchNantuko extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Broodhatch Nantuko is dealt damage, you may create that many 1/1 green Insect creature tokens.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new BroodhatchNantukoDealDamageEffect(), true, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new BroodhatchNantukoDealDamageEffect(), true, false));
         // Morph {2}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
     }

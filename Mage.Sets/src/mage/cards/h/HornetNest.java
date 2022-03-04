@@ -33,7 +33,7 @@ public final class HornetNest extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Hornet Nest is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false));
     }
 
     private HornetNest(final HornetNest card) {

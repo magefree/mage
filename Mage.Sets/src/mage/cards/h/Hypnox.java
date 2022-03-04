@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
@@ -77,13 +76,12 @@ class HypnoxExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (controller == null || player == null || permanent == null) {
+        if (controller == null || player == null) {
             return false;
         }
         return controller.moveCardsToExile(
                 player.getHand().getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), permanent.getIdName()
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 

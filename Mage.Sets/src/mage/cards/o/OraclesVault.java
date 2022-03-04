@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -27,13 +28,12 @@ public final class OraclesVault extends CardImpl {
     public OraclesVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {2}, {T}: Exile the top card of your library. Until end of turn, you may play that card. Put a brick counter on Oracle's Vault.
-        Effect effect = new OraclesVaultEffect();
-        effect.setText("Exile the top card of your library. Until end of turn, you may play that card");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        // {2}, {T}: Exile the top card of your library. Until end of turn, you may play that card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEndOfTurnEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
+
+        // Put a brick counter on Oracle's Vault.
         Effect effect2 = new AddCountersSourceEffect(CounterType.BRICK.createInstance());
-        effect2.setText("Put a brick counter on {this}");
         ability.addEffect(effect2);
         this.addAbility(ability);
 
@@ -52,32 +52,6 @@ public final class OraclesVault extends CardImpl {
     @Override
     public OraclesVault copy() {
         return new OraclesVault(this);
-    }
-}
-
-class OraclesVaultEffect extends OneShotEffect {
-
-    public OraclesVaultEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public OraclesVaultEffect(final OraclesVaultEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OraclesVaultEffect copy() {
-        return new OraclesVaultEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, false, false, false);
-        }
-        return false;
     }
 }
 

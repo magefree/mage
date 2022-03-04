@@ -24,7 +24,6 @@ public final class MoonrageBrute extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.color.setRed(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // First strike

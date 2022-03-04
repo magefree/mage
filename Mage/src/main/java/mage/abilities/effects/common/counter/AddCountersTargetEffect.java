@@ -119,6 +119,9 @@ public class AddCountersTargetEffect extends OneShotEffect {
         Target target = mode.getTargets().getEffectTarget(this.targetPointer);
         if (target != null) {
             if (target.getNumberOfTargets() == 0) {
+                if (target.getMaxNumberOfTargets() > 1) {
+                    sb.append("each of ");
+                }
                 sb.append("up to ");
             }
 

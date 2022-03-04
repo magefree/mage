@@ -32,7 +32,7 @@ public final class HuntmasterLiger extends CardImpl {
         // Whenever this creature mutates, other creatures you control get +X/+X until end of turn, where X is the number of times this creature has mutated.
         this.addAbility(new MutatesSourceTriggeredAbility(new BoostControlledEffect(
                 SourceMutatedCount.instance, SourceMutatedCount.instance, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true, true
         )));
     }
 

@@ -111,41 +111,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(target.getTargetName()).append(" gets ");
         }
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (t.equals("0") && p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-        if (duration != Duration.WhileOnBattlefield) {
-            sb.append(' ').append(duration.toString());
-        }
-        String message = null;
-        String fixedPart = null;
-        if (t.contains("X")) {
-            message = toughness.getMessage();
-            fixedPart = ", where X is ";
-        } else if (p.contains("X")) {
-            message = power.getMessage();
-            fixedPart = ", where X is ";
-        } else if (!power.getMessage().isEmpty()) {
-            message = power.getMessage();
-            fixedPart = " for each ";
-        } else if (!toughness.getMessage().isEmpty()) {
-            message = toughness.getMessage();
-            fixedPart = " for each ";
-        }
-        if (message != null && !message.isEmpty() && fixedPart != null) {
-            sb.append(fixedPart).append(message);
-        }
+        sb.append(CardUtil.getBoostText(power, toughness, duration));
         return sb.toString();
     }
 }

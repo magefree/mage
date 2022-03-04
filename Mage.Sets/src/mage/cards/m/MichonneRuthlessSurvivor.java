@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.WalkerToken;
 import mage.game.permanent.token.ZombieToken;
 
 import java.util.Objects;
@@ -35,7 +36,7 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Michonne enters the battlefield, create two Walker tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerToken(), 2)));
 
         // As long as Michonne is equipped, she must be blocked if able.
         this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
@@ -44,7 +45,7 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
         )));
 
         // Whenever Michonne and at least two Zombies attack, she gains indestructible until end of turn.
-        this.addAbility(new BattalionAbility());
+        this.addAbility(new MichonneRuthlessSurvivorAbility());
     }
 
     private MichonneRuthlessSurvivor(final MichonneRuthlessSurvivor card) {
@@ -57,19 +58,19 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
     }
 }
 
-class BattalionAbility extends TriggeredAbilityImpl {
+class MichonneRuthlessSurvivorAbility extends TriggeredAbilityImpl {
 
-    public BattalionAbility() {
+    public MichonneRuthlessSurvivorAbility() {
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public BattalionAbility(final BattalionAbility ability) {
+    public MichonneRuthlessSurvivorAbility(final MichonneRuthlessSurvivorAbility ability) {
         super(ability);
     }
 
     @Override
-    public BattalionAbility copy() {
-        return new BattalionAbility(this);
+    public MichonneRuthlessSurvivorAbility copy() {
+        return new MichonneRuthlessSurvivorAbility(this);
     }
 
     @Override

@@ -7,6 +7,8 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -136,21 +138,19 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder();
 
-        boolean quotes = forceQuotes || (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
-        if (excludeSource) {
-            sb.append("Other ");
+        boolean quotes = forceQuotes
+                || ability instanceof SimpleActivatedAbility
+                ||ability instanceof ActivatedManaAbilityImpl
+                || ability instanceof TriggeredAbility;
+        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
+        if (excludeSource && !each) {
+            sb.append("other ");
         }
         sb.append(filter.getMessage());
         if (duration == Duration.WhileOnBattlefield) {
-            if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
-                sb.append(" has ");
-            } else {
-                sb.append(" have ");
-            }
-        } else if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
-            sb.append(" gains ");
+            sb.append(each ? " has " : " have ");
         } else {
-            sb.append(" gain ");
+            sb.append(each ? " gains " : " gain ");
         }
         if (quotes) {
             sb.append('"');

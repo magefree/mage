@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -115,7 +116,7 @@ class ClarionUltimatumTarget extends TargetCardInLibrary {
     }
 
     private void populateNameMap(Set<String> names) {
-        names.stream().forEach(name -> this.nameMap.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        names.stream().forEach(name -> this.nameMap.compute(name, CardUtil::setOrIncrementValue));
     }
 
     @Override
@@ -133,7 +134,7 @@ class ClarionUltimatumTarget extends TargetCardInLibrary {
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)
-                .forEach(name -> alreadyChosen.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(name -> alreadyChosen.compute(name, CardUtil::setOrIncrementValue));
         return nameMap.getOrDefault(card.getName(), 0)
                 > alreadyChosen.getOrDefault(card.getName(), 0);
     }

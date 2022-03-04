@@ -29,7 +29,7 @@ public final class OrganHoarder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
                 Zone.GRAVEYARD, false, false, false, Zone.HAND, false
-        )));
+        ).setText("look at the top three cards of your library, then put one of them into your hand and the rest into your graveyard")));
     }
 
     private OrganHoarder(final OrganHoarder card) {

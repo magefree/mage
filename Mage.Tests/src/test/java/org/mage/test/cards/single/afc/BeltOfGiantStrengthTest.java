@@ -42,7 +42,6 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         );
     }
 
-    @Ignore // currently failing, need to fix
     @Test
     public void testWithoutManaAvailable() {
         addCard(Zone.BATTLEFIELD, playerA, belt);

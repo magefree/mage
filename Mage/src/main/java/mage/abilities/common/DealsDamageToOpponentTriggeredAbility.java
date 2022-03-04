@@ -62,7 +62,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
             }
             if(setTargetPointer) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     effect.setValue("damage", event.getAmount());
                 }
             }

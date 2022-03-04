@@ -73,6 +73,7 @@ public class Effects extends ArrayList<Effect> {
             } else if (lastRule != null && lastRule.length() > 3) {
                 //check if lastRule already has appropriate punctuation, if so, add a space.
                 if (lastRule.endsWith(".\"")
+                        || lastRule.endsWith(".]")
                         || lastRule.endsWith(".)")
                         || lastRule.endsWith(".)</i>")
                         || lastRule.endsWith(".")) {
@@ -105,8 +106,10 @@ public class Effects extends ArrayList<Effect> {
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
+                && !lastRule.endsWith(".]")
                 && !lastRule.startsWith("<b>Level ")
                 && !lastRule.endsWith(".)")
+                && !lastRule.endsWith("<br>")
                 && !lastRule.endsWith("</i>")) {
             sbText.append('.');
         }

@@ -30,7 +30,6 @@ public final class TovolarsMagehunter extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever an opponent casts a spell, Tovolar's Magehunter deals 2 damage to that player.
         this.addAbility(new TovolarsMagehunterTriggeredAbility());

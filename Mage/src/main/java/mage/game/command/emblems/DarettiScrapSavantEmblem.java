@@ -58,7 +58,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact(game)
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
-            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
+            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId(), game));
             return true;
         }
         return false;
@@ -93,7 +93,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY), source);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
         }
         return false;

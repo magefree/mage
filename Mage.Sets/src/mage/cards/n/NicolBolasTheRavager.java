@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,7 +34,6 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = NicolBolasTheArisen.class;
 
         // Flying
@@ -47,7 +46,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ExileAndReturnTransformedSourceEffect(Gender.MALE),
+                new ExileAndReturnTransformedSourceEffect(Pronoun.HE),
                 new ManaCostsImpl("{4}{U}{B}{R}")
         ));
     }

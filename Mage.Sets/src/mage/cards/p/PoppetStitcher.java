@@ -43,7 +43,6 @@ public final class PoppetStitcher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PoppetFactory.class;
 
         // Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed.
@@ -56,7 +55,7 @@ public final class PoppetStitcher extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new TransformSourceEffect(true),
+                        new TransformSourceEffect(),
                         TargetController.YOU, true
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control three or more creature tokens, you may transform {this}."

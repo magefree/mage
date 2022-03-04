@@ -49,14 +49,22 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(game.getCombat().getAttackingPlayerId())
-                && game
+        if (!isControlledBy(game.getCombat().getAttackingPlayerId())) {
+            return false;
+        }
+        int attackers = game
                 .getCombat()
                 .getAttackers()
                 .stream()
                 .map(game::getPermanent)
                 .filter(permanent -> filter.match(permanent, sourceId, controllerId, game))
-                .mapToInt(x -> 1).sum() >= minAttackers;
+                .mapToInt(x -> 1)
+                .sum();
+        if (attackers < minAttackers) {
+            return false;
+        }
+        getEffects().setValue("attackers", attackers);
+        return true;
     }
 
     @Override

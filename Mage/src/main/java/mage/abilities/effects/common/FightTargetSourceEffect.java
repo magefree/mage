@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -8,9 +7,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
- *
  * @author LevelX2
  */
 public class FightTargetSourceEffect extends OneShotEffect {
@@ -52,7 +51,15 @@ public class FightTargetSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder("{this} fights another target ").append(mode.getTargets().get(0).getTargetName()).toString();
+        Target target = mode.getTargets().get(0);
+        StringBuilder sb = new StringBuilder("{this} fights ");
+        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() == 1) {
+            sb.append("up to one ");
+        }
+        if (!target.getTargetName().contains("other")) {
+            sb.append("target ");
+        }
+        sb.append(target.getTargetName());
+        return sb.toString();
     }
-
 }

@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +23,7 @@ public final class BiomassMutation extends CardImpl {
 
         // Creatures you control have base power and toughness X/X until end of turn.
         DynamicValue variableMana = ManacostVariableValue.REGULAR;
-        this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
+        this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true));
     }
 
     private BiomassMutation(final BiomassMutation card) {

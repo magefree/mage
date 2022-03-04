@@ -40,7 +40,7 @@ public final class BudokaPupil extends CardImpl {
         this.flipCardName = "Ichiga, Who Topples Oaks";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Budoka Pupil.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

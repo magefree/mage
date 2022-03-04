@@ -32,7 +32,7 @@ public final class IllusoryAmbusher extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Illusory Ambusher is dealt damage, draw that many cards.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new IllusoryAmbusherDealtDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new IllusoryAmbusherDealtDamageEffect(), false, false));
     }
 
     private IllusoryAmbusher(final IllusoryAmbusher card) {

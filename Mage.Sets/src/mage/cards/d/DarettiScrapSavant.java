@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
@@ -33,7 +32,7 @@ public final class DarettiScrapSavant extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DARETTI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Discard up to two cards, then draw that many cards.
         this.addAbility(new LoyaltyAbility(new DiscardAndDrawThatManyEffect(2), 2));

@@ -5,6 +5,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
@@ -60,6 +61,7 @@ public class PermanentCard extends PermanentImpl {
     private void init(Card card, Game game) {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
+        startingLoyalty = card.getStartingLoyalty();
         copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
@@ -70,10 +72,10 @@ public class PermanentCard extends PermanentImpl {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
         if (isTransformable()) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null) {
+            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
+                    || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                setTransformed(true);
-                TransformAbility.transform(this, getSecondCardFace(), game, null);
+                TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
             }
         }
     }
@@ -132,14 +134,10 @@ public class PermanentCard extends PermanentImpl {
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
 
-        this.transformable = card.isTransformable();
-        if (this.transformable) {
-            this.nightCard = card.isNightCard();
-            if (!this.nightCard) {
-                this.secondSideCard = card.getSecondCardFace();
-                this.secondSideCardClazz = this.secondSideCard.getClass();
-            }
+        if (card.getSecondCardFace() != null) {
+            this.secondSideCardClazz = card.getSecondCardFace().getClass();
         }
+        this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
     }

@@ -64,7 +64,7 @@ class ChainOfSmogEffect extends OneShotEffect {
             Player affectedPlayer = game.getPlayer(targetId);
             if (affectedPlayer != null) {
                 Effect effect = new DiscardTargetEffect(2);
-                effect.setTargetPointer(new FixedTarget(targetId));
+                effect.setTargetPointer(new FixedTarget(targetId, game));
                 effect.apply(game, source);
                 if (affectedPlayer.chooseUse(Outcome.Copy, "Copy the spell?", source, game)) {
                     Spell spell = game.getStack().getSpell(source.getSourceId());

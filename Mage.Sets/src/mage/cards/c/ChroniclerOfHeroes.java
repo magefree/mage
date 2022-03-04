@@ -11,9 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -49,12 +47,6 @@ public final class ChroniclerOfHeroes extends CardImpl {
 
 class ChroniclerOfHeroesEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     public ChroniclerOfHeroesEffect() {
         super(Outcome.DrawCard);
         this.staticText = "draw a card if you control a creature with a +1/+1 counter on it";
@@ -73,7 +65,7 @@ class ChroniclerOfHeroesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (new PermanentsOnTheBattlefieldCondition(filter).apply(game, source)) {
+            if (new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_A_CREATURE_P1P1).apply(game, source)) {
                 controller.drawCards(1, source, game);
             }
             return true;

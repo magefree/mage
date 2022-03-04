@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +24,6 @@ public final class ChaplainOfAlms extends CardImpl {
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.ChapelShieldgeist.class;
 
         // First strike
@@ -35,8 +33,7 @@ public final class ChaplainOfAlms extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // Disturb {3}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new DisturbAbility(this, "{3}{W}"));
     }
 
     private ChaplainOfAlms(final ChaplainOfAlms card) {

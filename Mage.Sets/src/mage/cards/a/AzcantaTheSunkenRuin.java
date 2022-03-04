@@ -23,7 +23,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class AzcantaTheSunkenRuin extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
+    private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -37,7 +37,6 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // (Transforms from Search for Azcanta)/
         // {T} : Add {U}.

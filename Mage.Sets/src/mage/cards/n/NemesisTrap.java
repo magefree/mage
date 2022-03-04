@@ -44,7 +44,7 @@ public final class NemesisTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false)));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, false)));
 
         // Exile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new NemesisTrapEffect());
@@ -88,7 +88,7 @@ class NemesisTrapEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(targetedCreature, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 Effect exileEffect = new ExileTargetEffect("Exile " + addedToken.getName() + " at the beginning of the next end step");
                 exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

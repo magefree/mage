@@ -59,7 +59,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
         Permanent attacker = game.getPermanent(event.getSourceId());
         if (attacker != null && attacker.getAbilities().contains(FlyingAbility.getInstance())) {
             for (Effect effect : getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
             return true;
         }

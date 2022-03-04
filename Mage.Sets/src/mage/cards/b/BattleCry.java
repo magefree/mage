@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -71,7 +70,7 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+        getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
     }
 

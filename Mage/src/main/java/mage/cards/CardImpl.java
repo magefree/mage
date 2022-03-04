@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.ReconfigureAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -43,7 +44,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean transformable;
     protected Class<?> secondSideCardClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
@@ -121,7 +121,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        transformable = card.transformable;
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
@@ -305,9 +304,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        for (Ability subAbility : ability.getSubAbilities()) {
-            abilities.add(subAbility);
-        }
+        abilities.addAll(ability.getSubAbilities());
 
         // dynamic check: you can't add ability to the PermanentCard, use permanent.addAbility(a, source, game) instead
         // reason: triggered abilities are not processing here
@@ -620,12 +617,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
-        return this.transformable;
-    }
-
-    @Override
-    public void setTransformable(boolean transformable) {
-        this.transformable = transformable;
+        return this.secondSideCardClazz != null || this.nightCard;
     }
 
     @Override
@@ -822,21 +814,35 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
-        if (!this.attachments.contains(permanentId)) {
-            Permanent attachment = game.getPermanent(permanentId);
-            if (attachment == null) {
-                attachment = game.getPermanentEntering(permanentId);
-            }
-            if (attachment != null) {
-                if (!game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
-                    this.attachments.add(permanentId);
-                    attachment.attachTo(objectId, source, game);
-                    game.fireEvent(new AttachedEvent(objectId, attachment, source));
-                    return true;
-                }
-            }
+        if (permanentId == null
+                || this.attachments.contains(permanentId)
+                || permanentId.equals(this.getId())) {
+            return false;
         }
-        return false;
+        Permanent attachment = game.getPermanent(permanentId);
+        if (attachment == null) {
+            attachment = game.getPermanentEntering(permanentId);
+        }
+        if (attachment == null) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.EQUIPMENT, game)
+                && (attachment.isCreature(game)
+                && !attachment.getAbilities(game).containsClass(ReconfigureAbility.class)
+                || !this.isCreature(game))) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.FORTIFICATION, game)
+                && (attachment.isCreature(game) || !this.isLand(game))) {
+            return false;
+        }
+        if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
+            return false;
+        }
+        this.attachments.add(permanentId);
+        attachment.attachTo(objectId, source, game);
+        game.fireEvent(new AttachedEvent(objectId, attachment, source));
+        return true;
     }
 
     @Override

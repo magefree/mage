@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class ResoundingWave extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{W}{U}{B}")));
         // When you cycle Resounding Wave, return two target permanents to their owners' hands.
         Ability ability = new CycleTriggeredAbility(new ReturnToHandTargetEffect());
-        TargetPermanent target = new TargetPermanent(2, new FilterPermanent("two target permanents"));
+        TargetPermanent target = new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS);
         ability.addTarget(target);
         this.addAbility(ability);
     }

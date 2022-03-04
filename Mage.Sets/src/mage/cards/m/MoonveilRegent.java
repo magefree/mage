@@ -46,7 +46,7 @@ public final class MoonveilRegent extends CardImpl {
                 new DrawCardSourceControllerEffect(MoonveilRegentSpellValue.instance)
                         .setText("draw a card for each of that spell's colors"),
                 new DiscardHandCost()
-        ), false));
+        ), StaticFilters.FILTER_SPELL_A, false, true));
 
         // When Moonveil Regent dies, it deals X damage to any target, where X is the number of colors among permanents you control.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(

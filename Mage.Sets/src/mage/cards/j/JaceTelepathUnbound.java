@@ -3,7 +3,6 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.*;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,9 +30,8 @@ public final class JaceTelepathUnbound extends CardImpl {
 
         this.color.setBlue(true);
         this.nightCard = true;
-        this.transformable = true;
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
         Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);

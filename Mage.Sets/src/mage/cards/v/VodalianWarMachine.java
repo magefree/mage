@@ -1,11 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,25 +14,20 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class VodalianWarMachine extends CardImpl {
@@ -66,7 +56,7 @@ public final class VodalianWarMachine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
 
         // When Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
-        this.addAbility(new VodalianWarMachineTriggeredAbility(), new VodalianWarMachineWatcher());
+        this.addAbility(new DiesSourceTriggeredAbility(new VodalianWarMachineEffect()), new VodalianWarMachineWatcher());
     }
 
     private VodalianWarMachine(final VodalianWarMachine card) {
@@ -77,41 +67,6 @@ public final class VodalianWarMachine extends CardImpl {
     public VodalianWarMachine copy() {
         return new VodalianWarMachine(this);
     }
-}
-
-class VodalianWarMachineTriggeredAbility extends DiesSourceTriggeredAbility {
-
-    public VodalianWarMachineTriggeredAbility() {
-        super(new VodalianWarMachineEffect(), false);
-    }
-
-    public VodalianWarMachineTriggeredAbility(VodalianWarMachineTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VodalianWarMachineTriggeredAbility copy() {
-        return new VodalianWarMachineTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent before = ((ZoneChangeEvent) event).getTarget();
-        if (before == null) {
-            return false;
-        }
-        if (super.checkTrigger(event, game)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().isTransformable()) {
-                if (!zEvent.getTarget().getAbilities().contains(this)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
 }
 
 class VodalianWarMachineEffect extends OneShotEffect {

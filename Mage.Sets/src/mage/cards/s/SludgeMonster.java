@@ -92,16 +92,15 @@ class SludgeMonsterEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     permanent.removeAllAbilities(source.getSourceId(), game);
-                    return true;
+                    break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
                         permanent.getPower().setValue(2);
                         permanent.getToughness().setValue(2);
-                        return true;
                     }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -111,11 +110,6 @@ class SludgeMonsterEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        switch (layer) {
-            case AbilityAddingRemovingEffects_6:
-            case PTChangingEffects_7:
-                return true;
-        }
-        return false;
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
     }
 }

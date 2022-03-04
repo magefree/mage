@@ -3,6 +3,7 @@ package mage.watchers.common;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class DiscardedCardWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

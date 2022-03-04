@@ -34,7 +34,7 @@ public class SerializationTest extends CardTestPlayerBase {
     public void test_PermanentImpl_Simple() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
         Card newCard = cardInfo.getCard();
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
 
@@ -48,7 +48,7 @@ public class SerializationTest extends CardTestPlayerBase {
     public void test_PermanentImpl_MarkedDamageInfo() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
         Card newCard = cardInfo.getCard();
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
 
@@ -73,7 +73,7 @@ public class SerializationTest extends CardTestPlayerBase {
         CardUtil.getObjectPartsAsObjects(newCard).stream()
                 .map(Card.class::cast)
                 .forEach(card -> {
-                    Card testCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                    Card testCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                     Card testPermanent = null;
                     if (!testCard.isInstantOrSorcery()) {
                         testPermanent = new PermanentCard(testCard, playerA.getId(), currentGame);

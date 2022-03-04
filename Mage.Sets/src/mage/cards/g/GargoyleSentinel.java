@@ -1,20 +1,20 @@
-
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 /**
  *
@@ -29,7 +29,15 @@ public final class GargoyleSentinel extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{3}")));
+
+        // {3}: Until end of turn, Gargoyle Sentinel loses defender and gains flying.
+        Effect effect = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("until end of turn, {this} loses defender");
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(3));
+        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     private GargoyleSentinel(final GargoyleSentinel card) {
@@ -40,50 +48,4 @@ public final class GargoyleSentinel extends CardImpl {
     public GargoyleSentinel copy() {
         return new GargoyleSentinel(this);
     }
-
-}
-
-class GargoyleSentinelEffect extends ContinuousEffectImpl {
-
-    public GargoyleSentinelEffect() {
-        super(Duration.EndOfTurn, Outcome.AddAbility);
-        staticText = "Until end of turn, {this} loses defender and gains flying";
-    }
-
-    public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GargoyleSentinelEffect copy() {
-        return new GargoyleSentinelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.removeAbility(DefenderAbility.getInstance(), source.getSourceId(), game);
-                        permanent.getAbilities().add(FlyingAbility.getInstance());
-                    }
-                    break;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
 }

@@ -1,41 +1,43 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  * @author noxx
  */
 public final class HomicidalSeclusion extends CardImpl {
 
-    private static final String rule = "As long as you control exactly one creature, that creature gets +3/+1";
+    private static final Condition condition = new CreatureCountCondition(1, TargetController.YOU);
 
     public HomicidalSeclusion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
-        ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinuousEffect(boostEffect, new CreatureCountCondition(1, TargetController.YOU), rule);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect = new ConditionalContinuousEffect(lifelinkEffect, new CreatureCountCondition(1, TargetController.YOU), "and has lifelink");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield),
+                condition, "As long as you control exactly one creature, that creature gets +3/+1"
+        ));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_CONTROLLED_CREATURE
+        ), condition, "and has lifelink"));
+        this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
     }
 
     private HomicidalSeclusion(final HomicidalSeclusion card) {

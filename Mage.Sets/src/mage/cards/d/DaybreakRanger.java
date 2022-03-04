@@ -37,7 +37,6 @@ public final class DaybreakRanger extends CardImpl {
         this.subtype.add(SubType.RANGER);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.n.NightfallPredator.class;
 
         this.power = new MageInt(2);

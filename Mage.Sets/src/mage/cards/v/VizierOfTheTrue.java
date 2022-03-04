@@ -10,12 +10,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,15 +49,9 @@ public final class VizierOfTheTrue extends CardImpl {
 
 class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public VizierOfTheTrueAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect());
-        addTarget(new TargetCreaturePermanent(filter));
+        addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     public VizierOfTheTrueAbility(final VizierOfTheTrueAbility ability) {

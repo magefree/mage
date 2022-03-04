@@ -32,22 +32,22 @@ public final class MoodmarkPainter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Undergrowth — When Moodmark Painter enters the battlefield, target creature gains menace and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-        DynamicValue xValue = new CardsInControllerGraveyardCount(
-                StaticFilters.FILTER_CARD_CREATURE
-        );
+        // Undergrowth — When Moodmark Painter enters the battlefield,
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainAbilityTargetEffect(
-                        new MenaceAbility(),
+                        new MenaceAbility(false),
                         Duration.EndOfTurn
-                ).setText("target creature gains menace"),
+                ).setText("target creature gains menace."),
                 false);
+        // target creature gains menace and gets +X/+0 until end of turn,
+        // where X is the number of creature cards in your graveyard.
+        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
         ability.addEffect(new BoostTargetEffect(
                 xValue, StaticValue.get(0),
                 Duration.EndOfTurn, true
         ).setText("and gets +X/+0 until end of turn, "
-                + "where X is the number of creature cards in your graveyard")
-        );
+                + "where X is the number of creature cards in your graveyard. " +
+                "<i>(It can't be blocked except by two or more creatures.)</i>")); // Must be here to match Oracle text
         ability.addTarget(new TargetCreaturePermanent());
         ability.withFlavorWord("Undergrowth");
         this.addAbility(ability);
