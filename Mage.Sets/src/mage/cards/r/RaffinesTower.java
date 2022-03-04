@@ -1,11 +1,11 @@
-package mage.cards.k;
+package mage.cards.r;
 
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,33 +16,33 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class KetriaTriome extends CardImpl {
+public final class RaffinesTower extends CardImpl {
 
-    public KetriaTriome(UUID ownerId, CardSetInfo setInfo) {
+    public RaffinesTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.subtype.add(SubType.FOREST);
+        this.subtype.add(SubType.PLAINS);
         this.subtype.add(SubType.ISLAND);
-        this.subtype.add(SubType.MOUNTAIN);
+        this.subtype.add(SubType.SWAMP);
 
-        // ({T}: Add {G}, {U}, or {R}.)
-        this.addAbility(new GreenManaAbility());
+        // ({T}: Add {W}, {U}, or {B}.)
+        this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.addAbility(new BlackManaAbility());
 
-        // Ketria Triome enters the battlefield tapped.
+        // Raffine's Tower enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Cycling {3}
         this.addAbility(new CyclingAbility(new GenericManaCost(3)));
     }
 
-    private KetriaTriome(final KetriaTriome card) {
+    private RaffinesTower(final RaffinesTower card) {
         super(card);
     }
 
     @Override
-    public KetriaTriome copy() {
-        return new KetriaTriome(this);
+    public RaffinesTower copy() {
+        return new RaffinesTower(this);
     }
 }
