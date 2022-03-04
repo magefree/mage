@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -23,11 +22,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class CloakAndDagger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Rogue creature");
-
-    static {
-        filter.add(SubType.ROGUE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.ROGUE, "a Rogue creature");
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");

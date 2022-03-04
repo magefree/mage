@@ -118,7 +118,7 @@ class MaddeningImpCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
                 }
             }
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
-                    = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.ALL, new MaddeningImpDelayedDestroyEffect(activeCreatures), TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
+                    = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new MaddeningImpDelayedDestroyEffect(activeCreatures), TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
             delayedAbility.getDuration();
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;

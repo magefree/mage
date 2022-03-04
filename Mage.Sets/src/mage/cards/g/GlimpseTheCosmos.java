@@ -105,7 +105,7 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
 
     public GlimpseTheCosmosReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost.  If you cast {this} this way and it would be put into your graveyard, exile it instead";
+        staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost. If you cast {this} this way and it would be put into your graveyard, exile it instead";
     }
 
     public GlimpseTheCosmosReplacementEffect(final GlimpseTheCosmosReplacementEffect effect) {

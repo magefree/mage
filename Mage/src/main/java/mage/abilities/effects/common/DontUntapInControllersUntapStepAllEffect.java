@@ -93,7 +93,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
         StringBuilder sb =  new StringBuilder(filter.getMessage()).append(" don't untap during ");
         switch(targetController) {
             case ANY:
-                sb.append("their controller's ");
+                sb.append("their controllers' ");
                 break;
             default:
                 throw new RuntimeException("Type of TargetController not supported yet!");

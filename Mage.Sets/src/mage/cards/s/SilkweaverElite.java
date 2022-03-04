@@ -1,9 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -15,6 +12,8 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -33,14 +32,11 @@ public final class SilkweaverElite extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // <i>Revolt</i> &mdash; When Silkweaver Elite enters the battlefield, if a permanent you controlled left the battlefield this turn, draw a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), false), RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                + " the battlefield this turn, draw a card.");
-        ability.setAbilityWord(AbilityWord.REVOLT);
-        ability.addWatcher(new RevoltWatcher());
-        this.addAbility(ability);
-
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
+                RevoltCondition.instance, "When {this} enters the battlefield, " +
+                "if a permanent you controlled left the battlefield this turn, draw a card."
+        ).setAbilityWord(AbilityWord.REVOLT), new RevoltWatcher());
     }
 
     private SilkweaverElite(final SilkweaverElite card) {

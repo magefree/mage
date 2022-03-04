@@ -32,7 +32,7 @@ public final class MineExcavation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
     }
 
     private MineExcavation(final MineExcavation card) {

@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,18 +11,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.common.RevoltWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class DeadeyeHarpooner extends CardImpl {
 
-    private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
+    private static final FilterPermanent filter
+            = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
 
     static {
         filter.add(TappedPredicate.TAPPED);
@@ -39,15 +40,14 @@ public final class DeadeyeHarpooner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Revolt</i> &mdash; When Deadeye Harpooner enters the battlefield, if a permanent you controlled left the battlefield this turn, destroy target tapped creature an opponent controls.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new DestroyTargetEffect(), false), RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                + " the battlefield this turn, destroy target tapped creature an opponent controls."
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false),
+                RevoltCondition.instance, "When {this} enters the battlefield, if a permanent you controlled " +
+                "left the battlefield this turn, destroy target tapped creature an opponent controls."
         );
         ability.setAbilityWord(AbilityWord.REVOLT);
-        ability.addTarget(new TargetOpponentsCreaturePermanent(filter));
-        ability.addWatcher(new RevoltWatcher());
-        this.addAbility(ability);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability, new RevoltWatcher());
     }
 
     private DeadeyeHarpooner(final DeadeyeHarpooner card) {

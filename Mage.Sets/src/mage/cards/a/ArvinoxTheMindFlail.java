@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * @author TheElk801 plus everyone who worked on Gonti
  */
-public final class MindFlayerTheShadow extends CardImpl {
+public final class ArvinoxTheMindFlail extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
@@ -38,7 +38,7 @@ public final class MindFlayerTheShadow extends CardImpl {
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
     private static final Hint hint = new ValueHint("Permanents you control but don't own", xValue);
 
-    public MindFlayerTheShadow(UUID ownerId, CardSetInfo setInfo) {
+    public ArvinoxTheMindFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}{B}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -53,23 +53,23 @@ public final class MindFlayerTheShadow extends CardImpl {
 
         // At the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new MindFlayerTheShadowExileEffect(), TargetController.YOU, false
+                new ArvinoxTheMindFlailExileEffect(), TargetController.YOU, false
         ));
     }
 
-    private MindFlayerTheShadow(final MindFlayerTheShadow card) {
+    private ArvinoxTheMindFlail(final ArvinoxTheMindFlail card) {
         super(card);
     }
 
     @Override
-    public MindFlayerTheShadow copy() {
-        return new MindFlayerTheShadow(this);
+    public ArvinoxTheMindFlail copy() {
+        return new ArvinoxTheMindFlail(this);
     }
 }
 
-class MindFlayerTheShadowExileEffect extends OneShotEffect {
+class ArvinoxTheMindFlailExileEffect extends OneShotEffect {
 
-    MindFlayerTheShadowExileEffect() {
+    ArvinoxTheMindFlailExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the bottom card of each opponent's library face down. "
                 + "For as long as those cards remain exiled, you may look at them, "
@@ -77,13 +77,13 @@ class MindFlayerTheShadowExileEffect extends OneShotEffect {
                 + "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    private MindFlayerTheShadowExileEffect(final MindFlayerTheShadowExileEffect effect) {
+    private ArvinoxTheMindFlailExileEffect(final ArvinoxTheMindFlailExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public MindFlayerTheShadowExileEffect copy() {
-        return new MindFlayerTheShadowExileEffect(this);
+    public ArvinoxTheMindFlailExileEffect copy() {
+        return new ArvinoxTheMindFlailExileEffect(this);
     }
 
     @Override
@@ -108,21 +108,21 @@ class MindFlayerTheShadowExileEffect extends OneShotEffect {
         cards.getCards(game).stream().forEach(card -> card.setFaceDown(true, game));
         for (Card card : cards.getCards(game)) {
             card.setFaceDown(true, game);
-            game.addEffect(new MindFlayerTheShadowCastFromExileEffect().setTargetPointer(new FixedTarget(card, game)), source);
-            game.addEffect(new MindFlayerTheShadowSpendAnyManaEffect().setTargetPointer(new FixedTarget(card, game)), source);
-            game.addEffect(new MindFlayerTheShadowLookEffect(source.getControllerId()).setTargetPointer(new FixedTarget(card, game)), source);
+            game.addEffect(new ArvinoxTheMindFlailCastFromExileEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            game.addEffect(new ArvinoxTheMindFlailSpendAnyManaEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            game.addEffect(new ArvinoxTheMindFlailLookEffect(source.getControllerId()).setTargetPointer(new FixedTarget(card, game)), source);
         }
         return true;
     }
 }
 
-class MindFlayerTheShadowCastFromExileEffect extends AsThoughEffectImpl {
+class ArvinoxTheMindFlailCastFromExileEffect extends AsThoughEffectImpl {
 
-    public MindFlayerTheShadowCastFromExileEffect() {
+    public ArvinoxTheMindFlailCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 
-    private MindFlayerTheShadowCastFromExileEffect(final MindFlayerTheShadowCastFromExileEffect effect) {
+    private ArvinoxTheMindFlailCastFromExileEffect(final ArvinoxTheMindFlailCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -132,8 +132,8 @@ class MindFlayerTheShadowCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public MindFlayerTheShadowCastFromExileEffect copy() {
-        return new MindFlayerTheShadowCastFromExileEffect(this);
+    public ArvinoxTheMindFlailCastFromExileEffect copy() {
+        return new ArvinoxTheMindFlailCastFromExileEffect(this);
     }
 
     @Override
@@ -161,14 +161,14 @@ class MindFlayerTheShadowCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class MindFlayerTheShadowSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+class ArvinoxTheMindFlailSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    public MindFlayerTheShadowSpendAnyManaEffect() {
+    public ArvinoxTheMindFlailSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    private MindFlayerTheShadowSpendAnyManaEffect(final MindFlayerTheShadowSpendAnyManaEffect effect) {
+    private ArvinoxTheMindFlailSpendAnyManaEffect(final ArvinoxTheMindFlailSpendAnyManaEffect effect) {
         super(effect);
     }
 
@@ -178,8 +178,8 @@ class MindFlayerTheShadowSpendAnyManaEffect extends AsThoughEffectImpl implement
     }
 
     @Override
-    public MindFlayerTheShadowSpendAnyManaEffect copy() {
-        return new MindFlayerTheShadowSpendAnyManaEffect(this);
+    public ArvinoxTheMindFlailSpendAnyManaEffect copy() {
+        return new ArvinoxTheMindFlailSpendAnyManaEffect(this);
     }
 
     @Override
@@ -206,17 +206,17 @@ class MindFlayerTheShadowSpendAnyManaEffect extends AsThoughEffectImpl implement
     }
 }
 
-class MindFlayerTheShadowLookEffect extends AsThoughEffectImpl {
+class ArvinoxTheMindFlailLookEffect extends AsThoughEffectImpl {
 
     private final UUID authorizedPlayerId;
 
-    public MindFlayerTheShadowLookEffect(UUID authorizedPlayerId) {
+    public ArvinoxTheMindFlailLookEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
         staticText = "You may look at the cards exiled with {this}";
     }
 
-    private MindFlayerTheShadowLookEffect(final MindFlayerTheShadowLookEffect effect) {
+    private ArvinoxTheMindFlailLookEffect(final ArvinoxTheMindFlailLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
@@ -227,8 +227,8 @@ class MindFlayerTheShadowLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public MindFlayerTheShadowLookEffect copy() {
-        return new MindFlayerTheShadowLookEffect(this);
+    public ArvinoxTheMindFlailLookEffect copy() {
+        return new ArvinoxTheMindFlailLookEffect(this);
     }
 
     @Override

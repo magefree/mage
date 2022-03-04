@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.h;
 
 import mage.ConditionalMana;
 import mage.MageInt;
@@ -22,9 +22,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DustinGadgetGenius extends CardImpl {
+public final class HargildeKindlyRunechanter extends CardImpl {
 
-    public DustinGadgetGenius(UUID ownerId, CardSetInfo setInfo) {
+    public HargildeKindlyRunechanter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -34,28 +34,28 @@ public final class DustinGadgetGenius extends CardImpl {
 
         // {T}: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new ConditionalColorlessManaAbility(
-                new TapSourceCost(), 2, new DustinGadgetGeniusManaBuilder()
+                new TapSourceCost(), 2, new HargildeKindlyRunechanterManaBuilder()
         ));
 
         // Friends forever
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private DustinGadgetGenius(final DustinGadgetGenius card) {
+    private HargildeKindlyRunechanter(final HargildeKindlyRunechanter card) {
         super(card);
     }
 
     @Override
-    public DustinGadgetGenius copy() {
-        return new DustinGadgetGenius(this);
+    public HargildeKindlyRunechanter copy() {
+        return new HargildeKindlyRunechanter(this);
     }
 }
 
-class DustinGadgetGeniusManaBuilder extends ConditionalManaBuilder {
+class HargildeKindlyRunechanterManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalMana build(Object... options) {
-        return new DustinGadgetGeniusConditionalMana(this.mana);
+        return new HargildeKindlyRunechanterConditionalMana(this.mana);
     }
 
     @Override
@@ -64,15 +64,15 @@ class DustinGadgetGeniusManaBuilder extends ConditionalManaBuilder {
     }
 }
 
-class DustinGadgetGeniusConditionalMana extends ConditionalMana {
+class HargildeKindlyRunechanterConditionalMana extends ConditionalMana {
 
-    DustinGadgetGeniusConditionalMana(Mana mana) {
+    HargildeKindlyRunechanterConditionalMana(Mana mana) {
         super(mana);
-        addCondition(DustinGadgetGeniusCondition.instance);
+        addCondition(HargildeKindlyRunechanterCondition.instance);
     }
 }
 
-enum DustinGadgetGeniusCondition implements Condition {
+enum HargildeKindlyRunechanterCondition implements Condition {
     instance;
 
     @Override

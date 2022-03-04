@@ -30,7 +30,7 @@ public final class SaheelisArtistry extends CardImpl {
         Mode mode1 = new Mode();
         effect = new CreateTokenCopyTargetEffect();
         effect.setBecomesArtifact(true);
-        effect.setText("Create a token that's a copy of target creature, except that it's an artifact in addition to its other types");
+        effect.setText("Create a token that's a copy of target creature, except it's an artifact in addition to its other types");
         mode1.addEffect(effect);
         mode1.addTarget(new TargetCreaturePermanent().withChooseHint("create copy of that, artifact type"));
         this.getSpellAbility().addMode(mode1);

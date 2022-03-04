@@ -48,7 +48,7 @@ public final class DarkIntimations extends CardImpl {
         this.getSpellAbility().addEffect(new DarkIntimationsEffect());
 
         // When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
     }
 
     private DarkIntimations(final DarkIntimations card) {

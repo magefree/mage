@@ -23,7 +23,7 @@ public final class LeaveInTheDust extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 

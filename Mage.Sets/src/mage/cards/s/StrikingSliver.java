@@ -30,7 +30,7 @@ public final class StrikingSliver extends CardImpl {
         // Sliver creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(),
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS)));
     }
 
     private StrikingSliver(final StrikingSliver card) {

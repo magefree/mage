@@ -1247,15 +1247,18 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
-        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (!(effect instanceof BecomesFaceDownCreatureEffect)
-                && (effect != null && !effect.getDuration().equals(Duration.Custom))) { // Custom effects do not depend on the creating permanent
-            if (card != null) {
-                return card.hasAbility(ability, game);
-            }
+        switch (effect.getDuration()) { // effects with fixed duration don't need an object with the source ability (e.g. a silence cast with isochronic Scepter has no more a card object
+            case EndOfCombat:
+            case EndOfGame:
+            case EndOfStep:
+            case EndOfTurn:
+            case OneUse:
+            case Custom:  // custom duration means the effect ends itself if needed
+                return true;
         }
-
-        return true;
+        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+        return effect instanceof BecomesFaceDownCreatureEffect
+                || effect == null || card == null || card.hasAbility(ability, game);
     }
 
     public Set<Ability> getLayeredEffectAbilities(ContinuousEffect effect) {

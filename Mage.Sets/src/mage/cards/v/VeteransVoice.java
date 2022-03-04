@@ -1,9 +1,8 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.common.TapAttachedCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -11,32 +10,32 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class VeteransVoice extends CardImpl {
 
-    private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent("enchanted creature is untapped");
-    
+    private static final FilterPermanent filterUntapped = new FilterCreaturePermanent("enchanted creature is untapped");
+
     static {
         filterUntapped.add(TappedPredicate.UNTAPPED);
     }
+
+    private static final Condition condition = new AttachedToMatchesFilterCondition(filterUntapped);
 
     public VeteransVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
@@ -46,16 +45,15 @@ public final class VeteransVoice extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Tap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
-        FilterPermanent filterTarget = new FilterCreaturePermanent("creature other than the creature tapped this way");
-        filterTarget.add(Predicates.not(new AttachmentByUUIDPredicate(this.getId()))); 
-        Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new BoostTargetEffect(2, 1, Duration.EndOfTurn), new TapAttachedCost(), new AttachedToMatchesFilterCondition(filterUntapped));
-        ability2.addTarget(new TargetPermanent(filterTarget));
-        this.addAbility(ability2);
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostTargetEffect(2, 1, Duration.EndOfTurn)
+                        .setText("target creature other than the creature tapped this way gets +2/+1 until end of turn"),
+                new TapAttachedCost(), condition
+        ).setTargetAdjuster(VeteransVoiceAdjuster.instance));
     }
 
     private VeteransVoice(final VeteransVoice card) {
@@ -68,21 +66,18 @@ public final class VeteransVoice extends CardImpl {
     }
 }
 
-class AttachmentByUUIDPredicate implements Predicate<Permanent> {
-
-    private final UUID id;
-
-    public AttachmentByUUIDPredicate(UUID id) {
-        this.id = id;
-    }
+enum VeteransVoiceAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getAttachments().contains(id);            
-    }
-
-    @Override
-    public String toString() {
-        return "AttachmentUUID(" + id + ')';
+    public void adjustTargets(Ability ability, Game game) {
+        Permanent permanent = ability.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return;
+        }
+        FilterPermanent filter = new FilterCreaturePermanent();
+        filter.add(Predicates.not(new PermanentIdPredicate(permanent.getAttachedTo())));
+        ability.getTargets().clear();
+        ability.addTarget(new TargetPermanent(filter));
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -15,8 +14,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,6 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class CryptSliver extends CardImpl {
 
+    private static final FilterPermanent filter=new FilterPermanent(SubType.SLIVER,"Sliver");
     public CryptSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.SLIVER);
@@ -33,9 +35,11 @@ public final class CryptSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Slivers have "{tap}: Regenerate target Sliver."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.SLIVER, "Sliver")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+        Ability ability = new SimpleActivatedAbility( new RegenerateTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(new SimpleStaticAbility( new GainAbilityAllEffect(
+                ability, Duration.WhileOnBattlefield, filter
+        ).setText("all Slivers have \"{T}: Regenerate target Sliver.\"")));
     }
 
     private CryptSliver(final CryptSliver card) {

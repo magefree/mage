@@ -66,7 +66,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
                     }
                 }
             } else {
-                discard();;
+                discard();
             }
             return true;
         }

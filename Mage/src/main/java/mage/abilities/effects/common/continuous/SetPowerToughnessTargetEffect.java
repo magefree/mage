@@ -70,9 +70,11 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
-            sb.append("up to ");
-            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
-            sb.append(' ');
+            if (!mode.getTargets().get(0).getTargetName().startsWith("any")) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
+                sb.append(' ');
+            }
         }
         if (!mode.getTargets().get(0).getTargetName().contains("target")) {
             sb.append("target ");

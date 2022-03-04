@@ -120,7 +120,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
 
     CarpetOfFlowersEffect() {
         super();
-        staticText = "add X mana of any one color, where X is the number of Islands target opponent controls";
+        staticText = "you may add X mana of any one color, where X is the number of Islands target opponent controls";
     }
 
     CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {

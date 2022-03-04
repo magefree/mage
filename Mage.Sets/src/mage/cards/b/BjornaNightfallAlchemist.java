@@ -1,4 +1,4 @@
-package mage.cards.l;
+package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -22,9 +22,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class LucasTheSharpshooter extends CardImpl {
+public final class BjornaNightfallAlchemist extends CardImpl {
 
-    public LucasTheSharpshooter(UUID ownerId, CardSetInfo setInfo) {
+    public BjornaNightfallAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -43,12 +43,12 @@ public final class LucasTheSharpshooter extends CardImpl {
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private LucasTheSharpshooter(final LucasTheSharpshooter card) {
+    private BjornaNightfallAlchemist(final BjornaNightfallAlchemist card) {
         super(card);
     }
 
     @Override
-    public LucasTheSharpshooter copy() {
-        return new LucasTheSharpshooter(this);
+    public BjornaNightfallAlchemist copy() {
+        return new BjornaNightfallAlchemist(this);
     }
 }

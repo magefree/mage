@@ -17,9 +17,12 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.AttackedThisTurnWatcher;
-
 import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -49,7 +52,7 @@ public final class RobberOfTheRich extends CardImpl {
                 "if defending player has more cards in hand than you, exile the top card of their library. " +
                 "During any turn you attacked with a Rogue, you may cast that card and " +
                 "you may spend mana as though it were mana of any color to cast that spell."
-        ).addHint(new ConditionHint(RobberOfTheRichAnyTurnAttackedCondition.instance)), new AttackedThisTurnWatcher());
+        ).addHint(new ConditionHint(new RogueAttackedThisTurnCondition(null))), new AttackedThisTurnWatcher());
     }
 
     private RobberOfTheRich(final RobberOfTheRich card) {
@@ -69,24 +72,36 @@ enum RobberOfTheRichAttacksCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
-        return controller != null && player != null && controller.getHand().size() < player.getHand().size();
+        return controller != null 
+                && player != null 
+                && controller.getHand().size() < player.getHand().size();
     }
 }
 
-enum RobberOfTheRichAnyTurnAttackedCondition implements Condition {
-    instance;
+class RogueAttackedThisTurnCondition implements Condition {
+ 
+    private Ability ability;
+    
+    RogueAttackedThisTurnCondition(Ability source) {
+        this.ability = source;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // in case the Robber leaves the battlefield, the ability must be referenced for controller information
+        if (ability == null) {
+            ability = source;
+        }
         // your turn
-        if (!source.isControlledBy(game.getActivePlayerId())) {
+        if (!ability.isControlledBy(game.getActivePlayerId())) {
             return false;
         }
         // attacked with Rogue
+        // note that the MOR object doesn't work well with LKI call when checking for the subtype, thus we check the LKI permanent in the battlefield
         AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-        return watcher != null && watcher.getAttackedThisTurnCreatures()
+        return watcher != null && watcher.getAttackedThisTurnCreaturesPermanentLKI()
                 .stream()
-                .map(mor -> mor.getPermanentOrLKIBattlefield(game))
+                .map(permanent -> permanent)
                 .filter(Objects::nonNull)
                 .anyMatch(permanent -> permanent.hasSubtype(SubType.ROGUE, game));
     }
@@ -100,7 +115,7 @@ enum RobberOfTheRichAnyTurnAttackedCondition implements Condition {
 class RobberOfTheRichEffect extends OneShotEffect {
 
     RobberOfTheRichEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(Outcome.Benefit);
     }
 
     private RobberOfTheRichEffect(final RobberOfTheRichEffect effect) {
@@ -116,7 +131,8 @@ class RobberOfTheRichEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (controller == null || damagedPlayer == null) {
+        if (controller == null 
+                || damagedPlayer == null) {
             return false;
         }
         Card card = damagedPlayer.getLibrary().getFromTop(game);
@@ -125,13 +141,26 @@ class RobberOfTheRichEffect extends OneShotEffect {
         }
         // move card to exile
         controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        // Add effects only if the card has a spellAbility (e.g. not for lands).
+        // add the effects to the exiled card directly
+        // don't worry about land
         if (card.getSpellAbility() != null) {
-            // allow to cast the card
-            // and you may spend mana as though it were mana of any color to cast it
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true, null, RobberOfTheRichAnyTurnAttackedCondition.instance);
+            // the exiled card is independent and requires a new ability in case the Robber leaves the battlefield
+            // the exiled card can be cast throughout the entire game as long as the controller attacked with a rogue that turn
+            Ability copiedAbility = source.copy();
+            copiedAbility.newId();
+            copiedAbility.setSourceId(card.getId());
+            copiedAbility.setControllerId(source.getControllerId());
+            PlayFromNotOwnHandZoneTargetEffect playFromExile = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfGame);
+            YouMaySpendManaAsAnyColorToCastTargetEffect spendAnyMana = new YouMaySpendManaAsAnyColorToCastTargetEffect(Duration.EndOfGame);
+            ConditionalAsThoughEffect castOnlyIfARogueAttackedThisTurn = new ConditionalAsThoughEffect(playFromExile, new RogueAttackedThisTurnCondition(copiedAbility));
+            playFromExile.setTargetPointer(new FixedTarget(card, game));
+            spendAnyMana.setTargetPointer(new FixedTarget(card, game));
+            castOnlyIfARogueAttackedThisTurn.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(castOnlyIfARogueAttackedThisTurn, copiedAbility);
+            game.addEffect(spendAnyMana, copiedAbility);
+            return true;
         }
-        return true;
+        return false;
     }
 }
 

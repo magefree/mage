@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class BondOfFlourishing extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard();
+    private static final FilterCard filter = new FilterPermanentCard("a permanent card");
 
     public BondOfFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

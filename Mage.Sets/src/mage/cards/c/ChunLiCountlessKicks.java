@@ -42,7 +42,7 @@ public final class ChunLiCountlessKicks extends CardImpl {
                 .setTargetAdjuster(ChunLiCountlessKicksAdjuster.instance));
 
         // Lightning Kick—Whenever Chun-Li attacks, copy each exiled card you own with a kick counter on it. You may cast the copies.
-        this.addAbility(new AttacksTriggeredAbility(new ChunLiCountlessKicksCastEffect()));
+        this.addAbility(new AttacksTriggeredAbility(new ChunLiCountlessKicksCastEffect()).withFlavorWord("Lightning Kick"));
     }
 
     private ChunLiCountlessKicks(final ChunLiCountlessKicks card) {

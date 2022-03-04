@@ -92,7 +92,7 @@ class TitansNestManaAbility extends ActivatedManaAbilityImpl {
     TitansNestManaAbility() {
         super(Zone.BATTLEFIELD, (BasicManaEffect) new BasicManaEffect(
                 new TitansNestConditionalMana(), new CardsInControllerGraveyardCount())
-                .setText("Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost."), 
+                .setText("Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost."),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.netMana.add(Mana.ColorlessMana(1));
     }
@@ -111,7 +111,7 @@ class TitansNestConditionalMana extends ConditionalMana {
 
     TitansNestConditionalMana() {
         super(Mana.ColorlessMana(1));
-        staticText = "Spend this mana only to cast a colored spell without {X} in its mana cost.";
+        staticText = "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.";
         addCondition(new TitansNestManaCondition());
     }
 }

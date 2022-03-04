@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -11,24 +9,27 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class SentinelSliver extends CardImpl {
 
     public SentinelSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(SubType.SLIVER, "Sliver creatures you control "))));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_PERMANENT_SLIVERS
+        )));
     }
 
     private SentinelSliver(final SentinelSliver card) {

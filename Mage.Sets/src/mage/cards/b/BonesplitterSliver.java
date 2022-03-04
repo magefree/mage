@@ -27,7 +27,7 @@ public final class BonesplitterSliver extends CardImpl {
 
         // All Sliver creatures get +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
+                new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, false)));
     }
 
     private BonesplitterSliver(final BonesplitterSliver card) {

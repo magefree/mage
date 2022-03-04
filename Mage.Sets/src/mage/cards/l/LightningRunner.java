@@ -62,8 +62,8 @@ class LightningRunnerEffect extends OneShotEffect {
 
     LightningRunnerEffect() {
         super(Outcome.Benefit);
-        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you do, "
-                + "untap all creatures you control and after this phase, there is an additional combat phase";
+        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you pay, "
+                + "untap all creatures you control, and after this phase, there is an additional combat phase";
     }
 
     LightningRunnerEffect(final LightningRunnerEffect effect) {

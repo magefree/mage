@@ -61,7 +61,7 @@ class MedomaisProphecyTriggerEffect extends OneShotEffect {
 
     MedomaisProphecyTriggerEffect() {
         super(Outcome.Benefit);
-        staticText = "When you cast a spell with the chosen card name for the first time this turn, draw two cards.";
+        staticText = "When you cast a spell with the chosen name for the first time this turn, draw two cards.";
     }
 
     private MedomaisProphecyTriggerEffect(final MedomaisProphecyTriggerEffect effect) {

@@ -634,10 +634,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE_GOBLINS.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
 
     static {
-        FILTER_PERMANENT_CREATURE_SLIVERS.setLockedFilter(true);
+        FILTER_PERMANENT_SLIVERS.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENT_ALL_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
+
+    static {
+        FILTER_PERMANENT_ALL_SLIVERS.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("a Samurai or Warrior you control");

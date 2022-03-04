@@ -77,8 +77,8 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 || p == null || !p.getAttachments().contains(this.getSourceId())) {
             return false;
         }
+        getEffects().setValue("damage", event.getAmount());
         if (setFixedTargetPointer) {
-            getEffects().setValue("damage", event.getAmount());
             getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
         return true;

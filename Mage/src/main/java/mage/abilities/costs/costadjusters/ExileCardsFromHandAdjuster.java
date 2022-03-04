@@ -48,7 +48,7 @@ public class ExileCardsFromHandAdjuster implements CostAdjuster {
                 Zone.ALL,
                 new InfoEffect("as an additional cost to cast this spell, you may exile any number of "
                         + filter.getMessage() + ". This spell costs {2} less to cast for each card exiled this way")
-        ));
+        ).setRuleAtTheTop(true));
         card.getSpellAbility().setCostAdjuster(new ExileCardsFromHandAdjuster(filter));
     }
 }

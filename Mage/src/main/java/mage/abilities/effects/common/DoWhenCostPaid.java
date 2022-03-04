@@ -74,16 +74,10 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". When you do, " + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
-    }
-
-    private String getCostText() {
-        StringBuilder sb = new StringBuilder();
-        String costText = cost.getText();
-        if (!CardUtil.checkCostWords(costText)) {
-            sb.append("pay ");
-        }
-        return sb.append(costText).toString();
+        return (optional ? "you may " : "")
+                + CardUtil.addCostVerb(cost.getText())
+                + ". When you do, "
+                + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
     @Override

@@ -66,6 +66,9 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        if (this.minNumberOfTargets == 0) {
+            return true;
+        }
         int count = 0;
         for (StackObject stackObject : game.getStack()) {
             // rule 114.4. A spell or ability on the stack is an illegal target for itself.

@@ -22,9 +22,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class WillTheWise extends CardImpl {
+public final class WernogRidersChaplain extends CardImpl {
 
-    public WillTheWise(UUID ownerId, CardSetInfo setInfo) {
+    public WernogRidersChaplain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -33,37 +33,37 @@ public final class WillTheWise extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Will the Wise enters or leaves the battlefield, each opponent may investigate. Each opponent who doesn't loses 1 life. You investigate X times, where X is one plus the number of opponents who investigated this way.
-        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new WillTheWiseEffect(), false));
+        this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new WernogRidersChaplainEffect(), false));
 
         // Friends forever
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private WillTheWise(final WillTheWise card) {
+    private WernogRidersChaplain(final WernogRidersChaplain card) {
         super(card);
     }
 
     @Override
-    public WillTheWise copy() {
-        return new WillTheWise(this);
+    public WernogRidersChaplain copy() {
+        return new WernogRidersChaplain(this);
     }
 }
 
-class WillTheWiseEffect extends OneShotEffect {
+class WernogRidersChaplainEffect extends OneShotEffect {
 
-    WillTheWiseEffect() {
+    WernogRidersChaplainEffect() {
         super(Outcome.Benefit);
         staticText = "each opponent may investigate. Each opponent who doesn't loses 1 life. " +
                 "You investigate X times, where X is one plus the number of opponents who investigated this way";
     }
 
-    private WillTheWiseEffect(final WillTheWiseEffect effect) {
+    private WernogRidersChaplainEffect(final WernogRidersChaplainEffect effect) {
         super(effect);
     }
 
     @Override
-    public WillTheWiseEffect copy() {
-        return new WillTheWiseEffect(this);
+    public WernogRidersChaplainEffect copy() {
+        return new WernogRidersChaplainEffect(this);
     }
 
     @Override
