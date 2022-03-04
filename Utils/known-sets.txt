@@ -201,6 +201,7 @@ Shards of Alara|ShardsOfAlara|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|
+Streets of New Capenna|StreetsOfNewCapenna|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|

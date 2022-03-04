@@ -507,6 +507,7 @@ public class ScryfallImageSupportCards {
             add("DBL"); // Innistrad: Double Feature
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
+            add("SNC"); // Streets of New Capenna
         }
     };
 

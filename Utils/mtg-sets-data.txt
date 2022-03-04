@@ -200,6 +200,7 @@ Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Scars of Mirrodin|SOM|
+Streets of New Capenna|SNC|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
