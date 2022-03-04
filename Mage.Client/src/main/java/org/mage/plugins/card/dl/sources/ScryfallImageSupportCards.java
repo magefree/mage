@@ -508,6 +508,7 @@ public class ScryfallImageSupportCards {
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
+            add("SLX"); // Universes Within
         }
     };
 
