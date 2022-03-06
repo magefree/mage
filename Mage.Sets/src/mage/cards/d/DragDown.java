@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.hint.common.DomainHint;
@@ -18,13 +19,14 @@ import java.util.UUID;
  */
 public final class DragDown extends CardImpl {
 
-    private static final DynamicValue xValue = new DomainValue(-1);
+    private static final DynamicValue xValue = new MultipliedValue(DomainValue.REGULAR, -1);
 
     public DragDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Domain - Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
+                .setText("target creature gets -1/-1 until end of turn for each basic land type among lands you control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(DomainHint.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);

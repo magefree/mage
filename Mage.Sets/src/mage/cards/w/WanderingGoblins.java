@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class WanderingGoblins extends CardImpl {
 
-    private static final DynamicValue xValue = new DomainValue();
-
     public WanderingGoblins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
@@ -34,7 +31,7 @@ public final class WanderingGoblins extends CardImpl {
 
         // Domain - {3}: Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                DomainValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn, true
         ), new GenericManaCost(3)).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
     }
 

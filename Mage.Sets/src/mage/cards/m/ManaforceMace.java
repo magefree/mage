@@ -26,7 +26,7 @@ public final class ManaforceMace extends CardImpl {
 
         // Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                new BoostEquippedEffect(new DomainValue(), new DomainValue())
+                new BoostEquippedEffect(DomainValue.REGULAR, DomainValue.REGULAR)
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Equip {3}

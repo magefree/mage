@@ -22,7 +22,7 @@ public final class OrderedMigration extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");
 
         // Domain - Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new OrderedMigrationBirdToken(), new DomainValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new OrderedMigrationBirdToken(), DomainValue.REGULAR));
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
         this.getSpellAbility().addHint(DomainHint.instance);
     }

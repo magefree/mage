@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.abilities.hint.common.DomainHint;
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 public final class AvenTrailblazer extends CardImpl {
 
-    private static final DynamicValue xValue = new DomainValue();
-
     public AvenTrailblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.BIRD);
@@ -33,7 +30,7 @@ public final class AvenTrailblazer extends CardImpl {
 
         // Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
                 .setText("{this}'s toughness is equal to the number of basic land types among lands you control")
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
     }
