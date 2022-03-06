@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class ThopterToken extends TokenImpl {
 
     public ThopterToken() {
-        super("Thopter", "1/1 blue Thopter artifact creature tokens with flying");
+        super("Thopter", "1/1 blue Thopter artifact creature token with flying");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setBlue(true);

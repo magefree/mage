@@ -948,7 +948,7 @@ public final class CardUtil {
         }
     }
 
-    private static final String vowels = "aeiouAEIOU";
+    private static final String vowels = "aeiouAEIOU8";
 
     public static String addArticle(String text) {
         if (text.startsWith("a ")
