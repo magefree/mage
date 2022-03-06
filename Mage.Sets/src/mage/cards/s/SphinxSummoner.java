@@ -36,7 +36,7 @@ public final class SphinxSummoner extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Sphinx Summoner enters the battlefield, you may search your library for an artifact creature card, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
     }
 
     private SphinxSummoner(final SphinxSummoner card) {

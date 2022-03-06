@@ -161,6 +161,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     }
                 } else if (this.getTargets().isEmpty()
                         || ruleLow.startsWith("exile")
+                        || ruleLow.startsWith("gain")
                         || ruleLow.startsWith("destroy")
                         || ruleLow.startsWith("return")
                         || ruleLow.startsWith("tap")

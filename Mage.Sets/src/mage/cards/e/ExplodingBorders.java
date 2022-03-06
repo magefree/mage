@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import mage.abilities.dynamicvalue.common.DomainValue;
@@ -7,15 +6,15 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ExplodingBorders extends CardImpl {
@@ -28,6 +27,7 @@ public final class ExplodingBorders extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addHint(DomainHint.instance);
+        this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
     private ExplodingBorders(final ExplodingBorders card) {

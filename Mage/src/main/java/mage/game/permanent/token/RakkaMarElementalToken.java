@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -7,13 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class RakkaMarElementalToken extends TokenImpl {
 
-    public RakkaMarElementalToken () {
-        super("Elemental", "3/1 red Elemental creature with Haste");
+    public RakkaMarElementalToken() {
+        super("Elemental", "3/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
