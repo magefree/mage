@@ -25,7 +25,7 @@ public final class IllusionaryServant extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private IllusionaryServant(final IllusionaryServant card) {
