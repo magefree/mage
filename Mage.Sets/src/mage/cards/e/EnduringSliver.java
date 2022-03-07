@@ -32,7 +32,7 @@ public final class EnduringSliver extends CardImpl {
         // Other sliver creatures you control have outlast {2}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new OutlastAbility(new ManaCostsImpl<>("{2}")), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, true
+                StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, true
         ).setText("Other Sliver creatures you control have outlast {2}.")));
     }
 

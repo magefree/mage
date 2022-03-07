@@ -99,6 +99,7 @@ public enum CounterType {
     JUDGMENT("judgment"),
     KNOWLEDGE("knowledge"),
     KI("ki"),
+    KICK("kick"),
     LANDMARK("landmark"),
     LEVEL("level"),
     LIFELINK("lifelink"),

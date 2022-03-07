@@ -32,7 +32,7 @@ public final class ShorecrasherMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn.";
+    private static final String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn.";
 
     public ShorecrasherMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}");

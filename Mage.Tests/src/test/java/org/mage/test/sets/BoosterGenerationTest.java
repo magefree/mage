@@ -250,26 +250,6 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
-    public void testAmonkhetRemastered_MustHaveSpecialLand() {
-        // AKR replace all basic lands with special (1 per booster)
-        // https://mtg.gamepedia.com/Amonkhet_Remastered
-
-        for (int i = 1; i <= 5; i++) {
-            List<Card> booster = AmonkhetRemastered.getInstance().createBooster();
-
-            // no basic lands in booster
-            assertFalse(str(booster), contains(booster, basics, null));
-
-            // special lands in land slot (can have multiple special lands per booster: one from land slot, one from common slot)
-            List<Card> boosterLands = booster.stream().filter(card -> !card.isBasic() && card.isLand(currentGame)).collect(Collectors.toList());
-            Assert.assertTrue("Amonkhet Remastered's booster must contains minimum 1 special land", boosterLands.size() >= 1);
-
-            // Regal Caracal is top-boxer card, not booster
-            assertFalse("Amonkhet Remastered's booster must not contains Regal Caracal", contains(booster, "Regal Caracal", null));
-        }
-    }
-
-    @Test
     public void testZendikarRising_MDFC() {
         for (int i = 0; i < 20; i++) {
             List<Card> booster = ZendikarRising.getInstance().createBooster();

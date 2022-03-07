@@ -1,10 +1,8 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -20,21 +18,20 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Ichorid extends CardImpl {
 
     public Ichorid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(3);
@@ -42,15 +39,12 @@ public final class Ichorid extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // At the beginning of the end step, sacrifice Ichorid.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false));
+
         // At the beginning of your upkeep, if Ichorid is in your graveyard, you may exile a black creature card other than Ichorid from your graveyard. If you do, return Ichorid to the battlefield.
-        FilterCard filter = new FilterCreatureCard("a black creature card other than Ichorid from your graveyard");
-        filter.add(Predicates.not(new CardIdPredicate(this.getId())));
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-        Ability ability = new IchoridTriggerdAbility(filter);
-        this.addAbility(ability);
-        
+        this.addAbility(new IchoridTriggerdAbility());
     }
 
     private Ichorid(final Ichorid card) {
@@ -63,16 +57,20 @@ public final class Ichorid extends CardImpl {
     }
 }
 
-class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
+class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    public IchoridTriggerdAbility(FilterCard filter){
-        super(Zone.GRAVEYARD, 
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                        new ExileFromGraveCost(
-                                new TargetCardInYourGraveyard(1, 1, filter, true)
-                        )
-                ),
-                TargetController.YOU, false);
+    private static final FilterCard filter = new FilterCreatureCard("another black creature card");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+
+    public IchoridTriggerdAbility() {
+        super(Zone.GRAVEYARD, new DoIfCostPaid(
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))
+        ), TargetController.YOU, false);
     }
 
     public IchoridTriggerdAbility(IchoridTriggerdAbility ability) {
@@ -83,19 +81,17 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
     public BeginningOfUpkeepTriggeredAbility copy() {
         return new IchoridTriggerdAbility(this);
     }
-    
+
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if(controller != null && controller.getGraveyard().contains(sourceId)){
-            return super.checkInterveningIfClause(game);
-        }
-        return false;
+        MageObject sourceObject = getSourceObjectIfItStillExists(game);
+        return sourceObject != null && game.getState().getZone(getSourceId()) == Zone.GRAVEYARD;
     }
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {this} is in your graveyard, you may exile a black creature card other than {this} from your graveyard. If you do, return {this} to the battlefield.";
+        return "At the beginning of your upkeep, if {this} is in your graveyard, " +
+                "you may exile a black creature card other than {this} from your graveyard. " +
+                "If you do, return {this} to the battlefield.";
     }
-    
 }

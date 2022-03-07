@@ -182,6 +182,9 @@ class ValkmiraProtectorsShieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(getSourceId())) {
+            return false;
+        }
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject == null || !game.getOpponents(getControllerId()).contains(stackObject.getControllerId())) {
             return false;
@@ -200,7 +203,7 @@ class ValkmiraProtectorsShieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you or a permanent you control becomes the target of a spell or ability " +
+        return "Whenever you or another permanent you control becomes the target of a spell or ability " +
                 "an opponent controls, counter that spell or ability unless its controller pays {1}.";
     }
 }

@@ -62,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "NEO"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "M10"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -83,8 +83,9 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_WRONG_CARD_NUMBERS = "WRONG_CARD_NUMBERS";
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
-            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof",
-            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance"
+            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk"
     );
 
     static {
@@ -1487,6 +1488,13 @@ public class VerifyCardDataTest {
         newRule = newRule.replaceAll("(?i) <i>\\(.+\\)</i>", "");
         newRule = newRule.replaceAll("(?i) \\(.+\\)", "");
 
+        // fix specifically for mana abilities
+        if (newRule.startsWith("({T}: Add")) {
+            newRule = newRule
+                    .replace("(", "")
+                    .replace(")", "");
+        }
+
         // replace special text and symbols
         newRule = newRule
                 .replace("{this}", cardName)
@@ -1549,7 +1557,7 @@ public class VerifyCardDataTest {
                         .replace("{this}", card.getName())
                         //.replace("<i>", "")
                         //.replace("</i>", "")
-                        .replace("&mdash;", "—");;
+                        .replace("&mdash;", "—");
 
                 boolean found = false;
                 for (String refRule : refRules) {
@@ -1618,24 +1626,20 @@ public class VerifyCardDataTest {
         }
 
         String refText = ref.text;
-        // lands fix
-        if (refText.startsWith("(") && refText.endsWith(")")) {
-            refText = refText.substring(1, refText.length() - 1);
-        }
         // planeswalker fix [-7]: xxx
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
         // evergreen keyword fix
-        for (String s : refText.split("[\\$\\\n]")) {
+        for (String s : refText.replaceAll(" \\(.+?\\)", "").split("[\\$\\\n]")) {
             if (Arrays
-                    .stream(s.split(", "))
+                    .stream(s.split("[,;] "))
                     .map(String::toLowerCase)
                     .allMatch(VerifyCardDataTest::evergreenCheck)) {
                 String replacement = Arrays
-                        .stream(s.split(", "))
+                        .stream(s.split("[,;] "))
                         .map(CardUtil::getTextWithFirstCharUpperCase)
-                        .reduce("", (a, b) -> a + '\n' + b);
-                refText = refText.replace(s, replacement.substring(1));
+                        .collect(Collectors.joining("\n"));
+                refText = refText.replace(s, replacement);
             }
         }
         // modal spell fix
@@ -1650,7 +1654,8 @@ public class VerifyCardDataTest {
         }
         // mana ability fix
         for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {")) || !s.contains("} or {")) {
+            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
+                    || !(s.contains("} or {") || s.contains("}, or {"))) {
                 continue;
             }
             String newStr = "";

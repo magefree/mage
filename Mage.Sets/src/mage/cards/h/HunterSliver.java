@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -9,13 +7,13 @@ import mage.abilities.keyword.ProvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33
  */
 public final class HunterSliver extends CardImpl {
@@ -28,8 +26,10 @@ public final class HunterSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have provoke.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ProvokeAbility(),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                new ProvokeAbility(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
+        ).setText("all Sliver creatures have provoke")));
     }
 
     private HunterSliver(final HunterSliver card) {

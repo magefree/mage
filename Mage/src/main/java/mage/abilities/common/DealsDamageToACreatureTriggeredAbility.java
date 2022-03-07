@@ -1,9 +1,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX
  */
 public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl {
@@ -43,7 +42,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     public DealsDamageToACreatureTriggeredAbility copy() {
         return new DealsDamageToACreatureTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
@@ -60,10 +59,8 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
                 }
             }
             if (setTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    effect.setValue("damage", event.getAmount());
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                this.getEffects().setValue("damage", event.getAmount());
             }
             return true;
         }

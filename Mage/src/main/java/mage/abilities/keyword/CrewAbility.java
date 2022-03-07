@@ -4,9 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.CrewIncreasedPowerAbility;
 import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.abilities.CrewAbilityIcon;
@@ -47,6 +49,12 @@ public class CrewAbility extends SimpleActivatedAbility {
         this.addEffect(new CrewEventEffect());
         this.addIcon(CrewAbilityIcon.instance);
         this.value = value;
+        if (altCost != null) {
+            this.addSubAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                    "you may " + CardUtil.addCostVerb(altCost.getText())
+                            + " rather than pay {this}'s crew cost"
+            )));
+        }
     }
 
     public CrewAbility(final CrewAbility ability) {
@@ -123,9 +131,8 @@ class CrewCost extends CostImpl {
             return false;
         }
         Player player = game.getPlayer(controllerId);
-        String costName = altCost.getText();
         String message = CardUtil.getTextWithFirstCharUpperCase(
-                (CardUtil.checkCostWords(costName) ? "" : "Pay ") + costName
+                CardUtil.addCostVerb(altCost.getText())
         ) + " rather than the crew cost?";
         return player != null
                 && player.chooseUse(Outcome.Benefit, message, source, game)

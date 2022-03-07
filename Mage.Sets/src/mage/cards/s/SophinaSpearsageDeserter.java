@@ -1,4 +1,4 @@
-package mage.cards.c;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -21,7 +21,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ChiefJimHopper extends CardImpl {
+public final class SophinaSpearsageDeserter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterAttackingCreature();
 
@@ -31,7 +31,7 @@ public final class ChiefJimHopper extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
-    public ChiefJimHopper(UUID ownerId, CardSetInfo setInfo) {
+    public SophinaSpearsageDeserter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -51,12 +51,12 @@ public final class ChiefJimHopper extends CardImpl {
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private ChiefJimHopper(final ChiefJimHopper card) {
+    private SophinaSpearsageDeserter(final SophinaSpearsageDeserter card) {
         super(card);
     }
 
     @Override
-    public ChiefJimHopper copy() {
-        return new ChiefJimHopper(this);
+    public SophinaSpearsageDeserter copy() {
+        return new SophinaSpearsageDeserter(this);
     }
 }

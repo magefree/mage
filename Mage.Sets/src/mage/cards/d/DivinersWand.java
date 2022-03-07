@@ -27,24 +27,12 @@ import java.util.UUID;
  */
 public final class DivinersWand extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Wizard creature");
-
-    static {
-        filter.add(SubType.WIZARD.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WIZARD, "a Wizard creature");
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.EQUIPMENT);
-
-        // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
-
-        // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 
         // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
         // new abilities
@@ -60,6 +48,14 @@ public final class DivinersWand extends CardImpl {
         Ability totalAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effectBoost);
         totalAbility.addEffect(effectDraw.concatBy("and"));
         this.addAbility(totalAbility);
+
+        // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
+                filter, true, SetTargetPointer.PERMANENT, null));
+
+        // Equip {3}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     private DivinersWand(final DivinersWand card) {

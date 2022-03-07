@@ -52,7 +52,7 @@ public final class KothophedSoulHoarder extends CardImpl {
         Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, filter,
                 "Whenever a permanent owned by another player is put into a graveyard from the battlefield, ", false);
         effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and lose 1 life");
+        effect.setText("and you lose 1 life");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

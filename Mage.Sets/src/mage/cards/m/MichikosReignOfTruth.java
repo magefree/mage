@@ -33,7 +33,7 @@ public final class MichikosReignOfTruth extends CardImpl {
         this.secondSideCardClazz = mage.cards.p.PortraitOfMichiko.class;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_I);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Target creature gets +1/+1 until end of turn for each artifact and/or enchantment you control.
         sagaAbility.addChapterEffect(

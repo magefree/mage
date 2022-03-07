@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -93,7 +92,9 @@ public final class DeathMaskDuplicant extends CardImpl {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-                    if (exileId != null) {
+                    if (exileId != null
+                            && game.getState().getExile().getExileZone(exileId) != null
+                            && !game.getState().getExile().getExileZone(exileId).isEmpty()) {
                         for (UUID cardId : game.getState().getExile().getExileZone(exileId)) {
                             Card card = game.getCard(cardId);
                             if (card != null && card.isCreature(game)) {

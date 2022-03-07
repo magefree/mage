@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -21,32 +19,31 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class MinionReflector extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature");
 
     static {
         filter.add(TokenPredicate.FALSE);
     }
 
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and "At the beginning of the end step, sacrifice this permanent."
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new MinionReflectorEffect(), new ManaCostsImpl("{2}"),
-                "Pay {2} to create a token that's a copy of that creature that " +
-                        "entered the battlefield?"),
-                filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature enters the battlefield under your control, " +
-                "you may pay 2. If you do, create a token that's a copy of that creature, " +
-                "except it has haste and \"At the beginning of the end step, sacrifice this " +
-                "permanent.\"");
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new DoIfCostPaid(
+                        new MinionReflectorEffect(), new ManaCostsImpl<>("{2}"), "Pay {2} " +
+                        "to create a token that's a copy of that creature that entered the battlefield?"
+                ),
+                filter, false, SetTargetPointer.PERMANENT, null
+        ));
     }
 
     private MinionReflector(final MinionReflector card) {
@@ -64,7 +61,7 @@ class MinionReflectorEffect extends OneShotEffect {
 
     public MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.";
+        this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.\"";
     }
 
     public MinionReflectorEffect(final MinionReflectorEffect effect) {

@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
@@ -39,7 +39,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TamiyoCollectorOfTalesEffect(), 1));
 
         // -3: Return target card from your graveyard to your hand.
-        Ability ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
+        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }

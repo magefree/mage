@@ -147,6 +147,14 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         return false;
     }
 
+    public boolean refersTo(Ability source, Game game) {
+        if (source == null || !source.getSourceId().equals(sourceId)) {
+            return false;
+        }
+        return zoneChangeCounter * source.getSourceObjectZoneChangeCounter() == 0
+                || zoneChangeCounter == source.getSourceObjectZoneChangeCounter();
+    }
+
     public Permanent getPermanent(Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter) {

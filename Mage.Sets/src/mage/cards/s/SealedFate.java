@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -22,11 +22,12 @@ public final class SealedFate extends CardImpl {
 
         // Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR,
-                false, StaticValue.get(1),
-                new FilterCard("a card to exile"), Zone.LIBRARY, true,
-                false, false, Zone.EXILED,
-                false, true, true));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                ManacostVariableValue.REGULAR, false, StaticValue.get(1),
+                StaticFilters.FILTER_CARD, Zone.LIBRARY, true, false,
+                false, Zone.EXILED, false, true, true
+        ).setText("look at the top X cards of target opponent's library. Exile one of those cards " +
+                "and put the rest back on top of that player's library in any order"));
     }
 
     private SealedFate(final SealedFate card) {

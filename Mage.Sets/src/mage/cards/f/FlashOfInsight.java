@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -14,33 +12,34 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FlashOfInsight extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("blue cards from your graveyard");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    }
+
     public FlashOfInsight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
 
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FlashOfInsightEffect());
 
         // Flashback-{1}{U}, Exile X blue cards from your graveyard.
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{U}"));
-        FilterCard filter = new FilterCard("blue cards from your graveyard");
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(Predicates.not(new CardIdPredicate(getId())));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new ExileXFromYourGraveCost(filter));
         this.addAbility(ability);
     }

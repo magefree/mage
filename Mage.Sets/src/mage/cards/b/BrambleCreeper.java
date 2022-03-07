@@ -24,7 +24,7 @@ public final class BrambleCreeper extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
         // Whenever Bramble Creeper attacks, it gets +5/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn).setText("it gets +5/+0 until end of turn"), false));
     }
 
     private BrambleCreeper(final BrambleCreeper card) {

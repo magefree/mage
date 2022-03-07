@@ -34,8 +34,8 @@ public final class NoggleHedgeMage extends CardImpl {
         filter2.add(SubType.MOUNTAIN.getPredicate());
     }
 
-    private String rule = "When {this} enters the battlefield, if you control two or more Islands, you may tap two target permanents.";
-    private String rule2 = "When {this} enters the battlefield, if you control two or more Mountains, you may have {this} deal 2 damage to target player or planeswalker.";
+    private static final String rule = "When {this} enters the battlefield, if you control two or more Islands, you may tap two target permanents.";
+    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Mountains, you may have {this} deal 2 damage to target player or planeswalker.";
 
     public NoggleHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U/R}");

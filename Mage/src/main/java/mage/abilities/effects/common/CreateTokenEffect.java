@@ -118,11 +118,12 @@ public class CreateTokenEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
-            sb.append("a ");
             if (tapped && !attacking) {
-                sb.append("tapped ");
+                sb.append("a tapped ");
+                sb.append(token.getDescription());
+            } else {
+                sb.append(CardUtil.addArticle(token.getDescription()));
             }
-            sb.append(token.getDescription());
         } else {
             sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             if (tapped && !attacking) {

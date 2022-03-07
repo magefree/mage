@@ -15,7 +15,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

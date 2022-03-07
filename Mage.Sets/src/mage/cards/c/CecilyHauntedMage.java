@@ -1,4 +1,4 @@
-package mage.cards.e;
+package mage.cards.c;
 
 import mage.ApprovingObject;
 import mage.MageInt;
@@ -25,9 +25,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ElevenTheMage extends CardImpl {
+public final class CecilyHauntedMage extends CardImpl {
 
-    public ElevenTheMage(UUID ownerId, CardSetInfo setInfo) {
+    public CecilyHauntedMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -42,37 +42,37 @@ public final class ElevenTheMage extends CardImpl {
         )));
 
         // Whenever Eleven, the Mage attacks, you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, you may cast an instant or sorcery spell from your hand without paying its mana cost.
-        this.addAbility(new AttacksTriggeredAbility(new ElevenTheMageEffect()));
+        this.addAbility(new AttacksTriggeredAbility(new CecilyHauntedMageEffect()));
 
         // Friends forever
         this.addAbility(FriendsForeverAbility.getInstance());
     }
 
-    private ElevenTheMage(final ElevenTheMage card) {
+    private CecilyHauntedMage(final CecilyHauntedMage card) {
         super(card);
     }
 
     @Override
-    public ElevenTheMage copy() {
-        return new ElevenTheMage(this);
+    public CecilyHauntedMage copy() {
+        return new CecilyHauntedMage(this);
     }
 }
 
-class ElevenTheMageEffect extends OneShotEffect {
+class CecilyHauntedMageEffect extends OneShotEffect {
 
-    ElevenTheMageEffect() {
+    CecilyHauntedMageEffect() {
         super(Outcome.Benefit);
         staticText = "you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, " +
                 "you may cast an instant or sorcery spell from your hand without paying its mana cost";
     }
 
-    private ElevenTheMageEffect(final ElevenTheMageEffect effect) {
+    private CecilyHauntedMageEffect(final CecilyHauntedMageEffect effect) {
         super(effect);
     }
 
     @Override
-    public ElevenTheMageEffect copy() {
-        return new ElevenTheMageEffect(this);
+    public CecilyHauntedMageEffect copy() {
+        return new CecilyHauntedMageEffect(this);
     }
 
     @Override

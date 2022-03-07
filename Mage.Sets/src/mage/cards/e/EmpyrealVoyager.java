@@ -52,7 +52,7 @@ class EmpyrealVoyagerEffect extends OneShotEffect {
 
     public EmpyrealVoyagerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "get that many {E} counters";
+        this.staticText = "you get that many {E}";
     }
 
     public EmpyrealVoyagerEffect(final EmpyrealVoyagerEffect effect) {

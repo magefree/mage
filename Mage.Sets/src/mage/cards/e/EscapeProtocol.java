@@ -38,7 +38,7 @@ public final class EscapeProtocol extends CardImpl {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new ExileTargetForSourceEffect(), false,
                 "exile target artifact or creature you control, " +
-                        "then return it to the battlefield under its owner's control."
+                        "then return it to the battlefield under its owner's control"
         );
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         ability.addTarget(new TargetPermanent(filter));

@@ -25,7 +25,7 @@ public final class HissingIguanar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
-        DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, true);
+        DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1).setText("you may have {this} deal 1 damage to target player or planeswalker"), true, true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

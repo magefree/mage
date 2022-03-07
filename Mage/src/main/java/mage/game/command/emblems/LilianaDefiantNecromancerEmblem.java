@@ -53,7 +53,7 @@ class LilianaDefiantNecromancerEmblemEffect extends OneShotEffect {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY), source);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
         }
         return false;

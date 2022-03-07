@@ -21,7 +21,7 @@ public final class TortoiseFormation extends CardImpl {
         // Creatures you control gain shroud until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 ShroudAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_CONTROLLED_CREATURES
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ));
     }
 

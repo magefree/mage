@@ -74,7 +74,7 @@ class CardsInChosenPlayerHandCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "card in chosen opponents hand";
+        return "card in the chosen player's hand";
     }
 
     @Override

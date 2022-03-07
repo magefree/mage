@@ -30,7 +30,7 @@ public final class MagmaPhoenix extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(3), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(3, "it"), false));
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
     }
 

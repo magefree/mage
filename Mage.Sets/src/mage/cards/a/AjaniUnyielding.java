@@ -52,7 +52,7 @@ public final class AjaniUnyielding extends CardImpl {
 
         // -9: Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
         LoyaltyAbility ajaniAbility3 = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(5), new FilterControlledCreaturePermanent()), -9);
-        ajaniAbility3.addEffect(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(5), planeswalkerFilter));
+        ajaniAbility3.addEffect(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(5), planeswalkerFilter).setText("and five loyalty counters on each other planeswalker you control"));
         this.addAbility(ajaniAbility3);
     }
 

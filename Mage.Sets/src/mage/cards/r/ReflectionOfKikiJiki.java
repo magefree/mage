@@ -85,7 +85,7 @@ class ReflectionOfKikiJikiEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
-        effect.sacrificeTokensCreatedAtEndOfCombat(game, source);
+        effect.sacrificeTokensCreatedAtNextEndStep(game, source);
         return true;
     }
 }

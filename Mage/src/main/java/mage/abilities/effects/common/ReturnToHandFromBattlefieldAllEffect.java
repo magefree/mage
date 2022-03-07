@@ -24,7 +24,7 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
     public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
-        staticText = "Return all " + filter.getMessage() + " to their owners' hands";
+        staticText = "return all " + filter.getMessage() + " to their owners' hands";
     }
 
     public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
