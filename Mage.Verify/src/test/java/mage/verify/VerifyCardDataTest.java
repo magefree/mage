@@ -62,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "CON"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ARB"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -83,7 +83,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_WRONG_CARD_NUMBERS = "WRONG_CARD_NUMBERS";
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
-            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof",
+            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
             "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk"
     );

@@ -86,7 +86,11 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
 
     @Override
     public String getTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ").append(attachedDescription);
+        StringBuilder sb = new StringBuilder("Whenever ");
+        sb.append(attachedDescription);
+        if (!attachedDescription.endsWith("creature")) {
+            sb.append(" creature");
+        }
         sb.append(" deals");
         if (onlyCombat) {
             sb.append(" combat");
