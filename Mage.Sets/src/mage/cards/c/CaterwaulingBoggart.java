@@ -38,7 +38,7 @@ public final class CaterwaulingBoggart extends CardImpl {
 
         // Goblins you control and Elementals you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false), Duration.WhileOnBattlefield, filter
+                new MenaceAbility(true), Duration.WhileOnBattlefield, filter
         )));
     }
 
