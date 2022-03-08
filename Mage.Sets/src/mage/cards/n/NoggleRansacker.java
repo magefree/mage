@@ -28,7 +28,7 @@ public final class NoggleRansacker extends CardImpl {
 
         // When Noggle Ransacker enters the battlefield, each player draws two cards, then discards a card at random.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardAllEffect(2));
-        ability.addEffect(new DiscardEachPlayerEffect(1, true));
+        ability.addEffect(new DiscardEachPlayerEffect(1, true).setText(", then discards a card at random"));
         this.addAbility(ability);
     }
 
