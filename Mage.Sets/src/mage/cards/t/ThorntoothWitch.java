@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ThorntoothWitch extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Treefolk");
+    private static final FilterSpell filter = new FilterSpell("a Treefolk spell");
 
     static {
         filter.add(SubType.TREEFOLK.getPredicate());

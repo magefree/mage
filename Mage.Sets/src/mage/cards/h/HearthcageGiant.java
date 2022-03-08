@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class HearthcageGiant extends CardImpl {
 
     private static final FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
-    private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
+    private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant creature");
 
     static {
         filterElemental.add(SubType.ELEMENTAL.getPredicate());
