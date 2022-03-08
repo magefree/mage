@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class SeethingPathblazer extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent(SubType.ELEMENTAL, "Elemental");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ELEMENTAL, "Elemental");
 
     public SeethingPathblazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

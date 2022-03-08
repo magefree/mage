@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 
 import java.util.UUID;
 
@@ -24,12 +24,7 @@ import java.util.UUID;
  */
 public final class KithkinGreatheart extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(SubType.GIANT.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GIANT, "Giant");
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
