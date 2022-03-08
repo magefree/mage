@@ -34,7 +34,7 @@ public final class WrensRunPackmaster extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Champion an Elf
-        this.addAbility(new ChampionAbility(this, SubType.ELF, false));
+        this.addAbility(new ChampionAbility(this, SubType.ELF));
 
         // {2}{G}: Create a 2/2 green Wolf creature token.
         this.addAbility(new SimpleActivatedAbility(
