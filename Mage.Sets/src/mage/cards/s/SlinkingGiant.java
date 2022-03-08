@@ -28,7 +28,7 @@ public final class SlinkingGiant extends CardImpl {
 
         this.addAbility(WitherAbility.getInstance());
         // Whenever Slinking Giant blocks or becomes blocked, it gets -3/-0 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn).setText("it gets -3/-0 until end of turn"), false).setTriggerPhrase("Whenever {this} blocks or becomes blocked, "));
     }
 
     private SlinkingGiant(final SlinkingGiant card) {
