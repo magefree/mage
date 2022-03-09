@@ -100,6 +100,7 @@ public class VerifyCardDataTest {
 
         // cost
         skipListCreate(SKIP_LIST_COST);
+        skipListAddName(SKIP_LIST_TYPE, "SNC", "Brokers Ascendancy"); // temporary
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -109,7 +110,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "NEO", "Oni-Cult Anvil"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
