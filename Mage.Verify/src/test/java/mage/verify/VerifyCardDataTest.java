@@ -1676,9 +1676,11 @@ public class VerifyCardDataTest {
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .reduce("", (a, b) -> a + '\n' + b)
+                .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
+                .replace("<b>", "")
+                .replace("</b>", "")
                 .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);
