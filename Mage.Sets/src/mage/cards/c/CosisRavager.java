@@ -24,7 +24,7 @@ public final class CosisRavager extends CardImpl {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new LandfallAbility(new DamageTargetEffect(1), false);
+        Ability ability = new LandfallAbility(new DamageTargetEffect(1), true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

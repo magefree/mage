@@ -20,7 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class SeascapeAerialist extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("have Ally creatures you control");
 
     static {
         filter.add(SubType.ALLY.getPredicate());
@@ -36,7 +36,7 @@ public final class SeascapeAerialist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter).setText("you may have Ally creatures you control gain flying until end of turn"), true).setAbilityWord(null));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter), true).setAbilityWord(null));
     }
 
     private SeascapeAerialist(final SeascapeAerialist card) {

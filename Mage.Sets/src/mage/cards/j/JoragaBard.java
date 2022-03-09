@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -14,13 +12,14 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class JoragaBard extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("have Ally creatures you control");
 
     static {
         filter.add(SubType.ALLY.getPredicate());
@@ -28,7 +27,7 @@ public final class JoragaBard extends CardImpl {
     }
 
     public JoragaBard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.BARD);
@@ -39,7 +38,7 @@ public final class JoragaBard extends CardImpl {
 
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
-        ).setText("you may have Ally creatures you control gain vigilance until end of turn"), true).setAbilityWord(null));
+        ), true).setAbilityWord(null));
     }
 
     private JoragaBard(final JoragaBard card) {
