@@ -1,8 +1,14 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -20,7 +26,15 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         this.blockName = "Kamigawa: Neon Dynasty";
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.numBoosterDoubleFaced = 1; // temporary test fix
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 9;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7.4;
+        this.numBoosterDoubleFaced = 1;
+        this.maxCardNumberInBooster = 302;
+        this.ratioBoosterSpecialLand = 12;
+        this.ratioBoosterSpecialLandNumerator = 5;  // ratio not confirmed
 
         cards.add(new SetCardInfo("Acquisition Octopus", 44, Rarity.UNCOMMON, mage.cards.a.AcquisitionOctopus.class));
         cards.add(new SetCardInfo("Akki Ember-Keeper", 130, Rarity.COMMON, mage.cards.a.AkkiEmberKeeper.class));
@@ -575,5 +589,34 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("When We Were Young", 43, Rarity.UNCOMMON, mage.cards.w.WhenWeWereYoung.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 282, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("You Are Already Dead", 129, Rarity.COMMON, mage.cards.y.YouAreAlreadyDead.class));
+    }
+
+    // add common or uncommon double faced card to booster
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
+        for (int i = 0; i < numBoosterDoubleFaced; i++) {
+            // ratio not confirmed
+            if (RandomUtil.nextInt(102) < 54) {
+                rarity = Rarity.COMMON;
+            } else {
+                rarity = Rarity.UNCOMMON;
+            }
+            addToBooster(booster, getSpecialCardsByRarity(rarity));
+        }
+    }
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        // rare and mythic DFCs are normal rares
+        if (rarity == Rarity.RARE || rarity == Rarity.MYTHIC) {
+            return new ArrayList<CardInfo>();
+        }
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // Uncharted Haven is a normal common
+            cardInfos.removeIf(cardInfo -> "Uncharted Haven".equals(cardInfo.getName()));
+        }
+        return cardInfos;
     }
 }
