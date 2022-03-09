@@ -1,19 +1,22 @@
 package mage.cards.m;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,36 +63,21 @@ class MuseVortexEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        int xValue = source.getManaCostsToPay().getX();
+        if (player == null || xValue < 1) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
-        controller.moveCards(cards, Zone.EXILED, source, game);
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
+        player.moveCards(cards, Zone.EXILED, source, game);
         cards.retainZone(Zone.EXILED, game);
-        FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery card with mana value " + xValue + " or less");
+        FilterCard filter = new FilterInstantOrSorceryCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        TargetCardInExile target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
-        if (controller.choose(Outcome.Benefit, cards, target, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                cards.remove(card);
-                if (cardWasCast) {
-                    cards.remove(card);
-                } else {
-                    game.informPlayer(controller, "You're not able to cast "
-                            + card.getIdName() + " or you canceled the casting.");
-                }
-                controller.putCardsOnTopOfLibrary(cards, game, source, true);
-                return true;
-            }
-        }
-        return false;
+        CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
+        cards.retainZone(Zone.EXILED, game);
+        player.moveCards(cards.getCards(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game), Zone.HAND, source, game);
+        cards.retainZone(Zone.EXILED, game);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
+        return true;
     }
 }

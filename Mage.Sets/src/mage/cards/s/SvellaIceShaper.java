@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,19 +8,17 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.common.FilterNonlandCard;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.IcyManalithToken;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -47,7 +44,7 @@ public final class SvellaIceShaper extends CardImpl {
         this.addAbility(ability);
 
         // {6}{R}{G}, {T}: Look at the top four cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
-        ability = new SimpleActivatedAbility(new SvellaIceShaperEffect(), new ManaCostsImpl("{6}{R}{G}"));
+        ability = new SimpleActivatedAbility(new SvellaIceShaperEffect(), new ManaCostsImpl<>("{6}{R}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -86,23 +83,9 @@ class SvellaIceShaperEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Card> cardsSet = controller.getLibrary().getTopCards(game, 4);
-        Cards cards = new CardsImpl(cardsSet);
-        TargetCard target = new TargetCardInLibrary(0, 1,
-                new FilterNonlandCard("card to cast without paying its mana cost"));
-        controller.choose(Outcome.PlayForFree, cards, target, game);
-        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-        if (card == null) {
-            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-            return true;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        if (cardWasCast) {
-            cards.remove(card);
-        }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
+        cards.retainZone(Zone.LIBRARY, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }

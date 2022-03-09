@@ -1,6 +1,7 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -23,6 +24,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -36,6 +38,7 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
@@ -1193,6 +1196,126 @@ public final class CardUtil {
         game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
         if (anyColor) {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+        }
+    }
+
+    public interface SpellCastTracker {
+
+        boolean checkCard(Card card, Game game);
+
+        void addCard(Card card, Ability source, Game game);
+    }
+
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+        List<Card> cards = new ArrayList<>();
+        if (cardToCast instanceof CardWithHalves) {
+            cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
+            cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
+        } else if (cardToCast instanceof AdventureCard) {
+            cards.add(cardToCast);
+            cards.add(((AdventureCard) cardToCast).getSpellCard());
+        } else {
+            cards.add(cardToCast);
+        }
+        cards.removeIf(Objects::isNull);
+        cards.removeIf(card -> !filter.match(card, sourceId, playerId, game));
+        if (spellCastTracker != null) {
+            cards.removeIf(card -> spellCastTracker.checkCard(card, game));
+        }
+        return cards;
+    }
+
+    private static final FilterCard defaultFilter = new FilterCard("card to cast");
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        return castSpellWithAttributesForFree(player, source, game, cards, filter, null);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
+        Map<UUID, List<Card>> cardMap = new HashMap<>();
+        for (Card card : cards.getCards(game)) {
+            List<Card> castableComponents = getCastableComponents(card, filter, source.getSourceId(), player.getId(), game, spellCastTracker);
+            if (!castableComponents.isEmpty()) {
+                cardMap.put(card.getId(), castableComponents);
+            }
+        }
+        Card cardToCast;
+        switch (cardMap.size()) {
+            case 0:
+                return false;
+            case 1:
+                cardToCast = cards.get(cardMap.keySet().stream().findFirst().orElse(null), game);
+                break;
+            default:
+                Cards castableCards = new CardsImpl(cardMap.keySet());
+                TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
+                target.setNotTarget(true);
+                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                cardToCast = castableCards.get(target.getFirstTarget(), game);
+        }
+        if (cardToCast == null) {
+            return false;
+        }
+        List<Card> partsToCast = cardMap.get(cardToCast.getId());
+        String partsInfo = partsToCast
+                .stream()
+                .map(MageObject::getIdName)
+                .collect(Collectors.joining(" or "));
+        if (cardToCast == null
+                || partsToCast.size() < 1
+                || !player.chooseUse(
+                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+        )) {
+            return false;
+        }
+        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
+        boolean result = player.cast(
+                player.chooseAbilityForCast(cardToCast, game, true),
+                game, true, new ApprovingObject(source, game)
+        );
+        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+        if (result && spellCastTracker != null) {
+            spellCastTracker.addCard(cardToCast, source, game);
+        }
+        if (player.isComputer() && !result) {
+            cards.remove(cardToCast);
+        }
+        return result;
+    }
+
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+        return cards
+                .getCards(game)
+                .stream()
+                .anyMatch(card -> !getCastableComponents(card, filter, sourceId, playerId, game, spellCastTracker).isEmpty());
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, Integer.MAX_VALUE);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, maxSpells, null);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker) {
+        if (maxSpells == 1) {
+            CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
+            return;
+        }
+        int spellsCast = 0;
+        cards.removeZone(Zone.STACK, game);
+        while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker)) {
+                spellsCast++;
+                cards.removeZone(Zone.STACK, game);
+            } else if (!checkForPlayable(
+                    cards, filter, source.getSourceId(), player.getId(), game, spellCastTracker
+            ) || !player.chooseUse(
+                    Outcome.PlayForFree, "Continue casting spells?", source, game
+            )) {
+                break;
+            }
         }
     }
 
