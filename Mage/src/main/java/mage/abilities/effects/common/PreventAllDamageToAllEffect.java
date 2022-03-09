@@ -37,7 +37,7 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     public PreventAllDamageToAllEffect(Duration duration, FilterPermanentOrPlayer filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat, false);
         this.filter = filter;
-        staticText = "Prevent all "
+        staticText = "prevent all "
                 + (onlyCombat ? "combat " : "")
                 + "damage that would be dealt to "
                 + filter.getMessage()

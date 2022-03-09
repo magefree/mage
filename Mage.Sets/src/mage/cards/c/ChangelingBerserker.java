@@ -30,7 +30,7 @@ public final class ChangelingBerserker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // Champion a creature
-        this.addAbility(new ChampionAbility(this, true));
+        this.addAbility(new ChampionAbility(this));
     }
 
     private ChangelingBerserker(final ChangelingBerserker card) {

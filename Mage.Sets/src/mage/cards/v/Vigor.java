@@ -57,7 +57,7 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
 
     VigorReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "If damage would be dealt to a creature you control other than {this}, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way";
+        staticText = "if damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way";
     }
 
     VigorReplacementEffect(final VigorReplacementEffect effect) {

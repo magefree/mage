@@ -98,12 +98,12 @@ public class SacrificeEffect extends OneShotEffect {
                 sb.append(" sacrifice ");
             }
         }
-        if (!filter.getMessage().startsWith("another")
-                && !filter.getMessage().startsWith("a ")
-                && !filter.getMessage().startsWith("an ")) {
-            sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
+        if (count.toString().equals("1")) {
+            sb.append(CardUtil.addArticle(filter.getMessage()));
+        } else {
+            sb.append(CardUtil.numberToText(count.toString(), "a"));
+            sb.append(filter.getMessage());
         }
-        sb.append(filter.getMessage());
         staticText = sb.toString();
     }
 }

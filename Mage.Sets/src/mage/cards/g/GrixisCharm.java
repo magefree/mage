@@ -33,7 +33,7 @@ public final class GrixisCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or creatures you control get +2/+0 until end of turn.
         mode = new Mode();
-        mode.addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        mode.addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false));
         this.getSpellAbility().addMode(mode);
     }
 

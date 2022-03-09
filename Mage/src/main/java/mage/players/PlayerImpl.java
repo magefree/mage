@@ -1571,72 +1571,75 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, ActivatedAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
+    public static LinkedHashMap<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
         Abilities<Ability> allAbilities;
         if (object instanceof Card) {
             allAbilities = ((Card) object).getAbilities(game);
         } else {
             allAbilities = object.getAbilities();
         }
-
-        for (Ability ability : allAbilities) {
-            if (ability instanceof SpellAbility) {
-                SpellAbility spellAbility = (SpellAbility) ability;
-
-                switch (spellAbility.getSpellAbilityType()) {
-                    case BASE_ALTERNATE:
-                        // rules:
-                        // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
-                        // any alternative costs. You can, however, pay additional costs, such as kicker costs.
-                        // If the card has any mandatory additional costs, those must be paid to cast the spell.
-                        // (2021-02-05)
-                        if (!noMana) {
-                            if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
-                                useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
-                            }
-                            return useable;
+        for (SpellAbility spellAbility : allAbilities
+                .stream()
+                .filter(SpellAbility.class::isInstance)
+                .map(SpellAbility.class::cast)
+                .collect(Collectors.toList())) {
+            switch (spellAbility.getSpellAbilityType()) {
+                case BASE_ALTERNATE:
+                    // rules:
+                    // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
+                    // any alternative costs. You can, however, pay additional costs, such as kicker costs.
+                    // If the card has any mandatory additional costs, those must be paid to cast the spell.
+                    // (2021-02-05)
+                    if (!noMana) {
+                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
                         }
-                        break;
-                    case SPLIT_FUSED:
-                        // rules:
-                        // If you cast a split card with fuse from your hand without paying its mana cost,
-                        // you can choose to use its fuse ability and cast both halves without paying their mana costs.
-                        if (zone == Zone.HAND) {
-                            if (spellAbility.canChooseTarget(game, playerId)) {
-                                useable.put(spellAbility.getId(), spellAbility);
-                            }
+                        return useable;
+                    }
+                    break;
+                case SPLIT_FUSED:
+                    // rules:
+                    // If you cast a split card with fuse from your hand without paying its mana cost,
+                    // you can choose to use its fuse ability and cast both halves without paying their mana costs.
+                    if (zone == Zone.HAND) {
+                        if (spellAbility.canChooseTarget(game, playerId)) {
+                            useable.put(spellAbility.getId(), spellAbility);
                         }
-                    case SPLIT:
-                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                    ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                        }
+                    }
+                case SPLIT:
+                    if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility()
+                        );
+                    }
+                    if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility()
+                        );
+                    }
+                    return useable;
+                case SPLIT_AFTERMATH:
+                    if (zone == Zone.GRAVEYARD) {
                         if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getRightHalfCard().getSpellAbility());
                         }
-                        return useable;
-                    case SPLIT_AFTERMATH:
-                        if (zone == Zone.GRAVEYARD) {
-                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getRightHalfCard().getSpellAbility());
-                            }
-                        } else {
-                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                            }
+                    } else {
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                    ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                         }
-                        return useable;
-                    default:
-                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(spellAbility.getId(), spellAbility);
-                        }
-                }
+                    }
+                    return useable;
+                default:
+                    if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                        useable.put(spellAbility.getId(), spellAbility);
+                    }
             }
         }
         return useable;

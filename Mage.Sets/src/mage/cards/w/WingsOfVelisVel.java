@@ -28,11 +28,11 @@ public final class WingsOfVelisVel extends CardImpl {
 
         // Target creature becomes 4/4, gains all creature types, and gains flying until end of turn.
         this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
-                .setText("Target creature becomes 4/4"));
+                .setText("Until end of turn, target creature has base power and toughness 4/4"));
         this.getSpellAbility().addEffect(new GainAllCreatureTypesTargetEffect(Duration.EndOfTurn)
                 .setText(", gains all creature types"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
-                .setText(", and gains flying until end of turn"));
+                .setText(", and gains flying"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

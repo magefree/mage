@@ -80,7 +80,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur or Beast card.";
+        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.";
     }
 
     private static final List<SubType> subtypes = Arrays.asList(

@@ -23,7 +23,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class AzcantaTheSunkenRuin extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
+    private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));

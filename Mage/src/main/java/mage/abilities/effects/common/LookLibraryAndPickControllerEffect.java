@@ -290,11 +290,15 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (numberToPick.calculate(null, null, this) > 0) {
-
+        int pickCount=numberToPick.calculate(null, null, this);
+        int cardCount=numberOfCards.calculate(null, null, this);
+        if (pickCount > 0) {
             if (revealPickedCards) {
                 sb.append(". You may reveal ");
-                sb.append(filter.getMessage()).append(" from among them and put it into your ");
+                sb.append(filter.getMessage());
+                sb.append(" from among them and put ");
+                sb.append(pickCount>1?"the revealed cards":"it");
+                sb.append(" into your ");
             } else if (targetPickedCards == Zone.BATTLEFIELD) {
                 sb.append(". ");
                 if (optional) {
@@ -305,15 +309,15 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 sb.append("ut ").append(filter.getMessage()).append(" from among them onto the ");
             } else {
                 sb.append(". Put ");
-                if (numberToPick.calculate(null, null, this) > 1) {
+                if (pickCount > 1) {
                     if (upTo) {
-                        if (numberToPick.calculate(null, null, this) == (numberOfCards.calculate(null, null, this))) {
+                        if (pickCount == (cardCount)) {
                             sb.append("any number");
                         } else {
-                            sb.append("up to ").append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
+                            sb.append("up to ").append(CardUtil.numberToText(pickCount));
                         }
                     } else {
-                        sb.append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
+                        sb.append(CardUtil.numberToText(pickCount));
                     }
                 } else {
                     sb.append("one");
@@ -324,19 +328,23 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append(targetPickedCards.toString().toLowerCase(Locale.ENGLISH));
 
             if (targetZoneLookedCards == Zone.LIBRARY) {
-                sb.append(". Put the rest ");
+                sb.append(revealPickedCards?". Put ":" and ");
+                sb.append(cardCount-pickCount==1?"the other ":"the rest ");
                 if (putOnTop) {
                     sb.append("back on top");
                 } else {
                     sb.append("on the bottom");
                 }
-                sb.append(" of your library in ");
-                if (anyOrder && !backInRandomOrder) {
-                    sb.append("any");
-                } else {
-                    sb.append("a random");
+                sb.append(" of your library");
+                if (cardCount-pickCount>1) {
+                    sb.append(" in ");
+                    if (anyOrder && !backInRandomOrder) {
+                        sb.append("any");
+                    } else {
+                        sb.append("a random");
+                    }
+                    sb.append(" order");
                 }
-                sb.append(" order");
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {
                 sb.append(" and the");
                 if (numberOfCards instanceof StaticValue && numberToPick instanceof StaticValue

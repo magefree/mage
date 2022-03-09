@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
@@ -10,20 +8,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class SyphonLife extends CardImpl {
 
     public SyphonLife(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Target player loses 2 life and you gain 2 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
+
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }

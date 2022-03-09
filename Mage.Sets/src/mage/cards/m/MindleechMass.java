@@ -1,28 +1,24 @@
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MindleechMass extends CardImpl {
@@ -39,7 +35,9 @@ public final class MindleechMass extends CardImpl {
 
         // Whenever Mindleech Mass deals combat damage to a player, you may look at that 
         // player's hand. If you do, you may cast a nonland card in it without paying that card's mana cost.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MindleechMassEffect(), true, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new MindleechMassEffect(), true, true
+        ));
     }
 
     private MindleechMass(final MindleechMass card) {
@@ -56,8 +54,8 @@ class MindleechMassEffect extends OneShotEffect {
 
     public MindleechMassEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may look at that player's hand. If you do, "
-                + "you may cast a nonland card in it without paying that card's mana cost";
+        this.staticText = "look at that player's hand. If you do, you " +
+                "may cast a spell from among those cards without paying its mana cost";
     }
 
     public MindleechMassEffect(final MindleechMassEffect effect) {
@@ -71,27 +69,15 @@ class MindleechMassEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent != null && controller != null) {
-            Cards cardsInHand = new CardsImpl();
-            cardsInHand.addAll(opponent.getHand());
-            opponent.revealCards("Opponents hand", cardsInHand, game);
-            if (!cardsInHand.isEmpty()
-                    && !cardsInHand.getCards(new FilterNonlandCard(), game).isEmpty()) {
-                TargetCard target = new TargetCard(1, Zone.HAND, new FilterNonlandCard());
-                if (controller.chooseTarget(Outcome.PlayForFree, cardsInHand, target, source, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    }
-                }
-            }
-            return true;
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
         }
-        return false;
+        controller.lookAtCards(opponent.getName(), opponent.getHand(), game);
+        return CardUtil.castSpellWithAttributesForFree(
+                controller, source, game, new CardsImpl(opponent.getHand()),
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
+        );
     }
 }

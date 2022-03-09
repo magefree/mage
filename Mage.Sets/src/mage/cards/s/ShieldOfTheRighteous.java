@@ -1,7 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.BlocksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,13 +13,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ShieldOfTheRighteous extends CardImpl {
@@ -30,11 +29,16 @@ public final class ShieldOfTheRighteous extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +0/+2 and has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and has vigilance"));
 
         // Whenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.
-        this.addAbility(new BlocksAttachedTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), "equipped", false, false, true));
+        this.addAbility(new BlocksAttachedTriggeredAbility(
+                new DontUntapInControllersNextUntapStepTargetEffect("that creature"),
+                "equipped", false, false, true
+        ));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));

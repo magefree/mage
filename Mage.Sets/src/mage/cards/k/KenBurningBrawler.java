@@ -5,17 +5,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -59,12 +61,6 @@ public final class KenBurningBrawler extends CardImpl {
 
 class KenBurningBrawlerEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("sorcery spell");
-
-    static {
-        filter.add(CardType.SORCERY.getPredicate());
-    }
-
     KenBurningBrawlerEffect() {
         super(Outcome.Benefit);
         staticText = "you may cast a sorcery spell from your hand with mana value " +
@@ -82,8 +78,13 @@ class KenBurningBrawlerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new CastWithoutPayingManaCostEffect(
-                StaticValue.get((Integer) getValue("damage")), filter
-        ).apply(game, source);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || player.getHand().isEmpty()) {
+            return false;
+        }
+        FilterCard filter = new FilterCard();
+        filter.add(CardType.SORCERY.getPredicate());
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 1 + (Integer) getValue("damage")));
+        return CardUtil.castSpellWithAttributesForFree(player, source, game, new CardsImpl(player.getHand()), filter);
     }
 }

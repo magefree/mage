@@ -6,7 +6,6 @@ import mage.abilities.Mode;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -25,8 +24,6 @@ import java.util.UUID;
  */
 public final class TerritorialKavu extends CardImpl {
 
-    private static final DynamicValue xValue = new DomainValue();
-
     public TerritorialKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}");
 
@@ -36,7 +33,7 @@ public final class TerritorialKavu extends CardImpl {
 
         // Domain — Territorial Kavu's power and toughness are each equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetPowerToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Whenever Territorial Kavu attacks, choose one —

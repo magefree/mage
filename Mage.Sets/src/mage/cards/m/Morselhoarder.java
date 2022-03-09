@@ -30,7 +30,7 @@ public final class Morselhoarder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morselhoarder enters the battlefield with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2), false)));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // Remove a -1/-1 counter from Morselhoarder: Add one mana of any color.
         this.addAbility(new MorselhoarderAbility());

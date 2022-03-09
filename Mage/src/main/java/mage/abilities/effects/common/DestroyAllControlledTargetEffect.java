@@ -1,26 +1,23 @@
-
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyAllControlledTargetEffect extends OneShotEffect {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public DestroyAllControlledTargetEffect(FilterPermanent filter) {
         super(Outcome.DestroyPermanent);
         this.filter = filter;
-        staticText = "Destroy all " + filter.getMessage() + " controlled by target player";
+        staticText = "Destroy all " + filter.getMessage() + " target player controls";
     }
 
     public DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
@@ -35,10 +32,9 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
             permanent.destroy(source, game, false);
         }
         return true;
     }
-
 }

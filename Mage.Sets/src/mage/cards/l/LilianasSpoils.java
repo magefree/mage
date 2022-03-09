@@ -36,7 +36,7 @@ public final class LilianasSpoils extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(5), false, StaticValue.get(1), filter,
                 Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top five cards of your library. "
+        ).setBackInRandomOrder(true).setText("<br>Look at the top five cards of your library. "
                 + "You may reveal a black card from among them and put it into your hand. "
                 + "Put the rest on the bottom of your library in a random order.")
         );

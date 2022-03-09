@@ -122,6 +122,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         Set<Card> cardSet = cards.getCards(game);
         controller.moveCardsToExile(cardSet, source, game, true, exileId, exileName);
         opponent.shuffleLibrary(source, game);
+        cardSet.add(card);
         if (cardSet.isEmpty() || source.getSourcePermanentIfItStillExists(game) == null) {
             return true;
         }

@@ -52,7 +52,7 @@ class TowerAboveEffect extends OneShotEffect {
 
     public TowerAboveEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Until end of turn, target creature gets +4/+4 and gains trample, wither, and \"When this creature attacks, target creature blocks it this turn if able.";
+        staticText = "Until end of turn, target creature gets +4/+4 and gains trample, wither, and \"When this creature attacks, target creature blocks it this turn if able.\"";
     }
 
     public TowerAboveEffect(final TowerAboveEffect effect) {

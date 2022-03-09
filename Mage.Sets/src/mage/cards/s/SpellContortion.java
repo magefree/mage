@@ -27,7 +27,7 @@ public final class SpellContortion extends CardImpl {
 
         // Counter target spell unless its controller pays {2}. Draw a card for each time Spell Contortion was kicked.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(MultikickerCount.instance));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(MultikickerCount.instance).setText("draw a card for each time {this} was kicked"));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

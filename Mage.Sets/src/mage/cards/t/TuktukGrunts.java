@@ -28,7 +28,7 @@ public final class TuktukGrunts extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true).setAbilityWord(null));
     }
 
     private TuktukGrunts(final TuktukGrunts card) {

@@ -79,7 +79,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When there are no cards in your graveyard, you lose the game";
+        return "When there are no cards in your graveyard, you lose the game.";
     }
 }
 

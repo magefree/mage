@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
@@ -22,13 +21,12 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public final class DjinnOfWishes extends CardImpl {
-
-    private static final String ruleText = "{this} enters the battlefield with three wish counters on it";
 
     public DjinnOfWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -40,7 +38,7 @@ public final class DjinnOfWishes extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Djinn of Wishes enters the battlefield with three wish counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), ruleText));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), "with three wish counters on it"));
 
         // {2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl("{2}{U}{U}"));

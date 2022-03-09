@@ -27,7 +27,7 @@ public final class NovaChaser extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Champion an Elemental
-        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
+        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL));
     }
 
     private NovaChaser(final NovaChaser card) {

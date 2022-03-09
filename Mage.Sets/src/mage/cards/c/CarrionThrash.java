@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +21,7 @@ import java.util.UUID;
  */
 public final class CarrionThrash extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -35,7 +36,7 @@ public final class CarrionThrash extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Carrion Thrash dies, you may pay {2}. If you do, return another target creature card from your graveyard to your hand.
-        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(2)), false);
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(2)), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

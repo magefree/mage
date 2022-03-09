@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
@@ -24,8 +23,6 @@ import java.util.UUID;
  */
 public final class ScionOfDraco extends CardImpl {
 
-    private static final DynamicValue xValue = new DomainValue();
-
     public ScionOfDraco(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{12}");
 
@@ -35,7 +32,7 @@ public final class ScionOfDraco extends CardImpl {
 
         // Domain — This spell costs {2} less to cast for each basic land type among lands you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SpellCostReductionForEachSourceEffect(2, xValue)
+                new SpellCostReductionForEachSourceEffect(2, DomainValue.REGULAR)
                         .setText("this spell costs {2} less to cast for each basic land type among lands you control")
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 

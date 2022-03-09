@@ -88,28 +88,22 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
-        Condition condition = new MarchOfRecklessJoyCondition(source);
         for (Card card : cards) {
             CardUtil.makeCardPlayable(
                     game, source, card, Duration.UntilEndOfYourNextTurn,
-                    false, null, condition
+                    false, null, MarchOfRecklessJoyCondition.instance
             );
         }
         return true;
     }
 }
 
-class MarchOfRecklessJoyCondition implements Condition {
-
-    private final MageObjectReference mor;
-
-    MarchOfRecklessJoyCondition(Ability source) {
-        this.mor = new MageObjectReference(source);
-    }
+enum MarchOfRecklessJoyCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return MarchOfRecklessJoyWatcher.check(mor, game);
+        return MarchOfRecklessJoyWatcher.check(source, game);
     }
 }
 
@@ -133,7 +127,11 @@ class MarchOfRecklessJoyWatcher extends Watcher {
         );
     }
 
-    static boolean check(MageObjectReference mor, Game game) {
-        return game.getState().getWatcher(MarchOfRecklessJoyWatcher.class).morMap.getOrDefault(mor, 0) < 2;
+    static boolean check(Ability source, Game game) {
+        return game
+                .getState()
+                .getWatcher(MarchOfRecklessJoyWatcher.class)
+                .morMap
+                .getOrDefault(new MageObjectReference(source, 1), 0) < 2;
     }
 }

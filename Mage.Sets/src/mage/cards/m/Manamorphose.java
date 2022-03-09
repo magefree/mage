@@ -22,7 +22,7 @@ public final class Manamorphose extends CardImpl {
         this.getSpellAbility().addEffect(new AddManaInAnyCombinationEffect(2));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Manamorphose(final Manamorphose card) {

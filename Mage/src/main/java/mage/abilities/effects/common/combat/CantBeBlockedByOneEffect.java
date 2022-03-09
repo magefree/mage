@@ -1,17 +1,16 @@
-
 package mage.abilities.effects.common.combat;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
- *
  * @author North
  */
 public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
@@ -23,9 +22,9 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByOneEffect(int amount, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
-        staticText = "{this} can't be blocked except by " + amount + " or more creatures";
+        staticText = "{this} can't be blocked except by " + CardUtil.numberToText(amount) + " or more creatures";
     }
 
     public CantBeBlockedByOneEffect(final CantBeBlockedByOneEffect effect) {
@@ -39,26 +38,12 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+    public boolean apply(Game game, Ability source) {
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    perm.setMinBlockedBy(amount);
-                    break;
-            }
+            perm.setMinBlockedBy(amount);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

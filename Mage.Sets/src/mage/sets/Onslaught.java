@@ -169,6 +169,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Gratuitous Violence", 212, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Gravel Slinger", 33, Rarity.COMMON, mage.cards.g.GravelSlinger.class));
         cards.add(new SetCardInfo("Gravespawn Sovereign", 152, Rarity.RARE, mage.cards.g.GravespawnSovereign.class));
+        cards.add(new SetCardInfo("Graxiplon", 86, Rarity.UNCOMMON, mage.cards.g.Graxiplon.class));
         cards.add(new SetCardInfo("Grinning Demon", 153, Rarity.RARE, mage.cards.g.GrinningDemon.class));
         cards.add(new SetCardInfo("Gustcloak Harrier", 34, Rarity.COMMON, mage.cards.g.GustcloakHarrier.class));
         cards.add(new SetCardInfo("Gustcloak Runner", 35, Rarity.COMMON, mage.cards.g.GustcloakRunner.class));

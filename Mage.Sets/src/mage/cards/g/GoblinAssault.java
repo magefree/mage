@@ -29,7 +29,7 @@ public final class GoblinAssault extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinToken(true)), TargetController.YOU, false));
 
         // Goblin creatures attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, Duration.WhileOnBattlefield, true)), new AttackedThisTurnWatcher());
     }
 
     private GoblinAssault(final GoblinAssault card) {
