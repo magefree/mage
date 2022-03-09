@@ -37,7 +37,9 @@ public final class JoragaBard extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(
+                VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
+        ).setText("you may have Ally creatures you control gain vigilance until end of turn"), true).setAbilityWord(null));
     }
 
     private JoragaBard(final JoragaBard card) {
