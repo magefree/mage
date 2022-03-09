@@ -1206,7 +1206,7 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
@@ -1218,7 +1218,7 @@ public final class CardUtil {
             cards.add(cardToCast);
         }
         cards.removeIf(Objects::isNull);
-        cards.removeIf(card -> !filter.match(card, sourceId, playerId, game));
+        cards.removeIf(card -> !filter.match(card, source.getSourceId(), playerId, source, game));
         if (spellCastTracker != null) {
             cards.removeIf(card -> spellCastTracker.checkCard(card, game));
         }
@@ -1234,7 +1234,7 @@ public final class CardUtil {
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
-            List<Card> castableComponents = getCastableComponents(card, filter, source.getSourceId(), player.getId(), game, spellCastTracker);
+            List<Card> castableComponents = getCastableComponents(card, filter, source, player.getId(), game, spellCastTracker);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
@@ -1283,11 +1283,11 @@ public final class CardUtil {
         return result;
     }
 
-    private static boolean checkForPlayable(Cards cards, FilterCard filter, UUID sourceId, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
         return cards
                 .getCards(game)
                 .stream()
-                .anyMatch(card -> !getCastableComponents(card, filter, sourceId, playerId, game, spellCastTracker).isEmpty());
+                .anyMatch(card -> !getCastableComponents(card, filter, source, playerId, game, spellCastTracker).isEmpty());
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
@@ -1310,7 +1310,7 @@ public final class CardUtil {
                 spellsCast++;
                 cards.removeZone(Zone.STACK, game);
             } else if (!checkForPlayable(
-                    cards, filter, source.getSourceId(), player.getId(), game, spellCastTracker
+                    cards, filter, source, player.getId(), game, spellCastTracker
             ) || !player.chooseUse(
                     Outcome.PlayForFree, "Continue casting spells?", source, game
             )) {
