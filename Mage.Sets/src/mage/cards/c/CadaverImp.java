@@ -1,11 +1,9 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,8 +12,9 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class CadaverImp extends CardImpl {
@@ -31,10 +30,9 @@ public final class CadaverImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Cadaver Imp enters the battlefield, you may return target creature card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
-
     }
 
     private CadaverImp(final CadaverImp card) {
