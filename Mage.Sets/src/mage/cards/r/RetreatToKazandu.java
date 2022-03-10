@@ -24,8 +24,7 @@ public final class RetreatToKazandu extends CardImpl {
         // <i>Landfall</i>-Whenever a land enters the battlefield under your control, choose one - Put a +1/+1 counter on target creature; or You gain 2 life.
         LandfallAbility ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
         ability.addTarget(new TargetCreaturePermanent());
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeEffect(2));
+        Mode mode = new Mode(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
     }

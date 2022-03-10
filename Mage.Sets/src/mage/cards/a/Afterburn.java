@@ -30,8 +30,7 @@ public final class Afterburn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         //   Remove target creature from combat.
-        Mode mode = new Mode();
-        mode.addEffect(new RemoveFromCombatTargetEffect());
+        Mode mode = new Mode(new RemoveFromCombatTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

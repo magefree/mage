@@ -26,13 +26,11 @@ public final class TrickeryCharm extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or target creature becomes the creature type of your choice until end of turn
-        Mode mode = new Mode();
-        mode.addEffect(new BecomesChosenCreatureTypeTargetEffect());
+        Mode mode = new Mode(new BecomesChosenCreatureTypeTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or look at the top four cards of your library, then put them back in any order.
-        mode = new Mode();
-        mode.addEffect(new LookLibraryControllerEffect(4));
+        mode = new Mode(new LookLibraryControllerEffect(4));
         this.getSpellAbility().addMode(mode);
     }
 

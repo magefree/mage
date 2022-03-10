@@ -62,14 +62,12 @@ public final class MarathWillOfTheWild extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
 
         // or Marath deals X damage to any target;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         mode.addTarget(new TargetAnyTarget());
         ability.addMode(mode);
 
         // or create an X/X green Elemental creature token.
-        mode = new Mode();
-        mode.addEffect(new MarathWillOfTheWildCreateTokenEffect());
+        mode = new Mode(new MarathWillOfTheWildCreateTokenEffect());
         ability.addMode(mode);
 
         // X can't be 0.

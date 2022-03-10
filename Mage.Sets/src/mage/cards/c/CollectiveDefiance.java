@@ -44,18 +44,16 @@ public final class CollectiveDefiance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard).withChooseHint("discards all cards and draws"));
 
         // Collective Defiance deals 4 damage to target creature.;
-        Mode mode = new Mode();
         Effect effect = new DamageTargetEffect(4);
         effect.setText("{this} deals 4 damage to target creature");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 4 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Collective Defiance deals 3 damage to target opponent or planeswalker.
-        mode = new Mode();
         effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to target opponent or planeswalker");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetOpponentOrPlaneswalker().withChooseHint("deals 3 damage to"));
         this.getSpellAbility().addMode(mode);
     }

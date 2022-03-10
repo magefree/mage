@@ -41,10 +41,9 @@ public final class BorrowedHostility extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBoost).withChooseHint("gets +3/+0 until end of turn"));
 
         // Target creature gains first strike until end of turn.
-        Mode mode = new Mode();
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains first strike until end of turn");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterFirstStrike).withChooseHint("gains first strike until end of turn"));
         this.getSpellAbility().addMode(mode);
     }

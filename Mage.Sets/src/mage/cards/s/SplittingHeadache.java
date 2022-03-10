@@ -26,8 +26,7 @@ public final class SplittingHeadache extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
 
         // • Target player reveals their hand. You choose a card from it. That player discards that card.
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
+        Mode mode = new Mode(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

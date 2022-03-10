@@ -49,16 +49,14 @@ public final class BlessedAlliance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterGainLife).withChooseHint("player gains 4 life"));
 
         // Untap up to two target creatures.
-        Mode mode = new Mode();
         effect = new UntapTargetEffect();
         effect.setText("Untap up to two target creatures");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(0, 2, filterCreature, false).withChooseHint("untap"));
         this.getSpellAbility().addMode(mode);
 
         // Target opponent sacrifices an attacking creature.
-        mode = new Mode();
-        mode.addEffect(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target opponent"));
+        mode = new Mode(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target opponent"));
         mode.addTarget(new TargetPlayer(1, 1, false, filterSacrifice).withChooseHint("sacrifices an attacking creature"));
         this.getSpellAbility().addMode(mode);
     }

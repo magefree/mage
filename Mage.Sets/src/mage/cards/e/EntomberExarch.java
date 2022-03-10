@@ -35,8 +35,7 @@ public final class EntomberExarch extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // • Target opponent reveals their hand. You choose a noncreature card from it. That player discards that card.
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_CREATURE));
+        Mode mode = new Mode(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_CREATURE));
         mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);

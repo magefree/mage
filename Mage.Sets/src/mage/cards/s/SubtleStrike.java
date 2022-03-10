@@ -29,10 +29,9 @@ public final class SubtleStrike extends CardImpl {
         this.getSpellAbility().addEffect(minusOneMinusOne);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gets -1/-1 until end of turn"));
         // • Put a +1/+1 counter on target creature.
-        Mode mode1 = new Mode();
         AddCountersTargetEffect plusOnePlusOneCounter = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         plusOnePlusOneCounter.setText("Put a +1/+1 counter on target creature");
-        mode1.addEffect(plusOnePlusOneCounter);
+        Mode mode1 = new Mode(plusOnePlusOneCounter);
         mode1.addTarget(new TargetCreaturePermanent().withChooseHint("gets +1/+1 counter"));
         this.getSpellAbility().addMode(mode1);
     }
