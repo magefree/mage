@@ -1,12 +1,11 @@
 package mage.cards.r;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -16,8 +15,6 @@ import java.util.UUID;
  */
 public final class RememberTheFallen extends CardImpl {
 
-    private static final FilterArtifactCard filterArtifact = new FilterArtifactCard("artifact card from your graveyard");
-
     public RememberTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
@@ -26,13 +23,13 @@ public final class RememberTheFallen extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD).withChooseHint("return to hand"));
 
         // • Return target artifact card from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetCardInYourGraveyard(filterArtifact).withChooseHint("return to hand"));
+        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD).withChooseHint("return to hand"));
         this.getSpellAbility().addMode(mode);
 
     }
