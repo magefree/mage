@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,20 +10,19 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public final class RazorHippogriff extends CardImpl {
-
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from your graveyard");
 
     public RazorHippogriff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -36,7 +34,7 @@ public final class RazorHippogriff extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         ability.addEffect(new RazorHippogriffGainLifeEffect());
 
         this.addAbility(ability);

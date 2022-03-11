@@ -1,23 +1,13 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.constants.SubType;
 import mage.abilities.keyword.ReachAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
@@ -28,8 +18,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class HatcherySpider extends CardImpl {
@@ -45,10 +36,7 @@ public final class HatcherySpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Undergrowth — When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new CastSourceTriggeredAbility(
-                new HatcherySpiderEffect(), false,
-                "<i>Undergrowth</i> &mdash; "
-        ));
+        this.addAbility(new CastSourceTriggeredAbility(new HatcherySpiderEffect()).setAbilityWord(AbilityWord.UNDERGROWTH));
     }
 
     private HatcherySpider(final HatcherySpider card) {
@@ -88,34 +76,20 @@ class HatcherySpiderEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = new CardsInControllerGraveyardCount(
-                StaticFilters.FILTER_CARD_CREATURE
-        ).calculate(game, source, this);
-        FilterCard filter = new FilterPermanentCard(
-                "green permanent card with mana value "
-                + xValue + " or less"
-        );
+        int xValue = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
+        FilterCard filter = new FilterPermanentCard("green permanent card with mana value " + xValue + " or less");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new ManaValuePredicate(
-                ComparisonType.FEWER_THAN, xValue + 1
-        ));
-        TargetCard target = new TargetCardInLibrary(filter);
-        Cards cards = new CardsImpl(
-                player.getLibrary().getTopCards(game, xValue)
-        );
-        if (player.chooseUse(outcome, "Put a card onto the battlefield?", source, game)
-                && player.choose(outcome, cards, target, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null
-                    && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                cards.remove(card);
-            }
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
+        player.revealCards(source, cards, game);
+        TargetCard target = new TargetCardInLibrary(0, 1, filter);
+        player.choose(outcome, cards, target, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            player.getLibrary().putOnBottom(card, game);
-            cards.remove(card);
-        }
+        cards.retainZone(Zone.LIBRARY, game);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }

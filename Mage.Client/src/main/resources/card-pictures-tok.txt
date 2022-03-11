@@ -506,7 +506,7 @@
 |Generate|TOK:CNS|Wolf|||WolfToken|
 |Generate|TOK:CNS|Zombie|||ZombieToken|
 |Generate|TOK:CON|Angel|||AngelToken|
-|Generate|TOK:CON|Elemental|||RakkaMarElementalToken|
+|Generate|TOK:CON|Elemental|||ElementalTokenWithHaste|
 |Generate|TOK:CON|Saproling|||SaprolingToken|
 |Generate|TOK:CON|Soldier|||SoldierToken|
 |Generate|TOK:CON|Zombie|||ZombieToken|
@@ -1050,7 +1050,7 @@
 |Generate|TOK:RAV|Wolf|||VojaToken|
 |Generate|TOK:RAV|Faerie|||FaerieToken|
 |Generate|TOK:RIX|Elemental|1||RekindlingPhoenixToken|
-|Generate|TOK:RIX|Elemental|2||TilonallisSummonerElementalToken|
+|Generate|TOK:RIX|Elemental|2||RedElementalToken|
 |Generate|TOK:RIX|Golem|||GoldForgeGarrisonGolemToken|
 |Generate|TOK:RIX|Saproling|||SaprolingToken|
 |Generate|TOK:ROE|Dragon|||DragonToken2|

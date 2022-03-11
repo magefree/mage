@@ -35,7 +35,7 @@ public final class OnduCleric extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true).setAbilityWord(null));
     }
 
     private OnduCleric(final OnduCleric card) {

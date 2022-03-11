@@ -23,7 +23,7 @@ public final class EssenceFeed extends CardImpl {
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 3).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

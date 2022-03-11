@@ -160,17 +160,18 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         superRule = newRule.toString();
                     }
                 } else if (this.getTargets().isEmpty()
+                        || ruleLow.startsWith("attach")
+                        || ruleLow.startsWith("counter")
+                        || ruleLow.startsWith("destroy")
+                        || ruleLow.startsWith("exchange")
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
-                        || ruleLow.startsWith("destroy")
-                        || ruleLow.startsWith("return")
-                        || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")
+                        || ruleLow.startsWith("goad")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
-                        || ruleLow.startsWith("counter")
-                        || ruleLow.startsWith("exchange")
-                        || ruleLow.startsWith("goad")) {
+                        || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("tap")
+                        || ruleLow.startsWith("untap")) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");

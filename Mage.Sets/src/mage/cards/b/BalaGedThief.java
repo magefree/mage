@@ -36,7 +36,7 @@ public final class BalaGedThief extends CardImpl {
         // You choose one of them. That player discards that card.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, xValue), false);
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(null));
     }
 
     private BalaGedThief(final BalaGedThief card) {

@@ -18,10 +18,6 @@ public class Mode implements Serializable {
     protected final Effects effects;
     protected String flavorWord;
 
-    public Mode() {
-        this((Effect) null);
-    }
-
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();
         this.targets = new Targets();

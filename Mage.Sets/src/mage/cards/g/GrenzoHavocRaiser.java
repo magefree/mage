@@ -47,8 +47,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
         effect.setText(goadEffectName);
         Ability ability = new GrenzoHavocRaiserTriggeredAbility(effect);
         //or Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-        Mode mode = new Mode();
-        mode.addEffect(new GrenzoHavocRaiserEffect());
+        Mode mode = new Mode(new GrenzoHavocRaiserEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }

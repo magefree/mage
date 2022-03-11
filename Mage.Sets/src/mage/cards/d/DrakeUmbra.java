@@ -1,7 +1,4 @@
-
 package mage.cards.d;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +14,8 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -31,12 +30,16 @@ public final class DrakeUmbra extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature gets +3/+3 and has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+                3, 3, Duration.WhileOnBattlefield
+        ));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has flying"));
+        this.addAbility(ability);
 
         // Totem armor
         this.addAbility(new TotemArmorAbility());

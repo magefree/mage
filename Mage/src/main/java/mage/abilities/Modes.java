@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -42,7 +43,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean mayChooseNone = false;
 
     public Modes() {
-        this.currentMode = new Mode();
+        this.currentMode = new Mode((Effect) null);
         this.put(currentMode.getId(), currentMode);
         this.minModes = 1;
         this.maxModes = 1;

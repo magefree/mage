@@ -16,6 +16,7 @@ public enum AbilityWord {
     COHORT("Cohort"),
     CONSTELLATION("Constellation"),
     CONVERGE("Converge"),
+    COUNCILS_DILEMMA("Council's dilemma"),
     COVEN("Coven"),
     DELIRIUM("Delirium"),
     DOMAIN("Domain"),

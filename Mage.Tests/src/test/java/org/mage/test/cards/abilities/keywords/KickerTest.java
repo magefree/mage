@@ -670,7 +670,6 @@ public class KickerTest extends CardTestPlayerBase {
         // attack and prepare free cast, use kicker
         attack(1, playerA, "Etali, Primal Storm", playerB);
         setChoice(playerA, true); // cast for free
-        setChoice(playerA, "Ardent Soldier"); // cast for free
         setChoice(playerA, true); // use kicker
 
         setStrictChooseMode(true);
@@ -703,7 +702,6 @@ public class KickerTest extends CardTestPlayerBase {
         // attack and prepare free cast
         attack(1, playerA, "Etali, Primal Storm", playerB);
         setChoice(playerA, true); // cast for free
-        setChoice(playerA, "Thieving Skydiver"); // cast for free
         setChoice(playerA, true); // use kicker
         setChoiceAmount(playerA, 2); // X=2 for Kicker X
         addTarget(playerA, "Brain in a Jar"); // kicker's target (take control of artifact)

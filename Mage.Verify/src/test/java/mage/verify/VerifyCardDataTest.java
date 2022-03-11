@@ -62,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "M10"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ROE"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -100,6 +100,7 @@ public class VerifyCardDataTest {
 
         // cost
         skipListCreate(SKIP_LIST_COST);
+        skipListAddName(SKIP_LIST_COST, "SNC", "Brokers Ascendancy"); // temporary
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -109,7 +110,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "NEO", "Oni-Cult Anvil"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
@@ -1676,9 +1676,11 @@ public class VerifyCardDataTest {
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .reduce("", (a, b) -> a + '\n' + b)
+                .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
+                .replace("<b>", "")
+                .replace("</b>", "")
                 .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);

@@ -33,7 +33,7 @@ public final class TotemGuideHartebeest extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Totem-Guide Hartebeest enters the battlefield, you may search your library for an Aura card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
     private TotemGuideHartebeest(final TotemGuideHartebeest card) {

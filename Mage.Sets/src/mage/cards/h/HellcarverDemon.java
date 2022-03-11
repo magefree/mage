@@ -1,26 +1,24 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author jeffwadsworth & L_J
@@ -58,7 +56,7 @@ class HellcarverDemonEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         staticText = "sacrifice all other permanents you control and discard your hand. "
                 + "Exile the top six cards of your library. You may cast any number of "
-                + "nonland cards exiled this way without paying their mana costs.";
+                + "spells from among cards exiled this way without paying their mana costs";
     }
 
     public HellcarverDemonEffect(final HellcarverDemonEffect effect) {
@@ -68,54 +66,25 @@ class HellcarverDemonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-                if (!Objects.equals(permanent, sourceObject)) {
-                    permanent.sacrifice(source, game);
-                }
-            }
-            if (!controller.getHand().isEmpty()) {
-                int cardsInHand = controller.getHand().size();
-                controller.discard(cardsInHand, false, false, source, game);
-            }
-            // move cards from library to exile
-            Set<Card> currentExiledCards = new HashSet<>();
-            currentExiledCards.addAll(controller.getLibrary().getTopCards(game, 6));
-            controller.moveCardsToExile(currentExiledCards, source, game, true,
-                    source.getSourceId(), sourceObject.getIdName());
-
-            // cast the possible cards without paying the mana
-            Cards cardsToCast = new CardsImpl();
-            cardsToCast.addAll(currentExiledCards);
-            boolean alreadyCast = false;
-            while (controller.canRespond() && !cardsToCast.isEmpty()) {
-                if (!controller.chooseUse(outcome, "Cast a" + (alreadyCast ? "another" : "")
-                        + " card exiled with " + sourceObject.getLogName()
-                        + " without paying its mana cost?", source, game)) {
-                    break;
-                }
-                TargetCard targetCard = new TargetCard(1, Zone.EXILED,
-                        new FilterNonlandCard("nonland card to cast for free"));
-                if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
-                    alreadyCast = true;
-                    Card card = game.getCard(targetCard.getFirstTarget());
-                    if (card != null) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                        cardsToCast.remove(card);
-                        if (!cardWasCast) {
-                            game.informPlayer(controller, "You're not able to cast "
-                                    + card.getIdName() + " or you canceled the casting.");
-                        }
-                    }
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        MageObjectReference sourceMor = new MageObjectReference(source);
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT,
+                source.getControllerId(), source.getSourceId(), game
+        )) {
+            if (!sourceMor.refersTo(permanent, game)) {
+                permanent.sacrifice(source, game);
+            }
+        }
+        controller.discard(controller.getHand(), false, source, game);
+        CardUtil.castMultipleWithAttributeForFree(
+                controller, source, game, new CardsImpl(
+                        controller.getLibrary().getTopCards(game, 6)
+                ), StaticFilters.FILTER_CARD
+        );
+        return true;
     }
 
     @Override

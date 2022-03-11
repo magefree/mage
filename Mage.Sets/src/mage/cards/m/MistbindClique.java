@@ -38,7 +38,7 @@ public final class MistbindClique extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Champion a Faerie
-        this.addAbility(new ChampionAbility(this, SubType.FAERIE, false));
+        this.addAbility(new ChampionAbility(this, SubType.FAERIE));
         // When a Faerie is championed with Mistbind Clique, tap all lands target player controls.
         this.addAbility(new MistbindCliqueAbility());
 

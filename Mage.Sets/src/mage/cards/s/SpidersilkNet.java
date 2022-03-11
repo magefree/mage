@@ -1,7 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -12,22 +11,26 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class SpidersilkNet extends CardImpl {
 
     public SpidersilkNet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                ReachAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and has reach"));
+        this.addAbility(ability);
+
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 

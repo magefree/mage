@@ -3,8 +3,6 @@ package mage.client.util;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import com.mortennobel.imagescaling.ResampleOp;
-
 /**
  *
  * @author user
@@ -95,9 +93,12 @@ public final class TransformedImageCache {
     }
 
     private static BufferedImage resizeImage(BufferedImage original, int width, int height) {
-        ResampleOp resampleOp = new ResampleOp(width, height);
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
+        Image scaled = original.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage output = new BufferedImage(width, height, original.getType());
+        Graphics2D graphics = output.createGraphics();
+        graphics.drawImage(scaled, 0, 0, null);
+        graphics.dispose();
+        return output;
     }
 
     public static BufferedImage getResizedImage(BufferedImage image, int width, int height) {

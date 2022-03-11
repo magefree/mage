@@ -32,13 +32,11 @@ public final class EtherwroughtPage extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), TargetController.YOU, false);
 
         // or look at the top card of your library, then you may put that card into your graveyard;
-        Mode mode = new Mode();
-        mode.addEffect(new EtherwroughtPageEffect());
+        Mode mode = new Mode(new EtherwroughtPageEffect());
         ability.addMode(mode);
 
         // or each opponent loses 1 life
-        Mode mode1 = new Mode();
-        mode1.addEffect(new LoseLifeOpponentsEffect(1));
+        Mode mode1 = new Mode(new LoseLifeOpponentsEffect(1));
         ability.addMode(mode1);
         
         this.addAbility(ability);

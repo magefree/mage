@@ -17,24 +17,24 @@ import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.stream.Collectors;
+
 /**
  * @author igoudt
  */
 public class EternalizeAbility extends ActivatedAbilityImpl {
 
-    private String rule;
+    private final String rule;
 
     public EternalizeAbility(Cost cost, Card card) {
-        super(Zone.GRAVEYARD, new EternalizeEffect(), cost);
-        addCost(new ExileSourceFromGraveCost());
-        this.rule = setRule(cost, card);
-        this.timing = TimingRule.SORCERY;
-        setRule(cost, card);
+        this(cost, card, setRule(cost, card));
     }
 
     public EternalizeAbility(Cost cost, Card card, String rule) {
-        this(cost, card);
+        super(Zone.GRAVEYARD, new EternalizeEffect(), cost);
+        addCost(new ExileSourceFromGraveCost());
         this.rule = rule;
+        this.timing = TimingRule.SORCERY;
     }
 
     public EternalizeAbility(final EternalizeAbility ability) {
@@ -52,15 +52,15 @@ public class EternalizeAbility extends ActivatedAbilityImpl {
         return rule;
     }
 
-    private String setRule(Cost cost, Card card) {
-        StringBuilder sb = new StringBuilder("Eternalize ").append(cost.getText());
-        sb.append(" <i>(").append(cost.getText());
-        sb.append(", Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie ");
-        for (SubType subtype : card.getSubtype()) {
-            sb.append(subtype).append(" ");
-        }
-        sb.append(" with no mana cost. Eternalize only as a sorcery.)</i>");
-        return sb.toString();
+    private static String setRule(Cost cost, Card card) {
+        return "Eternalize " + cost.getText() + " <i>(" + cost.getText() + ", Exile this card from your graveyard: " +
+                "Create a token that's a copy of it, except it's a 4/4 black Zombie " +
+                card.getSubtype()
+                        .stream()
+                        .map(SubType::getDescription)
+                        .map(s -> s + ' ')
+                        .collect(Collectors.joining()) +
+                "with no mana cost. Eternalize only as a sorcery.)</i>";
     }
 }
 

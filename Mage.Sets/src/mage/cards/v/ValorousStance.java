@@ -35,8 +35,7 @@ public final class ValorousStance extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or destroy target creature with toughness 4 or greater.
-        Mode mode1 = new Mode();
-        mode1.addEffect(new DestroyTargetEffect());
+        Mode mode1 = new Mode(new DestroyTargetEffect());
         mode1.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode1);
 

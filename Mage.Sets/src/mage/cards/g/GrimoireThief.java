@@ -120,7 +120,7 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
     public GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at the cards exiled with {this}";
+        staticText = "You may look at cards exiled with {this}";
     }
 
     public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {

@@ -144,12 +144,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        if (conspireCost != null) {
-            sb.append(conspireCost.getText(false));
-            sb.append(' ').append(conspireCost.getReminderText());
-        }
-        return sb.toString();
+        return "Conspire <i>(" + reminderText + ")</i>";
     }
 
     @Override

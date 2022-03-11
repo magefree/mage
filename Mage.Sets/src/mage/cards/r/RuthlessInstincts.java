@@ -51,10 +51,9 @@ public final class RuthlessInstincts extends CardImpl {
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
         // * Target attacking creature gets +2/+2 and gains trample until end of turn.
-        Mode mode = new Mode();
         effect = new BoostTargetEffect(2,2,Duration.EndOfTurn);
         effect.setText("Target attacking creature gets +2/+2");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         mode.addEffect(effect);

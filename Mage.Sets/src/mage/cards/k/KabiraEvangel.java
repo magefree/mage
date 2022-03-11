@@ -35,7 +35,7 @@ public final class KabiraEvangel extends CardImpl {
                         .setText("choose a color. If you do, Allies you control gain protection " +
                                 "from the chosen color until end of turn."),
                 true
-        ));
+        ).setAbilityWord(null));
     }
 
     private KabiraEvangel(final KabiraEvangel card) {
