@@ -271,7 +271,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Repurpose", 85, Rarity.COMMON, mage.cards.r.Repurpose.class));
         cards.add(new SetCardInfo("Resistance", 310, Rarity.UNCOMMON, mage.cards.r.Resistance.class));
         cards.add(new SetCardInfo("Resistance Bomber", 515, Rarity.UNCOMMON, mage.cards.r.ResistanceBomber.class));
-        cards.add(new SetCardInfo("Revenge", 117, Rarity.COMMON, mage.cards.r.RevengeStarWars.class));
+        cards.add(new SetCardInfo("Revenge (Star Wars)", 117, Rarity.COMMON, mage.cards.r.RevengeStarWars.class));
         cards.add(new SetCardInfo("Rey", 410, Rarity.RARE, mage.cards.r.Rey.class));
         cards.add(new SetCardInfo("Riding Ronto", 28, Rarity.UNCOMMON, mage.cards.r.RidingRonto.class));
         cards.add(new SetCardInfo("Riot Trooper", 411, Rarity.COMMON, mage.cards.r.RiotTrooper.class));
