@@ -56,16 +56,14 @@ public final class SavageAlliance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterPlayer).withChooseHint("whose creatures gain trample"));
 
         // Savage Alliance deals 2 damage to target creature.;
-        Mode mode = new Mode();
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to target creature");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 2 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Savage Alliance deals 1 damage to each creature target opponent controls.
-        mode = new Mode();
-        mode.addEffect(new SavageAllianceDamageEffect());
+        mode = new Mode(new SavageAllianceDamageEffect());
         mode.addTarget(new TargetPlayer(1, 1, false, filterOpponent).withChooseHint("whose creatures get dealt 1 damage"));
         this.getSpellAbility().addMode(mode);
     }

@@ -39,10 +39,9 @@ public final class BorrowedMalevolence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterCreaturePlus).withChooseHint("gets +1/+1 until end of turn"));
 
         // Target creature gets -1/-1 until end of turn.
-        Mode mode = new Mode();
         effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
         effect.setText("Target creature gets -1/-1 until end of turn");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterCreatureMinus).withChooseHint("gets -1/-1 until end of turn"));
         this.getSpellAbility().addMode(mode);
     }

@@ -1587,4 +1587,15 @@ public final class CardUtil {
     public static <T> int setOrIncrementValue(T u, Integer i) {
         return i == null ? 1 : Integer.sum(i, 1);
     }
+
+    public static String convertStartingLoyalty(int startingLoyalty) {
+        switch (startingLoyalty) {
+            case -2:
+                return "X";
+            case -1:
+                return "";
+            default:
+                return "" + startingLoyalty;
+        }
+    }
 }

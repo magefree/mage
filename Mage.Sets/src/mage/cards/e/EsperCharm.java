@@ -26,12 +26,10 @@ public final class EsperCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         // or draw two cards;
-        Mode mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(2));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addMode(mode);
         // or target player discards two cards.
-        mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(2));
+        mode = new Mode(new DiscardTargetEffect(2));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

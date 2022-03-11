@@ -7,7 +7,7 @@ import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +33,7 @@ public final class SkeletonShard extends CardImpl {
 
         // {3}, {tap} or {B}, {tap}: Return target artifact creature card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnToHandTargetEffect(),
+                new ReturnFromGraveyardToHandTargetEffect(),
                 new OrCost(
                         new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
                         new CompositeCost(new ManaCostsImpl<>("{B}"), new TapSourceCost(), "{B}, {T}"),

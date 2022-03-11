@@ -29,12 +29,10 @@ public final class JundCharm extends CardImpl {
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // or Jund Charm deals 2 damage to each creature;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
+        Mode mode = new Mode(new DamageAllEffect(2, new FilterCreaturePermanent()));
         this.getSpellAbility().addMode(mode);
         // or put two +1/+1 counters on target creature.
-        mode = new Mode();
-        mode.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2), Outcome.BoostCreature));
+        mode = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2), Outcome.BoostCreature));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

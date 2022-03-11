@@ -36,8 +36,7 @@ public final class Doomfall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Target opponent reveals their hand. You choose a nonland card from it. Exile that card.
-        Mode mode = new Mode();
-        mode.addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND)
+        Mode mode = new Mode(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND)
                 .setText("Target opponent reveals their hand. You choose a nonland card from it. Exile that card"));
         mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);

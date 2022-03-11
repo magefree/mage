@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -46,7 +47,7 @@ class CleansingMeditationEffect extends OneShotEffect {
 
     public CleansingMeditationEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all enchantments.<br>Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
+        this.staticText = "Destroy all enchantments.<br>" + AbilityWord.THRESHOLD.formatWord() + "If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
     }
 
     public CleansingMeditationEffect(final CleansingMeditationEffect effect) {

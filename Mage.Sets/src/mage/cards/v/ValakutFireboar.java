@@ -25,7 +25,7 @@ public final class ValakutFireboar extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(7);
 
-        this.addAbility(new AttacksTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn).setText("switch its power and toughness until end of turn"), false));
     }
 
     private ValakutFireboar(final ValakutFireboar card) {

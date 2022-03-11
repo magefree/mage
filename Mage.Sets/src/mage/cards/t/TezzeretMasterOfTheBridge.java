@@ -6,14 +6,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -35,8 +34,6 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
         ));
     }
 
-    private static final FilterCard filter2 = new FilterArtifactCard("artifact card from your graveyard");
-
     public TezzeretMasterOfTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
 
@@ -53,8 +50,8 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TezzeretMasterOfTheBridgeEffect(), 2));
 
         // -3: Return target artifact card from your graveyard to your hand.
-        Ability ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // -8: Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.

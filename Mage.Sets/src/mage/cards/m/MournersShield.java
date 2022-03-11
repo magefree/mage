@@ -15,10 +15,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.SharesColorPredicate;
 import mage.game.ExileZone;
@@ -43,7 +40,7 @@ public final class MournersShield extends CardImpl {
         // Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MournersShieldImprintEffect(), true);
         ability.addTarget(new TargetCardInGraveyard());
-        ability.withFlavorWord("Imprint");
+        ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
 
         // {2}, {tap}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.

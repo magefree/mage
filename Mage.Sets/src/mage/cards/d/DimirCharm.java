@@ -45,14 +45,12 @@ public final class DimirCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filterSorcery));
 
         //or destroy target creature with power 2 or less
-        Mode mode1 = new Mode();
-        mode1.addEffect(new DestroyTargetEffect());
+        Mode mode1 = new Mode(new DestroyTargetEffect());
         mode1.addTarget(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().addMode(mode1);
 
         //or look at the top three cards of target player's library, then put one back and the rest into that player's graveyard
-        Mode mode2 = new Mode();
-        mode2.addEffect(new DimirCharmEffect());
+        Mode mode2 = new Mode(new DimirCharmEffect());
         mode2.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode2);
     }

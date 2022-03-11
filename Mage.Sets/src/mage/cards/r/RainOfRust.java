@@ -25,8 +25,7 @@ public final class RainOfRust extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         //or destroy target land.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetLandPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine {3}{R}

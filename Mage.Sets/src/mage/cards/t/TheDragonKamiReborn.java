@@ -90,7 +90,7 @@ class TheDragonKamiRebornEffect extends OneShotEffect {
             card.addCounters(CounterType.HATCHLING.createInstance(), source, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, true);
+        player.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

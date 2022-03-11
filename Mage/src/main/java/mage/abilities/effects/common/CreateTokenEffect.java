@@ -129,7 +129,7 @@ public class CreateTokenEffect extends OneShotEffect {
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append(token.getDescription());
+            sb.append(token.getDescription().replace("token. It has", "tokens. They have"));
             if (token.getDescription().endsWith("token")) {
                 sb.append("s");
             }

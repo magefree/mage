@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,13 +27,13 @@ public final class AidTheFallen extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         ).withChooseHint("returns a creature card to your hand"));
 
         // • Return target planeswalker card from your graveyard to your hand.
-        Mode mode = new Mode(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(filter)
                 .withChooseHint("returns a planeswalker card to your hand"));
         this.getSpellAbility().addMode(mode);

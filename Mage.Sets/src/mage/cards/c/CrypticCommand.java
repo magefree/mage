@@ -37,21 +37,18 @@ public final class CrypticCommand extends CardImpl {
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addTarget(new TargetSpell());
         // or return target permanent to its owner's hand;
-        Mode mode = new Mode();
         Effect effect2 = new ReturnToHandTargetEffect();
         effect2.setText("Return target permanent to its owner's hand.");
-        mode.addEffect(effect2);
+        Mode mode = new Mode(effect2);
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or tap all creatures your opponents control;
-        mode = new Mode();
-        mode.addEffect(new CrypticCommandEffect());
+        mode = new Mode(new CrypticCommandEffect());
         this.getSpellAbility().getModes().addMode(mode);
         // or draw a card.
-        mode = new Mode();
         Effect effect3 = new DrawCardSourceControllerEffect(1);
-        mode.addEffect(effect3);
         effect3.setText("Draw a card.");
+        mode = new Mode(effect3);
         this.getSpellAbility().getModes().addMode(mode);
     }
 

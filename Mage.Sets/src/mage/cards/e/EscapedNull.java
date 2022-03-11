@@ -27,7 +27,7 @@ public final class EscapedNull extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn).setText("it gets +5/+0 until end of turn"), false, false));
     }
 
     private EscapedNull(final EscapedNull card) {
