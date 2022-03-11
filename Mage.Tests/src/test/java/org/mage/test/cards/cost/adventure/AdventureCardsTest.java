@@ -793,7 +793,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
     }
 
@@ -841,8 +841,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
-        assertPermanentCount(playerA, "Food", 1);
-        assertPermanentCount(playerA, "Servo", 3);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
         assertExileCount(playerA, "Curious Pair", 1);
     }
 
@@ -862,7 +862,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
         assertPermanentCount(playerA, "Bear", 0);
-        assertPermanentCount(playerA, "Servo", 3);
+        assertPermanentCount(playerA, "Servo Token", 3);
     }
 
     @Test
@@ -880,8 +880,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Lonesome Unicorn", 0);
-        assertPermanentCount(playerA, "Knight", 1);
-        assertPermanentCount(playerA, "Servo", 3);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
         assertExileCount(playerA, "Lonesome Unicorn", 1);
     }
 }
