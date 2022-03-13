@@ -73,7 +73,7 @@ class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), this, game)) {
+        if (creature == null || !filter.match(creature, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().clear();

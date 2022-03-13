@@ -83,9 +83,9 @@ class BurningOfXinyeEffect extends OneShotEffect{
         int amount = Math.min(4, realCount);
 
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
-        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), source, game);
+        if (amount > 0 && target.canChoose(player.getId(), source, game)) {
+            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                player.choose(Outcome.Sacrifice, target, source, game);
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {

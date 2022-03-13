@@ -146,10 +146,10 @@ class TheDeckOfManyThingsReturnEffect extends OneShotEffect {
         }
         TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), source, game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getControllerId(), source, game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

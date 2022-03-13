@@ -77,7 +77,7 @@ class RegularExpression extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        source.getControllerId(), source.getSourceId(), source, game
+                        source.getControllerId(), source, game
                 ).stream()
                 .map(Permanent::getName)
                 .filter(Objects::nonNull)

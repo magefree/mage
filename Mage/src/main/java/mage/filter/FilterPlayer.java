@@ -43,11 +43,11 @@ public class FilterPlayer extends FilterImpl<Player> {
         return object instanceof Player;
     }
 
-    public boolean match(Player checkPlayer, UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean match(Player checkPlayer, UUID sourceControllerId, Ability source, Game game) {
         if (!this.match(checkPlayer, game)) {
             return false;
         }
-        ObjectSourcePlayer<Player> osp = new ObjectSourcePlayer<>(checkPlayer, sourceId, sourceControllerId, source);
+        ObjectSourcePlayer<Player> osp = new ObjectSourcePlayer<>(checkPlayer, sourceControllerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 

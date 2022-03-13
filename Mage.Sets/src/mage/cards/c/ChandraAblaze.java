@@ -87,7 +87,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Outcome.Discard, target, source.getSourceId(), source, game);
+            player.choose(Outcome.Discard, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, false, source, game);

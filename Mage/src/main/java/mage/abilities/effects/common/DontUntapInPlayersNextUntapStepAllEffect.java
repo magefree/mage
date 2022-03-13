@@ -101,7 +101,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
                 }
                 if (game.isActivePlayer(permanent.getControllerId())
                         && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game)) {
+                        filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }

@@ -63,7 +63,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), source, game)) {
+        if (permanent != null && filterTarget.match(permanent, source.getControllerId(), source, game)) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             MageObject sourceObject;
             if (stackObject instanceof StackAbility) {

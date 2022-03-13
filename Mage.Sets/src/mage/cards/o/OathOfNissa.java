@@ -79,12 +79,12 @@ class OathOfNissaEffect extends OneShotEffect {
             topCards.addAll(controller.getLibrary().getTopCards(game, 3));
             if (!topCards.isEmpty()) {
                 controller.lookAtCards(sourceObject.getIdName(), topCards, game);
-                int number = topCards.count(filter, source.getSourceId(), source.getControllerId(), source, game);
+                int number = topCards.count(filter, source.getControllerId(), source, game);
                 if (number > 0) {
                     if (controller.chooseUse(outcome, "Reveal a creature, land, or planeswalker card from the looked at cards and put it into your hand?", source, game)) {
                         Card card;
                         if (number == 1) {
-                            Set<Card> cards = topCards.getCards(filter, source.getSourceId(), source.getControllerId(), source, game);
+                            Set<Card> cards = topCards.getCards(filter, source.getControllerId(), source, game);
                             card = cards.isEmpty() ? null : cards.iterator().next();
                         } else {
                             TargetCard target = new TargetCard(Zone.LIBRARY, filter);

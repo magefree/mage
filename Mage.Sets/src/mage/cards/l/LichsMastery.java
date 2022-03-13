@@ -197,13 +197,13 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
             int permCount = game.getBattlefield().getActivePermanents(filter, controller.getId(), game).size();
             if (graveCount + handCount == 0 || (permCount > 0 && controller.chooseUse(Outcome.Exile, "Exile permanent you control? (No = from hand or graveyard)", source, game))) {
                 Target target = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
-                controller.choose(outcome, target, source.getSourceId(), source, game);
+                controller.choose(outcome, target, source, game);
                 Effect effect = new ExileTargetEffect();
                 effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
                 effect.apply(game, source);
             } else if (graveCount == 0 || (handCount > 0 && controller.chooseUse(Outcome.Exile, "Exile a card from your hand? (No = from graveyard)", source, game))) {
                 Target target = new TargetCardInHand(1, 1, new FilterCard());
-                controller.choose(outcome, target, source.getSourceId(), source, game);
+                controller.choose(outcome, target, source, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.EXILED, source, game);

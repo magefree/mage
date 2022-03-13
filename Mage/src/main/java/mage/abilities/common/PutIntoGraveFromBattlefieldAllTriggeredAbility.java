@@ -48,7 +48,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), this, game)) {
+            if (filter.match(zEvent.getTarget(), this.getControllerId(), this, game)) {
                 if (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
                     return false;
                 }

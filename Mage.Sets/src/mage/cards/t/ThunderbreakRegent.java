@@ -77,7 +77,7 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && filter.match(creature, getSourceId(), getControllerId(), this, game)) {
+            if (creature != null && filter.match(creature, getControllerId(), this, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

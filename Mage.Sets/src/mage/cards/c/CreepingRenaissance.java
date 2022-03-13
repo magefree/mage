@@ -75,7 +75,7 @@ class CreepingRenaissanceEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard(chosenType.toString().toLowerCase(Locale.ENGLISH) + " card");
         filter.add(chosenType.getPredicate());
-        return controller.moveCards(controller.getGraveyard().getCards(filter, source.getSourceId(), controller.getId(), source, game), Zone.HAND, source, game);
+        return controller.moveCards(controller.getGraveyard().getCards(filter, controller.getId(), source, game), Zone.HAND, source, game);
     }
 
     @Override

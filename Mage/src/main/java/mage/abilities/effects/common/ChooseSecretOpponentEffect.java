@@ -43,7 +43,7 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
         targetOpponent.setTargetName("opponent (secretly)");
-        controller.choose(outcome, targetOpponent, source.getSourceId(), source, game);
+        controller.choose(outcome, targetOpponent, source, game);
         if (targetOpponent.getFirstTarget() == null) {
             return false;
         }

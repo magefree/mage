@@ -27,11 +27,11 @@ public class FilterSpell extends FilterStackObject {
     }
 
     @Override
-    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(StackObject stackObject, UUID playerId, Ability source, Game game) {
         if (!(stackObject instanceof Spell)) {
             return false;
         }
-        return super.match(stackObject, sourceId, playerId, source, game);
+        return super.match(stackObject, playerId, source, game);
     }
 
     @Override

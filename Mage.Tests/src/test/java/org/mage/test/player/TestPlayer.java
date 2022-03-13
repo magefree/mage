@@ -499,7 +499,7 @@ public class TestPlayer implements Player {
                         targetName = targetName.substring(0, targetName.length() - 11);
                     }
                 }
-                for (UUID id : currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), ability, game)) {
+                for (UUID id : currentTarget.possibleTargets(ability.getControllerId(), ability, game)) {
                     if (!currentTarget.getTargets().contains(id)) {
                         MageObject object = game.getObject(id);
 
@@ -2056,7 +2056,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Ability source, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         UUID abilityControllerId = computerPlayer.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -2064,7 +2064,7 @@ public class TestPlayer implements Player {
 
         // ignore player select
         if (target.getMessage().equals("Select a starting player")) {
-            return computerPlayer.choose(outcome, target, sourceId, source, game, options);
+            return computerPlayer.choose(outcome, target, source, game, options);
         }
 
         assertAliasSupportInChoices(true);
@@ -2107,7 +2107,7 @@ public class TestPlayer implements Player {
                                 targetName = targetName.substring(0, targetName.length() - 11);
                             }
                         }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, sourceId, source, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, source, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
@@ -2173,7 +2173,7 @@ public class TestPlayer implements Player {
 
                     CheckOneChoice:
                     for (String possibleChoice : possibleChoices) {
-                        Set<UUID> possibleCards = target.possibleTargets(sourceId, abilityControllerId, source, game);
+                        Set<UUID> possibleCards = target.possibleTargets(abilityControllerId, source, game);
                         CheckTargetsList:
                         for (UUID targetId : possibleCards) {
                             MageObject targetObject = game.getCard(targetId);
@@ -2227,7 +2227,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target.getOriginalTarget());
-                possibleTargets = t.possibleTargets(sourceId, abilityControllerId, source, game);
+                possibleTargets = t.possibleTargets(abilityControllerId, source, game);
                 for (String choiceRecord : choices) {
                     String[] targetList = choiceRecord.split("\\^");
                     boolean targetFound = false;
@@ -2263,8 +2263,8 @@ public class TestPlayer implements Player {
              */
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + ";\n" + getInfo(target));
-        return computerPlayer.choose(outcome, target, sourceId, source, game, options);
+        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source.getSourceId())) + ";\n" + getInfo(target));
+        return computerPlayer.choose(outcome, target, source, game, options);
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
@@ -2375,7 +2375,7 @@ public class TestPlayer implements Player {
                         if (filter instanceof FilterPermanentOrSuspendedCard) {
                             filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();
                         }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, sourceId, source, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
                                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
@@ -3961,10 +3961,10 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target,
-                          UUID sourceId, Ability source, Game game
+                          Ability source, Game game
     ) {
         // needed to call here the TestPlayer because it's overwitten
-        return choose(outcome, target, sourceId, source, game, null);
+        return choose(outcome, target, source, game, null);
     }
 
     @Override
@@ -4061,7 +4061,7 @@ public class TestPlayer implements Player {
             Assert.assertTrue("target amount must be <= remaining = " + target.getAmountRemaining() + " " + targetInfo, targetAmount <= target.getAmountRemaining());
 
             if (target.getAmountRemaining() > 0) {
-                for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), source, game)) {
+                for (UUID possibleTarget : target.possibleTargets(source.getControllerId(), source, game)) {
                     boolean foundTarget = false;
 
                     // permanent

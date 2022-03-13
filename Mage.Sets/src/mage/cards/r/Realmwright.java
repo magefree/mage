@@ -113,7 +113,7 @@ class RealmwrightEffect extends ContinuousEffectImpl {
         }
         for (Permanent land : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), source.getSourceId(), source, game
+                source.getControllerId(), source, game
         )) {
             if (land == null || land.hasSubtype(choice, game)) {
                 continue;

@@ -88,7 +88,7 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
             }
             //The controller's hand is where the permanent moved to.
             return permanentThatMoved != null
-                    && filter.match(permanentThatMoved, sourceId, controllerId, this, game)
+                    && filter.match(permanentThatMoved, controllerId, this, game)
                     && zEvent.getPlayerId().equals(controllerId);
         }
         return false;

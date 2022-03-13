@@ -104,7 +104,7 @@ class KeldonBattlewagonCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, source, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override

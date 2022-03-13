@@ -129,8 +129,8 @@ class BreathOfFuryEffect extends OneShotEffect {
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
                 && enchantedCreature.sacrifice(source, game)
-                && target.canChoose(source.getSourceId(), controller.getId(), source, game)) {
-            controller.choose(outcome, target, source.getSourceId(), source, game);
+                && target.canChoose(controller.getId(), source, game)) {
+            controller.choose(outcome, target, source, game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
             boolean success = false;
             if (newCreature != null) {

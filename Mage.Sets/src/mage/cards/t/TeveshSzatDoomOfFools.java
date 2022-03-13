@@ -101,7 +101,7 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), source, game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
         target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
@@ -158,7 +158,7 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
 
         // gain control of all commanders
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), source, game
+                filter, source.getControllerId(), source, game
         )) {
             game.addEffect(new GainControlTargetEffect(
                     Duration.Custom, true

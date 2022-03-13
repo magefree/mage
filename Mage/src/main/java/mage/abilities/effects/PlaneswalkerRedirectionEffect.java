@@ -59,7 +59,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
                             redirectTarget.add(planeswalker.get(0).getId(), game);
                         }
                     } else {
-                        player.choose(Outcome.Damage, redirectTarget, null, source, game);
+                        player.choose(Outcome.Damage, redirectTarget, source, game);
                     }
                     if (!game.isSimulation()) {
                         Permanent redirectTo = game.getPermanent(redirectTarget.getFirstTarget());

@@ -987,7 +987,7 @@ public final class CardUtil {
                 .stream()
                 .map(Mode::getTargets)
                 .flatMap(Collection::stream)
-                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), ability, game))
+                .map(t -> t.possibleTargets(ability.getControllerId(), ability, game))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
@@ -1222,7 +1222,7 @@ public final class CardUtil {
             cards.add(cardToCast);
         }
         cards.removeIf(Objects::isNull);
-        cards.removeIf(card -> !filter.match(card, source.getSourceId(), playerId, source, game));
+        cards.removeIf(card -> !filter.match(card, playerId, source, game));
         if (spellCastTracker != null) {
             cards.removeIf(card -> spellCastTracker.checkCard(card, game));
         }

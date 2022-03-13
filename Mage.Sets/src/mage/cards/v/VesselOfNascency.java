@@ -81,7 +81,7 @@ class VesselOfNascencyEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-            boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), source, game) > 0;
+            boolean properCardFound = cards.count(filterPutInHand, source.getSourceId(), source, game) > 0;
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);

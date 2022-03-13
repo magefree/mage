@@ -64,7 +64,7 @@ public class UntapLandsEffect extends OneShotEffect {
                 tappedLands = game.getBattlefield().getAllActivePermanents(filter, game).size();
             }
             TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), source, game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
 
                 // UI Shortcut: Check if any lands are already tapped.  If there are equal/fewer than amount, give the option to add those in to be untapped now.
                 if (tappedLands <= amount && upTo) {

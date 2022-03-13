@@ -64,7 +64,7 @@ class BalancingActEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int count = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), source, game).size();
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source, game).size();
                     if (count < minPermanent) {
                         minPermanent = count;
                     }
@@ -76,7 +76,7 @@ class BalancingActEffect extends OneShotEffect {
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(minPermanent, minPermanent, new FilterControlledPermanent(), true);
                     if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), source, game)) {
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), source, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source, game)) {
                             if (permanent != null && !target.getTargets().contains(permanent.getId())) {
                                 permanent.sacrifice(source, game);
                             }

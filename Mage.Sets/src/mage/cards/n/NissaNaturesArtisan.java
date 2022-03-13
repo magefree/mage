@@ -81,7 +81,7 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
             for (Card card : cards.getCards(new FilterLandCard(),
-                    source.getSourceId(), source.getControllerId(), source, game)) {
+                    source.getControllerId(), source, game)) {
                 cards.remove(card);
                 toBattlefield.add(card);
             }

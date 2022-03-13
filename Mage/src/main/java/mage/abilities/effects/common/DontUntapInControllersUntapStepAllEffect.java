@@ -76,7 +76,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
                         throw new RuntimeException("Type of TargetController not supported!");
                 }
                 if (game.isActivePlayer(permanent.getControllerId()) && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game)) {
+                        filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }

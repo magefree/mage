@@ -78,7 +78,7 @@ public class TargetAnyTarget extends TargetImpl {
         if (source != null) {
             MageObject targetSource = game.getObject(source.getSourceId());
             if (permanent != null) {
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), source, game);
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getControllerId(), source, game);
             }
             if (player != null) {
                 return player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game);
@@ -96,17 +96,16 @@ public class TargetAnyTarget extends TargetImpl {
      * be chosen. Should only be used for Ability targets since this checks for
      * protection, shroud etc.
      *
-     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param source
      * @param game
      * @return - true if enough valid {@link Permanent} or {@link Player} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
 
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source.getSourceId());
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
@@ -118,7 +117,7 @@ public class TargetAnyTarget extends TargetImpl {
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, source, game)) {
+            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -153,7 +152,7 @@ public class TargetAnyTarget extends TargetImpl {
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (filter.match(permanent, null, sourceControllerId, null, game)) {
+            if (filter.match(permanent, sourceControllerId, null, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -165,22 +164,22 @@ public class TargetAnyTarget extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source.getSourceId());
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && filter.match(player, sourceId, sourceControllerId, source, game)) {
+                    && filter.match(player, sourceControllerId, source, game)) {
                 possibleTargets.add(playerId);
             }
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && filter.match(permanent, sourceId, sourceControllerId, source, game)) {
+                    && filter.match(permanent, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
@@ -200,7 +199,7 @@ public class TargetAnyTarget extends TargetImpl {
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (filter.getPermanentFilter().match(permanent, null, sourceControllerId, null, game)) {
+            if (filter.getPermanentFilter().match(permanent, sourceControllerId, null, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }

@@ -54,7 +54,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id)) {
-                return filter.match(card, source.getSourceId(), source.getControllerId(), source, game);
+                return filter.match(card, source.getControllerId(), source, game);
             }
         }
         return false;
@@ -72,11 +72,11 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
-            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+            if (source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                 possibleTargets.add(card.getId());
             }
         }
@@ -108,15 +108,15 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             if (this.minNumberOfTargets == 0) {
                 return true;
             }
             int possibleTargets = 0;
-            for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
-                if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+            for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+                if (source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
                         return true;

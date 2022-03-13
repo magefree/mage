@@ -73,8 +73,8 @@ class CulturalExchangeEffect extends OneShotEffect {
         FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures " + player2.getLogName() + " controls");
         filter1.add(new ControllerIdPredicate(player1.getId()));
         filter2.add(new ControllerIdPredicate(player2.getId()));
-        int creatureCount1 = game.getBattlefield().count(filter1, source.getSourceId(), source.getControllerId(), source, game);
-        int creatureCount2 = game.getBattlefield().count(filter2, source.getSourceId(), source.getControllerId(), source, game);
+        int creatureCount1 = game.getBattlefield().count(filter1, source.getControllerId(), source, game);
+        int creatureCount2 = game.getBattlefield().count(filter2, source.getControllerId(), source, game);
         int creaturesToSwitch = Math.min(creatureCount1, creatureCount2);
         if (creaturesToSwitch == 0) {
             return true;

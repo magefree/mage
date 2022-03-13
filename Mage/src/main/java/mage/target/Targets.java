@@ -47,7 +47,7 @@ public class Targets extends ArrayList<Target> {
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(sourceId, playerId, source, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
             while (!isChosen()) {
@@ -62,7 +62,7 @@ public class Targets extends ArrayList<Target> {
 
     public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
-            if (!canChoose(source.getSourceId(), playerId, source, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
 
@@ -116,14 +116,13 @@ public class Targets extends ArrayList<Target> {
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param source
      * @param game
      * @return - true if enough valid targets exist
      */
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
-        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, source, game));
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return stream().allMatch(target -> target.canChoose(sourceControllerId, source, game));
     }
 
     /**

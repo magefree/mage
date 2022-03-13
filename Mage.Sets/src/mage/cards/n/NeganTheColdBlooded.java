@@ -90,16 +90,16 @@ class NeganTheColdBloodedEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(opponent.getId()));
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), source, game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
         Set<UUID> choices = new HashSet<>();
-        controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), source, game);
+        controller.choose(Outcome.DestroyPermanent, target, source, game);
         UUID controllerChoice = target.getFirstTarget();
         choices.add(controllerChoice);
 
         target.clearChosen();
-        opponent.choose(Outcome.DestroyPermanent, target, source.getSourceId(), source, game);
+        opponent.choose(Outcome.DestroyPermanent, target, source, game);
         UUID opponentChoice = target.getFirstTarget();
         choices.add(opponentChoice);
 

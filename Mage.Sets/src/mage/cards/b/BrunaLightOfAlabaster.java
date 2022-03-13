@@ -104,7 +104,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
             targetAura.setNotTarget(true);
-            if (controller.choose(Outcome.Benefit, targetAura, source.getSourceId(), source, game)) {
+            if (controller.choose(Outcome.Benefit, targetAura, source, game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);

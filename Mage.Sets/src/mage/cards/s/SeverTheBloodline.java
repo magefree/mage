@@ -73,7 +73,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
             } else {
                 filter.add(new NamePredicate(targetPermanent.getName()));
             }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 controller.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);
             }
             return true;

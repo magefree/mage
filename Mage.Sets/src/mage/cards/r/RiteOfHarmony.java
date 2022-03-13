@@ -71,7 +71,7 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        return filter.match(permanent, getSourceId(), getControllerId(), this, game);
+        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override

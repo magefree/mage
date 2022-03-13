@@ -71,7 +71,7 @@ class CreditVoucherEffect extends OneShotEffect {
             TargetCardInHand target = new TargetCardInHand(0, controller.getHand().size(), filter);
             target.setRequired(false);
             int amountShuffled = 0;
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), source, game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
+            if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     amountShuffled = target.getTargets().size();
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, source, game);

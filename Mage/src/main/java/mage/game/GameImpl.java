@@ -1187,7 +1187,7 @@ public abstract class GameImpl implements Game {
                 return;
             }
             getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
-            if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, null, this)) {
+            if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
                 startingPlayerId = targetPlayer.getTargets().get(0);
             } else if (getState().getPlayers().size() < 3) {
                 // not possible to choose starting player, choosing player has probably conceded, so stop here
@@ -2387,7 +2387,7 @@ public abstract class GameImpl implements Game {
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterPermanent) {
-                                    if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), perm.getSpellAbility(), this)
+                                    if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getControllerId(), perm.getSpellAbility(), this)
                                             || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                         Card card = this.getCard(perm.getId());
                                         if (card != null && card.isCreature(this)) {

@@ -90,7 +90,7 @@ class CopperhornScoutUntapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         for ( Permanent creature : creatures ) {
             if ( !creature.getId().equals(source.getSourceId()) ) {

@@ -67,14 +67,14 @@ class IlluminatedFolioTarget extends TargetCardInHand {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
-        return super.canChoose(sourceId, sourceControllerId, source, game)
-                && !possibleTargets(sourceId,sourceControllerId, source, game).isEmpty();
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return super.canChoose(sourceControllerId, source, game)
+                && !possibleTargets(sourceControllerId, source, game).isEmpty();
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId,sourceControllerId, source, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         if (this.getTargets().size() == 1) {
             Card card = game.getCard(this.getTargets().get(0));
             possibleTargets.removeIf(

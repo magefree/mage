@@ -111,21 +111,21 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public int count(FilterCard filter, UUID sourceId, UUID playerId, Ability source, Game game) {
-        if (sourceId == null) {
+    public int count(FilterCard filter, UUID playerId, Ability source, Game game) {
+        if (source == null) {
             return count(filter, playerId, game);
         }
-        return (int) this.stream().filter(card -> filter.match(game.getCard(card), sourceId, playerId, source, game)).count();
+        return (int) this.stream().filter(card -> filter.match(game.getCard(card), playerId, source, game)).count();
 
     }
 
     @Override
-    public Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game) {
         Set<Card> cards = new LinkedHashSet<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) {
-                boolean match = filter.match(card, sourceId, playerId, source, game);
+                boolean match = filter.match(card, playerId, source, game);
                 if (match) {
                     cards.add(game.getCard(cardId));
                 }

@@ -58,7 +58,7 @@ class PowerstoneMinefieldTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), this, game)) {
+        if (filter.match(permanent, getControllerId(), this, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
             }

@@ -65,8 +65,8 @@ class WatchdogFilter extends FilterAttackingCreature {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Ability source, Game game) {
-        if (!super.match(permanent, sourceId, playerId, source, game)) {
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (!super.match(permanent, playerId, source, game)) {
             return false;
         }
 

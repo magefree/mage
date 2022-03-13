@@ -66,7 +66,7 @@ class WorldpurgeEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Set<Card> allPermanents = new HashSet<>();
-            allPermanents.addAll(game.getBattlefield().getActivePermanents(new FilterPermanent(), source.getControllerId(), source.getSourceId(), source, game));
+            allPermanents.addAll(game.getBattlefield().getActivePermanents(new FilterPermanent(), source.getControllerId(), source, game));
             controller.moveCards(allPermanents, Zone.HAND, source, game, false, false, true, null);
             game.informPlayers(sourceObject.getLogName() + " - All permanents returned to owners' hands");
 
@@ -78,7 +78,7 @@ class WorldpurgeEffect extends OneShotEffect {
                     TargetCardInHand target = new TargetCardInHand(0, numberInHand, new FilterCard("cards to keep in hand"));
                     Cards cardsToLibrary = new CardsImpl();
                     cardsToLibrary.addAll(player.getHand());
-                    if (player.choose(Outcome.Benefit, target, source.getSourceId(), source, game)) {
+                    if (player.choose(Outcome.Benefit, target, source, game)) {
                         cardsToLibrary.removeAll(target.getTargets());
                     }
                     player.shuffleCardsToLibrary(cardsToLibrary, game, source);

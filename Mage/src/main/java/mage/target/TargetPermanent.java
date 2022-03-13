@@ -69,17 +69,17 @@ public class TargetPermanent extends TargetObject {
                         return false;
                     }
                 }
-                return filter.match(permanent, source.getSourceId(), controllerId, source, game);
+                return filter.match(permanent, controllerId, source, game);
             } else {
-                return filter.match(permanent, null, controllerId, source, game);
+                return filter.match(permanent, controllerId, source, game);
             }
         }
         return false;
     }
 
-    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Ability source, Game game, boolean flag) {
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
         Permanent permanent = game.getPermanent(id);
-        return filter.match(permanent, sourceId, controllerId, source, game);
+        return filter.match(permanent, controllerId, source, game);
     }
 
     @Override
@@ -93,21 +93,20 @@ public class TargetPermanent extends TargetObject {
      * Takes into account notTarget parameter, in case it's true doesn't check
      * for protection, shroud etc.
      *
-     * @param sourceId           the target event source
      * @param sourceControllerId controller of the target event source
      * @param source
      * @param game
      * @return true if enough valid {@link Permanent} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
         if (remainingTargets <= 0) {
             return true;
         }
         int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, source, game)) {
+        MageObject targetSource = game.getObject(source.getSourceId());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
@@ -150,11 +149,11 @@ public class TargetPermanent extends TargetObject {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         // TODO: check if possible targets works with setTargetController from some cards like Nicol Bolas, Dragon-God
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, source, game)) {
+        MageObject targetSource = game.getObject(source.getSourceId());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     possibleTargets.add(permanent.getId());

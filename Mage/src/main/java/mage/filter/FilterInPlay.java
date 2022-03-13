@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public interface FilterInPlay<E> extends Filter<E> {
 
-    boolean match(E o, UUID sourceId, UUID playerId, Ability source, Game game);
+    boolean match(E o, UUID playerId, Ability source, Game game);
 
     @Override
     FilterInPlay<E> copy();

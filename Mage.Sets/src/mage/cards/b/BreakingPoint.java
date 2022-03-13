@@ -78,7 +78,7 @@ class BreakingPointDestroyEffect extends OneShotEffect {
                 }
             }
             if (destroyCreatures) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), source, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
                     permanent.destroy(source, game, true);
                 }
             }

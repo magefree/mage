@@ -65,7 +65,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         Player playerToDraw = game.getPlayer(event.getPlayerId());
         if (playerToDraw != null && sourcePermanent != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (playerToDraw.choose(Outcome.DrawCard, target, source.getSourceId(), source, game)) {
+            if (playerToDraw.choose(Outcome.DrawCard, target, source, game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
                     Card card = chosenPlayer.getLibrary().getFromTop(game);

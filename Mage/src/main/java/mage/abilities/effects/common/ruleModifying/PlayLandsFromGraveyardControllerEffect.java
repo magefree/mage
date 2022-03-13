@@ -77,6 +77,6 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         }
 
         // must be correct card
-        return filter.match(cardToCheck, source.getSourceId(), affectedControllerId, source, game);
+        return filter.match(cardToCheck, affectedControllerId, source, game);
     }
 }

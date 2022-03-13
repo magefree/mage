@@ -120,7 +120,7 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), source, game));
+            CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getControllerId(), source, game));
         }
         return true;
     }

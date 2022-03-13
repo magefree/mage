@@ -31,7 +31,7 @@ public enum GreatestSharedCreatureTypeCount implements DynamicValue {
 
     public static int getValue(UUID playerId, Ability source, Game game) {
         List<Permanent> permanentList = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source.getSourceId(), source, game
+                StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game
         );
         permanentList.removeIf(Objects::isNull);
         int changelings = permanentList

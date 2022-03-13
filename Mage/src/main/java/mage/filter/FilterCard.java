@@ -57,14 +57,14 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, null, playerId, null, game);
+        return match(card, playerId, null, game);
     }
 
-    public boolean match(Card card, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(Card card, UUID playerId, Ability source, Game game) {
         if (!this.match(card, game)) {
             return false;
         }
-        ObjectSourcePlayer<Card> osp = new ObjectSourcePlayer<>(card, sourceId, playerId, source);
+        ObjectSourcePlayer<Card> osp = new ObjectSourcePlayer<>(card, playerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 

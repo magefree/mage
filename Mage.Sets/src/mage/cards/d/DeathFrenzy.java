@@ -57,7 +57,7 @@ class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && StaticFilters.FILTER_PERMANENT_CREATURES.match(zEvent.getTarget(), sourceId, controllerId, this, game)) {
+        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && StaticFilters.FILTER_PERMANENT_CREATURES.match(zEvent.getTarget(), controllerId, this, game)) {
             return true;
         }
         return false;

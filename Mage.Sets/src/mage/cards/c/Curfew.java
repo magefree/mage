@@ -56,7 +56,7 @@ class CurfewEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game) > 0) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, true);
-                player.choose(Outcome.ReturnToHand, target, source.getSourceId(), source, game);
+                player.choose(Outcome.ReturnToHand, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     player.moveCards(permanent, Zone.HAND, source, game);

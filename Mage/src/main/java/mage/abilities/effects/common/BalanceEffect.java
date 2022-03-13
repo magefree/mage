@@ -136,7 +136,7 @@ public class BalanceEffect extends OneShotEffect {
                 continue;
             }
 
-            List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), source, game);
+            List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source, game);
             List<Permanent> permanentsToKeep = new ArrayList<>();
 
             if (lowestPermanentsCount > 0) {

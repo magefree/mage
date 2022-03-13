@@ -87,11 +87,11 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> imple
     }
 
     @Override
-    public boolean match(MageObject o, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(MageObject o, UUID playerId, Ability source, Game game) {
         if (o instanceof Permanent) {
-            return permanentFilter.match((Permanent) o, sourceId, playerId, source, game);
+            return permanentFilter.match((Permanent) o, playerId, source, game);
         } else if (o instanceof Card) {
-            return cardFilter.match((Card) o, sourceId, playerId, source, game);
+            return cardFilter.match((Card) o, playerId, source, game);
         }
         return false;
     }

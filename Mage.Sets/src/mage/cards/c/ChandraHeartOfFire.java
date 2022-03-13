@@ -101,7 +101,7 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
             // from graveyard
             Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true).withChooseHint("from graveyard");
-            if (target.canChoose(source.getSourceId(), controller.getId(), source, game)
+            if (target.canChoose(controller.getId(), source, game)
                     && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
                 exiledCards.addAll(cards);
@@ -109,7 +109,7 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
             // from library
             target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter).withChooseHint("from library");
-            if (target.canChoose(source.getSourceId(), controller.getId(), source, game)
+            if (target.canChoose(controller.getId(), source, game)
                     && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
                 exiledCards.addAll(cards);

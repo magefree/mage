@@ -102,7 +102,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), source, game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
                     redirectTarget = new TargetPermanent();
                     redirectTarget.add(source.getSourceId(), game);

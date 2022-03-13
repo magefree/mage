@@ -60,23 +60,23 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
             }
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {
-                return filter.match(permanent, source.getSourceId(), controllerId, source, game);
+                return filter.match(permanent, controllerId, source, game);
             }
         }
         return false;
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
         if (remainingTargets <= 0) {
             return true;
         }
         int count = 0;
         Player controller = game.getPlayer(sourceControllerId);
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source.getSourceId());
         if(targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, source, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId())) {
                     if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                         if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {

@@ -130,7 +130,7 @@ class GlacianPowerstoneEngineerCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), source, game);
+        return game.getBattlefield().count(filter, source.getControllerId(), source, game);
     }
 
     @Override

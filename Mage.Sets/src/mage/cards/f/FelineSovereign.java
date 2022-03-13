@@ -106,7 +106,7 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId()) &&
-                    filter.match(p, getSourceId(), getControllerId(), this, game) &&
+                    filter.match(p, getControllerId(), this, game) &&
                     !damagedPlayerIds.contains(event.getPlayerId())) {
                 damagedPlayerIds.add(event.getPlayerId());
                 this.getTargets().clear();

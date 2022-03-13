@@ -8,8 +8,6 @@ import mage.game.Game;
 import mage.player.ai.ComputerPlayer7;
 import mage.target.Target;
 
-import java.util.UUID;
-
 /**
  * Copied-pasted methods from TestComputerPlayer, see docs in there
  *
@@ -29,11 +27,11 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Ability source, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (testPlayerLink.canChooseByComputer()) {
-            return super.choose(outcome, target, sourceId, source, game);
+            return super.choose(outcome, target, source, game);
         } else {
-            return testPlayerLink.choose(outcome, target, sourceId, source, game);
+            return testPlayerLink.choose(outcome, target, source, game);
         }
     }
 

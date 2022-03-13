@@ -79,7 +79,7 @@ class AzorsGatewayEffect extends OneShotEffect {
         if (controller != null && exileId != null && sourceObject != null) {
             controller.drawCards(1, source, game);
             TargetCardInHand target = new TargetCardInHand();
-            controller.choose(outcome, target, source.getSourceId(), source, game);
+            controller.choose(outcome, target, source, game);
             Card cardToExile = game.getCard(target.getFirstTarget());
             if (cardToExile != null) {
                 controller.moveCardsToExile(cardToExile, source, game, true, exileId, sourceObject.getIdName());

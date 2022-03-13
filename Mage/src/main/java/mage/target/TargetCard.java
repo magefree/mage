@@ -53,14 +53,14 @@ public class TargetCard extends TargetObject {
     /**
      * Checks if there are enough {@link Card} that can be chosen.
      *
-     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param source
      * @param game
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        UUID sourceId = source.getSourceId();
         int possibleTargets = 0;
         if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
             return true;
@@ -73,7 +73,7 @@ public class TargetCard extends TargetObject {
                 }
                 switch (zone) {
                     case HAND:
-                        for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, source, game)) {
+                        for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets++;
                                 if (possibleTargets >= this.minNumberOfTargets) {
@@ -83,7 +83,7 @@ public class TargetCard extends TargetObject {
                         }
                         break;
                     case GRAVEYARD:
-                        for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
+                        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets++;
                                 if (possibleTargets >= this.minNumberOfTargets) {
@@ -121,7 +121,7 @@ public class TargetCard extends TargetObject {
                                 .map(game::getCard)
                                 .filter(Objects::nonNull)
                                 .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
-                                .filter(card -> filter.match(card, sourceId, sourceControllerId, source, game))
+                                .filter(card -> filter.match(card, sourceControllerId, source, game))
                                 .collect(Collectors.toList());
                         for (Card card : possibleCards) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
@@ -147,25 +147,26 @@ public class TargetCard extends TargetObject {
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, null, game);
+        return canChoose(sourceControllerId, null, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
+        UUID sourceId = source.getSourceId();
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 switch (zone) {
                     case HAND:
-                        for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, source, game)) {
+                        for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }
                         }
                         break;
                     case GRAVEYARD:
-                        for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
+                        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }
@@ -174,7 +175,7 @@ public class TargetCard extends TargetObject {
                     case LIBRARY:
                         for (Card card : player.getLibrary().getUniqueCards(game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, sourceId, sourceControllerId, source, game)) {
+                                if (filter.match(card, sourceControllerId, source, game)) {
                                     possibleTargets.add(card.getId());
                                 }
                             }
@@ -183,7 +184,7 @@ public class TargetCard extends TargetObject {
                     case EXILED:
                         for (Card card : game.getExile().getPermanentExile().getCards(game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, sourceId, sourceControllerId, source, game)) {
+                                if (filter.match(card, sourceControllerId, source, game)) {
                                     possibleTargets.add(card.getId());
                                 }
                             }
@@ -194,7 +195,7 @@ public class TargetCard extends TargetObject {
                                 .map(game::getCard)
                                 .filter(Objects::nonNull)
                                 .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
-                                .filter(card -> filter.match(card, sourceId, sourceControllerId, source, game))
+                                .filter(card -> filter.match(card, sourceControllerId, source, game))
                                 .collect(Collectors.toList());
                         for (Card card : possibleCards) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
@@ -214,7 +215,7 @@ public class TargetCard extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return possibleTargets(null, sourceControllerId, null, game);
+        return possibleTargets(sourceControllerId, (Ability) null, game);
     }
 
     // TODO: check all class targets, if it override canTarget then make sure it override ALL 3 METHODS with canTarget and possibleTargets (method with cards doesn't need)

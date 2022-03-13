@@ -50,11 +50,11 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
         if (!this.match(permanent, game) || !permanent.isPhasedIn()) {
             return false;
         }
-        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<Permanent>(permanent, sourceId, playerId, source);
+        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<Permanent>(permanent, playerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 

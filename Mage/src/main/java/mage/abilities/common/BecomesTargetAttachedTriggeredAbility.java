@@ -55,7 +55,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             if (event.getTargetId().equals(enchantment.getAttachedTo())
-                    && filter.match(sourceObject, getSourceId(), getControllerId(), this, game)) {
+                    && filter.match(sourceObject, getControllerId(), this, game)) {
                 return true;
             }
         }

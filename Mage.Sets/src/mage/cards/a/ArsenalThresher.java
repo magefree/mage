@@ -78,9 +78,9 @@ class ArsenalThresherEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
         if (controller.chooseUse(Outcome.Benefit, "Reveal other artifacts in your hand?", source, game)) {
             Cards cards = new CardsImpl();
-            if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), source, game) > 0) {
+            if (controller.getHand().count(filter, source.getControllerId(), source, game) > 0) {
                 TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-                if (controller.choose(Outcome.Benefit, target, source.getSourceId(), source, game)) {
+                if (controller.choose(Outcome.Benefit, target, source, game)) {
                     for (UUID uuid : target.getTargets()) {
                         cards.add(controller.getHand().get(uuid, game));
                     }

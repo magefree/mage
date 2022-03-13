@@ -30,11 +30,11 @@ public class FilterStackObject extends FilterObject<StackObject> {
         this.extraPredicates.addAll(filter.extraPredicates);
     }
 
-    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(StackObject stackObject, UUID playerId, Ability source, Game game) {
         if (!this.match(stackObject, game)) {
             return false;
         }
-        ObjectSourcePlayer<StackObject> osp = new ObjectSourcePlayer<>(stackObject, sourceId, playerId, source);
+        ObjectSourcePlayer<StackObject> osp = new ObjectSourcePlayer<>(stackObject, playerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 

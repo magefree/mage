@@ -192,7 +192,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), source, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.sacrifice(source, game);
         }
         return true;
@@ -239,6 +239,6 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return filter.match(card, source.getSourceId(), source.getControllerId(), source, game);
+        return filter.match(card, source.getControllerId(), source, game);
     }
 }

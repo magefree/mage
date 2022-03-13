@@ -96,7 +96,7 @@ class HansErikssonEffect extends OneShotEffect {
         UUID defenderId;
         if (game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
-                source.getSourceId(), defendingPlayerId, source, game
+                defendingPlayerId, source, game
         ) < 1) {
             defenderId = defendingPlayerId;
         } else {
@@ -107,7 +107,7 @@ class HansErikssonEffect extends OneShotEffect {
             filter.getPermanentFilter().add(new ControllerIdPredicate(defendingPlayerId));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), source, game);
+            player.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }
         if (defenderId != null) {

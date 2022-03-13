@@ -60,14 +60,14 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Ability source, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source.getSourceId());
         if (object instanceof StackObject) {
             Player targetPlayer = game.getPlayer(((StackObject) object).getStackAbility().getFirstTarget());
             if (targetPlayer != null) {
-                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceId, sourceControllerId, source, game)) {
-                    if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+                    if (source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                         possibleTargets.add(card.getId());
                     }
                 }

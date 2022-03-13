@@ -167,7 +167,7 @@ class KarnMinus1Effect extends OneShotEffect {
             default:
                 TargetCard target = new TargetCardInExile(filter);
                 target.setNotTarget(true);
-                controller.choose(outcome, target, source.getSourceId(), source, game);
+                controller.choose(outcome, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         if (card == null) {

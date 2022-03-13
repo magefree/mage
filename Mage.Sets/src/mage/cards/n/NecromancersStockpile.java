@@ -83,7 +83,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, source, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

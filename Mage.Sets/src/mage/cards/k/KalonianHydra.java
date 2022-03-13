@@ -71,7 +71,7 @@ class KalonianHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source.getSourceId(), source, game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source, game);
         for (Permanent permanent : permanents) {
             int existingCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
             if (existingCounters > 0) {

@@ -68,7 +68,7 @@ class KillSwitchEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_ARTIFACT,
-                        source.getControllerId(), source.getSourceId(), source, game
+                        source.getControllerId(), source, game
                 );
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {

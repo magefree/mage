@@ -68,7 +68,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
             localFilter = filter;
         }
         return ComparisonType.compare(game.getBattlefield().count(
-                localFilter, source.getSourceId(), source.getControllerId(), source, game
+                localFilter, source.getControllerId(), source, game
         ), type, count);
     }
 

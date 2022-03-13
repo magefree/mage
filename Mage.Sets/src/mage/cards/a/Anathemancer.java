@@ -63,7 +63,6 @@ enum AnathemancerCount implements DynamicValue {
         }
         return game.getBattlefield().count(
                 StaticFilters.FILTER_LANDS_NONBASIC,
-                sourceAbility.getFirstTarget(),
                 sourceAbility.getControllerId(),
                 sourceAbility, game
         );

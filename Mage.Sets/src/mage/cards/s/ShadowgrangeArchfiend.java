@@ -101,7 +101,7 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
                         "creature to sacrifice with power equal to " + greatestPower);
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
                 Target target = new TargetControlledCreaturePermanent(filter);
-                if (opponent.choose(outcome, target, playerId, source, game)) {
+                if (opponent.choose(outcome, target, source, game)) {
                     creatureToSacrifice = game.getPermanent(target.getFirstTarget());
                 }
             }

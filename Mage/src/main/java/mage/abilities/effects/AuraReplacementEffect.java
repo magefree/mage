@@ -139,7 +139,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                 controllingPlayer = game.getPlayer(card.getOwnerId());
             }
 
-            if (target != null && controllingPlayer != null && controllingPlayer.choose(auraOutcome, target, card.getId(), source, game)) {
+            if (target != null && controllingPlayer != null && controllingPlayer.choose(auraOutcome, target, source, game)) {
                 targetId = target.getFirstTarget();
             }
         }

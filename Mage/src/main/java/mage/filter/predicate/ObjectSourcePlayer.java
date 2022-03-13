@@ -15,10 +15,10 @@ public class ObjectSourcePlayer<T> {
     protected final UUID sourceId;
     protected final Ability source;
 
-    public ObjectSourcePlayer(T object, UUID sourceId, UUID sourceControllerId, Ability source) {
+    public ObjectSourcePlayer(T object, UUID sourceControllerId, Ability source) {
         this.object = object;
         this.playerId = sourceControllerId;
-        this.sourceId = sourceId;
+        this.sourceId = source != null ? source.getSourceId() : null;
         this.source = source;
     }
 

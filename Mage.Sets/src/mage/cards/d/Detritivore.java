@@ -112,7 +112,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
                 if (controller.hasOpponent(playerUUID, game)) {
                     Player player = game.getPlayer(playerUUID);
                     if (player != null) {
-                        amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), sourceAbility, game);
+                        amount += player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
                     }
                 }
             }

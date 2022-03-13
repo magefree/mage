@@ -53,12 +53,12 @@ public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements Filt
     }
 
     @Override
-    public boolean match(MageItem o, UUID sourceId, UUID playerId, Ability source, Game game) {
+    public boolean match(MageItem o, UUID playerId, Ability source, Game game) {
         if (super.match(o, game)) { // process predicates
             if (o instanceof Player) {
-                return playerFilter.match((Player) o, sourceId, playerId, source, game);
+                return playerFilter.match((Player) o, playerId, source, game);
             } else if (o instanceof Permanent) {
-                return creatureFilter.match((Permanent) o, sourceId, playerId, source, game);
+                return creatureFilter.match((Permanent) o, playerId, source, game);
             }
         }
         return false;

@@ -121,7 +121,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
             Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
             if (permanent != null && game.getState().getValue(mageObject.getId() + "_letter") != null) {
                 int letters = 0;
-                for (Permanent p : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), sourceAbility.getControllerId(), sourceAbility.getSourceId(), sourceAbility, game)) {
+                for (Permanent p : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), sourceAbility.getControllerId(), sourceAbility, game)) {
                     char initial = Character.toUpperCase(p.getName().charAt(0));
                     if (Character.toString(initial).equals(game.getState().getValue(mageObject.getId() + "_letter"))) {
                         letters++;
