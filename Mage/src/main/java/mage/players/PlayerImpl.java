@@ -1521,10 +1521,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
         TriggeredAbility ability = triggeredAbility.copy();
-        MageObject sourceObject = ability.getSourceObject(game);
-        if (sourceObject != null) {
-            sourceObject.adjustTargets(ability, game);
-        }
+        ability.adjustTargets(game);
         UUID triggerId = null;
         if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
@@ -3473,7 +3470,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
             if (availableMana != null) {
-                sourceObject.adjustCosts(copy, game);
+                copy.adjustCosts(game);
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
@@ -3632,7 +3629,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 copyAbility = ability.copy();
                                 copyAbility.getManaCostsToPay().clear();
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
-                                sourceObject.adjustCosts(copyAbility, game);
+                                copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
                                 // reduced all cost
@@ -3681,7 +3678,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 copyAbility = ability.copy();
                                 copyAbility.getManaCostsToPay().clear();
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
-                                sourceObject.adjustCosts(copyAbility, game);
+                                copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
                                 // reduced all cost

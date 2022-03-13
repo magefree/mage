@@ -210,7 +210,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
         // use case: make all modes chooseable
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = Integer.MAX_VALUE;
+            realMaxModes = this.size();
         }
 
         // use case: limit max modes by opponents (wtf?!)

@@ -360,8 +360,8 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (sourceObject != null && this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
-                sourceObject.adjustTargets(this, game);
+            if (this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
+                adjustTargets(game);
             }
 
             if (!getTargets().isEmpty()) {
@@ -387,8 +387,8 @@ public abstract class AbilityImpl implements Ability {
         boolean needCostModification = !CardUtil.isFusedPartAbility(this, game);
 
         //20101001 - 601.2e
-        if (needCostModification && sourceObject != null) {
-            sourceObject.adjustCosts(this, game); // still needed for CostAdjuster objects (to handle some types of dynamic costs)
+        if (needCostModification) {
+            adjustCosts(game); // still needed for CostAdjuster objects (to handle some types of dynamic costs)
             game.getContinuousEffects().costModification(this, game);
         }
 
