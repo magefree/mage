@@ -65,7 +65,7 @@ class PeerPressureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice choice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice choice = new ChoiceCreatureType(game.getObject(source));
         if (controller != null && controller.choose(Outcome.GainControl, choice, game)) {
             String chosenType = choice.getChoice();
             game.informPlayers(controller.getLogName() + " has chosen " + chosenType);

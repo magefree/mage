@@ -95,7 +95,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         // no max targets limit here
         int count = 0;
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player == null
@@ -153,7 +153,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
             return possibleTargets;
         }
 
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
 
         game.getState()
                 .getPlayersInRange(sourceControllerId, game)

@@ -121,7 +121,7 @@ class SoulOfShandalarTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
             if (item.getId().equals(source.getSourceId())) {

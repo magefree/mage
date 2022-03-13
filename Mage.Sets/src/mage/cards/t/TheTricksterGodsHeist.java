@@ -110,7 +110,7 @@ class TheTricksterGodsHeistTarget extends TargetPermanent {
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         Set<CardType> cardTypes = new HashSet<>();
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         if (targetSource == null) {
             return false;
         }

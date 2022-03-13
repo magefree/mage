@@ -75,7 +75,7 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         Player player = game.getPlayer(sourceControllerId);
         if (player == null) {
             return false;

@@ -81,7 +81,7 @@ class ReciprocateTarget extends TargetPermanent {
             return true;
         }
         int count = 0;
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         if(targetSource != null) {
             PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, sourceControllerId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {

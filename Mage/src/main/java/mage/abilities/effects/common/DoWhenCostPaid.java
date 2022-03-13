@@ -41,7 +41,7 @@ public class DoWhenCostPaid extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (player == null || mageObject == null) {
             return false;
         }

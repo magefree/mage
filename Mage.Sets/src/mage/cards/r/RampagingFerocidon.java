@@ -88,7 +88,7 @@ class RampagingFerocidonEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         Player player = game.getPlayer(event.getPlayerId());
         if (mageObject != null && player != null) {
             return player.getLogName() + " can't get " + event.getAmount() + " life (" + mageObject.getIdName() + ").";

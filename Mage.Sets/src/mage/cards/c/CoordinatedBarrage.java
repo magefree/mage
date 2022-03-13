@@ -60,7 +60,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+            Choice choice = new ChoiceCreatureType(game.getObject(source));
             if (controller.choose(Outcome.Damage, choice, game)) {
                 String chosenType = choice.getChoice();
                 FilterControlledPermanent filter = new FilterControlledPermanent();

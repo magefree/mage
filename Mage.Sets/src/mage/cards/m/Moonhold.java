@@ -77,7 +77,7 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "you can't play land cards this turn (" + mageObject.getIdName() + ").";
         }
@@ -120,7 +120,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play creature cards this turn (" + mageObject.getIdName() + ").";
         }

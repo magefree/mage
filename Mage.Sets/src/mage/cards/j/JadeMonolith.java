@@ -77,7 +77,7 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null && targetCreature != null && sourceObject != null) {
             controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());

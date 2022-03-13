@@ -48,7 +48,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     public void init(Ability source, Game game) {
         super.init(source, game);
         Target target = source.getTargets().get(0);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (target instanceof TargetAmount && sourceObject != null) {
             TargetAmount multiTarget = (TargetAmount) target;
             for (UUID targetId : multiTarget.getTargets()) {

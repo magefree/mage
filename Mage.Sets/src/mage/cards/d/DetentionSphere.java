@@ -77,7 +77,7 @@ class DetentionSphereEntersEffect extends OneShotEffect {
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && exileId != null && targetPermanent != null && controller != null) {
 
             if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature

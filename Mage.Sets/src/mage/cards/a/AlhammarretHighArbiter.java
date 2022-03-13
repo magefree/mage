@@ -138,7 +138,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }

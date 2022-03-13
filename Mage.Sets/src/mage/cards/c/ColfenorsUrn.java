@@ -95,7 +95,7 @@ class ColfenorsUrnCondition implements Condition {
     @Override
     public final boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             ExileZone exile = game.getExile().getExileZone(exileId);

@@ -37,7 +37,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         if (!super.canChoose(sourceControllerId, source, game)) {
-            MageObject targetSource = game.getObject(source.getSourceId());
+            MageObject targetSource = game.getObject(source);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattlefield, sourceControllerId, game)) {
                 if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                         && filterBattlefield.match(permanent, sourceControllerId, source, game)) {
@@ -96,7 +96,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game); // in graveyard first
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattlefield, sourceControllerId, source, game)) {
             if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filterBattlefield.match(permanent, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());

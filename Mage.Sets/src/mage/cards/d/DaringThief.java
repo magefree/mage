@@ -88,7 +88,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         // get all cardtypes from opponents permanents 
         Set<CardType> cardTypes = getOpponentPermanentCardTypes(sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
@@ -157,7 +157,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
-            MageObject targetSource = game.getObject(source.getSourceId());
+            MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {

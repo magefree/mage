@@ -37,7 +37,7 @@ public class ChooseOpponentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (controller != null && mageObject != null) {
             TargetOpponent target = new TargetOpponent(true);

@@ -63,7 +63,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
@@ -105,7 +105,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source != null ? source.getSourceId() : null);
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
@@ -149,7 +149,7 @@ public class TargetPlayer extends TargetImpl {
         Player player = game.getPlayer(id);
         if (player != null) {
             if (source != null) {
-                return (isNotTarget() || player.canBeTargetedBy(game.getObject(source.getSourceId()), source.getControllerId(), game))
+                return (isNotTarget() || player.canBeTargetedBy(game.getObject(source), source.getControllerId(), game))
                         && filter.match(player, source.getControllerId(), source, game);
             } else {
                 return filter.match(player, game);

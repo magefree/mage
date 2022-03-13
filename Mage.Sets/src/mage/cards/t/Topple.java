@@ -71,7 +71,7 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
         int maxPower = 0;
         List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         if(targetSource == null){
             return possibleTargets;
         }

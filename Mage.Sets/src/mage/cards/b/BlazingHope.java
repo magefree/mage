@@ -54,7 +54,7 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         if (permanent != null) {
             if (!isNotTarget()) {
                 if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                        || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
+                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
                     return false;
                 }
             }
@@ -74,7 +74,7 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         }
         int count = 0;
         Player controller = game.getPlayer(sourceControllerId);
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         if(targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId())) {

@@ -79,7 +79,7 @@ class KheruMindEaterExileEffect extends OneShotEffect {
             Target target = new TargetCardInHand(1, new FilterCard());
             target.chooseTarget(Outcome.Exile, player.getId(), source, game);
             Card card = game.getCard(target.getFirstTarget());
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (card != null && sourceObject != null) {
                 if (player.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName())) {
                     card.setFaceDown(true, game);
@@ -154,7 +154,7 @@ class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (sourceObject == null) {
                     return false;
                 }

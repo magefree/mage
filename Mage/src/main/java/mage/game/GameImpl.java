@@ -441,6 +441,11 @@ public abstract class GameImpl implements Game {
         return object;
     }
 
+    @Override
+    public MageObject getObject(Ability source) {
+        return source != null ? getObject(source.getSourceId()) : null;
+    }
+
     /**
      * Get permanent, card or command object (not spell or ability on the stack)
      *
@@ -3146,7 +3151,7 @@ public abstract class GameImpl implements Game {
             result.setRemainingAmount(amountToPrevent - result.getPreventedDamage());
         }
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
-        MageObject preventionSource = game.getObject(source.getSourceId());
+        MageObject preventionSource = game.getObject(source);
 
         if (damageSource != null && preventionSource != null) {
             MageObject targetObject = game.getObject(event.getTargetId());

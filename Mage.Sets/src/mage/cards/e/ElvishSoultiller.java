@@ -67,7 +67,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceCreatureType(mageObject);
             if (controller.choose(outcome, typeChoice, game)) {

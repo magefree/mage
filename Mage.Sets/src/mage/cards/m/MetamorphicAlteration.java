@@ -72,7 +72,7 @@ class ChooseACreature extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
         if (sourceObject == null) {
-            sourceObject = game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source);
         }
         if (controller == null
                 || sourceObject == null) {

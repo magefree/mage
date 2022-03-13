@@ -80,7 +80,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent == null) {
-            sourcePermanent = game.getObject(source.getSourceId());
+            sourcePermanent = game.getObject(source);
         }
         if (controller == null || sourcePermanent == null) {
             return false;

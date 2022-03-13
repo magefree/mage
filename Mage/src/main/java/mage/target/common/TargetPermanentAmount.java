@@ -100,7 +100,7 @@ public class TargetPermanentAmount extends TargetAmount {
                     .stream()
                     .collect(Collectors.toSet());
         }
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         return game
                 .getBattlefield()
                 .getActivePermanents(filter, sourceControllerId, source, game)

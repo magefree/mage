@@ -64,7 +64,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard();
             if (controller.chooseUse(Outcome.Detriment, "Choose card type:",

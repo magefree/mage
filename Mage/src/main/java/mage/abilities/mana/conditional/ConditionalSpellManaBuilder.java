@@ -60,7 +60,7 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if ((object instanceof StackObject)) {
                 return filter.match((StackObject) object, source.getControllerId(), source, game);
             }

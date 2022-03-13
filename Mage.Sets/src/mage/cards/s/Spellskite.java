@@ -67,7 +67,7 @@ class SpellskiteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
             Targets targets = new Targets();
             Ability sourceAbility;

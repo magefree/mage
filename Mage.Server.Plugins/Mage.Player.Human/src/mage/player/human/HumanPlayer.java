@@ -561,7 +561,7 @@ public class HumanPlayer extends PlayerImpl {
                         }
                     }
                 } else {
-                    MageObject object = game.getObject(source.getSourceId());
+                    MageObject object = game.getObject(source);
                     if (object instanceof Ability) {
                         if (target.canTarget(responseId, (Ability) object, game)) {
                             if (target.getTargets().contains(responseId)) { // if already included remove it with
@@ -2222,7 +2222,7 @@ public class HumanPlayer extends PlayerImpl {
         if (modes.size() > 1) {
             // done option for up to choices
             boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
-            MageObject obj = game.getObject(source.getSourceId());
+            MageObject obj = game.getObject(source);
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             int modeIndex = 0;
             AvailableModes:

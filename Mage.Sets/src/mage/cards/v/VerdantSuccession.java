@@ -117,7 +117,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if(mageObject != null) {
             permanent = (Permanent) game.getState().getValue("verdantSuccession" + mageObject);
             if (permanent != null) {

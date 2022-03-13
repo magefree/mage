@@ -88,7 +88,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
             if (source != null) {
-                MageObject targetSource = game.getObject(source.getSourceId());
+                MageObject targetSource = game.getObject(source);
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
                         && filter.match(permanent, source.getControllerId(), source, game);
             } else {
@@ -119,7 +119,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null
@@ -179,7 +179,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null

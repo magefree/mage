@@ -66,7 +66,7 @@ class SteamAuguryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Set<Card> cardsToGraveyard = new LinkedHashSet<>();
         Set<Card> cardsToHand = new LinkedHashSet<>();
         if (controller == null || sourceObject == null) {

@@ -66,7 +66,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {

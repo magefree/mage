@@ -66,7 +66,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You must choose at least " + this.filter.getMessage() + " on the battlefield as target if able (" + mageObject.getIdName() + ").";
         }

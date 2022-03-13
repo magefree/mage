@@ -62,7 +62,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean isMountain = false;
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || sourceObject == null) {
             return false;

@@ -62,7 +62,7 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            MageObject mageObject = game.getObject(source.getSourceId());
+            MageObject mageObject = game.getObject(source);
             if (mageObject != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
                 filter.add(new ColorPredicate(ObjectColor.GREEN));

@@ -54,7 +54,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
             return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';

@@ -65,7 +65,7 @@ public class TargetPermanent extends TargetObject {
                 // second for protection from sources (e.g. protection from artifacts + equip ability)
                 if (!isNotTarget()) {
                     if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                            || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
+                            || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
                         return false;
                     }
                 }
@@ -105,7 +105,7 @@ public class TargetPermanent extends TargetObject {
             return true;
         }
         int count = 0;
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
@@ -152,7 +152,7 @@ public class TargetPermanent extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         // TODO: check if possible targets works with setTargetController from some cards like Nicol Bolas, Dragon-God
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source.getSourceId());
+        MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {

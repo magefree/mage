@@ -182,7 +182,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
                 GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
         if (exileZones != null && sourceObject != null) {

@@ -63,7 +63,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getLogName() + " skipped");
         }

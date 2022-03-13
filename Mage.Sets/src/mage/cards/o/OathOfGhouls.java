@@ -108,7 +108,7 @@ class OathOfGhoulsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
         if (sourceObject == null || firstPlayer == null) {
             return false;

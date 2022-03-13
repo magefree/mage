@@ -65,7 +65,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play lands this turn (" + mageObject.getIdName() + ").";
         }

@@ -70,7 +70,7 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (you != null && targetPlayer != null) {
             you.lookAtCards("Hand of " + targetPlayer.getName() + " (" + (sourceObject != null ? sourceObject.getIdName() : null) + ')', targetPlayer.getHand(), game);
             return true;
@@ -100,7 +100,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && player != null && mageObject != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature controlled by " + player.getLogName());
             filter.add(FaceDownPredicate.instance);

@@ -2263,7 +2263,7 @@ public class TestPlayer implements Player {
              */
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source.getSourceId())) + ";\n" + getInfo(target));
+        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
         return computerPlayer.choose(outcome, target, source, game, options);
     }
 

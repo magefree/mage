@@ -68,7 +68,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (opponent != null && sourceObject != null) {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
             Player controller = game.getPlayer(source.getControllerId());

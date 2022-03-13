@@ -59,7 +59,7 @@ class DistantMelodyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
         if (controller != null && controller.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
             filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());

@@ -96,7 +96,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {

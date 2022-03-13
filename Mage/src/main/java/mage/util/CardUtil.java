@@ -717,7 +717,7 @@ public final class CardUtil {
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (sourceObject != null) {
                 title = sourceObject.getIdName()
                         + " [" + source.getSourceObjectZoneChangeCounter() + "]"

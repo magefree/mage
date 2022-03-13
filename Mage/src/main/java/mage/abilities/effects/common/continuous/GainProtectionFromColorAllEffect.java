@@ -49,7 +49,7 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             if (!controller.choose(Outcome.Protect, choice, game)) {

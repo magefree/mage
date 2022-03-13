@@ -41,7 +41,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
                     boolean canSourceControllerTarget = true;
                     if (!isNotTarget()) {
                         if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                                || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
+                                || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
                             canSourceControllerTarget = false;
                         }
                     }
@@ -76,7 +76,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player player = game.getPlayer(sourceControllerId);
         if (sourceObject == null || player == null) {
             return false;

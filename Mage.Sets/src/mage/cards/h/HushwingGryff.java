@@ -68,7 +68,7 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject enteringObject = game.getObject(event.getSourceId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Ability ability = (Ability) getValue("targetAbility");
         if (enteringObject != null && sourceObject != null && ability != null) {
             MageObject abilitObject = game.getObject(ability.getSourceId());

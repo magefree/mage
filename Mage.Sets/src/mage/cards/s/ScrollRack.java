@@ -59,7 +59,7 @@ class ScrollRackEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard("card in your hand to exile");
             TargetCardInHand target = new TargetCardInHand(0, controller.getHand().size(), filter);

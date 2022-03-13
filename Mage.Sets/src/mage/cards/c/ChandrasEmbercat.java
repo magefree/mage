@@ -69,7 +69,7 @@ class ChandrasEmbercatElementalManaCondition extends CreatureCastManaCondition {
         if (!super.apply(game, source)) {
             return false;
         }
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object == null) {
             return false;
         }
@@ -84,7 +84,7 @@ class ChandrasEmbercatPlaneswalkerManaCondition extends PlaneswalkerCastManaCond
         if (!super.apply(game, source)) {
             return false;
         }
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object == null) {
             return false;
         }
