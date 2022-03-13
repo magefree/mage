@@ -223,14 +223,6 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
         return 1; // Emblems can't move zones until now so return always 1
     }

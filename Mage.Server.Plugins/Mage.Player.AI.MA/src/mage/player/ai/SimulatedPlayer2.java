@@ -124,8 +124,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         // calculate the mana that can be used for the x part
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null && numAvailable > 0) {
+        if (numAvailable > 0) {
             // check if variable mana costs is included and get the multiplier
             VariableManaCost variableManaCost = null;
             for (ManaCost cost : ability.getManaCostsToPay()) {
@@ -159,7 +158,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         if (varCost != null) {
                             varCost.setPaid();
                         }
-                        card.adjustTargets(newAbility, game);
+                        newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
                         if (!newAbility.getTargets().getUnchosen().isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
