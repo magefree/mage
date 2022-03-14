@@ -19,6 +19,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
@@ -101,6 +102,7 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && !(((ZoneChangeEvent) event).getTarget() instanceof PermanentToken)
                 && game.getOpponents(source.getControllerId()).contains(game.getOwnerId(event.getTargetId()));
     }
 }
