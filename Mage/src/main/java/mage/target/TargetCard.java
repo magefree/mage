@@ -60,7 +60,7 @@ public class TargetCard extends TargetObject {
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         int possibleTargets = 0;
         if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
             return true;
@@ -153,7 +153,7 @@ public class TargetCard extends TargetObject {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

@@ -36,7 +36,7 @@ public class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         if (sourceId != null) {
             return sourceId.equals(event.getTargetId());
         }

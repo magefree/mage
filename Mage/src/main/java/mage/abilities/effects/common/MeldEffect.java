@@ -48,7 +48,7 @@ public class MeldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             // Find the two permanents to meld.
-            UUID sourceId = source.getSourceId();
+            UUID sourceId = source != null ? source.getSourceId() : null;
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named " + meldWithName);
             filter.add(new NamePredicate(meldWithName));
             TargetPermanent target = new TargetControlledCreaturePermanent(filter);
