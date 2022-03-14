@@ -3,8 +3,11 @@ package mage.game.permanent;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
+import mage.constants.SubType;
+import mage.constants.SubTypeSet;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
@@ -115,5 +118,15 @@ public class PermanentToken extends PermanentImpl {
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;
+    }
+
+    @Override
+    public boolean hasSubtype(SubType value, Game game) {
+        if (super.hasSubtype(value, game)) {
+            return true;
+        }
+        return this.isCreature(game)
+                && value.getSubTypeSet() == SubTypeSet.CreatureType
+                && this.getAbilities(game).containsClass(ChangelingAbility.class);
     }
 }
