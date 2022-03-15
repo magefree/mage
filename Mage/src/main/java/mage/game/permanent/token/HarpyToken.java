@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
@@ -11,10 +9,10 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public final class AbhorrentOverlordHarpyToken extends TokenImpl {
+public final class HarpyToken extends TokenImpl {
 
-    public AbhorrentOverlordHarpyToken() {
-        super("Harpy Token", "1/1 black Harpy creature tokens with flying");
+    public HarpyToken() {
+        super("Harpy Token", "1/1 black Harpy creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.HARPY);
@@ -24,11 +22,11 @@ public final class AbhorrentOverlordHarpyToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AbhorrentOverlordHarpyToken(final AbhorrentOverlordHarpyToken token) {
+    public HarpyToken(final HarpyToken token) {
         super(token);
     }
 
-    public AbhorrentOverlordHarpyToken copy() {
-        return new AbhorrentOverlordHarpyToken(this);
+    public HarpyToken copy() {
+        return new HarpyToken(this);
     }
 }

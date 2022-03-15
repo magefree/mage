@@ -9,9 +9,9 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
-public final class RhysTheRedeemedToken extends TokenImpl {
+public final class GreenWhiteElfWarriorToken extends TokenImpl {
 
-    public RhysTheRedeemedToken() {
+    public GreenWhiteElfWarriorToken() {
         super("Elf Warrior Token", "1/1 green and white Elf Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -24,12 +24,12 @@ public final class RhysTheRedeemedToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("SHM");
     }
 
-    public RhysTheRedeemedToken(final RhysTheRedeemedToken token) {
+    public GreenWhiteElfWarriorToken(final GreenWhiteElfWarriorToken token) {
         super(token);
     }
 
-    public RhysTheRedeemedToken copy() {
-        return new RhysTheRedeemedToken(this);
+    public GreenWhiteElfWarriorToken copy() {
+        return new GreenWhiteElfWarriorToken(this);
     }
 
     @Override

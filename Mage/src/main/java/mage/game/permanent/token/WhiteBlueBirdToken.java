@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -10,9 +8,9 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public final class DovescapeToken extends TokenImpl {
+public final class WhiteBlueBirdToken extends TokenImpl {
 
-    public DovescapeToken() {
+    public WhiteBlueBirdToken() {
         super("Bird Token", "1/1 white and blue Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -22,11 +20,11 @@ public final class DovescapeToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public DovescapeToken(final DovescapeToken token) {
+    public WhiteBlueBirdToken(final WhiteBlueBirdToken token) {
         super(token);
     }
 
-    public DovescapeToken copy() {
-        return new DovescapeToken(this);
+    public WhiteBlueBirdToken copy() {
+        return new WhiteBlueBirdToken(this);
     }
 }

@@ -234,7 +234,7 @@
 |Generate|TOK:ALL|Zombie|||ZombieToken|
 |Generate|TOK:APC|Angel|||HauntedAngelToken|
 |Generate|TOK:APC|Cat|||PenumbraBobcatToken|
-|Generate|TOK:APC|Goblin Soldier|||GoblinTrenchesToken|
+|Generate|TOK:APC|Goblin Soldier|||GoblinSoldierToken|
 |Generate|TOK:APC|Kavu|||PenumbraKavuToken|
 |Generate|TOK:APC|Saproling|||SaprolingToken|
 |Generate|TOK:APC|Wurm|||PenumbraWurmToken|
@@ -589,7 +589,7 @@
 |Generate|TOK:DGM|Spirit|||TeysaEnvoyOfGhostsToken|
 |Generate|TOK:DGM|Wurm|1||WurmWithTrampleToken|
 |Generate|TOK:DGM|Wurm|2||Wurm55Token|
-|Generate|TOK:DIS|Bird|||DovescapeToken|
+|Generate|TOK:DIS|Bird|||WhiteBlueBirdToken|
 |Generate|TOK:DIS|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|
 |Generate|TOK:DIS|Goblin|||RakdosGuildmageGoblinToken|
@@ -643,7 +643,7 @@
 |Generate|TOK:EMA|Elemental|2||CallTheSkyBreakerElementalToken|
 |Generate|TOK:EMA|Elephant|||ElephantToken|
 |Generate|TOK:EMA|Elf Warrior|||ElfWarriorToken|
-|Generate|TOK:EMA|Goblin Soldier|||GoblinTrenchesToken|
+|Generate|TOK:EMA|Goblin Soldier|||GoblinSoldierToken|
 |Generate|TOK:EMA|Goblin|||GoblinToken|
 |Generate|TOK:EMA|Serf|||SerfToken|
 |Generate|TOK:EMA|Soldier|||SoldierToken|
@@ -667,10 +667,10 @@
 |Generate|TOK:EMN|Zombie|3||ZombieToken|
 |Generate|TOK:EMN|Zombie|4||ZombieToken2|
 |Generate|TOK:EVE|Beast|||BeastToken|
-|Generate|TOK:EVE|Bird|||OwlToken|
+|Generate|TOK:EVE|Bird|||BlueBirdToken|
 |Generate|TOK:EVE|Elemental|||CallTheSkyBreakerElementalToken|
 |Generate|TOK:EVE|Goat|||GoatToken|
-|Generate|TOK:EVE|Goblin Soldier|||GoblinTrenchesToken|
+|Generate|TOK:EVE|Goblin Soldier|||GoblinSoldierToken|
 |Generate|TOK:EVE|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:EVE|Spirit|||BeckonApparitionToken|
 |Generate|TOK:EVE|Wolf|||WolfToken|
@@ -733,7 +733,7 @@
 |Generate|TOK:HOU|Steadfast Sentinel||||
 |Generate|TOK:HOU|Sunscourge Champion||||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
-|Generate|TOK:INV|Bird|||OwlToken|
+|Generate|TOK:INV|Bird|||BlueBirdToken|
 |Generate|TOK:INV|Elephant|||ElephantToken|
 |Generate|TOK:INV|Reflection|||ReflectionToken|
 |Generate|TOK:INV|Saproling|||SaprolingToken|
@@ -1082,10 +1082,8 @@
 |Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
 |Generate|TOK:SHM|Elemental|2||RedElementalToken|
-|Generate|TOK:SHM|Elf Warrior|1|
-|Generate|TOK:SHM|Elf Warrior|2|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
-|Generate|TOK:SHM|Elf Warrior|2||RhysTheRedeemedToken|
+|Generate|TOK:SHM|Elf Warrior|2||GreenWhiteElfWarriorToken|
 |Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieToken|
 |Generate|TOK:SHM|Giant Warrior|||GiantBaitingGiantWarriorToken|
 |Generate|TOK:SHM|Goblin Warrior|||WortTheRaidmotherToken|
@@ -1139,7 +1137,7 @@
 |Generate|TOK:THS|Cleric|||HeliodGodOfTheSunToken|
 |Generate|TOK:THS|Elemental|||MasterOfWavesElementalToken|
 |Generate|TOK:THS|Golem|||HammerOfPurphorosGolemToken|
-|Generate|TOK:THS|Harpy|||AbhorrentOverlordHarpyToken|
+|Generate|TOK:THS|Harpy|||HarpyToken|
 |Generate|TOK:THS|Satyr|||XenagosSatyrToken|
 |Generate|TOK:THS|Soldier|1||SoldierToken|
 |Generate|TOK:THS|Soldier|2||SoldierToken|
@@ -1192,7 +1190,7 @@
 |Generate|TOK:VMA|Boar|||BoarToken|
 |Generate|TOK:VMA|Demon|||ReignOfThePitToken|
 |Generate|TOK:VMA|Elephant|||ElephantToken|
-|Generate|TOK:VMA|Goblin Soldier|||GoblinTrenchesToken|
+|Generate|TOK:VMA|Goblin Soldier|||GoblinSoldierToken|
 |Generate|TOK:VMA|Goblin|||GoblinToken|
 |Generate|TOK:VMA|Insect|||InsectToken|
 |Generate|TOK:VMA|Reflection|||ReflectionToken|
@@ -1467,7 +1465,7 @@
 # KHM
 |Generate|TOK:KHM|Angel Warrior|||AngelWarriorVigilanceToken|
 |Generate|TOK:KHM|Bear|||BearToken|
-|Generate|TOK:KHM|Bird|||OwlToken|
+|Generate|TOK:KHM|Bird|||BlueBirdToken|
 |Generate|TOK:KHM|Cat|||GreenCat2Token|
 |Generate|TOK:KHM|Demon Berserker|||DemonBerserkerToken|
 |Generate|TOK:KHM|Dragon|||DragonToken2|
