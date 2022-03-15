@@ -228,6 +228,8 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 94, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 259, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 171, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
+        cards.add(new SetCardInfo("Share the Spoils",34, Rarity.RARE, mage.cards.s.ShareTheSpoils.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Share the Spoils",303, Rarity.RARE, mage.cards.s.ShareTheSpoils.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shielding Plax", 192, Rarity.COMMON, mage.cards.s.ShieldingPlax.class));
         cards.add(new SetCardInfo("Shiny Impetus", 138, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Shivan Hellkite", 139, Rarity.RARE, mage.cards.s.ShivanHellkite.class));
