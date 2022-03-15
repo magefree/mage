@@ -42,7 +42,7 @@ public final class DeathTyrant extends CardImpl {
 
         // {5}{B}: Return Death Tyrant from your graveyard to the battlefield tapped.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{5}{B}")
         ));
     }

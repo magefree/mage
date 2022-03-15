@@ -155,7 +155,8 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCardInPlay);
         staticText = "During each player's turn, " +
                 "that player may play a land or cast a spell from among cards exiled with {this}, " +
-                "and they may spend mana as though it were mana of any color to cast that spell";
+                "and they may spend mana as though it were mana of any color to cast that spell. " +
+                "When they do, exile the top card of their library.";
     }
 
     private ShareTheSpoilsPlayExiledCardEffect(final ShareTheSpoilsPlayExiledCardEffect effect) {
