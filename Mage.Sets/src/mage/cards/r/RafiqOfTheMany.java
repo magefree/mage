@@ -34,7 +34,7 @@ public final class RafiqOfTheMany extends CardImpl {
         // Whenever a creature you control attacks alone, it gains double strike until end of turn.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(new GainAbilityTargetEffect(
                 DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-        ).setText("it gains double strike until end of turn")));
+        ).setText("it gains double strike until end of turn"), true, false));
     }
 
     private RafiqOfTheMany(final RafiqOfTheMany card) {
