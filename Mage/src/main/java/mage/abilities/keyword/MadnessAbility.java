@@ -1,7 +1,11 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.StaticAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -18,7 +22,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * 702.33. Madness
@@ -124,13 +127,17 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Card card = game.getCard(event.getTargetId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         // TODO, deal with deprecated call
-        if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source, game, ((ZoneChangeEvent) event).getFromZone(), true)) {
+        if (controller.moveCards(card, Zone.EXILED, source, game)) {
             game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
             GameEvent gameEvent = new MadnessCardExiledEvent(card.getId(), source, controller.getId());
             game.fireEvent(gameEvent);
@@ -190,13 +197,19 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean resolve(Game game) {
-        if (super.resolve(game)) { return true; }
+        if (super.resolve(game)) {
+            return true;
+        }
 
         Card card = game.getCard(getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         Player owner = game.getPlayer(card.getOwnerId());
-        if (owner == null) { return false; }
+        if (owner == null) {
+            return false;
+        }
 
         // if cast was not successfull, the card is moved to graveyard
         owner.moveCards(card, Zone.GRAVEYARD, this, game);
@@ -205,7 +218,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "When this card is exiled this way, " ;
+        return "When this card is exiled this way, ";
     }
 }
 
@@ -237,15 +250,21 @@ class MadnessCastEffect extends OneShotEffect {
     }
 
     @Override
-    public MadnessCastEffect copy() { return new MadnessCastEffect(this); }
+    public MadnessCastEffect copy() {
+        return new MadnessCastEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         Player owner = game.getPlayer(card.getOwnerId());
-        if (owner == null) { return false; }
+        if (owner == null) {
+            return false;
+        }
 
         // Replace with the new cost
         SpellAbility castByMadness = card.getSpellAbility().copy();
@@ -268,9 +287,13 @@ enum MadnessCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject madnessSpell = game.getLastKnownInformation(source.getSourceId(), Zone.STACK, source.getSourceObjectZoneChangeCounter() - 1);
-        if (!(madnessSpell instanceof Spell)) { return false; }
+        if (!(madnessSpell instanceof Spell)) {
+            return false;
+        }
 
-        if (((Spell) madnessSpell).getSpellAbility() == null) { return false; }
+        if (((Spell) madnessSpell).getSpellAbility() == null) {
+            return false;
+        }
 
         return ((Spell) madnessSpell).getSpellAbility().getSpellAbilityCastMode() == SpellAbilityCastMode.MADNESS;
     }
