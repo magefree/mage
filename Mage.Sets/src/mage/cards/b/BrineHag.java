@@ -68,26 +68,27 @@ class BrineHagEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) { return false; }
+
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null) {
-            List<Permanent> list = new ArrayList<>();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
-                        if (sourcePermanent.getDealtDamageByThisTurn().contains(new MageObjectReference(creature.getId(), game))) {
-                            list.add(creature);
-                        }
-                    }
+        if (sourcePermanent == null) { return false; }
+
+        List<Permanent> list = new ArrayList<>();
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) { continue; }
+
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
+                if (sourcePermanent.getDealtDamageByThisTurn().contains(new MageObjectReference(creature.getId(), game))) {
+                    list.add(creature);
                 }
             }
-            if (!list.isEmpty()) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new PermanentInListPredicate(list));
-                game.addEffect(new SetPowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
-            }
-            return true;
         }
-        return false;
+        if (!list.isEmpty()) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            filter.add(new PermanentInListPredicate(list));
+            game.addEffect(new SetPowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
+        }
+        return true;
     }
 }

@@ -37,10 +37,11 @@ public final class KnowledgePool extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false).setAbilityWord(AbilityWord.IMPRINT));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolExileThreeCardsEffect(), false).setAbilityWord(AbilityWord.IMPRINT));
 
-        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
-        this.addAbility(new KnowledgePoolAbility());
+        // Whenever a player casts a spell from their hand, that player exiles it.
+        // If the player does, they may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
+        this.addAbility(new KnowledgePoolWhenCastFromHandAbility());
     }
 
     private KnowledgePool(final KnowledgePool card) {
@@ -51,58 +52,62 @@ public final class KnowledgePool extends CardImpl {
     public KnowledgePool copy() {
         return new KnowledgePool(this);
     }
-
 }
 
-class KnowledgePoolEffect1 extends OneShotEffect {
+class KnowledgePoolExileThreeCardsEffect extends OneShotEffect {
 
-    public KnowledgePoolEffect1() {
+    public KnowledgePoolExileThreeCardsEffect() {
         super(Outcome.Neutral);
         staticText = "each player exiles the top three cards of their library";
     }
 
-    public KnowledgePoolEffect1(final KnowledgePoolEffect1 effect) {
+    public KnowledgePoolExileThreeCardsEffect(final KnowledgePoolExileThreeCardsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) { return false; }
+
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
+        if (sourceObject == null) { return false; }
+
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCardsToExile(player.getLibrary().getTopCards(game, 3), source, game, true,
-                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
-                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ')');
-            }
+            if (player == null) { continue; }
+
+            player.moveCardsToExile(
+                    player.getLibrary().getTopCards(game, 3),
+                    source,
+                    game,
+                    true,
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
+                    sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ')'
+            );
         }
         return true;
     }
 
     @Override
-    public KnowledgePoolEffect1 copy() {
-        return new KnowledgePoolEffect1(this);
+    public KnowledgePoolExileThreeCardsEffect copy() {
+        return new KnowledgePoolExileThreeCardsEffect(this);
     }
-
 }
 
-class KnowledgePoolAbility extends TriggeredAbilityImpl {
+class KnowledgePoolWhenCastFromHandAbility extends TriggeredAbilityImpl {
 
-    public KnowledgePoolAbility() {
-        super(Zone.BATTLEFIELD, new KnowledgePoolEffect2(), false);
+    public KnowledgePoolWhenCastFromHandAbility() {
+        super(Zone.BATTLEFIELD, new KnowledgePoolExileAndPlayEffect(), false);
     }
 
-    public KnowledgePoolAbility(final KnowledgePoolAbility ability) {
+    private KnowledgePoolWhenCastFromHandAbility(final KnowledgePoolWhenCastFromHandAbility ability) {
         super(ability);
     }
 
     @Override
-    public KnowledgePoolAbility copy() {
-        return new KnowledgePoolAbility(this);
+    public KnowledgePoolWhenCastFromHandAbility copy() {
+        return new KnowledgePoolWhenCastFromHandAbility(this);
     }
 
     @Override
@@ -112,72 +117,76 @@ class KnowledgePoolAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() == Zone.HAND) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
+        if (event.getZone() != Zone.HAND) { return false; }
 
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null) { return false; }
+
+        for (Effect effect : this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        }
+        return true;
+    }
 }
 
-class KnowledgePoolEffect2 extends OneShotEffect {
+class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
 
-    private static FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Knowledge Pool");
-
-    public KnowledgePoolEffect2() {
+    public KnowledgePoolExileAndPlayEffect() {
         super(Outcome.Neutral);
         staticText = "Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with {this} without paying that card's mana cost";
     }
 
-    public KnowledgePoolEffect2(final KnowledgePoolEffect2 effect) {
+    private KnowledgePoolExileAndPlayEffect(final KnowledgePoolExileAndPlayEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell == null) {
+        if (spell == null) { return false; }
+
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject == null ) { return false; }
+
+        Player spellController = game.getPlayer(spell.getControllerId());
+        if (spellController == null) { return false; }
+
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
+
+        if (!spellController.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
+            // The card didn't make it to exile, none of Knowledge Pool's effect applied
             return false;
         }
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Player spellController = game.getPlayer(spell.getControllerId());
-        if (spellController != null
-                && sourceObject != null) {
-            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-            if (exileZoneId == null) {
-                return false;
-            }
-            if (spellController.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
-                if (spellController.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
-                    FilterNonlandCard realFilter = filter.copy();
-                    realFilter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
-                    TargetCardInExile target = new TargetCardInExile(0, 1, realFilter, source.getSourceId());
-                    target.setNotTarget(true);
-                    if (spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null
-                                && !card.getId().equals(spell.getSourceId())) {
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                            spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                        }
-                    }
-                }
-                return true;
-            }
+
+        // From here on down the function returns true since at least part of the effect went off
+
+        if (!spellController.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
+            // Pleyer didn't want to cast another spell BUT their original spell was exiled with Knowledge Pool, so return true.
+            return true;
         }
-        return false;
+        FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Knowledge Pool");
+        filter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
+
+        TargetCardInExile target = new TargetCardInExile(0, 1, filter, source.getSourceId());
+        target.setNotTarget(true);
+
+        if (!spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
+            // Player chose to not cast any ofthe spells
+            return true;
+        }
+
+        Card card = game.getCard(target.getFirstTarget());
+        if (card == null || card.getId().equals(spell.getSourceId())) { return true; }
+
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+        spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
+        return true;
     }
 
     @Override
-    public KnowledgePoolEffect2 copy() {
-        return new KnowledgePoolEffect2(this);
+    public KnowledgePoolExileAndPlayEffect copy() {
+        return new KnowledgePoolExileAndPlayEffect(this);
     }
-
 }

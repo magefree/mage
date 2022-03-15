@@ -32,7 +32,6 @@ public final class BloodBaronOfVizkopa extends CardImpl {
 
         // As long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodBaronOfVizkopaEffect()));
-
     }
 
     private BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
@@ -53,7 +52,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
         staticText = "As long as you have 30 or more life and an opponent has 10 or less life, {this} gets +6/+6 and has flying";
     }
 
-    public BloodBaronOfVizkopaEffect(final BloodBaronOfVizkopaEffect effect) {
+    private BloodBaronOfVizkopaEffect(final BloodBaronOfVizkopaEffect effect) {
         super(effect);
     }
 
@@ -64,41 +63,45 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (conditionState(source, game)) {
-            Permanent creature = game.getPermanent(source.getSourceId());
-            if (creature != null) {
-                switch (layer) {
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.ModifyPT_7c) {
-                            creature.addPower(6);
-                            creature.addToughness(6);
-                        }
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                        }
-                        break;
-                    default:
+        if (!conditionState(source, game)) { return false; }
+
+        Permanent creature = game.getPermanent(source.getSourceId());
+        if (creature == null) { return false; }
+
+        switch (layer) {
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.ModifyPT_7c) {
+                    creature.addPower(6);
+                    creature.addToughness(6);
                 }
-                return true;
-            }
+                break;
+            case AbilityAddingRemovingEffects_6:
+                if (sublayer == SubLayer.NA) {
+                    creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                }
+                break;
+            default:
+                return false;
         }
-        return false;
+
+        return true;
     }
 
-    protected boolean conditionState(Ability source, Game game) {
+    private boolean conditionState(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLife() >= 30) {
-            for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (controller.hasOpponent(opponentId, game)) {
-                    Player opponent = game.getPlayer(opponentId);
-                    if (opponent != null && opponent.getLife() < 11) {
-                        return true;
-                    }
-                }
-            }
+        if (controller == null) { return false; }
+
+        if (controller.getLife() < 30) { return false; }
+
+        for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            if (!controller.hasOpponent(opponentId, game)) { return false; }
+
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent == null) { return false; }
+
+            return opponent.getLife() < 11;
         }
+
         return false;
     }
 
@@ -109,8 +112,6 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return (layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7);
-
+        return (layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7);
     }
-
 }

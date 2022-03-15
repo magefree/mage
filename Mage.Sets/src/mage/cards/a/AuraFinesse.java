@@ -35,11 +35,11 @@ public final class AuraFinesse extends CardImpl {
     public AuraFinesse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-
         // Attach target Aura you control to target creature.
         this.getSpellAbility().addEffect(new AuraFinesseEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
@@ -70,26 +70,28 @@ class AuraFinesseEffect extends OneShotEffect {
         return new AuraFinesseEffect(this);
     }
 
+    // 15/06/2010   As Aura Finesse resolves, if either target is illegal,
+    //              the spell resolves but the Aura doesn’t move. You still draw a card.
+    //              If both targets are illegal, Aura Finesse doesn’t resolve and you don’t draw a card.
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent aura = game.getPermanent(source.getFirstTarget());
-            Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (aura != null && creature != null) {
-                Permanent oldCreature = game.getPermanent(aura.getAttachedTo());
-                if (oldCreature != null && !oldCreature.equals(creature)) {
-                    Target auraTarget = aura.getSpellAbility().getTargets().get(0);
-                    if (!auraTarget.canTarget(creature.getId(), game))  {
-                        game.informPlayers(aura.getLogName() + " was not attched to " +creature.getLogName() + " because it's no legal target for the aura" );
-                    } else if (oldCreature.removeAttachment(aura.getId(), source, game)) {
-                        game.informPlayers(aura.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + creature.getLogName());
-                        creature.addAttachment(aura.getId(), source, game);
-                    }
+        if (controller == null) { return false; }
+
+        Permanent aura = game.getPermanent(source.getFirstTarget());
+        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (aura != null && creature != null) {
+            Permanent oldCreature = game.getPermanent(aura.getAttachedTo());
+            if (oldCreature != null && !oldCreature.equals(creature)) {
+                Target auraTarget = aura.getSpellAbility().getTargets().get(0);
+                if (!auraTarget.canTarget(creature.getId(), game))  {
+                    game.informPlayers(aura.getLogName() + " was not attched to " +creature.getLogName() + " because it's no legal target for the aura" );
+                } else if (oldCreature.removeAttachment(aura.getId(), source, game)) {
+                    game.informPlayers(aura.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + creature.getLogName());
+                    creature.addAttachment(aura.getId(), source, game);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

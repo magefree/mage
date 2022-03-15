@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,7 +39,7 @@ public final class AtemsisAllSeeing extends CardImpl {
 
         // {2}{U}, {T}: Draw two cards, then discard a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(2, 1), new ManaCostsImpl("{2}{U}")
+                new DrawDiscardControllerEffect(2, 1), new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -88,7 +89,7 @@ class AtemsisAllSeeingEffect extends OneShotEffect {
                 .getHand()
                 .getCards(game)
                 .stream()
-                .map(card -> card.getManaValue())
+                .map(MageObject::getManaValue)
                 .distinct()
                 .count() > 5) {
             opponent.lost(game);

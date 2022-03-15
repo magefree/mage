@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class AuriokEdgewright extends CardImpl {
 
-    protected static String effectText = "<i>Metalcraft</i> &mdash; Auriok Edgewright has double strike as long as you control three or more artifacts.";
+    private static final String effectText = "<i>Metalcraft</i> &mdash; Auriok Edgewright has double strike as long as you control three or more artifacts.";
 
     public AuriokEdgewright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");

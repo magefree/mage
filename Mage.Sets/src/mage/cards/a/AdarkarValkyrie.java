@@ -84,18 +84,17 @@ class AdarkarValkyrieEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new MageObjectReference(permanent, game));
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
-        }
-        return false;
+        if (permanent == null) { return false; }
+
+        DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new MageObjectReference(permanent, game));
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
     }
 }
 
 class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    protected MageObjectReference mor;
+    private final MageObjectReference mor;
 
     public AdarkarValkyrieDelayedTriggeredAbility(MageObjectReference mor) {
         super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
@@ -119,14 +118,17 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).isDiesEvent()
-                && mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)
-                && game.getState().getZone(event.getTargetId()) == Zone.GRAVEYARD) { // must be in the graveyard
-            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-            return true;
+        if (!((ZoneChangeEvent) event).isDiesEvent()) { return false; }
 
-        }
-        return false;
+        if (!mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)) { return false; }
+
+        // TODO: Must it? Why?
+        // Must be in the graveyard
+        if (game.getState().getZone(event.getTargetId()) != Zone.GRAVEYARD) { return false; }
+
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+
+        return true;
     }
 
     @Override

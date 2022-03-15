@@ -64,7 +64,7 @@ public final class BoneyardScourge extends CardImpl {
 
 class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
@@ -89,22 +89,19 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()) { return false; }
+
         for (Zone z : Zone.values()) {
             if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
                 return false;
             }
         }
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
-                return true;
-            }
-        }
-        return false;
+
+        return filter.match(zEvent.getTarget(), sourceId, controllerId, game);
     }
 
     @Override
     public String getTriggerPhrase() {
         return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " ;
     }
-
 }

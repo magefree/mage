@@ -162,7 +162,7 @@ class BaneAlleyBrokerReturnToHandEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }
 
