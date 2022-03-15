@@ -15,7 +15,7 @@ public class AzoriusAethermageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3); // Used for paying ability cost
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2*3);
         addCard(Zone.BATTLEFIELD, playerA, "Toggo, Goblin Weaponsmith");
-        addCard(Zone.HAND, playerA, "Boomerang",1);
+        addCard(Zone.HAND, playerA, "Boomerang",3);
 
         // Permanents to bounce
         addCard(Zone.HAND, playerA, "Plains", 1);
@@ -25,17 +25,17 @@ public class AzoriusAethermageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boomerang", "Plains");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
-        setChoice(playerA, true);
+        setChoice(playerA, "Yes");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boomerang", "Rock");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
-        setChoice(playerA, true);
+        setChoice(playerA, "Yes");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boomerang", "Azorius Aethermage");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
-        setChoice(playerA, true);
+        setChoice(playerA, "Yes");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         setStopAt(1, PhaseStep.END_TURN);
