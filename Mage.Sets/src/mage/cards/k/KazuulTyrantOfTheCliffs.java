@@ -78,7 +78,7 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls attacks, if you're the defending player, " +
-                "create a 3/3 red Ogre creature token unless that creature's controller pays {3}";
+                "create a 3/3 red Ogre creature token unless that creature's controller pays {3}.";
     }
 }
 

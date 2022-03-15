@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
@@ -17,19 +16,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
-import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth, TheElk801
  */
 public final class HakimLoreweaver extends CardImpl {
@@ -58,22 +56,16 @@ public final class HakimLoreweaver extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new HakimLoreweaverEffect(),
-                new ManaCostsImpl("{U}{U}"),
-                new HakimLoreweaverCondition());
+                new ManaCostsImpl<>("{U}{U}"),
+                HakimLoreweaverCondition.instance
+        );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
         // {U}{U}, {tap}: Destroy all Auras attached to Hakim.
-        FilterPermanent filterAurasOnHakim = new FilterPermanent("Auras attached to Hakim");
-        filterAurasOnHakim.add(CardType.ENCHANTMENT.getPredicate());
-        filterAurasOnHakim.add(SubType.AURA.getPredicate());
-        FilterPermanent filterSourceId = new FilterPermanent();
-        filterSourceId.add(new CardIdPredicate(this.getId()));
-        filterAurasOnHakim.add(new AttachedToPredicate(filterSourceId));
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filterAurasOnHakim), new ManaCostsImpl("{U}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(new HakimLoreweaverEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
-
     }
 
     private HakimLoreweaver(final HakimLoreweaver card) {
@@ -123,8 +115,8 @@ class HakimLoreweaverEffect extends OneShotEffect {
     }
 }
 
-class HakimLoreweaverCondition implements Condition {
-
+enum HakimLoreweaverCondition implements Condition {
+    instance;
     static private final FilterPermanent auras = new FilterPermanent();
 
     static {
@@ -133,22 +125,65 @@ class HakimLoreweaverCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent hakimLoreweaver = game.getPermanent(source.getSourceId());
-        if (hakimLoreweaver != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(auras, game)) {
-                if (permanent != null
-                        && hakimLoreweaver.getAttachments().contains(permanent.getId())) {
-                    return false;
-                }
-            }
-            return PhaseStep.UPKEEP == game.getStep().getType()
-                    && game.isActivePlayer(source.getControllerId());
+        if (PhaseStep.UPKEEP != game.getStep().getType()
+                || !game.isActivePlayer(source.getControllerId())) {
+            return false;
         }
-        return false;
+        Permanent hakimLoreweaver = source.getSourcePermanentIfItStillExists(game);
+        return hakimLoreweaver != null
+                && hakimLoreweaver
+                .getAttachments()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
     }
 
     @Override
     public String toString() {
         return "during your upkeep and only if {this} isn't enchanted";
+    }
+}
+
+class HakimLoreweaverDestroyEffect extends OneShotEffect {
+
+    HakimLoreweaverDestroyEffect() {
+        super(Outcome.Benefit);
+        staticText = "destroy all Auras attached to {this}";
+    }
+
+    private HakimLoreweaverDestroyEffect(final HakimLoreweaverDestroyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public HakimLoreweaverDestroyEffect copy() {
+        return new HakimLoreweaverDestroyEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(SubType.AURA.getPredicate());
+        filter.add(new HakimLoreweaverPredicate(permanent));
+        return new DestroyAllEffect(filter).apply(game, source);
+    }
+}
+
+class HakimLoreweaverPredicate implements Predicate<Permanent> {
+
+    private final Permanent permanent;
+
+    HakimLoreweaverPredicate(Permanent permanent) {
+        this.permanent = permanent;
+    }
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.isAttachedTo(permanent.getId());
     }
 }

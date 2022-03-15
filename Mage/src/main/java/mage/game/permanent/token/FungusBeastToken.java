@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class FungusBeastToken extends TokenImpl {
 
     public FungusBeastToken() {
-        super("Fungus Beast", "4/4 green Fungus Beast creature token with trample");
+        super("Fungus Beast Token", "4/4 green Fungus Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.FUNGUS);

@@ -36,7 +36,7 @@ public final class AltarOfTheGoyf extends CardImpl {
                 CardTypesInGraveyardCount.ALL,
                 Duration.EndOfTurn, true
         ).setText("it gets +X/+X until end of turn, where X is " +
-                "the number of card types among cards in all graveyards.")).addHint(CardTypesInGraveyardHint.ALL));
+                "the number of card types among cards in all graveyards."), true, false).addHint(CardTypesInGraveyardHint.ALL));
 
         // Lhurgoyf creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

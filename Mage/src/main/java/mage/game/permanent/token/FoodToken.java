@@ -24,7 +24,7 @@ public final class FoodToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     public FoodToken() {
-        super("Food", "Food token");
+        super("Food Token", "Food token");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.FOOD);
 

@@ -43,8 +43,8 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Underworld Dreams", 2);
         assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
-        assertPowerToughness(playerA, "Spirit", 2, 2, Filter.ComparisonScope.All);
-        assertType("Spirit", CardType.ENCHANTMENT, SubType.SPIRIT);
+        assertPowerToughness(playerA, "Spirit Token", 2, 2, Filter.ComparisonScope.All);
+        assertType("Spirit Token", CardType.ENCHANTMENT, SubType.SPIRIT);
 
     }
 

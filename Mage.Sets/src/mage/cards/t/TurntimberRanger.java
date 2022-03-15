@@ -32,8 +32,8 @@ public final class TurntimberRanger extends CardImpl {
 
         // Whenever Turntimber Ranger or another Ally enters the battlefield under your control, you may create a 2/2 green Wolf creature token. If you do, put a +1/+1 counter on Turntimber Ranger.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken()), true);
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addAbility(ability);
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("If you do,"));
+        this.addAbility(ability.setAbilityWord(null));
     }
 
     private TurntimberRanger(final TurntimberRanger card) {

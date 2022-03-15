@@ -17,7 +17,7 @@ public final class GrismoldPlantToken extends TokenImpl {
     }
 
     public GrismoldPlantToken() {
-        super("Plant", "1/1 green Plant creature");
+        super("Plant Token", "1/1 green Plant creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.PLANT);

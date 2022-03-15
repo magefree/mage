@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class WolfsQuarryToken extends TokenImpl {
 
     public WolfsQuarryToken() {
-        super("Boar", "1/1 green Boar creature token with \"When this creature dies, create a Food token.\"");
+        super("Boar Token", "1/1 green Boar creature token with \"When this creature dies, create a Food token.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BOAR);

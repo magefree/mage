@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GodSireBeastToken extends TokenImpl {
 
     public GodSireBeastToken() {
-        super("Beast", "8/8 Beast creature token that's red, green, and white");
+        super("Beast Token", "8/8 Beast creature token that's red, green, and white");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);

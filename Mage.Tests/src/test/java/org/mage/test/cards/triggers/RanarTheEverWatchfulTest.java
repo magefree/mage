@@ -46,17 +46,17 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
         addTarget(playerA, "Serra Angel");
         addTarget(playerA, "Bog Imp");
         addTarget(playerA, "Sengir Vampire");
-        addTarget(playerA, "Knight");
-        addTarget(playerA, "Knight");
+        addTarget(playerA, "Knight Token");
+        addTarget(playerA, "Knight Token");
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Boar", 3); // created token by Curse
-        assertPermanentCount(playerA, "Spirit", 1); // created token by Ranar
-        assertPermanentCount(playerB, "Boar", 3); // created token by Curse
-        assertPermanentCount(playerB, "Spirit", 0);  // no Spirit token for playerB
+        assertPermanentCount(playerA, "Boar Token", 3); // created token by Curse
+        assertPermanentCount(playerA, "Spirit Token", 1); // created token by Ranar
+        assertPermanentCount(playerB, "Boar Token", 3); // created token by Curse
+        assertPermanentCount(playerB, "Spirit Token", 0);  // no Spirit token for playerB
     }
     
     @Test
@@ -83,8 +83,8 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
         
-        assertPermanentCount(playerA, "Spirit", 1); // created token by Ranar
-        assertPermanentCount(playerB, "Spirit", 0); // no Spirit tokens for the other player
+        assertPermanentCount(playerA, "Spirit Token", 1); // created token by Ranar
+        assertPermanentCount(playerB, "Spirit Token", 0); // no Spirit tokens for the other player
     }
     
 }

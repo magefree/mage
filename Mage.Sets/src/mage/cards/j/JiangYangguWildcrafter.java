@@ -3,7 +3,7 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class JiangYangguWildcrafter extends CardImpl {
         this.setStartingLoyalty(3);
 
         // Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1
         )));
 

@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class DrakeToken extends TokenImpl {
 
     public DrakeToken() {
-        super("Drake", "2/2 blue Drake creature token with flying");
+        super("Drake Token", "2/2 blue Drake creature token with flying");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.DRAKE);
 

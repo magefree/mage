@@ -22,7 +22,7 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Construct", 1);
+        assertPermanentCount(playerA, "Construct Token", 1);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Construct", 0);
+        assertPermanentCount(playerA, "Construct Token", 0);
     }
 
     @Test
@@ -60,6 +60,6 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Construct", 0);
+        assertPermanentCount(playerA, "Construct Token", 0);
     }
 }

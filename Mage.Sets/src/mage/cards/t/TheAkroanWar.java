@@ -53,7 +53,7 @@ public final class TheAkroanWar extends CardImpl {
                 SagaChapter.CHAPTER_II,
                 new AttacksIfAbleAllEffect(
                         filter, Duration.UntilYourNextTurn, true
-                )
+                ).setText("until your next turn, creatures your opponents control attack each combat if able")
         );
 
         // III — Each tapped creature deals damage to itself equal to its power.

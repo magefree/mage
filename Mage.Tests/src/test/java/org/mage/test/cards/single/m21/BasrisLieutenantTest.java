@@ -28,7 +28,7 @@ public class BasrisLieutenantTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Knight", 1);
+        assertPermanentCount(playerA, "Knight Token", 1);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class BasrisLieutenantTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Knight", 1);
+        assertPermanentCount(playerA, "Knight Token", 1);
     }
 
     @Test
@@ -74,6 +74,6 @@ public class BasrisLieutenantTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Knight", 0);
+        assertPermanentCount(playerA, "Knight Token", 0);
     }
 }

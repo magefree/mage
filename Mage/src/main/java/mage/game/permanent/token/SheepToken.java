@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class SheepToken extends TokenImpl {
 
     public SheepToken() {
-        super("Sheep", "0/1 green Sheep creature token");
+        super("Sheep Token", "0/1 green Sheep creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SHEEP);

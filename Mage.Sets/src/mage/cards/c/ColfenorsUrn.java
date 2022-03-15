@@ -44,7 +44,7 @@ public final class ColfenorsUrn extends CardImpl {
                 new ExileTargetForSourceEffect().setText("exile it"), true, filter, true, true));
 
         // At the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ColfenorsUrnEffect(), TargetController.ANY, new ColfenorsUrnCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ColfenorsUrnEffect(), TargetController.NEXT, new ColfenorsUrnCondition(), false));
     }
 
     private ColfenorsUrn(final ColfenorsUrn card) {

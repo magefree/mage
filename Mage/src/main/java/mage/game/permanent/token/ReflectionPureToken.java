@@ -16,7 +16,7 @@ public final class ReflectionPureToken extends TokenImpl {
     }
 
     public ReflectionPureToken(int xValue) {
-        super("Reflection", "X/X white Reflection creature token, where X is the mana value of that spell");
+        super("Reflection Token", "X/X white Reflection creature token, where X is the mana value of that spell");
         this.setOriginalExpansionSetCode("INV");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

@@ -56,7 +56,7 @@ class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPay
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        int domainValue = new DomainValue().calculate(game, source, this);
+        int domainValue = DomainValue.REGULAR.calculate(game, source, this);
         if (domainValue > 0) {
             return new ManaCostsImpl<>("{" + domainValue + '}');
         }

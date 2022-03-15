@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WolfToken extends TokenImpl {
 
     public WolfToken() {
-        super("Wolf", "2/2 green Wolf creature token");
+        super("Wolf Token", "2/2 green Wolf creature token");
 
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class GoblinRogueToken extends TokenImpl {
 
     public GoblinRogueToken() {
-        super("Goblin Rogue", "1/1 black Goblin Rogue creature token");
+        super("Goblin Rogue Token", "1/1 black Goblin Rogue creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.GOBLIN);

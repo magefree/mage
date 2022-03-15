@@ -30,8 +30,7 @@ public final class PowerConduit extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability.addCost(new RemoveCounterCost(new TargetControlledPermanent()));
         ability.addTarget(new TargetArtifactPermanent());
-        Mode mode = new Mode();
-        mode.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Mode mode = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);

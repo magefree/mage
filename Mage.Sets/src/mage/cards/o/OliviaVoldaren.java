@@ -12,12 +12,13 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,12 +43,6 @@ public final class OliviaVoldaren extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-
-        String rule = "Gain control of target Vampire for as long as you control {this}";
-
-        FilterPermanent filter2 = new FilterPermanent();
-        filter2.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(new CardIdPredicate(this.getId()));
 
         this.addAbility(FlyingAbility.getInstance());
 

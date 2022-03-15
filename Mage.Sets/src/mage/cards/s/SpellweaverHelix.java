@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -41,7 +42,7 @@ public final class SpellweaverHelix extends CardImpl {
         // Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SpellweaverHelixImprintEffect(), true);
         ability.addTarget(new TargetCardInASingleGraveyard(2, 2, filter));
-        ability.withFlavorWord("Imprint");
+        ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
 
         // Whenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.

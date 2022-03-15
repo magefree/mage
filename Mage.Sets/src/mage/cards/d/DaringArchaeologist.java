@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,12 +12,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DaringArchaeologist extends CardImpl {
@@ -41,7 +40,7 @@ public final class DaringArchaeologist extends CardImpl {
         // When Daring Archaeologist enters the battlefield, you may return target artifact card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
                 .setText("you may return target artifact card from your graveyard to your hand"), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // Whenever you cast a historic spell, put a +1/+1 counter on Daring Archaeologist.

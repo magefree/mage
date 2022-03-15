@@ -10,23 +10,20 @@ import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetDiscard;
+import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author North
@@ -138,6 +135,12 @@ class ChandraAblazeEffect2 extends OneShotEffect {
 
 class ChandraAblazeEffect5 extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterInstantOrSorceryCard();
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+
     public ChandraAblazeEffect5() {
         super(Outcome.PlayForFree);
         this.staticText = "Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs";
@@ -154,33 +157,17 @@ class ChandraAblazeEffect5 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // Under this card's current oracle wording, it only casts red instant or sorcery cards
+        // This may have been a mistake which could change in the future
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            FilterCard filter = new FilterCard("red instant or sorcery card from your graveyard to play");
-            filter.add(new ColorPredicate(ObjectColor.RED));
-            filter.add(Predicates.or(
-                    CardType.INSTANT.getPredicate(),
-                    CardType.SORCERY.getPredicate()));
-
-            String message = "Play red instant or sorcery card from your graveyard without paying its mana cost?";
-            Set<Card> cards = player.getGraveyard().getCards(filter, game);
-            TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-            while (!cards.isEmpty() && player.chooseUse(outcome, message, source, game)) {
-                target.clearChosen();
-                if (player.choose(outcome, target, source.getSourceId(), game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-
-                        cards.remove(card);
-                    }
-                }
-            }
-
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        CardUtil.castMultipleWithAttributeForFree(
+                player, source, game,
+                new CardsImpl(player.getGraveyard().getCards(filter, game)),
+                StaticFilters.FILTER_CARD
+        );
+        return true;
     }
 }

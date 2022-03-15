@@ -3,22 +3,21 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.ExileZone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.UUID;
-import mage.ApprovingObject;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * This ability has no effect by default and will always return false on the
@@ -49,7 +48,7 @@ public class ReboundAbility extends SimpleStaticAbility {
         super(Zone.STACK, new ReboundCastFromHandReplacementEffect());
     }
 
-    public ReboundAbility(ReboundAbility ability) {
+    public ReboundAbility(final ReboundAbility ability) {
         super(ability);
     }
 
@@ -57,18 +56,22 @@ public class ReboundAbility extends SimpleStaticAbility {
     public ReboundAbility copy() {
         return new ReboundAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "Rebound <i>(If you cast this spell from your hand, "
+                + "exile it as it resolves. At the beginning of your next upkeep, "
+                + "you may cast this card from exile without paying its mana cost.)</i>";
+    }
 }
 
 class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
 
     ReboundCastFromHandReplacementEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);
-        this.staticText = "Rebound <i>(If you cast this spell from your hand, "
-                + "exile it as it resolves. At the beginning of your next upkeep, "
-                + "you may cast this card from exile without paying its mana cost.)</i>";
     }
 
-    ReboundCastFromHandReplacementEffect(ReboundCastFromHandReplacementEffect effect) {
+    private ReboundCastFromHandReplacementEffect(final ReboundCastFromHandReplacementEffect effect) {
         super(effect);
     }
 
@@ -84,17 +87,14 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
         // by a spell like Cancel, or because all of its targets are illegal), rebound has no effect.
         // The spell is simply put into your graveyard. You won’t get to cast it again next turn.
         // (2010-06-15)
-        if (((ZoneChangeEvent) event).getFromZone() == Zone.STACK
-                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && event.getSourceId() != null
-                && event.getSourceId().equals(source.getSourceId())) { // if countered the source.sourceId is different or null if it fizzles
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null
-                    && spell.getFromZone() == Zone.HAND) {
-                return true;
-            }
-        }
-        return false;
+        if (((ZoneChangeEvent) event).getFromZone() != Zone.STACK
+                || ((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD
+                || event.getSourceId() == null
+                || !event.getSourceId().equals(source.getSourceId())) {
+            return false;
+        } // if countered the source.sourceId is different or null if it fizzles
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null && spell.getFromZone() == Zone.HAND;
     }
 
     @Override
@@ -102,23 +102,19 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
         Spell sourceSpell = game.getStack().getSpell(source.getSourceId());
         if (sourceSpell != null && sourceSpell.isCopy()) {
             return false;
-        } else {
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null) {
-                Player player = game.getPlayer(sourceCard.getOwnerId());
-                if (player != null) {
-                    // Add the delayed triggered effect
-                    ReboundEffectCastFromExileDelayedTrigger trigger
-                            = new ReboundEffectCastFromExileDelayedTrigger(source.getSourceId(), source.getSourceId());
-                    game.addDelayedTriggeredAbility(trigger, source);
-
-                    player.moveCardToExileWithInfo(sourceCard, sourceCard.getId(),
-                            player.getName() + " Rebound", source, game, Zone.STACK, true);
-                    return true;
-                }
-            }
         }
-        return false;
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (sourceCard == null) {
+            return false;
+        }
+        Player player = game.getPlayer(sourceCard.getOwnerId());
+        if (player == null) {
+            return false;
+        }
+        // Add the delayed triggered effect
+        player.moveCardsToExile(sourceCard, source, game, true, null, "Rebound");
+        game.addDelayedTriggeredAbility(new ReboundEffectCastFromExileDelayedTrigger(sourceCard, game), source);
+        return true;
     }
 
     @Override
@@ -130,13 +126,11 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
 
 class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
-    ReboundEffectCastFromExileDelayedTrigger(UUID cardId, UUID sourceId) {
-        super(new ReboundCastSpellFromExileEffect());
-        setSourceId(sourceId); // TODO: WTF?!
-        this.optional = true;
+    ReboundEffectCastFromExileDelayedTrigger(Card card, Game game) {
+        super(new ReboundCastSpellFromExileEffect().setTargetPointer(new FixedTarget(card, game)), Duration.Custom, true, true);
     }
 
-    ReboundEffectCastFromExileDelayedTrigger(ReboundEffectCastFromExileDelayedTrigger ability) {
+    private ReboundEffectCastFromExileDelayedTrigger(final ReboundEffectCastFromExileDelayedTrigger ability) {
         super(ability);
     }
 
@@ -152,7 +146,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return MyTurnCondition.instance.apply(game, this);
+        return game.isActivePlayer(getControllerId());
     }
 
     @Override
@@ -169,41 +163,25 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
  */
 class ReboundCastSpellFromExileEffect extends OneShotEffect {
 
-    private static String castFromExileText = "Rebound - You may cast {this} "
-            + "from exile without paying its mana cost";
-
     ReboundCastSpellFromExileEffect() {
         super(Outcome.PlayForFree);
-        staticText = castFromExileText;
     }
 
-    ReboundCastSpellFromExileEffect(ReboundCastSpellFromExileEffect effect) {
+    private ReboundCastSpellFromExileEffect(final ReboundCastSpellFromExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone zone = game.getExile().getExileZone(source.getSourceId());
-        if (zone == null
-                || zone.isEmpty()) {
-            return false;
-        }
-        Card reboundCard = zone.get(source.getSourceId(), game);
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null
-                && reboundCard != null) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + reboundCard.getId(), Boolean.TRUE);
-            Boolean cardWasCast = player.cast(player.chooseAbilityForCast(reboundCard, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + reboundCard.getId(), null);
-            return cardWasCast;
-        }
-        return false;
+        Card reboundCard = game.getCard(getTargetPointer().getFirst(game, source));
+        return player != null && reboundCard != null && CardUtil.castSpellWithAttributesForFree(
+                player, source, game, new CardsImpl(reboundCard), StaticFilters.FILTER_CARD
+        );
     }
 
     @Override
     public ReboundCastSpellFromExileEffect copy() {
         return new ReboundCastSpellFromExileEffect(this);
     }
-
 }

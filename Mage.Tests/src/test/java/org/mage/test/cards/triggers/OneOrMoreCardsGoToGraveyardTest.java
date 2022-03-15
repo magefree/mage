@@ -32,7 +32,7 @@ public class OneOrMoreCardsGoToGraveyardTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Evolving Wilds", 1);
         assertPermanentCount(playerA, "Mountain", 1);
-        assertPermanentCount(playerA, "Insect", 2);
+        assertPermanentCount(playerA, "Insect Token", 2);
 
     }
 }

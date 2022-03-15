@@ -27,8 +27,7 @@ public final class TemporalCascade extends CardImpl {
         this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
 
         // or each player draws seven cards.
-        Mode mode = new Mode();
-        mode.addEffect(new TemporalCascadeDrawEffect());
+        Mode mode = new Mode(new TemporalCascadeDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}

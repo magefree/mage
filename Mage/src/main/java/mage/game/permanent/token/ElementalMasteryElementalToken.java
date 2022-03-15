@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class ElementalMasteryElementalToken extends TokenImpl {
 
     public ElementalMasteryElementalToken() {
-        super("Elemental", "1/1 red Elemental creature token with haste");
+        super("Elemental Token", "1/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
         color.setRed(true);

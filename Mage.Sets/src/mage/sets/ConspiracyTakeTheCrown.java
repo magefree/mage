@@ -26,6 +26,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 221;
         cards.add(new SetCardInfo("Absorb Vis", 126, Rarity.COMMON, mage.cards.a.AbsorbVis.class));
         cards.add(new SetCardInfo("Adriana, Captain of the Guard", 73, Rarity.RARE, mage.cards.a.AdrianaCaptainOfTheGuard.class));
         cards.add(new SetCardInfo("Affa Guard Hound", 81, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));
@@ -130,7 +131,8 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Jeering Homunculus", 33, Rarity.COMMON, mage.cards.j.JeeringHomunculus.class));
         cards.add(new SetCardInfo("Juniper Order Ranger", 204, Rarity.UNCOMMON, mage.cards.j.JuniperOrderRanger.class));
         cards.add(new SetCardInfo("Kami of the Crescent Moon", 113, Rarity.RARE, mage.cards.k.KamiOfTheCrescentMoon.class));
-        cards.add(new SetCardInfo("Kaya, Ghost Assassin", 75, Rarity.MYTHIC, mage.cards.k.KayaGhostAssassin.class));
+        cards.add(new SetCardInfo("Kaya, Ghost Assassin", 75, Rarity.MYTHIC, mage.cards.k.KayaGhostAssassin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kaya, Ghost Assassin", 222, Rarity.MYTHIC, mage.cards.k.KayaGhostAssassin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Keeper of Keys", 34, Rarity.RARE, mage.cards.k.KeeperOfKeys.class));
         cards.add(new SetCardInfo("Keepsake Gorgon", 141, Rarity.UNCOMMON, mage.cards.k.KeepsakeGorgon.class));
         cards.add(new SetCardInfo("Kill Shot", 94, Rarity.COMMON, mage.cards.k.KillShot.class));

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SpawningGroundsBeastToken extends TokenImpl {
 
     public SpawningGroundsBeastToken() {
-        super("Beast", "5/5 green Beast creature token with trample");
+        super("Beast Token", "5/5 green Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAST);

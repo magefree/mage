@@ -85,7 +85,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell of the chosen type, put a charge counter on {this}";
+        return "Whenever you cast a spell of the chosen type, put a charge counter on {this}.";
     }
 }
 

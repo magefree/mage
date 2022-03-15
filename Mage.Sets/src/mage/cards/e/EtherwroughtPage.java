@@ -28,25 +28,18 @@ public final class EtherwroughtPage extends CardImpl {
     public EtherwroughtPage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{U}{B}");
 
-
-        
-
-
         // At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), TargetController.YOU, false);
 
         // or look at the top card of your library, then you may put that card into your graveyard;
-        Mode mode = new Mode();
-        mode.addEffect(new EtherwroughtPageEffect());
+        Mode mode = new Mode(new EtherwroughtPageEffect());
         ability.addMode(mode);
 
         // or each opponent loses 1 life
-        Mode mode1 = new Mode();
-        mode1.addEffect(new LoseLifeOpponentsEffect(1));
+        Mode mode1 = new Mode(new LoseLifeOpponentsEffect(1));
         ability.addMode(mode1);
         
         this.addAbility(ability);
-
     }
 
     private EtherwroughtPage(final EtherwroughtPage card) {
@@ -63,7 +56,7 @@ class EtherwroughtPageEffect extends OneShotEffect {
 
     public EtherwroughtPageEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "or look at the top card of your library, then you may put that card into your graveyard";
+        this.staticText = "look at the top card of your library. You may put that card into your graveyard";
     }
 
     public EtherwroughtPageEffect(final EtherwroughtPageEffect effect) {

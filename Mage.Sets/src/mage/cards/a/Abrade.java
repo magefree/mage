@@ -25,8 +25,7 @@ public final class Abrade extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Destroy target artifact.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }

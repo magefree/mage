@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class HorrorToken extends TokenImpl {
 
     public HorrorToken() {
-        super("Horror", "4/4 black Horror creature token");
+        super("Horror Token", "4/4 black Horror creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.HORROR);

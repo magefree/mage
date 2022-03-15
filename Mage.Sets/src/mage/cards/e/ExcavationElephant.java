@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,15 +7,16 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ExcavationElephant extends CardImpl {
@@ -34,11 +33,11 @@ public final class ExcavationElephant extends CardImpl {
 
         // When Excavation Elephant enters the battlefield, if it was kicked, return target artifact card from your graveyard to your hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, "
-                + "return target artifact card from your graveyard to your hand."
+                        + "return target artifact card from your graveyard to your hand."
         ));
     }
 

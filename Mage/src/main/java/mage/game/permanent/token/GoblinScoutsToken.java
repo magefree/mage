@@ -13,7 +13,7 @@ import mage.abilities.keyword.MountainwalkAbility;
 public final class GoblinScoutsToken extends TokenImpl {
 
     public GoblinScoutsToken() {
-        super("Goblin Scout", "1/1 red Goblin Scout creature tokens with mountainwalk");
+        super("Goblin Scout Token", "1/1 red Goblin Scout creature tokens with mountainwalk");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);

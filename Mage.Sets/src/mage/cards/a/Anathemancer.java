@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,33 +12,35 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Anathemancer extends CardImpl {
 
     public Anathemancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
-       
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Anathemancer enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new AnathemancerCount(), "it"));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(AnathemancerCount.instance, "it")
+                        .setText("it deals damage to target player equal to the number of nonbasic lands that player controls")
+        );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+
         // Unearth {5}{B}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{5}{B}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{5}{B}{R}")));
     }
 
     private Anathemancer(final Anathemancer card) {
@@ -53,29 +53,29 @@ public final class Anathemancer extends CardImpl {
     }
 }
 
-class AnathemancerCount implements DynamicValue {
+enum AnathemancerCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility.getFirstTarget() == null) {
             return 0;
         }
-
-        FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
-        filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
-
-        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(
+                StaticFilters.FILTER_LANDS_NONBASIC,
+                sourceAbility.getFirstTarget(),
+                sourceAbility.getControllerId(), game
+        );
     }
 
     @Override
     public AnathemancerCount copy() {
-        return new AnathemancerCount();
+        return this;
     }
 
     @Override
     public String toString() {
-        return "1";
+        return "";
     }
 
     @Override

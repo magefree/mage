@@ -17,6 +17,8 @@ import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.stream.Collectors;
+
 /**
  * @author LevelX2
  */
@@ -29,7 +31,6 @@ public class EmbalmAbility extends ActivatedAbilityImpl {
         addCost(new ExileSourceFromGraveCost());
         this.rule = setRule(cost, card);
         this.timing = TimingRule.SORCERY;
-        setRule(cost, card);
     }
 
     public EmbalmAbility(final EmbalmAbility ability) {
@@ -48,14 +49,14 @@ public class EmbalmAbility extends ActivatedAbilityImpl {
     }
 
     private String setRule(Cost cost, Card card) {
-        StringBuilder sb = new StringBuilder("Embalm ").append(cost.getText());
-        sb.append(" <i>(").append(cost.getText());
-        sb.append(", Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie ");
-        for (SubType subtype : card.getSubtype()) {
-            sb.append(subtype).append(" ");
-        }
-        sb.append(" with no mana cost. Embalm only as a sorcery.)</i>");
-        return sb.toString();
+        return "Embalm " + cost.getText() + " <i>(" + cost.getText() + ", Exile this card from your graveyard: " +
+                "Create a token that's a copy of it, except it's a white Zombie " +
+                card.getSubtype()
+                        .stream()
+                        .map(SubType::getDescription)
+                        .map(s -> s + ' ')
+                        .collect(Collectors.joining()) +
+                "with no mana cost. Embalm only as a sorcery.)</i>";
     }
 }
 

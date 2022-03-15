@@ -25,7 +25,7 @@ public final class SpyMasterGoblinToken extends TokenImpl {
     }
 
     public SpyMasterGoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"");
+        super("Goblin Token", "1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);

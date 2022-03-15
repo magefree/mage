@@ -1,9 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -12,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
@@ -39,17 +36,12 @@ public final class HeartOfKiran extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Crew 3
+        // You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
         this.addAbility(new CrewAbility(
                 3,
                 new RemoveCounterCost(new TargetControlledPermanent(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER
                 ), CounterType.LOYALTY)
-        ));
-
-        // You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("you may remove a loyalty counter " +
-                "from a planeswalker you control rather than pay {this}'s crew cost")
         ));
     }
 

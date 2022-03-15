@@ -1,13 +1,9 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.ApprovingObject;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -17,17 +13,17 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class SunbirdsInvocation extends CardImpl {
@@ -54,11 +50,11 @@ public final class SunbirdsInvocation extends CardImpl {
 
 class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
-    public SunbirdsInvocationTriggeredAbility() {
+    SunbirdsInvocationTriggeredAbility() {
         super(new SunbirdsInvocationEffect(), false);
     }
 
-    public SunbirdsInvocationTriggeredAbility(SunbirdsInvocationTriggeredAbility ability) {
+    private SunbirdsInvocationTriggeredAbility(SunbirdsInvocationTriggeredAbility ability) {
         super(ability);
     }
 
@@ -87,12 +83,10 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell from your hand, "
-                + "reveal the top X cards of your library, "
-                + "where X is that spell's mana value. "
-                + "You may cast a card revealed this way with "
-                + "mana value X or less without paying its mana cost."
-                + " Put the rest on the bottom of your library in a random order.";
+        return "Whenever you cast a spell from your hand, reveal the top X cards of your library, " +
+                "where X is that spell's mana value. You may cast a spell with mana value X or less " +
+                "from among cards revealed this way without paying its mana cost. " +
+                "Put the rest on the bottom of your library in a random order.";
     }
 }
 
@@ -100,10 +94,6 @@ class SunbirdsInvocationEffect extends OneShotEffect {
 
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "reveal the top X cards of your library, where X is that "
-                + "spell's mana value. You may cast a card revealed this "
-                + "way with mana value X or less without paying its mana cost. "
-                + "Put the rest on the bottom of your library in a random order";
     }
 
     public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
@@ -113,9 +103,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null
-                || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
@@ -124,29 +112,15 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         }
         int xValue = spell.getManaValue();
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-
-            FilterCard filter = new FilterNonlandCard("card revealed this way with mana value " + xValue + " or less");
-            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-            TargetCard target = new TargetCard(1, Zone.LIBRARY, filter);
-
-            if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                        if (cardWasCast) {
-                            cards.remove(card);
-                        }
-                    }
-                }
-            }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+        if (cards.isEmpty()) {
+            return true;
         }
+        controller.revealCards(source, cards, game);
+        FilterCard filter = new FilterCard();
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
+        cards.retainZone(Zone.LIBRARY, game);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 

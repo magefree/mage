@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -26,10 +25,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class VeteransArmaments extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Soldier creature");
-    static {
-        filter.add(SubType.SOLDIER.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SOLDIER, "a Soldier creature");
+    private static final DynamicValue xValue = new AttackingCreatureCount();
 
     public VeteransArmaments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
@@ -37,8 +34,7 @@ public final class VeteransArmaments extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
-        DynamicValue attackingCreatures = new AttackingCreatureCount("attacking creature");
-        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(attackingCreatures,attackingCreatures, Duration.EndOfTurn),false);
+        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.\"");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

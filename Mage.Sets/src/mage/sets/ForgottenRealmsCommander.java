@@ -104,8 +104,10 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 236, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 157, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Explorer's Scope", 205, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
+        cards.add(new SetCardInfo("Extract Brain", 46, Rarity.RARE, mage.cards.e.ExtractBrain.class));
         cards.add(new SetCardInfo("Fellwar Stone", 206, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fertile Ground", 158, Rarity.COMMON, mage.cards.f.FertileGround.class));
+        cards.add(new SetCardInfo("Fevered Suspicion", 47, Rarity.RARE, mage.cards.f.FeveredSuspicion.class));
         cards.add(new SetCardInfo("Fey Steed", 5, Rarity.RARE, mage.cards.f.FeySteed.class));
         cards.add(new SetCardInfo("Fiend of the Shadows", 99, Rarity.RARE, mage.cards.f.FiendOfTheShadows.class));
         cards.add(new SetCardInfo("Fiendlash", 31, Rarity.RARE, mage.cards.f.Fiendlash.class));
@@ -217,6 +219,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar's Expertise", 170, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Riverwise Augur", 93, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Robe of Stars", 11, Rarity.RARE, mage.cards.r.RobeOfStars.class));
+        cards.add(new SetCardInfo("Rod of Absorption", 19, Rarity.RARE, mage.cards.r.RodOfAbsorption.class));
         cards.add(new SetCardInfo("Ronom Unicorn", 71, Rarity.COMMON, mage.cards.r.RonomUnicorn.class));
         cards.add(new SetCardInfo("Savage Ventmaw", 191, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 137, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
@@ -267,12 +270,13 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unburial Rites", 111, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Underdark Rift", 62, Rarity.UNCOMMON, mage.cards.u.UnderdarkRift.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 220, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
-        cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.UNCOMMON, mage.cards.u.UtopiaSprawl.class));
+        cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.COMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utter End", 195, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Valiant Endeavor", 13, Rarity.RARE, mage.cards.v.ValiantEndeavor.class));
         cards.add(new SetCardInfo("Valorous Stance", 76, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 148, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanish into Memory", 196, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
+        cards.add(new SetCardInfo("Vengeful Ancestor", 35, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Verdant Embrace", 173, Rarity.RARE, mage.cards.v.VerdantEmbrace.class));
         cards.add(new SetCardInfo("Victimize", 112, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viridian Longbow", 221, Rarity.COMMON, mage.cards.v.ViridianLongbow.class));

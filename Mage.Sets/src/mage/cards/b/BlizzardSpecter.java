@@ -40,8 +40,7 @@ public final class BlizzardSpecter extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false, true);
 
         // or that player discards a card.
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(1, false));
+        Mode mode = new Mode(new DiscardTargetEffect(1, false));
         ability.addMode(mode);
 
         this.addAbility(ability);

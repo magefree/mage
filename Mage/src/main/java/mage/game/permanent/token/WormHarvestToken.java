@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class WormHarvestToken extends TokenImpl {
 
     public WormHarvestToken() {
-        super("Worm", "1/1 black and green Worm creature token");
+        super("Worm Token", "1/1 black and green Worm creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

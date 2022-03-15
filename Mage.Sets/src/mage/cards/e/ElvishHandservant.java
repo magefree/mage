@@ -18,7 +18,7 @@ import mage.filter.FilterSpell;
  */
 public final class ElvishHandservant extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Giant");
+    private static final FilterSpell filter = new FilterSpell("Giant spell");
 
     static {
         filter.add(SubType.GIANT.getPredicate());

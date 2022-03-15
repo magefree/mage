@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -35,7 +36,7 @@ public final class LieutenantsOfTheGuard extends CardImpl {
         // strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new LieutenantsOfTheGuardEffect(), false)
-                .withFlavorWord("Council's dilemma")
+                .setAbilityWord(AbilityWord.COUNCILS_DILEMMA)
         );
     }
 

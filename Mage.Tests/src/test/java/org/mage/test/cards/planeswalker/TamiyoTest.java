@@ -38,10 +38,10 @@ public class TamiyoTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until end of turn");
         // finally, use Tamiyo +1 on both creatures
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
-        addTarget(playerA, "Knight Ally^Gideon, Ally of Zendikar"); // both token and Gideon as creature
+        addTarget(playerA, "Knight Ally Token^Gideon, Ally of Zendikar"); // both token and Gideon as creature
 
         // attack with both unblocked
-        attack(3, playerA, "Knight Ally");
+        attack(3, playerA, "Knight Ally Token");
         attack(3, playerA, "Gideon, Ally of Zendikar");
 
         setStopAt(3, PhaseStep.END_COMBAT);
@@ -50,7 +50,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertLife(playerB, 13); // 5 + 2 damage, 20 - 7 = 13
         assertPermanentCount(playerA, "Tamiyo, Field Researcher", 1);
         assertPermanentCount(playerA, "Gideon, Ally of Zendikar", 1);
-        assertPermanentCount(playerA, "Knight Ally", 1);
+        assertPermanentCount(playerA, "Knight Ally Token", 1);
         assertHandCount(playerA, 3); // two cards drawn from each creature dealing damage + 1 card drawn on turn
     }
 

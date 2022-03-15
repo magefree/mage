@@ -6,11 +6,11 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 
-public class SharesColorWithSourcePredicate implements ObjectSourcePlayerPredicate<MageObject> {
+public enum SharesColorWithSourcePredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

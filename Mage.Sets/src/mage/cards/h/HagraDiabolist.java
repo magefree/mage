@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
@@ -15,8 +13,9 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class HagraDiabolist extends CardImpl {
@@ -29,7 +28,7 @@ public final class HagraDiabolist extends CardImpl {
     }
 
     public HagraDiabolist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.ALLY);
@@ -37,9 +36,9 @@ public final class HagraDiabolist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)).setText("you may have target player lose life equal to the number of Allies you control"), true);
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(null));
     }
 
     private HagraDiabolist(final HagraDiabolist card) {

@@ -867,6 +867,44 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_SramsExpertise_ValkiGodOfLies() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Valki, God of Lies");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Valki, God of Lies", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
+    }
+
+    @Test
+    public void test_SramsExpertise_CosimaGodOfTheVoyage() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Cosima, God of the Voyage");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast The Omenkeel"); // can cast any side here
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "The Omenkeel", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
+    }
+
+    @Test
     public void test_Copy_AsSpell() {
         addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);

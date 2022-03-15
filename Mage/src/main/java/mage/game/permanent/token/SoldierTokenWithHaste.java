@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SoldierTokenWithHaste extends TokenImpl {
 
     public SoldierTokenWithHaste() {
-        super("Soldier", "1/1 red and white Soldier creature token with haste");
+        super("Soldier Token", "1/1 red and white Soldier creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setRed(true);

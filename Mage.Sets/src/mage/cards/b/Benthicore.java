@@ -45,8 +45,8 @@ public final class Benthicore extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken(), 2), false));
         
         // Tap two untapped Merfolk you control: Untap Benthicore. It gains shroud until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn).setText("it gains shroud until end of turn"));
         this.addAbility(ability);
     }
 

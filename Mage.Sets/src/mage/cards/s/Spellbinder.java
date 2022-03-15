@@ -11,10 +11,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -40,7 +37,7 @@ public final class Spellbinder extends CardImpl {
         // an instant card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SpellbinderImprintEffect(), true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
         // Whenever equipped creature deals combat damage to a player, you may 

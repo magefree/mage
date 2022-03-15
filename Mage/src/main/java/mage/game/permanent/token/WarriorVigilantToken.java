@@ -16,7 +16,7 @@ import mage.constants.SubType;
 public final class WarriorVigilantToken extends TokenImpl {
 
     public WarriorVigilantToken() {
-        super("Warrior", "1/1 white Warrior creature token with vigilance");
+        super("Warrior Token", "1/1 white Warrior creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.WARRIOR);

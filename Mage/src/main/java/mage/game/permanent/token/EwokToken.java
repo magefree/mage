@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class EwokToken extends TokenImpl {
 
     public EwokToken() {
-        super("Ewok", "1/1 green Ewok creature tokens", 1, 1);
+        super("Ewok Token", "1/1 green Ewok creature tokens", 1, 1);
         availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);

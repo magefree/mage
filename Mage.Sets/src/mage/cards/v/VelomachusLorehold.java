@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -8,7 +7,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -16,10 +18,8 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -84,26 +84,11 @@ class VelomachusLoreholdEffect extends OneShotEffect {
         if (controller == null || permanent == null) {
             return false;
         }
-        Set<Card> cardsSet = controller.getLibrary().getTopCards(game, 7);
-        Cards cards = new CardsImpl(cardsSet);
-        FilterCard filter = new FilterInstantOrSorceryCard(
-                "instant or sorcery card with mana value " + permanent.getPower().getValue() + " or less"
-        );
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
+        FilterCard filter = new FilterInstantOrSorceryCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue() + 1));
-        TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        controller.choose(Outcome.PlayForFree, cards, target, game);
-        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-        if (card == null) {
-            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-            return true;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        if (cardWasCast) {
-            cards.remove(card);
-        }
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
+        cards.retainZone(Zone.LIBRARY, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }

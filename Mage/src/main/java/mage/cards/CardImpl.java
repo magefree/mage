@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.ReconfigureAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -813,21 +814,35 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
-        if (!this.attachments.contains(permanentId)) {
-            Permanent attachment = game.getPermanent(permanentId);
-            if (attachment == null) {
-                attachment = game.getPermanentEntering(permanentId);
-            }
-            if (attachment != null) {
-                if (!game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
-                    this.attachments.add(permanentId);
-                    attachment.attachTo(objectId, source, game);
-                    game.fireEvent(new AttachedEvent(objectId, attachment, source));
-                    return true;
-                }
-            }
+        if (permanentId == null
+                || this.attachments.contains(permanentId)
+                || permanentId.equals(this.getId())) {
+            return false;
         }
-        return false;
+        Permanent attachment = game.getPermanent(permanentId);
+        if (attachment == null) {
+            attachment = game.getPermanentEntering(permanentId);
+        }
+        if (attachment == null) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.EQUIPMENT, game)
+                && (attachment.isCreature(game)
+                && !attachment.getAbilities(game).containsClass(ReconfigureAbility.class)
+                || !this.isCreature(game))) {
+            return false;
+        }
+        if (attachment.hasSubtype(SubType.FORTIFICATION, game)
+                && (attachment.isCreature(game) || !this.isLand(game))) {
+            return false;
+        }
+        if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
+            return false;
+        }
+        this.attachments.add(permanentId);
+        attachment.attachTo(objectId, source, game);
+        game.fireEvent(new AttachedEvent(objectId, attachment, source));
+        return true;
     }
 
     @Override

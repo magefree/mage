@@ -1,8 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -10,13 +7,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.DashedCondition;
-import mage.abilities.condition.common.SourceOnBattlefieldCondition;
-import mage.abilities.costs.AlternativeCost2;
-import mage.abilities.costs.AlternativeCost2Impl;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -30,8 +21,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class DashAbility extends StaticAbility implements AlternativeSourceCosts {
@@ -112,11 +106,11 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
                 for (AlternativeCost2 dashCost : alternativeSourceCosts) {
                     if (dashCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, KEYWORD
-                                    + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
+                            + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
                         activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) dashCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) dashCost).iterator(); it.hasNext(); ) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -208,7 +202,7 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (game.getPermanentEntering(source.getSourceId()) != null) {
             OneShotEffect returnToHandEffect = new ReturnToHandTargetEffect();
-            ConditionalOneShotEffect mustBeOnBattlefieldToReturn = new ConditionalOneShotEffect(returnToHandEffect, SourceOnBattlefieldCondition.instance);
+            ConditionalOneShotEffect mustBeOnBattlefieldToReturn = new ConditionalOneShotEffect(returnToHandEffect, DashAddDelayedTriggeredAbilityEffect::check);
             mustBeOnBattlefieldToReturn.setText("return the dashed creature from the battlefield to its owner's hand");
             // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
             mustBeOnBattlefieldToReturn.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
@@ -217,5 +211,9 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+
+    static boolean check(Game game, Ability source) {
+        return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1;
     }
 }

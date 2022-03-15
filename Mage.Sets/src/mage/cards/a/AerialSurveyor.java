@@ -79,10 +79,10 @@ enum AerialSurveyorCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getBattlefield().count(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getSourceId(), source.getControllerId(), game
         ) > game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), source.getSourceId(), game
+                source.getSourceId(), source.getControllerId(), game
         );
     }
 }

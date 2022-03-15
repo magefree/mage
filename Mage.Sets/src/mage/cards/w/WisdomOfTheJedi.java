@@ -37,10 +37,9 @@ public final class WisdomOfTheJedi extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, false));
 
         // Target creature you control gets +1/+1 and protection from the color of your choice until end of turn.
-        Mode mode = new Mode();
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Target creature you control gets +1/+1");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn);
         effect.setText("and protection from the color of your choice until end of turn");
         mode.addEffect(effect);
@@ -48,8 +47,7 @@ public final class WisdomOfTheJedi extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // Counter target spell with converted mana cost of 3 or less.
-        mode = new Mode();
-        mode.addEffect(new CounterTargetEffect());
+        mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(filterSpell));
         this.getSpellAbility().addMode(mode);
 

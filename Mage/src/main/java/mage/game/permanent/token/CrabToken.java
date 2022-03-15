@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class CrabToken extends TokenImpl {
 
     public CrabToken() {
-        super("Crab", "0/3 blue Crab creature token");
+        super("Crab Token", "0/3 blue Crab creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.CRAB);

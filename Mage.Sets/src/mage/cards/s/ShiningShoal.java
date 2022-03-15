@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,8 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterOwnedCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,24 +23,33 @@ import mage.target.TargetSource;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ShiningShoal extends CardImpl {
+
+    private static final FilterOwnedCard filter
+            = new FilterOwnedCard("a white card with mana value X from your hand");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
 
     public ShiningShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.subtype.add(SubType.ARCANE);
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
-        FilterOwnedCard filter = new FilterOwnedCard("a white card with mana value X from your hand");
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(
+                new TargetCardInHand(filter), true
+        )));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
-        this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, ExileFromHandCostCardConvertedMana.instance));
+        this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(
+                Duration.EndOfTurn, ExileFromHandCostCardConvertedMana.instance
+        ));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -129,5 +134,4 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
         }
         return false;
     }
-
 }

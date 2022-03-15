@@ -16,7 +16,7 @@ public final class KalitasVampireToken extends TokenImpl {
     }
 
     public KalitasVampireToken(int tokenPower, int tokenToughness) {
-        super("Vampire", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Vampire creature token").toString());
+        super("Vampire Token", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Vampire creature token").toString());
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);

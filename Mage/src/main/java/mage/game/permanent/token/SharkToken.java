@@ -14,7 +14,7 @@ public final class SharkToken extends TokenImpl {
         this(0);
     }
     public SharkToken(int xValue) {
-        super("Shark", "X/X blue Shark creature token with flying");
+        super("Shark Token", "X/X blue Shark creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SHARK);

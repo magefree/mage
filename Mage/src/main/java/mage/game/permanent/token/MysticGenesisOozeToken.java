@@ -15,7 +15,7 @@ public final class MysticGenesisOozeToken extends TokenImpl {
         this(0);
     }
     public MysticGenesisOozeToken(int xValue) {
-        super("Ooze", "X/X green Ooze creature token");
+        super("Ooze Token", "X/X green Ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.OOZE);

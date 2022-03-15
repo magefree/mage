@@ -33,7 +33,7 @@ public final class BelzenlokDemonToken extends TokenImpl {
     }
 
     public BelzenlokDemonToken() {
-        super("Demon", "6/6 black Demon creature token with flying, trample, and "
+        super("Demon Token", "6/6 black Demon creature token with flying, trample, and "
                 + "\"At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you.\"");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);

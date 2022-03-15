@@ -45,7 +45,7 @@ public final class AjaniVengeant extends CardImpl {
         // −2: Ajani Vengeant deals 3 damage to any target and you gain 3 life.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(3));
-        effects1.add(new GainLifeEffect(3));
+        effects1.add(new GainLifeEffect(3).concatBy("and"));
         LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);

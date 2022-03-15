@@ -1,8 +1,5 @@
-
-
 package mage.cards.w;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -11,21 +8,18 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
 
 /**
  * @author LevelX2
@@ -43,8 +37,9 @@ public final class WaxmaneBaku extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // {1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WaxmaneBakuTapEffect(), new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect("tap X target creatures"), new GenericManaCost(1));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.setTargetAdjuster(WaxmaneBakuAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -58,45 +53,18 @@ public final class WaxmaneBaku extends CardImpl {
     }
 }
 
-class WaxmaneBakuTapEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    public WaxmaneBakuTapEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap X target creatures";
-    }
-
-    public WaxmaneBakuTapEffect(final WaxmaneBakuTapEffect effect) {
-        super(effect);
-    }
+enum WaxmaneBakuAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int numberToTap = 0;
-        for (Cost cost : source.getCosts()) {
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = 0;
+        for (Cost cost : ability.getCosts()) {
             if (cost instanceof RemoveVariableCountersSourceCost) {
-                numberToTap = ((RemoveVariableCountersSourceCost) cost).getAmount();
+                xValue = ((RemoveVariableCountersSourceCost) cost).getAmount();
             }
         }
-        TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-            if (!target.getTargets().isEmpty()) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.tap(source, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public WaxmaneBakuTapEffect copy() {
-        return new WaxmaneBakuTapEffect(this);
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(xValue));
     }
 }

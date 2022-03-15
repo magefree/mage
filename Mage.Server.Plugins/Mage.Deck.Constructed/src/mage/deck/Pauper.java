@@ -29,10 +29,11 @@ public class Pauper extends Constructed {
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
         banned.add("Daze");
+        banned.add("Disciple of the Vault");
         banned.add("Empty the Warrens");
-        banned.add("Expedition Map");
         banned.add("Fall from Favor");
         banned.add("Frantic Search");
+        banned.add("Galvanic Relay");
         banned.add("Gitaxian Probe");
         banned.add("Grapeshot");
         banned.add("Gush");

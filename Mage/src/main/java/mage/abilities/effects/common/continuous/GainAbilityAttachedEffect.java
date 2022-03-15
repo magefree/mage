@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -19,6 +20,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     protected AttachmentType attachmentType;
     protected boolean independentEffect;
     protected String targetObjectName;
+    protected boolean doesntRemoveItself = false;
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         this(ability, attachmentType, Duration.WhileOnBattlefield);
@@ -62,6 +64,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.attachmentType = effect.attachmentType;
         this.independentEffect = effect.independentEffect;
         this.targetObjectName = effect.targetObjectName;
+        this.doesntRemoveItself = effect.doesntRemoveItself;
     }
 
     @Override
@@ -82,7 +85,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = null;
+        Permanent permanent;
         if (affectedObjectsSet) {
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent == null) {
@@ -93,9 +96,14 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
+            } else {
+                permanent = null;
             }
         }
         if (permanent != null) {
+            if (doesntRemoveItself && ability instanceof ProtectionAbility) {
+                ((ProtectionAbility) ability).setAuraIdNotToBeRemoved(source.getSourceId());
+            }
             permanent.addAbility(ability, source.getSourceId(), game);
             afterGain(game, source, permanent, ability);
         }
@@ -112,6 +120,11 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
      */
     public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
         //
+    }
+
+    public GainAbilityAttachedEffect setDoesntRemoveItself(boolean doesntRemoveItself) {
+        this.doesntRemoveItself = doesntRemoveItself;
+        return this;
     }
 
     @Override
@@ -137,6 +150,9 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration);
+        }
+        if (doesntRemoveItself) {
+            sb.append(" This effect doesn't remove {this}.");
         }
         return sb.toString();
     }

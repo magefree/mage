@@ -80,7 +80,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Clue", 2);
+        assertPermanentCount(playerA, "Clue Token", 2);
 
     }
 
@@ -96,8 +96,8 @@ public class StateValuesTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Screech");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
-        setChoice(playerA, "Bird");
-        setChoice(playerA, "Bird");
+        setChoice(playerA, "Bird Token");
+        setChoice(playerA, "Bird Token");
         setChoice(playerA, "Silvercoat Lion");
 
         setStrictChooseMode(true);
@@ -108,9 +108,9 @@ public class StateValuesTest extends CardTestPlayerBase {
 
         // Before rollback
         assertTappedCount("Plains", true, 4);
-        assertTappedCount("Bird", true, 2);
+        assertTappedCount("Bird Token", true, 2);
         assertTappedCount("Silvercoat Lion", true, 1);
-        assertPermanentCount(playerA, "Bird", 4);
+        assertPermanentCount(playerA, "Bird Token", 4);
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Battle Screech", 1);
 
@@ -119,7 +119,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         // After rollback to turn 1
         assertTappedCount("Plains", true, 0);
         assertTappedCount("Silvercoat Lion", true, 0);
-        assertPermanentCount(playerA, "Bird", 0);
+        assertPermanentCount(playerA, "Bird Token", 0);
         assertLibraryCount(playerA, "Battle Screech", 1);
         assertHandCount(playerA, 0);
     }

@@ -32,7 +32,8 @@ public final class FableOfTheMirrorBreaker extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new CreateTokenEffect(new FableOfTheMirrorBreakerToken()));
 
         // II — You may discard up to two cards. If you do, draw that many cards.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new DiscardAndDrawThatManyEffect(2));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new DiscardAndDrawThatManyEffect(2)
+                .setText("you may discard up to two cards. If you do, draw that many cards"));
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
         this.addAbility(new TransformAbility());

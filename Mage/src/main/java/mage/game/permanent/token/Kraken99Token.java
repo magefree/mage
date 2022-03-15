@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class Kraken99Token extends TokenImpl {
 
     public Kraken99Token() {
-        super("Kraken", "9/9 blue Kraken creature token");
+        super("Kraken Token", "9/9 blue Kraken creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.KRAKEN);

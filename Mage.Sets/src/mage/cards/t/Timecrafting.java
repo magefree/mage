@@ -36,8 +36,7 @@ public final class Timecrafting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanentOrSuspendedCard());
 
         // or put X time counters on target permanent with a time counter on it or suspended card.
-        Mode mode = new Mode();
-        mode.addEffect(new TimecraftingAddEffect());
+        Mode mode = new Mode(new TimecraftingAddEffect());
         mode.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         this.getSpellAbility().addMode(mode);
     }

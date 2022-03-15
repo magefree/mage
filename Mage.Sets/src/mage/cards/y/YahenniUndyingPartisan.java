@@ -1,7 +1,5 @@
-
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,17 +11,16 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class YahenniUndyingPartisan extends CardImpl {
@@ -41,14 +38,16 @@ public final class YahenniUndyingPartisan extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni, Undying Partisan.
-        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, new FilterOpponentsCreaturePermanent()));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
+        ));
 
         // Sacrifice another creature: Yahenni gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)))
-        );
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+        ));
     }
 
     private YahenniUndyingPartisan(final YahenniUndyingPartisan card) {

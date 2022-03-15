@@ -52,7 +52,7 @@ public final class SaprolingToken extends TokenImpl {
     }
 
     public SaprolingToken() {
-        super("Saproling", "1/1 green Saproling creature token");
+        super("Saproling Token", "1/1 green Saproling creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

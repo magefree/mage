@@ -21,7 +21,7 @@ public final class PrismToken extends TokenImpl {
     }
 
     public PrismToken() {
-        super("Prism", "0/1 colorless Prism artifact creature token");
+        super("Prism Token", "0/1 colorless Prism artifact creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

@@ -49,14 +49,12 @@ public final class CollectiveBrutality extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("reveals hand, you choose to discard"));
 
         // Target creature gets -2/-2 until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent().withChooseHint("gets -2/-2 until end of turn"));
         this.getSpellAbility().addMode(mode);
 
         // Target opponent loses 2 life and you gain 2 life.
-        mode = new Mode();
-        mode.addEffect(new LoseLifeTargetEffect(2));
+        mode = new Mode(new LoseLifeTargetEffect(2));
         mode.addEffect(new GainLifeEffect(2).concatBy("and"));
         mode.addTarget(new TargetOpponent().withChooseHint("loses 2 life"));
         this.getSpellAbility().addMode(mode);

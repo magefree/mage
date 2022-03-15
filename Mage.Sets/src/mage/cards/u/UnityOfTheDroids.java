@@ -40,13 +40,11 @@ public final class UnityOfTheDroids extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(artifactCreatureFilter));
 
         //   Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
-        Mode mode = new Mode();
-        mode.addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false));
+        Mode mode = new Mode(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false));
         this.getSpellAbility().addMode(mode);
 
         //   Destroy target nonartifact creature.
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetCreaturePermanent(nonArtifactCreatureFilter));
         this.getSpellAbility().addMode(mode);
     }

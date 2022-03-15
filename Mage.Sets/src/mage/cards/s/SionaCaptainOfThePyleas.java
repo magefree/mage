@@ -95,7 +95,7 @@ class SionaCaptainOfThePyleasAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever an Aura you control becomes attached to a creature you control, " +
-                "create a 1/1 white Human Soldier creature token";
+                "create a 1/1 white Human Soldier creature token.";
     }
 
     @Override

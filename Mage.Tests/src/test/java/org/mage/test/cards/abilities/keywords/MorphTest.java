@@ -262,8 +262,8 @@ public class MorphTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Ponyback Brigade", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
-        assertPermanentCount(playerA, "Goblin", 3);
-        assertPowerToughness(playerA, "Goblin", 1, 1, Filter.ComparisonScope.Any);
+        assertPermanentCount(playerA, "Goblin Token", 3);
+        assertPowerToughness(playerA, "Goblin Token", 1, 1, Filter.ComparisonScope.Any);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
         assertPowerToughness(playerA, "Ponyback Brigade", 1, 1);

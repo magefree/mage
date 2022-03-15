@@ -45,7 +45,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
 
     public RealmsUnchartedEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle";
+        this.staticText = "Search your library for up to four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle";
     }
 
     public RealmsUnchartedEffect(final RealmsUnchartedEffect effect) {

@@ -37,7 +37,7 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Sejiri Merfolk", 0);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertExileCount("Sejiri Merfolk", 1);
 
     }
@@ -60,7 +60,7 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Craw Wurm", 0);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertExileCount("Craw Wurm", 1);
 
     }

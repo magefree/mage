@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +34,7 @@ public final class SpellkeeperWeird extends CardImpl {
 
         // {2}, {T}, Sacrifice Spellkeeper Weird: Return target instant or sorcery card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnToHandTargetEffect(), new GenericManaCost(2)
+                new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

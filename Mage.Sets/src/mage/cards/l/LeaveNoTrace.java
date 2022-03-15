@@ -1,18 +1,19 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -25,12 +26,12 @@ public final class LeaveNoTrace extends CardImpl {
     }
 
     public LeaveNoTrace(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
         this.getSpellAbility().addEffect(new LeaveNoTraceEffect());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
     private LeaveNoTrace(final LeaveNoTrace card) {
@@ -52,7 +53,7 @@ class LeaveNoTraceEffect extends OneShotEffect {
 
     LeaveNoTraceEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Radiance - Destroy target enchantment and each other enchantment that shares a color with it";
+        staticText = "Destroy target enchantment and each other enchantment that shares a color with it";
     }
 
     LeaveNoTraceEffect(final LeaveNoTraceEffect effect) {

@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class LilianaDreadhordeGeneral extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent(" creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creatures");
 
     public LilianaDreadhordeGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");

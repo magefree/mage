@@ -79,7 +79,7 @@ class AllCountersCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each counter on it";
+        return "counter on it";
     }
 
     @Override

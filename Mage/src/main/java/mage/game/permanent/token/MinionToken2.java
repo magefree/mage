@@ -17,7 +17,7 @@ public final class MinionToken2 extends TokenImpl {
     }
 
     public MinionToken2(String setCode) {
-        super("Minion", "1/1 black Minion creature token");
+        super("Minion Token", "1/1 black Minion creature token");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.MINION);

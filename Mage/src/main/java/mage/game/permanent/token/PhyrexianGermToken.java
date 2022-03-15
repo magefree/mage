@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PhyrexianGermToken extends TokenImpl {
 
     public PhyrexianGermToken() {
-        super("Phyrexian Germ", "0/0 black Phyrexian Germ creature token");
+        super("Phyrexian Germ Token", "0/0 black Phyrexian Germ creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PHYREXIAN);

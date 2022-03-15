@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WurmWithDeathtouchToken extends TokenImpl {
 
     public WurmWithDeathtouchToken() {
-        super("Phyrexian Wurm", "3/3 colorless Phyrexian Wurm artifact creature token with deathtouch");
+        super("Phyrexian Wurm Token", "3/3 colorless Phyrexian Wurm artifact creature token with deathtouch");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);

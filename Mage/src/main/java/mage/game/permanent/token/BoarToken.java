@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class BoarToken extends TokenImpl {
 
     public BoarToken() {
-        super("Boar", "3/3 green Boar creature token");
+        super("Boar Token", "3/3 green Boar creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BOAR);

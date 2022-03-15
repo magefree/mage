@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class MerfolkToken extends TokenImpl {
 
     public MerfolkToken() {
-        super("Merfolk", "1/1 blue Merfolk creature token");
+        super("Merfolk Token", "1/1 blue Merfolk creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.MERFOLK);

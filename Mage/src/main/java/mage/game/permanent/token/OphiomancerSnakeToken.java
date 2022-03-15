@@ -13,7 +13,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 public final class OphiomancerSnakeToken extends TokenImpl {
 
     public OphiomancerSnakeToken() {
-        super("Snake", "1/1 black Snake creature token with deathtouch");
+        super("Snake Token", "1/1 black Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SNAKE);

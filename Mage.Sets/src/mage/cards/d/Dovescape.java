@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -10,11 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.DovescapeToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WhiteBlueBirdToken;
 import mage.game.stack.Spell;
 
 /**
@@ -23,17 +20,11 @@ import mage.game.stack.Spell;
  */
 public final class Dovescape extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public Dovescape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}{W/U}");
 
         // Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.SPELL));
     }
 
     private Dovescape(final Dovescape card) {
@@ -72,8 +63,7 @@ class DovescapeEffect extends OneShotEffect {
             spellControllerID = spell.getControllerId();
             game.getStack().counter(spell.getId(), source, game);
         }
-        Token token = new DovescapeToken();
-        token.putOntoBattlefield(spellCMC, game, source, spellControllerID);
+        new WhiteBlueBirdToken().putOntoBattlefield(spellCMC, game, source, spellControllerID);
         return true;
     }
 }

@@ -4,6 +4,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
@@ -11,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 
 /**
  *
@@ -28,7 +30,9 @@ public final class RubblebeltMaaka extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bloodrush — {R}, Discard Rubblebelt Maaka: Target attacking creature gets +3/+3 until end of turn.
-        this.addAbility(new BloodrushAbility("{R}", new BoostTargetEffect(3,3, Duration.EndOfTurn)));
+        Effect boostEffect = new BoostTargetEffect(3,3, Duration.EndOfTurn);
+        boostEffect.setOutcome(Outcome.Benefit);
+        this.addAbility(new BloodrushAbility("{R}", boostEffect));
 
     }
 

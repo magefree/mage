@@ -124,6 +124,12 @@ public final class StaticFilters {
         FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD = new FilterArtifactCard("artifact card from your graveyard");
+
+    static {
+        FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
 
     static {
@@ -634,10 +640,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE_GOBLINS.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
 
     static {
-        FILTER_PERMANENT_CREATURE_SLIVERS.setLockedFilter(true);
+        FILTER_PERMANENT_SLIVERS.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENT_ALL_SLIVERS = new FilterCreaturePermanent(SubType.SLIVER, "all Sliver creatures");
+
+    static {
+        FILTER_PERMANENT_ALL_SLIVERS.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("a Samurai or Warrior you control");

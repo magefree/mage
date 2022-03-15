@@ -60,6 +60,6 @@ class SylvanEchoesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you clash and win, you may draw a card";
+        return "Whenever you clash and win, you may draw a card.";
     }
 }

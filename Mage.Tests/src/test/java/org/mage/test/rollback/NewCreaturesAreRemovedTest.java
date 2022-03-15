@@ -53,7 +53,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
         assertPermanentCount(playerA, "Port Town", 1);
         assertTapped("Port Town", false);
-        assertPermanentCount(playerA, "Clue", 3);
+        assertPermanentCount(playerA, "Clue Token", 3);
 
     }
 
@@ -107,7 +107,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Port Town", 1);
         assertTapped("Port Town", false);
-        assertPermanentCount(playerA, "Clue", 3);
+        assertPermanentCount(playerA, "Clue Token", 3);
 
         assertLife(playerB, 14);
         assertLife(playerA, 14);

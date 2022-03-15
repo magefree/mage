@@ -15,7 +15,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class SplinterToken extends TokenImpl {
 
     public SplinterToken() {
-        super("Splinter", "1/1 green Splinter creature token");
+        super("Splinter Token", "1/1 green Splinter creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPLINTER);
         color.setGreen(true);

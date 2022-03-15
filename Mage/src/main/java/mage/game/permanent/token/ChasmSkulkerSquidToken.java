@@ -13,7 +13,7 @@ import mage.abilities.keyword.IslandwalkAbility;
 public final class ChasmSkulkerSquidToken extends TokenImpl {
 
     public ChasmSkulkerSquidToken() {
-        super("Squid", "1/1 blue Squid creature token with islandwalk");
+        super("Squid Token", "1/1 blue Squid creature token with islandwalk");
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);

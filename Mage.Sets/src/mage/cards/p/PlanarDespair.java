@@ -24,7 +24,7 @@ public final class PlanarDespair extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Domain - All creatures get -1/-1 until end of turn for each basic land type among lands you control.
-        DynamicValue dv = new SignInversionDynamicValue(new DomainValue());
+        DynamicValue dv = new SignInversionDynamicValue(DomainValue.REGULAR);
         Effect effect = new BoostAllEffect(dv, dv, Duration.EndOfTurn);
         effect.setText("<i>Domain</i> &mdash; All creatures get -1/-1 until end of turn for each basic land type among lands you control.");
         this.getSpellAbility().addEffect(effect);

@@ -25,7 +25,6 @@ public class AmonkhetRemastered extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.ratioBoosterSpecialLand = 1; // replace all basic lands
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 268, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abrade", 136, Rarity.UNCOMMON, mage.cards.a.Abrade.class));

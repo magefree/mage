@@ -30,7 +30,7 @@ public final class KorHookmaster extends CardImpl {
         // When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. 
         // That creature doesn't untap during its controller's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

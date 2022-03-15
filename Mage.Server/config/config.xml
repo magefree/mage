@@ -153,6 +153,7 @@
         <draftCube name="MTGO Vintage Cube July 2020" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeJuly2020"/>
         <draftCube name="MTGO Vintage Cube December 2020" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeDecember2020"/>
         <draftCube name="MTGO Vintage Cube July 2021" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeJuly2021"/>
+        <draftCube name="MTGO Vintage Cube February 2022" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeFebruary2022"/>
         <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ScgConCube2018December"/>
         <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
         <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGCube"/>

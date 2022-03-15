@@ -11,7 +11,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.OwlToken;
+import mage.game.permanent.token.BlueBirdToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -68,7 +68,7 @@ class RavenformEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(permanent.getControllerId());
         player.moveCards(permanent, Zone.EXILED, source, game);
-        new OwlToken().putOntoBattlefield(1, game, source, player.getId());
+        new BlueBirdToken().putOntoBattlefield(1, game, source, player.getId());
         return true;
     }
 }

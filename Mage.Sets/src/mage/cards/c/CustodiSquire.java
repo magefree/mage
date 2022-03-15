@@ -9,10 +9,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.VoteHandler;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -41,7 +38,7 @@ public final class CustodiSquire extends CardImpl {
         // Will of the council - When Custodi Squire enters the battlefield, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for most votes to your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CustodiSquireVoteEffect(), false)
-                .withFlavorWord("Will of the council")
+                .setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL)
         );
     }
 

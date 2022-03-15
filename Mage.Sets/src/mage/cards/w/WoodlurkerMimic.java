@@ -32,7 +32,7 @@ public final class WoodlurkerMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
+    private static final String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
 
     public WoodlurkerMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/G}");

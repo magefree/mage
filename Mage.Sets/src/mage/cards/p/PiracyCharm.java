@@ -28,13 +28,11 @@ public final class PiracyCharm extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or target creature gets +2/-1 until end of turn;
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or target player discards a card.
-        mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(1));
+        mode = new Mode(new DiscardTargetEffect(1));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

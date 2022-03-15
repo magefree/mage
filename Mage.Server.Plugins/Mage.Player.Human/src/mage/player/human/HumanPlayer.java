@@ -1737,7 +1737,6 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         } else {
             TargetDefender target = new TargetDefender(possibleDefender, attackerId);
-            target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
             if (forcedToAttack) {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
@@ -1757,7 +1756,6 @@ public class HumanPlayer extends PlayerImpl {
 
     protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
         TargetDefender target = new TargetDefender(defenders, null);
-        target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
         if (chooseTarget(Outcome.Damage, target, null, game)) {
             return getFixedResponseUUID(game);
         }
@@ -2187,10 +2185,10 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
+            LinkedHashMap<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
-                return (SpellAbility) useableAbilities.values().iterator().next();
+                return useableAbilities.values().iterator().next();
             } else if (useableAbilities != null
                     && !useableAbilities.isEmpty()) {
 
@@ -2204,7 +2202,7 @@ public class HumanPlayer extends PlayerImpl {
                 UUID responseId = getFixedResponseUUID(game);
                 if (responseId != null) {
                     if (useableAbilities.containsKey(responseId)) {
-                        return (SpellAbility) useableAbilities.get(responseId);
+                        return useableAbilities.get(responseId);
                     }
                 }
             }

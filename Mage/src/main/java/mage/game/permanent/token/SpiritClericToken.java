@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class SpiritClericToken extends TokenImpl {
 
     public SpiritClericToken() {
-        super("Spirit Cleric", "white Spirit Cleric creature token with \"This creature's power and toughness are each equal to the number of Spirits you control.\"");
+        super("Spirit Cleric Token", "white Spirit Cleric creature token with \"This creature's power and toughness are each equal to the number of Spirits you control.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         subtype.add(SubType.CLERIC);

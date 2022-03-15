@@ -43,7 +43,7 @@ public class BasriKetTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerB, 17);
-        assertPermanentCount(playerA, "Soldier", 1);
+        assertPermanentCount(playerA, "Soldier Token", 1);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class BasriKetTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerB, 14);
-        assertPermanentCount(playerA, "Soldier", 1);
+        assertPermanentCount(playerA, "Soldier Token", 1);
     }
 
 }

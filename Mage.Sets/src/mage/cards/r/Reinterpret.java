@@ -2,14 +2,18 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -56,12 +60,17 @@ class ReinterpretEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpell(source.getFirstTarget());
-        if (spell == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (spell == null || controller == null) {
             return false;
         }
         int manaValue = spell.getManaValue();
-        game.getStack().counter(spell.getId(), source, game);
-        new CastWithoutPayingManaCostEffect(manaValue).apply(game, source);
+        spell.counter(source, game);
+        FilterCard filter = new FilterCard();
+        filter.add(new ManaValuePredicate(
+                ComparisonType.FEWER_THAN, manaValue + 1
+        ));
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, controller.getHand(), filter);
         return true;
     }
 }

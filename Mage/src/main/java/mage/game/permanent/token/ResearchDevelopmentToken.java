@@ -20,7 +20,7 @@ public final class ResearchDevelopmentToken extends TokenImpl {
     }
 
     public ResearchDevelopmentToken() {
-        super("Elemental", "3/1 red Elemental creature token");
+        super("Elemental Token", "3/1 red Elemental creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setRed(true);

@@ -57,7 +57,7 @@ class CemeteryPucaEffect extends OneShotEffect {
 
     public CemeteryPucaEffect() {
         super(Outcome.Copy);
-        staticText = " {this} becomes a copy of that creature, except it has this ability";
+        staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
     public CemeteryPucaEffect(final CemeteryPucaEffect effect) {

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class PlanewideCelebrationToken extends TokenImpl {
 
     public PlanewideCelebrationToken() {
-        super("Citizen", "2/2 Citizen creature token that's all colors");
+        super("Citizen Token", "2/2 Citizen creature token that's all colors");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlue(true);
