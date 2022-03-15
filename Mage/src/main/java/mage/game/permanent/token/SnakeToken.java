@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class SnakeToken extends TokenImpl {
 
     public SnakeToken() {
-        super("Snake", "1/1 green Snake creature token");
+        super("Snake Token", "1/1 green Snake creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SNAKE);

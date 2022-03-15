@@ -47,8 +47,8 @@ public class VoiceOfResurgenceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Treachery", 1);
         assertGraveyardCount(playerB, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerA, "Elemental", 2); // one from the Lightning Bolt and one from the Voice of Resurgence dying
-        assertPowerToughness(playerA, "Elemental", 3, 3, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Elemental Token", 2); // one from the Lightning Bolt and one from the Voice of Resurgence dying
+        assertPowerToughness(playerA, "Elemental Token", 3, 3, Filter.ComparisonScope.All);
         assertTappedCount("Island", true, 0);
     }
 

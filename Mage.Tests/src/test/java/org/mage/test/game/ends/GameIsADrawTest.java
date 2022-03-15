@@ -137,7 +137,7 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Angel", 20);
+        assertPermanentCount(playerA, "Angel Token", 20);
         Assert.assertFalse("Game should not have ended.", currentGame.hasEnded());
         assertLife(playerA, 100);
 

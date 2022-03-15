@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class Angel33Token extends TokenImpl {
 
     public Angel33Token() {
-        super("Angel", "3/3 white Angel creature token with flying");
+        super("Angel Token", "3/3 white Angel creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.ANGEL);

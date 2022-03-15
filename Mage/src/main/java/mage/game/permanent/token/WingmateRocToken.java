@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class WingmateRocToken extends TokenImpl {
 
     public WingmateRocToken() {
-        super("Bird", "3/4 white Bird creature token with flying");
+        super("Bird Token", "3/4 white Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.BIRD);
         color.setWhite(true);

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class SpiritRedToken extends TokenImpl {
 
     public SpiritRedToken() {
-        super("Spirit token", "2/2 red Spirit creature token with menace");
+        super("Spirit Token", "2/2 red Spirit creature token with menace");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setRed(true);

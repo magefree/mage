@@ -27,7 +27,7 @@ import java.util.Arrays;
 public final class SengirNosferatuBatToken extends TokenImpl {
 
     public SengirNosferatuBatToken() {
-        super("Bat", "1/2 black Bat creature token with flying");
+        super("Bat Token", "1/2 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.BAT);

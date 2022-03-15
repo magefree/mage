@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SoldierToken extends TokenImpl {
 
     public SoldierToken() {
-        super("Soldier", "1/1 white Soldier creature token");
+        super("Soldier Token", "1/1 white Soldier creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.SOLDIER);

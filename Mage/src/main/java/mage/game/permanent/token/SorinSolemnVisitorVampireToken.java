@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class SorinSolemnVisitorVampireToken extends TokenImpl {
 
     public SorinSolemnVisitorVampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
+        super("Vampire Token", "2/2 black Vampire creature token with flying");
         setOriginalExpansionSetCode("KTK");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

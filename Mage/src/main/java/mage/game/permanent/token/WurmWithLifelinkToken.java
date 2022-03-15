@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WurmWithLifelinkToken extends TokenImpl {
 
     public WurmWithLifelinkToken() {
-        super("Phyrexian Wurm", "3/3 colorless Phyrexian Wurm artifact creature token with lifelink");
+        super("Phyrexian Wurm Token", "3/3 colorless Phyrexian Wurm artifact creature token with lifelink");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);

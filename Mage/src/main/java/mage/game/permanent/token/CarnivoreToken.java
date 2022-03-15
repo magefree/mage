@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class CarnivoreToken extends TokenImpl {
 
     public CarnivoreToken() {
-        super("Carnivore", "3/1 red Beast creature token");
+        super("Carnivore Token", "3/1 red Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.BEAST);

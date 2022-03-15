@@ -90,8 +90,8 @@ public class ConspireTest extends CardTestPlayerBase {
         // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use conspire
-        setChoice(playerA, "Goblin Warrior");
-        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior Token");
+        setChoice(playerA, "Goblin Warrior Token");
         setChoice(playerA, false); // keep targets
 
         setStrictChooseMode(true);
@@ -122,8 +122,8 @@ public class ConspireTest extends CardTestPlayerBase {
         // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use conspire
-        setChoice(playerA, "Goblin Warrior");
-        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior Token");
+        setChoice(playerA, "Goblin Warrior Token");
         setChoice(playerA, false); // keep targets
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Shock", playerB);
         setChoice(playerA, false); // don't use conspire

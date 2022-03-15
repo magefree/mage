@@ -29,7 +29,7 @@ public class ArrestTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Arrest", 1);
-        assertPermanentCount(playerB, "Saproling", 0); // can't use ability so no Saproling
+        assertPermanentCount(playerB, "Saproling Token", 0); // can't use ability so no Saproling
 
         assertLife(playerA, 20); // can't attack so no damage to player
         assertLife(playerB, 20);

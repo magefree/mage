@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SpiderToken extends TokenImpl {
 
     public SpiderToken() {
-        super("Spider", "1/2 green Spider creature token with reach");
+        super("Spider Token", "1/2 green Spider creature token with reach");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SPIDER);

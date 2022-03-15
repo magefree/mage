@@ -14,7 +14,7 @@ import mage.constants.SubType;
 public final class DroidToken extends TokenImpl {
 
     public DroidToken() {
-        super("Droid", "1/1 colorless Droid creature token");
+        super("Droid Token", "1/1 colorless Droid creature token");
         availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);

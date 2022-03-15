@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GiantWarriorToken extends TokenImpl {
 
     public GiantWarriorToken() {
-        super("Giant Warrior", "5/5 white Giant Warrior creature token");
+        super("Giant Warrior Token", "5/5 white Giant Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.GIANT);

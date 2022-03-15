@@ -24,7 +24,7 @@ public final class PursuedWhaleToken extends TokenImpl {
     }
 
     public PursuedWhaleToken() {
-        super("Pirate", "1/1 red Pirate creature token with \"This creature can't block\" and \"Creatures you control attack each combat if able.\"");
+        super("Pirate Token", "1/1 red Pirate creature token with \"This creature can't block\" and \"Creatures you control attack each combat if able.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.PIRATE);

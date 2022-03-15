@@ -65,7 +65,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 2, 2);
-        assertPermanentCount(playerA, "Soldier", 4);
+        assertPermanentCount(playerA, "Soldier Token", 4);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
     }
 
     @Test
@@ -177,7 +177,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 5, 5);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
     }
 
     @Test
@@ -197,7 +197,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 3);
+        assertPermanentCount(playerA, "Soldier Token", 3);
     }
 
     @Test
@@ -216,7 +216,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -236,7 +236,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 7, 7);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -258,7 +258,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
     }
 
     @Test
@@ -278,7 +278,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
-        assertPermanentCount(playerA, "Soldier", 3);
+        assertPermanentCount(playerA, "Soldier Token", 3);
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);
         assertLife(playerC, 20 - 2);
@@ -304,7 +304,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, lieutenant, 6, 6);
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertLife(playerC, 20);

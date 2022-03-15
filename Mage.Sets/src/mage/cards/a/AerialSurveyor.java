@@ -110,6 +110,6 @@ enum AerialSurveyorHint implements Hint {
 
     @Override
     public AerialSurveyorHint copy() {
-        return this;
+        return instance;
     }
 }

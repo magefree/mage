@@ -40,7 +40,7 @@ public class SpendManaAsThoughItWereManaOfAnyColorTest extends CardTestPlayerBas
 
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, "Moan of the Unhallowed", 1);
-        assertPermanentCount(playerB, "Zombie", 2);
+        assertPermanentCount(playerB, "Zombie Token", 2);
 
     }
 

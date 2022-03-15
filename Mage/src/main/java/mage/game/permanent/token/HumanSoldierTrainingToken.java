@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class HumanSoldierTrainingToken extends TokenImpl {
 
     public HumanSoldierTrainingToken() {
-        super("Human Soldier", "1/1 green and white Human Soldier creature token with training");
+        super("Human Soldier Token", "1/1 green and white Human Soldier creature token with training");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);

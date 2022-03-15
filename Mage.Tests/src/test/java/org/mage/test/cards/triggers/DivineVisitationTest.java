@@ -41,11 +41,11 @@ public class DivineVisitationTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
         
         assertHandCount(playerB, 3);
-        assertPermanentCount(playerA, "Treasure", 3);
-        assertType("Treasure", CardType.ARTIFACT, SubType.TREASURE);
-        assertNotType("Treasure", CardType.CREATURE);
-        assertNotSubtype("Treasure", SubType.ANGEL);
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Treasure Token", 3);
+        assertType("Treasure Token", CardType.ARTIFACT, SubType.TREASURE);
+        assertNotType("Treasure Token", CardType.CREATURE);
+        assertNotSubtype("Treasure Token", SubType.ANGEL);
+        assertPermanentCount(playerA, "Angel Token", 0);
         assertPermanentCount(playerA, 6);
         assertGraveyardCount(playerA, 1);
     }
@@ -69,13 +69,13 @@ public class DivineVisitationTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, 1);
         assertPermanentCount(playerA, 5);
-        assertPermanentCount(playerA, "Goblin", 0);
-        assertPermanentCount(playerA, "Angel", 2);
-        assertType("Angel", CardType.CREATURE, SubType.ANGEL);
-        assertColor(playerA, "Angel", ObjectColor.WHITE, true);
-        assertColor(playerA, "Angel", ObjectColor.RED, false);
-        assertPowerToughness(playerA, "Angel", 4,4);
-        assertNotSubtype("Angel", SubType.GOBLIN);
+        assertPermanentCount(playerA, "Goblin Token", 0);
+        assertPermanentCount(playerA, "Angel Token", 2);
+        assertType("Angel Token", CardType.CREATURE, SubType.ANGEL);
+        assertColor(playerA, "Angel Token", ObjectColor.WHITE, true);
+        assertColor(playerA, "Angel Token", ObjectColor.RED, false);
+        assertPowerToughness(playerA, "Angel Token", 4,4);
+        assertNotSubtype("Angel Token", SubType.GOBLIN);
         
     }
 }

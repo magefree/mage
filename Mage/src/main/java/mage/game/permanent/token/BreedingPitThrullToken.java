@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class BreedingPitThrullToken extends TokenImpl {
 
     public BreedingPitThrullToken() {
-        super("Thrull", "0/1 black Thrull creature token");
+        super("Thrull Token", "0/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.THRULL);
         color.setBlack(true);

@@ -24,7 +24,7 @@ public final class AngelicExaltation extends CardImpl {
                 CreaturesYouControlCount.instance,
                 CreaturesYouControlCount.instance,
                 Duration.EndOfTurn, true
-        ).setText("it gets +X/+X until end of turn, where X is the number of creatures you control")).addHint(CreaturesYouControlHint.instance));
+        ).setText("it gets +X/+X until end of turn, where X is the number of creatures you control"), true, false).addHint(CreaturesYouControlHint.instance));
     }
 
     private AngelicExaltation(final AngelicExaltation card) {

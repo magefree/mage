@@ -173,7 +173,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         assertGraveyardCount(playerA, "Mogg Infestation", 1);
         assertCommandZoneCount(playerB, "Daxos of Meletis", 1);
 
-        assertPermanentCount(playerB, "Goblin", 2);
+        assertPermanentCount(playerB, "Goblin Token", 2);
 
     }
 

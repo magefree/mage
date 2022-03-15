@@ -24,9 +24,9 @@ public final class ImposterMech extends CardImpl {
     private static final CopyApplier applier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-            blueprint.removeAllCardTypes(game);
-            blueprint.addCardType(game, CardType.ARTIFACT);
-            blueprint.addSubType(game, SubType.VEHICLE);
+            blueprint.removeAllCardTypes();
+            blueprint.addCardType(CardType.ARTIFACT);
+            blueprint.addSubType(SubType.VEHICLE);
             blueprint.getAbilities().add(new CrewAbility(3));
             return true;
         }

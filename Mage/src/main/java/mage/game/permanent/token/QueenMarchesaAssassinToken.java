@@ -14,7 +14,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class QueenMarchesaAssassinToken extends TokenImpl {
 
     public QueenMarchesaAssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with deathtouch and haste");
+        super("Assassin Token", "1/1 black Assassin creature tokens with deathtouch and haste");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ASSASSIN);

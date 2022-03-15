@@ -882,7 +882,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Valki, God of Lies", 1);
-        assertPermanentCount(playerA, "Servo", 3);
+        assertPermanentCount(playerA, "Servo Token", 3);
     }
 
     @Test
@@ -901,7 +901,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "The Omenkeel", 1);
-        assertPermanentCount(playerA, "Servo", 3);
+        assertPermanentCount(playerA, "Servo Token", 3);
     }
 
     @Test

@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class GremlinToken extends TokenImpl {
 
     public GremlinToken() {
-        super("Gremlin", "2/2 red Gremlin creature token");
+        super("Gremlin Token", "2/2 red Gremlin creature token");
         cardType.add(CardType.CREATURE);
         this.setOriginalExpansionSetCode("AER");
         subtype.add(SubType.GREMLIN);

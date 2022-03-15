@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.HarpyToken;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class AbhorrentOverlord extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Abhorrent Overlord enters the battlefield, create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black.
-        Effect effect = new CreateTokenEffect(new AbhorrentOverlordHarpyToken(), DevotionCount.B);
+        Effect effect = new CreateTokenEffect(new HarpyToken(), DevotionCount.B);
         effect.setText("create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.B.getHint()));
 
@@ -49,27 +49,5 @@ public final class AbhorrentOverlord extends CardImpl {
     @Override
     public AbhorrentOverlord copy() {
         return new AbhorrentOverlord(this);
-    }
-}
-
-class AbhorrentOverlordHarpyToken extends TokenImpl {
-
-    AbhorrentOverlordHarpyToken() {
-        super("Harpy", "1/1 black Harpy creature tokens with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add(SubType.HARPY);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
-    private AbhorrentOverlordHarpyToken(final AbhorrentOverlordHarpyToken token) {
-        super(token);
-    }
-
-    public AbhorrentOverlordHarpyToken copy() {
-        return new AbhorrentOverlordHarpyToken(this);
     }
 }

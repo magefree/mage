@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class InsectInfectToken extends TokenImpl {
 
     public InsectInfectToken() {
-        super("Phyrexian Insect", "1/1 green Phyrexian Insect creature token with infect");
+        super("Phyrexian Insect Token", "1/1 green Phyrexian Insect creature token with infect");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.PHYREXIAN);

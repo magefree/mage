@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class HippoToken2 extends TokenImpl {
 
     public HippoToken2() {
-        super("Hippo", "3/3 green Hippo creature token");
+        super("Hippo Token", "3/3 green Hippo creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HIPPO);

@@ -12,7 +12,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 public final class PharikaSnakeToken extends TokenImpl {
 
     public PharikaSnakeToken() {
-        super("Snake", "1/1 black and green Snake enchantment creature token with deathtouch", 1, 1);
+        super("Snake Token", "1/1 black and green Snake enchantment creature token with deathtouch", 1, 1);
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);

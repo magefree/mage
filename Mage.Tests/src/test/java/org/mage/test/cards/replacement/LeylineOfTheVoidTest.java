@@ -123,7 +123,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         
-        assertPermanentCount(playerA, "Eldrazi Spawn", 0);        
+        assertPermanentCount(playerA, "Eldrazi Spawn Token", 0);        
         assertExileCount(playerB, 0);
         assertHandCount(playerB, 1); 
     }

@@ -35,8 +35,8 @@ public class PutOntoBattlefieldTest extends CardTestPlayerBase {
         execute();
 
         assertPowerToughness(playerA, "Kalonian Hydra", 2, 2);
-        assertPermanentCount(playerA, "Ooze", 1);
-        assertPowerToughness(playerA, "Ooze", 2, 2);
+        assertPermanentCount(playerA, "Ooze Token", 1);
+        assertPowerToughness(playerA, "Ooze Token", 2, 2);
 
     }
 

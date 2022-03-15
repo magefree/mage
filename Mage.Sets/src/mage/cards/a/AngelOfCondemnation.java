@@ -8,7 +8,6 @@ import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.costs.common.ExertSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -56,15 +55,19 @@ public final class AngelOfCondemnation extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {2}{W}, {T}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AngelOfCondemnationExileUntilEOTEffect(), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(
+                new AngelOfCondemnationExileUntilEOTEffect(), new ManaCostsImpl<>("{2}{W}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {2}{W}, {T}, Exert Angel of Condemnation: Exile another target creature until Angel of Condemnation leaves the battlefield.
-        Effect effect = new ExileUntilSourceLeavesEffect("");
-        effect.setText("Exile another target creature until {this} leaves the battlefield");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{W}"));
+        ability = new SimpleActivatedAbility(
+                new ExileUntilSourceLeavesEffect("")
+                        .setText("Exile another target creature until {this} leaves the battlefield"),
+                new ManaCostsImpl<>("{2}{W}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
@@ -86,10 +89,11 @@ class AngelOfCondemnationExileUntilEOTEffect extends OneShotEffect {
 
     AngelOfCondemnationExileUntilEOTEffect() {
         super(Outcome.Detriment);
-        staticText = "exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "exile another target creature. Return that card to the battlefield " +
+                "under its owner's control at the beginning of the next end step";
     }
 
-    AngelOfCondemnationExileUntilEOTEffect(final AngelOfCondemnationExileUntilEOTEffect effect) {
+    private AngelOfCondemnationExileUntilEOTEffect(final AngelOfCondemnationExileUntilEOTEffect effect) {
         super(effect);
     }
 
@@ -97,18 +101,17 @@ class AngelOfCondemnationExileUntilEOTEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && permanent != null && sourcePermanent != null) {
-            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
-                //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-                effect.setText("return that card to the battlefield under its owner's control");
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                return true;
-            }
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(permanent, Zone.EXILED, source, game);
+        //create delayed triggered ability
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
+                        .setText("return that card to the battlefield under its owner's control")
+                        .setTargetPointer(new FixedTarget(source.getFirstTarget(), game))
+        ), source);
+        return true;
     }
 
     @Override

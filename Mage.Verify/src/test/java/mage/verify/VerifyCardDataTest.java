@@ -1141,7 +1141,7 @@ public class VerifyCardDataTest {
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
-            } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
+            } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token",""), "").isEmpty()) {
                 errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }

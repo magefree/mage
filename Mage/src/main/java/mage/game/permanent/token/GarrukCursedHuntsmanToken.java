@@ -18,7 +18,7 @@ public final class GarrukCursedHuntsmanToken extends TokenImpl {
             = new FilterControlledPermanent(SubType.GARRUK, "Garruk you control");
 
     public GarrukCursedHuntsmanToken() {
-        super("Wolf", "2/2 black and green Wolf creature token with \"When this creature dies, put a loyalty counter on each Garruk you control.\"");
+        super("Wolf Token", "2/2 black and green Wolf creature token with \"When this creature dies, put a loyalty counter on each Garruk you control.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

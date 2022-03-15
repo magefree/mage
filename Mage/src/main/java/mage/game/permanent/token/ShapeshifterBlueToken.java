@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class ShapeshifterBlueToken extends TokenImpl {
 
     public ShapeshifterBlueToken() {
-        super("Shapeshifter", "2/2 blue Shapeshifter creature token with changeling");
+        super("Shapeshifter Token", "2/2 blue Shapeshifter creature token with changeling");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SHAPESHIFTER);
         color.setBlue(true);

@@ -28,6 +28,6 @@ public class TerastodonTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, 3);
-        assertPermanentCount(playerA, "Elephant", 3);
+        assertPermanentCount(playerA, "Elephant Token", 3);
     }
 }

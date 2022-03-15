@@ -13,7 +13,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 public final class GarrukApexPredatorBeastToken extends TokenImpl {
 
     public GarrukApexPredatorBeastToken() {
-        super("Beast", "3/3 black Beast creature token with deathtouch");
+        super("Beast Token", "3/3 black Beast creature token with deathtouch");
         setOriginalExpansionSetCode("M15");
         setTokenType(1);
         cardType.add(CardType.CREATURE);

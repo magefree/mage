@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class DinosaurToken extends TokenImpl {
 
     public DinosaurToken() {
-        super("Dinosaur", "3/3 green Dinosaur creature token with trample");
+        super("Dinosaur Token", "3/3 green Dinosaur creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.DINOSAUR);

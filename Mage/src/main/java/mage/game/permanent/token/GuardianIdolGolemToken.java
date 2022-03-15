@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GuardianIdolGolemToken extends TokenImpl {
 
     public GuardianIdolGolemToken() {
-        super("Golem", "2/2 Golem artifact creature token");
+        super("Golem Token", "2/2 Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);

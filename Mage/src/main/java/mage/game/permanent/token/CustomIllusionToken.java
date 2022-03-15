@@ -16,7 +16,7 @@ public final class CustomIllusionToken extends TokenImpl {
     }
 
     public CustomIllusionToken(int xValue) {
-        super("Illusion", "X/X blue Illusion creature token");
+        super("Illusion Token", "X/X blue Illusion creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ILLUSION);

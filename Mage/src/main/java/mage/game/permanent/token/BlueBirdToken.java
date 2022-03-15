@@ -10,10 +10,10 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
-public final class OwlToken extends TokenImpl {
+public final class BlueBirdToken extends TokenImpl {
 
-    public OwlToken() {
-        super("Bird", "1/1 blue Bird creature token with flying");
+    public BlueBirdToken() {
+        super("Bird Token", "1/1 blue Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);
@@ -25,11 +25,11 @@ public final class OwlToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("EVE", "INV", "KHM");
     }
 
-    public OwlToken(final OwlToken token) {
+    public BlueBirdToken(final BlueBirdToken token) {
         super(token);
     }
 
-    public OwlToken copy() {
-        return new OwlToken(this);
+    public BlueBirdToken copy() {
+        return new BlueBirdToken(this);
     }
 }

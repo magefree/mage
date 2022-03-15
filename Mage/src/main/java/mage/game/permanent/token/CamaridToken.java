@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class CamaridToken extends TokenImpl {
 
     public CamaridToken() {
-        super("Camarid", "1/1 blue Camarid creature tokens");
+        super("Camarid Token", "1/1 blue Camarid creature tokens");
         this.setOriginalExpansionSetCode("FEM");
         this.getPower().modifyBaseValue(1);
         this.getToughness().modifyBaseValue(1);

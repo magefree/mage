@@ -14,7 +14,7 @@ import mage.MageInt;
 public final class SliverToken extends TokenImpl {
 
     public SliverToken() {
-        super("Sliver", "1/1 colorless Sliver creature token");
+        super("Sliver Token", "1/1 colorless Sliver creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);

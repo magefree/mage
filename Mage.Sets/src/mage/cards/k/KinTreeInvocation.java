@@ -80,7 +80,7 @@ class SpiritWarriorToken extends TokenImpl {
     }
 
     public SpiritWarriorToken(int x) {
-        super("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
+        super("Spirit Warrior Token", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);

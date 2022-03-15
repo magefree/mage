@@ -22,14 +22,14 @@ public class TreasureCoveTest extends CardTestPlayerBase {
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkHandCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
-        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure", 2); // from saga
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure Token", 2); // from saga
 
         // sacrifice and draw
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
-        setChoice(playerA, "Treasure");
+        setChoice(playerA, "Treasure Token");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkHandCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure", 2 - 1);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure Token", 2 - 1);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

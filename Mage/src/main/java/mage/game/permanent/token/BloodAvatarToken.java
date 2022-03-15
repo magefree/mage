@@ -16,7 +16,7 @@ import java.util.Arrays;
 public final class BloodAvatarToken extends TokenImpl {
 
     public BloodAvatarToken() {
-        super("Avatar", "3/6 black and red Avatar creature token with haste and \"Whenever this creature attacks, it deals 3 damage to each opponent.\"");
+        super("Avatar Token", "3/6 black and red Avatar creature token with haste and \"Whenever this creature attacks, it deals 3 damage to each opponent.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setRed(true);

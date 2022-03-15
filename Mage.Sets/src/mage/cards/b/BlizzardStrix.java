@@ -7,7 +7,6 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -90,18 +89,17 @@ class BlizzardStrixEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && permanent != null && sourcePermanent != null) {
-            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
-                //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-                effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                return true;
-            }
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(permanent, Zone.EXILED, source, game);
+        //create delayed triggered ability
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
+                        .setText("Return that card to the battlefield under its owner's control at the beginning of the next end step")
+                        .setTargetPointer(new FixedTarget(source.getFirstTarget(), game))
+        ), source);
+        return true;
     }
 
     @Override

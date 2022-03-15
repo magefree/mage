@@ -38,6 +38,6 @@ public class CurseOfTheSwineTest  extends CardTestCommanderDuelBase {
 
         assertCommandZoneCount(playerA, "Daxos of Meletis", 1);
         assertExileCount("Daxos of Meletis", 0);
-        assertPermanentCount(playerA, "Boar", 1);
+        assertPermanentCount(playerA, "Boar Token", 1);
     }
 }
