@@ -102,6 +102,7 @@ class AetherworksMarvelEffect extends OneShotEffect {
         }
 
         return cardWasCast || controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+        /*
         if (controller == null) {
             return false;
         }
@@ -110,5 +111,6 @@ class AetherworksMarvelEffect extends OneShotEffect {
         cards.retainZone(Zone.LIBRARY, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
+        */
     }
 }
