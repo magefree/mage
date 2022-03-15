@@ -80,7 +80,7 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanentThatMoved, sourceId, controllerId, game);
+        return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanentThatMoved, controllerId, this, game);
     }
 
     @Override

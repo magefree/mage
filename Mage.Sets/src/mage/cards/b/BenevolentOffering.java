@@ -66,7 +66,7 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
         if (controller == null) { return false; }
 
         Target target = new TargetOpponent(true);
-        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (opponent == null) { return false; }
 
@@ -100,7 +100,7 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
         if (controller == null) { return false; }
 
         Target target = new TargetOpponent(true);
-        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (opponent == null) { return false; }
 
