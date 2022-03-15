@@ -57,13 +57,12 @@ public final class AetherworksMarvel extends CardImpl {
 
 class AetherworksMarvelEffect extends OneShotEffect {
 
-    private static final FilterNonlandCard filter = new FilterNonlandCard("card to cast without paying its mana cost");
-
     AetherworksMarvelEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Look at the top six cards of your library. "
-                + "You may cast a card from among them without paying its mana cost. "
-                + "Put the rest on the bottom of your library in a random order";
+                + "You may cast a card from among them without paying "
+                + "its mana cost. Put the rest on the bottom of your "
+                + "library in a random order";
     }
 
     AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
@@ -78,31 +77,6 @@ class AetherworksMarvelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
-
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
-        TargetCard target = new TargetCardInLibrary(0, 1, filter);
-
-        boolean cardWasCast = false;
-        if (controller.choose(Outcome.PlayForFree, cards, target, game)) {
-            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-
-                cardWasCast = controller.cast(
-                        controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game)
-                );
-
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                if (cardWasCast) {
-                    cards.remove(card);
-                }
-            }
-        }
-
-        return cardWasCast || controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        /*
         if (controller == null) {
             return false;
         }
@@ -111,6 +85,5 @@ class AetherworksMarvelEffect extends OneShotEffect {
         cards.retainZone(Zone.LIBRARY, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-        */
     }
 }
