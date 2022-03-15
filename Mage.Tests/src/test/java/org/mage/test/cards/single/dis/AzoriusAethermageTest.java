@@ -11,8 +11,8 @@ public class AzoriusAethermageTest extends CardTestPlayerBase {
      * Whenever you bounce a permanent (tokens included) you may pay {1}, if you do, draw a card
      */
     @Test
-    @Ignore
     public void testBouncedLand() {
+        /*
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3); // Used for paying ability cost
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2*3);
         addCard(Zone.BATTLEFIELD, playerA, "Toggo, Goblin Weaponsmith");
@@ -49,5 +49,6 @@ public class AzoriusAethermageTest extends CardTestPlayerBase {
         // 3 cards bounced: plains, token, and aethermage, but the token never makes it to the hand -> +2 cards in hand
         // 3 cards drawn -> +3 cards in hand
         assertHandCount(playerA, (1+1) + (1) + (1+1));
+        */
     }
 }
