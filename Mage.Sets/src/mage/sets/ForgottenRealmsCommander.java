@@ -270,7 +270,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unburial Rites", 111, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Underdark Rift", 62, Rarity.UNCOMMON, mage.cards.u.UnderdarkRift.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 220, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
-        cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.UNCOMMON, mage.cards.u.UtopiaSprawl.class));
+        cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.COMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utter End", 195, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Valiant Endeavor", 13, Rarity.RARE, mage.cards.v.ValiantEndeavor.class));
         cards.add(new SetCardInfo("Valorous Stance", 76, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));

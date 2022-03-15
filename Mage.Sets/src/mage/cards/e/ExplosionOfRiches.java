@@ -56,6 +56,7 @@ class ExplosionOfRichesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        int cardsDrawn = 0;
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
@@ -65,9 +66,9 @@ class ExplosionOfRichesEffect extends OneShotEffect {
                     && !player.chooseUse(outcome, "Draw a card?", source, game)) {
                 continue;
             }
-            if (player.drawCards(1, source, game) >= 1) {
-                continue;
-            }
+            cardsDrawn += player.drawCards(1, source, game);
+        }
+        for (int i = 0; i < cardsDrawn; i++) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                     new DamageTargetEffect(5), false,
                     "{this} deals damage to target opponent chosen at random"

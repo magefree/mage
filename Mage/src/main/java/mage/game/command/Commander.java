@@ -273,14 +273,6 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-    }
-
-    @Override
     public UUID getId() {
         return sourceObject.getId();
     }

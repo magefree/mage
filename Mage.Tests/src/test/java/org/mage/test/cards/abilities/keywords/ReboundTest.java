@@ -64,7 +64,7 @@ public class ReboundTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+        execute();assertAllCommandsUsed();
 
         //check exile and graveyard        
         assertPowerToughness(playerA, "Memnite", 2, 1);

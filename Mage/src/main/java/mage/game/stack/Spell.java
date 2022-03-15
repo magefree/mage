@@ -816,20 +816,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (card != null) {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (card != null) {
-            card.adjustTargets(ability, game);
-        }
-    }
-
-    @Override
     public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         return card.removeFromZone(game, fromZone, source);
     }
