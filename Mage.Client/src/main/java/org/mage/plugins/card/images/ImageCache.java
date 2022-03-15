@@ -487,7 +487,7 @@ public final class ImageCache {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card, String name, String suffix) {
-        return name
+        return (card.isToken() ? name.replace(" Token", "") : name)
                 + '#' + card.getExpansionSetCode()
                 + '#' + card.getType()
                 + '#' + card.getCardNumber()
