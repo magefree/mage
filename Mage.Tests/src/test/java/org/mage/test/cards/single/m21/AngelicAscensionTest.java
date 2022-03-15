@@ -25,8 +25,8 @@ public class AngelicAscensionTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertExileCount(playerB, 1);
-        assertPermanentCount(playerB,  "Angel", 1);
-        assertPowerToughness(playerB, "Angel", 4, 4);
+        assertPermanentCount(playerB,  "Angel Token", 1);
+        assertPowerToughness(playerB, "Angel Token", 4, 4);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class AngelicAscensionTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertExileCount(playerA, 1);
-        assertPermanentCount(playerA,  "Angel", 1);
-        assertPowerToughness(playerA, "Angel", 4, 4);
+        assertPermanentCount(playerA,  "Angel Token", 1);
+        assertPowerToughness(playerA, "Angel Token", 4, 4);
     }
 }

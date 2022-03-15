@@ -49,7 +49,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, stinger, 1);
         assertCounterCount(playerA, stinger, CounterType.M1M1, 2);
         assertPowerToughness(playerA, stinger, 2, 3); // 4/5 with two -1/-1 counters
-        assertPermanentCount(playerA, "Insect", 2); // two counters = two insects
+        assertPermanentCount(playerA, "Insect Token", 2); // two counters = two insects
     }
 
     /*
@@ -98,7 +98,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, hillGiant, CounterType.M1M1, 1);
         assertPowerToughness(playerB, grizzly, 1, 1); // 2/2 with -1/-1 counter
         assertPowerToughness(playerB, hillGiant, 2, 2); // 3/3 with -1/-1 counter
-        assertPermanentCount(playerA, "Insect", 4); // 4 counters = 4 insects
+        assertPermanentCount(playerA, "Insect Token", 4); // 4 counters = 4 insects
     }
 
     /*
@@ -150,8 +150,8 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, hillGiant, CounterType.M1M1, 1);
         assertPowerToughness(playerB, grizzly, 1, 1); // 2/2 with -1/-1 counter
         assertPowerToughness(playerB, hillGiant, 2, 2); // 3/3 with -1/-1 counter
-        assertPermanentCount(playerB, "Insect", 0); // playerB did not place the -1/-1 counters, should not trigger
-        assertPermanentCount(playerA, "Insect", 4); // 4 counters = 4 insects        
+        assertPermanentCount(playerB, "Insect Token", 0); // playerB did not place the -1/-1 counters, should not trigger
+        assertPermanentCount(playerA, "Insect Token", 4); // 4 counters = 4 insects        
     }
 
     /*
@@ -177,7 +177,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, CounterType.POISON, 0);
         assertPowerToughness(playerB, wOmens, -1, 3); // 0/4 with -1/-1 counter
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 1);
-        assertPermanentCount(playerA, "Insect", 1);
+        assertPermanentCount(playerA, "Insect Token", 1);
     }
 
     /*
@@ -203,6 +203,6 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertPowerToughness(playerB, wOmens, -2, 2); // 0/4 with two -1/-1 counters
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 2);
-        assertPermanentCount(playerA, "Insect", 2);
+        assertPermanentCount(playerA, "Insect Token", 2);
     }
 }

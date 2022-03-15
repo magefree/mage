@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class MercyKillingToken extends TokenImpl {
 
     public MercyKillingToken() {
-        super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
+        super("Elf Warrior Token", "1/1 green and white Elf Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);

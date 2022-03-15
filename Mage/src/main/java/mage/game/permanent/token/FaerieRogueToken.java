@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class FaerieRogueToken extends TokenImpl {
 
     public FaerieRogueToken() {
-        super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
+        super("Faerie Rogue Token", "1/1 black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.FAERIE);

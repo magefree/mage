@@ -65,7 +65,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lab Rats");
         setChoice(playerA, false);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Boomerang", "Rat");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Boomerang", "Rat Token");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -75,8 +75,8 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lab Rats", 1);
         assertGraveyardCount(playerB, "Boomerang", 1);
 
-        assertPermanentCount(playerA, "Soldier", 3);
-        assertPermanentCount(playerA, "Rat", 0);
+        assertPermanentCount(playerA, "Soldier Token", 3);
+        assertPermanentCount(playerA, "Rat Token", 0);
 
     }
 

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class CatToken extends TokenImpl {
 
     public CatToken() {
-        super("Cat", "2/2 white Cat creature token");
+        super("Cat Token", "2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.CAT);

@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class LolthSpiderToken extends TokenImpl {
 
     public LolthSpiderToken() {
-        super("Spider", "2/1 black Spider creature token with menace and reach");
+        super("Spider Token", "2/1 black Spider creature token with menace and reach");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SPIDER);

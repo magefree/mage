@@ -10,7 +10,7 @@ import java.util.Arrays;
 public final class HumanSoldierToken extends TokenImpl {
 
     public HumanSoldierToken() {
-        super("Human Soldier", "1/1 white Human Soldier creature token");
+        super("Human Soldier Token", "1/1 white Human Soldier creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.SOLDIER);

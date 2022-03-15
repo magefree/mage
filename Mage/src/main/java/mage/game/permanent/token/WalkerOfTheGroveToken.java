@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class WalkerOfTheGroveToken extends TokenImpl {
 
     public WalkerOfTheGroveToken() {
-        super("Elemental", "4/4 green Elemental creature token");
+        super("Elemental Token", "4/4 green Elemental creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
         this.color.setGreen(true);

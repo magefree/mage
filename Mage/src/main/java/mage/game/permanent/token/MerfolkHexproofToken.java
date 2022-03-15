@@ -14,7 +14,7 @@ import mage.constants.SubType;
 public final class MerfolkHexproofToken extends TokenImpl {
     
     public MerfolkHexproofToken() {
-        super("Merfolk", "1/1 blue Merfolk creature token with hexproof");
+        super("Merfolk Token", "1/1 blue Merfolk creature token with hexproof");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.MERFOLK);
         this.color.setBlue(true);

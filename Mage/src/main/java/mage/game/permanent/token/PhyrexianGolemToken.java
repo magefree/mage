@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PhyrexianGolemToken extends TokenImpl {
 
     public PhyrexianGolemToken() {
-        super("Phyrexian Golem", "3/3 colorless Phyrexian Golem artifact creature token");
+        super("Phyrexian Golem Token", "3/3 colorless Phyrexian Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);

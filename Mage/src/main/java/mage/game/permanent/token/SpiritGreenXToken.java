@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class SpiritGreenXToken extends TokenImpl {
 
     public SpiritGreenXToken(int xValue) {
-        super("Spirit token", "X/X green Spirit creature token");
+        super("Spirit Token", "X/X green Spirit creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setGreen(true);

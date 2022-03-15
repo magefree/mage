@@ -41,7 +41,7 @@ public class HallowedMoonlightTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Hallowed Moonlight", 1);
         assertGraveyardCount(playerB, "Spiritual Visit", 1);
 
-        assertPermanentCount(playerB, "Spirit", 0);
+        assertPermanentCount(playerB, "Spirit Token", 0);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
 
         assertExileCount(playerB, 1);

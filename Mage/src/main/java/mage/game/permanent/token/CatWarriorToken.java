@@ -21,7 +21,7 @@ public final class CatWarriorToken extends TokenImpl {
     }
 
     public CatWarriorToken() {
-        super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
+        super("Cat Warrior Token", "2/2 green Cat Warrior creature token with forestwalk");
         availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode("PLC");
         this.getPower().modifyBaseValue(2);

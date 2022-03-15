@@ -14,7 +14,7 @@ public final class DinosaurBeastToken extends TokenImpl {
         this(0);
     }
     public DinosaurBeastToken(int xValue) {
-        super("Dinosaur Beast", "X/X green Dinosaur Beast creature token with trample");
+        super("Dinosaur Beast Token", "X/X green Dinosaur Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.DINOSAUR);

@@ -9,7 +9,7 @@ import java.util.Arrays;
 public final class KorAllyToken extends TokenImpl {
 
     public KorAllyToken() {
-        super("Kor Ally", "1/1 white Kor Ally creature token");
+        super("Kor Ally Token", "1/1 white Kor Ally creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.KOR);
         subtype.add(SubType.ALLY);

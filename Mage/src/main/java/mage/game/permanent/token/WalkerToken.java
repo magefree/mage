@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class WalkerToken extends TokenImpl {
 
     public WalkerToken() {
-        super("Walker", "Walker token");
+        super("Walker Token", "Walker token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

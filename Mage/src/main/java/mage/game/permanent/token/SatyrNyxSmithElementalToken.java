@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class SatyrNyxSmithElementalToken extends TokenImpl {
 
     public SatyrNyxSmithElementalToken() {
-        super("Elemental", "3/1 red Elemental enchantment creature token with haste");
+        super("Elemental Token", "3/1 red Elemental enchantment creature token with haste");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setRed(true);

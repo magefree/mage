@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class SpiritToken extends TokenImpl {
 
     public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
+        super("Spirit Token", "1/1 colorless Spirit creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         power = new MageInt(1);

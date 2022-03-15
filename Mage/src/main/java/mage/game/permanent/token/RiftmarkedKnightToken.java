@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class RiftmarkedKnightToken extends TokenImpl {
 
     public RiftmarkedKnightToken() {
-        super("Knight", "2/2 black Knight creature token with flanking, protection from white, and haste");
+        super("Knight Token", "2/2 black Knight creature token with flanking, protection from white, and haste");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.KNIGHT);

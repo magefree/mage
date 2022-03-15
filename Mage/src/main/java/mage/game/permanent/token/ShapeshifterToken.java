@@ -21,7 +21,7 @@ public final class ShapeshifterToken extends TokenImpl {
     }
 
     public ShapeshifterToken() {
-        super("Shapeshifter", "2/2 colorless Shapeshifter creature token with changeling");
+        super("Shapeshifter Token", "2/2 colorless Shapeshifter creature token with changeling");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SHAPESHIFTER);

@@ -29,7 +29,7 @@ public final class SaprolingBurstToken extends TokenImpl {
     }
 
     public SaprolingBurstToken(MageObjectReference saprolingBurstMOR) {
-        super("Saproling", "green Saproling creature token with \"This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.\"");
+        super("Saproling Token", "green Saproling creature token with \"This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.\"");
         this.color.setGreen(true);
         this.subtype.add(SubType.SAPROLING);
         this.cardType.add(CardType.CREATURE);

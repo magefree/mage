@@ -24,7 +24,7 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
     }
 
     public SeizeTheStormElementalToken(DynamicValue xValue, Hint hint) {
-        super("Elemental", "red Elemental creature token with trample and " +
+        super("Elemental Token", "red Elemental creature token with trample and " +
                 "\"This creature's power and toughness are each equal to the number of instant " +
                 "and sorcery cards in your graveyard plus the number of cards with flashback you own in exile.\"");
         cardType.add(CardType.CREATURE);

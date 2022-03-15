@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class HammerOfPurphorosGolemToken extends TokenImpl {
 
     public HammerOfPurphorosGolemToken() {
-        super("Golem", "3/3 colorless Golem enchantment artifact creature token");
+        super("Golem Token", "3/3 colorless Golem enchantment artifact creature token");
         setOriginalExpansionSetCode("THS");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.ARTIFACT);

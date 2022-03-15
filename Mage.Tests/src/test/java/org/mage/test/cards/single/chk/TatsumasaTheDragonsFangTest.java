@@ -21,7 +21,7 @@ public class TatsumasaTheDragonsFangTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{6}");
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, murder, "Dragon Spirit");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, murder, "Dragon Spirit Token");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -198,7 +198,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
-        assertPermanentCount(playerA, "Kor Ally", 4);
+        assertPermanentCount(playerA, "Kor Ally Token", 4);
         assertExileCount("Unified Front", 1);
     }
 
@@ -435,7 +435,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, fCatBlitz, 1);
-        assertPermanentCount(playerA, "Elemental Cat", 1);
+        assertPermanentCount(playerA, "Elemental Cat Token", 1);
         assertGraveyardCount(playerA, mountain, 1);
     }
 
@@ -471,7 +471,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTapped(yOx, true);
         assertTapped(wKnight, true);
         assertExileCount(playerA, bScreech, 1); // this fails, but the creatures are tapped as part of paying the cost
-        assertPermanentCount(playerA, "Bird", 2); // if you comment out the above line, this is failing as well
+        assertPermanentCount(playerA, "Bird Token", 2); // if you comment out the above line, this is failing as well
     }
 
     /*

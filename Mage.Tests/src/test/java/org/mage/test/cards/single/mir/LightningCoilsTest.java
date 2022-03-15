@@ -44,7 +44,7 @@ public class LightningCoilsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, bGnomes, gnomeCount);
         assertPermanentCount(playerA, lCoils, 1);
         assertCounterCount(playerA, lCoils, CounterType.CHARGE, 0);
-        assertPermanentCount(playerA, "Elemental", gnomeCount);
+        assertPermanentCount(playerA, "Elemental Token", gnomeCount);
     }
     
     @Test
@@ -92,7 +92,7 @@ public class LightningCoilsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, bGnomes, tokenCount);
         assertPermanentCount(playerA, lCoils, 1);
         assertCounterCount(playerA, lCoils, CounterType.CHARGE, 0);
-        assertPermanentCount(playerA, "Elemental", 0);
+        assertPermanentCount(playerA, "Elemental Token", 0);
         int remainingLife = 20 - (tokenCount * 3); // each elemental does 3 damage
         assertLife(playerB, remainingLife);
     }

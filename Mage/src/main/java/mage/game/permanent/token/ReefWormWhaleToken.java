@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class ReefWormWhaleToken extends TokenImpl {
 
     public ReefWormWhaleToken() {
-        super("Whale", "6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"");
+        super("Whale Token", "6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.WHALE);

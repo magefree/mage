@@ -22,7 +22,7 @@ public class AnnointedProcessionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Zombie", 4);
+        assertPermanentCount(playerA, "Zombie Token", 4);
         assertLife(playerA, 24);
     }
 
@@ -38,7 +38,7 @@ public class AnnointedProcessionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Zombie", 8);
+        assertPermanentCount(playerA, "Zombie Token", 8);
         assertLife(playerA, 28);
     }
 
@@ -54,7 +54,7 @@ public class AnnointedProcessionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Zombie", 2);
+        assertPermanentCount(playerA, "Zombie Token", 2);
         assertLife(playerA, 20);
     }
 
@@ -82,6 +82,6 @@ public class AnnointedProcessionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Zombie", 6);
+        assertPermanentCount(playerA, "Zombie Token", 6);
     }
 }

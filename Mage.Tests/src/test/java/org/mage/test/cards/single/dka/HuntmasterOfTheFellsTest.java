@@ -41,7 +41,7 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPermanentCount(playerA, "Wolf", 1);
+        assertPermanentCount(playerA, "Wolf Token", 1);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
     }
 
@@ -59,7 +59,7 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2);
         assertLife(playerB, 20 - 2);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 0);
-        assertPermanentCount(playerA, "Wolf", 1);
+        assertPermanentCount(playerA, "Wolf Token", 1);
         assertPermanentCount(playerA, "Ravager of the Fells", 1);
     }
 
@@ -84,7 +84,7 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2 + 2);
         assertLife(playerB, 20 - 2 - 3 * 2);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Lightning Bolt", 0);
     }
@@ -112,7 +112,7 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2 + 2);
         assertLife(playerB, 20 - 2 - 3 * 2);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Lightning Bolt", 0);
         assertPermanentCount(playerB, "Balduvian Bears", 0);

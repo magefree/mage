@@ -45,8 +45,8 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Daxos of Meletis", 0);
         assertGraveyardCount(playerA, "Daxos of Meletis", 0);
 
-        assertPermanentCount(playerB, "Phyrexian Horror", 1);
-        assertPowerToughness(playerB, "Phyrexian Horror", 1, 1);
+        assertPermanentCount(playerB, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerB, "Phyrexian Horror Token", 1, 1);
     }
 
     @Test
@@ -74,8 +74,8 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         setStopAt(3, PhaseStep.UPKEEP);
         execute();
 
-        assertPermanentCount(playerB, "Phyrexian Horror", 1);
-        assertPowerToughness(playerB, "Phyrexian Horror", 1, 1);
+        assertPermanentCount(playerB, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerB, "Phyrexian Horror Token", 1, 1);
 
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         assertPermanentCount(playerA, "Gift of Immortality", 1);

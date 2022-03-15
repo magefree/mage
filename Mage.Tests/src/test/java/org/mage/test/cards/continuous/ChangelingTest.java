@@ -106,7 +106,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertCounterCount(playerA, cohort, CounterType.P1P1, 1);
-        assertCounterCount(playerA, "Shapeshifter", CounterType.P1P1, 1);
+        assertCounterCount(playerA, "Shapeshifter Token", CounterType.P1P1, 1);
     }
 
     private static final String amoeboid = "Amoeboid Changeling";
@@ -119,13 +119,13 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, cohort);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cohort);
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target creature loses", "Shapeshifter");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target creature loses", "Shapeshifter Token");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
 
         assertTapped(amoeboid, true);
-        assertPowerToughness(playerA, "Shapeshifter", 2, 2);
+        assertPowerToughness(playerA, "Shapeshifter Token", 2, 2);
     }
 }

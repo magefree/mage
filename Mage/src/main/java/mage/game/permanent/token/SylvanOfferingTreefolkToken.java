@@ -15,7 +15,7 @@ public final class SylvanOfferingTreefolkToken extends TokenImpl {
         this(1);
     }
     public SylvanOfferingTreefolkToken(int xValue) {
-        super("Treefolk", "X/X green Treefolk creature token");
+        super("Treefolk Token", "X/X green Treefolk creature token");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.TREEFOLK);

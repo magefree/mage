@@ -21,7 +21,7 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
     }
 
     public UtvaraHellkiteDragonToken() {
-        super("Dragon", "6/6 red Dragon creature token with flying");
+        super("Dragon Token", "6/6 red Dragon creature token with flying");
         availableImageSetCodes = tokenImageSets;
         setExpansionSetCodeForImage("C17");
         cardType.add(CardType.CREATURE);

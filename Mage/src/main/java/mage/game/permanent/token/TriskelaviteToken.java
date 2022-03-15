@@ -19,7 +19,7 @@ import mage.target.common.TargetAnyTarget;
 public final class TriskelaviteToken extends TokenImpl {
 
     public TriskelaviteToken() {
-        super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to any target.\"");
+        super("Triskelavite Token", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to any target.\"");
         this.setOriginalExpansionSetCode("TSP");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

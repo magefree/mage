@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class PincherToken extends TokenImpl {
 
     public PincherToken() {
-        super("Pincher", "2/2 colorless Pincher creature token");
+        super("Pincher Token", "2/2 colorless Pincher creature token");
         setOriginalExpansionSetCode("5ND");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PINCHER);

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class CentaurToken extends TokenImpl {
 
     public CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
+        super("Centaur Token", "3/3 green Centaur creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.CENTAUR);

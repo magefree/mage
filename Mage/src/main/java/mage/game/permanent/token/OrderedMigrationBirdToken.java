@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class OrderedMigrationBirdToken extends TokenImpl {
 
     public OrderedMigrationBirdToken() {
-        super("Bird", "1/1 blue Bird creature token with flying");
+        super("Bird Token", "1/1 blue Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);

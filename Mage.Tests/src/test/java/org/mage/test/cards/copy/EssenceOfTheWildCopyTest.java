@@ -118,7 +118,7 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Soldier Token", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 1 + 5);
 
         List<Permanent> list = new ArrayList<>();

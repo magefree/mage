@@ -8,7 +8,7 @@ import mage.constants.SubType;
 public final class MuYanlingSkyDancerToken extends TokenImpl {
 
     public MuYanlingSkyDancerToken() {
-        super("Elemental Bird", "4/4 blue Elemental Bird creature token with flying");
+        super("Elemental Bird Token", "4/4 blue Elemental Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ELEMENTAL);

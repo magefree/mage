@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class HumanClericToken extends TokenImpl {
 
     public HumanClericToken() {
-        super("Human Cleric", "1/1 white and black Human Cleric creature token");
+        super("Human Cleric Token", "1/1 white and black Human Cleric creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.CLERIC);

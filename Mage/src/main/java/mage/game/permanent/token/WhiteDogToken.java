@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class WhiteDogToken extends TokenImpl {
 
     public WhiteDogToken() {
-        super("Dog", "1/1 white Dog creature token");
+        super("Dog Token", "1/1 white Dog creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DOG);
 

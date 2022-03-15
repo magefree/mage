@@ -221,7 +221,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Giant Growth", 1);
         assertPowerToughness(playerA, "Silverfur Partisan", 5, 5);
         assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
-        assertPermanentCount(playerA, "Wolf", 1); // created from Silverfur ability
+        assertPermanentCount(playerA, "Wolf Token", 1); // created from Silverfur ability
     }
     */
 

@@ -28,7 +28,7 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit", 0);
+        assertPermanentCount(playerA, "Spirit Token", 0);
         assertGraveyardCount(playerA, "Lingering Souls", 1);
     }
 

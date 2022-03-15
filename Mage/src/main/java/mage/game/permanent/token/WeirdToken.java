@@ -14,7 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class WeirdToken extends TokenImpl {
 
     public WeirdToken() {
-        super("Weird", "3/3 blue Weird create token with defender and flying");
+        super("Weird Token", "3/3 blue Weird create token with defender and flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.WEIRD);

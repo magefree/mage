@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class MarduStrikeLeaderWarriorToken extends TokenImpl {
 
     public MarduStrikeLeaderWarriorToken() {
-        super("Warrior", "2/1 black Warrior creature token");
+        super("Warrior Token", "2/1 black Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.WARRIOR);

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class OxToken extends TokenImpl {
 
     public OxToken() {
-        super("Ox", "2/4 white Ox creature token");
+        super("Ox Token", "2/4 white Ox creature token");
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

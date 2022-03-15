@@ -117,7 +117,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
             assertPermanentCount(playerA, creature, 1);
         }
         // Each has a solider token generated while attacking
-        assertPermanentCount(playerA, "Soldier", 5);
+        assertPermanentCount(playerA, "Soldier Token", 5);
         // Battlefield Thaumaturge will have hexproof from heroic trigger
         Permanent battlefieldThaumaturge = getPermanent("Battlefield Thaumaturge", playerA.getId());
         Assert.assertTrue("Battlefield Thaumaturge must have hexproof", battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()));
@@ -166,7 +166,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         }
 
         // All 4 creatures have been replaced by boars
-        assertPermanentCount(playerB, "Boar", 4);
+        assertPermanentCount(playerB, "Boar Token", 4);
 
         /* Cost to target 4 permanents will be:
          * + {4}{U}{U} for the base spell with X = 4
@@ -216,8 +216,8 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         }
 
         // And each player has 3 dragons
-        assertPermanentCount(playerA, "Dragon", 3);
-        assertPermanentCount(playerB, "Dragon", 3);
+        assertPermanentCount(playerA, "Dragon Token", 3);
+        assertPermanentCount(playerB, "Dragon Token", 3);
 
         /* Cost to target 6 creatures will be
          * + {4}{R}{R} for the fixed cost base spell

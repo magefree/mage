@@ -64,7 +64,7 @@ public final class PrideOfTheClouds extends CardImpl {
     private static class BirdToken extends TokenImpl {
 
         public BirdToken() {
-            super("Bird", "1/1 white and blue Bird creature token with flying");
+            super("Bird Token", "1/1 white and blue Bird creature token with flying");
             cardType.add(CardType.CREATURE);
             color.setWhite(true);
             color.setBlue(true);

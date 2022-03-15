@@ -11,7 +11,7 @@ import mage.MageInt;
 public final class IllusionToken extends TokenImpl {
 
     public IllusionToken() {
-        super("Illusion", "2/2 blue Illusion creature token");
+        super("Illusion Token", "2/2 blue Illusion creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
 

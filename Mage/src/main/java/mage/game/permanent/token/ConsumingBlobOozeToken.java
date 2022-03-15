@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class ConsumingBlobOozeToken extends TokenImpl {
 
     public ConsumingBlobOozeToken() {
-        super("Ooze", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.\"");
+        super("Ooze Token", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);

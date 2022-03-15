@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class FractalToken extends TokenImpl {
 
     public FractalToken() {
-        super("Fractal", "0/0 green and blue Fractal creature token");
+        super("Fractal Token", "0/0 green and blue Fractal creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.FRACTAL);
         color.setGreen(true);

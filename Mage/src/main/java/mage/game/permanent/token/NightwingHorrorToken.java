@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class NightwingHorrorToken extends TokenImpl {
 
     public NightwingHorrorToken() {
-        super("Horror", "1/1 blue and black Horror creature token with flying");
+        super("Horror Token", "1/1 blue and black Horror creature token with flying");
         cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
         this.color.setBlack(true);

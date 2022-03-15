@@ -88,11 +88,11 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Elephant", 1);
-        assertPermanentCount(playerB, "Elephant", 1);
-        assertAbility(playerB, "Elephant", HasteAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Elephant Token", 1);
+        assertPermanentCount(playerB, "Elephant Token", 1);
+        assertAbility(playerB, "Elephant Token", HasteAbility.getInstance(), true);
 
-        Permanent copiedTokenElephant = getPermanent("Elephant", playerB);
+        Permanent copiedTokenElephant = getPermanent("Elephant Token", playerB);
         Assert.assertEquals("Elephant has Enchantment card type", true, copiedTokenElephant.getCardType(currentGame).contains(CardType.ENCHANTMENT));
 
         assertLife(playerA, 17);

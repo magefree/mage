@@ -33,7 +33,7 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit", 2);
+        assertPermanentCount(playerA, "Spirit Token", 2);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit", 0);
+        assertPermanentCount(playerA, "Spirit Token", 0);
     }
 
 }

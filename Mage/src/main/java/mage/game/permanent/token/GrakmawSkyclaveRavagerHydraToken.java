@@ -16,7 +16,7 @@ public final class GrakmawSkyclaveRavagerHydraToken extends TokenImpl {
     }
 
     public GrakmawSkyclaveRavagerHydraToken(int xValue) {
-        super("Hydra", "X/X black and green Hydra creature token");
+        super("Hydra Token", "X/X black and green Hydra creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

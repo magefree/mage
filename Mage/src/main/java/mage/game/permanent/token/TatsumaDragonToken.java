@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class TatsumaDragonToken extends TokenImpl {
 
     public TatsumaDragonToken() {
-        super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");
+        super("Dragon Spirit Token", "5/5 blue Dragon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.DRAGON);

@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class MouseToken extends TokenImpl {
 
     public MouseToken() {
-        super("Mouse", "1/1 white Mouse creature token");
+        super("Mouse Token", "1/1 white Mouse creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.MOUSE);

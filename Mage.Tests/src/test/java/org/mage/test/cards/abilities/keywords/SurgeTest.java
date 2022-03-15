@@ -62,7 +62,7 @@ public class SurgeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Cackling Counterpart", 1);
         assertGraveyardCount(playerA, "Crush of Tentacles", 1);
-        assertPermanentCount(playerA, "Octopus", 1);
+        assertPermanentCount(playerA, "Octopus Token", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Silvercoat Lion", 1);
