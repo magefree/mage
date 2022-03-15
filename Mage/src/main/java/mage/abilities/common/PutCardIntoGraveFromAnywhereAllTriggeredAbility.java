@@ -77,7 +77,8 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD
+                || !zone.match(game.getState().getZone(getSourceId()))) {
             return false;
         }
         Card card = game.getCard(event.getTargetId());
