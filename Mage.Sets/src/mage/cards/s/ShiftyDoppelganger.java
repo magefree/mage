@@ -1,36 +1,29 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ShiftyDoppelganger extends CardImpl {
@@ -43,10 +36,9 @@ public final class ShiftyDoppelganger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{U}, Exile Shifty Doppelganger: You may put a creature card from your hand onto the battlefield. If you do, that creature gains haste until end of turn. At the beginning of the next end step, sacrifice that creature. If you do, return Shifty Doppelganger to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShiftyDoppelgangerExileEffect(), new ManaCostsImpl("{3}{U}"));
-        ability.addCost(new ExileSourceCost(true));
+        Ability ability = new SimpleActivatedAbility(new ShiftyDoppelgangerExileEffect(), new ManaCostsImpl<>("{3}{U}"));
+        ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
-
     }
 
     private ShiftyDoppelganger(final ShiftyDoppelganger card) {
@@ -63,10 +55,12 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
 
     public ShiftyDoppelgangerExileEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, that creature gains haste until end of turn. At the beginning of the next end step, sacrifice that creature. If you do, return {this} to the battlefield";
+        this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, " +
+                "that creature gains haste until end of turn. At the beginning of the next end step, " +
+                "sacrifice that creature. If you do, return {this} to the battlefield";
     }
 
-    public ShiftyDoppelgangerExileEffect(final ShiftyDoppelgangerExileEffect effect) {
+    private ShiftyDoppelgangerExileEffect(final ShiftyDoppelgangerExileEffect effect) {
         super(effect);
     }
 
@@ -77,56 +71,52 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreatureCard filter = new FilterCreatureCard("a creature card");
-        boolean putCreature = false;
-        UUID creatureId = UUID.randomUUID();
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
-            TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    putCreature = player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    if (putCreature) {
-                        creatureId = card.getId();
-                    }
-                }
-            }
+        if (player == null
+                || player.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) < 1
+                || !player.chooseUse(
+                Outcome.PutCardInPlay, "Put a creature card " +
+                        "from your hand onto the battlefield?", source, game
+        )) {
+            return false;
         }
-        if (putCreature) {
-            Permanent creature = game.getPermanent(creatureId);
-            if (creature != null) {
-                ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                hasteEffect.setTargetPointer(new FixedTarget(creature, game));
-                game.addEffect(hasteEffect, source);
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ShiftyDoppelgangerReturnEffect(creature.getId(), creature.getZoneChangeCounter(game), (int) game.getState().getValue(source.getSourceId().toString())));
-                game.addDelayedTriggeredAbility(delayedAbility, source);
-            }
+        TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
+        player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card == null) {
+            return false;
         }
+        player.moveCards(card, Zone.BATTLEFIELD, source, game);
+        Permanent creature = game.getPermanent(card.getId());
+        if (creature == null) {
+            return false;
+        }
+        game.addEffect(new GainAbilityTargetEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setTargetPointer(new FixedTarget(creature, game)), source);
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ShiftyDoppelgangerReturnEffect(creature, source, game)
+        ), source);
         return true;
     }
 }
 
 class ShiftyDoppelgangerReturnEffect extends OneShotEffect {
 
-    private final UUID creatureId;
-    private final int creatureZoneCount;
-    private final int sourceZoneCount;
+    private final MageObjectReference creatureMor;
+    private final MageObjectReference sourceMor;
 
-    ShiftyDoppelgangerReturnEffect(UUID creatureId, int creatureZoneCount, int sourceZoneCount) {
+    ShiftyDoppelgangerReturnEffect(Permanent creature, Ability source, Game game) {
         super(Outcome.Benefit);
         this.staticText = "sacrifice that creature. If you do, return {this} to the battlefield";
-        this.creatureId = creatureId;
-        this.creatureZoneCount = creatureZoneCount;
-        this.sourceZoneCount = sourceZoneCount;
+        this.creatureMor = new MageObjectReference(creature, game);
+        this.sourceMor = new MageObjectReference(source, 1);
     }
 
-    ShiftyDoppelgangerReturnEffect(final ShiftyDoppelgangerReturnEffect effect) {
+    private ShiftyDoppelgangerReturnEffect(final ShiftyDoppelgangerReturnEffect effect) {
         super(effect);
-        this.creatureId = effect.creatureId;
-        this.creatureZoneCount = effect.creatureZoneCount;
-        this.sourceZoneCount = effect.sourceZoneCount;
+        this.creatureMor = effect.creatureMor;
+        this.sourceMor = effect.sourceMor;
     }
 
     @Override
@@ -136,14 +126,16 @@ class ShiftyDoppelgangerReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(creatureId);
+        Permanent creature = creatureMor.getPermanent(game);
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (creature != null && creature.getZoneChangeCounter(game) == this.creatureZoneCount && creature.sacrifice(source, game)) {
-            if (player != null && sourceObject != null && sourceObject.getZoneChangeCounter(game) == this.sourceZoneCount) {
-                player.moveCards(game.getCard(source.getSourceId()), Zone.BATTLEFIELD, source, game);
-            }
+        if (creature == null || player == null
+                || !creature.sacrifice(source, game)) {
+            return false;
         }
-        return false;
+        Card sourceCard = sourceMor.getCard(game);
+        if (sourceCard != null) {
+            player.moveCards(sourceCard, Zone.BATTLEFIELD, source, game);
+        }
+        return true;
     }
 }
