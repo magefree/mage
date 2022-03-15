@@ -1,5 +1,3 @@
-
-
 package org.mage.test.cards.single.ths;
 
 import mage.constants.PhaseStep;
@@ -9,15 +7,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
-public class AshiokNightmareWaeverTest extends CardTestPlayerBase {
+public class AshiokNightmareWeaverTest extends CardTestPlayerBase {
 
     /**
      * Ashiok, Nightmare Weaver {1}{U}{B}  - 3
-     *
+     * <p>
      * +2: Exile the top three cards of target opponent's library.
      * -X: Put a creature card with converted mana cost X exiled with Ashiok, Nightmare Weaver onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
      * -10: Exile all cards from all opponents' hands and graveyards.);Tests Heliod get a God with devotion to white >>= 5
@@ -55,9 +52,9 @@ public class AshiokNightmareWaeverTest extends CardTestPlayerBase {
 
         setChoice(playerA, "X=5");
         addTarget(playerA, "Prophet of Kruphix");
-        
+
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        
+
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
