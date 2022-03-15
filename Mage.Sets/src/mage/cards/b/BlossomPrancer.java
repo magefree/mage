@@ -89,9 +89,9 @@ class BlossomPrancerEffect extends OneShotEffect {
             player.revealCards(source, new CardsImpl(card), game);
             player.moveCards(card, Zone.HAND, source, game);
             cards.remove(card);
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(cards, game, source, false);
         } else {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(cards, game, source, false);
             player.gainLife(4, game, source);
         }
         return true;
