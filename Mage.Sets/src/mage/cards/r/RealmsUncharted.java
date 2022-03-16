@@ -1,9 +1,11 @@
 package mage.cards.r;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -11,12 +13,11 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetOpponent;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -43,9 +44,14 @@ public final class RealmsUncharted extends CardImpl {
 
 class RealmsUnchartedEffect extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterLandCard("land cards with different names");
+    private static final FilterCard filter2 = new FilterCard("cards to put in graveyard");
+
     public RealmsUnchartedEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle";
+        this.staticText = "Search your library for up to four land cards with different names and reveal them. " +
+                "An opponent chooses two of those cards. Put the chosen cards into your graveyard " +
+                "and the rest into your hand. Then shuffle";
     }
 
     public RealmsUnchartedEffect(final RealmsUnchartedEffect effect) {
@@ -59,81 +65,36 @@ class RealmsUnchartedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-
-        RealmsUnchartedTarget target = new RealmsUnchartedTarget();
-        if (controller.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = controller.getLibrary().getCard(cardId, game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-                controller.revealCards(sourceObject.getName(), cards, game);
-
-                CardsImpl cardsToKeep = new CardsImpl();
-                if (cards.size() > 2) {
-                    cardsToKeep.addAll(cards);
-
-                    Player opponent;
-                    Set<UUID> opponents = game.getOpponents(controller.getId());
-                    if (opponents.size() == 1) {
-                        opponent = game.getPlayer(opponents.iterator().next());
-                    } else {
-                        Target targetOpponent = new TargetOpponent(true);
-                        controller.chooseTarget(Outcome.Detriment, targetOpponent, source, game);
-                        opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                    }
-                    TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
-                    if (opponent != null && opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
-                        cardsToKeep.removeAll(targetDiscard.getTargets());
-                        cards.removeAll(cardsToKeep);
-                    }
-                }
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-                controller.moveCards(cardsToKeep, Zone.HAND, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
+        TargetCardInLibrary target = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        cards.retainZone(Zone.LIBRARY, game);
+        if (cards.isEmpty()) {
+            player.shuffleLibrary(source, game);
         }
-        controller.shuffleLibrary(source, game);
-        return false;
-    }
-}
+        player.revealCards(source, cards, game);
 
-class RealmsUnchartedTarget extends TargetCardInLibrary {
-
-    public RealmsUnchartedTarget() {
-        super(0, 4, new FilterLandCard("land cards with different names"));
-    }
-
-    public RealmsUnchartedTarget(final RealmsUnchartedTarget target) {
-        super(target);
-    }
-
-    @Override
-    public RealmsUnchartedTarget copy() {
-        return new RealmsUnchartedTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        Card card = cards.get(id, game);
-        if (card != null) {
-            for (UUID targetId : this.getTargets()) {
-                Card iCard = game.getCard(targetId);
-                if (iCard != null && iCard.getName().equals(card.getName())) {
-                    return false;
-                }
+        if (cards.size() > 2) {
+            TargetOpponent targetOpponent = new TargetOpponent();
+            targetOpponent.setNotTarget(true);
+            player.choose(outcome, target, source.getSourceId(), game);
+            Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+            Cards cardsToKeep = new CardsImpl();
+            cardsToKeep.addAll(cards);
+            TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
+            if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
+                cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
+                cards.removeAll(cardsToKeep);
             }
-            return filter.match(card, playerId, game);
+            player.moveCards(cardsToKeep, Zone.HAND, source, game);
         }
-        return false;
+
+        player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        player.shuffleLibrary(source, game);
+        return true;
     }
 }

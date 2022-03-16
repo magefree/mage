@@ -2,7 +2,10 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -11,10 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -42,7 +44,8 @@ public final class GiftsUngiven extends CardImpl {
 
 class GiftsUngivenEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("cards to put in graveyard");
+    private static final FilterCard filter = new FilterCard("cards with different names");
+    private static final FilterCard filter2 = new FilterCard("cards to put in graveyard");
 
     public GiftsUngivenEffect() {
         super(Outcome.DrawCard);
@@ -67,13 +70,10 @@ class GiftsUngivenEffect extends OneShotEffect {
         if (player == null || opponent == null) {
             return false;
         }
-        GiftsUngivenTarget target = new GiftsUngivenTarget();
+        TargetCardInLibrary target = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
         player.searchLibrary(target, source, game);
-        Cards cards = new CardsImpl();
-        target.getTargets()
-                .stream()
-                .map(uuid -> player.getLibrary().getCard(uuid, game))
-                .forEach(cards::add);
+        Cards cards = new CardsImpl(target.getTargets());
+        cards.retainZone(Zone.LIBRARY, game);
         if (cards.isEmpty()) {
             player.shuffleLibrary(source, game);
         }
@@ -82,7 +82,7 @@ class GiftsUngivenEffect extends OneShotEffect {
         if (cards.size() > 2) {
             Cards cardsToKeep = new CardsImpl();
             cardsToKeep.addAll(cards);
-            TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter);
+            TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
             if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
                 cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
                 cards.removeAll(cardsToKeep);
@@ -93,38 +93,5 @@ class GiftsUngivenEffect extends OneShotEffect {
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
         player.shuffleLibrary(source, game);
         return true;
-    }
-}
-
-class GiftsUngivenTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter = new FilterCard("cards with different names");
-
-    GiftsUngivenTarget() {
-        super(0, 4, filter);
-    }
-
-    private GiftsUngivenTarget(final GiftsUngivenTarget target) {
-        super(target);
-    }
-
-    @Override
-    public GiftsUngivenTarget copy() {
-        return new GiftsUngivenTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        if (!super.canTarget(playerId, id, source, cards, game)) {
-            return false;
-        }
-        Card card = cards.get(id, game);
-        return card != null
-                && this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .noneMatch(c -> CardUtil.haveSameNames(c, card));
     }
 }
