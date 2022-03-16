@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -13,6 +12,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,23 +73,13 @@ class DazzlingSphinxEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Card toCast = null;
         for (Card card : opponent.getLibrary().getCards(game)) {
             cards.add(card);
+            opponent.moveCards(card, Zone.EXILED, source, game);
             if (card.isInstantOrSorcery(game)) {
-                toCast = card;
+                CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
+                break;
             }
-        }
-        opponent.moveCards(cards, Zone.EXILED, source, game);
-        if (toCast != null && controller.chooseUse(
-                outcome, "Cast " + toCast.getName() + " without paying its mana cost?", source, game
-        )) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
-            controller.cast(
-                    controller.chooseAbilityForCast(toCast, game, true),
-                    game, true, new ApprovingObject(source, game)
-            );
-            game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
         }
         cards.retainZone(Zone.EXILED, game);
         opponent.putCardsOnBottomOfLibrary(cards, game, source, false);
