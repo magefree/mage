@@ -78,7 +78,7 @@ class AchHansRunEffect extends OneShotEffect {
         if (!controller.searchLibrary(target, source, game)) {
             return false;
         }
-        Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
+        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
         if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }

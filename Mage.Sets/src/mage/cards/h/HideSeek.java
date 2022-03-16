@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.abilities.Ability;
@@ -21,7 +20,6 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HideSeek extends SplitCard {
@@ -31,14 +29,13 @@ public final class HideSeek extends SplitCard {
 
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.
-        getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Seek
         // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles their library..
-        getRightHalfCard().getSpellAbility().addEffect(new SeekEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
-
+        this.getRightHalfCard().getSpellAbility().addEffect(new SeekEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
     }
 
     private HideSeek(final HideSeek card) {
@@ -71,24 +68,17 @@ class SeekEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && opponent != null) {
-            if (opponent.getLibrary().hasCards()) {
-                TargetCardInLibrary target = new TargetCardInLibrary();
-                if (player.searchLibrary(target, source, game, opponent.getId())) {
-                    UUID targetId = target.getFirstTarget();
-                    Card card = opponent.getLibrary().remove(targetId, game);
-                    if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source, game, Zone.LIBRARY, true);
-                        int cmc = card.getManaValue();
-                        if (cmc > 0) {
-                            player.gainLife(cmc, game, source);
-                        }
-                    }
-                }
-            }
-            opponent.shuffleLibrary(source, game);
-            return true;
+        if (player == null || opponent == null) {
+            return false;
         }
-        return false;
+        TargetCardInLibrary target = new TargetCardInLibrary();
+        player.searchLibrary(target, source, game, opponent.getId());
+        Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);
+        if (card != null) {
+            player.moveCards(card, Zone.EXILED, source, game);
+            player.gainLife(card.getManaValue(), game, source);
+        }
+        opponent.shuffleLibrary(source, game);
+        return true;
     }
 }
