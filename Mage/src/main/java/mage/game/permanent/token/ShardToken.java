@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class ShardToken extends TokenImpl {
 
     public ShardToken() {
-        super("Shard", "Shard token");
+        super("Shard Token", "Shard token");
         cardType.add(CardType.ENCHANTMENT);
         subtype.add(SubType.SHARD);
 

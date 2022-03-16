@@ -91,8 +91,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
                 continue;
             }
             if (player.getGraveyard().count(filter2, game) > 0) {
-                spell.counter(source, game);
-                return true;
+                return game.getStack().counter(spell.getId(), source, game);
             }
         }
         return false;

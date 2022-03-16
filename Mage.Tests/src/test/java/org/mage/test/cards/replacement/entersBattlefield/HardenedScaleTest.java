@@ -50,7 +50,7 @@ public class HardenedScaleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mMimic);
-        setChoice(playerA, "Construct");
+        setChoice(playerA, "Construct Token");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hWalker);
         setChoice(playerA, "X=1");

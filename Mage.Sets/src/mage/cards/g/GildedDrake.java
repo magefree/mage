@@ -15,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,12 +26,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class GildedDrake extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GildedDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -47,7 +40,7 @@ public final class GildedDrake extends CardImpl {
         // This ability can't be countered except by spells and abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GildedDrakeEffect());
         ability.setCanFizzle(false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
         this.addAbility(ability);
     }
 

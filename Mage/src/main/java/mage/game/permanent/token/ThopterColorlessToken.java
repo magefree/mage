@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class ThopterColorlessToken extends TokenImpl {
 
     public ThopterColorlessToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
+        super("Thopter Token", "1/1 colorless Thopter artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.THOPTER);
@@ -24,7 +24,7 @@ public final class ThopterColorlessToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("C18", "EXO", "KLD", "MBS", "ORI", "VMA", "M19", "ZNC",
-                "KHC", "C21", "MH2");
+                "KHC", "C21", "MH2", "AFC", "VOC");
     }
 
     @Override

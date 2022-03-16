@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class TreefolkShamanToken extends TokenImpl {
 
     public TreefolkShamanToken() {
-        super("Treefolk Shaman", "2/5 green Treefolk Shaman creature token");
+        super("Treefolk Shaman Token", "2/5 green Treefolk Shaman creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.TREEFOLK);

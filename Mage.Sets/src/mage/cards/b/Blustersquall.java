@@ -30,8 +30,7 @@ public final class Blustersquall extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
 
         // Overload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BlustersqallTapAllEffect(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl("{3}{U}")));
-
+        this.addAbility(new OverloadAbility(this, new BlustersqallTapAllEffect(), new ManaCostsImpl("{3}{U}")));
     }
 
     private Blustersquall(final Blustersquall card) {
@@ -46,22 +45,18 @@ public final class Blustersquall extends CardImpl {
 
 class BlustersqallTapAllEffect extends OneShotEffect {
 
-    protected FilterCreaturePermanent filter;
-
-    BlustersqallTapAllEffect(FilterCreaturePermanent filter) {
+    BlustersqallTapAllEffect() {
         super(Outcome.Tap);
-        this.filter = filter;
         staticText = "Tap each creature you don't control";
     }
 
     private BlustersqallTapAllEffect(final BlustersqallTapAllEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(source, game);
         }
         return true;

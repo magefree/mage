@@ -30,7 +30,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setChoice(playerA, "X=2");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
-        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling", 2);
+        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling Token", 2);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -55,7 +55,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setChoice(playerA, "X=2");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
-        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling", 2);
+        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling Token", 2);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -85,7 +85,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setChoice(playerA, "X=0");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
-        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling", 0);
+        checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Saproling Token", 0);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SpiritWhiteToken extends TokenImpl {
 
     public SpiritWhiteToken() {
-        super("Spirit", "1/1 white Spirit creature token with flying");
+        super("Spirit Token", "1/1 white Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setWhite(true);
@@ -23,7 +23,8 @@ public final class SpiritWhiteToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
-                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C20", "CMR", "KHM");
+                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C20", "CMR", "KHM",
+                "MID", "VOW");
     }
 
     @Override

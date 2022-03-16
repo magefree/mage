@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,12 +57,6 @@ public final class KalonianHydra extends CardImpl {
 
 class KalonianHydraEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     public KalonianHydraEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "double the number of +1/+1 counters on each creature you control";
@@ -78,7 +73,7 @@ class KalonianHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
             int existingCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
             if (existingCounters > 0) {

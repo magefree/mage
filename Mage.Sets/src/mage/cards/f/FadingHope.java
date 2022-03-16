@@ -41,7 +41,8 @@ class FadingHopeEffect extends OneShotEffect {
 
     FadingHopeEffect() {
         super(Outcome.Benefit);
-        staticText = "return target creature to its owner's hand. If its mana value was 3 or less, scry 1";
+        staticText = "return target creature to its owner's hand. If its mana value was 3 or less, scry 1. " +
+                "<i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>";
     }
 
     private FadingHopeEffect(final FadingHopeEffect effect) {

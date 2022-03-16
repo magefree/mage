@@ -43,7 +43,7 @@ public final class LeechBonder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Leech Bonder enters the battlefield with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // {U}, {untap}: Move a counter from target creature onto another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl("{U}"));

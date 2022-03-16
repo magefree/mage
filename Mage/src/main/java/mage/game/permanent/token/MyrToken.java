@@ -9,7 +9,7 @@ import java.util.Arrays;
 public final class MyrToken extends TokenImpl {
 
     public MyrToken() {
-        super("Myr", "1/1 colorless Myr artifact creature token");
+        super("Myr Token", "1/1 colorless Myr artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.MYR);

@@ -72,7 +72,7 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shadowfeed", "Safehold Elite", "Persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shadowfeed", "Safehold Elite", "persist");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -150,7 +150,7 @@ public class PersistTest extends CardTestPlayerBase {
         assertLife(playerB, 26); // +6 from lifelink of Wurmcoil
 
         assertPermanentCount(playerB, "Wurmcoil Engine", 0);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2);
         assertPermanentCount(playerA, "Kitchen Finks", 2);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1, Filter.ComparisonScope.All);
 

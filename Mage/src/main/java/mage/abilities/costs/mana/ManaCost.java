@@ -1,7 +1,5 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -10,6 +8,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
+
+import java.util.List;
 
 public interface ManaCost extends Cost {
 
@@ -45,4 +45,7 @@ public interface ManaCost extends Cost {
     @Override
     ManaCost copy();
 
+    boolean isPhyrexian();
+
+    void setPhyrexian(boolean phyrexian);
 }

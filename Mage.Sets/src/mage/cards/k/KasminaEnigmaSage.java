@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -37,13 +36,13 @@ public final class KasminaEnigmaSage extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KASMINA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
+        this.setStartingLoyalty(2);
 
         // Each other planeswalker you control has the loyalty abilities of Kasmina, Enigma Sage.
         this.addAbility(new SimpleStaticAbility(new KasminaEnigmaSageGainAbilitiesEffect()));
 
         // +2: Scry 1.
-        this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
+        this.addAbility(new LoyaltyAbility(new ScryEffect(1, false), 2));
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
         this.addAbility(new LoyaltyAbility(FractalToken.getEffect(

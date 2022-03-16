@@ -32,7 +32,7 @@ public final class DireStrainAnarchist extends CardImpl {
         this.nightCard = true;
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

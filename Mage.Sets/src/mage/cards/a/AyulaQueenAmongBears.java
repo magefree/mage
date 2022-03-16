@@ -51,7 +51,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
         ability.addTarget(new TargetPermanent(filter2));
 
         // • Target Bear you control fights target creature you don't control.
-        Mode mode = new Mode(new FightTargetsEffect());
+        Mode mode = new Mode(new FightTargetsEffect(false));
         mode.addTarget(new TargetControlledPermanent(filter3));
         mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.addMode(mode);

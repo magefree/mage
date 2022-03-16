@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class MesmerizingBenthidToken extends TokenImpl {
 
     public MesmerizingBenthidToken() {
-        super("Illusion", "0/2 blue Illusion creature token with \"Whenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step.\"");
+        super("Illusion Token", "0/2 blue Illusion creature token with \"Whenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         setOriginalExpansionSetCode("RNA");

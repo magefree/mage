@@ -4,7 +4,7 @@ package mage.cards.q;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -42,7 +42,7 @@ public final class QuiGonJinn extends CardImpl {
         // When Qui-Gon Jinn attacks alone, it gets +2/+2 and lifelink until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2");
-        Ability abitity = new AttacksAloneTriggeredAbility(effect);
+        Ability abitity = new AttacksAloneSourceTriggeredAbility(effect);
         effect = new GainAbilitySourceEffect(LifelinkAbility.getInstance());
         effect.setText("and lifelink until end of turn");
         abitity.addEffect(effect);

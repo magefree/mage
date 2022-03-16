@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,8 +14,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AetherstreamLeopard extends CardImpl {
@@ -36,8 +35,9 @@ public final class AetherstreamLeopard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
 
         // Whenever Aetherstream Leopard attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new PayEnergyCost(1)), false,
-                "Whenever {this} attacks you may pay {E}. If you do, it gets +2/+0 until end of turn."));
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new BoostSourceEffect(
+                2, 0, Duration.EndOfTurn
+        ).setText("it gets +2/+0 until end of turn"), new PayEnergyCost(1))));
     }
 
     private AetherstreamLeopard(final AetherstreamLeopard card) {

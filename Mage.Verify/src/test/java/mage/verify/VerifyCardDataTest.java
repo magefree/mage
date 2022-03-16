@@ -3,9 +3,12 @@ package mage.verify;
 import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -59,7 +62,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "VOC"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "AFC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -80,8 +83,9 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_WRONG_CARD_NUMBERS = "WRONG_CARD_NUMBERS";
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
-            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof",
-            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance"
+            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk"
     );
 
     static {
@@ -193,7 +197,6 @@ public class VerifyCardDataTest {
         // wrond card numbers skip list
         skipListCreate(SKIP_LIST_WRONG_CARD_NUMBERS);
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
-        skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "POR"); // Portal, TODO: remove after bug fixed https://github.com/mtgjson/mtgjson/issues/660
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SOI", "Tamiyo's Journal"); // not all variations implemented
@@ -237,7 +240,7 @@ public class VerifyCardDataTest {
     }
 
     private static boolean evergreenCheck(String s) {
-        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from");
+        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from") || s.startsWith("ward ");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
@@ -1137,7 +1140,7 @@ public class VerifyCardDataTest {
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
-            } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
+            } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token",""), "").isEmpty()) {
                 errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
@@ -1410,25 +1413,24 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
+        if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
+            fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
+
+        hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library");
+        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
             // ability/effect must have description or not
-            boolean mustCheck = card.getAbilities().containsClass(objectClass)
-                    || card.getAbilities().stream()
-                    .map(Ability::getAllEffects)
-                    .flatMap(Collection::stream)
-                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
-            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
-            if (mustCheck) {
-                boolean needHint = ref.text.contains(objectHint);
-                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
-                if (needHint != haveHint) {
-                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
-                }
+            boolean needHint = ref.text.contains(objectHint);
+            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+            if (needHint != haveHint) {
+                fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
             }
         }
 
@@ -1484,6 +1486,13 @@ public class VerifyCardDataTest {
         // remove reminder text
         newRule = newRule.replaceAll("(?i) <i>\\(.+\\)</i>", "");
         newRule = newRule.replaceAll("(?i) \\(.+\\)", "");
+
+        // fix specifically for mana abilities
+        if (newRule.startsWith("({T}: Add")) {
+            newRule = newRule
+                    .replace("(", "")
+                    .replace(")", "");
+        }
 
         // replace special text and symbols
         newRule = newRule
@@ -1547,7 +1556,7 @@ public class VerifyCardDataTest {
                         .replace("{this}", card.getName())
                         //.replace("<i>", "")
                         //.replace("</i>", "")
-                        .replace("&mdash;", "—");;
+                        .replace("&mdash;", "—");
 
                 boolean found = false;
                 for (String refRule : refRules) {
@@ -1594,6 +1603,17 @@ public class VerifyCardDataTest {
         return cardText.replace(name, name.split(" ")[0]).equals(refText);
     }
 
+    private static final boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
+        return card.getAbilities()
+                .stream()
+                .map(Ability::getModes)
+                .map(LinkedHashMap::values)
+                .flatMap(Collection::stream)
+                .map(Mode::getEffects)
+                .flatMap(Collection::stream)
+                .anyMatch(effectClazz::isInstance);
+    }
+
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
@@ -1605,24 +1625,20 @@ public class VerifyCardDataTest {
         }
 
         String refText = ref.text;
-        // lands fix
-        if (refText.startsWith("(") && refText.endsWith(")")) {
-            refText = refText.substring(1, refText.length() - 1);
-        }
         // planeswalker fix [-7]: xxx
-        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ");
+        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
         // evergreen keyword fix
-        for (String s : refText.split("[\\$\\\n]")) {
+        for (String s : refText.replaceAll(" \\(.+?\\)", "").split("[\\$\\\n]")) {
             if (Arrays
-                    .stream(s.split(", "))
+                    .stream(s.split("[,;] "))
                     .map(String::toLowerCase)
                     .allMatch(VerifyCardDataTest::evergreenCheck)) {
                 String replacement = Arrays
-                        .stream(s.split(", "))
+                        .stream(s.split("[,;] "))
                         .map(CardUtil::getTextWithFirstCharUpperCase)
-                        .reduce("", (a, b) -> a + '\n' + b);
-                refText = refText.replace(s, replacement.substring(1));
+                        .collect(Collectors.joining("\n"));
+                refText = refText.replace(s, replacement);
             }
         }
         // modal spell fix
@@ -1637,7 +1653,8 @@ public class VerifyCardDataTest {
         }
         // mana ability fix
         for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {")) || !s.contains("} or {")) {
+            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
+                    || !(s.contains("} or {") || s.contains("}, or {"))) {
                 continue;
             }
             String newStr = "";
@@ -1658,9 +1675,11 @@ public class VerifyCardDataTest {
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .reduce("", (a, b) -> a + '\n' + b)
+                .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
+                .replace("<b>", "")
+                .replace("</b>", "")
                 .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);

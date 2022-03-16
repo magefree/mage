@@ -13,6 +13,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -27,7 +29,7 @@ public final class MinnWilyIllusionistToken extends TokenImpl {
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public MinnWilyIllusionistToken() {
-        super("Illusion", "1/1 blue Illusion creature token with \"This creature gets +1/+0 for each other Illusion you control.\"");
+        super("Illusion Token", "1/1 blue Illusion creature token with \"This creature gets +1/+0 for each other Illusion you control.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ILLUSION);
@@ -36,6 +38,8 @@ public final class MinnWilyIllusionistToken extends TokenImpl {
         addAbility(new SimpleStaticAbility(new BoostSourceEffect(
                 xValue, StaticValue.get(0), Duration.WhileOnBattlefield
         ).setText("this creature gets +1/+0 for each other Illusion you control")));
+
+        availableImageSetCodes = Arrays.asList("AFC");
     }
 
     public MinnWilyIllusionistToken(final MinnWilyIllusionistToken token) {

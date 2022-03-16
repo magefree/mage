@@ -76,7 +76,7 @@ class RiverKelpieTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another permanent is put onto the battlefield from a graveyard, draw a card.";
+        return "Whenever {this} or another permanent enters the battlefield from a graveyard, draw a card.";
     }
 }
 

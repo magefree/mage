@@ -22,7 +22,7 @@ public final class ShelteringLight extends CardImpl {
 
         // Target creature gains indestructible until end of turn.  Scry 1.  
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

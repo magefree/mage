@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class KnightToken extends TokenImpl {
 
     public KnightToken() {
-        super("Knight", "2/2 white Knight creature token with vigilance");
+        super("Knight Token", "2/2 white Knight creature token with vigilance");
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -23,7 +23,7 @@ public final class KnightToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(VigilanceAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C13", "C15", "CMA", "DGM", "ORI", "RTR", "M19", "ELD", "M21");
+        availableImageSetCodes = Arrays.asList("C13", "C15", "CMA", "DGM", "ORI", "RTR", "M19", "ELD", "M21", "AFC", "MIC");
     }
 
     public KnightToken(final KnightToken token) {

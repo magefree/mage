@@ -46,7 +46,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
 
     static {
         filter.add(new AnotherCardPredicate());
-        filter.add(new SharesColorWithSourcePredicate());
+        filter.add(SharesColorWithSourcePredicate.instance);
     }
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.instance);

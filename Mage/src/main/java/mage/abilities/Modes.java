@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -42,7 +43,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean mayChooseNone = false;
 
     public Modes() {
-        this.currentMode = new Mode();
+        this.currentMode = new Mode((Effect) null);
         this.put(currentMode.getId(), currentMode);
         this.minModes = 1;
         this.maxModes = 1;
@@ -209,7 +210,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
         // use case: make all modes chooseable
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = Integer.MAX_VALUE;
+            realMaxModes = this.size();
         }
 
         // use case: limit max modes by opponents (wtf?!)
@@ -483,7 +484,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             throw new UnsupportedOperationException("no text available for this selection of min and max modes");
         }
 
-        if (isEachModeOnlyOnce()) {
+        if (isEachModeOnlyOnce() && this.getMaxModesFilter() == null) {
             sb.append(" that hasn't been chosen");
         }
         if (isResetEachTurn()) {

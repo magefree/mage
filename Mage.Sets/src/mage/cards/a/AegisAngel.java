@@ -1,11 +1,8 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -17,7 +14,8 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
-import mage.watchers.common.LostControlWatcher;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -41,13 +39,10 @@ public final class AegisAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom),
-                new SourceOnBattlefieldControlUnchangedCondition(),
-                "another target permanent is indestructible for as long as you control Aegis Angel");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(
+                IndestructibleAbility.getInstance(), Duration.WhileControlled
+        ), false);
         ability.addTarget(new TargetPermanent(filter));
-        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 
@@ -59,5 +54,4 @@ public final class AegisAngel extends CardImpl {
     public AegisAngel copy() {
         return new AegisAngel(this);
     }
-
 }

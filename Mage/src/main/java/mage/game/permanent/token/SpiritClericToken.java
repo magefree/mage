@@ -12,6 +12,8 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Arrays;
+
 /**
  *
  * @author weirddan455
@@ -19,7 +21,7 @@ import mage.game.permanent.Permanent;
 public class SpiritClericToken extends TokenImpl {
 
     public SpiritClericToken() {
-        super("Spirit Cleric", "white Spirit Cleric creature token with \"This creature's power and toughness are each equal to the number of Spirits you control.\"");
+        super("Spirit Cleric Token", "white Spirit Cleric creature token with \"This creature's power and toughness are each equal to the number of Spirits you control.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         subtype.add(SubType.CLERIC);
@@ -28,7 +30,10 @@ public class SpiritClericToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
+        // This creature’s power and toughness are each equal to the number of Spirits you control.
         this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(SpiritClericTokenValue.instance, Duration.EndOfGame)));
+
+        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     private SpiritClericToken(final SpiritClericToken token) {

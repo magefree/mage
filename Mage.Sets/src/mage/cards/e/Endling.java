@@ -38,7 +38,7 @@ public final class Endling extends CardImpl {
 
         // {B}: Endling gains menace until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
-                new MenaceAbility(), Duration.EndOfTurn
+                new MenaceAbility(false), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{B}")));
 
         // {B}: Endling gains deathtouch until end of turn.

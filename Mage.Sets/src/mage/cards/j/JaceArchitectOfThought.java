@@ -3,32 +3,24 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPlayer;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.PlayerIdPredicate;
-import mage.game.ExileZone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.*;
-import mage.ApprovingObject;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -40,7 +32,7 @@ public final class JaceArchitectOfThought extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtStartEffect1(), 1));
@@ -52,7 +44,6 @@ public final class JaceArchitectOfThought extends CardImpl {
         // -8: For each player, search that player's library for a nonland card and exile it, 
         // then that player shuffles their library. You may cast those cards without paying their mana costs.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect3(), -8));
-
     }
 
     private JaceArchitectOfThought(final JaceArchitectOfThought card) {
@@ -92,7 +83,7 @@ class JaceArchitectOfThoughtStartEffect1 extends OneShotEffect {
 
 class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private int startingTurn;
+    private final int startingTurn;
 
     public JaceArchitectOfThoughtDelayedTriggeredAbility(int startingTurn) {
         super(new BoostTargetEffect(-1, 0, Duration.EndOfTurn), Duration.Custom, false);
@@ -230,83 +221,33 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null || sourcePermanent == null) {
+        if (controller == null) {
             return false;
         }
-        if (controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", source, game)) {
             game.informPlayers(controller.getLogName() + " is looking at all players' libraries.");
             controller.lookAtAllLibraries(source, game);
         }
-        List<UUID> playerList = new ArrayList<>();
-        playerList.addAll(game.getState().getPlayersInRange(controller.getId(), game));
-        Set<UUID> checkList = new HashSet<>();
-        while (!playerList.isEmpty()) {
-            FilterPlayer filter = new FilterPlayer();
-            List<PlayerIdPredicate> playerPredicates = new ArrayList<>();
-            playerList.forEach((playerId) -> {
-                playerPredicates.add(new PlayerIdPredicate(playerId));
-            });
-            filter.add(Predicates.or(playerPredicates));
-            TargetPlayer targetPlayer = new TargetPlayer(1, 1, true, filter);
-            targetPlayer.setRequired(!checkList.containsAll(playerList));
-            if (controller.chooseTarget(outcome, targetPlayer, source, game)) {
-                UUID playerId = targetPlayer.getFirstTarget();
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    String playerName = player.getLogName() + "'s";
-                    if (source.isControlledBy(player.getId())) {
-                        playerName = "your";
-                    }
-                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard("nonland card from " + playerName + " library"));
-                    if (controller.searchLibrary(target, source, game, playerId)) {
-                        checkList.add(playerId);
-                        UUID targetId = target.getFirstTarget();
-                        Card card = player.getLibrary().remove(targetId, game);
-                        if (card != null) {
-                            controller.moveCardsToExile(card, source, game, true, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName());
-                            playerList.remove(playerId);
-                        }
-                    } else {
-                        playerList.remove(playerId);
-                    }
-                } else {
-                    playerList.remove(playerId);
-                }
-            } else {
-                break;
+        Cards cards = new CardsImpl();
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
-
-            // remove disconnected or quit players
-            playerList.removeIf(playerId -> game.getPlayer(playerId) == null || !game.getPlayer(playerId).canRespond());
-        }
-        checkList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
+            TargetCardInLibrary target = new TargetCardInLibrary(
+                    0, 1, StaticFilters.FILTER_CARD_A_NON_LAND
+            );
+            controller.searchLibrary(target, source, game, playerId);
+            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+            if (card == null) {
+                continue;
+            }
+            cards.add(card);
+            controller.moveCards(card, Zone.EXILED, source, game);
             player.shuffleLibrary(source, game);
-        });
-        ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (jaceExileZone == null) {
-            return true;
         }
-        FilterCard filter = new FilterCard("card to cast without mana costs");
-        TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-        Cards cardsToChoose = new CardsImpl(jaceExileZone.getCards(game));
-        while (controller.canRespond()
-                && cardsToChoose.count(filter, game) > 0
-                && controller.chooseUse(Outcome.Benefit, "Cast another spell from exile zone for free?", source, game)) {
-            controller.choose(Outcome.PlayForFree, cardsToChoose, target, game);
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                cardsToChoose.remove(card);
-                if (cardWasCast) {
-                    game.getExile().removeCard(card, game);
-                }
-            }
-            target.clearChosen();
-        }
+        cards.retainZone(Zone.EXILED, game);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;
     }
 }

@@ -1,20 +1,19 @@
-
 package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.permanent.token.RakkaMarElementalToken;
+import mage.game.permanent.token.ElementalTokenWithHaste;
 
 import java.util.UUID;
 
@@ -34,9 +33,8 @@ public final class RakkaMar extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new CreateTokenEffect(new RakkaMarElementalToken()),
-                new ManaCostsImpl("{R}")
+                new CreateTokenEffect(new ElementalTokenWithHaste()),
+                new ColoredManaCost(ColoredManaSymbol.R)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

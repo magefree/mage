@@ -64,24 +64,24 @@ class BrightflameEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         int damageDealt = 0;
-        if (target != null) {
-            ObjectColor color = target.getColor(game);
-            damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
-            for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
-                    damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
-                }
-            }
 
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null && damageDealt > 0) {
-                you.gainLife(damageDealt, game, source);
+        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        if (target == null) { return false; }
+
+        ObjectColor color = target.getColor(game);
+        damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
+        for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
+                damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
             }
-            return true;
         }
-        return false;
+
+        Player you = game.getPlayer(source.getControllerId());
+        if (you != null && damageDealt > 0) {
+            you.gainLife(damageDealt, game, source);
+        }
+        return true;
     }
 
     @Override

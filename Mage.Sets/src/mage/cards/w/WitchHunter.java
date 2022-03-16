@@ -13,9 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -24,12 +23,6 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  * @author fireshoes
  */
 public final class WitchHunter extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public WitchHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -46,7 +39,7 @@ public final class WitchHunter extends CardImpl {
         // {1}{W}{W}, {tap}: Return target creature an opponent controls to its owner's hand.
         Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
         returnAbility.addCost(new TapSourceCost());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         returnAbility.addTarget(target);
         this.addAbility(returnAbility);
     }

@@ -1,17 +1,19 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,10 +41,6 @@ public final class ArcaneEndeavor extends CardImpl {
 }
 
 class ArcaneEndeavorEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterInstantOrSorceryCard(
-            "instant or sorcery card with mana value %mv or less from your hand"
-    );
 
     ArcaneEndeavorEffect() {
         super(Outcome.Benefit);
@@ -82,7 +80,9 @@ class ArcaneEndeavorEffect extends OneShotEffect {
             second = firstResult;
         }
         player.drawCards(first, source, game);
-        new CastWithoutPayingManaCostEffect(StaticValue.get(second), filter).apply(game, source);
+        FilterCard filter = new FilterInstantOrSorceryCard();
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, second + 1));
+        CardUtil.castSpellWithAttributesForFree(player, source, game, new CardsImpl(player.getHand()), filter);
         return true;
     }
 }

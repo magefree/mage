@@ -20,7 +20,7 @@ public final class LastKiss extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

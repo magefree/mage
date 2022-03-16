@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,12 +13,15 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.effects.common.CopyEffect;
+import mage.game.permanent.PermanentCard;
+import mage.util.functions.CopyApplier;
 
 /**
  * @author TheElk801
@@ -35,8 +37,8 @@ public final class Dermotaxi extends CardImpl {
 
         // Imprint — As Dermotaxi enters the battlefield, exile a creature card from a graveyard.
         this.addAbility(new EntersBattlefieldAbility(
-                new DermotaxiImprintEffect(), null, "<i>Imprint</i> &mdash; As {this} " +
-                "enters the battlefield, exile a creature card from a graveyard.", ""
+                new DermotaxiImprintEffect(), null, "<i>Imprint</i> &mdash; As {this} "
+                + "enters the battlefield, exile a creature card from a graveyard.", ""
         ));
 
         // Tap two untapped creatures you control: Until end of turn, Dermotaxi becomes a copy of the imprinted card, except it's a Vehicle artifact in addition to its other types.
@@ -101,8 +103,8 @@ class DermotaxiCopyEffect extends OneShotEffect {
 
     DermotaxiCopyEffect() {
         super(Outcome.Benefit);
-        staticText = "until end of turn, {this} becomes a copy of the exiled card, " +
-                "except it's a Vehicle artifact in addition to its other types";
+        staticText = "until end of turn, {this} becomes a copy of the exiled card, "
+                + "except it's a Vehicle artifact in addition to its other types";
     }
 
     private DermotaxiCopyEffect(final DermotaxiCopyEffect effect) {
@@ -120,19 +122,28 @@ class DermotaxiCopyEffect extends OneShotEffect {
         if (sourcePermanent == null) {
             return false;
         }
-        Card card = game.getPermanent(sourcePermanent.getImprinted().get(0));
+        Card card = game.getCard(sourcePermanent.getImprinted().get(0));
         if (card == null) {
             return false;
         }
         Permanent newBluePrint = new PermanentCard(card, source.getControllerId(), game);
         newBluePrint.assignNewId();
-        newBluePrint.addCardType(CardType.ARTIFACT);
-        newBluePrint.addSubType(SubType.VEHICLE);
+        DermotaxiCopyApplier applier = new DermotaxiCopyApplier();
+        applier.apply(game, newBluePrint, source, sourcePermanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, sourcePermanent.getId());
         copyEffect.newId();
-        Ability newAbility = source.copy();
-        copyEffect.init(newAbility, game);
-        game.addEffect(copyEffect, newAbility);
+        copyEffect.setApplier(applier);
+        game.addEffect(copyEffect, source);
+        return true;
+    }
+}
+
+class DermotaxiCopyApplier extends CopyApplier {
+
+    @Override
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addCardType(CardType.ARTIFACT);
+        blueprint.addSubType(SubType.VEHICLE);
         return true;
     }
 }

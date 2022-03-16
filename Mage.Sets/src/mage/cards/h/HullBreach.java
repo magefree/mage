@@ -26,16 +26,14 @@ public final class HullBreach extends CardImpl {
         Target target = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(target);
         // or destroy target enchantment;
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         target = new TargetEnchantmentPermanent();
         mode.addTarget(target);
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact and target enchantment.
-        mode = new Mode();
         Effect effect = new DestroyTargetEffect(false, true);
         effect.setText("destroy target artifact and target enchantment");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetArtifactPermanent());
         mode.addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);

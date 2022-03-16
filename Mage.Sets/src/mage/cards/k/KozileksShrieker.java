@@ -38,7 +38,8 @@ public final class KozileksShrieker extends CardImpl {
         effect.setText("{this} gets +1/+0");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{C}"));
         effect = new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn);
-        effect.setText("and gains menace until end of turn");
+        effect.setText("and gains menace until end of turn. " +
+                "<i>(It can't be blocked except by two or more creatures. {C} represents colorless mana.)</i>");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

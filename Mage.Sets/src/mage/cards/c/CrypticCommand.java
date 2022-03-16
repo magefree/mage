@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -38,21 +37,18 @@ public final class CrypticCommand extends CardImpl {
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addTarget(new TargetSpell());
         // or return target permanent to its owner's hand;
-        Mode mode = new Mode();
         Effect effect2 = new ReturnToHandTargetEffect();
         effect2.setText("Return target permanent to its owner's hand.");
-        mode.addEffect(effect2);
+        Mode mode = new Mode(effect2);
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or tap all creatures your opponents control;
-        mode = new Mode();
-        mode.addEffect(new CrypticCommandEffect());
+        mode = new Mode(new CrypticCommandEffect());
         this.getSpellAbility().getModes().addMode(mode);
         // or draw a card.
-        mode = new Mode();
         Effect effect3 = new DrawCardSourceControllerEffect(1);
-        mode.addEffect(effect3);
         effect3.setText("Draw a card.");
+        mode = new Mode(effect3);
         this.getSpellAbility().getModes().addMode(mode);
     }
 
@@ -67,12 +63,6 @@ public final class CrypticCommand extends CardImpl {
 }
 
 class CrypticCommandEffect extends OneShotEffect {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public CrypticCommandEffect() {
         super(Outcome.Tap);
@@ -89,7 +79,7 @@ class CrypticCommandEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, player.getId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, player.getId(), source.getSourceId(), game)) {
             creature.tap(source, game);
         }
         return true;

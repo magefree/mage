@@ -11,6 +11,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,7 +41,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new SaskiaTheUnyieldingEffect(),
-                new FilterControlledCreaturePermanent("a creature you control"), false, SetTargetPointer.NONE, true
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.NONE, true
         ));
     }
 

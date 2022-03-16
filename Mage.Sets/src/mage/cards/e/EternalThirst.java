@@ -15,7 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -24,16 +24,10 @@ import mage.target.common.TargetCreaturePermanent;
  * @author emerald000
  */
 public final class EternalThirst extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public EternalThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -47,12 +41,10 @@ public final class EternalThirst extends CardImpl {
         effect.setText("Enchanted creature has lifelink");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         // and "Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature."
-        effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter), AttachmentType.AURA);
+        effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE), AttachmentType.AURA);
         ability.addEffect(effect);
         effect.setText("and \"Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature.\"");
         this.addAbility(ability);
-
-
     }
 
     private EternalThirst(final EternalThirst card) {

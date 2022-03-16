@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class BearsCompanionBearToken extends TokenImpl {
 
     public BearsCompanionBearToken() {
-        super("Bear", "4/4 green Bear creature token");
+        super("Bear Token", "4/4 green Bear creature token");
         setOriginalExpansionSetCode("KTK");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

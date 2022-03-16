@@ -65,10 +65,10 @@ class BathaHerdEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int xValue = ((BecomesMonstrousSourceTriggeredAbility) source).getMonstrosityValue();
-            return new CreateTokenEffect(new TuskenRaiderToken(), xValue).apply(game, source);
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        int xValue = ((BecomesMonstrousSourceTriggeredAbility) source).getMonstrosityValue();
+
+        return new CreateTokenEffect(new TuskenRaiderToken(), xValue).apply(game, source);
     }
 }

@@ -1,3 +1,4 @@
+Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
 Aether Revolt|AetherRevolt|
@@ -128,6 +129,7 @@ Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
 Kamigawa: Neon Dynasty|KamigawaNeonDynasty|
+Neon Dynasty Commander|NeonDynastyCommander|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
 Legends|Legends|
@@ -199,6 +201,7 @@ Shards of Alara|ShardsOfAlara|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|
+Streets of New Capenna|StreetsOfNewCapenna|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|

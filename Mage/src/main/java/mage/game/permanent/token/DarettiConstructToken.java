@@ -17,7 +17,7 @@ public final class DarettiConstructToken extends TokenImpl {
     }
 
     public DarettiConstructToken(String setCode) {
-        super("Construct", "1/1 colorless Construct artifact creature token with defender");
+        super("Construct Token", "1/1 colorless Construct artifact creature token with defender");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

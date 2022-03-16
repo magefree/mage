@@ -28,7 +28,9 @@ public class Legacy extends Constructed {
         banned.add("Bronze Tablet");
         banned.add("Channel");
         banned.add("Chaos Orb");
+        banned.add("Cleanse");
         banned.add("Contract from Below");
+        banned.add("Crusade");
         banned.add("Darkpact");
         banned.add("Deathrite Shaman");
         banned.add("Demonic Attorney");
@@ -48,8 +50,11 @@ public class Legacy extends Constructed {
         banned.add("Hermit Druid");
         banned.add("Immediate Action");
         banned.add("Imperial Seal");
+        banned.add("Imprison");
+        banned.add("Invoke Prejudice");
         banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
+        banned.add("Jihad");
         banned.add("Library of Alexandria");
         banned.add("Lurrus of the Dream-Den");
         banned.add("Mana Crypt");
@@ -71,6 +76,7 @@ public class Legacy extends Constructed {
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");
         banned.add("Power Play");
+        banned.add("Pradesh Gypsies");
         banned.add("Ragavan, Nimble Pilferer");
         banned.add("Rebirth");
         banned.add("Secret Summoning");
@@ -80,6 +86,7 @@ public class Legacy extends Constructed {
         banned.add("Shahrazad");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
+        banned.add("Stone-Throwing Devils");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
         banned.add("Tempest Efreet");

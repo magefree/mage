@@ -33,7 +33,7 @@ public final class ExoticCurse extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Domain - Enchanted creature gets -1/-1 for each basic land type among lands you control.
-        DynamicValue unboost = new SignInversionDynamicValue(new DomainValue());
+        DynamicValue unboost = new SignInversionDynamicValue(DomainValue.REGULAR);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(unboost, unboost, Duration.WhileOnBattlefield));
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));

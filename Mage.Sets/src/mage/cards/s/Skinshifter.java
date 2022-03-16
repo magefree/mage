@@ -35,12 +35,10 @@ public final class Skinshifter extends CardImpl {
                 new ManaCostsImpl<>("{G}"));
         ability.getModes().setChooseText("Choose one. Activate only once each turn.");
 
-        Mode mode = new Mode();
-        mode.addEffect(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
+        Mode mode = new Mode(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
-        mode = new Mode();
-        mode.addEffect(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
+        mode = new Mode(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
         this.addAbility(ability);

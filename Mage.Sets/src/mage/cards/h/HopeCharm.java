@@ -36,13 +36,11 @@ public final class HopeCharm extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or target player gains 2 life
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeTargetEffect(2));
+        Mode mode = new Mode(new GainLifeTargetEffect(2));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
         // or destroy target Aura.
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

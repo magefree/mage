@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class RhinoToken extends TokenImpl {
 
     public RhinoToken() {
-        super("Rhino", "4/4 green Rhino creature token with trample");
+        super("Rhino Token", "4/4 green Rhino creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.RHINO);
@@ -21,7 +21,7 @@ public final class RhinoToken extends TokenImpl {
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("DGM", "RTR", "MH1", "C19"));
+        availableImageSetCodes = Arrays.asList("DGM", "RTR", "MH1", "C19", "MIC");
     }
 
     public RhinoToken(final RhinoToken token) {

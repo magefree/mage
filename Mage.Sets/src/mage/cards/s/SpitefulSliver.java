@@ -35,7 +35,7 @@ public final class SpitefulSliver extends CardImpl {
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
         ).setText("Sliver creatures you control have \"Whenever this creature is dealt damage, " +
                 "it deals that much damage to target player or planeswalker.\"")
         ));

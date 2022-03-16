@@ -28,12 +28,10 @@ public final class SimicCharm extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         //permanents you control gain hexproof until end of turn
-        Mode mode = new Mode();
-        mode.addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
+        Mode mode = new Mode(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
         //return target creature to its owner's hand.
-        Mode mode2 = new Mode();
-        mode2.addEffect(new ReturnToHandTargetEffect());
+        Mode mode2 = new Mode(new ReturnToHandTargetEffect());
         mode2.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode2);
         

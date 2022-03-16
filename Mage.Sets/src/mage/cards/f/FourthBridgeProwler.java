@@ -1,21 +1,18 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FourthBridgeProwler extends CardImpl {
@@ -29,9 +26,8 @@ public final class FourthBridgeProwler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Fourth Bridge Prowler enters the battlefield, you may have target creature get -1/-1 until end of turn.
-        Effect effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
-        effect.setText("have target creature get -1/-1 until end of turn");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-1, -1)
+                .setText("you may have target creature get -1/-1 until end of turn"), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

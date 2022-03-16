@@ -148,6 +148,12 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
+        VEHICLE_CREWED,
+        /* VEHICLE_CREWED
+         targetId    the id of the vehicle
+         sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
         X_MANA_ANNOUNCE,
         /* X_MANA_ANNOUNCE
          mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)

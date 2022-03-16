@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.keyword.AmassEffect;
@@ -26,7 +25,7 @@ public final class AngrathCaptainOfChaos extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

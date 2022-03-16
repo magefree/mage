@@ -17,7 +17,7 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
     }
 
     public MetallurgicSummoningsConstructToken(int xValue) {
-        super("Construct", "X/X colorless Construct artifact creature token");
+        super("Construct Token", "X/X colorless Construct artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

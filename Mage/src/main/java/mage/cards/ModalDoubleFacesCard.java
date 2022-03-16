@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public abstract class ModalDoubleFacesCard extends CardImpl {
+public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithHalves {
 
     protected Card leftHalfCard; // main card in all zone
     protected Card rightHalfCard; // second side card, can be only in stack and battlefield zones

@@ -35,14 +35,14 @@ public final class DeathTyrant extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Negative Energy Cone — Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token.
         this.addAbility(new DeathTyrantTriggeredAbility().withFlavorWord("Negative Energy Cone"));
 
         // {5}{B}: Return Death Tyrant from your graveyard to the battlefield tapped.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{5}{B}")
         ));
     }

@@ -21,6 +21,8 @@ import mage.util.GameLog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -139,6 +141,24 @@ public class StackAbilityView extends CardView {
                 rules.add(HintUtils.HINT_START_MARK);
                 HintUtils.appendHints(rules, abilityHints);
             }
+        }
+
+        // show target of an ability on the stack if "related objects" is empty
+        if (!ability.getTargets().isEmpty()
+                && names.isEmpty()) {
+            StackObject stackObjectTarget = null;
+            for (Target target : ability.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mo = game.getObject(targetId);
+                    if (mo instanceof StackObject) {
+                        stackObjectTarget = (StackObject) mo;
+                    }
+                    if (stackObjectTarget != null) {
+                        this.rules.add("<span color='green'><i>Targeted ability related to this card: " + game.getCard(stackObjectTarget.getSourceId()).getIdName());
+                    }
+                }
+            }
+
         }
     }
 

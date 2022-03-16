@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
@@ -23,6 +22,7 @@ import mage.game.Game;
 import mage.game.command.emblems.KaitoShizukiEmblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NinjaToken;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class KaitoShizuki extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -55,7 +55,7 @@ public final class KaitoShizuki extends CardImpl {
                 new DiscardControllerEffect(1), condition,
                 "Then discard a card unless you attacked this turn"
         ));
-        this.addAbility(ability.addHint(RaidHint.instance));
+        this.addAbility(ability.addHint(RaidHint.instance), new PlayerAttackedWatcher());
 
         // −2: Create a 1/1 blue Ninja creature token with "This creature can't be blocked."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new NinjaToken()), -2));

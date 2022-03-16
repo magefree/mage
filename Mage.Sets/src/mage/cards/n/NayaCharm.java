@@ -27,13 +27,11 @@ public final class NayaCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or return target card from a graveyard to its owner's hand;
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetCardInGraveyard());
         this.getSpellAbility().addMode(mode);
         // or tap all creatures target player controls.
-        mode = new Mode();
-        mode.addEffect(new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES));
+        mode = new Mode(new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

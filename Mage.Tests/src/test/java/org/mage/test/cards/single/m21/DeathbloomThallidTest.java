@@ -20,7 +20,7 @@ public class DeathbloomThallidTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Saproling", 1);
+        assertPermanentCount(playerA, "Saproling Token", 1);
 
     }
 }

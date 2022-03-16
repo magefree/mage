@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PhyrexianZombieToken extends TokenImpl {
 
     public PhyrexianZombieToken() {
-        super("Phyrexian Zombie", "2/2 black Phyrexian Zombie creature token");
+        super("Phyrexian Zombie Token", "2/2 black Phyrexian Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PHYREXIAN);

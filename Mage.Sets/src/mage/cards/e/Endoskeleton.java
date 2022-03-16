@@ -30,7 +30,7 @@ public final class Endoskeleton extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}, {tap}: Target creature gets +0/+3 for as long as Endoskeleton remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostTargetEffect(0, 3, Duration.Custom), SourceTappedCondition.instance,
+            new BoostTargetEffect(0, 3, Duration.Custom), SourceTappedCondition.TAPPED,
             "target creature gets +0/+3 for as long as {this} remains tapped"), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

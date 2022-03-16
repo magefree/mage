@@ -1,6 +1,8 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
 import mage.choices.Choice;
@@ -9,11 +11,13 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * http://mtgsalvation.gamepedia.com/Land_changers
@@ -24,7 +28,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
     protected List<SubType> landTypes = new ArrayList<>();
-    private final List<SubType> landTypesToAdd = new ArrayList<>();
     private final boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesBasicLandTargetEffect(Duration duration) {
@@ -58,15 +61,12 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             dependencyTypes.add(DependencyType.BecomePlains);
         }
         this.chooseLandType = chooseLandType;
-        this.staticText = setText();
         this.loseOther = loseOther;
-
     }
 
     public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
-        this.landTypesToAdd.addAll(effect.landTypesToAdd);
         this.chooseLandType = effect.chooseLandType;
         this.loseOther = effect.loseOther;
     }
@@ -90,9 +90,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 return;
             }
         }
-        if (loseOther) {
-            landTypesToAdd.addAll(landTypes);
-        }
     }
 
     @Override
@@ -112,33 +109,37 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 land.removeAllAbilities(source.getSourceId(), game);
                 // 305.7
                 land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-                land.addSubType(game, landTypes);
-            } else {
-                landTypesToAdd.clear();
-                for (SubType subtype : landTypes) {
-                    if (!land.hasSubtype(subtype, game)) {
-                        land.addSubType(game, subtype);
-                        landTypesToAdd.add(subtype);
-                    }
-                }
             }
+            land.addSubType(game, landTypes);
+
             // add intrinsic land abilities here not in layer 6
-            for (SubType landType : landTypesToAdd) {
+            Abilities<Ability> landAbilities = land.getAbilities(game);
+            for (SubType landType : landTypes) {
                 switch (landType) {
                     case PLAINS:
-                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                        if (!landAbilities.containsClass(WhiteManaAbility.class)) {
+                            land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                     case ISLAND:
-                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                        if (!landAbilities.containsClass(BlueManaAbility.class)) {
+                            land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                     case SWAMP:
-                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                        if (!landAbilities.containsClass(BlackManaAbility.class)) {
+                            land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                     case MOUNTAIN:
-                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                        if (!landAbilities.containsClass(RedManaAbility.class)) {
+                            land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                     case FOREST:
-                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                        if (!landAbilities.containsClass(GreenManaAbility.class)) {
+                            land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                 }
             }
@@ -146,27 +147,32 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder();
-        if (chooseLandType) {
-            sb.append("Target land becomes the basic land type of your choice");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder("target ");
+        if (!mode.getTargets().isEmpty()) {
+            sb.append(mode.getTargets().get(0).getTargetName());
         } else {
-            sb.append("Target land becomes a ");
-            int i = 1;
-            for (SubType landType : landTypes) {
-                if (i > 1) {
-                    if (i == landTypes.size()) {
-                        sb.append(" and ");
-                    } else {
-                        sb.append(", ");
-                    }
-                }
-                i++;
-                sb.append(landType);
-            }
+            sb.append("land");
+        }
+        sb.append(" becomes ");
+        if (chooseLandType) {
+            sb.append("the basic land type of your choice");
+        } else {
+            sb.append(CardUtil.addArticle(CardUtil.concatWithAnd(landTypes
+                    .stream()
+                    .map(SubType::getDescription)
+                    .collect(Collectors.toList())
+            )));
+        }
+        if (!loseOther) {
+            sb.append(" in addition to its other types");
         }
         if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
-            sb.append(' ').append(duration.toString());
+            sb.append(' ').append(duration);
         }
         return sb.toString();
     }

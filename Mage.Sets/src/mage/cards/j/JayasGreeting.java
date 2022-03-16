@@ -19,7 +19,7 @@ public final class JayasGreeting extends CardImpl {
 
         // Jaya's Greeting deals 3 damage to target creature. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

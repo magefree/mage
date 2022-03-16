@@ -34,7 +34,7 @@ public final class TheBirthOfMeletis extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle your library.
         sagaAbility.addChapterEffect(

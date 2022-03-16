@@ -46,7 +46,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Elemental", 1); // because the copy was sacrificed
+        assertPermanentCount(playerA, "Elemental Token", 1); // because the copy was sacrificed
         assertPermanentCount(playerA, "Voice of Resurgence", 1);
     }
 
@@ -74,7 +74,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Voice of Resurgence", 0);
         assertGraveyardCount(playerA, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerA, "Elemental", 2);
+        assertPermanentCount(playerA, "Elemental Token", 2);
 
     }
 

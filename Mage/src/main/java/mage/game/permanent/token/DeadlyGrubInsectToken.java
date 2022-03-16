@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class DeadlyGrubInsectToken extends TokenImpl {
 
     public DeadlyGrubInsectToken() {
-        super("Insect", "6/1 green Insect creature token with shroud");
+        super("Insect Token", "6/1 green Insect creature token with shroud");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.INSECT);

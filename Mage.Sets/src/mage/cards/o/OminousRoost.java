@@ -2,16 +2,13 @@ package mage.cards.o;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.OminousRoostToken;
-import mage.game.stack.Spell;
-import mage.target.common.TargetNonlandPermanent;
+import mage.game.permanent.token.OminousRoostBirdToken;
 
 import java.util.UUID;
 
@@ -40,7 +37,7 @@ public final class OminousRoost extends CardImpl {
 class OminousRoostTriggeredAbility extends TriggeredAbilityImpl {
 
     OminousRoostTriggeredAbility() {
-        super(Zone.ALL, new CreateTokenEffect(new OminousRoostToken()));
+        super(Zone.ALL, new CreateTokenEffect(new OminousRoostBirdToken()));
     }
 
     private OminousRoostTriggeredAbility(final OminousRoostTriggeredAbility ability) {

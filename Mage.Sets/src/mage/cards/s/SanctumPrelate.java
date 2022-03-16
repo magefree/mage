@@ -1,7 +1,4 @@
-
 package mage.cards.s;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.MageObject;
@@ -18,6 +15,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author maxlebedev
@@ -52,7 +51,7 @@ class ChooseNumberEffect extends OneShotEffect {
 
     public ChooseNumberEffect() {
         super(Outcome.Detriment);
-        staticText = setText();
+        staticText = "choose a number";
     }
 
     public ChooseNumberEffect(final ChooseNumberEffect effect) {
@@ -67,7 +66,7 @@ class ChooseNumberEffect extends OneShotEffect {
             game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
-            if(permanent != null) {
+            if (permanent != null) {
                 permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: " + numberChoice + "</font>", game);
 
                 game.informPlayers(permanent.getLogName() + ", chosen number: " + numberChoice);
@@ -79,10 +78,6 @@ class ChooseNumberEffect extends OneShotEffect {
     @Override
     public ChooseNumberEffect copy() {
         return new ChooseNumberEffect(this);
-    }
-
-    private String setText() {
-        return "Choose a number. Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 }
 

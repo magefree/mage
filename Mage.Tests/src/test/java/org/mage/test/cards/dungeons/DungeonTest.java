@@ -89,7 +89,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 0);
+        assertPermanentCount(playerA, "Goblin Token", 0);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Cave Entrance");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -112,7 +112,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -138,7 +138,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -166,7 +166,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(null, null);
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -189,7 +189,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(null, null);
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
@@ -213,7 +213,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -247,7 +247,7 @@ public class DungeonTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, SILVERCOAT_LION, 3, 3);
         assertCounterCount(playerA, SILVERCOAT_LION, CounterType.P1P1, 1);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Storeroom");
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -286,8 +286,8 @@ public class DungeonTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
-        assertPermanentCount(playerB, "Treasure", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
+        assertPermanentCount(playerB, "Treasure Token", 1);
         assertDungeonRoom(playerA, LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertDungeonRoom(playerB, DUNGEON_OF_THE_MAD_MAGE, "Lost Level");
         assertLife(playerA, 20 + 1);
@@ -406,7 +406,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1 + 1);
         assertLife(playerB, 20 - 1 - 1);
@@ -433,7 +433,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
-        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);

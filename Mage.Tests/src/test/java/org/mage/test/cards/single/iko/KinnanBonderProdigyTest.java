@@ -66,6 +66,6 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, hovermyr, 1);
-        assertPermanentCount(playerA, "Treasure", 0);
+        assertPermanentCount(playerA, "Treasure Token", 0);
     }
 }

@@ -37,7 +37,7 @@ public final class AngelheartVial extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4))));
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -82,7 +82,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you are dealt damage, you may put that many charge counters on {this}.";
+        return "Whenever you're dealt damage, you may put that many charge counters on {this}.";
     }
 }
 

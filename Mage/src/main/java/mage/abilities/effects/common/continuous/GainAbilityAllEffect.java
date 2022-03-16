@@ -7,6 +7,8 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -136,7 +138,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder();
 
-        boolean quotes = forceQuotes || (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        boolean quotes = forceQuotes
+                || ability instanceof SimpleActivatedAbility
+                ||ability instanceof ActivatedManaAbilityImpl
+                || ability instanceof TriggeredAbility;
         boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
         if (excludeSource && !each) {
             sb.append("other ");

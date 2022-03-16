@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class WaylayToken extends TokenImpl {
 
     public WaylayToken() {
-        super("Knight", "2/2 white Knight creature token");
+        super("Knight Token", "2/2 white Knight creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KNIGHT);

@@ -33,7 +33,7 @@ public final class KingNarfisBetrayal extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         //I — Each player mills four cards. You may exile up to one creature or planeswalker card from each graveyard.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new KingNarfisBetrayalFirstEffect());

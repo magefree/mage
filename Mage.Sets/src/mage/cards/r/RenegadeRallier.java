@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,15 +10,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.RevoltWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class RenegadeRallier extends CardImpl {
@@ -41,14 +40,13 @@ public final class RenegadeRallier extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn,
         // return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                + " the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield.");
-        ability.setAbilityWord(AbilityWord.REVOLT);
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false),
+                RevoltCondition.instance, "When {this} enters the battlefield, if a permanent you controlled " +
+                "left the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield."
+        ).setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.addWatcher(new RevoltWatcher());
-        this.addAbility(ability);
+        this.addAbility(ability, new RevoltWatcher());
     }
 
     private RenegadeRallier(final RenegadeRallier card) {

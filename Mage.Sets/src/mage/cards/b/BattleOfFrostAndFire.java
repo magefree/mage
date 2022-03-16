@@ -42,7 +42,7 @@ public final class BattleOfFrostAndFire extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Battle of Frost and Fire deals 4 damage to each non-Giant creature and each planeswalker.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DamageAllEffect(4, filter));

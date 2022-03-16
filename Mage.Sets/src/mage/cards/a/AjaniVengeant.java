@@ -3,7 +3,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
@@ -36,7 +35,7 @@ public final class AjaniVengeant extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Target permanent doesn't untap during its controller's next untap step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DontUntapInControllersNextUntapStepTargetEffect(), 1);
@@ -46,7 +45,7 @@ public final class AjaniVengeant extends CardImpl {
         // −2: Ajani Vengeant deals 3 damage to any target and you gain 3 life.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(3));
-        effects1.add(new GainLifeEffect(3));
+        effects1.add(new GainLifeEffect(3).concatBy("and"));
         LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);

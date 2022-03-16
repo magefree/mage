@@ -34,7 +34,7 @@ public final class ParadiseDruid extends CardImpl {
                 new GainAbilitySourceEffect(
                         HexproofAbility.getInstance(),
                         Duration.WhileOnBattlefield
-                ), new InvertCondition(SourceTappedCondition.instance),
+                ), SourceTappedCondition.UNTAPPED,
                 "{this} has hexproof as long as it's untapped"
         )));
 

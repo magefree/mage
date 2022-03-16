@@ -33,7 +33,7 @@ public final class BoggartMob extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Champion a Goblin
-        this.addAbility(new ChampionAbility(this, SubType.GOBLIN, false));
+        this.addAbility(new ChampionAbility(this, SubType.GOBLIN));
 
         // Whenever a Goblin you control deals combat damage to a player, you may create a 1/1 black Goblin Rogue creature token.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(

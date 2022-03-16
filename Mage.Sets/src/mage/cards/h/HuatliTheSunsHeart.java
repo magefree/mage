@@ -1,7 +1,6 @@
 package mage.cards.h;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -25,7 +24,7 @@ public final class HuatliTheSunsHeart extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
+        this.setStartingLoyalty(7);
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
         this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(

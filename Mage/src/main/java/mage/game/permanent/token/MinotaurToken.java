@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class MinotaurToken extends TokenImpl {
 
     public MinotaurToken() {
-        super("Minotaur", "2/3 red Minotaur creature token");
+        super("Minotaur Token", "2/3 red Minotaur creature token");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);
         subtype.add(SubType.MINOTAUR);

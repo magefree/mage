@@ -35,7 +35,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
         ).setText("and has vigilance"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
-        ).setText("and menace"));
+        ).setText("and menace. <i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
         ability.addHint(GateYouControlHint.instance);
         this.addAbility(ability);
 

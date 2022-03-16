@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class ElementalTokenWithHaste extends TokenImpl {
 
     public ElementalTokenWithHaste() {
-        super("Elemental", "3/1 red Elemental creature token with haste");
+        super("Elemental Token", "3/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
@@ -21,7 +21,7 @@ public final class ElementalTokenWithHaste extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C20", "PMEI", "OGW", "SOK", "MRD");
+        availableImageSetCodes = Arrays.asList("C20", "PMEI", "OGW", "SOK", "MRD", "CON");
     }
 
     public ElementalTokenWithHaste(final ElementalTokenWithHaste token) {

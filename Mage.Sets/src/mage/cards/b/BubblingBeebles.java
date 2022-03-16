@@ -32,7 +32,7 @@ public final class BubblingBeebles extends CardImpl {
         // Bubbling Beebles can't be blocked as long as defending player controls an enchantment.
         Effect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(),
-                new DefendingPlayerControlsCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
+                new DefendingPlayerControlsCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
         effect.setText("{this} can't be blocked as long as defending player controls an enchantment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

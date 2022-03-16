@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class BeastToken2 extends TokenImpl {
 
     public BeastToken2() {
-        super("Beast", "4/4 green Beast creature token");
+        super("Beast Token", "4/4 green Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAST);
@@ -20,7 +20,7 @@ public final class BeastToken2 extends TokenImpl {
         toughness = new MageInt(4);
 
         availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "C19", "CMA", "CMD", "GVL", "DDD",
-                "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR", "C21", "MH2");
+                "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR", "C21", "MH2", "MID");
     }
 
     public BeastToken2(final BeastToken2 token) {

@@ -22,7 +22,7 @@ public class ElderGargarothTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
-        assertPermanentCount(playerA, "Beast", 1);
+        assertPermanentCount(playerA, "Beast Token", 1);
     }
 
     @Test

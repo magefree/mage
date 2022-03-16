@@ -30,7 +30,7 @@ public class TokenImplActivatedAbilityTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Elf Druid", 2);
+        assertPermanentCount(playerA, "Elf Druid Token", 2);
         assertPermanentCount(playerA, "Freyalise, Llanowar's Fury", 1);
         Assert.assertEquals("one green mana has to be in the mana pool", 1, playerA.getManaPool().get(ManaType.GREEN));
     }

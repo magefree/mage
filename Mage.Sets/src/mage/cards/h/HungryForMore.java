@@ -10,9 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.game.Game;
-import mage.game.permanent.token.HungryForMoreToken;
+import mage.game.permanent.token.HungryForMoreVampireToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
 
@@ -63,7 +62,7 @@ class HungryForMoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new HungryForMoreToken();
+        Token token = new HungryForMoreVampireToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new SacrificeTargetEffect().setTargetPointer(new FixedTargets(

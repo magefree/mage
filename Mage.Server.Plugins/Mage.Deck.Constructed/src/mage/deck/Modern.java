@@ -45,6 +45,7 @@ public class Modern extends Constructed {
         banned.add("Hogaak, Arisen Necropolis");
         banned.add("Hypergenesis");
         banned.add("Krark-Clan Ironworks");
+        banned.add("Lurrus of the Dream-Den");
         banned.add("Mental Misstep");
         banned.add("Mox Opal");
         banned.add("Mycosynth Lattice");

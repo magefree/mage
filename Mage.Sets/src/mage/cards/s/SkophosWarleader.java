@@ -52,7 +52,8 @@ public final class SkophosWarleader extends CardImpl {
                 new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn)
-                .setText("and gains menace until end of turn"));
+                .setText("and gains menace until end of turn. " +
+                        "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 

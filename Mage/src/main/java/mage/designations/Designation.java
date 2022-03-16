@@ -9,7 +9,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -224,14 +223,6 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
         return 1; // Emblems can't move zones until now so return always 1
     }
@@ -269,16 +260,6 @@ public abstract class Designation implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public boolean isUnique() {

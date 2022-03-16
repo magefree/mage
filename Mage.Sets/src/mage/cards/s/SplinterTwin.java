@@ -62,7 +62,7 @@ class SplinterTwinEffect extends OneShotEffect {
 
     public SplinterTwinEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile it at the beginning of the next end step";
+        this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile that token at the beginning of the next end step";
     }
 
     public SplinterTwinEffect(final SplinterTwinEffect effect) {
@@ -81,7 +81,7 @@ class SplinterTwinEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
+            for (Permanent addedToken : effect.getAddedPermanents()) {
                 ExileTargetEffect exileEffect = new ExileTargetEffect();
                 exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

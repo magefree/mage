@@ -44,7 +44,7 @@ public final class ValentinDeanOfTheVein extends ModalDoubleFacesCard {
         this.getLeftHalfCard().setPT(1, 1);
 
         // Menace
-        this.getLeftHalfCard().addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());

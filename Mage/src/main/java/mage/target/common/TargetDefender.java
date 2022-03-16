@@ -38,6 +38,7 @@ public class TargetDefender extends TargetImpl {
         this.filter = new FilterPlaneswalkerOrPlayer(defenders);
         this.targetName = filter.getMessage();
         this.attackerId = attackerId;
+        this.notTarget = true;
     }
 
     public TargetDefender(final TargetDefender target) {

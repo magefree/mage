@@ -41,7 +41,8 @@ public final class OgreErrant extends CardImpl {
         // Whenever Ogre Errant attacks, another target attacking Knight gains menace until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(
                 new MenaceAbility(), Duration.EndOfTurn
-        ).setText("another target attacking Knight gains menace until end of turn"), false);
+        ).setText("another target attacking Knight gains menace until end of turn." +
+                "<i>(It can't be blocked except by two or more creatures.)</i>"), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

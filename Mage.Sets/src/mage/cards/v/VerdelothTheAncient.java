@@ -1,6 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -11,10 +12,15 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 
 import java.util.UUID;
@@ -23,6 +29,13 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class VerdelothTheAncient extends CardImpl {
+
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("Saproling creatures and other Treefolk creatures");
+
+    static {
+        filter.add(VerdelothTheAncientPredicate.instance);
+    }
 
     public VerdelothTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
@@ -36,20 +49,15 @@ public final class VerdelothTheAncient extends CardImpl {
         this.addAbility(new KickerAbility("{X}"));
 
         // Saproling creatures and other Treefolk creatures get +1/+1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures and other Treefolk creatures");
-        filter.add(Predicates.or(
-                Predicates.and(SubType.TREEFOLK.getPredicate(), Predicates.not(new PermanentIdPredicate(this.getId()))),
-                SubType.SAPROLING.getPredicate())
-        );
-        filter.add(Predicates.not(new PermanentIdPredicate(this.getId())));
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, false
+        )));
 
         // When Verdeloth the Ancient enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), GetKickerXValue.instance), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens."));
-
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new SaprolingToken(), GetKickerXValue.instance), false
+        ), KickedCondition.instance, "When {this} enters the battlefield, " +
+                "if it was kicked, create X 1/1 green Saproling creature tokens."));
     }
 
     private VerdelothTheAncient(final VerdelothTheAncient card) {
@@ -59,5 +67,19 @@ public final class VerdelothTheAncient extends CardImpl {
     @Override
     public VerdelothTheAncient copy() {
         return new VerdelothTheAncient(this);
+    }
+}
+
+enum VerdelothTheAncientPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        MageObject obj = input.getObject();
+        if (obj.getId().equals(input.getSourceId())) {
+            return obj.hasSubtype(SubType.SAPROLING, game);
+        }
+        return obj.hasSubtype(SubType.TREEFOLK, game)
+                || obj.hasSubtype(SubType.SAPROLING, game);
     }
 }

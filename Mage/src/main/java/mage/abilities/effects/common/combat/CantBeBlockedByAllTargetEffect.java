@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -19,11 +20,6 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
     public CantBeBlockedByAllTargetEffect(FilterCreaturePermanent filterBlockedBy, Duration duration) {
         super(duration);
         this.filterBlockedBy = filterBlockedBy;
-        staticText = "target creature"
-                + " can't be blocked "
-                + (duration == EndOfTurn ? "this turn " : "")
-                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
-                + filterBlockedBy.getMessage();
     }
 
     public CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
@@ -44,5 +40,18 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
     @Override
     public CantBeBlockedByAllTargetEffect copy() {
         return new CantBeBlockedByAllTargetEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "target "
+                + mode.getTargets().get(0).getTargetName()
+                + " can't be blocked "
+                + (duration == EndOfTurn ? "this turn " : "")
+                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                + filterBlockedBy.getMessage();
     }
 }

@@ -12,7 +12,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -21,12 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class GlaringAegis extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GlaringAegis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
@@ -41,7 +35,7 @@ public final class GlaringAegis extends CardImpl {
         
         // When Glaring Aegis enters the battlefield, tap target creature an opponent controls.
         Ability ability2 = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability2);
         
         // Enchanted creature gets +1/+3.

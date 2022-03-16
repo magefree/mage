@@ -46,23 +46,20 @@ public final class ProfaneCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // * Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with mana value X or less from your graveyard")));
         this.getSpellAbility().addMode(mode);
 
         // * Target creature gets -X/-X until end of turn.
         DynamicValue minusValue = new SignInversionDynamicValue(xValue);
-        mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
+        mode = new Mode(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         // * Up to X target creatures gain fear until end of turn.
-        mode = new Mode();
         Effect effect = new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Up to X target creatures gain fear until end of turn");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().addMode(mode);
 

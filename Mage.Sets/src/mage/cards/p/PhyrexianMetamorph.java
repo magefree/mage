@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -44,9 +43,7 @@ public final class PhyrexianMetamorph extends CardImpl {
         CopyApplier phyrexianMetamorphCopyApplier = new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                if (!blueprint.isArtifact(game)) {
-                    blueprint.addCardType(game, CardType.ARTIFACT);
-                }
+                blueprint.addCardType(CardType.ARTIFACT);
                 return true;
             }
         };

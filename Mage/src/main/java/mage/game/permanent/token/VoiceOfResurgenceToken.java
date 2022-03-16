@@ -15,7 +15,7 @@ import mage.constants.Zone;
 public final class VoiceOfResurgenceToken extends TokenImpl {
 
     public VoiceOfResurgenceToken() {
-        super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
+        super("Elemental Token", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
         setOriginalExpansionSetCode("DGM");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

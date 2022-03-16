@@ -28,14 +28,12 @@ public final class EvolutionCharm extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true).setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle"));
 
         // or return target creature card from your graveyard to your hand;
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addMode(mode);
 
         // or target creature gains flying until end of turn.
-        mode = new Mode();
-        mode.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        mode = new Mode(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

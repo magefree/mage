@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -24,8 +24,6 @@ import java.util.UUID;
  */
 public final class AzoriusAethermage extends CardImpl {
 
-    private static final String rule = "Whenever a permanent is returned to your hand, ";
-
     public AzoriusAethermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
@@ -35,8 +33,8 @@ public final class AzoriusAethermage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.
-        Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
-        this.addAbility(new AzoriusAEthermageAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, effect, new FilterPermanent(), rule, false));
+        Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}"));
+        this.addAbility(new AzoriusAEthermageAbility(effect));
     }
 
     private AzoriusAethermage(final AzoriusAethermage card) {
@@ -51,25 +49,14 @@ public final class AzoriusAethermage extends CardImpl {
 
 class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
 
-    protected FilterPermanent filter;
-    protected Zone fromZone;
-    protected Zone toZone;
-    protected String rule;
+    private static final String rule = "Whenever a permanent is returned to your hand, ";
 
-    public AzoriusAEthermageAbility(Zone zone, Zone fromZone, Zone toZone, Effect effect, FilterPermanent filter, String rule, boolean optional) {
-        super(zone, effect, optional);
-        this.fromZone = fromZone;
-        this.toZone = toZone;
-        this.rule = rule;
-        this.filter = filter;
+    public AzoriusAEthermageAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public AzoriusAEthermageAbility(final AzoriusAEthermageAbility ability) {
+    private AzoriusAEthermageAbility(final AzoriusAEthermageAbility ability) {
         super(ability);
-        this.fromZone = ability.fromZone;
-        this.toZone = ability.toZone;
-        this.rule = ability.rule;
-        this.filter = ability.filter;
     }
 
     @Override
@@ -80,35 +67,29 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if ((fromZone == null || zEvent.getFromZone() == fromZone)
-                && (toZone == null || zEvent.getToZone() == toZone)) {
-            Permanent permanentThatMoved = null;
-            if (zEvent.getTarget() != null) {
-                permanentThatMoved = zEvent.getTarget();
-            }
-            //The controller's hand is where the permanent moved to.
-            return permanentThatMoved != null
-                    && filter.match(permanentThatMoved, sourceId, controllerId, game)
-                    && zEvent.getPlayerId().equals(controllerId);
+        if (zEvent.getFromZone() != Zone.BATTLEFIELD || zEvent.getToZone() != Zone.HAND) {
+            return false;
         }
-        return false;
+
+        if (!zEvent.getPlayerId().equals(controllerId)) {
+            return false;
+        }
+
+        Permanent permanentThatMoved = zEvent.getTarget();
+        if (permanentThatMoved == null) {
+            return false;
+        }
+
+        return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanentThatMoved, sourceId, controllerId, game);
     }
 
     @Override
     public String getTriggerPhrase() {
-        return rule ;
+        return rule;
     }
 
     @Override
     public AzoriusAEthermageAbility copy() {
         return new AzoriusAEthermageAbility(this);
-    }
-
-    public Zone getFromZone() {
-        return fromZone;
-    }
-
-    public Zone getToZone() {
-        return toZone;
     }
 }

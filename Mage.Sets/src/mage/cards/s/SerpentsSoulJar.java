@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -21,7 +22,9 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -35,8 +38,8 @@ public final class SerpentsSoulJar extends CardImpl {
 
         // Whenever an Elf you control dies, exile it.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new SerpentsSoulJarExileEffect(), false, filter, true)
-        );
+                new SerpentsSoulJarExileEffect(), false, filter, true
+        ));
 
         // {T}, Pay 2 life: Until end of turn, you may cast a creature spell from among cards exiled with Serpent's Soul-Jar.
         Ability ability = new SimpleActivatedAbility(new SerpentsSoulJarCastFromExileEffect(), new TapSourceCost());
@@ -78,13 +81,11 @@ class SerpentsSoulJarExileEffect extends OneShotEffect {
         if (player == null || permanent == null || card == null) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(permanent, game);
-        player.moveCards(card, Zone.EXILED, source, game);
-        String exileId = "serpentsSoulJar_" + mor.getSourceId() + mor.getZoneChangeCounter();
-        if (game.getState().getValue(exileId) == null) {
-            game.getState().setValue(exileId, new HashSet<MageObjectReference>());
-        }
-        ((Set) game.getState().getValue(exileId)).add(new MageObjectReference(card, game));
+        player.moveCardsToExile(
+                card, source, game, true,
+                CardUtil.getExileZoneId(game, source),
+                CardUtil.getSourceName(game, source)
+        );
         return true;
     }
 }
@@ -113,28 +114,16 @@ class SerpentsSoulJarCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        SerpentsSoulJarWatcher watcher = game.getState().getWatcher(SerpentsSoulJarWatcher.class);
-        if (watcher != null) {
-            watcher.addPlayable(source, game);
-        }
+        SerpentsSoulJarWatcher.addPlayable(source, game);
     }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        SerpentsSoulJarWatcher watcher = game.getState().getWatcher(SerpentsSoulJarWatcher.class);
-        if (watcher == null || !watcher.checkPermission(affectedControllerId, source, game)) {
+        if (!SerpentsSoulJarWatcher.checkPermission(affectedControllerId, source, game)) {
             return false;
         }
-        Object value = game.getState().getValue(
-                "serpentsSoulJar_" + source.getSourceId() + source.getSourceObjectZoneChangeCounter()
-        );
-        if (!(value instanceof Set)) {
-            discard();
-            return false;
-        }
-        Set<MageObjectReference> morSet = (Set<MageObjectReference>) value;
-        if (game.getState().getZone(sourceId) != Zone.EXILED
-                || morSet.stream().noneMatch(mor -> mor.refersTo(sourceId, game))) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null || !exileZone.contains(sourceId)) {
             return false;
         }
         Card card = game.getCard(sourceId);
@@ -168,24 +157,27 @@ class SerpentsSoulJarWatcher extends Watcher {
         super.reset();
     }
 
-    boolean checkPermission(UUID playerId, Ability source, Game game) {
+    static boolean checkPermission(UUID playerId, Ability source, Game game) {
         if (!playerId.equals(source.getControllerId())) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
-        );
-        if (!morMap.containsKey(mor)) {
-            return false;
-        }
-        return morMap.get(mor).getOrDefault(playerId, 0) > 0;
+        MageObjectReference mor = new MageObjectReference(source);
+        SerpentsSoulJarWatcher watcher = game.getState().getWatcher(SerpentsSoulJarWatcher.class);
+        return watcher
+                .morMap
+                .containsKey(mor)
+                && watcher
+                .morMap
+                .get(mor)
+                .getOrDefault(playerId, 0) > 0;
     }
 
-    void addPlayable(Ability source, Game game) {
-        MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
-        );
-        morMap.computeIfAbsent(mor, m -> new HashMap<>())
+    static void addPlayable(Ability source, Game game) {
+        MageObjectReference mor = new MageObjectReference(source);
+        game.getState()
+                .getWatcher(SerpentsSoulJarWatcher.class)
+                .morMap
+                .computeIfAbsent(mor, m -> new HashMap<>())
                 .compute(source.getControllerId(), CardUtil::setOrIncrementValue);
     }
 }

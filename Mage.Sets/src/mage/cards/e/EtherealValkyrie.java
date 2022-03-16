@@ -98,7 +98,7 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or attacks, " ;
+        return "Whenever {this} enters the battlefield or attacks, ";
     }
 }
 
@@ -167,6 +167,11 @@ class EtherealValkyrieEffect extends OneShotEffect {
                 // all done pre-processing so stick the foretell cost effect onto the main card
                 // note that the card is not foretell'd into exile, it is put into exile and made foretold
                 if (foretellAbility != null) {
+                    // copy source and use it for the foretold effect on the exiled card
+                    // bug #8673
+                    Ability copiedSource = source.copy();
+                    copiedSource.newId();
+                    copiedSource.setSourceId(exileCard.getId());
                     game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Turn Number", game.getTurnNum());
                     UUID exileId = CardUtil.getExileZoneId(exileCard.getMainCard().getId().toString() + "foretellAbility", game);
                     controller.moveCardsToExile(exileCard, source, game, true, exileId, " Foretell Turn Number: " + game.getTurnNum());
@@ -176,7 +181,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     game.getState().addOtherAbility(exileCard, foretellAbility);
                     foretellAbility.activate(game, true);
                     ContinuousEffect effect = foretellAbility.new ForetellAddCostEffect(new MageObjectReference(exileCard, game));
-                    game.addEffect(effect, source);
+                    game.addEffect(effect, copiedSource);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETOLD, exileCard.getId(), null, null));
                     return true;
                 }

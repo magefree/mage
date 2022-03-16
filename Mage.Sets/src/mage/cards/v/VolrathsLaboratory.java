@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -19,11 +17,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VolrathsLaboratoryToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class VolrathsLaboratory extends CardImpl {
@@ -74,7 +72,9 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        Token token = new VolrathsLaboratoryToken(color, subType);
-        return token.putOntoBattlefield(1, game, source, source.getControllerId());
+        if (subType == null || color == null) {
+            return false;
+        }
+        return new VolrathsLaboratoryToken(color, subType).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

@@ -47,7 +47,7 @@ class SecretSalvageEffect extends OneShotEffect {
     public SecretSalvageEffect() {
         super(Outcome.DrawCard);
         staticText = "Exile target nonland card from your graveyard. Search your library for any number of cards with the same name as that card, "
-                + "reveal them, and put them into your hand. Then shuffle";
+                + "reveal them, put them into your hand, then shuffle";
     }
 
     public SecretSalvageEffect(final SecretSalvageEffect effect) {

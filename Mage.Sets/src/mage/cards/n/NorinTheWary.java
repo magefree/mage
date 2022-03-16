@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -48,7 +47,7 @@ public final class NorinTheWary extends CardImpl {
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), false);
     }
 
     public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {

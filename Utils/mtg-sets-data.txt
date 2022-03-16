@@ -8,6 +8,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
 Aether Revolt|AER|
@@ -128,6 +129,7 @@ Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
 Kamigawa: Neon Dynasty|NEO|
+Neon Dynasty Commander|NEC|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
@@ -198,6 +200,7 @@ Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Scars of Mirrodin|SOM|
+Streets of New Capenna|SNC|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|

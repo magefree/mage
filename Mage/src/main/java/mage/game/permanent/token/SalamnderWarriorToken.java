@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class SalamnderWarriorToken extends TokenImpl {
 
     public SalamnderWarriorToken() {
-        super("Salamander Warrior", "4/3 blue Salamander Warrior creature token");
+        super("Salamander Warrior Token", "4/3 blue Salamander Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SALAMANDER);

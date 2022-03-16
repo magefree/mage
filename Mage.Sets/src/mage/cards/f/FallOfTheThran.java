@@ -36,7 +36,7 @@ public final class FallOfTheThran extends CardImpl {
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
         // I — Destroy all lands.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DestroyAllEffect(StaticFilters.FILTER_LANDS));
         // II, III — Each player returns two land cards from their graveyard to the battlefield.

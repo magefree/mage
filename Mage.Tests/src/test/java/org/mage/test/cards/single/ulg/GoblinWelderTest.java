@@ -41,6 +41,6 @@ public class GoblinWelderTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, wurmcoil, 1);
         assertPermanentCount(playerA, relic, 1);
         assertCounterCount(aspirant, CounterType.P1P1, 1);
-        assertPermanentCount(playerA, "Wurm", 2);
+        assertPermanentCount(playerA, "Wurm Token", 2);
     }
 }

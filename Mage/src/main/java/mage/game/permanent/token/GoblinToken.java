@@ -23,7 +23,7 @@ public final class GoblinToken extends TokenImpl {
     }
 
     public GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token");
+        super("Goblin Token", "1/1 red Goblin creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOBLIN);
         color.setRed(true);

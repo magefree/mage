@@ -102,7 +102,7 @@ class PhantasmalSphereEffect extends OneShotEffect {
 class PhantasmalSphereToken extends TokenImpl {
 
     public PhantasmalSphereToken(int xValue) {
-        super("Orb", "X/X blue Orb creature token with flying");
+        super("Orb Token", "X/X blue Orb creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ORB);

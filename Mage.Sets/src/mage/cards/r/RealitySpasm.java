@@ -27,8 +27,7 @@ public final class RealitySpasm extends CardImpl {
 
         // Choose one - Tap X target permanents; or untap X target permanents.
         this.getSpellAbility().addEffect(new RealitySpasmTapEffect());
-        Mode mode = new Mode();
-        mode.addEffect(new RealitySpasmUntapEffect());
+        Mode mode = new Mode(new RealitySpasmUntapEffect());
         this.getSpellAbility().addMode(mode);
     }
 

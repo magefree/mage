@@ -30,11 +30,11 @@ public final class CloudshredderSliver extends CardImpl {
         // Sliver creatures you control have flying and haste.
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
                 FlyingAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
         ).setText("Sliver creatures you control have flying"));
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
         ).setText("and haste"));
         this.addAbility(ability);
     }

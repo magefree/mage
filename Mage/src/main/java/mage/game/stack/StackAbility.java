@@ -16,7 +16,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
@@ -390,22 +389,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustTargets(ability, game);
-        }
-    }
-
-    @Override
     public boolean checkIfClause(Game game) {
         return true;
     }
@@ -647,18 +630,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+    public StackAbility setTargetAdjuster(TargetAdjuster targetAdjuster) {
         this.targetAdjuster = targetAdjuster;
+        return this;
     }
 
     @Override

@@ -1,22 +1,18 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
@@ -27,11 +23,11 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ShellOfTheLastKappa extends CardImpl {
@@ -50,16 +46,18 @@ public final class ShellOfTheLastKappa extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // {3}, {tap}: Exile target instant or sorcery spell that targets you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ShellOfTheLastKappaEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(
+                new ShellOfTheLastKappaEffect(), new GenericManaCost(3)
+        );
         ability.addCost(new TapSourceCost());
         Target target = new TargetSpell(filter);
         ability.addTarget(target);
         this.addAbility(ability);
         // {3}, {tap}, Sacrifice Shell of the Last Kappa: You may cast a card 
         // exiled with Shell of the Last Kappa without paying its mana cost.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ShellOfTheLastKappaCastEffect(), new ManaCostsImpl("{3}"));
+        ability = new SimpleActivatedAbility(
+                new ShellOfTheLastKappaCastEffect(), new GenericManaCost(3)
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -118,7 +116,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
 
     public ShellOfTheLastKappaCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "You may cast a card exiled with {this} without paying its mana cost";
+        this.staticText = "You may cast a spell from among cards exiled with {this} without paying its mana cost";
     }
 
     public ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
@@ -134,25 +132,11 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null
-                && sourcePermanent != null) {
-            TargetCardInExile target = new TargetCardInExile(new FilterCard(),
-                    CardUtil.getExileZoneId(game, source.getSourceId(), sourcePermanent.getZoneChangeCounter(game)));
-            if (controller.choose(Outcome.PlayForFree, game.getExile()
-                    .getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(),
-                            sourcePermanent.getZoneChangeCounter(game))), target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null
-                        && controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    return cardWasCast;
-                }
-            }
+        if (controller == null || sourcePermanent == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)));
+        return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
     }
 }
 

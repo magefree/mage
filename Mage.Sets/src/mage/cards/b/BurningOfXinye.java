@@ -61,22 +61,21 @@ class BurningOfXinyeEffect extends OneShotEffect{
     @Override
     public boolean apply(Game game, Ability source) {
         boolean abilityApplied = false;
-        
-        Player controller = game.getPlayer(source.getControllerId());
 
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             abilityApplied |= playerDestroys(game, source, controller);
         }
-        
-        Player opponent = game.getPlayer(source.getFirstTarget());
 
-        if (controller != null) {
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        if (opponent != null) {
             abilityApplied |= playerDestroys(game, source, opponent);
         }
+
         return abilityApplied;
     }
     
-    public boolean playerDestroys(Game game, Ability source,Player player){
+    private boolean playerDestroys(Game game, Ability source, Player player){
         boolean abilityApplied = false;
         
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
@@ -88,10 +87,10 @@ class BurningOfXinyeEffect extends OneShotEffect{
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
-            for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent(target.getTargets().get(idx));
+            for (UUID targetId : target.getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
 
-                if ( permanent != null ) {
+                if (permanent != null) {
                     abilityApplied |= permanent.destroy(source, game, false);
                 }
             }
@@ -103,5 +102,4 @@ class BurningOfXinyeEffect extends OneShotEffect{
     public BurningOfXinyeEffect copy() {
         return new BurningOfXinyeEffect(this);
     }
-
 }

@@ -45,4 +45,6 @@ public interface Cards extends Set<UUID>, Serializable {
     Cards copy();
 
     void retainZone(Zone zone, Game game);
+
+    void removeZone(Zone zone, Game game);
 }

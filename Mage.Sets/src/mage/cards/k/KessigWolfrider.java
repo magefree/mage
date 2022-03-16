@@ -31,7 +31,7 @@ public final class KessigWolfrider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {2}{R}, {T}, Exile three cards from your graveyard: Create a 3/2 red Wolf creature token.
         Ability ability = new SimpleActivatedAbility(

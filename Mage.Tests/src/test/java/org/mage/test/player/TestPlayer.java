@@ -4364,19 +4364,17 @@ public class TestPlayer implements Player {
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
-
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
-        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
+        Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
         if (useable.size() == 1) {
-            return (SpellAbility) useable.values().iterator().next();
+            return useable.values().iterator().next();
         }
 
         if (!choices.isEmpty()) {
-            for (ActivatedAbility ability : useable.values()) {
+            for (SpellAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
-                    return (SpellAbility) ability;
+                    return ability;
                 }
             }
 
@@ -4384,6 +4382,7 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
+        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Card's abilities:\n" + allInfo);
         return computerPlayer.chooseAbilityForCast(card, game, noMana);
     }

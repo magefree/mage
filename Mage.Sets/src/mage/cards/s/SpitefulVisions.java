@@ -29,7 +29,7 @@ public final class SpitefulVisions extends CardImpl {
 
 
         // At the beginning of each player's draw step, that player draws an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1).setText("that player draws an additional card"), TargetController.ANY, false));
 
         // Whenever a player draws a card, Spiteful Visions deals 1 damage to that player.
         TriggeredAbility triggeredAbility = new SpitefulVisionsTriggeredAbility(new DamageTargetEffect(1), false);
@@ -74,7 +74,7 @@ class SpitefulVisionsTriggeredAbility  extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player draws a card, Spiteful Visions deals 1 damage to that player.";
+        return "Whenever a player draws a card, {this} deals 1 damage to that player.";
     }
 
     @Override

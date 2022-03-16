@@ -49,7 +49,7 @@ public class PayEnergyCost extends CostImpl {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("Pay ");
+        StringBuilder sb = new StringBuilder("pay ");
         for (int i = 0; i < amount; i++) {
             sb.append("{E}");
         }

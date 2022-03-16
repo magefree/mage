@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class CatSoldierCreatureToken extends TokenImpl {
 
     public CatSoldierCreatureToken() {
-        super("Cat Soldier", "1/1 white Cat Soldier creature token with vigilance");
+        super("Cat Soldier Token", "1/1 white Cat Soldier creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         

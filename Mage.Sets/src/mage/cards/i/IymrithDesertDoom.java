@@ -40,7 +40,7 @@ public final class IymrithDesertDoom extends CardImpl {
         // Iymrith, Desert Doom has ward {4} as long as it's untapped.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new WardAbility(new GenericManaCost(4)), Duration.WhileOnBattlefield),
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 "{this} has ward {4} as long as it's untapped"
         )));
 

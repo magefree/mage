@@ -34,7 +34,7 @@ public final class Moonhold extends CardImpl {
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();
         ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
         effect.setText("Target player can't play lands this turn if {R} was spent to cast this spell");
-        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast it.");
+        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast this spell.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));

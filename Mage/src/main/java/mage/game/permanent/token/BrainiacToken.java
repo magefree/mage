@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class BrainiacToken extends TokenImpl {
 
     public BrainiacToken() {
-        super("Brainiac", "1/1 red Brainiac creature token");
+        super("Brainiac Token", "1/1 red Brainiac creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.BRAINIAC);

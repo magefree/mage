@@ -27,8 +27,7 @@ public final class Triskaidekaphobia extends CardImpl {
         // At the beginning of your upkeep, choose one - Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect(), TargetController.YOU, false);
-        Mode mode = new Mode();
-        mode.addEffect(new TriskaidekaphobiaLoseLifeEffect());
+        Mode mode = new Mode(new TriskaidekaphobiaLoseLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }

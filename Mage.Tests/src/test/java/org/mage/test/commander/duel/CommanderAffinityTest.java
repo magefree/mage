@@ -129,7 +129,7 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         // generate artifact tokens
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Create");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall", 7);
+        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall Token", 7);
         checkPlayableAbility("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Karn, Silver Golem", true);
 
         setStrictChooseMode(true);

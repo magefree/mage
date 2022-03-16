@@ -28,7 +28,7 @@ public final class TheFlameOfKeld extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Discard your hand.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DiscardHandControllerEffect());

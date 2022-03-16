@@ -63,19 +63,18 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetOpponent(true);
-            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
-            Player opponent = game.getPlayer(target.getFirstTarget());
-            if (opponent != null) {
-                Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
-                effect.setTargetPointer(new FixedTarget(opponent.getId()));
-                effect.apply(game, source);
-                new CreateTokenEffect(new SpiritWhiteToken(), 3).apply(game, source);
-                return true;
-            }
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        Target target = new TargetOpponent(true);
+        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+        Player opponent = game.getPlayer(target.getFirstTarget());
+        if (opponent == null) { return false; }
+
+        Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
+        effect.setTargetPointer(new FixedTarget(opponent.getId()));
+        effect.apply(game, source);
+        new CreateTokenEffect(new SpiritWhiteToken(), 3).apply(game, source);
+        return true;
     }
 }
 
@@ -98,18 +97,18 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetOpponent(true);
-            target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
-            Player opponent = game.getPlayer(target.getFirstTarget());
-            if (opponent != null) {
-                int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
-                controller.gainLife(count, game, source);
-                count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) * 2;
-                opponent.gainLife(count, game, source);
-                return true;
-            }
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        Target target = new TargetOpponent(true);
+        target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
+        Player opponent = game.getPlayer(target.getFirstTarget());
+        if (opponent == null) { return false; }
+
+        int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
+        controller.gainLife(count, game, source);
+        count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) * 2;
+        opponent.gainLife(count, game, source);
+
+        return true;
     }
 }

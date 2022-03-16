@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class TemptWithVengeanceElementalToken extends TokenImpl {
 
     public TemptWithVengeanceElementalToken() {
-        super("Elemental", "1/1 red Elemental creature tokens with haste");
+        super("Elemental Token", "1/1 red Elemental creature tokens with haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
 

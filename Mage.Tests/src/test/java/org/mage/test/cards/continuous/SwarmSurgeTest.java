@@ -40,8 +40,8 @@ public class SwarmSurgeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Birthing Hulk", 7, 4);
         assertAbility(playerA, "Birthing Hulk", FirstStrikeAbility.getInstance(), true);
-        assertPowerToughness(playerA, "Eldrazi Scion", 3, 1, Filter.ComparisonScope.All);
-        assertAbility(playerA, "Eldrazi Scion", FirstStrikeAbility.getInstance(), true, 2);
+        assertPowerToughness(playerA, "Eldrazi Scion Token", 3, 1, Filter.ComparisonScope.All);
+        assertAbility(playerA, "Eldrazi Scion Token", FirstStrikeAbility.getInstance(), true, 2);
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 2);
         assertAbility(playerA, "Silvercoat Lion", FirstStrikeAbility.getInstance(), false);
 

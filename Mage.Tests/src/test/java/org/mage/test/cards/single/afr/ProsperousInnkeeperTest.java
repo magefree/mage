@@ -19,7 +19,7 @@ public class ProsperousInnkeeperTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
-        assertPermanentCount(playerA, "Treasure", 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
     }
 
     @Test

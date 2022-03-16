@@ -4,9 +4,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
@@ -245,18 +243,7 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        if (card.isPlaneswalker()) {
-            for (Ability ab : card.getAbilities()) {
-                if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
-                    this.startingLoyalty = "" + ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();
-                }
-            }
-            if (this.startingLoyalty == null) {
-                this.startingLoyalty = "";
-            }
-        } else {
-            this.startingLoyalty = "";
-        }
+        this.startingLoyalty = CardUtil.convertStartingLoyalty(card.getStartingLoyalty());
     }
 
     public Card getCard() {
@@ -491,8 +478,8 @@ public class CardInfo {
         if (o == null || !(o instanceof CardInfo)) return false;
         CardInfo other = (CardInfo) o;
         return (this.name.equals(other.name)
-            && this.setCode.equals(other.setCode)
-            && this.cardNumber.equals(other.cardNumber));
+                && this.setCode.equals(other.setCode)
+                && this.cardNumber.equals(other.cardNumber));
     }
 
     @Override

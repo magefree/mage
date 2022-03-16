@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class RedGreenBeastToken extends TokenImpl {
 
     public RedGreenBeastToken() {
-        super("Beast", "4/4 red and green Beast creature token with trample");
+        super("Beast Token", "4/4 red and green Beast creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);

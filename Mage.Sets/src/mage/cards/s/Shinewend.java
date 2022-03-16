@@ -36,10 +36,10 @@ public final class Shinewend extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Shinewend enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))));
-        
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), "with a +1/+1 counter on it"));
+
         // {1}{W}, Remove a +1/+1 counter from Shinewend: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility( new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);

@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ApeToken;
@@ -29,7 +29,7 @@ public final class MonkeyCage extends CardImpl {
 
         // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),
-                new FilterCreaturePermanent("a creature"), false, SetTargetPointer.PERMANENT, "");
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT, "");
         ability.addEffect(new MonkeyCageEffect());
         this.addAbility(ability);
     }

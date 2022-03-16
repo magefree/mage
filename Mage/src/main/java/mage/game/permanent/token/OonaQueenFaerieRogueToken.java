@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class OonaQueenFaerieRogueToken extends TokenImpl {
 
     public OonaQueenFaerieRogueToken() {
-        super("Faerie Rogue", "1/1 blue and black Faerie Rogue creature token with flying");
+        super("Faerie Rogue Token", "1/1 blue and black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);

@@ -31,7 +31,7 @@ public final class ChitinousCloak extends CardImpl {
         // Equipped creature gets +2/+2 and has menace.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
         Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT);
-        effect.setText("and has menace");
+        effect.setText("and has menace. <i>(It can't be blocked except by two or more creatures.)</i>");
         ability.addEffect(effect);
         this.addAbility(ability);
         // Equip {3}

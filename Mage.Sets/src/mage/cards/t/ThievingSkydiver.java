@@ -40,7 +40,7 @@ public final class ThievingSkydiver extends CardImpl {
         KickerAbility kickerAbility = new KickerAbility("{X}");
         kickerAbility.getKickerCosts().forEach(cost -> {
             cost.setMinimumCost(1);
-            cost.setReminderText(". X can't be 0.");
+            cost.setReminderText(". X can't be 0. <i>(You may pay an additional {X} as you cast this spell.)</i>");
         });
         this.addAbility(kickerAbility);
 

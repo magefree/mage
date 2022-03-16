@@ -38,7 +38,7 @@ public final class NoxiousGearhulk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Noxious Gearhulk enters the battlefield, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NoxiousGearhulkEffect());

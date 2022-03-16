@@ -30,7 +30,7 @@ public final class RegalLeosaur extends CardImpl {
 
         // Whenever this creature mutates, other creatures you control get +2/+1 until end of turn.
         this.addAbility(new MutatesSourceTriggeredAbility(
-                new BoostControlledEffect(2, 1, Duration.EndOfTurn, false)
+                new BoostControlledEffect(2, 1, Duration.EndOfTurn, true)
         ));
     }
 

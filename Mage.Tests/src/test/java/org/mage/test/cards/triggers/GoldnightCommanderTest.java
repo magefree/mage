@@ -30,8 +30,8 @@ public class GoldnightCommanderTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Human", 3);
-        assertPowerToughness(playerA, "Human", 4, 4, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Human Token", 3);
+        assertPowerToughness(playerA, "Human Token", 4, 4, Filter.ComparisonScope.All);
 
     }
 

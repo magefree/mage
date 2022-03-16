@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class CaribouToken extends TokenImpl {
 
     public CaribouToken() {
-        super("Caribou", "0/1 white Caribou creature token");
+        super("Caribou Token", "0/1 white Caribou creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.CARIBOU);

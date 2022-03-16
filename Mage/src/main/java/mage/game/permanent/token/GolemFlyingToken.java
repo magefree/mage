@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class GolemFlyingToken extends TokenImpl {
 
     public GolemFlyingToken() {
-        super("Golem", "3/3 colorless Golem artifact creature token with flying");
+        super("Golem Token", "3/3 colorless Golem artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);

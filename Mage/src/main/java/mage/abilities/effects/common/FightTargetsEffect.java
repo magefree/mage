@@ -16,12 +16,20 @@ import java.util.UUID;
  */
 public class FightTargetsEffect extends OneShotEffect {
 
+    protected boolean showEffectHint;
+
     public FightTargetsEffect() {
-        super(Outcome.Damage);
+        this(true);
+    }
+
+    public FightTargetsEffect(boolean showEffectHint) {
+        super(Outcome.Benefit);
+        this.showEffectHint = showEffectHint;
     }
 
     public FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
+        this.showEffectHint = effect.showEffectHint;
     }
 
     @Override
@@ -80,6 +88,12 @@ public class FightTargetsEffect extends OneShotEffect {
         if(!target.getTargetName().contains("other")){
             sb.append("target ");
         }
-        sb.append(target.getTargetName());return sb.toString();
+        sb.append(target.getTargetName());
+
+        if (showEffectHint) {
+            sb.append(". <i>(Each deals damage equal to its power to the other.)</i>");
+        }
+
+        return sb.toString();
     }
 }

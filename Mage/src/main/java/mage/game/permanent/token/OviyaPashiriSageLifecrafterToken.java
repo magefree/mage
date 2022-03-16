@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.Arrays;
 
@@ -12,14 +11,12 @@ import java.util.Arrays;
  */
 public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
 
-    static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
-
     public OviyaPashiriSageLifecrafterToken() {
         this(1);
     }
 
     public OviyaPashiriSageLifecrafterToken(int number) {
-        super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
+        super("Construct Token", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

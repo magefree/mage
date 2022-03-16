@@ -9,10 +9,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Arrays;
+
 public final class VrondissRageOfAncientsToken extends TokenImpl {
 
     public VrondissRageOfAncientsToken() {
-        super("Dragon Spirit", "5/4 red and green Dragon Spirit creature token with \"When this creature deals damage, sacrifice it.\"");
+        super("Dragon Spirit Token", "5/4 red and green Dragon Spirit creature token with \"When this creature deals damage, sacrifice it.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);
@@ -20,7 +22,10 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(5);
         toughness = new MageInt(4);
+
         this.addAbility(new VrondissRageOfAncientsTokenTriggeredAbility());
+
+        availableImageSetCodes = Arrays.asList("AFC");
     }
 
     public VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {

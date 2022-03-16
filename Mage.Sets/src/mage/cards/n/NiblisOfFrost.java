@@ -11,9 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,11 +20,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class NiblisOfFrost extends CardImpl {
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filterCreature.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public NiblisOfFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -42,7 +35,7 @@ public final class NiblisOfFrost extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
-        ability.addTarget(new TargetCreaturePermanent(filterCreature));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
         this.addAbility(ability);
     }

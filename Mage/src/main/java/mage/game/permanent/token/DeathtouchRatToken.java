@@ -21,7 +21,7 @@ public final class DeathtouchRatToken extends TokenImpl {
     }
 
     public DeathtouchRatToken() {
-        super("Rat", "1/1 black Rat creature token with deathtouch");
+        super("Rat Token", "1/1 black Rat creature token with deathtouch");
         this.setExpansionSetCodeForImage("C17");
         availableImageSetCodes = tokenImageSets;
         this.cardType.add(CardType.CREATURE);

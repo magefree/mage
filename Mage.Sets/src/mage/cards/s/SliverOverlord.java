@@ -42,7 +42,7 @@ public final class SliverOverlord extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ManaCostsImpl("{3}")));
         
         // {3}: Gain control of target Sliver.
-        Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame), new ManaCostsImpl("{3}")));
+        Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl("{3}")));
         Target target = new TargetPermanent(new FilterCreaturePermanent(SubType.SLIVER,"Sliver"));
         ability.addTarget(target);
         this.addAbility(ability);

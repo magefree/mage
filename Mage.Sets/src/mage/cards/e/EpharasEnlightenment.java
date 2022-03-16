@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,8 +47,8 @@ public final class EpharasEnlightenment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Whenever a creature enters the battlefield under your control, you may return Ephara's Enlightenment to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, 
-                new ReturnToHandSourceEffect(true), 
-                new FilterCreaturePermanent("a creature"),
+                new ReturnToHandSourceEffect(true),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 true));
         
     }

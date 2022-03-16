@@ -55,7 +55,7 @@ public final class SeeRed extends CardImpl {
 
         // At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice See Red.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU),
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU),
                 new InvertCondition(ControllerAttackedThisTurnCondition.instance),
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."), new AttackedThisTurnWatcher());
     }

@@ -50,7 +50,7 @@ public class ColdsnapThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 373, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 374, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Dead", 137, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
-        //cards.add(new SetCardInfo("Kjeldoran Elite Guard", 34, Rarity.UNCOMMON, mage.cards.k.KjeldoranEliteGuard.class));
+        cards.add(new SetCardInfo("Kjeldoran Elite Guard", 34, Rarity.UNCOMMON, mage.cards.k.KjeldoranEliteGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 8, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Pride", "9b", Rarity.COMMON, mage.cards.k.KjeldoranPride.class));
         cards.add(new SetCardInfo("Lat-Nam's Legacy", "30b", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));

@@ -15,8 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -29,12 +29,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ToothCollector extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        FILTER.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public ToothCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
@@ -44,7 +38,7 @@ public final class ToothCollector extends CardImpl {
 
         // When Tooth Collector enters the battlefield, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(FILTER));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // {<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,

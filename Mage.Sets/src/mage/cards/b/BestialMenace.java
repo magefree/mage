@@ -18,6 +18,7 @@ public final class BestialMenace extends CardImpl {
     public BestialMenace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 
+        // Create a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken()).setText(", a 2/2 green Wolf creature token"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()).setText(", and a 3/3 green Elephant creature token"));

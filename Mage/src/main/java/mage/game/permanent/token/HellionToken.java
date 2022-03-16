@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class HellionToken extends TokenImpl {
 
     public HellionToken() {
-        super("Hellion", "4/4 red Hellion creature token");
+        super("Hellion Token", "4/4 red Hellion creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.HELLION);

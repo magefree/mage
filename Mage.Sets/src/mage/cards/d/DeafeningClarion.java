@@ -30,8 +30,7 @@ public final class DeafeningClarion extends CardImpl {
         ));
 
         // • Creatures you control gain lifelink until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new GainAbilityControlledEffect(
+        Mode mode = new Mode(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(),
                 Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURES
