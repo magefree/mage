@@ -2,15 +2,18 @@ package mage.cards.u;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -46,7 +49,8 @@ class UncageTheMenagerieEffect extends OneShotEffect {
 
     public UncageTheMenagerieEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle.";
+        this.staticText = "Search your library for up to X creature cards with different names " +
+                "that each have mana value X, reveal them, put them into your hand, then shuffle.";
     }
 
     public UncageTheMenagerieEffect(final UncageTheMenagerieEffect effect) {
@@ -60,38 +64,15 @@ class UncageTheMenagerieEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
-            return false;
-        }
-
-        int xValue = source.getManaCostsToPay().getX();
-
-        UncageTheMenagerieTarget target = new UncageTheMenagerieTarget(xValue);
-        if (player.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-                player.revealCards(sourceCard.getIdName(), cards, game);
-                player.moveCards(cards, Zone.HAND, source, game);
-            }
-            player.shuffleLibrary(source, game);
-            return true;
-        }
-        player.shuffleLibrary(source, game);
-        return false;
+        return new SearchLibraryPutInHandEffect(new UncageTheMenagerieTarget(
+                source.getManaCostsToPay().getX()), true, true
+        ).apply(game, source);
     }
 }
 
 class UncageTheMenagerieTarget extends TargetCardInLibrary {
 
-    private int xValue;
+    private final int xValue;
 
     public UncageTheMenagerieTarget(int xValue) {
         super(0, xValue, new FilterCreatureCard(xValue + " creature cards with different names with mana value " + xValue));
@@ -110,21 +91,15 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        Card card = cards.get(id, game);
-        if (card != null) {
-            for (UUID targetId : this.getTargets()) {
-                Card iCard = game.getCard(targetId);
-                if (iCard != null && iCard.getName().equals(card.getName())) {
-                    return false;
-                }
-            }
-
-            if (!(card.isCreature(game) && card.getManaValue() == xValue)) {
-                return false;
-            }
-
-            return filter.match(card, playerId, game);
+        if (!super.canTarget(playerId, id, source, cards, game)) {
+            return false;
         }
-        return false;
+        Card card = cards.get(id, game);
+        return card.getManaValue() == xValue
+                && this
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .noneMatch(c -> CardUtil.haveSameNames(c, card));
     }
 }
