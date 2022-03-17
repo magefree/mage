@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  */
 public class Constructed extends DeckValidator {
 
-    private static final Logger logger = Logger.getLogger(DeckValidator.class);
+    private static final Logger logger = Logger.getLogger(Constructed.class);
 
     private static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
             "Relentless Rats", "Shadowborn Apostle", "Rat Colony",

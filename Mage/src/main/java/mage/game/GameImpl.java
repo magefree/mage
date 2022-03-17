@@ -1129,12 +1129,13 @@ public abstract class GameImpl implements Game {
         Map<Player, Card> playerCompanionMap = new HashMap<>();
         for (Player player : state.getPlayers().values()) {
             // Make a list of legal companions present in the sideboard
+            Set<Card> cards = new HashSet<>(player.getLibrary().getCards(this));
             Set<Card> potentialCompanions = new HashSet<>();
             for (Card card : player.getSideboard().getUniqueCards(this)) {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingHandSize)) {
+                        if (companionAbility.isLegal(cards, startingHandSize)) {
                             potentialCompanions.add(card);
                             break;
                         }
