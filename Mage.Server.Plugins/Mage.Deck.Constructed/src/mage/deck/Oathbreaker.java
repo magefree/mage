@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
+import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
 import mage.constants.CardType;
@@ -15,7 +16,7 @@ import java.util.*;
 /**
  * @author JayDi85
  */
-public class Oathbreaker extends Vintage {
+public class Oathbreaker extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
@@ -30,21 +31,14 @@ public class Oathbreaker extends Vintage {
         banned.add("Biorhythm");
         banned.add("Black Lotus");
         banned.add("Channel");
-        banned.add("Chaos Orb");
-        banned.add("Cleanse");
-        banned.add("Crusade");
         banned.add("Dark Ritual");
         banned.add("Doomsday");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Expropriate");
-        banned.add("Falling Star");
         banned.add("Fastbond");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
         banned.add("High Tide");
-        banned.add("Imprison");
-        banned.add("Invoke Prejudice");
-        banned.add("Jihad");
         banned.add("Jeweled Lotus");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
@@ -60,12 +54,9 @@ public class Oathbreaker extends Vintage {
         banned.add("Natural Order");
         banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
-        banned.add("Pradesh Gypsies");
         banned.add("Primal Surge");
         banned.add("Saheeli, the Gifted");
-        banned.add("Shahrazad");
         banned.add("Sol Ring");
-        banned.add("Stone-Throwing Devils");
         banned.add("Sundering Titan");
         banned.add("Sylvan Primordial");
         banned.add("Time Vault");
