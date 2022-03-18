@@ -81,7 +81,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
         if (cards.size() > 2) {
             TargetOpponent targetOpponent = new TargetOpponent();
             targetOpponent.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
             Cards cardsToKeep = new CardsImpl();
             cardsToKeep.addAll(cards);

@@ -77,7 +77,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getControllerId(), source.getControllerId(), game
+                        source.getControllerId(), source, game
                 ).stream()
                 .anyMatch(permanent -> permanent.shareCreatureTypes(game, card))) {
             CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
