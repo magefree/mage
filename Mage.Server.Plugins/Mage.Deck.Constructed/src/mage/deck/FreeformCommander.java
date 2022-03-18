@@ -27,10 +27,6 @@ public class FreeformCommander extends AbstractCommander {
         super(name);
     }
 
-    public FreeformCommander(String name, String shortName) {
-        super(name, shortName);
-    }
-
     @Override
     protected boolean checkBanned(Map<String, Integer> counts) {
         return true;

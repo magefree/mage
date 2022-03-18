@@ -1,8 +1,6 @@
-
 package mage.deck;
 
 /**
- *
  * @author andreacosta
  */
 public class CenturionCommander extends Commander {
@@ -83,5 +81,4 @@ public class CenturionCommander extends Commander {
         bannedPartner.add("Kraum, Ludevic's Opus");
         bannedPartner.add("Thrasios, Triton Hero ");
     }
-
 }

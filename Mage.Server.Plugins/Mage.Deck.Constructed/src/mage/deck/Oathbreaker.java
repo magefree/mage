@@ -21,8 +21,7 @@ public class Oathbreaker extends Vintage {
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
 
     public Oathbreaker() {
-        super();
-        setName("Oathbreaker");
+        super("Oathbreaker");
 
         // banned = vintage + oathbreaker's list: https://oathbreakermtg.org/banned-list/
         banned.add("Ad Nauseam");

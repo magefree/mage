@@ -10,7 +10,11 @@ import mage.cards.decks.Constructed;
 public class Vintage extends Constructed {
 
     public Vintage() {
-        super("Constructed - Vintage");
+        this("Constructed - Vintage");
+    }
+
+    protected Vintage(String name) {
+        super(name);
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());

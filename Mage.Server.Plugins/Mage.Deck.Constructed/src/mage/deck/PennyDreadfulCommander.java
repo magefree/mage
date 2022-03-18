@@ -16,7 +16,7 @@ public class PennyDreadfulCommander extends AbstractCommander {
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
 
     public PennyDreadfulCommander() {
-        super("Penny Dreadful Commander", "Penny");
+        super("Penny Dreadful Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());

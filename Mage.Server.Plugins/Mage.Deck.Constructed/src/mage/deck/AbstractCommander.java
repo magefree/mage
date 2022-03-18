@@ -10,8 +10,6 @@ import mage.abilities.keyword.FriendsForeverAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
@@ -32,63 +30,8 @@ public abstract class AbstractCommander extends Constructed {
     protected final List<String> bannedPartner = new ArrayList<>();
     protected boolean partnerAllowed = true;
 
-    public AbstractCommander() {
-        super("Commander");
-        for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isEternalLegal()) {
-                setCodes.add(set.getCode());
-            }
-        }
-        banned.add("Ancestral Recall");
-        banned.add("Balance");
-        banned.add("Biorhythm");
-        banned.add("Black Lotus");
-        banned.add("Braids, Cabal Minion");
-        banned.add("Channel");
-        banned.add("Coalition Victory");
-        banned.add("Emrakul, the Aeons Torn");
-        banned.add("Erayo, Soratami Ascendant");
-        banned.add("Fastbond");
-        banned.add("Flash");
-        banned.add("Gifts Ungiven");
-        banned.add("Griselbrand");
-        banned.add("Hullbreacher");
-        banned.add("Iona, Shield of Emeria");
-        banned.add("Karakas");
-        banned.add("Leovold, Emissary of Trest");
-        banned.add("Library of Alexandria");
-        banned.add("Limited Resources");
-        banned.add("Lutri, the Spellchaser");
-        banned.add("Mox Emerald");
-        banned.add("Mox Jet");
-        banned.add("Mox Pearl");
-        banned.add("Mox Ruby");
-        banned.add("Mox Sapphire");
-        banned.add("Panoptic Mirror");
-        banned.add("Paradox Engine");
-        banned.add("Primeval Titan");
-        banned.add("Prophet of Kruphix");
-        banned.add("Recurring Nightmare");
-        banned.add("Rofellos, Llanowar Emissary");
-        banned.add("Sundering Titan");
-        banned.add("Sway of the Stars");
-        banned.add("Sylvan Primordial");
-        banned.add("Time Vault");
-        banned.add("Time Walk");
-        banned.add("Tinker");
-        banned.add("Tolarian Academy");
-        banned.add("Trade Secrets");
-        banned.add("Upheaval");
-        banned.add("Worldfire");
-        banned.add("Yawgmoth's Bargain");
-    }
-
     public AbstractCommander(String name) {
         super(name);
-    }
-
-    public AbstractCommander(String name, String shortName) {
-        super(name, shortName);
     }
 
     @Override

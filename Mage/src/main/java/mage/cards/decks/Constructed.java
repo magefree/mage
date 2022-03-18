@@ -30,12 +30,8 @@ public class Constructed extends DeckValidator {
     protected List<Rarity> rarities = new ArrayList<>();
     protected Set<String> singleCards = new HashSet<>();
 
-    public Constructed() {
-        super("Constructed");
-    }
-
     protected Constructed(String name) {
-        super(name);
+        this(name, null);
     }
 
     protected Constructed(String name, String shortName) {

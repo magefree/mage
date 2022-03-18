@@ -12,12 +12,7 @@ import java.util.Map;
 public class Commander extends AbstractCommander {
 
     public Commander() {
-        super("Commander");
-        for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isEternalLegal()) {
-                setCodes.add(set.getCode());
-            }
-        }
+        this("Commander");
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Biorhythm");
@@ -69,12 +64,13 @@ public class Commander extends AbstractCommander {
         banned.add("Yawgmoth's Bargain");
     }
 
-    public Commander(String name) {
+    protected Commander(String name) {
         super(name);
-    }
-
-    public Commander(String name, String shortName) {
-        super(name, shortName);
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType().isEternalLegal()) {
+                setCodes.add(set.getCode());
+            }
+        }
     }
 
     @Override
