@@ -68,7 +68,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId : target.getTargets()) {
-                        Card card = controller.getLibrary().remove(cardId, game);
+                        Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }
                     controller.revealCards(sourceObject.getName(), revealed, game);

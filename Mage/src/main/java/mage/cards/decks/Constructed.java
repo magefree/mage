@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  */
 public class Constructed extends DeckValidator {
 
-    private static final Logger logger = Logger.getLogger(DeckValidator.class);
+    private static final Logger logger = Logger.getLogger(Constructed.class);
 
     private static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
             "Relentless Rats", "Shadowborn Apostle", "Rat Colony",
@@ -30,16 +30,65 @@ public class Constructed extends DeckValidator {
     protected List<Rarity> rarities = new ArrayList<>();
     protected Set<String> singleCards = new HashSet<>();
 
-    public Constructed() {
-        super("Constructed");
-    }
-
     protected Constructed(String name) {
-        super(name);
+        this(name, null);
     }
 
     protected Constructed(String name, String shortName) {
         super(name, shortName);
+        // Conspiracy cards are banned
+        banned.add("Adriana's Valor");
+        banned.add("Advantageous Proclamation");
+        banned.add("Assemble the Rank and Vile");
+        banned.add("Backup Plan");
+        banned.add("Brago's Favor");
+        banned.add("Double Stroke");
+        banned.add("Echoing Boon");
+        banned.add("Emissary's Ploy");
+        banned.add("Hired Heist");
+        banned.add("Hold the Perimeter");
+        banned.add("Hymn of the Wilds");
+        banned.add("Immediate Action");
+        banned.add("Incendiary Dissent");
+        banned.add("Iterative Analysis");
+        banned.add("Muzzio's Preparations");
+        banned.add("Natural Unity");
+        banned.add("Power Play");
+        banned.add("Secrets of Paradise");
+        banned.add("Secret Summoning");
+        banned.add("Sentinel Dispatch");
+        banned.add("Sovereign's Realm");
+        banned.add("Summoner's Bond");
+        banned.add("Unexpected Potential");
+        banned.add("Weight Advantage");
+        banned.add("Worldknit");
+
+        // Dexterity cards are banned
+        banned.add("Chaos Orb");
+        banned.add("Falling Star");
+
+        // Sub-game cards are banned
+        banned.add("Shahrazad");
+
+        // Ante cards are banned
+        banned.add("Amulet of Quoz");
+        banned.add("Bronze Tablet");
+        banned.add("Contract from Below");
+        banned.add("Darkpact");
+        banned.add("Demonic Attorney");
+        banned.add("Jeweled Bird");
+        banned.add("Rebirth");
+        banned.add("Tempest Efreet");
+        banned.add("Timmerian Fiends");
+
+        // Potentially offensive cards are banned
+        banned.add("Cleanse");
+        banned.add("Crusade");
+        banned.add("Imprison");
+        banned.add("Invoke Prejudice");
+        banned.add("Jihad");
+        banned.add("Pradesh Gypsies");
+        banned.add("Stone-Throwing Devils");
     }
 
     public List<String> getSetCodes() {

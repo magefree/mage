@@ -12,9 +12,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -28,10 +28,7 @@ public final class ChaosWand extends CardImpl {
         // until they exile an instant or sorcery card. You may cast that card 
         // without paying its mana cost. Then put the exiled cards that weren't 
         // cast this way on the bottom of that library in a random order.
-        Ability ability = new SimpleActivatedAbility(
-                new ChaosWandEffect(),
-                new GenericManaCost(4)
-        );
+        Ability ability = new SimpleActivatedAbility(new ChaosWandEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -80,25 +77,15 @@ class ChaosWandEffect extends OneShotEffect {
             if (card == null) {
                 break;
             }
+            cardsToShuffle.add(card);
             opponent.moveCards(card, Zone.EXILED, source, game);
-            controller.revealCards(source, new CardsImpl(card), game);
             if (card.isInstantOrSorcery(game)) {
-                boolean cardWasCast = false;
-                if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
-                        + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                }
-                if (!cardWasCast) {
-                    cardsToShuffle.add(card);
-                }
+                CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
                 break;
-            } else {
-                cardsToShuffle.add(card);
             }
         }
+        cardsToShuffle.retainZone(Zone.EXILED, game);
+        controller.revealCards(source, cardsToShuffle, game);
         return opponent.putCardsOnBottomOfLibrary(cardsToShuffle, game, source, false);
     }
 }

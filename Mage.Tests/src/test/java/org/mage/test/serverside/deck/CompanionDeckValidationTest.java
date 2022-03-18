@@ -7,7 +7,7 @@ import org.mage.test.serverside.base.MageTestBase;
 /**
  * @author TheElk801
  */
-public class CompanionTest extends MageTestBase {
+public class CompanionDeckValidationTest extends MageTestBase {
 
     @Test
     public void testGyrudaTrue() {

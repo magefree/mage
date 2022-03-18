@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DemonstrateAbility;
@@ -10,6 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -78,18 +78,7 @@ class CreativeTechniqueEffect extends OneShotEffect {
             player.moveCards(toCast, Zone.EXILED, source, game);
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        if (toCast == null || !player.chooseUse(
-                Outcome.PlayForFree, "Cast " + toCast.getIdName()
-                        + " without paying its mana cost?", source, game
-        )) {
-            return true;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
-        player.cast(
-                player.chooseAbilityForCast(toCast, game, true),
-                game, true, new ApprovingObject(source, game)
-        );
-        game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
+        CardUtil.castSpellWithAttributesForFree(player, source, game, toCast);
         return true;
     }
 }

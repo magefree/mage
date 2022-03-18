@@ -25,6 +25,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -1230,6 +1231,10 @@ public final class CardUtil {
     }
 
     private static final FilterCard defaultFilter = new FilterCard("card to cast");
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Card card) {
+        return castSpellWithAttributesForFree(player, source, game, new CardsImpl(card), StaticFilters.FILTER_CARD);
+    }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
         return castSpellWithAttributesForFree(player, source, game, cards, filter, null);

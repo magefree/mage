@@ -2,7 +2,10 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -11,6 +14,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -40,9 +44,14 @@ public final class GiftsUngiven extends CardImpl {
 
 class GiftsUngivenEffect extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterCard("cards with different names");
+    private static final FilterCard filter2 = new FilterCard("cards to put in graveyard");
+
     public GiftsUngivenEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle";
+        this.staticText = "Search your library for up to four cards with different names and reveal them. " +
+                "Target opponent chooses two of those cards. Put the chosen cards into your graveyard " +
+                "and the rest into your hand. Then shuffle";
     }
 
     public GiftsUngivenEffect(final GiftsUngivenEffect effect) {
@@ -57,74 +66,32 @@ class GiftsUngivenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
-            return false;
-        }
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (opponent == null) {
+        if (player == null || opponent == null) {
             return false;
         }
-        GiftsUngivenTarget target = new GiftsUngivenTarget();
-        if (player.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-                player.revealCards(sourceCard.getIdName(), cards, game);
-
-                CardsImpl cardsToKeep = new CardsImpl();
-                if (cards.size() > 2) {
-                    cardsToKeep.addAll(cards);
-                    TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
-                    if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
-                        cardsToKeep.removeAll(targetDiscard.getTargets());
-                        cards.removeAll(cardsToKeep);
-                    }
-                }
-
-                player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                player.moveCards(cardsToKeep, Zone.HAND, source, game);
-            }
+        TargetCardInLibrary target = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        cards.retainZone(Zone.LIBRARY, game);
+        if (cards.isEmpty()) {
             player.shuffleLibrary(source, game);
-            return true;
         }
-        player.shuffleLibrary(source, game);
-        return false;
-    }
-}
+        player.revealCards(source, cards, game);
 
-class GiftsUngivenTarget extends TargetCardInLibrary {
-
-    public GiftsUngivenTarget() {
-        super(0, 4, new FilterCard("cards with different names"));
-    }
-
-    public GiftsUngivenTarget(final GiftsUngivenTarget target) {
-        super(target);
-    }
-
-    @Override
-    public GiftsUngivenTarget copy() {
-        return new GiftsUngivenTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        Card card = cards.get(id, game);
-        if (card != null) {
-            for (UUID targetId : this.getTargets()) {
-                Card iCard = game.getCard(targetId);
-                if (iCard != null && iCard.getName().equals(card.getName())) {
-                    return false;
-                }
+        if (cards.size() > 2) {
+            Cards cardsToKeep = new CardsImpl();
+            cardsToKeep.addAll(cards);
+            TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
+            if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
+                cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
+                cards.removeAll(cardsToKeep);
             }
-            return filter.match(card, playerId, game);
+            player.moveCards(cardsToKeep, Zone.HAND, source, game);
         }
-        return false;
+
+        player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        player.shuffleLibrary(source, game);
+        return true;
     }
 }

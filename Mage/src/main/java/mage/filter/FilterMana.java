@@ -1,6 +1,10 @@
 package mage.filter;
 
+import mage.ObjectColor;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author nantuko
@@ -106,6 +110,62 @@ public class FilterMana implements Serializable {
             colorCount += 1;
         }
         return colorCount;
+    }
+
+    public void addAll(FilterMana filterMana) {
+        if (filterMana.white) {
+            this.white = true;
+        }
+        if (filterMana.blue) {
+            this.blue = true;
+        }
+        if (filterMana.black) {
+            this.black = true;
+        }
+        if (filterMana.red) {
+            this.red = true;
+        }
+        if (filterMana.green) {
+            this.green = true;
+        }
+    }
+
+    public void removeAll(FilterMana filterMana) {
+        if (filterMana.white) {
+            this.white = false;
+        }
+        if (filterMana.blue) {
+            this.blue = false;
+        }
+        if (filterMana.black) {
+            this.black = false;
+        }
+        if (filterMana.red) {
+            this.red = false;
+        }
+        if (filterMana.green) {
+            this.green = false;
+        }
+    }
+
+    public List<ObjectColor> getColors() {
+        List<ObjectColor> colors = new ArrayList<>();
+        if (this.white) {
+            colors.add(ObjectColor.WHITE);
+        }
+        if (this.blue) {
+            colors.add(ObjectColor.BLUE);
+        }
+        if (this.black) {
+            colors.add(ObjectColor.BLACK);
+        }
+        if (this.red) {
+            colors.add(ObjectColor.RED);
+        }
+        if (this.green) {
+            colors.add(ObjectColor.GREEN);
+        }
+        return colors;
     }
 
     public FilterMana copy() {
