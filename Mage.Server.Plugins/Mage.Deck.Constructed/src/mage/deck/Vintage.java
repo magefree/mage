@@ -10,49 +10,12 @@ import mage.cards.decks.Constructed;
 public class Vintage extends Constructed {
 
     public Vintage() {
-        this("Constructed - Vintage");
-    }
-
-    protected Vintage(String name) {
-        super(name);
+        super("Constructed - Vintage");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
-        banned.add("Advantageous Proclamation");
-        banned.add("Amulet of Quoz");
-        banned.add("Backup Plan");
-        banned.add("Brago's Favor");
-        banned.add("Bronze Tablet");
-        banned.add("Chaos Orb");
-        banned.add("Cleanse");
-        banned.add("Crusade");
-        banned.add("Contract from Below");
-        banned.add("Darkpact");
-        banned.add("Demonic Attorney");
-        banned.add("Double Stroke");
-        banned.add("Falling Star");
-        banned.add("Immediate Action");
-        banned.add("Imprison");
-        banned.add("Invoke Prejudice");
-        banned.add("Iterative Analysis");
-        banned.add("Jeweled Bird");
-        banned.add("Jihad");
-        banned.add("Muzzio's Preparations");
-        banned.add("Power Play");
-        banned.add("Pradesh Gypsies");
-        banned.add("Rebirth");
-        banned.add("Secret Summoning");
-        banned.add("Secrets of Paradise");
-        banned.add("Sentinel Dispatch");
-        banned.add("Shahrazad");
-        banned.add("Stone-Throwing Devils");
-        banned.add("Tempest Efreet");
-        banned.add("Timmerian Fiends");
-        banned.add("Unexpected Potential");
-        banned.add("Worldknit");
-
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
