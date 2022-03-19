@@ -112,7 +112,7 @@ class MirrorBoxBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source.getSourceId(), game
         );
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source.getSourceId(), game
