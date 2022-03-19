@@ -434,7 +434,7 @@ public class KhansExpandedCube extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Spontaneous Mutation", ""));
         cubeCards.add(new DraftCube.CardIdentity("Dead Drop", "Khans of Tarkir"));
         cubeCards.add(new DraftCube.CardIdentity("Repeating Barrage", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Obscuring &AElig;ther", ""));
+        cubeCards.add(new DraftCube.CardIdentity("Obscuring Aether", "Dragons of Tarkir"));
         cubeCards.add(new DraftCube.CardIdentity("Response // Resurgence", ""));
         cubeCards.add(new DraftCube.CardIdentity("Thornwood Falls", "Fate Reforged"));
         cubeCards.add(new DraftCube.CardIdentity("Stasis Snare", ""));
