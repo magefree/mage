@@ -104,7 +104,7 @@ class KatsumasaTheAnimatorEffect extends OneShotEffect {
         game.addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ), source);
-        if (permanent.hasSubtype(SubType.VEHICLE, game)) {
+        if (!permanent.hasSubtype(SubType.VEHICLE, game)) {
             game.addEffect(new SetPowerToughnessTargetEffect(
                     1, 1, Duration.EndOfTurn
             ), source);
