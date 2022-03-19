@@ -14,14 +14,12 @@ public class CenturionCommander extends Commander {
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
         banned.add("Channel");
-        banned.add("Chaos Orb");
         banned.add("Chrome Mox");
         banned.add("Demonic Tutor");
         banned.add("Dig Through Time");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Emrakul, the Promised End");
         banned.add("Entomb");
-        banned.add("Falling Star");
         banned.add("Fastbond");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
@@ -51,7 +49,6 @@ public class CenturionCommander extends Commander {
         banned.add("Parallax Tide");
         banned.add("Protean Hulk");
         banned.add("Sensei's Diving Top");
-        banned.add("Sharazad");
         banned.add("Survival of the Fittest");
         banned.add("Sol Ring");
         banned.add("Strip Mine");

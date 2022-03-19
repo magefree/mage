@@ -29,30 +29,6 @@ public class OldSchool9394CFB extends Constructed {
         setCodes.add(mage.sets.TheDark.getInstance().getCode());
         setCodes.add(mage.sets.FallenEmpires.getInstance().getCode());
 
-        // ante cards and conspiracies banned, with specifically mentioned ones called out.
-        banned.add("Advantageous Proclamation");
-        banned.add("Amulet of Quoz");
-        banned.add("Backup Plan");
-        banned.add("Brago's Favor");
-        banned.add("Bronze Tablet"); ///
-        banned.add("Contract from Below"); ///
-        banned.add("Darkpact"); ///
-        banned.add("Demonic Attorney"); ///
-        banned.add("Double Stroke");
-        banned.add("Immediate Action");
-        banned.add("Iterative Analysis");
-        banned.add("Jeweled Bird"); ///
-        banned.add("Muzzio's Preparations");
-        banned.add("Power Play");
-        banned.add("Rebirth"); ///
-        banned.add("Secret Summoning");
-        banned.add("Secrets of Paradise");
-        banned.add("Sentinel Dispatch");
-        banned.add("Tempest Efreet"); ///
-        banned.add("Timmerian Fiends");
-        banned.add("Unexpected Potential");
-        banned.add("Worldknit");
-
         //Let Media Inserts Arena and Sewers of Estark being only cards playable
         banned.add("Acquire");
         banned.add("Aeronaut Tinkerer");

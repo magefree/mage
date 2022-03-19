@@ -19,9 +19,7 @@ public class Commander extends AbstractCommander {
         banned.add("Black Lotus");
         banned.add("Braids, Cabal Minion");
         banned.add("Channel");
-        banned.add("Cleanse");
         banned.add("Coalition Victory");
-        banned.add("Crusade");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Erayo, Soratami Ascendant");
         banned.add("Fastbond");
@@ -30,8 +28,6 @@ public class Commander extends AbstractCommander {
         banned.add("Golos, Tireless Pilgrim");
         banned.add("Griselbrand");
         banned.add("Hullbreacher");
-        banned.add("Imprison");
-        banned.add("Invoke Prejudice");
         banned.add("Iona, Shield of Emeria");
         banned.add("Jihad");
         banned.add("Karakas");
@@ -46,12 +42,10 @@ public class Commander extends AbstractCommander {
         banned.add("Mox Sapphire");
         banned.add("Panoptic Mirror");
         banned.add("Paradox Engine");
-        banned.add("Pradesh Gypsies");
         banned.add("Primeval Titan");
         banned.add("Prophet of Kruphix");
         banned.add("Recurring Nightmare");
         banned.add("Rofellos, Llanowar Emissary");
-        banned.add("Stone-Throwing Devils");
         banned.add("Sundering Titan");
         banned.add("Sway of the Stars");
         banned.add("Sylvan Primordial");
