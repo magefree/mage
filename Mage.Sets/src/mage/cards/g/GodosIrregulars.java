@@ -31,7 +31,7 @@ public final class GodosIrregulars extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Godo's Irregulars deals 1 damage to target creature blocking it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking it");
         filter.add(new BlockingAttackerIdPredicate(this.getId()));
         ability.addTarget(new TargetCreaturePermanent(filter));

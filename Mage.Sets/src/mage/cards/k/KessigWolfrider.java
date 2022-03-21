@@ -35,7 +35,7 @@ public final class KessigWolfrider extends CardImpl {
 
         // {2}{R}, {T}, Exile three cards from your graveyard: Create a 3/2 red Wolf creature token.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new RedWolfToken()), new ManaCostsImpl<>("2}{R}")
+                new CreateTokenEffect(new RedWolfToken()), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3)));

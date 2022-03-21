@@ -439,6 +439,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         if (mana == null || mana.isEmpty()) {
             return;
         }
+        if (mana.startsWith("{") != mana.endsWith("}")) {
+            throw new IllegalArgumentException("mana costs should be surrounded by braces on both sides or not at all");
+        }
 
         if (!extractMonoHybridGenericValue && costsCache.containsKey(mana)) {
             ManaCosts<ManaCost> savedCosts = costsCache.get(mana);
