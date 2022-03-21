@@ -42,6 +42,7 @@ public final class GeistlightSnare extends CardImpl {
         ).setRuleAtTheTop(true);
         ability.addEffect(new SpellCostReductionSourceEffect(1, condition2).setCanWorksOnStackOnly(true)
                 .setText("It also costs {1} less to cast if you control an enchantment"));
+        this.addAbility(ability);
 
         // Counter target spell unless its controller pays {3}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));

@@ -1140,7 +1140,7 @@ public class VerifyCardDataTest {
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
-            } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token",""), "").isEmpty()) {
+            } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
                 errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
@@ -1594,13 +1594,9 @@ public class VerifyCardDataTest {
         }
     }*/
     private static final boolean compareText(String cardText, String refText, String name) {
-        if (cardText.equals(refText)) {
-            return true;
-        }
-        if (cardText.replace(name, name.split(", ")[0]).equals(refText)) {
-            return true;
-        }
-        return cardText.replace(name, name.split(" ")[0]).equals(refText);
+        return cardText.equals(refText)
+                || cardText.replace(name, name.split(", ")[0]).equals(refText)
+                || cardText.replace(name, name.split(" ")[0]).equals(refText);
     }
 
     private static final boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
@@ -1711,6 +1707,7 @@ public class VerifyCardDataTest {
         for (int j = 0; j <= refRules.length - 1; j++) {
             String refRule = refRules[j];
             if (!refRule.startsWith("+ ")) {
+                isFine = false;
                 refRules[j] = "- " + refRules[j];
             }
         }

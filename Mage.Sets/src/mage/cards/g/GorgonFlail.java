@@ -27,6 +27,7 @@ public final class GorgonFlail extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has deathtouch"));
+        this.addAbility(ability);
 
         this.addAbility(new EquipAbility(2));
     }
