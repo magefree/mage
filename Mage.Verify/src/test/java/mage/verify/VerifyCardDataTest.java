@@ -1659,6 +1659,9 @@ public class VerifyCardDataTest {
                     newStr += "{T}: Add {" + c + "}.\n";
                 }
             }
+            if (!newStr.isEmpty()) {
+                newStr = newStr.substring(0, newStr.length() - 1);
+            }
             refText = refText.replace(s, newStr);
         }
 

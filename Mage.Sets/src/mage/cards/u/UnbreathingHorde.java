@@ -96,11 +96,11 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl {
 
     public UnbreathingHordeEffect2() {
         super(Duration.WhileOnBattlefield);
+        staticText = "If damage would be dealt to {this}, prevent that damage and remove a +1/+1 counter from it";
     }
 
     public UnbreathingHordeEffect2(final UnbreathingHordeEffect2 effect) {
         super(effect);
-        staticText = "If damage would be dealt to {this}, prevent that damage and remove a +1/+1 counter from it";
     }
 
     @Override
