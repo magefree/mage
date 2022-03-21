@@ -31,7 +31,7 @@ public final class RuneOfProtectionRed extends CardImpl {
 
         // {W}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("W")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}")));
         // Cycling {2} ({2}, Discard this card: Draw a card.)
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

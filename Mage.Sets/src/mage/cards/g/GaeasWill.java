@@ -30,7 +30,7 @@ public final class GaeasWill extends CardImpl {
         this.color.setGreen(true);
 
         // Suspend 4—{G}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("G"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{G}"), this));
 
         // Until end of turn, you may play land cards and cast spells from your graveyard.
         this.getSpellAbility().addEffect(new GaeasWillGraveyardEffect());
