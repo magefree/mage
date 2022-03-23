@@ -84,7 +84,7 @@ class FinalityEffect extends OneShotEffect {
         Target target = new TargetControlledCreaturePermanent(0, 1);
         target.setNotTarget(true);
         if (player.choose(
-                Outcome.BoostCreature, target, source.getSourceId(), game
+                Outcome.BoostCreature, target, source, game
         )) {
             Effect effect = new AddCountersTargetEffect(
                     CounterType.P1P1.createInstance(2)

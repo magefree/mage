@@ -123,7 +123,7 @@ class TitansNestManaCondition extends ManaCondition {
         if (!(source instanceof SpellAbility)) {
             return false;
         }
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object == null || object.getColor(game).isColorless()) {
             return false;
         }

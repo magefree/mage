@@ -41,7 +41,7 @@ public class SetPowerSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             int value = amount.calculate(game, source, this);
             mageObject.getPower().setValue(value);

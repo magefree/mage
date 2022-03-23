@@ -124,7 +124,7 @@ class WeddingRingTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!game.isActivePlayer(event.getPlayerId())
                 || !game.getOpponents(getControllerId()).contains(event.getPlayerId())
-                || !game.getBattlefield().contains(filter, getSourceId(), event.getPlayerId(), game, 1)) {
+                || !game.getBattlefield().contains(filter, getSourceId(), event.getPlayerId(), this, game, 1)) {
             return false;
         }
         this.getEffects().clear();

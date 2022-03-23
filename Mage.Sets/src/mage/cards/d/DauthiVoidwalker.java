@@ -141,7 +141,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         TargetCardInExile target = new TargetCardInExile(
                 0, 1, filter, null, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

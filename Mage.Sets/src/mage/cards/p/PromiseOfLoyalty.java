@@ -67,13 +67,13 @@ class PromiseOfLoyaltyEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player == null || game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_CREATURE,
-                    source.getSourceId(), playerId, game
+                    playerId, source, game
             ) < 1) {
                 continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;

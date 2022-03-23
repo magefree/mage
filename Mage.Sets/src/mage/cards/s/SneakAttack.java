@@ -74,7 +74,7 @@ class SneakAttackEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        if (!controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

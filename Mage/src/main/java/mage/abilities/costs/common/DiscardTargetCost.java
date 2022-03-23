@@ -50,7 +50,7 @@ public class DiscardTargetCost extends CostImpl {
         int amount = this.getTargets().get(0).getNumberOfTargets();
         if (randomDiscard) {
             this.cards.addAll(player.discard(amount, true, true, source, game).getCards(game));
-        } else if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
+        } else if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
             Cards toDiscard = new CardsImpl();
             toDiscard.addAll(targets.get(0).getTargets());
             Cards discarded = player.discard(toDiscard, true, source, game);
@@ -71,7 +71,7 @@ public class DiscardTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

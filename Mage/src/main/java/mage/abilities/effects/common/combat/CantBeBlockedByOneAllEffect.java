@@ -52,7 +52,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case RulesEffects:
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     perm.setMinBlockedBy(amount);
                 }
                 break;

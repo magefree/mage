@@ -66,14 +66,14 @@ class HumiliateEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         ) < 1) {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         target.withChooseHint("+1/+1 counter");
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(
                 CounterType.P1P1.createInstance(), source.getControllerId(), source, game

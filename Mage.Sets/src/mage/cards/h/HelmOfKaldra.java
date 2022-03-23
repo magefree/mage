@@ -80,13 +80,13 @@ class HelmOfKaldraCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getSourceId(), source.getControllerId(), game) >= 1;
+        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getControllerId(), source, game) >= 1;
     }
 
 }

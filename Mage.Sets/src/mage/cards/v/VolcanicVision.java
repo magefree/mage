@@ -80,7 +80,7 @@ class VolcanicVisionReturnToHandTargetEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.HAND, source, game);
                         int damage = card.getManaValue();
                         if (damage > 0) {
-                            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                                 creature.damage(damage, source.getSourceId(), source, game, false, true);
                             }
                         }

@@ -67,7 +67,7 @@ class TerminusEffect extends OneShotEffect {
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Cards toLib = new CardsImpl();
                 for (Permanent permanent : game.getBattlefield()
-                        .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                        .getActivePermanents(filter, source.getControllerId(), source, game)) {
                     toLib.add(permanent);
                 }
                 player.putCardsOnBottomOfLibrary(toLib, game, source, true);

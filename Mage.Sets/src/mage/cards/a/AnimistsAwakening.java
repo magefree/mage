@@ -56,7 +56,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -66,7 +66,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (Card card : cards.getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game)) {
+            for (Card card : cards.getCards(new FilterLandCard(), source.getControllerId(), source, game)) {
                 cards.remove(card);
                 toBattlefield.add(card);
             }

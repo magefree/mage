@@ -13,7 +13,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -120,7 +119,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game) && target.choose(outcome, controller.getId(), source.getSourceId(), game)) {
+        if (target.canChoose(controller.getId(), source, game) && target.choose(outcome, controller.getId(), source.getSourceId(), source, game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = game.getCard(cardId);

@@ -82,7 +82,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
-        if (!target.canChoose(source.getSourceId(), controller.getId(), game)
+        if (!target.canChoose(controller.getId(), source, game)
                 || !controller.chooseTarget(outcome, target, source, game)) {
             return true;
         }

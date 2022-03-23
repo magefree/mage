@@ -69,7 +69,7 @@ class GeodeRagerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getFirstTarget(), source.getSourceId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getFirstTarget(), source, game
         )) {
             if (permanent == null) {
                 continue;

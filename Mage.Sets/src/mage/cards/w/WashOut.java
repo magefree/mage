@@ -63,7 +63,7 @@ class WashOutEffect extends OneShotEffect {
             ObjectColor color = choice.getColor();
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(color));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 cardsToReturn.add((Card) permanent);
             }
             return controller.moveCards(cardsToReturn, Zone.HAND, source, game);

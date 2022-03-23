@@ -89,7 +89,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                     FilterCard filter = new FilterCard(numberOfTargets + " cards of cards drawn this turn");
                     filter.add(new CardIdPredicate(cards));
                     TargetCardInHand target = new TargetCardInHand(numberOfTargets, filter);
-                    controller.choose(outcome, target, source.getSourceId(), game);
+                    controller.choose(outcome, target, source, game);
 
                     Cards cardsPutBack = new CardsImpl();
                     for (UUID cardId : target.getTargets()) {

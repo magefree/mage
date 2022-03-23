@@ -65,7 +65,7 @@ enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         if (sourceObject == null || input.getObject() == null) {
             return false;
         }

@@ -93,7 +93,7 @@ enum OrbOfDragonkindManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && object.hasSubtype(SubType.DRAGON, game);
     }
 }

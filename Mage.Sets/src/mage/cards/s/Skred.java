@@ -61,7 +61,7 @@ class SkredDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if(amount > 0) {   
             if (permanent != null) {

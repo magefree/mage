@@ -80,7 +80,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         if (game != null && game.inCheckPlayableState()) {
             // Because the ability can be used multiple times, multiply with untapped druids
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             List<Mana> netMana = new ArrayList<>();
             if (count > 0) {
                 netMana.add(Mana.GreenMana(count));

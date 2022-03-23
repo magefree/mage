@@ -63,7 +63,7 @@ class UrgeToFeedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+        if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
             for (UUID vampireId : target.getTargets()) {
                 Permanent vampire = game.getPermanent(vampireId);
                 if (vampire != null) {

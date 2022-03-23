@@ -52,7 +52,7 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
         if (onlyControlled && !permanent.isControlledBy(this.getControllerId())) {
             return false;
         }
-        return filter.match(permanent, getSourceId(), getControllerId(), game);
+        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override

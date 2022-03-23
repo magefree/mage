@@ -77,7 +77,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Player player = game.getPlayer(sourceControllerId);
         Set<UUID> possibleTargets = new HashSet<>(0);
         if (player == null) {
@@ -85,7 +85,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
         }
         // Choosing first target
         if (this.getTargets().isEmpty()) {
-            List<Permanent> permanentList = game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game);
+            List<Permanent> permanentList = game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, source, game);
             if (permanentList.size() < 2) {
                 return possibleTargets;
             }
@@ -96,7 +96,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 }
                 FilterPermanent filter = filterUntapped.copy();
                 filter.add(new SharesCreatureTypePredicate(permanent));
-                if (game.getBattlefield().count(filter, sourceId, sourceControllerId, game) > 1) {
+                if (game.getBattlefield().count(filter, sourceControllerId, source, game) > 1) {
                     possibleTargets.add(permanent.getId());
                 }
             }
@@ -108,7 +108,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
             }
             FilterPermanent filter = filterUntapped.copy();
             filter.add(new SharesCreatureTypePredicate(firstTargetCreature));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, source, game)) {
                 if (permanent != null) {
                     possibleTargets.add(permanent.getId());
                 }
@@ -118,9 +118,9 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game)) {
-            for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game)) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, source, game)) {
+            for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, source, game)) {
                 if (!Objects.equals(permanent1, permanent2) && permanent1.shareCreatureTypes(game, permanent2)) {
                     return true;
                 }
@@ -139,7 +139,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
             return false;
         }
         if (this.getTargets().isEmpty()) {
-            List<Permanent> permanentList = game.getBattlefield().getActivePermanents(filterUntapped, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> permanentList = game.getBattlefield().getActivePermanents(filterUntapped, source.getControllerId(), source, game);
             if (permanentList.size() < 2) {
                 return false;
             }
@@ -149,7 +149,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 }
                 FilterPermanent filter = filterUntapped.copy();
                 filter.add(new SharesCreatureTypePredicate(permanent));
-                if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 1) {
+                if (game.getBattlefield().count(filter, source.getControllerId(), source, game) > 1) {
                     return true;
                 }
             }

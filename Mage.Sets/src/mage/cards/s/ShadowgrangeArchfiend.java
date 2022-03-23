@@ -2,9 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -103,7 +101,7 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
                         "creature to sacrifice with power equal to " + greatestPower);
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
                 Target target = new TargetControlledCreaturePermanent(filter);
-                if (opponent.choose(outcome, target, playerId, game)) {
+                if (opponent.choose(outcome, target, source, game)) {
                     creatureToSacrifice = game.getPermanent(target.getFirstTarget());
                 }
             }

@@ -60,7 +60,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getControllerId(), this, game)) {
             if (attacksYouOrYourPlaneswalker) {
                 boolean check = false;
                 if (event.getTargetId().equals(getControllerId())) {

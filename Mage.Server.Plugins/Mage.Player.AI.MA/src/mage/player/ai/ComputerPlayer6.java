@@ -396,7 +396,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
                 if (!target.doneChosing()) {
-                    for (UUID targetId : target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game)) {
+                    for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
                         SearchEffect newEffect = getSearchEffect(newAbility);

@@ -54,7 +54,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
                 && (!combatOnly || ((DamagedEvent) event).isCombatDamage())) {
             if (filter != null) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (!filter.match(creature, getSourceId(), getControllerId(), game)) {
+                if (!filter.match(creature, getControllerId(), this, game)) {
                     return false;
                 }
             }

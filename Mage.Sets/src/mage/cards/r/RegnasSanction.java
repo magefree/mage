@@ -83,7 +83,7 @@ class RegnasSanctionEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
             if (game.getBattlefield().contains(filter, source, game, 1)
-                    && player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                    && player.choose(Outcome.Benefit, target, source, game)) {
                 filterToTap.add(Predicates.not(new PermanentIdPredicate(target.getFirstTarget())));
             }
         }
@@ -94,7 +94,7 @@ class RegnasSanctionEffect extends OneShotEffect {
                 .map(Predicates::not)
                 .forEach(filterToTap::add);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game
         )) {
             if (choice.getFriends().stream().map(MageItem::getId).anyMatch(permanent::isControlledBy)) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source, game);

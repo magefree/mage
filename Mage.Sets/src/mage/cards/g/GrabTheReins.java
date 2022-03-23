@@ -82,7 +82,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         target.setTargetName("a creature to sacrifice");
-        if (!target.canChoose(source.getSourceId(), controllerId, game)) {
+        if (!target.canChoose(controllerId, source, game)) {
             return false;
         }
         Player player = game.getPlayer(controllerId);

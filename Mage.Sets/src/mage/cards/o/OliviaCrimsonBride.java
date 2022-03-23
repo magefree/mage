@@ -124,7 +124,7 @@ class OliviaCrimsonBrideAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(filter, getSourceId(), getControllerId(), game) < 1;
+        return game.getBattlefield().count(filter, getControllerId(), this, game) < 1;
     }
 
     @Override

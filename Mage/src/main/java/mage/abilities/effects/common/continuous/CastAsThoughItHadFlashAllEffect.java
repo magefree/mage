@@ -61,10 +61,10 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
                         Card cardCopy = card.copy();
                         cardCopy.removeAllCardTypes(game);
                         cardCopy.addCardType(game, CardType.CREATURE);
-                        return filter.match(cardCopy, source.getSourceId(), affectedControllerId, game);
+                        return filter.match(cardCopy, affectedControllerId, source, game);
                     }
                 }
-                return filter.match(card, source.getSourceId(), affectedControllerId, game);
+                return filter.match(card, affectedControllerId, source, game);
             }
         }
         return false;

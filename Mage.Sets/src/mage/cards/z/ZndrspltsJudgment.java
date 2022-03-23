@@ -73,7 +73,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            if (!player.choose(Outcome.Copy, target, source.getSourceId(), game)) {
+            if (!player.choose(Outcome.Copy, target, source, game)) {
                 continue;
             }
             Effect effect = new CreateTokenCopyTargetEffect(player.getId());
@@ -84,7 +84,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            if (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+            if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
                 continue;
             }
             Effect effect = new ReturnToHandTargetEffect();

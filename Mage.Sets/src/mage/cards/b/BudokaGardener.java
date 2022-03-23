@@ -71,7 +71,7 @@ class BudokaGardenerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) { return false; }
-        if (game.getBattlefield().count(filterLands, source.getSourceId(), source.getControllerId(), game) < 10) {
+        if (game.getBattlefield().count(filterLands, source.getControllerId(), source, game) < 10) {
             return false;
         }
 

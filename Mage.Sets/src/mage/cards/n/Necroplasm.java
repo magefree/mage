@@ -80,7 +80,7 @@ class NecroplasmEffect extends OneShotEffect {
             int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numCounters));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if(permanent != null) {
                     permanent.destroy(source, game, false);
                 }

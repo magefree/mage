@@ -87,7 +87,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         }
         TargetOpponent targetOpponent = new TargetOpponent();
         targetOpponent.setNotTarget(true);
-        player.choose(outcome, targetOpponent, source.getSourceId(), game);
+        player.choose(outcome, targetOpponent, source, game);
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
         if (opponent == null) {
             if (searched) {

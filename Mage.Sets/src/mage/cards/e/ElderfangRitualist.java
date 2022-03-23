@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBySubtypeCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -22,7 +22,7 @@ public final class ElderfangRitualist extends CardImpl {
 
     private static final FilterCard filter = new FilterBySubtypeCard(SubType.ELF);
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.setMessage("another target Elf card from your graveyard");
     }
 

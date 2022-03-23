@@ -66,7 +66,7 @@ class FloodOfTearsEffect extends OneShotEffect {
             return false;
         }
         List<Permanent> nonlands = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), source, game
         );
         Cards cards = new CardsImpl();
         if (!nonlands.isEmpty()) {

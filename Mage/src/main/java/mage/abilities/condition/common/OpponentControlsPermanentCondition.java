@@ -53,7 +53,7 @@ public class OpponentControlsPermanentCondition implements Condition {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             FilterPermanent localFilter = filter.copy();
             localFilter.add(new ControllerIdPredicate(opponentId));
-            if (ComparisonType.compare(game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game), type, this.count)) {
+            if (ComparisonType.compare(game.getBattlefield().count(localFilter, source.getControllerId(), source, game), type, this.count)) {
                 conditionApplies = true;
                 break;
             }

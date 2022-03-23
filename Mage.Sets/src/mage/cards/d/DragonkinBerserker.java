@@ -72,7 +72,7 @@ class DragonkinBerserkerEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.reduceCost(abilityToModify, game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ));
         return true;
     }

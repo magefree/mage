@@ -62,7 +62,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
             if (duration == Duration.Custom || isTemporary()) {
                 mageObject = game.getPermanent(source.getSourceId());
             } else {
-                mageObject = game.getObject(source.getSourceId());
+                mageObject = game.getObject(source);
             }
         }
         if (mageObject == null) {

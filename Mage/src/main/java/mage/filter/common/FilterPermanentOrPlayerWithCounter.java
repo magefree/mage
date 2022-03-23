@@ -1,6 +1,7 @@
 package mage.filter.common;
 
 import mage.MageItem;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -37,8 +38,8 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     }
 
     @Override
-    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(o, sourceId, playerId, game)) { // same as parent class, so can call with full params
+    public boolean match(MageItem o, UUID playerId, Ability source, Game game) {
+        if (super.match(o, playerId, source, game)) { // same as parent class, so can call with full params
             if (o instanceof Player) {
                 return !((Player) o).getCounters().isEmpty();
             } else if (o instanceof Permanent) {

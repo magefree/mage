@@ -80,7 +80,7 @@ enum ObsidianCharmawValue implements DynamicValue {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_OPPONENTS_PERMANENT,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(permanent1 -> permanent1.isLand(game))

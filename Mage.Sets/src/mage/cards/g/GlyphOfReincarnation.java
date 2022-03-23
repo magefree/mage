@@ -85,7 +85,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 Map<UUID, Player> destroyed = new HashMap<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetWall.getId())) {
                         if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(targetWall, game), game)) {
                             if (creature.destroy(source, game, true)
@@ -108,7 +108,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         filter.add(new OwnerIdPredicate(player.getId()));
                         Target targetCreature = new TargetCardInGraveyard(filter);
                         targetCreature.setNotTarget(true);
-                        if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
+                        if (targetCreature.canChoose(controller.getId(), source, game)
                                 && controller.chooseTarget(outcome, targetCreature, source, game)) {
                             Card card = game.getCard(targetCreature.getFirstTarget());
                             if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {

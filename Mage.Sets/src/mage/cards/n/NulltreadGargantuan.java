@@ -69,7 +69,7 @@ class NulltreadGargantuanEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && player.putCardsOnTopOfLibrary(permanent, game, source, false);
     }

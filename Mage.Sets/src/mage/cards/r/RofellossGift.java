@@ -84,7 +84,7 @@ class RofellossGiftEffect extends OneShotEffect {
         int enchantmentsToReturn = Math.min(player.getGraveyard().count(filter2, game), targetCardInHand.getTargets().size());
         TargetCardInYourGraveyard targetCardInYourGraveyard = new TargetCardInYourGraveyard(enchantmentsToReturn, filter2);
         targetCardInYourGraveyard.setNotTarget(true);
-        if (!player.choose(outcome, targetCardInYourGraveyard, source.getSourceId(), game)) {
+        if (!player.choose(outcome, targetCardInYourGraveyard, source, game)) {
             return false;
         }
         cards = new CardsImpl();

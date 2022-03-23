@@ -127,7 +127,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
         }
         TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
         target.setNotTarget(true);
-        if (!controller.choose(outcome, target, source.getSourceId(), game)) {
+        if (!controller.choose(outcome, target, source, game)) {
             return false;
         }
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfCombat, player.getId());

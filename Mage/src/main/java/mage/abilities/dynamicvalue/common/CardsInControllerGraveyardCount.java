@@ -39,7 +39,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
             return amount * player.getGraveyard().count(
-                    filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                    filter, sourceAbility.getControllerId(), sourceAbility, game
             );
         }
         return 0;

@@ -87,7 +87,7 @@ class NomadMythmakerEffect extends OneShotEffect {
         FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("Choose a creature you control");
         TargetControlledPermanent target = new TargetControlledPermanent(FILTER);
         target.setNotTarget(true);
-        if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null
                     && !permanent.cantBeAttachedBy(aura, source, game, false)) {

@@ -78,10 +78,10 @@ class SakashimasWillStealEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         if (game.getPermanent(target.getFirstTarget()) == null) {
             return false;
         }
@@ -116,17 +116,17 @@ class SakashimasWillCopyEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent chosenCreature = game.getPermanent(target.getFirstTarget());
         if (chosenCreature == null) {
             return false;
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                player.getId(), source.getSourceId(), game
+                player.getId(), source, game
         )) {
             if (permanent == null || permanent.getId().equals(chosenCreature.getId())) {
                 continue;

@@ -89,7 +89,7 @@ class BattleForBretagardEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new BattleForBretagardTarget();
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {
             new CreateTokenCopyTargetEffect()
                     .setTargetPointer(new FixedTarget(targetId, game))
@@ -145,8 +145,8 @@ class BattleForBretagardTarget extends TargetPermanent {
 
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)

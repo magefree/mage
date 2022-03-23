@@ -65,7 +65,7 @@ class TwistAllegianceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 // only creatures of controller & target opponent
                 if (permanent.isControlledBy(source.getControllerId()) || permanent.isControlledBy(targetOpponent.getId())) {
                     UUID newController = permanent.isControlledBy(source.getControllerId()) ? targetOpponent.getId() : source.getControllerId();

@@ -94,7 +94,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         int countersRemoved = 0;
         Player controller = game.getPlayer(controllerId);
         for (int i = 0; i < countersToRemove; i++) {
-            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     if (!permanent.getCounters(game).isEmpty()) {

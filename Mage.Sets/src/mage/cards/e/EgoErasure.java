@@ -64,7 +64,7 @@ class EgoErasureEffect extends ContinuousEffectImpl {
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getFirstTarget(), source.getSourceId(), game
+                        source.getFirstTarget(), source, game
                 ).stream()
                 .map(permanent -> new MageObjectReference(permanent, game))
                 .forEach(affectedObjectList::add);

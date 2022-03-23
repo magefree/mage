@@ -81,7 +81,7 @@ public final class DustOfMoments extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (controller != null && sourceObject != null) {
                 updatePermanents(source, game, controller, sourceObject);
                 updateSuspended(source, game, controller, sourceObject);

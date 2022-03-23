@@ -98,7 +98,7 @@ class EsiorWardwingFamiliarEffect extends CostModificationEffectImpl {
             if (allTargets.stream()
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
-                    .anyMatch(permanent -> !filter.match(permanent, source.getSourceId(), source.getControllerId(), game))) {
+                    .anyMatch(permanent -> !filter.match(permanent, source.getControllerId(), source, game))) {
                 return false;
             }
         }
@@ -106,7 +106,7 @@ class EsiorWardwingFamiliarEffect extends CostModificationEffectImpl {
         return allTargets.stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> filter.match(permanent, source.getSourceId(), source.getControllerId(), game));
+                .anyMatch(permanent -> filter.match(permanent, source.getControllerId(), source, game));
     }
 
     @Override

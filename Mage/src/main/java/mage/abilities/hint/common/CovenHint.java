@@ -23,7 +23,7 @@ public enum CovenHint implements Hint {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        ability.getControllerId(), ability.getSourceId(), game
+                        ability.getControllerId(), ability, game
                 )
                 .stream()
                 .filter(Objects::nonNull)

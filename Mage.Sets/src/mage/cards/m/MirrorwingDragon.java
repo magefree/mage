@@ -147,7 +147,7 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        player.getId(), source.getSourceId(), game
+                        player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

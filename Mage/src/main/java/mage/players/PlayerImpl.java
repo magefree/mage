@@ -789,7 +789,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return toDiscard;
         }
         TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
-        choose(Outcome.Discard, target, source != null ? source.getSourceId() : null, game);
+        choose(Outcome.Discard, target, source, game);
         toDiscard.addAll(target.getTargets());
         return toDiscard;
     }
@@ -2730,7 +2730,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            if (newTarget.choose(Outcome.Neutral, searchingController.getId(), targetPlayer.getId(), game)) {
+            if (newTarget.choose(Outcome.Neutral, searchingController.getId(), targetPlayer.getId(), source, game)) {
                 target.getTargets().clear();
                 for (UUID targetId : newTarget.getTargets()) {
                     target.add(targetId, game);
@@ -2758,7 +2758,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Set<Card> cards = this.getLibrary()
                 .getCards(game)
                 .stream()
-                .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
+                .filter(card -> filter.match(card, getId(), source, game))
                 .collect(Collectors.toSet());
         Card card = RandomUtil.randomFromCollection(cards);
         if (card == null) {
@@ -4231,7 +4231,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
-        for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
+        for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game)) {
             Ability newOption = option.copy();
             newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, option, game, true);
             if (targetNum < option.getCosts().getTargets().size() - 1) {
@@ -4322,7 +4322,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, source.getSourceId(), controllerId, game);
+        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game);
     }
 
     @Override

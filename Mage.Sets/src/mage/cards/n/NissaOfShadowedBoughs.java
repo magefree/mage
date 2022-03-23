@@ -126,7 +126,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         }
         int lands = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + lands + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, lands + 1));
@@ -144,7 +144,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         } else {
             target = new TargetCardInHand(filter);
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

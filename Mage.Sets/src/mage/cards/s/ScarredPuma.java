@@ -68,7 +68,7 @@ public final class ScarredPuma extends CardImpl {
         @Override
         public boolean applies(Permanent permanent, Ability source, Game game) {
             if (permanent.getId().equals(source.getSourceId())) {
-                for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     //excludes itself (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=23067)
                     if (!Objects.equals(creature.getId(), source.getSourceId())) {
                         ObjectColor color = creature.getColor(game);

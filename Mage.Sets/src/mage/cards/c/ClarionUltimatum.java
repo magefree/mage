@@ -69,11 +69,11 @@ class ClarionUltimatumEffect extends OneShotEffect {
         }
         int permCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         TargetPermanent targetPermanent = new TargetControlledPermanent(Math.max(permCount, 5));
         targetPermanent.setNotTarget(true);
-        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        player.choose(outcome, targetPermanent, source, game);
         Set<String> names = targetPermanent
                 .getTargets()
                 .stream()

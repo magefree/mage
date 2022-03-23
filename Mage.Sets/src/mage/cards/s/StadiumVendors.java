@@ -69,7 +69,7 @@ class StadiumVendorsEffect extends OneShotEffect {
             return false;
         }
         TargetPlayer target = new TargetPlayer(1, 1, true);
-        if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.Benefit, target, source, game)) {
             Player player = game.getPlayer(target.getFirstTarget());
             ChoiceColor colorChoice = new ChoiceColor(true);
             if (player == null

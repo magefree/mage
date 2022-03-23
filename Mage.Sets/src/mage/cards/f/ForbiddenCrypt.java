@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -69,8 +68,8 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

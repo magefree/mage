@@ -72,10 +72,10 @@ enum ArchaeomancersMapCondition implements Condition {
         UUID playerId = (UUID) source.getEffects().get(0).getValue("permanentEnteringControllerId");
         return playerId != null && game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), playerId, game
+                playerId, source, game
         ) > game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
     }
 }

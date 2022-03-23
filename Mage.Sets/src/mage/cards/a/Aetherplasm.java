@@ -67,7 +67,7 @@ class AetherplasmEffect extends OneShotEffect {
         }
         if (player.chooseUse(Outcome.PutCardInPlay, "Put a creature card from your hand onto the battlefield?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A);
-            if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));

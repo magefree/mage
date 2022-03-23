@@ -24,7 +24,7 @@ public enum DomainHint implements Hint {
         List<String> landTypes = game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
-                        ability.getControllerId(), ability.getSourceId(), game
+                        ability.getControllerId(), ability, game
                 ).stream()
                 .map(permanent -> SubType
                         .getBasicLands()

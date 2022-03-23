@@ -67,7 +67,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (player != null && controller != null && sourceObject != null) {
                 int maxPower = new GreatestPowerCountCreatureYouControl().calculate(game, source, this);
                 Cost cost = ManaUtil.createManaCost(maxPower, true);

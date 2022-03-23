@@ -3,6 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroySourceEffect;
@@ -72,11 +73,11 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
     }
     
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (super.match(permanent, playerId, source, game)) {
+            SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                if (combatGroup.getBlockers().contains(sourceId) && combatGroup.getAttackers().contains(permanent.getId())) {
+                if (combatGroup.getBlockers().contains(source.getSourceId()) && combatGroup.getAttackers().contains(permanent.getId())) {
                     return true;
                 }
             }

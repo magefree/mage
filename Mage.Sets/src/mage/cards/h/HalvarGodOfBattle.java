@@ -193,7 +193,7 @@ class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<Permanen
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         UUID attachedTo = input.getObject().getAttachedTo();
         Permanent permanent = game.getPermanent(attachedTo);
-        return permanent != null && filter.match(permanent, input.getSourceId(), input.getPlayerId(), game);
+        return permanent != null && filter.match(permanent, input.getPlayerId(), input.getSource(), game);
     }
 
     @Override

@@ -68,7 +68,7 @@ public final class PureReflection extends CardImpl {
             // destroy all Reflections
             FilterPermanent filter = new FilterPermanent("Reflections");
             filter.add(SubType.REFLECTION.getPredicate());
-            game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).forEach((permanent) -> {
+            game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).forEach((permanent) -> {
                 permanent.destroy(source, game,false);
             });
             game.getState().processAction(game);

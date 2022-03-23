@@ -89,7 +89,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    cardsToReturn.addAll(player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
+                    cardsToReturn.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 }
             }
             controller.moveCards(cardsToReturn.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);

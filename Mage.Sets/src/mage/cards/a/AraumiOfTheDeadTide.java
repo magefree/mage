@@ -96,7 +96,7 @@ class AraumiOfTheDeadTideCost extends CostImpl {
         int oppCount = game.getOpponents(controllerId).size();
         TargetCard target = new TargetCardInYourGraveyard(oppCount, StaticFilters.FILTER_CARD);
         target.setNotTarget(true);
-        player.choose(Outcome.Exile, target, source.getSourceId(), game);
+        player.choose(Outcome.Exile, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.size() < oppCount) {
             return paid;

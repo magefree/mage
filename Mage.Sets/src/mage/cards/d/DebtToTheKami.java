@@ -73,7 +73,7 @@ class DebtToTheKamiExileCreatureEffect extends OneShotEffect {
         }
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -112,7 +112,7 @@ class DebtToTheKamiExileEnchantmentEffect extends OneShotEffect {
         }
         Target target = new TargetControlledPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

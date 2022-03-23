@@ -80,7 +80,7 @@ class BirchloreRangersManaEffect extends AddManaOfAnyColorEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         if (game != null && game.inCheckPlayableState()) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 2;
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) / 2;
             List<Mana> netMana = new ArrayList<>();
             if (count > 0) {
                 netMana.add(Mana.AnyMana(count * 2));

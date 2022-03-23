@@ -219,7 +219,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 realMaxModes = 0;
                 for (UUID targetPlayerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player targetPlayer = game.getPlayer(targetPlayerId);
-                    if (((FilterPlayer) this.maxModesFilter).match(targetPlayer, source.getSourceId(), source.getControllerId(), game)) {
+                    if (((FilterPlayer) this.maxModesFilter).match(targetPlayer, source.getControllerId(), source, game)) {
                         realMaxModes++;
                     }
                 }
@@ -292,7 +292,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 }
                 for (Mode mode : this.values()) {
                     if ((!isEachModeOnlyOnce() || onceSelectedModes == null || !onceSelectedModes.contains(mode.getId()))
-                            && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                            && mode.getTargets().canChoose(source.getControllerId(), source, game)) {
                         this.addSelectedMode(mode.getId());
                     }
                 }
@@ -309,7 +309,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             UUID playerId = null;
             if (modeChooser == TargetController.OPPONENT) {
                 TargetOpponent targetOpponent = new TargetOpponent();
-                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
+                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
                     playerId = targetOpponent.getFirstTarget();
                 }
             } else {

@@ -101,7 +101,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
         UUID defenderId;
         if (game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
-                source.getSourceId(), player.getId(), game
+                player.getId(), source, game
         ) < 1) {
             defenderId = player.getId();
         } else {
@@ -112,7 +112,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             filter.getPermanentFilter().add(new ControllerIdPredicate(player.getId()));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
             target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }
         game.getCombat().addAttackerToCombat(permanent.getId(), defenderId, game);

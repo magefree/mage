@@ -76,7 +76,7 @@ class VisionsOfDreadEffect extends OneShotEffect {
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         );
         target.setNotTarget(true);
-        opponent.choose(Outcome.Detriment, target, source.getSourceId(), game);
+        opponent.choose(Outcome.Detriment, target, source, game);
         return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
     }
 }

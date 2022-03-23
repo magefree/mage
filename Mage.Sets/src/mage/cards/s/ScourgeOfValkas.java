@@ -87,7 +87,7 @@ class ScourgeOfValkasDamageEffect extends OneShotEffect {
         if (controller == null || enteringDragon == null) {
             return false;
         }
-        int dragons = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int dragons = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (dragons < 1) {
             return true;
         }

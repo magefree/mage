@@ -69,7 +69,7 @@ class SharedAnimosityEffect extends OneShotEffect {
         FilterPermanent filter = new FilterAttackingCreature();
         filter.add(new SharesCreatureTypePredicate(permanent));
         filter.add(AnotherPredicate.instance);
-        int count = game.getBattlefield().count(filter, permanent.getId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (count > 0) {
             game.addEffect(new BoostTargetEffect(
                     count, 0, Duration.EndOfTurn

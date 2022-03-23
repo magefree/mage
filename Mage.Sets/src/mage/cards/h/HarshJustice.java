@@ -122,7 +122,7 @@ class HarshJusticeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = (Integer) this.getValue("damage");
         UUID sourceId = (UUID) this.getValue("sourceId");
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && damage > 0 && sourceId != null) {
             Permanent targetObject = game.getPermanentOrLKIBattlefield(sourceId);
             if (targetObject != null) {

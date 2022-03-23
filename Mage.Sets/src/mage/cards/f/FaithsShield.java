@@ -62,7 +62,7 @@ class FaithsShieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
             if (FatefulHourCondition.instance.apply(game, source)) {
                 ChoiceColor choice = new ChoiceColor();

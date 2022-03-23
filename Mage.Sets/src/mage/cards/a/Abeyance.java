@@ -68,7 +68,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast instant or sorcery spells or activate abilities "
                     + "that aren't mana abilities this turn (" + mageObject.getIdName() + ").";

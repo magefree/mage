@@ -150,7 +150,7 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (sourceObject == null) {
                     return false;
                 }

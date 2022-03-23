@@ -57,7 +57,7 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         MageObject eventObject = game.getObject(event.getSourceId());
         if (sourceObject != null && eventObject != null) {
             return "You can cast or activate anability of " + eventObject.getIdName() + "  only during your own turns (" + sourceObject.getIdName() + "). ";

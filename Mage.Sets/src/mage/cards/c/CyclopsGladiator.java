@@ -69,7 +69,7 @@ class CyclopsGladiatorEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(defenderId));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             Player player = game.getPlayer(source.getControllerId());
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
                 if (player != null && player.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     Permanent cyclops = game.getPermanent(source.getSourceId());

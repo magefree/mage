@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ public final class ScrapheapScrounger extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("another creature card");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ScrapheapScrounger(UUID ownerId, CardSetInfo setInfo) {

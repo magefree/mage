@@ -63,7 +63,7 @@ class RavingOniSlaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (game.getBattlefield().count(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getSourceId(), source.getControllerId(), game) < 1) {
+            if (game.getBattlefield().count(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getControllerId(), source, game) < 1) {
                 controller.loseLife(3, game, source, false);
             }
             return true;

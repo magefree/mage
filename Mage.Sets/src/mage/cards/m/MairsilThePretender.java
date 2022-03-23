@@ -93,11 +93,11 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
         if (controller.chooseUse(Outcome.Detriment, "Exile a card from your hand? (No = from graveyard)", source, game)) {
             // from hand
             target = new TargetCardInHand(0, 1, filter);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
         } else {
             // from graveyard
             target = new TargetCardInYourGraveyard(0, 1, filter);
-            target.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+            target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         }
 
         Card card = controller.getHand().get(target.getFirstTarget(), game);

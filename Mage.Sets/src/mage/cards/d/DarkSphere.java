@@ -70,13 +70,13 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null) {
             controller.damage((int) Math.ceil(damageEvent.getAmount() / 2.0), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());

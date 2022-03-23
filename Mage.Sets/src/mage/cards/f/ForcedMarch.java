@@ -55,8 +55,7 @@ class ForcedMarchEffect extends OneShotEffect {
         // for(Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(),
-                source.getSourceId(),
-                game)) {
+                source, game)) {
             if (permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source, game, false);
             }

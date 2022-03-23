@@ -67,7 +67,7 @@ class FlashEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

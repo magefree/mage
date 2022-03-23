@@ -64,7 +64,7 @@ class ThranTomeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // validate source and controller exist
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
 
         if (sourceObject == null || controller == null) {
             return false;

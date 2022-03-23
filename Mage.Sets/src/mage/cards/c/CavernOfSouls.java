@@ -67,7 +67,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
             creatureType = subType;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
@@ -108,7 +108,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
         // check: ... to cast a creature spell
         if (super.apply(game, source)) {
             // check: ... of the chosen type
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if (creatureType != null && object != null && object.hasSubtype(creatureType, game)) {
                 return true;
             }
@@ -170,7 +170,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered because a colored mana from " + sourceObject.getName() + " was spent to cast it.";
         }

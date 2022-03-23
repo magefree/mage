@@ -75,7 +75,7 @@ class FortunateFewEffect extends OneShotEffect {
 
                     Target target = new TargetNonlandPermanent(filter);
                     target.setNotTarget(true);
-                    if (player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
+                    if (player.choose(Outcome.Exile, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
                             chosenCards.put(permanent, 1);
@@ -85,7 +85,7 @@ class FortunateFewEffect extends OneShotEffect {
                 }
             }
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source, game)) {
                 if (!chosenCards.containsKey(permanent)) {
                     permanent.destroy(source, game, false);
                 }

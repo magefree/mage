@@ -40,7 +40,7 @@ public enum PartyCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Cards cards = new CardsImpl(game.getBattlefield().getActivePermanents(
-                filter, sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                filter, sourceAbility.getControllerId(), sourceAbility, game
         ).stream().collect(Collectors.toSet()));
         return subTypeAssigner.getRoleCount(cards, game);
     }

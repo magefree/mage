@@ -53,7 +53,7 @@ public class SacrificeTargetCost extends CostImpl {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         // can be cancel by user
-        if (targets.choose(Outcome.Sacrifice, activator, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Sacrifice, activator, source.getSourceId(), source, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {

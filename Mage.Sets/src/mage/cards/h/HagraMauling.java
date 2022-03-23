@@ -86,7 +86,7 @@ enum HagraMaulingCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null && game.getBattlefield().count(filter, source.getSourceId(), playerId, game) == 0) {
+            if (player != null && game.getBattlefield().count(filter, playerId, source, game) == 0) {
                 return true;
             }
         }

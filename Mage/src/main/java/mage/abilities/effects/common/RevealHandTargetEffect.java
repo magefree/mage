@@ -35,7 +35,7 @@ public class RevealHandTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             player.revealCards(sourceObject.getIdName(), player.getHand(), game);
             return true;

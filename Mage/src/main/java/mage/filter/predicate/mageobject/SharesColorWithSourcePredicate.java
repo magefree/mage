@@ -14,12 +14,8 @@ public enum SharesColorWithSourcePredicate implements ObjectSourcePlayerPredicat
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        MageObject sourceObject = game.getObject(input.getSourceId());
-        if (sourceObject != null) {
-            return input.getObject().getColor(game).shares(sourceObject.getColor(game));
-        }
-        return false;
-
+        MageObject sourceObject = input.getSource().getSourceObject(game);
+        return sourceObject != null && input.getObject().getColor(game).shares(sourceObject.getColor(game));
     }
 
     @Override

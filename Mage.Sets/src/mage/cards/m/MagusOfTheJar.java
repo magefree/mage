@@ -132,7 +132,7 @@ class MagusoftheJarDelayedEffect extends OneShotEffect {
                 continue;
             }
             player.discard(player.getHand(), false, source, game);
-            player.moveCards(cards.getCards(filter, source.getSourceId(), playerId, game), Zone.HAND, source, game);
+            player.moveCards(cards.getCards(filter, playerId, source, game), Zone.HAND, source, game);
         }
         return true;
     }

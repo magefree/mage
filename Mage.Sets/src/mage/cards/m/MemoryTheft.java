@@ -77,8 +77,8 @@ class MemoryTheftEffect extends OneShotEffect {
         filter.add(AdventurePredicate.instance);
         filter.add(new OwnerIdPredicate(player.getId()));
         TargetCard target = new TargetCardInExile(0, 1, filter, null, true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                || !controller.choose(outcome, target, source.getSourceId(), game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)
+                || !controller.choose(outcome, target, source, game)) {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());

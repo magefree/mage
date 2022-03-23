@@ -83,7 +83,7 @@ enum PriestOfTheBlessedGrafValue implements DynamicValue {
                 .getActivePermanents(
                         StaticFilters.FILTER_LAND,
                         source.getControllerId(),
-                        source.getSourceId(), game
+                        source, game
                 ).stream()
                 .map(Controllable::getControllerId)
                 .collect(Collectors.toMap(Function.identity(), u -> 1, Integer::sum));

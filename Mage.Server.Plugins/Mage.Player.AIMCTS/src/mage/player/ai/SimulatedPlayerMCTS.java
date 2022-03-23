@@ -221,7 +221,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -245,19 +245,19 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (this.isHuman()) {
             return chooseRandom(target, game);
         }
-        return super.choose(outcome, target, sourceId, game);
+        return super.choose(outcome, target, source, game);
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         if (this.isHuman()) {
             return chooseRandom(target, game);
         }
-        return super.choose(outcome, target, sourceId, game, options);
+        return super.choose(outcome, target, source, game, options);
     }
 
     @Override
@@ -302,7 +302,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
         }

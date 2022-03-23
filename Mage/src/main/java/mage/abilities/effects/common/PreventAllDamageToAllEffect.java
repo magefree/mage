@@ -92,7 +92,7 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
                 object = game.getObject(event.getTargetId());
             }            
             if (object != null) {
-                return filter.match(object, source.getSourceId(), source.getControllerId(), game);
+                return filter.match(object, source.getControllerId(), source, game);
             }
         }
         return false;

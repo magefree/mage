@@ -32,6 +32,7 @@ package mage.filter.common;
 import java.util.UUID;
 
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.counters.CounterType;
@@ -86,11 +87,11 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> imple
     }
 
     @Override
-    public boolean match(MageObject o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageObject o, UUID playerId, Ability source, Game game) {
         if (o instanceof Permanent) {
-            return permanentFilter.match((Permanent) o, sourceId, playerId, game);
+            return permanentFilter.match((Permanent) o, playerId, source, game);
         } else if (o instanceof Card) {
-            return cardFilter.match((Card) o, sourceId, playerId, game);
+            return cardFilter.match((Card) o, playerId, source, game);
         }
         return false;
     }

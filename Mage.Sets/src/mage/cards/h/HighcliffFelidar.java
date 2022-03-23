@@ -101,7 +101,7 @@ class HighcliffFelidarEffect extends OneShotEffect {
                         filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, maxPower));
                         TargetPermanent target = new TargetPermanent(filter);
                         target.setNotTarget(true);
-                        if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                        if (controller.choose(outcome, target, source, game)) {
                             toDestroy.add(target.getFirstTarget());
                         }
                     }

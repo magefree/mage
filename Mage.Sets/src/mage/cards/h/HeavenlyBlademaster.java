@@ -108,7 +108,7 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         target.getTargets().stream().map(

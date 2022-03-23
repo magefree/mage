@@ -75,7 +75,7 @@ class MartyrsCryEffect extends OneShotEffect {
             return false;
         }
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         );
         Map<UUID, Integer> playerMap = permanents
                 .stream()

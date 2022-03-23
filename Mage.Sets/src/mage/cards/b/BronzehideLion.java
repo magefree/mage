@@ -88,7 +88,7 @@ class BronzehideLionReturnEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (controller.choose(outcome, target, source.getSourceId(), game)
+        if (controller.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null) {
             game.getState().setValue("attachTo:" + source.getSourceId(), target.getFirstTarget());
         }

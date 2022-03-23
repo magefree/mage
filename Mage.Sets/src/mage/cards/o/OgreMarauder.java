@@ -69,7 +69,7 @@ class OgreMarauderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {
             Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));

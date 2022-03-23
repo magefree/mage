@@ -67,7 +67,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
                 break;
             default:
         }
-        if (target == null || !target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target == null || !target.canChoose(player.getId(), source, game)) {
             return true;
         }
         target.chooseTarget(Outcome.Exile, player.getId(), source, game);

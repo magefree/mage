@@ -68,7 +68,7 @@ class ExplosiveSingularityEffect extends CostModificationEffectImpl {
         if (game.inCheckPlayableState()) {
             reduction = game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES,
-                    source.getSourceId(), source.getControllerId(), game
+                    source.getControllerId(), source, game
             );
         } else {
             reduction = ((List<Permanent>) spellAbility.getEffects().get(0).getValue("tappedPermanents")).size();

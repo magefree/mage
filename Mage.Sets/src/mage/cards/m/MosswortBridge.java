@@ -60,7 +60,7 @@ enum MosswortBridgeTotalPowerCondition implements Condition {
         int totalPower = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             totalPower += permanent.getPower().getValue();
             if (totalPower >= 10) {

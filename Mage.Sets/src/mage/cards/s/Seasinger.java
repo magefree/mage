@@ -81,6 +81,6 @@ enum SeasingerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return game.getBattlefield().contains(filter, input.getSourceId(), input.getObject().getControllerId(), game, 1);
+        return game.getBattlefield().contains(filter, input.getSourceId(), input.getObject().getControllerId(), input.getSource(), game, 1);
     }
 }

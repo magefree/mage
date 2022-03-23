@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -83,7 +82,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && filter.match(p, getSourceId(), getControllerId(), game);
+        return damageEvent.isCombatDamage() && filter.match(p, getControllerId(), this, game);
     }
 
     @Override

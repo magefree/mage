@@ -73,7 +73,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         if (targetPermanent != null) {
             player = game.getPlayer(targetPermanent.getControllerId());
         }
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             Cost costToPay;
             String costValueMessage;

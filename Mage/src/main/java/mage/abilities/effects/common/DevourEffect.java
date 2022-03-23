@@ -77,7 +77,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         }
         Target target = new TargetControlledPermanent(1, Integer.MAX_VALUE, devourFactor.getFilter(), true);
         target.setRequired(false);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
         if (!controller.chooseUse(Outcome.Detriment, "Devour " + devourFactor.getCardType().toString().toLowerCase() + "s?", source, game)) {

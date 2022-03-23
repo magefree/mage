@@ -84,7 +84,7 @@ public enum TargetController {
                     }
                     break;
                 case ENCHANTED:
-                    Permanent permanent = game.getPermanent(input.getSourceId());
+                    Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
                 case ANY:
                     return true;
@@ -184,7 +184,7 @@ public enum TargetController {
                     }
                     break;
                 case ENCHANTED:
-                    Permanent permanent = game.getPermanent(input.getSourceId());
+                    Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
                 case ANY:
                     return true;

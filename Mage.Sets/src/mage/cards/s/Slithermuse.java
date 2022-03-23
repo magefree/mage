@@ -77,7 +77,7 @@ class SlithermuseEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             TargetOpponent target = new TargetOpponent();
             target.setNotTarget(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
+            if (player.choose(this.outcome, target, source, game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
                     game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());

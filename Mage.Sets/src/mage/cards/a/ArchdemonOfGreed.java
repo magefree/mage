@@ -84,8 +84,8 @@ public final class ArchdemonOfGreed extends CardImpl {
                 if (player != null) {
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                     // if they can pay the cost, then they must pay
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    if (target.canChoose(player.getId(), source, game)) {
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         Permanent humanSacrifice = game.getPermanent(target.getFirstTarget());
                         if (humanSacrifice != null) {
                             // sacrifice the chosen card

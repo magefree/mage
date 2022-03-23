@@ -88,7 +88,7 @@ class ArdennIntrepidArchaeologistEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {
             if (player != null) {
                 player.addAttachment(targetId, source, game);

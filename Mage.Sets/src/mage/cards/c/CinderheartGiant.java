@@ -70,7 +70,7 @@ class CinderheartGiantEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         ) < 1) {
             return false;
         }

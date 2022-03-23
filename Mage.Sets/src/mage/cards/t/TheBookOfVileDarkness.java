@@ -11,7 +11,6 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -128,25 +127,25 @@ class TheBookOfVileDarknessCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return source.getSourcePermanentIfItStillExists(game) != null
-                && game.getBattlefield().count(filter1, source.getSourceId(), source.getControllerId(), game) > 0
-                && game.getBattlefield().count(filter2, source.getSourceId(), source.getControllerId(), game) > 0;
+                && game.getBattlefield().count(filter1, source.getControllerId(), source, game) > 0
+                && game.getBattlefield().count(filter2, source.getControllerId(), source, game) > 0;
     }
 
     private static Permanent getPermanent(FilterPermanent filter, Player controller, Ability source, Game game) {
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         switch (count) {
             case 0:
                 return null;
             case 1:
                 return game.getBattlefield().getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream().findFirst().orElse(null);
             default:
                 break;
         }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        controller.choose(Outcome.Sacrifice, target, source.getControllerId(), game);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }
 

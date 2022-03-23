@@ -76,7 +76,7 @@ class GrizzledAnglerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.millCards(2, source, game);
-            if (controller.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), game) >= 1) {
+            if (controller.getGraveyard().count(filter, source.getControllerId(), source, game) >= 1) {
                 return new TransformSourceEffect().apply(game, source);
             }
         }

@@ -61,7 +61,7 @@ class RampageOfTheClansEffect extends OneShotEffect {
         Map<UUID, Integer> playersWithPermanents = new HashMap<>();
         for (Permanent p : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             UUID controllerId = p.getControllerId();
             if (p.destroy(source, game, false)) {

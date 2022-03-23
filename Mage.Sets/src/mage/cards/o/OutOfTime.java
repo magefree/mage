@@ -72,7 +72,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game);
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
         int numCreatures = creatures.size();
         if (numCreatures > 0) {
             Set<UUID> creatureIds = new HashSet<>(numCreatures);

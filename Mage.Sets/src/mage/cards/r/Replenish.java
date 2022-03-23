@@ -56,8 +56,8 @@ class ReplenishEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.moveCards(controller.getGraveyard().getCards(new FilterEnchantmentCard(), source.getSourceId(),
-                    source.getControllerId(), game), Zone.BATTLEFIELD, source, game);
+            return controller.moveCards(controller.getGraveyard().getCards(new FilterEnchantmentCard(),
+                    source.getControllerId(), source, game), Zone.BATTLEFIELD, source, game);
         }
         return false;
     }

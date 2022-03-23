@@ -113,7 +113,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject Valki = game.getObject(source.getSourceId());
+        MageObject Valki = game.getObject(source);
         Set<Card> cardsToExile = new LinkedHashSet<>();
         if (controller != null
                 && Valki != null) {
@@ -231,7 +231,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject Valki = game.getObject(source.getSourceId());
+        MageObject Valki = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && Valki != null) {

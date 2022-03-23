@@ -85,7 +85,7 @@ class DeliverUntoEvilEffect extends OneShotEffect {
         }
         TargetOpponent targetOpponent = new TargetOpponent();
         targetOpponent.setNotTarget(true);
-        if (!player.choose(outcome, targetOpponent, source.getSourceId(), game)) {
+        if (!player.choose(outcome, targetOpponent, source, game)) {
             return false;
         }
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());

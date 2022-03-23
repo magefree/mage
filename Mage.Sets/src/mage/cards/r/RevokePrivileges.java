@@ -79,7 +79,7 @@ class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "The creature enchanted by " + mageObject.getIdName() + " can't crew vehicles.";
         }

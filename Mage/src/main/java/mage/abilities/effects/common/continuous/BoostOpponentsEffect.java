@@ -51,7 +51,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (opponents.contains(perm.getControllerId())) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
@@ -75,7 +75,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (opponents.contains(perm.getControllerId())) {
                     perm.addPower(power);
                     perm.addToughness(toughness);

@@ -69,7 +69,7 @@ class GlintHawkEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT);
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+        if (target.canChoose(controller.getId(), source, game)
                 && controller.chooseUse(outcome, "Return an artifact you control to its owner's hand?", source, game)) {
             controller.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

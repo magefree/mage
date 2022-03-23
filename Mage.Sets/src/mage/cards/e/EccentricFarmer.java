@@ -74,7 +74,7 @@ class EccentricFarmerEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_LAND, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
         return true;
     }

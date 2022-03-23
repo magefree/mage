@@ -198,7 +198,7 @@ class TergridsLaternEffect extends OneShotEffect {
         Outcome aiOutcome = (targetedPlayer.getLife() <= 3 * 2) ? Outcome.Benefit : Outcome.Detriment;
 
         Set<String> choiceSet = new HashSet<>();
-        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, source.getSourceId(), targetedPlayer.getId(), game) > 0) {
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, targetedPlayer.getId(), source, game) > 0) {
             choiceSet.add(SACRIFICE_CHOICE);
         }
         if (targetedPlayer.getHand().size() > 0) {
@@ -222,7 +222,7 @@ class TergridsLaternEffect extends OneShotEffect {
             case SACRIFICE_CHOICE:
                 TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                 target.setNotTarget(true);
-                targetedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                targetedPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 return chosenLand != null && chosenLand.sacrifice(source, game);
             case DISCARD_CHOICE:

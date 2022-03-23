@@ -126,7 +126,7 @@ class ProfessorOnyxEffect extends OneShotEffect {
                 TargetDiscard target = new TargetDiscard(
                         0, 1, StaticFilters.FILTER_CARD, playerId
                 );
-                player.choose(Outcome.Discard, target, source.getSourceId(), game);
+                player.choose(Outcome.Discard, target, source, game);
                 playerMap.put(playerId, game.getCard(target.getFirstTarget()));
             }
             for (UUID playerId : game.getOpponents(source.getControllerId())) {

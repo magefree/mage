@@ -80,7 +80,7 @@ public class DoIfCostPaid extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = getPayingPlayer(game, source);
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (player != null && mageObject != null) {
             String message;
             if (chooseUseText == null) {

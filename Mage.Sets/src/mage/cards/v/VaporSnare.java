@@ -80,8 +80,8 @@ class VaporSnareEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
         if (controller != null 
-                && target.canChoose(source.getSourceId(), controller.getId(), game)) {
-            controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                && target.canChoose(controller.getId(), source, game)) {
+            controller.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
 
             if ( permanent != null ) {

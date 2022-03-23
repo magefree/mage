@@ -83,7 +83,7 @@ class EnchantedPermanentSubtypeCondition implements Condition {
         if (enchantment != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
-                return filter.match(permanent, source.getSourceId(), enchantment.getControllerId(), game);
+                return filter.match(permanent, enchantment.getControllerId(), source, game);
                 }
             }
         return false;

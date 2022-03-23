@@ -71,7 +71,7 @@ class TogglodyteEntersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (mageObject != null) {
             boolean toggled = true;
@@ -103,7 +103,7 @@ class TogglodyteToggleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_toggle") == null) {
                 return false;
@@ -183,7 +183,7 @@ class TogglodyteCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return !Boolean.TRUE.equals(game.getState().getValue(mageObject.getId() + "_toggle"));
         }

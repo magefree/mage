@@ -81,7 +81,7 @@ class BoundEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent("a creature (to sacrifice)"), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                     if (toSacrifice != null) {
@@ -126,7 +126,7 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered (" + sourceObject.getIdName() + ").";
         }

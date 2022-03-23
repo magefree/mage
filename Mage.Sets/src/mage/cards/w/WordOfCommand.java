@@ -74,7 +74,7 @@ class WordOfCommandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player sourceController = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card card = null;
         if (sourceController != null && targetPlayer != null && sourceObject != null) {
             Player controller = null;

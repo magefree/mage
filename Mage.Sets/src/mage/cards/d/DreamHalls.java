@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -45,7 +45,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard("a card that shares a color with that spell");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(SharesColorWithSourcePredicate.instance);
     }
 

@@ -42,14 +42,14 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return isActivatedOrTriggeredAbility(stackObject) && source != null && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
+        return isActivatedOrTriggeredAbility(stackObject) && source != null && filter.match(stackObject, source.getControllerId(), source, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if (isActivatedOrTriggeredAbility(stackObject)
-                    && filter.match(stackObject, sourceId, sourceControllerId, game)) {
+                    && filter.match(stackObject, sourceControllerId, source, game)) {
                 return true;
             }
         }
@@ -64,7 +64,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         return possibleTargets(sourceControllerId, game);
     }
 

@@ -79,7 +79,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                && filter.match(permanent, getControllerId(), this, game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
@@ -98,7 +98,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
 
         Permanent attacker = game.getPermanent(event.getSourceId());
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                && filter.match(attacker, getSourceId(), getControllerId(), game)) {
+                && filter.match(attacker, getControllerId(), this, game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {

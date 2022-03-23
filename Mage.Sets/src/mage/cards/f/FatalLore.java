@@ -72,8 +72,8 @@ class FatalLoreEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen opponent's creature");
                 filter.add(new ControllerIdPredicate(chosenOpponent.getId()));
                 TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2, filter, false);
-                if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                        && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
+                if (target.canChoose(controller.getId(), source, game)
+                        && controller.choose(Outcome.DestroyPermanent, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Effect destroyCreature = new DestroyTargetEffect(true);
                         destroyCreature.setTargetPointer(new FixedTarget(targetId, game));

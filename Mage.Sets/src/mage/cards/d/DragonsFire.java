@@ -133,7 +133,7 @@ class DragonsFireCost extends CostImpl {
             switch (chosenZone) {
                 case HAND:
                     targets.add(new TargetCardInHand(handFilter));
-                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
+                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
                         Card card = game.getCard(targets.getFirstTarget());
                         if (card != null) {
                             dragonZone = DragonZone.HAND;
@@ -144,7 +144,7 @@ class DragonsFireCost extends CostImpl {
                     break;
                 case BATTLEFIELD:
                     targets.add(new TargetControlledPermanent(battlefieldFilter));
-                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
+                    if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
                         Permanent permanent = game.getPermanent(targets.getFirstTarget());
                         if (permanent != null) {
                             dragonZone = DragonZone.BATTLEFIELD;

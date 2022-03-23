@@ -87,7 +87,7 @@ class NicolBolasDragonGodGainAbilitiesEffect extends ContinuousEffectImpl {
             return true;
         }
         for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             for (Ability ability : permanent.getAbilities()) {
                 if (ability instanceof LoyaltyAbility) {
@@ -173,7 +173,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
                 }
                 // permanent
                 if (target.equals(targetPermanent)) {
-                    if (opponent.choose(Outcome.Exile, targetPermanent, source.getSourceId(), game)) {
+                    if (opponent.choose(Outcome.Exile, targetPermanent, source, game)) {
                         MageObject mageObject = game.getObject(targetPermanent.getFirstTarget());
                         if (mageObject instanceof Permanent) {
                             cardsOnBattlefield.add((Card) mageObject);

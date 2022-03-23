@@ -78,7 +78,7 @@ class IllusionaryPresenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             SubType landTypeChoice = SubType.byDescription((String) game.getState().getValue(mageObject.getId().toString() + "BasicLandType"));
             if (landTypeChoice != null) {

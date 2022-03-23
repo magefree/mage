@@ -72,7 +72,7 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent martialImpetus = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent martialImpetus = input.getSource().getSourcePermanentOrLKI(game);
         if (martialImpetus != null) {
             Permanent attachedTo = game.getPermanentOrLKIBattlefield(martialImpetus.getAttachedTo());
             UUID auraControllerId = martialImpetus.getControllerId();

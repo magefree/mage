@@ -48,7 +48,7 @@ public class AttackingCreatureCount implements DynamicValue {
             for (UUID permId : combatGroup.getAttackers()) {
                 if (filter != null) {
                     Permanent attacker = game.getPermanent(permId);
-                    if (filter.match(attacker, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game)) {
+                    if (filter.match(attacker, sourceAbility.getControllerId(), sourceAbility, game)) {
                         count++;
                     }
                 } else {

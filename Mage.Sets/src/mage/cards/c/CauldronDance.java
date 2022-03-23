@@ -119,7 +119,7 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
         if (controller != null) {
             if (controller.chooseUse(Outcome.PutCreatureInPlay, CHOICE_TEXT, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-                if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {

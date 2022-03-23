@@ -55,9 +55,9 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int maxPower = Integer.MIN_VALUE; // get the most powerful controlled creature that can be targeted
-        Card sourceCard = game.getCard(sourceId);
+        Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard == null) {
             return false;
         }
@@ -69,7 +69,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
         // now check, if another creature has less power and can be targeted
         FilterCreaturePermanent checkFilter = new FilterCreaturePermanent();
         checkFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower));
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, sourceId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, source, game)) {
             if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
                 return true;
             }
@@ -78,8 +78,8 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Spell spell = game.getStack().getSpell(sourceId);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
             Permanent firstTarget = getPermanentFromFirstTarget(spell.getSpellAbility(), game);
             if (firstTarget != null) {
@@ -89,7 +89,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
                 filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, power));
             }
         }
-        return super.possibleTargets(sourceId, sourceControllerId, game);
+        return super.possibleTargets(sourceControllerId, source, game);
     }
 
     private Permanent getPermanentFromFirstTarget(Ability source, Game game) {

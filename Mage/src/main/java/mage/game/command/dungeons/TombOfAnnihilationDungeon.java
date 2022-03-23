@@ -105,7 +105,7 @@ class VeilsOfFearEffect extends OneShotEffect {
                 continue;
             }
             TargetDiscard target = new TargetDiscard(0, 1, StaticFilters.FILTER_CARD, playerId);
-            player.choose(Outcome.PreventDamage, target, source.getSourceId(), game);
+            player.choose(Outcome.PreventDamage, target, source, game);
             map.put(playerId, game.getCard(target.getFirstTarget()));
         }
         for (Map.Entry<UUID, Card> entry : map.entrySet()) {
@@ -151,7 +151,7 @@ class OublietteEffect extends OneShotEffect {
             return true;
         }
         OublietteTarget target = new OublietteTarget(Math.min(saccable, 3));
-        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        player.choose(Outcome.Sacrifice, target, source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -207,8 +207,8 @@ class OublietteTarget extends TargetControlledPermanent {
 
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, null, game));
         return possibleTargets;
     }
@@ -216,7 +216,7 @@ class OublietteTarget extends TargetControlledPermanent {
     static int checkTargetCount(Ability source, Game game) {
         List<Permanent> permanents = game
                 .getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+                .getActivePermanents(filter, source.getControllerId(), source, game);
         return cardTypeAssigner.getRoleCount(new CardsImpl(permanents), game);
     }
 }
@@ -246,7 +246,7 @@ class SandfallCellEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(0, 1, TombOfAnnihilationDungeon.filter, true);
-            player.choose(Outcome.PreventDamage, target, source.getSourceId(), game);
+            player.choose(Outcome.PreventDamage, target, source, game);
             map.put(playerId, game.getPermanent(target.getFirstTarget()));
         }
         for (Map.Entry<UUID, Permanent> entry : map.entrySet()) {

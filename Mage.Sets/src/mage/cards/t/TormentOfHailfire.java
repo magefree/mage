@@ -69,7 +69,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
                                 "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
                             Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                             target.setNotTarget(true);
-                            if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+                            if (opponent.choose(outcome, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {
                                     if (permanent.sacrifice(source, game)) {

@@ -69,7 +69,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        int value = game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
         if (value > 0) {
             value--;
         }

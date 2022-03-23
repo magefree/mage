@@ -82,7 +82,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
                 ((DamagedEvent) event).isCombatDamage() &&
                 !usedForCombatDamageStep) {
             Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+            if (creature == null || !filter.match(creature, getControllerId(), this, game)) {
                 return false;
             }
             // trigger only once per combat damage step

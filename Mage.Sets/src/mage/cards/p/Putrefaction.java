@@ -58,7 +58,7 @@ class PutrefactionTriggeredAbility extends SpellCastAllTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filterGreenOrWhiteSpell.match(spell, getSourceId(), getControllerId(), game)) {
+            if (spell != null && filterGreenOrWhiteSpell.match(spell, getControllerId(), this, game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

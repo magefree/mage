@@ -84,7 +84,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (!filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().setValue("permanentEnteringBattlefield", permanent);

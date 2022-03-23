@@ -30,7 +30,7 @@ public class SourceTargetsPermanentCondition implements Condition {
         Iterator<Target> targets = sourceSpell.getStackAbility().getTargets().iterator();
         while (targets.hasNext()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(targets.next().getFirstTarget());
-            if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (filter.match(permanent, source.getControllerId(), source, game)) {
                 return true;
             }
         }

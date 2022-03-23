@@ -91,7 +91,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
                 && game.isActivePlayer(source.getControllerId())
                 && !EsixFractalBloomWatcher.checkPlayer(source.getControllerId(), game)
                 && game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ) > 0;
     }
 
@@ -102,7 +102,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

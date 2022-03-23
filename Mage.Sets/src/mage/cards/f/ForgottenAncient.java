@@ -97,11 +97,11 @@ public final class ForgottenAncient extends CardImpl {
 
             do {
                 Target target = new TargetCreaturePermanent(1, 1, filter, true);
-                if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                if (!target.canChoose(controller.getId(), source, game)) {
                     break;
                 }
 
-                if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), game)) {
+                if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), source, game)) {
                     break;
                 }
 

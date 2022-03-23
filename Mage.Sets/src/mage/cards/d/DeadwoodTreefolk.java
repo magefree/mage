@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -28,7 +28,7 @@ public final class DeadwoodTreefolk extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public DeadwoodTreefolk(UUID ownerId, CardSetInfo setInfo) {

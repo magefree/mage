@@ -83,7 +83,7 @@ class CurseOfLeechesEffect extends ReplacementEffectImpl {
         }
         TargetPlayer target = new TargetPlayer();
         target.withChooseHint("Player to attach to").setNotTarget(true);
-        controller.choose(Outcome.Detriment, target, source.getSourceId(), game);
+        controller.choose(Outcome.Detriment, target, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;

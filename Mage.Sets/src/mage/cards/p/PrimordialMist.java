@@ -83,14 +83,14 @@ class PrimordialMistCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (target.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
                 Card card = game.getCard(source.getSourceId());
                 if (card != null) {
                     Permanent sourcePermanent = game.getPermanent(source.getSourceId());

@@ -88,7 +88,7 @@ class DwarvenShrineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 0;
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             Spell spell = (Spell) game.getState().getValue("dwarvenShrine" + mageObject);
             if (spell != null) {

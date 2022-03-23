@@ -35,7 +35,7 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "{this} doesn't untap (" + mageObject.getLogName() + ')';
         }

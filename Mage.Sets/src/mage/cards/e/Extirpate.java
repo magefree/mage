@@ -79,7 +79,7 @@ class ExtirpateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card chosenCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (chosenCard != null && sourceObject != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());

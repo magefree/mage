@@ -106,7 +106,7 @@ public class BecomesColorAllEffect extends ContinuousEffectImpl {
             return false;
         }
         if (setColor != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent != null) {
                     switch (layer) {
                         case ColorChangingEffects_5:

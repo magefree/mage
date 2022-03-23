@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -9,13 +8,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Martyrdom extends CardImpl {
@@ -78,7 +72,6 @@ class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
 
 class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private UUID caster;
 
     public MartyrdomActivatedAbility(UUID caster) {
@@ -94,15 +87,14 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (playerId.equals(caster)) {
-            Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
-            if (permanent != null) {
-                if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
-                    return super.canActivate(playerId, game);
-                }
-            }
+        if (!playerId.equals(caster)) {
+            return ActivationStatus.getFalse();
         }
-        return ActivationStatus.getFalse();
+        Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
+        if (permanent == null || !permanent.isCreature(game)) {
+            return ActivationStatus.getFalse();
+        }
+        return super.canActivate(playerId, game);
     }
 
     @Override
@@ -138,7 +130,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
                         TargetAnyTarget target = new TargetAnyTarget();

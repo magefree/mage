@@ -64,7 +64,7 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Map<Character, Integer> initialCount = new HashMap<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), getControllerId(), getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), getControllerId(), this, game)) {
             Character initial = permanent.getName().charAt(0);
             initialCount.putIfAbsent(initial, 0);
             initialCount.put(initial, initialCount.get(initial) + 1);

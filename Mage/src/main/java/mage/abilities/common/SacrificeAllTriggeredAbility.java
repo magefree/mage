@@ -58,7 +58,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
                 break;
         }
         Permanent sacrificedPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return sacrificed && filter.match(sacrificedPermanent, getSourceId(), getControllerId(), game);
+        return sacrificed && filter.match(sacrificedPermanent, getControllerId(), this, game);
     }
 
     @Override

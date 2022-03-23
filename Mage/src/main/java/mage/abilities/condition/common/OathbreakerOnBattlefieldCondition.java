@@ -63,7 +63,7 @@ public class OathbreakerOnBattlefieldCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         // source.getSourceId() is null for commander's effects
-        int permanentsOnBattlefield = game.getBattlefield().count(this.filter, source.getSourceId(), playerId, game);
+        int permanentsOnBattlefield = game.getBattlefield().count(this.filter, playerId, source, game);
         return permanentsOnBattlefield > 0;
     }
 

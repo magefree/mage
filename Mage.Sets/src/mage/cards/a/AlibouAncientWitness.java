@@ -91,7 +91,7 @@ class AlibouAncientWitnessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int xValue = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (xValue < 1) {
             return false;
         }

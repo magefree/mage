@@ -69,7 +69,7 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
             return player.moveCards(cards, Zone.HAND, source, game);
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
-        if (!player.choose(outcome, targetOpponent, source.getSourceId(), game)) {
+        if (!player.choose(outcome, targetOpponent, source, game)) {
             return false;
         }
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());

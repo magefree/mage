@@ -99,7 +99,7 @@ class VampireSocialiteReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (OpponentsLostLifeCondition.instance.apply(game, source)) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            return permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+            return permanent != null && filter.match(permanent, source.getControllerId(), source, game);
         }
         return false;
     }

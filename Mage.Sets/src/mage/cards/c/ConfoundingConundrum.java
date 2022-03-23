@@ -106,10 +106,10 @@ class ConfoundingConundrumEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetPermanent(1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

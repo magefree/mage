@@ -88,7 +88,7 @@ class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
             int maxPower = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent.getPower().getValue() > maxPower) {
                     maxPower = permanent.getPower().getValue();
                 }
@@ -102,11 +102,11 @@ class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         int maxPower = 0;
-        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game);
+        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         if(targetSource == null){
             return possibleTargets;
         }
@@ -126,8 +126,8 @@ class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return !possibleTargets(sourceId, sourceControllerId, game).isEmpty();
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return !possibleTargets(sourceControllerId, source, game).isEmpty();
     }
 
     @Override

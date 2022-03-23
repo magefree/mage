@@ -72,7 +72,7 @@ class PowderKegEffect extends OneShotEffect {
         FilterPermanent filter = new FilterPermanent();
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             perm.destroy(source, game, false);
         }
         return true;

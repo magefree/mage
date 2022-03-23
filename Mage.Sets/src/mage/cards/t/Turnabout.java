@@ -98,7 +98,7 @@ class TurnaboutEffect extends OneShotEffect {
                 "Tap", "Untap", source, game
         );
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getFirstTarget(), source.getSourceId(), game
+                filter, source.getFirstTarget(), source, game
         )) {
             if (tap) {
                 permanent.tap(source, game);

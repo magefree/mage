@@ -73,7 +73,7 @@ class MirrorOfFateEffect extends OneShotEffect {
         // Choose up to seven face-up exiled cards you own
         CardsImpl cards = new CardsImpl();
         MirrorOfFateTarget targetExile = new MirrorOfFateTarget();
-        if (controller.choose(outcome, targetExile, source.getSourceId(), game)) {
+        if (controller.choose(outcome, targetExile, source, game)) {
             cards.addAll(targetExile.getTargets());
         }
         // Exile all the cards from your library

@@ -16,7 +16,6 @@ import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -130,8 +129,8 @@ class BreathOfFuryEffect extends OneShotEffect {
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
                 && enchantedCreature.sacrifice(source, game)
-                && target.canChoose(source.getSourceId(), controller.getId(), game)) {
-            controller.choose(outcome, target, source.getSourceId(), game);
+                && target.canChoose(controller.getId(), source, game)) {
+            controller.choose(outcome, target, source, game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
             boolean success = false;
             if (newCreature != null) {

@@ -87,7 +87,7 @@ class RescuerSphinxEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(0, 1, filter, true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());

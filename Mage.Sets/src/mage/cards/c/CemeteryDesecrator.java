@@ -88,7 +88,7 @@ class CemeteryDesecratorEffect extends OneShotEffect {
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 int manaValue = card.getManaValue();

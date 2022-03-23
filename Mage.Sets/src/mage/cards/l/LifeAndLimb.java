@@ -67,7 +67,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.addCardType(game, CardType.CREATURE);

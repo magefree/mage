@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
@@ -125,7 +124,7 @@ class GripOfChaosEffect extends OneShotEffect {
                 Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     UUID oldTargetId = target.getFirstTarget();
-                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game);
+                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getControllerId(), source, game);
                     if (possibleTargets.contains(stackObject.getId())) { // The stackObject can't target itself
                         possibleTargets.remove(stackObject.getId());
                     }
