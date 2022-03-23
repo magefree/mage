@@ -41,7 +41,7 @@ public final class ElephantGrass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filterBlack)));
 
         // Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{2"), false, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{2}"), false, filter)));
     }
 
     private ElephantGrass(final ElephantGrass card) {

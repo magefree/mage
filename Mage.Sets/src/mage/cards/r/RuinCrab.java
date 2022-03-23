@@ -17,7 +17,7 @@ import mage.constants.TargetController;
 public final class RuinCrab extends CardImpl {
 
     public RuinCrab(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "U");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(0);

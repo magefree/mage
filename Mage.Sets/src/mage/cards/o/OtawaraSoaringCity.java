@@ -46,7 +46,7 @@ public final class OtawaraSoaringCity extends CardImpl {
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each legendary creature you control"));
         ability.addTarget(new TargetPermanent(filter));
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private OtawaraSoaringCity(final OtawaraSoaringCity card) {

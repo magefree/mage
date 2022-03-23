@@ -50,7 +50,7 @@ public final class Imprison extends CardImpl {
         this.addAbility(new ImprisonTriggeredAbility());
         
         // Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.
-        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl("1")), AttachmentType.AURA));
+        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")), AttachmentType.AURA));
     }
 
     private Imprison(final Imprison card) {
@@ -66,7 +66,7 @@ public final class Imprison extends CardImpl {
 class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
     ImprisonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl("1")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {

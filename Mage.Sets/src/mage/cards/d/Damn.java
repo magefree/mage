@@ -31,7 +31,7 @@ public final class Damn extends CardImpl {
         this.addAbility(new OverloadAbility(
                 this,
                 new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true),
-                new ManaCostsImpl<>("{2}{W}{W")
+                new ManaCostsImpl<>("{2}{W}{W}")
         ));
     }
 

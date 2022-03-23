@@ -77,9 +77,11 @@ public class ConjureCardEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("conjure ");
         sb.append(CardUtil.numberToText(amount, "a"));
         sb.append(' ');
-        sb.append(cardName);
         sb.append("card");
         sb.append(amount > 1 ? "s " : " ");
+        sb.append("named ");
+        sb.append(cardName);
+        sb.append(' ');
         switch (zone) {
             case HAND:
             case GRAVEYARD:
@@ -88,7 +90,8 @@ public class ConjureCardEffect extends OneShotEffect {
             case BATTLEFIELD:
                 sb.append("onto the");
         }
-        sb.append(zone);
+        sb.append(' ');
+        sb.append(zone.toString().toLowerCase());
         return sb.toString();
     }
 }

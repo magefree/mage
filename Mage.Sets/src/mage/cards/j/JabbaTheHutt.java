@@ -58,7 +58,7 @@ public final class JabbaTheHutt extends CardImpl {
         this.addAbility(ability);
 
         // {R},{T}: Create a tapped 4/4 red Hunter creature token. It fights another target creature an opponent control with a bounty counter on it. Activate this ability only any time you could cast a sorcery.
-        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new JabbaTheHuttEffect(), new ManaCostsImpl("R"));
+        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new JabbaTheHuttEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentsCreaturePermanent(filter));
         this.addAbility(ability);

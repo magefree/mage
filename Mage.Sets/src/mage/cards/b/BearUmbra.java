@@ -40,6 +40,7 @@ public final class BearUmbra extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(new AttacksTriggeredAbility(
                 new UntapAllLandsControllerEffect(), false
         ), AttachmentType.AURA).setText("and has \"Whenever this creature attacks, untap all lands you control.\""));
+        this.addAbility(ability);
 
         // Totem armor
         this.addAbility(new TotemArmorAbility());

@@ -79,7 +79,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
             return ability.getRule();
         }
         return (abilityWord != null ? abilityWord.formatWord() : "") + abilityText +
-                (abilityText.endsWith(".") || abilityText.endsWith("\"") ? "" : ".");
+                (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : ".");
     }
 
     @Override
