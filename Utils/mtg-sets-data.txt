@@ -40,6 +40,7 @@ Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
 Commander 2021 Edition|C21|
 Commander Legends|CMR|
+Commander Legends: Battle for Baldur's Gate|CLB|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
