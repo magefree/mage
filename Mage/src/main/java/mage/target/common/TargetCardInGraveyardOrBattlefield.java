@@ -54,7 +54,7 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
         if (!super.canTarget(id, source, game)) { // in graveyard first
             Permanent permanent = game.getPermanent(id);
             if (permanent != null) {
-                return filterBattlefield.match(permanent, game);
+                return filterBattlefield.match(permanent, source.getControllerId(), source, game);
             }
         }
         return true;

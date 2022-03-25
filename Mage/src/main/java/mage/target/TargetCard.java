@@ -239,7 +239,7 @@ public class TargetCard extends TargetObject {
         Card card = game.getCard(id);
         return card != null
                 && zone != null && zone.match(game.getState().getZone(id))
-                && getFilter() != null && getFilter().match(card, playerId, game);
+                && getFilter() != null && getFilter().match(card, playerId, source, game);
     }
 
     public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
