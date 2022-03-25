@@ -115,7 +115,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
-                return event.getSourceId().equals(getSourceId());
+                return event.getTargetId().equals(getSourceId());
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 return zEvent.isDiesEvent()
