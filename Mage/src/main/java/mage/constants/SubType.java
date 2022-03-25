@@ -436,6 +436,7 @@ public enum SubType {
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
+    MINSC("Minsc", SubTypeSet.PlaneswalkerType),
     MORDENKAINEN("Mordenkainen", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
