@@ -128,7 +128,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 break;
         }
         game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
-        return true;
+        return false;
     }
 
     @Override
