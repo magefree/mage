@@ -61,7 +61,7 @@ public class TargetCardInHand extends TargetCard {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                if (source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
+                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets.add(card.getId());
                 }
             }
@@ -75,7 +75,7 @@ public class TargetCardInHand extends TargetCard {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                if (source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
+                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
                         return true;

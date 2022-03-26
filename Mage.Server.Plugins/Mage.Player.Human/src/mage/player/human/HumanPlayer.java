@@ -535,7 +535,7 @@ public class HumanPlayer extends PlayerImpl {
             updateGameStatePriority("choose(5)", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source.getSourceId(), game)), targetIds, required, getOptions(target, options));
+                game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), targetIds, required, getOptions(target, options));
             }
             waitForResponse(game);
 
