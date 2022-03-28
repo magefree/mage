@@ -1225,7 +1225,7 @@ public final class CardUtil {
         cards.removeIf(Objects::isNull);
         cards.removeIf(card -> !filter.match(card, playerId, source, game));
         if (spellCastTracker != null) {
-            cards.removeIf(card -> spellCastTracker.checkCard(card, game));
+            cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
         }
         return cards;
     }
