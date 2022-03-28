@@ -73,7 +73,7 @@ class BondOfInsightEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, true
         );
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         Cards cards = new CardsImpl(target.getTargets());

@@ -430,7 +430,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
                 game.informPlayers(sb.toString());
                 if (target != null) {
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         target.chooseTarget(outcome, controller.getId(), source, game);
                     } else {
                         // 1/19/2018 	(...) If the ability that comes up requires a target and there are no legal targets available, click again until that’s not true.
@@ -485,7 +485,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
@@ -558,7 +558,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

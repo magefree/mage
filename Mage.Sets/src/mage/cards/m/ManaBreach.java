@@ -61,13 +61,13 @@ class ManaBreachEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), player.getId(), game
+                player.getId(), source, game
         ) < 1) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(game.getPermanent(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

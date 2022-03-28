@@ -53,7 +53,7 @@ class WaveOfReckoningDamageEffect extends OneShotEffect {
             FilterPermanent filter = new FilterPermanent();
             filter.add(CardType.CREATURE.getPredicate());
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 int amount = permanent.getPower().getValue();
                 permanent.damage(amount, permanent.getId(), source, game, false, true);
             }

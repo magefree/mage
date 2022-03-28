@@ -106,7 +106,7 @@ enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Object obj = game.getState().getValue(input.getSourceId() + "" + game.getState().getZoneChangeCounter(input.getSourceId()) + "_haktos_number");
+        Object obj = game.getState().getValue(input.getSourceId() + "" + input.getSource().getSourceObjectZoneChangeCounter() + "_haktos_number");
         if (!(obj instanceof Integer)) {
             return false;
         }

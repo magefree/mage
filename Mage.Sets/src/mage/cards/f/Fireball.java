@@ -123,7 +123,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
         }
 
         for (int numberTargets = 1; numberTargets == 1 || xVal / (numberTargets - 1) > 1; numberTargets++) {
-            Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+            Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
             // less possible targets than we're trying to set
             if (possibleTargets.size() < numberTargets) {
                 return options;

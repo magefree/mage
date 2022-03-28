@@ -70,7 +70,7 @@ class NightmareIncursionEffect extends OneShotEffect {
         if (controller == null || targetPlayer == null) {
             return false;
         }
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD);
         if (controller.searchLibrary(target, source, game, targetPlayer.getId())) {
             Cards cards = new CardsImpl(target.getTargets());

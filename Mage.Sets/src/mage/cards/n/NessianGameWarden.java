@@ -87,7 +87,7 @@ class NessianGameWardenEffect extends OneShotEffect {
 
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put into your hand"));
-            if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.choose(Outcome.DrawCard, cards, target, game)) {
+            if (target.canChoose(controller.getId(), source, game) && controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);

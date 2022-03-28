@@ -72,7 +72,7 @@ class HellcarverDemonEffect extends OneShotEffect {
         MageObjectReference sourceMor = new MageObjectReference(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (!sourceMor.refersTo(permanent, game)) {
                 permanent.sacrifice(source, game);

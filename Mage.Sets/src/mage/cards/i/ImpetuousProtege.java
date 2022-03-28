@@ -77,7 +77,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxPower = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             maxPower = Math.max(maxPower, creature.getPower().getValue());
         }
         game.addEffect(new BoostSourceEffect(maxPower, 0, Duration.EndOfTurn), source);

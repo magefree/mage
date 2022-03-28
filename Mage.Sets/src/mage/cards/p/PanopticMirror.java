@@ -80,7 +80,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PlayForFree, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PlayForFree, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source, game);

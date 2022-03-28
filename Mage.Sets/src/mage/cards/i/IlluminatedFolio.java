@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -68,14 +67,14 @@ class IlluminatedFolioTarget extends TargetCardInHand {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return super.canChoose(sourceId, sourceControllerId, game)
-                && !possibleTargets(sourceId,sourceControllerId, game).isEmpty();
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return super.canChoose(sourceControllerId, source, game)
+                && !possibleTargets(sourceControllerId, source, game).isEmpty();
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId,sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         if (this.getTargets().size() == 1) {
             Card card = game.getCard(this.getTargets().get(0));
             possibleTargets.removeIf(

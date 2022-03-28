@@ -78,7 +78,7 @@ class SerrasEmissaryEffect extends ContinuousEffectImpl {
             controller.addAbility(ability);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(
                     StaticFilters.FILTER_CONTROLLED_CREATURE,
-                    source.getControllerId(), source.getSourceId(), game
+                    source.getControllerId(), source, game
             )) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }

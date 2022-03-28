@@ -51,7 +51,7 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+        if (filter.match(permanent, source.getControllerId(), source, game)) {
             if (eachCombat) {
                 return true;
             }

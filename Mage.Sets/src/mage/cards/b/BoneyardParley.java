@@ -79,7 +79,7 @@ class BoneyardParleyEffect extends OneShotEffect {
             }
             if (!cards.isEmpty() && player.moveCards(cards, Zone.EXILED, source, game)) {
                 TargetOpponent targetOpponent = new TargetOpponent(true);
-                if (player.choose(Outcome.Neutral, targetOpponent, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Neutral, targetOpponent, source, game)) {
                     Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                     if (opponent != null) {
                         TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));

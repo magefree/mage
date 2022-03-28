@@ -37,7 +37,7 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> permanentsToHand = new HashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 permanentsToHand.add(permanent);
             }
             controller.moveCards(permanentsToHand, Zone.HAND, source, game);

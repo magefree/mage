@@ -85,7 +85,7 @@ class DecreeOfAnnihilationEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             cards.add(permanent);
         }

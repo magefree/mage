@@ -966,7 +966,7 @@ public abstract class AbilityImpl implements Ability {
                 if (target.getTargetController() != null) {
                     abilityControllerId = target.getTargetController();
                 }
-                if (!target.canChoose(ability.getSourceId(), abilityControllerId, game)) {
+                if (!target.canChoose(abilityControllerId, ability, game)) {
                     validTargets = false;
                     break;
                 }

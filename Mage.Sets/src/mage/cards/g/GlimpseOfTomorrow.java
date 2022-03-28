@@ -77,7 +77,7 @@ class GlimpseOfTomorrowEffect extends OneShotEffect {
             return false;
         }
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         );
         int count = permanents.size();
         player.shuffleCardsToLibrary(new CardsImpl(permanents), game, source);

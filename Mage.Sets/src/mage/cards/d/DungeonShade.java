@@ -31,7 +31,7 @@ public final class DungeonShade extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {B}: Dungeon Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("B")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private DungeonShade(final DungeonShade card) {

@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,17 +9,19 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponent;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author spjspj
@@ -35,17 +36,15 @@ public final class KarnScionOfUrza extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +1: Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new KarnPlus1Effect(), 1);
-        this.addAbility(ability1);
+        this.addAbility(new LoyaltyAbility(new KarnPlus1Effect(), 1));
 
         // -1: Put a card you own with a silver counter on it from exile into your hand.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new KarnMinus1Effect(), -1);
-        this.addAbility(ability2);
+        this.addAbility(new LoyaltyAbility(new KarnMinus1Effect(), -1));
 
         // -2: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
-        LoyaltyAbility ability3 = new LoyaltyAbility(new CreateTokenEffect(new KarnConstructToken(), 1), -2);
-        ability3.addHint(ArtifactYouControlHint.instance);
-        this.addAbility(ability3);
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(
+                new KarnConstructToken(), 1
+        ), -2).addHint(ArtifactYouControlHint.instance));
     }
 
     private KarnScionOfUrza(final KarnScionOfUrza card) {
@@ -78,44 +77,47 @@ class KarnPlus1Effect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject == null || controller == null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 2));
-
         if (cards.isEmpty()) {
             return true;
         }
-        controller.revealCards(staticText, cards, game);
+        controller.revealCards(source, cards, game);
         Card cardToHand;
-        if (cards.size() == 1) {
-            cardToHand = cards.getRandom(game);
-        } else {
-            Player opponent;
-            Set<UUID> opponents = game.getOpponents(controller.getId());
-            if (opponents.size() == 1) {
-                opponent = game.getPlayer(opponents.iterator().next());
-            } else {
-                Target target = new TargetOpponent(true);
-                controller.chooseTarget(Outcome.Detriment, target, source, game);
-                opponent = game.getPlayer(target.getFirstTarget());
-            }
-            TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
-            opponent.chooseTarget(outcome, cards, target, source, game);
-            cardToHand = game.getCard(target.getFirstTarget());
+        switch (cards.size()) {
+            case 0:
+                return false;
+            case 1:
+                cardToHand = cards.getRandom(game);
+                break;
+            default:
+                Player opponent;
+                Set<UUID> opponents = game.getOpponents(controller.getId());
+                if (opponents.size() == 1) {
+                    opponent = game.getPlayer(opponents.iterator().next());
+                } else {
+                    Target target = new TargetOpponent(true);
+                    controller.chooseTarget(Outcome.Detriment, target, source, game);
+                    opponent = game.getPlayer(target.getFirstTarget());
+                }
+                TargetCard target = new TargetCard(1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
+                opponent.chooseTarget(outcome, cards, target, source, game);
+                cardToHand = game.getCard(target.getFirstTarget());
         }
         if (cardToHand != null) {
             controller.moveCards(cardToHand, Zone.HAND, source, game);
-            cards.remove(cardToHand);
         }
 
-        if (!cards.isEmpty()) {
-            controller.moveCards(cards, Zone.EXILED, source, game);
-            for (Card c : cards.getCards(game)) {
-                c.addCounters(CounterType.SILVER.createInstance(1), source.getControllerId(), source, game);
-            }
+        cards.retainZone(Zone.LIBRARY, game);
+        if (cards.isEmpty()) {
+            return true;
         }
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        cards.getCards(game)
+                .stream()
+                .forEach(card -> card.addCounters(CounterType.SILVER.createInstance(1), source, game));
         return true;
     }
 }
@@ -148,38 +150,29 @@ class KarnMinus1Effect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ExileZone exZone = game.getExile().getPermanentExile(); // getExileZone(Zone.EXILED);
-        if (exZone == null) {
-            return true;
-        }
-        Card card = null;
-
-        List<Card> exile = game.getExile().getAllCards(game);
-        boolean noTargets = exile.isEmpty();
-        if (noTargets) {
-            game.informPlayer(controller, "You have no exiled cards.");
-            return true;
-        }
-
-        Cards filteredCards = new CardsImpl();
-
-        for (Card exileCard : exile) {
-            if (exileCard.isOwnedBy(source.getControllerId()) && filter.match(exileCard, game)) {
-                filteredCards.add(exileCard);
-            }
-        }
-
-        TargetCard target = new TargetCard(Zone.EXILED, filter);
-        target.setNotTarget(true);
-        if (!controller.choose(Outcome.Benefit, filteredCards, target, game)) {
-            return true;
+        Cards cards = new CardsImpl(game
+                .getExile()
+                .getCards(filter, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> card.isOwnedBy(source.getControllerId()))
+                .collect(Collectors.toList()));
+        Card card;
+        switch (cards.size()) {
+            case 0:
+                return false;
+            case 1:
+                card = cards.getRandom(game);
+                break;
+            default:
+                TargetCard target = new TargetCardInExile(filter);
+                target.setNotTarget(true);
+                controller.choose(outcome, target, source, game);
+                card = cards.get(target.getFirstTarget(), game);
         }
         if (card == null) {
-            card = game.getCard(target.getFirstTarget());
+            return false;
         }
-        if (card != null) {
-            controller.moveCards(card, Zone.HAND, source, game);
-        }
-        return true;
+        return card != null && controller.moveCards(card, Zone.HAND, source, game);
     }
 }

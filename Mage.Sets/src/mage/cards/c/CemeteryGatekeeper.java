@@ -83,7 +83,7 @@ class CemeteryGatekeeperEffect extends OneShotEffect {
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard();
             target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());

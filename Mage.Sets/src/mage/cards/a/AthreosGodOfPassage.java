@@ -144,7 +144,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         if (!zEvent.isDiesEvent()) {
             return false;
         }
-        if (zEvent.getTarget() == null || !filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+        if (zEvent.getTarget() == null || !filter.match(zEvent.getTarget(), controllerId, this, game)) {
             return false;
         }
         for (Effect effect : this.getEffects()) {

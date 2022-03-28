@@ -102,7 +102,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         ).stream().filter(Objects::nonNull).forEach(cards::add);
         return player.moveCardsToExile(
                 cards.getCards(game), source, game, true,

@@ -112,7 +112,7 @@ public final class StarfieldOfNyx extends CardImpl {
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter,
-                    source.getControllerId(), source.getSourceId(), game)) {
+                    source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {

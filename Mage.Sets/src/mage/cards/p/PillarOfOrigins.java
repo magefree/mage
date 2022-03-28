@@ -55,7 +55,7 @@ class PillarOfOriginsManaBuilder extends ConditionalManaBuilder {
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
         creatureType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spent to cast creatures of type " + creatureType + ")");
@@ -96,7 +96,7 @@ class PillarOfOriginsManaCondition extends CreatureCastManaCondition {
         // check: ... to cast a creature spell
         if (super.apply(game, source)) {
             // check: ... of the chosen type
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if (creatureType != null && object != null && object.hasSubtype(creatureType, game)) {
                 return true;
             }

@@ -106,7 +106,7 @@ class InfernalHarvestAdditionalCost extends VariableCostImpl {
                 return false;
             }
             Player player = game.getPlayer(controllerId);
-            if (player == null || !targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
+            if (player == null || !targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
                 return false;
             }
             return paid = player.moveCards(

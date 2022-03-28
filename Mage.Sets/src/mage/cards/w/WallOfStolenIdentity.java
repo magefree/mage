@@ -94,10 +94,10 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
             target.setRequired(false);
             target.setNotTarget(true);
         }
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+        controller.choose(Outcome.Copy, target, source, game);
         Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
         if (copyFromPermanent == null) {
             return false;

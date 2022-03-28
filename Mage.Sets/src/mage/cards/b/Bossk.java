@@ -70,7 +70,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().count(new FilterControlledLandPermanent(), getSourceId(), getControllerId(), game) > 4;
+        return game.getBattlefield().count(new FilterControlledLandPermanent(), getControllerId(), this, game) > 4;
     }
 
     @Override

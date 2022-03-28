@@ -68,7 +68,7 @@ class DiscipleOfBolasEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true);
             target.setRequired(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
                 controller.chooseTarget(outcome, target, source, game);
                 Permanent sacrificed = game.getPermanent(target.getFirstTarget());
                 if (sacrificed != null) {

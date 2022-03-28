@@ -75,7 +75,7 @@ class TransmuteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             FilterCard filter = new FilterCard("card with mana value " + sourceObject.getManaValue());
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, sourceObject.getManaValue()));

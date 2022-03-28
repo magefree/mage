@@ -70,7 +70,7 @@ class ConsumingTideEffect extends OneShotEffect {
             if (player != null) {
                 TargetNonlandPermanent target = new TargetNonlandPermanent();
                 target.setNotTarget(true);
-                player.choose(Outcome.Benefit, target, source.getSourceId(), game);
+                player.choose(Outcome.Benefit, target, source, game);
                 UUID permId = target.getFirstTarget();
                 if (permId != null) {
                     chosenPermanents.add(permId);
@@ -78,7 +78,7 @@ class ConsumingTideEffect extends OneShotEffect {
             }
         }
         HashSet<Card> permanentsToHand = new HashSet<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, controller.getId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, controller.getId(), source, game)) {
             if (!chosenPermanents.contains(permanent.getId())) {
                 permanentsToHand.add(permanent);
             }

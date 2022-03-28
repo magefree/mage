@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -28,7 +29,7 @@ public interface Cards extends Set<UUID>, Serializable {
 
     Set<Card> getCards(FilterCard filter, Game game);
 
-    Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game);
+    Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game);
 
     String getValue(Game game);
 
@@ -40,7 +41,7 @@ public interface Cards extends Set<UUID>, Serializable {
 
     int count(FilterCard filter, UUID playerId, Game game);
 
-    int count(FilterCard filter, UUID sourceId, UUID playerId, Game game);
+    int count(FilterCard filter, UUID playerId, Ability source, Game game);
 
     Cards copy();
 

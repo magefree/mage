@@ -108,7 +108,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (perm.shareCreatureTypes(game, equipedCreature)) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));
@@ -148,7 +148,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (equipedCreature.getColor(game).shares(perm.getColor(game))) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));

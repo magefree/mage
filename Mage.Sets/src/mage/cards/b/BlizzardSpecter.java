@@ -79,7 +79,7 @@ class ReturnToHandEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
-        if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
+        if (target.canChoose(targetPlayer.getId(), source, game)) {
             targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

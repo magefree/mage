@@ -77,8 +77,8 @@ class HitEffect extends OneShotEffect {
                     CardType.CREATURE.getPredicate()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
-                targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            if (target.canChoose(targetPlayer.getId(), source, game)) {
+                targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);
@@ -113,7 +113,7 @@ class RunEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int attackingCreatures = game.getBattlefield().count(new FilterAttackingCreature(), controller.getId(), controller.getId(), game);
+            int attackingCreatures = game.getBattlefield().count(new FilterAttackingCreature(), controller.getId(), source, game);
             if (attackingCreatures > 1) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterAttackingCreature(), controller.getId(), game)) {
                     ContinuousEffect effect = new BoostTargetEffect(attackingCreatures - 1, 0, Duration.EndOfTurn);

@@ -64,7 +64,7 @@ class GatherThePackEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
-            int creatures = cards.count(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source.getControllerId(), game);
+            int creatures = cards.count(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source, game);
             if (creatures > 0) {
                 int max = 1;
                 if (SpellMasteryCondition.instance.apply(game, source) && creatures > 1) {

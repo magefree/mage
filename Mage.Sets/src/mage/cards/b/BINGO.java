@@ -83,7 +83,7 @@ class BingoEffect extends OneShotEffect {
             if (spell.getManaValue() > 9) {
                 return true;
             }
-            MageObject mageObject = game.getObject(source.getSourceId());
+            MageObject mageObject = game.getObject(source);
             if (mageObject != null) {
                 Map<Integer, Integer> chipCounters = new HashMap<>(); // Map<number, amount of counters>
                 if (game.getState().getValue(mageObject.getId() + "_chip") != null) {

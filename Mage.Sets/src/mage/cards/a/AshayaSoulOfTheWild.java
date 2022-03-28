@@ -77,7 +77,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             if (!permanent.isLand(game)) {
                 permanent.addCardType(game, CardType.LAND);

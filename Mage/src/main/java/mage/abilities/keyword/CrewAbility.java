@@ -163,7 +163,7 @@ class CrewCost extends CostImpl {
         };
 
         // can cancel
-        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
+        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
             int sumPower = 0;
             for (UUID targetId : target.getTargets()) {
                 GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, targetId, source, controllerId);

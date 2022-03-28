@@ -81,7 +81,7 @@ class BlizzardBrawlEffect extends OneShotEffect {
         if (creature1 == null) {
             return false;
         }
-        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) >= 3) {
+        if (game.getBattlefield().count(filter, source.getControllerId(), source, game) >= 3) {
             game.addEffect(new BoostTargetEffect(
                     1, 0, Duration.EndOfTurn
             ).setTargetPointer(new FixedTarget(creature1.getId(), game)), source);

@@ -94,8 +94,8 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
             Player opponent = null;
             Card cardOpponentGraveyard = null;
             chosenCreatureOpponentGraveyard.setNotTarget(true);
-            if (chosenCreatureOpponentGraveyard.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                controller.choose(Outcome.Detriment, chosenCreatureOpponentGraveyard, source.getSourceId(), game);
+            if (chosenCreatureOpponentGraveyard.canChoose(source.getControllerId(), source, game)) {
+                controller.choose(Outcome.Detriment, chosenCreatureOpponentGraveyard, source, game);
                 cardOpponentGraveyard = game.getCard(chosenCreatureOpponentGraveyard.getFirstTarget());
                 if (cardOpponentGraveyard != null) {
                     opponent = game.getPlayer(cardOpponentGraveyard.getOwnerId());
@@ -109,7 +109,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
             if (opponent == null) {
                 // if no card from opponent was available controller has to chose an opponent to select a creature card in controllers graveyard
                 TargetOpponent targetOpponent = new TargetOpponent(true);
-                controller.choose(outcome, targetOpponent, source.getSourceId(), game);
+                controller.choose(outcome, targetOpponent, source, game);
                 opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() 
@@ -126,8 +126,8 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                 TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filterCreatureCard);
                 targetControllerGaveyard.setNotTarget(true);
                 Card controllerCreatureCard = null;
-                if (targetControllerGaveyard.canChoose(source.getSourceId(), opponent.getId(), game)
-                        && opponent.choose(outcome, targetControllerGaveyard, source.getSourceId(), game)) {
+                if (targetControllerGaveyard.canChoose(opponent.getId(), source, game)
+                        && opponent.choose(outcome, targetControllerGaveyard, source, game)) {
                     controllerCreatureCard = game.getCard(targetControllerGaveyard.getFirstTarget());
                     if (controllerCreatureCard != null) {
                         game.informPlayers(sourceObject.getLogName() 

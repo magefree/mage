@@ -80,7 +80,7 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 for (Effect effect : this.getEffects()) {

@@ -68,7 +68,7 @@ class StolenStrategyEffect extends OneShotEffect {
             if (damagedPlayer == null) {
                 continue;
             }
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             Card card = damagedPlayer.getLibrary().getFromTop(game);
             if (card != null && sourceObject != null) {

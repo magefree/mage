@@ -156,7 +156,8 @@ public class Brawl extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Brawl Companion Invalid", true);
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
+                                String.format("Brawl companion illegal: %s", companionAbility.getLegalRule()), true);
                         valid = false;
                     }
                     break;

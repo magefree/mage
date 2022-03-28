@@ -85,7 +85,7 @@ class GerrardWeatherlightHeroEffect extends OneShotEffect {
             return false;
         }
         return player.moveCards(player.getGraveyard().getCards(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ), Zone.BATTLEFIELD, source, game);
     }
 }

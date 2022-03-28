@@ -89,7 +89,7 @@ class SacellumGodspeakerEffect extends ManaEffect {
     public Mana produceMana(Game game, Ability source) {
         if (game != null) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-            if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
+            if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
                 return Mana.GreenMana(target.getTargets().size());
             }
         }

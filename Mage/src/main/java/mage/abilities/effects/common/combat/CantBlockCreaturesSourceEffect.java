@@ -40,7 +40,7 @@ public class CantBlockCreaturesSourceEffect extends RestrictionEffect {
         if (attacker == null) {
             return true;
         }
-        return !filter.match(attacker, source.getSourceId(), source.getControllerId(), game);
+        return !filter.match(attacker, source.getControllerId(), source, game);
     }
 
     @Override

@@ -51,7 +51,7 @@ class ParaseleneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), source, game)) {
             if (permanent.destroy(source, game, false)) {
                 count++;
             }

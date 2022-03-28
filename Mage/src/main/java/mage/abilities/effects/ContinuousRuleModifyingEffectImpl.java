@@ -85,7 +85,7 @@ public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffect
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         if (infoMessage == null) {
             String message;
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             if (object != null) {
                 message = source.getRule(messageToUser ? object.getIdName() : object.getLogName());
             } else {

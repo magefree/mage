@@ -117,7 +117,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+            if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("permanentId", event.getTargetId());
                 }

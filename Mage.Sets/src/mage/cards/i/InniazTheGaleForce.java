@@ -107,8 +107,8 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         }
 
         private void chooseTargets(Player controller, Game game, Ability source) {
-            if (game.getBattlefield().count(this.filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                controller.choose(Outcome.Neutral, this.target, source.getSourceId(), game);
+            if (game.getBattlefield().count(this.filter, source.getControllerId(), source, game) > 0) {
+                controller.choose(Outcome.Neutral, this.target, source, game);
             }
         }
 

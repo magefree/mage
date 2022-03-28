@@ -118,7 +118,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cardsToExile = controller.getGraveyard().getCards(
-                    new FilterInstantOrSorceryCard(), source.getId(), source.getControllerId(), game);
+                    new FilterInstantOrSorceryCard(), source.getControllerId(), source, game);
             if (!cardsToExile.isEmpty()) {
                 if (controller.moveCards(cardsToExile, Zone.EXILED, source, game)) {
                     Cards copiedCards = new CardsImpl();

@@ -56,7 +56,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
                 if (!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
+                    if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
                         return true;
                     }
                 }

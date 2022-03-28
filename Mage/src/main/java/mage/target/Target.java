@@ -34,9 +34,9 @@ public interface Target extends Serializable {
     void setNotTarget(boolean notTarget);
 
     // methods for targets
-    boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
+    boolean canChoose(UUID sourceControllerId, Ability source, Game game);
 
-    Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
+    Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
@@ -70,7 +70,7 @@ public interface Target extends Serializable {
 
     Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
 
-    boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game);
+    boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
     void add(UUID id, Game game);
 

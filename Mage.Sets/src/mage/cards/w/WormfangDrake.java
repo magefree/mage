@@ -82,7 +82,7 @@ class WormfangDrakeExileCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
                 UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
@@ -98,7 +98,7 @@ class WormfangDrakeExileCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

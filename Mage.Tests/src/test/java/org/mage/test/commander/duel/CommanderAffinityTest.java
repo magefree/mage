@@ -91,7 +91,7 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
     public void test_Gained_Affinity() {
         // bug: Mycosynth Golem did not allow my commander, Karn, Silver Golem, to cost 0 even though I had 7+ artifacts on the board.
 
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl("R"));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl<>("{R}"));
         addCustomCardWithAbility("generate tokens", playerA, ability);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //

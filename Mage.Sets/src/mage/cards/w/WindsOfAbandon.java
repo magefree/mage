@@ -123,7 +123,7 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         }
         Map<UUID, Integer> playerMap = new HashMap<>();
         CardsImpl cards = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, source.getControllerId(), source, game)) {
             int count = playerMap.getOrDefault(permanent.getControllerId(), 0);
             playerMap.put(permanent.getControllerId(), count + 1);
             cards.add(permanent);

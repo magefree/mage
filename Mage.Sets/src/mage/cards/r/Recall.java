@@ -68,7 +68,7 @@ class RecallEffect extends OneShotEffect {
                 // then return a card from your graveyard to your hand for each card discarded this way
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(cardsDiscarded.size(), new FilterCard());
                 target.setNotTarget(true);
-                target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game);
+                target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), source, game);
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
 

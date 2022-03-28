@@ -89,7 +89,7 @@ class InscriptionOfAbundanceEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getFirstTarget(), source.getSourceId(), game
+                        source.getFirstTarget(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)

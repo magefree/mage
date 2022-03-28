@@ -72,7 +72,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (!filter.match(permanent, sourceId, controllerId, game)) {
+        if (!filter.match(permanent, controllerId, this, game)) {
             return false;
         }
 

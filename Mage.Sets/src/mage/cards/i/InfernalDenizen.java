@@ -108,15 +108,15 @@ class InfernalDenizenEffect extends OneShotEffect {
                     creature.tap(source, game);
                 }
                 TargetOpponent targetOpp = new TargetOpponent(true);
-                if (targetOpp.canChoose(source.getSourceId(), player.getId(), game)
-                        && targetOpp.choose(Outcome.Detriment, player.getId(), source.getSourceId(), game)) {
+                if (targetOpp.canChoose(player.getId(), source, game)
+                        && targetOpp.choose(Outcome.Detriment, player.getId(), source.getSourceId(), source, game)) {
                     Player opponent = game.getPlayer(targetOpp.getFirstTarget());
                     if (opponent != null) {
                         FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature controlled by " + player.getLogName());
                         filter2.add(new ControllerIdPredicate(player.getId()));
                         TargetCreaturePermanent targetCreature = new TargetCreaturePermanent(1, 1, filter2, true);
                         targetCreature.setTargetController(opponent.getId());
-                        if (targetCreature.canChoose(source.getSourceId(), id, game)
+                        if (targetCreature.canChoose(id, source, game)
                                 && opponent.chooseUse(Outcome.GainControl, "Gain control of a creature?", source, game)
                                 && opponent.chooseTarget(Outcome.GainControl, targetCreature, source, game)) {
                             ConditionalContinuousEffect giveEffect = new ConditionalContinuousEffect(

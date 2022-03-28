@@ -71,7 +71,7 @@ class CullingRitualEffect extends OneShotEffect {
         }
         int counter = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             counter += permanent.destroy(source, game, false) ? 1 : 0;
         }

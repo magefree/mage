@@ -100,7 +100,7 @@ class ArmoredSkyhunterEffect extends OneShotEffect {
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
         targetCard.setNotTarget(true);
-        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        player.choose(outcome, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         if (permanent != null) {
             permanent.addAttachment(equipment.getId(), source, game);

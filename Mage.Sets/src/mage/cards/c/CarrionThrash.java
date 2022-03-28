@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,11 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class CarrionThrash extends CardImpl {
@@ -25,7 +24,7 @@ public final class CarrionThrash extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public CarrionThrash(UUID ownerId, CardSetInfo setInfo) {

@@ -99,8 +99,8 @@ class TheFirstEruptionEffect extends OneShotEffect {
 
         Target target = new TargetControlledPermanent(1, 1, filter, false);
         boolean sacrificed = false;
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-            while (controller.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game)) {
+        if (target.canChoose(controller.getId(), source, game)) {
+            while (controller.canRespond() && !target.isChosen() && target.canChoose(controller.getId(), source, game)) {
                 controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 

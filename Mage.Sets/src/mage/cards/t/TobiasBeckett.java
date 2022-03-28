@@ -73,7 +73,7 @@ class TobiasBeckettEffect extends OneShotEffect {
             if (bountyTriggered != null) {
                 Player opponent = game.getPlayer(bountyTriggered.getControllerId());
                 if (opponent != null) {
-                    MageObject sourceObject = game.getObject(source.getSourceId());
+                    MageObject sourceObject = game.getObject(source);
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
                     Card card = opponent.getLibrary().getFromTop(game);
                     if (card != null && sourceObject != null) {

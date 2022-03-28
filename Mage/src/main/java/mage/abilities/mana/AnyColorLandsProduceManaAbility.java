@@ -155,7 +155,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             return types;
         }
         inManaTypeCalculation = true;
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         for (Permanent land : lands) {
             if (!land.getId().equals(source.getSourceId())) {
                 types.addAll(AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(land, game));

@@ -79,7 +79,7 @@ class GlowsporeShamanEffect extends OneShotEffect {
         }
         Target target = new TargetCardInYourGraveyard(0, 1, filter, true);
         if (player.chooseUse(outcome, "Put a land card on top of your library?", source, game)
-                && player.choose(outcome, target, source.getSourceId(), game)) {
+                && player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 return player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);

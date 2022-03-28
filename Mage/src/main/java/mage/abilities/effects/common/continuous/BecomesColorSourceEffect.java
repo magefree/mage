@@ -96,7 +96,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return false;
         }
         if (setColor != null) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (sourceObject != null) {
                 sourceObject.getColor(game).setColor(setColor);
             } else {

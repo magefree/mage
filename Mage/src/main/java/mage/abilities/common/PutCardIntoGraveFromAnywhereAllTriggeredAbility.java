@@ -82,7 +82,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
             return false;
         }
         Card card = game.getCard(event.getTargetId());
-        if (card == null || card.isCopy() || !filter.match(card, getSourceId(), getControllerId(), game)) {
+        if (card == null || card.isCopy() || !filter.match(card, getControllerId(), this, game)) {
             return false;
         }
         switch (setTargetPointer) {

@@ -95,7 +95,7 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("Aura or Equipment card that can be attached to " + permanent.getName());
         filter.add(new MantleOfTheAncientsPredicate(permanent));
         TargetCard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.isEmpty()) {
             return false;

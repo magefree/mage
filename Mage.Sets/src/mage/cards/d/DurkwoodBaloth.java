@@ -24,7 +24,7 @@ public final class DurkwoodBaloth extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Suspend 5-{G}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{G"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{G}"), this));
     }
 
     private DurkwoodBaloth(final DurkwoodBaloth card) {

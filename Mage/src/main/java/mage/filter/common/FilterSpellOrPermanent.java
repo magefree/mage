@@ -1,6 +1,7 @@
 package mage.filter.common;
 
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -51,11 +52,11 @@ public class FilterSpellOrPermanent extends FilterImpl<MageObject> implements Fi
     }
 
     @Override
-    public boolean match(MageObject o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageObject o, UUID playerId, Ability source, Game game) {
         if (o instanceof Spell) {
-            return spellFilter.match((Spell) o, sourceId, playerId, game);
+            return spellFilter.match((Spell) o, playerId, source, game);
         } else if (o instanceof Permanent) {
-            return permanentFilter.match((Permanent) o, sourceId, playerId, game);
+            return permanentFilter.match((Permanent) o, playerId, source, game);
         }
         return false;
     }

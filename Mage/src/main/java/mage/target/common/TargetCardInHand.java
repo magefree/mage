@@ -5,7 +5,6 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -57,12 +56,12 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
-                if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+            for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
+                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets.add(card.getId());
                 }
             }
@@ -71,12 +70,12 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int possibleTargets = 0;
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
-                if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+            for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
+                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
                         return true;

@@ -65,8 +65,8 @@ class BodyDoubleCopyEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                player.choose(outcome, target, source.getSourceId(), game);
+            if (target.canChoose(source.getControllerId(), source, game)) {
+                player.choose(outcome, target, source, game);
                 Card copyFromCard = game.getCard(target.getFirstTarget());
                 if (copyFromCard != null) {
                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, copyFromCard, source.getSourceId());

@@ -33,6 +33,7 @@ public final class ShieldOfTheRighteous extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has vigilance"));
+        this.addAbility(ability);
 
         // Whenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.
         this.addAbility(new BlocksAttachedTriggeredAbility(

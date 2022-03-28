@@ -28,7 +28,7 @@ public final class NavigatorsRuin extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new PutLibraryIntoGraveTargetEffect(4), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, " +
+                "At the beginning of your end step, " +
                         "if you attacked this turn, target opponent mills four cards."
         );
         ability.addTarget(new TargetOpponent());

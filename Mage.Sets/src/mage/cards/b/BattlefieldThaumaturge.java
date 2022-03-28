@@ -99,7 +99,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
                 if (target.isNotTarget()) {
                     continue;
                 }
-                Set<UUID> possibleList = target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game);
+                Set<UUID> possibleList = target.possibleTargets(ability.getControllerId(), ability, game);
                 possibleList.removeIf(id -> {
                     Permanent permanent = game.getPermanent(id);
                     return permanent == null || !permanent.isCreature(game);

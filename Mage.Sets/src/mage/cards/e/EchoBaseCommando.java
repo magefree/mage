@@ -86,7 +86,7 @@ class EchoBaseCommandoEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (filter.match(permanent, source.getControllerId(), source, game)) {
                 return true;
             }
         }

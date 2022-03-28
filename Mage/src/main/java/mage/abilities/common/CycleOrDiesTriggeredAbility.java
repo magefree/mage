@@ -23,7 +23,8 @@ public class CycleOrDiesTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE
+                || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
@@ -31,8 +32,8 @@ public class CycleOrDiesTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (!event.getSourceId().equals(this.getSourceId())) {
             return false;
         }
-        if (((ZoneChangeEvent) event).isDiesEvent()) {
-            return true;
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            return ((ZoneChangeEvent) event).isDiesEvent();
         }
         StackObject object = game.getStack().getStackObject(event.getSourceId());
         return object != null && object.getStackAbility() instanceof CyclingAbility;

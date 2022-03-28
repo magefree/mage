@@ -98,15 +98,15 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
                 FilterPermanent filter = new FilterNonlandPermanent(message);
                 filter.add(cardType.getPredicate());
                 filter.add(new ControllerIdPredicate(player.getId()));
-                if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0) {
+                if (game.getBattlefield().count(filter, source.getControllerId(), source, game) == 0) {
                     continue;
                 }
                 TargetPermanent target = new TargetPermanent(filter);
                 target.setNotTarget(true);
                 if (conditionMet) {
-                    controller.choose(outcome, target, source.getSourceId(), game);
+                    controller.choose(outcome, target, source, game);
                 } else {
-                    player.choose(outcome, target, source.getSourceId(), game);
+                    player.choose(outcome, target, source, game);
                 }
                 toKeep.add(target.getFirstTarget());
             }

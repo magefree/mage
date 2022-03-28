@@ -89,7 +89,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Target target = new TargetPermanent(filter);
-        if (target.choose(Outcome.GainControl, controllerId, source.getSourceId(), game)) {
+        if (target.choose(Outcome.GainControl, controllerId, source.getSourceId(), source, game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
             game.addEffect(effect, ability);
@@ -101,7 +101,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, source.getSourceId(), controllerId, game, 1);
+        return game.getBattlefield().contains(filter, source.getSourceId(), controllerId, source, game, 1);
     }
 
     @Override
@@ -135,7 +135,7 @@ class HeraldOfLeshracLeavesEffect extends OneShotEffect {
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(new OwnerIdPredicate(playerId));
             filter.add(new ControllerIdPredicate(source.getControllerId()));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, playerId);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);

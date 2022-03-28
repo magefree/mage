@@ -80,6 +80,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     MageObject getObject(UUID objectId);
 
+    MageObject getObject(Ability source);
+
     MageObject getBaseObject(UUID objectId);
 
     MageObject getEmblem(UUID objectId);

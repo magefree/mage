@@ -64,7 +64,7 @@ class CamaraderieEffect extends OneShotEffect {
         }
         int xValue = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         player.gainLife(xValue, game, source);
         player.drawCards(xValue, source, game);

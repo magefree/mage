@@ -141,7 +141,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
         FilterObject filterObject = new FilterObject("a source of your choice that shares a color with the exiled card");
         filterObject.add(new SharesColorPredicate(colorsAmongImprinted));
         this.target = new TargetSource(filterObject);
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         if (target.getFirstTarget() != null) {
             mageObjectReference = new MageObjectReference(target.getFirstTarget(), game);
         } else {

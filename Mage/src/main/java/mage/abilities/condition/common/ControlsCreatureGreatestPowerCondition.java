@@ -28,7 +28,7 @@ public enum ControlsCreatureGreatestPowerCondition implements Condition {
         Set<UUID> controllers = new HashSet<>();
         Integer maxPower = null;
 
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         for (Permanent permanent : permanents) {
             if (permanent == null) {
                 continue;

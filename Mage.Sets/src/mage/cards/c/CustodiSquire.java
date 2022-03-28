@@ -104,7 +104,7 @@ class CustodiSquireVote extends VoteHandler<Card> {
     public Card playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || controller.getGraveyard().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ) < 1) {
             return null;
         }

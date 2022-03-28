@@ -103,7 +103,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
                 || !cost.pay(source, game, source, player.getId(), false)) {
             TargetOpponent target = new TargetOpponent();
             Player opponent = null;
-            if (target.choose(Outcome.Detriment, player.getId(), source.getSourceId(), game)) {
+            if (target.choose(Outcome.Detriment, player.getId(), source.getSourceId(), source, game)) {
                 opponent = game.getPlayer(target.getFirstTarget());
             }
             new TapAllEffect(filter).apply(game, source);

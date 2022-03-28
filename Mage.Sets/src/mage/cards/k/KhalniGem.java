@@ -64,7 +64,7 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         int landCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         if (player == null || landCount < 1) {
             return false;
@@ -73,7 +73,7 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect {
                 Math.min(landCount, 2), StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND
         );
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 

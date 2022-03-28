@@ -121,7 +121,7 @@ class NykthosParagonEffect extends OneShotEffect {
     @Override
     public boolean apply (Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Integer life = (Integer) this.getValue("gainedLife");
         if (controller != null && sourceObject != null && life != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {

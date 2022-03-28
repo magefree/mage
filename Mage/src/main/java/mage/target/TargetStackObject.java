@@ -51,15 +51,15 @@ public class TargetStackObject extends TargetObject {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(id);
-        return filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(stackObject, source.getControllerId(), source, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
         for (StackObject stackObject : game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                    && filter.match(stackObject, sourceId, sourceControllerId, game)) {
+                    && filter.match(stackObject, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -71,15 +71,15 @@ public class TargetStackObject extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+        return canChoose(sourceControllerId, null, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                    && filter.match(stackObject, sourceId, sourceControllerId, game)) {
+                    && filter.match(stackObject, sourceControllerId, source, game)) {
                 possibleTargets.add(stackObject.getId());
             }
         }
@@ -88,7 +88,7 @@ public class TargetStackObject extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return this.possibleTargets(null, sourceControllerId, game);
+        return this.possibleTargets(sourceControllerId, null, game);
     }
 
     @Override

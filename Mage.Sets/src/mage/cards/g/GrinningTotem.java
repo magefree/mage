@@ -78,7 +78,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         }
         TargetCardInLibrary targetCard = new TargetCardInLibrary();
         you.searchLibrary(targetCard, source, game, targetOpponent.getId());
-        Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
+        Card card = targetOpponent.getLibrary().getCard(targetCard.getFirstTarget(), game);
         if (card != null) {
             UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
             you.moveCardsToExile(card, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));

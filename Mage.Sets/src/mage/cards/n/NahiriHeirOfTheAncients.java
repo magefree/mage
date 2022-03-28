@@ -116,7 +116,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        int equipCount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int equipCount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (tokens.isEmpty()
                 || equipCount == 0
                 || !player.chooseUse(outcome, "Attach an equipment to the token?", source, game)) {
@@ -133,12 +133,12 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
             ));
             TargetPermanent target = new TargetPermanent(tokenFilter);
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             tokenCreature = game.getPermanent(target.getFirstTarget());
         }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         tokenCreature.addAttachment(target.getFirstTarget(), source, game);
         return true;
     }

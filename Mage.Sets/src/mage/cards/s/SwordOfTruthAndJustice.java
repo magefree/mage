@@ -86,7 +86,7 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
         }
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        if (player.choose(outcome, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

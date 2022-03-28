@@ -9,7 +9,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
@@ -100,11 +99,11 @@ class AnnihilatorEffect extends OneShotEffect {
             int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), player.getId(), game));
             if (amount > 0) {
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                if (target.canChoose(player.getId(), source, game)) {
                     while (player.canRespond()
-                            && target.canChoose(source.getSourceId(), player.getId(), game)
+                            && target.canChoose(player.getId(), source, game)
                             && !target.isChosen()) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                     }
                     target.getTargets().stream()
                             .map(game::getPermanent)

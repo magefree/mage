@@ -76,9 +76,9 @@ class CharmedGriffinEffect extends OneShotEffect {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         TargetCardInHand target = new TargetCardInHand(new FilterArtifactOrEnchantmentCard());
-                        if (target.canChoose(source.getSourceId(), playerId, game)
+                        if (target.canChoose(playerId, source, game)
                                 && player.chooseUse(Outcome.Neutral, "Put an artifact or enchantment card from your hand onto the battlefield?", source, game)
-                                && player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                                && player.choose(Outcome.PutCardInPlay, target, source, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
                                 toBattlefield.add(card);

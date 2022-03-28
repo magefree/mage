@@ -90,7 +90,7 @@ class OketraTheTrueRestrictionEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getControllerId(), source, game);
                 return (ComparisonType.compare(permanentsOnBattlefield, ComparisonType.FEWER_THAN, 4));
             }
             return true;

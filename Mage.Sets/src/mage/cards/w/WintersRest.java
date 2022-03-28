@@ -85,7 +85,7 @@ class WintersRestEffect extends DontUntapInControllersUntapStepEnchantedEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ).isEmpty()) {
             return false;
         }

@@ -269,7 +269,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
         Player targetController = getTargetController(game, playerId);
         if (targetController == null) {
             return false;
@@ -280,7 +280,7 @@ public abstract class TargetImpl implements Target {
             if (!targetController.canRespond()) {
                 return chosen;
             }
-            if (!targetController.choose(outcome, this, sourceId, game)) {
+            if (!targetController.choose(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
@@ -295,7 +295,7 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getSourceId(), playerId, game));
+        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
 
         chosen = targets.size() >= getNumberOfTargets();
         do {
@@ -385,7 +385,7 @@ public abstract class TargetImpl implements Target {
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
         List<UUID> possibleTargets = new ArrayList<>();
-        possibleTargets.addAll(possibleTargets(source.getSourceId(), source.getControllerId(), game));
+        possibleTargets.addAll(possibleTargets(source.getControllerId(), source, game));
         possibleTargets.removeAll(getTargets());
 
         // get the length of the array

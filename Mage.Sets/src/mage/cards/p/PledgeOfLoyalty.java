@@ -72,7 +72,7 @@ enum PledgeOfLoyaltyPredicate implements ObjectSourcePlayerPredicate<MageObject>
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                        input.getPlayerId(), input.getSourceId(), game
+                        input.getPlayerId(), input.getSource(), game
                 ).stream()
                 .anyMatch(permanent -> permanent.getColor(game).shares(color));
     }

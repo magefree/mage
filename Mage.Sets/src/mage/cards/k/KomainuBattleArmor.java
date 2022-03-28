@@ -128,7 +128,7 @@ class KomainuBattleArmorEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                playerId, source.getSourceId(), game
+                playerId, source, game
         )) {
             game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
         }

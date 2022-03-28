@@ -24,7 +24,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -113,7 +112,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
                 if (controller.hasOpponent(playerUUID, game)) {
                     Player player = game.getPlayer(playerUUID);
                     if (player != null) {
-                        amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+                        amount += player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
                     }
                 }
             }

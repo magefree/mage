@@ -2,6 +2,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -55,9 +57,9 @@ class FilterSteelyResolve extends FilterCreaturePermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(sourceId, game);
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (super.match(permanent, playerId, source, game)) {
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             if (subType != null && permanent.hasSubtype(subType, game)) {
                 return true;
             }

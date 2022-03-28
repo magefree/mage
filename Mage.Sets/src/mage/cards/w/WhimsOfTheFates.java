@@ -177,11 +177,11 @@ class TargetSecondPilePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
         if (firstPile.contains(id)) {
             return false;
         }
-        return super.canTarget(controllerId, id, sourceId, game, flag);
+        return super.canTarget(controllerId, id, source, game, flag);
     }
 
     @Override

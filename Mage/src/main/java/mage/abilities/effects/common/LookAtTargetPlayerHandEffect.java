@@ -32,7 +32,7 @@ public class LookAtTargetPlayerHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (you != null && targetPlayer != null) {
             you.lookAtCards(sourceObject != null ? sourceObject.getIdName() : null, targetPlayer.getHand(), game);
             return true;

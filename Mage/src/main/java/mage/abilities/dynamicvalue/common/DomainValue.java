@@ -38,7 +38,7 @@ public enum DomainValue implements DynamicValue {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
-                        targetPlayer, sourceAbility.getSourceId(), game
+                        targetPlayer, sourceAbility, game
                 ).stream()
                 .map(permanent -> SubType
                         .getBasicLands()

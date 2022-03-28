@@ -79,7 +79,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
                             FilterLandPermanent playerFilter = filter.copy();
                             playerFilter.add(new ControllerIdPredicate(playerId));
                             Target target = new TargetLandPermanent(amount, amount, playerFilter, true);
-                            player.choose(outcome, target, source.getSourceId(), game);
+                            player.choose(outcome, target, source, game);
                             for (UUID landId : target.getTargets()) {
                                 Permanent permanent = game.getPermanent(landId);
                                 if (permanent != null) {

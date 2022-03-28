@@ -42,7 +42,7 @@ public final class RenownedWeaponsmith extends CardImpl {
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new RenownedWeaponsmithManaBuilder()));
 
         // {U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RenownedWeaponsmithEffect(), new ManaCostsImpl("{U"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RenownedWeaponsmithEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -83,7 +83,7 @@ class RenownedWeaponsmithCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return (object != null
                 && object.isArtifact(game));
     }
@@ -110,7 +110,7 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {

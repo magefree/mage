@@ -44,7 +44,7 @@ public class FatesealEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetOpponent(true);
-            if (controller.choose(outcome, target, source.getSourceId(), game)) {
+            if (controller.choose(outcome, target, source, game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
                 if (opponent == null) {
                     return false;

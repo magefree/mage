@@ -58,7 +58,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
             return false;
         }
         Permanent permanent = game.getPermanent(game.getCombat().getAttackers().get(0));
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         if (setTargetPointer) {

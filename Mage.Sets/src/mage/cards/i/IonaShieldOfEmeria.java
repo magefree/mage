@@ -67,7 +67,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null && chosenColor != null) {
             return "You can't cast " + chosenColor.toString() + " spells (" + mageObject.getIdName() + ").";
         }

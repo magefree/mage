@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -15,10 +14,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -45,6 +45,13 @@ public final class EmergentUltimatum extends CardImpl {
 
 class EmergentUltimatumEffect extends OneShotEffect {
 
+    private static final FilterCard filter
+            = new FilterCard("monocolored cards with different names");
+
+    static {
+        filter.add(MonocoloredPredicate.instance);
+    }
+
     EmergentUltimatumEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for up to three monocolored cards with different names and exile them. " +
@@ -67,7 +74,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetCardInLibrary targetCardInLibrary = new EmergentUltimatumTarget();
+        TargetCardInLibrary targetCardInLibrary = new TargetCardWithDifferentNameInLibrary(0, 3, filter);
         targetCardInLibrary.setNotTarget(true);
         boolean searched = player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
@@ -80,7 +87,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         }
         TargetOpponent targetOpponent = new TargetOpponent();
         targetOpponent.setNotTarget(true);
-        player.choose(outcome, targetOpponent, source.getSourceId(), game);
+        player.choose(outcome, targetOpponent, source, game);
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
         if (opponent == null) {
             if (searched) {
@@ -97,67 +104,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
             player.shuffleLibrary(source, game);
             cards.remove(toShuffle);
         }
-        while (!cards.isEmpty()) {
-            if (!player.chooseUse(Outcome.PlayForFree, "Cast an exiled card without paying its mana cost?", source, game)) {
-                break;
-            }
-            targetCardInExile.clearChosen();
-            if (!player.choose(Outcome.PlayForFree, cards, targetCardInExile, game)) {
-                continue;
-            }
-            Card card = game.getCard(targetCardInExile.getFirstTarget());
-            if (card == null) {
-                continue;
-            }
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            Boolean cardWasCast = player.cast(player.chooseAbilityForCast(card, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-            cards.remove(card); // remove on non cast too (infinite freeze fix)
-            if (cardWasCast) {
-                cards.remove(card);
-            } else {
-                game.informPlayer(player, "You're not able to cast "
-                        + card.getIdName() + " or you canceled the casting.");
-            }
-        }
+        CardUtil.castMultipleWithAttributeForFree(player, source, game, cards, StaticFilters.FILTER_CARD);
         return true;
-    }
-}
-
-class EmergentUltimatumTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterCard("monocolored cards with different names");
-
-    static {
-        filter.add(MonocoloredPredicate.instance);
-    }
-
-    EmergentUltimatumTarget() {
-        super(0, 3, filter);
-    }
-
-    private EmergentUltimatumTarget(final EmergentUltimatumTarget target) {
-        super(target);
-    }
-
-    @Override
-    public EmergentUltimatumTarget copy() {
-        return new EmergentUltimatumTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null
-                && this.getTargets()
-                .stream()
-                .map(game::getCard)
-                .map(MageObject::getName)
-                .noneMatch(card.getName()::equals);
     }
 }

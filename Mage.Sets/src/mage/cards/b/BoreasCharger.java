@@ -92,7 +92,7 @@ class BoreasChargerEffect extends OneShotEffect {
             return false;
         }
         TargetPlayer target = new TargetPlayer(1, 1, true, filter);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (opponent == null) {
             controller.shuffleLibrary(source, game);

@@ -72,7 +72,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> toExile = new HashSet<>(game.getBattlefield()
-                    .getActivePermanents(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie"), source.getControllerId(), source.getSourceId(), game));
+                    .getActivePermanents(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie"), source.getControllerId(), source, game));
             controller.moveCards(toExile, Zone.EXILED, source, game);
             FilterCreatureCard filterHuman = new FilterCreatureCard();
             filterHuman.add(SubType.HUMAN.getPredicate());

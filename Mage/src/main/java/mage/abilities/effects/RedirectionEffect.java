@@ -65,7 +65,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         if (damageToRedirect < 1) { // if multiple replacement effect apply, the rest damage can be 0, so the effect is not applied/replaced
             return false;
         }
-        String sourceLogName = source != null ? game.getObject(source.getSourceId()).getLogName() + ": " : "";
+        String sourceLogName = source != null ? game.getObject(source).getLogName() + ": " : "";
         DamageEvent damageEvent = (DamageEvent) event;
         int restDamage = 0;
         if (damageEvent.getAmount() > amountToRedirect) {

@@ -112,7 +112,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (abilityToModify.isControlledBy(source.getControllerId())) {
                 Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
                 if (spellCard != null) {
-                    return this.filter.match(spellCard, source.getSourceId(), source.getControllerId(), game);
+                    return this.filter.match(spellCard, source.getControllerId(), source, game);
                 }
             }
         }

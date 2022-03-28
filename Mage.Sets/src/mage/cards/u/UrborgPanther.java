@@ -1,10 +1,9 @@
 package mage.cards.u;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -16,57 +15,64 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- * 
  * @author Ketsuban
  */
 public class UrborgPanther extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("creature named Feral Shadow");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("creature named Breathstealer");
-
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature blocking {this}");
+    private static final FilterControlledCreaturePermanent filter1
+            = new FilterControlledCreaturePermanent("creature named Feral Shadow");
+    private static final FilterControlledCreaturePermanent filter2
+            = new FilterControlledCreaturePermanent("creature named Breathstealer");
     private static final FilterCard filterCard = new FilterCreatureCard("card named Spirit of the Night");
 
     static {
+        filter.add(BlockingOrBlockedBySourcePredicate.BLOCKING);
         filter1.add(new NamePredicate("Feral Shadow"));
         filter2.add(new NamePredicate("Breathstealer"));
         filterCard.add(new NamePredicate("Spirit of the Night"));
     }
 
     public UrborgPanther(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.NIGHTSTALKER);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // B, Sacrifice Urborg Panther: Destroy target creature blocking Urborg Panther.
-        Ability ability1 = new SimpleActivatedAbility(new DestroyTargetEffect(),
-                new ColoredManaCost(ColoredManaSymbol.B));
-        ability1.addCost(new SacrificeSourceCost());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking {this}");
-        filter.add(new BlockingAttackerIdPredicate(this.getId()));
-        ability1.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability1);
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
 
         // Sacrifice a creature named Feral Shadow, a creature named Breathstealer, and
         // Urborg Panther: Search your library for a card named Spirit of the Night and
         // put that card onto the battlefield. Then shuffle your library.
-        Ability ability2 = new SimpleActivatedAbility(
-            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, 1, new FilterCard(filterCard))),
-            new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter1, true)));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter2, true)));
-        ability2.addCost(new SacrificeSourceCost());
-        this.addAbility(ability2);
+        this.addAbility(new SimpleActivatedAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
+                        1, 1, filterCard
+                )),
+                new CompositeCost(new CompositeCost(
+                        new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter1)),
+                        new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter2)),
+                        ""
+                ), new SacrificeSourceCost(), "sacrifice a creature named Feral Shadow, " +
+                        "a creature named Breathstealer, and {this}")
+        ));
     }
 
     private UrborgPanther(final UrborgPanther card) {
@@ -77,5 +83,4 @@ public class UrborgPanther extends CardImpl {
     public UrborgPanther copy() {
         return new UrborgPanther(this);
     }
-
 }

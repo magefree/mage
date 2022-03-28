@@ -70,7 +70,7 @@ class SternJudgeEffect extends OneShotEffect {
                 continue;
             }
             player.loseLife(game.getBattlefield().count(
-                    filter, playerId, source.getSourceId(), game
+                    filter, source.getSourceId(), source, game
             ), game, source, false);
         }
         return true;

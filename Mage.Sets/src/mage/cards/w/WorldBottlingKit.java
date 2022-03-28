@@ -77,7 +77,7 @@ class WorldBottlingKitEffect extends OneShotEffect {
                 game.informPlayers(controller.getLogName() + " has chosen set " + setChosen);
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), SuperType.BASIC.getPredicate())));
-                List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+                List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
                 for (Permanent permanent : permanents) {
                     if (permanent.getExpansionSetCode().equals(setChosen)) {
                         controller.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);

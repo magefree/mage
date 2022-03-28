@@ -86,7 +86,7 @@ class KudzuEffect extends OneShotEffect {
                     target.setNotTarget(true); //not a target, it is chosen
                     Card kudzuCard = game.getCard(source.getSourceId());
                     if (kudzuCard != null && landsController != null) {
-                        if (landsController.choose(Outcome.Detriment, target, source.getId(), game)) {
+                        if (landsController.choose(Outcome.Detriment, target, source, game)) {
                             if (target.getFirstTarget() != null) {
                                 Permanent landChosen = game.getPermanent(target.getFirstTarget());
                                 if (landChosen != null) {

@@ -75,7 +75,7 @@ class VoldarenEstateManaBuilder extends ConditionalManaBuilder {
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spent to cast a Vampire spell");
@@ -108,7 +108,7 @@ class VoldarenEstateManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             return object != null && object.hasSubtype(SubType.VAMPIRE, game);
         }
         return false;

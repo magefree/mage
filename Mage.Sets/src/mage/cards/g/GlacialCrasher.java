@@ -76,7 +76,7 @@ class GlacialCrasherEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1;
+            return game.getBattlefield().count(filter, source.getControllerId(), source, game) < 1;
         }
         return false;
     }

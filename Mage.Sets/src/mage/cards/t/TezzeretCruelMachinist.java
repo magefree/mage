@@ -87,7 +87,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cardsToMove = new CardsImpl(target.getTargets());
         if (cardsToMove.isEmpty()) {
             return false;

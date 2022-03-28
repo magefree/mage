@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -66,7 +65,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         Player playerToDraw = game.getPlayer(event.getPlayerId());
         if (playerToDraw != null && sourcePermanent != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (playerToDraw.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
+            if (playerToDraw.choose(Outcome.DrawCard, target, source, game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
                     Card card = chosenPlayer.getLibrary().getFromTop(game);

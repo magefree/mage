@@ -11,7 +11,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -84,7 +87,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, false, source, game);

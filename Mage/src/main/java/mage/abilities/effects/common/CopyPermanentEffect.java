@@ -80,7 +80,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent == null) {
-            sourcePermanent = game.getObject(source.getSourceId());
+            sourcePermanent = game.getObject(source);
         }
         if (controller == null || sourcePermanent == null) {
             return false;
@@ -91,8 +91,8 @@ public class CopyPermanentEffect extends OneShotEffect {
         } else {
             Target target = new TargetPermanent(filter);
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+            if (target.canChoose(controller.getId(), source, game)) {
+                controller.choose(Outcome.Copy, target, source, game);
                 copyFromPermanent = game.getPermanent(target.getFirstTarget());
             }
         }
@@ -157,7 +157,7 @@ public class CopyPermanentEffect extends OneShotEffect {
 
         // select new target
         auraTarget.setNotTarget(true);
-        if (!controller.choose(auraOutcome, auraTarget, source.getSourceId(), game)) {
+        if (!controller.choose(auraOutcome, auraTarget, source, game)) {
             return true;
         }
         UUID targetId = auraTarget.getFirstTarget();

@@ -11,7 +11,6 @@ import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -55,7 +54,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
             return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
@@ -102,7 +101,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
                 }
                 if (game.isActivePlayer(permanent.getControllerId())
                         && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                        filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }

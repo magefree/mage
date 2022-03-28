@@ -33,7 +33,7 @@ public final class MarduWarshrieker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                         new AddManaToManaPoolSourceControllerEffect(new Mana(1, 0, 1, 1, 0, 0, 0, 0))),
                         RaidCondition.instance,
-                        "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, add {R}{W}{B}.")
+                        "When {this} enters the battlefield, if you attacked this turn, add {R}{W}{B}.")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),
                 new PlayerAttackedWatcher());

@@ -52,7 +52,7 @@ public class TargetCardInExile extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (allExileZones) {
             for (Card card : game.getExile().getAllCards(game)) {
@@ -74,11 +74,11 @@ public class TargetCardInExile extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         if (allExileZones) {
             int numberTargets = 0;
             for(ExileZone exileZone : game.getExile().getExileZones()) {
-                numberTargets += exileZone.count(filter, sourceId, sourceControllerId, game);
+                numberTargets += exileZone.count(filter, sourceControllerId, source, game);
                 if (numberTargets >= this.minNumberOfTargets) {
                     return true;
                 }
@@ -86,7 +86,7 @@ public class TargetCardInExile extends TargetCard {
         } else {
             ExileZone exileZone = game.getExile().getExileZone(zoneId);
             if (exileZone != null) {
-                if (exileZone.count(filter, sourceId, sourceControllerId, game) >= this.minNumberOfTargets) {
+                if (exileZone.count(filter, sourceControllerId, source, game) >= this.minNumberOfTargets) {
                     return true;
                 }
             }

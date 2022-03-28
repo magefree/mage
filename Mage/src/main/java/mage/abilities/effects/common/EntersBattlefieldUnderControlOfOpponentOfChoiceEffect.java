@@ -43,7 +43,7 @@ public class EntersBattlefieldUnderControlOfOpponentOfChoiceEffect extends OneSh
         }
         Target target = new TargetOpponent();
         target.setNotTarget(true);
-        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.Benefit, target, source, game)) {
             return false;
         }
         Player opponent = game.getPlayer(target.getFirstTarget());

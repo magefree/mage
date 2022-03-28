@@ -50,7 +50,7 @@ class BurdenOfGreedCount implements DynamicValue {
         FilterArtifactPermanent filter = new FilterArtifactPermanent();
         filter.add(TappedPredicate.TAPPED);
         filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
-        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

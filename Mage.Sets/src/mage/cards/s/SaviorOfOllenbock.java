@@ -112,7 +112,7 @@ class SaviorOfOllenbockEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
         return player != null && exileZone != null && !exileZone.isEmpty() && player.moveCards(
                 exileZone.getCards(game), Zone.BATTLEFIELD, source, game,
                 false, false, true, null

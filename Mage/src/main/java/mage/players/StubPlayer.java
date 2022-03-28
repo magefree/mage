@@ -37,7 +37,7 @@ import static com.google.common.collect.Iterables.getOnlyElement;
 public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
                 if (player.getId().equals(getId()) && target.canTarget(getId(), game)) {
@@ -103,14 +103,14 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         return false;
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith(" more) to put on the bottom of your library")) {
-            chooseDiscardBottom(game, target.getMinNumberOfTargets(), new ArrayList<>(target.possibleTargets(null, null, game)))
+            chooseDiscardBottom(game, target.getMinNumberOfTargets(), new ArrayList<>(target.possibleTargets(null, source, game)))
                     .forEach(cardId -> target.add(cardId, game));
         }
         return false;

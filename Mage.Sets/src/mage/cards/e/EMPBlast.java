@@ -59,7 +59,7 @@ class EMPBlastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent artifact : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent artifact : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), source, game)) {
             artifact.tap(source, game);
         }
         return true;

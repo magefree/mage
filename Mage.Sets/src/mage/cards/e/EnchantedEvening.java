@@ -51,7 +51,7 @@ public final class EnchantedEvening extends CardImpl {
         public boolean apply(Game game, Ability source) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(
                     StaticFilters.FILTER_PERMANENT, source.getControllerId(),
-                    source.getSourceId(), game
+                    source, game
             )) {
                 if (permanent != null) {
                     permanent.addCardType(game, CardType.ENCHANTMENT);

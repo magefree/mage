@@ -39,6 +39,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has first strike"));
+        this.addAbility(ability);
 
         // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));

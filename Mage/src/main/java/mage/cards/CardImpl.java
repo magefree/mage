@@ -550,7 +550,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 removed = true;
                 break;
             default:
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
                         + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
                 break;

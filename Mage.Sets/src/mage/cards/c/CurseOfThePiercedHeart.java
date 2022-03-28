@@ -78,7 +78,7 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
         if (controller == null || opponent == null) {
             return false;
         }
-        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER, source.getSourceId(), opponent.getId(), game) < 1
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER, opponent.getId(), source, game) < 1
                 || !controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
             return opponent.damage(1, source.getSourceId(), source, game) > 0;
         }
@@ -86,7 +86,7 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(opponent.getId()));
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {
             return permanent.damage(1, source.getSourceId(), source, game, false, true) > 0;

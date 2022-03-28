@@ -28,8 +28,8 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
-        return opponentId != null && super.canTarget(opponentId, id, sourceId, game, flag);
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
+        return opponentId != null && super.canTarget(opponentId, id, source, game, flag);
     }
 
     @Override
@@ -41,12 +41,12 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
                     boolean canSourceControllerTarget = true;
                     if (!isNotTarget()) {
                         if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                                || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
+                                || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
                             canSourceControllerTarget = false;
                         }
                     }
                     canSourceControllerTarget &= super.canTarget(opponentId, id, source, game);
-                    canSourceControllerTarget &= filter.match(permanent, source.getSourceId(), opponentId, game);
+                    canSourceControllerTarget &= filter.match(permanent, opponentId, source, game);
                     return canSourceControllerTarget;
                 }
             }
@@ -75,8 +75,8 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        MageObject sourceObject = game.getObject(sourceId);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        MageObject sourceObject = game.getObject(source);
         Player player = game.getPlayer(sourceControllerId);
         if (sourceObject == null || player == null) {
             return false;
@@ -88,7 +88,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
             if (opp != null && player.hasOpponent(opp.getId(), game)) {
                 for (Permanent perm : game.getBattlefield().getActivePermanents(opp.getId(), game)) {
                     if (!targets.containsKey(perm.getId())
-                            && filter.match(perm, sourceId, opp.getId(), game)
+                            && filter.match(perm, opp.getId(), source, game)
                             && perm.canBeTargetedBy(sourceObject, sourceControllerId, game)) {
                         counter++;
                         if (counter >= minNumberOfTargets) {

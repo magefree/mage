@@ -32,7 +32,7 @@ public final class RuinRaider extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new RuinRaiderEffect(), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, "
+                "At the beginning of your end step, if you attacked this turn, "
                         + "reveal the top card of your library and put that card into your hand. "
                         + "You lose life equal to the card's mana value.");
         ability.setAbilityWord(AbilityWord.RAID);

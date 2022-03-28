@@ -72,7 +72,7 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
                 FilterLandPermanent filter = new FilterLandPermanent(landName + " to destroy");
                 filter.add(landName.getPredicate());
                 Target target = new TargetLandPermanent(1, 1, filter, true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game)) {
                     controller.chooseTarget(outcome, target, source, game);
                     lands.add(target.getFirstTarget());
                 }

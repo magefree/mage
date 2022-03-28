@@ -14,7 +14,7 @@ public class AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<Pe
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent enchantment = input.getSource().getSourcePermanentIfItStillExists(game);
         return enchantment != null && !input.getObject().getId().equals(enchantment.getAttachedTo());
     }
 

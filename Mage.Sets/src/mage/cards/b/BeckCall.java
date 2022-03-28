@@ -14,7 +14,6 @@ import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BirdToken;
 
@@ -65,7 +64,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        return filter.match(permanent, getSourceId(), getControllerId(), game);
+        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override

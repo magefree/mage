@@ -45,7 +45,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
         Mana mana = new Mana();
         if (game != null) {
             Player controller = getPlayer(game, source);
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);

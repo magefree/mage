@@ -83,7 +83,7 @@ class JumpTrooperTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
+            if (creature != null && filter.match(creature, getControllerId(), this, game)) {
                 this.getTargets().clear();
                 TargetStackObject target = new TargetStackObject();
                 target.add(event.getSourceId(), game);

@@ -32,7 +32,7 @@ public class MeldCondition implements Condition {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(new NamePredicate(this.meldWithName));
                 filter.add(new OwnerIdPredicate(source.getControllerId()));
-                return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0;
+                return game.getBattlefield().count(filter, source.getControllerId(), source, game) > 0;
             }
         }
         return false;

@@ -116,7 +116,7 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                            source.getControllerId(), source.getSourceId(), game
+                            source.getControllerId(), source, game
                     ).stream()
                     .map(permanent -> new MageObjectReference(permanent, game))
                     .forEach(affectedObjectList::add);

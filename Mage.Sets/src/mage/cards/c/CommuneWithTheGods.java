@@ -63,7 +63,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                 FilterCard filterPutInHand = new FilterCard("creature or enchantment card to put in hand");
                 filterPutInHand.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
                 controller.revealCards(source, cards, game);
-                if (cards.count(filterPutInHand, source.getSourceId(), source.getControllerId(), game) > 0) {
+                if (cards.count(filterPutInHand, source.getControllerId(), source, game) > 0) {
                     TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filterPutInHand);
                     if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());

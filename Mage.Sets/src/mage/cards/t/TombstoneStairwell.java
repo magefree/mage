@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -92,7 +91,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
 
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source.getSourceId(), game);
+                int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source, game);
                 token.putOntoBattlefield(creatureCardsInGraveyard, game, source, playerId);
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
                     tokensCreated.add(tokenId);

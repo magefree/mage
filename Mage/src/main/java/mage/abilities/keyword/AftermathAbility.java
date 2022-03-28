@@ -153,7 +153,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
             // If branch so that we also support putting Aftermath on
             // non-split cards for... whatever reason, in case somebody
             // wants to do that in the future.
-            UUID sourceId = source.getSourceId();
+            UUID sourceId = source != null ? source.getSourceId() : null;
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard instanceof SubCard) {
                 sourceCard = ((SubCard<?>) sourceCard).getParentCard();

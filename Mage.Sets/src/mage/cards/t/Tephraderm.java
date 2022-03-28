@@ -74,7 +74,7 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null
-                && FILTER_CREATURE.match(sourcePermanent, getSourceId(), getControllerId(), game)) {
+                && FILTER_CREATURE.match(sourcePermanent, getControllerId(), this, game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
@@ -120,7 +120,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         StackObject sourceSpell = game.getStack().getStackObject(event.getSourceId());
-        if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getSourceId(), getControllerId(), game)) {
+        if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getControllerId(), this, game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));

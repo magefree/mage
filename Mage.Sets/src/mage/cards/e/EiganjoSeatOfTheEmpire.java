@@ -36,7 +36,7 @@ public final class EiganjoSeatOfTheEmpire extends CardImpl {
         ));
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private EiganjoSeatOfTheEmpire(final EiganjoSeatOfTheEmpire card) {

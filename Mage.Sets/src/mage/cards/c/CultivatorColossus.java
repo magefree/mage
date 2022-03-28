@@ -82,7 +82,7 @@ class CultivatorColossusEffect extends OneShotEffect {
             TargetCard target = new TargetCardInHand(
                     0, 1, StaticFilters.FILTER_CARD_LAND
             );
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
                 break;

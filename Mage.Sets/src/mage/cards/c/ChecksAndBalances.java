@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -103,7 +102,7 @@ class ChecksAndBalancesEffect extends OneShotEffect {
                 Player player = game.getPlayer(uuid);
                 if (player != null && !player.getHand().isEmpty()) {
                     TargetCardInHand target = new TargetCardInHand();
-                    if (player.choose(Outcome.Discard, target, source.getSourceId(), game)) {
+                    if (player.choose(Outcome.Discard, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         player.discard(card, false, source, game);
                     }

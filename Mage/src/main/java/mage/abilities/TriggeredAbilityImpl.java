@@ -331,7 +331,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
         }
         if (sourceObject == null) { // source is no permanent
-            sourceObject = game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source);
             if (sourceObject == null || sourceObject.isPermanent(game)) {
                 return false; // No source object found => ability is not valid
             }

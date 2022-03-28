@@ -72,9 +72,9 @@ class SmokestackEffect extends OneShotEffect {
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
                 //A spell or ability could have removed the only legal target this player
                 //had, if thats the case this ability should fizzle.
-                if (target.canChoose(source.getSourceId(), activePlayer.getId(), game)) {
-                    while (!target.isChosen() && target.canChoose(source.getSourceId(), activePlayer.getId(), game) && activePlayer.canRespond()) {
-                        activePlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                if (target.canChoose(activePlayer.getId(), source, game)) {
+                    while (!target.isChosen() && target.canChoose(activePlayer.getId(), source, game) && activePlayer.canRespond()) {
+                        activePlayer.choose(Outcome.Sacrifice, target, source, game);
                     }
 
                     for (int idx = 0; idx < target.getTargets().size(); idx++) {

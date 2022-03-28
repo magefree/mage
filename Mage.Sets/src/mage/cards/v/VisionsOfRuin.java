@@ -71,13 +71,13 @@ class VisionsOfRuinEffect extends OneShotEffect {
             Player opponent = game.getPlayer(playerId);
             if (opponent == null || game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                    source.getSourceId(), playerId, game
+                    playerId, source, game
             ) < 1) {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT);
             target.setNotTarget(true);
-            opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            opponent.choose(Outcome.Sacrifice, target, source, game);
             permanents.add(game.getPermanent(target.getFirstTarget()));
         }
         int sacrificed = 0;

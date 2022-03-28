@@ -11,16 +11,15 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -30,6 +29,8 @@ import java.util.UUID;
  * @author emerald000
  */
 public final class SaheeliRai extends CardImpl {
+
+    private static final FilterCard filter = new FilterArtifactCard("artifact cards with different names");
 
     public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
@@ -51,7 +52,7 @@ public final class SaheeliRai extends CardImpl {
         this.addAbility(ability);
 
         // -7: Search your library for up to three artifact cards with different names, put them onto the battlefield, then shuffle your library.
-        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new SaheeliRaiTarget()), -7));
+        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardWithDifferentNameInLibrary(0, 3, filter)), -7));
     }
 
     private SaheeliRai(final SaheeliRai card) {
@@ -94,37 +95,6 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
                 }
                 return true;
             }
-        }
-        return false;
-    }
-}
-
-class SaheeliRaiTarget extends TargetCardInLibrary {
-
-    SaheeliRaiTarget() {
-        super(0, 3, new FilterArtifactCard("artifact cards with different names"));
-    }
-
-    SaheeliRaiTarget(final SaheeliRaiTarget target) {
-        super(target);
-    }
-
-    @Override
-    public SaheeliRaiTarget copy() {
-        return new SaheeliRaiTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        Card card = cards.get(id, game);
-        if (card != null) {
-            for (UUID targetId : this.getTargets()) {
-                Card iCard = game.getCard(targetId);
-                if (iCard != null && iCard.getName().equals(card.getName())) {
-                    return false;
-                }
-            }
-            return filter.match(card, playerId, game);
         }
         return false;
     }

@@ -73,7 +73,7 @@ class CruelUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game);
+        controller.choose(Outcome.ReturnToHand, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             return controller.moveCards(card, Zone.HAND, source, game);

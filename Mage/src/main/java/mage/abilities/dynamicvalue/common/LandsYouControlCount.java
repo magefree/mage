@@ -16,7 +16,7 @@ public enum LandsYouControlCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                sourceAbility.getControllerId(), sourceAbility, game
         );
     }
 

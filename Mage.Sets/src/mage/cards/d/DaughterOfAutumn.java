@@ -81,7 +81,7 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
                         TargetPermanent target = new TargetPermanent();

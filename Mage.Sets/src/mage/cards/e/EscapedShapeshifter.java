@@ -69,7 +69,7 @@ class EscapedShapeshifterEffect extends ContinuousEffectImpl {
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(permanent -> !permanent.getName().equals("Escaped Shapeshifter"))

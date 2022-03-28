@@ -49,7 +49,7 @@ public class ExileAllEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ).stream().forEach(cards::add);
         if (forSource) {
             return controller.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));

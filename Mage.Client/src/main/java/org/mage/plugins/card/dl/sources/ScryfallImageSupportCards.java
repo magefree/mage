@@ -509,6 +509,7 @@ public class ScryfallImageSupportCards {
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
             add("SLX"); // Universes Within
+            add("CLB"); // Commander Legends: Battle for Baldur's Gate
         }
     };
 

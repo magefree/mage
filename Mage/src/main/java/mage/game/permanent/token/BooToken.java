@@ -26,7 +26,7 @@ public final class BooToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("AFR");
+        availableImageSetCodes = Arrays.asList("AFR", "CLB");
     }
 
     private BooToken(final BooToken token) {

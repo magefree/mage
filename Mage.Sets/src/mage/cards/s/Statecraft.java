@@ -61,11 +61,11 @@ class StatecraftPreventionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-            if (sourcePermanent != null && filter.match(sourcePermanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (sourcePermanent != null && filter.match(sourcePermanent, source.getControllerId(), source, game)) {
                 return true;
             }
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            if (targetPermanent != null && filter.match(targetPermanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (targetPermanent != null && filter.match(targetPermanent, source.getControllerId(), source, game)) {
                 return true;
             }
         }

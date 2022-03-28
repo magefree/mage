@@ -69,7 +69,7 @@ class MagnigothTreefolkEffect extends ContinuousEffectImpl {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source, game
                 ).stream()
                 .map(p -> SubType
                         .getBasicLands()

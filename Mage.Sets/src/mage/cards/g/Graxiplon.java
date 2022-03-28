@@ -51,8 +51,6 @@ enum GraxiplonCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
-        return player == null || GreatestSharedCreatureTypeCount.getValue(
-                player.getId(), source.getSourceId(), game
-        ) < 3;
+        return player == null || GreatestSharedCreatureTypeCount.getValue(player.getId(), source, game) < 3;
     }
 }

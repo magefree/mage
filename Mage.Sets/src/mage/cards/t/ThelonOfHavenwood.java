@@ -84,7 +84,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             int numCounters = creature.getCounters(game).getCount(CounterType.SPORE);
             if (numCounters > 0) {
                 creature.addPower(numCounters);

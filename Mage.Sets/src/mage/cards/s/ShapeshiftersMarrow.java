@@ -56,7 +56,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player activePlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (activePlayer != null && sourceObject != null) {
                 Card card = activePlayer.getLibrary().getFromTop(game);
                 if (card != null) {

@@ -72,7 +72,7 @@ class CankerAbominationEffect extends OneShotEffect {
         if (controller != null && cankerAbomination != null) {
             Target target = new TargetOpponent();
             target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 game.informPlayers(cankerAbomination.getName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());

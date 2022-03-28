@@ -71,7 +71,7 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         Player controller = null;
         if (sourceObject != null) {
             controller = game.getPlayer(sourceObject.getControllerId());
@@ -114,16 +114,16 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
+            if (item.getId().equals(source.getSourceId())) {
                 object = item;
             }
-            if (item.getSourceId().equals(sourceId)) {
+            if (item.getSourceId().equals(source.getSourceId())) {
                 object = item;
             }
         }

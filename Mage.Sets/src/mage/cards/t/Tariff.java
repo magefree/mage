@@ -77,7 +77,7 @@ class TariffEffect extends OneShotEffect {
     }
 
     private void processPlayer(Game game, Ability source, Player player) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
 
         List<Permanent> creatures = getPermanentsWithTheHighestCMC(game, player.getId(), new FilterControlledCreaturePermanent());
 

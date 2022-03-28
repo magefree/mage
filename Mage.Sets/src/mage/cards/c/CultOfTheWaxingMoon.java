@@ -73,7 +73,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return filter.match(permanent, getSourceId(), getControllerId(), game);
+        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override

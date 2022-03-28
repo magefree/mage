@@ -70,7 +70,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             filter.add(new OwnerIdPredicate(player.getId()));
             toLib.addAll(player.getHand());
             toLib.addAll(player.getGraveyard());
-            for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
+            for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)){
                 toLib.add(permanent);
             }            
             player.shuffleCardsToLibrary(toLib, game, source);

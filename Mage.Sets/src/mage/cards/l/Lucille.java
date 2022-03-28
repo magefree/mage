@@ -83,10 +83,10 @@ class LucilleEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (!target.canChoose(player.getId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent.sacrifice(source, game)
                 && new WalkerToken().putOntoBattlefield(1, game, source, source.getControllerId()

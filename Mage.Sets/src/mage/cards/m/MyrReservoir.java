@@ -82,7 +82,7 @@ enum MyrReservoirManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object != null && object.hasSubtype(SubType.MYR, game)) {
             return true;
         }

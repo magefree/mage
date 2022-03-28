@@ -121,7 +121,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             TargetCard chosenCards = new TargetCard(numberToReveal, numberToReveal,
                     Zone.HAND, new FilterCard("card in " + player.getName() + "'s hand"));
             chosenCards.setNotTarget(true);
-            if (chosenCards.canChoose(source.getSourceId(), player.getId(), game)
+            if (chosenCards.canChoose(player.getId(), source, game)
                     && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
                 if (!chosenCards.getTargets().isEmpty()) {
                     List<UUID> targets = chosenCards.getTargets();
@@ -142,7 +142,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
         boolean result = true;
-        int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
+        int filteredCardsCount = revealedCards.count(filter, source.getControllerId(), source, game);
         int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source, this), filteredCardsCount);
         if (numberToDiscard <= 0) {
             return result;

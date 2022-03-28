@@ -87,7 +87,7 @@ class DauntlessBodyguardChooseCreatureEffect extends OneShotEffect {
         Permanent mageObject = game.getPermanentEntering(source.getSourceId());
         if (controller != null && mageObject != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-            if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+            if (controller.choose(this.outcome, target, source, game)) {
                 Permanent chosenCreature = game.getPermanent(target.getFirstTarget());
                 if (chosenCreature != null) {
                     game.getState().setValue(mageObject.getId() + "_chosenCreature", new MageObjectReference(chosenCreature, game));

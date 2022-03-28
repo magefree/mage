@@ -87,7 +87,7 @@ class SpectralArcanistCastEffect extends OneShotEffect {
         FilterCard filterCard = new FilterInstantOrSorceryCard();
         filterCard.add(new ManaValuePredicate(
                 ComparisonType.FEWER_THAN,
-                game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game)
+                game.getBattlefield().count(filter, source.getControllerId(), source, game)
         ));
         Cards cards = new CardsImpl();
         game.getState()

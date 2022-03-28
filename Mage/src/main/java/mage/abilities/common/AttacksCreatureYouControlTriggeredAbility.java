@@ -61,7 +61,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (filter.match(sourcePermanent, sourceId, controllerId, game)) {
+        if (filter.match(sourcePermanent, controllerId, this, game)) {
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }

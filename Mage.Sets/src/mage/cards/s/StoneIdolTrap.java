@@ -65,7 +65,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int reductionAmount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         CardUtil.reduceCost(abilityToModify, reductionAmount);
         return true;
     }

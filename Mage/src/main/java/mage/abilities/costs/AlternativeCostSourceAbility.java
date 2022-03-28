@@ -117,7 +117,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (ability != null && AbilityType.SPELL == ability.getAbilityType()) {
             if (filter != null) {
                 Card card = game.getCard(ability.getSourceId());
-                if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {
+                if (!filter.match(card, ability.getControllerId(), ability, game)) {
                     return false;
                 }
             }

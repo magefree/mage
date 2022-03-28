@@ -1,24 +1,31 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class GoblinJavelineer extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature blocking it");
+
+    static {
+        filter.add(BlockingOrBlockedBySourcePredicate.BLOCKING);
+    }
 
     public GoblinJavelineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -32,10 +39,10 @@ public final class GoblinJavelineer extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Goblin Javelineer becomes blocked, it deals 1 damage to target creature blocking it.
-        Ability ability = new BecomesBlockedSourceTriggeredAbility(new DamageTargetEffect(1, "it"), false);
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking it");
-        filter.add(new BlockingAttackerIdPredicate(this.getId()));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new BecomesBlockedSourceTriggeredAbility(
+                new DamageTargetEffect(1, "it"), false
+        );
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

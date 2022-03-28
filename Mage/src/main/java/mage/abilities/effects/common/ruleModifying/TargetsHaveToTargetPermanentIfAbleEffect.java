@@ -66,7 +66,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You must choose at least " + this.filter.getMessage() + " on the battlefield as target if able (" + mageObject.getIdName() + ").";
         }
@@ -97,7 +97,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
             Ability ability = (Ability) getValue("targetAbility");
             if (ability != null) {
                 // Get all the allowed permanents on the battlefield in range of the abilities controller
-                List<Permanent> allowedPermanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), event.getSourceId(), game);
+                List<Permanent> allowedPermanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), source, game);
                 if (!allowedPermanents.isEmpty()) {
                     boolean canTargetAllowedPermanent = false;
                     for (UUID modeId : ability.getModes().getSelectedModes()) {

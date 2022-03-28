@@ -118,7 +118,7 @@ class ShadrixSilverquillEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getFirstTarget(), source.getSourceId(), game
+                source.getFirstTarget(), source, game
         )) {
             if (permanent == null) {
                 continue;

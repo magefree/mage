@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
@@ -104,7 +103,7 @@ class WidespreadPanicEffect extends OneShotEffect {
                 TargetCardInHand target = new TargetCardInHand();
                 target.setNotTarget(true);
                 target.setTargetName("a card from your hand to put on top of your library");
-                shuffler.choose(Outcome.Detriment, target, source.getSourceId(), game);
+                shuffler.choose(Outcome.Detriment, target, source, game);
                 Card card = shuffler.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     shuffler.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);

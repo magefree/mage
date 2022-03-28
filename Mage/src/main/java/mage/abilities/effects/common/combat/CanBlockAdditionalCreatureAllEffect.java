@@ -41,7 +41,7 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (permanent != null) {
                 // maxBlocks = 0 equals to "can block any number of creatures"
                 if (amount > 0) {

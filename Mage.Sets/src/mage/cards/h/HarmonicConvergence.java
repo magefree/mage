@@ -64,7 +64,7 @@ class HarmonicConvergenceEffect extends OneShotEffect {
                 FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Cards toLib = new CardsImpl();
-                for(Permanent enchantment: game.getBattlefield().getActivePermanents(filter, playerId, source.getSourceId(), game)) {
+                for(Permanent enchantment: game.getBattlefield().getActivePermanents(filter, playerId, source, game)) {
                     toLib.add(enchantment);
                 }
                 player.putCardsOnTopOfLibrary(toLib, game, source, true);

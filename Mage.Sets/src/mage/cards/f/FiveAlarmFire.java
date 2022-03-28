@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -89,7 +88,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedEvent) event).isCombatDamage() && !triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                     triggeringCreatures.add(event.getSourceId());
                     return true;
                 }

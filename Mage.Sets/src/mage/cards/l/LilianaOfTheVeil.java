@@ -85,7 +85,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(0, count, new FilterPermanent("permanents to put in the first pile"), true);
             List<Permanent> pile1 = new ArrayList<>();
             target.setRequired(false);
-            if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Neutral, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Permanent p = game.getPermanent(targetId);

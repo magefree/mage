@@ -60,7 +60,7 @@ public class RemoveCounterCost extends CostImpl {
                 return paid = true;
             }
             target.clearChosen();
-            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), source, game)) {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
@@ -122,7 +122,7 @@ public class RemoveCounterCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     private String setText() {

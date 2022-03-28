@@ -76,14 +76,14 @@ class SkullwinderEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetOpponent targetOpponent = new TargetOpponent(true);
-            if (controller.choose(Outcome.Detriment, targetOpponent, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Detriment, targetOpponent, source, game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
                     // That player returns a card from their graveyard to their hand
                     TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(new FilterCard("a card from your graveyard to return to your hand"));
                     targetCard.setNotTarget(true);
-                    if (opponent.choose(outcome, targetCard, source.getSourceId(), game)) {
+                    if (opponent.choose(outcome, targetCard, source, game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
                         if (card != null) {
                             opponent.moveCards(card, Zone.HAND, source, game);

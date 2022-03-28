@@ -49,7 +49,7 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
                 if (zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
-                    if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
+                    if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
                         return true;
                     }
                 }

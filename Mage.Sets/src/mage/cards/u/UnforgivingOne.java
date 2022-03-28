@@ -86,6 +86,6 @@ enum UnforgivingOnePredicate implements ObjectSourcePlayerPredicate<Card> {
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return input.getObject().getManaValue()
-                <= game.getBattlefield().count(filter, input.getSourceId(), input.getPlayerId(), game);
+                <= game.getBattlefield().count(filter, input.getPlayerId(), input.getSource(), game);
     }
 }

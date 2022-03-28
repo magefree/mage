@@ -49,7 +49,7 @@ public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
                 && !((DamageEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                return filter.match(permanent, source.getControllerId(), source, game);
             }
             return andToYou && source.getControllerId().equals(event.getTargetId());
         }

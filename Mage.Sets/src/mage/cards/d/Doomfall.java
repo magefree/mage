@@ -74,7 +74,7 @@ class DoomfallEffect extends OneShotEffect {
         if (targetPlayer != null) {
             Target target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            if (targetPlayer.choose(outcome, target, source.getSourceId(), game)) {
+            if (targetPlayer.choose(outcome, target, source, game)) {
                 targetPlayer.moveCards(game.getPermanent(target.getFirstTarget()), Zone.EXILED, source, game);
             }
             return true;

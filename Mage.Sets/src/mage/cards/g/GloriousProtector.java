@@ -95,7 +95,7 @@ class GloriousProtectorEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }

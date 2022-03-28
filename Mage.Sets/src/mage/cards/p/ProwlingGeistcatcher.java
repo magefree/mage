@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -110,11 +111,8 @@ class ProwlingGeistcatcherReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        return player.moveCards(game.getExile().getExileZone(
-                CardUtil.getExileZoneId(game, source)
-        ), Zone.BATTLEFIELD, source, game);
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return player != null && exileZone != null && !exileZone.isEmpty()
+                && player.moveCards(exileZone, Zone.BATTLEFIELD, source, game);
     }
 }

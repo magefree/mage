@@ -65,7 +65,7 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(new FilterCreaturePermanent(), this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(new FilterCreaturePermanent(), this.getControllerId(), this, game) == 0;
     }
 
     @Override

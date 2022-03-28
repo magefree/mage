@@ -12,14 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.BoostCounter;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -28,6 +27,13 @@ import java.util.UUID;
  */
 public final class LesserWerewolf extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature blocking or blocked by {this}");
+
+    static {
+        filter.add(BlockingOrBlockedBySourcePredicate.EITHER);
+    }
+
     public LesserWerewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.WEREWOLF);
@@ -35,13 +41,12 @@ public final class LesserWerewolf extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}: If Lesser Werewolf’s power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by Lesser Werewolf. Activate this ability only during the declare blockers step.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new LesserWerewolfEffect(), new ManaCostsImpl("{B}"), new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false));
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Lesser Werewolf");
-        filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
-                new BlockingAttackerIdPredicate(this.getId())));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD, new LesserWerewolfEffect(), new ManaCostsImpl<>("{B}"),
+                new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false)
+        );
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-
     }
 
     private LesserWerewolf(final LesserWerewolf card) {
@@ -75,13 +80,13 @@ class LesserWerewolfEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source)); // must be valid target
-        if (controller != null && sourcePermanent != null && targetPermanent != null) {
-            if (sourcePermanent.getPower().getValue() >= 1) {
-                game.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), source);
-                new AddCountersTargetEffect(new BoostCounter(0, -1), outcome).apply(game, source);
-            }
-            return true;
+        if (controller == null || sourcePermanent == null || targetPermanent == null) {
+            return false;
         }
-        return false;
+        if (sourcePermanent.getPower().getValue() >= 1) {
+            game.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), source);
+            new AddCountersTargetEffect(new BoostCounter(0, -1), outcome).apply(game, source);
+        }
+        return true;
     }
 }

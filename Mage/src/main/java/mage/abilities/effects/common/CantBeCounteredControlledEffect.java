@@ -59,7 +59,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.isControlledBy(source.getControllerId())
-                && filterTarget.match(spell, source.getSourceId(), source.getControllerId(), game)) {
+                && filterTarget.match(spell, source.getControllerId(), source, game)) {
             if (filterSource == null) {
                 return true;
             } else {

@@ -52,7 +52,7 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast can't cast noncreature spells (it is prevented by emblem of " + mageObject.getLogName() + ')';
         }

@@ -77,12 +77,12 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null
-                || game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0
+                || game.getBattlefield().count(filter, source.getControllerId(), source, game) == 0
                 || !player.chooseUse(outcome, "Sacrifice an enchantment?", source, game)) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

@@ -110,7 +110,7 @@ class SigilOfValorCount implements DynamicValue {
         if (equipment != null && equipment.getAttachedTo() != null) {
             FilterPermanent filterPermanent = new FilterControlledCreaturePermanent();
             filterPermanent.add(Predicates.not(new CardIdPredicate(equipment.getAttachedTo())));
-            return game.getBattlefield().count(filterPermanent, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+            return game.getBattlefield().count(filterPermanent, sourceAbility.getControllerId(), sourceAbility, game);
         }
         return 0;
     }

@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -79,7 +78,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
         Map<String, UUID> cardNames = new HashMap<>();
         Map<UUID, Integer> toDestroy = new HashMap<>();
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             String cardName = permanent.getName();
             if (cardNames.get(cardName) == null) {
                 cardNames.put(cardName, permanent.getId());
@@ -166,7 +165,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
         }
         String cn = etbPermanent.getName();
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             String cardName = permanent.getName();
             if (cardName.equals(cn) && !Objects.equals(permanent.getId(), etbPermanent.getId())) {
                 toDestroy.put(permanent.getId(), 1);
