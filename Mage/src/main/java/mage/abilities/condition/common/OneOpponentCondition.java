@@ -19,6 +19,7 @@ public enum OneOpponentCondition implements Condition {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
+                .filter(player -> !player.hasLost())
                 .count() <= 1;
     }
 
