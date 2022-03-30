@@ -8,6 +8,7 @@ import mage.game.permanent.Permanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +29,13 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
 
     protected abstract List<UUID> getTargetIds(Game game, Ability source);
 
+    private Predicate<UUID> checkTargetId(Game game) {
+        return targetId -> targets
+                .stream()
+                .noneMatch(mor -> mor.getSourceId().equals(targetId)
+                        && !mor.zoneCounterIsCurrent(game));
+    }
+
     @Override
     public void init(Game game, Ability source) {
         for (UUID target : getTargetIds(game, source)) {
@@ -37,20 +45,18 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        return targets
+        return getTargetIds(game, source)
                 .stream()
-                .filter(mor -> mor.zoneCounterIsCurrent(game))
-                .map(MageObjectReference::getSourceId)
+                .filter(checkTargetId(game))
                 .collect(Collectors.toList());
     }
 
     @Override
     public UUID getFirst(Game game, Ability source) {
-        return targets
+        return getTargetIds(game, source)
                 .stream()
                 .findFirst()
-                .filter(mor -> mor.zoneCounterIsCurrent(game))
-                .map(MageObjectReference::getSourceId)
+                .filter(checkTargetId(game))
                 .orElse(null);
     }
 
@@ -66,9 +72,6 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
 
     @Override
     public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
-        if (!targets.isEmpty()) {
-            return targets.get(0).getPermanent(game);
-        }
-        return null;
+        return game.getPermanentOrLKIBattlefield(getFirst(game, source));
     }
 }
