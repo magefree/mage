@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.mage.test.cards.single.pc2;
 
 import mage.constants.PhaseStep;
@@ -10,10 +6,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
-/**
- *
- * @author dev
- */
 public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
     
     @Test
@@ -35,7 +27,7 @@ public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 2);
+        assertPermanentCount(playerA, "Eldrazi Token", 2);
         assertTappedCount("Fractured Powerstone", true, 1);
     }
     
@@ -63,7 +55,7 @@ public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 3);
+        assertPermanentCount(playerA, "Eldrazi Token", 3);
         assertTappedCount("Mountain", true, 1); // cost for second planar die
     }
 }
