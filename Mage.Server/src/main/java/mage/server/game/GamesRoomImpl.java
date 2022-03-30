@@ -81,34 +81,34 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }
         tableView = tableList;
         List<UsersView> users = new ArrayList<>();
-        String pingInfo;
         for (User user : managerFactory.userManager().getUsers()) {
-            
-            Session session = managerFactory.sessionManager().getSession(user.getSessionId()).get();
-            pingInfo = session == null ? "<no ping>" : session.getPingInfo();
-            if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
-                try {
-                    users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
-                            user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
-                            user.getTourneyQuitRatio(), user.getGameInfo(), pingInfo,
-                            user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
-                            user.getUserData().getLimitedRating()));
-                } catch (Exception ex) {
-                    LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
-                    users.add(new UsersView(
-                            (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
-                            user.getName() != null ? user.getName() : "<no name>",
-                            user.getMatchHistory() != null ? user.getMatchHistory() : "<no match history>",
-                            user.getMatchQuitRatio(),
-                            user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
-                            user.getTourneyQuitRatio(),
-                            "[exception]",
-                            pingInfo,
-                            user.getUserData() != null ? user.getUserData().getGeneralRating() : 0,
-                            user.getUserData() != null ? user.getUserData().getConstructedRating() : 0,
-                            user.getUserData() != null ? user.getUserData().getLimitedRating() : 0));
+            managerFactory.sessionManager().getSession(user.getSessionId()).ifPresent(session -> {
+                String pingInfo;
+                pingInfo = session == null ? "<no ping>" : session.getPingInfo();
+                if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
+                    try {
+                        users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
+                                user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
+                                user.getTourneyQuitRatio(), user.getGameInfo(), pingInfo,
+                                user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
+                                user.getUserData().getLimitedRating()));
+                    } catch (Exception ex) {
+                        LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
+                        users.add(new UsersView(
+                                (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
+                                user.getName() != null ? user.getName() : "<no name>",
+                                user.getMatchHistory() != null ? user.getMatchHistory() : "<no match history>",
+                                user.getMatchQuitRatio(),
+                                user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
+                                user.getTourneyQuitRatio(),
+                                "[exception]",
+                                pingInfo,
+                                user.getUserData() != null ? user.getUserData().getGeneralRating() : 0,
+                                user.getUserData() != null ? user.getUserData().getConstructedRating() : 0,
+                                user.getUserData() != null ? user.getUserData().getLimitedRating() : 0));
+                    }
                 }
-            }
+            });
         }
 
         users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
