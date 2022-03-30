@@ -107,6 +107,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean manaBurn = false;
     private boolean hasDayNight = false;
     private boolean isDaytime = true;
+    private boolean reverseTurnOrder = false;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -1433,9 +1434,21 @@ public class GameState implements Serializable, Copyable<GameState> {
     boolean isDaytime() {
         return isDaytime;
     }
-
+    
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
+    }
+
+    public boolean setReverseTurnOrder(boolean reverse){
+        if(this.reverseTurnOrder&&reverse){
+            this.reverseTurnOrder = false;
+        } else {
+            this.reverseTurnOrder = reverse;
+        }
+        return this.reverseTurnOrder;
+    }
+    public boolean getReverseTurnOrder(){
+        return this.reverseTurnOrder;
     }
 }

@@ -20,6 +20,7 @@ public final class Commander2019Edition extends ExpansionSet {
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Ainok Survivalist", 156, Rarity.COMMON, mage.cards.a.AinokSurvivalist.class));
+        cards.add(new SetCardInfo("Aeon Engine", 52, Rarity.RARE, mage.cards.a.AeonEngine.class));
         cards.add(new SetCardInfo("Akoum Refuge", 226, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));
         cards.add(new SetCardInfo("Alchemist's Greeting", 133, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class));
         cards.add(new SetCardInfo("Angel of Sanctions", 61, Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
