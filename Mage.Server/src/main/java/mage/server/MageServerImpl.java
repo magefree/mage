@@ -163,10 +163,10 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean connectUser(final Connection connection, final String sessionId, MageVersion version, String host)  {
+    public String connectUser(final Connection connection, final String sessionId, MageVersion version, String host)  {
         if (version.compareTo(Main.getVersion()) != 0) {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version + " sessionId=" + sessionId);
-            return false;
+            return "MageVersionException: client - "+version+" server - "+Main.getVersion();
         }
         else {
             return managerFactory.sessionManager().connectUser(sessionId, connection, host);

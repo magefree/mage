@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import javax.net.ssl.SSLException;
 
 /**
  * Allows client to make requests to server
@@ -79,7 +78,6 @@ public class SessionImpl implements Session {
 
         @Override
         public void initChannel(SocketChannel ch) throws Exception {
-
             if (sslCtx != null) {
                 ch.pipeline().addLast(sslCtx.newHandler(ch.alloc(), host, port));
             }
@@ -88,42 +86,32 @@ public class SessionImpl implements Session {
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
             ch.pipeline().addLast("heartbeatHandler", new HeartbeatHandler());
             ch.pipeline().addLast("pingMessageHandler", new PingMessageHandler());
-
-//            ch.pipeline().addLast("h", h);
-//            ch.pipeline().addLast("clientConnectedMessageHandler", clientConnectedMessageHandler);
             ch.pipeline().addLast("clientMessageHandler", clientMessageHandler);
-
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
     }
 
     @Override
     public boolean register(Connection connection, MageVersion version) {
-        /*if(connect(connection,version)){
-            try {
-                return clientMessageHandler.registerUser(connection);
-            } catch (Exception ex) {
-                logger.error("Error joining tournament table", ex);
-            }
-        }
-        return false;*/
         this.username = connection.getUsername();
         this.host = connection.getHost();
         this.port = connection.getPort();
-
+        
         try {
             if (connection.isSSL()) {
                 sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
             } else {
                 sslCtx = null;
             }
+
             clientMessageHandler = new ClientMessageHandler(client, true);
             exceptionHandler = new ClientExceptionHandler(this);
+
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
                     .handler(new SessionInitializer());
-            
+
             clientMessageHandler.setConnection(connection);
             clientMessageHandler.setVersion(version);
             channel = bootstrap.connect(host, port).sync().channel();
@@ -180,9 +168,9 @@ public class SessionImpl implements Session {
             clientMessageHandler.setConnection(connection);
             clientMessageHandler.setVersion(version);
             channel = bootstrap.connect(host, port).sync().channel();
-            ServerState state = clientMessageHandler.connectClient();
-            if (state.isValid()) {
-                client.clientRegistered(state);
+            Optional<ServerState> state = clientMessageHandler.connectClient();
+            if ((!state.isEmpty())&&state.get().isValid()) {
+                client.clientRegistered(state.get());
                 client.connected(connection.getUsername() + "@" + host + ":" + port + " ");
                 return true;
             } else {

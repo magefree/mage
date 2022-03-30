@@ -14,7 +14,7 @@ public interface SessionManager {
 
     String registerUser(String sessionId, Connection connection, String host);
 
-    boolean connectUser(String sessionId, Connection connection, String host);
+    String connectUser(String sessionId, Connection connection, String host);
 
     boolean connectAdmin(String sessionId);
 

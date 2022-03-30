@@ -4,7 +4,6 @@ import mage.players.net.UserData;
 import mage.server.managers.SessionManager;
 import mage.server.managers.ManagerFactory;
 import mage.remote.Connection;
-import mage.remote.messages.MessageType;
 import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
 
@@ -60,25 +59,21 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public boolean connectUser(String sessionId, Connection connection, String host) {
+    public String connectUser(String sessionId, Connection connection, String host) {
         Session session = new Session(managerFactory,sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);
-        if (session != null) {
-            String returnMessage = session.connectUser(connection.getUsername(), connection.getPassword());
-            if (returnMessage == null) {
-                logger.info(connection.getUsername() + " connected to server");
-                logger.debug("- userId:    " + session.getUserId());
-                logger.debug("- sessionId: " + sessionId);
-                logger.debug("- host:      " + session.getHost());
-                return true;
-            } else {
-                logger.debug(connection.getUsername() + " not connected: " + returnMessage);
-            }
+        String returnMessage = session.connectUser(connection.getUsername(), connection.getPassword());
+        if (returnMessage == null) {
+            logger.info(connection.getUsername() + " connected to server");
+            logger.debug("- userId:    " + session.getUserId());
+            logger.debug("- sessionId: " + sessionId);
+            logger.debug("- host:      " + session.getHost());
+            return null;
         } else {
-            logger.error(connection.getUsername() + " tried to connect with no sessionId");
+            logger.debug(connection.getUsername() + " not connected: " + returnMessage);
+            return returnMessage;
         }
-        return false;
     }
 
     @Override
