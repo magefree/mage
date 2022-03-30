@@ -50,15 +50,16 @@ public class Mode implements Serializable {
         return targets;
     }
 
-    public void addTarget(Target target) {
-        this.addTarget(target, false);
+    public Mode addTarget(Target target) {
+        return this.addTarget(target, false);
     }
 
-    public void addTarget(Target target, Boolean addChooseHintFromEffect) {
+    public Mode addTarget(Target target, Boolean addChooseHintFromEffect) {
         targets.add(target);
         if (addChooseHintFromEffect) {
             target.withChooseHint(this.getEffects().getText(this));
         }
+        return this;
     }
 
     public Effects getEffects() {
