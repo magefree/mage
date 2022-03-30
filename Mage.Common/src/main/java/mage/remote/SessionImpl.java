@@ -99,6 +99,14 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean register(Connection connection, MageVersion version) {
+        /*if(connect(connection,version)){
+            try {
+                return clientMessageHandler.registerUser(connection);
+            } catch (Exception ex) {
+                logger.error("Error joining tournament table", ex);
+            }
+        }
+        return false;*/
         this.username = connection.getUsername();
         this.host = connection.getHost();
         this.port = connection.getPort();
@@ -109,6 +117,8 @@ public class SessionImpl implements Session {
             } else {
                 sslCtx = null;
             }
+            clientMessageHandler = new ClientMessageHandler(client, true);
+            exceptionHandler = new ClientExceptionHandler(this);
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
@@ -117,15 +127,10 @@ public class SessionImpl implements Session {
             clientMessageHandler.setConnection(connection);
             clientMessageHandler.setVersion(version);
             channel = bootstrap.connect(host, port).sync().channel();
-            ServerState state = clientMessageHandler.registerUser();
-            if (state.isValid()) {
-                client.clientRegistered(state);
-                client.connected(connection.getUsername() + "@" + host + ":" + port + " ");
-                return true;
-            } else {
-                disconnect(false);
-            }
-        } catch (SSLException | InterruptedException ex) {
+            boolean ret = clientMessageHandler.registerUser();
+            disconnect(false);
+            return ret;
+        } catch (Exception ex) {
             logger.fatal("Error connecting", ex);
             client.inform("Error", "Error connecting", MessageType.ERROR);
             disconnect(false);
@@ -165,6 +170,8 @@ public class SessionImpl implements Session {
             } else {
                 sslCtx = null;
             }
+            clientMessageHandler = new ClientMessageHandler(client, false);
+            exceptionHandler = new ClientExceptionHandler(this);
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)

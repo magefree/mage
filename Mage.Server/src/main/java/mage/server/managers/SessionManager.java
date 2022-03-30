@@ -12,7 +12,7 @@ import mage.remote.Connection;
 public interface SessionManager {
     Optional<Session> getSession(@Nonnull String sessionId);
 
-    boolean registerUser(String sessionId, Connection connection, String host);
+    String registerUser(String sessionId, Connection connection, String host);
 
     boolean connectUser(String sessionId, Connection connection, String host);
 

@@ -43,21 +43,20 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public boolean registerUser(String sessionId, Connection connection, String host) {
+    public String registerUser(String sessionId, Connection connection, String host) {
         Session session = new Session(managerFactory,sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);
         String returnMessage = session.registerUser(connection);
-        if (returnMessage == null) {
-            logger.info(connection.getUsername() + " joined server");
-            logger.debug("- userId:    " + session.getUserId());
-            logger.debug("- sessionId: " + sessionId);
-            logger.debug("- host:      " + session.getHost());
-            return true;
+        if (returnMessage != null) {
+            logger.debug(connection.getUsername() + " not registered: " + returnMessage);
+            return returnMessage;
         }
-        logger.debug(connection.getUsername() + " not registered: " + returnMessage);
-        Main.informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
-        return false;
+        logger.info(connection.getUsername() + " registered");
+        logger.debug("- userId:    " + session.getUserId());
+        logger.debug("- sessionId: " + sessionId);
+        logger.debug("- host:      " + session.getHost());
+        return null;
     }
 
     @Override

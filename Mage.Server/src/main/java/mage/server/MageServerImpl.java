@@ -91,12 +91,10 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean registerUser(final Connection connection, final String sessionId, final MageVersion version, final String host) {
+    public String registerUser(final Connection connection, final String sessionId, final MageVersion version, String host) {
         if (version.compareTo(getVersion()) != 0) {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version);
-            String message = "Wrong client version " + version + ", expecting version " + getVersion() + ". \r\n\r\nPlease download needed version from http://XMage.de or http://www.slightlymagic.net/forum/viewforum.php?f=70";
-            Main.getClientCallback().informClient(sessionId, "Wrong version", message, MessageType.ERROR);
-            return false;
+            return "MageVersionException: userName=" + connection.getUsername() + ", version=" + version;
         }
         return managerFactory.sessionManager().registerUser(sessionId, connection, host);
     }
@@ -170,8 +168,7 @@ public class MageServerImpl implements MageServer {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version + " sessionId=" + sessionId);
             return false;
         }
-        else
-        {
+        else {
             return managerFactory.sessionManager().connectUser(sessionId, connection, host);
         }
     }
