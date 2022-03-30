@@ -134,7 +134,9 @@ public final class SessionHandler {
     }
     
     public static void setPreferences(UserData userData) {
-        session.setPreferences(userData);
+        if(isConnected()){
+            session.setPreferences(userData);
+        }
     }
 
     public static boolean startTournament(UUID roomId, UUID tableId) {
