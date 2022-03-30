@@ -5,9 +5,8 @@ import mage.game.Game;
 import mage.target.Target;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EachTargetPointer extends NonFixedTargetPointer {
 
@@ -25,12 +24,11 @@ public class EachTargetPointer extends NonFixedTargetPointer {
     }
 
     @Override
-    protected List<UUID> getTargetIds(Game game, Ability source) {
+    protected Stream<UUID> getTargetStream(Game game, Ability source) {
         return source
                 .getTargets()
                 .stream()
                 .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .flatMap(Collection::stream);
     }
 }

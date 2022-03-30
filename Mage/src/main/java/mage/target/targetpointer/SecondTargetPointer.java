@@ -3,9 +3,8 @@ package mage.target.targetpointer;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class SecondTargetPointer extends NonFixedTargetPointer {
 
@@ -23,10 +22,10 @@ public class SecondTargetPointer extends NonFixedTargetPointer {
     }
 
     @Override
-    protected List<UUID> getTargetIds(Game game, Ability source) {
+    protected Stream<UUID> getTargetStream(Game game, Ability source) {
         if (source.getTargets().size() < 2) {
-            return new ArrayList<>();
+            return Stream.of();
         }
-        return source.getTargets().get(1).getTargets();
+        return source.getTargets().get(1).getTargets().stream();
     }
 }

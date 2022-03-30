@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -27,7 +28,7 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
         this.targets.addAll(targetPointer.targets);
     }
 
-    protected abstract List<UUID> getTargetIds(Game game, Ability source);
+    protected abstract Stream<UUID> getTargetStream(Game game, Ability source);
 
     private Predicate<UUID> checkTargetId(Game game) {
         return targetId -> targets
@@ -38,23 +39,21 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
 
     @Override
     public void init(Game game, Ability source) {
-        for (UUID target : getTargetIds(game, source)) {
-            this.targets.add(new MageObjectReference(target, game));
-        }
+        this.getTargetStream(game, source)
+                .map(uuid -> new MageObjectReference(uuid, game))
+                .forEach(targets::add);
     }
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        return getTargetIds(game, source)
-                .stream()
+        return this.getTargetStream(game, source)
                 .filter(checkTargetId(game))
                 .collect(Collectors.toList());
     }
 
     @Override
     public UUID getFirst(Game game, Ability source) {
-        return getTargetIds(game, source)
-                .stream()
+        return this.getTargetStream(game, source)
                 .findFirst()
                 .filter(checkTargetId(game))
                 .orElse(null);
