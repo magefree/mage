@@ -33,8 +33,7 @@ public abstract class NonFixedTargetPointer extends TargetPointerImpl {
     private Predicate<UUID> checkTargetId(Game game) {
         return targetId -> targets
                 .stream()
-                .noneMatch(mor -> mor.getSourceId().equals(targetId)
-                        && !mor.zoneCounterIsCurrent(game));
+                .noneMatch(mor -> mor.matchesButNotCurrent(targetId, game));
     }
 
     @Override

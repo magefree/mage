@@ -180,7 +180,11 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     public boolean zoneCounterIsCurrent(Game game) {
-        return game.getState().getZoneChangeCounter(sourceId) == zoneChangeCounter
-                || game.getPlayerList().contains(sourceId);
+        return (zoneChangeCounter == 0) == game.getPlayerList().contains(sourceId)
+                || game.getState().getZoneChangeCounter(sourceId) == zoneChangeCounter;
+    }
+
+    public boolean matchesButNotCurrent(UUID id, Game game) {
+        return sourceId != null && sourceId.equals(id) && !zoneCounterIsCurrent(game);
     }
 }
