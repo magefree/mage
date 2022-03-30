@@ -159,17 +159,17 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
+    public void gameChooseAbility(UUID gameId, GameView gameView, AbilityPickerView abilities) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
+    public void gameChoosePile(UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void gameChooseChoice(UUID gameId, Choice choice) {
+    public void gameChooseChoice(UUID gameId, GameView gameView,  Choice choice) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

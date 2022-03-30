@@ -63,21 +63,21 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void chooseAbility(final AbilityPickerView abilities) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.gameChooseAbility(game.getId(), abilities));
+            userManager.getUser(userId).ifPresent(user -> user.gameChooseAbility(game.getId(), getGameView(), abilities));
         }
 
     }
 
     public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.gameChoosePile(game.getId(), message, pile1, pile2));
+            userManager.getUser(userId).ifPresent(user -> user.gameChoosePile(game.getId(), getGameView(), message, pile1, pile2));
         }
 
     }
 
     public void chooseChoice(final Choice choice) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.gameChooseChoice(game.getId(), choice));
+            userManager.getUser(userId).ifPresent(user -> user.gameChooseChoice(game.getId(), getGameView(), choice));
         }
 
     }

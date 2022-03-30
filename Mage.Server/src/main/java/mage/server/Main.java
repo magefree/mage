@@ -366,16 +366,16 @@ public final class Main {
         clientCallback.gameSelect(sessionId, gameId, gameView, message, options);
     }
 
-    public static void gameChooseAbility(String sessionId, UUID gameId, AbilityPickerView abilities) {
-        clientCallback.gameChooseAbility(sessionId, gameId, abilities);
+    public static void gameChooseAbility(String sessionId, UUID gameId, GameView gameView, AbilityPickerView abilities) {
+        clientCallback.gameChooseAbility(sessionId, gameId, gameView, abilities);
     }
     
-    public static void gameChoosePile(String sessionId, UUID gameId, String message, CardsView pile1, CardsView pile2) {
-        clientCallback.gameChoosePile(sessionId, gameId, message, pile1, pile2);
+    public static void gameChoosePile(String sessionId, UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
+        clientCallback.gameChoosePile(sessionId, gameId, gameView, message, pile1, pile2);
     }
 
-    public static void gameChooseChoice(String sessionId, UUID gameId, Choice choice) {
-        clientCallback.gameChooseChoice(sessionId, gameId, choice);
+    public static void gameChooseChoice(String sessionId, UUID gameId, GameView gameView, Choice choice) {
+        clientCallback.gameChooseChoice(sessionId, gameId, gameView, choice);
     }
 
     public static void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {

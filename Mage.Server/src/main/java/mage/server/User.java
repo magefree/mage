@@ -281,16 +281,16 @@ public class User {
         Main.gameSelect(sessionId, gameId, gameView, message, options);
     }
 
-    public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
-        Main.gameChooseAbility(sessionId, gameId, abilities);
+    public void gameChooseAbility(UUID gameId, GameView gameView, AbilityPickerView abilities) {
+        Main.gameChooseAbility(sessionId, gameId, gameView, abilities);
     }
 
-    public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
-        Main.gameChoosePile(sessionId, gameId, message, pile1, pile2);
+    public void gameChoosePile(UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
+        Main.gameChoosePile(sessionId, gameId, gameView, message, pile1, pile2);
     }
 
-    public void gameChooseChoice(UUID gameId, Choice choice) {
-        Main.gameChooseChoice(sessionId, gameId, choice);
+    public void gameChooseChoice(UUID gameId, GameView gameView, Choice choice) {
+        Main.gameChooseChoice(sessionId, gameId, gameView, choice);
     }
 
     public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
