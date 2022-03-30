@@ -152,7 +152,7 @@ public class TablesTableModel extends AbstractTableModel {
 
                     case WAITING:
                         String owner = tables[rowIndex].getControllerName();
-                        if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
+                        if (SessionHandler.isConnected() && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
                         return "Join";
@@ -166,7 +166,7 @@ public class TablesTableModel extends AbstractTableModel {
                             return "Show";
                         } else {
                             owner = tables[rowIndex].getControllerName();
-                            if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
+                            if (SessionHandler.isConnected() && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
                             if (tables[rowIndex].getSpectatorsAllowed()) {

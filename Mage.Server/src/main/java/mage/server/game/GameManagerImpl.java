@@ -129,12 +129,12 @@ public class GameManagerImpl implements GameManager {
     }
 
     @Override
-    public boolean watchGame(UUID gameId, UUID userId) {
-        GameController gameController = getGameControllerSafe(gameId);
+    public GameView watchGame(UUID gameId, UUID userId) {
+        GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
             return gameController.watch(userId);
         }
-        return false;
+        return null;
     }
 
     @Override

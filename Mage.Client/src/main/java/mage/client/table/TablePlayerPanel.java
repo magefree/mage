@@ -46,7 +46,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
             return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), "");
-        }
+         }
         return true;
     }
 

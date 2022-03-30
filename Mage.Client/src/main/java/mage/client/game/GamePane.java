@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.swing.*;
 
 import mage.client.MagePane;
+import mage.view.GameView;
 
 /**
  * Game GUI: game panel with scrollbars
@@ -48,10 +49,10 @@ public class GamePane extends MagePane {
         this.removeFrame();
     }
 
-    public void watchGame(UUID gameId) {
+    public void watchGame(UUID gameId, UUID chatId, GameView game) {
         this.setTitle("Watching " + gameId);
         this.gameId = gameId;
-        gamePanel.watchGame(gameId, this);
+        gamePanel.watchGame(gameId, chatId, game, this);
     }
 
     public void replayGame(UUID gameId) {

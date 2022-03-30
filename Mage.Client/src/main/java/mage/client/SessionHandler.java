@@ -1,8 +1,6 @@
 package mage.client;
 
 import mage.cards.decks.DeckCardLists;
-import mage.client.chat.LocalCommands;
-import mage.client.dialog.PreferencesDialog;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
@@ -14,9 +12,14 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.ExpansionInfo;
+import mage.utils.CompressUtil;
+import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.io.Serializable;
 
 /**
  * Created by IGOUDT on 15-9-2016.
@@ -25,6 +28,8 @@ public final class SessionHandler {
 
 
     private static final Logger logger = Logger.getLogger(SessionHandler.class);
+    
+    private static final MageVersion VERSION = new MageVersion(SessionHandler.class);
 
     private static Session session;
     private static String lastConnectError = "";
@@ -35,11 +40,10 @@ public final class SessionHandler {
     public static void startSession(MageFrame mageFrame) {
 
         session = new SessionImpl(mageFrame);
-        session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_JSON_GAME_LOG_AUTO_SAVE, "true")));
     }
 
     public static void ping() {
-        session.ping();
+        session.ping(new Connection());
     }
 
     public static Session getSession() {
@@ -47,36 +51,25 @@ public final class SessionHandler {
     }
 
     public static boolean isConnected() {
+        if(session == null){
+            return false;
+        }
         return session.isConnected();
     }
 
-    public static String getVersionInfo() {
-        return session.getVersionInfo();
-    }
-
     public static boolean connect(Connection connection) {
-        lastConnectError = "";
-        if (session.connect(connection)) {
-            return true;
-        } else {
-            lastConnectError = session.getLastError();
-            return false;
-        }
+        return session.connect(connection, VERSION);
     }
 
     public static String getLastConnectError() {
         return lastConnectError;
     }
 
-    public static boolean stopConnecting() {
-        return session.stopConnecting();
-    }
-
     public static void disconnect(boolean showmessage) {
         session.disconnect(showmessage);
     }
 
-    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object relatedUserId) {
+    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Serializable relatedUserId) {
         session.sendPlayerAction(playerAction, gameId, relatedUserId);
     }
 
@@ -96,8 +89,8 @@ public final class SessionHandler {
         session.stopWatching(gameId);
     }
 
-    public static void removeTable(UUID roomId, UUID tableId) {
-        session.removeTable(roomId, tableId);
+    public static void removeTable(UUID roomId) {
+        session.removeTable(roomId);
     }
 
     public static void stopReplay(UUID gameId) {
@@ -113,7 +106,7 @@ public final class SessionHandler {
     }
 
     public static PlayerType[] getPlayerTypes() {
-        return session.getPlayerTypes();
+        return session.getServerState().getPlayerTypes();
     }
 
     public static boolean joinTournamentTable(UUID roomId, UUID tableId, String text, PlayerType selectedItem, Integer integer, DeckCardLists deckCardLists, String s) {
@@ -139,17 +132,9 @@ public final class SessionHandler {
     public static boolean leaveTable(UUID roomId, UUID tableId) {
         return session.leaveTable(roomId, tableId);
     }
-
-    public static void updatePreferencesForServer(UserData userData) {
-        session.updatePreferencesForServer(userData);
-    }
-
-    public static boolean isTableOwner(UUID roomId, UUID tableId) {
-        return session.isTableOwner(roomId, tableId);
-    }
-
-    public static Optional<UUID> getTableChatId(UUID tableId) {
-        return session.getTableChatId(tableId);
+    
+    public static void setPreferences(UserData userData) {
+        session.setPreferences(userData);
     }
 
     public static boolean startTournament(UUID roomId, UUID tableId) {
@@ -160,11 +145,7 @@ public final class SessionHandler {
         return session.startMatch(roomId, tableId);
     }
 
-    public static Optional<UUID> getGameChatId(UUID gameId) {
-        return session.getGameChatId(gameId);
-    }
-
-    public static boolean joinGame(UUID gameId) {
+    public static Optional<UUID> joinGame(UUID gameId) {
         return session.joinGame(gameId);
     }
 
@@ -176,8 +157,8 @@ public final class SessionHandler {
         session.watchTournamentTable(tableId);
     }
 
-    public static boolean joinTournament(UUID tournamentId) {
-        return session.joinTournament(tournamentId);
+    public static void joinTournament(UUID tournamentId) {
+        session.joinTournament(tournamentId);
     }
 
     public static Optional<UUID> getTournamentChatId(UUID tournamentId) {
@@ -215,7 +196,7 @@ public final class SessionHandler {
     }
 
     public static boolean isTestMode() {
-        return session.isTestMode();
+        return session.getServerState().isTestMode();
     }
 
     public static void cheat(UUID gameId, UUID playerId, DeckCardLists deckCardLists) {
@@ -227,7 +208,7 @@ public final class SessionHandler {
     }
 
     public static List<TournamentTypeView> getTournamentTypes() {
-        return session.getTournamentTypes();
+        return session.getServerState().getTournamentTypes();
     }
 
     public static boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) {
@@ -235,17 +216,17 @@ public final class SessionHandler {
     }
 
     public static String[] getDeckTypes() {
-        return session.getDeckTypes();
+        return session.getServerState().getDeckTypes();
     }
 
     public static String[] getDraftCubes() {
-        return session.getDraftCubes();
+        return session.getServerState().getDraftCubes();
     }
 
     public static List<GameTypeView> getTournamentGameTypes() {
-        return session.getTournamentGameTypes();
+        return session.getServerState().getTournamentGameTypes();
     }
-
+    
     public static TableView createTournamentTable(UUID roomId, TournamentOptions tOptions) {
         return session.createTournamentTable(roomId, tOptions);
     }
@@ -259,45 +240,27 @@ public final class SessionHandler {
     }
 
     public static List<GameTypeView> getGameTypes() {
-        return session.getGameTypes();
+        return session.getServerState().getGameTypes();
     }
-
-    public static boolean joinDraft(UUID draftId) {
-        return session.joinDraft(draftId);
+    
+    public static void joinDraft(UUID draftId) {
+        session.joinDraft(draftId);
     }
-
-    public static DraftPickView sendCardPick(UUID draftId, UUID id, Set<UUID> cardsHidden) {
-        return session.sendCardPick(draftId, id, cardsHidden);
+    
+    public static DraftPickView pickCard(UUID draftId, UUID cardId, Set<UUID> cardsHidden){
+        return session.pickCard(draftId, cardId, cardsHidden);
     }
-
-    public static void sendCardMark(UUID draftId, UUID id) {
-        session.sendCardMark(draftId, id);
+    
+    public static void markCard(UUID draftId, UUID cardId) {
+        session.markCard(draftId, cardId);
     }
     
     public static void setBoosterLoaded(UUID draftId) {
         session.setBoosterLoaded(draftId);
     }
-
+    
     public static Optional<UUID> getRoomChatId(UUID roomId) {
         return session.getRoomChatId(roomId);
-    }
-
-    public static Collection<RoomUsersView> getRoomUsers(UUID roomId) {
-        try {
-            return session.getRoomUsers(roomId);
-        } catch (MageRemoteException e) {
-            logger.info(e);
-            return Collections.emptyList();
-        }
-    }
-
-    public static Collection<MatchView> getFinishedMatches(UUID roomId) {
-        try {
-            return session.getFinishedMatches(roomId);
-        } catch (MageRemoteException e) {
-            logger.info(e);
-            return Collections.emptyList();
-        }
     }
 
     public static void replayGame(UUID id) {
@@ -309,36 +272,27 @@ public final class SessionHandler {
     }
 
     public static Collection<TableView> getTables(UUID roomId) {
-        try {
-            return session.getTables(roomId);
-        } catch (MageRemoteException e) {
-            logger.info(e);
-            return Collections.emptyList();
-        }
+        return session.getTables(roomId);
     }
 
     public static List<String> getServerMessages() {
-        return session.getServerMessages();
+        return (List<String>) CompressUtil.decompress(session.getServerMessages());
     }
 
-    public static boolean joinChat(UUID chatId) {
-        return session.joinChat(chatId);
+    public static void joinChat(UUID chatId) {
+        session.joinChat(chatId);
     }
 
-    public static boolean leaveChat(UUID chatId) {
-        return session.leaveChat(chatId);
+    public static void leaveChat(UUID chatId) {
+        session.leaveChat(chatId);
     }
 
-    public static boolean sendChatMessage(UUID chatId, String text) {
-        if (!LocalCommands.handleLocalCommands(chatId, text)) {
-            return session.sendChatMessage(chatId, text);
-        } else {
-            return false;
-        }
+    public static void sendChatMessage(UUID chatId, String text) {
+        session.sendChatMessage(chatId, text);
     }
 
-    public static boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data) {
-        return session.sendPlayerManaType(gameId, playerId, data);
+    public static void sendPlayerManaType(UUID gameId, UUID playerId, ManaType data) {
+        session.sendPlayerManaType(gameId, playerId, data);
     }
 
     public static Optional<TableView> getTable(UUID roomId, UUID tableId) {
@@ -358,6 +312,26 @@ public final class SessionHandler {
     }
 
     public static boolean register(Connection connection) {
-        return session.register(connection);
+        return session.register(connection,VERSION);
+    }
+    
+    public static List<ExpansionInfo> getMissingExpansionsData(List<String> setCodes) {
+        return session.getMissingExpansionsData(setCodes);
+    }
+    
+    public static List<CardInfo> getMissingCardsData(List<String> cards) {
+        return session.getMissingCardsData(cards);
+    }
+    
+    public static Optional<String> getServerHostname() {
+        return session.getServerHostname();
+    }
+    
+    public static UUID getMainRoomId(){
+        return session.getMainRoomId();
+    }
+    
+    public static RoomView getRoom(UUID roomId) {
+        return session.getRoom(roomId);
     }
 }

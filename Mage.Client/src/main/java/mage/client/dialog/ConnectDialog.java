@@ -4,7 +4,6 @@ import mage.cards.repository.RepositoryUtil;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
-import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
@@ -68,7 +67,8 @@ public class ConnectDialog extends MageDialog {
         this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
-
+        this.lblStatus.setText("");
+        
         String selectedFlag = MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world");
         // set the selected country/flag
         for (int i = 0; i < cbFlag.getItemCount(); i++) {
@@ -648,6 +648,7 @@ public class ConnectDialog extends MageDialog {
             connection = new Connection();
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.parseInt(this.txtPort.getText().trim()));
+            connection.setSSL(false);
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(String.valueOf(this.txtPassword.getPassword()).trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || RepositoryUtil.isDatabaseEmpty());
@@ -681,7 +682,6 @@ public class ConnectDialog extends MageDialog {
     private class ConnectTask extends SwingWorker<Boolean, Void> {
 
         private boolean result = false;
-        private String lastConnectError = "";
 
         private static final int CONNECTION_TIMEOUT_MS = 2100;
 
@@ -689,8 +689,7 @@ public class ConnectDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             setConnectButtonsState(false);
-            result = MageFrame.connect(connection);
-            lastConnectError = SessionHandler.getLastConnectError();
+            result = MageFrame.getInstance().connect(connection);
             return result;
         }
 
@@ -703,17 +702,18 @@ public class ConnectDialog extends MageDialog {
                     connected();
                     MageFrame.getInstance().prepareAndShowTablesPane();
                 } else {
-                    lblStatus.setText("Could not connect: " + lastConnectError);
+                    lblStatus.setText("Could not connect: " );
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Update Players Task error", ex);
+                lblStatus.setText("Could not connect.  Server not available.");
             } catch (CancellationException ex) {
                 logger.info("Connect: canceled");
                 lblStatus.setText("Connect was canceled");
             } catch (TimeoutException ex) {
                 logger.fatal("Connection timeout: ", ex);
+                lblStatus.setText("Could not connect");
             } finally {
-                MageFrame.stopConnecting();
                 setConnectButtonsState(true);
             }
         }

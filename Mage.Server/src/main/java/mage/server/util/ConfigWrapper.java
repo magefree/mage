@@ -142,5 +142,9 @@ public class ConfigWrapper implements ConfigSettings {
     public List<Plugin> getDeckTypes() {
         return config.getDeckTypes().getDeckType();
     }
+    
+    public Boolean isUseSSL() {
+        return config.getServer().isUseSSL();
+    }
 
 }

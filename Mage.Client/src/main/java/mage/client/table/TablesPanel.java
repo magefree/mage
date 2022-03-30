@@ -19,8 +19,9 @@ import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
 import mage.util.DeckUtil;
 import mage.util.RandomUtil;
+import mage.utils.CompressUtil;
 import mage.view.MatchView;
-import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
@@ -138,9 +139,7 @@ public class TablesPanel extends javax.swing.JPanel {
     
     private final MatchesTableModel matchesModel;
     private UUID roomId;
-    private UpdateTablesTask updateTablesTask;
-    private UpdatePlayersTask updatePlayersTask;
-    private UpdateMatchesTask updateMatchesTask;
+    private UpdateRoomTask updateRoomTask;
     private JoinTableDialog joinTableDialog;
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
@@ -712,54 +711,27 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void startUpdateTasks(boolean refreshImmediately) {
-        if (SessionHandler.getSession() != null) {
-            // active tables and server messages
-            if (updateTablesTask == null || updateTablesTask.isDone() || refreshImmediately) {
-                if (updateTablesTask != null) updateTablesTask.cancel(true);
-                updateTablesTask = new UpdateTablesTask(roomId, this);
-                updateTablesTask.execute();
-            }
-
-            // finished tables
-            if (this.btnStateFinished.isSelected()) {
-                if (updateMatchesTask == null || updateMatchesTask.isDone() || refreshImmediately) {
-                    if (updateMatchesTask != null) updateMatchesTask.cancel(true);
-                    updateMatchesTask = new UpdateMatchesTask(roomId, this);
-                    updateMatchesTask.execute();
-                }
-            } else {
-                if (updateMatchesTask != null) updateMatchesTask.cancel(true);
-            }
-
-            // players list
-            if (updatePlayersTask == null || updatePlayersTask.isDone() || refreshImmediately) {
-                if (updatePlayersTask != null) updatePlayersTask.cancel(true);
-                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
-                updatePlayersTask.execute();
+        if (SessionHandler.isConnected()) {
+            if (updateRoomTask == null || updateRoomTask.isDone()) {
+                updateRoomTask = new UpdateRoomTask(roomId, this, this.chatPanelMain);
+                updateRoomTask.execute();
             }
         }
     }
 
     public void stopTasks() {
-        if (updateTablesTask != null) {
-            updateTablesTask.cancel(true);
-        }
-        if (updatePlayersTask != null) {
-            updatePlayersTask.cancel(true);
-        }
-        if (updateMatchesTask != null) {
-            updateMatchesTask.cancel(true);
+        if (updateRoomTask != null) {
+            updateRoomTask.cancel(true);
         }
     }
 
     public void showTables(UUID roomId) {
         this.roomId = roomId;
         UUID chatRoomId = null;
-        if (SessionHandler.getSession() != null) {
+        if (SessionHandler.isConnected()) {
             btnQuickStart2Player.setVisible(SessionHandler.isTestMode());
             btnQuickStart4Player.setVisible(SessionHandler.isTestMode());
             btnQuickStartMCTS.setVisible(SessionHandler.isTestMode());
-            gameChooser.init();
             chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
         }
         if (newTableDialog == null) {
@@ -782,7 +754,6 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             hideTables();
         }
-        //tableModel.setSession(session);
 
         reloadServerMessages();
 
@@ -795,7 +766,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     protected void reloadServerMessages() {
         // reload server messages
-        java.util.List<String> serverMessages = SessionHandler.getServerMessages();
+        java.util.List<String> serverMessages = (List<String>) CompressUtil.decompress(SessionHandler.getServerMessages()) ;
         synchronized (this) {
             if (serverMessages != null) {
                 this.messages = serverMessages;
@@ -936,16 +907,19 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // Hide games of ignored players
         java.util.List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
-        final Set<String> ignoreListCopy = IgnoreList.getIgnoredUsers(serverAddress);
-        if (!ignoreListCopy.isEmpty()) {
-            ignoreListFilterList.add(new RowFilter<Object, Object>() {
-                @Override
-                public boolean include(Entry<? extends Object, ? extends Object> entry) {
-                    final String owner = entry.getStringValue(TablesTableModel.COLUMN_OWNER);
-                    return !ignoreListCopy.contains(owner);
-                }
-            });
+        if(SessionHandler.isConnected())
+        {
+            String serverAddress = SessionHandler.getServerHostname().orElse("");
+            final Set<String> ignoreListCopy = IgnoreList.getIgnoredUsers(serverAddress);
+            if (!ignoreListCopy.isEmpty()) {
+                ignoreListFilterList.add(new RowFilter<Object, Object>() {
+                    @Override
+                    public boolean include(Entry<? extends Object, ? extends Object> entry) {
+                        final String owner = entry.getStringValue(TablesTableModel.COLUMN_OWNER);
+                        return !ignoreListCopy.contains(owner);
+                    }
+                });
+            }
         }
 
         if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty()
@@ -1713,7 +1687,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setRollbackTurnsAllowed(true);
             options.setQuitRatio(100);
             options.setMinimumRating(0);
-            String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+            String serverAddress = SessionHandler.getServerHostname().orElse("");
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
@@ -1837,28 +1811,30 @@ public class TablesPanel extends javax.swing.JPanel {
 
 }
 
-class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
+class UpdateRoomTask extends SwingWorker<Void, RoomView> {
 
     private final UUID roomId;
     private final TablesPanel panel;
     private boolean isFirstRun = true;
+    private final PlayersChatPanel chat;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateRoomTask.class);
 
     private int count = 0;
 
-    UpdateTablesTask(UUID roomId, TablesPanel panel) {
+    UpdateRoomTask(UUID roomId, TablesPanel panel, PlayersChatPanel chat) {
 
         this.roomId = roomId;
         this.panel = panel;
+        this.chat = chat;
     }
 
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<TableView> tables = SessionHandler.getTables(roomId);
-            if (tables != null) {
-                this.publish(tables);
+            RoomView room = SessionHandler.getRoom(roomId);
+            if (room != null) {
+                this.publish(room);
             }
             TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_ACTIVE_TABLES_SECS));
         }
@@ -1866,8 +1842,10 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     }
 
     @Override
-    protected void process(java.util.List<Collection<TableView>> view) {
-        panel.updateTables(view.get(0));
+    protected void process(java.util.List<RoomView> view) {
+        panel.updateTables(view.get(0).getTableViews());
+        panel.updateMatches(view.get(0).getMatchViews());
+        chat.setRoomUserInfo(view.get(0).getRoomUsersView());
 
         // update server messages
         count++;
@@ -1884,83 +1862,6 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             get();
         } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Tables Task error", ex);
-        } catch (CancellationException ex) {
-        }
-    }
-
-}
-
-class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
-
-    private final UUID roomId;
-    private final PlayersChatPanel chat;
-
-    private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
-
-    UpdatePlayersTask(UUID roomId, PlayersChatPanel chat) {
-
-        this.roomId = roomId;
-        this.chat = chat;
-    }
-
-    @Override
-    protected Void doInBackground() throws Exception {
-        while (!isCancelled()) {
-            this.publish(SessionHandler.getRoomUsers(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_PLAYERS_SECS));
-        }
-        return null;
-    }
-
-    @Override
-    protected void process(java.util.List<Collection<RoomUsersView>> roomUserInfo) {
-        chat.setRoomUserInfo(roomUserInfo);
-    }
-
-    @Override
-    protected void done() {
-        try {
-            get();
-        } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Players Task error", ex);
-        } catch (CancellationException ex) {
-        }
-    }
-
-}
-
-class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
-
-    private final UUID roomId;
-    private final TablesPanel panel;
-
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
-
-    UpdateMatchesTask(UUID roomId, TablesPanel panel) {
-        this.roomId = roomId;
-        this.panel = panel;
-    }
-
-    @Override
-    protected Void doInBackground() throws Exception {
-        while (!isCancelled()) {
-            this.publish(SessionHandler.getFinishedMatches(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_FINISHED_TABLES_SECS));
-        }
-        return null;
-    }
-
-    @Override
-    protected void process(java.util.List<Collection<MatchView>> view) {
-        panel.updateMatches(view.get(0));
-    }
-
-    @Override
-    protected void done() {
-        try {
-            get();
-        } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Matches Task error", ex);
         } catch (CancellationException ex) {
         }
     }

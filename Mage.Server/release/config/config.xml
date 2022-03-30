@@ -2,7 +2,7 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
     <!--
-    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use
+    serverName          - name of the XMage server
     port                - the port the primary server socket is bound to
     secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected.
     backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater
@@ -32,8 +32,7 @@
     mailPassword        - passworf of the used user to send the mail
     mailFromAddress     - sender address
     -->
-    <server serverAddress="0.0.0.0"
-            serverName="mage-server"
+    <server serverName="mage-server"
             port="17171"
             secondaryBindPort="-1"
             backlogSize="200"
@@ -50,6 +49,7 @@
             maxPasswordLength="100"
             maxAiOpponents="15"
             saveGameActivated="false"
+            useSSL="false"
             authenticationActivated="false"
             googleAccount=""
             mailgunApiKey=""

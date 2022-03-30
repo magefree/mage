@@ -1,27 +1,24 @@
 package mage.server.managers;
 
-import mage.MageException;
 import mage.players.net.UserData;
-import mage.server.DisconnectReason;
+import mage.remote.DisconnectReason;
 import mage.server.Session;
 import mage.server.User;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import mage.remote.Connection;
 
 public interface SessionManager {
     Optional<Session> getSession(@Nonnull String sessionId);
 
-    void createSession(String sessionId, InvokerCallbackHandler callbackHandler);
+    boolean registerUser(String sessionId, Connection connection, String host);
 
-    boolean registerUser(String sessionId, String userName, String password, String email) throws MageException;
-
-    boolean connectUser(String sessionId, String userName, String password, String userIdStr) throws MageException;
+    boolean connectUser(String sessionId, Connection connection, String host);
 
     boolean connectAdmin(String sessionId);
 
-    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
+    boolean setUserData(String sessionId, UserData userData, String clientVersion, String userIdStr);
 
     void disconnect(String sessionId, DisconnectReason reason);
 

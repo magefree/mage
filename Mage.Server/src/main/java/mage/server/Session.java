@@ -1,21 +1,16 @@
 package mage.server;
 
-import mage.MageException;
 import mage.constants.Constants;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
+import mage.remote.DisconnectReason;
+import mage.util.RandomUtil;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import mage.server.game.GamesRoom;
+import mage.remote.Connection;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
+import mage.server.game.GamesRoom;
 import mage.server.util.SystemUtil;
-import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
-import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -23,8 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static mage.server.DisconnectReason.LostConnection;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -34,6 +29,7 @@ public class Session {
     private static final Logger logger = Logger.getLogger(Session.class);
     private static final Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
     private static final Pattern digitsPattern = Pattern.compile("[0-9]");
+    private static final ScheduledExecutorService pingTaskExecutor = Executors.newScheduledThreadPool(10);
 
     public static final String REGISTRATION_DISABLED_MESSAGE = "Registration has been disabled on the server. You can use any name and empty password to login.";
 
@@ -44,33 +40,35 @@ public class Session {
     private final AtomicInteger messageId = new AtomicInteger(0);
     private final Date timeConnected;
     private boolean isAdmin = false;
-    private final AsynchInvokerCallbackHandler callbackHandler;
+    private final static int PING_CYCLES = 10;
+    private final LinkedList<Long> pingTime = new LinkedList<>();
+    private String pingInfo = "";
     private boolean valid = true;
 
     private final ReentrantLock lock;
     private final ReentrantLock callBackLock;
 
-    public Session(ManagerFactory managerFactory, String sessionId, InvokerCallbackHandler callbackHandler) {
+    public Session(ManagerFactory managerFactory, String sessionId) {
         this.managerFactory = managerFactory;
         this.sessionId = sessionId;
-        this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
         this.isAdmin = false;
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
         this.callBackLock = new ReentrantLock();
     }
 
-    public String registerUser(String userName, String password, String email) throws MageException {
+    public String registerUser(Connection connection){
         if (!managerFactory.configSettings().isAuthenticationActivated()) {
             String returnMessage = REGISTRATION_DISABLED_MESSAGE;
-            sendErrorMessageToClient(returnMessage);
             return returnMessage;
         }
         synchronized (AuthorizedUserRepository.getInstance()) {
             // name
+            String userName = connection.getUsername();
+            String password = connection.getPassword();
+            String email = connection.getEmail();
             String returnMessage = validateUserName(userName);
             if (returnMessage != null) {
-                sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
 
@@ -79,14 +77,12 @@ public class Session {
             password = randomString.nextString();
             returnMessage = validatePassword(password, userName);
             if (returnMessage != null) {
-                sendErrorMessageToClient("Auto-generated password fail, try again: " + returnMessage);
                 return returnMessage;
             }
 
             // email
             returnMessage = validateEmail(email);
             if (returnMessage != null) {
-                sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
 
@@ -105,15 +101,12 @@ public class Session {
             if (success) {
                 String ok = "Email with initial password sent to " + email + " for a user " + userName;
                 logger.info(ok);
-                sendInfoMessageToClient(ok);
             } else if (Main.isTestMode()) {
                 String ok = "Email sending failed. Server is in test mode. Your account registered with a password " + password + " for a user " + userName;
                 logger.info(ok);
-                sendInfoMessageToClient(ok);
             } else {
                 String err = "Email sending failed. Try use another email address or service. Or reset password by email " + email + " for a user " + userName;
                 logger.error(err);
-                sendErrorMessageToClient(err);
                 return err;
             }
             return null;
@@ -182,19 +175,12 @@ public class Session {
         return null;
     }
 
-    public String connectUser(String userName, String password) throws MageException {
+    public String connectUser(String userName, String password){
         String returnMessage = connectUserHandling(userName, password);
-        if (returnMessage != null) {
-            sendErrorMessageToClient(returnMessage);
-        }
         return returnMessage;
     }
-
-    public boolean isLocked() {
-        return lock.isLocked();
-    }
-
-    public String connectUserHandling(String userName, String password) throws MageException {
+    
+    public String connectUserHandling(String userName, String password)  {
         this.isAdmin = false;
         AuthorizedUser authorizedUser = null;
         if (managerFactory.configSettings().isAuthenticationActivated()) {
@@ -268,6 +254,11 @@ public class Session {
         return null;
     }
 
+    public boolean isLocked() {
+        return lock.isLocked();
+    }
+
+
     public void connectAdmin() {
         this.isAdmin = true;
         User user = managerFactory.userManager().createUser("Admin", host, null).orElse(
@@ -283,9 +274,8 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserData userData, String clientVersion, String userIdStr) {
-        Optional<User> _user = managerFactory.userManager().getUserByName(userName);
-        _user.ifPresent(user -> {
+    public boolean setUserData(User user, UserData userData, String clientVersion, String userIdStr) {
+        if (user != null) {
             if (clientVersion != null) {
                 user.setClientVersion(clientVersion);
             }
@@ -302,10 +292,11 @@ public class Session {
             if (user.getUserData().getAvatarId() == 11) {
                 user.getUserData().setAvatarId(updateAvatar(user.getName()));
             }
-        });
-        return _user.isPresent();
+            return true;
+        }
+        return false;
     }
-
+    
     private int updateAvatar(String userName) {
         //TODO: move to separate class
         //TODO: add for checking for private key
@@ -358,6 +349,7 @@ public class Session {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
             managerFactory.userManager().removeUserFromAllTablesAndChat(userId, reason);
+            pingTime.clear();
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
         } finally {
@@ -368,34 +360,6 @@ public class Session {
             }
         }
 
-    }
-
-    public void fireCallback(final ClientCallback call) {
-        boolean lockSet = false;
-        try {
-            if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
-                call.setMessageId(messageId.incrementAndGet());
-                lockSet = true;
-                Callback callback = new Callback(call);
-                callbackHandler.handleCallbackOneway(callback);
-            }
-        } catch (InterruptedException ex) {
-            logger.warn("SESSION LOCK - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
-        } catch (HandleCallbackException ex) {
-            this.valid = false;
-            managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                user.setUserState(User.UserState.Disconnected);
-                logger.warn("SESSION CALLBACK EXCEPTION - " + user.getName() + " userId " + userId + " messageId: " + call.getMessageId() + " - cause: " + getBasicCause(ex).toString());
-                logger.trace("Stack trace:", ex);
-                managerFactory.sessionManager().disconnect(sessionId, LostConnection);
-            });
-        } catch (Exception ex) {
-            logger.warn("Unspecific exception:", ex);
-        } finally {
-            if (lockSet) {
-                callBackLock.unlock();
-            }
-        }
     }
 
     public UUID getUserId() {
@@ -418,19 +382,9 @@ public class Session {
         this.host = hostAddress;
     }
 
-    public void sendErrorMessageToClient(String message) {
-        List<String> messageData = new LinkedList<>();
-        messageData.add("Error while connecting to server");
-        messageData.add(message);
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
-    }
 
-    public void sendInfoMessageToClient(String message) {
-        List<String> messageData = new LinkedList<>();
-        messageData.add("Information about connecting to the server");
-        messageData.add(message);
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
-    }
+
+
 
     public static Throwable getBasicCause(Throwable cause) {
         Throwable t = cause;
@@ -442,6 +396,25 @@ public class Session {
         }
         return t;
     }
+
+    public void recordPingTime(long milliSeconds) {
+        pingTime.add(milliSeconds);
+        String lastPing = milliSeconds > 0 ? milliSeconds + "ms" : "<1ms";
+        if (pingTime.size() > PING_CYCLES) {
+            pingTime.poll();
+        }
+        long sum = 0;
+        for (Long time : pingTime) {
+            sum += time;
+        }
+        long avg = sum / pingTime.size();
+        pingInfo = lastPing + " (Av: " + (avg > 0 ? avg + "ms" : "<1ms") + ")";
+    }
+
+    public String getPingInfo() {
+        return pingInfo;
+    }
+    
 }
 
 class RandomString {

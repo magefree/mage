@@ -182,7 +182,7 @@ public class MageActionCallback implements ActionCallback {
 
                 if (tooltipCard == null
                         || !tooltipCard.equals(data.getCard())
-                        || SessionHandler.getSession() == null
+                        || !SessionHandler.isConnected()
                         || !popupTextWindowOpen
                         || enlargedWindowState != EnlargedWindowState.CLOSED) {
                     return;
@@ -523,7 +523,7 @@ public class MageActionCallback implements ActionCallback {
             tooltipPopup.hide();
         }
         try {
-            if (SessionHandler.getSession() == null) {
+            if (!SessionHandler.isConnected()) {
                 return;
             }
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);

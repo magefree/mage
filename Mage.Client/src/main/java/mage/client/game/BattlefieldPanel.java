@@ -12,8 +12,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.CardLayoutStrategyImpl;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.util.DebugUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -91,8 +89,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
          gameUpdateTimer = new Timer(GAME_REDRAW_TIMEOUT_MS, evt -> SwingUtilities.invokeLater(() -> {
             gameUpdateTimer.stop();
-             ClientCallback updateMessage = new ClientCallback(ClientCallbackMethod.GAME_REDRAW_GUI, gameId);
-             MageFrame.getInstance().processCallback(updateMessage);
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.updateGame();
+            }
         }));
     }
 

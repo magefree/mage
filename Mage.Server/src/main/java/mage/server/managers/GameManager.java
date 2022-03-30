@@ -34,7 +34,7 @@ public interface GameManager {
 
     void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId, Object data);
 
-    boolean watchGame(UUID gameId, UUID userId);
+    GameView watchGame(UUID gameId, UUID userId);
 
     void stopWatching(UUID gameId, UUID userId);
 

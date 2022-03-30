@@ -168,7 +168,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         this.tournamentId = tournamentId;
         // MageFrame.addTournament(tournamentId, this);
         Optional<UUID> chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
-        if (SessionHandler.joinTournament(tournamentId) && chatRoomId.isPresent()) {
+        SessionHandler.joinTournament(tournamentId);
+        if (chatRoomId.isPresent()) {
             this.chatPanel1.connect(chatRoomId.get());
             startTasks();
             this.setVisible(true);
@@ -268,7 +269,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (SessionHandler.getSession() != null) {
+        if (SessionHandler.isConnected()) {
             if (updateTask == null || updateTask.isDone()) {
                 updateTask = new UpdateTournamentTask(tournamentId, this);
                 updateTask.execute();

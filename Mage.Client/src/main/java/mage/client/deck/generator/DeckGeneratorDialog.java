@@ -1,22 +1,33 @@
 package mage.client.deck.generator;
 
-import mage.cards.decks.Deck;
-import mage.client.MageFrame;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.gui.ColorsChooser;
-import mage.client.util.gui.FastSearchUtil;
-import mage.client.util.sets.ConstructedFormats;
-
-import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import mage.cards.decks.Deck;
+import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.gui.ColorsChooser;
+import mage.client.util.sets.ConstructedFormats;
+import mage.client.util.gui.FastSearchUtil;
+import mage.cards.decks.generator.DeckOptions;
 
 import static mage.cards.decks.DeckFormats.XMAGE;
 
@@ -332,11 +343,15 @@ public class DeckGeneratorDialog {
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {
-            MageFrame.getInstance().showError("Couldn't generate deck. Try again.");
+            MageFrame.getInstance().showErrorDialog("","Couldn't generate deck. Try again.");
         }
         return null;
     }
 
+    public DeckOptions getOptions() {
+        return new DeckOptions(getSelectedColors(), getSelectedFormat(), getDeckSize(), isSingleton(), useArtifacts(), useNonBasicLand());
+    }
+    
     public String getSelectedFormat() {
         return (String) cbSets.getSelectedItem();
     }

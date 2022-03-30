@@ -11,6 +11,7 @@ import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
+import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -94,79 +95,73 @@ public class ChatManagerImpl implements ChatManager {
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
 
     @Override
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
+    public void broadcast(UUID chatId, User user, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                Optional<User> user = managerFactory.userManager().getUserByName(userName);
-                if (user.isPresent()) {
-                    if (!performUserCommand(user.get(), message, chatId, false)) {
-                        performUserCommand(user.get(), message, chatId, true);
+                if (user != null) {
+                    if (!performUserCommand(user, message, chatId, false)) {
+                        performUserCommand(user, message, chatId, true);
                     }
                     return;
                 }
             }
 
-            if (messageType != MessageType.GAME && !userName.isEmpty()) {
-                Optional<User> u = managerFactory.userManager().getUserByName(userName);
-                if (u.isPresent()) {
+            if (messageType != MessageType.GAME && user != null) {
+                String messageId = chatId.toString() + message;
+                if (messageId.equals(userMessages.get(user.getName()))) {
+                    // prevent identical messages
+                    String informUser = "Your message appears to be identical to your last message";
+                    chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
+                    return;
+                }
 
-                    User user = u.get();
-                    String messageId = chatId.toString() + message;
-                    if (messageId.equals(userMessages.get(userName))) {
-                        // prevent identical messages
-                        String informUser = "Your message appears to be identical to your last message";
-                        chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
-                        return;
-                    }
+                if (message.length() > 500) {
+                    message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
+                }
 
-                    if (message.length() > 500) {
-                        message = message.replaceFirst("^(.{500}).*", "$1 (rest of message truncated)");
-                    }
-
-                    String messageToCheck = message;
-                    Matcher matchPattern = cardNamePattern.matcher(message);
-                    while (matchPattern.find()) {
-                        String cardName = matchPattern.group(1);
-                        CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName);
-                        if (cardInfo != null) {
-                            String colour = "silver";
-                            if (cardInfo.getCard().getColor(null).isMulticolored()) {
-                                colour = "yellow";
-                            } else if (cardInfo.getCard().getColor(null).isWhite()) {
-                                colour = "white";
-                            } else if (cardInfo.getCard().getColor(null).isBlue()) {
-                                colour = "blue";
-                            } else if (cardInfo.getCard().getColor(null).isBlack()) {
-                                colour = "black";
-                            } else if (cardInfo.getCard().getColor(null).isRed()) {
-                                colour = "red";
-                            } else if (cardInfo.getCard().getColor(null).isGreen()) {
-                                colour = "green";
-                            }
-                            messageToCheck = messageToCheck.replaceFirst("\\[" + cardName + "\\]", "card");
-                            String displayCardName = "<font bgcolor=orange color=" + colour + '>' + cardName + "</font>";
-                            message = message.replaceFirst("\\[" + cardName + "\\]", displayCardName);
+                String messageToCheck = message;
+                Matcher matchPattern = cardNamePattern.matcher(message);
+                while (matchPattern.find()) {
+                    String cardName = matchPattern.group(1);
+                    CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName);
+                    if (cardInfo != null) {
+                        String colour = "silver";
+                        if (cardInfo.getCard().getColor(null).isMulticolored()) {
+                            colour = "yellow";
+                        } else if (cardInfo.getCard().getColor(null).isWhite()) {
+                            colour = "white";
+                        } else if (cardInfo.getCard().getColor(null).isBlue()) {
+                            colour = "blue";
+                        } else if (cardInfo.getCard().getColor(null).isBlack()) {
+                            colour = "black";
+                        } else if (cardInfo.getCard().getColor(null).isRed()) {
+                            colour = "red";
+                        } else if (cardInfo.getCard().getColor(null).isGreen()) {
+                            colour = "green";
                         }
+                        messageToCheck = messageToCheck.replaceFirst("\\[" + cardName + "\\]", "card");
+                        String displayCardName = "<font bgcolor=orange color=" + colour + '>' + cardName + "</font>";
+                        message = message.replaceFirst("\\[" + cardName + "\\]", displayCardName);
                     }
+                }
 
-                    userMessages.put(userName, messageId);
+                userMessages.put(user.getName(), messageId);
 
-                    if (messageType == MessageType.TALK) {
-                        if (user.getChatLockedUntil() != null) {
-                            if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
-                                chatSessions.get(chatId).broadcastInfoToUser(user, "Your chat is muted until " + SystemUtil.dateFormat.format(user.getChatLockedUntil()));
-                                return;
-                            } else {
-                                user.setChatLockedUntil(null);
-                            }
+                if (messageType == MessageType.TALK) {
+                    if (user.getChatLockedUntil() != null) {
+                        if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
+                            chatSessions.get(chatId).broadcastInfoToUser(user, "Your chat is muted until " + SystemUtil.dateFormat.format(user.getChatLockedUntil()));
+                            return;
+                        } else {
+                            user.setChatLockedUntil(null);
                         }
-
                     }
 
                 }
+
             }
-            chatSession.broadcast(userName, message, color, withTime, game, messageType, soundToPlay);
+            chatSession.broadcast(user==null ? null:user.getName(), message, color, withTime, game, messageType, soundToPlay);
         }
     }
 
@@ -388,5 +383,5 @@ public class ChatManagerImpl implements ChatManager {
             r.unlock();
         }
     }
-
+    
 }

@@ -7,6 +7,9 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.ExpansionRepository;
 import mage.cards.repository.RepositoryUtil;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.ExpansionInfo;
+import mage.choices.Choice;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.*;
@@ -25,11 +28,11 @@ import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
-import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
-import mage.client.table.TablesPanel;
 import mage.client.tournament.TournamentPane;
+import mage.client.table.TablesPanel;
 import mage.client.util.*;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
@@ -38,13 +41,21 @@ import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
 import mage.game.draft.RateCard;
-import mage.interfaces.MageClient;
-import mage.interfaces.callback.CallbackClient;
-import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.ServerState;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.remote.interfaces.MageClient;
+import mage.remote.messages.MessageType;
 import mage.utils.MageVersion;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
+import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
+import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import net.java.balloontip.BalloonTip;
 import net.java.balloontip.positioners.LeftAbovePositioner;
@@ -64,22 +75,34 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.prefs.Preferences;
+import java.awt.AWTEvent;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
+import java.awt.Toolkit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.prefs.Preferences;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -104,9 +127,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String NOT_CONNECTED_BUTTON = "CONNECT TO SERVER";
     private static MageFrame instance;
 
+    private ServerState serverState;
     private final ConnectDialog connectDialog;
     private final ErrorDialog errorDialog;
-    private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
@@ -123,6 +146,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static String startServer = "localhost";
     private static int startPort = -1;
     private static boolean debugMode = false;
+    private int messageId;
 
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
     private static final Map<UUID, GamePanel> GAMES = new HashMap<>();
@@ -133,12 +157,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
-
+    
     private final BalloonTip balloonTip;
 
-    /**
-     * @return the session
-     */
     public static JDesktopPane getDesktop() {
         return desktopPane;
     }
@@ -157,11 +178,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static boolean isSkipSmallSymbolGenerationForExisting() {
         return skipSmallSymbolGenerationForExisting;
-    }
-
-    @Override
-    public MageVersion getVersion() {
-        return VERSION;
     }
 
     public static MageFrame getInstance() {
@@ -284,7 +300,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         SessionHandler.startSession(this);
-        callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
         errorDialog = new ErrorDialog();
@@ -292,8 +307,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
-
+        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> {
+                if(SessionHandler.isConnected()){
+                    SessionHandler.ping();
+                }
+            }, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
+        
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
         tablesPane = new TablesPane();
@@ -350,15 +369,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setGUISize();
         setConnectButtonText(NOT_CONNECTED_BUTTON);
         SwingUtilities.invokeLater(() -> {
-            disableButtons();
-            updateMemUsageTask.execute();
-            LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
-            if (autoConnect()) {
-                enableButtons();
-            } else {
-                connectDialog.showDialog();
-            }
-            setWindowTitle();
+                disableButtons();
+                updateMemUsageTask.execute();
+                LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
+                if (autoConnect()) {
+                    enableButtons();
+                } else {
+                    connectDialog.showDialog();
+                    if (SessionHandler.isConnected()) {
+                        prepareAndShowTablesPane();
+                    }
+                }
+                setWindowTitle();
         });
 
         if (MacFullscreenUtil.isMacOSX()) {
@@ -372,7 +394,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
                 + (VERSION == null ? "<not available>" : VERSION.toString()) + "  Server: "
-                + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : NOT_CONNECTED_TEXT));
+                + (SessionHandler.isConnected() ? serverState.getVersion().toString() : "<not connected>"));
     }
 
     private void updateTooltipContainerSizes() {
@@ -552,9 +574,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private AbstractButton createSwitchPanelsButton() {
         final JToggleButton switchPanelsButton = new JToggleButton("Switch panels");
         switchPanelsButton.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                 createAndShowSwitchPanelsMenu((JComponent) e.getSource(), switchPanelsButton);
-            }
+                }
         });
         switchPanelsButton.setFocusable(false);
         switchPanelsButton.setHorizontalTextPosition(SwingConstants.LEADING);
@@ -574,8 +596,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     menuItem.setFont(GUISizeHelper.menuFont);
                     menuItem.setState(i == 0);
                     menuItem.addActionListener(ae -> {
-                        MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
-                        setActive(frame);
+                            MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
+                            setActive(frame);
                     });
                     //menuItem.setIcon(window.getFrameIcon());
                     menu.add(menuItem);
@@ -697,43 +719,64 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * @param gameId
      * @param playerId
      */
-    public void showGame(UUID gameId, UUID playerId) {
-        GamePane gamePane = new GamePane();
-        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-        gamePane.setVisible(true);
-        gamePane.showGame(gameId, playerId);
-        setActive(gamePane);
-    }
-
-    public void watchGame(UUID gameId) {
-        for (Component component : desktopPane.getComponents()) {
-            if (component instanceof GamePane
-                    && ((GamePane) component).getGameId().equals(gameId)) {
-                setActive((GamePane) component);
-                return;
+    public void showGame(final UUID gameId, final UUID playerId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePane gamePane = new GamePane();
+                desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                gamePane.setVisible(true);
+                gamePane.showGame(gameId, playerId);
+                setActive(gamePane);
             }
-        }
-        GamePane gamePane = new GamePane();
-        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-        gamePane.setVisible(true);
-        gamePane.watchGame(gameId);
-        setActive(gamePane);
+        });
     }
 
-    public void replayGame(UUID gameId) {
-        GamePane gamePane = new GamePane();
-        desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-        gamePane.setVisible(true);
-        gamePane.replayGame(gameId);
-        setActive(gamePane);
+    @Override
+    public void watchGame(final UUID gameId, final UUID chatId, final GameView game) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                for (Component component : desktopPane.getComponents()) {
+                    if (component instanceof GamePane
+                            && ((GamePane) component).getGameId().equals(gameId)) {
+                        setActive((GamePane) component);
+                        return;
+                    }
+                }
+                GamePane gamePane = new GamePane();
+                desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                gamePane.setVisible(true);
+                gamePane.watchGame(gameId, chatId, game);
+                setActive(gamePane);
+            }
+        });
     }
 
-    public void showDraft(UUID draftId) {
-        DraftPane draftPane = new DraftPane();
-        desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
-        draftPane.setVisible(true);
-        draftPane.showDraft(draftId);
-        setActive(draftPane);
+    public void replayGameC(final UUID gameId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePane gamePane = new GamePane();
+                desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                gamePane.setVisible(true);
+                gamePane.replayGame(gameId);
+                setActive(gamePane);
+            }
+        });
+    }
+
+    public void showDraft(final UUID draftId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPane draftPane = new DraftPane();
+                desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
+                draftPane.setVisible(true);
+                draftPane.showDraft(draftId);
+                setActive(draftPane);
+            }
+        });
     }
 
     public void endDraft(UUID draftId) {
@@ -746,41 +789,88 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showTournament(UUID tournamentId) {
-        for (Component component : desktopPane.getComponents()) {
-            if (component instanceof TournamentPane
-                    && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
-                setActive((TournamentPane) component);
-                return;
+    public void showTournament(final UUID tournamentId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                for (Component component : desktopPane.getComponents()) {
+                    if (component instanceof TournamentPane
+                            && ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
+                        setActive((TournamentPane) component);
+                        return;
+                    }
+                }
+                TournamentPane tournamentPane = new TournamentPane();
+                desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
+                tournamentPane.setVisible(true);
+                tournamentPane.showTournament(tournamentId);
+                setActive(tournamentPane);
             }
-        }
-        TournamentPane tournamentPane = new TournamentPane();
-        desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
-        tournamentPane.setVisible(true);
-        tournamentPane.showTournament(tournamentId);
-        setActive(tournamentPane);
+        });
     }
 
-    public void showGameEndDialog(GameEndView gameEndView) {
-        GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
-        desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
-        gameEndDialog.showDialog();
+    public void showGameEndDialog(final GameEndView gameEndView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
+                desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
+                gameEndDialog.showDialog();
+            }
+        });
     }
 
-    public void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
-        TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
-        desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
-        tableWaitingDialog.showDialog(roomId, tableId, isTournament);
+    public void showTableWaitingDialog(final UUID roomId, final UUID tableId, final UUID chatId, final boolean owner, final boolean tournament) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
+                desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
+                tableWaitingDialog.showDialog(roomId, tableId, chatId, owner, tournament);
+            }
+        });
     }
 
-    public static boolean connect(Connection connection) {
+    public boolean connect(Connection connection) {
         boolean result = SessionHandler.connect(connection);
-        MageFrame.getInstance().setWindowTitle();
+        setWindowTitle();
+        if (result) {
+            updateDatabase(connection.isForceDBComparison(), serverState);
+        }
         return result;
     }
+    
+    private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
+        // download NEW cards/sets, but do not download data fixes (it's an old and rare feature from old clients, e.g. one client for different servers with different cards)
+        // use case: server gets new minor version with new cards, old client can get that cards too without donwload new version
 
-    public static boolean stopConnecting() {
-        return SessionHandler.stopConnecting();
+        // sets
+        long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
+            List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+            List<ExpansionInfo> expansions = SessionHandler.getMissingExpansionsData(setCodes);
+            logger.info("DB: updating sets... Found new: " + expansions.size());
+            ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
+        }
+
+        // cards
+        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cards = SessionHandler.getMissingCardsData(classNames);
+            logger.info("DB: updating cards... Found new: " + cards.size());
+            CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
+        }
+    }
+    
+    private List<ExpansionInfo> getMissingExpansionData(List<String> codes) {
+        List<ExpansionInfo> result = new ArrayList<>();
+        for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
+            if (!codes.contains(expansionInfo.getCode())) {
+                result.add(expansionInfo);
+            }
+        }
+        return result;
     }
 
     public boolean autoConnect() {
@@ -810,11 +900,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPassword(password);
             currentConnection.setHost(server);
             currentConnection.setPort(port);
+            currentConnection.setSSL(false);
             // force to redownload db on updates
             boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
             currentConnection.setForceDBComparison(redownloadDatabase);
             String allMAC = "";
-            try {
+        try {
                 allMAC = Connection.getMAC();
             } catch (SocketException ex) {
             }
@@ -830,11 +921,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         try {
             LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
                     + ' ' + currentConnection.getProxyHost() + ' ' + currentConnection.getProxyPort() + ' ' + currentConnection.getProxyUsername());
-            if (MageFrame.connect(currentConnection)) {
-                prepareAndShowTablesPane();
+            if (connect(currentConnection)) {
                 return true;
             } else {
-                showMessage("Unable connect to server: " + SessionHandler.getLastConnectError());
+                showMessage("Error Connecting", "Unable to connect to server");
             }
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -1067,6 +1157,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } else {
             connectDialog.showDialog();
             setWindowTitle();
+            if (SessionHandler.isConnected()) {
+                prepareAndShowTablesPane();
+            }
         }
     }//GEN-LAST:event_btnConnectActionPerformed
 
@@ -1167,15 +1260,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void prepareAndShowTablesPane() {
-        // Update the tables pane with the new session
-        this.tablesPane.showTables();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Update the tables pane with the new session
+                tablesPane.showTables();
 
-        // Show the tables pane if there wasn't already an active pane
-        MagePane topPanebefore = getTopMost(tablesPane);
-        setActive(tablesPane);
-        if (topPanebefore != null && topPanebefore != tablesPane) {
-            setActive(topPanebefore);
-        }
+                // Show the tables pane if there wasn't already an active pane
+                MagePane topPanebefore = getTopMost(tablesPane);
+                setActive(tablesPane);
+                if (topPanebefore != null && topPanebefore != tablesPane) {
+                    setActive(topPanebefore);
+                }
+            }
+        });
     }
 
     public void hideGames() {
@@ -1206,31 +1304,36 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
-        String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            name = "Deck Editor - " + tableId.toString();
-        } else {
-            if (deck != null) {
-                name = "Deck Editor - " + deck.getName();
-            } else {
-                name = "Deck Editor";
-            }
-            // use already open editor
-            Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-            for (Component window : windows) {
-                if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
-                    setActive((MagePane) window);
-                    return;
+    public void showDeckEditor(final DeckEditorMode mode, final Deck deck, final UUID tableId, final int time) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                String name;
+                if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING || mode == DeckEditorMode.VIEW_LIMITED_DECK) {
+                    name = "Deck Editor - " + tableId.toString();
+                } else {
+                    if (deck != null) {
+                        name = "Deck Editor - " + deck.getName();
+                    } else {
+                        name = "Deck Editor";
+                    }
+                    // use already open editor
+                    Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+                    for (Component window : windows) {
+                        if (window instanceof DeckEditorPane && ((MagePane) window).getTitle().equals(name)) {
+                            setActive((MagePane) window);
+                            return;
+                        }
+                    }
                 }
-            }
-        }
 
-        DeckEditorPane deckEditorPane = new DeckEditorPane();
-        desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
-        deckEditorPane.setVisible(false);
-        deckEditorPane.show(mode, deck, name, tableId, time);
-        setActive(deckEditorPane);
+                DeckEditorPane deckEditorPane = new DeckEditorPane();
+                desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
+                deckEditorPane.setVisible(false);
+                deckEditorPane.show(mode, deck, name, tableId, time);
+                setActive(deckEditorPane);
+            }
+        });
     }
 
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
@@ -1245,11 +1348,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showErrorDialog(final String title, final String message) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            errorDialog.showDialog(title, message);
-        } else {
-            SwingUtilities.invokeLater(() -> errorDialog.showDialog(title, message));
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (SwingUtilities.isEventDispatchThread()) {
+                    errorDialog.showDialog(title, message);
+                } else {
+                    SwingUtilities.invokeLater(() -> errorDialog.showDialog(title, message));
+                }
+            }
+        });
     }
 
     public void showCollectionViewer() {
@@ -1443,12 +1551,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return DRAFTS.get(draftId);
     }
 
-    public static void removeDraft(UUID draftId) {
-        DraftPanel draftPanel = DRAFTS.get(draftId);
-        if (draftPanel != null) {
-            DRAFTS.remove(draftId);
-            draftPanel.hideDraft();
-        }
+    public static void removeDraft(final UUID draftId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPanel draftPanel = DRAFTS.get(draftId);
+                if (draftPanel != null) {
+                    DRAFTS.remove(draftId);
+                    draftPanel.hideDraft();
+                }
+            }
+        });
     }
 
     public static void addDraft(UUID draftId, DraftPanel draftPanel) {
@@ -1474,50 +1587,395 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void disconnected(final boolean askToReconnect) {
-        if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
-            // REMOTE task, e.g. connecting
-            LOGGER.info("Disconnected from remote task");
-            setConnectButtonText(NOT_CONNECTED_BUTTON);
-            disableButtons();
-            hideGames();
-            hideTables();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
+                    // REMOTE task, e.g. connecting
+                    LOGGER.info("Disconnected from remote task");
+                    setConnectButtonText(NOT_CONNECTED_BUTTON);
+                    disableButtons();
+                    hideGames();
+                    hideTables();
+                } else {
+                    // USER mode, e.g. user plays and got disconnect
+                    LOGGER.info("Disconnected from user mode");
+                    SwingUtilities.invokeLater(() -> {
+                                SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
+                                setConnectButtonText(NOT_CONNECTED_BUTTON);
+                                disableButtons();
+                                hideGames();
+                                hideTables();
+                                if (askToReconnect) {
+                                    UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
+                                    message.setButton1("No", null);
+                                    message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
+                                    showUserRequestDialog(message);
+                                }
+                            }
+                    );
+                }
+            }
+        });
+                
+    }
+
+    public void showMessage(final String title, final String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+    }
+
+    @Override
+    public void inform(String title, String message, MessageType type) {
+        if (type == MessageType.ERROR) {
+            showErrorDialog(title, message);
         } else {
-            // USER mode, e.g. user plays and got disconnect
-            LOGGER.info("Disconnected from user mode");
-            SwingUtilities.invokeLater(() -> {
-                        SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
-                        setConnectButtonText(NOT_CONNECTED_BUTTON);
-                        disableButtons();
-                        hideGames();
-                        hideTables();
-                        if (askToReconnect) {
-                            UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
-                            message.setButton1("No", null);
-                            message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
-                            showUserRequestDialog(message);
-                        }
-                    }
-            );
+            showMessage(title, message);
         }
     }
 
     @Override
-    public void showMessage(String message) {
-        final UserRequestMessage requestMessage = new UserRequestMessage("Message", message);
-        requestMessage.setButton1("OK", null);
-        showUserRequestDialog(requestMessage);
+    public void receiveChatMessage(final UUID chatId, final ChatMessage message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ChatPanelBasic panel = MageFrame.getChat(chatId);
+                if (panel != null) {
+                    // send the message to subchat if exists and it's not a game message
+                    if (!message.getMessageType().equals(ChatMessage.MessageType.GAME) && panel.getConnectedChat() != null) {
+                        panel.getConnectedChat().receiveMessage(message);
+                    } else {
+                        panel.receiveMessage(message);
+                    }
+                }
+            }
+        });
     }
 
     @Override
-    public void showError(final String message) {
-        final UserRequestMessage requestMessage = new UserRequestMessage("Error", message);
-        requestMessage.setButton1("OK", null);
-        showUserRequestDialog(requestMessage);
+    public void clientRegistered(ServerState state) {
+        this.serverState = state;
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
-        callbackClient.processCallback(callback);
+    public ServerState getServerState() {
+        return serverState;
+    }
+
+    @Override
+    public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        showTableWaitingDialog(roomId, tableId, chatId, owner, tournament);
+    }
+
+    private void handleException(Exception ex) {
+        logger.fatal("Client error\n", ex);
+        String errorMessage = ex.getMessage();
+        if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
+            errorMessage = ex.getClass().getSimpleName() + " - look server or client logs for more details";
+        }
+        showErrorDialog("Client error", "Server's error: " + errorMessage);
+    }
+       
+    @Override
+    public void gameStarted(UUID gameId, UUID playerId) {
+        try {
+            showGame(gameId, playerId);
+            logger.info("Game " + gameId + " started for player " + playerId);
+        } catch (Exception ex) {
+            handleException(ex);
+        }
+
+        if (Plugins.instance.isCounterPluginLoaded()) {
+            Plugins.instance.addGamesPlayed();
+        }
+    }
+
+    @Override
+    public void initGame(final UUID gameId, final GameView gameView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GamePanel panel = MageFrame.getGame(gameId);
+                if (panel != null) {
+                    panel.init(gameView);
+                }
+            }
+        });
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+    
+    @Override
+    public void gameAsk(final UUID gameId, final GameView gameView, final String question, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.ask(question, gameView, options);
+            }
+        });
+    }
+
+    @Override
+    public void gameTarget(final UUID gameId, final GameView gameView, final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.pickTarget(gameView, options, question, cardView,  targets, required);
+            }
+        });
+    }
+
+    @Override
+    public void gameChooseAbility(final UUID gameId, final AbilityPickerView abilities) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.pickAbility(null,null,abilities);
+            }
+        });
+    }
+
+    @Override
+    public void gameChoosePile(final UUID gameId, final String message, final CardsView pile1, final CardsView pile2) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.pickPile(null,null,message, pile1, pile2);
+            }
+        });
+    }
+
+    @Override
+    public void gameChooseChoice(final UUID gameId, final Choice choice) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.getChoice(null,null,choice);
+            }
+        });
+    }
+
+    @Override
+    public void gamePlayMana(final UUID gameId, final GameView gameView, final String message, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.playMana(gameView, options, message);
+            }
+        });
+    }
+
+    @Override
+    public void gamePlayXMana(final UUID gameId, final GameView gameView, final String message) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.playXMana(gameView, null, message);
+            }
+        });
+    }
+
+    @Override
+    public void gameSelectAmount(final UUID gameId, GameView gameView, final String message, final int min, final int max) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.getAmount(gameView, null, min, max, message);
+        }
+    }
+    
+    @Override
+    public void gameMultiAmount(UUID gameId, GameView gameView, Map<String, Serializable> option, List<String> messages, int min, int max){
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.getMultiAmount(messages, gameView, option, min, max);
+        }
+    }
+
+    @Override
+    public void gameSelect(final UUID gameId, final GameView gameView, final String message, final Map<String, Serializable> options) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.select(gameView, options, message);
+            }
+        });
+    }
+
+    @Override
+    public void gameEndInfo(UUID gameId, GameEndView view) {
+        showGameEndDialog(view);
+    }
+
+    @Override
+    public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
+        showUserRequestDialog(userRequestMessage);
+    }
+
+    @Override
+    public void gameUpdate(final UUID gameId, final GameView gameView) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.updateGame(gameView);
+            }
+        });
+    }
+
+    @Override
+    public void gameInform(final UUID gameId, final GameClientMessage message) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.inform(message.getMessage(), message.getGameView());
+            }
+        });
+    }
+
+    @Override
+    public void gameInformPersonal(final UUID gameId, final GameClientMessage message) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+    }
+
+    @Override
+    public void gameOver(final UUID gameId, final String message) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.endMessage(null,null,message);
+            }
+        });
+    }
+
+    @Override
+    public void gameError(UUID gameId, String message) {
+        this.showErrorDialog("Game Error", message);
+    }
+    
+    @Override
+    public void sideboard(UUID tableId, DeckView deckView, int time, boolean limited) {
+        Deck deck = DeckUtil.construct(deckView);
+        if (limited) {
+            construct(deck, tableId, time);
+        } else {
+            sideboard(deck, tableId, time);
+        }
+    }
+    
+    @Override
+    public void viewLimitedDeck(UUID tableId, DeckView deckView, int time, boolean limited) {
+        showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, DeckUtil.construct(deckView), tableId, time);
+    }
+
+    @Override
+    public void viewSideboard(UUID gameId, UUID targetPlayerId){
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.openSideboardWindow(targetPlayerId);
+            }
+        });
+    }
+    
+    @Override
+    public void construct(UUID tableId, DeckView deckView, int time) {
+        Deck deck = DeckUtil.construct(deckView);
+        construct(deck, tableId, time);
+    }
+    protected void sideboard(Deck deck, UUID tableId, int time) {
+        showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
+    }
+    protected void construct(Deck deck, UUID tableId, int time) {
+        showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+    }
+    @Override
+    public void startDraft(UUID draftId, UUID playerId) {
+        showDraft(draftId);
+        logger.info("Draft " + draftId + " started for player " + playerId);
+    }
+    @Override
+    public void draftInit(final UUID draftId, final DraftPickView draftPickView) {
+        SwingUtilities.invokeLater(() -> {
+            DraftPanel panel = MageFrame.getDraft(draftId);
+            if (panel != null) {
+                panel.loadBooster(draftPickView);
+            }
+        });
+    }
+    @Override
+    public void draftUpdate(final UUID draftId, final DraftView draftView) {
+        SwingUtilities.invokeLater(() -> {
+            DraftPanel panel = MageFrame.getDraft(draftId);
+            if (panel != null) {
+                panel.updateDraft(draftView);
+            }
+        });
+    }
+    @Override
+    public void draftPick(final UUID draftId, final DraftPickView draftPickView) {
+        SwingUtilities.invokeLater(() -> {
+            DraftPanel panel = MageFrame.getDraft(draftId);
+            if (panel != null) {
+                try {
+                    panel.loadBooster(draftPickView);
+                } catch (Exception ex) {
+                    logger.error("arrrgh", ex);
+                }
+            }
+        });
+    }
+    @Override
+    public void draftOver(UUID draftId) {
+        removeDraft(draftId);
+    }
+    @Override
+    public void tournamentStarted(UUID tournamentId) {
+        showTournament(tournamentId);
+        AudioManager.playTournamentStarted();
+        logger.info("Tournament " + tournamentId + " started");
+    }
+    
+    @Override
+    public void replayGame(UUID gameId) {
+        replayGameC(gameId);
+    }
+    
+    @Override
+    public void replayInit(UUID gameId, GameView gameView) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.init(gameView);
+        }
+    }
+    
+    @Override
+    public void replayDone(UUID gameId, String result) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.endMessage(null, null, result);
+        }
+    }
+    
+    @Override
+    public void replayUpdate(UUID gameId, GameView gameView) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.updateGame(gameView);
+        }
     }
 
     public void sendUserReplay(PlayerAction playerAction, UserRequestMessage userRequestMessage) {
@@ -1533,7 +1991,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     SessionHandler.disconnect(false);
                 }
                 tablesPane.clearChat();
-                showMessage("You have disconnected");
+                showMessage("Disconnected", "You have disconnected");
                 setWindowTitle();
                 break;
             case CLIENT_QUIT_TOURNAMENT:
@@ -1568,7 +2026,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 System.exit(0);
                 break;
             case CLIENT_REMOVE_TABLE:
-                SessionHandler.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
+                SessionHandler.removeTable(userRequestMessage.getRoomId());
                 break;
             case CLIENT_RECONNECT:
                 if (performConnect(true)) {
@@ -1579,19 +2037,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 SessionHandler.stopReplay(userRequestMessage.getGameId());
                 break;
             default:
-                if (SessionHandler.getSession() != null && playerAction != null) {
+                if (SessionHandler.isConnected() && playerAction != null) {
                     SessionHandler.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
                 }
 
-        }
-    }
-
-    private void endTables() {
-        for (UUID gameId : GAMES.keySet()) {
-            SessionHandler.quitMatch(gameId);
-        }
-        for (UUID draftId : DRAFTS.keySet()) {
-            SessionHandler.quitDraft(draftId);
         }
     }
 

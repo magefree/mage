@@ -43,6 +43,22 @@ public class TableView implements Serializable {
     private final boolean rated;
     private final boolean passworded;
     private final boolean spectatorsAllowed;
+    
+    public static TableView emptyTableView = new TableView();
+
+    private TableView() {
+        this.deckType = "";
+        this.additionalInfo = "";
+        this.skillLevel = SkillLevel.BEGINNER;
+        this.tableStateText = "Empty";
+        this.seatsInfo = "";
+        this.quitRatio="";
+        this.minimumRating="";
+        this.limited=false;
+        this.rated=false;
+        this.passworded=false;
+        this.spectatorsAllowed=false;
+    }
 
     public TableView(Table table) {
         this.tableId = table.getId();

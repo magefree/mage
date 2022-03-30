@@ -252,7 +252,7 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnGetAuthTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAuthTokenActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an email address.");
+            MageFrame.getInstance().showErrorDialog(null, "Please enter an email address.");
             return;
         }
 
@@ -268,19 +268,19 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnSubmitNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitNewPasswordActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an email address.");
+            MageFrame.getInstance().showErrorDialog(null, "Please enter an email address.");
             return;
         }
         if (this.txtAuthToken.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an auth token.");
+            MageFrame.getInstance().showErrorDialog(null, "Please enter an auth token.");
             return;
         }
         if (String.valueOf(this.txtPassword.getPassword()).trim().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter a new password.");
+            MageFrame.getInstance().showErrorDialog(null, "Please enter a new password.");
             return;
         }
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError("Passwords don't match.");
+            MageFrame.getInstance().showErrorDialog(null, "Passwords don't match.");
             return;
         }
 
@@ -334,7 +334,7 @@ public class ResetPasswordDialog extends MageDialog {
 
                     String message = "Auth token is emailed. Please check your inbox.";
                     lblStatus.setText(message);
-                    MageFrame.getInstance().showMessage(message);
+                    MageFrame.getInstance().showMessage(null,message);
                 } else {
                     lblStatus.setText("There was an issue while requesting an auth token.");
                 }
@@ -346,7 +346,6 @@ public class ResetPasswordDialog extends MageDialog {
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {
-                MageFrame.stopConnecting();
                 enableButtons();
             }
         }
@@ -376,7 +375,7 @@ public class ResetPasswordDialog extends MageDialog {
 
                     String message = "Password is reset successfully.";
                     lblStatus.setText(message);
-                    MageFrame.getInstance().showMessage(message);
+                    MageFrame.getInstance().showMessage(null,message);
                     hideDialog();
                 } else {
                     lblStatus.setText("There was an issue while resetting password.");
@@ -389,7 +388,6 @@ public class ResetPasswordDialog extends MageDialog {
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {
-                MageFrame.stopConnecting();
                 enableButtons();
             }
         }

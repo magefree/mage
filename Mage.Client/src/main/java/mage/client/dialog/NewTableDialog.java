@@ -526,7 +526,7 @@ public class NewTableDialog extends MageDialog {
                 if (player.getPlayerType() != PlayerType.HUMAN) {
                     if (!player.joinTable(roomId, table.getTableId())) {
                         // error message must be send by the server
-                        SessionHandler.removeTable(roomId, table.getTableId());
+                        SessionHandler.removeTable(roomId);
                         table = null;
                         return;
                     }
@@ -549,7 +549,7 @@ public class NewTableDialog extends MageDialog {
             handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-        SessionHandler.removeTable(roomId, table.getTableId());
+        SessionHandler.removeTable(roomId);
         table = null;
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -619,7 +619,7 @@ public class NewTableDialog extends MageDialog {
         options.setMinimumRating((Integer) this.spnMinimumRating.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        String serverAddress = SessionHandler.getServerHostname().orElse("");
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         return options;

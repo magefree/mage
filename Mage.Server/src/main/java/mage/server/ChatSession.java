@@ -1,8 +1,7 @@
 package mage.server;
 
+import mage.remote.DisconnectReason;
 import mage.game.Game;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.managers.ManagerFactory;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
@@ -90,8 +89,7 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(null, message, new Date(), null, MessageColor.BLUE, MessageType.USER_INFO, null)));
+            toUser.chatMessage(chatId, new ChatMessage(null, message, new Date(), null, MessageColor.BLUE, MessageType.USER_INFO, null));
             return true;
         }
         return false;
@@ -99,35 +97,30 @@ public class ChatSession {
 
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(fromUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
+            toUser.chatMessage(chatId, 
+                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered));
             if (clients.containsKey(fromUser.getId())) {
-                fromUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                        new ChatMessage(toUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
+                fromUser.chatMessage(chatId,
+                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_TO, null));
                 return true;
             }
         }
         return false;
     }
-
+    
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(userName, message, (withTime ? new Date() : null), game, color, messageType, soundToPlay));
-            List<UUID> chatUserIds = new ArrayList<>();
-            final Lock r = lock.readLock();
-            r.lock();
-            try {
-                chatUserIds.addAll(clients.keySet());
-            } finally {
-                r.unlock();
-            }
-            for (UUID userId : chatUserIds) {
-                Optional<User> user = managerFactory.userManager().getUser(userId);
-                if (user.isPresent()) {
-                    user.get().fireCallback(clientCallback);
-                } else {
+            boolean remove = false;
+            final String time = (withTime ? timeFormatter.format(new Date()):"");
+            logger.trace("Broadcasting '" + message + "' for " + chatId);
+            for (UUID userId: clients.keySet()) {
+                User chatUser = managerFactory.userManager().getUser(userId).get();                
+                if (chatUser != null) {
+                    Main.sendChatMessage(chatUser.getSessionId(), chatId, new ChatMessage(userName, message, (withTime ? new Date() : null), game, color, messageType, soundToPlay));
+                }
+                else {
+                    logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
                     clientsToRemove.add(userId);
                 }
             }

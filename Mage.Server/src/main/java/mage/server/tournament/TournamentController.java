@@ -59,13 +59,15 @@ public class TournamentController {
 
     private void init() {
         tournament.addTableEventListener(
-                (Listener<TableEvent>) event -> {
+            new Listener<TableEvent> () {
+                @Override
+                public void event(TableEvent event) {
                     switch (event.getEventType()) {
                         case CHECK_STATE_PLAYERS:
                             checkPlayersState();
                             break;
                         case INFO:
-                            managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                            managerFactory.chatManager().broadcast(chatId, null, event.getMessage(), MessageColor.BLACK, true, null, MessageType.STATUS, null);
                             logger.debug(tournament.getId() + " " + event.getMessage());
                             break;
                         case START_DRAFT:
@@ -102,6 +104,7 @@ public class TournamentController {
                             break;
                     }
                 }
+            }
         );
         tournament.addPlayerQueryEventListener(
                 (Listener<PlayerQueryEvent>) event -> {
@@ -120,7 +123,7 @@ public class TournamentController {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
-                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                managerFactory.chatManager().broadcast(chatId, null, player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             }
         }
         checkStart();
@@ -150,7 +153,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setJoined();
             logger.debug("player " + player.getPlayer().getName() + " - client has joined tournament " + tournament.getId());
-            managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+            managerFactory.chatManager().broadcast(chatId, null, player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             checkStart();
         } else {
             logger.error("User not found  userId: " + userId + "   tournamentId: " + tournament.getId());
@@ -163,11 +166,6 @@ public class TournamentController {
             logger.fatal("Tournament session not found - playerId:" + playerId + "  tournamentId " + tournament.getId());
             return;
         }
-        if (!tournamentSession.init()) {
-            logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
-            return;
-        }
-        tournamentSession.update();
     }
 
     private void checkStart() {
@@ -189,13 +187,6 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
-        for (final TournamentSession tournamentSession : tournamentSessions.values()) {
-            if (!tournamentSession.init()) {
-                logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
-                //TODO: generate client error message
-                return;
-            }
-        }
         started = true;
         logger.debug("Tournament starts (all players joined): " + tournament.getId() + " - " + tournament.getTournamentType().toString());
         tournament.nextStep();
@@ -317,7 +308,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
+                managerFactory.chatManager().broadcast(chatId, null, player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
             }
         }
     }
@@ -402,7 +393,7 @@ public class TournamentController {
             tournamentPlayer.setQuit(info, status);
             tournament.quit(playerId);
             tournamentSession.quit();
-            managerFactory.chatManager().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
+            managerFactory.chatManager().broadcast(chatId, null, tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
         }
     }
 
@@ -428,7 +419,7 @@ public class TournamentController {
                     user.get().removeTable(leavingPlayer.getPlayer().getId());
                     user.get().removeTournament(leavingPlayer.getPlayer().getId());
                 }
-                managerFactory.chatManager().broadcast(chatId, "", leavingPlayer.getPlayer().getLogName() + " was replaced by draftbot", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                managerFactory.chatManager().broadcast(chatId, null, leavingPlayer.getPlayer().getLogName() + " was replaced by draftbot", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             });
             return true;
         }

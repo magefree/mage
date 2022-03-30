@@ -5,7 +5,6 @@ import mage.client.SessionHandler;
 import mage.client.dialog.MageDialog;
 import mage.client.game.GamePanel;
 import mage.client.util.ImageHelper;
-import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
@@ -38,7 +37,6 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private List<Object> choices;
     private String message = DEFAULT_MESSAGE;
 
-    private Session session;
     private UUID gameId;
 
     private BackgroundPainter mwPanelPainter;

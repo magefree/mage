@@ -3031,7 +3031,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         updateCache(KEY_AVATAR, String.valueOf(selectedAvatarId));
 
         try {
-            SessionHandler.updatePreferencesForServer(getUserData());
+            SessionHandler.setPreferences(getUserData());
             prefs.flush();
         } catch (BackingStoreException ex) {
             logger.error("Error: couldn't save preferences", ex);
@@ -4032,7 +4032,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        SessionHandler.updatePreferencesForServer(getUserData());
+                        SessionHandler.setPreferences(getUserData());
                     }
                 }
             });

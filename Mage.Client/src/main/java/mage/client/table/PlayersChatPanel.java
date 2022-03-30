@@ -17,7 +17,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -143,8 +142,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
         private UsersView[] players = new UsersView[0];
 
-        public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
-            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
+        public void loadData(RoomUsersView roomUserInfo) throws MageRemoteException {
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
@@ -289,9 +287,9 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setRoomUserInfo(List<Collection<RoomUsersView>> view) {
+    public void setRoomUserInfo(RoomUsersView view) {
         try {
-            userTableModel.loadData(view.get(0));
+            userTableModel.loadData(view);
         } catch (Exception ex) {
             this.players.clear();
         }

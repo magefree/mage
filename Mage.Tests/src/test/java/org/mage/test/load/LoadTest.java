@@ -9,7 +9,7 @@ import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.remote.Connection;
-import mage.remote.MageRemoteException;
+import mage.utils.MageVersion;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.util.RandomUtil;
@@ -538,19 +538,17 @@ public class LoadTest {
             this.client = new SimpleMageClient(joinGameChat);
             this.session = new SessionImpl(this.client);
 
-            this.session.connect(this.connection);
+            this.session.connect(this.connection, new MageVersion(LoadTest.class));
             this.client.setSession(this.session);
-            this.roomID = this.session.getMainRoomId();
+            this.roomID = this.session.getServerState().getMainRoomId();
         }
 
         public ArrayList<UsersView> getAllRoomUsers() {
             ArrayList<UsersView> res = new ArrayList<>();
             try {
-                for (RoomUsersView roomUsers : this.session.getRoomUsers(this.roomID)) {
-                    res.addAll(roomUsers.getUsersView());
-                }
-            } catch (MageRemoteException e) {
-                logger.error(e);
+                res.addAll(this.session.getRoom(roomID).getRoomUsersView().getUsersView());
+            } catch (Exception ex) {
+                logger.error(ex);
             }
             return res;
         }

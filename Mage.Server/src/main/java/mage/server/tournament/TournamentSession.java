@@ -2,11 +2,8 @@ package mage.server.tournament;
 
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
-import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
 import java.util.Optional;
@@ -41,39 +38,12 @@ public class TournamentSession {
         this.tableId = tableId;
     }
 
-    public boolean init() {
-        if (!killed) {
-            Optional<User> user = managerFactory.userManager().getUser(userId);
-            if (user.isPresent()) {
-                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_INIT, tournament.getId(), getTournamentView()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void update() {
-        if (!killed) {
-            managerFactory.userManager().getUser(userId).ifPresent(user
-                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_UPDATE, tournament.getId(), getTournamentView())));
-
-        }
-    }
-
-    public void gameOver(final String message) {
-        if (!killed) {
-            managerFactory.userManager().getUser(userId).ifPresent(user
-                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.TOURNAMENT_OVER, tournament.getId(), message)));
-
-        }
-    }
-
     public void construct(int timeout) {
         if (!killed) {
             setupTimeout(timeout);
             managerFactory.userManager().getUser(userId).ifPresent(user -> {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+                user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
             });
         }
     }
@@ -119,10 +89,6 @@ public class TournamentSession {
             futureTimeout.cancel(false);
             logger.debug("Timeout is Done: " + futureTimeout.isDone() + "  userId: " + userId);
         }
-    }
-
-    private TournamentView getTournamentView() {
-        return new TournamentView(tournament);
     }
 
     public UUID getTournamentId() {
