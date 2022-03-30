@@ -51,5 +51,12 @@ public class PlanarRollWatcher extends Watcher {
         super.reset();
         numberTimesPlanarDieRolled.clear();
     }
+    
+    public void removePlanarDieRoll(UUID playerId) {
+        Integer amount = numberTimesPlanarDieRolled.get(playerId);
+        if (amount != null){
+            numberTimesPlanarDieRolled.put(playerId, amount-1);
+        }
+    }
 
 }
