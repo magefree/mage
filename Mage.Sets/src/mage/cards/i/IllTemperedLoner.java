@@ -33,8 +33,8 @@ public final class IllTemperedLoner extends CardImpl {
         this.secondSideCardClazz = mage.cards.h.HowlpackAvenger.class;
 
         // Whenever Ill-Tempered Loner is dealt damage, it deals that much damage to any target.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(new DamageTargetEffect(SavedDamageValue.instance)
-                .setText("it deals that much damage to any target"), false, false);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(
+                new DamageTargetEffect(SavedDamageValue.MUCH, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

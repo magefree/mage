@@ -1,18 +1,19 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -44,8 +45,7 @@ public final class BodyOfKnowledge extends CardImpl {
 
         // Whenever Body of Knowledge is dealt damage, draw that many cards.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                new BodyOfKnowledgeEffect(), false, false
-        ));
+                new DrawCardSourceControllerEffect(SavedDamageValue.MANY), false));
     }
 
     private BodyOfKnowledge(final BodyOfKnowledge card) {
@@ -55,31 +55,5 @@ public final class BodyOfKnowledge extends CardImpl {
     @Override
     public BodyOfKnowledge copy() {
         return new BodyOfKnowledge(this);
-    }
-}
-
-class BodyOfKnowledgeEffect extends OneShotEffect {
-
-    BodyOfKnowledgeEffect() {
-        super(Outcome.Benefit);
-        staticText = "draw that many cards";
-    }
-
-    private BodyOfKnowledgeEffect(final BodyOfKnowledgeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BodyOfKnowledgeEffect copy() {
-        return new BodyOfKnowledgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null
-                && amount > 0
-                && player.drawCards(amount, source, game) > 0;
     }
 }
