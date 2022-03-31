@@ -169,7 +169,7 @@ public class SessionImpl implements Session {
             clientMessageHandler.setVersion(version);
             channel = bootstrap.connect(host, port).sync().channel();
             Optional<ServerState> state = clientMessageHandler.connectClient();
-            if ((!state.isEmpty())&&state.get().isValid()) {
+            if ((state.isPresent())&&state.get().isValid()) {
                 client.clientRegistered(state.get());
                 client.connected(connection.getUsername() + "@" + host + ":" + port + " ");
                 return true;
