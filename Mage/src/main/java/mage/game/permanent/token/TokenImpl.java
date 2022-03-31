@@ -238,6 +238,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
             }
             putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
+            event.getTokens()
+                    .keySet()
+                    .stream()
+                    .map(Token::getLastAddedTokenIds)
+                    .flatMap(Collection::stream)
+                    .distinct()
+                    .filter(uuid -> !this.lastAddedTokenIds.contains(uuid))
+                    .forEach(this.lastAddedTokenIds::add);
             return true;
         }
         return false;
