@@ -66,8 +66,9 @@ public class Mode implements Serializable {
         return effects;
     }
 
-    public void addEffect(Effect effect) {
+    public Mode addEffect(Effect effect) {
         effects.add(effect);
+        return this;
     }
 
     public String getFlavorWord() {

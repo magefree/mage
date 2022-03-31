@@ -87,7 +87,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
 
 class CagedSunTriggeredAbility extends TriggeredManaAbility {
 
-    private static final String staticText = "Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.";
+    private static final String staticText = "Whenever a land's ability causes you to add one or more mana of the chosen color, add one additional mana of that color.";
 
     public CagedSunTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CagedSunEffect());

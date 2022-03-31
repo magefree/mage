@@ -9,7 +9,14 @@ import mage.game.Game;
  * @author TheElk801
  */
 public enum SavedDamageValue implements DynamicValue {
-    instance;
+    MANY("many"),
+    MUCH("much");
+
+    private final String message;
+
+    SavedDamageValue(String message) {
+        this.message = message;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -22,7 +29,12 @@ public enum SavedDamageValue implements DynamicValue {
     }
 
     @Override
+    public String toString() {
+        return "that " + message;
+    }
+
+    @Override
     public String getMessage() {
-        return "that much";
+        return "";
     }
 }
