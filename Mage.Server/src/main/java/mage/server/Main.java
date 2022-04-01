@@ -10,7 +10,6 @@ import mage.game.draft.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
-import mage.remote.Connection;
 import mage.server.draft.CubeFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -19,9 +18,11 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.*;
+import mage.server.util.config.Config;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
+import mage.utils.ValidationResult;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -101,7 +102,12 @@ public final class Main {
                 .orElse(defaultConfigPath);
 
         logger.info(String.format("Reading configuration from path=%s", configPath));
-        final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
+        final Config deserialisedConfig = ConfigFactory.loadFromFile(configPath);
+        final ValidationResult configValidation = ConfigValidator.validate(deserialisedConfig);
+        if(!configValidation.isValid()) {
+            throw new ConfigurationException(configValidation.getValidationMessages());
+        }
+        final ConfigWrapper config = new ConfigWrapper(deserialisedConfig);
 
 
         if (config.isAuthenticationActivated()) {
@@ -247,17 +253,24 @@ public final class Main {
             logger.error("ERROR, can't load any game types. Check your config.xml in server's config folder (example: old jar versions after update).");
         }
 
-        Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
-        connection.setHost(config.getServerAddress());
-        connection.setPort(config.getPort());
+        final String defaultHost = ServerConnection.computeLocalAddress();
+        logger.info(String.format("Computed default address=%s", defaultHost));
+        /*
+         * URIs have parameters that have unsafe characters converted into HTML entities, but jboss requires a connection
+         * string without HTML entities, in particular "%3A" needs to be ':' and "%21" needs to be '!'
+         */
+        final String connectionString = new ServerConnection(deserialisedConfig.getServer(), defaultHost).getUri().toString()
+                .replaceAll("%3A", ":")
+                .replaceAll("%21", "!");
+        logger.info(String.format("Computed connection string=%s", connectionString));
         final ManagerFactory managerFactory = new MainManagerFactory(config);
         try {
             // Parameter: serializationtype => jboss
-            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
+            InvokerLocator serverLocator = new InvokerLocator(connectionString);
             if (!isAlreadyRunning(config, serverLocator)) {
                 server = new MageTransporterServer(managerFactory, serverLocator, new MageServerImpl(managerFactory, adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler(managerFactory));
                 server.start();
-                logger.info("Started MAGE server - listening on " + connection.toString());
+                logger.info("Started MAGE server - listening on " + connectionString);
 
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
@@ -267,7 +280,7 @@ public final class Main {
                 logger.fatal("Unable to start MAGE server - another server is already started");
             }
         } catch (Exception ex) {
-            logger.fatal("Failed to start server - " + connection.toString(), ex);
+            logger.fatal("Failed to start server - " + connectionString, ex);
         }
     }
 
@@ -390,7 +403,14 @@ public final class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
+            if (managerFactory.configSettings().isMultiHome()) {
+                final List<Integer> secondaryBindPorts = managerFactory.configSettings().secondaryPorts();
+                ((BisocketServerInvoker) invoker).setSecondaryConnectPorts(secondaryBindPorts);
+                ((BisocketServerInvoker) invoker).setSecondaryBindPorts(secondaryBindPorts);
+            } else {
+                ((BisocketServerInvoker) invoker).setSecondaryConnectPort(managerFactory.configSettings().getSecondaryBindPort());
+                ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
+            }
             ((BisocketServerInvoker) invoker).setBacklog(managerFactory.configSettings().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(managerFactory.configSettings().getNumAcceptThreads());
         }

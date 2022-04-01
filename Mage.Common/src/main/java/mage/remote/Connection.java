@@ -1,16 +1,11 @@
-
 package mage.remote;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import mage.players.net.UserData;
 
+import java.net.*;
+import java.util.Enumeration;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Connection {
@@ -27,19 +22,11 @@ public class Connection {
     private int proxyPort;
     private String proxyUsername;
     private String proxyPassword;
-    private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
     private String userIdStr;
-    private int socketWriteTimeout;
+    private final int socketWriteTimeout;
 
     private UserData userData;
-
-//    private int avatarId;
-//    private boolean showAbilityPickerForced;
-//    private boolean allowRequestShowHandCards;
-//    private boolean confirmEmptyManaPool;
-//    private String flagName;
-//    private UserSkipPrioritySteps userSkipPrioritySteps;
     private static final String serialization = "?serializationtype=jboss";
     private static final String transport = "bisocket";
     private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";
@@ -57,7 +44,7 @@ public class Connection {
 
     @Override
     public int hashCode() {
-        return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();
+        return (transport + host + port + proxyType.toString()).hashCode();
     }
 
     @Override
@@ -71,7 +58,7 @@ public class Connection {
 
     @Override
     public String toString() {
-        return host + ':' + Integer.toString(port) + '/' + serialization + parameter;
+        return host + ':' + port + '/' + serialization + parameter;
     }
 
     public String getURI() {
@@ -218,7 +205,7 @@ public class Connection {
     }
 
     public static InetAddress getLocalAddress() throws SocketException {
-        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
             NetworkInterface iface = interfaces.nextElement();
             if (iface.isLoopback()) {
                 continue;
@@ -237,7 +224,7 @@ public class Connection {
 
     public static String getMAC() throws SocketException {
         StringBuilder allMACs = new StringBuilder();
-        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
+        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
             NetworkInterface iface = interfaces.nextElement();
             byte[] mac = iface.getHardwareAddress();
 
