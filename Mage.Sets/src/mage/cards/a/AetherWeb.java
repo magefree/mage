@@ -1,34 +1,32 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.abilities.StaticAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.ReachAbility;
-import mage.constants.*;
-import mage.abilities.keyword.FlashAbility;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
 public final class AetherWeb extends CardImpl {
 
     public AetherWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Flash
@@ -38,15 +36,15 @@ public final class AetherWeb extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
-        StaticAbility staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1)
-                .setText("Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow."));
-        staticAbility.addEffect(new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA).setText(""));
-        staticAbility.addEffect(new AetherWebEffect());
-        this.addAbility(staticAbility);
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                ReachAbility.getInstance(), AttachmentType.AURA
+        ).setText(", has reach"));
+        ability.addEffect(new AetherWebEffect());
+        this.addAbility(ability);
     }
 
     private AetherWeb(final AetherWeb card) {
@@ -63,7 +61,7 @@ class AetherWebEffect extends AsThoughEffectImpl {
 
     public AetherWebEffect() {
         super(AsThoughEffectType.BLOCK_SHADOW, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "";
+        staticText = ", and can block creatures with shadow as though they didn't have shadow";
     }
 
     public AetherWebEffect(final AetherWebEffect effect) {

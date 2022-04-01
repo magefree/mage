@@ -40,7 +40,7 @@ public final class GoblinSkycutter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Goblin Skycutter: Goblin Skycutter deals 2 damage to target creature with flying. That creature loses flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new SacrificeSourceCost());
         ability.addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("that creature loses flying until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

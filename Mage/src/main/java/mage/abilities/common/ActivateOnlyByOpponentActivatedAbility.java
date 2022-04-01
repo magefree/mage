@@ -29,6 +29,6 @@ public class ActivateOnlyByOpponentActivatedAbility extends ActivatedAbilityImpl
 
     @Override
     public String getRule() {
-        return super.getRule() + " Only any opponent may activate this ability.";
+        return super.getRule() + " Only your opponents may activate this ability.";
     }
 }

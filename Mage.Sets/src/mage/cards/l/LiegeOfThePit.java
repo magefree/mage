@@ -57,7 +57,7 @@ class LiegeOfThePitEffect extends OneShotEffect {
 
     public LiegeOfThePitEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice a creature other than {this}. If you can't {this} deals 7 damage to you.";
+        this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
     public LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {

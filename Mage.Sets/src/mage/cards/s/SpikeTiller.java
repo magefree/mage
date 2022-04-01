@@ -45,7 +45,7 @@ public final class SpikeTiller extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Remove a +1/+1 counter from Spike Tiller: Target land becomes a 2/2 creature that's still a land. Put a +1/+1 counter on it.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfGame).setText("Target land becomes a 2/2 creature that's still a land. "), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfGame).setText("Target land becomes a 2/2 creature that's still a land"), new GenericManaCost(2));
         ability2.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability2.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("Put a +1/+1 counter on it."));
         ability2.addTarget(new TargetLandPermanent());

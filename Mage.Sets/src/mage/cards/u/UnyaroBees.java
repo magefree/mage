@@ -35,7 +35,7 @@ public final class UnyaroBees extends CardImpl {
         // {G}: Unyaro Bees gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
         // {3}{G}, Sacrifice Unyaro Bees: Unyaro Bees deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new ManaCostsImpl("{3}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

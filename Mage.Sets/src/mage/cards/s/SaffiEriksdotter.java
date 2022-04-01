@@ -57,7 +57,7 @@ class SaffiEriksdotterEffect extends OneShotEffect {
 
     public SaffiEriksdotterEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "When target creature is put into your graveyard from the battlefield this turn, return that card to the battlefield";
+        this.staticText = "When target creature is put into your graveyard this turn, return that card to the battlefield";
     }
 
     public SaffiEriksdotterEffect(final SaffiEriksdotterEffect effect) {
