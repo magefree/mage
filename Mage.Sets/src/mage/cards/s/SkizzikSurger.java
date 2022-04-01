@@ -28,7 +28,7 @@ public final class SkizzikSurger extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Echo-Sacrifice two lands.
-        this.addAbility(new EchoAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+        this.addAbility(new EchoAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true))));
     }
 
     private SkizzikSurger(final SkizzikSurger card) {

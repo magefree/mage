@@ -29,7 +29,7 @@ public final class MarshalingCry extends CardImpl {
         effect.setText("Creatures you control get +1/+1");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and vigilance until end of turn");
+        effect.setText("and gain vigilance until end of turn");
         this.getSpellAbility().addEffect(effect);
         
         // Cycling {2}

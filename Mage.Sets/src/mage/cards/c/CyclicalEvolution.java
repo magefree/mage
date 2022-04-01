@@ -30,7 +30,7 @@ public final class CyclicalEvolution extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
         getSpellAbility().addEffect(new ExileSpellEffect());
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), true, true);
-        effect.setText("with 3 time counters on it");
+        effect.setText("with three time counters on it");
         getSpellAbility().addEffect(effect);
 
         // Suspend 3-{2}{G}

@@ -72,9 +72,9 @@ public class DamageAttachedEffect extends OneShotEffect {
             return staticText;
         }
         if ("equal to".equals(amount.toString())) {
-            return this.sourceName + " deals damage " + amount + " that creatures toughness to that creature";
+            return this.sourceName + " deals damage " + amount + " that creatures toughness to enchanted creature";
         }
-         return this.sourceName + " deals " + amount + " damage to that creature";
+         return this.sourceName + " deals " + amount + " damage to enchanted creature";
     }
 
     public String getSourceName() {
