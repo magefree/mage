@@ -30,7 +30,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
-    private UUID lastAddedTokenId;
     private int tokenType;
     private String originalCardNumber;
     private String originalExpansionSetCode;
@@ -76,7 +75,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
-        this.lastAddedTokenId = token.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
@@ -111,11 +109,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     @Override
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public UUID getLastAddedToken() {
-        return lastAddedTokenId;
     }
 
     @Override
@@ -301,7 +294,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // keep tokens ids
                 if (token instanceof TokenImpl) {
                     ((TokenImpl) token).lastAddedTokenIds.add(permanent.getId());
-                    ((TokenImpl) token).lastAddedTokenId = permanent.getId();
                 }
 
                 // created token events

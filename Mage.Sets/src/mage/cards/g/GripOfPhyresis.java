@@ -69,7 +69,7 @@ class GripOfPhyresisEffect extends CreateTokenEffect {
 
         if (controller != null && equipment != null) {
             if (super.apply(game, source)) {
-                Permanent germ = game.getPermanent(this.getLastAddedTokenId());
+                Permanent germ = game.getPermanent(this.getLastAddedTokenIds().stream().findFirst().orElse(null));
                 if (germ != null) {
                     germ.addAttachment(equipment.getId(), source, game);
                     return true;
