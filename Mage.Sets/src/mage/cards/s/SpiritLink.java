@@ -1,10 +1,9 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -31,11 +30,10 @@ public final class SpiritLink extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature deals damage, you gain that much life.
-        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
+        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false));
     }
 
     private SpiritLink(final SpiritLink card) {

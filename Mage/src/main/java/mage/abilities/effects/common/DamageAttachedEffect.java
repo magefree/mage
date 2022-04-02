@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -19,27 +17,28 @@ import mage.game.permanent.Permanent;
 public class DamageAttachedEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    private String sourceName = "{this}";
 
     public DamageAttachedEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = StaticValue.get(amount);
+        this(StaticValue.get(amount), "{this}");
     }
 
     public DamageAttachedEffect(int amount, String whoDealDamageName) {
-        this(amount);
-        this.sourceName = whoDealDamageName;
+        this(StaticValue.get(amount), whoDealDamageName);
     }
-    
+
     public DamageAttachedEffect(DynamicValue amount) {
+        this(amount, "{this}");
+    }
+
+    public DamageAttachedEffect(DynamicValue amount, String whoDealDamageName) {
         super(Outcome.Damage);
         this.amount = amount;
+        this.staticText = whoDealDamageName + " deals " + amount + " damage to enchanted creature";
     }
 
     public DamageAttachedEffect(final DamageAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.sourceName = effect.sourceName;
     }
 
     @Override
@@ -64,24 +63,5 @@ public class DamageAttachedEffect extends OneShotEffect {
         }
         enchanted.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        if ("equal to".equals(amount.toString())) {
-            return this.sourceName + " deals damage " + amount + " that creatures toughness to enchanted creature";
-        }
-         return this.sourceName + " deals " + amount + " damage to enchanted creature";
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
     }
 }

@@ -1,10 +1,8 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -30,16 +28,14 @@ public final class DruidsCall extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
-        Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), new NumericSetToEffectValues("that much", "damage"));
+        Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), SavedDamageValue.MANY);
         effect.setText("its controller creates that many 1/1 green Squirrel creature tokens");
         this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }

@@ -1,12 +1,13 @@
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -18,9 +19,13 @@ import mage.players.Player;
  */
 public class LoseLifeTargetControllerEffect extends OneShotEffect {
 
-    protected int amount;
+    private final DynamicValue amount;
 
     public LoseLifeTargetControllerEffect(int amount) {
+        this(StaticValue.get(amount));
+    }
+
+    public LoseLifeTargetControllerEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
         staticText = "Its controller loses " + amount + " life";
@@ -28,7 +33,7 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect {
 
     public LoseLifeTargetControllerEffect(final LoseLifeTargetControllerEffect effect) {
         super(effect);
-        this.amount = effect.amount;
+        this.amount = effect.amount.copy();
     }
 
     @Override
@@ -38,16 +43,11 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        MageObject targetCard = targetPointer.getFirstTargetPermanentOrLKI(game, source);
 
+        // if target is a countered spell
         if ( targetCard == null ) {
-            MageObject obj = game.getObject(targetPointer.getFirst(game, source));
-            if ( obj instanceof Card ) {
-                targetCard = (Card)obj;
-            } else {
-                // if target is a countered spell
-                targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
-            }
+            targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
 
         if ( targetCard != null ) {
@@ -65,11 +65,10 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect {
             }
 
             if ( controller != null ) {
-                controller.loseLife(amount, game, source, false);
+                controller.loseLife(amount.calculate(game, source, this), game, source, false);
                 return true;
             }
         }
         return false;
     }
-
 }

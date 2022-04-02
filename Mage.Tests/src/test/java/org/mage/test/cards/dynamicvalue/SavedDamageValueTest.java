@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.dynamicvalue;
 
 import mage.constants.PhaseStep;
@@ -11,8 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 
-public class NumericSetToEffectValueTest extends CardTestPlayerBase {
-
+public class SavedDamageValueTest extends CardTestPlayerBase {
 
     /**
      * Check that the dealt damage is added to life
@@ -40,7 +38,5 @@ public class NumericSetToEffectValueTest extends CardTestPlayerBase {
         
         assertLife(playerA, 24);
         assertLife(playerB, 16);
-
     }
-
 }

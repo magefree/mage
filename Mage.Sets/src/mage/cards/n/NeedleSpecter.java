@@ -1,20 +1,17 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -31,13 +28,14 @@ public final class NeedleSpecter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Wither
         this.addAbility(WitherAbility.getInstance());
-        
+
         // Whenever Needle Specter deals combat damage to a player, that player discards that many cards.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NeedleSpecterEffect(), false, true));
-        
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DiscardTargetEffect(SavedDamageValue.MANY),
+                false, true));
     }
 
     private NeedleSpecter(final NeedleSpecter card) {
@@ -48,34 +46,4 @@ public final class NeedleSpecter extends CardImpl {
     public NeedleSpecter copy() {
         return new NeedleSpecter(this);
     }
-}
-
-class NeedleSpecterEffect extends OneShotEffect {
-
-        public NeedleSpecterEffect() {
-            super(Outcome.Discard);
-            this.staticText = "that player discards that many cards";
-        }
-
-        public NeedleSpecterEffect(final NeedleSpecterEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public NeedleSpecterEffect copy() {
-            return new NeedleSpecterEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (targetPlayer != null) {
-                int damage = (Integer)getValue("damage");
-                targetPlayer.discard(damage, false, false, source, game);
-                game.informPlayers(targetPlayer.getLogName() + "discards " + damage + " card(s)");
-                return true;
-            }
-            return false;
-        }
-    
 }

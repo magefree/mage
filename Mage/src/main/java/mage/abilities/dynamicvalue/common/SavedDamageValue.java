@@ -15,7 +15,7 @@ public enum SavedDamageValue implements DynamicValue {
     private final String message;
 
     SavedDamageValue(String message) {
-        this.message = message;
+        this.message = "that " + message;
     }
 
     @Override
@@ -30,7 +30,7 @@ public enum SavedDamageValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "that " + message;
+        return message;
     }
 
     @Override
