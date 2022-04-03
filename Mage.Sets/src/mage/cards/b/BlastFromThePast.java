@@ -15,7 +15,6 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetAnyTarget;
 
@@ -29,7 +28,7 @@ public final class BlastFromThePast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{R}")));
         // Cycling {1}{R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
         // Kicker {2}{R}

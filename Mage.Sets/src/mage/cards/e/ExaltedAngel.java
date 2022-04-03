@@ -30,7 +30,7 @@ public final class ExaltedAngel extends CardImpl {
         // Whenever Exalted Angel deals damage, you gain that much life.
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
         // Morph {2}{W}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}{W}")));
     }
 
     private ExaltedAngel(final ExaltedAngel card) {

@@ -37,7 +37,7 @@ public final class MonasteryLoremaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Megamorph {5}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}"), true));
 
         // When Monastery Loremaster is turned face up, return target noncreature, nonland card from your graveyard to your hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());

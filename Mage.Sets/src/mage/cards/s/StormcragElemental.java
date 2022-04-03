@@ -27,7 +27,7 @@ public final class StormcragElemental extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Megamorph {4}{R}{R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}"), true));
     }
 
     private StormcragElemental(final StormcragElemental card) {

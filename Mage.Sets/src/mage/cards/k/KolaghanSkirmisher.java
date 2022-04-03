@@ -23,7 +23,7 @@ public final class KolaghanSkirmisher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Dash {2}{B}
-        this.addAbility(new DashAbility(this, "{2}{B}"));
+        this.addAbility(new DashAbility("{2}{B}"));
     }
 
     private KolaghanSkirmisher(final KolaghanSkirmisher card) {

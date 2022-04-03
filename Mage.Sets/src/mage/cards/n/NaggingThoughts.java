@@ -25,7 +25,7 @@ public final class NaggingThoughts extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false));
 
         // Madness {1}{U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{U}")));
     }
 
     private NaggingThoughts(final NaggingThoughts card) {

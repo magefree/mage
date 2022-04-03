@@ -40,7 +40,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
 
-    public DashAbility(Card card, String manaString) {
+    public DashAbility(String manaString) {
         super(Zone.ALL, null);
         name = KEYWORD;
         this.addDashCost(manaString);
@@ -53,7 +53,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
 
     }
 
-    public DashAbility(final DashAbility ability) {
+    private DashAbility(final DashAbility ability) {
         super(ability);
         this.alternativeSourceCosts.addAll(ability.alternativeSourceCosts);
         this.zoneChangeCounter = ability.zoneChangeCounter;

@@ -41,7 +41,7 @@ public final class Timebender extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
 
         // When Timebender is turned face up, choose one — 
         // Remove two time counters from target permanent or suspended card.

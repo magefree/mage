@@ -23,7 +23,7 @@ public final class Thunderheads extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Replicate {2}{U}
-        this.addAbility(new ReplicateAbility(this, "{2}{U}"));
+        this.addAbility(new ReplicateAbility("{2}{U}"));
         // Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThunderheadsEffect());
     }

@@ -34,7 +34,7 @@ public final class Revolutionist extends CardImpl {
         this.addAbility(ability);
 
         // Madness {3}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{3}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{R}")));
     }
 
     private Revolutionist(final Revolutionist card) {

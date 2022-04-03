@@ -31,7 +31,7 @@ public final class KrosanCloudscraper extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}{G}")), TargetController.YOU, false));
 
         // Morph {7}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{7}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{7}{G}{G}")));
     }
 
     private KrosanCloudscraper(final KrosanCloudscraper card) {

@@ -25,7 +25,7 @@ public final class LumithreadField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
         
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
     }
 
     private LumithreadField(final LumithreadField card) {

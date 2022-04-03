@@ -26,7 +26,7 @@ public final class WhipSpineDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}")));
     }
 
     private WhipSpineDrake(final WhipSpineDrake card) {

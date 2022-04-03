@@ -35,7 +35,7 @@ public final class AbominationOfGudul extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, true));
         
         // Morph 2BGU
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}{G}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}{G}{U}")));
     }
 
     private AbominationOfGudul(final AbominationOfGudul card) {

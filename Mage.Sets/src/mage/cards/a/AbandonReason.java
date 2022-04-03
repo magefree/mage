@@ -34,7 +34,7 @@ public final class AbandonReason extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AbandonReason(final AbandonReason card) {

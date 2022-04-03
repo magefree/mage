@@ -45,7 +45,7 @@ public final class BirchloreRangers extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));        
         
         // Morph {G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{G}")));
     }
 
     private BirchloreRangers(final BirchloreRangers card) {

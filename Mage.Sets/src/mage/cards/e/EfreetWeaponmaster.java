@@ -42,7 +42,7 @@ public final class EfreetWeaponmaster extends CardImpl {
         this.addAbility(new EfreetWeaponmasterAbility());
 
         // Morph {2}{U}{R}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{R}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{R}{W}")));
     }
 
     private EfreetWeaponmaster(final EfreetWeaponmaster card) {

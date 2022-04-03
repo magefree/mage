@@ -42,7 +42,7 @@ public final class KolaghanTheStormsFury extends CardImpl {
                 false, filter, SetTargetPointer.NONE, false));
 
         // Dash {3}{B}{R}
-        this.addAbility(new DashAbility(this, "{3}{B}{R}"));
+        this.addAbility(new DashAbility("{3}{B}{R}"));
     }
 
     private KolaghanTheStormsFury(final KolaghanTheStormsFury card) {

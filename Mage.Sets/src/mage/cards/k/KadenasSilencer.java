@@ -33,7 +33,7 @@ public final class KadenasSilencer extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new KadenasSilencerEffect()));
 
         // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}"), true));
     }
 
     private KadenasSilencer(final KadenasSilencer card) {

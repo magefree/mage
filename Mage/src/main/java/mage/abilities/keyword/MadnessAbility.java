@@ -53,11 +53,11 @@ public class MadnessAbility extends StaticAbility {
 
     private final String rule;
 
-    public MadnessAbility(Card card, ManaCosts<ManaCost> madnessCost) {
-        this(card, madnessCost, 0);
+    public MadnessAbility(ManaCosts<ManaCost> madnessCost) {
+        this(madnessCost, 0);
     }
 
-    public MadnessAbility(Card card, ManaCosts<ManaCost> madnessCost, int lifeCost) {
+    public MadnessAbility(ManaCosts<ManaCost> madnessCost, int lifeCost) {
         super(Zone.HAND, new MadnessReplacementEffect(madnessCost, lifeCost));
         addSubAbility(new MadnessTriggeredAbility(madnessCost, lifeCost, getOriginalId()));
 

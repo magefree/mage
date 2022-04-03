@@ -114,7 +114,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
     private void addMadnessToCard(Game game, Card card, Map<UUID, MadnessAbility> usedMadnessAbilities) {
         MadnessAbility ability = madnessAbilities.get(card.getId());
         if (ability == null) {
-            ability = new MadnessAbility(card, card.getSpellAbility().getManaCosts());
+            ability = new MadnessAbility(card.getSpellAbility().getManaCosts());
         }
         game.getState().addOtherAbility(card, ability, false);
         usedMadnessAbilities.put(card.getId(), ability);

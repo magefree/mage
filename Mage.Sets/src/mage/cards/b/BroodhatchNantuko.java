@@ -30,7 +30,7 @@ public final class BroodhatchNantuko extends CardImpl {
                 new CreateTokenEffect(new InsectToken(), SavedDamageValue.MANY), true));
 
         // Morph {2}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}")));
     }
 
     private BroodhatchNantuko(final BroodhatchNantuko card) {

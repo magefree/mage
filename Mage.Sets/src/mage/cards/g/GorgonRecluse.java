@@ -33,7 +33,7 @@ public final class GorgonRecluse extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false));
 
         // Madness {B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}{B}")));
     }
 
     private GorgonRecluse(final GorgonRecluse card) {

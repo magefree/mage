@@ -43,7 +43,7 @@ public final class ShadowgrangeArchfiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ShadowgrangeArchfiendEffect()));
 
         // Madness—{2}{B}, Pay 8 life.
-        MadnessAbility madnessAbility = new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}"), 8);
+        MadnessAbility madnessAbility = new MadnessAbility(new ManaCostsImpl<>("{2}{B}"), 8);
         this.addAbility(madnessAbility);
     }
 

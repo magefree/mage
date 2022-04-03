@@ -33,7 +33,7 @@ public final class DistemperOfTheBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{R}")));
     }
 
     private DistemperOfTheBlood(final DistemperOfTheBlood card) {

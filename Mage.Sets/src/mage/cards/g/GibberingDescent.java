@@ -37,7 +37,7 @@ public final class GibberingDescent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GibberingDescentSkipUpkeepEffect()).setAbilityWord(AbilityWord.HELLBENT));
 
         // Madness {2}{B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}{B}")));
     }
 
     private GibberingDescent(final GibberingDescent card) {

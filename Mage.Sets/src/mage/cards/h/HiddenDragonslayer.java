@@ -43,7 +43,7 @@ public final class HiddenDragonslayer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         
         // Megamorph {2}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}"), true));
 
         // When Hidden Dragonslayer is turned face up, destroy target creature with power 4 or greater an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false, false);

@@ -44,7 +44,7 @@ public final class JeeringInstigator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}")));
 
         // When Jeering Instigator is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

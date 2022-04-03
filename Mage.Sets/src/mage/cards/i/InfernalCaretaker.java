@@ -31,7 +31,7 @@ public final class InfernalCaretaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {3}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}")));
         
         // When Infernal Caretaker is turned face up, return all Zombie cards from all graveyards to their owners' hands.
         Effect effect = new ReturnToHandFromGraveyardAllEffect(zombieCard);

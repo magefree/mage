@@ -64,7 +64,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(
+        this.addAbility(new MorphAbility(new SacrificeTargetCost(
                 new TargetControlledPermanent(filter)
         )));
 

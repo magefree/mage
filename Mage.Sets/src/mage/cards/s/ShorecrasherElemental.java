@@ -44,7 +44,7 @@ public final class ShorecrasherElemental extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalBoostEffect(), new ManaCostsImpl("{1}")));
 
         // Megamorph {4}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{U}"), true));
 
     }
 

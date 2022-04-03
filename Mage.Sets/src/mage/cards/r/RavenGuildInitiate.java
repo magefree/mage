@@ -33,7 +33,7 @@ public final class RavenGuildInitiate extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph-Return a Bird you control to its owner's hand.
-        this.addAbility(new MorphAbility(this, new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new MorphAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))));
 
     }
 

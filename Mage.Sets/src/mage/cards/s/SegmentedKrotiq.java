@@ -23,7 +23,7 @@ public final class SegmentedKrotiq extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Megamorph {6}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{G}"), true));
     }
 
     private SegmentedKrotiq(final SegmentedKrotiq card) {

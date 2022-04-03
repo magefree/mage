@@ -30,7 +30,7 @@ public final class Mimeofacture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Replicate {3}{U}
-        this.addAbility(new ReplicateAbility(this, "{3}{U}"));
+        this.addAbility(new ReplicateAbility("{3}{U}"));
 
         // Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new MimeofactureEffect());

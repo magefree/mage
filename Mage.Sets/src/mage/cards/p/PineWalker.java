@@ -28,7 +28,7 @@ public final class PineWalker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Morph {4}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}")));
         // Whenever Pine Walker or another creature you control is turned face up, untap that creature.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap that creature");

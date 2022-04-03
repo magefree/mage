@@ -32,7 +32,7 @@ public final class Warbringer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new WarbringerSpellsCostReductionEffect()));
 
         // Dash {2}{R}
-        this.addAbility(new DashAbility(this, "{2}{R}"));
+        this.addAbility(new DashAbility("{2}{R}"));
     }
 
     private Warbringer(final Warbringer card) {

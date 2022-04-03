@@ -36,7 +36,7 @@ public final class DisruptivePitmage extends CardImpl {
         this.addAbility(ability);
         
         // Morph {U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
     }
 
     private DisruptivePitmage(final DisruptivePitmage card) {

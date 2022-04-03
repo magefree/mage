@@ -28,7 +28,7 @@ public final class UnblinkingBleb extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
 
         // Whenever Unblinking Bleb or another permanent is turned face up, you may scry 2.
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(

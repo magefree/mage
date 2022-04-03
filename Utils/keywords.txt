@@ -17,7 +17,7 @@ Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
-Dash|card, manaString|
+Dash|manaString|
 Daybound|new|
 Deathtouch|instance|
 Demonstrate|new|
@@ -65,7 +65,7 @@ Kicker|manaString|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
-Madness|card, cost|
+Madness|cost|
 Melee|new|
 Menace|new|
 Mentor|new|
@@ -73,7 +73,7 @@ Miracle|cost|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
-Morph|card, cost|
+Morph|cost|
 Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
@@ -91,7 +91,7 @@ Reach|instance|
 Rebound|new|
 Reconfigure|manaString|
 Renown|number|
-Replicate|card, manaString|
+Replicate|manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|

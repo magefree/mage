@@ -31,7 +31,7 @@ public final class Whetwheel extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Morph {3}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}")));
     }
 
     private Whetwheel(final Whetwheel card) {

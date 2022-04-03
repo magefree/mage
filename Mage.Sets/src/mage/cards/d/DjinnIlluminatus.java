@@ -86,7 +86,7 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
                     && !stackObject.getManaCost().isEmpty()) { //handle cases like Ancestral Vision
                 Spell spell = (Spell) stackObject;
                 if (filter.match(stackObject, game)) {
-                    ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(spell.getCard(), spell.getSpellAbility().getManaCosts().getText()));
+                    ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(spell.getSpellAbility().getManaCosts().getText()));
                     game.getState().addOtherAbility(spell.getCard(), replicateAbility, false); // Do not copy because paid and # of activations state is handled in the baility
                 }
             }

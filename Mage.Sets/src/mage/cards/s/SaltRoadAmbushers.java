@@ -32,7 +32,7 @@ public final class SaltRoadAmbushers extends CardImpl {
         this.addAbility(new SaltRoadAmbushersTriggeredAbility());
         
         // Megamorph {3}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}"), true));
     }
 
     private SaltRoadAmbushers(final SaltRoadAmbushers card) {

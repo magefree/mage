@@ -26,7 +26,7 @@ public final class RockshardElemental extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}")));
     }
 
     private RockshardElemental(final RockshardElemental card) {
