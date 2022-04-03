@@ -9,6 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DashedCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DashAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -69,8 +70,14 @@ class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.isControlledBy(source.getControllerId())) {
+        if (abilityToModify instanceof SpellAbility
+                && abilityToModify.isControlledBy(source.getControllerId())) {
+            if (game != null && game.inCheckPlayableState()) {
+                Card card = game.getCard(source.getSourceId());
+                if (card != null) {
+                    return card.getAbilities(game).stream().anyMatch(a -> a instanceof DashAbility);
+                }
+            } else {
                 return DashedCondition.instance.apply(game, abilityToModify);
             }
         }
