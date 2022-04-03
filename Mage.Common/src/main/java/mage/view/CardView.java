@@ -542,7 +542,7 @@ public class CardView extends SimpleCardView {
                 } else if (spell.getCard() != null) {
                     SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
                     Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities(game);
-                    if (aftermathHalfAbilities.stream().anyMatch(halfAbility -> halfAbility instanceof AftermathAbility)) {
+                    if (aftermathHalfAbilities.stream().anyMatch(AftermathAbility.class::isInstance)) {
                         if (ty == SpellAbilityType.SPLIT_RIGHT) {
                             artRect = ArtRect.AFTERMATH_BOTTOM;
                         } else {

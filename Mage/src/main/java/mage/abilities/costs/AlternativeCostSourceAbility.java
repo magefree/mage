@@ -140,7 +140,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 if (alternativeCostsToCheck.canPay(ability, ability, ability.getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
                     if (ability instanceof SpellAbility) {
-                        ability.getManaCostsToPay().removeIf(manaCost -> manaCost instanceof VariableCost);
+                        ability.getManaCostsToPay().removeIf(VariableCost.class::isInstance);
                         CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
                     } else {

@@ -1482,7 +1482,7 @@ public class HumanPlayer extends PlayerImpl {
         // can't see lands as playable and must know the reason (if they click on land then they get that message)
         if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
             Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
-            boolean haveManaAbilities = object.getAbilities().stream().anyMatch(a -> a instanceof ManaAbility);
+            boolean haveManaAbilities = object.getAbilities().stream().anyMatch(ManaAbility.class::isInstance);
             if (spell != null && !spell.isResolving() && haveManaAbilities) {
                 switch (spell.getCurrentActivatingManaAbilitiesStep()) {
                     // if you used special mana ability like convoke then normal mana abilities will be restricted to use, see Convoke for details

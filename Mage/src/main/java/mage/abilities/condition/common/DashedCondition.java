@@ -20,7 +20,7 @@ public enum DashedCondition implements Condition {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             return card.getAbilities(game).stream()
-                    .filter(a -> a instanceof DashAbility)
+                    .filter(DashAbility.class::isInstance)
                     .anyMatch(d -> ((DashAbility) d).isActivated(source, game));
 
         }

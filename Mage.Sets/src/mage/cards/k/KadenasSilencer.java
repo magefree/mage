@@ -67,7 +67,7 @@ class KadenasSilencerEffect extends OneShotEffect {
         Set<UUID> opps = game.getOpponents(source.getControllerId());
         game.getStack()
                 .stream()
-                .filter(stackObject -> stackObject instanceof Ability)
+                .filter(Ability.class::isInstance)
                 .filter(stackObject -> opps.contains(stackObject.getControllerId()))
                 .forEach(stackObject -> game.getStack().counter(stackObject.getId(), source, game));
         return true;
