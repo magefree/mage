@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -23,7 +21,7 @@ import mage.target.common.TargetAttackingCreature;
 public final class Condemn extends CardImpl {
 
     public Condemn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Put target attacking creature on the bottom of its owner's library.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
@@ -46,7 +44,7 @@ public final class Condemn extends CardImpl {
 class CondemnEffect extends OneShotEffect {
 
     public CondemnEffect() {
-        super(Outcome.GainLife);
+        super(Outcome.Detriment);
         staticText = "Its controller gains life equal to its toughness";
     }
 
@@ -61,7 +59,7 @@ class CondemnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent)game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
