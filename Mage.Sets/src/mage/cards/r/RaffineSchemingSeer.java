@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAttackingCreature;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class RaffineSchemingSeer extends CardImpl {
 
         // Whenever you attack, target creature connives X, where X is the number of attacking creatures.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new ConniveTargetEffect(xValue), 1);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
 
