@@ -17,12 +17,13 @@ import mage.filter.common.FilterArtifactOrEnchantmentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -44,8 +45,8 @@ public final class TameshiRealityArchitect extends CardImpl {
         // {X}{W}, Return a land you control to its owner's hand: Return target artifact or enchantment card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
-                        .setText("return target artifact or enchantment card with " +
-                                "mana value X or less from your graveyard to the battlefield"),
+                        .setText("return target artifact or enchantment card with "
+                                + "mana value X or less from your graveyard to the battlefield"),
                 new ManaCostsImpl<>("{X}{W}")
         );
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
@@ -98,6 +99,13 @@ class TameshiRealityArchitectTriggeredAbility extends ZoneChangeTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return super.checkTrigger(event, game) && !((ZoneChangeEvent) event).getTarget().isCreature(game);
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanentMovedToHand = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
+        if (permanentMovedToHand != null
+                && fromZone == zEvent.getFromZone()
+                && toZone == zEvent.getToZone()) {
+            return !permanentMovedToHand.isCreature(game);
+        }
+        return false;
     }
 }
