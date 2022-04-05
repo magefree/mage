@@ -1,10 +1,10 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,6 +20,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
@@ -44,7 +45,9 @@ public final class NissaGenesisMage extends CardImpl {
         this.setStartingLoyalty(5);
 
         //+2: Untap up to two target creatures and up to two target lands.
-        Ability ability = new LoyaltyAbility(new UntapTargetEffect(false).setText("Untap up to two target creatures and up to two target lands"), +2);
+        Effect effect = new UntapTargetEffect("untap up to two target creatures and up to two target lands");
+        effect.setTargetPointer(new EachTargetPointer());
+        Ability ability = new LoyaltyAbility(effect, +2);
         ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
         ability.addTarget(new TargetLandPermanent(0, 2, StaticFilters.FILTER_LANDS, false));
         this.addAbility(ability);
