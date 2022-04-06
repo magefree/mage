@@ -25,10 +25,10 @@ public final class LibraryOfLatNam extends CardImpl {
         this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
 
         // You draw three cards at the beginning of the next turn's upkeep;
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(3)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(3).setText("you draw three cards")), false));
 
         // or you search your library for a card, put that card into your hand, then shuffle your library.
-        this.getSpellAbility().addMode(new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true)));
+        this.getSpellAbility().addMode(new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true).setText("you search your library for a card, put that card into your hand, then shuffle")));
     }
 
     private LibraryOfLatNam(final LibraryOfLatNam card) {

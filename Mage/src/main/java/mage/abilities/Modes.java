@@ -473,20 +473,27 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (mayChooseNone) {
             sb.append("you may ");
         }
-        if (this.chooseText != null) {
-            sb.append(chooseText);
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
-            sb.append("choose up to one");
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose any number");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
-            sb.append("choose one or both");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose one or more");
-        } else if (this.getMinModes() == this.getMaxModes(null, null)) {
-            sb.append("choose " + CardUtil.numberToText(this.getMinModes()));
+        if (this.chooseText == null) {
+            if (modeChooser == TargetController.OPPONENT) {
+                sb.append("an opponent chooses ");
+            } else {
+                sb.append("choose ");
+            }
+            if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
+                sb.append("up to one");
+            } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
+                sb.append("any number");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
+                sb.append("one or both");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
+                sb.append("one or more");
+            } else if (this.getMinModes() == this.getMaxModes(null, null)) {
+                sb.append(CardUtil.numberToText(this.getMinModes()));
+            } else {
+                throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+            }
         } else {
-            throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+            sb.append(chooseText);
         }
 
         if (isEachModeOnlyOnce() && this.getMaxModesFilter() == null) {
