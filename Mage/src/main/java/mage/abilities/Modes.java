@@ -306,19 +306,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // Some spells and abilities specify that a player other than their controller chooses a mode for it.
             // In that case, the other player does so when the spell or ability's controller normally would do so.
             // If there is more than one other player who could make such a choice, the spell or ability's controller decides which of those players will make the choice.
-            UUID playerId = null;
+            UUID playerId;
             if (modeChooser == TargetController.OPPONENT) {
                 TargetOpponent targetOpponent = new TargetOpponent();
-                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
-                    playerId = targetOpponent.getFirstTarget();
-                }
+                targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
+                playerId = targetOpponent.getFirstTarget();
             } else {
                 playerId = source.getControllerId();
             }
-            if (playerId == null) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
                 return false;
             }
-            Player player = game.getPlayer(playerId);
 
             // player chooses modes manually
             this.currentMode = null;
@@ -341,7 +340,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (isEachModeOnlyOnce()) {
                 setAlreadySelectedModes(source, game);
             }
-            return true;
+            if (modeChooser == TargetController.OPPONENT) {
+                selectedModes
+                        .stream()
+                        .map(this::get)
+                        .map(Mode::getEffects)
+                        .forEach(effects -> effects.setValue("choosingPlayer", playerId));
+            }
         } else {
             // only one mode available
             if (currentMode == null) {
@@ -350,8 +355,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 this.addSelectedMode(mode.getId());
                 this.setActiveMode(mode);
             }
-            return true;
         }
+        return true;
     }
 
     /**
