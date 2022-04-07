@@ -202,6 +202,7 @@ Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Scars of Mirrodin|SOM|
 Streets of New Capenna|SNC|
+New Capenna Commander|NCC|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
