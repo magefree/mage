@@ -53,6 +53,7 @@ Foretell|card, manaString|
 Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
+Hideaway|number|
 Improvise|new|
 Indestructible|instance|
 Infect|instance|
