@@ -28,18 +28,20 @@ public final class PressIntoService extends CardImpl {
         getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
-        this.getSpellAbility().addEffect(effect);
-        effect = new UntapTargetEffect();
-        effect.setText("Untap that creature");
-        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Suppor
-        effect.setText("It gains haste until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent()); // First target is used by Support
+
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
+                .setText("Gain control of target creature until end of turn")
+                .setTargetPointer(new SecondTargetPointer())
+        );
+        this.getSpellAbility().addEffect(new UntapTargetEffect()
+                .setText("Untap that creature")
+                .setTargetPointer(new SecondTargetPointer())
+        );
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("It gains haste until end of turn")
+                .setTargetPointer(new SecondTargetPointer())
+        );
     }
 
     private PressIntoService(final PressIntoService card) {
