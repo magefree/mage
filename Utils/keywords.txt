@@ -10,6 +10,7 @@ Bloodthirst|number|
 Bushido|number|
 Buyback|manaString|
 Cascade|new|
+Casualty|card, number|
 Changeling|new|
 Cleave|card, manaString|
 Compleated|instance|
