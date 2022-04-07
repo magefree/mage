@@ -6,11 +6,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  * @author TheElk801
@@ -44,22 +41,8 @@ public class ConniveTargetEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        Player player = game.getPlayer(permanent.getControllerId());
-        if (player == null) {
-            return false;
-        }
         int amount = xValue.calculate(game, source, this);
-        if (amount < 1) {
-            return false;
-        }
-        player.drawCards(amount, source, game);
-        int counters = player.discard(
-                amount, false, false, source, game
-        ).count(StaticFilters.FILTER_CARDS_NON_LAND, game);
-        if (counters > 0) {
-            permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
-        }
-        return true;
+        return amount > 0 && ConniveSourceEffect.connive(permanent, amount, source, game);
     }
 
     @Override

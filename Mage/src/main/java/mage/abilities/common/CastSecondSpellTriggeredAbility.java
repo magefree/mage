@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -17,19 +18,28 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
 public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final Hint hint = new ValueHint("Spells you cast this turn", SpellCastValue.instance);
+    private final TargetController targetController;
 
     public CastSecondSpellTriggeredAbility(Effect effect) {
-        this(Zone.BATTLEFIELD, effect, false);
+        this(effect, TargetController.YOU);
     }
 
-    public CastSecondSpellTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+    public CastSecondSpellTriggeredAbility(Effect effect, TargetController targetController) {
+        this(Zone.BATTLEFIELD, effect, targetController, false);
+    }
+
+    public CastSecondSpellTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean optional) {
         super(zone, effect, optional);
         this.addWatcher(new CastSpellLastTurnWatcher());
-        this.addHint(hint);
+        if (targetController == TargetController.YOU) {
+            this.addHint(hint);
+        }
+        this.targetController = targetController;
     }
 
     private CastSecondSpellTriggeredAbility(final CastSecondSpellTriggeredAbility ability) {
         super(ability);
+        this.targetController = ability.targetController;
     }
 
     @Override
@@ -39,8 +49,21 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
-            return false;
+        switch (targetController) {
+            case YOU:
+                if (!isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            case OPPONENT:
+                if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            case ANY:
+                break;
+            default:
+                throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
@@ -48,7 +71,16 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever you cast your second spell each turn, " ;
+        switch (targetController) {
+            case YOU:
+                return "Whenever you cast your second spell each turn, ";
+            case OPPONENT:
+                return "Whenever an opponent casts their second spell each turn, ";
+            case ANY:
+                return "Whenever a player casts their second spell each turn, ";
+            default:
+                throw new IllegalArgumentException("TargetController " + targetController + " not supported");
+        }
     }
 
     @Override

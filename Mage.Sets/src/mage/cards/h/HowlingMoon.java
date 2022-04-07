@@ -56,7 +56,7 @@ public final class HowlingMoon extends CardImpl {
 }
 
 class HowlingMoonTriggeredAbility extends TriggeredAbilityImpl {
-
+    // TODO: replace this and others like it with CastSecondSpellTriggeredAbility
     public HowlingMoonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
     }
