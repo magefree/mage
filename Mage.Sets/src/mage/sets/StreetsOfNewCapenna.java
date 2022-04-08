@@ -39,6 +39,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Disciplined Duelist", 182, Rarity.UNCOMMON, mage.cards.d.DisciplinedDuelist.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gala Greeters", 148, Rarity.RARE, mage.cards.g.GalaGreeters.class));
+        cards.add(new SetCardInfo("Getaway Car", 237, Rarity.RARE, mage.cards.g.GetawayCar.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jetmir's Garden", 250, Rarity.RARE, mage.cards.j.JetmirsGarden.class));
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 193, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class));
