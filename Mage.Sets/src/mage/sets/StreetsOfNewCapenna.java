@@ -39,6 +39,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Murder", 88, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Obscura Charm", 208, Rarity.UNCOMMON, mage.cards.o.ObscuraCharm.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Racers' Ring", 253, Rarity.COMMON, mage.cards.r.RacersRing.class));
         cards.add(new SetCardInfo("Raffine's Tower", 254, Rarity.RARE, mage.cards.r.RaffinesTower.class));
         cards.add(new SetCardInfo("Raffine, Scheming Seer", 213, Rarity.MYTHIC, mage.cards.r.RaffineSchemingSeer.class));
         cards.add(new SetCardInfo("Riveteers Charm", 217, Rarity.UNCOMMON, mage.cards.r.RiveteersCharm.class));
