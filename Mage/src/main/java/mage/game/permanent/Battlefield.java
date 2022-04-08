@@ -237,8 +237,8 @@ public class Battlefield implements Serializable {
 
     /**
      * Returns all {@link Permanent} on the battlefield that match the supplied
-     * filter. This method ignores the range of influence. It ignores controller
-     * predicates
+     * filter. This method ignores the range of influence and ignores
+     * ObjectSourcePlayer predicates in the filter (e.g. controller predicates)
      *
      * @param filter
      * @param game
@@ -254,7 +254,8 @@ public class Battlefield implements Serializable {
 
     /**
      * Returns all {@link Permanent} that match the filter and are controlled by
-     * controllerId. This method ignores the range of influence.
+     * controllerId. This method ignores the range of influence and ignores
+     * ObjectSourcePlayer predicates in the filter
      *
      * @param filter
      * @param controllerId

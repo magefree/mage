@@ -117,8 +117,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (perm.isControlledBy(source.getControllerId())
+                        && (!(excludeSource && perm.getId().equals(source.getSourceId())))) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
