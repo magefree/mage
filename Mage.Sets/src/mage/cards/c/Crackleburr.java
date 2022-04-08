@@ -33,7 +33,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Crackleburr extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped red creatures you control");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("tapped blue creatures you control");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("tapped blue creature you control");
     
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
