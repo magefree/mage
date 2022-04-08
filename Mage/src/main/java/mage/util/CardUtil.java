@@ -533,7 +533,7 @@ public final class CardUtil {
     }
 
     public static String replaceSourceName(String message, String sourceName) {
-        return message.replace("{this}", sourceName);
+        return message != null ? message.replace("{this}", sourceName) : null;
     }
 
     public static String booleanToFlipName(boolean flip) {

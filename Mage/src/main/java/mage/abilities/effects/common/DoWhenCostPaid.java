@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -38,17 +37,23 @@ public class DoWhenCostPaid extends OneShotEffect {
         this.optional = effect.optional;
     }
 
+    private boolean checkOptional(Player player, Game game, Ability source) {
+        return optional && !player.chooseUse(
+                ability.getEffects().getOutcome(source, this.outcome),
+                CardUtil.replaceSourceName(
+                        chooseUseText, CardUtil.getSourceName(game, source)
+                ), source, game
+        );
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source);
-        if (player == null || mageObject == null) {
+        if (player == null) {
             return false;
         }
-        String message = CardUtil.replaceSourceName(chooseUseText, mageObject.getLogName());
-        Outcome payOutcome = ability.getEffects().getOutcome(source, this.outcome);
         if (!cost.canPay(source, source, player.getId(), game)
-                || (optional && !player.chooseUse(payOutcome, message, source, game))) {
+                || checkOptional(player, game, source)) {
             return false;
         }
         cost.clearPaid();
