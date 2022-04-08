@@ -59,7 +59,7 @@ class AnOfferYouCantRefuseEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        spell.counter(source, game);
+        game.getStack().counter(spell.getId(), source, game);;
         new TreasureToken().putOntoBattlefield(2, game, source, spell.getControllerId());
         return true;
     }
