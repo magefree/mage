@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -59,5 +64,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when shield counters are implemented
     }
 }
