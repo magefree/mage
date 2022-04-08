@@ -65,6 +65,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
+        cards.add(new SetCardInfo("Ziatora, the Incinerator", 231, Rarity.MYTHIC, mage.cards.z.ZiatoraTheIncinerator.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when shield counters are implemented
     }
