@@ -63,6 +63,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Strangle", 125, Rarity.COMMON, mage.cards.s.Strangle.class));
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
+        cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 129, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class));
         cards.add(new SetCardInfo("Vivien on the Hunt", 347, Rarity.MYTHIC, mage.cards.v.VivienOnTheHunt.class));
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
