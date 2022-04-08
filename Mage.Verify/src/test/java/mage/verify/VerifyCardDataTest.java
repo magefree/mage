@@ -100,7 +100,6 @@ public class VerifyCardDataTest {
 
         // cost
         skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "SNC", "Brokers Charm"); // temporary
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
