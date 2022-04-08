@@ -21,6 +21,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("Botanical Plaza", 350, Rarity.COMMON, mage.cards.b.BotanicalPlaza.class));
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
         cards.add(new SetCardInfo("Brokers Charm", 171, Rarity.UNCOMMON, mage.cards.b.BrokersCharm.class));

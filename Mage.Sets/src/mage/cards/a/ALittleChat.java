@@ -1,7 +1,8 @@
-package mage.cards.s;
+package mage.cards.a;
 
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.keyword.CasualtyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -11,12 +12,15 @@ import mage.filter.StaticFilters;
 import java.util.UUID;
 
 /**
- * @author North
+ * @author TheElk801
  */
-public final class SleightOfHand extends CardImpl {
+public final class ALittleChat extends CardImpl {
 
-    public SleightOfHand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
+    public ALittleChat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+
+        // Casualty 1
+        this.addAbility(new CasualtyAbility(this, 1));
 
         // Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
@@ -25,12 +29,12 @@ public final class SleightOfHand extends CardImpl {
         ));
     }
 
-    private SleightOfHand(final SleightOfHand card) {
+    private ALittleChat(final ALittleChat card) {
         super(card);
     }
 
     @Override
-    public SleightOfHand copy() {
-        return new SleightOfHand(this);
+    public ALittleChat copy() {
+        return new ALittleChat(this);
     }
 }
