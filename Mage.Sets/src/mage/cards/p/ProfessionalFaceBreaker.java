@@ -33,7 +33,7 @@ public final class ProfessionalFaceBreaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
