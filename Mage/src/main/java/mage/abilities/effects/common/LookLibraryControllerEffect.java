@@ -32,23 +32,11 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     }
 
     public LookLibraryControllerEffect(int numberOfCards) {
-        this(numberOfCards, false, true);
+        this(StaticValue.get(numberOfCards));
     }
 
     public LookLibraryControllerEffect(DynamicValue numberOfCards) {
-        this(numberOfCards, false, true);
-    }
-
-    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
-        this(numberOfCards, mayShuffleAfter, true);
-    }
-
-    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-        this(StaticValue.get(numberOfCards), mayShuffleAfter, putOnTop);
-    }
-
-    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-        this(Outcome.Benefit, numberOfCards, mayShuffleAfter, Zone.LIBRARY, putOnTop);
+        this(Outcome.Benefit, numberOfCards, false, Zone.LIBRARY, true);
     }
 
     public LookLibraryControllerEffect(Outcome outcome, DynamicValue numberOfCards, boolean mayShuffleAfter, Zone targetZoneLookedCards, boolean putOnTop) {

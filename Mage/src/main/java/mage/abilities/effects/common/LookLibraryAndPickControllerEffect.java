@@ -56,7 +56,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected DynamicValue numberToPick;
     protected boolean revealPickedCards = true;
     protected Zone targetPickedCards = Zone.HAND; // HAND
-    protected int foundCardsToPick = 0;
     protected boolean optional;
     private boolean upTo;
     private boolean putOnTopSelected;
