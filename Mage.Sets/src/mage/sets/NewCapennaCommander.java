@@ -12,7 +12,8 @@ import java.util.List;
  */
 public final class NewCapennaCommander extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Kros, Defense Contractor", "Perrie, the Pulveriser");
+    private static final List<String> unfinished = Arrays.asList("Henzie \"Toolbox\" Torre", "Kros, Defense Contractor", "Perrie, the Pulveriser");
+
     private static final NewCapennaCommander instance = new NewCapennaCommander();
 
     public static NewCapennaCommander getInstance() {

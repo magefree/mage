@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver");
+    private static final List<String> unfinished = Arrays.asList("Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver", "Jaxis, the Troublemaker");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -47,6 +47,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Halo Fountain", 15, Rarity.MYTHIC, mage.cards.h.HaloFountain.class));
         cards.add(new SetCardInfo("Incriminate", 84, Rarity.COMMON, mage.cards.i.Incriminate.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jaxis, the Troublemaker", 112, Rarity.RARE, mage.cards.j.JaxisTheTroublemaker.class));
         cards.add(new SetCardInfo("Jetmir's Garden", 250, Rarity.RARE, mage.cards.j.JetmirsGarden.class));
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 193, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class));
         cards.add(new SetCardInfo("Join the Maestros", 85, Rarity.COMMON, mage.cards.j.JoinTheMaestros.class));
