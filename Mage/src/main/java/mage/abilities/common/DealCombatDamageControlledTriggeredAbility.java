@@ -17,39 +17,39 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends TriggeredAbilityImpl {
+public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbilityImpl {
 
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
     private final boolean setTargetPointer;
     private final boolean onlyOpponents;
 
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Effect effect) {
+    public DealCombatDamageControlledTriggeredAbility(Effect effect) {
         this(Zone.BATTLEFIELD, effect);
     }
 
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone zone, Effect effect) {
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect) {
         this(zone, effect, false);
     }
 
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer) {
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer) {
         this(zone, effect, setTargetPointer, false);
     }
 
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents) {
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents) {
         super(zone, effect, false);
         this.setTargetPointer = setTargetPointer;
         this.onlyOpponents = onlyOpponents;
     }
 
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(final ControlledCreaturesDealCombatDamagePlayerTriggeredAbility ability) {
+    public DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;
     }
 
     @Override
-    public ControlledCreaturesDealCombatDamagePlayerTriggeredAbility copy() {
-        return new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(this);
+    public DealCombatDamageControlledTriggeredAbility copy() {
+        return new DealCombatDamageControlledTriggeredAbility(this);
     }
 
     @Override
