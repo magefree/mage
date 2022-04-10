@@ -213,6 +213,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingTurnWasActive = activePlayerId != null
                 && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
         this.effectStartingOnTurn = game.getTurnNum();
+        this.effectStartingEndStep = EndStepCountWatcher.getCount(startingController, game);
     }
 
     @Override
@@ -245,7 +246,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             return false;
         }
 
-        boolean canDelete = false;
+        boolean canDelete;
         Player player = game.getPlayer(startingControllerId);
 
         // discard on start of turn for leaved player
@@ -255,16 +256,26 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         switch (duration) {
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
-                canDelete = player == null
-                        || (!player.isInGame()
-                        && player.hasReachedNextTurnAfterLeaving());
+                canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+                break;
+            default:
+                canDelete = false;
+        }
+
+        if (canDelete) {
+            return true;
         }
 
         // discard on another conditions (start of your turn)
         switch (duration) {
             case UntilYourNextTurn:
                 if (player != null && player.isInGame()) {
-                    canDelete = canDelete || this.isYourNextTurn(game);
+                    return this.isYourNextTurn(game);
+                }
+                break;
+            case UntilYourNextEndStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextEndStep(game);
                 }
         }
 
