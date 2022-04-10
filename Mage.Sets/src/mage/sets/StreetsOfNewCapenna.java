@@ -40,11 +40,13 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Devilish Valet", 105, Rarity.RARE, mage.cards.d.DevilishValet.class));
         cards.add(new SetCardInfo("Disciplined Duelist", 182, Rarity.UNCOMMON, mage.cards.d.DisciplinedDuelist.class));
         cards.add(new SetCardInfo("Errant, Street Artist", 41, Rarity.RARE, mage.cards.e.ErrantStreetArtist.class));
+        cards.add(new SetCardInfo("Evolving Door", 144, Rarity.RARE, mage.cards.e.EvolvingDoor.class));
         cards.add(new SetCardInfo("Faerie Vandal", 44, Rarity.UNCOMMON, mage.cards.f.FaerieVandal.class));
         cards.add(new SetCardInfo("Fight Rigging", 430, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gala Greeters", 148, Rarity.RARE, mage.cards.g.GalaGreeters.class));
         cards.add(new SetCardInfo("Getaway Car", 237, Rarity.RARE, mage.cards.g.GetawayCar.class));
+        cards.add(new SetCardInfo("Graveyard Shift", 81, Rarity.UNCOMMON, mage.cards.g.GraveyardShift.class));
         cards.add(new SetCardInfo("Grisly Sigil", 82, Rarity.UNCOMMON, mage.cards.g.GrislySigil.class));
         cards.add(new SetCardInfo("Halo Fountain", 15, Rarity.MYTHIC, mage.cards.h.HaloFountain.class));
         cards.add(new SetCardInfo("Incriminate", 84, Rarity.COMMON, mage.cards.i.Incriminate.class));
@@ -84,6 +86,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 129, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class));
         cards.add(new SetCardInfo("Vivien on the Hunt", 162, Rarity.MYTHIC, mage.cards.v.VivienOnTheHunt.class));
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
+        cards.add(new SetCardInfo("Witness Protection", 66, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
         cards.add(new SetCardInfo("Ziatora, the Incinerator", 231, Rarity.MYTHIC, mage.cards.z.ZiatoraTheIncinerator.class));
