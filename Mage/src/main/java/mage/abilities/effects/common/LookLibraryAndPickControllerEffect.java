@@ -328,8 +328,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append(targetPickedCards.toString().toLowerCase(Locale.ENGLISH));
 
             if (targetZoneLookedCards == Zone.LIBRARY) {
-                sb.append(revealPickedCards?". Put ":" and ");
-                sb.append(cardCount-pickCount==1?"the other ":"the rest ");
+                sb.append(revealPickedCards ? ". Put " : " and ");
+                sb.append(cardCount-pickCount == 1 ? "the other " : "the rest ");
                 if (putOnTop) {
                     sb.append("back on top");
                 } else {
@@ -346,12 +346,12 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                     sb.append(" order");
                 }
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {
-                sb.append(" and the");
+                sb.append(revealPickedCards ? ". Put" : " and");
                 if (numberOfCards instanceof StaticValue && numberToPick instanceof StaticValue
                         && ((StaticValue) numberToPick).getValue() + 1 == ((StaticValue) numberOfCards).getValue()) {
-                    sb.append(" other");
+                    sb.append(" the other");
                 } else {
-                    sb.append(" rest");
+                    sb.append(" the rest");
                 }
                 sb.append(" into your graveyard");
             }
