@@ -10,7 +10,11 @@ public class AbilityCounter extends Counter {
     private final Ability ability;
 
     AbilityCounter(Ability ability, int count) {
-        super(makeName(ability.getRule()), count);
+        this(ability, count, makeName(ability.getRule()));
+    }
+
+    AbilityCounter(Ability ability, int count, String name) {
+        super(name, count);
         this.ability = ability;
     }
 
