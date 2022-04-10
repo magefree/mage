@@ -67,6 +67,8 @@ public interface ContinuousEffect extends Effect {
 
     boolean isYourNextTurn(Game game);
 
+    boolean isYourNextEndStep(Game game);
+
     @Override
     void newId();
 

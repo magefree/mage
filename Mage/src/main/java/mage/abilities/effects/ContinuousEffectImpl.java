@@ -4,7 +4,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -19,6 +18,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
+import mage.watchers.common.EndStepCountWatcher;
 
 import java.util.*;
 
@@ -61,6 +61,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     private UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
     private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
     private int effectStartingOnTurn = 0; // turn the effect started
+    private int effectStartingEndStep = 0;
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -91,6 +92,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingControllerId = effect.startingControllerId;
         this.startingTurnWasActive = effect.startingTurnWasActive;
         this.effectStartingOnTurn = effect.effectStartingOnTurn;
+        this.effectStartingEndStep = effect.effectStartingEndStep;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
@@ -220,6 +222,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
+    public boolean isYourNextEndStep(Game game) {
+        return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
+    }
+
+    @Override
     public boolean isInactive(Ability source, Game game) {
         // YOUR turn checks
         // until end of turn - must be checked on cleanup step, see rules 514.2
@@ -227,6 +234,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         switch (duration) {
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
+            case UntilYourNextEndStep:
                 break;
             default:
                 return false;
@@ -255,10 +263,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         // discard on another conditions (start of your turn)
         switch (duration) {
             case UntilYourNextTurn:
-                if (player != null
-                        && player.isInGame()) {
-                    canDelete = canDelete
-                            || this.isYourNextTurn(game);
+                if (player != null && player.isInGame()) {
+                    canDelete = canDelete || this.isYourNextTurn(game);
                 }
         }
 

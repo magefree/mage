@@ -50,7 +50,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         // rules 514.2
         for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
-            boolean canRemove = false;
+            boolean canRemove;
             switch (entry.getDuration()) {
                 case EndOfTurn:
                     canRemove = true;
@@ -58,6 +58,11 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 case UntilEndOfYourNextTurn:
                     canRemove = entry.isYourNextTurn(game);
                     break;
+                case UntilYourNextEndStep:
+                    canRemove = entry.isYourNextEndStep(game);
+                    break;
+                default:
+                    canRemove = false;
             }
             if (canRemove) {
                 i.remove();
@@ -149,6 +154,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                     case Custom:
                     case UntilYourNextTurn:
                     case UntilEndOfYourNextTurn:
+                    case UntilYourNextEndStep:
                         // until your turn effects continue until real turn reached, their used it's own inactive method
                         // 514.2 Second, the following actions happen simultaneously: all damage marked on permanents
                         // (including phased-out permanents) is removed and all "until end of turn" and "this turn" effects end.
