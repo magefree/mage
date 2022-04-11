@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -1129,6 +1130,9 @@ public abstract class GameImpl implements Game {
         if (checkIfGameIsOver()) {
             return;
         }
+
+        // Apply shield counter mechanic from SNC
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new ShieldCounterEffect()), null);
 
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();

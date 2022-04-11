@@ -1,7 +1,5 @@
 package mage.counters;
 
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.filter.predicate.Predicate;
@@ -282,8 +280,6 @@ public enum CounterType {
                 return new AbilityCounter(TrampleAbility.getInstance(), amount);
             case VIGILANCE:
                 return new AbilityCounter(VigilanceAbility.getInstance(), amount);
-            case SHIELD:
-                return new AbilityCounter(new SimpleStaticAbility(new ShieldCounterEffect()), amount, name);
             default:
                 return new Counter(name, amount);
         }

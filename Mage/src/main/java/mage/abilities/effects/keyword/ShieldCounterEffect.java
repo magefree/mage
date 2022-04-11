@@ -9,11 +9,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+/**
+ *
+ * @author weirddan455
+ */
 public class ShieldCounterEffect extends ReplacementEffectImpl {
 
     public ShieldCounterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
-        this.staticText = "If {this} would be dealt damage or destroyed, remove a shield counter from it instead";
+        super(Duration.Custom, Outcome.PreventDamage);
+        this.staticText = "If it would be dealt damage or destroyed, remove a shield counter from it instead";
     }
 
     private ShieldCounterEffect(final ShieldCounterEffect effect) {
@@ -27,14 +31,15 @@ public class ShieldCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getCounters(game).getCount(CounterType.SHIELD) > 0) {
             permanent.removeCounters(CounterType.SHIELD.getName(), 1, source, game);
             if (!game.isSimulation()) {
                 game.informPlayers("Removed a shield counter from " + permanent.getLogName());
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -50,8 +55,7 @@ public class ShieldCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        return permanent != null && permanent.getId().equals(event.getTargetId())
-                && permanent.getCounters(game).getCount(CounterType.SHIELD) > 0;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.SHIELD) > 0;
     }
 }
