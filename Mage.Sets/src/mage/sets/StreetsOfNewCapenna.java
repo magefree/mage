@@ -41,6 +41,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Disciplined Duelist", 182, Rarity.UNCOMMON, mage.cards.d.DisciplinedDuelist.class));
         cards.add(new SetCardInfo("Errant, Street Artist", 41, Rarity.RARE, mage.cards.e.ErrantStreetArtist.class));
         cards.add(new SetCardInfo("Evolving Door", 144, Rarity.RARE, mage.cards.e.EvolvingDoor.class));
+        cards.add(new SetCardInfo("Exotic Pets", 185, Rarity.UNCOMMON, mage.cards.e.ExoticPets.class));
         cards.add(new SetCardInfo("Faerie Vandal", 44, Rarity.UNCOMMON, mage.cards.f.FaerieVandal.class));
         cards.add(new SetCardInfo("Fight Rigging", 430, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
