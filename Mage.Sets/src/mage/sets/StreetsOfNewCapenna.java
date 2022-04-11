@@ -32,6 +32,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
         cards.add(new SetCardInfo("Brokers Charm", 171, Rarity.UNCOMMON, mage.cards.b.BrokersCharm.class));
         cards.add(new SetCardInfo("Cabaretti Charm", 173, Rarity.UNCOMMON, mage.cards.c.CabarettiCharm.class));
+        cards.add(new SetCardInfo("Ceremonial Groundbreaker", 175, Rarity.UNCOMMON, mage.cards.c.CeremonialGroundbreaker.class));
         cards.add(new SetCardInfo("Chrome Cat", 236, Rarity.COMMON, mage.cards.c.ChromeCat.class));
         cards.add(new SetCardInfo("Cormela, Glamour Thief", 177, Rarity.UNCOMMON, mage.cards.c.CormelaGlamourThief.class));
         cards.add(new SetCardInfo("Courier's Briefcase", 142, Rarity.UNCOMMON, mage.cards.c.CouriersBriefcase.class));
