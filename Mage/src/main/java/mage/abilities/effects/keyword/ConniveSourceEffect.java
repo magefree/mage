@@ -1,6 +1,8 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -8,20 +10,27 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
  */
 public class ConniveSourceEffect extends OneShotEffect {
 
+    private final ReflexiveTriggeredAbility ability;
+
     public ConniveSourceEffect() {
+        this((ReflexiveTriggeredAbility) null);
+    }
+
+    public ConniveSourceEffect(ReflexiveTriggeredAbility ability) {
         super(Outcome.Benefit);
-        staticText = "{this} connives. <i>(Draw a card, then discard a card. " +
-                "If you discarded a nonland card, put a +1/+1 counter on this creature.)</i>";
+        this.ability = ability;
     }
 
     private ConniveSourceEffect(final ConniveSourceEffect effect) {
         super(effect);
+        this.ability = effect.ability;
     }
 
     @Override
@@ -32,10 +41,13 @@ public class ConniveSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
+        if (permanent != null) {
+            connive(permanent, 1, source, game);
         }
-        return permanent != null && connive(permanent, 1, source, game);
+        if (ability != null) {
+            game.fireReflexiveTriggeredAbility(ability, source);
+        }
+        return permanent != null || ability != null;
     }
 
     public static boolean connive(Permanent permanent, int amount, Ability source, Game game) {
@@ -54,5 +66,20 @@ public class ConniveSourceEffect extends OneShotEffect {
             permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
         }
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        if (ability == null) {
+            return "{this} connives. <i>(Draw a card, then discard a card. " +
+                    "If you discarded a nonland card, put a +1/+1 counter on this creature.)</i>";
+        }
+        return "{this} connives. When it connives this way, " +
+                CardUtil.getTextWithFirstCharLowerCase(ability.getRule()) +
+                " <i>(To have a creature connive, draw a card, then discard a card. " +
+                "If you discarded a nonland card, put a +1/+1 counter on that creature.)</i>";
     }
 }
