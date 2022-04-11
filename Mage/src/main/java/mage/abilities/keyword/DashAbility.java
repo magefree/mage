@@ -1,192 +1,55 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.DashedCondition;
-import mage.abilities.costs.*;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.AlternativeSourceCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author LevelX2
  */
-public class DashAbility extends StaticAbility implements AlternativeSourceCosts {
+public class DashAbility extends AlternativeSourceCostsImpl {
 
     protected static final String KEYWORD = "Dash";
     protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. "
             + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
             + "hand at the beginning of the next end step.)";
 
-    protected List<AlternativeCost> alternativeSourceCosts = new LinkedList<>();
-
-    // needed to check activation status, if card changes zone after casting it
-    private int zoneChangeCounter = 0;
-
     public DashAbility(String manaString) {
-        super(Zone.ALL, null);
-        name = KEYWORD;
-        this.addDashCost(manaString);
+        super(KEYWORD, REMINDER_TEXT, manaString);
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
                 DashedCondition.instance, "", "");
         ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
-
     }
 
     private DashAbility(final DashAbility ability) {
         super(ability);
-        this.alternativeSourceCosts.addAll(ability.alternativeSourceCosts);
-        this.zoneChangeCounter = ability.zoneChangeCounter;
     }
 
     @Override
     public DashAbility copy() {
         return new DashAbility(this);
     }
-
-    public final AlternativeCost addDashCost(String manaString) {
-        AlternativeCost evokeCost = new AlternativeCostImpl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
-        alternativeSourceCosts.add(evokeCost);
-        return evokeCost;
-    }
-
-    public void resetDash() {
-        for (AlternativeCost cost : alternativeSourceCosts) {
-            cost.reset();
-        }
-        zoneChangeCounter = 0;
-    }
-
-    @Override
-    public boolean isActivated(Ability ability, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null
-                && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
-            for (AlternativeCost cost : alternativeSourceCosts) {
-                if (cost.isActivated(game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isAvailable(Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            // we must use the controller of the ability here IE: Hedonist's Trove (play from not own hand when you aren't the owner)
-            Player player = game.getPlayer(ability.getControllerId());
-            if (player != null) {
-                this.resetDash();
-                for (AlternativeCost dashCost : alternativeSourceCosts) {
-                    if (dashCost.canPay(ability, this, player.getId(), game)
-                            && player.chooseUse(Outcome.Benefit, KEYWORD
-                            + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
-                        activateDash(dashCost, game);
-                        ability.getManaCostsToPay().clear();
-                        ability.getCosts().clear();
-                        for (Iterator it = ((Costs) dashCost).iterator(); it.hasNext(); ) {
-                            Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                            } else {
-                                ability.getCosts().add(cost.copy());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return isActivated(ability, game);
-    }
-
-    private void activateDash(AlternativeCost cost, Game game) {
-        cost.activate();
-        // remember zone change counter
-        if (zoneChangeCounter == 0) {
-            Card card = game.getCard(getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter(game);
-            } else {
-                throw new IllegalArgumentException("Dash source card not found");
-            }
-        }
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        int numberCosts = 0;
-        String remarkText = "";
-        for (AlternativeCost dashCost : alternativeSourceCosts) {
-            if (numberCosts == 0) {
-                sb.append(dashCost.getText(false));
-                remarkText = dashCost.getReminderText();
-            } else {
-                sb.append(" and/or ").append(dashCost.getText(true));
-            }
-            ++numberCosts;
-        }
-        if (numberCosts == 1) {
-            sb.append(' ').append(remarkText);
-        }
-
-        return sb.toString();
-    }
-
-    @Override
-    public String getCastMessageSuffix(Game game) {
-        StringBuilder sb = new StringBuilder();
-        int position = 0;
-        for (AlternativeCost cost : alternativeSourceCosts) {
-            if (cost.isActivated(game)) {
-                sb.append(cost.getCastSuffixMessage(position));
-                ++position;
-            }
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost aCost : alternativeSourceCosts) {
-            alterCosts.add(aCost.getCost());
-        }
-        return alterCosts;
-    }
 }
 
 class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public DashAddDelayedTriggeredAbilityEffect() {
+    DashAddDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
     }
 
-    public DashAddDelayedTriggeredAbilityEffect(final DashAddDelayedTriggeredAbilityEffect effect) {
+    private DashAddDelayedTriggeredAbilityEffect(final DashAddDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 

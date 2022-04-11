@@ -10,7 +10,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 public interface AlternativeCost extends Cost {
-    
+
     String getName();
 
     /**
@@ -41,13 +41,11 @@ public interface AlternativeCost extends Cost {
 
     /**
      * If the player intends to pay the alternate cost, the cost will be activated
-     *
      */
     void activate();
 
     /**
-     * Reset the activate 
-     *
+     * Reset the activate
      */
     void reset();
 
@@ -61,4 +59,6 @@ public interface AlternativeCost extends Cost {
 
     Cost getCost();
 
+    @Override
+    AlternativeCost copy();
 }

@@ -228,6 +228,11 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     @Override
+    public void resetCost() {
+
+    }
+
+    @Override
     public String getRule() {
         if (rule != null) {
             return rule;

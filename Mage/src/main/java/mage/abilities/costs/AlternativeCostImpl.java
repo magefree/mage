@@ -1,4 +1,3 @@
-
 package mage.abilities.costs;
 
 import mage.game.Game;
@@ -6,9 +5,8 @@ import mage.game.Game;
 /**
  * Alternative costs
  *
- * @author LevelX2
- *
  * @param <T>
+ * @author LevelX2
  */
 public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends CostsImpl<Cost> implements AlternativeCost {
 
@@ -32,7 +30,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         this.add(cost);
     }
 
-    public AlternativeCostImpl(final AlternativeCostImpl cost) {
+    public AlternativeCostImpl(final AlternativeCostImpl<?> cost) {
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;
@@ -80,7 +78,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
      * message.
      *
      * @param position - if there are multiple costs, it's the postion the cost
-     * is set (starting with 0)
+     *                 is set (starting with 0)
      * @return
      */
     @Override
@@ -92,7 +90,6 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
 
     /**
      * If the player intends to pay the cost, the cost will be activated
-     *
      */
     @Override
     public void activate() {
@@ -101,7 +98,6 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
 
     /**
      * Reset the activate and count information
-     *
      */
     @Override
     public void reset() {
@@ -120,8 +116,8 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
     }
 
     @Override
-    public AlternativeCostImpl copy() {
-        return new AlternativeCostImpl(this);
+    public AlternativeCostImpl<?> copy() {
+        return new AlternativeCostImpl<>(this);
     }
 
     @Override
@@ -131,5 +127,4 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         }
         return null;
     }
-
 }
