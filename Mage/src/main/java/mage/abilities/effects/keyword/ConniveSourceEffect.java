@@ -74,10 +74,10 @@ public class ConniveSourceEffect extends OneShotEffect {
             return staticText;
         }
         if (ability == null) {
-            return "{this} connives. <i>(Draw a card, then discard a card. " +
+            return "it connives. <i>(Draw a card, then discard a card. " +
                     "If you discarded a nonland card, put a +1/+1 counter on this creature.)</i>";
         }
-        return "{this} connives. When it connives this way, " +
+        return "it connives. When it connives this way, " +
                 CardUtil.getTextWithFirstCharLowerCase(ability.getRule()) +
                 " <i>(To have a creature connive, draw a card, then discard a card. " +
                 "If you discarded a nonland card, put a +1/+1 counter on that creature.)</i>";
