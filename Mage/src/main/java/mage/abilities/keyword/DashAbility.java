@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -9,7 +8,6 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.condition.common.DashedCondition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -186,7 +184,6 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     public DashAddDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return the dashed creature from the battlefield to its owner's hand";
     }
 
     public DashAddDelayedTriggeredAbilityEffect(final DashAddDelayedTriggeredAbilityEffect effect) {
@@ -200,20 +197,15 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPermanentEntering(source.getSourceId()) != null) {
-            OneShotEffect returnToHandEffect = new ReturnToHandTargetEffect();
-            ConditionalOneShotEffect mustBeOnBattlefieldToReturn = new ConditionalOneShotEffect(returnToHandEffect, DashAddDelayedTriggeredAbilityEffect::check);
-            mustBeOnBattlefieldToReturn.setText("return the dashed creature from the battlefield to its owner's hand");
-            // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
-            mustBeOnBattlefieldToReturn.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(mustBeOnBattlefieldToReturn);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
+        if (game.getPermanentEntering(source.getSourceId()) == null) {
+            return false;
         }
-        return false;
-    }
-
-    static boolean check(Game game, Ability source) {
-        return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1;
+        // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ReturnToHandTargetEffect()
+                        .setText("return the dashed creature from the battlefield to its owner's hand")
+                        .setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1))
+        ), source);
+        return true;
     }
 }

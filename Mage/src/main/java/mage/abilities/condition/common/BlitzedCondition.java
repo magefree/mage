@@ -2,15 +2,15 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.keyword.DashAbility;
+import mage.abilities.keyword.BlitzAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public enum DashedCondition implements Condition {
+public enum BlitzedCondition implements Condition {
     instance;
 
     @Override
@@ -19,7 +19,7 @@ public enum DashedCondition implements Condition {
         return card != null
                 && CardUtil.castStream(card
                 .getAbilities(game)
-                .stream(), DashAbility.class)
+                .stream(), BlitzAbility.class)
                 .anyMatch(ability -> ability.isActivated(source, game));
     }
 }
