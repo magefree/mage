@@ -28,7 +28,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. "
             + "If you do, it's sacrificed when it enters the battlefield.)";
 
-    protected List<AlternativeCost2> evokeCosts = new LinkedList<>();
+    protected List<AlternativeCost> evokeCosts = new LinkedList<>();
 
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
@@ -59,14 +59,14 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         return new EvokeAbility(this);
     }
 
-    public final AlternativeCost2 addEvokeCost(Cost cost) {
-        AlternativeCost2 evokeCost = new AlternativeCost2Impl<>(EVOKE_KEYWORD, REMINDER_TEXT, cost);
+    public final AlternativeCost addEvokeCost(Cost cost) {
+        AlternativeCost evokeCost = new AlternativeCostImpl<>(EVOKE_KEYWORD, REMINDER_TEXT, cost);
         evokeCosts.add(evokeCost);
         return evokeCost;
     }
 
     public void resetEvoke() {
-        for (AlternativeCost2 cost : evokeCosts) {
+        for (AlternativeCost cost : evokeCosts) {
             cost.reset();
         }
         zoneChangeCounter = 0;
@@ -77,7 +77,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         Card card = game.getCard(sourceId);
         if (card != null
                 && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
-            for (AlternativeCost2 cost : evokeCosts) {
+            for (AlternativeCost cost : evokeCosts) {
                 if (cost.isActivated(game)) {
                     return true;
                 }
@@ -98,7 +98,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetEvoke();
-                for (AlternativeCost2 evokeCost : evokeCosts) {
+                for (AlternativeCost evokeCost : evokeCosts) {
                     if (evokeCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, new StringBuilder(EVOKE_KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), ability, game)) {
                         activateEvoke(evokeCost, game);
@@ -119,7 +119,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         return isActivated(ability, game);
     }
 
-    private void activateEvoke(AlternativeCost2 cost, Game game) {
+    private void activateEvoke(AlternativeCost cost, Game game) {
         cost.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
@@ -137,7 +137,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         StringBuilder sb = new StringBuilder();
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 evokeCost : evokeCosts) {
+        for (AlternativeCost evokeCost : evokeCosts) {
             if (numberCosts == 0) {
                 sb.append(evokeCost.getText(false));
                 remarkText = evokeCost.getReminderText();
@@ -157,7 +157,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
-        for (AlternativeCost2 cost : evokeCosts) {
+        for (AlternativeCost cost : evokeCosts) {
             if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
@@ -169,7 +169,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost2 aCost : evokeCosts) {
+        for (AlternativeCost aCost : evokeCosts) {
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;

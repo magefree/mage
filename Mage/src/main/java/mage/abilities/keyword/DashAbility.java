@@ -33,7 +33,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
             + "hand at the beginning of the next end step.)";
 
-    protected List<AlternativeCost2> alternativeSourceCosts = new LinkedList<>();
+    protected List<AlternativeCost> alternativeSourceCosts = new LinkedList<>();
 
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
@@ -62,14 +62,14 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         return new DashAbility(this);
     }
 
-    public final AlternativeCost2 addDashCost(String manaString) {
-        AlternativeCost2 evokeCost = new AlternativeCost2Impl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
+    public final AlternativeCost addDashCost(String manaString) {
+        AlternativeCost evokeCost = new AlternativeCostImpl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
         alternativeSourceCosts.add(evokeCost);
         return evokeCost;
     }
 
     public void resetDash() {
-        for (AlternativeCost2 cost : alternativeSourceCosts) {
+        for (AlternativeCost cost : alternativeSourceCosts) {
             cost.reset();
         }
         zoneChangeCounter = 0;
@@ -80,7 +80,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         Card card = game.getCard(sourceId);
         if (card != null
                 && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
-            for (AlternativeCost2 cost : alternativeSourceCosts) {
+            for (AlternativeCost cost : alternativeSourceCosts) {
                 if (cost.isActivated(game)) {
                     return true;
                 }
@@ -101,7 +101,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetDash();
-                for (AlternativeCost2 dashCost : alternativeSourceCosts) {
+                for (AlternativeCost dashCost : alternativeSourceCosts) {
                     if (dashCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, KEYWORD
                             + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
@@ -123,7 +123,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         return isActivated(ability, game);
     }
 
-    private void activateDash(AlternativeCost2 cost, Game game) {
+    private void activateDash(AlternativeCost cost, Game game) {
         cost.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
@@ -141,7 +141,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         StringBuilder sb = new StringBuilder();
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 dashCost : alternativeSourceCosts) {
+        for (AlternativeCost dashCost : alternativeSourceCosts) {
             if (numberCosts == 0) {
                 sb.append(dashCost.getText(false));
                 remarkText = dashCost.getReminderText();
@@ -161,7 +161,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
-        for (AlternativeCost2 cost : alternativeSourceCosts) {
+        for (AlternativeCost cost : alternativeSourceCosts) {
             if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
@@ -173,7 +173,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost2 aCost : alternativeSourceCosts) {
+        for (AlternativeCost aCost : alternativeSourceCosts) {
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;

@@ -34,7 +34,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String REMINDER_TEXT = "(If you cast this spell for its blitz cost, it gains haste " +
             "and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.)";
 
-    protected List<AlternativeCost2> alternativeSourceCosts = new LinkedList<>();
+    protected List<AlternativeCost> alternativeSourceCosts = new LinkedList<>();
 
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
@@ -66,14 +66,14 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
         return new BlitzAbility(this);
     }
 
-    public final AlternativeCost2 addBlitzCost(String manaString) {
-        AlternativeCost2 evokeCost = new AlternativeCost2Impl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
+    public final AlternativeCost addBlitzCost(String manaString) {
+        AlternativeCost evokeCost = new AlternativeCostImpl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
         alternativeSourceCosts.add(evokeCost);
         return evokeCost;
     }
 
     public void resetBlitz() {
-        for (AlternativeCost2 cost : alternativeSourceCosts) {
+        for (AlternativeCost cost : alternativeSourceCosts) {
             cost.reset();
         }
         zoneChangeCounter = 0;
@@ -84,7 +84,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
         Card card = game.getCard(sourceId);
         if (card != null
                 && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
-            for (AlternativeCost2 cost : alternativeSourceCosts) {
+            for (AlternativeCost cost : alternativeSourceCosts) {
                 if (cost.isActivated(game)) {
                     return true;
                 }
@@ -105,7 +105,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetBlitz();
-                for (AlternativeCost2 BlitzCost : alternativeSourceCosts) {
+                for (AlternativeCost BlitzCost : alternativeSourceCosts) {
                     if (BlitzCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, KEYWORD
                             + " the creature for " + BlitzCost.getText(true) + " ?", ability, game)) {
@@ -127,7 +127,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
         return isActivated(ability, game);
     }
 
-    private void activateBlitz(AlternativeCost2 cost, Game game) {
+    private void activateBlitz(AlternativeCost cost, Game game) {
         cost.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
@@ -145,7 +145,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
         StringBuilder sb = new StringBuilder();
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 BlitzCost : alternativeSourceCosts) {
+        for (AlternativeCost BlitzCost : alternativeSourceCosts) {
             if (numberCosts == 0) {
                 sb.append(BlitzCost.getText(false));
                 remarkText = BlitzCost.getReminderText();
@@ -165,7 +165,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
     public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
-        for (AlternativeCost2 cost : alternativeSourceCosts) {
+        for (AlternativeCost cost : alternativeSourceCosts) {
             if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
@@ -177,7 +177,7 @@ public class BlitzAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost2 aCost : alternativeSourceCosts) {
+        for (AlternativeCost aCost : alternativeSourceCosts) {
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;

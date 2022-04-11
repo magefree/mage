@@ -6,7 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AlternativeCost2Impl;
+import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -78,7 +78,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             + "as a 2/2 creature for {3}. Turn it face up any time for its megamorph "
             + "cost and put a +1/+1 counter on it.)</i>";
     protected String ruleText;
-    protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(
+    protected AlternativeCostImpl alternateCosts = new AlternativeCostImpl(
             ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
     protected Costs<Cost> morphCosts;
     // needed to check activation status, if card changes zone after casting it

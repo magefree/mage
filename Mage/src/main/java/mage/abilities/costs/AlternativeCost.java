@@ -9,7 +9,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public interface AlternativeCost2 extends Cost {
+public interface AlternativeCost extends Cost {
     
     String getName();
 

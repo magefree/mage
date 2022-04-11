@@ -33,7 +33,7 @@ import java.util.List;
 public class ProwlAbility extends StaticAbility implements AlternativeSourceCosts {
 
     private static final String PROWL_KEYWORD = "Prowl";
-    private final List<AlternativeCost2> prowlCosts = new LinkedList<>();
+    private final List<AlternativeCost> prowlCosts = new LinkedList<>();
     private String reminderText;
 
     public ProwlAbility(Card card, String manaString) {
@@ -57,22 +57,22 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
         return new ProwlAbility(this);
     }
 
-    public final AlternativeCost2 addProwlCost(String manaString) {
-        AlternativeCost2 prowlCost = new AlternativeCost2Impl(PROWL_KEYWORD,
+    public final AlternativeCost addProwlCost(String manaString) {
+        AlternativeCost prowlCost = new AlternativeCostImpl(PROWL_KEYWORD,
                 reminderText, new ManaCostsImpl(manaString));
         prowlCosts.add(prowlCost);
         return prowlCost;
     }
 
     public void resetProwl() {
-        for (AlternativeCost2 cost : prowlCosts) {
+        for (AlternativeCost cost : prowlCosts) {
             cost.reset();
         }
     }
 
     @Override
     public boolean isActivated(Ability ability, Game game) {
-        for (AlternativeCost2 cost : prowlCosts) {
+        for (AlternativeCost cost : prowlCosts) {
             if (cost.isActivated(game)) {
                 return true;
             }
@@ -94,7 +94,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
             }
             if (ProwlCondition.instance.apply(game, ability)) {
                 this.resetProwl();
-                for (AlternativeCost2 prowlCost : prowlCosts) {
+                for (AlternativeCost prowlCost : prowlCosts) {
                     if (prowlCost.canPay(ability, this, ability.getControllerId(), game)
                             && player.chooseUse(Outcome.Benefit, "Cast for "
                                     + PROWL_KEYWORD + " cost " + prowlCost.getText(true)
@@ -122,7 +122,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
         StringBuilder sb = new StringBuilder();
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 prowlCost : prowlCosts) {
+        for (AlternativeCost prowlCost : prowlCosts) {
             if (numberCosts == 0) {
                 sb.append(prowlCost.getText(false));
                 remarkText = prowlCost.getReminderText();
@@ -142,7 +142,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
-        for (AlternativeCost2 cost : prowlCosts) {
+        for (AlternativeCost cost : prowlCosts) {
             if (cost.isActivated(game)) {
                 sb.append(cost.getCastSuffixMessage(position));
                 ++position;
@@ -160,7 +160,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost2 aCost : prowlCosts) {
+        for (AlternativeCost aCost : prowlCosts) {
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;

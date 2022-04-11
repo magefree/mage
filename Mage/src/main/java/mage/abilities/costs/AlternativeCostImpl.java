@@ -10,7 +10,7 @@ import mage.game.Game;
  *
  * @param <T>
  */
-public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends CostsImpl<Cost> implements AlternativeCost2 {
+public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends CostsImpl<Cost> implements AlternativeCost {
 
     protected String name;
     protected String reminderText;
@@ -18,11 +18,11 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
 
     protected boolean activated;
 
-    public AlternativeCost2Impl(String name, String reminderText, Cost cost) {
+    public AlternativeCostImpl(String name, String reminderText, Cost cost) {
         this(name, " ", reminderText, cost);
     }
 
-    public AlternativeCost2Impl(String name, String delimiter, String reminderText, Cost cost) {
+    public AlternativeCostImpl(String name, String delimiter, String reminderText, Cost cost) {
         this.activated = false;
         this.name = name;
         this.delimiter = delimiter;
@@ -32,7 +32,7 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         this.add(cost);
     }
 
-    public AlternativeCost2Impl(final AlternativeCost2Impl cost) {
+    public AlternativeCostImpl(final AlternativeCostImpl cost) {
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;
@@ -120,8 +120,8 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
     }
 
     @Override
-    public AlternativeCost2Impl copy() {
-        return new AlternativeCost2Impl(this);
+    public AlternativeCostImpl copy() {
+        return new AlternativeCostImpl(this);
     }
 
     @Override
