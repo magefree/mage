@@ -108,6 +108,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Rob the Archives", 122, Rarity.UNCOMMON, mage.cards.r.RobTheArchives.class));
         cards.add(new SetCardInfo("Rooftop Nuisance", 57, Rarity.COMMON, mage.cards.r.RooftopNuisance.class));
         cards.add(new SetCardInfo("Rumor Gatherer", 29, Rarity.UNCOMMON, mage.cards.r.RumorGatherer.class));
+        cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
         cards.add(new SetCardInfo("Shadow of Mortality", 94, Rarity.RARE, mage.cards.s.ShadowOfMortality.class));
         cards.add(new SetCardInfo("Shakedown Heavy", 95, Rarity.RARE, mage.cards.s.ShakedownHeavy.class));
         cards.add(new SetCardInfo("Skybridge Towers", 256, Rarity.COMMON, mage.cards.s.SkybridgeTowers.class));
