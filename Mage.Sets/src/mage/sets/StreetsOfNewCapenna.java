@@ -94,6 +94,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Raffine's Informant", 26, Rarity.COMMON, mage.cards.r.RaffinesInformant.class));
         cards.add(new SetCardInfo("Raffine's Tower", 254, Rarity.RARE, mage.cards.r.RaffinesTower.class));
         cards.add(new SetCardInfo("Raffine, Scheming Seer", 213, Rarity.MYTHIC, mage.cards.r.RaffineSchemingSeer.class));
+        cards.add(new SetCardInfo("Refuse to Yield", 27, Rarity.UNCOMMON, mage.cards.r.RefuseToYield.class));
         cards.add(new SetCardInfo("Revel Ruiner", 91, Rarity.COMMON, mage.cards.r.RevelRuiner.class));
         cards.add(new SetCardInfo("Riveteers Charm", 217, Rarity.UNCOMMON, mage.cards.r.RiveteersCharm.class));
         cards.add(new SetCardInfo("Rob the Archives", 122, Rarity.UNCOMMON, mage.cards.r.RobTheArchives.class));
