@@ -15,8 +15,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 public class EvokeAbility extends AlternativeSourceCostsImpl {
 
     protected static final String EVOKE_KEYWORD = "Evoke";
-    protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. "
-            + "If you do, it's sacrificed when it enters the battlefield.)";
+    protected static final String REMINDER_TEXT = "You may cast this spell for its evoke cost. "
+            + "If you do, it's sacrificed when it enters the battlefield.";
 
     public EvokeAbility(String manaString) {
         this(new ManaCostsImpl<>(manaString));

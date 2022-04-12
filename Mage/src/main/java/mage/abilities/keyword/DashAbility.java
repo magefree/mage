@@ -19,9 +19,9 @@ import mage.target.targetpointer.FixedTarget;
 public class DashAbility extends AlternativeSourceCostsImpl {
 
     protected static final String KEYWORD = "Dash";
-    protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. "
+    protected static final String REMINDER_TEXT = "You may cast this spell for its dash cost. "
             + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
-            + "hand at the beginning of the next end step.)";
+            + "hand at the beginning of the next end step.";
 
     public DashAbility(String manaString) {
         super(KEYWORD, REMINDER_TEXT, manaString);

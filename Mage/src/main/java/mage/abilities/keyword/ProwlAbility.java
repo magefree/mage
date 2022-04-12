@@ -23,13 +23,12 @@ import mage.watchers.common.ProwlWatcher;
 public class ProwlAbility extends AlternativeSourceCostsImpl {
 
     private static final String PROWL_KEYWORD = "Prowl";
-    private static final String reminderText = "(You may cast this for its prowl cost if you dealt combat damage to a "
-            + "player this turn with a creature that shared a creature type with {this})";
+    private static final String reminderText = "You may cast this for its prowl cost if you dealt combat damage to a "
+            + "player this turn with a creature that shared a creature type with {this}";
 
     public ProwlAbility(Card card, String manaString) {
         super(PROWL_KEYWORD, reminderText, manaString);
         this.setRuleAtTheTop(true);
-        this.name = PROWL_KEYWORD;
         this.addWatcher(new ProwlWatcher());
         this.addHint(ProwlHint.instance);
     }

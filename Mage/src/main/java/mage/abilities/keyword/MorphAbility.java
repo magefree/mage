@@ -9,6 +9,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.constants.CardType;
@@ -62,11 +63,11 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
 
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String ABILITY_KEYWORD_MEGA = "Megamorph";
-    protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a "
-            + "2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
-    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down "
+    protected static final String REMINDER_TEXT = "You may cast this card face down as a "
+            + "2/2 creature for {3}. Turn it face up any time for its morph cost.";
+    protected static final String REMINDER_TEXT_MEGA = "You may cast this card face down "
             + "as a 2/2 creature for {3}. Turn it face up any time for its megamorph "
-            + "cost and put a +1/+1 counter on it.)</i>";
+            + "cost and put a +1/+1 counter on it.";
     protected Costs<Cost> morphCosts;
     // needed to check activation status, if card changes zone after casting it
     private final boolean megamorph;
@@ -127,7 +128,9 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
 
     @Override
     public String getRule() {
-        return alternativeCost.getName() + ' ' + morphCosts + ' ' + alternativeCost.getReminderText();
+        boolean isMana = morphCosts.get(0) instanceof ManaCost;
+        return alternativeCost.getName() + (isMana ? " " : "&mdash;") +
+                morphCosts.getText() + (isMana ? ' ' : ". ") + alternativeCost.getReminderText();
     }
 
     public static void setPermanentToFaceDownCreature(MageObject mageObject, Game game) {

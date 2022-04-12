@@ -21,8 +21,8 @@ import mage.target.targetpointer.FixedTarget;
 public class BlitzAbility extends AlternativeSourceCostsImpl {
 
     protected static final String KEYWORD = "Blitz";
-    protected static final String REMINDER_TEXT = "(If you cast this spell for its blitz cost, it gains haste " +
-            "and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.)";
+    protected static final String REMINDER_TEXT = "If you cast this spell for its blitz cost, it gains haste " +
+            "and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.";
 
     public BlitzAbility(String manaString) {
         super(KEYWORD, REMINDER_TEXT, manaString);

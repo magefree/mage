@@ -1,5 +1,6 @@
 package mage.abilities.costs;
 
+import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
 
 /**
@@ -12,20 +13,16 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
 
     protected String name;
     protected String reminderText;
-    protected String delimiter;
+    protected boolean isMana;
 
     protected boolean activated;
 
     public AlternativeCostImpl(String name, String reminderText, Cost cost) {
-        this(name, " ", reminderText, cost);
-    }
-
-    public AlternativeCostImpl(String name, String delimiter, String reminderText, Cost cost) {
         this.activated = false;
         this.name = name;
-        this.delimiter = delimiter;
+        this.isMana = cost instanceof ManaCost;
         if (reminderText != null) {
-            this.reminderText = "<i>" + reminderText + "</i>";
+            this.reminderText = "<i>(" + reminderText + ")</i>";
         }
         this.add(cost);
     }
@@ -35,7 +32,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         this.name = cost.name;
         this.reminderText = cost.reminderText;
         this.activated = cost.activated;
-        this.delimiter = cost.delimiter;
+        this.isMana = cost.isMana;
     }
 
     @Override
@@ -55,7 +52,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         if (onlyCost) {
             return getText();
         } else {
-            return (name != null ? name : "") + (delimiter != null ? delimiter : "") + getText();
+            return (name != null ? name : "") + (isMana ? " " : "&mdash;") + getText() + (isMana ? "" : '.');
         }
     }
 
