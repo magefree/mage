@@ -31,7 +31,7 @@ public final class OutOfTheWay extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);
