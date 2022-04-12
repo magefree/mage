@@ -76,7 +76,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Make Disappear", 49, Rarity.COMMON, mage.cards.m.MakeDisappear.class));
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murder", 88, Rarity.COMMON, mage.cards.m.Murder.class));
-        cards.add(new SetCardInfo("Nimble Larcenist", 205, Rarity.COMMON, mage.cards.n.NimbleLarcenist.class));
+        cards.add(new SetCardInfo("Nimble Larcenist", 205, Rarity.UNCOMMON, mage.cards.n.NimbleLarcenist.class));
         cards.add(new SetCardInfo("Obscura Charm", 208, Rarity.UNCOMMON, mage.cards.o.ObscuraCharm.class));
         cards.add(new SetCardInfo("Obscura Interceptor", 209, Rarity.RARE, mage.cards.o.ObscuraInterceptor.class));
         cards.add(new SetCardInfo("Out of the Way", 52, Rarity.UNCOMMON, mage.cards.o.OutOfTheWay.class));
@@ -99,6 +99,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Strangle", 125, Rarity.COMMON, mage.cards.s.Strangle.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 245, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tavern Swindler", 96, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
         cards.add(new SetCardInfo("Unleash the Inferno", 229, Rarity.RARE, mage.cards.u.UnleashTheInferno.class));
