@@ -29,6 +29,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 51, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Arc Spitter", 233, Rarity.UNCOMMON, mage.cards.a.ArcSpitter.class));
+        cards.add(new SetCardInfo("Ballroom Brawlers", 3, Rarity.UNCOMMON, mage.cards.b.BallroomBrawlers.class));
         cards.add(new SetCardInfo("Black Market Tycoon", 167, Rarity.RARE, mage.cards.b.BlackMarketTycoon.class));
         cards.add(new SetCardInfo("Botanical Plaza", 247, Rarity.COMMON, mage.cards.b.BotanicalPlaza.class));
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
