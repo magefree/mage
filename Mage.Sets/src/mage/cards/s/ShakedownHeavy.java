@@ -31,7 +31,7 @@ public final class ShakedownHeavy extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Shakedown Heavy attacks, defending player may have you draw a card. If they do, untap Shakedown Heavy and remove it from combat.
         this.addAbility(new AttacksTriggeredAbility(
