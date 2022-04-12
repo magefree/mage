@@ -27,6 +27,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
+        cards.add(new SetCardInfo("All-Seeing Arbiter", 34, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 51, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Arc Spitter", 233, Rarity.UNCOMMON, mage.cards.a.ArcSpitter.class));
         cards.add(new SetCardInfo("Aven Heartstabber", 166, Rarity.RARE, mage.cards.a.AvenHeartstabber.class));
