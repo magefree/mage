@@ -21,7 +21,7 @@ public final class TaintedIndulgence extends CardImpl {
     private static final Condition condition = new InvertCondition(DifferentManaValuesInGraveCondition.FIVE);
 
     public TaintedIndulgence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");
 
         // Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
