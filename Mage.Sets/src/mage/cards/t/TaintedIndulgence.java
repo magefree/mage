@@ -1,5 +1,7 @@
 package mage.cards.t;
 
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DifferentManaValuesInGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -16,14 +18,16 @@ import java.util.UUID;
  */
 public final class TaintedIndulgence extends CardImpl {
 
+    private static final Condition condition = new InvertCondition(DifferentManaValuesInGraveCondition.FIVE);
+
     public TaintedIndulgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{R}");
 
         // Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                null, new DiscardControllerEffect(1), DifferentManaValuesInGraveCondition.FIVE,
-                "Then discard a card unless there are five or more mana values among cards in your graveyard"
+                new DiscardControllerEffect(1), condition, "Then discard a card " +
+                "unless there are five or more mana values among cards in your graveyard"
         ));
         this.getSpellAbility().addHint(DifferentManaValuesInGraveHint.instance);
     }
