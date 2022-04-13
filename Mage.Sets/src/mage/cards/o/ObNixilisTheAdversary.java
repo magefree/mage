@@ -170,7 +170,7 @@ class ObNixilisTheAdversaryApplier implements StackObjectCopyApplier {
     @Override
     public void modifySpell(StackObject stackObject, Game game) {
         stackObject.getSuperType().remove(SuperType.LEGENDARY);
-        stackObject.setStartingLoyalty(loyalty); // TODO: This doesn't work.
+        stackObject.setStartingLoyalty(loyalty);
     }
 
     @Override

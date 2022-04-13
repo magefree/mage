@@ -62,6 +62,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean countered;
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
+    private int startingLoyalty;
 
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
@@ -78,6 +79,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
+        this.startingLoyalty = affectedCard.getStartingLoyalty();
         this.id = ability.getId();
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
@@ -131,6 +133,7 @@ public class Spell extends StackObjectImpl implements Card {
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
+        this.startingLoyalty = spell.startingLoyalty;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -654,11 +657,12 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public int getStartingLoyalty() {
-        return card.getStartingLoyalty();
+        return this.startingLoyalty;
     }
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+        this.startingLoyalty = startingLoyalty;
     }
 
     @Override
