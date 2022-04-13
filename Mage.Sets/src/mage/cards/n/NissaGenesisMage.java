@@ -60,7 +60,7 @@ public final class NissaGenesisMage extends CardImpl {
         //You may put any number of creature and/or land cards from among them onto the battlefield.
         //Put the rest on the bottom of your library in a random order.);
         this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(10, 10, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(10, Integer.MAX_VALUE, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
                 -10));
     }
 

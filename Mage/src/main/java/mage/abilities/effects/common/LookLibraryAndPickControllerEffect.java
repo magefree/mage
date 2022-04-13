@@ -43,8 +43,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
-import java.util.Locale;
-
 /**
  * @author LevelX, awjackson
  */
@@ -53,7 +51,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected int numberToPick;
     protected PutCards putPickedCards;
     protected FilterCard filter;
-    protected boolean haveFilter;
     protected boolean revealPickedCards;
     protected boolean optional;
     protected boolean upTo;
@@ -79,7 +76,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.numberToPick = numberToPick;
         this.putPickedCards = putPickedCards;
         this.filter = (numberToPick > 1) ? StaticFilters.FILTER_CARD_CARDS : StaticFilters.FILTER_CARD_A;
-        this.haveFilter = false;
         this.revealPickedCards = false;
         this.optional = false;
         this.upTo = upTo || numberToPick == Integer.MAX_VALUE;
@@ -106,7 +102,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.numberToPick = numberToPick;
         this.putPickedCards = putPickedCards;
         this.filter = filter;
-        this.haveFilter = true;
         this.revealPickedCards = !putPickedCards.getZone().isPublicZone();
         this.optional = optional;
         this.upTo = (numberToPick > 1);
@@ -117,7 +112,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.numberToPick = effect.numberToPick;
         this.putPickedCards = effect.putPickedCards;
         this.filter = effect.filter.copy();
-        this.haveFilter = effect.haveFilter;
         this.revealPickedCards = effect.revealPickedCards;
         this.optional = effect.optional;
         this.upTo = effect.upTo;
@@ -178,12 +172,13 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         } else {
             sb.append(revealPickedCards ? "Reveal " : "Put ");
         }
+        boolean havePredicates = filter.hasPredicates();
         boolean plural = numberToPick > 1;
-        if (haveFilter && !plural && !upTo) {
+        if (havePredicates && !plural && !upTo) {
             sb.append(CardUtil.addArticle(filter.getMessage()));
         } else if (numberToPick == Integer.MAX_VALUE) {
             sb.append("any number of ");
-            if (haveFilter) {
+            if (havePredicates) {
                 sb.append(filter.getMessage());
             }
         } else {
@@ -192,9 +187,9 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             }
             sb.append(CardUtil.numberToText(numberToPick));
             sb.append(" ");
-            sb.append(haveFilter ? filter.getMessage() : "of ");
+            sb.append(havePredicates ? filter.getMessage() : "of ");
         }
-        if (haveFilter) {
+        if (havePredicates) {
             sb.append(" from among ");
         }
         sb.append("them ");
@@ -204,7 +199,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         }
         sb.append(putPickedCards.getMessage(plural));
 
-        plural = upTo
+        plural = optional
+                || upTo
                 || !(numberOfCards instanceof StaticValue)
                 || numberOfCards.calculate(null, null, this) - numberToPick != 1;
 
@@ -212,7 +208,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         if (!plural && putLookedCards == PutCards.TOP_ANY) {
             return setText(mode, sb.toString());
         }
-        sb.append(haveFilter ? ". Put" : " and");
+        sb.append(havePredicates ? ". Put" : " and");
         sb.append(" the ");
         sb.append(plural ? "rest " : "other ");
         sb.append(putLookedCards.getMessage(plural));

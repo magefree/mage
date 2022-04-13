@@ -40,7 +40,7 @@ public final class DiscerningTaste extends CardImpl {
 
 class DiscerningTasteEffect extends LookLibraryAndPickControllerEffect {
 
-    public DiscerningTasteEffect() {
+    DiscerningTasteEffect() {
         super(4, 1, PutCards.HAND, PutCards.GRAVEYARD);
     }
 

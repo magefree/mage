@@ -19,7 +19,7 @@ public final class LeadTheStampede extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal any number of creature cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                5, 5, StaticFilters.FILTER_CARD_CREATURES, PutCards.HAND, PutCards.BOTTOM_ANY));
+                5, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
     private LeadTheStampede(final LeadTheStampede card) {

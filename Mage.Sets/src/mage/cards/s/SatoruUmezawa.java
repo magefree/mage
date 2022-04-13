@@ -34,7 +34,9 @@ public final class SatoruUmezawa extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn.
+        // Whenever you activate a ninjutsu ability, look at the top three cards of your library.
+        // Put one of them into your hand and the rest on the bottom of your library in any order.
+        // This ability triggers only once each turn.
         this.addAbility(new SatoruUmezawaTriggeredAbility());
 
         // Each creature card in your hand has ninjutsu {2}{U}{B}.
@@ -82,10 +84,8 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate a ninjutsu ability, look at the top three cards of your library. " +
-                "Put one of them into your hand and the rest on the bottom of your library in any order. " +
-                "This ability triggers only once each turn.";
+    public String getTriggerPhrase() {
+        return "Whenever you activate a ninjutsu ability, ";
     }
 }
 

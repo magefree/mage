@@ -80,8 +80,8 @@ public final class BlexVexingPest extends ModalDoubleFacesCard {
 
 class SearchForBlexEffect extends LookLibraryAndPickControllerEffect {
 
-    public SearchForBlexEffect() {
-        super(5, Integer.MAX_VALUE, PutCards.HAND, PutCards.GRAVEYARD, true);
+    SearchForBlexEffect() {
+        super(5, Integer.MAX_VALUE, PutCards.HAND, PutCards.GRAVEYARD);
         this.optional = true;
     }
 

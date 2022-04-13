@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -15,11 +14,9 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class DragonlordOjutai extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Dragonlord Ojutai has hexproof as long as it's untapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                 SourceTappedCondition.UNTAPPED,
                 "{this} has hexproof as long as it's untapped")));

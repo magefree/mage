@@ -78,9 +78,7 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a Food, you may pay {1}. If you do, " +
-                "look at the top two cards of your library. You may reveal a permanent card from among them " +
-                "and put it into your hand. Put the rest on the bottom of your library in any order.";
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a Food, ";
     }
 }
