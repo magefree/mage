@@ -135,6 +135,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
         cards.add(new SetCardInfo("Unleash the Inferno", 229, Rarity.RARE, mage.cards.u.UnleashTheInferno.class));
+        cards.add(new SetCardInfo("Unlicensed Hearse", 246, Rarity.RARE, mage.cards.u.UnlicensedHearse.class));
         cards.add(new SetCardInfo("Unlucky Witness", 128, Rarity.UNCOMMON, mage.cards.u.UnluckyWitness.class));
         cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 129, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class));
         cards.add(new SetCardInfo("Vampire Scrivener", 98, Rarity.UNCOMMON, mage.cards.v.VampireScrivener.class));
