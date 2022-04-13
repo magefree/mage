@@ -30,6 +30,7 @@ public class CasualtyAbility extends StaticAbility {
                         " or greater. When you do, copy this spell.)</i>"
         ));
         card.getSpellAbility().addCost(new CasualtyCost(number));
+        this.setRuleAtTheTop(true);
     }
 
     private CasualtyAbility(final CasualtyAbility ability) {
