@@ -115,6 +115,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Revel Ruiner", 91, Rarity.COMMON, mage.cards.r.RevelRuiner.class));
         cards.add(new SetCardInfo("Riveteers Charm", 217, Rarity.UNCOMMON, mage.cards.r.RiveteersCharm.class));
         cards.add(new SetCardInfo("Rob the Archives", 122, Rarity.UNCOMMON, mage.cards.r.RobTheArchives.class));
+        cards.add(new SetCardInfo("Rocco, Cabaretti Caterer", 218, Rarity.UNCOMMON, mage.cards.r.RoccoCabarettiCaterer.class));
         cards.add(new SetCardInfo("Rooftop Nuisance", 57, Rarity.COMMON, mage.cards.r.RooftopNuisance.class));
         cards.add(new SetCardInfo("Rumor Gatherer", 29, Rarity.UNCOMMON, mage.cards.r.RumorGatherer.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
