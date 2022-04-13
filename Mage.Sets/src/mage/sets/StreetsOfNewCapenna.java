@@ -91,6 +91,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Obscura Charm", 208, Rarity.UNCOMMON, mage.cards.o.ObscuraCharm.class));
         cards.add(new SetCardInfo("Obscura Initiate", 50, Rarity.COMMON, mage.cards.o.ObscuraInitiate.class));
         cards.add(new SetCardInfo("Obscura Interceptor", 209, Rarity.RARE, mage.cards.o.ObscuraInterceptor.class));
+        cards.add(new SetCardInfo("Obscura Storefront", 252, Rarity.COMMON, mage.cards.o.ObscuraStorefront.class));
         cards.add(new SetCardInfo("Out of the Way", 52, Rarity.UNCOMMON, mage.cards.o.OutOfTheWay.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Professional Face-Breaker", 116, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
