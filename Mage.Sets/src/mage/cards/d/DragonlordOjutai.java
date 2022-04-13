@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -8,8 +7,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -46,8 +45,9 @@ public final class DragonlordOjutai extends CardImpl {
                 "{this} has hexproof as long as it's untapped")));
         
         // Whenever Dragonlord Ojutai deals combat damage to a player, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LookLibraryAndPickControllerEffect
-            (StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
+                false));
     }
 
     private DragonlordOjutai(final DragonlordOjutai card) {

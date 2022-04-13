@@ -1,14 +1,11 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 /**
  *
@@ -20,9 +17,7 @@ public final class ContingencyPlan extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(5),
-                new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
-
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, Integer.MAX_VALUE, PutCards.GRAVEYARD, PutCards.TOP_ANY));
     }
 
     private ContingencyPlan(final ContingencyPlan card) {

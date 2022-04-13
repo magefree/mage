@@ -9,22 +9,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,14 +43,15 @@ public final class TaigamSidisisHand extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // At the beginning of your upkeep, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD),
+                TargetController.YOU, false));
 
         // {B}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TaigamSidisisHandEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(new TaigamSidisisHandEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetCreaturePermanent());

@@ -64,6 +64,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactCard FILTER_CARD_ARTIFACTS = new FilterArtifactCard("artifact cards");
+
+    static {
+        FILTER_CARD_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT_AN = new FilterArtifactCard("an artifact card");
 
     static {

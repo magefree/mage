@@ -1,18 +1,16 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -54,7 +52,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public LoneRevenantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
     public LoneRevenantTriggeredAbility(final LoneRevenantTriggeredAbility ability) {

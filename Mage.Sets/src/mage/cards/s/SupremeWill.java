@@ -1,17 +1,14 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -28,7 +25,7 @@ public final class SupremeWill extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
 
         // or Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        Mode mode = new Mode(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
+        Mode mode = new Mode(new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.getSpellAbility().addMode(mode);
     }
 

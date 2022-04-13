@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -54,10 +54,7 @@ public final class SatoruUmezawa extends CardImpl {
 class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
     SatoruUmezawaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ));
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.setTriggersOnce(true);
     }
 

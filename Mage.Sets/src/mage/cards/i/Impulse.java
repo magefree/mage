@@ -1,14 +1,11 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 /**
  *
@@ -20,8 +17,7 @@ public final class Impulse extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
-
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
     private Impulse(final Impulse card) {
