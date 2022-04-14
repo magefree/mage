@@ -171,6 +171,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of the Vermin", 163, Rarity.UNCOMMON, mage.cards.v.VoiceOfTheVermin.class));
         cards.add(new SetCardInfo("Void Rend", 230, Rarity.RARE, mage.cards.v.VoidRend.class));
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
+        cards.add(new SetCardInfo("Whack", 99, Rarity.UNCOMMON, mage.cards.w.Whack.class));
         cards.add(new SetCardInfo("Witness Protection", 66, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
         cards.add(new SetCardInfo("Workshop Warchief", 432, Rarity.RARE, mage.cards.w.WorkshopWarchief.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
