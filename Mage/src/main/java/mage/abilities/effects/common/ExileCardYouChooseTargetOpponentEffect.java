@@ -33,11 +33,13 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (controller == null || opponent == null
-                || opponent.getHand().count(filter, game) < 1) {
+        if (controller == null || opponent == null) {
             return false;
         }
         opponent.revealCards(source, opponent.getHand(), game);
+        if (opponent.getHand().count(filter, game) < 1) {
+            return true;
+        }
         TargetCard target = new TargetCard(Zone.HAND, filter);
         controller.choose(Outcome.Exile, opponent.getHand(), target, game);
         Card card = opponent.getHand().get(target.getFirstTarget(), game);

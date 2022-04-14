@@ -13,7 +13,7 @@ public enum DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredic
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return game.getCombat().getPlayerDefenders(game, false).contains(input.getObject().getOwnerId());
+        return input.getObject().isOwnedBy(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
     }
 
     @Override

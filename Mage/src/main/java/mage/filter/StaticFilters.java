@@ -434,6 +434,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURES = new FilterCreaturePermanent("creatures an opponent controls");
+
+    static {
+        FILTER_OPPONENTS_PERMANENT_CREATURES.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_PERMANENT_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature an opponent controls");
 
     static {
