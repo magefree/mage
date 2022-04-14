@@ -88,6 +88,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Jaxis, the Troublemaker", 112, Rarity.RARE, mage.cards.j.JaxisTheTroublemaker.class));
         cards.add(new SetCardInfo("Jetmir's Garden", 250, Rarity.RARE, mage.cards.j.JetmirsGarden.class));
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 193, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class));
+        cards.add(new SetCardInfo("Jewel Thief", 151, Rarity.COMMON, mage.cards.j.JewelThief.class));
         cards.add(new SetCardInfo("Join the Maestros", 85, Rarity.COMMON, mage.cards.j.JoinTheMaestros.class));
         cards.add(new SetCardInfo("Knockout Blow", 20, Rarity.UNCOMMON, mage.cards.k.KnockoutBlow.class));
         cards.add(new SetCardInfo("Ledger Shredder", 46, Rarity.RARE, mage.cards.l.LedgerShredder.class));
