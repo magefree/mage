@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Workshop Warchief", "Ziatora's Envoy");
+    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Tenacious Underdog", "Workshop Warchief", "Ziatora's Envoy");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -45,7 +45,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
         cards.add(new SetCardInfo("Brokers Charm", 171, Rarity.UNCOMMON, mage.cards.b.BrokersCharm.class));
         cards.add(new SetCardInfo("Buy Your Silence", 6, Rarity.COMMON, mage.cards.b.BuyYourSilence.class));
-        cards.add(new SetCardInfo("Cabaretti Ascendency", 172, Rarity.RARE, mage.cards.c.CabarettiAscendency.class));
+        cards.add(new SetCardInfo("Cabaretti Ascendancy", 172, Rarity.RARE, mage.cards.c.CabarettiAscendancy.class));
         cards.add(new SetCardInfo("Cabaretti Charm", 173, Rarity.UNCOMMON, mage.cards.c.CabarettiCharm.class));
         cards.add(new SetCardInfo("Cabaretti Courtyard", 249, Rarity.COMMON, mage.cards.c.CabarettiCourtyard.class));
         cards.add(new SetCardInfo("Cabaretti Initiate", 137, Rarity.COMMON, mage.cards.c.CabarettiInitiate.class));
