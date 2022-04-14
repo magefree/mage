@@ -79,6 +79,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Fleetfoot Dancer", 188, Rarity.RARE, mage.cards.f.FleetfootDancer.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge Boss", 189, Rarity.UNCOMMON, mage.cards.f.ForgeBoss.class));
+        cards.add(new SetCardInfo("Freelance Muscle", 147, Rarity.UNCOMMON, mage.cards.f.FreelanceMuscle.class));
         cards.add(new SetCardInfo("Gala Greeters", 148, Rarity.RARE, mage.cards.g.GalaGreeters.class));
         cards.add(new SetCardInfo("Getaway Car", 237, Rarity.RARE, mage.cards.g.GetawayCar.class));
         cards.add(new SetCardInfo("Graveyard Shift", 81, Rarity.UNCOMMON, mage.cards.g.GraveyardShift.class));
