@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver", "Jaxis, the Troublemaker");
+    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Workshop Warchief", "Ziatora's Envoy");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -58,6 +58,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Devilish Valet", 105, Rarity.RARE, mage.cards.d.DevilishValet.class));
         cards.add(new SetCardInfo("Dig Up the Body", 76, Rarity.COMMON, mage.cards.d.DigUpTheBody.class));
         cards.add(new SetCardInfo("Disciplined Duelist", 182, Rarity.UNCOMMON, mage.cards.d.DisciplinedDuelist.class));
+        cards.add(new SetCardInfo("Disdainful Stroke", 39, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Echo Inspector", 40, Rarity.COMMON, mage.cards.e.EchoInspector.class));
         cards.add(new SetCardInfo("Elegant Entourage", 143, Rarity.UNCOMMON, mage.cards.e.ElegantEntourage.class));
         cards.add(new SetCardInfo("Errant, Street Artist", 41, Rarity.RARE, mage.cards.e.ErrantStreetArtist.class));
