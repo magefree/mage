@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Disciplined Duelist", "Elspeth Resplendent", "Falco Spara, Pactweaver", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Workshop Warchief", "Ziatora's Envoy");
+  private static final List<String> unfinished = Arrays.asList("Elspeth Resplendent", "Falco Spara, Pactweaver", "Jaxis, the Troublemaker");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
