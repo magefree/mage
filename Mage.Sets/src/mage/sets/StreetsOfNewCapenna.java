@@ -38,6 +38,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market Tycoon", 167, Rarity.RARE, mage.cards.b.BlackMarketTycoon.class));
         cards.add(new SetCardInfo("Body Dropper", 168, Rarity.COMMON, mage.cards.b.BodyDropper.class));
         cards.add(new SetCardInfo("Body Launderer", 68, Rarity.MYTHIC, mage.cards.b.BodyLaunderer.class));
+        cards.add(new SetCardInfo("Bootleggers' Stash", 134, Rarity.MYTHIC, mage.cards.b.BootleggersStash.class));
         cards.add(new SetCardInfo("Botanical Plaza", 247, Rarity.COMMON, mage.cards.b.BotanicalPlaza.class));
         cards.add(new SetCardInfo("Brazen Upstart", 169, Rarity.UNCOMMON, mage.cards.b.BrazenUpstart.class));
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
