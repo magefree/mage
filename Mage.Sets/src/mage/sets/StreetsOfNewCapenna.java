@@ -62,6 +62,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Cut of the Profits", 72, Rarity.RARE, mage.cards.c.CutOfTheProfits.class));
         cards.add(new SetCardInfo("Dapper Shieldmate", 9, Rarity.COMMON, mage.cards.d.DapperShieldmate.class));
         cards.add(new SetCardInfo("Darling of the Masses", 181, Rarity.UNCOMMON, mage.cards.d.DarlingOfTheMasses.class));
+        cards.add(new SetCardInfo("Deal Gone Bad", 74, Rarity.COMMON, mage.cards.d.DealGoneBad.class));
         cards.add(new SetCardInfo("Depopulate", 10, Rarity.RARE, mage.cards.d.Depopulate.class));
         cards.add(new SetCardInfo("Devilish Valet", 105, Rarity.RARE, mage.cards.d.DevilishValet.class));
         cards.add(new SetCardInfo("Dig Up the Body", 76, Rarity.COMMON, mage.cards.d.DigUpTheBody.class));
