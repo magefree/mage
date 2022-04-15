@@ -142,6 +142,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Venom Connoisseur", 161, Rarity.UNCOMMON, mage.cards.v.VenomConnoisseur.class));
         cards.add(new SetCardInfo("Vivien on the Hunt", 162, Rarity.MYTHIC, mage.cards.v.VivienOnTheHunt.class));
         cards.add(new SetCardInfo("Void Rend", 230, Rarity.RARE, mage.cards.v.VoidRend.class));
+        cards.add(new SetCardInfo("Warm Welcome", 164, Rarity.COMMON, mage.cards.w.WarmWelcome.class));
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Witness Protection", 66, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
