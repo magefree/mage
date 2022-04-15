@@ -179,6 +179,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Indulgence", 227, Rarity.UNCOMMON, mage.cards.t.TaintedIndulgence.class));
         cards.add(new SetCardInfo("Take to the Streets", 158, Rarity.UNCOMMON, mage.cards.t.TakeToTheStreets.class));
         cards.add(new SetCardInfo("Tavern Swindler", 96, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
+        cards.add(new SetCardInfo("Titan of Industry", 159, Rarity.MYTHIC, mage.cards.t.TitanOfIndustry.class));
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
         cards.add(new SetCardInfo("Torch Breath", 127, Rarity.UNCOMMON, mage.cards.t.TorchBreath.class));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
