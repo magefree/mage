@@ -1,7 +1,5 @@
+package mage.cards.h;
 
-package mage.cards.n;
-
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BlocksCreatureWithFlyingTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -9,35 +7,37 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author Hiddevb
  */
-public final class NetcasterSpider extends CardImpl {
+public final class HighRiseSawjack extends CardImpl {
 
-    public NetcasterSpider(UUID ownerId, CardSetInfo setInfo) {
+    public HighRiseSawjack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add(SubType.SPIDER);
 
+        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever Netcaster Spider blocks a creature with flying, Netcaster Spider gets +2/+0 until end of turn.
+        // Whenever High-Rise Sawjack blocks a creature with flying, High-Rise Sawjack gets +2/+0 until end of turn.
         this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    private NetcasterSpider(final NetcasterSpider card) {
+    private HighRiseSawjack(final HighRiseSawjack card) {
         super(card);
     }
 
     @Override
-    public NetcasterSpider copy() {
-        return new NetcasterSpider(this);
+    public HighRiseSawjack copy() {
+        return new HighRiseSawjack(this);
     }
 }

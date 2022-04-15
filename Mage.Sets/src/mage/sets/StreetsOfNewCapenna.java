@@ -95,6 +95,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Goldhound", 108, Rarity.COMMON, mage.cards.g.Goldhound.class));
         cards.add(new SetCardInfo("Grisly Sigil", 82, Rarity.UNCOMMON, mage.cards.g.GrislySigil.class));
         cards.add(new SetCardInfo("Halo Fountain", 15, Rarity.MYTHIC, mage.cards.h.HaloFountain.class));
+        cards.add(new SetCardInfo("High-Rise Sawjack", 150, Rarity.COMMON, mage.cards.h.HighRiseSawjack.class));
         cards.add(new SetCardInfo("Hoard Hauler", 109, Rarity.RARE, mage.cards.h.HoardHauler.class));
         cards.add(new SetCardInfo("Hold for Ransom", 16, Rarity.COMMON, mage.cards.h.HoldForRansom.class));
         cards.add(new SetCardInfo("Hostile Takeover", 191, Rarity.RARE, mage.cards.h.HostileTakeover.class));
