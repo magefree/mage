@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Tenacious Underdog", "Workshop Warchief", "Ziatora's Envoy");
+    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Girder Goons", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Pugnacious Pugilist", "Riveteers Decoy", "Riveteers Requisitioner", "Tenacious Underdog", "Workshop Warchief", "Ziatora's Envoy");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -43,6 +43,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Botanical Plaza", 247, Rarity.COMMON, mage.cards.b.BotanicalPlaza.class));
         cards.add(new SetCardInfo("Brass Knuckles", 234, Rarity.UNCOMMON, mage.cards.b.BrassKnuckles.class));
         cards.add(new SetCardInfo("Brazen Upstart", 169, Rarity.UNCOMMON, mage.cards.b.BrazenUpstart.class));
+        cards.add(new SetCardInfo("Broken Wings", 136, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
         cards.add(new SetCardInfo("Brokers Charm", 171, Rarity.UNCOMMON, mage.cards.b.BrokersCharm.class));
         cards.add(new SetCardInfo("Brokers Initiate", 5, Rarity.COMMON, mage.cards.b.BrokersInitiate.class));
@@ -63,6 +64,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Civil Servant", 176, Rarity.COMMON, mage.cards.c.CivilServant.class));
         cards.add(new SetCardInfo("Cormela, Glamour Thief", 177, Rarity.UNCOMMON, mage.cards.c.CormelaGlamourThief.class));
         cards.add(new SetCardInfo("Corpse Appraiser", 178, Rarity.UNCOMMON, mage.cards.c.CorpseAppraiser.class));
+        cards.add(new SetCardInfo("Corrupt Court Official", 70, Rarity.COMMON, mage.cards.c.CorruptCourtOfficial.class));
         cards.add(new SetCardInfo("Courier's Briefcase", 142, Rarity.UNCOMMON, mage.cards.c.CouriersBriefcase.class));
         cards.add(new SetCardInfo("Cut Your Losses", 38, Rarity.RARE, mage.cards.c.CutYourLosses.class));
         cards.add(new SetCardInfo("Cut of the Profits", 72, Rarity.RARE, mage.cards.c.CutOfTheProfits.class));
@@ -109,6 +111,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 193, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class));
         cards.add(new SetCardInfo("Jewel Thief", 151, Rarity.COMMON, mage.cards.j.JewelThief.class));
         cards.add(new SetCardInfo("Join the Maestros", 85, Rarity.COMMON, mage.cards.j.JoinTheMaestros.class));
+        cards.add(new SetCardInfo("Kill Shot", 19, Rarity.COMMON, mage.cards.k.KillShot.class));
         cards.add(new SetCardInfo("Knockout Blow", 20, Rarity.UNCOMMON, mage.cards.k.KnockoutBlow.class));
         cards.add(new SetCardInfo("Ledger Shredder", 46, Rarity.RARE, mage.cards.l.LedgerShredder.class));
         cards.add(new SetCardInfo("Light 'Em Up", 113, Rarity.COMMON, mage.cards.l.LightEmUp.class));
@@ -198,7 +201,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Whack", 99, Rarity.UNCOMMON, mage.cards.w.Whack.class));
         cards.add(new SetCardInfo("Witness Protection", 66, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
-        cards.add(new SetCardInfo("Workshop Warchief", 432, Rarity.RARE, mage.cards.w.WorkshopWarchief.class));
+        cards.add(new SetCardInfo("Workshop Warchief", 165, Rarity.RARE, mage.cards.w.WorkshopWarchief.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
         cards.add(new SetCardInfo("Ziatora, the Incinerator", 231, Rarity.MYTHIC, mage.cards.z.ZiatoraTheIncinerator.class));
