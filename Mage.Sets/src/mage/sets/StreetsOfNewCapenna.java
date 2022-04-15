@@ -97,6 +97,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Involuntary Employment", 110, Rarity.UNCOMMON, mage.cards.i.InvoluntaryEmployment.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaxis, the Troublemaker", 112, Rarity.RARE, mage.cards.j.JaxisTheTroublemaker.class));
+        cards.add(new SetCardInfo("Jetmir's Fixer", 194, Rarity.COMMON, mage.cards.j.JetmirsFixer.class));
         cards.add(new SetCardInfo("Jetmir's Garden", 250, Rarity.RARE, mage.cards.j.JetmirsGarden.class));
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 193, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class));
         cards.add(new SetCardInfo("Jewel Thief", 151, Rarity.COMMON, mage.cards.j.JewelThief.class));
