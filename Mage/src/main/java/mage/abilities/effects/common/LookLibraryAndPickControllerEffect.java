@@ -130,7 +130,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             return actionWithPickedCards(game, source, player, new CardsImpl(), cards);
         }
         TargetCard target = new TargetCard((upTo ? 0 : number), number, Zone.LIBRARY, filter);
-        target.withChooseHint("to put " + putPickedCards.getMessage(numberToPick > 1));
+        target.withChooseHint(getChooseHint());
         if (!player.chooseTarget(putPickedCards.getOutcome(), cards, target, source, game)) {
             return actionWithPickedCards(game, source, player, new CardsImpl(), cards);
         }
@@ -148,7 +148,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         return result;
     }
 
-    private String getMayText() {
+    protected String getMayText() {
         boolean plural = numberToPick > 1;
         StringBuilder sb = new StringBuilder(revealPickedCards ? "Reveal " : "Put ");
         sb.append(plural ? filter.getMessage() : CardUtil.addArticle(filter.getMessage()));
@@ -159,6 +159,10 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         sb.append(" ");
         sb.append(putPickedCards.getMessage(plural));
         return sb.append("?").toString();
+    }
+
+    protected String getChooseHint() {
+        return "to put " + putPickedCards.getMessage(numberToPick > 1);
     }
 
     @Override
@@ -208,7 +212,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         if (!plural && putLookedCards == PutCards.TOP_ANY) {
             return setText(mode, sb.toString());
         }
-        sb.append(havePredicates ? ". Put" : " and");
+        sb.append(havePredicates && (optional || upTo) ? ". Put" : " and");
         sb.append(" the ");
         sb.append(plural ? "rest " : "other ");
         sb.append(putLookedCards.getMessage(plural));

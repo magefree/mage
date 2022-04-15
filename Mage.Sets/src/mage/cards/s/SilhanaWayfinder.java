@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,15 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SilhanaWayfinder extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("a creature or land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
 
     public SilhanaWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -38,8 +28,8 @@ public final class SilhanaWayfinder extends CardImpl {
         // When Silhana Wayfinder enters the battlefield, look at the top four cards of your library.
         // You may reveal a creature or land card from among them and put it on top of your library.
         // Put the rest on the bottom of your library in a random order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(4, 1, filter, PutCards.TOP_ANY, PutCards.BOTTOM_RANDOM)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                4, 1, StaticFilters.FILTER_CARD_CREATURE_OR_LAND, PutCards.TOP_ANY, PutCards.BOTTOM_RANDOM)));
     }
 
     private SilhanaWayfinder(final SilhanaWayfinder card) {

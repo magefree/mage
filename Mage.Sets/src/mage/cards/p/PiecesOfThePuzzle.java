@@ -1,8 +1,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class PiecesOfThePuzzle extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Reveal the top five cards of your library. Put up to two instant and/or sorcery cards from among them into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 2, filter, PutCards.HAND, PutCards.GRAVEYARD, false));
+        this.getSpellAbility().addEffect(new RevealLibraryPickControllerEffect(5, 2, filter, PutCards.HAND, PutCards.GRAVEYARD, false));
     }
 
     private PiecesOfThePuzzle(final PiecesOfThePuzzle card) {

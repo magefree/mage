@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -26,15 +26,10 @@ import mage.target.TargetPermanent;
  */
 public final class VivienReid extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a creature or land card");
-    private static final FilterPermanent filter2 = new FilterPermanent("artifact, enchantment, or creature with flying");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or creature with flying");
 
     static {
         filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-        filter2.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
@@ -53,11 +48,12 @@ public final class VivienReid extends CardImpl {
 
         // +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM), 1));
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
+                4, 1, StaticFilters.FILTER_CARD_CREATURE_OR_LAND, PutCards.HAND, PutCards.BOTTOM_RANDOM), 1));
 
         // -3: Destroy target artifact, enchantment, or creature with flying.
         Ability ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // -8: You get an emblem with "Creatures you control get +2/+2 and have vigilance, trample, and indestructible.

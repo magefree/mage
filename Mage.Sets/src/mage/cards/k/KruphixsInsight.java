@@ -1,8 +1,8 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class KruphixsInsight extends CardImpl {
 
         // Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand
         // and the rest of the revealed cards into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(6, 3, filter, PutCards.HAND, PutCards.GRAVEYARD, false));
+        this.getSpellAbility().addEffect(new RevealLibraryPickControllerEffect(6, 3, filter, PutCards.HAND, PutCards.GRAVEYARD, false));
     }
 
     private KruphixsInsight(final KruphixsInsight card) {

@@ -938,6 +938,16 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_CREATURE_OR_LAND = new FilterCard("creature or land card");
+
+    static {
+        FILTER_CARD_CREATURE_OR_LAND.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+        FILTER_CARD_CREATURE_OR_LAND.setLockedFilter(true);
+    }
+
     public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");
 
     static {

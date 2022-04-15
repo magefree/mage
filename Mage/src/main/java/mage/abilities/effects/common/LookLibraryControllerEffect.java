@@ -60,6 +60,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
 
     protected DynamicValue numberOfCards;
     protected PutCards putLookedCards;
+    protected boolean revealCards;
 
     public LookLibraryControllerEffect() {
         this(1);
@@ -77,12 +78,14 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         super(outcome);
         this.numberOfCards = numberOfCards;
         this.putLookedCards = putLookedCards;
+        this.revealCards = false;
     }
 
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
         super(effect);
         this.numberOfCards = effect.numberOfCards.copy();
         this.putLookedCards = effect.putLookedCards;
+        this.revealCards = effect.revealCards;
     }
 
     @Override
@@ -102,7 +105,11 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         controller.setTopCardRevealed(false);
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, numberOfCards.calculate(game, source, this)));
 
-        controller.lookAtCards(source, null, cards, game);
+        if (revealCards) {
+            controller.revealCards(source, cards, game);
+        } else {
+            controller.lookAtCards(source, null, cards, game);
+        }
 
         boolean result = actionWithLookedCards(game, source, controller, cards);
 
@@ -142,7 +149,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         String numberString = numberOfCards.toString();
         boolean dynamic = !numberOfCards.getMessage().isEmpty();
         boolean oneCard = !dynamic && numberString.equals("1");
-        StringBuilder sb = new StringBuilder("look at ");
+        StringBuilder sb = new StringBuilder(revealCards ? "reveal " : "look at ");
         if (oneCard) {
             sb.append("the top card");
         } else if (dynamic) {
