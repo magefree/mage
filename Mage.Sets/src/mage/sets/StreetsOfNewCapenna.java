@@ -35,6 +35,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Arc Spitter", 233, Rarity.UNCOMMON, mage.cards.a.ArcSpitter.class));
         cards.add(new SetCardInfo("Attended Socialite", 133, Rarity.COMMON, mage.cards.a.AttendedSocialite.class));
         cards.add(new SetCardInfo("Aven Heartstabber", 166, Rarity.RARE, mage.cards.a.AvenHeartstabber.class));
+        cards.add(new SetCardInfo("Backstreet Bruiser", 35, Rarity.COMMON, mage.cards.b.BackstreetBruiser.class));
         cards.add(new SetCardInfo("Backup Agent", 2, Rarity.COMMON, mage.cards.b.BackupAgent.class));
         cards.add(new SetCardInfo("Ballroom Brawlers", 3, Rarity.UNCOMMON, mage.cards.b.BallroomBrawlers.class));
         cards.add(new SetCardInfo("Big Score", 102, Rarity.COMMON, mage.cards.b.BigScore.class));
