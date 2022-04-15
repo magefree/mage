@@ -29,6 +29,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 34, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 51, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
+        cards.add(new SetCardInfo("Angel of Suffering", 67, Rarity.MYTHIC, mage.cards.a.AngelOfSuffering.class));
         cards.add(new SetCardInfo("Angelic Observer", 1, Rarity.UNCOMMON, mage.cards.a.AngelicObserver.class));
         cards.add(new SetCardInfo("Arc Spitter", 233, Rarity.UNCOMMON, mage.cards.a.ArcSpitter.class));
         cards.add(new SetCardInfo("Attended Socialite", 133, Rarity.COMMON, mage.cards.a.AttendedSocialite.class));
