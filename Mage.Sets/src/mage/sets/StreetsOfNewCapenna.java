@@ -127,6 +127,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Make Disappear", 49, Rarity.COMMON, mage.cards.m.MakeDisappear.class));
         cards.add(new SetCardInfo("Mayhem Patrol", 114, Rarity.COMMON, mage.cards.m.MayhemPatrol.class));
         cards.add(new SetCardInfo("Metropolis Angel", 203, Rarity.UNCOMMON, mage.cards.m.MetropolisAngel.class));
+        cards.add(new SetCardInfo("Midnight Assassin", 87, Rarity.COMMON, mage.cards.m.MidnightAssassin.class));
         cards.add(new SetCardInfo("Most Wanted", 153, Rarity.COMMON, mage.cards.m.MostWanted.class));
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mr. Orfeo, the Boulder", 204, Rarity.UNCOMMON, mage.cards.m.MrOrfeoTheBoulder.class));
