@@ -162,6 +162,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Slip Out the Back", 62, Rarity.UNCOMMON, mage.cards.s.SlipOutTheBack.class));
         cards.add(new SetCardInfo("Snooping Newsie", 222, Rarity.COMMON, mage.cards.s.SnoopingNewsie.class));
         cards.add(new SetCardInfo("Social Climber", 157, Rarity.COMMON, mage.cards.s.SocialClimber.class));
+        cards.add(new SetCardInfo("Soul of Emancipation", 223, Rarity.RARE, mage.cards.s.SoulOfEmancipation.class));
         cards.add(new SetCardInfo("Spara's Headquarters", 257, Rarity.RARE, mage.cards.s.SparasHeadquarters.class));
         cards.add(new SetCardInfo("Stimulus Package", 225, Rarity.UNCOMMON, mage.cards.s.StimulusPackage.class));
         cards.add(new SetCardInfo("Strangle", 125, Rarity.COMMON, mage.cards.s.Strangle.class));
