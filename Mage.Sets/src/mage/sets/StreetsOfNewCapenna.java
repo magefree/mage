@@ -154,6 +154,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Shakedown Heavy", 95, Rarity.RARE, mage.cards.s.ShakedownHeavy.class));
         cards.add(new SetCardInfo("Skybridge Towers", 256, Rarity.COMMON, mage.cards.s.SkybridgeTowers.class));
         cards.add(new SetCardInfo("Sleep with the Fishes", 61, Rarity.UNCOMMON, mage.cards.s.SleepWithTheFishes.class));
+        cards.add(new SetCardInfo("Slip Out the Back", 62, Rarity.UNCOMMON, mage.cards.s.SlipOutTheBack.class));
         cards.add(new SetCardInfo("Snooping Newsie", 222, Rarity.COMMON, mage.cards.s.SnoopingNewsie.class));
         cards.add(new SetCardInfo("Social Climber", 157, Rarity.COMMON, mage.cards.s.SocialClimber.class));
         cards.add(new SetCardInfo("Spara's Headquarters", 257, Rarity.RARE, mage.cards.s.SparasHeadquarters.class));
