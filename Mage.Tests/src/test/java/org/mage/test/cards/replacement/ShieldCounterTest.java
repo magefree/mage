@@ -65,4 +65,23 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Disciplined Duelist", 1);
         assertCounterCount("Disciplined Duelist", CounterType.SHIELD, 0);
     }
+
+    // Effects that say "Damage can't be prevented" should both remove the shield counter and deal damage
+    // TODO: Find a high toughness creature with a shield counter to test this better
+    @Test
+    public void testDamagePrevention() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Disciplined Duelist");
+        addCard(Zone.HAND, playerA, "Call In a Professional", 1);
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call In a Professional");
+        addTarget(playerA, "Disciplined Duelist");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+        assertGraveyardCount(playerA, "Disciplined Duelist", 1);
+    }
 }

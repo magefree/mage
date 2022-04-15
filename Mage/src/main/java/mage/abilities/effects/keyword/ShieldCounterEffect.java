@@ -32,14 +32,20 @@ public class ShieldCounterEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCounters(game).getCount(CounterType.SHIELD) > 0) {
-            permanent.removeCounters(CounterType.SHIELD.getName(), 1, source, game);
-            if (!game.isSimulation()) {
-                game.informPlayers("Removed a shield counter from " + permanent.getLogName());
-            }
-            return true;
+        if (permanent == null || permanent.getCounters(game).getCount(CounterType.SHIELD) < 1) {
+            return false;
         }
-        return false;
+        permanent.removeCounters(CounterType.SHIELD.getName(), 1, source, game);
+        if (!game.isSimulation()) {
+            game.informPlayers("Removed a shield counter from " + permanent.getLogName());
+        }
+        // Damage should be prevented rather than replacing the event.
+        // Effects that say "damage can't be prevented" will have the creature both take the damage and remove a shield counter.
+        if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
+            game.preventDamage(event, source, game, Integer.MAX_VALUE);
+            return false;
+        }
+        return true;
     }
 
     @Override
