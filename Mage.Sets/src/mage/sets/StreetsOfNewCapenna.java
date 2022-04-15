@@ -75,6 +75,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Cut Your Losses", 38, Rarity.RARE, mage.cards.c.CutYourLosses.class));
         cards.add(new SetCardInfo("Cut of the Profits", 72, Rarity.RARE, mage.cards.c.CutOfTheProfits.class));
         cards.add(new SetCardInfo("Dapper Shieldmate", 9, Rarity.COMMON, mage.cards.d.DapperShieldmate.class));
+        cards.add(new SetCardInfo("Daring Escape", 104, Rarity.COMMON, mage.cards.d.DaringEscape.class));
         cards.add(new SetCardInfo("Darling of the Masses", 181, Rarity.UNCOMMON, mage.cards.d.DarlingOfTheMasses.class));
         cards.add(new SetCardInfo("Deal Gone Bad", 74, Rarity.COMMON, mage.cards.d.DealGoneBad.class));
         cards.add(new SetCardInfo("Demon's Due", 75, Rarity.COMMON, mage.cards.d.DemonsDue.class));
