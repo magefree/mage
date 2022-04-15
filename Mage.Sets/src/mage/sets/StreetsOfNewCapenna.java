@@ -64,6 +64,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Ceremonial Groundbreaker", 175, Rarity.UNCOMMON, mage.cards.c.CeremonialGroundbreaker.class));
         cards.add(new SetCardInfo("Chrome Cat", 236, Rarity.COMMON, mage.cards.c.ChromeCat.class));
         cards.add(new SetCardInfo("Citizen's Crowbar", 8, Rarity.UNCOMMON, mage.cards.c.CitizensCrowbar.class));
+        cards.add(new SetCardInfo("Civic Gardener", 140, Rarity.COMMON, mage.cards.c.CivicGardener.class));
         cards.add(new SetCardInfo("Civil Servant", 176, Rarity.COMMON, mage.cards.c.CivilServant.class));
         cards.add(new SetCardInfo("Cleanup Crew", 141, Rarity.UNCOMMON, mage.cards.c.CleanupCrew.class));
         cards.add(new SetCardInfo("Cormela, Glamour Thief", 177, Rarity.UNCOMMON, mage.cards.c.CormelaGlamourThief.class));
