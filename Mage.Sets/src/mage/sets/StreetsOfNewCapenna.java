@@ -163,6 +163,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Patch Up", 23, Rarity.UNCOMMON, mage.cards.p.PatchUp.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plasma Jockey", 115, Rarity.COMMON, mage.cards.p.PlasmaJockey.class));
+        cards.add(new SetCardInfo("Prizefight", 154, Rarity.COMMON, mage.cards.p.Prizefight.class));
         cards.add(new SetCardInfo("Professional Face-Breaker", 116, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
         cards.add(new SetCardInfo("Psionic Snoop", 53, Rarity.COMMON, mage.cards.p.PsionicSnoop.class));
         cards.add(new SetCardInfo("Psychic Pickpocket", 54, Rarity.UNCOMMON, mage.cards.p.PsychicPickpocket.class));
