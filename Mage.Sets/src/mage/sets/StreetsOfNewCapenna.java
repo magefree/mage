@@ -72,6 +72,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Cleanup Crew", 141, Rarity.UNCOMMON, mage.cards.c.CleanupCrew.class));
         cards.add(new SetCardInfo("Cormela, Glamour Thief", 177, Rarity.UNCOMMON, mage.cards.c.CormelaGlamourThief.class));
         cards.add(new SetCardInfo("Corpse Appraiser", 178, Rarity.UNCOMMON, mage.cards.c.CorpseAppraiser.class));
+        cards.add(new SetCardInfo("Corpse Explosion", 179, Rarity.RARE, mage.cards.c.CorpseExplosion.class));
         cards.add(new SetCardInfo("Corrupt Court Official", 70, Rarity.COMMON, mage.cards.c.CorruptCourtOfficial.class));
         cards.add(new SetCardInfo("Courier's Briefcase", 142, Rarity.UNCOMMON, mage.cards.c.CouriersBriefcase.class));
         cards.add(new SetCardInfo("Crooked Custodian", 71, Rarity.COMMON, mage.cards.c.CrookedCustodian.class));
