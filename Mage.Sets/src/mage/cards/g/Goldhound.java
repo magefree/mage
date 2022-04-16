@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class Goldhound extends CardImpl {
 
     public Goldhound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{R}");
 
         this.subtype.add(SubType.TREASURE);
         this.subtype.add(SubType.DOG);
@@ -35,7 +35,7 @@ public final class Goldhound extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility(true));
 
-        // {T}, Sacrifice Mimic: Add one mana of any color.
+        // {T}, Sacrifice Goldhound: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
