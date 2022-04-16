@@ -193,6 +193,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctuary Warden", 30, Rarity.MYTHIC, mage.cards.s.SanctuaryWarden.class));
         cards.add(new SetCardInfo("Sanguine Spy", 93, Rarity.RARE, mage.cards.s.SanguineSpy.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
+        cards.add(new SetCardInfo("Sewer Crocodile", 60, Rarity.COMMON, mage.cards.s.SewerCrocodile.class));
         cards.add(new SetCardInfo("Shadow of Mortality", 94, Rarity.RARE, mage.cards.s.ShadowOfMortality.class));
         cards.add(new SetCardInfo("Shakedown Heavy", 95, Rarity.RARE, mage.cards.s.ShakedownHeavy.class));
         cards.add(new SetCardInfo("Skybridge Towers", 256, Rarity.COMMON, mage.cards.s.SkybridgeTowers.class));
