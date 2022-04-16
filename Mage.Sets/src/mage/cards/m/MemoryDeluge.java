@@ -2,14 +2,12 @@ package mage.cards.m;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,9 +21,8 @@ public final class MemoryDeluge extends CardImpl {
 
         // Look at the top X cards of your library, where X is the amount of mana spent to cast this spell. Put two of them into your hand and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                ManaSpentToCastCount.instance, false, StaticValue.get(2),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ).setBackInRandomOrder(true).setText("look at the top X cards of your library, where X " +
+                ManaSpentToCastCount.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        ).setText("look at the top X cards of your library, where X " +
                 "is the amount of mana spent to cast this spell. Put two of them into your " +
                 "hand and the rest on the bottom of your library in a random order"));
 

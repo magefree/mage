@@ -1,11 +1,10 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +32,8 @@ public final class CourageousOutrider extends CardImpl {
 
         // When Courageous Outrider enters the battlefield, look at the top four cards of your library. You may reveal a Human card from among them
         // and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filter, false) , false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                4, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY)));
     }
 
     private CourageousOutrider(final CourageousOutrider card) {

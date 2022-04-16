@@ -2,8 +2,8 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -11,8 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -36,13 +34,11 @@ public final class NymrisOonasTrickster extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.
+        // Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library.
+        // Put one of those cards into your hand and the other into your graveyard.
         this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(2), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false
-                ), false
-        ));
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD),
+                false));
     }
 
     private NymrisOonasTrickster(final NymrisOonasTrickster card) {

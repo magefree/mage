@@ -5,11 +5,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -49,10 +47,7 @@ public final class YodaJediMaster extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +1: Look at the top two cards of your library. Put one on the bottom of your library.
-        Effect effect = new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1),
-                new FilterCard(), Zone.LIBRARY, true, false, false, Zone.LIBRARY, false, false, true);
-        effect.setText("Look at the top two cards of your library. Put one on the bottom of your library");
-        this.addAbility(new LoyaltyAbility(effect, 1));
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(2, 1, PutCards.BOTTOM_ANY, PutCards.TOP_ANY), 1));
 
         //  0: Exile another target permanent you own. Return that card to the battlefield under your control at the beggining of your next end step.
         Ability ability = new LoyaltyAbility(new YodaJediMasterEffect(), 0);

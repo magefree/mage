@@ -2,8 +2,8 @@ package mage.cards.r;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
@@ -28,16 +28,8 @@ public final class RealityHeist extends CardImpl {
         ).addHint(ArtifactYouControlHint.instance));
 
         // Look at the top seven cards of your library. You may reveal up to two artifact cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
-        this.getSpellAbility().addEffect(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD_ARTIFACT, Zone.LIBRARY, false, true,
-                        false, Zone.HAND, true, false, false
-                ).setBackInRandomOrder(true)
-                        .setText("look at the top seven cards of your library. You may reveal up to " +
-                                "two artifact cards from among them and put them into your hand. " +
-                                "Put the rest on the bottom of your library in a random order")
-        );
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                7, 2, StaticFilters.FILTER_CARD_ARTIFACTS, PutCards.HAND, PutCards.BOTTOM_RANDOM));
     }
 
     private RealityHeist(final RealityHeist card) {

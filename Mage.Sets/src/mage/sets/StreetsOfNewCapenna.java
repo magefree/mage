@@ -211,6 +211,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Vivien on the Hunt", 162, Rarity.MYTHIC, mage.cards.v.VivienOnTheHunt.class));
         cards.add(new SetCardInfo("Voice of the Vermin", 163, Rarity.UNCOMMON, mage.cards.v.VoiceOfTheVermin.class));
         cards.add(new SetCardInfo("Void Rend", 230, Rarity.RARE, mage.cards.v.VoidRend.class));
+        cards.add(new SetCardInfo("Warm Welcome", 164, Rarity.COMMON, mage.cards.w.WarmWelcome.class));
         cards.add(new SetCardInfo("Waterfront District", 259, Rarity.COMMON, mage.cards.w.WaterfrontDistrict.class));
         cards.add(new SetCardInfo("Whack", 99, Rarity.UNCOMMON, mage.cards.w.Whack.class));
         cards.add(new SetCardInfo("Witness Protection", 66, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
