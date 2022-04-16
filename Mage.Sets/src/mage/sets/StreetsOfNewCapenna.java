@@ -45,6 +45,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Boon of Safety", 4, Rarity.COMMON, mage.cards.b.BoonOfSafety.class));
         cards.add(new SetCardInfo("Bootleggers' Stash", 134, Rarity.MYTHIC, mage.cards.b.BootleggersStash.class));
         cards.add(new SetCardInfo("Botanical Plaza", 247, Rarity.COMMON, mage.cards.b.BotanicalPlaza.class));
+        cards.add(new SetCardInfo("Bouncer's Beatdown", 135, Rarity.UNCOMMON, mage.cards.b.BouncersBeatdown.class));
         cards.add(new SetCardInfo("Brass Knuckles", 234, Rarity.UNCOMMON, mage.cards.b.BrassKnuckles.class));
         cards.add(new SetCardInfo("Brazen Upstart", 169, Rarity.UNCOMMON, mage.cards.b.BrazenUpstart.class));
         cards.add(new SetCardInfo("Broken Wings", 136, Rarity.COMMON, mage.cards.b.BrokenWings.class));
