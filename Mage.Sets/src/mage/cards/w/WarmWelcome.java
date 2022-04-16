@@ -21,7 +21,7 @@ public final class WarmWelcome extends CardImpl {
 
         // Look at the top five cards of your library.
         // You may reveal a creature card from among them and put it into your hand.
-        // Put the rest on the bottom of your library in a random order. 
+        // Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 5, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM));
 

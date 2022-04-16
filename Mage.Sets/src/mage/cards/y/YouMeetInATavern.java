@@ -23,7 +23,7 @@ public final class YouMeetInATavern extends CardImpl {
         // Choose one —
         // • Form a Party — Look at the top five cards of your library. You may reveal any number of creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                5, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM));
+                5, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES, PutCards.HAND, PutCards.BOTTOM_RANDOM));
         this.getSpellAbility().withFirstModeFlavorWord("Form a Party");
 
         // • Start a Brawl — Creatures you control get +2/+2 until end of turn.

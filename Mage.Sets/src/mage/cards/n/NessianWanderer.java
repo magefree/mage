@@ -25,9 +25,13 @@ public final class NessianWanderer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Constellation — Whenever an enchantment enters the battelfield under your control, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
+        // Constellation — Whenever an enchantment enters the battelfield under your control, look at the top three cards of your library.
+        // You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConstellationAbility(
-                new LookLibraryAndPickControllerEffect(3, 1, StaticFilters.FILTER_CARD_LAND_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(3, 1, StaticFilters.FILTER_CARD_LAND_A, PutCards.HAND, PutCards.BOTTOM_RANDOM)
+                .setText("look at the top three cards of your library. " +
+                        "You may reveal a land card from among them and put that card into your hand. " +
+                        "Put the rest on the bottom of your library in a random order"),
                 false, false));
     }
 

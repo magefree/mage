@@ -23,7 +23,9 @@ public final class MaestrosCharm extends CardImpl {
 
         // Choose one —
         // • Look at the top five cards of your library. Put one of those cards into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 1, PutCards.HAND, PutCards.GRAVEYARD));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 1, PutCards.HAND, PutCards.GRAVEYARD)
+                .setText("look at the top five cards of your library. " +
+                        "Put one of those cards into your hand and the rest into your graveyard"));
 
         // • Each opponent loses 3 life and you gain 3 life.
         Mode mode = new Mode(new LoseLifeOpponentsEffect(3));

@@ -9,6 +9,8 @@ import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -64,7 +66,7 @@ public class VerifyCardDataTest {
 
     private static final String FULL_ABILITIES_CHECK_SET_CODE = "FUT"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
-    private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static final boolean ONLY_TEXT = true; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final Set<String> checkedNames = new HashSet<>();
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
@@ -1612,7 +1614,8 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
+        if (!(checkForEffect(card, LookLibraryAndPickControllerEffect.class)
+            || checkForEffect(card, RevealLibraryPickControllerEffect.class)) || !checkName(ref)) {
             return;
         }
 

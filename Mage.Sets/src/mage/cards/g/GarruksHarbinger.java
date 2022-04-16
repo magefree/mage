@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class GarruksHarbinger extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a creature or Garruk planeswalker card");
+    private static final FilterCard filter = new FilterCard("creature card or Garruk planeswalker card");
     static {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),

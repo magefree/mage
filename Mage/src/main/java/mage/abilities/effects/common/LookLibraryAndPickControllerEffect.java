@@ -208,13 +208,16 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 || !(numberOfCards instanceof StaticValue)
                 || numberOfCards.calculate(null, null, this) - numberToPick != 1;
 
-        // if remaining text would be "put the other back on top of your library", omit it
+        // if remaining text would be "put the other on top of your library", omit it
         if (!plural && putLookedCards == PutCards.TOP_ANY) {
             return setText(mode, sb.toString());
         }
         sb.append(havePredicates && (optional || upTo) ? ". Put" : " and");
         sb.append(" the ");
         sb.append(plural ? "rest " : "other ");
+        if (putPickedCards == PutCards.GRAVEYARD && putLookedCards == PutCards.TOP_ANY) {
+            sb.append("back ");
+        }
         sb.append(putLookedCards.getMessage(plural));
 
         // get text frame from super class and inject action text

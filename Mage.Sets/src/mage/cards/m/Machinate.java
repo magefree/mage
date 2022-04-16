@@ -24,7 +24,8 @@ public final class Machinate extends CardImpl {
 
         // Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(xValue, 1, PutCards.HAND, PutCards.BOTTOM_ANY);
-        //effect.setText("Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.");
+        effect.setText("look at the top X cards of your library, where X is the number of artifacts you control. " +
+                "Put one of those cards into your hand and the rest on the bottom of your library in any order");
         this.getSpellAbility().addEffect(effect);
     }
 

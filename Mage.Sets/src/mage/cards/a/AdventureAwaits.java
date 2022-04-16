@@ -61,6 +61,6 @@ class AdventureAwaitsEffect extends LookLibraryAndPickControllerEffect {
 
     @Override
     public String getText(Mode mode) {
-        return super.getText(mode).concat(". If you don't put a card into your hand this way, draw a card");
+        return super.getText(mode).concat(". If you didn't put a card into your hand this way, draw a card");
     }
 }

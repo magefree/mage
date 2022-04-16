@@ -25,7 +25,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         GRAVEYARD(Outcome.Discard, Zone.GRAVEYARD, "into your graveyard"),
         BATTLEFIELD(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield"),
         BATTLEFIELD_TAPPED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield tapped"),
-        TOP_ANY(Outcome.Benefit, Zone.LIBRARY, "back on top of your library", " in any order"),
+        TOP_ANY(Outcome.Benefit, Zone.LIBRARY, "on top of your library", " in any order"),
         BOTTOM_ANY(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in any order"),
         BOTTOM_RANDOM(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in a random order");
 
