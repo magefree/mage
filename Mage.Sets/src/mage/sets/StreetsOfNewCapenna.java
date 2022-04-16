@@ -190,6 +190,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Rogues' Gallery", 92, Rarity.UNCOMMON, mage.cards.r.RoguesGallery.class));
         cards.add(new SetCardInfo("Rooftop Nuisance", 57, Rarity.COMMON, mage.cards.r.RooftopNuisance.class));
         cards.add(new SetCardInfo("Rumor Gatherer", 29, Rarity.UNCOMMON, mage.cards.r.RumorGatherer.class));
+        cards.add(new SetCardInfo("Run Out of Town", 58, Rarity.COMMON, mage.cards.r.RunOutOfTown.class));
         cards.add(new SetCardInfo("Sanctuary Warden", 30, Rarity.MYTHIC, mage.cards.s.SanctuaryWarden.class));
         cards.add(new SetCardInfo("Sanguine Spy", 93, Rarity.RARE, mage.cards.s.SanguineSpy.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
