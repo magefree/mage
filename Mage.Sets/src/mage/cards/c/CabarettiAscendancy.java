@@ -21,22 +21,22 @@ import mage.players.Player;
  *
  * @author weirddan455
  */
-public final class CabarettiAscendency extends CardImpl {
+public final class CabarettiAscendancy extends CardImpl {
 
-    public CabarettiAscendency(UUID ownerId, CardSetInfo setInfo) {
+    public CabarettiAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it in your hand. If you don't, you may put it on the bottom of your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CabarettiAscendencyEffect(), TargetController.YOU, false));
     }
 
-    private CabarettiAscendency(final CabarettiAscendency card) {
+    private CabarettiAscendancy(final CabarettiAscendancy card) {
         super(card);
     }
 
     @Override
-    public CabarettiAscendency copy() {
-        return new CabarettiAscendency(this);
+    public CabarettiAscendancy copy() {
+        return new CabarettiAscendancy(this);
     }
 }
 

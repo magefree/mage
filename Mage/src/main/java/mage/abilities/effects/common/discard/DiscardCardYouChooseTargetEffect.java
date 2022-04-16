@@ -30,6 +30,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     private DynamicValue numberCardsToReveal;
     private final DynamicValue numberCardsToDiscard;
     private boolean revealAllCards;
+    private boolean optional = false;
 
     public DiscardCardYouChooseTargetEffect() {
         this(StaticFilters.FILTER_CARD_A);
@@ -99,6 +100,12 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.numberCardsToDiscard = effect.numberCardsToDiscard;
         this.numberCardsToReveal = effect.numberCardsToReveal;
         this.revealAllCards = effect.revealAllCards;
+        this.optional = effect.optional;
+    }
+
+    public void setOptional(boolean optional) {
+        this.optional = optional;
+        staticText = this.setText();
     }
 
     @Override
@@ -147,7 +154,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         if (numberToDiscard <= 0) {
             return result;
         }
-        TargetCard target = new TargetCard(numberToDiscard, Zone.HAND, filter);
+        TargetCard target = new TargetCard(optional ? 0 : numberToDiscard, numberToDiscard, Zone.HAND, filter);
         if (!controller.choose(Outcome.Benefit, revealedCards, target, game)) {
             return result;
         }
@@ -175,7 +182,11 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         }
         sb.append(" reveals ");
         if (revealAllCards) {
-            sb.append("their hand. You choose ");
+            sb.append("their hand. You ");
+            if (optional) {
+                sb.append("may ");
+            }
+            sb.append("choose ");
             if (discardMultipleCards) {
                 sb.append(numberCardsToDiscard).append(' ').append(filter.getMessage());
             } else {
@@ -194,7 +205,11 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 sb.append("a number of cards from their hand equal to ");
                 sb.append(numberCardsToReveal.getMessage());
             }
-            sb.append(". You choose ");
+            sb.append(". You ");
+            if (optional) {
+                sb.append("may ");
+            }
+            sb.append("choose ");
             if (numberCardsToDiscard instanceof StaticValue) {
                 sb.append(CardUtil.numberToText(((StaticValue) numberCardsToDiscard).getValue()));
             } else {
