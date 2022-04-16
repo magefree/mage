@@ -50,6 +50,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Broken Wings", 136, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Brokers Ascendancy", 170, Rarity.RARE, mage.cards.b.BrokersAscendancy.class));
         cards.add(new SetCardInfo("Brokers Charm", 171, Rarity.UNCOMMON, mage.cards.b.BrokersCharm.class));
+        cards.add(new SetCardInfo("Brokers Hideout", 248, Rarity.COMMON, mage.cards.b.BrokersHideout.class));
         cards.add(new SetCardInfo("Brokers Initiate", 5, Rarity.COMMON, mage.cards.b.BrokersInitiate.class));
         cards.add(new SetCardInfo("Buy Your Silence", 6, Rarity.COMMON, mage.cards.b.BuyYourSilence.class));
         cards.add(new SetCardInfo("Cabaretti Ascendancy", 172, Rarity.RARE, mage.cards.c.CabarettiAscendancy.class));
