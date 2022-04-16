@@ -174,6 +174,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Professional Face-Breaker", 116, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
         cards.add(new SetCardInfo("Psionic Snoop", 53, Rarity.COMMON, mage.cards.p.PsionicSnoop.class));
         cards.add(new SetCardInfo("Psychic Pickpocket", 54, Rarity.UNCOMMON, mage.cards.p.PsychicPickpocket.class));
+        cards.add(new SetCardInfo("Pugnacious Pugilist", 117, Rarity.UNCOMMON, mage.cards.p.PugnaciousPugilist.class));
         cards.add(new SetCardInfo("Pyre-Sledge Arsonist", 118, Rarity.UNCOMMON, mage.cards.p.PyreSledgeArsonist.class));
         cards.add(new SetCardInfo("Queza, Augur of Agonies", 212, Rarity.UNCOMMON, mage.cards.q.QuezaAugurOfAgonies.class));
         cards.add(new SetCardInfo("Quick-Draw Dagger", 243, Rarity.COMMON, mage.cards.q.QuickDrawDagger.class));
