@@ -102,6 +102,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Fatal Grudge", 187, Rarity.UNCOMMON, mage.cards.f.FatalGrudge.class));
         cards.add(new SetCardInfo("Fight Rigging", 145, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Fleetfoot Dancer", 188, Rarity.RARE, mage.cards.f.FleetfootDancer.class));
+        cards.add(new SetCardInfo("For the Family", 146, Rarity.COMMON, mage.cards.f.ForTheFamily.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge Boss", 189, Rarity.UNCOMMON, mage.cards.f.ForgeBoss.class));
         cards.add(new SetCardInfo("Freelance Muscle", 147, Rarity.UNCOMMON, mage.cards.f.FreelanceMuscle.class));
