@@ -219,6 +219,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of Emancipation", 223, Rarity.RARE, mage.cards.s.SoulOfEmancipation.class));
         cards.add(new SetCardInfo("Spara's Headquarters", 257, Rarity.RARE, mage.cards.s.SparasHeadquarters.class));
         cards.add(new SetCardInfo("Speakeasy Server", 32, Rarity.COMMON, mage.cards.s.SpeakeasyServer.class));
+        cards.add(new SetCardInfo("Sticky Fingers", 124, Rarity.COMMON, mage.cards.s.StickyFingers.class));
         cards.add(new SetCardInfo("Stimulus Package", 225, Rarity.UNCOMMON, mage.cards.s.StimulusPackage.class));
         cards.add(new SetCardInfo("Strangle", 125, Rarity.COMMON, mage.cards.s.Strangle.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 245, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
