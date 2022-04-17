@@ -42,7 +42,7 @@ public final class RhoxPummeler extends CardImpl {
         // As long as Rhox Pummeler has a shield counter on it, it has trample.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()), condition,
-                "as long as {this} has a shield counter on it, it has trample"
+                "{this} has trample as long as it has a shield counter on it"
         )));
     }
 

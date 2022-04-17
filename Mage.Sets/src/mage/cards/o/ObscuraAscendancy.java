@@ -40,14 +40,14 @@ public final class ObscuraAscendancy extends CardImpl {
         SpellCastControllerTriggeredAbility triggeredAbility = new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.SOUL.createInstance()), false);
         triggeredAbility.addEffect(new CreateTokenEffect(new Spirit22Token()));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, ObscuraAscendancyCondition.instance,
-                "Whenever you cast a spell, if its mana value is equal to the number of soul counters on {this} plus one, put a soul counter on {this}, then create a 2/2 white Spirit creature token with flying."
+                "Whenever you cast a spell, if its mana value is equal to 1 plus the number of soul counters on {this}, put a soul counter on {this}, then create a 2/2 white Spirit creature token with flying."
         ));
 
         // As long as Obscura Ascendancy has five or more soul counters on it, Spirits you control get +3/+3.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter),
                 new SourceHasCounterCondition(CounterType.SOUL, 5),
-                "as long as {this} has five or more soul counters on it, Spirits you control get +3/+3"
+                "as long as there are five or more soul counters on {this}, Spirits you control get +3/+3"
         )));
     }
 

@@ -55,7 +55,7 @@ class ParkHeightsPegasusEffect extends OneShotEffect {
 
     public ParkHeightsPegasusEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "draw a card if two or more creatures entered the battlefield under your control this turn";
+        this.staticText = "draw a card if you had two or more creatures enter the battlefield under your control this turn";
     }
 
     private ParkHeightsPegasusEffect(final ParkHeightsPegasusEffect effect) {

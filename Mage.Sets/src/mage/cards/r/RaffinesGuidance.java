@@ -57,7 +57,7 @@ class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
 
     public RafinnesGuidancePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast {this} from your graveyard by paying {2}{W} instead of its mana cost.";
+        staticText = "You may cast {this} from your graveyard by paying {2}{W} rather than paying its mana cost.";
     }
 
     public RafinnesGuidancePlayEffect(final RafinnesGuidancePlayEffect effect) {
