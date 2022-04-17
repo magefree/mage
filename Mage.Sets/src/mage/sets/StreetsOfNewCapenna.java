@@ -65,6 +65,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Case the Joint", 37, Rarity.COMMON, mage.cards.c.CaseTheJoint.class));
         cards.add(new SetCardInfo("Celebrity Fencer", 7, Rarity.COMMON, mage.cards.c.CelebrityFencer.class));
         cards.add(new SetCardInfo("Celestial Regulator", 174, Rarity.COMMON, mage.cards.c.CelestialRegulator.class));
+        cards.add(new SetCardInfo("Cement Shoes", 235, Rarity.UNCOMMON, mage.cards.c.CementShoes.class));
         cards.add(new SetCardInfo("Cemetery Tampering", 69, Rarity.RARE, mage.cards.c.CemeteryTampering.class));
         cards.add(new SetCardInfo("Ceremonial Groundbreaker", 175, Rarity.UNCOMMON, mage.cards.c.CeremonialGroundbreaker.class));
         cards.add(new SetCardInfo("Chrome Cat", 236, Rarity.COMMON, mage.cards.c.ChromeCat.class));
