@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ShrineToken extends TokenImpl {
 
     public ShrineToken() {
-        super("Spirit", "1/1 colorless Shrine enchantment creature token");
+        super("Shrine Token", "1/1 colorless Shrine enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SHRINE);

@@ -3,9 +3,9 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -28,7 +27,7 @@ import mage.target.targetpointer.EachTargetPointer;
  */
 public final class NissaGenesisMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("any number of creature and/or land cards");
+    private static final FilterCard filter = new FilterCard("creature and/or land cards");
 
     static {
         filter.add(Predicates.or(
@@ -57,10 +56,11 @@ public final class NissaGenesisMage extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        //-10: Look at the top ten cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.);
+        //-10: Look at the top ten cards of your library.
+        //You may put any number of creature and/or land cards from among them onto the battlefield.
+        //Put the rest on the bottom of your library in a random order.);
         this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(StaticValue.get(10), false, StaticValue.get(10), filter,
-                        Zone.LIBRARY, true, false, true, Zone.BATTLEFIELD, true, true, false).setBackInRandomOrder(true),
+                new LookLibraryAndPickControllerEffect(10, Integer.MAX_VALUE, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
                 -10));
     }
 

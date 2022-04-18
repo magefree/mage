@@ -1,13 +1,12 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -36,10 +34,10 @@ public final class TheAntiquitiesWar extends CardImpl {
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
         SagaAbility sagaAbility = new SagaAbility(this);
 
-        // I, II — Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+        // I, II — Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true, true, false).setBackInRandomOrder(true));
+                new LookLibraryAndPickControllerEffect(5, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_RANDOM));
 
         // III — Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheAntiquitiesWarEffect());

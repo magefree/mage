@@ -6,13 +6,13 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -31,7 +31,9 @@ public final class TrailOfCrumbs extends CardImpl {
         // When Trail of Crumbs enters the battlefield, create a Food token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken())));
 
-        // Whenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // Whenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards of your library.
+        // You may reveal a permanent card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in any order.
         this.addAbility(new TrailOfCrumbsTriggeredAbility());
     }
 
@@ -47,11 +49,9 @@ public final class TrailOfCrumbs extends CardImpl {
 
 class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard();
-
     TrailOfCrumbsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new LookLibraryAndPickControllerEffect(
-                2, 1, filter, true, true, Zone.HAND, true
+                2, 1, StaticFilters.FILTER_CARD_PERMANENT, PutCards.HAND, PutCards.BOTTOM_ANY
         ), new GenericManaCost(1)));
     }
 
@@ -78,9 +78,7 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a Food, you may pay {1}. If you do, " +
-                "look at the top two cards of your library. You may reveal a permanent card from among them " +
-                "and put it into your hand. Put the rest on the bottom of your library in any order.";
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a Food, ";
     }
 }

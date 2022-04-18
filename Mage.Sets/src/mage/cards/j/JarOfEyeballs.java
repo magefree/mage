@@ -7,26 +7,22 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveAllCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 import java.util.UUID;
 
 /**
- * @author North
+ * @author awjackson
  */
 public final class JarOfEyeballs extends CardImpl {
 
@@ -42,7 +38,9 @@ public final class JarOfEyeballs extends CardImpl {
         // {3}, {tap}, Remove all eyeball counters from Jar of Eyeballs:
         // Look at the top X cards of your library, where X is the number of eyeball counters removed this way.
         // Put one of them into your hand and the rest on the bottom of your library in any order.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(new JarOfEyeballsEffect(), new GenericManaCost(3));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(JarOfEyeballsValue.instance, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
+                new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveAllCountersSourceCost(CounterType.EYEBALL));
         this.addAbility(ability);
@@ -58,43 +56,32 @@ public final class JarOfEyeballs extends CardImpl {
     }
 }
 
-class JarOfEyeballsEffect extends OneShotEffect {
-
-    public JarOfEyeballsEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public JarOfEyeballsEffect(final JarOfEyeballsEffect effect) {
-        super(effect);
-    }
+enum JarOfEyeballsValue implements DynamicValue {
+    instance;
 
     @Override
-    public JarOfEyeballsEffect copy() {
-        return new JarOfEyeballsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int countersRemoved = 0;
-        for (Cost cost : source.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof RemoveAllCountersSourceCost) {
                 countersRemoved = ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
             }
         }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, countersRemoved));
-        controller.lookAtCards(source, null, cards, game);
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-            Cards targetCards = new CardsImpl(target.getTargets());
-            controller.moveCards(targetCards, Zone.HAND, source, game);
-            cards.removeAll(targetCards);
-        }
-        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
+        return countersRemoved;
+    }
+
+    @Override
+    public JarOfEyeballsValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "the number of eyeball counters removed this way";
     }
 }

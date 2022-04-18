@@ -3,15 +3,14 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -45,11 +44,7 @@ public final class CoralhelmChronicler extends CardImpl {
 
         // When Coralhelm Chronicler enters the battlefield, look at the top five cards of your library. You may reveal a card with a kicker ability from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(5), false, StaticValue.get(1), filter, Zone.LIBRARY, false,
-                true, false, Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("look at the top five cards of your library. " +
-                "You may reveal a card with a kicker ability from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order")));
+                5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM)));
     }
 
     private CoralhelmChronicler(final CoralhelmChronicler card) {

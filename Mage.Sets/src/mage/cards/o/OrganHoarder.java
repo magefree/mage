@@ -2,14 +2,12 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -27,8 +25,7 @@ public final class OrganHoarder extends CardImpl {
 
         // When Organ Hoarder enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest into you graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
-                Zone.GRAVEYARD, false, false, false, Zone.HAND, false
+                3, 1, PutCards.HAND, PutCards.GRAVEYARD
         ).setText("look at the top three cards of your library, then put one of them into your hand and the rest into your graveyard")));
     }
 

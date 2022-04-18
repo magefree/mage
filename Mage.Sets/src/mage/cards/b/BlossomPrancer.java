@@ -2,20 +2,18 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -34,7 +32,10 @@ public final class BlossomPrancer extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // When Blossom Prancer enters the battlefield, look at the top five cards of your library. You may reveal a creature or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, you gain 4 life.
+        // When Blossom Prancer enters the battlefield, look at the top five cards of your library.
+        // You may reveal a creature or enchantment card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        // If you didn't put a card into your hand this way, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BlossomPrancerEffect()));
     }
 
@@ -48,7 +49,7 @@ public final class BlossomPrancer extends CardImpl {
     }
 }
 
-class BlossomPrancerEffect extends OneShotEffect {
+class BlossomPrancerEffect extends LookLibraryAndPickControllerEffect {
 
     private static final FilterCard filter = new FilterCard("creature or enchantment card");
 
@@ -60,10 +61,7 @@ class BlossomPrancerEffect extends OneShotEffect {
     }
 
     BlossomPrancerEffect() {
-        super(Outcome.Benefit);
-        staticText = "look at the top five cards of your library. You may reveal a creature or enchantment card from " +
-                "among them and put it into your hand. Put the rest on the bottom of your library in a random order. " +
-                "If you didn't put a card into your hand this way, you gain 4 life";
+        super(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM);
     }
 
     private BlossomPrancerEffect(final BlossomPrancerEffect effect) {
@@ -76,24 +74,16 @@ class BlossomPrancerEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
-        TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            player.revealCards(source, new CardsImpl(card), game);
-            player.moveCards(card, Zone.HAND, source, game);
-            cards.remove(card);
-            player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        } else {
-            player.putCardsOnBottomOfLibrary(cards, game, source, false);
+    public boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
+        super.actionWithPickedCards(game, source, player, pickedCards, otherCards);
+        if (pickedCards.isEmpty()) {
             player.gainLife(4, game, source);
         }
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return super.getText(mode).concat(". If you didn't put a card into your hand this way, you gain 4 life");
     }
 }

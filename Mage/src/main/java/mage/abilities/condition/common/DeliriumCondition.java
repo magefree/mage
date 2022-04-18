@@ -19,7 +19,7 @@ public enum DeliriumCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if there are four or more card types among cards in your graveyard";
+        return "there are four or more card types among cards in your graveyard";
     }
 
 }
