@@ -30,4 +30,26 @@ public class SyrKonradTheGrimTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 18);
     }
+
+    @Test
+    public void reanimateFromOtherGraveyardTest() {
+        addCard(Zone.HAND, playerA, "Reanimate");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Syr Konrad, the Grim");
+        addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.UNTAP);
+        execute();
+
+        assertLife(playerB, 20);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Grizzly Bears");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, 0);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertLife(playerA, 18); // loss of 2 from reanimate
+        assertLife(playerB, 20); // card leaving B's graveyard *shouldn't* cause loss of life
+    }
 }

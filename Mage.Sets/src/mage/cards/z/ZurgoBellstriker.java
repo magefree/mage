@@ -34,7 +34,7 @@ public final class ZurgoBellstriker extends CardImpl {
         // Zurgo Bellstriker can't block creatures with power 2 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
         // Dash {1}{R}
-        this.addAbility(new DashAbility(this, "{1}{R}"));
+        this.addAbility(new DashAbility("{1}{R}"));
     }
 
     private ZurgoBellstriker(final ZurgoBellstriker card) {

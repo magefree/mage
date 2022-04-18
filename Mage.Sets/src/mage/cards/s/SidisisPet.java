@@ -29,7 +29,7 @@ public final class SidisisPet extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         
         // Morph {1}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SidisisPet(final SidisisPet card) {

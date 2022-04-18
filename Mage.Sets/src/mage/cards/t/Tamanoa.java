@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -6,7 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -31,7 +30,7 @@ public final class Tamanoa extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a noncreature source you control deals damage, you gain that much life.
-        Ability ability = new TamanoaDealsDamageTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false);
+        Ability ability = new TamanoaDealsDamageTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
 
         this.addAbility(ability);
     }

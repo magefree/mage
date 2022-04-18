@@ -23,7 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class SteamfloggerBoss extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent(SubType.RIGGER, "Rigger creatures");
+            = new FilterCreaturePermanent(SubType.RIGGER, "Riggers");
 
     public SteamfloggerBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -53,7 +53,7 @@ public final class SteamfloggerBoss extends CardImpl {
                 Zone.BATTLEFIELD,
                 new InfoEffect(
                         "If a Rigger you control would assemble a Contraption, "
-                        + "it assembles two Contraptions instead. (NOT IMPLEMENTED)"
+                        + "it assembles two Contraptions instead"
                 )
         ));
 

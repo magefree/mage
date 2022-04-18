@@ -273,7 +273,7 @@ public class Spell extends StackObjectImpl implements Card {
                     CardUtil.copyTo(token).from(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
-                        permId = token.getLastAddedToken();
+                        permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
                         flag = true;
                     } else {
                         permId = null;

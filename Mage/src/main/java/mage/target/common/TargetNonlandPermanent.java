@@ -1,18 +1,16 @@
-
-
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetNonlandPermanent extends TargetPermanent {
 
     public TargetNonlandPermanent() {
-        this(1, 1, false);
+        this(1);
     }
 
     public TargetNonlandPermanent(FilterNonlandPermanent filter) {
@@ -20,11 +18,15 @@ public class TargetNonlandPermanent extends TargetPermanent {
     }
 
     public TargetNonlandPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterNonlandPermanent(), false);
+        this(numTargets, numTargets);
+    }
+
+    public TargetNonlandPermanent(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, false);
     }
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        this(minNumTargets, maxNumTargets, new FilterNonlandPermanent(), notTarget);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_NON_LAND, notTarget);
     }
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, FilterNonlandPermanent filter, boolean notTarget) {

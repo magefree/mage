@@ -31,7 +31,7 @@ public final class CallToTheNetherworld extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         // Madness {0}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{0}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{0}")));
     }
 
     private CallToTheNetherworld(final CallToTheNetherworld card) {

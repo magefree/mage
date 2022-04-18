@@ -95,7 +95,7 @@ public class FilterCard extends FilterObject<Card> {
         // card filter can't contain controller predicate (only permanents on battlefield have controller)
         List<Predicate> list = new ArrayList<>();
         Predicates.collectAllComponents(predicate, list);
-        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate)) {
+        if (list.stream().anyMatch(TargetController.ControllerPredicate.class::isInstance)) {
             throw new IllegalArgumentException("Card filter doesn't support controller predicate");
         }
     }

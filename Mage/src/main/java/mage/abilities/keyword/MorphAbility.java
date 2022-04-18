@@ -85,19 +85,19 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     private int zoneChangeCounter = 0;
     private boolean megamorph;
 
-    public MorphAbility(Card card, Cost morphCost) {
-        this(card, createCosts(morphCost));
+    public MorphAbility(Cost morphCost) {
+        this(createCosts(morphCost));
     }
 
-    public MorphAbility(Card card, Cost morphCost, boolean megamorph) {
-        this(card, createCosts(morphCost), megamorph);
+    public MorphAbility(Cost morphCost, boolean megamorph) {
+        this(createCosts(morphCost), megamorph);
     }
 
-    public MorphAbility(Card card, Costs<Cost> morphCosts) {
-        this(card, morphCosts, false);
+    public MorphAbility(Costs<Cost> morphCosts) {
+        this(morphCosts, false);
     }
 
-    public MorphAbility(Card card, Costs<Cost> morphCosts, boolean megamorph) {
+    public MorphAbility(Costs<Cost> morphCosts, boolean megamorph) {
         super(Zone.HAND, null);
         this.morphCosts = morphCosts;
         this.megamorph = megamorph;

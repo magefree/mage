@@ -34,7 +34,7 @@ public final class FallenCleric extends CardImpl {
         // Protection from Clerics
         this.addAbility(new ProtectionAbility(filter));
         // Morph {4}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{B}")));
     }
 
     private FallenCleric(final FallenCleric card) {

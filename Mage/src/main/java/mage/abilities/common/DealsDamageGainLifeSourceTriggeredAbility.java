@@ -1,16 +1,12 @@
-
-
 package mage.abilities.common;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 
 /**
  *
@@ -20,7 +16,7 @@ import mage.players.Player;
 public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealsDamageGainLifeSourceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainThatMuchLifeEffect(), false);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
     }
 
     public DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
@@ -51,36 +47,5 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     @Override
     public String getTriggerPhrase() {
         return "Whenever {this} deals damage, " ;
-    }
-}
-
-class GainThatMuchLifeEffect extends OneShotEffect {
-
-    public GainThatMuchLifeEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public GainThatMuchLifeEffect(final GainThatMuchLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GainThatMuchLifeEffect copy() {
-        return new GainThatMuchLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                controller.gainLife(amount, game, source);
-
-            }
-            return true;
-        }
-        return false;
     }
 }

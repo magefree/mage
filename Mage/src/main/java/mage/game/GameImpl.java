@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -1130,6 +1131,9 @@ public abstract class GameImpl implements Game {
             return;
         }
 
+        // Apply shield counter mechanic from SNC
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new ShieldCounterEffect()), null);
+
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
         for (Player player : state.getPlayers().values()) {
@@ -1299,6 +1303,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
         newWatchers.add(new BlockingOrBlockedWatcher());
+        newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
 
         // runtime check - allows only GAME scope (one watcher per game)

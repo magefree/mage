@@ -117,4 +117,20 @@ public class DashTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Screamreach Brawler", 0);
         assertAbility(playerA, "Screamreach Brawler", HasteAbility.getInstance(), true);
     }
+
+    @Test
+    public void testWarbringerCostReduction() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Warbringer");
+        addCard(Zone.HAND, playerA, "Warbringer");
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warbringer");
+        setChoice(playerA, true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Warbringer", 2);
+        assertHandCount(playerA, "Warbringer", 0);
+    }
 }

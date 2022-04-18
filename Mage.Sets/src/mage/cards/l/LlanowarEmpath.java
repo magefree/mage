@@ -35,7 +35,7 @@ public final class LlanowarEmpath extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Llanowar Empath enters the battlefield, scry 2, then reveal the top card of your library. If it's a creature card, put it into your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(2, false));
         ability.addEffect(new LlanowarEmpathEffect());
         this.addAbility(ability);
     }

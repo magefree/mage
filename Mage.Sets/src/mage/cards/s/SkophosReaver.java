@@ -35,7 +35,7 @@ public final class SkophosReaver extends CardImpl {
         )));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private SkophosReaver(final SkophosReaver card) {

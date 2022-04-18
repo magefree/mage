@@ -30,7 +30,7 @@ public final class IreShaman extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Megamorph {R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}"), true));
 
         // When Ire Shaman is turned face up, exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), false));

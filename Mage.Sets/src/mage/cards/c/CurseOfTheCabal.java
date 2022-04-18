@@ -111,7 +111,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
         ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, "
-                        + "that player may sacrifice a permanent. If they do, "
+                        + "that player may sacrifice a permanent. If the player does, "
                         + "put two time counters on {this}."
         );
         // controller has to sac a permanent

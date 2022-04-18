@@ -45,7 +45,7 @@ public final class VenomspoutBrackus extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}")));
 
     }
 

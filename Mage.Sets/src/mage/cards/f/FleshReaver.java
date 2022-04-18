@@ -1,19 +1,17 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -47,7 +45,7 @@ public final class FleshReaver extends CardImpl {
 class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
 
     FleshReaverTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new FleshReaverEffect());
+        super(Zone.BATTLEFIELD, new DamageControllerEffect(SavedDamageValue.MUCH));
     }
 
     private FleshReaverTriggeredAbility(final FleshReaverTriggeredAbility effect) {
@@ -80,39 +78,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to a creature or opponent, {this} deals that much damage to you.";
-    }
-
-}
-
-class FleshReaverEffect extends OneShotEffect {
-
-    FleshReaverEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "{this} deals that much damage to you.";
-    }
-
-    private FleshReaverEffect(final FleshReaverEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FleshReaverEffect copy() {
-        return new FleshReaverEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent creature = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (creature == null || controller == null) {
-            return false;
-        }
-        int damageToDeal = (Integer) getValue("damage");
-        if (damageToDeal > 0) {
-            controller.damage(damageToDeal, source.getSourceId(), source, game);
-        }
-        return true;
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals damage to a creature or opponent, ";
     }
 }

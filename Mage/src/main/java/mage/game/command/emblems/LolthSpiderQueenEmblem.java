@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -25,7 +25,7 @@ public final class LolthSpiderQueenEmblem extends Emblem {
         this.setName("Emblem Lolth");
         this.setExpansionSetCodeForImage("AFR");
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(
+                new DealCombatDamageControlledTriggeredAbility(
                         Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), true, true
                 ), LolthSpiderQueenEmblemCondition.instance, "Whenever an opponent " +
                 "is dealt combat damage by one or more creatures you control, " +

@@ -28,7 +28,7 @@ public final class RecklessWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Madness {2}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{R}")));
     }
 
     private RecklessWurm(final RecklessWurm card) {

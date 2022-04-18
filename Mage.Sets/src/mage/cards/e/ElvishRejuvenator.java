@@ -2,26 +2,18 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
- * @author TheElk801
+ * @author awjackson
  */
 public final class ElvishRejuvenator extends CardImpl {
 
@@ -33,8 +25,11 @@ public final class ElvishRejuvenator extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Elvish Rejuvenator enters the battlefield, look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ElvishRejuvenatorEffect(), false));
+        // When Elvish Rejuvenator enters the battlefield, look at the top five cards of your library.
+        // You may put a land card from among them onto the battlefield tapped.
+        // Put the rest on the bottom of your library in a random order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                5, 1, StaticFilters.FILTER_CARD_LAND_A, PutCards.BATTLEFIELD_TAPPED, PutCards.BOTTOM_RANDOM)));
     }
 
     private ElvishRejuvenator(final ElvishRejuvenator card) {
@@ -44,51 +39,5 @@ public final class ElvishRejuvenator extends CardImpl {
     @Override
     public ElvishRejuvenator copy() {
         return new ElvishRejuvenator(this);
-    }
-}
-
-class ElvishRejuvenatorEffect extends OneShotEffect {
-
-    public ElvishRejuvenatorEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "look at the top five cards of your library. "
-                + "You may put a land card from among them onto the battlefield tapped. "
-                + "Put the rest on the bottom of your library in a random order";
-    }
-
-    public ElvishRejuvenatorEffect(final ElvishRejuvenatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 5));
-        if (!cards.isEmpty()) {
-            TargetCard target = new TargetCard(
-                    0, 1, Zone.LIBRARY,
-                    new FilterLandCard("land card to put on the battlefield")
-            );
-            if (controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
-                }
-            }
-            if (!cards.isEmpty()) {
-                controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public ElvishRejuvenatorEffect copy() {
-        return new ElvishRejuvenatorEffect(this);
     }
 }

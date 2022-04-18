@@ -29,7 +29,7 @@ public final class MarangRiverSkeleton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
 
         // Megamorph {3}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}"), true));
     }
 
     private MarangRiverSkeleton(final MarangRiverSkeleton card) {

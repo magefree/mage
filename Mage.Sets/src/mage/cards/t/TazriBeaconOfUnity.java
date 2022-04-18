@@ -7,8 +7,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.constants.SubType;
@@ -52,13 +52,9 @@ public final class TazriBeaconOfUnity extends CardImpl {
         ).addHint(PartyCountHint.instance));
 
         // {2/U}{2/B}{2/R}{2/G}: Look at the top six cards of your library. You may reveal up to two Cleric, Rogue, Warrior, Wizard, and/or Ally cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(6), false, StaticValue.get(2), filter, Zone.LIBRARY, false,
-                true, true, Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top six cards of your library. You may reveal up to two " +
-                "Cleric, Rogue, Warrior, Wizard, and/or Ally cards from among them and put them into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ), new ManaCostsImpl<>("{2/U}{2/B}{2/R}{2/G}")));
+        this.addAbility(new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(6, 2, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl<>("{2/U}{2/B}{2/R}{2/G}")));
     }
 
     private TazriBeaconOfUnity(final TazriBeaconOfUnity card) {

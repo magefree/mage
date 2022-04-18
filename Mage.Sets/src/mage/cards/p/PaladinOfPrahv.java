@@ -7,20 +7,19 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,13 +58,12 @@ public final class PaladinOfPrahv extends CardImpl {
 class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     
     public PaladinOfPrahvTriggeredAbility() {
-        super(new PaladinOfPrahvEffect(), Duration.EndOfTurn, false);
+        super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
     }
-    
+
     public PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
         super(ability);
     }
-    
 
     @Override
     public PaladinOfPrahvTriggeredAbility copy() {
@@ -93,40 +91,9 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
         }
         return false;
     }
-    
+
     @Override
     public String getTriggerPhrase() {
         return "Whenever target creature deals damage this turn, " ;
-    }
-}
-
-class PaladinOfPrahvEffect extends OneShotEffect {
-    
-    public PaladinOfPrahvEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-    
-    public PaladinOfPrahvEffect(final PaladinOfPrahvEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public PaladinOfPrahvEffect copy() {
-        return new PaladinOfPrahvEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                controller.gainLife(amount, game, source);
-                return true;
-            }
-            return true;
-        }
-        return false;
     }
 }

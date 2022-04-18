@@ -306,19 +306,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // Some spells and abilities specify that a player other than their controller chooses a mode for it.
             // In that case, the other player does so when the spell or ability's controller normally would do so.
             // If there is more than one other player who could make such a choice, the spell or ability's controller decides which of those players will make the choice.
-            UUID playerId = null;
+            UUID playerId;
             if (modeChooser == TargetController.OPPONENT) {
                 TargetOpponent targetOpponent = new TargetOpponent();
-                if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
-                    playerId = targetOpponent.getFirstTarget();
-                }
+                targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
+                playerId = targetOpponent.getFirstTarget();
             } else {
                 playerId = source.getControllerId();
             }
-            if (playerId == null) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
                 return false;
             }
-            Player player = game.getPlayer(playerId);
 
             // player chooses modes manually
             this.currentMode = null;
@@ -341,7 +340,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (isEachModeOnlyOnce()) {
                 setAlreadySelectedModes(source, game);
             }
-            return true;
+            if (modeChooser == TargetController.OPPONENT) {
+                selectedModes
+                        .stream()
+                        .map(this::get)
+                        .map(Mode::getEffects)
+                        .forEach(effects -> effects.setValue("choosingPlayer", playerId));
+            }
         } else {
             // only one mode available
             if (currentMode == null) {
@@ -350,8 +355,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 this.addSelectedMode(mode.getId());
                 this.setActiveMode(mode);
             }
-            return true;
         }
+        return true;
     }
 
     /**
@@ -468,20 +473,27 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (mayChooseNone) {
             sb.append("you may ");
         }
-        if (this.chooseText != null) {
-            sb.append(chooseText);
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
-            sb.append("choose up to one");
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose any number");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
-            sb.append("choose one or both");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose one or more");
-        } else if (this.getMinModes() == this.getMaxModes(null, null)) {
-            sb.append("choose " + CardUtil.numberToText(this.getMinModes()));
+        if (this.chooseText == null) {
+            if (modeChooser == TargetController.OPPONENT) {
+                sb.append("an opponent chooses ");
+            } else {
+                sb.append("choose ");
+            }
+            if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
+                sb.append("up to one");
+            } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
+                sb.append("any number");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
+                sb.append("one or both");
+            } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
+                sb.append("one or more");
+            } else if (this.getMinModes() == this.getMaxModes(null, null)) {
+                sb.append(CardUtil.numberToText(this.getMinModes()));
+            } else {
+                throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+            }
         } else {
-            throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+            sb.append(chooseText);
         }
 
         if (isEachModeOnlyOnce() && this.getMaxModesFilter() == null) {

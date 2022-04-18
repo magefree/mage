@@ -14,9 +14,9 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -73,11 +73,9 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
         // {1}{G}, {T}: Look at the top six cards of your library.
         // You may reveal a legendary creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(6), false, StaticValue.get(1), filter2,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false).setBackInRandomOrder(true), new ManaCostsImpl("{1}{G}")
-        );
+        ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(6, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.getLeftHalfCard().addAbility(ability);
 

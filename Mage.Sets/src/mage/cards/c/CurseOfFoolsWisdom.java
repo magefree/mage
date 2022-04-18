@@ -45,7 +45,7 @@ public final class CurseOfFoolsWisdom extends CardImpl {
         this.addAbility(new CurseOfFoolsWisdomTriggeredAbility());
 
         // Madness {3}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{B}")));
     }
 
     private CurseOfFoolsWisdom(final CurseOfFoolsWisdom card) {

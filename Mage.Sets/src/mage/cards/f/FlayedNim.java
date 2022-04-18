@@ -5,17 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -32,10 +28,13 @@ public final class FlayedNim extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Flayed Nim deals combat damage to a creature, that creature's controller loses that much life.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new FlayedNimEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
+                new LoseLifeTargetControllerEffect(SavedDamageValue.MUCH)
+                .setText("that creature's controller loses that much life"),
+                false, true));
 
         // {2}{B}: Regenerate Flayed Nim.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
     private FlayedNim(final FlayedNim card) {
@@ -45,37 +44,5 @@ public final class FlayedNim extends CardImpl {
     @Override
     public FlayedNim copy() {
         return new FlayedNim(this);
-    }
-}
-
-class FlayedNimEffect extends OneShotEffect {
-
-    FlayedNimEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "that creature's controller loses that much life";
-    }
-
-    FlayedNimEffect(final FlayedNimEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FlayedNimEffect copy() {
-        return new FlayedNimEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (creature == null) {
-            return false;
-        }
-        Player player = game.getPlayer(creature.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int damage = (int) this.getValue("damage");
-        player.loseLife(damage, game, source, false);
-        return true;
     }
 }

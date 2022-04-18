@@ -6,11 +6,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -28,11 +28,11 @@ public final class BrightwoodTracker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // {5}{G}, {T}: Look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                4, 1, StaticFilters.FILTER_CARD_CREATURE_A,
-                true, false, Zone.HAND, true
-        ).setBackInRandomOrder(true), new ManaCostsImpl("{5}{G}"));
+        // {5}{G}, {T}: Look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl("{5}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -617,7 +617,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{U}", true);
         runCode("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             long flashbackCount = player.getPlayable(game, true).stream()
-                    .filter(ability -> ability instanceof FlashbackAbility)
+                    .filter(FlashbackAbility.class::isInstance)
                     .count();
             Assert.assertEquals("must have only two playable abilities without duplicates", 2, flashbackCount);
         });

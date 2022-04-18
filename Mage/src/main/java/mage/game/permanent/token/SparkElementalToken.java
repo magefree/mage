@@ -15,7 +15,7 @@ import mage.constants.TargetController;
 public final class SparkElementalToken extends TokenImpl {
 
     public SparkElementalToken() {
-        super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental with trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");
+        super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental. It has trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

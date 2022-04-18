@@ -35,7 +35,7 @@ public final class FrontlineStrategist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
         // When Frontline Strategist is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true).setText("prevent all combat damage non-Soldier creatures would deal this turn")));
     }

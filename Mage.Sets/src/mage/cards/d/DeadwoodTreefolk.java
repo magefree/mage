@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class DeadwoodTreefolk extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
     static {
         filter.add(AnotherPredicate.instance);
     }

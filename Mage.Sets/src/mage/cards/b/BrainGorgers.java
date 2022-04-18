@@ -37,7 +37,7 @@ public final class BrainGorgers extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new BrainGorgersCounterSourceEffect()));
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private BrainGorgers(final BrainGorgers card) {

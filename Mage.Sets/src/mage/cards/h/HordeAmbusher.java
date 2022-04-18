@@ -45,7 +45,7 @@ public final class HordeAmbusher extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new DamageControllerEffect(1, "it"), false));
         
         // Morph - Reveal a red card in your hand.
-        this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
         
         // When Horde Ambusher is turned face up, target creature can't block this turn.
         Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);

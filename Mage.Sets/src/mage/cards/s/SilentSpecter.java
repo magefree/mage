@@ -31,7 +31,7 @@ public final class SilentSpecter extends CardImpl {
         // Whenever Silent Specter deals combat damage to a player, that player discards two cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(2), false, true));
         // Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}{B}")));
     }
 
     private SilentSpecter(final SilentSpecter card) {

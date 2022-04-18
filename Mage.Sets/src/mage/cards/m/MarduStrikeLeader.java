@@ -29,7 +29,7 @@ public final class MarduStrikeLeader extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new MarduStrikeLeaderWarriorToken()), false));
 
         // Dash {3}{B}
-        this.addAbility(new DashAbility(this, "{3}{B}"));
+        this.addAbility(new DashAbility("{3}{B}"));
     }
 
     private MarduStrikeLeader(final MarduStrikeLeader card) {

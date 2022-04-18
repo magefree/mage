@@ -1,10 +1,8 @@
 package mage.cards.g;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -20,8 +18,10 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author emerald000
  */
 public final class GripOfChaos extends CardImpl {
@@ -49,7 +49,7 @@ class GripOfChaosTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GripOfChaosEffect());
     }
 
-    GripOfChaosTriggeredAbility(final GripOfChaosTriggeredAbility ability) {
+    private GripOfChaosTriggeredAbility(final GripOfChaosTriggeredAbility ability) {
         super(ability);
     }
 
@@ -63,30 +63,32 @@ class GripOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (Effect effect : this.getEffects()) {
-            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            return true;
-        }
-        return false;
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+        return true;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        StackObject stackObject = null;
-        for (Effect effect : this.getEffects()) {
-            stackObject = game.getStack().getStackObject(effect.getTargetPointer().getFirst(game, this));
+        StackObject stackObject = this
+                .getEffects()
+                .stream()
+                .findFirst()
+                .filter(Objects::nonNull)
+                .map(Effect::getTargetPointer)
+                .map(tp -> tp.getFirst(game, this))
+                .map(game.getStack()::getStackObject)
+                .orElse(null);
+        if (stackObject == null) {
+            return false;
         }
-        if (stackObject != null) {
-            int numberOfTargets = 0;
-            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
-                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
-                for (Target target : mode.getTargets()) {
-                    numberOfTargets += target.getTargets().size();
-                }
-            }
-            return numberOfTargets == 1;
-        }
-        return false;
+        Modes modes = stackObject.getStackAbility().getModes();
+        return modes
+                .getSelectedModes()
+                .stream()
+                .map(modes::get)
+                .map(Mode::getTargets)
+                .mapToInt(ArrayList::size)
+                .sum() == 1;
     }
 
     @Override
@@ -107,7 +109,7 @@ class GripOfChaosEffect extends OneShotEffect {
         this.staticText = "reselect its target at random";
     }
 
-    GripOfChaosEffect(final GripOfChaosEffect effect) {
+    private GripOfChaosEffect(final GripOfChaosEffect effect) {
         super(effect);
     }
 
@@ -119,31 +121,30 @@ class GripOfChaosEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(this.getTargetPointer().getFirst(game, source));
-        if (stackObject != null) {
-            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
-                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
-                for (Target target : mode.getTargets()) {
-                    UUID oldTargetId = target.getFirstTarget();
-                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getControllerId(), source, game);
-                    if (possibleTargets.contains(stackObject.getId())) { // The stackObject can't target itself
-                        possibleTargets.remove(stackObject.getId());
-                    }
-                    if (!possibleTargets.isEmpty()) {
-                        int i = 0;
-                        int rnd = RandomUtil.nextInt(possibleTargets.size());
-                        Iterator<UUID> it = possibleTargets.iterator();
-                        while (i < rnd) {
-                            it.next();
-                            i++;
-                        }
-                        UUID newTargetId = it.next();
-                        target.remove(oldTargetId);
-                        target.add(newTargetId, game);
-                    }
-                }
-            }
-            return true;
+        if (stackObject == null) {
+            return false;
         }
-        return false;
+        Modes modes = stackObject.getStackAbility().getModes();
+        for (Target target : modes
+                .getSelectedModes()
+                .stream()
+                .map(modes::get)
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList())) {
+            UUID oldTargetId = target.getFirstTarget();
+            Set<UUID> possibleTargets = target.possibleTargets(
+                    stackObject.getControllerId(), stackObject.getStackAbility(), game
+            );
+            if (possibleTargets.contains(stackObject.getId())) { // The stackObject can't target itself
+                possibleTargets.remove(stackObject.getId());
+            }
+            if (!possibleTargets.isEmpty()) {
+                UUID newTargetId = RandomUtil.randomFromCollection(possibleTargets);
+                target.remove(oldTargetId);
+                target.add(newTargetId, game);
+            }
+        }
+        return true;
     }
 }

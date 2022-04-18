@@ -24,11 +24,10 @@ import java.util.UUID;
  */
 public class CreateTokenEffect extends OneShotEffect {
 
-    private Token token;
-    private DynamicValue amount;
-    private boolean tapped;
-    private boolean attacking;
-    private UUID lastAddedTokenId;
+    private final Token token;
+    private final DynamicValue amount;
+    private final boolean tapped;
+    private final boolean attacking;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
@@ -62,7 +61,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.token = effect.token.copy();
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
-        this.lastAddedTokenId = effect.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
     }
 
@@ -75,14 +73,9 @@ public class CreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
-        this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
 
         return true;
-    }
-
-    public UUID getLastAddedTokenId() {
-        return lastAddedTokenId;
     }
 
     public List<UUID> getLastAddedTokenIds() {

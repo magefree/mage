@@ -29,7 +29,7 @@ public final class SilumgarSpellEater extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Megamorph {4}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{U}"), true));
         
         // When Silumgar Spell-Eater is turned face up, counter target spell unless its controller pays {3}.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), false, false);

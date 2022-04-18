@@ -32,7 +32,7 @@ public final class AvenLiberator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
         // When Aven Liberator is turned face up, target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetControlledCreaturePermanent());

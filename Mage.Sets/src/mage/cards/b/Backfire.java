@@ -1,10 +1,8 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -32,11 +30,10 @@ public final class Backfire extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(new NumericSetToEffectValues("that much", "damage")), "enchanted creature", false, true, false, TargetController.YOU));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(SavedDamageValue.MUCH), "enchanted creature", false, true, false, TargetController.YOU));
     }
 
     private Backfire(final Backfire card) {

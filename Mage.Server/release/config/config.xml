@@ -115,6 +115,7 @@
         <draftCube name="Sam Black's No Search Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.SamBlacksCube"/>
         <draftCube name="Timothee Simonot's Twisted Color Pie Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.TimotheeSimonotsTwistedColorPieCube"/>
         <draftCube name="MTGA Cube 2020 April" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGACube2020April"/>
+        <draftCube name="MTGO Khans Expanded Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.KhansExpandedCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCube"/>
         <draftCube name="MTGO Legacy Cube 2015 March" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>

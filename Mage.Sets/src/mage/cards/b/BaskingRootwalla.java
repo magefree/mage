@@ -32,7 +32,7 @@ public final class BaskingRootwalla extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
 
         // Madness {0}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{0}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{0}")));
     }
 
     private BaskingRootwalla(final BaskingRootwalla card) {

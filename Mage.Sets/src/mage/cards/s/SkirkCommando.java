@@ -35,7 +35,7 @@ public final class SkirkCommando extends CardImpl {
         this.addAbility(new SkirkCommandoTriggeredAbility());
 
         //Morph {2}{R} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}")));
 
     }
 

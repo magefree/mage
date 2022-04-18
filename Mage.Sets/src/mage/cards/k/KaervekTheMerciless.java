@@ -51,7 +51,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
 
     public KaervekTheMercilessEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals damage to any target equal to that spell's mana value";
+        this.staticText = "{this} deals damage equal to that spell's mana value to any target";
     }
 
     public KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {

@@ -63,7 +63,7 @@ class ExtirpateEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.staticText = "Choose target card in a graveyard other than "
                 + "a basic land card. Search its owner's graveyard, hand, "
-                + "and library for any number of cards with the same name "
+                + "and library for all cards with the same name "
                 + "as that card and exile them. Then that player shuffles";
     }
 

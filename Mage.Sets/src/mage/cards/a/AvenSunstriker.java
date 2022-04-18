@@ -30,7 +30,7 @@ public final class AvenSunstriker extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Megamorph {4}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{W}"), true));
     }
 
     private AvenSunstriker(final AvenSunstriker card) {

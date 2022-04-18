@@ -23,7 +23,7 @@ public final class SandstormCharger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Megamorph {4}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{W}"), true));
     }
 
     private SandstormCharger(final SandstormCharger card) {

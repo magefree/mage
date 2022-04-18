@@ -29,7 +29,7 @@ public final class AtarkaEfreet extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Megamorph {2}{R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}"), true));
 
         // When Atarka Efreet is turned face up, it deals 1 damage to any target.
         Effect effect = new DamageTargetEffect(1, "it");

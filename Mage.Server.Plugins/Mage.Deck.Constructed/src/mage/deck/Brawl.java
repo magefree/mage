@@ -57,10 +57,10 @@ public class Brawl extends Constructed {
             Iterator<Card> iter = deck.getSideboard().iterator();
             Card card1 = iter.next();
             Card card2 = iter.next();
-            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            if (card1.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card1;
                 brawler = card2;
-            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            } else if (card2.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card2;
                 brawler = card1;
             } else {

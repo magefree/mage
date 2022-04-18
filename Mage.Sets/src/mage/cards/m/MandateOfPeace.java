@@ -117,11 +117,11 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
         combat.endCombat(game);
         if (!game.getStack().isEmpty()) {
             game.getStack().stream()
-                    .filter(stackObject -> stackObject instanceof Spell)
+                    .filter(Spell.class::isInstance)
                     .forEach(stackObject -> ((Spell) stackObject).moveToExile(null, "", null, game));
 
             game.getStack().stream()
-                    .filter(stackObject -> stackObject instanceof Ability)
+                    .filter(Ability.class::isInstance)
                     .forEach(stackObject -> game.getStack().remove(stackObject, game));
         }
         return true;

@@ -34,7 +34,7 @@ public final class DwarvenBlastminer extends CardImpl {
         this.addAbility(ability);
         
         // Morph {R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}")));
     }
 
     private DwarvenBlastminer(final DwarvenBlastminer card) {

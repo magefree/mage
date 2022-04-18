@@ -23,7 +23,7 @@ public final class TreespringLorian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}")));
     }
 
     private TreespringLorian(final TreespringLorian card) {

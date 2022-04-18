@@ -30,7 +30,7 @@ public final class RavenGuildMaster extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{U}")));
     }
 
     private RavenGuildMaster(final RavenGuildMaster card) {

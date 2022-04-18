@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,9 @@ public final class SatoruUmezawa extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn.
+        // Whenever you activate a ninjutsu ability, look at the top three cards of your library.
+        // Put one of them into your hand and the rest on the bottom of your library in any order.
+        // This ability triggers only once each turn.
         this.addAbility(new SatoruUmezawaTriggeredAbility());
 
         // Each creature card in your hand has ninjutsu {2}{U}{B}.
@@ -54,10 +56,7 @@ public final class SatoruUmezawa extends CardImpl {
 class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
     SatoruUmezawaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ));
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.setTriggersOnce(true);
     }
 
@@ -85,10 +84,8 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate a ninjutsu ability, look at the top three cards of your library. " +
-                "Put one of them into your hand and the rest on the bottom of your library in any order. " +
-                "This ability triggers only once each turn.";
+    public String getTriggerPhrase() {
+        return "Whenever you activate a ninjutsu ability, ";
     }
 }
 

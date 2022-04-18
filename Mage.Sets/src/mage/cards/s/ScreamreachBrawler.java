@@ -23,7 +23,7 @@ public final class ScreamreachBrawler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dash {1}{R}
-        this.addAbility(new DashAbility(this, "{1}{R}"));
+        this.addAbility(new DashAbility("{1}{R}"));
     }
 
     private ScreamreachBrawler(final ScreamreachBrawler card) {

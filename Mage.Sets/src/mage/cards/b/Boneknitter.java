@@ -40,7 +40,7 @@ public final class Boneknitter extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Morph {2}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}")));
     }
 
     private Boneknitter(final Boneknitter card) {

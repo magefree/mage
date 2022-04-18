@@ -20,7 +20,7 @@ public final class Vacuumelt extends CardImpl {
 
 
         // Replicate {2}{U}
-        this.addAbility(new ReplicateAbility(this, "{2}{U}"));
+        this.addAbility(new ReplicateAbility("{2}{U}"));
         // Return target creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

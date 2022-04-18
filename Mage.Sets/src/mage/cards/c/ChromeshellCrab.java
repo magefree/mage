@@ -34,7 +34,7 @@ public final class ChromeshellCrab extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{U}")));
         
         // When Chromeshell Crab is turned face up, you may exchange control of target creature you control and target creature an opponent controls.
         Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);

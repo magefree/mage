@@ -36,7 +36,7 @@ public final class SnappingThragg extends CardImpl {
         this.addAbility(new SnappingThraggTriggeredAbility());
 
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}")));
 
     }
 

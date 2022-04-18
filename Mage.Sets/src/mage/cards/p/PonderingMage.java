@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,9 +27,8 @@ public final class PonderingMage extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Pondering Mage enters the battlefield, look at the top three cards of your library, then put them back in any order. You may shuffle your library. Draw a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new LookLibraryControllerEffect(3, true, true)
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(3));
+        ability.addEffect(new ShuffleLibrarySourceEffect(true));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }

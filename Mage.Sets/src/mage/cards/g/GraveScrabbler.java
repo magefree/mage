@@ -26,7 +26,7 @@ public final class GraveScrabbler extends CardImpl {
         this.toughness = new MageInt(2);
 
         //Madness {1}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
 
         //When Grave Scrabbler enters the battlefield, if its madness cost was paid,
         //you may return target creature card from a graveyard to its owner's hand.

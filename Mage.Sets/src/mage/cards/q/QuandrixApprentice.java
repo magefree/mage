@@ -2,13 +2,12 @@ package mage.cards.q;
 
 import mage.MageInt;
 import mage.abilities.common.MagecraftAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -28,9 +27,7 @@ public final class QuandrixApprentice extends CardImpl {
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new MagecraftAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD_LAND_A,
-                Zone.LIBRARY, false, true, false, Zone.HAND, true
-        )));
+                3, 1, StaticFilters.FILTER_CARD_LAND_A, PutCards.HAND, PutCards.BOTTOM_ANY)));
     }
 
     private QuandrixApprentice(final QuandrixApprentice card) {

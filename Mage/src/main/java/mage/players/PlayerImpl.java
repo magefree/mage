@@ -1008,7 +1008,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (card.moveToZone(Zone.LIBRARY, source, game, true)
                         && !(card instanceof PermanentToken) && !card.isCopy()) {
                     Card cardInLib = getLibrary().getFromTop(game);
-                    if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
+                    if (cardInLib != null && cardInLib.getId().equals(card.getMainCard().getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
                         game.informPlayers((withName ? cardInLib.getLogName() : "A card")
@@ -3706,7 +3706,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         ManaOptions manaFull = availableMana.copy();
         if (ability instanceof SpellAbility) {
             for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
-                    .filter(a -> a instanceof AlternateManaPaymentAbility)
+                    .filter(AlternateManaPaymentAbility.class::isInstance)
                     .map(a -> (AlternateManaPaymentAbility) a)
                     .collect(Collectors.toList())) {
                 ManaOptions manaSpecial = altAbility.getManaOptions(ability, game, ability.getManaCostsToPay());
@@ -3739,7 +3739,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
             if (object.isLand(game)) {
-                playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
+                playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(PlayLandAbility.class::isInstance).findFirst().orElse(null);
             } else if (object instanceof Card) {
                 playAbility = ((Card) object).getSpellAbility();
             }

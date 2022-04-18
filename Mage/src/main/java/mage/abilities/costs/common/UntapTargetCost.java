@@ -1,29 +1,26 @@
-
 package mage.abilities.costs.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.costs.Cost;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class UntapTargetCost extends CostImpl {
 
-    TargetControlledPermanent target;
+    private final TargetControlledPermanent target;
 
     public UntapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.text = "Untap " + CardUtil.numberToText(target.getMaxNumberOfTargets(), "") + ' ' + target.getTargetName();
+        this.text = makeText(target);
     }
 
     public UntapTargetCost(final UntapTargetCost cost) {
@@ -33,14 +30,15 @@ public class UntapTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (target.choose(Outcome.Untap, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : (List<UUID>) target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
-                    return false;
-                }
-                paid |= permanent.untap(game);
+        if (!target.choose(Outcome.Untap, controllerId, source.getSourceId(), source, game)) {
+            return paid;
+        }
+        for (UUID targetId : target.getTargets()) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent == null) {
+                return false;
             }
+            paid |= permanent.untap(game);
         }
         return paid;
     }
@@ -55,4 +53,14 @@ public class UntapTargetCost extends CostImpl {
         return new UntapTargetCost(this);
     }
 
+    private static String makeText(TargetControlledPermanent target) {
+        StringBuilder sb = new StringBuilder("untap ");
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+            sb.append(target.getTargetName().replace("you control", "s you control"));
+        } else {
+            sb.append(CardUtil.addArticle(target.getTargetName()));
+        }
+        return sb.toString();
+    }
 }

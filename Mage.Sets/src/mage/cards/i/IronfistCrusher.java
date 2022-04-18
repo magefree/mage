@@ -30,7 +30,7 @@ public final class IronfistCrusher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
         
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
     }
 
     private IronfistCrusher(final IronfistCrusher card) {

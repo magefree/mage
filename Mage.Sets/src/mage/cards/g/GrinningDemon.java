@@ -28,7 +28,7 @@ public final class GrinningDemon extends CardImpl {
         // At the beginning of your upkeep, you lose 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
         // Morph {2}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}{B}")));
     }
 
     private GrinningDemon(final GrinningDemon card) {

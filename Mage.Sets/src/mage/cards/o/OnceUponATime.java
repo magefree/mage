@@ -3,15 +3,13 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
@@ -25,15 +23,6 @@ import java.util.UUID;
  */
 public final class OnceUponATime extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a creature or land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
     public OnceUponATime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
@@ -45,13 +34,7 @@ public final class OnceUponATime extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(5), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top five cards of your library. " +
-                "You may reveal a creature or land card from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ));
+                5, 1, StaticFilters.FILTER_CARD_CREATURE_OR_LAND, PutCards.HAND, PutCards.BOTTOM_RANDOM));
     }
 
     private OnceUponATime(final OnceUponATime card) {
