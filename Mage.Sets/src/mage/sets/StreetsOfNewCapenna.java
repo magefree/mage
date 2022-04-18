@@ -210,6 +210,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Sanguine Spy", 93, Rarity.RARE, mage.cards.s.SanguineSpy.class));
         cards.add(new SetCardInfo("Scuttling Butler", 244, Rarity.UNCOMMON, mage.cards.s.ScuttlingButler.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
+        cards.add(new SetCardInfo("Security Rhox", 220, Rarity.UNCOMMON, mage.cards.s.SecurityRhox.class));
         cards.add(new SetCardInfo("Sewer Crocodile", 60, Rarity.COMMON, mage.cards.s.SewerCrocodile.class));
         cards.add(new SetCardInfo("Shadow of Mortality", 94, Rarity.RARE, mage.cards.s.ShadowOfMortality.class));
         cards.add(new SetCardInfo("Shakedown Heavy", 95, Rarity.RARE, mage.cards.s.ShakedownHeavy.class));
