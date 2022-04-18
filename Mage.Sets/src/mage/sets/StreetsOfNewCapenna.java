@@ -170,6 +170,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Ognis, the Dragon's Lash", 210, Rarity.RARE, mage.cards.o.OgnisTheDragonsLash.class));
         cards.add(new SetCardInfo("Ominous Parcel", 241, Rarity.COMMON, mage.cards.o.OminousParcel.class));
         cards.add(new SetCardInfo("Out of the Way", 52, Rarity.UNCOMMON, mage.cards.o.OutOfTheWay.class));
+        cards.add(new SetCardInfo("Paragon of Modernity", 242, Rarity.COMMON, mage.cards.p.ParagonOfModernity.class));
         cards.add(new SetCardInfo("Park Heights Pegasus", 211, Rarity.RARE, mage.cards.p.ParkHeightsPegasus.class));
         cards.add(new SetCardInfo("Patch Up", 23, Rarity.UNCOMMON, mage.cards.p.PatchUp.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
