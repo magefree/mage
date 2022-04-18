@@ -82,7 +82,7 @@ class SmokeSpiritsAidEffect extends OneShotEffect {
                 if (aura == null) {
                     continue;
                 }
-                aura.getAbilities().get(0).getTargets().get(0).add(source.getFirstTarget(), game);
+                aura.getAbilities().get(0).getTargets().get(0).add(targetId, game);
                 aura.getAbilities().get(0).getEffects().get(0).apply(game, aura.getAbilities().get(0));
             }
         }
