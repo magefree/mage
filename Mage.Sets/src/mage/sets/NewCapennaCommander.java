@@ -24,6 +24,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         super("New Capenna Commander", "NCC", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Angelic Sleuth", 113, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Damning Verdict", 15, Rarity.RARE, mage.cards.d.DamningVerdict.class));
         cards.add(new SetCardInfo("Extravagant Replication", 25, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
