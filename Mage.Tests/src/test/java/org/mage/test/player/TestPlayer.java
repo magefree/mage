@@ -2461,7 +2461,7 @@ public class TestPlayer implements Player {
             }
 
             // card in battlefield
-            if (target instanceof TargetCardInGraveyardOrBattlefield) {
+            if (target instanceof TargetCardInGraveyardBattlefieldOrStack) {
                 TargetCard targetFull = (TargetCard) target;
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
@@ -2489,7 +2489,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInGraveyard
-                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield
+                    || target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.GRAVEYARD)) {
                 targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
