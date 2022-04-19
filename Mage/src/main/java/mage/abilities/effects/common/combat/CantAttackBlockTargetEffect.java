@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -9,12 +10,10 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-
 public class CantAttackBlockTargetEffect extends RestrictionEffect {
 
     public CantAttackBlockTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Target creature can't attack or block this turn";
     }
 
     public CantAttackBlockTargetEffect(final CantAttackBlockTargetEffect effect) {
@@ -41,4 +40,17 @@ public class CantAttackBlockTargetEffect extends RestrictionEffect {
         return new CantAttackBlockTargetEffect(this);
     }
 
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder("target creature can't attack or block ");
+        if (duration == Duration.EndOfTurn) {
+            sb.append("this turn");
+        } else {
+            sb.append(duration);
+        }
+        return sb.toString();
+    }
 }
