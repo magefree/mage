@@ -218,6 +218,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Sewer Crocodile", 60, Rarity.COMMON, mage.cards.s.SewerCrocodile.class));
         cards.add(new SetCardInfo("Shadow of Mortality", 94, Rarity.RARE, mage.cards.s.ShadowOfMortality.class));
         cards.add(new SetCardInfo("Shakedown Heavy", 95, Rarity.RARE, mage.cards.s.ShakedownHeavy.class));
+        cards.add(new SetCardInfo("Shattered Seraph", 221, Rarity.COMMON, mage.cards.s.ShatteredSeraph.class));
         cards.add(new SetCardInfo("Sizzling Soloist", 123, Rarity.UNCOMMON, mage.cards.s.SizzlingSoloist.class));
         cards.add(new SetCardInfo("Sky Crier", 31, Rarity.COMMON, mage.cards.s.SkyCrier.class));
         cards.add(new SetCardInfo("Skybridge Towers", 256, Rarity.COMMON, mage.cards.s.SkybridgeTowers.class));
