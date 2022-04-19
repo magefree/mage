@@ -27,9 +27,8 @@ public final class GraniteShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(1),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
-                        new CompositeCost(new ManaCostsImpl<>("{R}"), new TapSourceCost(), "{R}, {T}"),
-                        "{3}, {T} or {R}, {T}"
+                        "{3}, {T} or {R}, {T}", new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{R}"), new TapSourceCost(), "{R}, {T}")
                 )
         );
         ability.addTarget(new TargetAnyTarget());

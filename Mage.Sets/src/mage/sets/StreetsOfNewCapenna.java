@@ -93,6 +93,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Dig Up the Body", 76, Rarity.COMMON, mage.cards.d.DigUpTheBody.class));
         cards.add(new SetCardInfo("Disciplined Duelist", 182, Rarity.UNCOMMON, mage.cards.d.DisciplinedDuelist.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 39, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
+        cards.add(new SetCardInfo("Dusk Mangler", 77, Rarity.UNCOMMON, mage.cards.d.DuskMangler.class));
         cards.add(new SetCardInfo("Echo Inspector", 40, Rarity.COMMON, mage.cards.e.EchoInspector.class));
         cards.add(new SetCardInfo("Elegant Entourage", 143, Rarity.UNCOMMON, mage.cards.e.ElegantEntourage.class));
         cards.add(new SetCardInfo("Elspeth Resplendent", 11, Rarity.MYTHIC, mage.cards.e.ElspethResplendent.class));

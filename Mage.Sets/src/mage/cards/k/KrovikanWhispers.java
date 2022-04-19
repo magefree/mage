@@ -42,7 +42,7 @@ public final class KrovikanWhispers extends CardImpl {
         this.addAbility(ability);
 
         // Cumulative upkeep-Pay {U} or {B}.
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost(new ManaCostsImpl("{U}"), new ManaCostsImpl("{B}"), "{U} or {B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new OrCost("{U} or {B}", new ManaCostsImpl("{U}"), new ManaCostsImpl("{B}"))));
 
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));

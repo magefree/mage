@@ -34,9 +34,8 @@ public final class CrystalShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CrystalShardEffect(),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
-                        new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}"),
-                        "{3}, {T} or {U}, {T}"
+                        "{3}, {T} or {U}, {T}", new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}")
                 )
         );
         ability.addTarget(new TargetCreaturePermanent());

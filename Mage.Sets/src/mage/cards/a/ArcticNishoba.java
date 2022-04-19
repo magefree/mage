@@ -37,9 +37,8 @@ public final class ArcticNishoba extends CardImpl {
 
         // Cumulative upkeep {G} or {W}
         this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{G}"),
-                new ManaCostsImpl("{W}"),
-                "{G} or {W}"
+                "{G} or {W}", new ManaCostsImpl("{G}"),
+                new ManaCostsImpl("{W}")
         )));
 
         // When Arctic Nishoba dies, you gain 2 life for each age counter on it.

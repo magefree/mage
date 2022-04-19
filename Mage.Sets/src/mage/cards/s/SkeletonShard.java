@@ -35,9 +35,8 @@ public final class SkeletonShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
-                        new CompositeCost(new ManaCostsImpl<>("{B}"), new TapSourceCost(), "{B}, {T}"),
-                        "{3}, {T} or {B}, {T}"
+                        "{3}, {T} or {B}, {T}", new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{B}"), new TapSourceCost(), "{B}, {T}")
                 )
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));

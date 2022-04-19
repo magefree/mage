@@ -33,8 +33,8 @@ public final class FinalPayment extends CardImpl {
         final Cost lifeCost = new PayLifeCost(5);
         final Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(filter));
 
-        this.getSpellAbility().addCost(new OrCost(lifeCost, sacrificeCost,
-                "pay 5 life or sacrifice a creature or enchantment"));
+        this.getSpellAbility().addCost(new OrCost("pay 5 life or sacrifice a creature or enchantment", lifeCost, sacrificeCost
+        ));
 
         // Destroy target creature
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

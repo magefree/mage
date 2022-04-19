@@ -40,7 +40,7 @@ public final class ThrullWizard extends CardImpl {
         this.toughness = new MageInt(1);
         
         // {1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}.
-        Cost cost = new OrCost(new ColoredManaCost(ColoredManaSymbol.B), new GenericManaCost(3), "pay {B} or pay {3}");
+        Cost cost = new OrCost("pay {B} or pay {3}", new ColoredManaCost(ColoredManaSymbol.B), new GenericManaCost(3));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), new ManaCostsImpl("{1}{B}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

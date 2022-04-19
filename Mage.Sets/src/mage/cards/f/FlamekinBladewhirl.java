@@ -34,9 +34,9 @@ public final class FlamekinBladewhirl extends CardImpl {
 
         // As an additional cost to cast Flamekin Bladewhirl, reveal an Elemental card from your hand or pay {3}.
         this.getSpellAbility().addCost(new OrCost(
-                new RevealTargetFromHandCost(new TargetCardInHand(filter)),
-                new GenericManaCost(3),
-                "reveal an Elemental card from your hand or pay {3}"));
+                "reveal an Elemental card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
+                new GenericManaCost(3)
+        ));
     }
 
     private FlamekinBladewhirl(final FlamekinBladewhirl card) {

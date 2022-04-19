@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +41,6 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
         this.amount = amount;
         this.filter = filter.copy();
         this.filter.add(TargetController.YOU.getControllerPredicate());
-        setText();
     }
 
     public SacrificeOpponentsEffect(final SacrificeOpponentsEffect effect) {
@@ -79,7 +79,11 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
         return true;
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("each opponent sacrifices ");
         switch (amount.toString()) {
@@ -92,6 +96,6 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
             default:
                 sb.append(CardUtil.numberToText(amount.toString())).append(' ').append(filter.getMessage());
         }
-        staticText = sb.toString();
+        return sb.toString();
     }
 }

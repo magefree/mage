@@ -1,32 +1,32 @@
-
 package mage.abilities.costs;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Targets;
 
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class OrCost implements Cost {
 
-    private final Cost firstCost;
-    private final Cost secondCost;
+    private final List<Cost> costs = new ArrayList<>();
     private String description;
     // which cost was slected to pay
     private Cost selectedCost;
 
-    public OrCost(Cost firstCost, Cost secondCost, String description) {
-        this.firstCost = firstCost;
-        this.secondCost = secondCost;
+    public OrCost(String description, Cost... costs) {
+        Collections.addAll(this.costs, costs);
         this.description = description;
     }
 
     public OrCost(final OrCost cost) {
-        this.firstCost = cost.firstCost.copy();
-        this.secondCost = cost.secondCost.copy();
+        cost.costs.stream().map(Cost::copy).forEach(this.costs::add);
         this.description = cost.description;
         this.selectedCost = cost.selectedCost;
     }
@@ -49,7 +49,7 @@ public class OrCost implements Cost {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return firstCost.canPay(ability, source, controllerId, game) || secondCost.canPay(ability, source, controllerId, game);
+        return costs.stream().anyMatch(cost -> cost.canPay(ability, source, controllerId, game));
     }
 
     @Override
@@ -60,28 +60,47 @@ public class OrCost implements Cost {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         selectedCost = null;
-        // if only one can be paid select it
-        if (!firstCost.canPay(ability, source, controllerId, game)) {
-            selectedCost = secondCost;
+        List<Cost> usable = costs
+                .stream()
+                .filter(cost -> cost.canPay(ability, source, controllerId, game))
+                .collect(Collectors.toList());
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
         }
-        if (!secondCost.canPay(ability, source, controllerId, game)) {
-            selectedCost = firstCost;
-        }
-        // if both can be paid player has to select
-        if (selectedCost == null) {
-            Player controller = game.getPlayer(controllerId);
-            if (controller != null) {
+        switch (usable.size()) {
+            case 0:
+                return false;
+            case 1:
+                selectedCost = usable.get(0);
+                break;
+            case 2:
                 StringBuilder sb = new StringBuilder();
-                if (firstCost instanceof ManaCost) {
+                if (usable.get(0) instanceof ManaCost) {
                     sb.append("Pay ");
                 }
-                sb.append(firstCost.getText()).append('?');
-                if (controller.chooseUse(Outcome.Detriment, sb.toString(), ability, game)) {
-                    selectedCost = firstCost;
+                sb.append(usable.get(0).getText());
+                sb.append(" or ");
+                sb.append(usable.get(1));
+                sb.append('?');
+                if (controller.chooseUse(
+                        Outcome.Detriment, sb.toString(), null,
+                        usable.get(0).getText(), usable.get(1).getText(), ability, game
+                )) {
+                    selectedCost = usable.get(0);
                 } else {
-                    selectedCost = secondCost;
+                    selectedCost = usable.get(1);
                 }
-            }
+                break;
+            default:
+                Map<String, Cost> costMap = usable
+                        .stream()
+                        .collect(Collectors.toMap(Cost::getText, Function.identity()));
+                Choice choice = new ChoiceImpl(true);
+                choice.setMessage("Choose a cost to pay");
+                choice.setChoices(costMap.keySet());
+                controller.choose(Outcome.Neutral, choice, game);
+                selectedCost = costMap.getOrDefault(choice.getChoice(), null);
         }
         if (selectedCost == null) {
             return false;
@@ -92,17 +111,13 @@ public class OrCost implements Cost {
 
     @Override
     public boolean isPaid() {
-        if (selectedCost != null) {
-            return selectedCost.isPaid();
-        }
-        return false;
+        return selectedCost != null ? selectedCost.isPaid() : false;
     }
 
     @Override
     public void clearPaid() {
         selectedCost = null;
-        firstCost.clearPaid();
-        secondCost.clearPaid();
+        costs.stream().forEach(Cost::clearPaid);
     }
 
     @Override
