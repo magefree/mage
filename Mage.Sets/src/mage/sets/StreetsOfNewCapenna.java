@@ -116,6 +116,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Getaway Car", 237, Rarity.RARE, mage.cards.g.GetawayCar.class));
         cards.add(new SetCardInfo("Gilded Pinions", 238, Rarity.COMMON, mage.cards.g.GildedPinions.class));
         cards.add(new SetCardInfo("Girder Goons", 80, Rarity.COMMON, mage.cards.g.GirderGoons.class));
+        cards.add(new SetCardInfo("Glamorous Outlaw", 190, Rarity.COMMON, mage.cards.g.GlamorousOutlaw.class));
         cards.add(new SetCardInfo("Glittering Stockpile", 107, Rarity.UNCOMMON, mage.cards.g.GlitteringStockpile.class));
         cards.add(new SetCardInfo("Glittermonger", 149, Rarity.COMMON, mage.cards.g.Glittermonger.class));
         cards.add(new SetCardInfo("Goldhound", 108, Rarity.COMMON, mage.cards.g.Goldhound.class));
