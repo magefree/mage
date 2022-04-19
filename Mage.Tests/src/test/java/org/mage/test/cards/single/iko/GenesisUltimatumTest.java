@@ -30,7 +30,7 @@ public class GenesisUltimatumTest extends CardTestPlayerBase {
 
         // cast spell and put 3 cards to battle
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Genesis Ultimatum");
-        setChoice(playerA, "Grizzly Bears^Kitesail Corsair^Riverglide Pathway");
+        addTarget(playerA, "Grizzly Bears^Kitesail Corsair^Riverglide Pathway");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

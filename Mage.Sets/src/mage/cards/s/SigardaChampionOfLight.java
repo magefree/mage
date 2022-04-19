@@ -5,8 +5,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -51,12 +51,11 @@ public final class SigardaChampionOfLight extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter
         )));
 
-        // Coven — Whenever Sigarda attacks, if you control three or more creatures with different powers, look at the top five cards of your library. You may reveal a Human creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+        // Coven — Whenever Sigarda attacks, if you control three or more creatures with different powers,
+        // look at the top five cards of your library. You may reveal a Human creature card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1), filter2,
-                        Zone.LIBRARY, false, true, false, Zone.HAND, true
-                ).setBackInRandomOrder(true)), CovenCondition.instance, "Whenever {this} attacks, " +
+                new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM)), CovenCondition.instance, "Whenever {this} attacks, " +
                 "if you control three or more creatures with different powers, look at the top five cards " +
                 "of your library. You may reveal a Human creature card from among them and put it into your hand. " +
                 "Put the rest on the bottom of your library in a random order."

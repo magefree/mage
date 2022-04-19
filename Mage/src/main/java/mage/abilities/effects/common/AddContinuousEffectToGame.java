@@ -2,10 +2,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -18,7 +19,6 @@ public class AddContinuousEffectToGame extends OneShotEffect {
     public AddContinuousEffectToGame(ContinuousEffect effect) {
         super(Outcome.Benefit);
         this.effect = effect;
-        this.staticText = effect.getText(null);
     }
 
     public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
@@ -35,5 +35,10 @@ public class AddContinuousEffectToGame extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.addEffect(effect, source);
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return effect.getText(mode);
     }
 }

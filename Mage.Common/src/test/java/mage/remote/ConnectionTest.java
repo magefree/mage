@@ -72,7 +72,7 @@ public class ConnectionTest {
         void serialisation() {
             final String query = make(testeeBuilder).getQuery();
 
-            assertThat(query).contains("serializationtype=jboss");
+            assertThat(query).contains("serializationtype=java");
         }
 
         @Test

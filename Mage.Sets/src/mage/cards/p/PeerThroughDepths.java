@@ -1,9 +1,7 @@
-
-
 package mage.cards.p;
 
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,10 +29,9 @@ public final class PeerThroughDepths extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
         this.subtype.add(SubType.ARCANE);
 
-
         // Look at the top five cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. 
         // Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), filter, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
     public PeerThroughDepths (final PeerThroughDepths card) {
@@ -45,6 +42,4 @@ public final class PeerThroughDepths extends CardImpl {
     public PeerThroughDepths copy() {
         return new PeerThroughDepths(this);
     }
-
 }
-

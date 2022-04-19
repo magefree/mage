@@ -2,13 +2,12 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -35,12 +34,7 @@ public final class AjanisInfluence extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal a white card form among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(5), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("<br>Look at the top five cards of your library. "
-                + "You may reveal a white card from among them and put it into your hand. "
-                + "Put the rest on the bottom of your library in a random order.")
-        );
+                5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM).concatBy("<br>"));
     }
 
     private AjanisInfluence(final AjanisInfluence card) {

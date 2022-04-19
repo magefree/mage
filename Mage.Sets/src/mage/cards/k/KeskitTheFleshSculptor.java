@@ -5,16 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -48,11 +46,11 @@ public final class KeskitTheFleshSculptor extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {T}, Sacrifice three other artifacts and/or creatures: Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard.
-        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(2), StaticFilters.FILTER_CARD,
-                Zone.GRAVEYARD, false, false
-        ), new TapSourceCost());
+        // {T}, Sacrifice three other artifacts and/or creatures: Look at the top three cards of your library.
+        // Put two of them into your hand and the other into your graveyard.
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(3, 2, PutCards.HAND, PutCards.GRAVEYARD),
+                new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
         this.addAbility(ability);
 

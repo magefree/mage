@@ -9,8 +9,8 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -43,10 +42,9 @@ public final class SoulcipherBoard extends CardImpl {
         ));
 
         // {1}{U}, {T}: Look at the top two cards of your library. Put one of them into your graveyard.
-        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(2), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
-                Zone.LIBRARY, true, false, false, Zone.GRAVEYARD, false
-        ).setText("look at the top two cards of your library. Put one of them into your graveyard"), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.GRAVEYARD, PutCards.TOP_ANY),
+                new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

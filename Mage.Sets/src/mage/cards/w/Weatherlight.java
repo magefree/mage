@@ -1,10 +1,9 @@
-
 package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
@@ -40,14 +38,12 @@ public final class Weatherlight extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Weatherlight deals combat damage to a player, look at the top five cards of your library. You may reveal a historic card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // Whenever Weatherlight deals combat damage to a player, look at the top five cards of your library.
+        // You may reveal a historic card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1), filter,
-                        Zone.LIBRARY, false, true, false, Zone.HAND,
-                        true, false, false
-                ).setBackInRandomOrder(true), false
-        ));
+                new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                false));
 
         // Crew 3
         this.addAbility(new CrewAbility(3));

@@ -1,25 +1,26 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -27,10 +28,12 @@ import mage.target.TargetCard;
  */
 public final class HeroesPodium extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each legendary creature");
+    private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
+        filter2.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
@@ -38,15 +41,16 @@ public final class HeroesPodium extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
-        DynamicValue xValue = new HeroesPodiumLegendaryCount();
-        Effect effect = new BoostControlledEffect(xValue, xValue, Duration.WhileOnBattlefield, filter, false);
-        effect.setText("Each legendary creature you control gets +1/+1 for each other legendary creature you control");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        // {X}, {T}: Look at the top X cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeroesPodiumEffect(), new ManaCostsImpl("{X}"));
+        this.addAbility(new SimpleStaticAbility(
+                new BoostControlledEffect(HeroesPodiumValue.instance, HeroesPodiumValue.instance, Duration.WhileOnBattlefield, filter, false)));
+        // {X}, {T}: Look at the top X cards of your library.
+        // You may reveal a legendary creature card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     private HeroesPodium(final HeroesPodium card) {
@@ -59,7 +63,8 @@ public final class HeroesPodium extends CardImpl {
     }
 }
 
-class HeroesPodiumLegendaryCount implements DynamicValue {
+enum HeroesPodiumValue implements DynamicValue {
+    instance;
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other legendary creature you control");
 
@@ -69,16 +74,12 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int value = game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
-        if (value > 0) {
-            value--;
-        }
-        return value;
+        return Math.max(game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game) - 1, 0);
     }
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 
     @Override
@@ -87,64 +88,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
     }
 
     @Override
-    public HeroesPodiumLegendaryCount copy() {
-        return new HeroesPodiumLegendaryCount();
-    }
-}
-
-class HeroesPodiumEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a legendary creature card");
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-    }
-
-    public HeroesPodiumEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top X cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order";
-    }
-
-    public HeroesPodiumEffect(final HeroesPodiumEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HeroesPodiumEffect copy() {
-        return new HeroesPodiumEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
-        boolean legendaryIncluded = cards.count(filter, game) > 0;
-        controller.lookAtCards(sourceObject.getIdName(), cards, game);
-
-        // You may reveal a legendary creature card from among them and put it into your hand.
-        if (!cards.isEmpty() && legendaryIncluded && controller.chooseUse(outcome, "Put a legendary creature card into your hand?", source, game)) {
-            if (cards.size() == 1) {
-                controller.moveCards(cards, Zone.HAND, source, game);
-                return true;
-            } else {
-                TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (controller.choose(outcome, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
-                }
-            }
-        }
-
-        // Put the rest on the bottom of your library in a random order
-        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        return true;
+    public HeroesPodiumValue copy() {
+        return instance;
     }
 }

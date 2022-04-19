@@ -4,14 +4,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
@@ -36,10 +35,7 @@ public final class IngeniousSmith extends CardImpl {
         // You may reveal an artifact card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(1), StaticFilters.FILTER_CARD_ARTIFACT_AN,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false).setBackInRandomOrder(true)
-        ));
+                4, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_RANDOM)));
 
         // Whenever one or more artifacts enter the battlefield under your control, put a +1/+1 counter on Ingenious Smith.
         // This ability triggers only once each turn.

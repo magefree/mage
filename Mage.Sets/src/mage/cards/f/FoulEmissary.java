@@ -1,20 +1,19 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.EldraziHorrorToken;
@@ -26,12 +25,6 @@ import mage.game.stack.Spell;
  */
 public final class FoulEmissary extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a creature card");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
-
     public FoulEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add(SubType.HUMAN);
@@ -40,7 +33,8 @@ public final class FoulEmissary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Foul Emissary enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filter, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_ANY)));
 
         // When you sacrifice Foul Emissary while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.
         this.addAbility(new FoulEmissaryTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
