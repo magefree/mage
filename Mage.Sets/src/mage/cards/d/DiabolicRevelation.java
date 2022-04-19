@@ -57,8 +57,13 @@ class DiabolicRevelationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        int xValue = source.getManaCostsToPay().getX();
+        if (xValue < 1) {
+            player.shuffleLibrary(source, game);
+            return true;
+        }
         TargetCardInLibrary target = new TargetCardInLibrary(
-                0, source.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD
+                0, xValue, StaticFilters.FILTER_CARD
         );
         player.searchLibrary(target, source, game);
         Cards cards = new CardsImpl();
