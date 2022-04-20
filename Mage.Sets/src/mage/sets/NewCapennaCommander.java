@@ -115,6 +115,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Extravagant Replication", 25, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Fact or Fiction", 221, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 338, Rarity.RARE, mage.cards.f.FallenShinobi.class));
+        cards.add(new SetCardInfo("False Floor", 82, Rarity.RARE, mage.cards.f.FalseFloor.class));
         cards.add(new SetCardInfo("Farseek", 290, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fathom Mage", 339, Rarity.RARE, mage.cards.f.FathomMage.class));
         cards.add(new SetCardInfo("Feed the Swarm", 250, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
