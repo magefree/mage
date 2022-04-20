@@ -931,7 +931,7 @@
 |Generate|TOK:MMA|Bat|||BatToken|
 |Generate|TOK:MMA|Dragon|||DragonToken|
 |Generate|TOK:MMA|Elemental|||WalkerOfTheGroveToken|
-|Generate|TOK:MMA|Faerie Rogue|||OonaQueenFaerieToken|
+|Generate|TOK:MMA|Faerie Rogue|||OonaQueenFaerieRogueToken|
 |Generate|TOK:MMA|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MMA|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:MMA|Goblin|||GoblinToken|
@@ -1084,7 +1084,7 @@
 |Generate|TOK:SHM|Elemental|2||RedElementalToken|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
 |Generate|TOK:SHM|Elf Warrior|2||GreenWhiteElfWarriorToken|
-|Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieToken|
+|Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieRogueToken|
 |Generate|TOK:SHM|Giant Warrior|||GiantBaitingGiantWarriorToken|
 |Generate|TOK:SHM|Goblin Warrior|||WortTheRaidmotherToken|
 |Generate|TOK:SHM|Kithkin Soldier|||KithkinSoldierToken|

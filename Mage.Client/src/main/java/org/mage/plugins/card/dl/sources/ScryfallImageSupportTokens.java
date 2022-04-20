@@ -749,18 +749,18 @@ public class ScryfallImageSupportTokens {
             put ("MMA/Zombie", "https://api.scryfall.com/cards/tmma/8/en?format=image");
 
             // SHM
-            put ("MMA/Elemental/1", "https://api.scryfall.com/cards/tshm/9/en?format=image"); // black, red
-            put ("MMA/Elemental/2", "https://api.scryfall.com/cards/tshm/4/en?format=image"); // haste
-            put ("MMA/Elf Warrior/1", "https://api.scryfall.com/cards/tshm/5/en?format=image"); // green
-            put ("MMA/Elf Warrior/2", "https://api.scryfall.com/cards/tshm/12/en?format=image"); // white, green
-            put ("MMA/Faerie Rogue", "https://api.scryfall.com/cards/tshm/8/en?format=image");
-            put ("MMA/Giant Warrior", "https://api.scryfall.com/cards/tshm/10/en?format=image");
-            put ("MMA/Goblin Warrior", "https://api.scryfall.com/cards/tshm/11/en?format=image");
-            put ("MMA/Kithkin Soldier", "https://api.scryfall.com/cards/tshm/1/en?format=image");
-            put ("MMA/Rat", "https://api.scryfall.com/cards/tshm/3/en?format=image");
-            put ("MMA/Spider", "https://api.scryfall.com/cards/tshm/6/en?format=image");
-            put ("MMA/Spirit", "https://api.scryfall.com/cards/tshm/2/en?format=image");
-            put ("MMA/Wolf", "https://api.scryfall.com/cards/tshm/7/en?format=image");
+            put ("SHM/Elemental/1", "https://api.scryfall.com/cards/tshm/9/en?format=image"); // black, red
+            put ("SHM/Elemental/2", "https://api.scryfall.com/cards/tshm/4/en?format=image"); // haste
+            put ("SHM/Elf Warrior/1", "https://api.scryfall.com/cards/tshm/5/en?format=image"); // green
+            put ("SHM/Elf Warrior/2", "https://api.scryfall.com/cards/tshm/12/en?format=image"); // white, green
+            put ("SHM/Faerie Rogue", "https://api.scryfall.com/cards/tshm/8/en?format=image");
+            put ("SHM/Giant Warrior", "https://api.scryfall.com/cards/tshm/10/en?format=image");
+            put ("SHM/Goblin Warrior", "https://api.scryfall.com/cards/tshm/11/en?format=image");
+            put ("SHM/Kithkin Soldier", "https://api.scryfall.com/cards/tshm/1/en?format=image");
+            put ("SHM/Rat", "https://api.scryfall.com/cards/tshm/3/en?format=image");
+            put ("SHM/Spider", "https://api.scryfall.com/cards/tshm/6/en?format=image");
+            put ("SHM/Spirit", "https://api.scryfall.com/cards/tshm/2/en?format=image");
+            put ("SHM/Wolf", "https://api.scryfall.com/cards/tshm/7/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
