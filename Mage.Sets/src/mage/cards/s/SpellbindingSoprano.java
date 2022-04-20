@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -32,6 +33,8 @@ public final class SpellbindingSoprano extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // Whenever Spellbinding Soprano attacks, instant and sorcery spells you cast this turn cost {1} less to cast.
         this.addAbility(new AttacksTriggeredAbility(new SpellsCostReductionControllerEffect(filter, 1)));
