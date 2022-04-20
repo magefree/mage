@@ -33,8 +33,8 @@ public final class MirrorhallMimic extends CardImpl {
         // You may have Mirrorhall Mimic enter the battlefield as a copy of any creature on the battlefield, except it's a Spirit in addition to its other types.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE, new MirrorhallMimicApplier()
-        ), true, null, "You may have {this} enter the battlefield as a copy of " +
-                "any creature on the battlefield, except it's a Spirit in addition to its other types.", null));
+        ), true, null, "You may have {this} enter the battlefield as a copy of "
+                + "any creature on the battlefield, except it's a Spirit in addition to its other types.", null));
 
         // Disturb {3}{U}{U}
         this.addAbility(new DisturbAbility(this, "{3}{U}{U}"));
@@ -54,9 +54,7 @@ class MirrorhallMimicApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-        if (!blueprint.hasSubtype(SubType.SPIRIT, game)) {
-            blueprint.addSubType(game, SubType.SPIRIT);
-        }
+        blueprint.addSubType(SubType.SPIRIT);
         return true;
     }
 }
