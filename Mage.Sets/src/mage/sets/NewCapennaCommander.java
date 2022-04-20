@@ -204,6 +204,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Preordain", 230, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Primal Empathy", 348, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
         cards.add(new SetCardInfo("Profane Command", 256, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
+        cards.add(new SetCardInfo("Prosperous Partnership", 78, Rarity.RARE, mage.cards.p.ProsperousPartnership.class));
         cards.add(new SetCardInfo("Puppeteer Clique", 257, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Quietus Spike", 377, Rarity.RARE, mage.cards.q.QuietusSpike.class));
         cards.add(new SetCardInfo("Rakdos Signet", 378, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
