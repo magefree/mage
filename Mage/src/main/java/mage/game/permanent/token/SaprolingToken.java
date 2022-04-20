@@ -47,7 +47,8 @@ public final class SaprolingToken extends TokenImpl {
                 "CMR",
                 "TSR",
                 "C21",
-                "AFC"
+                "AFC",
+                "NEC"
         ));
     }
 

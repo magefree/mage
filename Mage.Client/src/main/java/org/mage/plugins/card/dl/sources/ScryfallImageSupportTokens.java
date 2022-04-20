@@ -783,6 +783,20 @@ public class ScryfallImageSupportTokens {
             put ("NEO/Emblem Tezzeret, Betrayer of Flesh", "https://api.scryfall.com/cards/tneo/19/en?format=image");
             put ("NEO/Treasure", "https://api.scryfall.com/cards/tneo/17/en?format=image");
 
+            // NEC
+            put ("NEC/Angel", "https://api.scryfall.com/cards/tnec/2/en?format=image");
+            put ("NEC/Beast", "https://api.scryfall.com/cards/tnec/7/en?format=image");
+            put ("NEC/Elemental", "https://api.scryfall.com/cards/tnec/4/en?format=image");
+            put ("NEC/Elephant", "https://api.scryfall.com/cards/tnec/8/en?format=image");
+            put ("NEC/Goblin", "https://api.scryfall.com/cards/tnec/5/en?format=image");
+            put ("NEC/Myr", "https://api.scryfall.com/cards/tnec/11/en?format=image");
+            put ("NEC/Phyrexian Germ", "https://api.scryfall.com/cards/tnec/3/en?format=image");
+            put ("NEC/Plant", "https://api.scryfall.com/cards/tnec/9/en?format=image");
+            put ("NEC/Saproling", "https://api.scryfall.com/cards/tnec/10/en?format=image");
+            put ("NEC/Shrine", "https://api.scryfall.com/cards/tnec/1/en?format=image");
+            put ("NEC/Smoke Blessing", "https://api.scryfall.com/cards/tnec/6/en?format=image");
+            put ("NEC/Thopter", "https://api.scryfall.com/cards/tnec/12/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

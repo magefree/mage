@@ -1702,3 +1702,17 @@
 |Generate|TOK:NEO|Spirit|4||SpiritRedToken|
 |Generate|TOK:NEO|Tamiyo's Notebook|||TamiyosNotebookToken|
 |Generate|TOK:NEO|Treasure|||TreasureToken|
+
+# NEC
+|Generate|TOK:NEC|Angel|||AngelVigilanceToken|
+|Generate|TOK:NEC|Beast|||BeastToken|
+|Generate|TOK:NEC|Elemental|||RedElementalToken|
+|Generate|TOK:NEC|Elephant|||ElephantToken|
+|Generate|TOK:NEC|Goblin|||GoblinToken|
+|Generate|TOK:NEC|Myr|||MyrToken|
+|Generate|TOK:NEC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:NEC|Plant|||PlantToken|
+|Generate|TOK:NEC|Saproling|||SaprolingToken|
+|Generate|TOK:NEC|Shrine|||ShrineToken|
+|Generate|TOK:NEC|Smoke Blessing|||SmokeBlessingToken|
+|Generate|TOK:NEC|Thopter|||ThopterColorlessToken|
