@@ -157,6 +157,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Maestros Initiate", 86, Rarity.COMMON, mage.cards.m.MaestrosInitiate.class));
         cards.add(new SetCardInfo("Maestros Theater", 251, Rarity.COMMON, mage.cards.m.MaestrosTheater.class));
         cards.add(new SetCardInfo("Mage's Attendant", 21, Rarity.UNCOMMON, mage.cards.m.MagesAttendant.class));
+        cards.add(new SetCardInfo("Majestic Metamorphosis", 48, Rarity.COMMON, mage.cards.m.MajesticMetamorphosis.class));
         cards.add(new SetCardInfo("Make Disappear", 49, Rarity.COMMON, mage.cards.m.MakeDisappear.class));
         cards.add(new SetCardInfo("Masked Bandits", 201, Rarity.COMMON, mage.cards.m.MaskedBandits.class));
         cards.add(new SetCardInfo("Mayhem Patrol", 114, Rarity.COMMON, mage.cards.m.MayhemPatrol.class));
