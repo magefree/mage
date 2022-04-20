@@ -712,6 +712,24 @@ public class ScryfallImageSupportTokens {
             put("VOW/Zombie/1", "https://api.scryfall.com/cards/tvow/8/en?format=image"); // 2/2
             put("VOW/Zombie/2", "https://api.scryfall.com/cards/tvow/5/en?format=image"); // */*
 
+            // UMA
+            put ("UMA/Citizen", "https://api.scryfall.com/cards/tuma/1/en?format=image");
+            put ("UMA/Drake", "https://api.scryfall.com/cards/tuma/3/en?format=image");
+            put ("UMA/Elemental/1", "https://api.scryfall.com/cards/tuma/13/en?format=image"); // green
+            put ("UMA/Elemental/2", "https://api.scryfall.com/cards/tuma/9/en?format=image");
+            put ("UMA/Elemental/3", "https://api.scryfall.com/cards/tuma/10/en?format=image");
+            put ("UMA/Faerie Rogue", "https://api.scryfall.com/cards/tuma/5/en?format=image");
+            put ("UMA/Homunculus", "https://api.scryfall.com/cards/tuma/4/en?format=image");
+            put ("UMA/Marit Lage", "https://api.scryfall.com/cards/tuma/6/en?format=image");
+            put ("UMA/Ooze", "https://api.scryfall.com/cards/tuma/14/en?format=image");
+            put ("UMA/Soldier", "https://api.scryfall.com/cards/tuma/11/en?format=image");
+            put ("UMA/Spark Elemental", "https://api.scryfall.com/cards/tuma/12/en?format=image");
+            put ("UMA/Spider", "https://api.scryfall.com/cards/tuma/15/en?format=image");
+            put ("UMA/Spirit/1", "https://api.scryfall.com/cards/tuma/2/en?format=image"); // white
+            put ("UMA/Spirit/2", "https://api.scryfall.com/cards/tuma/16/en?format=image"); // white, black
+            put ("UMA/Wurm", "https://api.scryfall.com/cards/tuma/7/en?format=image");
+            put ("UMA/Zombie", "https://api.scryfall.com/cards/tuma/8/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

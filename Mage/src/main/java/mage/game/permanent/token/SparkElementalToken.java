@@ -8,6 +8,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.TargetController;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -25,6 +27,8 @@ public final class SparkElementalToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+
+        availableImageSetCodes = Arrays.asList("UMA");
     }
 
     public SparkElementalToken(final SparkElementalToken token) {

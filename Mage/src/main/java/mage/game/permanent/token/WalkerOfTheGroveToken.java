@@ -19,7 +19,7 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("C13", "LRW", "MMA", "MOR");
+        availableImageSetCodes = Arrays.asList("C13", "LRW", "MMA", "MOR", "UMA");
     }
 
     @Override

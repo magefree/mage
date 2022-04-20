@@ -1663,3 +1663,21 @@
 |Generate|TOK:VOW|Wolf|2||RedWolfToken|
 |Generate|TOK:VOW|Zombie|1||ZombieToken|
 |Generate|TOK:VOW|Zombie|2||StitcherGeralfZombieToken|
+
+# UMA
+|Generate|TOK:UMA|Citizen|||CitizenToken|
+|Generate|TOK:UMA|Drake|||DrakeToken|
+|Generate|TOK:UMA|Elemental|1||WalkerOfTheGroveToken|
+|Generate|TOK:UMA|Elemental|2||RedElementalToken|
+|Generate|TOK:UMA|Elemental|3||RedElementalToken|
+|Generate|TOK:UMA|Faerie Rogue|||FaerieRogueToken|
+|Generate|TOK:UMA|Homunculus|||StitchersApprenticeHomunculusToken|
+|Generate|TOK:UMA|Marit Lage|||MaritLageToken|
+|Generate|TOK:UMA|Ooze|||OozeToken|
+|Generate|TOK:UMA|Soldier|||AkroanSoldierToken|
+|Generate|TOK:UMA|Spark Elemental|||SparkElementalToken|
+|Generate|TOK:UMA|Spider|||SpiderToken|
+|Generate|TOK:UMA|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:UMA|Spirit|2||WhiteBlackSpiritToken|
+|Generate|TOK:UMA|Wurm|||PenumbraWurmToken|
+|Generate|TOK:UMA|Zombie|||ZombieToken|

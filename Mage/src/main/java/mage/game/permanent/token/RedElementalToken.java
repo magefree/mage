@@ -20,7 +20,7 @@ public final class RedElementalToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C13", "EMA", "M14", "SHM", "MH1", "M20", "RIX");
+        availableImageSetCodes = Arrays.asList("C13", "EMA", "M14", "SHM", "MH1", "M20", "RIX", "UMA");
     }
 
     @Override

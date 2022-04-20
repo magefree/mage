@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -21,6 +23,8 @@ public final class PenumbraWurmToken extends TokenImpl {
         toughness = new MageInt(6);
 
         this.addAbility(TrampleAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("UMA"));
     }
 
     public PenumbraWurmToken(final PenumbraWurmToken token) {
