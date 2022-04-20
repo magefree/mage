@@ -293,6 +293,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Woodfall Primus", 322, Rarity.RARE, mage.cards.w.WoodfallPrimus.class));
         cards.add(new SetCardInfo("World Shaper", 323, Rarity.RARE, mage.cards.w.WorldShaper.class));
         cards.add(new SetCardInfo("Wrexial, the Risen Deep", 359, Rarity.MYTHIC, mage.cards.w.WrexialTheRisenDeep.class));
+        cards.add(new SetCardInfo("Writ of Return", 42, Rarity.RARE, mage.cards.w.WritOfReturn.class));
         cards.add(new SetCardInfo("Zndrsplt's Judgment", 240, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));
         cards.add(new SetCardInfo("Zurzoth, Chaos Rider", 278, Rarity.RARE, mage.cards.z.ZurzothChaosRider.class));
 
