@@ -797,6 +797,19 @@ public class ScryfallImageSupportTokens {
             put ("NEC/Smoke Blessing", "https://api.scryfall.com/cards/tnec/6/en?format=image");
             put ("NEC/Thopter", "https://api.scryfall.com/cards/tnec/12/en?format=image");
 
+            // SLD
+            put ("SLD/Clue", "https://api.scryfall.com/cards/sld/348/en?format=image");
+            put ("SLD/Faerie Rogue/1", "https://api.scryfall.com/cards/sld/13/en?format=image");
+            put ("SLD/Faerie Rogue/2", "https://api.scryfall.com/cards/sld/14/en?format=image");
+            put ("SLD/Faerie Rogue/3", "https://api.scryfall.com/cards/sld/15/en?format=image");
+            put ("SLD/Faerie Rogue/4", "https://api.scryfall.com/cards/sld/16/en?format=image");
+            put ("SLD/Treasure", "https://api.scryfall.com/cards/sld/153/en?format=image");
+            put ("SLD/Walker/1", "https://api.scryfall.com/cards/sld/148/en?format=image");
+            put ("SLD/Walker/2", "https://api.scryfall.com/cards/sld/149/en?format=image");
+            put ("SLD/Walker/3", "https://api.scryfall.com/cards/sld/150/en?format=image");
+            put ("SLD/Walker/4", "https://api.scryfall.com/cards/sld/151/en?format=image");
+            put ("SLD/Walker/5", "https://api.scryfall.com/cards/sld/152/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

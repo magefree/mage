@@ -1716,3 +1716,16 @@
 |Generate|TOK:NEC|Shrine|||ShrineToken|
 |Generate|TOK:NEC|Smoke Blessing|||SmokeBlessingToken|
 |Generate|TOK:NEC|Thopter|||ThopterColorlessToken|
+
+# SLD
+|Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|2||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|3||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|4||FaerieRogueToken|
+|Generate|TOK:SLD|Treasure|||TreasureToken|
+|Generate|TOK:SLD|Walker|1||WalkerToken|
+|Generate|TOK:SLD|Walker|2||WalkerToken|
+|Generate|TOK:SLD|Walker|3||WalkerToken|
+|Generate|TOK:SLD|Walker|4||WalkerToken|
+|Generate|TOK:SLD|Walker|5||WalkerToken|
