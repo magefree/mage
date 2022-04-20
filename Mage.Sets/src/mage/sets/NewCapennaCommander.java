@@ -27,6 +27,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Sleuth", 113, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Body Count", 34, Rarity.RARE, mage.cards.b.BodyCount.class));
+        cards.add(new SetCardInfo("Brokers Confluence", 168, Rarity.RARE, mage.cards.b.BrokersConfluence.class));
         cards.add(new SetCardInfo("Damning Verdict", 15, Rarity.RARE, mage.cards.d.DamningVerdict.class));
         cards.add(new SetCardInfo("Extravagant Replication", 25, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Kitt Kanto, Mayhem Diva", 4, Rarity.MYTHIC, mage.cards.k.KittKantoMayhemDiva.class));
