@@ -730,6 +730,24 @@ public class ScryfallImageSupportTokens {
             put ("UMA/Wurm", "https://api.scryfall.com/cards/tuma/7/en?format=image");
             put ("UMA/Zombie", "https://api.scryfall.com/cards/tuma/8/en?format=image");
 
+            // MMA
+            put ("MMA/Bat", "https://api.scryfall.com/cards/tmma/5/en?format=image");
+            put ("MMA/Dragon", "https://api.scryfall.com/cards/tmma/9/en?format=image");
+            put ("MMA/Elemental", "https://api.scryfall.com/cards/tmma/11/en?format=image");
+            put ("MMA/Emblem Elspeth, Knight Errant", "https://api.scryfall.com/cards/tmma/16/en?format=image");
+            put ("MMA/Faerie Rogue", "https://api.scryfall.com/cards/tmma/14/en?format=image");
+            put ("MMA/Giant Warrior", "https://api.scryfall.com/cards/tmma/1/en?format=image");
+            put ("MMA/Goblin", "https://api.scryfall.com/cards/tmma/10/en?format=image");
+            put ("MMA/Goblin Rogue", "https://api.scryfall.com/cards/tmma/6/en?format=image");
+            put ("MMA/Illusion", "https://api.scryfall.com/cards/tmma/4/en?format=image");
+            put ("MMA/Kithkin Soldier", "https://api.scryfall.com/cards/tmma/2/en?format=image");
+            put ("MMA/Saproling", "https://api.scryfall.com/cards/tmma/12/en?format=image");
+            put ("MMA/Soldier", "https://api.scryfall.com/cards/tmma/3/en?format=image");
+            put ("MMA/Spider", "https://api.scryfall.com/cards/tmma/7/en?format=image");
+            put ("MMA/Treefolk Shaman", "https://api.scryfall.com/cards/tmma/13/en?format=image");
+            put ("MMA/Worm", "https://api.scryfall.com/cards/tmma/15/en?format=image");
+            put ("MMA/Zombie", "https://api.scryfall.com/cards/tmma/8/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
