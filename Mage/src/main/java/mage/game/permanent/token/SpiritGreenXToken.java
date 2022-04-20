@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -16,6 +18,8 @@ public final class SpiritGreenXToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+
+        availableImageSetCodes = Arrays.asList("NEO");
     }
 
     public SpiritGreenXToken(final SpiritGreenXToken token) {

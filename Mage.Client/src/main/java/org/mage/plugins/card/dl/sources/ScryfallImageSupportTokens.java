@@ -762,6 +762,27 @@ public class ScryfallImageSupportTokens {
             put ("SHM/Spirit", "https://api.scryfall.com/cards/tshm/2/en?format=image");
             put ("SHM/Wolf", "https://api.scryfall.com/cards/tshm/7/en?format=image");
 
+            // NEO
+            put ("NEO/Construct/1", "https://api.scryfall.com/cards/tneo/15/en?format=image"); // 1/1
+            put ("NEO/Construct/2", "https://api.scryfall.com/cards/tneo/6/en?format=image"); // haste
+            put ("NEO/Dragon Spirit", "https://api.scryfall.com/cards/tneo/7/en?format=image");
+            put ("NEO/Goblin Shaman", "https://api.scryfall.com/cards/tneo/8/en?format=image");
+            put ("NEO/Human Monk", "https://api.scryfall.com/cards/tneo/10/en?format=image");
+            put ("NEO/Emblem Kaito Shizuki", "https://api.scryfall.com/cards/tneo/18/en?format=image");
+            put ("NEO/Keimi", "https://api.scryfall.com/cards/tneo/13/en?format=image");
+            put ("NEO/Mechtitan", "https://api.scryfall.com/cards/tneo/14/en?format=image");
+            put ("NEO/Ninja", "https://api.scryfall.com/cards/tneo/4/en?format=image");
+            put ("NEO/Pilot", "https://api.scryfall.com/cards/tneo/1/en?format=image");
+            put ("NEO/Rat Rogue", "https://api.scryfall.com/cards/tneo/5/en?format=image");
+            put ("NEO/Samurai", "https://api.scryfall.com/cards/tneo/3/en?format=image");
+            put ("NEO/Spirit/1", "https://api.scryfall.com/cards/tneo/2/en?format=image"); // colorless
+            put ("NEO/Spirit/2", "https://api.scryfall.com/cards/tneo/12/en?format=image"); // */*
+            put ("NEO/Spirit/3", "https://api.scryfall.com/cards/tneo/11/en?format=image"); // green
+            put ("NEO/Spirit/4", "https://api.scryfall.com/cards/tneo/9/en?format=image"); // red
+            put ("NEO/Tamiyo's Notebook", "https://api.scryfall.com/cards/tneo/16/en?format=image");
+            put ("NEO/Emblem Tezzeret, Betrayer of Flesh", "https://api.scryfall.com/cards/tneo/19/en?format=image");
+            put ("NEO/Treasure", "https://api.scryfall.com/cards/tneo/17/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

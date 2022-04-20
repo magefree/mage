@@ -115,6 +115,8 @@
 |Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
 |Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
 |Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
+|Generate|EMBLEM:NEO|Kaito Shizuki||Emblem Kaito|KaitoShizukiEmblem|
+|Generate|EMBLEM:NEO|Tezzeret, Betrayer of Flesh||Emblem Tezzeret|TezzeretBetrayerOfFleshEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1681,3 +1683,22 @@
 |Generate|TOK:UMA|Spirit|2||WhiteBlackSpiritToken|
 |Generate|TOK:UMA|Wurm|||PenumbraWurmToken|
 |Generate|TOK:UMA|Zombie|||ZombieToken|
+
+# NEO
+|Generate|TOK:NEO|Construct|1||ConstructToken|
+|Generate|TOK:NEO|Construct|2||ConstructRedToken|
+|Generate|TOK:NEO|Dragon Spirit|||DragonSpiritToken|
+|Generate|TOK:NEO|Goblin Shaman|||FableOfTheMirrorBreakerToken|
+|Generate|TOK:NEO|Human Monk|||HumanMonkToken|
+|Generate|TOK:NEO|Keimi|||KeimiToken|
+|Generate|TOK:NEO|Mechtitan|||MechtitanToken|
+|Generate|TOK:NEO|Ninja|||NinjaToken|
+|Generate|TOK:NEO|Pilot|||PilotToken|
+|Generate|TOK:NEO|Rat Rogue|||RatRogueToken|
+|Generate|TOK:NEO|Samurai|||SamuraiToken|
+|Generate|TOK:NEO|Spirit|1||SpiritToken|
+|Generate|TOK:NEO|Spirit|2||SpiritGreenXToken|
+|Generate|TOK:NEO|Spirit|3||SpiritGreenToken|
+|Generate|TOK:NEO|Spirit|4||SpiritRedToken|
+|Generate|TOK:NEO|Tamiyo's Notebook|||TamiyosNotebookToken|
+|Generate|TOK:NEO|Treasure|||TreasureToken|

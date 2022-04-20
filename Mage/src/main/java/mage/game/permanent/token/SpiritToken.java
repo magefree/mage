@@ -18,7 +18,7 @@ public final class SpiritToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C19", "CHK", "EMA", "EXP", "SOK", "V12", "VOC");
+        availableImageSetCodes = Arrays.asList("C19", "CHK", "EMA", "EXP", "NEO", "SOK", "V12", "VOC");
     }
 
     @Override
