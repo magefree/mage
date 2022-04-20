@@ -59,6 +59,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Charm", 332, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boxing Ring", 91, Rarity.RARE, mage.cards.b.BoxingRing.class));
         cards.add(new SetCardInfo("Brokers Confluence", 68, Rarity.RARE, mage.cards.b.BrokersConfluence.class));
+        cards.add(new SetCardInfo("Caldaia Guardian", 56, Rarity.RARE, mage.cards.c.CaldaiaGuardian.class));
         cards.add(new SetCardInfo("Call the Coppercoats", 195, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
         cards.add(new SetCardInfo("Call the Skybreaker", 333, Rarity.RARE, mage.cards.c.CallTheSkybreaker.class));
         cards.add(new SetCardInfo("Camaraderie", 334, Rarity.RARE, mage.cards.c.Camaraderie.class));
