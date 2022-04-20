@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
