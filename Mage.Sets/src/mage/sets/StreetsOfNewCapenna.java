@@ -104,6 +104,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Pets", 185, Rarity.UNCOMMON, mage.cards.e.ExoticPets.class));
         cards.add(new SetCardInfo("Expendable Lackey", 43, Rarity.COMMON, mage.cards.e.ExpendableLackey.class));
         cards.add(new SetCardInfo("Extract the Truth", 78, Rarity.COMMON, mage.cards.e.ExtractTheTruth.class));
+        cards.add(new SetCardInfo("Extraction Specialist", 12, Rarity.RARE, mage.cards.e.ExtractionSpecialist.class));
         cards.add(new SetCardInfo("Faerie Vandal", 44, Rarity.UNCOMMON, mage.cards.f.FaerieVandal.class));
         cards.add(new SetCardInfo("Fake Your Own Death", 79, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
         cards.add(new SetCardInfo("Fatal Grudge", 187, Rarity.UNCOMMON, mage.cards.f.FatalGrudge.class));
