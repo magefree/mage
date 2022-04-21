@@ -3,6 +3,8 @@ package mage.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
@@ -43,6 +45,11 @@ public final class ClassScanner {
                         filePath = filePath.substring("file:".length(), filePath.lastIndexOf('!'));
                         jars.add(filePath);
                     } else {
+                        try {
+                            filePath = resource.toURI().getPath();
+                        } catch (URISyntaxException e) {
+                            throw new RuntimeException(e);
+                        }
                         dirs.put(filePath, packageName);
                     }
                 }
