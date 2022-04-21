@@ -138,6 +138,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Pilferer", 223, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Giant Adephage", 293, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 341, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Grand Crescendo", 16, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Grateful Apparition", 202, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Graveblade Marauder", 251, Rarity.RARE, mage.cards.g.GravebladeMarauder.class));
         cards.add(new SetCardInfo("Greenwarden of Murasa", 294, Rarity.MYTHIC, mage.cards.g.GreenwardenOfMurasa.class));
