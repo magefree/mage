@@ -161,6 +161,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 270, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Kess, Dissident Mage", 344, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 411, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
+        cards.add(new SetCardInfo("Killer Service", 61, Rarity.RARE, mage.cards.k.KillerService.class));
         cards.add(new SetCardInfo("Kitt Kanto, Mayhem Diva", 4, Rarity.MYTHIC, mage.cards.k.KittKantoMayhemDiva.class));
         cards.add(new SetCardInfo("Kodama's Reach", 298, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kresh the Bloodbraided", 345, Rarity.MYTHIC, mage.cards.k.KreshTheBloodbraided.class));
