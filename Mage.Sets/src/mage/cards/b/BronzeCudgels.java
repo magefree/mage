@@ -76,7 +76,7 @@ class BronzeCudgelsEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new BoostTargetEffect(resolvedCount, 0)
-                .setTargetPointer(new FixedTarget(permanent.getOwnerId(), game)), source);
+                .setTargetPointer(new FixedTarget(permanent.getAttachedTo(), game)), source);
         return true;
     }
 }
