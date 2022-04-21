@@ -38,6 +38,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Artisan of Kozilek", 191, Rarity.UNCOMMON, mage.cards.a.ArtisanOfKozilek.class));
         cards.add(new SetCardInfo("Ash Barrens", 386, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assemble the Legion", 327, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
+        cards.add(new SetCardInfo("Audacious Swap", 44, Rarity.RARE, mage.cards.a.AudaciousSwap.class));
         cards.add(new SetCardInfo("Aura Mutation", 328, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Austere Command", 193, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Aven Mimeomancer", 329, Rarity.RARE, mage.cards.a.AvenMimeomancer.class));
