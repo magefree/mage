@@ -32,10 +32,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent == null) {
-            opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        }
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (controller == null || opponent == null) {
             return false;
         }
