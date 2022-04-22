@@ -13,10 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -28,12 +25,9 @@ import java.util.UUID;
  * @author woshikie
  */
 public final class GiadaFontOfHope extends CardImpl {
-
-    private static final FilterPermanent OTHER_ANGEL_YOU_CONTROL_FILTER = new FilterControlledCreaturePermanent(SubType.ANGEL, "other Angel you control");
     private static final FilterSpell ANGEL_SPELL_FILTER = new FilterSpell("an Angel spell");
 
     static {
-        OTHER_ANGEL_YOU_CONTROL_FILTER.add(AnotherPredicate.instance);
         ANGEL_SPELL_FILTER.add(SubType.ANGEL.getPredicate());
     }
 
@@ -87,7 +81,7 @@ class GiadaFontOfHopeEntersBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "Each other Angel you control enters the battlefield with an additional +1/+1 counter on it for each Angel you already control.";
     }
 
-    public GiadaFontOfHopeEntersBattlefieldEffect(GiadaFontOfHopeEntersBattlefieldEffect effect) {
+    private GiadaFontOfHopeEntersBattlefieldEffect(GiadaFontOfHopeEntersBattlefieldEffect effect) {
         super(effect);
     }
 
