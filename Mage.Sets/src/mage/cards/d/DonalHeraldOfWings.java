@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -33,6 +35,7 @@ public class DonalHeraldOfWings extends CardImpl {
     static {
         filterSpell.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
         filterSpell.add(CardType.CREATURE.getPredicate());
+        filterSpell.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public DonalHeraldOfWings(UUID ownderId, CardSetInfo setInfo) {
@@ -67,7 +70,7 @@ class DonalHeraldOfWingsEffect extends OneShotEffect {
 
     DonalHeraldOfWingsEffect() {
         super(Outcome.Copy);
-        staticText = "you may copy it, except the copy is a 1/1 Spirit in addition to its other types";
+        staticText = "copy it, except the copy is a 1/1 Spirit in addition to its other types";
     }
 
     private DonalHeraldOfWingsEffect(final DonalHeraldOfWingsEffect effect) {
