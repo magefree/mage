@@ -5,6 +5,7 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 
 /**
@@ -20,6 +21,15 @@ public class FilterCreatureSpell extends FilterSpell {
     public FilterCreatureSpell(String name) {
         super(name);
         this.add(CardType.CREATURE.getPredicate());
+    }
+
+    public FilterCreatureSpell(SubType subType) {
+        this(subType, subType.name() + " creature spell");
+    }
+
+    public FilterCreatureSpell(SubType subType, String name){
+        this(name);
+        this.add(subType.getPredicate());
     }
 
 }
