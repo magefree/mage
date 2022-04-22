@@ -99,6 +99,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Elspeth Resplendent", 11, Rarity.MYTHIC, mage.cards.e.ElspethResplendent.class));
         cards.add(new SetCardInfo("Endless Detour", 183, Rarity.RARE, mage.cards.e.EndlessDetour.class));
         cards.add(new SetCardInfo("Errant, Street Artist", 41, Rarity.RARE, mage.cards.e.ErrantStreetArtist.class));
+        cards.add(new SetCardInfo("Even the Score", 42, Rarity.MYTHIC, mage.cards.e.EvenTheScore.class));
         cards.add(new SetCardInfo("Evolving Door", 144, Rarity.RARE, mage.cards.e.EvolvingDoor.class));
         cards.add(new SetCardInfo("Exhibition Magician", 106, Rarity.COMMON, mage.cards.e.ExhibitionMagician.class));
         cards.add(new SetCardInfo("Exotic Pets", 185, Rarity.UNCOMMON, mage.cards.e.ExoticPets.class));
@@ -107,6 +108,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Extraction Specialist", 12, Rarity.RARE, mage.cards.e.ExtractionSpecialist.class));
         cards.add(new SetCardInfo("Faerie Vandal", 44, Rarity.UNCOMMON, mage.cards.f.FaerieVandal.class));
         cards.add(new SetCardInfo("Fake Your Own Death", 79, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
+        cards.add(new SetCardInfo("Falco Spara, Pactweaver", 186, Rarity.MYTHIC, mage.cards.f.FalcoSparaPactweaver.class));
         cards.add(new SetCardInfo("Fatal Grudge", 187, Rarity.UNCOMMON, mage.cards.f.FatalGrudge.class));
         cards.add(new SetCardInfo("Fight Rigging", 145, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Fleetfoot Dancer", 188, Rarity.RARE, mage.cards.f.FleetfootDancer.class));
@@ -221,6 +223,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Run Out of Town", 58, Rarity.COMMON, mage.cards.r.RunOutOfTown.class));
         cards.add(new SetCardInfo("Sanctuary Warden", 30, Rarity.MYTHIC, mage.cards.s.SanctuaryWarden.class));
         cards.add(new SetCardInfo("Sanguine Spy", 93, Rarity.RARE, mage.cards.s.SanguineSpy.class));
+        cards.add(new SetCardInfo("Scheming Fence", 219, Rarity.RARE, mage.cards.s.SchemingFence.class));
         cards.add(new SetCardInfo("Scuttling Butler", 244, Rarity.UNCOMMON, mage.cards.s.ScuttlingButler.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
         cards.add(new SetCardInfo("Security Rhox", 220, Rarity.UNCOMMON, mage.cards.s.SecurityRhox.class));
@@ -251,6 +254,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Take to the Streets", 158, Rarity.UNCOMMON, mage.cards.t.TakeToTheStreets.class));
         cards.add(new SetCardInfo("Tavern Swindler", 96, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
         cards.add(new SetCardInfo("Titan of Industry", 159, Rarity.MYTHIC, mage.cards.t.TitanOfIndustry.class));
+        cards.add(new SetCardInfo("Toluz, Clever Conductor", 228, Rarity.RARE, mage.cards.t.ToluzCleverConductor.class));
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
         cards.add(new SetCardInfo("Torch Breath", 127, Rarity.UNCOMMON, mage.cards.t.TorchBreath.class));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
