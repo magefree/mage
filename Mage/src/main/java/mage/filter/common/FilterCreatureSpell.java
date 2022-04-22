@@ -23,13 +23,4 @@ public class FilterCreatureSpell extends FilterSpell {
         this.add(CardType.CREATURE.getPredicate());
     }
 
-    public FilterCreatureSpell(SubType subType) {
-        this(subType, subType.name() + " creature spell");
-    }
-
-    public FilterCreatureSpell(SubType subType, String name){
-        this(name);
-        this.add(subType.getPredicate());
-    }
-
 }
