@@ -15,8 +15,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
+import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureSpell;
+import mage.filter.common.FilterSubTypeSpell;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,9 +68,10 @@ public final class GiadaFontOfHope extends CardImpl {
                 new ConditionalColoredManaAbility(
                         Mana.WhiteMana(1),
                         new ConditionalSpellManaBuilder(
-                                new FilterCreatureSpell(SubType.ANGEL)
+                            new FilterSubTypeSpell(SubType.ANGEL, "an Angel spell")
                         )
                 )
+
         );
     }
 
