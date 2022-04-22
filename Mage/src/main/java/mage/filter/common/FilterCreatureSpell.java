@@ -5,7 +5,6 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.filter.FilterSpell;
 
 /**
