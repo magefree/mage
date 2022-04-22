@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksCreatureWithFlyingTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -43,7 +43,7 @@ public final class FrostwebSpider extends CardImpl {
         // Whenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())), true);
         effect.setText("put a +1/+1 counter on {this} at end of combat");
-        this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(effect, false));
+        this.addAbility(new BlocksCreatureTriggeredAbility(effect, filter,false));
     }
 
     private FrostwebSpider(final FrostwebSpider card) {
