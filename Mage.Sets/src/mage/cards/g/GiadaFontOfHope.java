@@ -16,10 +16,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureSpell;
-import mage.filter.common.FilterSubTypeSpell;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,10 +28,12 @@ import java.util.UUID;
  */
 public final class GiadaFontOfHope extends CardImpl {
 
-    public static final FilterPermanent OTHER_ANGEL_YOU_CONTROL_FILTER = new FilterControlledCreaturePermanent(SubType.ANGEL, "other Angel you control");
+    private static final FilterPermanent OTHER_ANGEL_YOU_CONTROL_FILTER = new FilterControlledCreaturePermanent(SubType.ANGEL, "other Angel you control");
+    private static final FilterSpell ANGEL_SPELL_FILTER = new FilterSpell("an Angel spell");
 
     static {
         OTHER_ANGEL_YOU_CONTROL_FILTER.add(AnotherPredicate.instance);
+        ANGEL_SPELL_FILTER.add(SubType.ANGEL.getPredicate());
     }
 
     public GiadaFontOfHope(UUID ownerId, CardSetInfo setInfo) {
@@ -67,9 +66,7 @@ public final class GiadaFontOfHope extends CardImpl {
         this.addAbility(
                 new ConditionalColoredManaAbility(
                         Mana.WhiteMana(1),
-                        new ConditionalSpellManaBuilder(
-                            new FilterSubTypeSpell(SubType.ANGEL, "an Angel spell")
-                        )
+                        new ConditionalSpellManaBuilder(ANGEL_SPELL_FILTER)
                 )
 
         );
