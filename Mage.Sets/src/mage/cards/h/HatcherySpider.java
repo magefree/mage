@@ -5,18 +5,18 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.ReachAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ public final class HatcherySpider extends CardImpl {
 class HatcherySpiderEffect extends OneShotEffect {
 
     public HatcherySpiderEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         this.staticText = "reveal the top X cards of your library, "
                 + "where X is the number of creature cards in your graveyard. "
                 + "You may put a green permanent card with mana value "
@@ -77,19 +77,9 @@ class HatcherySpiderEffect extends OneShotEffect {
             return false;
         }
         int xValue = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-        FilterCard filter = new FilterPermanentCard("green permanent card with mana value " + xValue + " or less");
+        FilterPermanentCard filter = new FilterPermanentCard("green permanent card with mana value " + xValue + " or less");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
-        player.revealCards(source, cards, game);
-        TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        }
-        cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        return true;
+        return new RevealLibraryPickControllerEffect(xValue, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM).apply(game, source);
     }
 }

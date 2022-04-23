@@ -6,12 +6,8 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,6 +16,8 @@ import mage.constants.*;
 import mage.game.Game;
 
 import java.util.*;
+import mage.abilities.mana.ConditionalColoredManaAbility;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 
 /**
  * @author TheElk801
@@ -39,8 +37,8 @@ public final class JeganthaTheWellspring extends CardImpl {
         this.addAbility(new CompanionAbility(JeganthaTheWellspringCompanionCondition.instance));
 
         // {T}: Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
-        this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD, new JeganthaTheWellspringManaEffect(), new TapSourceCost()
+        this.addAbility(new ConditionalColoredManaAbility(
+                new TapSourceCost(), new Mana(1, 1, 1, 1, 1, 0, 0, 0), new JeganthaManaBuilder()
         ));
     }
 
@@ -72,65 +70,38 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
         return card.getManaCostSymbols()
                 .stream()
                 .anyMatch(s -> symbolMap.compute(
-                        s, (str, i) -> (i == null) ? 1 : i + 1
-                ) > 1);
+                s, (str, i) -> (i == null) ? 1 : i + 1
+        ) > 1);
     }
 }
 
-class JeganthaTheWellspringManaEffect extends ManaEffect {
+class JeganthaManaBuilder extends ConditionalManaBuilder {
 
-    JeganthaTheWellspringManaEffect() {
-        super();
-        staticText = "Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.";
-    }
-
-    private JeganthaTheWellspringManaEffect(final JeganthaTheWellspringManaEffect effect) {
-        super(effect);
+    @Override
+    public ConditionalMana build(Object... options) {
+        return new JeganthaConditionalMana(this.mana);
     }
 
     @Override
-    public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
-        mana.add(new JeganthaTheWellspringConditionalMana("W"));
-        mana.add(new JeganthaTheWellspringConditionalMana("U"));
-        mana.add(new JeganthaTheWellspringConditionalMana("B"));
-        mana.add(new JeganthaTheWellspringConditionalMana("R"));
-        mana.add(new JeganthaTheWellspringConditionalMana("G"));
-        return mana;
-    }
-
-    @Override
-    public JeganthaTheWellspringManaEffect copy() {
-        return new JeganthaTheWellspringManaEffect(this);
+    public String getRule() {
+        return "This mana can't be spent to pay generic mana costs";
     }
 }
 
-class JeganthaTheWellspringConditionalMana extends ConditionalMana {
+class JeganthaConditionalMana extends ConditionalMana {
 
-    JeganthaTheWellspringConditionalMana(String manaSymbol) {
-        super(new Mana(ColoredManaSymbol.valueOf(manaSymbol)));
-        addCondition(new JeganthaTheWellspringManaCondition(manaSymbol));
+    JeganthaConditionalMana(Mana mana) {
+        super(mana);
+        staticText = "This mana can't be spent to pay generic mana costs";
+        addCondition(new JeganthaManaCondition());
     }
 }
 
-class JeganthaTheWellspringManaCondition extends ManaCondition {
-
-    private final String manaSymbol;
-
-    JeganthaTheWellspringManaCondition(String manaSymbol) {
-        this.manaSymbol = manaSymbol.toLowerCase(Locale.ENGLISH);
-    }
+class JeganthaManaCondition extends ManaCondition {
 
     @Override
-    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (!(costToPay instanceof ManaCosts)) {
-            return false;
-        }
-        return Arrays.stream(
-                ((ManaCosts<ManaCost>) costToPay)
-                        .getUnpaid()
-                        .getText()
-                        .split("[\\}\\{]")
-        ).map(s -> s.toLowerCase(Locale.ENGLISH)).anyMatch(s -> s.contains(manaSymbol));
+    public boolean apply(Game game, Ability source, UUID originalId, Cost costsToPay) {
+        // TODO find a better method.  this one forces the user to pay off the generic mana before continuing.
+        return source.getManaCostsToPay().getUnpaid().getMana().getGeneric() == 0;
     }
 }

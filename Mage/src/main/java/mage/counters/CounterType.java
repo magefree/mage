@@ -163,6 +163,7 @@ public enum CounterType {
     SOUL("soul"),
     SPITE("spite"),
     SPORE("spore"),
+    STASH("stash"),
     STORAGE("storage"),
     STRIFE("strife"),
     STUDY("study"),

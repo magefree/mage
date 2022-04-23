@@ -35,7 +35,7 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         setChoice(playerA, false); // Cast without paying its mana cost?
         
         setChoice(playerA, true); // Do you wish to reveal a creature or land card and put into your hand?
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -68,12 +68,12 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Once Upon a Time");
         setChoice(playerA, true); // Cast without paying its mana cost?
         setChoice(playerA, true); // Do you wish to reveal a creature or land card and put into your hand?
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Once Upon a Time");
         setChoice(playerB, true); // Cast without paying its mana cost?
         setChoice(playerB, true); // Do you wish to reveal a creature or land card and put into your hand?
-        setChoice(playerB, "Silvercoat Lion");
+        addTarget(playerB, "Silvercoat Lion");
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();

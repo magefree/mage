@@ -1,18 +1,16 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,10 +29,10 @@ public final class RavenFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Echo {2}{U}
         this.addAbility(new EchoAbility("{2}{U}"));
-        // When Raven Familiar enters the battlefield, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+        // When Raven Familiar enters the battlefield, look at the top three cards of your library.
+        // Put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false),
-                false));
+                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY)));
     }
 
     private RavenFamiliar(final RavenFamiliar card) {

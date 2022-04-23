@@ -1,16 +1,14 @@
 package mage.cards.m;
 
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
@@ -25,10 +23,9 @@ public final class MaestrosCharm extends CardImpl {
 
         // Choose one —
         // • Look at the top five cards of your library. Put one of those cards into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(5), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
-                Zone.GRAVEYARD, false, false, false, Zone.HAND, false
-        ));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 1, PutCards.HAND, PutCards.GRAVEYARD)
+                .setText("look at the top five cards of your library. " +
+                        "Put one of those cards into your hand and the rest into your graveyard"));
 
         // • Each opponent loses 3 life and you gain 3 life.
         Mode mode = new Mode(new LoseLifeOpponentsEffect(3));

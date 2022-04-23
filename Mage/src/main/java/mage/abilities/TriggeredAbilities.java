@@ -91,7 +91,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
                 }
 
-                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game)) {
+                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     if (!game.replaceEvent(numberOfTriggersEvent)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {

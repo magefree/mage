@@ -46,7 +46,7 @@ class DigUpTheBodyEffect extends OneShotEffect {
 
     DigUpTheBodyEffect() {
         super(Outcome.Benefit);
-        staticText = "mill two cards, then return a creature card from your graveyard to your hand";
+        staticText = "mill two cards, then you may return a creature card from your graveyard to your hand";
     }
 
     private DigUpTheBodyEffect(final DigUpTheBodyEffect effect) {
@@ -65,7 +65,7 @@ class DigUpTheBodyEffect extends OneShotEffect {
             return false;
         }
         player.millCards(2, source, game);
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
+        TargetCard target = new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return true;

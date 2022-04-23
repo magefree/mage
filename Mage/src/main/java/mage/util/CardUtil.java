@@ -1531,14 +1531,22 @@ public final class CardUtil {
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 
+    public static String concatWithOr(List<String> strings) {
+        return concatWith(strings, "or");
+    }
+
     public static String concatWithAnd(List<String> strings) {
+        return concatWith(strings, "and");
+    }
+
+    private static String concatWith(List<String> strings, String last) {
         switch (strings.size()) {
             case 0:
                 return "";
             case 1:
                 return strings.get(0);
             case 2:
-                return strings.get(0) + " and " + strings.get(1);
+                return strings.get(0) + " " + last + " " + strings.get(1);
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < strings.size(); i++) {
@@ -1548,7 +1556,8 @@ public final class CardUtil {
             }
             sb.append(", ");
             if (i == strings.size() - 2) {
-                sb.append("and ");
+                sb.append(last);
+                sb.append(' ');
             }
         }
         return sb.toString();

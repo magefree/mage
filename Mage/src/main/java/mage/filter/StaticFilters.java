@@ -64,6 +64,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactCard FILTER_CARD_ARTIFACTS = new FilterArtifactCard("artifact cards");
+
+    static {
+        FILTER_CARD_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT_AN = new FilterArtifactCard("an artifact card");
 
     static {
@@ -937,6 +943,16 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_CARD_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_CREATURE_OR_LAND = new FilterCard("creature or land card");
+
+    static {
+        FILTER_CARD_CREATURE_OR_LAND.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+        FILTER_CARD_CREATURE_OR_LAND.setLockedFilter(true);
     }
 
     public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");

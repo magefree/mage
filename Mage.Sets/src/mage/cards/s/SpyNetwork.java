@@ -35,7 +35,7 @@ public final class SpyNetwork extends CardImpl {
         this.getSpellAbility().addEffect(new SpyNetworkLookAtTargetPlayerHandEffect());
         this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect().setText(" the top card of that player's library"));
         this.getSpellAbility().addEffect(new SpyNetworkFaceDownEffect());
-        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4, false, true));
+        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

@@ -2,19 +2,15 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.effects.common.PutOnTopOrBottomLibraryTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -45,7 +41,7 @@ public final class MoonsnarePrototype extends CardImpl {
         this.addAbility(ability);
 
         // Channel — {4}{U}, Discard Moonsnare Prototype: The owner of target nonland permanent puts it on the top or bottom of their library.
-        ability = new ChannelAbility("{4}{U}", new MoonsnarePrototypeEffect());
+        ability = new ChannelAbility("{4}{U}", new PutOnTopOrBottomLibraryTargetEffect());
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }
@@ -57,35 +53,5 @@ public final class MoonsnarePrototype extends CardImpl {
     @Override
     public MoonsnarePrototype copy() {
         return new MoonsnarePrototype(this);
-    }
-}
-
-class MoonsnarePrototypeEffect extends OneShotEffect {
-
-    MoonsnarePrototypeEffect() {
-        super(Outcome.Benefit);
-        staticText = "the owner of target nonland permanent puts it on the top or bottom of their library";
-    }
-
-    private MoonsnarePrototypeEffect(final MoonsnarePrototypeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MoonsnarePrototypeEffect copy() {
-        return new MoonsnarePrototypeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getOwnerId(source.getFirstTarget()));
-        if (player == null) {
-            return false;
-        }
-        if (player.chooseUse(Outcome.Detriment, "Put the targeted object on the top or bottom of your library?",
-                "", "Top", "Bottom", source, game)) {
-            return new PutOnLibraryTargetEffect(true).apply(game, source);
-        }
-        return new PutOnLibraryTargetEffect(false).apply(game, source);
     }
 }

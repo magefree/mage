@@ -26,7 +26,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     private final String ruleTrigger;
     private TriggeredAbility[] triggeredAbilities;
-    private List<Integer> triggeringAbilities;
 
     public OrTriggeredAbility(Zone zone, Effect effect, TriggeredAbility... abilities) {
         this(zone, effect, false, null, abilities);
@@ -36,7 +35,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.triggeredAbilities = abilities;
         this.ruleTrigger = ruleTrigger;
-        this.triggeringAbilities = new ArrayList<>();
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
@@ -49,7 +47,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (int i = 0; i < this.triggeredAbilities.length; i++) {
             this.triggeredAbilities[i] = ability.triggeredAbilities[i].copy();
         }
-        this.triggeringAbilities = new ArrayList<>(ability.triggeringAbilities);
         this.ruleTrigger = ability.ruleTrigger;
     }
 
@@ -66,10 +63,8 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
-        for (int i = 0; i < triggeredAbilities.length; i++) {
-            TriggeredAbility ability = triggeredAbilities[i];
+        for (TriggeredAbility ability : triggeredAbilities) {
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
-                triggeringAbilities.add(i);
                 toRet = true;
             }
         }
@@ -123,5 +118,4 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
             ability.addWatcher(watcher);
         }
     }
-
 }

@@ -5,10 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  */
 public final class NahiriHeirOfTheAncients extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Warrior or Equipment card");
+    private static final FilterCard filter = new FilterCard("a Warrior or Equipment card");
 
     static {
         filter.add(Predicates.or(
@@ -57,15 +57,10 @@ public final class NahiriHeirOfTheAncients extends CardImpl {
         // +1: Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriHeirOfTheAncientsEffect(), 1));
 
-        // −2: Look at the top six cards of your library. You may reveal a Warrior or Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(6), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top six cards of your library. " +
-                "You may reveal a Warrior or Equipment card from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ), -2));
+        // −2: Look at the top six cards of your library.
+        // You may reveal a Warrior or Equipment card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(6, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM), -2));
 
         // −3: Nahiri, Heir of the Ancients deals damage to target creature or planeswalker equal to twice the number of Equipment you control.
         Ability ability = new LoyaltyAbility(new DamageTargetEffect(xValue)

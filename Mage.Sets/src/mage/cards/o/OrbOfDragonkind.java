@@ -9,16 +9,16 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
@@ -45,12 +45,9 @@ public final class OrbOfDragonkind extends CardImpl {
 
         // {R}, {T}, Sacrifice Orb of Dragonkind: Look at the top seven cards of your library.
         // You may reveal a Dragon card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(7), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false).setBackInRandomOrder(true),
-                new ManaCostsImpl<>("{R}")
-        );
+        ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

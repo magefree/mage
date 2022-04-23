@@ -102,9 +102,13 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
 
         Card card = controller.getHand().get(target.getFirstTarget(), game);
         if (card != null) {
-            CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
+            return CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
         }
-        return true;
+        card = controller.getGraveyard().get(target.getFirstTarget(), game);
+        if (card != null) {
+            return CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
+        }
+        return false;
     }
 }
 

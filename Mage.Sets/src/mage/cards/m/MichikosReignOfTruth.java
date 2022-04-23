@@ -38,7 +38,7 @@ public final class MichikosReignOfTruth extends CardImpl {
         // I, II — Target creature gets +1/+1 until end of turn for each artifact and/or enchantment you control.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
                         .setText("target creature gets +1/+1 until end of turn " +
                                 "for each artifact and/or enchantment you control"),
                 new TargetCreaturePermanent()

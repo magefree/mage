@@ -76,7 +76,7 @@ enum PyreSledgeArsonistValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of permanents you sacrificed this turn";
+        return "the number of permanents you've sacrificed this turn";
     }
 
     @Override

@@ -18,7 +18,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyardOrBattlefield;
+import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -60,7 +60,7 @@ class SaviorOfOllenbockTriggeredAbility extends TriggeredAbilityImpl {
 
     SaviorOfOllenbockTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetForSourceEffect());
-        this.addTarget(new TargetCardInGraveyardOrBattlefield(
+        this.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
                 0, 1,
                 StaticFilters.FILTER_CARD_CREATURE,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
