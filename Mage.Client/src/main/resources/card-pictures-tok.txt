@@ -1741,12 +1741,12 @@
 |Generate|TOK:2XM|Elemental|||VoiceOfResurgenceToken|
 |Generate|TOK:2XM|Elephant|||ElephantToken|
 |Generate|TOK:2XM|Elf Warrior|||GreenWhiteElfWarriorToken|
-|Generate|TOK:2XM|Germ|||PhyrexianGermToken|
+|Generate|TOK:2XM|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:2XM|Golem|||GolemToken|
 |Generate|TOK:2XM|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:2XM|Marit Lage|||MaritLageToken|
-|Generate|TOK:2XM|Myr|1||MyrToken|
-|Generate|TOK:2XM|Myr|2||BrudicladTelchorMyrToken|
+|Generate|TOK:2XM|Myr|||MyrToken|
+|Generate|TOK:2XM|Phyrexian Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:2XM|Ooze|||OozeToken|
 |Generate|TOK:2XM|Plant|||PlantToken|
 |Generate|TOK:2XM|Saproling|||SaprolingToken|
@@ -1759,5 +1759,5 @@
 |Generate|TOK:2XM|Treasure|||TreasureToken|
 |Generate|TOK:2XM|Tuktuk the Returned|||TuktukTheReturnedToken|
 |Generate|TOK:2XM|Wolf|||WolfToken|
-|Generate|TOK:2XM|Wurm|1||WurmWithDeathtouchToken|
-|Generate|TOK:2XM|Wurm|2||WurmWithLifelinkToken|
+|Generate|TOK:2XM|Phyrexian Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:2XM|Phyrexian Wurm|2||WurmWithLifelinkToken|

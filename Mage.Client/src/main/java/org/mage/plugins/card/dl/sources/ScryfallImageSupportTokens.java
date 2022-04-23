@@ -821,12 +821,12 @@ public class ScryfallImageSupportTokens {
             put ("2XM/Elemental", "https://api.scryfall.com/cards/t2xm/20/en?format=image");
             put ("2XM/Elephant", "https://api.scryfall.com/cards/t2xm/14/en?format=image");
             put ("2XM/Elf Warrior", "https://api.scryfall.com/cards/t2xm/21/en?format=image");
-            put ("2XM/Germ", "https://api.scryfall.com/cards/t2xm/10/en?format=image");
+            put ("2XM/Phyrexian Germ", "https://api.scryfall.com/cards/t2xm/10/en?format=image");
             put ("2XM/Golem", "https://api.scryfall.com/cards/t2xm/23/en?format=image");
             put ("2XM/Human Soldier", "https://api.scryfall.com/cards/t2xm/5/en?format=image");
             put ("2XM/Marit Lage", "https://api.scryfall.com/cards/t2xm/11/en?format=image");
-            put ("2XM/Myr/1", "https://api.scryfall.com/cards/t2xm/24/en?format=image");
-            put ("2XM/Myr/2", "https://api.scryfall.com/cards/t2xm/7/en?format=image");
+            put ("2XM/Myr", "https://api.scryfall.com/cards/t2xm/24/en?format=image");
+            put ("2XM/Phyrexian Myr", "https://api.scryfall.com/cards/t2xm/7/en?format=image");
             put ("2XM/Ooze", "https://api.scryfall.com/cards/t2xm/15/en?format=image");
             put ("2XM/Plant", "https://api.scryfall.com/cards/t2xm/16/en?format=image");
             put ("2XM/Saproling", "https://api.scryfall.com/cards/t2xm/17/en?format=image");
@@ -839,8 +839,8 @@ public class ScryfallImageSupportTokens {
             put ("2XM/Treasure", "https://api.scryfall.com/cards/t2xm/27/en?format=image");
             put ("2XM/Tuktuk the Returned", "https://api.scryfall.com/cards/t2xm/28/en?format=image");
             put ("2XM/Wolf", "https://api.scryfall.com/cards/t2xm/19/en?format=image");
-            put ("2XM/Wurm/1", "https://api.scryfall.com/cards/t2xm/29/en?format=image");
-            put ("2XM/Wurm/2", "https://api.scryfall.com/cards/t2xm/30/en?format=image");
+            put ("2XM/Phyrexian Wurm/1", "https://api.scryfall.com/cards/t2xm/29/en?format=image");
+            put ("2XM/Phyrexian Wurm/2", "https://api.scryfall.com/cards/t2xm/30/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
