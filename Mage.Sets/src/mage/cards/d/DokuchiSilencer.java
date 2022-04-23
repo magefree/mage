@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
@@ -90,6 +91,7 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
                 new DestroyTargetEffect(), false,
                 "destroy target creature or planeswalker that player controls"
         );
+        ability.addTarget(new TargetPermanent(filter));
         this.getEffects().clear();
         this.addEffect(new DoWhenCostPaid(
                 ability,

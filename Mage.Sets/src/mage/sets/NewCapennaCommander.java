@@ -38,6 +38,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Artisan of Kozilek", 191, Rarity.UNCOMMON, mage.cards.a.ArtisanOfKozilek.class));
         cards.add(new SetCardInfo("Ash Barrens", 386, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assemble the Legion", 327, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
+        cards.add(new SetCardInfo("Audacious Swap", 44, Rarity.RARE, mage.cards.a.AudaciousSwap.class));
         cards.add(new SetCardInfo("Aura Mutation", 328, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Austere Command", 193, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Aven Mimeomancer", 329, Rarity.RARE, mage.cards.a.AvenMimeomancer.class));
@@ -58,6 +59,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Body Count", 34, Rarity.RARE, mage.cards.b.BodyCount.class));
         cards.add(new SetCardInfo("Boros Charm", 332, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boxing Ring", 91, Rarity.RARE, mage.cards.b.BoxingRing.class));
+        cards.add(new SetCardInfo("Bribe Taker", 55, Rarity.RARE, mage.cards.b.BribeTaker.class));
         cards.add(new SetCardInfo("Brokers Confluence", 68, Rarity.RARE, mage.cards.b.BrokersConfluence.class));
         cards.add(new SetCardInfo("Caldaia Guardian", 56, Rarity.RARE, mage.cards.c.CaldaiaGuardian.class));
         cards.add(new SetCardInfo("Call the Coppercoats", 195, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
@@ -136,6 +138,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Pilferer", 223, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Giant Adephage", 293, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 341, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Grand Crescendo", 16, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Grateful Apparition", 202, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Graveblade Marauder", 251, Rarity.RARE, mage.cards.g.GravebladeMarauder.class));
         cards.add(new SetCardInfo("Greenwarden of Murasa", 294, Rarity.MYTHIC, mage.cards.g.GreenwardenOfMurasa.class));
@@ -158,10 +161,12 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 270, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Kess, Dissident Mage", 344, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 411, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
+        cards.add(new SetCardInfo("Killer Service", 61, Rarity.RARE, mage.cards.k.KillerService.class));
         cards.add(new SetCardInfo("Kitt Kanto, Mayhem Diva", 4, Rarity.MYTHIC, mage.cards.k.KittKantoMayhemDiva.class));
         cards.add(new SetCardInfo("Kodama's Reach", 298, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kresh the Bloodbraided", 345, Rarity.MYTHIC, mage.cards.k.KreshTheBloodbraided.class));
         cards.add(new SetCardInfo("Leafkin Druid", 299, Rarity.COMMON, mage.cards.l.LeafkinDruid.class));
+        cards.add(new SetCardInfo("Life Insurance", 74, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Life's Legacy", 300, Rarity.RARE, mage.cards.l.LifesLegacy.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 370, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lightning Greaves", 371, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
