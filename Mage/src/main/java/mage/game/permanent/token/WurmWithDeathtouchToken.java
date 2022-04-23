@@ -22,7 +22,7 @@ public final class WurmWithDeathtouchToken extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "SOM");
+        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM");
     }
 
     @Override

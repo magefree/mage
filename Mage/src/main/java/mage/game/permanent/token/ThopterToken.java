@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -21,6 +23,8 @@ public final class ThopterToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("ALA", "C16", "C18", "2XM");
     }
 
     public ThopterToken(final ThopterToken token) {

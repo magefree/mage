@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -18,6 +20,8 @@ public final class ApeToken extends TokenImpl {
         subtype.add(SubType.APE);
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("2XM", "TSR", "C14");
     }
 
     public ApeToken(final ApeToken token) {

@@ -1729,3 +1729,35 @@
 |Generate|TOK:SLD|Walker|3||WalkerToken|
 |Generate|TOK:SLD|Walker|4||WalkerToken|
 |Generate|TOK:SLD|Walker|5||WalkerToken|
+
+# 2XM
+|Generate|TOK:2XM|Angel|||AngelToken|
+|Generate|TOK:2XM|Ape|||ApeToken|
+|Generate|TOK:2XM|Beast|||BeastToken|
+|Generate|TOK:2XM|Cat|||CatToken|
+|Generate|TOK:2XM|Clue|||ClueArtifactToken|
+|Generate|TOK:2XM|Demon|||DemonToken|
+|Generate|TOK:2XM|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:2XM|Elemental|||VoiceOfResurgenceToken|
+|Generate|TOK:2XM|Elephant|||ElephantToken|
+|Generate|TOK:2XM|Elf Warrior|||GreenWhiteElfWarriorToken|
+|Generate|TOK:2XM|Germ|||PhyrexianGermToken|
+|Generate|TOK:2XM|Golem|||GolemToken|
+|Generate|TOK:2XM|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:2XM|Marit Lage|||MaritLageToken|
+|Generate|TOK:2XM|Myr|1||MyrToken|
+|Generate|TOK:2XM|Myr|2||BrudicladTelchorMyrToken|
+|Generate|TOK:2XM|Ooze|||OozeToken|
+|Generate|TOK:2XM|Plant|||PlantToken|
+|Generate|TOK:2XM|Saproling|||SaprolingToken|
+|Generate|TOK:2XM|Servo|||ServoToken|
+|Generate|TOK:2XM|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:2XM|Soldier|||SoldierToken|
+|Generate|TOK:2XM|Squirrel|||SquirrelToken|
+|Generate|TOK:2XM|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:2XM|Thopter|2||ThopterToken|
+|Generate|TOK:2XM|Treasure|||TreasureToken|
+|Generate|TOK:2XM|Tuktuk the Returned|||TuktukTheReturnedToken|
+|Generate|TOK:2XM|Wolf|||WolfToken|
+|Generate|TOK:2XM|Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:2XM|Wurm|2||WurmWithLifelinkToken|

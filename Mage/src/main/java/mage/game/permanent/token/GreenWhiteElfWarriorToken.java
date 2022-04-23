@@ -21,7 +21,7 @@ public final class GreenWhiteElfWarriorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("SHM");
+        availableImageSetCodes = Arrays.asList("SHM", "2XM");
     }
 
     public GreenWhiteElfWarriorToken(final GreenWhiteElfWarriorToken token) {

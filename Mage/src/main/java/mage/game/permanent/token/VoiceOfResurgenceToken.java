@@ -9,6 +9,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -28,6 +30,8 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
         // This creature's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
                 CreaturesYouControlCount.instance, Duration.EndOfGame)));
+            
+        availableImageSetCodes = Arrays.asList("DGM", "MM3", "2XM");
     }
 
     public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {

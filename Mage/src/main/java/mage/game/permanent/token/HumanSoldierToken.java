@@ -18,7 +18,7 @@ public final class HumanSoldierToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("SOI", "THB", "IKO", "MIC");
+        availableImageSetCodes = Arrays.asList("SOI", "THB", "IKO", "MIC", "2XM");
     }
 
     @Override

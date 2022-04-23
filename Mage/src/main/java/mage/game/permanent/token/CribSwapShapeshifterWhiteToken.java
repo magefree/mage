@@ -5,6 +5,8 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -18,6 +20,8 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new ChangelingAbility());
+
+        availableImageSetCodes = Arrays.asList("LRW", "C15", "CM2", "C18", "2XM");
     }
 
     public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {

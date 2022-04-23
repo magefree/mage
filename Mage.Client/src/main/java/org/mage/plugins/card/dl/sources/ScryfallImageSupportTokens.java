@@ -810,6 +810,38 @@ public class ScryfallImageSupportTokens {
             put ("SLD/Walker/4", "https://api.scryfall.com/cards/sld/151/en?format=image");
             put ("SLD/Walker/5", "https://api.scryfall.com/cards/sld/152/en?format=image");
 
+            // 2XM
+            put ("2XM/Angel", "https://api.scryfall.com/cards/t2xm/3/en?format=image");
+            put ("2XM/Ape", "https://api.scryfall.com/cards/t2xm/12/en?format=image");
+            put ("2XM/Beast", "https://api.scryfall.com/cards/t2xm/13/en?format=image");
+            put ("2XM/Cat", "https://api.scryfall.com/cards/t2xm/4/en?format=image");
+            put ("2XM/Clue", "https://api.scryfall.com/cards/t2xm/22/en?format=image");
+            put ("2XM/Demon", "https://api.scryfall.com/cards/t2xm/9/en?format=image");
+            put ("2XM/Eldrazi Spawn", "https://api.scryfall.com/cards/t2xm/1/en?format=image");
+            put ("2XM/Elemental", "https://api.scryfall.com/cards/t2xm/20/en?format=image");
+            put ("2XM/Elephant", "https://api.scryfall.com/cards/t2xm/14/en?format=image");
+            put ("2XM/Elf Warrior", "https://api.scryfall.com/cards/t2xm/21/en?format=image");
+            put ("2XM/Germ", "https://api.scryfall.com/cards/t2xm/10/en?format=image");
+            put ("2XM/Golem", "https://api.scryfall.com/cards/t2xm/23/en?format=image");
+            put ("2XM/Human Soldier", "https://api.scryfall.com/cards/t2xm/5/en?format=image");
+            put ("2XM/Marit Lage", "https://api.scryfall.com/cards/t2xm/11/en?format=image");
+            put ("2XM/Myr/1", "https://api.scryfall.com/cards/t2xm/24/en?format=image");
+            put ("2XM/Myr/2", "https://api.scryfall.com/cards/t2xm/7/en?format=image");
+            put ("2XM/Ooze", "https://api.scryfall.com/cards/t2xm/15/en?format=image");
+            put ("2XM/Plant", "https://api.scryfall.com/cards/t2xm/16/en?format=image");
+            put ("2XM/Saproling", "https://api.scryfall.com/cards/t2xm/17/en?format=image");
+            put ("2XM/Servo", "https://api.scryfall.com/cards/t2xm/25/en?format=image");
+            put ("2XM/Shapeshifter", "https://api.scryfall.com/cards/t2xm/2/en?format=image");
+            put ("2XM/Soldier", "https://api.scryfall.com/cards/t2xm/6/en?format=image");
+            put ("2XM/Squirrel", "https://api.scryfall.com/cards/t2xm/18/en?format=image");
+            put ("2XM/Thopter/1", "https://api.scryfall.com/cards/t2xm/26/en?format=image");
+            put ("2XM/Thopter/2", "https://api.scryfall.com/cards/t2xm/8/en?format=image");
+            put ("2XM/Treasure", "https://api.scryfall.com/cards/t2xm/27/en?format=image");
+            put ("2XM/Tuktuk the Returned", "https://api.scryfall.com/cards/t2xm/28/en?format=image");
+            put ("2XM/Wolf", "https://api.scryfall.com/cards/t2xm/19/en?format=image");
+            put ("2XM/Wurm/1", "https://api.scryfall.com/cards/t2xm/29/en?format=image");
+            put ("2XM/Wurm/2", "https://api.scryfall.com/cards/t2xm/30/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
