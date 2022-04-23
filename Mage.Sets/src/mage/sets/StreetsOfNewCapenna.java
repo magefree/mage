@@ -152,6 +152,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Join the Maestros", 85, Rarity.COMMON, mage.cards.j.JoinTheMaestros.class));
         cards.add(new SetCardInfo("Kill Shot", 19, Rarity.COMMON, mage.cards.k.KillShot.class));
         cards.add(new SetCardInfo("Knockout Blow", 20, Rarity.UNCOMMON, mage.cards.k.KnockoutBlow.class));
+        cards.add(new SetCardInfo("Lagrella, the Magpie", 196, Rarity.UNCOMMON, mage.cards.l.LagrellaTheMagpie.class));
         cards.add(new SetCardInfo("Ledger Shredder", 46, Rarity.RARE, mage.cards.l.LedgerShredder.class));
         cards.add(new SetCardInfo("Light 'Em Up", 113, Rarity.COMMON, mage.cards.l.LightEmUp.class));
         cards.add(new SetCardInfo("Lord Xander, the Collector", 197, Rarity.MYTHIC, mage.cards.l.LordXanderTheCollector.class));
