@@ -48,7 +48,7 @@ class PatchUpTarget extends TargetCardInYourGraveyard {
     }
 
     PatchUpTarget() {
-        super(0, 2, filter, false);
+        super(0, 3, filter, false);
     }
 
     private PatchUpTarget(final PatchUpTarget target) {

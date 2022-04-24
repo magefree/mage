@@ -7,6 +7,7 @@ import mage.abilities.keyword.BlitzAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -25,7 +26,7 @@ public final class RiveteersDecoy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Riveteers Decoy must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Blitz {3}{G}
         this.addAbility(new BlitzAbility(this, "{3}{G}"));

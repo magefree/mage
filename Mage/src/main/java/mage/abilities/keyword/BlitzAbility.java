@@ -27,9 +27,6 @@ import java.util.List;
 public class BlitzAbility extends SpellAbility {
 
     public static final String BLITZ_ACTIVATION_VALUE_KEY = "blitzActivation";
-    protected static final String KEYWORD = "Blitz";
-    protected static final String REMINDER_TEXT = "If you cast this spell for its blitz cost, it gains haste " +
-            "and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.";
 
     public BlitzAbility(Card card, String manaString) {
         super(new ManaCostsImpl<>(manaString), card.getName() + " with Blitz");
@@ -44,6 +41,7 @@ public class BlitzAbility extends SpellAbility {
         ability.addEffect(new BlitzAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
+        this.ruleAdditionalCostsVisible = false;
     }
 
     private BlitzAbility(final BlitzAbility ability) {
@@ -57,7 +55,22 @@ public class BlitzAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Blitz";
+        StringBuilder sb = new StringBuilder("Blitz");
+        if (costs.isEmpty()) {
+            sb.append(' ');
+        } else {
+            sb.append("&mdash;");
+        }
+        sb.append(manaCosts.getText());
+        if (!costs.isEmpty()) {
+            sb.append(", ");
+            sb.append(costs.getText());
+            sb.append('.');
+        }
+        sb.append(" <i>(If you cast this spell for its blitz cost, it gains haste ");
+        sb.append("and \"When this creature dies, draw a card.\" ");
+        sb.append("Sacrifice it at the beginning of the next end step.)</i>");
+        return sb.toString();
     }
 
     @Override

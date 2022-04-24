@@ -68,7 +68,7 @@ class RaffineSchemingSeerEffect extends OneShotEffect {
 
     RaffineSchemingSeerEffect() {
         super(Outcome.Benefit);
-        staticText = "target creature connives X, where X is the number of attacking creatures. " +
+        staticText = "target attacking creature connives X, where X is the number of attacking creatures. " +
                 "<i>(Draw X cards, then discard X cards. Put a +1/+1 counter on that creature " +
                 "for each nonland card discarded this way.)</i>";
     }
