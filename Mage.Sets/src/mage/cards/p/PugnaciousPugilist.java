@@ -31,7 +31,7 @@ public final class PugnaciousPugilist extends CardImpl {
         )));
 
         // Blitz {3}{R}
-        this.addAbility(new BlitzAbility("{3}{R}"));
+        this.addAbility(new BlitzAbility(this, "{3}{R}"));
     }
 
     private PugnaciousPugilist(final PugnaciousPugilist card) {

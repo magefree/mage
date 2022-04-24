@@ -29,7 +29,7 @@ public final class RiveteersRequisitioner extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Blitz {2}{R}
-        this.addAbility(new BlitzAbility("{2}{R}"));
+        this.addAbility(new BlitzAbility(this, "{2}{R}"));
     }
 
     private RiveteersRequisitioner(final RiveteersRequisitioner card) {

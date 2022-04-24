@@ -35,7 +35,7 @@ public final class CaldaiaStrongarm extends CardImpl {
         this.addAbility(ability);
 
         // Blitz {3}{G}
-        this.addAbility(new BlitzAbility("{3}{G}"));
+        this.addAbility(new BlitzAbility(this, "{3}{G}"));
     }
 
     private CaldaiaStrongarm(final CaldaiaStrongarm card) {

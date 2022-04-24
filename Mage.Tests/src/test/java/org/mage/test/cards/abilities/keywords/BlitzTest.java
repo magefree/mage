@@ -14,6 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class BlitzTest extends CardTestPlayerBase {
 
+    private static final String withBlitz = " with Blitz";
     private static final String decoy = "Riveteers Decoy";
 
     private void assertBlitzed(String cardName, boolean isBlitzed) {
@@ -38,8 +39,7 @@ public class BlitzTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, decoy);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy);
-        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -55,8 +55,7 @@ public class BlitzTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, decoy);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy);
-        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -74,7 +73,6 @@ public class BlitzTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, decoy);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy);
-        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
