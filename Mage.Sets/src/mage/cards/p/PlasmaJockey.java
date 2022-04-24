@@ -33,7 +33,7 @@ public final class PlasmaJockey extends CardImpl {
         this.addAbility(ability);
 
         // Blitz {2}{R}
-        this.addAbility(new BlitzAbility("{2}{R}"));
+        this.addAbility(new BlitzAbility(this, "{2}{R}"));
     }
 
     private PlasmaJockey(final PlasmaJockey card) {

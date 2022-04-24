@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class StreetsOfNewCapenna extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Caldaia Strongarm", "Girder Goons", "Jaxis, the Troublemaker", "Mayhem Patrol", "Night Clubber", "Plasma Jockey", "Pugnacious Pugilist", "Riveteers Decoy", "Riveteers Requisitioner", "Tenacious Underdog", "Workshop Warchief", "Ziatora's Envoy");
 
     private static final StreetsOfNewCapenna instance = new StreetsOfNewCapenna();
 
@@ -260,6 +255,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Indulgence", 227, Rarity.UNCOMMON, mage.cards.t.TaintedIndulgence.class));
         cards.add(new SetCardInfo("Take to the Streets", 158, Rarity.UNCOMMON, mage.cards.t.TakeToTheStreets.class));
         cards.add(new SetCardInfo("Tavern Swindler", 96, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
+        cards.add(new SetCardInfo("Tenacious Underdog", 97, Rarity.RARE, mage.cards.t.TenaciousUnderdog.class));
         cards.add(new SetCardInfo("Titan of Industry", 159, Rarity.MYTHIC, mage.cards.t.TitanOfIndustry.class));
         cards.add(new SetCardInfo("Toluz, Clever Conductor", 228, Rarity.RARE, mage.cards.t.ToluzCleverConductor.class));
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
@@ -288,7 +284,5 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
         cards.add(new SetCardInfo("Ziatora, the Incinerator", 231, Rarity.MYTHIC, mage.cards.z.ZiatoraTheIncinerator.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when shield counters are implemented
     }
 }

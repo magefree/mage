@@ -48,7 +48,7 @@ public final class JaxisTheTroublemaker extends CardImpl {
         this.addAbility(ability);
 
         // Blitz {1}{R}
-        this.addAbility(new BlitzAbility("{1}{R}"));
+        this.addAbility(new BlitzAbility(this, "{1}{R}"));
     }
 
     private JaxisTheTroublemaker(final JaxisTheTroublemaker card) {

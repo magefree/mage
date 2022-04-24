@@ -33,7 +33,7 @@ public final class NightClubber extends CardImpl {
         )));
 
         // Blitz {2}{B}
-        this.addAbility(new BlitzAbility("{2}{B}"));
+        this.addAbility(new BlitzAbility(this, "{2}{B}"));
     }
 
     private NightClubber(final NightClubber card) {

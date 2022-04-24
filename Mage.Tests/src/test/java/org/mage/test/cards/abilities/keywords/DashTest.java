@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class DashTest extends CardTestPlayerBase {
@@ -31,7 +30,6 @@ public class DashTest extends CardTestPlayerBase {
      * may cast this spell for its dash cost. If you do, it gains haste, and
      * it's returned from the battlefield to its owner's hand at the beginning
      * of the next end step.)
-     *
      */
     @Test
     public void testDash() {
@@ -132,5 +130,22 @@ public class DashTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Warbringer", 2);
         assertHandCount(playerA, "Warbringer", 0);
+    }
+
+    @Test
+    public void testRegularCostReduction() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ruby Medallion");
+        addCard(Zone.HAND, playerA, "Screamreach Brawler");
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
+        setChoice(playerA, true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ruby Medallion", 1);
+        assertPermanentCount(playerA, "Screamreach Brawler", 1);
+        assertHandCount(playerA, "Screamreach Brawler", 0);
     }
 }

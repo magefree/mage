@@ -28,7 +28,7 @@ public final class RiveteersDecoy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect()));
 
         // Blitz {3}{G}
-        this.addAbility(new BlitzAbility("{3}{G}"));
+        this.addAbility(new BlitzAbility(this, "{3}{G}"));
     }
 
     private RiveteersDecoy(final RiveteersDecoy card) {

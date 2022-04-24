@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class NewCapennaCommander extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Caldaia Guardian", "Henzie \"Toolbox\" Torre", "Mezzio Mugger", "Wave of Rats");
 
     private static final NewCapennaCommander instance = new NewCapennaCommander();
 
@@ -302,7 +297,5 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Writ of Return", 42, Rarity.RARE, mage.cards.w.WritOfReturn.class));
         cards.add(new SetCardInfo("Zndrsplt's Judgment", 240, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));
         cards.add(new SetCardInfo("Zurzoth, Chaos Rider", 278, Rarity.RARE, mage.cards.z.ZurzothChaosRider.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when shield counters are implemented
     }
 }

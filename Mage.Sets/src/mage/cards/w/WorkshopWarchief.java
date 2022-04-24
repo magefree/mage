@@ -38,7 +38,7 @@ public final class WorkshopWarchief extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new RhinoWarriorToken())));
 
         // Blitz {4}{G}{G}
-        this.addAbility(new BlitzAbility("{4}{G}{G}"));
+        this.addAbility(new BlitzAbility(this, "{4}{G}{G}"));
     }
 
     private WorkshopWarchief(final WorkshopWarchief card) {

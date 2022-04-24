@@ -42,7 +42,7 @@ public final class CaldaiaGuardian extends CardImpl {
         ));
 
         // Blitz {2}{G}
-        this.addAbility(new BlitzAbility("{2}{G}"));
+        this.addAbility(new BlitzAbility(this, "{2}{G}"));
     }
 
     private CaldaiaGuardian(final CaldaiaGuardian card) {
