@@ -128,11 +128,18 @@ public class RemoveCounterCost extends CostImpl {
     private String setText() {
         StringBuilder sb = new StringBuilder("remove ");
         if (counterTypeToRemove != null) {
-            sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ').append(counterTypeToRemove.getName());
+            sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle()));
+            sb.append(' ');
+            sb.append(counterTypeToRemove.getName());
         } else {
             sb.append(CardUtil.numberToText(countersToRemove, "a"));
         }
-        sb.append(countersToRemove == 1 ? " counter from " : " counters from ").append(target.getMaxNumberOfTargets() == 1 ? "a " : "").append(target.getTargetName());
+        sb.append(countersToRemove > 1 ? " counters from " : " counter from ");
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(target.getTargetName());
+        } else {
+            sb.append(CardUtil.addArticle(target.getTargetName()));
+        }
         return sb.toString();
     }
 

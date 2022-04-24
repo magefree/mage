@@ -42,7 +42,7 @@ public final class StickyFingers extends CardImpl {
         // Enchanted creature has menace and "Whenever this creature deals combat damage to a player, create a Treasure token.
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.AURA));
         ability.addEffect(new GainAbilityAttachedEffect(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false), AttachmentType.AURA)
-                .setText("and \"Whenever this creature deals combat damage to a player, create a Treasure token. <i>(It creature can't be blocked except by two or more creatures. The token is an artiface with \"{T}, Sacrifice this artifact: Add one mana of any color.\")</i>"));
+                .setText("and \"Whenever this creature deals combat damage to a player, create a Treasure token.\" <i>(It can't be blocked except by two or more creatures. The token is an artifact with \"{T}, Sacrifice this artifact: Add one mana of any color.\")</i>"));
         this.addAbility(ability);
 
         // When enchanted creature dies, draw a card.

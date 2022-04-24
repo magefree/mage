@@ -42,7 +42,7 @@ public final class RiveteersOverlook extends CardImpl {
         ), false);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                ability, new SacrificeSourceCost(), null, false
+                ability, new SacrificeSourceCost().setText("sacrifice it"), null, false
         )));
     }
 

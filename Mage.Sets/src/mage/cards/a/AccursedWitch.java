@@ -84,8 +84,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
         }
 
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        UUID secondFaceId = card.getSecondCardFace().getId();
-        game.getState().setValue("attachTo:" + secondFaceId, attachTo.getId());
+        game.getState().setValue("attachTo:" + source.getSourceId(), attachTo.getId());
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             attachTo.addAttachment(card.getId(), source, game);
         }

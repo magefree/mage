@@ -286,20 +286,23 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("token that's a copy of target ");
+            sb.append("token that's a copy of ");
         } else {
             sb.append(number);
             sb.append(" ");
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append("tokens that are copies of target ");
+            sb.append("tokens that are copies of ");
         }
-        if (!mode.getTargets().isEmpty()) {
-            sb.append(mode.getTargets().get(0).getTargetName());
-        } else {
+        if (mode.getTargets().isEmpty()) {
             throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
         }
+        String targetName = mode.getTargets().get(0).getTargetName();
+        if (!targetName.startsWith("another target")) {
+            sb.append("target ");
+        }
+        sb.append(targetName);
 
         if (attacking) {
             sb.append(" that are");

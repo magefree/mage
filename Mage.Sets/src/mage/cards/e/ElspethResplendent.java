@@ -46,7 +46,7 @@ public final class ElspethResplendent extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ElspethResplendentLookEffect(), -3));
 
         // −7: Create five 3/3 white Angel creature tokens with flying.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new Angel33Token(), 5)));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new Angel33Token(), 5), -7));
     }
 
     private ElspethResplendent(final ElspethResplendent card) {
@@ -113,7 +113,7 @@ class ElspethResplendentLookEffect extends OneShotEffect {
 
     ElspethResplendentLookEffect() {
         super(Outcome.Benefit);
-        staticText = "look at the top seven cards of your library. You may put a permanent card" +
+        staticText = "look at the top seven cards of your library. You may put a permanent card " +
                 "with mana value 3 or less from among them onto the battlefield with a shield counter on it. " +
                 "Put the rest on the bottom of your library in a random order";
     }

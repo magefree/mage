@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class StimulusPackage extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE, "a Treasure");
 
     public StimulusPackage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{G}");

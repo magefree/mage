@@ -542,7 +542,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         // Angel of Serenity trigger
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack) {
             Cards cards = new CardsImpl(possibleTargets);
             List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
             for (Card card : possibleCards) {
@@ -1043,7 +1043,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack) {
             List<Card> cards = new ArrayList<>();
             for (Player player : game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));

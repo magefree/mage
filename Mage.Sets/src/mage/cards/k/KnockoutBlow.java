@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
 public final class KnockoutBlow extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("a red permanent");
+            = new FilterCreaturePermanent("a red creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

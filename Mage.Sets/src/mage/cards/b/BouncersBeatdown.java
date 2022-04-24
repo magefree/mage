@@ -37,7 +37,7 @@ public final class BouncersBeatdown extends CardImpl {
 
         // This spell costs {2} less to cast if it targets a black permanent.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(3, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Bouncer's Beatdown deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control. If that creature or planeswalker would die this turn, exile it instead.

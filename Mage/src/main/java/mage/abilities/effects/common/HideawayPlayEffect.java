@@ -19,7 +19,7 @@ public class HideawayPlayEffect extends OneShotEffect {
 
     public HideawayPlayEffect() {
         super(Outcome.Benefit);
-        staticText = "You may play the exiled card without paying its mana cost";
+        staticText = "you may play the exiled card without paying its mana cost";
     }
 
     public HideawayPlayEffect(final HideawayPlayEffect effect) {

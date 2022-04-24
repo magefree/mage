@@ -38,7 +38,7 @@ public final class ObscuraInterceptor extends CardImpl {
         // When Obscura Interceptor enters the battlefield, it connives. When it connives this way, return up to one target spell to its owner's hand.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetSpell(0, 1, StaticFilters.FILTER_SPELL));
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConniveSourceEffect(ability)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConniveSourceEffect("it", ability)));
     }
 
     private ObscuraInterceptor(final ObscuraInterceptor card) {
