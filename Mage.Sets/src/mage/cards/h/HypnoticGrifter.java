@@ -25,7 +25,7 @@ public final class HypnoticGrifter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}: Hypnotic Grifter connives.
-        this.addAbility(new SimpleActivatedAbility(new ConniveSourceEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new ConniveSourceEffect("{this}"), new GenericManaCost(3)));
     }
 
     private HypnoticGrifter(final HypnoticGrifter card) {

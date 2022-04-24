@@ -42,7 +42,7 @@ public final class CivilServant extends CardImpl {
 
         // Whenever Civil Servant attacks, you may tap another untapped Citizen you control. If you do, Civil Servant gets +1/+0 and gains lifelink until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+1"),
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"),
                 new TapTargetCost(new TargetControlledPermanent(filter))
         ).addEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn

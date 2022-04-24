@@ -59,7 +59,7 @@ public final class SanctuaryWarden extends CardImpl {
                 new DoIfCostPaid(
                         new DrawCardSourceControllerEffect(1),
                         new RemoveCounterCost(new TargetControlledPermanent(filter))
-                ).addEffect(new CreateTokenEffect(new CitizenGreenWhiteToken()))
+                ).addEffect(new CreateTokenEffect(new CitizenGreenWhiteToken()).concatBy("and"))
         ));
     }
 

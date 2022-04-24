@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class AngelicObserver extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.CITIZEN, "Citizens you control");
+            = new FilterControlledPermanent(SubType.CITIZEN, "Citizen you control");
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
     private static final Hint hint = new ValueHint("Citizens you control", xValue);
 

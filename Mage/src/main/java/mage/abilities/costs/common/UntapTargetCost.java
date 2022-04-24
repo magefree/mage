@@ -57,7 +57,8 @@ public class UntapTargetCost extends CostImpl {
         StringBuilder sb = new StringBuilder("untap ");
         if (target.getMaxNumberOfTargets() > 1) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
-            sb.append(target.getTargetName().replace("you control", "s you control"));
+            sb.append(' ');
+            sb.append(target.getTargetName().replace(" you control", "s you control"));
         } else {
             sb.append(CardUtil.addArticle(target.getTargetName()));
         }

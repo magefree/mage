@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -8,12 +7,12 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -25,8 +24,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class BodyLaunderer extends CardImpl {
@@ -51,11 +51,11 @@ public final class BodyLaunderer extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever another nontoken creature you control dies, Body Launderer connives.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ConniveSourceEffect(), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new ConniveSourceEffect("{this}"), false, filter));
 
         // When Body Launderer dies, return another target non-Rogue creature card with power less than or equal to Body Launderer from your graveyard to the battlefield.
         Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
-                .setText("return another target non-Rogue creature card with power less than or equal to {this} from your graveyard to the battlefield")
+                .setText("return another target non-Rogue creature card with equal or lesser power from your graveyard to the battlefield")
         );
         ability.setTargetAdjuster(BodyLaundererAdjuster.instance);
         this.addAbility(ability);

@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -25,7 +26,7 @@ import java.util.UUID;
 public final class RiveteersAscendancy extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature card with lesser mana value from your graveyard ");
+            = new FilterCreatureCard("creature card with lesser mana value from your graveyard");
 
     static {
         filter.add(RiveteersAscendancyPredicate.instance);
@@ -36,7 +37,8 @@ public final class RiveteersAscendancy extends CardImpl {
 
         // Whenever you sacrifice a creature, you may return target creature card with lesser mana value from your graveyard to the battlefield tapped. Do this only once each turn.
         Ability ability = new SacrificePermanentTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(true)
+                new ReturnFromGraveyardToBattlefieldTargetEffect(true),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE
         ).setDoOnlyOnce(true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

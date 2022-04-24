@@ -37,7 +37,7 @@ public final class FatalGrudge extends CardImpl {
         this.getSpellAbility().addEffect(new FatalGrudgeEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private FatalGrudge(final FatalGrudge card) {

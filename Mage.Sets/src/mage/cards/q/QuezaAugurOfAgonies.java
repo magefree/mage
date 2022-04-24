@@ -30,7 +30,7 @@ public final class QuezaAugurOfAgonies extends CardImpl {
 
         // Whenever you draw a card, target opponent loses 1 life and you gain 1 life.
         Ability ability = new DrawCardControllerTriggeredAbility(new LoseLifeTargetEffect(1), false);
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

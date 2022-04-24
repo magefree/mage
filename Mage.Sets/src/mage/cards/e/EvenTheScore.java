@@ -57,4 +57,9 @@ enum EvenTheScoreCondition implements Condition {
                 .mapToInt(game.getState().getWatcher(CardsDrawnThisTurnWatcher.class)::getCardsDrawnThisTurn)
                 .anyMatch(x -> x >= 4);
     }
+
+    @Override
+    public String toString() {
+        return "an opponent has drawn four or more cards this turn";
+    }
 }

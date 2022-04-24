@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class CapennaExpress extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE, "Treasure");
 
     public CapennaExpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{G}");

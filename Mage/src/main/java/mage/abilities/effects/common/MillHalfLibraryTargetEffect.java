@@ -12,7 +12,7 @@ import mage.players.Player;
  */
 public class MillHalfLibraryTargetEffect extends OneShotEffect {
 
-    private static boolean roundUp;
+    private final boolean roundUp;
 
     public MillHalfLibraryTargetEffect(boolean roundUp) {
         super(Outcome.Benefit);

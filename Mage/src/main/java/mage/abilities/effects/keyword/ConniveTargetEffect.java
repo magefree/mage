@@ -56,7 +56,7 @@ public class ConniveTargetEffect extends OneShotEffect {
             sb.append(", where X is ");
             sb.append(xValue.getMessage());
         }
-        sb.append("<i>(Draw ");
+        sb.append(" <i>(Draw ");
         sb.append(xValue);
         sb.append(" cards, then discard ");
         sb.append(xValue);
