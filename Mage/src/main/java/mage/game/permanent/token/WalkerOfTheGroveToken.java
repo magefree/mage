@@ -9,6 +9,7 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
+
 public final class WalkerOfTheGroveToken extends TokenImpl {
 
     public WalkerOfTheGroveToken() {
