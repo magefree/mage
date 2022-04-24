@@ -282,6 +282,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Workshop Warchief", 165, Rarity.RARE, mage.cards.w.WorkshopWarchief.class));
         cards.add(new SetCardInfo("Wrecking Crew", 132, Rarity.COMMON, mage.cards.w.WreckingCrew.class));
         cards.add(new SetCardInfo("Xander's Lounge", 260, Rarity.RARE, mage.cards.x.XandersLounge.class));
+        cards.add(new SetCardInfo("Ziatora's Envoy", 232, Rarity.RARE, mage.cards.z.ZiatorasEnvoy.class));
         cards.add(new SetCardInfo("Ziatora's Proving Ground", 261, Rarity.RARE, mage.cards.z.ZiatorasProvingGround.class));
         cards.add(new SetCardInfo("Ziatora, the Incinerator", 231, Rarity.MYTHIC, mage.cards.z.ZiatoraTheIncinerator.class));
     }
