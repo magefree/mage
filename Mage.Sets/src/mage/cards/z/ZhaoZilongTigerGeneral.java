@@ -29,7 +29,7 @@ public final class ZhaoZilongTigerGeneral extends CardImpl {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn, "it")));
     }
 
     private ZhaoZilongTigerGeneral(final ZhaoZilongTigerGeneral card) {

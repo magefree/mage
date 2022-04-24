@@ -40,7 +40,7 @@ public final class GoblinSnowman extends CardImpl {
 
         //Whenever Goblin Snowman blocks, prevent all combat damage that would be dealt to and dealt by it this turn.
         Ability ability = new BlocksSourceTriggeredAbility(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn)
-                .setText("prevent all combat damage that would be dealt to"), false);
+                .setText("prevent all combat damage that would be dealt to"));
         ability.addEffect(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn)
                 .setText("and dealt by it this turn"));
         this.addAbility(ability);

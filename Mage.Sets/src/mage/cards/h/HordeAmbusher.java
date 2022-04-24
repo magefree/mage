@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -8,7 +7,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -42,15 +40,13 @@ public final class HordeAmbusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Horde Ambusher blocks, it deals 1 damage to you.
-        this.addAbility(new BlocksSourceTriggeredAbility(new DamageControllerEffect(1, "it"), false));
-        
+        this.addAbility(new BlocksSourceTriggeredAbility(new DamageControllerEffect(1, "it")));
+
         // Morph - Reveal a red card in your hand.
         this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
-        
+
         // When Horde Ambusher is turned face up, target creature can't block this turn.
-        Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
-        effect.setText("target creature can't block this turn");
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

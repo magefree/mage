@@ -7,6 +7,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -15,6 +16,10 @@ import mage.util.CardUtil;
 public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCreaturePermanent filter;
+
+    public BlocksCreatureTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
 
     public BlocksCreatureTriggeredAbility(Effect effect, boolean optional) {
         this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional);
@@ -37,8 +42,14 @@ public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId())
-                && filter.match(game.getPermanent(event.getTargetId()), getControllerId(), this, game);
+        if (!event.getSourceId().equals(this.getSourceId())) {
+            return false;
+        }
+        if (!filter.match(game.getPermanent(event.getTargetId()), getControllerId(), this, game)) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        return true;
     }
 
     @Override
