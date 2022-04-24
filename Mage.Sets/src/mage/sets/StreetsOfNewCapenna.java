@@ -33,6 +33,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Observer", 1, Rarity.UNCOMMON, mage.cards.a.AngelicObserver.class));
         cards.add(new SetCardInfo("Antagonize", 100, Rarity.COMMON, mage.cards.a.Antagonize.class));
         cards.add(new SetCardInfo("Arc Spitter", 233, Rarity.UNCOMMON, mage.cards.a.ArcSpitter.class));
+        cards.add(new SetCardInfo("Arcane Bombardment", 101, Rarity.MYTHIC, mage.cards.a.ArcaneBombardment.class));
         cards.add(new SetCardInfo("Attended Socialite", 133, Rarity.COMMON, mage.cards.a.AttendedSocialite.class));
         cards.add(new SetCardInfo("Aven Heartstabber", 166, Rarity.RARE, mage.cards.a.AvenHeartstabber.class));
         cards.add(new SetCardInfo("Backstreet Bruiser", 35, Rarity.COMMON, mage.cards.b.BackstreetBruiser.class));
@@ -99,13 +100,16 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Elspeth Resplendent", 11, Rarity.MYTHIC, mage.cards.e.ElspethResplendent.class));
         cards.add(new SetCardInfo("Endless Detour", 183, Rarity.RARE, mage.cards.e.EndlessDetour.class));
         cards.add(new SetCardInfo("Errant, Street Artist", 41, Rarity.RARE, mage.cards.e.ErrantStreetArtist.class));
+        cards.add(new SetCardInfo("Even the Score", 42, Rarity.MYTHIC, mage.cards.e.EvenTheScore.class));
         cards.add(new SetCardInfo("Evolving Door", 144, Rarity.RARE, mage.cards.e.EvolvingDoor.class));
         cards.add(new SetCardInfo("Exhibition Magician", 106, Rarity.COMMON, mage.cards.e.ExhibitionMagician.class));
         cards.add(new SetCardInfo("Exotic Pets", 185, Rarity.UNCOMMON, mage.cards.e.ExoticPets.class));
         cards.add(new SetCardInfo("Expendable Lackey", 43, Rarity.COMMON, mage.cards.e.ExpendableLackey.class));
         cards.add(new SetCardInfo("Extract the Truth", 78, Rarity.COMMON, mage.cards.e.ExtractTheTruth.class));
+        cards.add(new SetCardInfo("Extraction Specialist", 12, Rarity.RARE, mage.cards.e.ExtractionSpecialist.class));
         cards.add(new SetCardInfo("Faerie Vandal", 44, Rarity.UNCOMMON, mage.cards.f.FaerieVandal.class));
         cards.add(new SetCardInfo("Fake Your Own Death", 79, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
+        cards.add(new SetCardInfo("Falco Spara, Pactweaver", 186, Rarity.MYTHIC, mage.cards.f.FalcoSparaPactweaver.class));
         cards.add(new SetCardInfo("Fatal Grudge", 187, Rarity.UNCOMMON, mage.cards.f.FatalGrudge.class));
         cards.add(new SetCardInfo("Fight Rigging", 145, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Fleetfoot Dancer", 188, Rarity.RARE, mage.cards.f.FleetfootDancer.class));
@@ -116,6 +120,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Gala Greeters", 148, Rarity.RARE, mage.cards.g.GalaGreeters.class));
         cards.add(new SetCardInfo("Gathering Throng", 13, Rarity.COMMON, mage.cards.g.GatheringThrong.class));
         cards.add(new SetCardInfo("Getaway Car", 237, Rarity.RARE, mage.cards.g.GetawayCar.class));
+        cards.add(new SetCardInfo("Giada, Font of Hope", 14, Rarity.RARE, mage.cards.g.GiadaFontOfHope.class));
         cards.add(new SetCardInfo("Gilded Pinions", 238, Rarity.COMMON, mage.cards.g.GildedPinions.class));
         cards.add(new SetCardInfo("Girder Goons", 80, Rarity.COMMON, mage.cards.g.GirderGoons.class));
         cards.add(new SetCardInfo("Glamorous Outlaw", 190, Rarity.COMMON, mage.cards.g.GlamorousOutlaw.class));
@@ -150,12 +155,14 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Ledger Shredder", 46, Rarity.RARE, mage.cards.l.LedgerShredder.class));
         cards.add(new SetCardInfo("Light 'Em Up", 113, Rarity.COMMON, mage.cards.l.LightEmUp.class));
         cards.add(new SetCardInfo("Lord Xander, the Collector", 197, Rarity.MYTHIC, mage.cards.l.LordXanderTheCollector.class));
+        cards.add(new SetCardInfo("Luxior, Giada's Gift", 240, Rarity.MYTHIC, mage.cards.l.LuxiorGiadasGift.class));
         cards.add(new SetCardInfo("Luxurious Libation", 152, Rarity.UNCOMMON, mage.cards.l.LuxuriousLibation.class));
         cards.add(new SetCardInfo("Maestros Charm", 199, Rarity.UNCOMMON, mage.cards.m.MaestrosCharm.class));
         cards.add(new SetCardInfo("Maestros Diabolist", 200, Rarity.RARE, mage.cards.m.MaestrosDiabolist.class));
         cards.add(new SetCardInfo("Maestros Initiate", 86, Rarity.COMMON, mage.cards.m.MaestrosInitiate.class));
         cards.add(new SetCardInfo("Maestros Theater", 251, Rarity.COMMON, mage.cards.m.MaestrosTheater.class));
         cards.add(new SetCardInfo("Mage's Attendant", 21, Rarity.UNCOMMON, mage.cards.m.MagesAttendant.class));
+        cards.add(new SetCardInfo("Majestic Metamorphosis", 48, Rarity.COMMON, mage.cards.m.MajesticMetamorphosis.class));
         cards.add(new SetCardInfo("Make Disappear", 49, Rarity.COMMON, mage.cards.m.MakeDisappear.class));
         cards.add(new SetCardInfo("Masked Bandits", 201, Rarity.COMMON, mage.cards.m.MaskedBandits.class));
         cards.add(new SetCardInfo("Mayhem Patrol", 114, Rarity.COMMON, mage.cards.m.MayhemPatrol.class));
@@ -204,6 +211,8 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Revel Ruiner", 91, Rarity.COMMON, mage.cards.r.RevelRuiner.class));
         cards.add(new SetCardInfo("Revelation of Power", 28, Rarity.COMMON, mage.cards.r.RevelationOfPower.class));
         cards.add(new SetCardInfo("Rhox Pummeler", 155, Rarity.COMMON, mage.cards.r.RhoxPummeler.class));
+        cards.add(new SetCardInfo("Rigo, Streetwise Mentor", 215, Rarity.RARE, mage.cards.r.RigoStreetwiseMentor.class));
+        cards.add(new SetCardInfo("Riveteers Ascendancy", 216, Rarity.RARE, mage.cards.r.RiveteersAscendancy.class));
         cards.add(new SetCardInfo("Riveteers Charm", 217, Rarity.UNCOMMON, mage.cards.r.RiveteersCharm.class));
         cards.add(new SetCardInfo("Riveteers Decoy", 156, Rarity.UNCOMMON, mage.cards.r.RiveteersDecoy.class));
         cards.add(new SetCardInfo("Riveteers Initiate", 120, Rarity.COMMON, mage.cards.r.RiveteersInitiate.class));
@@ -217,6 +226,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Run Out of Town", 58, Rarity.COMMON, mage.cards.r.RunOutOfTown.class));
         cards.add(new SetCardInfo("Sanctuary Warden", 30, Rarity.MYTHIC, mage.cards.s.SanctuaryWarden.class));
         cards.add(new SetCardInfo("Sanguine Spy", 93, Rarity.RARE, mage.cards.s.SanguineSpy.class));
+        cards.add(new SetCardInfo("Scheming Fence", 219, Rarity.RARE, mage.cards.s.SchemingFence.class));
         cards.add(new SetCardInfo("Scuttling Butler", 244, Rarity.UNCOMMON, mage.cards.s.ScuttlingButler.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
         cards.add(new SetCardInfo("Security Rhox", 220, Rarity.UNCOMMON, mage.cards.s.SecurityRhox.class));
@@ -247,9 +257,11 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Take to the Streets", 158, Rarity.UNCOMMON, mage.cards.t.TakeToTheStreets.class));
         cards.add(new SetCardInfo("Tavern Swindler", 96, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
         cards.add(new SetCardInfo("Titan of Industry", 159, Rarity.MYTHIC, mage.cards.t.TitanOfIndustry.class));
+        cards.add(new SetCardInfo("Toluz, Clever Conductor", 228, Rarity.RARE, mage.cards.t.ToluzCleverConductor.class));
         cards.add(new SetCardInfo("Topiary Stomper", 160, Rarity.RARE, mage.cards.t.TopiaryStomper.class));
         cards.add(new SetCardInfo("Torch Breath", 127, Rarity.UNCOMMON, mage.cards.t.TorchBreath.class));
         cards.add(new SetCardInfo("Tramway Station", 258, Rarity.COMMON, mage.cards.t.TramwayStation.class));
+        cards.add(new SetCardInfo("Undercover Operative", 63, Rarity.RARE, mage.cards.u.UndercoverOperative.class));
         cards.add(new SetCardInfo("Unleash the Inferno", 229, Rarity.RARE, mage.cards.u.UnleashTheInferno.class));
         cards.add(new SetCardInfo("Unlicensed Hearse", 246, Rarity.RARE, mage.cards.u.UnlicensedHearse.class));
         cards.add(new SetCardInfo("Unlucky Witness", 128, Rarity.UNCOMMON, mage.cards.u.UnluckyWitness.class));

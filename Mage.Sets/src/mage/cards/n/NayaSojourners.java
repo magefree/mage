@@ -2,14 +2,17 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CycleOrDiesTriggeredAbility;
+import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,8 +31,12 @@ public final class NayaSojourners extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When you cycle Naya Sojourners or it dies, you may put a +1/+1 counter on target creature.
-        Ability ability = new CycleOrDiesTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true
+        Ability ability = new OrTriggeredAbility(Zone.ALL,
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                true,
+                "When you cycle {this} or it dies, ",
+                new CycleTriggeredAbility(null, true),
+                new DiesSourceTriggeredAbility(null, true)
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
