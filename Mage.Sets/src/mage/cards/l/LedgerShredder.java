@@ -29,7 +29,7 @@ public final class LedgerShredder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a player casts their second spell each turn, Ledger Shredder connives.
-        this.addAbility(new CastSecondSpellTriggeredAbility(new ConniveSourceEffect(), TargetController.ANY));
+        this.addAbility(new CastSecondSpellTriggeredAbility(new ConniveSourceEffect("{this}"), TargetController.ANY));
     }
 
     private LedgerShredder(final LedgerShredder card) {

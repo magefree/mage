@@ -31,7 +31,7 @@ public final class GirderGoons extends CardImpl {
         )));
 
         // Blitz {3}{B}
-        this.addAbility(new BlitzAbility("{3}{B}"));
+        this.addAbility(new BlitzAbility(this, "{3}{B}"));
     }
 
     private GirderGoons(final GirderGoons card) {

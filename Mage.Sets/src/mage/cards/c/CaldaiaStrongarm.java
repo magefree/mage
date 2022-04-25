@@ -29,13 +29,13 @@ public final class CaldaiaStrongarm extends CardImpl {
 
         // When Caldaia Strongarm enters the battlefield, put two +1/+1 counters on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Blitz {3}{G}
-        this.addAbility(new BlitzAbility("{3}{G}"));
+        this.addAbility(new BlitzAbility(this, "{3}{G}"));
     }
 
     private CaldaiaStrongarm(final CaldaiaStrongarm card) {

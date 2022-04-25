@@ -1,43 +1,38 @@
-
 package mage.abilities.costs;
 
+import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
 
 /**
  * Alternative costs
  *
- * @author LevelX2
- *
  * @param <T>
+ * @author LevelX2
  */
-public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends CostsImpl<Cost> implements AlternativeCost2 {
+public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends CostsImpl<Cost> implements AlternativeCost {
 
     protected String name;
     protected String reminderText;
-    protected String delimiter;
+    protected boolean isMana;
 
     protected boolean activated;
 
-    public AlternativeCost2Impl(String name, String reminderText, Cost cost) {
-        this(name, " ", reminderText, cost);
-    }
-
-    public AlternativeCost2Impl(String name, String delimiter, String reminderText, Cost cost) {
+    public AlternativeCostImpl(String name, String reminderText, Cost cost) {
         this.activated = false;
         this.name = name;
-        this.delimiter = delimiter;
+        this.isMana = cost instanceof ManaCost;
         if (reminderText != null) {
-            this.reminderText = "<i>" + reminderText + "</i>";
+            this.reminderText = "<i>(" + reminderText + ")</i>";
         }
         this.add(cost);
     }
 
-    public AlternativeCost2Impl(final AlternativeCost2Impl cost) {
+    public AlternativeCostImpl(final AlternativeCostImpl<?> cost) {
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;
         this.activated = cost.activated;
-        this.delimiter = cost.delimiter;
+        this.isMana = cost.isMana;
     }
 
     @Override
@@ -57,7 +52,7 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         if (onlyCost) {
             return getText();
         } else {
-            return (name != null ? name : "") + (delimiter != null ? delimiter : "") + getText();
+            return (name != null ? name : "") + (isMana ? " " : "&mdash;") + getText() + (isMana ? "" : '.');
         }
     }
 
@@ -80,7 +75,7 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
      * message.
      *
      * @param position - if there are multiple costs, it's the postion the cost
-     * is set (starting with 0)
+     *                 is set (starting with 0)
      * @return
      */
     @Override
@@ -92,7 +87,6 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
 
     /**
      * If the player intends to pay the cost, the cost will be activated
-     *
      */
     @Override
     public void activate() {
@@ -101,7 +95,6 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
 
     /**
      * Reset the activate and count information
-     *
      */
     @Override
     public void reset() {
@@ -120,8 +113,8 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
     }
 
     @Override
-    public AlternativeCost2Impl copy() {
-        return new AlternativeCost2Impl(this);
+    public AlternativeCostImpl<?> copy() {
+        return new AlternativeCostImpl<>(this);
     }
 
     @Override
@@ -131,5 +124,4 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         }
         return null;
     }
-
 }

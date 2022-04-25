@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -34,7 +34,7 @@ public final class EvolvingDoor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{G}");
 
         // {1}, {T}, Sacrifice a creature: Count the colors of the sacrificed creature, then search your library for a creature card that's exactly that many colors plus one. Exile that card, then shuffle. You may cast the exiled card. Activate only as a sorcery.
-        Ability ability = new SimpleActivatedAbility(new EvolvingDoorEffect(), new GenericManaCost(1));
+        Ability ability = new ActivateAsSorceryActivatedAbility(new EvolvingDoorEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);

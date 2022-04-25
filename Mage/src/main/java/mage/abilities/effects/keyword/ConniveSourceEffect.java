@@ -17,19 +17,26 @@ import mage.util.CardUtil;
  */
 public class ConniveSourceEffect extends OneShotEffect {
 
+    private final String selfName;
     private final ReflexiveTriggeredAbility ability;
 
     public ConniveSourceEffect() {
-        this((ReflexiveTriggeredAbility) null);
+        this("it");
     }
 
-    public ConniveSourceEffect(ReflexiveTriggeredAbility ability) {
+    public ConniveSourceEffect(String selfName) {
+        this(selfName, null);
+    }
+
+    public ConniveSourceEffect(String selfName, ReflexiveTriggeredAbility ability) {
         super(Outcome.Benefit);
+        this.selfName = selfName;
         this.ability = ability;
     }
 
     private ConniveSourceEffect(final ConniveSourceEffect effect) {
         super(effect);
+        this.selfName = effect.selfName;
         this.ability = effect.ability;
     }
 
@@ -74,10 +81,10 @@ public class ConniveSourceEffect extends OneShotEffect {
             return staticText;
         }
         if (ability == null) {
-            return "it connives. <i>(Draw a card, then discard a card. " +
+            return selfName + " connives. <i>(Draw a card, then discard a card. " +
                     "If you discarded a nonland card, put a +1/+1 counter on this creature.)</i>";
         }
-        return "it connives. When it connives this way, " +
+        return selfName + " connives. When it connives this way, " +
                 CardUtil.getTextWithFirstCharLowerCase(ability.getRule()) +
                 " <i>(To have a creature connive, draw a card, then discard a card. " +
                 "If you discarded a nonland card, put a +1/+1 counter on that creature.)</i>";

@@ -1288,8 +1288,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 114.2a
         ActivationStatus activationStatus = playLandAbility.canActivate(this.playerId, game);
         if (ignoreTiming) {
-            if (!canPlayLand()) {
-                return false; // ignore timing does not mean that more lands than normal can be played
+            if (!canPlayLand() || !isActivePlayer(game)) {
+                // ignore timing does not mean that more lands than normal can be played
+                // it also has to be your turn
+                return false;
             }
         } else {
             if (!activationStatus.canActivate()) {
@@ -3607,9 +3609,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
-                                if (cost instanceof AlternativeCost2) {
-                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
-                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                if (cost instanceof AlternativeCost) {
+                                    if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
                                     }
                                 } else {
                                     if (cost instanceof ManaCost) {
@@ -3656,9 +3658,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
-                                if (cost instanceof AlternativeCost2) {
-                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
-                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                if (cost instanceof AlternativeCost) {
+                                    if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
                                     }
                                 } else {
                                     if (cost instanceof ManaCost) {

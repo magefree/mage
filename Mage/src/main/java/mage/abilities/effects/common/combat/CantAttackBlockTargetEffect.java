@@ -45,7 +45,13 @@ public class CantAttackBlockTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("target creature can't attack or block ");
+        StringBuilder sb = new StringBuilder("target ");
+        if (mode.getTargets().isEmpty()) {
+            sb.append("creature");
+        } else {
+            sb.append(mode.getTargets().get(0).getTargetName());
+        }
+        sb.append(" can't attack or block ");
         if (duration == Duration.EndOfTurn) {
             sb.append("this turn");
         } else {

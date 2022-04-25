@@ -46,7 +46,7 @@ public final class FightRigging extends CardImpl {
                 TargetController.YOU, false
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new HideawayPlayEffect(), condition, "then if you control a creature " +
+                new HideawayPlayEffect(), condition, "Then if you control a creature " +
                 "with power 7 or greater, you may play the exiled card without paying its mana cost"
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());

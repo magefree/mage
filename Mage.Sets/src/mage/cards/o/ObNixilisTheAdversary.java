@@ -73,7 +73,7 @@ class ObNixilisTheAdversaryCasualtyAbility extends StaticAbility {
 
     public ObNixilisTheAdversaryCasualtyAbility(Card card) {
         super(Zone.ALL, new InfoEffect(
-                "Casualty X. <i>(As you cast this spell, " +
+                "Casualty X. The copy isn't legendary and has starting loyalty X. <i>(As you cast this spell, " +
                         "you may sacrifice a creature with power X. " +
                         "When you do, copy this spell. The copy becomes a token.)</i>"
         ));

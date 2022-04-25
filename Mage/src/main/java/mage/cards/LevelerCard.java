@@ -2,11 +2,13 @@
 
 package mage.cards;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.CardType;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class LevelerCard extends CardImpl {
@@ -30,4 +32,9 @@ public abstract class LevelerCard extends CardImpl {
         this.maxLevelCounters = maxLevelCounters;
     }
 
+    protected void addAbilities(List<Ability> abilities) {
+        for (Ability ability : abilities) {
+            addAbility(ability);
+        }
+    }
 }

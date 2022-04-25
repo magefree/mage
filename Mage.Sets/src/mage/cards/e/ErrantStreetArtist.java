@@ -3,6 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -54,6 +55,7 @@ public final class ErrantStreetArtist extends CardImpl {
 
         // {1}{U}, {T}: Copy target spell you control that wasn't cast. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(), new ManaCostsImpl<>("{1}{U}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

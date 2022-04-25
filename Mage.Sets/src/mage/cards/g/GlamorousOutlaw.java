@@ -29,7 +29,7 @@ public final class GlamorousOutlaw extends CardImpl {
 
         // When Glamorous Outlaw enters the battlefield, it deals 2 damage to each opponent and you scry 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamagePlayersEffect(2, TargetController.OPPONENT)
+                new DamagePlayersEffect(2, TargetController.OPPONENT, "it")
         );
         ability.addEffect(new ScryEffect(2, false).concatBy("and you"));
         this.addAbility(ability);

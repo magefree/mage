@@ -29,7 +29,7 @@ public final class PsychicPickpocket extends CardImpl {
         // When Psychic Pickpocket enters the battlefield, it connives. When it connives this way, return up to one target nonland permanent to its owner's hand.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetNonlandPermanent(0, 1));
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConniveSourceEffect(ability)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConniveSourceEffect("it", ability)));
     }
 
     private PsychicPickpocket(final PsychicPickpocket card) {

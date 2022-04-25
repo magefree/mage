@@ -6,7 +6,7 @@ Assist|new|
 Basic landcycling|cost|
 Battle cry|new|
 Bestow|card, manaString|
-Blitz|manaString|
+Blitz|card, manaString|
 Bloodthirst|number|
 Bushido|number|
 Buyback|manaString|

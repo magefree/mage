@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
@@ -14,11 +15,9 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -27,6 +26,13 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public final class SereneMaster extends CardImpl {
+
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creature it's blocking");
+
+    static {
+        filter.add(BlockingOrBlockedBySourcePredicate.BLOCKED_BY);
+    }
 
     public SereneMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -37,8 +43,9 @@ public final class SereneMaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Serene Master blocks, exchange its power and the power of target creature it's blocking until end of combat.
-        this.addAbility(new BlocksSourceTriggeredAbility(new SereneMasterEffect(), false));
-
+        Ability ability = new BlocksSourceTriggeredAbility(new SereneMasterEffect());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     private SereneMaster(final SereneMaster card) {
@@ -69,31 +76,19 @@ class SereneMasterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (controller != null && sourceCreature != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature it's blocking");
-            filter.add(new BlockedByIdPredicate((source.getSourceId())));
-            Target target = new TargetCreaturePermanent(filter);
-            if (target.canChoose(controller.getId(), source, game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Permanent attackingCreature = game.getPermanent(target.getFirstTarget());
-                    if (attackingCreature != null) {
-                        int newSourcePower = attackingCreature.getPower().getValue();
-                        int newAttackerPower = sourceCreature.getPower().getValue();
-                        ContinuousEffect effect = new SetPowerToughnessTargetEffect(newSourcePower, sourceCreature.getToughness().getValue(), Duration.EndOfCombat);
-                        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                        game.addEffect(effect, source);
-                        effect = new SetPowerToughnessTargetEffect(newAttackerPower, attackingCreature.getToughness().getValue(), Duration.EndOfCombat);
-                        effect.setTargetPointer(new FixedTarget(attackingCreature.getId(), game));
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                }
-            }
-
+        Permanent attackingCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (sourceCreature != null && attackingCreature != null) {
+            StaticValue newSourcePower = StaticValue.get(attackingCreature.getPower().getValue());
+            StaticValue newAttackerPower = StaticValue.get(sourceCreature.getPower().getValue());
+            ContinuousEffect effect = new SetPowerToughnessTargetEffect(newSourcePower, null, Duration.EndOfCombat);
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+            game.addEffect(effect, source);
+            effect = new SetPowerToughnessTargetEffect(newAttackerPower, null, Duration.EndOfCombat);
+            effect.setTargetPointer(new FixedTarget(attackingCreature.getId(), game));
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }
-
 }

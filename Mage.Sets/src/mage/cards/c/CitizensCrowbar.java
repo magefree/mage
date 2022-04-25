@@ -43,6 +43,7 @@ public final class CitizensCrowbar extends CardImpl {
                 new DestroyTargetEffect(), new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT),
                 new SacrificeAttachmentCost(), new ManaCostsImpl<>("{W}"), new TapSourceCost()
         ));
+        this.addAbility(ability);
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));

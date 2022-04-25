@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class NewCapennaCommander extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Caldaia Guardian", "Henzie \"Toolbox\" Torre", "Mezzio Mugger", "Wave of Rats");
 
     private static final NewCapennaCommander instance = new NewCapennaCommander();
 
@@ -61,6 +56,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Boxing Ring", 91, Rarity.RARE, mage.cards.b.BoxingRing.class));
         cards.add(new SetCardInfo("Bribe Taker", 55, Rarity.RARE, mage.cards.b.BribeTaker.class));
         cards.add(new SetCardInfo("Brokers Confluence", 68, Rarity.RARE, mage.cards.b.BrokersConfluence.class));
+        cards.add(new SetCardInfo("Cabaretti Confluence", 69, Rarity.RARE, mage.cards.c.CabarettiConfluence.class));
         cards.add(new SetCardInfo("Caldaia Guardian", 56, Rarity.RARE, mage.cards.c.CaldaiaGuardian.class));
         cards.add(new SetCardInfo("Call the Coppercoats", 195, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
         cards.add(new SetCardInfo("Call the Skybreaker", 333, Rarity.RARE, mage.cards.c.CallTheSkybreaker.class));
@@ -142,6 +138,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grateful Apparition", 202, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Graveblade Marauder", 251, Rarity.RARE, mage.cards.g.GravebladeMarauder.class));
         cards.add(new SetCardInfo("Greenwarden of Murasa", 294, Rarity.MYTHIC, mage.cards.g.GreenwardenOfMurasa.class));
+        cards.add(new SetCardInfo("Grime Gorger", 72, Rarity.RARE, mage.cards.g.GrimeGorger.class));
         cards.add(new SetCardInfo("Grixis Panorama", 407, Rarity.COMMON, mage.cards.g.GrixisPanorama.class));
         cards.add(new SetCardInfo("Harmonize", 295, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Hex", 252, Rarity.RARE, mage.cards.h.Hex.class));
@@ -179,6 +176,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("March of the Multitudes", 346, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
+        cards.add(new SetCardInfo("Mask of the Schemer", 28, Rarity.RARE, mage.cards.m.MaskOfTheSchemer.class));
         cards.add(new SetCardInfo("Midnight Clock", 226, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Migration Path", 301, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mimic Vat", 372, Rarity.RARE, mage.cards.m.MimicVat.class));
@@ -227,6 +225,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sandwurm Convergence", 308, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Savage Lands", 424, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 309, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Scepter of Celebration", 64, Rarity.RARE, mage.cards.s.ScepterOfCelebration.class));
         cards.add(new SetCardInfo("Scute Swarm", 310, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Seaside Citadel", 425, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 350, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
@@ -288,6 +287,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 357, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
         cards.add(new SetCardInfo("Wall of Roots", 319, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Warstorm Surge", 277, Rarity.RARE, mage.cards.w.WarstormSurge.class));
+        cards.add(new SetCardInfo("Waste Management", 40, Rarity.RARE, mage.cards.w.WasteManagement.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 384, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Whirler Rogue", 238, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 320, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
@@ -302,7 +302,5 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Writ of Return", 42, Rarity.RARE, mage.cards.w.WritOfReturn.class));
         cards.add(new SetCardInfo("Zndrsplt's Judgment", 240, Rarity.RARE, mage.cards.z.ZndrspltsJudgment.class));
         cards.add(new SetCardInfo("Zurzoth, Chaos Rider", 278, Rarity.RARE, mage.cards.z.ZurzothChaosRider.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when shield counters are implemented
     }
 }
