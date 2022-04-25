@@ -329,12 +329,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
     }
 
-    protected void addAbilities(List<Ability> abilities) {
-        for (Ability ability : abilities) {
-            addAbility(ability);
-        }
-    }
-
     protected void addAbility(Ability ability, Watcher watcher) {
         addAbility(ability);
         ability.addWatcher(watcher);
