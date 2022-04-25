@@ -18,6 +18,15 @@ public final class SpiritGreenToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(3);
+        }
+    }
+
     public SpiritGreenToken(final SpiritGreenToken token) {
         super(token);
     }

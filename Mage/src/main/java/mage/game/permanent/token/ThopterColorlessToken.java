@@ -40,6 +40,9 @@ public final class ThopterColorlessToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ORI")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("2XM")) {
+            this.setTokenType(1);
+        }
 
     }
 

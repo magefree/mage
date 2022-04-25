@@ -27,6 +27,15 @@ public final class ThopterToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("ALA", "C16", "C18", "2XM");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("2XM")) {
+            this.setTokenType(2);
+        }
+    }
+
     public ThopterToken(final ThopterToken token) {
         super(token);
     }

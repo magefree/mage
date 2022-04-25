@@ -22,6 +22,15 @@ public final class ConstructToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("ZNR", "NEO");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(1);
+        }
+    }
+
     public ConstructToken(final ConstructToken token) {
         super(token);
     }

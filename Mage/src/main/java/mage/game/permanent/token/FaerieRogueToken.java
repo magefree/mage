@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -23,6 +24,15 @@ public final class FaerieRogueToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("MOR", "MM2", "ZNC", "UMA", "SLD");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SLD")) {
+            setTokenType(RandomUtil.nextInt(4) + 1);
+        }
     }
 
     public FaerieRogueToken(final FaerieRogueToken token) {

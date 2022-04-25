@@ -25,6 +25,15 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         availableImageSetCodes.addAll(Arrays.asList("MH1", "C21", "UMA"));
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("UMA")) {
+            this.setTokenType(2);
+        }
+    }
+
     public WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {
         super(token);
     }

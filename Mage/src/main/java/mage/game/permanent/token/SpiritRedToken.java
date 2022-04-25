@@ -24,6 +24,15 @@ public final class SpiritRedToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("NEO");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(4);
+        }
+    }
+
     public SpiritRedToken(final SpiritRedToken token) {
         super(token);
     }

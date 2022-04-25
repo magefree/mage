@@ -27,8 +27,8 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
 
-        if (getOriginalExpansionSetCode().equals("C13")) {
-            this.setTokenType(2);
+        if (getOriginalExpansionSetCode().equals("UMA")) {
+            this.setTokenType(1);
         }
     }
 

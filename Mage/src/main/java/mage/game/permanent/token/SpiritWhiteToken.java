@@ -39,6 +39,9 @@ public final class SpiritWhiteToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
             setTokenType(2);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("UMA")) {
+            setTokenType(1);
+        }
     }
 
     public SpiritWhiteToken(final SpiritWhiteToken token) {

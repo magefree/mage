@@ -32,6 +32,10 @@ public final class SpiritToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
             setTokenType(2);
         }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(1);
+        }
     }
 
     public SpiritToken(final SpiritToken token) {

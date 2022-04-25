@@ -32,8 +32,13 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
         }
-
         if (getOriginalExpansionSetCode().equals("SOM")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("CM2")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("2XM")) {
             this.setTokenType(2);
         }
     }

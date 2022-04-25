@@ -22,6 +22,15 @@ public final class SpiritGreenXToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("NEO");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(2);
+        }
+    }
+
     public SpiritGreenXToken(final SpiritGreenXToken token) {
         super(token);
     }
