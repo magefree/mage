@@ -155,6 +155,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Lord Xander, the Collector", 197, Rarity.MYTHIC, mage.cards.l.LordXanderTheCollector.class));
         cards.add(new SetCardInfo("Luxior, Giada's Gift", 240, Rarity.MYTHIC, mage.cards.l.LuxiorGiadasGift.class));
         cards.add(new SetCardInfo("Luxurious Libation", 152, Rarity.UNCOMMON, mage.cards.l.LuxuriousLibation.class));
+        cards.add(new SetCardInfo("Maestros Ascendancy", 198, Rarity.RARE, mage.cards.m.MaestrosAscendancy.class));
         cards.add(new SetCardInfo("Maestros Charm", 199, Rarity.UNCOMMON, mage.cards.m.MaestrosCharm.class));
         cards.add(new SetCardInfo("Maestros Diabolist", 200, Rarity.RARE, mage.cards.m.MaestrosDiabolist.class));
         cards.add(new SetCardInfo("Maestros Initiate", 86, Rarity.COMMON, mage.cards.m.MaestrosInitiate.class));
