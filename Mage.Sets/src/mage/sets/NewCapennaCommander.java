@@ -53,6 +53,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodthirsty Blade", 362, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
         cards.add(new SetCardInfo("Body Count", 34, Rarity.RARE, mage.cards.b.BodyCount.class));
         cards.add(new SetCardInfo("Boros Charm", 332, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
+        cards.add(new SetCardInfo("Boss's Chauffeur", 13, Rarity.RARE, mage.cards.b.BosssChauffeur.class));
         cards.add(new SetCardInfo("Boxing Ring", 91, Rarity.RARE, mage.cards.b.BoxingRing.class));
         cards.add(new SetCardInfo("Bribe Taker", 55, Rarity.RARE, mage.cards.b.BribeTaker.class));
         cards.add(new SetCardInfo("Brokers Confluence", 68, Rarity.RARE, mage.cards.b.BrokersConfluence.class));
