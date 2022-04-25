@@ -68,29 +68,22 @@ public enum TargetController {
 
             switch (targetOwner) {
                 case YOU:
-                    if (card.isOwnedBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return card.isOwnedBy(playerId);
                 case OPPONENT:
-                    if (!card.isOwnedBy(playerId)
-                            && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !card.isOwnedBy(playerId)
+                            && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game);
                 case NOT_YOU:
-                    if (!card.isOwnedBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !card.isOwnedBy(playerId);
                 case ENCHANTED:
                     Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
+                case SOURCE_TARGETS:
+                    return card.isOwnedBy(input.getSource().getFirstTarget());
                 case ANY:
                     return true;
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override
@@ -117,24 +110,17 @@ public enum TargetController {
 
             switch (targetPlayer) {
                 case YOU:
-                    if (player.getId().equals(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return player.getId().equals(playerId);
                 case OPPONENT:
-                    if (!player.getId().equals(playerId) &&
-                            game.getPlayer(playerId).hasOpponent(player.getId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !player.getId().equals(playerId) &&
+                            game.getPlayer(playerId).hasOpponent(player.getId(), game);
                 case NOT_YOU:
-                    if (!player.getId().equals(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !player.getId().equals(playerId);
+                case SOURCE_TARGETS:
+                    return player.equals(input.getSource().getFirstTarget());
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override
@@ -158,39 +144,26 @@ public enum TargetController {
 
             switch (controller) {
                 case YOU:
-                    if (object.isControlledBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return object.isControlledBy(playerId);
                 case TEAM:
-                    if (!game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !game.getPlayer(playerId).hasOpponent(object.getControllerId(), game);
                 case OPPONENT:
-                    if (!object.isControlledBy(playerId)
-                            && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                        return true;
-                    }
-                    break;
+                    return !object.isControlledBy(playerId)
+                            && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game);
                 case NOT_YOU:
-                    if (!object.isControlledBy(playerId)) {
-                        return true;
-                    }
-                    break;
+                    return !object.isControlledBy(playerId);
                 case ACTIVE:
-                    if (object.isControlledBy(game.getActivePlayerId())) {
-                        return true;
-                    }
-                    break;
+                    return object.isControlledBy(game.getActivePlayerId());
                 case ENCHANTED:
                     Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
+                case SOURCE_TARGETS:
+                    return object.isControlledBy(input.getSource().getFirstTarget());
                 case ANY:
                     return true;
+                default:
+                    throw new UnsupportedOperationException("TargetController not supported");
             }
-
-            return false;
         }
 
         @Override
