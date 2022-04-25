@@ -225,6 +225,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sandwurm Convergence", 308, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Savage Lands", 424, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 309, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Scepter of Celebration", 64, Rarity.RARE, mage.cards.s.ScepterOfCelebration.class));
         cards.add(new SetCardInfo("Scute Swarm", 310, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Seaside Citadel", 425, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 350, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
