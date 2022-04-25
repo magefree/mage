@@ -129,6 +129,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gahiji, Honored One", 340, Rarity.MYTHIC, mage.cards.g.GahijiHonoredOne.class));
         cards.add(new SetCardInfo("Game Trail", 405, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Garruk's Uprising", 292, Rarity.UNCOMMON, mage.cards.g.GarruksUprising.class));
+        cards.add(new SetCardInfo("Gavel of the Righteous", 83, Rarity.RARE, mage.cards.g.GavelOfTheRighteous.class));
         cards.add(new SetCardInfo("Gavony Township", 406, Rarity.RARE, mage.cards.g.GavonyTownship.class));
         cards.add(new SetCardInfo("Generous Gift", 201, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghostly Pilferer", 223, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
