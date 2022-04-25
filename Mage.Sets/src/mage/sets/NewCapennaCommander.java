@@ -222,6 +222,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("River's Rebuke", 231, Rarity.RARE, mage.cards.r.RiversRebuke.class));
         cards.add(new SetCardInfo("Roalesk, Apex Hybrid", 349, Rarity.MYTHIC, mage.cards.r.RoaleskApexHybrid.class));
         cards.add(new SetCardInfo("Rogue's Passage", 422, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rose Room Treasurer", 51, Rarity.RARE, mage.cards.r.RoseRoomTreasurer.class));
         cards.add(new SetCardInfo("Rugged Prairie", 423, Rarity.RARE, mage.cards.r.RuggedPrairie.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 307, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandwurm Convergence", 308, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
