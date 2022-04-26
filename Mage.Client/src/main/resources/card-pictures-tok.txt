@@ -1246,7 +1246,7 @@
 |Generate|TOK:RNA|Ooze|||BiogenicOozeToken|
 |Generate|TOK:RNA|Sphinx|||WardenSphinxToken|
 |Generate|TOK:RNA|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RNA|Thopter|||ThopterToken|
+|Generate|TOK:RNA|Thopter|||ThopterColorlessToken|
 |Generate|TOK:RNA|Treasure|||TreasureToken|
 |Generate|TOK:RNA|Zombie|||ZombieToken|
 |Generate|TOK:GRN|Angel|||AngelVigilanceToken|
