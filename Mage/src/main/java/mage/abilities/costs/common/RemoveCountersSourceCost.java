@@ -26,11 +26,15 @@ public class RemoveCountersSourceCost extends CostImpl {
     private final int amount;
     private final String name;
 
+    public RemoveCountersSourceCost() {
+        this((Counter) null);
+    }
+
     public RemoveCountersSourceCost(Counter counter) {
         this.amount = counter != null ? counter.getCount() : 1;
         this.name = counter != null ? counter.getName() : "";
         this.text = new StringBuilder("remove ")
-                .append((amount == 1 ? CounterType.findArticle(counter.getName()) : CardUtil.numberToText(amount)))
+                .append((amount == 1 ? CounterType.findArticle(name) : CardUtil.numberToText(amount)))
                 .append(name.isEmpty() ? "" : (' ' + name))
                 .append(" counter")
                 .append((amount != 1 ? "s" : ""))

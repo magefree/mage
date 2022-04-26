@@ -57,7 +57,7 @@ public final class GavelOfTheRighteous extends CardImpl {
                 Outcome.BoostCreature,
                 new OrCost(
                         "Pay {3} or remove a counter from {this}",
-                        new GenericManaCost(3), new RemoveCountersSourceCost(null)
+                        new GenericManaCost(3), new RemoveCountersSourceCost()
                 )
         ));
     }
