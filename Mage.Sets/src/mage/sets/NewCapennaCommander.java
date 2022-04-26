@@ -256,6 +256,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stalking Vengeance", 276, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
         cards.add(new SetCardInfo("Steelbane Hydra", 313, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Stolen Identity", 233, Rarity.RARE, mage.cards.s.StolenIdentity.class));
+        cards.add(new SetCardInfo("Storm of Forms", 32, Rarity.RARE, mage.cards.s.StormOfForms.class));
         cards.add(new SetCardInfo("Strionic Resonator", 381, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Sun Titan", 210, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 430, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
