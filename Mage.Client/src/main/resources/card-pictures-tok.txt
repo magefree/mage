@@ -1581,7 +1581,7 @@
 |Generate|TOK:AFR|Boo|||BooToken|
 |Generate|TOK:AFR|Devil|||DevilToken|
 |Generate|TOK:AFR|Dog Illusion|||DogIllusionToken|
-# |Generate|TOK:AFR|Faerie Dragon|||xxx| TODO: add after dice pr merge
+# |Generate|TOK:AFR|Faerie Dragon|||FaerieDragonToken|
 |Generate|TOK:AFR|Goblin|||GoblinToken|
 |Generate|TOK:AFR|Guenhwyvar|||GuenhwyvarToken|
 |Generate|TOK:AFR|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
