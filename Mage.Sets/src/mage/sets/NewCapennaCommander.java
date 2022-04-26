@@ -94,6 +94,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deathreap Ritual", 336, Rarity.UNCOMMON, mage.cards.d.DeathreapRitual.class));
         cards.add(new SetCardInfo("Declaration in Stone", 196, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
         cards.add(new SetCardInfo("Deep Analysis", 218, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
+        cards.add(new SetCardInfo("Determined Iteration", 45, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Devoted Druid", 286, Rarity.UNCOMMON, mage.cards.d.DevotedDruid.class));
         cards.add(new SetCardInfo("Dig Through Time", 219, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Signet", 365, Rarity.COMMON, mage.cards.d.DimirSignet.class));

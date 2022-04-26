@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -14,6 +13,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -31,6 +33,7 @@ public class PopulateEffect extends OneShotEffect {
 
     private final boolean tappedAndAttacking;
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature token for populate");
+    private final List<Permanent> addedTokenPermanents = new ArrayList<>();
 
     static {
         filter.add(TokenPredicate.TRUE);
@@ -56,6 +59,7 @@ public class PopulateEffect extends OneShotEffect {
     public PopulateEffect(final PopulateEffect effect) {
         super(effect);
         this.tappedAndAttacking = effect.tappedAndAttacking;
+        this.addedTokenPermanents.addAll(effect.addedTokenPermanents);
     }
 
     @Override
@@ -75,11 +79,18 @@ public class PopulateEffect extends OneShotEffect {
             return true;
         }
         game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
-        Effect effect = new CreateTokenCopyTargetEffect(
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                 null, null, false, 1, tappedAndAttacking, tappedAndAttacking
         );
         effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
-        return effect.apply(game, source);
+        effect.apply(game, source);
+        this.addedTokenPermanents.clear();
+        this.addedTokenPermanents.addAll(effect.getAddedPermanents());
+        return true;
+    }
+
+    public List<Permanent> getAddedPermanents() {
+        return addedTokenPermanents;
     }
 
     @Override
