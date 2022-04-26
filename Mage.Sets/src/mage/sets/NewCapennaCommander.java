@@ -283,6 +283,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 442, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Thrummingbird", 236, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thunderfoot Baloth", 317, Rarity.RARE, mage.cards.t.ThunderfootBaloth.class));
+        cards.add(new SetCardInfo("Tivit, Seller of Secrets", 10, Rarity.MYTHIC, mage.cards.t.TivitSellerOfSecrets.class));
         cards.add(new SetCardInfo("Together Forever", 212, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Treasure Cruise", 237, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Treeshaker Chimera", 318, Rarity.RARE, mage.cards.t.TreeshakerChimera.class));
