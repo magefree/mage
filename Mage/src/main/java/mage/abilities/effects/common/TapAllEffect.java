@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
@@ -8,8 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-
 
 /**
  *
@@ -22,7 +18,7 @@ public class TapAllEffect extends OneShotEffect {
     public TapAllEffect(FilterPermanent filter) {
         super(Outcome.Tap);
         this.filter = filter;
-        setText();
+        staticText = "tap all " + filter.getMessage();
     }
 
     public TapAllEffect(final TapAllEffect effect) {
@@ -42,9 +38,4 @@ public class TapAllEffect extends OneShotEffect {
         }
         return true;
     }
-
-    private void setText() {
-        staticText = "tap all " + filter.getMessage();
-    }
-
 }

@@ -1,32 +1,24 @@
 package mage.target.common;
 
-import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Styxo
+ * @author awjackson
  */
-public class TargetOpponentsCreaturePermanent extends TargetCreaturePermanent {
+public class TargetOpponentsCreaturePermanent extends TargetPermanent {
 
     public TargetOpponentsCreaturePermanent() {
-        this(1, 1, new FilterOpponentsCreaturePermanent(), false);
+        this(1);
     }
 
     public TargetOpponentsCreaturePermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterOpponentsCreaturePermanent(), false);
+        this(numTargets, numTargets);
     }
 
     public TargetOpponentsCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, new FilterOpponentsCreaturePermanent(), false);
-    }
-
-    public TargetOpponentsCreaturePermanent(FilterOpponentsCreaturePermanent filter) {
-        super(1, 1, filter, false);
-    }
-
-    public TargetOpponentsCreaturePermanent(int minNumTargets, int maxNumTargets, FilterOpponentsCreaturePermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
+        super(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES : StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
     }
 
     public TargetOpponentsCreaturePermanent(final TargetOpponentsCreaturePermanent target) {
