@@ -21,6 +21,15 @@ public final class ConstructRedToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(2);
+        }
+    }
+
     public ConstructRedToken(final ConstructRedToken token) {
         super(token);
     }

@@ -22,7 +22,7 @@ public final class AkroanSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("THS");
+        availableImageSetCodes = Arrays.asList("THS", "UMA");
     }
 
     public AkroanSoldierToken(final AkroanSoldierToken token) {

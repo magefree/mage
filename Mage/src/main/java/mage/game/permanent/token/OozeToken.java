@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class OozeToken extends TokenImpl {
 
     public OozeToken(int power, int toughness) {
@@ -22,6 +24,8 @@ public final class OozeToken extends TokenImpl {
         subtype.add(SubType.OOZE);
         power = new MageInt(0);
         toughness = new MageInt(0);
+
+        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM");
     }
 
     public OozeToken(final OozeToken token) {

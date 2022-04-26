@@ -19,7 +19,16 @@ public final class ConstructToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("ZNR");
+        availableImageSetCodes = Arrays.asList("ZNR", "NEO");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(1);
+        }
     }
 
     public ConstructToken(final ConstructToken token) {

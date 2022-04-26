@@ -115,6 +115,8 @@
 |Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
 |Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
 |Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
+|Generate|EMBLEM:NEO|Kaito Shizuki||Emblem Kaito|KaitoShizukiEmblem|
+|Generate|EMBLEM:NEO|Tezzeret, Betrayer of Flesh||Emblem Tezzeret|TezzeretBetrayerOfFleshEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -931,7 +933,7 @@
 |Generate|TOK:MMA|Bat|||BatToken|
 |Generate|TOK:MMA|Dragon|||DragonToken|
 |Generate|TOK:MMA|Elemental|||WalkerOfTheGroveToken|
-|Generate|TOK:MMA|Faerie Rogue|||OonaQueenFaerieToken|
+|Generate|TOK:MMA|Faerie Rogue|||OonaQueenFaerieRogueToken|
 |Generate|TOK:MMA|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MMA|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:MMA|Goblin|||GoblinToken|
@@ -1081,10 +1083,10 @@
 |Generate|TOK:SCG|Goblin|||GoblinToken|
 |Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
-|Generate|TOK:SHM|Elemental|2||RedElementalToken|
+|Generate|TOK:SHM|Elemental|2||ElementalMasteryElementalToken|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
 |Generate|TOK:SHM|Elf Warrior|2||GreenWhiteElfWarriorToken|
-|Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieToken|
+|Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieRogueToken|
 |Generate|TOK:SHM|Giant Warrior|||GiantBaitingGiantWarriorToken|
 |Generate|TOK:SHM|Goblin Warrior|||WortTheRaidmotherToken|
 |Generate|TOK:SHM|Kithkin Soldier|||KithkinSoldierToken|
@@ -1663,3 +1665,99 @@
 |Generate|TOK:VOW|Wolf|2||RedWolfToken|
 |Generate|TOK:VOW|Zombie|1||ZombieToken|
 |Generate|TOK:VOW|Zombie|2||StitcherGeralfZombieToken|
+
+# UMA
+|Generate|TOK:UMA|Citizen|||CitizenToken|
+|Generate|TOK:UMA|Drake|||DrakeToken|
+|Generate|TOK:UMA|Elemental|1||WalkerOfTheGroveToken|
+|Generate|TOK:UMA|Elemental|2||RedElementalToken|
+|Generate|TOK:UMA|Elemental|3||RedElementalToken|
+|Generate|TOK:UMA|Faerie Rogue|||FaerieRogueToken|
+|Generate|TOK:UMA|Homunculus|||StitchersApprenticeHomunculusToken|
+|Generate|TOK:UMA|Marit Lage|||MaritLageToken|
+|Generate|TOK:UMA|Ooze|||OozeToken|
+|Generate|TOK:UMA|Soldier|||AkroanSoldierToken|
+|Generate|TOK:UMA|Spark Elemental|||SparkElementalToken|
+|Generate|TOK:UMA|Spider|||SpiderToken|
+|Generate|TOK:UMA|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:UMA|Spirit|2||WhiteBlackSpiritToken|
+|Generate|TOK:UMA|Wurm|||PenumbraWurmToken|
+|Generate|TOK:UMA|Zombie|||ZombieToken|
+
+# NEO
+|Generate|TOK:NEO|Construct|1||ConstructToken|
+|Generate|TOK:NEO|Construct|2||ConstructRedToken|
+|Generate|TOK:NEO|Dragon Spirit|||DragonSpiritToken|
+|Generate|TOK:NEO|Goblin Shaman|||FableOfTheMirrorBreakerToken|
+|Generate|TOK:NEO|Human Monk|||HumanMonkToken|
+|Generate|TOK:NEO|Keimi|||KeimiToken|
+|Generate|TOK:NEO|Mechtitan|||MechtitanToken|
+|Generate|TOK:NEO|Ninja|||NinjaToken|
+|Generate|TOK:NEO|Pilot|||PilotToken|
+|Generate|TOK:NEO|Rat Rogue|||RatRogueToken|
+|Generate|TOK:NEO|Samurai|||SamuraiToken|
+|Generate|TOK:NEO|Spirit|1||SpiritToken|
+|Generate|TOK:NEO|Spirit|2||SpiritGreenXToken|
+|Generate|TOK:NEO|Spirit|3||SpiritGreenToken|
+|Generate|TOK:NEO|Spirit|4||SpiritRedToken|
+|Generate|TOK:NEO|Tamiyo's Notebook|||TamiyosNotebookToken|
+|Generate|TOK:NEO|Treasure|||TreasureToken|
+
+# NEC
+|Generate|TOK:NEC|Angel|||AngelVigilanceToken|
+|Generate|TOK:NEC|Beast|||BeastToken|
+|Generate|TOK:NEC|Elemental|||RedElementalToken|
+|Generate|TOK:NEC|Elephant|||ElephantToken|
+|Generate|TOK:NEC|Goblin|||GoblinToken|
+|Generate|TOK:NEC|Myr|||MyrToken|
+|Generate|TOK:NEC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:NEC|Plant|||PlantToken|
+|Generate|TOK:NEC|Saproling|||SaprolingToken|
+|Generate|TOK:NEC|Shrine|||ShrineToken|
+|Generate|TOK:NEC|Smoke Blessing|||SmokeBlessingToken|
+|Generate|TOK:NEC|Thopter|||ThopterColorlessToken|
+
+# SLD
+|Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|2||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|3||FaerieRogueToken|
+|Generate|TOK:SLD|Faerie Rogue|4||FaerieRogueToken|
+|Generate|TOK:SLD|Treasure|||TreasureToken|
+|Generate|TOK:SLD|Walker|1||WalkerToken|
+|Generate|TOK:SLD|Walker|2||WalkerToken|
+|Generate|TOK:SLD|Walker|3||WalkerToken|
+|Generate|TOK:SLD|Walker|4||WalkerToken|
+|Generate|TOK:SLD|Walker|5||WalkerToken|
+
+# 2XM
+|Generate|TOK:2XM|Angel|||AngelToken|
+|Generate|TOK:2XM|Ape|||ApeToken|
+|Generate|TOK:2XM|Beast|||BeastToken|
+|Generate|TOK:2XM|Cat|||CatToken|
+|Generate|TOK:2XM|Clue|||ClueArtifactToken|
+|Generate|TOK:2XM|Demon|||DemonToken|
+|Generate|TOK:2XM|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:2XM|Elemental|||VoiceOfResurgenceToken|
+|Generate|TOK:2XM|Elephant|||ElephantToken|
+|Generate|TOK:2XM|Elf Warrior|||GreenWhiteElfWarriorToken|
+|Generate|TOK:2XM|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:2XM|Golem|||GolemToken|
+|Generate|TOK:2XM|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:2XM|Marit Lage|||MaritLageToken|
+|Generate|TOK:2XM|Myr|||MyrToken|
+|Generate|TOK:2XM|Phyrexian Myr|||BrudicladTelchorMyrToken|
+|Generate|TOK:2XM|Ooze|||OozeToken|
+|Generate|TOK:2XM|Plant|||PlantToken|
+|Generate|TOK:2XM|Saproling|||SaprolingToken|
+|Generate|TOK:2XM|Servo|||ServoToken|
+|Generate|TOK:2XM|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:2XM|Soldier|||SoldierToken|
+|Generate|TOK:2XM|Squirrel|||SquirrelToken|
+|Generate|TOK:2XM|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:2XM|Thopter|2||ThopterToken|
+|Generate|TOK:2XM|Treasure|||TreasureToken|
+|Generate|TOK:2XM|Tuktuk the Returned|||TuktukTheReturnedToken|
+|Generate|TOK:2XM|Wolf|||WolfToken|
+|Generate|TOK:2XM|Phyrexian Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:2XM|Phyrexian Wurm|2||WurmWithLifelinkToken|

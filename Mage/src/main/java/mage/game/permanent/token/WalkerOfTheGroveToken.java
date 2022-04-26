@@ -9,6 +9,7 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
+
 public final class WalkerOfTheGroveToken extends TokenImpl {
 
     public WalkerOfTheGroveToken() {
@@ -19,15 +20,15 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("C13", "LRW", "MMA", "MOR");
+        availableImageSetCodes = Arrays.asList("LRW", "MMA", "DDR", "UMA");
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
 
-        if (getOriginalExpansionSetCode().equals("C13")) {
-            this.setTokenType(2);
+        if (getOriginalExpansionSetCode().equals("UMA")) {
+            this.setTokenType(1);
         }
     }
 

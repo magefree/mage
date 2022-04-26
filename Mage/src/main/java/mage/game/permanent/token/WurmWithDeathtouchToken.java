@@ -22,12 +22,25 @@ public final class WurmWithDeathtouchToken extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "SOM");
+        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM");
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("C14")) {
+            this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode().equals("SOM")) {
+            this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode().equals("CM2")) {
+            this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode().equals("2XM")) {
+            this.setTokenType(1);
+        }
     }
 
     public WurmWithDeathtouchToken(final WurmWithDeathtouchToken token) {

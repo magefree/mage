@@ -35,5 +35,9 @@ public final class ElfWarriorToken extends TokenImpl {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("SHM")) {
+            this.setTokenType(1);
+        }
     }
 }

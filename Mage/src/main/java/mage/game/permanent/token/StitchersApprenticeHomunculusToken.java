@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -18,6 +20,8 @@ public final class StitchersApprenticeHomunculusToken extends TokenImpl {
         subtype.add(SubType.HOMUNCULUS);
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("UMA");
     }
 
     public StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {
