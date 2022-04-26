@@ -104,7 +104,7 @@
 |Generate|EMBLEM:M21|Garruk, Unleashed||Emblem Garruk|GarrukUnleashedEmblem|
 |Generate|EMBLEM:M21|Liliana, Waker of the Dead||Emblem Liliana|LilianaWakerOfTheDeadEmblem|
 |Generate|EMBLEM:KHM|Kaya the Inexorable||Emblem Kaya|KayaTheInexorableEmblem|
-|Generate|EMBLEM:KHM|Tibalt Cosmic Imposter||Emblem Tibalt|TibaltCosmicImposterEmblem|
+|Generate|EMBLEM:KHM|Tibalt, Cosmic Impostor||Emblem Tibalt|TibaltCosmicImpostorEmblem|
 |Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
 |Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
 |Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|

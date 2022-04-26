@@ -520,7 +520,7 @@ public class ScryfallImageSupportTokens {
             put("KHM/Troll Warrior", "https://api.scryfall.com/cards/tkhm/16/en?format=image");
             put("KHM/Zombie Berserker", "https://api.scryfall.com/cards/tkhm/9/en?format=image");
             put("KHM/Emblem Kaya the Inexorable", "https://api.scryfall.com/cards/tkhm/20/en?format=image");
-            put("KHM/Emblem Tibalt Cosmic Imposter", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
+            put("KHM/Emblem Tibalt, Cosmic Impostor", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
             put("KHM/Emblem Tyvar Kell", "https://api.scryfall.com/cards/tkhm/22/en?format=image");
 
             // KHC
