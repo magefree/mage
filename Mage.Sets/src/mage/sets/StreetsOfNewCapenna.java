@@ -20,6 +20,12 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         this.blockName = "Streets of New Capenna";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7;
+        this.maxCardNumberInBooster = 281;
 
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 286, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
