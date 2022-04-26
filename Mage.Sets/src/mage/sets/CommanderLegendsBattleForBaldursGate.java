@@ -19,7 +19,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         super("Commander Legends: Battle for Baldur's Gate", "CLB", ExpansionSet.buildDate(2022, 6, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Legends";
         this.hasBasicLands = false;
-        this.hasBoosters = true;
+        this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Ancient Brass Dragon", 111, Rarity.MYTHIC, mage.cards.a.AncientBrassDragon.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 348, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
