@@ -69,6 +69,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Reaction", 265, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 284, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Champion of Wits", 213, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
+        cards.add(new SetCardInfo("Change of Plans", 24, Rarity.RARE, mage.cards.c.ChangeOfPlans.class));
         cards.add(new SetCardInfo("Chaos Warp", 266, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 214, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Choked Estuary", 393, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
