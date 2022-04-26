@@ -41,8 +41,12 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(getControllerId())
-                && filter.match(game.getCard(event.getTargetId()), getControllerId(), this, game);
+        if (isControlledBy(event.getPlayerId())
+                && filter.match(game.getCard(event.getTargetId()), this.getControllerId(), this, game)) {
+            this.getEffects().setValue("discardedCard", game.getCard(event.getTargetId()));
+            return true;
+        }
+        return false;
     }
 
     @Override

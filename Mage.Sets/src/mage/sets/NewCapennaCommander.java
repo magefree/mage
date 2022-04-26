@@ -82,6 +82,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crumbling Necropolis", 397, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Crystalline Giant", 364, Rarity.RARE, mage.cards.c.CrystallineGiant.class));
         cards.add(new SetCardInfo("Cultivate", 285, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Currency Converter", 81, Rarity.RARE, mage.cards.c.CurrencyConverter.class));
         cards.add(new SetCardInfo("Custodi Lich", 244, Rarity.RARE, mage.cards.c.CustodiLich.class));
         cards.add(new SetCardInfo("Damnable Pact", 245, Rarity.RARE, mage.cards.d.DamnablePact.class));
         cards.add(new SetCardInfo("Damning Verdict", 15, Rarity.RARE, mage.cards.d.DamningVerdict.class));
