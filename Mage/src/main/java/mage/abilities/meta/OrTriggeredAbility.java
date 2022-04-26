@@ -1,17 +1,20 @@
 package mage.abilities.meta;
 
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * A triggered ability that combines several others and triggers whenever one or
@@ -25,7 +28,7 @@ import java.util.UUID;
 public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     private final String ruleTrigger;
-    private TriggeredAbility[] triggeredAbilities;
+    private final List<TriggeredAbility> triggeredAbilities = new ArrayList<>();
 
     public OrTriggeredAbility(Zone zone, Effect effect, TriggeredAbility... abilities) {
         this(zone, effect, false, null, abilities);
@@ -33,8 +36,8 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, TriggeredAbility... abilities) {
         super(zone, effect, optional);
-        this.triggeredAbilities = abilities;
         this.ruleTrigger = ruleTrigger;
+        Collections.addAll(this.triggeredAbilities, abilities);
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
@@ -43,11 +46,10 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     public OrTriggeredAbility(OrTriggeredAbility ability) {
         super(ability);
-        this.triggeredAbilities = new TriggeredAbility[ability.triggeredAbilities.length];
-        for (int i = 0; i < this.triggeredAbilities.length; i++) {
-            this.triggeredAbilities[i] = ability.triggeredAbilities[i].copy();
-        }
         this.ruleTrigger = ability.ruleTrigger;
+        for (TriggeredAbility triggeredAbility : ability.triggeredAbilities) {
+            this.triggeredAbilities.add(triggeredAbility.copy());
+        }
     }
 
     @Override
@@ -81,18 +83,12 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return ruleTrigger;
         }
-        StringBuilder sb = new StringBuilder();
-        if (triggeredAbilities[0].getRule().length() > 0) {
-            sb.append(triggeredAbilities[0].getRule().substring(0, 1).toUpperCase(Locale.ENGLISH))
-                    .append(triggeredAbilities[0].getRule().substring(1).toLowerCase(Locale.ENGLISH));
-        }
-
-        for (int i = 1; i < (triggeredAbilities.length - 1); i++) {
-            sb.append(triggeredAbilities[i].getRule().toLowerCase(Locale.ENGLISH));
-        }
-
-        sb.append(" or ").append(triggeredAbilities[triggeredAbilities.length - 1].getRule().toLowerCase(Locale.ENGLISH));
-        return sb.toString();
+        return triggeredAbilities
+                .stream()
+                .map(Ability::getRule)
+                .map(CardUtil::getTextWithFirstCharLowerCase)
+                .map(s -> s.substring(0, s.length() - 2))
+                .collect(Collectors.joining(" or ")) + ", ";
     }
 
     @Override

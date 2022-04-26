@@ -203,6 +203,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Outpost Siege", 272, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overgrown Battlement", 303, Rarity.UNCOMMON, mage.cards.o.OvergrownBattlement.class));
         cards.add(new SetCardInfo("Painful Truths", 255, Rarity.RARE, mage.cards.p.PainfulTruths.class));
+        cards.add(new SetCardInfo("Park Heights Maverick", 63, Rarity.RARE, mage.cards.p.ParkHeightsMaverick.class));
         cards.add(new SetCardInfo("Path of Ancestry", 419, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 208, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Planar Outburst", 209, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
