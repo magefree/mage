@@ -67,6 +67,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cascade Bluffs", 390, Rarity.RARE, mage.cards.c.CascadeBluffs.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 391, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Castle Embereth", 392, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
+        cards.add(new SetCardInfo("Cephalid Facetaker", 23, Rarity.RARE, mage.cards.c.CephalidFacetaker.class));
         cards.add(new SetCardInfo("Chain Reaction", 265, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 284, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Champion of Wits", 213, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
