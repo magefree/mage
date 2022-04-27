@@ -20,8 +20,8 @@ import mage.target.TargetStackObject;
 public final class MirrorshellCrab extends CardImpl {
 
     public MirrorshellCrab(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE,CardType.ARTIFACT}, "{5}{U}{U}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{5}{U}{U}");
+
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
