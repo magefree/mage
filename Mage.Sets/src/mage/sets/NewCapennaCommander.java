@@ -241,6 +241,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scepter of Celebration", 64, Rarity.RARE, mage.cards.s.ScepterOfCelebration.class));
         cards.add(new SetCardInfo("Scute Swarm", 310, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Seaside Citadel", 425, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Seize the Spotlight", 52, Rarity.RARE, mage.cards.s.SeizeTheSpotlight.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 350, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
         cards.add(new SetCardInfo("Sever the Bloodline", 259, Rarity.RARE, mage.cards.s.SeverTheBloodline.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 426, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
