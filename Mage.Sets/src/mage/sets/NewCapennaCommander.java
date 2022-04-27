@@ -205,6 +205,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nightmare Unmaking", 253, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 254, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Oblivion Stone", 373, Rarity.RARE, mage.cards.o.OblivionStone.class));
+        cards.add(new SetCardInfo("Obscura Confluence", 76, Rarity.RARE, mage.cards.o.ObscuraConfluence.class));
         cards.add(new SetCardInfo("Oracle's Vault", 374, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 207, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Signet", 375, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
