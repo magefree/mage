@@ -839,6 +839,15 @@ public class ScryfallImageSupportTokens {
             put ("2XM/Phyrexian Wurm/1", "https://api.scryfall.com/cards/t2xm/29/en?format=image");
             put ("2XM/Phyrexian Wurm/2", "https://api.scryfall.com/cards/t2xm/30/en?format=image");
 
+            // DTK
+            put ("DTK/Djinn Monk", "https://api.scryfall.com/cards/tdtk/2/en?format=image");
+            put ("DTK/Dragon", "https://api.scryfall.com/cards/tdtk/5/en?format=image");
+            put ("DTK/Goblin", "https://api.scryfall.com/cards/tdtk/6/en?format=image");
+            put ("DTK/Emblem Narset", "https://api.scryfall.com/cards/tdtk/8/en?format=image");
+            put ("DTK/Warrior", "https://api.scryfall.com/cards/tdtk/1/en?format=image");
+            put ("DTK/Zombie", "https://api.scryfall.com/cards/tdtk/3/en?format=image");
+            put ("DTK/Zombie Horror", "https://api.scryfall.com/cards/tdtk/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
