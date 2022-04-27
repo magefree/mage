@@ -207,6 +207,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Park Heights Maverick", 63, Rarity.RARE, mage.cards.p.ParkHeightsMaverick.class));
         cards.add(new SetCardInfo("Path of Ancestry", 419, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 208, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Perrie, the Pulverizer", 5, Rarity.MYTHIC, mage.cards.p.PerrieThePulverizer.class));
         cards.add(new SetCardInfo("Planar Outburst", 209, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
         cards.add(new SetCardInfo("Ponder", 229, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Port Town", 420, Rarity.RARE, mage.cards.p.PortTown.class));
