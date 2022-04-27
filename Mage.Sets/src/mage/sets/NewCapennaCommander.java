@@ -174,6 +174,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kresh the Bloodbraided", 345, Rarity.MYTHIC, mage.cards.k.KreshTheBloodbraided.class));
         cards.add(new SetCardInfo("Leafkin Druid", 299, Rarity.COMMON, mage.cards.l.LeafkinDruid.class));
         cards.add(new SetCardInfo("Life Insurance", 74, Rarity.RARE, mage.cards.l.LifeInsurance.class));
+        cards.add(new SetCardInfo("Life of the Party", 48, Rarity.RARE, mage.cards.l.LifeOfTheParty.class));
         cards.add(new SetCardInfo("Life's Legacy", 300, Rarity.RARE, mage.cards.l.LifesLegacy.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 370, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lightning Greaves", 371, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));

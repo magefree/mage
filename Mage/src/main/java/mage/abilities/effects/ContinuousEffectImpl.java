@@ -99,8 +99,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
-    public void setDuration(Duration duration) {
+    public ContinuousEffectImpl setDuration(Duration duration) {
         this.duration = duration;
+        return this;
     }
 
     @Override
