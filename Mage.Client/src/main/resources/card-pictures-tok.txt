@@ -769,9 +769,7 @@
 |Generate|TOK:JUD|Wurm|||WurmToken|
 |Generate|TOK:KLD|Beast|||ArchitectOfTheUntamedBeastToken|
 |Generate|TOK:KLD|Construct|1||OviyaPashiriSageLifecrafterToken|
-|Generate|TOK:KLD|Construct|2||OviyaPashiriSageLifecrafterToken|
-|Generate|TOK:KLD|Construct|3||MetallurgicSummoningsConstructToken|
-|Generate|TOK:KLD|Construct|4||MetallurgicSummoningsConstructToken|
+|Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
 |Generate|TOK:KLD|Servo|1||ServoToken|
 |Generate|TOK:KLD|Servo|2||ServoToken|
 |Generate|TOK:KLD|Servo|3||ServoToken|

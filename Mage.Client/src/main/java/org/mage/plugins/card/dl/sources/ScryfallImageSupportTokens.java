@@ -131,11 +131,8 @@ public class ScryfallImageSupportTokens {
             //KLD
             put("KLD/Beast", "https://api.scryfall.com/cards/tkld/1/en?format=image");
             put("KLD/Emblem Chandra", "https://api.scryfall.com/cards/tkld/10/en?format=image");
-            // same construct images uses for different classes, so KLD have 4 instead 2 tokens
             put("KLD/Construct/1", "https://api.scryfall.com/cards/tkld/2/en?format=image");
             put("KLD/Construct/2", "https://api.scryfall.com/cards/tkld/3/en?format=image");
-            put("KLD/Construct/3", "https://api.scryfall.com/cards/tkld/2/en?format=image");
-            put("KLD/Construct/4", "https://api.scryfall.com/cards/tkld/3/en?format=image");
             put("KLD/Emblem Dovin", "https://api.scryfall.com/cards/tkld/12/en?format=image");
             put("KLD/Emblem Nissa", "https://api.scryfall.com/cards/tkld/11/en?format=image");
             put("KLD/Servo/1", "https://api.scryfall.com/cards/tkld/4/en?format=image");
