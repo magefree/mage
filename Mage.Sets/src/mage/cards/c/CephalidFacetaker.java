@@ -63,6 +63,7 @@ class CephalidFacetakerEffect extends OneShotEffect {
             blueprint.getAbilities().add(new SimpleStaticAbility(
                     new CantBeBlockedSourceEffect().setText("this creature can't be blocked")
             ));
+            return true;
         }
     };
 
