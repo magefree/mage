@@ -154,6 +154,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hoofprints of the Stag", 203, Rarity.RARE, mage.cards.h.HoofprintsOfTheStag.class));
         cards.add(new SetCardInfo("Identity Thief", 224, Rarity.RARE, mage.cards.i.IdentityThief.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 368, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
+        cards.add(new SetCardInfo("In Too Deep", 27, Rarity.RARE, mage.cards.i.InTooDeep.class));
         cards.add(new SetCardInfo("Incubation Druid", 296, Rarity.RARE, mage.cards.i.IncubationDruid.class));
         cards.add(new SetCardInfo("Indrik Stomphowler", 297, Rarity.UNCOMMON, mage.cards.i.IndrikStomphowler.class));
         cards.add(new SetCardInfo("Indulge // Excess", 46, Rarity.RARE, mage.cards.i.IndulgeExcess.class));
