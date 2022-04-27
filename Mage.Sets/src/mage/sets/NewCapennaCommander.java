@@ -190,6 +190,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
         cards.add(new SetCardInfo("Mask of the Schemer", 28, Rarity.RARE, mage.cards.m.MaskOfTheSchemer.class));
+        cards.add(new SetCardInfo("Mezzio Mugger", 49, Rarity.RARE, mage.cards.m.MezzioMugger.class));
         cards.add(new SetCardInfo("Midnight Clock", 226, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Migration Path", 301, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mimic Vat", 372, Rarity.RARE, mage.cards.m.MimicVat.class));
