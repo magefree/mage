@@ -258,6 +258,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", 380, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Spellbinding Soprano", 53, Rarity.RARE, mage.cards.s.SpellbindingSoprano.class));
         cards.add(new SetCardInfo("Spinerock Knoll", 429, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
+        cards.add(new SetCardInfo("Spiteful Repossession", 90, Rarity.RARE, mage.cards.s.SpitefulRepossession.class));
         cards.add(new SetCardInfo("Squee, the Immortal", 275, Rarity.RARE, mage.cards.s.SqueeTheImmortal.class));
         cards.add(new SetCardInfo("Stalking Vengeance", 276, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
         cards.add(new SetCardInfo("Steelbane Hydra", 313, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
