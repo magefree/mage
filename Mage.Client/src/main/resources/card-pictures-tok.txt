@@ -1759,3 +1759,21 @@
 |Generate|TOK:2XM|Wolf|||WolfToken|
 |Generate|TOK:2XM|Phyrexian Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:2XM|Phyrexian Wurm|2||WurmWithLifelinkToken|
+
+# SNC
+|Generate|TOK:SNC|Angel|||Angel33Token|
+|Generate|TOK:SNC|Cat|||CatHasteToken|
+|Generate|TOK:SNC|Citizen|||CitizenGreenWhiteToken|
+|Generate|TOK:SNC|Devil|||DevilToken|
+|Generate|TOK:SNC|Dog|||DogVigilanceToken|
+|Generate|TOK:SNC|Fish|||FishToken|
+|Generate|TOK:SNC|Ogre Warrior|||OgreWarriorToken|
+|Generate|TOK:SNC|Rhino Warrior|||RhinoWarriorToken|
+|Generate|TOK:SNC|Rogue|||RogueToken|
+|Generate|TOK:SNC|Spirit|||Spirit22Token|
+|Generate|TOK:SNC|Treasure|1||TreasureToken|
+|Generate|TOK:SNC|Treasure|2||TreasureToken|
+|Generate|TOK:SNC|Treasure|3||TreasureToken|
+|Generate|TOK:SNC|Treasure|4||TreasureToken|
+|Generate|TOK:SNC|Treasure|5||TreasureToken|
+|Generate|TOK:SNC|Wizard|||MagesAttendantToken|

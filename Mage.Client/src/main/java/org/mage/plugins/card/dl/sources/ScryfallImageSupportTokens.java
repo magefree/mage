@@ -848,6 +848,24 @@ public class ScryfallImageSupportTokens {
             put ("DTK/Zombie", "https://api.scryfall.com/cards/tdtk/3/en?format=image");
             put ("DTK/Zombie Horror", "https://api.scryfall.com/cards/tdtk/4/en?format=image");
 
+            // SNC
+            put ("SNC/Angel", "https://api.scryfall.com/cards/tsnc/2/en?format=image");
+            put ("SNC/Cat", "https://api.scryfall.com/cards/tsnc/9/en?format=image");
+            put ("SNC/Citizen", "https://api.scryfall.com/cards/tsnc/12/en?format=image");
+            put ("SNC/Devil", "https://api.scryfall.com/cards/tsnc/8/en?format=image");
+            put ("SNC/Dog", "https://api.scryfall.com/cards/tsnc/10/en?format=image");
+            put ("SNC/Fish", "https://api.scryfall.com/cards/tsnc/4/en?format=image");
+            put ("SNC/Ogre Warrior", "https://api.scryfall.com/cards/tsnc/6/en?format=image");
+            put ("SNC/Rhino Warrior", "https://api.scryfall.com/cards/tsnc/11/en?format=image");
+            put ("SNC/Rogue", "https://api.scryfall.com/cards/tsnc/7/en?format=image");
+            put ("SNC/Spirit", "https://api.scryfall.com/cards/tsnc/3/en?format=image");
+            put ("SNC/Treasure/1", "https://api.scryfall.com/cards/tsnc/13/en?format=image");
+            put ("SNC/Treasure/2", "https://api.scryfall.com/cards/tsnc/14/en?format=image");
+            put ("SNC/Treasure/3", "https://api.scryfall.com/cards/tsnc/15/en?format=image");
+            put ("SNC/Treasure/4", "https://api.scryfall.com/cards/tsnc/16/en?format=image");
+            put ("SNC/Treasure/5", "https://api.scryfall.com/cards/tsnc/17/en?format=image");
+            put ("SNC/Wizard", "https://api.scryfall.com/cards/tsnc/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
