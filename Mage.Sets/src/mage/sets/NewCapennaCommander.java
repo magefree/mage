@@ -306,6 +306,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vivid Creek", 444, Rarity.UNCOMMON, mage.cards.v.VividCreek.class));
         cards.add(new SetCardInfo("Vivid Grove", 445, Rarity.UNCOMMON, mage.cards.v.VividGrove.class));
         cards.add(new SetCardInfo("Vivid Meadow", 446, Rarity.UNCOMMON, mage.cards.v.VividMeadow.class));
+        cards.add(new SetCardInfo("Vivien's Stampede", 65, Rarity.RARE, mage.cards.v.ViviensStampede.class));
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 357, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
         cards.add(new SetCardInfo("Wall of Roots", 319, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Warstorm Surge", 277, Rarity.RARE, mage.cards.w.WarstormSurge.class));
