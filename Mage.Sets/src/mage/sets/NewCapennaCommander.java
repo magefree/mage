@@ -127,6 +127,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 367, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Heath", 401, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("First Responder", 60, Rarity.RARE, mage.cards.f.FirstResponder.class));
+        cards.add(new SetCardInfo("Flawless Forgery", 26, Rarity.RARE, mage.cards.f.FlawlessForgery.class));
         cards.add(new SetCardInfo("Flooded Grove", 402, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 403, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 291, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
