@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * Can be used with SearchLibrary only. User hasn't access to libs.
  *
  * @author BetaSteward_at_googlemail.com
@@ -82,7 +81,7 @@ public class TargetCardInLibrary extends TargetCard {
             if (!player.canRespond()) {
                 return chosen;
             }
-            if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
+            if (!player.chooseTarget(outcome, cardsId, this, source, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getMinNumberOfTargets();
