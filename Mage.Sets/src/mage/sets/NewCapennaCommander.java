@@ -36,6 +36,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Audacious Swap", 44, Rarity.RARE, mage.cards.a.AudaciousSwap.class));
         cards.add(new SetCardInfo("Aura Mutation", 328, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Austere Command", 193, Rarity.RARE, mage.cards.a.AustereCommand.class));
+        cards.add(new SetCardInfo("Aven Courier", 22, Rarity.RARE, mage.cards.a.AvenCourier.class));
         cards.add(new SetCardInfo("Aven Mimeomancer", 329, Rarity.RARE, mage.cards.a.AvenMimeomancer.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 280, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Avenging Huntbonder", 194, Rarity.RARE, mage.cards.a.AvengingHuntbonder.class));
