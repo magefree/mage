@@ -76,7 +76,7 @@ class WiretappingTriggeredAbility extends TriggeredAbilityImpl {
                 && game
                 .getState()
                 .getWatcher(CardsDrawnDuringDrawStepWatcher.class)
-                .getAmountCardsDrawn(event.getPlayerId()) == 0;
+                .getAmountCardsDrawn(event.getPlayerId()) == 1;
     }
 
     @Override
