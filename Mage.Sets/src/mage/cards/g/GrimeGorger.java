@@ -55,7 +55,7 @@ class GrimeGorgerEffect extends OneShotEffect {
     GrimeGorgerEffect() {
         super(Outcome.Benefit);
         staticText = "exile up to one card of each card type from defending player's graveyard. " +
-                "Put a +1/+1 on {this} for each card exiled this way";
+                "Put a +1/+1 counter on {this} for each card exiled this way";
     }
 
     private GrimeGorgerEffect(final GrimeGorgerEffect effect) {

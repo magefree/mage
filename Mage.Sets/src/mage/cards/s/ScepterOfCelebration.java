@@ -5,7 +5,7 @@ import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -29,7 +29,7 @@ public final class ScepterOfCelebration extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0 and has trample.
-        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has trample"));

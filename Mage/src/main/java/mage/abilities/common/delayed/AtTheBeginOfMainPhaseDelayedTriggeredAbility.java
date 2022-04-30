@@ -107,7 +107,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your " + phaseSelection + ", ";

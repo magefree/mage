@@ -83,6 +83,11 @@ enum ViviensStampedeValue implements DynamicValue {
     public String getMessage() {
         return "player who was dealt combat damage this turn";
     }
+
+    @Override
+    public String toString() {
+        return "1";
+    }
 }
 
 class ViviensStampedeWatcher extends Watcher {

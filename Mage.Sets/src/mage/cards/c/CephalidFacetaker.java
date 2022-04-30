@@ -70,7 +70,7 @@ class CephalidFacetakerEffect extends OneShotEffect {
     CephalidFacetakerEffect() {
         super(Outcome.Benefit);
         staticText = "you may have {this} become a copy of another target creature until end of turn, " +
-                "except its a 1/4 and has \"This creature can't be blocked.\"";
+                "except it's 1/4 and has \"This creature can't be blocked.\"";
     }
 
     private CephalidFacetakerEffect(final CephalidFacetakerEffect effect) {

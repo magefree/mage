@@ -6,6 +6,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -51,7 +52,8 @@ public final class LifeOfTheParty extends CardImpl {
 
         // Whenever Life of the Party attacks, it gets +X/+0 until end of turn, where X is the number of creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn
+                CreaturesYouControlCount.instance, StaticValue.get(0),
+                Duration.EndOfTurn, true, "it"
         )));
 
         // When Life of the Party enters the battlefield, if it's not a token, each opponent creates a token that's a copy of it. The tokens are goaded for the rest of the game.

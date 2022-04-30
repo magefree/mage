@@ -34,9 +34,9 @@ public final class KillerService extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // When Killer Service enters the battlefield, create a number of Food tokens equal to the number of opponents you have.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new FoodToken(), OpponentsCount.instance)
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
+                new FoodToken(), OpponentsCount.instance
+        ).setText("create a number of Food tokens equal to the number of opponents you have")));
 
         // At the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
