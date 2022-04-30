@@ -36,7 +36,9 @@ public final class IlluminatorVirtuoso extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Illuminator Virtuoso becomes the target of a spell you control, it connives.
-        this.addAbility(new BecomesTargetTriggeredAbility(new ConniveSourceEffect(), filter));
+        this.addAbility(new BecomesTargetTriggeredAbility(
+                new ConniveSourceEffect(), filter
+        ).setTriggerPhrase("Whenever {this} becomes the target of a spell you control, "));
     }
 
     private IlluminatorVirtuoso(final IlluminatorVirtuoso card) {

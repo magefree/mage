@@ -39,7 +39,7 @@ public final class MetropolisAngel extends CardImpl {
         // Whenever you attack with one or more creatures with counters on them, draw a card.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), 1, filter
-        ));
+        ).setTriggerPhrase("Whenever you attack with one or more creatures with counters on them, "));
     }
 
     private MetropolisAngel(final MetropolisAngel card) {
