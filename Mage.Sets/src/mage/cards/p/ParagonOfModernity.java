@@ -60,6 +60,6 @@ enum ParagonOfModernityCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCosts().getUsedManaToPay().getDifferentColors() == 3;
+        return source.getManaCostsToPay().getUsedManaToPay().getDifferentColors() == 3;
     }
 }
