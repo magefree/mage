@@ -44,6 +44,7 @@ class DiscoverTheImpossibleEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
+        filter.add(CardType.INSTANT.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
