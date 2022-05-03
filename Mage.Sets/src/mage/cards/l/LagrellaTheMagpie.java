@@ -153,7 +153,7 @@ class LagrellaTheMagpieTriggeredAbility extends DelayedTriggeredAbility {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     LagrellaTheMagpieTriggeredAbility(Cards cards, Game game) {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.Custom, false, false);
+        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), Duration.Custom, false, false);
         cards.getCards(game)
                 .stream()
                 .map(card -> new MageObjectReference(card, game, 1))
