@@ -65,7 +65,7 @@ class TheFallenApartEntersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (mageObject != null) {
             game.getState().setValue(mageObject.getId() + "_arms", 2);
@@ -98,7 +98,7 @@ class TheFallenApartToggleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_arms") == null
                     || game.getState().getValue(mageObject.getId() + "_legs") == null) {
@@ -158,7 +158,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return (Integer) game.getState().getValue(mageObject.getId() + "_arms") > 0;
         }
@@ -167,7 +167,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return (Integer) game.getState().getValue(mageObject.getId() + "_legs") > 0;
         }

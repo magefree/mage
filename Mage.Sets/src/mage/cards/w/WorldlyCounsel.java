@@ -66,7 +66,7 @@ class WorldlyCounselEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, (new DomainValue()).calculate(game, source, this)));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, (DomainValue.REGULAR).calculate(game, source, this)));
         controller.lookAtCards(source, null, cards, game);
 
         if (!cards.isEmpty()) {

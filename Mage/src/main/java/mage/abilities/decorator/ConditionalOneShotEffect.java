@@ -50,7 +50,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         // nothing to do - no problem
         Effects toApply = condition.apply(game, source) ? effects : otherwiseEffects;
         if (toApply.isEmpty()) {
-            return false;
+            return true;
         }
         toApply.setTargetPointer(this.targetPointer);
         toApply.stream().forEach(effect -> effect.apply(game, source));
@@ -63,7 +63,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     }
 
     public ConditionalOneShotEffect addOtherwiseEffect(OneShotEffect effect) {
-        this.effects.add(effect);
+        this.otherwiseEffects.add(effect);
         return this;
     }
 

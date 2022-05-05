@@ -8,6 +8,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
 Aether Revolt|AER|
@@ -39,6 +40,7 @@ Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
 Commander 2021 Edition|C21|
 Commander Legends|CMR|
+Commander Legends: Battle for Baldur's Gate|CLB|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
@@ -199,6 +201,8 @@ Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Scars of Mirrodin|SOM|
+Streets of New Capenna|SNC|
+New Capenna Commander|NCC|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|

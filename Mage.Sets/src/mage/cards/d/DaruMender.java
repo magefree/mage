@@ -28,7 +28,7 @@ public final class DaruMender extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
         // When Daru Mender is turned face up, regenerate target creature.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RegenerateTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());

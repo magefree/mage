@@ -36,7 +36,7 @@ public class ChooseExpansionSetEffect extends OneShotEffect {
 
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
 
         if (controller != null) {

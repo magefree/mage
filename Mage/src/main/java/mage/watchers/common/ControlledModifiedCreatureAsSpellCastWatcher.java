@@ -27,7 +27,7 @@ public class ControlledModifiedCreatureAsSpellCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private final HashMap<MageObjectReference, Boolean> spellsCastCondition = new HashMap<>();
+    private final HashMap<MageObjectReference, Integer> modifiedCreaturesWhenCast = new HashMap<>();
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -35,8 +35,7 @@ public class ControlledModifiedCreatureAsSpellCastWatcher extends Watcher {
             Spell spell = game.getSpell(event.getTargetId());
             if (spell != null) {
                 MageObjectReference mor = new MageObjectReference(spell, game);
-                Boolean condition = !game.getBattlefield().getAllActivePermanents(filter, spell.getControllerId(), game).isEmpty();
-                spellsCastCondition.put(mor, condition);
+                modifiedCreaturesWhenCast.put(mor, game.getBattlefield().countAll(filter, spell.getControllerId(), game));
             }
         }
     }
@@ -44,10 +43,10 @@ public class ControlledModifiedCreatureAsSpellCastWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        spellsCastCondition.clear();
+        modifiedCreaturesWhenCast.clear();
     }
 
-    public boolean checkModifiedCondition(MageObjectReference mor) {
-        return spellsCastCondition.getOrDefault(mor, false);
+    public int getModifiedCreatureCount(MageObjectReference mor) {
+        return modifiedCreaturesWhenCast.getOrDefault(mor, 0);
     }
 }

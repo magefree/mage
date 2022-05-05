@@ -21,7 +21,7 @@ public final class EldraziHorrorToken extends TokenImpl {
     }
 
     public EldraziHorrorToken() {
-        super("Eldrazi Horror", "3/2 colorless Eldrazi Horror creature token");
+        super("Eldrazi Horror Token", "3/2 colorless Eldrazi Horror creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.HORROR);

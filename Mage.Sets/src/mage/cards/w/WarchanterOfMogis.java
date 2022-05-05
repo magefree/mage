@@ -1,9 +1,9 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.abilities.keyword.IntimidateAbility;
@@ -29,7 +29,9 @@ public final class WarchanterOfMogis extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Inspired</i> &mdash; Whenever Warchanter of Mogis becomes untapped, target creature you control gains intimidate until end of turn.
-        Ability ability = new InspiredAbility(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false);
+        Effect effect = new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("target creature you control gains intimidate until end of turn. <i>(A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
+        Ability ability = new InspiredAbility(effect);
         ability.addTarget(new TargetControlledCreaturePermanent());        
         this.addAbility(ability);
     }

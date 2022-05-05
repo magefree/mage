@@ -33,7 +33,7 @@ public final class MarduHordechief extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                         new CreateTokenEffect(new WarriorToken())),
                         RaidCondition.instance,
-                        "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, create a 1/1 white Warrior creature token.")
+                        "When {this} enters the battlefield, if you attacked this turn, create a 1/1 white Warrior creature token.")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),
                 new PlayerAttackedWatcher());

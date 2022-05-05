@@ -4,10 +4,10 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,14 +55,13 @@ public final class CalixDestinysHand extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALIX);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
-        // +1: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
+        // +1: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand.
+        // Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false,
-                Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. "
+                4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        ).setText("Look at the top four cards of your library. "
                 + "You may reveal an enchantment card from among them and put that card into your hand. "
                 + "Put the rest on the bottom of your library in a random order."), 1
         ));

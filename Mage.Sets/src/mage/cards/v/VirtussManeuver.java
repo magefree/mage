@@ -81,7 +81,7 @@ class VirtussManeuverEffect extends OneShotEffect {
             filter.add(new OwnerIdPredicate(player.getId()));
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             getBackMap.put(player.getId(), null);
-            if (player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.ReturnToHand, target, source, game)) {
                 getBackMap.put(player.getId(), game.getCard(target.getFirstTarget()));
             }
         }
@@ -101,7 +101,7 @@ class VirtussManeuverEffect extends OneShotEffect {
                 continue;
             }
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             perms.addAll(target.getTargets());
         }
         for (UUID permID : perms) {

@@ -171,7 +171,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             if (loseAllAbilities) {
                 sb.append(" lose all their abilities and ");
             }
-            sb.append("  each become ");
+            sb.append(" each become ");
         } else {
             sb.append("target ").append(target.getTargetName());
             if (loseAllAbilities && !keepAbilities) {

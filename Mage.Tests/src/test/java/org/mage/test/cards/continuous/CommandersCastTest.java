@@ -150,7 +150,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "4");
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -179,7 +179,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "4");
         setChoice(playerA, true); // return commander
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -409,7 +409,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setChoice(playerA, true); // return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 1);
+        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 1);
         // commander tax: 1x
         // can't cast due commander cost added (we stil have 2x mana)
         checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
@@ -425,7 +425,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         setChoice(playerA, false); // do not return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 2);
+        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 2);
         checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 

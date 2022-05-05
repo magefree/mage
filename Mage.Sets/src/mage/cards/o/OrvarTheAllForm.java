@@ -156,7 +156,7 @@ class OrvarTheAllFormEffect extends OneShotEffect {
         filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source))));
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return new CreateTokenCopyTargetEffect()
                 .setTargetPointer(new FixedTarget(target.getFirstTarget(), game))
                 .apply(game, source);

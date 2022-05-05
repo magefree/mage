@@ -34,7 +34,7 @@ public final class MistformSeaswift extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new GenericManaCost(1)));
 
         // Morph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}")));
 
     }
 

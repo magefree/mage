@@ -7,7 +7,6 @@ import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -36,7 +35,7 @@ public final class ChandraPyromaster extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to 
         // up to one target creature that player controls. That creature can't block this turn.
@@ -127,16 +126,16 @@ class ChandraPyromasterTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
+            if (item.getId().equals(source.getSourceId())) {
                 object = item;
             }
-            if (item.getSourceId().equals(sourceId)) {
+            if (item.getSourceId().equals(source.getSourceId())) {
                 object = item;
             }
         }

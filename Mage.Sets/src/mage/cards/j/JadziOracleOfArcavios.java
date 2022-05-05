@@ -240,7 +240,7 @@ class JourneyToTheOracleEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_LANDS
         );
-        player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game);
+        player.choose(Outcome.PutCardInPlay, target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

@@ -29,7 +29,7 @@ public final class FodderLaunch extends CardImpl {
         //Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(5));
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(5).setText("{this} deals 5 damage to that creature's controller"));
     }
 
     private FodderLaunch(final FodderLaunch card) {

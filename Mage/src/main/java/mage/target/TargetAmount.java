@@ -120,7 +120,7 @@ public abstract class TargetAmount extends TargetImpl {
     @Override
     public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
         List<TargetAmount> options = new ArrayList<>();
-        Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+        Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
 
         addTargets(this, possibleTargets, options, source, game);
 

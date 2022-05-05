@@ -66,7 +66,7 @@ class GerrymanderingEffect extends OneShotEffect {
         if (controller != null) {
             // Exile all lands.
             Cards exiledCards = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), source, game)) {
                 exiledCards.add(permanent);
                 playerLandCount.putIfAbsent(permanent.getControllerId(), 0);
                 playerLandCount.put(permanent.getControllerId(), playerLandCount.get(permanent.getControllerId()) + 1);

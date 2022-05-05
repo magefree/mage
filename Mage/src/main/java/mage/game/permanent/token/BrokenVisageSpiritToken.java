@@ -16,7 +16,7 @@ public final class BrokenVisageSpiritToken extends TokenImpl {
     }
 
     public BrokenVisageSpiritToken(int tokenPower, int tokenToughness) {
-        super("Spirit", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Spirit creature token").toString());
+        super("Spirit Token", new StringBuilder(tokenPower).append('/').append(tokenToughness).append(" black Spirit creature token").toString());
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SPIRIT);

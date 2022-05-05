@@ -93,7 +93,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Cobblebrute", 4, 4);
         assertPowerToughness(playerA, "Cobblebrute", 4, 4);
 
-        assertPermanentCount(playerB, "Soldier", 0);
+        assertPermanentCount(playerB, "Soldier Token", 0);
         assertPermanentCount(playerA, "Island", 0);
         assertPermanentCount(playerB, "Plains", 0);
     }

@@ -5,6 +5,7 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author phulin
  */
 public abstract class AdventureCard extends CardImpl {
 
@@ -90,13 +91,11 @@ public abstract class AdventureCard extends CardImpl {
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        switch (ability.getSpellAbilityType()) {
-            case ADVENTURE_SPELL:
-                return this.getSpellCard().cast(game, fromZone, ability, controllerId);
-            default:
-                this.getSpellCard().getSpellAbility().setControllerId(controllerId);
-                return super.cast(game, fromZone, ability, controllerId);
+        if (ability.getSpellAbilityType() == SpellAbilityType.ADVENTURE_SPELL) {
+            return this.getSpellCard().cast(game, fromZone, ability, controllerId);
         }
+        this.getSpellCard().getSpellAbility().setControllerId(controllerId);
+        return super.cast(game, fromZone, ability, controllerId);
     }
 
     @Override

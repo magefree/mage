@@ -2,7 +2,6 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -33,7 +32,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // If you would draw a card while your library has no cards in it, you win the game instead.
         this.addAbility(new SimpleStaticAbility(new JaceWielderOfMysteriesContinuousEffect()));

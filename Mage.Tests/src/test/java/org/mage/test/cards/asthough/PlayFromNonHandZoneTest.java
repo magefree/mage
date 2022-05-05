@@ -463,7 +463,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA, "Angelic Purge", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);  // sacrificed for Purge
 
-        assertPermanentCount(playerB, "Food", 1);
+        assertPermanentCount(playerB, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
 
         assertHandCount(playerB, 1); // 1 from Turn 2 draw

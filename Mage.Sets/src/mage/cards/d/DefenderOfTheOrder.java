@@ -27,7 +27,7 @@ public final class DefenderOfTheOrder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {W}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}{W}")));
         // When Defender of the Order is turned face up, creatures you control get +0/+2 until end of turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(0, 2, Duration.EndOfTurn)));
     }

@@ -41,14 +41,12 @@ public final class UmezawasJitte extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
 
         // Target creature gets -1/-1 until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         // You gain 2 life.
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(2));
+        mode = new Mode(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
 

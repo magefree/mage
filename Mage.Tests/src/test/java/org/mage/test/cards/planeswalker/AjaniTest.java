@@ -52,7 +52,7 @@ public class AjaniTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Kor Ally", 2);
+        assertPermanentCount(playerA, "Kor Ally Token", 2);
         assertPermanentCount(playerA, "Oath of Gideon", 1);
         assertPermanentCount(playerA, "Ajani Goldmane", 1);
         assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 6);  // 4 + 1 + 1 = 6

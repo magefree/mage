@@ -91,7 +91,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
         }
         game.getState().processAction(game);
         player.drawCards(game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ), source, game);
         return true;
     }

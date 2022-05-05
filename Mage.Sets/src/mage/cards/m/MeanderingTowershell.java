@@ -72,7 +72,7 @@ class MeanderingTowershellEffect extends OneShotEffect {
 
     public MeanderingTowershellEffect() {
         super(Outcome.Detriment);
-        this.staticText = "exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the next declare attackers step on your next turn";
+        this.staticText = "exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn";
     }
 
     public MeanderingTowershellEffect(final MeanderingTowershellEffect effect) {

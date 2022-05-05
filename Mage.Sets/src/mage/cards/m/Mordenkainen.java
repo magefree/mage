@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -27,7 +26,7 @@ public final class Mordenkainen extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.MORDENKAINEN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +2: Draw two cards, then put a card from your hand on the bottom of your library.
         this.addAbility(new LoyaltyAbility(new MordenkainenDrawEffect(), 2));

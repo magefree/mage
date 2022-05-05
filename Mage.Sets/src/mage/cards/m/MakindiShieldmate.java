@@ -29,7 +29,7 @@ public final class MakindiShieldmate extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true).setAbilityWord(null));
     }
 
     private MakindiShieldmate(final MakindiShieldmate card) {

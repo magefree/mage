@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class KederektLeviathan extends CardImpl {
     
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("all other nonland permanents");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("other nonland permanents");
     static{
         filter.add(AnotherPredicate.instance);
     }

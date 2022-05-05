@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class OctopusToken extends TokenImpl {
 
     public OctopusToken() {
-        super("Octopus", "8/8 blue Octopus creature token");
+        super("Octopus Token", "8/8 blue Octopus creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.OCTOPUS);

@@ -37,7 +37,7 @@ public final class AinokSurvivalist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Megamorph {1}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}"), true));
         
         // When Ainok Survivalist is turned face up, destroy target artifact or enchantment an opponent controls.
         Effect effect = new DestroyTargetEffect();

@@ -69,7 +69,7 @@ class ShatterTheSkyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .map(Controllable::getControllerId)
                 .distinct()

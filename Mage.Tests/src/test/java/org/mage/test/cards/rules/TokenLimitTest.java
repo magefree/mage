@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TokenLimitTest extends CardTestPlayerBase {
     private static final String secure = "Secure the Wastes";
     private static final String procession = "Anointed Procession";
-    private static final String warrior = "Warrior";
+    private static final String warrior = "Warrior Token";
 
     @Test
     public void testOnePlayerHitsLimit() {

@@ -1,26 +1,24 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class GraveExchange extends CardImpl {
@@ -29,8 +27,9 @@ public final class GraveExchange extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Return target creature card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
         // Target player sacrifices a creature.
         this.getSpellAbility().addEffect(new GraveExchangeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -69,8 +68,10 @@ class GraveExchangeEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
-        if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+        Target target = new TargetControlledCreaturePermanent();
+        target.setNotTarget(true);
+        if (target.canChoose(player.getId(), source, game)
+                && player.choose(Outcome.Sacrifice, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 return permanent.sacrifice(source, game);

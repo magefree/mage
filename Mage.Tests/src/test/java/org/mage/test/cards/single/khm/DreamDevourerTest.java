@@ -190,7 +190,7 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell {2}{W}");
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lonesome Unicorn", 1);
-        checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Knight", 1);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Knight Token", 1);
 
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lonesome Unicorn");
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
@@ -203,6 +203,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Lonesome Unicorn", 2);
-        assertPermanentCount(playerA, "Knight", 1);
+        assertPermanentCount(playerA, "Knight Token", 1);
     }
 }

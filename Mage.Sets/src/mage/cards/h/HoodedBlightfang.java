@@ -88,7 +88,7 @@ class HoodedBlightfangTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null
                 || damaged == null
                 || !StaticFilters.FILTER_PERMANENT_PLANESWALKER.match(damaged, game)
-                || !HoodedBlightfang.filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
+                || !HoodedBlightfang.filter.match(permanent, this.getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(damaged.getId(), damaged.getZoneChangeCounter(game)));

@@ -18,7 +18,7 @@ import mage.constants.Zone;
 public final class BroodKeeperDragonToken extends TokenImpl {
 
     public BroodKeeperDragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
+        super("Dragon Token", "2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setRed(true);

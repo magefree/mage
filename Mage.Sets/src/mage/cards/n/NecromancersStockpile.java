@@ -64,7 +64,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 for (UUID targetId : targets.get(0).getTargets()) {
@@ -83,7 +83,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

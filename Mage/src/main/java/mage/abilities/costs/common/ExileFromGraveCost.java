@@ -78,7 +78,7 @@ public class ExileFromGraveCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card == null
@@ -106,7 +106,7 @@ public class ExileFromGraveCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

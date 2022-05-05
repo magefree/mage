@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
  */
 public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean onlyToControllerGraveyard;
+    private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect) {
         this(effect, false, false);
@@ -42,19 +42,21 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null
-                    && zEvent.isDiesEvent()) {
-                return !onlyToControllerGraveyard || this.isControlledBy(game.getOwnerId(zEvent.getTargetId()));
-            }
+        if (!event.getTargetId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
+        if (permanent == null || !zEvent.isDiesEvent()
+                || (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId())))) {
+            return false;
+        }
+        this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
+        return true;
     }
 
     @Override
     public String getTriggerPhrase() {
-        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " ;
+        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ";
     }
 }

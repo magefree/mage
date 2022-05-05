@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class HourOfNeedSphinxToken extends TokenImpl {
 
     public HourOfNeedSphinxToken() {
-        super("Sphinx", "4/4 blue Sphinx creature token with flying");
+        super("Sphinx Token", "4/4 blue Sphinx creature token with flying");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);

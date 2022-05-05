@@ -91,7 +91,7 @@ class KamahlsWillEffect extends OneShotEffect {
         }
         for (Permanent creature : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (creature == null || creature.getPower().getValue() < 1) {
                 continue;

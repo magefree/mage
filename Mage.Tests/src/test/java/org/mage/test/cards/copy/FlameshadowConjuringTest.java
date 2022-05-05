@@ -40,7 +40,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Priest of the Blood Rite", 1);
-        assertPermanentCount(playerA, "Demon", 2);
+        assertPermanentCount(playerA, "Demon Token", 2);
 
         assertLife(playerB, 20);
         assertLife(playerA, 18);
@@ -79,7 +79,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
         assertLife(playerA, 26);
 
-        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
 
     }
 

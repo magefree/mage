@@ -57,7 +57,7 @@ class FireballEffect extends OneShotEffect {
     public FireballEffect() {
         super(Outcome.Damage);
         staticText = "this spell costs {1} more to cast for each target beyond the first.<br> {this} deals " +
-                "X damage divided evenly, rounded down, among any number of target creatures and/or players.";
+                "X damage divided evenly, rounded down, among any number of targets";
     }
 
     public FireballEffect(final FireballEffect effect) {
@@ -123,7 +123,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
         }
 
         for (int numberTargets = 1; numberTargets == 1 || xVal / (numberTargets - 1) > 1; numberTargets++) {
-            Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+            Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
             // less possible targets than we're trying to set
             if (possibleTargets.size() < numberTargets) {
                 return options;

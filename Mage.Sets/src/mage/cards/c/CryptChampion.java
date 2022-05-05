@@ -89,7 +89,7 @@ class CryptChampionEffect extends OneShotEffect {
                     filter.add(new OwnerIdPredicate(playerId));
                     filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
                     Target target = new TargetCardInGraveyard(filter);
-                    if (target.canChoose(source.getSourceId(), playerId, game)
+                    if (target.canChoose(playerId, source, game)
                             && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {

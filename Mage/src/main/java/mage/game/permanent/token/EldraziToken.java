@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class EldraziToken extends TokenImpl {
 
     public EldraziToken() {
-        super("Eldrazi", "10/10 colorless Eldrazi creature token");
+        super("Eldrazi Token", "10/10 colorless Eldrazi creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         power = new MageInt(10);

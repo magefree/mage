@@ -29,7 +29,7 @@ public final class MinnWilyIllusionistToken extends TokenImpl {
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public MinnWilyIllusionistToken() {
-        super("Illusion", "1/1 blue Illusion creature token with \"This creature gets +1/+0 for each other Illusion you control.\"");
+        super("Illusion Token", "1/1 blue Illusion creature token with \"This creature gets +1/+0 for each other Illusion you control.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ILLUSION);

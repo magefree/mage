@@ -66,7 +66,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getSourceId(), getControllerId(), game) > 5;
+        return game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getControllerId(), this, game) > 5;
     }
 
     @Override

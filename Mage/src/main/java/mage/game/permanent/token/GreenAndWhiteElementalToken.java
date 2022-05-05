@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class GreenAndWhiteElementalToken extends TokenImpl {
 
     public GreenAndWhiteElementalToken() {
-        super("Elemental", "8/8 green and white Elemental creature token with vigilance");
+        super("Elemental Token", "8/8 green and white Elemental creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);

@@ -44,7 +44,7 @@ public final class GuardianZendikon extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
-                new GuardianZendikonWallToken(), "Enchanted land is a 2/6 white wall creature with defender. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
+                new GuardianZendikonWallToken(), "Enchanted land is a 2/6 white Wall creature with defender. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
 
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -64,7 +64,7 @@ public final class GuardianZendikon extends CardImpl {
 class GuardianZendikonWallToken extends TokenImpl {
 
     GuardianZendikonWallToken() {
-        super("", "2/6 white wall creature with defender");
+        super("", "2/6 white Wall creature with defender");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.WALL);

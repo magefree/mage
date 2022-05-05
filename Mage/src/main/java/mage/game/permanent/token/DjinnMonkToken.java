@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class DjinnMonkToken extends TokenImpl {
 
     public DjinnMonkToken() {
-        super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
+        super("Djinn Monk Token", "2/2 blue Djinn Monk creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.DJINN);

@@ -28,7 +28,7 @@ public final class GoatToken extends TokenImpl {
     }
 
     public GoatToken(String setCode, int tokenType) {
-        super("Goat", "0/1 white Goat creature token");
+        super("Goat Token", "0/1 white Goat creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

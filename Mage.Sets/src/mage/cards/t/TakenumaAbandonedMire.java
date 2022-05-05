@@ -36,7 +36,7 @@ public final class TakenumaAbandonedMire extends CardImpl {
         // Channel — {3}{B}, Discard Takenuma, Abandoned Mire: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand. This ability costs {1} less to activate for each legendary creature you control.
         Ability ability = new ChannelAbility("{3}{B}", new TakenumaAbandonedMireEffect());
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private TakenumaAbandonedMire(final TakenumaAbandonedMire card) {

@@ -32,7 +32,6 @@ public class OpalPalaceTest extends CardTestCommanderDuelBase {
         // showAvailableAbilities("abi", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}");
-        setChoice(playerA, "Opal Palace"); // activate mana replace effect first (+3 counters)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
 
         setStrictChooseMode(true);

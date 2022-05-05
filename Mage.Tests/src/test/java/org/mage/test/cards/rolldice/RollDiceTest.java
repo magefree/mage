@@ -46,7 +46,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, goblins, 1);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, guide, 1);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, guide, 2);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
     }
 
     private void runKrarksOtherThumbTest(int choice, int thumbCount, int goblinCount, int... rolls) {
@@ -141,7 +141,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, gallery, 1);
         assertPermanentCount(playerA, thumb, thumbCount);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
     @Test(expected = AssertionError.class)
@@ -198,7 +198,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, goblins, 1);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
         assertAbility(playerA, farideh, FlyingAbility.getInstance(), true);
         assertHandCount(playerA, handCount);
     }
@@ -232,7 +232,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 2);
+        assertPermanentCount(playerA, "Eldrazi Token", 2);
         assertTappedCount("Mountain", true, 1); // cost for second planar die
     }
 
@@ -259,7 +259,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -289,7 +289,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -323,7 +323,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 0);
+        assertPermanentCount(playerA, "Eldrazi Token", 0);
     }
 
     @Test
@@ -342,7 +342,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 6); // additional roll - will be selected
         setDieRollResult(playerA, 5); // additional roll
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -366,11 +366,11 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
         setDieRollResult(playerA, 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac Token", 3);
 
         // prepare idea effect
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
-        setChoice(playerA, "Brainiac", 3);
+        setChoice(playerA, "Brainiac Token", 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // roll and trigger idea replace event
@@ -378,7 +378,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 3); // normal roll
         setDieRollResult(playerA, 6); // additional roll - will be sums
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 3 + 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 3 + 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -401,7 +401,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 6); // additional roll
         setChoice(playerA, "6"); // keep 6 as roll result
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -427,7 +427,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -450,7 +450,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -471,11 +471,11 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
         setDieRollResult(playerA, 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac Token", 3);
 
         // prepare idea effect
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
-        setChoice(playerA, "Brainiac", 3);
+        setChoice(playerA, "Brainiac Token", 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // roll planar die, but no triggers with second roll - cause it works with numerical results (sum)
@@ -489,7 +489,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -509,7 +509,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

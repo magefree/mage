@@ -34,7 +34,7 @@ public class CantAttackYouOrPlaneswalkerAllEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filterAttacker.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filterAttacker.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override

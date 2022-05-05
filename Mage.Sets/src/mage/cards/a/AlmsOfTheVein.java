@@ -25,7 +25,7 @@ public final class AlmsOfTheVein extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Madness {B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
     }
 
     private AlmsOfTheVein(final AlmsOfTheVein card) {

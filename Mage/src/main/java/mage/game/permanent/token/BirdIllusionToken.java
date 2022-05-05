@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class BirdIllusionToken extends TokenImpl {
 
     public BirdIllusionToken() {
-        super("Bird Illusion", "1/1 blue Bird Illusion creature token with flying");
+        super("Bird Illusion Token", "1/1 blue Bird Illusion creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);

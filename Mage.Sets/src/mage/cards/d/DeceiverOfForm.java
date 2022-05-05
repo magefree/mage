@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -63,18 +62,25 @@ class DeceiverOfFormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Card copyFromCard = null;
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null
                 && sourceObject != null) {
-            Card copyFromCard = controller.getLibrary().getFromTop(game);
-            if (copyFromCard != null) {
-                Cards cards = new CardsImpl(copyFromCard);
+            Card cardFromTop = controller.getLibrary().getFromTop(game);
+            if (cardFromTop != null) {
+                Cards cards = new CardsImpl(cardFromTop);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (copyFromCard.isCreature(game)) {
+                if (cardFromTop.isCreature(game)) {
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
-                            + sourceObject.getLogName() + " becomes copies of " + copyFromCard.getLogName() + " until end of turn?", source, game)) {
+                            + sourceObject.getLogName() + " becomes copies of " + cardFromTop.getLogName() + " until end of turn?", source, game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
+                                copyFromCard = cardFromTop;
+                                // handle MDFC
+                                if (cardFromTop instanceof ModalDoubleFacesCard
+                                        && ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
+                                    copyFromCard = ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard();
+                                }
                                 Permanent newBluePrint = null;
                                 newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 newBluePrint.assignNewId();

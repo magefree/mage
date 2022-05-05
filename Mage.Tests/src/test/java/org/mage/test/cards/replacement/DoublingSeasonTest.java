@@ -88,7 +88,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Saproling", 2);
+        assertPermanentCount(playerA, "Saproling Token", 2);
         assertCounterCount("Pallid Mycoderm", CounterType.SPORE, 1);
 
     }
@@ -272,7 +272,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Zombie", 2);
+        assertPermanentCount(playerA, "Zombie Token", 2);
     }
 
 }

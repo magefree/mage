@@ -70,7 +70,7 @@ class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (activePlayer != null && mageObject != null) {
             return "You can't cast spells or activate abilities of artifacts, creatures, or enchantments during the turns of " + activePlayer.getLogName() +
                     " (" + mageObject.getLogName() + ')';

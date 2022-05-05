@@ -90,7 +90,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
                 || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
             // Activated abilities of creatures
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (filter.match(card, source.getSourceId(), source.getControllerId(), game) && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+            if (filter.match(card, source.getControllerId(), source, game) && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                 return true;
             }
         }

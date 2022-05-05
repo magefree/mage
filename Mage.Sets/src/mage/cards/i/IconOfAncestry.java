@@ -6,9 +6,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -61,15 +62,10 @@ public final class IconOfAncestry extends CardImpl {
     }
 }
 
-class IconOfAncestryEffect extends LookLibraryAndPickControllerEffect {
+class IconOfAncestryEffect extends OneShotEffect {
 
     public IconOfAncestryEffect() {
-        super(StaticValue.get(3), false, StaticValue.get(1), new FilterCreatureCard(
-                        "creature card that matches the chosen subtype"
-                ), Zone.LIBRARY, false, true, false,
-                Zone.HAND, true, false, false);
-        this.setOutcome(Outcome.AIDontUseIt);
-        this.setBackInRandomOrder(true);
+        super(Outcome.AIDontUseIt);
         staticText = "look at the top three cards of your library. " +
                 "You may reveal a creature card of the chosen type from among them and put it into your hand. " +
                 "Put the rest on the bottom of your library in a random order";
@@ -77,13 +73,13 @@ class IconOfAncestryEffect extends LookLibraryAndPickControllerEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        SubType subtype = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         if (subtype == null) {
             return false;
         }
+        FilterCreatureCard filter = new FilterCreatureCard(subtype.toString() + " creature card");
         filter.add(subtype.getPredicate());
-        filter.setMessage(subtype.toString() + " creature card");
-        return super.apply(game, source);
+        return new LookLibraryAndPickControllerEffect(3, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM).apply(game, source);
     }
 
     public IconOfAncestryEffect(final IconOfAncestryEffect effect) {

@@ -25,7 +25,7 @@ public interface ContinuousEffect extends Effect {
 
     void discard();
 
-    void setDuration(Duration duration);
+    ContinuousEffect setDuration(Duration duration);
 
     Duration getDuration();
 
@@ -66,6 +66,8 @@ public interface ContinuousEffect extends Effect {
     UUID getStartingController();
 
     boolean isYourNextTurn(Game game);
+
+    boolean isYourNextEndStep(Game game);
 
     @Override
     void newId();

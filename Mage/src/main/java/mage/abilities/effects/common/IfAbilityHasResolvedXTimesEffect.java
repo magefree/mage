@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -21,8 +22,6 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
         super(outcome);
         this.resolutionNumber = resolutionNumber;
         this.effect = effect;
-        this.staticText = "If this is the " + CardUtil.numberToOrdinalText(resolutionNumber) + " time this ability has resolved this turn, " +
-                effect.getText(null);
     }
 
     private IfAbilityHasResolvedXTimesEffect(final IfAbilityHasResolvedXTimesEffect effect) {
@@ -39,12 +38,21 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (AbilityResolvedWatcher.getResolutionCount(game, source) != resolutionNumber) {
-            return true;
+            return false;
         }
         if (effect instanceof OneShotEffect) {
             return effect.apply(game, source);
         }
         game.addEffect((ContinuousEffect) effect, source);
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "If this is the " + CardUtil.numberToOrdinalText(resolutionNumber) +
+                " time this ability has resolved this turn, " + effect.getText(mode);
     }
 }

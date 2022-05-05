@@ -23,9 +23,9 @@ import java.util.UUID;
  */
 public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
 
-    private final MageObjectReference mor;
-    private final UUID playerId;
-    private final Condition condition;
+    protected final MageObjectReference mor;
+    protected final UUID playerId;
+    protected final Condition condition;
 
     public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration) {
         this(game, cardId, cardZCC, duration, null, null);

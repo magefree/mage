@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.OwlToken;
+import mage.game.permanent.token.BlueBirdToken;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -30,7 +30,7 @@ public final class FableOfWolfAndOwl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G/U}{G/U}{G/U}");
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BlueBirdToken(), 1), filterBlueSpell, true));
     }
 
     private FableOfWolfAndOwl(final FableOfWolfAndOwl card) {

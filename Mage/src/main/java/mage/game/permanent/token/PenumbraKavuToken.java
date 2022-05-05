@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class PenumbraKavuToken extends TokenImpl {
 
     public PenumbraKavuToken() {
-        super("Kavu", "3/3 black Kavu creature token");
+        super("Kavu Token", "3/3 black Kavu creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.KAVU);

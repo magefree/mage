@@ -1,6 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,8 +8,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
@@ -30,7 +30,7 @@ public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        if(controller == null) {
+        if (controller == null) {
             return false;
         }
         return controller.getGraveyard().size() >= amount;
@@ -39,17 +39,19 @@ public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if(controller != null) {
-            Card topCard = null;
-            for (Card card :controller.getGraveyard().getCards(game)) {
-                if (card.isCreature(game)) {
-                    topCard = card;
-                }
-            }
-            if (topCard != null) {
-                controller.moveCardToExileWithInfo(topCard, null, "", source, game, Zone.GRAVEYARD, true);
-                paid = true;
-            }
+        if (controller == null) {
+            return paid;
+        }
+        Card topCard = controller
+                .getGraveyard()
+                .getCards(game)
+                .stream()
+                .filter(card -> card.isCreature(game))
+                .findFirst()
+                .orElse(null);
+        if (topCard != null) {
+            controller.moveCards(topCard, Zone.EXILED, source, game);
+            paid = true;
         }
         return paid;
     }

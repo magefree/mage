@@ -80,7 +80,7 @@ class EvilTwinPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
-        Permanent twin = game.getPermanent(input.getSourceId());
+        Permanent twin = input.getSource().getSourcePermanentIfItStillExists(game);
         return CardUtil.haveSameNames(permanent, twin);
     }
 

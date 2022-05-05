@@ -88,7 +88,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
                     }
                     target.clearChosen();
                     boolean playedLand = false;
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game) && currentPlayer.chooseUse(outcome, "Put a land card from your hand onto the battlefield?", source, game)) {
+                    if (target.canChoose(currentPlayer.getId(), source, game) && currentPlayer.chooseUse(outcome, "Put a land card from your hand onto the battlefield?", source, game)) {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {

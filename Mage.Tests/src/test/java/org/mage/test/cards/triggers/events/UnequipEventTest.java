@@ -97,7 +97,7 @@ public class UnequipEventTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Hammer of Nazahn", 1);
         assertGraveyardCount(playerA, "Beast Within", 1);
-        assertPowerToughness(playerA, "Beast", 3, 3);
+        assertPowerToughness(playerA, "Beast Token", 3, 3);
         assertGraveyardCount(playerA, "Grafted Exoskeleton", 1);
         assertGraveyardCount(playerA, "Nazahn, Revered Bladesmith", 1);
 

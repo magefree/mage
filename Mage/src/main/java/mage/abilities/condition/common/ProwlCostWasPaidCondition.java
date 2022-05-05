@@ -32,7 +32,7 @@ public enum ProwlCostWasPaidCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this}'s prowl cost was paid";
+        return "this spell's prowl cost was paid";
     }
 
 }

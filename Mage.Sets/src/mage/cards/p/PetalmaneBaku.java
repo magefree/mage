@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -31,18 +30,17 @@ public final class PetalmaneBaku extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
+        // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Petalmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color.
         Ability ability = new DynamicManaAbility(
                 new Mana(0, 0, 0, 0, 0, 0, 1, 0),
                 RemovedCountersForCostValue.instance,
-                new ManaCostsImpl<>("{1}"),
+                new GenericManaCost(1),
                 "Add X mana of any one color",
                 true, new CountersSourceCount(CounterType.KI));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(),
-                "Remove X ki counters from {this}"));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
         this.addAbility(ability);
     }
 

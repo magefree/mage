@@ -112,10 +112,10 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2:");
 
-        attack(3, playerA, "Devil");
+        attack(3, playerA, "Devil Token");
         castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, mTrickster);
-        addTarget(playerB, "Devil");
-        block(3, playerB, mTrickster, "Devil");
+        addTarget(playerB, "Devil Token");
+        block(3, playerB, mTrickster, "Devil Token");
         addTarget(playerA, mTrickster);
 
         setStopAt(3, PhaseStep.END_COMBAT);

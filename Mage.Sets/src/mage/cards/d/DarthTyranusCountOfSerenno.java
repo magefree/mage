@@ -4,7 +4,6 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.SearchEffect;
@@ -39,7 +38,7 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOOKU);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Up to one target creature gets -6/-0 until your next turn.
         Effect effect = new BoostTargetEffect(-6, 0, Duration.UntilYourNextTurn);

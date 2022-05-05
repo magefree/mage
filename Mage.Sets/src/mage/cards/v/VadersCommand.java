@@ -45,20 +45,17 @@ public final class VadersCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         //   Destroy target planeswalker.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filterPlaneswalker));
         this.getSpellAbility().addMode(mode);
 
         //   Destroy target nonartifact creature.
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetCreaturePermanent(filterNonArtifact));
         this.getSpellAbility().addMode(mode);
 
         //   Gain 5 life.
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(5).setText("Gain 5 life"));
+        mode = new Mode(new GainLifeEffect(5).setText("Gain 5 life"));
         this.getSpellAbility().addMode(mode);
     }
 

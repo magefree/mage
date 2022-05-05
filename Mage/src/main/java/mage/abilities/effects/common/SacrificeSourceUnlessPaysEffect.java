@@ -14,8 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
-import java.util.Locale;
-
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 21.12.10 Time: 9:21
  */
@@ -92,17 +90,6 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
-        String costText = cost != null ? cost.getText() : "{X}";
-
-        if (CardUtil.checkCostWords(costText)) {
-            sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));
-            sb.append(costText.substring(1));
-        } else {
-            sb.append("pay ").append(costText);
-        }
-
-        return sb.toString();
+        return "sacrifice {this} unless you " + CardUtil.addCostVerb(cost != null ? cost.getText() : "{X}");
     }
 }

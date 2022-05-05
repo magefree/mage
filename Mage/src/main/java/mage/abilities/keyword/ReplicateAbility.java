@@ -30,7 +30,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
             + " You may choose new targets for the copies.";
     protected OptionalAdditionalCost additionalCost;
 
-    public ReplicateAbility(Card card, String manaString) {
+    public ReplicateAbility(String manaString) {
         super(Zone.STACK, null);
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText,
                 reminderTextMana, new ManaCostsImpl(manaString));

@@ -24,8 +24,7 @@ public final class HealingLeaves extends CardImpl {
         // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to any target this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        Mode mode = new Mode();
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
+        Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }

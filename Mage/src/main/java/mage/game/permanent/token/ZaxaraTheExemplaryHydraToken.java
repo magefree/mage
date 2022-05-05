@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class ZaxaraTheExemplaryHydraToken extends TokenImpl {
 
     public ZaxaraTheExemplaryHydraToken() {
-        super("Hydra", "0/0 green Hydra creature token");
+        super("Hydra Token", "0/0 green Hydra creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HYDRA);

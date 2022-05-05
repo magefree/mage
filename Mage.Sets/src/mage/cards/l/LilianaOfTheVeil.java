@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.ArrayList;
@@ -6,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
@@ -18,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,13 +28,13 @@ import mage.target.TargetPlayer;
  * @author North
  */
 public final class LilianaOfTheVeil extends CardImpl {
-
+    
     public LilianaOfTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        
+        this.setStartingLoyalty(3);
 
         // +1: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(), 1));
@@ -50,11 +49,11 @@ public final class LilianaOfTheVeil extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
-
+    
     private LilianaOfTheVeil(final LilianaOfTheVeil card) {
         super(card);
     }
-
+    
     @Override
     public LilianaOfTheVeil copy() {
         return new LilianaOfTheVeil(this);
@@ -62,31 +61,33 @@ public final class LilianaOfTheVeil extends CardImpl {
 }
 
 class LilianaOfTheVeilEffect extends OneShotEffect {
-
+    
     public LilianaOfTheVeilEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice";
     }
-
+    
     public LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public LilianaOfTheVeilEffect copy() {
         return new LilianaOfTheVeilEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
             int count = game.getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
-            TargetPermanent target = new TargetPermanent(0, count, new FilterPermanent("permanents to put in the first pile"), true);
+            FilterPermanent filter = new FilterPermanent("permanents to put in the first pile");
+            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
+            TargetPermanent target = new TargetPermanent(0, count, filter, true);
             List<Permanent> pile1 = new ArrayList<>();
             target.setRequired(false);
-            if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Neutral, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Permanent p = game.getPermanent(targetId);
@@ -101,20 +102,20 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
                     pile2.add(p);
                 }
             }
-
+            
             boolean choice = targetPlayer.choosePile(Outcome.DestroyPermanent, "Choose a pile to sacrifice.", pile1, pile2, game);
-
+            
             if (choice) {
                 sacrificePermanents(pile1, game, source);
             } else {
                 sacrificePermanents(pile2, game, source);
             }
-
+            
             return true;
         }
         return false;
     }
-
+    
     private void sacrificePermanents(List<Permanent> pile, Game game, Ability source) {
         for (Permanent permanent : pile) {
             if (permanent != null) {

@@ -16,7 +16,7 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
     }
 
     public StitcherGeralfZombieToken(int xValue) {
-        super("Zombie", "X/X blue Zombie creature token");
+        super("Zombie Token", "X/X blue Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ZOMBIE);

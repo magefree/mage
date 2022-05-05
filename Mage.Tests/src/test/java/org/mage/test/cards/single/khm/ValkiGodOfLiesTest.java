@@ -18,7 +18,6 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Ephemerate");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tibalt, Cosmic Impostor");
-        setChoice(playerA, "Tibalt, Cosmic Impostor"); // two etb effects
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Exile the top card of each player's library.");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", "Grizzly Bears");

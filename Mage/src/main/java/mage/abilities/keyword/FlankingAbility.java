@@ -34,7 +34,7 @@ public class FlankingAbility extends TriggeredAbilityImpl {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
                 boolean hasFlankingAbility
-                        = permanent.getAbilities().stream().anyMatch(ability -> ability instanceof FlankingAbility);
+                        = permanent.getAbilities().stream().anyMatch(FlankingAbility.class::isInstance);
 
                 if (!hasFlankingAbility) {
                     for (Effect effect : this.getEffects()) {

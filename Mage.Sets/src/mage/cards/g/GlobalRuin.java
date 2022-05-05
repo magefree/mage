@@ -70,7 +70,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
                     filter.add(landName.getPredicate());
                     Target target = new TargetControlledPermanent(1, 1, filter, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(outcome, target, source, game);
                         lands.add(target.getFirstTarget());
                     }

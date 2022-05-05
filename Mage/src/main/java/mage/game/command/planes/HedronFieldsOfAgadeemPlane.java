@@ -95,6 +95,6 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
         if (!cPlane.getPlaneType().equals(Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM)) {
             return false;
         }
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 }

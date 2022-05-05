@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * Can be used with SearchLibrary only. User hasn't access to libs.
  *
  * @author BetaSteward_at_googlemail.com
@@ -56,7 +55,7 @@ public class TargetCardInLibrary extends TargetCard {
     }
 
     @Override
-    public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) { // TODO: wtf sourceId named as targetPlayerId?!
+    public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Ability source, Game game) { // TODO: wtf sourceId named as targetPlayerId?!
         Player player = game.getPlayer(playerId);
         Player targetPlayer = game.getPlayer(targetPlayerId);
         if (targetPlayer == null) {
@@ -82,7 +81,7 @@ public class TargetCardInLibrary extends TargetCard {
             if (!player.canRespond()) {
                 return chosen;
             }
-            if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
+            if (!player.chooseTarget(outcome, cardsId, this, source, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getMinNumberOfTargets();
@@ -93,7 +92,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getControllerId(), source, game);
     }
 
     @Override

@@ -81,8 +81,8 @@ class FallOfTheThranReturnEffect extends OneShotEffect {
                     TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_LAND);
                     target.setNotTarget(true);
                     target.setTargetController(playerId);
-                    if (target.canChoose(source.getSourceId(), playerId, game)) {
-                        player.choose(outcome, target, source.getSourceId(), game);
+                    if (target.canChoose(playerId, source, game)) {
+                        player.choose(outcome, target, source, game);
                         if (target.getTargets().size() == 2) {
                             toBattlefield.put(playerId, new CardsImpl(target.getTargets()).getCards(game));
                         }

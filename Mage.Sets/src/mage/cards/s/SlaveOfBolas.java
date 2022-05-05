@@ -1,9 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -21,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class SlaveOfBolas extends CardImpl {
@@ -31,9 +29,11 @@ public final class SlaveOfBolas extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U/R}{B}");
 
         // Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom));
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setText("It gains haste until end of turn"));
         this.getSpellAbility().addEffect(new SlaveOfBolasEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -67,13 +67,13 @@ class SlaveOfBolasEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this", source.getControllerId());
-            sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new SacrificeTargetEffect("sacrifice this", source.getControllerId())
+                        .setTargetPointer(new FixedTarget(permanent, game))
+        ), source);
+        return true;
     }
 }

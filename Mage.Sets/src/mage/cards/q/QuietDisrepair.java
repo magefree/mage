@@ -39,8 +39,7 @@ public final class QuietDisrepair extends CardImpl {
 
         // At the beginning of your upkeep, choose one - Destroy enchanted permanent; or you gain 2 life.
         ability = new BeginningOfUpkeepTriggeredAbility(new DestroyAttachedToEffect("enchanted permanent"), TargetController.YOU, false);
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeEffect(2));
+        Mode mode = new Mode(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
     }

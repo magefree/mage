@@ -9,7 +9,7 @@ import mage.constants.Zone;
  */
 public class MenaceAbility extends StaticAbility { // Menace may not be a Singleton because the source ability is needed in the continuous effect
 
-    private boolean showAbilityHint = true;
+    private final boolean showAbilityHint;
 
     public MenaceAbility() {
         this(true);

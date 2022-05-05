@@ -13,14 +13,14 @@ import java.util.Arrays;
 public final class RedElementalToken extends TokenImpl {
 
     public RedElementalToken() {
-        super("Elemental", "1/1 red Elemental creature token");
+        super("Elemental Token", "1/1 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C13", "EMA", "M14", "SHM", "MH1", "M20");
+        availableImageSetCodes = Arrays.asList("C13", "EMA", "M14", "SHM", "MH1", "M20", "RIX", "UMA", "NEC");
     }
 
     @Override
@@ -35,8 +35,16 @@ public final class RedElementalToken extends TokenImpl {
             setTokenType(RandomUtil.nextInt(2) + 1);
         }
 
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("RIX")) {
+            setTokenType(2);
+        }
+
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SHM")) {
             setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("UMA")) {
+            setTokenType(RandomUtil.nextInt(2) + 2); // 2..3
         }
     }
 

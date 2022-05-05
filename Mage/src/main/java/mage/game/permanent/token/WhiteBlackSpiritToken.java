@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WhiteBlackSpiritToken extends TokenImpl {
 
     public WhiteBlackSpiritToken() {
-        super("Spirit", "1/1 white and black Spirit creature token with flying");
+        super("Spirit Token", "1/1 white and black Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);
@@ -22,7 +22,16 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("MH1", "C21"));
+        availableImageSetCodes.addAll(Arrays.asList("MH1", "C21", "UMA"));
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("UMA")) {
+            this.setTokenType(2);
+        }
     }
 
     public WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {

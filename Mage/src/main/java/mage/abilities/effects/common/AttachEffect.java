@@ -10,6 +10,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -36,30 +38,29 @@ public class AttachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            // if it activating on the stack then allow +1 zcc
-            int zcc = game.getState().getZoneChangeCounter(sourcePermanent.getId());
-            if (zcc == CardUtil.getActualSourceObjectZoneChangeCounter(game, source)
-                    || zcc == CardUtil.getActualSourceObjectZoneChangeCounter(game, source) + 1) {
-                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                if (permanent != null) {
-                    return permanent.addAttachment(source.getSourceId(), source, game);
-                } else {
-                    Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-                    if (player != null) {
-                        return player.addAttachment(source.getSourceId(), source, game);
-                    }
-                    if (!source.getTargets().isEmpty() && source.getTargets().get(0) instanceof TargetCard) { // e.g. Spellweaver Volute
-                        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-                        if (card != null) {
-                            return card.addAttachment(source.getSourceId(), source, game);
-                        }
-                    }
-                }
-            }
+        if (sourcePermanent == null) {
+            return false;
         }
-
-        return false;
+        // if it activating on the stack then allow +1 zcc
+        int zcc = game.getState().getZoneChangeCounter(sourcePermanent.getId());
+        if (zcc != CardUtil.getActualSourceObjectZoneChangeCounter(game, source)
+                && zcc != CardUtil.getActualSourceObjectZoneChangeCounter(game, source) + 1) {
+            return false;
+        }
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null) {
+            return permanent.addAttachment(source.getSourceId(), source, game);
+        }
+        Player player = game.getPlayer(targetId);
+        if (player != null) {
+            return player.addAttachment(source.getSourceId(), source, game);
+        }
+        if (source.getTargets().isEmpty() || !(source.getTargets().get(0) instanceof TargetCard)) {
+            return false;
+        }
+        Card card = game.getCard(targetId);
+        return card != null && card.addAttachment(source.getSourceId(), source, game);
     }
 
 }

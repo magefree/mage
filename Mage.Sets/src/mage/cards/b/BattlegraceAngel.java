@@ -35,7 +35,7 @@ public final class BattlegraceAngel extends CardImpl {
         // Whenever a creature you control attacks alone, it gains lifelink until end of turn.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(new GainAbilityTargetEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
-        ).setText("it gains lifelink until end of turn")));
+        ).setText("it gains lifelink until end of turn"), true, false));
     }
 
     public BattlegraceAngel(final BattlegraceAngel card) {

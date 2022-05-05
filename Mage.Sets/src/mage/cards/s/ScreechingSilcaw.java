@@ -34,7 +34,7 @@ public final class ScreechingSilcaw extends CardImpl {
         TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(
                         new PutLibraryIntoGraveTargetEffect(4), false, true
-                ), MetalcraftCondition.instance, "<i>Metalcraft</i> &mdash; Whenever {this} " +
+                ), MetalcraftCondition.instance, "Whenever {this} " +
                 "deals combat damage to a player, if you control three or more artifacts, that player mills four cards."
         );
         conditional.setAbilityWord(AbilityWord.METALCRAFT);

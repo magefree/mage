@@ -15,7 +15,7 @@ import mage.constants.SubType;
 public final class DragonBroodmotherDragonToken extends TokenImpl {
 
     public DragonBroodmotherDragonToken() {
-        super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
+        super("Dragon Token", "1/1 red and green Dragon creature token with flying and devour 2");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setRed(true);

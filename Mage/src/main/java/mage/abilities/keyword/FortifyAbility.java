@@ -1,20 +1,17 @@
-
-
 package mage.abilities.keyword;
 
+import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.FortifyEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 
@@ -26,11 +23,11 @@ public class FortifyAbility extends ActivatedAbilityImpl {
     }
 
     public FortifyAbility(Outcome outcome, Cost cost) {
-        this(outcome, cost, new TargetPermanent(new FilterControlledLandPermanent()));
+        this(outcome, cost, new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
     }
 
     public FortifyAbility(Outcome outcome, Cost cost, Target target) {
-        super(Zone.BATTLEFIELD, new FortifyEffect(outcome), cost);
+        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Fortify"), cost);
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
     }

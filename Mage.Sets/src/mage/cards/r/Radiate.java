@@ -134,7 +134,7 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
                 .orElse(null);
         game.getBattlefield()
                 .getActivePermanents(
-                        StaticFilters.FILTER_PERMANENT, player.getId(), source.getSourceId(), game
+                        StaticFilters.FILTER_PERMANENT, player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(game.getPermanent(targeted)))

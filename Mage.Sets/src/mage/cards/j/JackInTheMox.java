@@ -51,12 +51,13 @@ class JackInTheMoxManaEffect extends ManaEffect {
 
     JackInTheMoxManaEffect() {
         super();
-        staticText = "Roll a six-sided die for {this}. On a 1, sacrifice {this} and lose 5 life. Otherwise, {this} has one of the following effects. Treat this ability as a mana source."
-                + "<br/>2 Add {W}.\n"
-                + "<br/>3 Add {U}.\n"
-                + "<br/>4 Add {B}.\n"
-                + "<br/>5 Add {R}.\n"
-                + "<br/>6 Add {G}.";
+        staticText = "roll a six-sided die. This ability has the indicated effect."
+                + "<br>1 - Sacrifice {this} and you lose 5 life."
+                + "<br>2 - Add {W}."
+                + "<br>3 - Add {U}."
+                + "<br>4 - Add {B}."
+                + "<br>5 - Add {R}."
+                + "<br>6 - Add {G}.";
     }
 
     JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {

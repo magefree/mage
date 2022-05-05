@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class DemonToken extends TokenImpl {
 
     public DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
+        super("Demon Token", "5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);
@@ -21,7 +21,7 @@ public final class DemonToken extends TokenImpl {
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21"));
+        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21", "2XM"));
     }
 
     public DemonToken(final DemonToken token) {

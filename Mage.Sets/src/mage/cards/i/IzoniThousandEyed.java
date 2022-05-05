@@ -11,12 +11,9 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.target.common.TargetControlledPermanent;
@@ -44,7 +41,7 @@ public final class IzoniThousandEyed extends CardImpl {
                                 StaticFilters.FILTER_CARD_CREATURE
                         )
                 ), false)
-                .withFlavorWord("Undergrowth")
+                .setAbilityWord(AbilityWord.UNDERGROWTH)
         );
 
         // {B}{G}, Sacrifice another creature: You gain 1 life and draw a card.

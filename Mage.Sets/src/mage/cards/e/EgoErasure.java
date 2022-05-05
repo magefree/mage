@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,9 +27,8 @@ public final class EgoErasure extends CardImpl {
         // Changeling
         this.addAbility(new ChangelingAbility());
 
-        //Creatures target player controls get -2/+0 and lose all creature types until end of turn.
-        this.getSpellAbility().addEffect(new EgoErasureBoostEffect());
-        this.getSpellAbility().addEffect(new EgoErasureLoseEffect());
+        // Creatures target player controls get -2/+0 and lose all creature types until end of turn.
+        this.getSpellAbility().addEffect(new EgoErasureEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
@@ -44,84 +42,67 @@ public final class EgoErasure extends CardImpl {
     }
 }
 
-class EgoErasureLoseEffect extends ContinuousEffectImpl {
+class EgoErasureEffect extends ContinuousEffectImpl {
 
-    public EgoErasureLoseEffect() {
-        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
-        staticText = "and lose all creature types until end of turn";
+    public EgoErasureEffect() {
+        super(Duration.EndOfTurn, Outcome.Neutral);
+        staticText = "creatures target player controls get -2/-0 and lose all creature types until end of turn";
     }
 
-    public EgoErasureLoseEffect(final EgoErasureLoseEffect effect) {
+    public EgoErasureEffect(final EgoErasureEffect effect) {
         super(effect);
     }
 
     @Override
-    public EgoErasureLoseEffect copy() {
-        return new EgoErasureLoseEffect(this);
+    public EgoErasureEffect copy() {
+        return new EgoErasureEffect(this);
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
-            for (Permanent creature : creatures) {
-                affectedObjectList.add(new MageObjectReference(creature, game));
+        game.getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE,
+                        source.getFirstTarget(), source, game
+                ).stream()
+                .map(permanent -> new MageObjectReference(permanent, game))
+                .forEach(affectedObjectList::add);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
+            Permanent permanent = it.next().getPermanent(game);
+            if (permanent == null) {
+                it.remove();
+                continue;
+            }
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.removeAllCreatureTypes(game);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.ModifyPT_7c) {
+                        permanent.addPower(-2);
+                    }
+                    break;
             }
         }
+        if (affectedObjectList.isEmpty()) {
+            discard();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-            Permanent permanent = it.next().getPermanent(game);
-            if (permanent != null) {
-                permanent.removeAllCreatureTypes(game);
-            } else {
-                it.remove();
-            }
-        }
-        return true;
-    }
-}
-
-class EgoErasureBoostEffect extends ContinuousEffectImpl {
-
-    public EgoErasureBoostEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.Benefit);
-        staticText = "Creatures target player controls get -2/+0";
-    }
-
-    public EgoErasureBoostEffect(final EgoErasureBoostEffect effect) {
-        super(effect);
+        return false;
     }
 
     @Override
-    public EgoErasureBoostEffect copy() {
-        return new EgoErasureBoostEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
-            for (Permanent creature : creatures) {
-                affectedObjectList.add(new MageObjectReference(creature, game));
-            }
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-            Permanent permanent = it.next().getPermanent(game);
-            if (permanent != null) {
-                permanent.addPower(-2);
-            } else {
-                it.remove();
-            }
-        }
-        return true;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.TypeChangingEffects_4 || layer == Layer.PTChangingEffects_7;
     }
 }

@@ -48,7 +48,7 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
         }
         TappedForManaEvent manaEvent = ((TappedForManaEvent) event);
         Permanent permanent = manaEvent.getPermanent();
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         getEffects().setValue("mana", manaEvent.getMana());

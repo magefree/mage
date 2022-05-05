@@ -47,7 +47,7 @@ public final class JaggedScarArchers extends CardImpl {
         // Jagged-Scar Archers's power and toughness are each equal to the number of Elves you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledElvesFilter), Duration.EndOfGame)));
         // {tap}: Jagged-Scar Archers deals damage equal to its power to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()).setText("{this} deals damage equal to its power to target creature with flying"), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(flyingCreatureFilter));
         this.addAbility(ability);
     }

@@ -72,7 +72,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
-            Set<CardType> cardTypes = getOpponentPermanentCardTypes(source.getSourceId(), controllerId, game);
+            Set<CardType> cardTypes = getOpponentPermanentCardTypes(controllerId, game);
             Permanent permanent = game.getPermanent(id);
             for (CardType type : permanent.getCardType(game)) {
                 if (cardTypes.contains(type)) {
@@ -84,13 +84,13 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         // get all cardtypes from opponents permanents 
-        Set<CardType> cardTypes = getOpponentPermanentCardTypes(sourceId, sourceControllerId, game);
+        Set<CardType> cardTypes = getOpponentPermanentCardTypes(sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
@@ -109,7 +109,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         return new TargetControlledPermanentSharingOpponentPermanentCardType(this);
     }
 
-    private EnumSet<CardType> getOpponentPermanentCardTypes(UUID sourceId, UUID sourceControllerId, Game game) {
+    private EnumSet<CardType> getOpponentPermanentCardTypes(UUID sourceControllerId, Game game) {
         Player controller = game.getPlayer(sourceControllerId);
         EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
         if (controller != null) {
@@ -154,12 +154,12 @@ class DaringThiefSecondTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
-            MageObject targetSource = game.getObject(sourceId);
+            MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                         if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());

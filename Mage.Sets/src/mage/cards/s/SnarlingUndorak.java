@@ -40,7 +40,7 @@ public final class SnarlingUndorak extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Morph {1}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}{G}")));
     }
 
     private SnarlingUndorak(final SnarlingUndorak card) {

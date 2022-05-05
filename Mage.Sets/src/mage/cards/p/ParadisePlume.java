@@ -74,7 +74,7 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
             filter.add(new ColorPredicate(color));
             Spell spell = game.getStack().getSpell(event.getTargetId());
             return (spell != null
-                    && filter.match(spell, getSourceId(), getControllerId(), game));
+                    && filter.match(spell, getControllerId(), this, game));
         }
         return false;
     }

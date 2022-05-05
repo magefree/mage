@@ -62,7 +62,7 @@ public final class Humility extends CardImpl {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                        new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                        new FilterCreaturePermanent(), source.getControllerId(), source, game)) {
                     switch (layer) {
                         case AbilityAddingRemovingEffects_6:
                             permanent.removeAllAbilities(source.getSourceId(), game);

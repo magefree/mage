@@ -25,9 +25,9 @@ public final class NiveousWisps extends CardImpl {
         // Target creature becomes white until end of turn. Tap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap that creature"));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     public NiveousWisps (final NiveousWisps card) {

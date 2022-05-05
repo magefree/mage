@@ -10,7 +10,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -76,7 +75,7 @@ class CreepingRenaissanceEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard(chosenType.toString().toLowerCase(Locale.ENGLISH) + " card");
         filter.add(chosenType.getPredicate());
-        return controller.moveCards(controller.getGraveyard().getCards(filter, source.getSourceId(), controller.getId(), game), Zone.HAND, source, game);
+        return controller.moveCards(controller.getGraveyard().getCards(filter, controller.getId(), source, game), Zone.HAND, source, game);
     }
 
     @Override

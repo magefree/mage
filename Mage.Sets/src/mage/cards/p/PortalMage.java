@@ -109,7 +109,6 @@ class PortalMageEffect extends OneShotEffect {
                 }
                 // Select the new defender
                 TargetDefender target = new TargetDefender(defenders, null);
-                target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
                 if (controller.chooseTarget(Outcome.Damage, target, source, game)) {
                     if (!combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
                         if (combatGroupTarget.changeDefenderPostDeclaration(target.getFirstTarget(), game)) {

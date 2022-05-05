@@ -10,6 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -38,7 +40,7 @@ public final class JukaiPreserver extends CardImpl {
         ability = new ChannelAbility(
                 "{2}{G}", new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 2));
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

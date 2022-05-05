@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class PatagiaViperSnakeToken extends TokenImpl {
 
     public PatagiaViperSnakeToken() {
-        super("Snake", "1/1 green and blue Snake creature token");
+        super("Snake Token", "1/1 green and blue Snake creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setBlue(true);

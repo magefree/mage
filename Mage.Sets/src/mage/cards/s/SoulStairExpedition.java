@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class SoulStairExpedition extends CardImpl {
 
         // Remove three quest counters from Soul Stair Expedition and sacrifice it: Return up to two target creature cards from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnToHandTargetEffect(),
+                new ReturnFromGraveyardToHandTargetEffect(),
                 new CompositeCost(
                         new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)),
                         new SacrificeSourceCost(),

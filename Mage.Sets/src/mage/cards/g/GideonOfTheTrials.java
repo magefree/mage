@@ -4,7 +4,6 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -33,7 +32,7 @@ public final class GideonOfTheTrials extends CardImpl {
         this.subtype.add(SubType.GIDEON);
 
         //Starting Loyalty: 3
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Until your next turn, prevent all damage target permanent would deal.
         Effect effect = new PreventDamageByTargetEffect(Duration.UntilYourNextTurn);

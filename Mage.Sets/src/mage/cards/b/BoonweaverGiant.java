@@ -54,7 +54,8 @@ class BoonweaverGiantEffect extends OneShotEffect {
 
     public BoonweaverGiantEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. If you search your library this way, shuffle.";
+        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}." +
+                "If you search your library this way, shuffle.";
     }
 
     public BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
@@ -69,45 +70,40 @@ class BoonweaverGiantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
+        if (controller == null) { return false; }
 
         FilterCard filter = new FilterCard("Aura card");
         filter.add(CardType.ENCHANTMENT.getPredicate());
         filter.add(SubType.AURA.getPredicate());
 
         Card card = null;
-        Zone zone = null;
+
+        // Choose card from graveyard
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for an Aura card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
             if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.GRAVEYARD;
-                }
             }
         }
+
+        // Choose card from your hand
         if (card == null && controller.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
             if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.HAND;
-                }
             }
         }
+
+        // Choose a card from your library
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.LIBRARY;
-                }
             }
             controller.shuffleLibrary(source, game);
         }
-        // aura card found - attach it
+
+        // Aura card found - attach it
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {

@@ -28,7 +28,7 @@ public final class LancerSliver extends CardImpl {
         // Sliver creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_SLIVERS
         )));
     }
 

@@ -86,7 +86,7 @@ class PoxEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-                    int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 3.0);
+                    int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 3.0);
                     if (creaturesToSacrifice > 0) {
                         Target target = new TargetControlledCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
                         target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
@@ -104,7 +104,7 @@ class PoxEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
-                    int landsToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 3.0);
+                    int landsToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 3.0);
                     if (landsToSacrifice > 0) {
                         Target target = new TargetControlledPermanent(landsToSacrifice, landsToSacrifice, filter, true);
                         target.chooseTarget(Outcome.Sacrifice, playerId, source, game);

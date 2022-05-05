@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -44,7 +43,7 @@ public final class NahiriStormOfStone extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // As long as it's your turn, creatures you control have first strike and equip abilities you activate cost {1} less to activate.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

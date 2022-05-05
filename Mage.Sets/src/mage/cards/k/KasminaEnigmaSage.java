@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -37,7 +36,7 @@ public final class KasminaEnigmaSage extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KASMINA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
+        this.setStartingLoyalty(2);
 
         // Each other planeswalker you control has the loyalty abilities of Kasmina, Enigma Sage.
         this.addAbility(new SimpleStaticAbility(new KasminaEnigmaSageGainAbilitiesEffect()));
@@ -88,7 +87,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 .collect(Collectors.toList());
         for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (permanent == null || permanent == perm) {
                 continue;

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class Construct4Token extends TokenImpl {
 
     public Construct4Token() {
-        super("Construct", "4/4 colorless Construct artifact creature token");
+        super("Construct Token", "4/4 colorless Construct artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

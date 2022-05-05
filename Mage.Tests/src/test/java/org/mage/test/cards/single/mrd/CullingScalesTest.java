@@ -58,7 +58,7 @@ public class CullingScalesTest extends CardTestPlayerBase {
         execute();
         
         // Culling Scales trigger fizzles since the Visionary no longer has the lowest CMC
-        assertPermanentCount(playerB, "Soldier", 2);
+        assertPermanentCount(playerB, "Soldier Token", 2);
         assertPermanentCount(playerB, "Elvish Visionary", 1);
         assertPermanentCount(playerB, "Plains", 5);
         assertPermanentCount(playerA, "Culling Scales", 1);

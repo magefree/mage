@@ -52,7 +52,7 @@ enum BlatantThieveryAdjuster implements TargetAdjuster {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null || game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                    ability.getSourceId(), opponentId, game
+                    opponentId, ability, game
             ) < 1) {
                 continue;
             }

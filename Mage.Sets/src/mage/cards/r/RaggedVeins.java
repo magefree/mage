@@ -1,13 +1,10 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -15,8 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +25,6 @@ public final class RaggedVeins extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add(SubType.AURA);
 
-
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
@@ -41,9 +35,10 @@ public final class RaggedVeins extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature is dealt damage, its controller loses that much life.
-        Effect effect = new LoseLifeTargetEffect(new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("its controller loses that much life");
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(
+                new LoseLifeControllerAttachedEffect(SavedDamageValue.MUCH),
+                false
+        ));
     }
 
     private RaggedVeins(final RaggedVeins card) {

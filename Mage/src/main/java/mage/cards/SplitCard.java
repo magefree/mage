@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public abstract class SplitCard extends CardImpl {
+public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     protected Card leftHalfCard;
     protected Card rightHalfCard;

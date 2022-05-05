@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class JoinTheRanksSoldierToken extends TokenImpl {
 
     public JoinTheRanksSoldierToken() {
-        super("Soldier Ally", "1/1 white Soldier Ally creature token");
+        super("Soldier Ally Token", "1/1 white Soldier Ally creature token");
         this.setOriginalExpansionSetCode("WWK");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

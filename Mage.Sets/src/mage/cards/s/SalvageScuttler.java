@@ -1,20 +1,17 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class SalvageScuttler extends CardImpl {
@@ -27,9 +24,9 @@ public final class SalvageScuttler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Salvage Scuttler attacks, return an artifact you control to its owner's hand.
-        Ability ability = new AttacksTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact you control")));
-        this.addAbility(ability);
+        this.addAbility(new AttacksTriggeredAbility(
+                new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)
+        ));
     }
 
     private SalvageScuttler(final SalvageScuttler card) {

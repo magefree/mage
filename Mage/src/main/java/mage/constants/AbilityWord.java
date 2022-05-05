@@ -9,6 +9,7 @@ public enum AbilityWord {
 
     ADDENDUM("Addendum"),
     ADAMANT("Adamant"),
+    ALLIANCE("Alliance"),
     BATTALION("Battalion"),
     BLOODRUSH("Bloodrush"),
     CHANNEL("Channel"),
@@ -16,6 +17,7 @@ public enum AbilityWord {
     COHORT("Cohort"),
     CONSTELLATION("Constellation"),
     CONVERGE("Converge"),
+    COUNCILS_DILEMMA("Council's dilemma"),
     COVEN("Coven"),
     DELIRIUM("Delirium"),
     DOMAIN("Domain"),

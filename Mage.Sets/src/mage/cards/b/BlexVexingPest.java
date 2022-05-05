@@ -6,21 +6,18 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -81,15 +78,11 @@ public final class BlexVexingPest extends ModalDoubleFacesCard {
     }
 }
 
-class SearchForBlexEffect extends LookLibraryControllerEffect {
+class SearchForBlexEffect extends LookLibraryAndPickControllerEffect {
 
-    private static final FilterCard filter = new FilterCard("cards to put into your hand");
-
-    public SearchForBlexEffect() {
-        super(Outcome.DrawCard, StaticValue.get(5), false, Zone.GRAVEYARD, true);
-        this.staticText = "Look at the top five cards of your library. "
-                + "You may put any number of them into your hand and the rest into your graveyard. "
-                + "You lose 3 life for each card you put into your hand this way";
+    SearchForBlexEffect() {
+        super(5, Integer.MAX_VALUE, PutCards.HAND, PutCards.GRAVEYARD);
+        this.optional = true;
     }
 
     private SearchForBlexEffect(final SearchForBlexEffect effect) {
@@ -102,21 +95,14 @@ class SearchForBlexEffect extends LookLibraryControllerEffect {
     }
 
     @Override
-    protected void actionWithSelectedCards(Cards cards, Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetCard target = new TargetCard(0, 5, Zone.LIBRARY, filter);
-            if (player.choose(outcome, cards, target, game)) {
-                Cards pickedCards = new CardsImpl(target.getTargets());
-                cards.removeAll(pickedCards);
-                player.moveCards(pickedCards, Zone.HAND, source, game);
-                player.loseLife(pickedCards.size() * 3, game, source, false);
-            }
-        }
+    protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
+        super.actionWithPickedCards(game, source, player, pickedCards, otherCards);
+        player.loseLife(pickedCards.size() * 3, game, source, false);
+        return true;
     }
 
     @Override
     public String getText(Mode mode) {
-        return staticText;
+        return super.getText(mode).concat(". You lose 3 life for each card you put into your hand this way");
     }
 }

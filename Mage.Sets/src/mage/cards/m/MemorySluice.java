@@ -23,7 +23,7 @@ public final class MemorySluice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Conspire
-        this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
+        this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));
 
     }
 

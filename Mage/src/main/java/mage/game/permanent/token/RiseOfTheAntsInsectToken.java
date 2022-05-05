@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class RiseOfTheAntsInsectToken extends TokenImpl {
 
     public RiseOfTheAntsInsectToken() {
-        super("Insect", "3/3 green Insect creature token");
+        super("Insect Token", "3/3 green Insect creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.INSECT);

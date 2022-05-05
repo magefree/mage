@@ -120,7 +120,7 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
     public GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at the cards exiled with {this}";
+        staticText = "You may look at cards exiled with {this}";
     }
 
     public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
@@ -182,7 +182,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
                 GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
         if (exileZones != null && sourceObject != null) {

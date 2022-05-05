@@ -58,7 +58,7 @@ public final class NezahalPrimalTide extends CardImpl {
                 new DrawCardSourceControllerEffect(1), filter, false, SetTargetPointer.NONE));
 
         // Discard three cards: Exile Nezahal. Return it to the battlefield tapped under its owner's control at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true, true),
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),
                 new DiscardTargetCost(new TargetCardInHand(3, new FilterCard("three cards")))));
 
     }

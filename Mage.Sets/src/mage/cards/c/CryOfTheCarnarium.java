@@ -64,15 +64,14 @@ class CryOfTheCarnariumExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        if (player == null || watcher == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(watcher.getCardsPutToGraveyardFromBattlefield(game));
+        if (controller == null || watcher == null) { return false; }
+
+        Cards cards = new CardsImpl(watcher.getCardsPutIntoGraveyardFromBattlefield(game));
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
-        player.moveCards(cards, Zone.EXILED, source, game);
-        return true;
+
+        return controller.moveCards(cards, Zone.EXILED, source, game);
     }
 }
 

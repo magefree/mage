@@ -136,9 +136,9 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Gonti, Lord of Luxury", 1);
         assertPowerToughness(playerA, "Gonti, Lord of Luxury", 2, 3);
-        assertPermanentCount(playerA, "Spirit", 2);
+        assertPermanentCount(playerA, "Spirit Token", 2);
 
-        assertPermanentCount(playerB, "Spirit", 2);
+        assertPermanentCount(playerB, "Spirit Token", 2);
 
         assertExileCount("Lingering Souls", 1);
 

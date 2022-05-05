@@ -3,7 +3,6 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -31,14 +30,14 @@ import java.util.UUID;
  */
 public final class LilianaDreadhordeGeneral extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent(" creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creatures");
 
     public LilianaDreadhordeGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // Whenever a creature you control dies, draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(
@@ -102,13 +101,13 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
                 filter.add(cardType.getPredicate());
                 Target target = new TargetControlledPermanent(filter);
                 target.setNotTarget(true);
-                if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+                if (opponent.choose(outcome, target, source, game)) {
                     keepFilter.add(Predicates.not(new CardIdPredicate(target.getFirstTarget())));
                 }
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (keepFilter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (keepFilter.match(permanent, source.getControllerId(), source, game)) {
                 permanent.sacrifice(source, game);
             }
         }

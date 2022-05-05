@@ -21,7 +21,7 @@ public final class KaroxBladewingDragonToken extends TokenImpl {
     }
 
     public KaroxBladewingDragonToken() {
-        super("Karox Bladewing", "legendary 4/4 red Dragon creature token with flying", 4, 4);
+        super("Karox Bladewing Token", "legendary 4/4 red Dragon creature token with flying", 4, 4);
 
         availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode("DOM");

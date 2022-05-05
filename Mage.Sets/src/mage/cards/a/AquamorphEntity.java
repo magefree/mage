@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -39,7 +38,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(ability);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
     }
 
     private AquamorphEntity(final AquamorphEntity card) {
@@ -128,7 +127,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 break;
         }
         game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
-        return true;
+        return false;
     }
 
     @Override

@@ -64,7 +64,7 @@ class RevivalExperimentEffect extends OneShotEffect {
             return false;
         }
         RevivalExperimentTarget target = new RevivalExperimentTarget();
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         int toBattlefield = cards
@@ -118,8 +118,8 @@ class RevivalExperimentTarget extends TargetCardInYourGraveyard {
 
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, null, game));
         return possibleTargets;
     }

@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -46,7 +45,7 @@ public final class EstridTheMasked extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ESTRID);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Untap each enchanted permanent you control.
         this.addAbility(new LoyaltyAbility(new UntapAllControllerEffect(
@@ -150,10 +149,10 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(controller.getGraveyard().getCards(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ), Zone.BATTLEFIELD, source, game);
         controller.moveCards(controller.getGraveyard().getCards(
-                filter2, source.getSourceId(), source.getControllerId(), game
+                filter2, source.getControllerId(), source, game
         ), Zone.BATTLEFIELD, source, game);
         return true;
     }

@@ -1,9 +1,9 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.DevouredCreaturesCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
@@ -14,18 +14,20 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HellkiteHatchling extends CardImpl {
 
+    private static final Condition condition = new DevouredCreaturesCondition(ComparisonType.MORE_THAN, 0);
+
     public HellkiteHatchling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(2);
@@ -35,14 +37,15 @@ public final class HellkiteHatchling extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
 
         // Hellkite Hatchling has flying and trample if it devoured a creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect( 
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance()),
-                new DevouredCreaturesCondition(ComparisonType.MORE_THAN, 0),
-                "{this} has flying if it devoured a creature")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                condition, "{this} has flying"
+        ));
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
-                new DevouredCreaturesCondition(ComparisonType.MORE_THAN, 0),
-                "{this} has trample if it devoured a creature")));
+                condition, "and trample if it devoured a creature"
+        ));
+        this.addAbility(ability);
     }
 
     private HellkiteHatchling(final HellkiteHatchling card) {

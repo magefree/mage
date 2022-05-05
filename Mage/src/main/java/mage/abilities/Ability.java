@@ -541,7 +541,7 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
-    void setTargetAdjuster(TargetAdjuster targetAdjuster);
+    Ability setTargetAdjuster(TargetAdjuster targetAdjuster);
 
     TargetAdjuster getTargetAdjuster();
 

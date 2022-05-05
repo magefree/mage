@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class MurasaBehemoth extends CardImpl {
 
-    Condition condition = new CardsInControllerGraveyardCondition(1, StaticFilters.FILTER_CARD_LAND);
+    private static final Condition condition = new CardsInControllerGraveyardCondition(1, StaticFilters.FILTER_CARD_LAND);
 
     public MurasaBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

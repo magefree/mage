@@ -22,8 +22,8 @@ public final class BoneShards extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice a creature or discard a card.
         this.getSpellAbility().addCost(new OrCost(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
-                new DiscardCardCost(), "sacrifice a creature or discard a card"
+                "sacrifice a creature or discard a card", new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
+                new DiscardCardCost()
         ));
 
         // Destroy target creature or planeswalker.

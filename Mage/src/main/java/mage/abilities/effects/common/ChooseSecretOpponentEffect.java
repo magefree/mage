@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -37,14 +36,14 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (controller == null || mageObject == null) {
             return false;
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
         targetOpponent.setTargetName("opponent (secretly)");
-        controller.choose(outcome, targetOpponent, source.getSourceId(), game);
+        controller.choose(outcome, targetOpponent, source, game);
         if (targetOpponent.getFirstTarget() == null) {
             return false;
         }

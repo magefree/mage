@@ -34,9 +34,9 @@ public final class GoldmeadowStalwart extends CardImpl {
 
         // As an additional cost to cast Goldmeadow Stalwart, reveal a Kithkin card from your hand or pay {3}.
         this.getSpellAbility().addCost(new OrCost(
-                new RevealTargetFromHandCost(new TargetCardInHand(filter)),
-                new GenericManaCost(3),
-                "reveal a Kithkin card from your hand or pay {3}"));
+                "reveal a Kithkin card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
+                new GenericManaCost(3)
+        ));
     }
 
     private GoldmeadowStalwart(final GoldmeadowStalwart card) {

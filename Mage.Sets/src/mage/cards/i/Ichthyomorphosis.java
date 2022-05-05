@@ -38,7 +38,7 @@ public final class Ichthyomorphosis extends CardImpl {
         // Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
         Effect effect = new BecomesCreatureAttachedEffect(
                 new CreatureToken(0, 1, "", SubType.FISH).withColor("U"),
-                "Enchanted creature loses all abilities and is a blue Fish creature with base power and toughness 0/1",
+                "Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1",
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL
         );
         effect.setOutcome(Outcome.Detriment);

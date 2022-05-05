@@ -33,8 +33,8 @@ public final class HagHedgeMage extends CardImpl {
         filter2.add(SubType.FOREST.getPredicate());
     }
 
-    private String rule = "When {this} enters the battlefield, if you control two or more Swamps, you may have target player discard a card.";
-    private String rule2 = "When {this} enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.";
+    private static final String rule = "When {this} enters the battlefield, if you control two or more Swamps, you may have target player discard a card.";
+    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.";
 
     public HagHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/G}");

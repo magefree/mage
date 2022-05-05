@@ -13,7 +13,7 @@ import mage.abilities.keyword.TrampleAbility;
 public final class StoneTrapIdolToken extends TokenImpl {
 
     public StoneTrapIdolToken() {
-        super("Construct", "6/12  colorless Construct artifact creature token with trample");
+        super("Construct Token", "6/12  colorless Construct artifact creature token with trample");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.CONSTRUCT);

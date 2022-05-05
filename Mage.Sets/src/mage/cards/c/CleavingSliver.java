@@ -27,7 +27,7 @@ public final class CleavingSliver extends CardImpl {
         // Sliver creatures you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 2, 0, Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_SLIVERS
         )));
     }
 

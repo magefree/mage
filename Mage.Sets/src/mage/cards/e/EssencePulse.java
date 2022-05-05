@@ -1,7 +1,5 @@
 package mage.cards.e;
 
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -11,13 +9,16 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.LockedInDynamicValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 
 /**
  * @author TheElk801
  */
 public final class EssencePulse extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ControllerGotLifeCount.instance, -1);
+    // rule 608.2h
+    private static final LockedInDynamicValue xValue = new LockedInDynamicValue(new SignInversionDynamicValue(ControllerGotLifeCount.instance));
 
     public EssencePulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");

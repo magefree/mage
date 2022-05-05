@@ -28,7 +28,7 @@ public final class PredatorySliver extends CardImpl {
 
         // Sliver creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(1, 1, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+                new BoostControlledEffect(1, 1, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_SLIVERS)));
     }
 
     private PredatorySliver(final PredatorySliver card) {

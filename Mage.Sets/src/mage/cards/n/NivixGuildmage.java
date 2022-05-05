@@ -24,7 +24,7 @@ import mage.target.TargetSpell;
  */
 public final class NivixGuildmage extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control");
 
     static {
         filter.add(Predicates.or(

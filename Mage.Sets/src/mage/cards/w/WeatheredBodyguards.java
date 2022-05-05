@@ -38,7 +38,7 @@ public final class WeatheredBodyguards extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeatheredBodyguardsEffect()));
 
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
 
     }
 

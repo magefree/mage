@@ -34,12 +34,10 @@ public final class HearthCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         // or attacking creatures get +1/+0 until end of turn
-        Mode mode = new Mode();
-        mode.addEffect(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));
+        Mode mode = new Mode(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));
         this.getSpellAbility().addMode(mode);
         // or target creature with power 2 or less is unblockable this turn.
-        mode = new Mode();
-        mode.addEffect(new CantBeBlockedTargetEffect());
+        mode = new Mode(new CantBeBlockedTargetEffect());
         mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

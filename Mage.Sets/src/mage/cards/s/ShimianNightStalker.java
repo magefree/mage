@@ -79,7 +79,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getSourceId() != null && event.getTargetId() != null) {
                     if (event.getSourceId().equals(getTargetPointer().getFirst(game, source))
                             && event.getTargetId().equals(source.getControllerId())) {

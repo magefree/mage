@@ -31,7 +31,7 @@ public final class NeedlebiteTrap extends CardImpl {
 
         // Target player loses 5 life and you gain 5 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
-        this.getSpellAbility().addEffect(new GainLifeEffect(5));
+        this.getSpellAbility().addEffect(new GainLifeEffect(5).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

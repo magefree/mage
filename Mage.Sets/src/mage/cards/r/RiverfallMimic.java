@@ -32,7 +32,7 @@ public final class RiverfallMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    private String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
+    private static final String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
 
     public RiverfallMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/R}");

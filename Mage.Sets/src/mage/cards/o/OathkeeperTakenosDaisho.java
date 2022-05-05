@@ -121,7 +121,7 @@ class OathkeeperEquippedMatchesFilterCondition implements Condition {
                 }
             }
             if (attachedTo != null) {
-                return filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game);
+                return filter.match(attachedTo, attachedTo.getControllerId(), source, game);
 
             }
         }

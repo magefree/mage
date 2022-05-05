@@ -86,7 +86,7 @@ class DoomForetoldEffect extends OneShotEffect {
         if (game.getBattlefield().contains(filter2, source, game, 1)) {
             TargetPermanent target = new TargetPermanent(filter2);
             target.setNotTarget(true);
-            if (player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null && permanent.sacrifice(source, game)) {
                     return true;

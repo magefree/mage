@@ -74,7 +74,7 @@ class DisorderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Player player : game
                 .getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)

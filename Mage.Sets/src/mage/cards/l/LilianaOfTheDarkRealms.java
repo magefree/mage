@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -37,7 +36,7 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));
@@ -86,7 +85,7 @@ class LilianaOfTheDarkRealmsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int swamps = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (swamps < 1) {
             return false;
         }

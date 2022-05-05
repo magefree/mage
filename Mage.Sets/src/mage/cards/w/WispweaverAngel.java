@@ -38,7 +38,7 @@ public final class WispweaverAngel extends CardImpl {
 
         // When Wispweaver Angel enters the battlefield, you may exile another target creature you control, then return that card to the battlefield under its owner's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(","));
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
     }

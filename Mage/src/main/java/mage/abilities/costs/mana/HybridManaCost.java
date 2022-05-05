@@ -1,14 +1,14 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HybridManaCost extends ManaCostImpl {
 
@@ -50,7 +50,7 @@ public class HybridManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return '{' + mana1.toString() + '/' + mana2.toString() + '}';
+        return '{' + mana1.toString() + '/' + mana2.toString() + (this.phyrexian ? "/P" : "") + '}';
     }
 
     @Override

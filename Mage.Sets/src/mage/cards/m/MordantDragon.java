@@ -99,7 +99,7 @@ class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, "
-                + "you may have it deal that much damage to target creature that player controls";
+                + "you may have it deal that much damage to target creature that player controls.";
     }
 }
 

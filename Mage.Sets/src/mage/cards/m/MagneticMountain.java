@@ -87,7 +87,7 @@ class MagneticMountainEffect extends OneShotEffect {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter2, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Pay {4} and untap a tapped blue creature under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter2, true);
-                if (player.choose(Outcome.Untap, tappedCreatureTarget, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Untap, tappedCreatureTarget, source, game)) {
                     Cost cost = ManaUtil.createManaCost(4, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
                     if (tappedCreature != null && cost.pay(source, game, source, player.getId(), false)) {

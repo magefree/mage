@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class CreakwoodLiegeToken extends TokenImpl {
 
     public CreakwoodLiegeToken() {
-        super("Worm", "1/1 black and green Worm creature token");
+        super("Worm Token", "1/1 black and green Worm creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

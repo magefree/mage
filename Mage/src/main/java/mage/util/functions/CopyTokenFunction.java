@@ -92,6 +92,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
 
         target.getPower().modifyBaseValue(sourceObj.getPower().getBaseValueModified());
         target.getToughness().modifyBaseValue(sourceObj.getToughness().getBaseValueModified());
+        target.setStartingLoyalty(sourceObj.getStartingLoyalty());
 
         return target;
     }
@@ -108,6 +109,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
         if (spell != null) {
             // copied spell puts to battlefield as token, so that token's ZCC must be synced with spell instead card (card can be moved before resolve)
             target.setZoneChangeCounter(spell.getZoneChangeCounter(game), game);
+            // Copy starting loyalty from spell (Ob Nixilis, the Adversary)
+            target.setStartingLoyalty(spell.getStartingLoyalty());
         } else {
             target.setZoneChangeCounter(source.getZoneChangeCounter(game), game);
         }

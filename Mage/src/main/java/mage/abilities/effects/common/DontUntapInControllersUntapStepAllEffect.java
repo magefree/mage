@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -77,7 +76,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
                         throw new RuntimeException("Type of TargetController not supported!");
                 }
                 if (game.isActivePlayer(permanent.getControllerId()) && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                        filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }
@@ -93,7 +92,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
         StringBuilder sb =  new StringBuilder(filter.getMessage()).append(" don't untap during ");
         switch(targetController) {
             case ANY:
-                sb.append("their controller's ");
+                sb.append("their controllers' ");
                 break;
             default:
                 throw new RuntimeException("Type of TargetController not supported yet!");

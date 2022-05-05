@@ -8,6 +8,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author Loki
@@ -66,7 +67,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     private void setText() {
         if (counter.getCount() > 1) {
             StringBuilder sb = new StringBuilder();
-            sb.append("remove ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters from {this}");
+            sb.append("remove ").append(CardUtil.numberToText(counter.getCount())).append(' ').append(counter.getName()).append(" counters from {this}");
             staticText = sb.toString();
         } else {
             staticText = "remove " + CounterType.findArticle(counter.getName()) + " " + counter.getName() + " counter from {this}";

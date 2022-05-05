@@ -39,7 +39,7 @@ public final class DragonsEyeSavants extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Morph - Reveal a blue card in your hand.
-        this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
         
         // When Dragon's Eye Savants is turned face up, look at target opponent's hand.
         Effect effect = new LookAtTargetPlayerHandEffect();

@@ -50,7 +50,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
         // check if attacking creature fullfills filter criteria
         if (filterCreaturePermanent != null) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (!filterCreaturePermanent.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (!filterCreaturePermanent.match(permanent, source.getControllerId(), source, game)) {
                 return false;
             }
         }

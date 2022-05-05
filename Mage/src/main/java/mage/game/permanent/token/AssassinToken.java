@@ -15,7 +15,7 @@ import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 public final class AssassinToken extends TokenImpl {
 
     public AssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
+        super("Assassin Token", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ASSASSIN);
