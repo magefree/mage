@@ -15,6 +15,7 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.game.stack.StackAbility;
 
 /**
  * @author TheElk801
@@ -58,16 +59,25 @@ class StrictProctorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ABILITY_TRIGGERED;
+        return event.getType() == GameEvent.EventType.TRIGGERED_ABILITY;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        GameEvent triggeringEvent = (GameEvent) game.getState().getValue(event.getId().toString());
-        if (triggeringEvent == null || triggeringEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+        // retrieve the event that led to the trigger triggering
+        // verify that it is a ETB event
+        StackAbility stackAbilityOfTriggeredAbility = (StackAbility) game.getObject(event.getTargetId());
+        if (stackAbilityOfTriggeredAbility == null
+                || stackAbilityOfTriggeredAbility.getSourceId() == null) {
             return false;
         }
-        getEffects().setTargetPointer(new FixedTarget(triggeringEvent.getTargetId(), game));
+        GameEvent triggeringEvent = (GameEvent) game.getState().getValue("triggeringEvent" + stackAbilityOfTriggeredAbility.getSourceId());
+        if (triggeringEvent == null
+                || triggeringEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            return false;
+        }
+        // set the target to the ability that gets triggered from the enter the battlefield trigger
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 
@@ -78,7 +88,7 @@ class StrictProctorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a permanent entering the battlefield causes a triggered ability to trigger, " +
-                "counter that ability unless its controller pays {2}.";
+        return "Whenever a permanent entering the battlefield causes a triggered ability to trigger, "
+                + "counter that ability unless its controller pays {2}.";
     }
 }
