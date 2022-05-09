@@ -6,7 +6,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.permanent.token.ServoToken;
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public final class SramsExpertise extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("a spell with mana value 3 or less");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("a spell with mana value 3 or less");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
