@@ -78,7 +78,7 @@ class CurrencyConverterExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = (Card) getValue("discardedCard");
-        if (player == null || card == null || card.isOwnedBy(player.getId())
+        if (player == null || card == null || !card.isOwnedBy(player.getId())
                 || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
             return false;
         }
