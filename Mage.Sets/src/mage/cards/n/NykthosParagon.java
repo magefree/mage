@@ -32,7 +32,7 @@ public final class NykthosParagon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever you gain life, you may put that many +1/+1 counters on each creature you control. Do this only once each turn.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new NykthosParagonEffect()).setDoOnlyOnce(true));
+        this.addAbility(new GainLifeControllerTriggeredAbility(new NykthosParagonEffect(), true, true).setDoOnlyOnce(true));
     }
 
     private NykthosParagon(final NykthosParagon card) {
