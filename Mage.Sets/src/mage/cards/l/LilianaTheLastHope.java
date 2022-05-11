@@ -4,7 +4,6 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -37,7 +36,7 @@ public final class LilianaTheLastHope extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Up to one target creature gets -2/-1 until your next turn.
         Effect effect = new BoostTargetEffect(-2, -1, Duration.UntilYourNextTurn);
@@ -90,9 +89,9 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);

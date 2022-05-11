@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +26,7 @@ public final class CorpseHauler extends CardImpl {
     private static final FilterCard filter = new FilterCard("another target creature card from your graveyard");
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public CorpseHauler(UUID ownerId, CardSetInfo setInfo) {

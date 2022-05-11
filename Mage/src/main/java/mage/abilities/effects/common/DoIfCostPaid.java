@@ -17,7 +17,7 @@ public class DoIfCostPaid extends OneShotEffect {
 
     protected Effects executingEffects = new Effects();
     protected Effects otherwiseEffects = new Effects(); // used for Imprison
-    private final Cost cost;
+    protected final Cost cost;
     private final String chooseUseText;
     private final boolean optional;
 
@@ -80,7 +80,7 @@ public class DoIfCostPaid extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = getPayingPlayer(game, source);
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (player != null && mageObject != null) {
             String message;
             if (chooseUseText == null) {
@@ -88,7 +88,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
-                message = getCostText() + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
+                message = CardUtil.addCostVerb(cost.getText()) + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             } else {
                 message = chooseUseText;
@@ -155,17 +155,11 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode)
+        return (optional ? "you may " : "")
+                + CardUtil.addCostVerb(cost.getText())
+                + ". If you do, "
+                + executingEffects.getText(mode)
                 + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
-    }
-
-    protected String getCostText() {
-        StringBuilder sb = new StringBuilder();
-        String costText = cost.getText();
-        if (!CardUtil.checkCostWords(costText)) {
-            sb.append("pay ");
-        }
-        return sb.append(costText).toString();
     }
 
     @Override

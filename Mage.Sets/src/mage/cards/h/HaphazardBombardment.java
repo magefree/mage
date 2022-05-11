@@ -79,7 +79,7 @@ class HaphazardBombardmentEffect extends OneShotEffect {
             FilterPermanent filter = new FilterPermanent("nonenchantment permanents you don't control");
             filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
             filter.add(TargetController.OPPONENT.getControllerPredicate());
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
             if (permanents.size() > 4) {
                 permanents.clear();
                 TargetPermanent target = new TargetPermanent(4, 4, filter, true);
@@ -127,7 +127,7 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(CounterType.AIM.getPredicate());
         filter.add(Predicates.not(new AbilityPredicate(IndestructibleAbility.class)));
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         if (!permanents.isEmpty()) {
             Permanent permanent = permanents.get(RandomUtil.nextInt(permanents.size()));
             if (permanent != null) {

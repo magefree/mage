@@ -148,7 +148,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
         FilterControlledCreaturePermanent filterBasic = new FilterControlledCreaturePermanent();
 
         // each creature can give {1} or color mana
-        game.getBattlefield().getActivePermanents(filterBasic, source.getControllerId(), source.getSourceId(), game)
+        game.getBattlefield().getActivePermanents(filterBasic, source.getControllerId(), source, game)
                 .stream()
                 .filter(permanent -> !permanent.isTapped())
                 .forEach(permanent -> {

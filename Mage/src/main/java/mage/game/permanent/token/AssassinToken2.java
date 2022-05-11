@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class AssassinToken2 extends TokenImpl {
 
     public AssassinToken2() {
-        super("Assassin", "1/1 black Assassin creature token with deathtouch and \"Whenever this creature deals damage to a planeswalker, destroy that planeswalker.\"");
+        super("Assassin Token", "1/1 black Assassin creature token with deathtouch and \"Whenever this creature deals damage to a planeswalker, destroy that planeswalker.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ASSASSIN);

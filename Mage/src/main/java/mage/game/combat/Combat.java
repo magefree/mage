@@ -384,7 +384,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
 
-            if (target.choose(Outcome.Benefit, attackingPlayerId, null, game)) {
+            if (target.choose(Outcome.Benefit, attackingPlayerId, null, null, game)) {
                 isBanded = true;
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
@@ -440,65 +440,76 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (Permanent creature : player.getAvailableAttackers(game)) {
             boolean mustAttack = false;
             Set<UUID> defendersForcedToAttack = new HashSet<>();
-
-            // check if a creature has to attack
-            for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
-                RequirementEffect effect = entry.getKey();
-                if (effect.mustAttack(game)
-                        && checkAttackRestrictions(player, game)) { // needed for Goad Effect
+            if (creature.getGoadingPlayers().isEmpty()) {
+                // check if a creature has to attack
+                for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
+                    RequirementEffect effect = entry.getKey();
+                    if (!effect.mustAttack(game)) {
+                        continue;
+                    }
                     mustAttack = true;
                     for (Ability ability : entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
-                        if (defenderId != null) {
-                            if (defenders.contains(defenderId)) {
-                                defendersForcedToAttack.add(defenderId);
-                            }
+                        if (defenderId != null && defenders.contains(defenderId)) {
+                            defendersForcedToAttack.add(defenderId);
                         }
                         break;
                     }
                 }
+            } else {
+                // if creature is goaded then we start with assumption that it needs to attack any player
+                mustAttack = true;
+                defendersForcedToAttack.addAll(defenders);
             }
-            if (mustAttack) {
-                // check which defenders the forced to attack creature can attack without paying a cost
-                Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
-                for (UUID defenderId : defenders) {
-                    if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                            new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game)) {
-                        defendersCostlessAttackable.remove(defenderId);
-                        defendersForcedToAttack.remove(defenderId);
-                    }
-                }
-                // force attack only if a defender can be attacked without paying a cost
-                if (!defendersCostlessAttackable.isEmpty()) {
-                    creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
-                    // No need to attack a special defender
-                    if (defendersForcedToAttack.isEmpty()) {
-                        if (defendersCostlessAttackable.size() == 1) {
-                            player.declareAttacker(creature.getId(), defendersCostlessAttackable.iterator().next(), game, false);
-                        } else {
-                            TargetDefender target = new TargetDefender(defendersCostlessAttackable, creature.getId());
-                            target.setRequired(true);
-                            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
-                            if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                                player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
-                            }
-                        }
-                    } else {
-                        if (defendersForcedToAttack.size() == 1) {
-                            player.declareAttacker(creature.getId(), defendersForcedToAttack.iterator().next(), game, false);
-                        } else {
-                            TargetDefender target = new TargetDefender(defendersForcedToAttack, creature.getId());
-                            target.setRequired(true);
-                            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
-                            if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                                player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
-                            }
-                        }
-                    }
-                }
-
+            if (!mustAttack) {
+                continue;
             }
-
+            // check which defenders the forced to attack creature can attack without paying a cost
+            Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
+            for (UUID defenderId : defenders) {
+                if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
+                        new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game
+                )) {
+                    defendersCostlessAttackable.remove(defenderId);
+                    defendersForcedToAttack.remove(defenderId);
+                    continue;
+                }
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(creature, game).entrySet()) {
+                    if (entry
+                            .getValue()
+                            .stream()
+                            .anyMatch(ability -> entry.getKey().canAttack(
+                                    creature, defenderId, ability, game, false
+                            ))) {
+                        continue;
+                    }
+                    defendersCostlessAttackable.remove(defenderId);
+                    defendersForcedToAttack.remove(defenderId);
+                    break;
+                }
+            }
+            // if creature can attack someone other than a player that goaded them
+            // then they attack one of those players, otherwise they attack any player
+            if (!defendersForcedToAttack.stream().allMatch(creature.getGoadingPlayers()::contains)) {
+                defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
+            }
+            // force attack only if a defender can be attacked without paying a cost
+            if (defendersCostlessAttackable.isEmpty()) {
+                continue;
+            }
+            creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
+            // No need to attack a special defender
+            Set<UUID> defendersToChooseFrom = defendersForcedToAttack.isEmpty() ? defendersCostlessAttackable : defendersForcedToAttack;
+            if (defendersToChooseFrom.size() == 1) {
+                player.declareAttacker(creature.getId(), defendersToChooseFrom.iterator().next(), game, false);
+                continue;
+            }
+            TargetDefender target = new TargetDefender(defendersToChooseFrom, creature.getId());
+            target.setRequired(true);
+            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
+            if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+                player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
+            }
         }
     }
 
@@ -529,28 +540,30 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canAttackCheckAfter(numberAttackers, ability, game, true)) {
-                            MageObject sourceObject = ability.getSourceObject(game);
-                            if (attackingPlayer.isHuman()) {
-                                attackingPlayer.resetPlayerPassedActions();
-                                game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ')');
-                                return false;
-                            } else {
-                                // remove attacking creatures for AI that are not allowed to attack
-                                // can create possible not allowed attack scenarios, but not sure how to solve this
-                                for (CombatGroup combatGroup : this.getGroups()) {
-                                    if (combatGroup.getAttackers().contains(attackingCreatureId)) {
-                                        attackerToRemove = attackingCreatureId;
-                                    }
-                                }
-                                check = true; // do the check again
-                                if (numberOfChecks > 50) {
-                                    logger.error("Seems to be an AI declare attacker lock (reached 50 check iterations) " + (sourceObject == null ? "null" : sourceObject.getIdName()));
-                                    return true; // break the check
-                                }
-                                continue Check;
-                            }
+                        if (effect.canAttackCheckAfter(numberAttackers, ability, game, true)) {
+                            continue;
                         }
+                        MageObject sourceObject = ability.getSourceObject(game);
+                        if (attackingPlayer.isHuman()) {
+                            attackingPlayer.resetPlayerPassedActions();
+                            game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ')');
+                            return false;
+                        }
+                        // remove attacking creatures for AI that are not allowed to attack
+                        // can create possible not allowed attack scenarios, but not sure how to solve this
+                        if (this.getGroups()
+                                .stream()
+                                .map(CombatGroup::getAttackers)
+                                .flatMap(Collection::stream)
+                                .anyMatch(attackingCreatureId::equals)) {
+                            attackerToRemove = attackingCreatureId;
+                        }
+                        check = true; // do the check again
+                        if (numberOfChecks > 50) {
+                            logger.error("Seems to be an AI declare attacker lock (reached 50 check iterations) " + (sourceObject == null ? "null" : sourceObject.getIdName()));
+                            return true; // break the check
+                        }
+                        continue Check;
                     }
                 }
             }
@@ -1300,21 +1313,20 @@ public class Combat implements Serializable, Copyable<Combat> {
     @SuppressWarnings("deprecation")
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
-        if (attacker != null) {
-            if (!game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))) {
-                if (addAttackerToCombat(creatureId, defenderId, game)) {
-                    if (!attacker.hasAbility(VigilanceAbility.getInstance(), game)
-                            && !attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
-                        if (!attacker.isTapped()) {
-                            attacker.setTapped(true);
-                            attackersTappedByAttack.add(attacker.getId());
-                        }
-                    }
-                    return true;
-                }
-            }
+        if (attacker == null
+                || game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))
+                || !addAttackerToCombat(creatureId, defenderId, game)) {
+            return false;
         }
-        return false;
+        if (attacker.hasAbility(VigilanceAbility.getInstance(), game)
+                || attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
+            return true;
+        }
+        if (!attacker.isTapped()) {
+            attacker.setTapped(true);
+            attackersTappedByAttack.add(attacker.getId());
+        }
+        return true;
     }
 
     public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {

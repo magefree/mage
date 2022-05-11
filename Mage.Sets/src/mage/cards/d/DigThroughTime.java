@@ -1,13 +1,11 @@
 package mage.cards.d;
 
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 import java.util.UUID;
 
@@ -23,7 +21,7 @@ public final class DigThroughTime extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(7), false, StaticValue.get(2), new FilterCard(), Zone.LIBRARY, false, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(7, 2, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
     private DigThroughTime(final DigThroughTime card) {

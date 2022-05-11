@@ -84,8 +84,8 @@ class CreepingInnEffect extends OneShotEffect {
             UUID exileId = CardUtil.getExileZoneId(game, source);
             TargetCardInGraveyard target = new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                if (player.choose(Outcome.Exile, target, source.getId(), game)) {
+            if (target.canChoose(player.getId(), source, game)) {
+                if (player.choose(Outcome.Exile, target, source, game)) {
                     Card cardChosen = game.getCard(target.getFirstTarget());
                     if (cardChosen != null) {
                         int lifeAmount = 0;

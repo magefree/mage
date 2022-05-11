@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class SerfToken extends TokenImpl {
 
     public SerfToken() {
-        super("Serf", "0/1 black Serf creature token");
+        super("Serf Token", "0/1 black Serf creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SERF);

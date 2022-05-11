@@ -1,13 +1,9 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.DesertControlledOrGraveyardCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
@@ -18,25 +14,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class UnquenchableThirst extends CardImpl {
-
-    private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
-    private static final FilterCard filterDesertCard = new FilterCard("Desert card");
-
-    static {
-        filterDesertPermanent.add(SubType.DESERT.getPredicate());
-        filterDesertCard.add(SubType.DESERT.getPredicate());
-    }
 
     public UnquenchableThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -47,20 +33,17 @@ public final class UnquenchableThirst extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // When Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.
-        Ability ability2 = new ConditionalInterveningIfTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                new OrCondition(
-                        new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveyardCondition(1, filterDesertCard)),
-                "When {this} enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.");
-        this.addAbility(ability2);
+                DesertControlledOrGraveyardCondition.instance, "When {this} enters the battlefield, " +
+                "if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature."
+        ).addHint(DesertControlledOrGraveyardCondition.getHint()));
 
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
     private UnquenchableThirst(final UnquenchableThirst card) {

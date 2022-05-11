@@ -69,7 +69,7 @@ class AnuridScavengerCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.Removal, controllerId, source.getSourceId(), game)) {
+            if (targets.choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
                 for (UUID targetId: targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
@@ -85,7 +85,7 @@ class AnuridScavengerCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

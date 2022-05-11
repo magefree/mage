@@ -19,7 +19,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class GoldmeadowHarrierToken extends TokenImpl {
 
     public GoldmeadowHarrierToken() {
-        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
+        super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier. It has \"{W}, {T}: Tap target creature.\"");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KITHKIN);

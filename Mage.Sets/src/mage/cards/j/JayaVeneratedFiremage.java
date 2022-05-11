@@ -3,7 +3,6 @@ package mage.cards.j;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -28,7 +27,7 @@ public final class JayaVeneratedFiremage extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
         this.addAbility(new SimpleStaticAbility(new JayaVeneratedFiremageEffect()));

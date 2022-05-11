@@ -67,7 +67,7 @@ public final class BenthicExplorers extends CardImpl {
 
 class BenthicExplorersCost extends CostImpl {
 
-    TargetLandPermanent target;
+    private final TargetLandPermanent target;
 
     public BenthicExplorersCost(TargetLandPermanent target) {
         this.target = target;
@@ -81,7 +81,7 @@ class BenthicExplorersCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (target.choose(Outcome.Untap, controllerId, source.getSourceId(), game)) {
+        if (target.choose(Outcome.Untap, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -98,7 +98,7 @@ class BenthicExplorersCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override
@@ -155,59 +155,60 @@ class BenthicExplorersManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
-        if (game == null) {
-            return mana;
-        }
+        if (game == null) { return mana; }
+
         Choice choice = ManaType.getChoiceOfManaTypes(getManaTypes(game, source), false);
-        if (!choice.getChoices().isEmpty()) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                if (player == null
-                        || !player.choose(Outcome.Neutral, choice, game)) {
-                    return mana;
-                }
-            }
-            if (choice.getChoice() != null) {
-                switch (choice.getChoice()) {
-                    case "Black":
-                        mana.setBlack(1);
-                        break;
-                    case "Blue":
-                        mana.setBlue(1);
-                        break;
-                    case "Red":
-                        mana.setRed(1);
-                        break;
-                    case "Green":
-                        mana.setGreen(1);
-                        break;
-                    case "White":
-                        mana.setWhite(1);
-                        break;
-                    case "Colorless":
-                        mana.setColorless(1);
-                        break;
-                }
+        if (choice.getChoices().isEmpty()) { return mana; }
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (choice.getChoices().size() == 1) {
+            choice.setChoice(choice.getChoices().iterator().next());
+        } else {
+            if (player == null
+                    || !player.choose(Outcome.Neutral, choice, game)) {
+                return mana;
             }
         }
+
+        if (choice.getChoice() == null) { return mana; }
+
+        switch (choice.getChoice()) {
+            case "Black":
+                mana.setBlack(1);
+                break;
+            case "Blue":
+                mana.setBlue(1);
+                break;
+            case "Red":
+                mana.setRed(1);
+                break;
+            case "Green":
+                mana.setGreen(1);
+                break;
+            case "White":
+                mana.setWhite(1);
+                break;
+            case "Colorless":
+                mana.setColorless(1);
+                break;
+        }
+
         return mana;
     }
 
     private Set<ManaType> getManaTypes(Game game, Ability source) {
         Set<ManaType> types = EnumSet.noneOf(ManaType.class);
-        if (game == null
-                || game.getPhase() == null) {
+        if (game == null || game.getPhase() == null) {
             return types;
         }
+
         Permanent land = (Permanent) game.getState().getValue("UntapTargetCost" + source.getSourceId().toString());
-        if (land != null) {
-            Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
-            for (ActivatedManaAbilityImpl ability : mana) {
-                if (ability.definesMana(game)) {
-                    types.addAll(ability.getProducableManaTypes(game));
-                }
+        if (land == null) { return types; }
+
+        Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
+        for (ActivatedManaAbilityImpl ability : mana) {
+            if (ability.definesMana(game)) {
+                types.addAll(ability.getProducableManaTypes(game));
             }
         }
         return types;

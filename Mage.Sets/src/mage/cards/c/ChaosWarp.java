@@ -98,7 +98,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
             return false;
         }
         Player owner = game.getPlayer(permanent.getOwnerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (owner == null || sourceObject == null) {
             return false;
         }

@@ -3,7 +3,6 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -38,7 +37,7 @@ public final class LilianaDeathsMajesty extends CardImpl {
         this.subtype.add(SubType.LILIANA);
 
         //Starting Loyalty: 5
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Create a 2/2 black Zombie creature token. Put the top two cards of your library into your graveyard.
         LoyaltyAbility ability = new LoyaltyAbility(new CreateTokenEffect(new ZombieToken()), 1);

@@ -78,7 +78,7 @@ class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            MageObject target = game.getObject(source.getSourceId());
+            MageObject target = game.getObject(source);
             if (target != null) {
                 UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
                 FilterLandPermanent filter = FilterLandPermanent.nonbasicLand();

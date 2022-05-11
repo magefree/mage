@@ -4,13 +4,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -34,15 +33,11 @@ public final class SkallaWolf extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Skalla Wolf enters the battlefield, look at the top five cards of your library. You may reveal a green card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+        // When Skalla Wolf enters the battlefield, look at the top five cards of your library.
+        // You may reveal a green card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1), filter,
-                        Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
-                ).setBackInRandomOrder(true).setText("look at the top five cards of your library. "
-                        + "You may reveal a green card from among them and put it into your hand. "
-                        + "Put the rest on the bottom of your library in a random order.")
-        ));
+                new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM)));
     }
 
     private SkallaWolf(final SkallaWolf card) {

@@ -9,7 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -18,6 +19,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SpringLeafAvenger extends CardImpl {
+
+    private static final FilterCard filter = new FilterPermanentCard("permanent card from your graveyard");
 
     public SpringLeafAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -34,7 +37,7 @@ public final class SpringLeafAvenger extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), false
         );
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

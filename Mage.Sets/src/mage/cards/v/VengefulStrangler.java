@@ -92,8 +92,7 @@ class VengefulStranglerEffect extends OneShotEffect {
         }
 
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        UUID secondFaceId = game.getCard(source.getSourceId()).getSecondCardFace().getId();
-        game.getState().setValue("attachTo:" + secondFaceId, permanent.getId());
+        game.getState().setValue("attachTo:" + source.getSourceId(), permanent);
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             permanent.addAttachment(card.getId(), source, game);
         }

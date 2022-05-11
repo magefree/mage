@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WolfToken extends TokenImpl {
 
     public WolfToken() {
-        super("Wolf", "2/2 green Wolf creature token");
+        super("Wolf Token", "2/2 green Wolf creature token");
 
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -23,7 +23,7 @@ public final class WolfToken extends TokenImpl {
 
         availableImageSetCodes = Arrays.asList("BNG", "C14", "C15", "CMA", "CMD", "CNS", "DKA", "EVE", "ISD",
                 "LRW", "M10", "M14", "MM2", "MOR", "SHM", "SOI", "SOM", "V10", "WWK", "ZEN", "WAR", "M20",
-                "THB", "AFR", "MID", "VOW");
+                "THB", "AFR", "MID", "VOW", "2XM");
     }
 
     @Override

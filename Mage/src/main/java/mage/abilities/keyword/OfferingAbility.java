@@ -95,7 +95,7 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
         ManaOptions additionalManaOptionsForThisAbility = new ManaOptions();
 
         // Creatures from the offerd type
-        game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+        game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .map(Card::getSpellAbility)
                 .filter(Objects::nonNull)
@@ -164,7 +164,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 game.getState().setValue("offering_Id_" + card.getId(), null);
             }
 
-            if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getSourceId(), source.getControllerId(), game) > 0) {
+            if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getControllerId(), source, game) > 0) {
 
                 if (game.inCheckPlayableState()) {
                     return true;

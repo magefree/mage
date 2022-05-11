@@ -3,18 +3,16 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -33,7 +31,7 @@ public final class DovinGrandArbiter extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Until end of turn, whenever a creature you control deals combat damage to a player, put a loyalty counter on Dovin, Grand Arbiter.
         this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(
@@ -42,19 +40,13 @@ public final class DovinGrandArbiter extends CardImpl {
 
         // -1: Create a 1/1 colorless Thopter artifact creature token with flying. You gain 1 life.
         Ability ability = new LoyaltyAbility(new CreateTokenEffect(new ThopterColorlessToken()), -1);
-        ability.addEffect(new GainLifeEffect(1).setText("You gain 1 life."));
+        ability.addEffect(new GainLifeEffect(1));
         this.addAbility(ability);
 
-        // -7: Look at the top ten cards of your library. Put three of them into your hand and the rest on the bottom of your library in a random order.
+        // -7: Look at the top ten cards of your library. Put three of them into your hand
+        // and the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(10), false,
-                StaticValue.get(3), StaticFilters.FILTER_CARD,
-                Zone.LIBRARY, false, false, false,
-                Zone.HAND, false, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top ten cards of your library. " +
-                "Put three of them into your hand and the rest " +
-                "on the bottom of your library in a random order."
-        ), -7));
+                10, 3, PutCards.HAND, PutCards.BOTTOM_RANDOM), -7));
     }
 
     private DovinGrandArbiter(final DovinGrandArbiter card) {

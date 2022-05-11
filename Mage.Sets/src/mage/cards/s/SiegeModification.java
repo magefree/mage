@@ -23,7 +23,7 @@ import mage.target.TargetPermanent;
  */
 public final class SiegeModification extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or vehicle");
+    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
 
     static {
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(),

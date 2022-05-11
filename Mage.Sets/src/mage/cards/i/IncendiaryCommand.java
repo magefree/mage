@@ -36,17 +36,14 @@ public final class IncendiaryCommand extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         // or Incendiary Command deals 2 damage to each creature;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
+        Mode mode = new Mode(new DamageAllEffect(2, new FilterCreaturePermanent()));
         this.getSpellAbility().getModes().addMode(mode);
         // or destroy target nonbasic land;
-        mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetNonBasicLandPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or each player discards all the cards in their hand, then draws that many cards.
-        mode = new Mode();
-        mode.addEffect(new IncendiaryCommandDrawEffect());
+        mode = new Mode(new IncendiaryCommandDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
     }

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class DorotheasRetributionSpiritToken extends TokenImpl {
 
     public DorotheasRetributionSpiritToken() {
-        super("Spirit", "4/4 white Spirit creature token with flying");
+        super("Spirit Token", "4/4 white Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setWhite(true);

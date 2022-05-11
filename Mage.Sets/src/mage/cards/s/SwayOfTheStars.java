@@ -69,7 +69,7 @@ class SwayOfTheStarsEffect extends OneShotEffect {
                     FilterPermanent filter = new FilterPermanent();
                     filter.add(new OwnerIdPredicate(playerId));
                     Cards toLib = new CardsImpl();
-                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source, game)) {
                         toLib.add(permanent);
                     }
                     player.shuffleCardsToLibrary(toLib, game, source);

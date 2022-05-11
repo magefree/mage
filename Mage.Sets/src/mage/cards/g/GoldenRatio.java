@@ -48,7 +48,7 @@ enum GoldenRatioValue implements DynamicValue {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility, game
                 )
                 .stream()
                 .filter(Objects::nonNull)

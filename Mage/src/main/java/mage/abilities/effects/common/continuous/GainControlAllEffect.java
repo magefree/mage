@@ -30,7 +30,7 @@ public class GainControlAllEffect extends OneShotEffect {
         this.filter = filter;
         this.duration = duration;
         this.controllingPlayerId = controllingPlayerId;
-        this.staticText = "Gain control of " + filter.getMessage();
+        this.staticText = "gain control of " + filter.getMessage();
     }
 
     public GainControlAllEffect(final GainControlAllEffect effect) {
@@ -49,7 +49,7 @@ public class GainControlAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield()
                 .getActivePermanents(filter,
-                        source.getControllerId(), source.getSourceId(), game)) {
+                        source.getControllerId(), source, game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, controllingPlayerId);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);

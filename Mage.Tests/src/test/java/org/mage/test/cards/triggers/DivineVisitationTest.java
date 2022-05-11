@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author luziferius
  */
 public class DivineVisitationTest extends CardTestPlayerBase {
@@ -35,17 +34,17 @@ public class DivineVisitationTest extends CardTestPlayerBase {
         setChoice(playerA, "Whenever an opponent draws a card", 2); // choose order of triggers
         setChoice(playerB, false, 3); // Decline to pay 2
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        
+
         setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
-        
+
         assertHandCount(playerB, 3);
-        assertPermanentCount(playerA, "Treasure", 3);
-        assertType("Treasure", CardType.ARTIFACT, SubType.TREASURE);
-        assertNotType("Treasure", CardType.CREATURE);
-        assertNotSubtype("Treasure", SubType.ANGEL);
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Treasure Token", 3);
+        assertType("Treasure Token", CardType.ARTIFACT, SubType.TREASURE);
+        assertNotType("Treasure Token", CardType.CREATURE);
+        assertNotSubtype("Treasure Token", SubType.ANGEL);
+        assertPermanentCount(playerA, "Angel Token", 0);
         assertPermanentCount(playerA, 6);
         assertGraveyardCount(playerA, 1);
     }
@@ -62,20 +61,37 @@ public class DivineVisitationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Dragon Fodder");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Fodder");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        
+
         setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 1);
         assertPermanentCount(playerA, 5);
-        assertPermanentCount(playerA, "Goblin", 0);
-        assertPermanentCount(playerA, "Angel", 2);
-        assertType("Angel", CardType.CREATURE, SubType.ANGEL);
-        assertColor(playerA, "Angel", ObjectColor.WHITE, true);
-        assertColor(playerA, "Angel", ObjectColor.RED, false);
-        assertPowerToughness(playerA, "Angel", 4,4);
-        assertNotSubtype("Angel", SubType.GOBLIN);
-        
+        assertPermanentCount(playerA, "Goblin Token", 0);
+        assertPermanentCount(playerA, "Angel Token", 2);
+        assertType("Angel Token", CardType.CREATURE, SubType.ANGEL);
+        assertColor(playerA, "Angel Token", ObjectColor.WHITE, true);
+        assertColor(playerA, "Angel Token", ObjectColor.RED, false);
+        assertPowerToughness(playerA, "Angel Token", 4, 4);
+        assertNotSubtype("Angel Token", SubType.GOBLIN);
+
+    }
+
+    @Test
+    public void testSacrificeEOT() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Divine Visitation");
+        addCard(Zone.HAND, playerA, "Thatcher Revolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thatcher Revolt");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Human Token", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
     }
 }

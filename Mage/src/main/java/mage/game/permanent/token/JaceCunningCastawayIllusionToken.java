@@ -19,7 +19,7 @@ import mage.game.stack.Spell;
 public final class JaceCunningCastawayIllusionToken extends TokenImpl {
 
     public JaceCunningCastawayIllusionToken() {
-        super("Illusion", "2/2 blue Illusion creature token with \"When this creature becomes the target of a spell, sacrifice it.\"");
+        super("Illusion Token", "2/2 blue Illusion creature token with \"When this creature becomes the target of a spell, sacrifice it.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
 

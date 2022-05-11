@@ -28,6 +28,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
 
     private static final String[] symbols = {"W", "U", "B", "R", "G",
         "W/U", "U/B", "B/R", "R/G", "G/W", "W/B", "U/R", "B/G", "R/W", "G/U",
+        "W/U/P", "U/B/P", "B/R/P", "R/G/P", "G/W/P", "W/B/P", "U/R/P", "B/G/P", "R/W/P", "G/U/P",
         "2/W", "2/U", "2/B", "2/R", "2/G",
         "WP", "UP", "BP", "RP", "GP",
         "X", "S", "T", "Q", "C", "E"};

@@ -33,7 +33,7 @@ public final class KadenasSilencer extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new KadenasSilencerEffect()));
 
         // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}"), true));
     }
 
     private KadenasSilencer(final KadenasSilencer card) {
@@ -67,7 +67,7 @@ class KadenasSilencerEffect extends OneShotEffect {
         Set<UUID> opps = game.getOpponents(source.getControllerId());
         game.getStack()
                 .stream()
-                .filter(stackObject -> stackObject instanceof Ability)
+                .filter(Ability.class::isInstance)
                 .filter(stackObject -> opps.contains(stackObject.getControllerId()))
                 .forEach(stackObject -> game.getStack().counter(stackObject.getId(), source, game));
         return true;

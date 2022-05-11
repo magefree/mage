@@ -16,7 +16,7 @@ public final class FleshCarverHorrorToken extends TokenImpl {
     }
 
     public FleshCarverHorrorToken(int xValue) {
-        super("Horror", "X/X black Horror creature token");
+        super("Horror Token", "X/X black Horror creature token");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

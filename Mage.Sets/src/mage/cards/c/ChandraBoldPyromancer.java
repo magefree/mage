@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
@@ -30,7 +29,7 @@ public final class ChandraBoldPyromancer extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Add {R}{R}. Chandra, Bold Pyromancer deals 2 damage to target player.
         Ability ability = new LoyaltyAbility(new BasicManaEffect(Mana.RedMana(2)), +1);

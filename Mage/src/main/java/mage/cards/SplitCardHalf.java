@@ -3,12 +3,8 @@ package mage.cards;
 /**
  * @author LevelX2
  */
-public interface SplitCardHalf extends Card {
+public interface SplitCardHalf extends SubCard<SplitCard> {
 
     @Override
     SplitCardHalf copy();
-
-    void setParentCard(SplitCard card);
-
-    SplitCard getParentCard();
 }

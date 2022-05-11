@@ -57,12 +57,12 @@ class BlasphemousCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int reductionAmount = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source.getControllerId(), game);
-            CardUtil.reduceCost(abilityToModify, reductionAmount);
-            return true;
-        }
-        return false;
+        if (player == null) { return false; }
+
+        int reductionAmount = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source, game);
+        CardUtil.reduceCost(abilityToModify, reductionAmount);
+
+        return true;
     }
 
     @Override

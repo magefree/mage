@@ -110,7 +110,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         // deck legality cards selection
         Arrays.stream(deckLegalityDisplay.getComponents())
-                .filter(c -> c instanceof LegalityLabel)
+                .filter(LegalityLabel.class::isInstance)
                 .forEach(c -> {
                     c.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {

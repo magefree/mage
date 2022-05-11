@@ -2,19 +2,17 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.TeferiWhoSlowsTheSunsetEmblem;
 import mage.game.permanent.Permanent;
@@ -35,7 +33,7 @@ public final class TeferiWhoSlowsTheSunset extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Choose up to one target artifact, up to one target creature, and up to one target land. Untap the chosen permanents you control. Tap the chosen permanents you don't control. You gain 2 life.
         Ability ability = new LoyaltyAbility(new TeferiWhoSlowsTheSunsetEffect(), 1);
@@ -46,10 +44,7 @@ public final class TeferiWhoSlowsTheSunset extends CardImpl {
         this.addAbility(ability);
 
         // −2: Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, false, false
-        ), -2));
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY), -2));
 
         // −7: You get an emblem with "Untap all permanents you control during each opponent's untap step" and "You draw a card during each opponent's draw step."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TeferiWhoSlowsTheSunsetEmblem()), -7));

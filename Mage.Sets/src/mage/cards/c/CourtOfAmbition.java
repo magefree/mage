@@ -82,7 +82,7 @@ class CourtOfAmbitionEffect extends OneShotEffect {
                 continue;
             }
             TargetDiscard target = new TargetDiscard(discardCount, StaticFilters.FILTER_CARD, playerId);
-            player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source, game);
             discardMap.put(playerId, new CardsImpl(target.getTargets()));
         }
         for (Map.Entry<UUID, Cards> entry : discardMap.entrySet()) {

@@ -28,7 +28,7 @@ public final class TreetopAmbusher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Dash {1}{G}
-        this.addAbility(new DashAbility(this, "{1}{G}"));
+        this.addAbility(new DashAbility("{1}{G}"));
 
         // Whenever Treetop Ambusher attacks, target creature you control gets +1/+1 until end of turn.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(

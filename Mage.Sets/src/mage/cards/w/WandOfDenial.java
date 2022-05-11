@@ -66,7 +66,7 @@ class WandOfDenialEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 controller.lookAtCards(sourceObject != null ? sourceObject.getName() : "", new CardsImpl(card), game);
                 if (!card.isLand(game)
                         && controller.canPayLifeCost(source)

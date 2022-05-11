@@ -69,7 +69,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = source.getManaCostsToPay().getX();
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         UUID controllerId = source.getControllerId();
 
         // X damage to each creature without flying

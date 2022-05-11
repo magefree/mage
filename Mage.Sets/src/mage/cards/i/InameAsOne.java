@@ -90,7 +90,7 @@ class InameAsOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null && targetCard != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", source, game)) {

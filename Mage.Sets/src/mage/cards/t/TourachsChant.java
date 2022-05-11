@@ -75,7 +75,7 @@ class TourachsChantEffect extends OneShotEffect {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
             if (player.chooseUse(Outcome.Detriment, "Put a -1/-1 counter on a creature you control? (otherwise " + sourcePermanent.getLogName() + " deals 3 damage to you)", source, game)
-                    && player.choose(Outcome.UnboostCreature, target, source.getSourceId(), game)) {
+                    && player.choose(Outcome.UnboostCreature, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.addCounters(CounterType.M1M1.createInstance(), player.getId(), source, game);

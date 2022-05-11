@@ -31,7 +31,7 @@ public final class KitchenImp extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Madness {B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private KitchenImp(final KitchenImp card) {

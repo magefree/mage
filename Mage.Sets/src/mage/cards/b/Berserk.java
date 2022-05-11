@@ -127,15 +127,15 @@ class BerserkDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            //create delayed triggered ability
-            Effect effect = new BerserkDelayedDestroyEffect();
-            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
-            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        //create delayed triggered ability
+        Effect effect = new BerserkDelayedDestroyEffect();
+        effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+
+        return true;
     }
 }
 
@@ -158,15 +158,15 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-                if (watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
-                    return permanent.destroy(source, game, false);
-                }
-            }
-        }
-        return false;
+        if (controller == null) { return false; }
+
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (permanent == null) { return false; }
+
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        if (watcher == null) { return false; }
+
+        return watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))
+                && permanent.destroy(source, game, false);
     }
 }

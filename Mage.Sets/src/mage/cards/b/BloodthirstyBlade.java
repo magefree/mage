@@ -2,9 +2,10 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.GoadAttachedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,10 +28,12 @@ public final class BloodthirstyBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0 and is goaded.
-        this.addAbility(new GoadAttachedAbility(new BoostEquippedEffect(2, 0)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
+        ability.addEffect(new GoadAttachedEffect());
+        this.addAbility(ability);
 
         // {1}: Attach Bloodthirsty Blade to target creature an opponent controls. Active this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
+        ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(
                         Outcome.Detriment, "Attach {this} to target creature an opponent controls"

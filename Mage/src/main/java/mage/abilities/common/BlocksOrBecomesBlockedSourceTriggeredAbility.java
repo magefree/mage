@@ -21,7 +21,11 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
     protected boolean setTargetPointer;
 
     public BlocksOrBecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional, null, true);
+        this(effect, optional, true);
+    }
+
+    public BlocksOrBecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional, null, setTargetPointer);
     }
 
     public BlocksOrBecomesBlockedSourceTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {

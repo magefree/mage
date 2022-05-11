@@ -21,10 +21,9 @@ import java.util.UUID;
  * @author Loki
  */
 public final class BladeSplicer extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+    private static final FilterPermanent filter = new FilterPermanent("Golems");
 
     static {
-        filter.add(CardType.CREATURE.getPredicate());
         filter.add(SubType.GOLEM.getPredicate());
     }
 

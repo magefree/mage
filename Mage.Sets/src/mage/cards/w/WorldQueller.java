@@ -118,8 +118,8 @@ class WorldQuellerEffect extends OneShotEffect {
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
-                    if (player2 != null && target.canChoose(source.getSourceId(), playerId, game)) {
-                        while (player2.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), playerId, game)) {
+                    if (player2 != null && target.canChoose(playerId, source, game)) {
+                        while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, source, game)) {
                             player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());

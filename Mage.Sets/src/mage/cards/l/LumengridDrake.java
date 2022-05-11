@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class LumengridDrake extends CardImpl {
 
-    private static final String ruleText = "<i>Metalcraft</i> &mdash; When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
+    private static final String ruleText = "When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 
     public LumengridDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -1,9 +1,10 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.GoadAttachedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -37,11 +38,10 @@ public final class PredatoryImpetus extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3, must be blocked if able, and is goaded.
-        this.addAbility(new GoadAttachedAbility(
-                new BoostEnchantedEffect(3, 3)
-                        .setText("Enchanted creature gets +3/+3"),
-                new PredatoryImpetusEffect()
-        ));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3));
+        ability.addEffect(new PredatoryImpetusEffect());
+        ability.addEffect(new GoadAttachedEffect().concatBy(","));
+        this.addAbility(ability);
     }
 
     private PredatoryImpetus(final PredatoryImpetus card) {

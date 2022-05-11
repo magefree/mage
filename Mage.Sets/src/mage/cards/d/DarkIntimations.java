@@ -48,7 +48,7 @@ public final class DarkIntimations extends CardImpl {
         this.getSpellAbility().addEffect(new DarkIntimationsEffect());
 
         // When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
     }
 
     private DarkIntimations(final DarkIntimations card) {
@@ -101,7 +101,7 @@ class DarkIntimationsEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                if (target.canChoose(player.getId(), source, game)) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     perms.addAll(target.getTargets());
                 }
@@ -120,8 +120,8 @@ class DarkIntimationsEffect extends OneShotEffect {
             }
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCard);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
-                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+        if (target.canChoose(source.getControllerId(), source, game)
+                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
                 return false;

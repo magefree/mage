@@ -1,3 +1,4 @@
+Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
 Aether Revolt|AetherRevolt|
@@ -32,6 +33,7 @@ Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
 Commander 2021|Commander2021Edition|
 Commander Legends|CommanderLegends|
+Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
@@ -200,6 +202,8 @@ Shards of Alara|ShardsOfAlara|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|
+Streets of New Capenna|StreetsOfNewCapenna|
+New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|

@@ -34,7 +34,7 @@ public class AffinityEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         // abilityToModify.getControllerId() works with Sen Triplets and in multiplayer games, see https://github.com/magefree/mage/issues/5931
-        int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source.getId(), game).size();
+        int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source, game).size();
         CardUtil.reduceCost(abilityToModify, count);
         return true;
     }

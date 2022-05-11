@@ -27,7 +27,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
     public ProtectionChosenColorAttachedEffect(boolean notRemoveItself) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.notRemoveItself = notRemoveItself;
-        staticText = "{this} has protection from the chosen color" + (notRemoveItself ? ". This effect doesn't remove {this}" : "");
+        staticText = "enchanted creature has protection from the chosen color" + (notRemoveItself ? ". This effect doesn't remove {this}" : "");
     }
 
     public ProtectionChosenColorAttachedEffect(final ProtectionChosenColorAttachedEffect effect) {

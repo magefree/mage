@@ -13,7 +13,7 @@ import mage.abilities.keyword.ProwessAbility;
 public final class MonasteryMentorToken extends TokenImpl {
 
     public MonasteryMentorToken() {
-        super("Monk", "1/1 white Monk creature token with prowess");
+        super("Monk Token", "1/1 white Monk creature token with prowess");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.MONK);

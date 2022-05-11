@@ -1,7 +1,4 @@
-
 package mage.cards.m;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +14,8 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -26,17 +25,20 @@ public final class MammothUmbra extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature gets +3/+3 and has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+                3, 3, Duration.WhileOnBattlefield
+        ));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                VigilanceAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has vigilance"));
+        this.addAbility(ability);
 
         // Totem armor
         this.addAbility(new TotemArmorAbility());

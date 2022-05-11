@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -8,6 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SaprolingToken;
@@ -46,13 +45,17 @@ public final class KorozdaGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn),new ManaCostsImpl("{1}{B}{G}"));
-        ability.addEffect(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("target creature gets +1/+1");
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{1}{B}{G}"));
+        effect = new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains intimidate until end of turn. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{B}{G}, Sacrifice a nontoken creature: create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl("{2}{B}{G}"));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true)));
         this.addAbility(ability);
         

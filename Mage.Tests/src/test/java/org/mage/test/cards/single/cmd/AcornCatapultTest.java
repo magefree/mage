@@ -36,7 +36,7 @@ public class AcornCatapultTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Acolyte of Xathrid", 1);
 
-        assertPermanentCount(playerB, "Squirrel", 1);
+        assertPermanentCount(playerB, "Squirrel Token", 1);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class AcornCatapultTest extends CardTestPlayerBase {
 
         assertLife(playerB, 19);
 
-        assertPermanentCount(playerB, "Squirrel", 1);
+        assertPermanentCount(playerB, "Squirrel Token", 1);
 
     }
 }

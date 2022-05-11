@@ -79,7 +79,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (targetPlayer != null && mageObject != null) {
             return "This turn you can't cast spells or activate abilities" +
                     " (" + mageObject.getLogName() + ')';
@@ -129,7 +129,7 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
 
     public SenTripletsPlayFromOpponentsHandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play cards from that player's hand this turn";
+        staticText = "You may play lands and cast spells from that player's hand this turn";
     }
 
     public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {

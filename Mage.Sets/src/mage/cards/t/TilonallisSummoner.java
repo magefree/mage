@@ -20,7 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.TilonallisSummonerElementalToken;
+import mage.game.permanent.token.RedElementalToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
@@ -82,13 +82,13 @@ class TilonallisSummonerEffect extends OneShotEffect {
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment
-                    CreateTokenEffect effect = new CreateTokenEffect(new TilonallisSummonerElementalToken(), costX, true, true);
+                    CreateTokenEffect effect = new CreateTokenEffect(new RedElementalToken(), costX, true, true);
                     effect.apply(game, source);
                     Effect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD)
                             .setText("exile those tokens unless you have the city's blessing");
                     exileEffect.setTargetPointer(new FixedTargets(new CardsImpl(effect.getLastAddedTokenIds()), game));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            Zone.ALL, exileEffect, TargetController.ANY, new InvertCondition(CitysBlessingCondition.instance)), source);
+                            exileEffect, TargetController.ANY, new InvertCondition(CitysBlessingCondition.instance)), source);
                 }
             }
             return true;

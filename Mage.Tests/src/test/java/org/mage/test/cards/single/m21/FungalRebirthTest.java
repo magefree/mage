@@ -25,6 +25,6 @@ public class FungalRebirthTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Saproling", 2);
+        assertPermanentCount(playerA, "Saproling Token", 2);
     }
 }

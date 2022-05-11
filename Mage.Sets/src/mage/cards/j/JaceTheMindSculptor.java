@@ -4,7 +4,6 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BrainstormEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -33,7 +32,7 @@ public final class JaceTheMindSculptor extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.
         LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);

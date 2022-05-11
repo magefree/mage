@@ -87,15 +87,15 @@ class HedronAlignmentEffect extends OneShotEffect {
             if (!game.getBattlefield().contains(filterPermanent, source, game, 1)) {
                 return true;
             }
-            if (controller.getHand().getCards(filterCard, source.getSourceId(), controller.getId(), game).isEmpty()) {
+            if (controller.getHand().getCards(filterCard, controller.getId(), source, game).isEmpty()) {
                 return true;
             }
-            if (controller.getGraveyard().getCards(filterCard, source.getSourceId(), controller.getId(), game).isEmpty()) {
+            if (controller.getGraveyard().getCards(filterCard, controller.getId(), source, game).isEmpty()) {
                 return true;
             }
             Cards cardsToCheck = new CardsImpl();
             cardsToCheck.addAll(game.getExile().getAllCards(game));
-            if (cardsToCheck.count(filterCard, source.getSourceId(), controller.getId(), game) == 0) {
+            if (cardsToCheck.count(filterCard, controller.getId(), source, game) == 0) {
                 return true;
             }
             controller.won(game);

@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -58,7 +57,7 @@ class SpellSwindleEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            return new CreateTokenEffect(new TreasureToken(), stackObject.getManaValue()).apply(game, source);
+            return new TreasureToken().putOntoBattlefield(stackObject.getManaValue(), game, source);
         }
         return false;
     }

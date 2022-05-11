@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class InklingToken extends TokenImpl {
 
     public InklingToken() {
-        super("Inkling", "2/1 white and black Inkling creature token with flying");
+        super("Inkling Token", "2/1 white and black Inkling creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);

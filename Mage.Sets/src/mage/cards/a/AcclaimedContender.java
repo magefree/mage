@@ -5,14 +5,13 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,9 +55,8 @@ public final class AcclaimedContender extends CardImpl {
         // When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1), filter2, Zone.LIBRARY, false,
-                        true, false, Zone.HAND, true, false, false
-                ).setBackInRandomOrder(true)), condition, "When {this} enters the battlefield, " +
+                        5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM
+                )), condition, "When {this} enters the battlefield, " +
                 "if you control another Knight, look at the top five cards of your library. " +
                 "You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them " +
                 "and put it into your hand. Put the rest on the bottom of your library in a random order."

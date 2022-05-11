@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ElephantToken extends TokenImpl {
 
     public ElephantToken() {
-        super("Elephant", "3/3 green Elephant creature token");
+        super("Elephant Token", "3/3 green Elephant creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEPHANT);
@@ -20,7 +20,7 @@ public final class ElephantToken extends TokenImpl {
         toughness = new MageInt(3);
 
         availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "CMA", "CMD", "CNS", "GVL", "DDD",
-                "EMA", "INV", "JUD", "MM2", "ODY", "ROE", "TSP", "VMA", "WWK", "MH1", "CMR", "C21", "MIC");
+                "EMA", "INV", "JUD", "MM2", "ODY", "ROE", "TSP", "VMA", "WWK", "MH1", "CMR", "C21", "MIC", "NEC", "2XM");
     }
 
     public ElephantToken(final ElephantToken token) {

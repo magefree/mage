@@ -20,7 +20,7 @@ public final class SleepOfTheDead extends CardImpl {
 
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Escape—{2}{U}, Exile three other cards from your graveyard.

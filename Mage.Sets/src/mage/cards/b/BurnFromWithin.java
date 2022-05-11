@@ -32,7 +32,6 @@ public final class BurnFromWithin extends CardImpl {
         // If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new BurnFromWithinEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-
     }
 
     private BurnFromWithin(final BurnFromWithin card) {
@@ -49,7 +48,9 @@ class BurnFromWithinEffect extends OneShotEffect {
 
     public BurnFromWithinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to any target. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead";
+        this.staticText = "{this} deals X damage to any target. " +
+                "If a creature is dealt damage this way, it loses indestructible until end of turn. " +
+                "If that creature would die this turn, exile it instead";
     }
 
     public BurnFromWithinEffect(final BurnFromWithinEffect effect) {
@@ -64,25 +65,31 @@ class BurnFromWithinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            int amount = source.getManaCostsToPay().getX();
-            if (creature != null) {
-                game.addEffect(new DiesReplacementEffect(new MageObjectReference(creature, game), Duration.EndOfTurn), source);
-                int damageDealt = creature.damage(amount, source.getSourceId(), source, game, false, true);
-                if (damageDealt > 0) {
-                    ContinuousEffect effect = new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(creature.getId(), game));
-                    game.addEffect(effect, source);
-                }
-                return true;
+        if (controller == null) { return false; }
+
+        int amount = source.getManaCostsToPay().getX();
+
+        // Target is a creature
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (creature != null) {
+            game.addEffect(new DiesReplacementEffect(new MageObjectReference(creature, game), Duration.EndOfTurn), source);
+            int damageDealt = creature.damage(amount, source.getSourceId(), source, game, false, true);
+            if (damageDealt > 0) {
+                ContinuousEffect effect = new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(creature.getId(), game));
+                game.addEffect(effect, source);
             }
-            Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (targetPlayer != null) {
-                targetPlayer.damage(amount, source.getSourceId(), source, game);
-                return true;
-            }
+            return true;
         }
+
+        // Target is a player
+        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
+            targetPlayer.damage(amount, source.getSourceId(), source, game);
+            return true;
+        }
+
+        // No valid target
         return false;
     }
 }

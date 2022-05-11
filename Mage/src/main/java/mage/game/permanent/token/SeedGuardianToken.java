@@ -16,7 +16,7 @@ public final class SeedGuardianToken extends TokenImpl {
     }
 
     public SeedGuardianToken(int xValue) {
-        super("Elemental", "X/X green Elemental creature token");
+        super("Elemental Token", "X/X green Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEMENTAL);

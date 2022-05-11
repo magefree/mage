@@ -33,7 +33,7 @@ public final class SupremeExemplar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Champion an Elemental
-        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
+        this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL));
     }
 
     private SupremeExemplar(final SupremeExemplar card) {

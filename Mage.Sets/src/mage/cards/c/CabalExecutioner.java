@@ -17,7 +17,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -37,7 +36,7 @@ public final class CabalExecutioner extends CardImpl {
         this.addAbility(new CabalExecutionerAbility());
 
         // Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}{B}")));
     }
 
     private CabalExecutioner(final CabalExecutioner card) {

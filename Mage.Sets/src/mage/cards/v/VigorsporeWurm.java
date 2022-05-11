@@ -11,12 +11,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffe
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +45,7 @@ public final class VigorsporeWurm extends CardImpl {
         ).setText("and gets +X/+X until end of turn, "
                 + "where X is the number of creature cards in your graveyard."));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.withFlavorWord("Undergrowth");
+        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
 
         // Vigorspore Wurm can't be blocked by more than one creature.

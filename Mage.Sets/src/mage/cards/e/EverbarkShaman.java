@@ -24,7 +24,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class EverbarkShaman extends CardImpl {
 
-    private static final FilterCard filterForest = new FilterCard("Forest");
+    private static final FilterCard filterForest = new FilterCard("Forest cards");
     private static final FilterCard filterTreefolk = new FilterCard("Treefolk card from your graveyard");
 
     static {
@@ -41,7 +41,7 @@ public final class EverbarkShaman extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {T}, Exile a Treefolk card from your graveyard: Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(2, filterForest), true, Outcome.PutLandInPlay), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterForest), true, Outcome.PutLandInPlay), new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filterTreefolk)));
         this.addAbility(ability);
     }

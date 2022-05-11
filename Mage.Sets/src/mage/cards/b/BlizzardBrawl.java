@@ -61,7 +61,7 @@ class BlizzardBrawlEffect extends OneShotEffect {
         staticText = "Choose target creature you control and target creature you don't control. " +
                 "If you control three or more snow permanents, the creature you control gets +1/+0 " +
                 "and gains indestructible until end of turn. " +
-                "Then those creatures fight each other." +
+                "Then those creatures fight each other. " +
                 "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
@@ -81,7 +81,7 @@ class BlizzardBrawlEffect extends OneShotEffect {
         if (creature1 == null) {
             return false;
         }
-        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) >= 3) {
+        if (game.getBattlefield().count(filter, source.getControllerId(), source, game) >= 3) {
             game.addEffect(new BoostTargetEffect(
                     1, 0, Duration.EndOfTurn
             ).setTargetPointer(new FixedTarget(creature1.getId(), game)), source);

@@ -1,20 +1,24 @@
-
 package mage.target.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
 
-    public TargetCreaturePermanentSameController(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
+    public TargetCreaturePermanentSameController(int numTargets) {
+        this(numTargets, StaticFilters.FILTER_PERMANENT_CREATURE);
+    }
+
+    public TargetCreaturePermanentSameController(int numTargets, FilterCreaturePermanent filter) {
+        super(numTargets, numTargets, filter, false);
     }
 
     public TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {

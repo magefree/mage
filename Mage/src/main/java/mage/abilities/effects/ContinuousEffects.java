@@ -1247,15 +1247,18 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
-        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (!(effect instanceof BecomesFaceDownCreatureEffect)
-                && (effect != null && !effect.getDuration().equals(Duration.Custom))) { // Custom effects do not depend on the creating permanent
-            if (card != null) {
-                return card.hasAbility(ability, game);
-            }
+        switch (effect.getDuration()) { // effects with fixed duration don't need an object with the source ability (e.g. a silence cast with isochronic Scepter has no more a card object
+            case EndOfCombat:
+            case EndOfGame:
+            case EndOfStep:
+            case EndOfTurn:
+            case OneUse:
+            case Custom:  // custom duration means the effect ends itself if needed
+                return true;
         }
-
-        return true;
+        final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+        return effect instanceof BecomesFaceDownCreatureEffect
+                || effect == null || card == null || card.hasAbility(ability, game);
     }
 
     public Set<Ability> getLayeredEffectAbilities(ContinuousEffect effect) {
@@ -1288,45 +1291,36 @@ public class ContinuousEffects implements Serializable {
         switch (effect.getEffectType()) {
             case REPLACEMENT:
             case REDIRECTION:
-                ReplacementEffect newReplacementEffect = (ReplacementEffect) effect;
-                replacementEffects.addEffect(newReplacementEffect, source);
+                replacementEffects.addEffect((ReplacementEffect) effect, source);
                 break;
             case PREVENTION:
-                PreventionEffect newPreventionEffect = (PreventionEffect) effect;
-                preventionEffects.addEffect(newPreventionEffect, source);
+                preventionEffects.addEffect((PreventionEffect) effect, source);
                 break;
             case RESTRICTION:
-                RestrictionEffect newRestrictionEffect = (RestrictionEffect) effect;
-                restrictionEffects.addEffect(newRestrictionEffect, source);
+                restrictionEffects.addEffect((RestrictionEffect) effect, source);
                 break;
             case RESTRICTION_UNTAP_NOT_MORE_THAN:
-                RestrictionUntapNotMoreThanEffect newRestrictionUntapNotMoreThanEffect = (RestrictionUntapNotMoreThanEffect) effect;
-                restrictionUntapNotMoreThanEffects.addEffect(newRestrictionUntapNotMoreThanEffect, source);
+                restrictionUntapNotMoreThanEffects.addEffect((RestrictionUntapNotMoreThanEffect) effect, source);
                 break;
             case REQUIREMENT:
-                RequirementEffect newRequirementEffect = (RequirementEffect) effect;
-                requirementEffects.addEffect(newRequirementEffect, source);
+                requirementEffects.addEffect((RequirementEffect) effect, source);
                 break;
             case ASTHOUGH:
                 AsThoughEffect newAsThoughEffect = (AsThoughEffect) effect;
-                if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
+                asThoughEffectsMap.computeIfAbsent(newAsThoughEffect.getAsThoughEffectType(), x -> {
                     ContinuousEffectsList<AsThoughEffect> list = new ContinuousEffectsList<>();
                     allEffectsLists.add(list);
-                    asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
-                }
-                asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
+                    return list;
+                }).addEffect(newAsThoughEffect, source);
                 break;
             case COSTMODIFICATION:
-                CostModificationEffect newCostModificationEffect = (CostModificationEffect) effect;
-                costModificationEffects.addEffect(newCostModificationEffect, source);
+                costModificationEffects.addEffect((CostModificationEffect) effect, source);
                 break;
             case SPLICE:
-                SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect) effect;
-                spliceCardEffects.addEffect(newSpliceCardEffect, source);
+                spliceCardEffects.addEffect((SpliceCardEffect) effect, source);
                 break;
             case CONTINUOUS_RULE_MODIFICATION:
-                ContinuousRuleModifyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifyingEffect) effect;
-                continuousRuleModifyingEffects.addEffect(newContinuousRuleModifiyingEffect, source);
+                continuousRuleModifyingEffects.addEffect((ContinuousRuleModifyingEffect) effect, source);
                 break;
             default:
                 layeredEffects.addEffect(effect, source);

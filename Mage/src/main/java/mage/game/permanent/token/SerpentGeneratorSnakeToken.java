@@ -15,7 +15,7 @@ import mage.constants.SubType;
 public final class SerpentGeneratorSnakeToken extends TokenImpl {
 
     public SerpentGeneratorSnakeToken() {
-        super("Snake", "1/1 colorless Snake artifact creature token with \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
+        super("Snake Token", "1/1 colorless Snake artifact creature token with \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SNAKE);

@@ -28,7 +28,7 @@ public final class MysticOfTheHiddenWay extends CardImpl {
         // Mystic of the Hidden Way can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
     }
 
     private MysticOfTheHiddenWay(final MysticOfTheHiddenWay card) {

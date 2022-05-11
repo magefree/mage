@@ -91,8 +91,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (perm.isControlledBy(source.getControllerId())
+                        && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -116,8 +117,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (perm.isControlledBy(source.getControllerId())
+                        && (!(excludeSource && perm.getId().equals(source.getSourceId())))) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }

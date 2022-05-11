@@ -1,6 +1,7 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -23,6 +24,8 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -36,6 +39,7 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
@@ -529,7 +533,7 @@ public final class CardUtil {
     }
 
     public static String replaceSourceName(String message, String sourceName) {
-        return message.replace("{this}", sourceName);
+        return message != null ? message.replace("{this}", sourceName) : null;
     }
 
     public static String booleanToFlipName(boolean flip) {
@@ -594,7 +598,11 @@ public final class CardUtil {
     }
 
     public static UUID getExileZoneId(Game game, Ability source) {
-        return getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        return getExileZoneId(game, source, 0);
+    }
+
+    public static UUID getExileZoneId(Game game, Ability source, int offset) {
+        return getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() + offset);
     }
 
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
@@ -710,7 +718,7 @@ public final class CardUtil {
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (sourceObject != null) {
                 title = sourceObject.getIdName()
                         + " [" + source.getSourceObjectZoneChangeCounter() + "]"
@@ -948,7 +956,7 @@ public final class CardUtil {
         }
     }
 
-    private static final String vowels = "aeiouAEIOU";
+    private static final String vowels = "aeiouAEIOU8";
 
     public static String addArticle(String text) {
         if (text.startsWith("a ")
@@ -980,7 +988,7 @@ public final class CardUtil {
                 .stream()
                 .map(Mode::getTargets)
                 .flatMap(Collection::stream)
-                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), game))
+                .map(t -> t.possibleTargets(ability.getControllerId(), ability, game))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
     }
@@ -1196,6 +1204,130 @@ public final class CardUtil {
         }
     }
 
+    public interface SpellCastTracker {
+
+        boolean checkCard(Card card, Game game);
+
+        void addCard(Card card, Ability source, Game game);
+    }
+
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+        List<Card> cards = new ArrayList<>();
+        if (cardToCast instanceof CardWithHalves) {
+            cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
+            cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
+        } else if (cardToCast instanceof AdventureCard) {
+            cards.add(cardToCast);
+            cards.add(((AdventureCard) cardToCast).getSpellCard());
+        } else {
+            cards.add(cardToCast);
+        }
+        cards.removeIf(Objects::isNull);
+        cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        if (spellCastTracker != null) {
+            cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
+        }
+        return cards;
+    }
+
+    private static final FilterCard defaultFilter = new FilterCard("card to cast");
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Card card) {
+        return castSpellWithAttributesForFree(player, source, game, new CardsImpl(card), StaticFilters.FILTER_CARD);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        return castSpellWithAttributesForFree(player, source, game, cards, filter, null);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
+        Map<UUID, List<Card>> cardMap = new HashMap<>();
+        for (Card card : cards.getCards(game)) {
+            List<Card> castableComponents = getCastableComponents(card, filter, source, player.getId(), game, spellCastTracker);
+            if (!castableComponents.isEmpty()) {
+                cardMap.put(card.getId(), castableComponents);
+            }
+        }
+        Card cardToCast;
+        switch (cardMap.size()) {
+            case 0:
+                return false;
+            case 1:
+                cardToCast = cards.get(cardMap.keySet().stream().findFirst().orElse(null), game);
+                break;
+            default:
+                Cards castableCards = new CardsImpl(cardMap.keySet());
+                TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
+                target.setNotTarget(true);
+                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                cardToCast = castableCards.get(target.getFirstTarget(), game);
+        }
+        if (cardToCast == null) {
+            return false;
+        }
+        List<Card> partsToCast = cardMap.get(cardToCast.getId());
+        String partsInfo = partsToCast
+                .stream()
+                .map(MageObject::getIdName)
+                .collect(Collectors.joining(" or "));
+        if (cardToCast == null
+                || partsToCast.size() < 1
+                || !player.chooseUse(
+                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+        )) {
+            return false;
+        }
+        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
+        boolean result = player.cast(
+                player.chooseAbilityForCast(cardToCast, game, true),
+                game, true, new ApprovingObject(source, game)
+        );
+        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+        if (result && spellCastTracker != null) {
+            spellCastTracker.addCard(cardToCast, source, game);
+        }
+        if (player.isComputer() && !result) {
+            cards.remove(cardToCast);
+        }
+        return result;
+    }
+
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+        return cards
+                .getCards(game)
+                .stream()
+                .anyMatch(card -> !getCastableComponents(card, filter, source, playerId, game, spellCastTracker).isEmpty());
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, Integer.MAX_VALUE);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, maxSpells, null);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker) {
+        if (maxSpells == 1) {
+            CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
+            return;
+        }
+        int spellsCast = 0;
+        cards.removeZone(Zone.STACK, game);
+        while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker)) {
+                spellsCast++;
+                cards.removeZone(Zone.STACK, game);
+            } else if (!checkForPlayable(
+                    cards, filter, source, player.getId(), game, spellCastTracker
+            ) || !player.chooseUse(
+                    Outcome.PlayForFree, "Continue casting spells?", source, game
+            )) {
+                break;
+            }
+        }
+    }
+
     /**
      * Pay life in effects
      *
@@ -1284,8 +1416,11 @@ public final class CardUtil {
         return zcc;
     }
 
-    public static boolean checkCostWords(String text) {
-        return text != null && costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith);
+    public static String addCostVerb(String text) {
+        if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
+            return text;
+        }
+        return "pay " + text;
     }
 
     /**
@@ -1396,14 +1531,22 @@ public final class CardUtil {
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 
+    public static String concatWithOr(List<String> strings) {
+        return concatWith(strings, "or");
+    }
+
     public static String concatWithAnd(List<String> strings) {
+        return concatWith(strings, "and");
+    }
+
+    private static String concatWith(List<String> strings, String last) {
         switch (strings.size()) {
             case 0:
                 return "";
             case 1:
                 return strings.get(0);
             case 2:
-                return strings.get(0) + " and " + strings.get(1);
+                return strings.get(0) + " " + last + " " + strings.get(1);
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < strings.size(); i++) {
@@ -1413,7 +1556,8 @@ public final class CardUtil {
             }
             sb.append(", ");
             if (i == strings.size() - 2) {
-                sb.append("and ");
+                sb.append(last);
+                sb.append(' ');
             }
         }
         return sb.toString();
@@ -1460,5 +1604,16 @@ public final class CardUtil {
 
     public static <T> int setOrIncrementValue(T u, Integer i) {
         return i == null ? 1 : Integer.sum(i, 1);
+    }
+
+    public static String convertStartingLoyalty(int startingLoyalty) {
+        switch (startingLoyalty) {
+            case -2:
+                return "X";
+            case -1:
+                return "";
+            default:
+                return "" + startingLoyalty;
+        }
     }
 }

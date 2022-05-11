@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class InexorableBlobOozeToken extends TokenImpl {
 
     public InexorableBlobOozeToken() {
-        super("Ooze", "3/3 green Ooze creature token");
+        super("Ooze Token", "3/3 green Ooze creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);

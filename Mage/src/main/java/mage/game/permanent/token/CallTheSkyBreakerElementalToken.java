@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class CallTheSkyBreakerElementalToken extends TokenImpl {
 
     public CallTheSkyBreakerElementalToken() {
-        super("Elemental", "5/5 blue and red Elemental creature token with flying");
+        super("Elemental Token", "5/5 blue and red Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);

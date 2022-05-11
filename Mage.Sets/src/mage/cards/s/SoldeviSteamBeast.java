@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class SoldeviSteamBeast extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Regenerate Soldevi Steam Beast.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
     }
 
     private SoldeviSteamBeast(final SoldeviSteamBeast card) {

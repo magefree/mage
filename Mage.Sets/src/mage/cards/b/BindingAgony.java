@@ -1,13 +1,10 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,12 +26,10 @@ public final class BindingAgony extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
         // Whenever enchanted creature is dealt damage, Binding Agony deals that much damage to that creature's controller.
-        Effect effect = new DamageTargetEffect(new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("{this} deals that much damage to that creature's controller");
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DamageAttachedControllerEffect(SavedDamageValue.MUCH), false));
     }
 
     private BindingAgony(final BindingAgony card) {

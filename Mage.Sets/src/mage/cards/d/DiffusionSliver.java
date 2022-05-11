@@ -14,7 +14,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -74,7 +73,7 @@ class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+        if (creature == null || !filter.match(creature, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().clear();

@@ -499,7 +499,7 @@ public class TestPlayer implements Player {
                         targetName = targetName.substring(0, targetName.length() - 11);
                     }
                 }
-                for (UUID id : currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                for (UUID id : currentTarget.possibleTargets(ability.getControllerId(), ability, game)) {
                     if (!currentTarget.getTargets().contains(id)) {
                         MageObject object = game.getObject(id);
 
@@ -2056,7 +2056,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         UUID abilityControllerId = computerPlayer.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -2064,7 +2064,7 @@ public class TestPlayer implements Player {
 
         // ignore player select
         if (target.getMessage().equals("Select a starting player")) {
-            return computerPlayer.choose(outcome, target, sourceId, game, options);
+            return computerPlayer.choose(outcome, target, source, game, options);
         }
 
         assertAliasSupportInChoices(true);
@@ -2082,11 +2082,6 @@ public class TestPlayer implements Player {
             List<Integer> usedChoices = new ArrayList<>();
             List<UUID> usedTargets = new ArrayList<>();
 
-            Ability source = null;
-            StackObject stackObject = game.getStack().getStackObject(sourceId);
-            if (stackObject != null) {
-                source = stackObject.getStackAbility();
-            }
 
             if ((target.getOriginalTarget() instanceof TargetPermanent)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
@@ -2112,7 +2107,7 @@ public class TestPlayer implements Player {
                                 targetName = targetName.substring(0, targetName.length() - 11);
                             }
                         }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, sourceId, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, source, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
@@ -2178,7 +2173,7 @@ public class TestPlayer implements Player {
 
                     CheckOneChoice:
                     for (String possibleChoice : possibleChoices) {
-                        Set<UUID> possibleCards = target.possibleTargets(sourceId, abilityControllerId, game);
+                        Set<UUID> possibleCards = target.possibleTargets(abilityControllerId, source, game);
                         CheckTargetsList:
                         for (UUID targetId : possibleCards) {
                             MageObject targetObject = game.getCard(targetId);
@@ -2232,7 +2227,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target.getOriginalTarget());
-                possibleTargets = t.possibleTargets(sourceId, abilityControllerId, game);
+                possibleTargets = t.possibleTargets(abilityControllerId, source, game);
                 for (String choiceRecord : choices) {
                     String[] targetList = choiceRecord.split("\\^");
                     boolean targetFound = false;
@@ -2268,8 +2263,8 @@ public class TestPlayer implements Player {
              */
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + ";\n" + getInfo(target));
-        return computerPlayer.choose(outcome, target, sourceId, game, options);
+        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
+        return computerPlayer.choose(outcome, target, source, game, options);
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
@@ -2380,7 +2375,7 @@ public class TestPlayer implements Player {
                         if (filter instanceof FilterPermanentOrSuspendedCard) {
                             filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();
                         }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, sourceId, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
                                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
@@ -2466,7 +2461,7 @@ public class TestPlayer implements Player {
             }
 
             // card in battlefield
-            if (target instanceof TargetCardInGraveyardOrBattlefield) {
+            if (target instanceof TargetCardInGraveyardBattlefieldOrStack) {
                 TargetCard targetFull = (TargetCard) target;
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
@@ -2494,7 +2489,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInGraveyard
-                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield
+                    || target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.GRAVEYARD)) {
                 targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
@@ -3966,10 +3961,10 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target,
-                          UUID sourceId, Game game
+                          Ability source, Game game
     ) {
         // needed to call here the TestPlayer because it's overwitten
-        return choose(outcome, target, sourceId, game, null);
+        return choose(outcome, target, source, game, null);
     }
 
     @Override
@@ -4066,7 +4061,7 @@ public class TestPlayer implements Player {
             Assert.assertTrue("target amount must be <= remaining = " + target.getAmountRemaining() + " " + targetInfo, targetAmount <= target.getAmountRemaining());
 
             if (target.getAmountRemaining() > 0) {
-                for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                for (UUID possibleTarget : target.possibleTargets(source.getControllerId(), source, game)) {
                     boolean foundTarget = false;
 
                     // permanent
@@ -4364,19 +4359,17 @@ public class TestPlayer implements Player {
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
-
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
-        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
+        Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
         if (useable.size() == 1) {
-            return (SpellAbility) useable.values().iterator().next();
+            return useable.values().iterator().next();
         }
 
         if (!choices.isEmpty()) {
-            for (ActivatedAbility ability : useable.values()) {
+            for (SpellAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
-                    return (SpellAbility) ability;
+                    return ability;
                 }
             }
 
@@ -4384,6 +4377,7 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
+        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Card's abilities:\n" + allInfo);
         return computerPlayer.chooseAbilityForCast(card, game, noMana);
     }

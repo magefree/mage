@@ -40,7 +40,7 @@ public final class TemurCharger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph - Reveal a green card in your hand.
-        this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new MorphAbility(new RevealTargetFromHandCost(new TargetCardInHand(filter))));
 
         // When Temur Charger is turned face up, target creature gains trample until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)); 

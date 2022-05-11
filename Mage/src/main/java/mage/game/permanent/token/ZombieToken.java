@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class ZombieToken extends TokenImpl {
 
     public ZombieToken() {
-        super("Zombie", "2/2 black Zombie creature token");
+        super("Zombie Token", "2/2 black Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);
@@ -25,7 +25,7 @@ public final class ZombieToken extends TokenImpl {
                 "CNS", "MMA", "BNG", "KTK", "DTK", "ORI", "OGW",
                 "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01",
                 "RNA", "WAR", "MH1", "M20", "C19", "THB", "M21",
-                "CMR", "C21", "MH2", "AFR", "MIC", "VOW");
+                "CMR", "C21", "MH2", "AFR", "MIC", "VOW", "UMA");
     }
 
     @Override

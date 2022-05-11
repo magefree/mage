@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class HungryForMoreVampireToken extends TokenImpl {
 
     public HungryForMoreVampireToken() {
-        super("Vampire", "3/1 black and red Vampire creature token with trample, lifelink, and haste");
+        super("Vampire Token", "3/1 black and red Vampire creature token with trample, lifelink, and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setBlack(true);

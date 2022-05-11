@@ -59,7 +59,7 @@ class PersecuteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         ChoiceColor choice = new ChoiceColor();
         if (controller == null

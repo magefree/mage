@@ -34,8 +34,7 @@ public final class RetreatToHagra extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
 
         // or Each opponent loses 1 life and you gain 1 life.
-        Mode mode = new Mode();
-        mode.addEffect(new LoseLifeOpponentsEffect(1));
+        Mode mode = new Mode(new LoseLifeOpponentsEffect(1));
         Effect gainLife = new GainLifeEffect(1);
         gainLife.setText("and you gain 1 life");
         mode.addEffect(gainLife);

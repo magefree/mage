@@ -4,7 +4,6 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -42,7 +41,7 @@ public final class KioraTheCrashingWave extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIORA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
+        this.setStartingLoyalty(2);
 
         // +1: Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
         LoyaltyAbility ability = new LoyaltyAbility(new KioraPreventionEffect(), 1);

@@ -82,7 +82,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 ));
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
 
-                if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
+                if (target.canChoose(controller.getId(), source, game) && controller.chooseTarget(outcome, target, source, game)) {
                     Permanent returningCreature = game.getPermanent(target.getFirstTarget());
                     if (returningCreature != null) {
                         controller.moveCards(returningCreature, Zone.HAND, source, game);

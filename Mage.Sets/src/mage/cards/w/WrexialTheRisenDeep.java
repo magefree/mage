@@ -108,7 +108,7 @@ class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever {this} deals combat damage to a player, "
                 + "you may cast target instant or sorcery card "
                 + "from that player's graveyard without paying its mana cost. "
-                + "If that spell would be put into a graveyard this turn, exile it instead";
+                + "If that spell would be put into a graveyard this turn, exile it instead.";
     }
 }
 

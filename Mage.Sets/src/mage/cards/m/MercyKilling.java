@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.MercyKillingToken;
+import mage.game.permanent.token.GreenWhiteElfWarriorToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,7 +58,7 @@ class MercyKillingTokenEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             int power = permanent.getPower().getValue();
-            return new MercyKillingToken().putOntoBattlefield(power, game, source, permanent.getControllerId());
+            return new GreenWhiteElfWarriorToken().putOntoBattlefield(power, game, source, permanent.getControllerId());
         }
         return false;
     }

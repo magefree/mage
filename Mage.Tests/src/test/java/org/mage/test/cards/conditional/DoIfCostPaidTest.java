@@ -26,7 +26,7 @@ public class DoIfCostPaidTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Awaken the Sky Tyrant", 0);
-        assertPermanentCount(playerB, "Dragon", 1);
+        assertPermanentCount(playerB, "Dragon Token", 1);
     }
 
 }

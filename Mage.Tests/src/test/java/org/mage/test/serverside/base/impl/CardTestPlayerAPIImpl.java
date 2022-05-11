@@ -238,6 +238,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             getHandCards(testPlayer).clear();
             getBattlefieldCards(testPlayer).clear();
             getGraveCards(testPlayer).clear();
+            getExiledCards(testPlayer).clear();
             // Reset the turn counter for tests
             ((TestPlayer) player).setInitialTurns(0);
         }
@@ -731,6 +732,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 return getLibraryCards(player);
             case COMMAND:
                 return getCommandCards(player);
+            case EXILED:
+                return getExiledCards(player);
             default:
                 break;
         }
@@ -1442,7 +1445,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
+        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ").", count, actualCount);
+    }
+
+    /**
+     * Assert card count in a specific exile zone.
+     *
+     * @param exileZoneName Name of the exile zone to be counted.
+     * @param count         Expected count.
+     * @throws AssertionError
+     */
+    public void assertExileZoneCount(String exileZoneName, int count) throws AssertionError {
+        ExileZone exileZone = currentGame.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneName, currentGame));
+        int actualCount = exileZone.getCards(currentGame).size();
+
+        Assert.assertEquals("(Exile \"" + exileZoneName + "\") Card counts are not equal.", count, actualCount);
     }
 
     /**
@@ -1713,7 +1730,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Ends a block of actions to be added after an rollback action
      */
     public void rollbackAfterActionsEnd() throws IllegalStateException {
-        if (rollbackBlockActive = false || rollbackPlayer == null) {
+        if (!rollbackBlockActive || rollbackPlayer == null) {
             throw new IllegalStateException("There was no rollback action defined before or no rollback block started. You can use this command only after a rollback action.");
         }
         rollbackBlockActive = false;

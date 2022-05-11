@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class VampireToken extends TokenImpl {
 
     public VampireToken() {
-        super("Vampire", "2/2 black Vampire creature token with flying");
+        super("Vampire Token", "2/2 black Vampire creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);

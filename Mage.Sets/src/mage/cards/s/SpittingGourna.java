@@ -26,7 +26,7 @@ public final class SpittingGourna extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Morph {4}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}")));
     }
 
     private SpittingGourna(final SpittingGourna card) {

@@ -25,7 +25,7 @@ public final class CanyonLurkers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph 3R
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{R}")));
     }
 
     private CanyonLurkers(final CanyonLurkers card) {

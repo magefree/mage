@@ -66,9 +66,6 @@ class AvatarOfWoeCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (AvatarOfWoe.graveyardCount.calculate(game, source, null) >= 10) {
-            return true;
-        }
-        return false;
+        return AvatarOfWoe.graveyardCount.calculate(game, source, null) >= 10;
     }
 }

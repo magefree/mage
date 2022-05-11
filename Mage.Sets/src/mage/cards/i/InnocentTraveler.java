@@ -79,9 +79,9 @@ class InnocentTravelerEffect extends OneShotEffect {
 
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), opponent.getId(), game)
+            if (!target.canChoose(opponent.getId(), source, game)
                     || !opponent.chooseUse(Outcome.AIDontUseIt, "Sacrifice a creature?", source, game)
-                    || !opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+                    || !opponent.choose(Outcome.Sacrifice, target, source, game)) {
                 continue;
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

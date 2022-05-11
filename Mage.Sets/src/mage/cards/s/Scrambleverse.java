@@ -56,7 +56,7 @@ class ScrambleverseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
         int count = players.size();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source, game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, players.get(RandomUtil.nextInt(count)));
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);

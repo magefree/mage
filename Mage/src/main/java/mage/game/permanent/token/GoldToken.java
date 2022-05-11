@@ -22,7 +22,7 @@ public final class GoldToken extends TokenImpl {
     }
 
     public GoldToken() {
-        super("Gold", "Gold token");
+        super("Gold Token", "Gold token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.GOLD);

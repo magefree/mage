@@ -17,7 +17,7 @@ public final class DemonFlyingToken extends TokenImpl {
     }
 
     public DemonFlyingToken(int xValue) {
-        super("Demon", "X/X black Demon creature token with flying");
+        super("Demon Token", "X/X black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);

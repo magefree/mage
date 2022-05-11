@@ -94,7 +94,7 @@ class StonehewerGiantEffect extends OneShotEffect {
                 Permanent equipment = game.getPermanent(card.getId());
                 Target targetCreature = new TargetControlledCreaturePermanent();
                 targetCreature.setNotTarget(true);
-                if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
+                if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source, game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), source, game);
                 }

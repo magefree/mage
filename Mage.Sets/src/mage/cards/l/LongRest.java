@@ -64,7 +64,7 @@ class LongRestTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Set<Integer> manaValues = new HashSet<>();
         for (UUID targetId : this.getTargets()) {
@@ -73,7 +73,7 @@ class LongRestTarget extends TargetCardInYourGraveyard {
                 manaValues.add(card.getManaValue());
             }
         }
-        for (UUID possibleTargetId : super.possibleTargets(sourceId, sourceControllerId, game)) {
+        for (UUID possibleTargetId : super.possibleTargets(sourceControllerId, source, game)) {
             Card card = game.getCard(possibleTargetId);
             if (card != null && !manaValues.contains(card.getManaValue())) {
                 possibleTargets.add(possibleTargetId);

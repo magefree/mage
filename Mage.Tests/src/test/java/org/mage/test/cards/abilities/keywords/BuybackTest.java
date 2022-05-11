@@ -143,7 +143,7 @@ public class BuybackTest extends CardTestPlayerBase {
         // bolt 2 - cast (R) and copy as free cast (R), return reiterate with buyback (RRR)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}:");
-        setChoice(playerA, "Reiterate"); // free cast
+        setChoice(playerA, true); // cast for free
         setChoice(playerA, true); // use buyback
         addTarget(playerA, "Lightning Bolt"); // copy target
         setChoice(playerA, false); // same bolt's target

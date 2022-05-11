@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -55,7 +54,7 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
         // Rowan, Scholar of Sparks
         // Legendary Planeswalker - Rowan
         this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getLeftHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
+        this.getLeftHalfCard().setStartingLoyalty(2);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
@@ -79,7 +78,7 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
         // Will, Scholar of Frost
         // Legendary Planeswalker - Will
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.getRightHalfCard().setStartingLoyalty(4);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(

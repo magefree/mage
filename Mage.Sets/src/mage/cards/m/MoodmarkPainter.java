@@ -10,6 +10,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
+import mage.constants.AbilityWord;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +50,7 @@ public final class MoodmarkPainter extends CardImpl {
                 + "where X is the number of creature cards in your graveyard. " +
                 "<i>(It can't be blocked except by two or more creatures.)</i>")); // Must be here to match Oracle text
         ability.addTarget(new TargetCreaturePermanent());
-        ability.withFlavorWord("Undergrowth");
+        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
     }
 

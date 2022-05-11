@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.RedWolfToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -35,10 +36,10 @@ public final class KessigWolfrider extends CardImpl {
 
         // {2}{R}, {T}, Exile three cards from your graveyard: Create a 3/2 red Wolf creature token.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new RedWolfToken()), new ManaCostsImpl<>("2}{R}")
+                new CreateTokenEffect(new RedWolfToken()), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         this.addAbility(ability);
     }
 

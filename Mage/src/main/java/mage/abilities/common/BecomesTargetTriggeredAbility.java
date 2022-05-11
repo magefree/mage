@@ -57,7 +57,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
         if (!event.getTargetId().equals(getSourceId())
-                || !filter.match(sourceObject, getSourceId(), getControllerId(), game)) {
+                || !filter.match(sourceObject, getControllerId(), this, game)) {
             return false;
         }
         switch (setTargetPointer) {

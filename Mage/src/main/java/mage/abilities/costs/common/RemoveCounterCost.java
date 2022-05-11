@@ -23,10 +23,9 @@ import java.util.UUID;
  */
 public class RemoveCounterCost extends CostImpl {
 
-    protected TargetPermanent target;
-    private String name;
-    private CounterType counterTypeToRemove;
-    protected int countersToRemove;
+    protected final TargetPermanent target;
+    private final CounterType counterTypeToRemove;
+    protected final int countersToRemove;
 
     public RemoveCounterCost(TargetPermanent target) {
         this(target, null);
@@ -47,7 +46,6 @@ public class RemoveCounterCost extends CostImpl {
     public RemoveCounterCost(final RemoveCounterCost cost) {
         super(cost);
         this.target = cost.target.copy();
-        this.name = cost.name;
         this.countersToRemove = cost.countersToRemove;
         this.counterTypeToRemove = cost.counterTypeToRemove;
     }
@@ -62,7 +60,7 @@ public class RemoveCounterCost extends CostImpl {
                 return paid = true;
             }
             target.clearChosen();
-            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), source, game)) {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
@@ -124,17 +122,24 @@ public class RemoveCounterCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Remove ");
+        StringBuilder sb = new StringBuilder("remove ");
         if (counterTypeToRemove != null) {
-            sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ').append(counterTypeToRemove.getName());
+            sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle()));
+            sb.append(' ');
+            sb.append(counterTypeToRemove.getName());
         } else {
             sb.append(CardUtil.numberToText(countersToRemove, "a"));
         }
-        sb.append(countersToRemove == 1 ? " counter from " : " counters from ").append(target.getMaxNumberOfTargets() == 1 ? "a " : "").append(target.getTargetName());
+        sb.append(countersToRemove > 1 ? " counters from " : " counter from ");
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(target.getTargetName());
+        } else {
+            sb.append(CardUtil.addArticle(target.getTargetName()));
+        }
         return sb.toString();
     }
 

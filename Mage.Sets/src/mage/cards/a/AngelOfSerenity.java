@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCardInGraveyardOrBattlefield;
+import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 
 import java.util.UUID;
 import mage.filter.common.FilterCreatureCard;
@@ -49,7 +49,7 @@ public final class AngelOfSerenity extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ExileTargetForSourceEffect().setText(rule), true
         );
-        ability.addTarget(new TargetCardInGraveyardOrBattlefield(
+        ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
                 0, 3, filterCreatureCard, filterCreaturePermanent
         ));
         this.addAbility(ability);

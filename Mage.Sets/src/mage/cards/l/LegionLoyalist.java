@@ -68,7 +68,7 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
     @Override
     public void init(Ability source, Game game) {
         affectedObjectsSet = true;
-        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }

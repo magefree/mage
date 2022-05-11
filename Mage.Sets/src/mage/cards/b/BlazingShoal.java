@@ -12,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterOwnedCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,19 +23,27 @@ import java.util.UUID;
  */
 public final class BlazingShoal extends CardImpl {
 
+    private static final FilterOwnedCard filter
+            = new FilterOwnedCard("a red card with mana value X from your hand");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+
     public BlazingShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.subtype.add(SubType.ARCANE);
 
-
         // You may exile a red card with converted mana cost X from your hand rather than pay Blazing Shoal's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("a red card with mana value X from your hand");
-        filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(
+                new TargetCardInHand(filter), true
+        )));
 
         // Target creature gets +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ExileFromHandCostCardConvertedMana.instance, StaticValue.get(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(
+                ExileFromHandCostCardConvertedMana.instance,
+                StaticValue.get(0), Duration.EndOfTurn
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

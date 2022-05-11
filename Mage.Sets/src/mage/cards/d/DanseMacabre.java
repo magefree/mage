@@ -87,13 +87,13 @@ class DanseMacabreEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null || game.getBattlefield().count(
-                    filter, source.getSourceId(), source.getControllerId(), game
+                    filter, source.getControllerId(), source, game
             ) < 1) {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;
@@ -124,7 +124,7 @@ class DanseMacabreEffect extends OneShotEffect {
             return true;
         }
         target.setNotTarget(true);
-        controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game);
+        controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }

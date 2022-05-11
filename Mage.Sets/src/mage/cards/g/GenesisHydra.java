@@ -80,7 +80,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, count + 1));
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
                 target1.setRequired(false);
-                if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {
+                if (cards.count(filter, source.getSourceId(), source, game) > 0) {
                     if (controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
                         Card card = cards.get(target1.getFirstTarget(), game);
                         if (card != null) {

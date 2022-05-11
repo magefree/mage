@@ -26,7 +26,7 @@ public final class ChillingGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
 
         // Madness {3}{U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{U}")));
     }
 
     private ChillingGrasp(final ChillingGrasp card) {

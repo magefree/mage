@@ -69,10 +69,10 @@ class DesolationEffect extends OneShotEffect {
             }
             TargetPermanent target = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
             target.setNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+            if (!target.canChoose(player.getId(), source, game)) {
                 continue;
             }
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanents.add(permanent);

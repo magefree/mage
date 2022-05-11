@@ -81,7 +81,7 @@ class RithTheAwakenerEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " chooses " + choice.getColor());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));
-            int cardsWithColor = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
+            int cardsWithColor = game.getBattlefield().count(filter, controller.getId(), source, game);
             if (cardsWithColor > 0) {
                 new CreateTokenEffect(new SaprolingToken(), cardsWithColor).apply(game, source);
             }

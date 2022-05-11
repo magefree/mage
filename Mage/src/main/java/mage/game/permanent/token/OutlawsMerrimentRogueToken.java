@@ -15,7 +15,7 @@ import mage.target.common.TargetAnyTarget;
 public final class OutlawsMerrimentRogueToken extends TokenImpl {
 
     public OutlawsMerrimentRogueToken() {
-        super("Human Rogue", "1/2 Human Rogue with haste and \"When this creature enters the battlefield, it deals 1 damage to any target.\"");
+        super("Human Rogue Token", "1/2 Human Rogue with haste and \"When this creature enters the battlefield, it deals 1 damage to any target.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.ROGUE);

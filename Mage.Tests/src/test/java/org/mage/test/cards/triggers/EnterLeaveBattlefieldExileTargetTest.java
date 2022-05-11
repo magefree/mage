@@ -103,7 +103,7 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Knight Ally", 2);
+        assertPermanentCount(playerA, "Knight Ally Token", 2);
         assertPermanentCount(playerA, "Angel of Serenity", 1);
     }
 }

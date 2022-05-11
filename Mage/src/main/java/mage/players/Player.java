@@ -609,9 +609,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean priority(Game game);
 
-    boolean choose(Outcome outcome, Target target, UUID sourceId, Game game);
+    boolean choose(Outcome outcome, Target target, Ability source, Game game);
 
-    boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options);
+    boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options);
 
     boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game); // TODO: remove to use choose with "Ability source"
 

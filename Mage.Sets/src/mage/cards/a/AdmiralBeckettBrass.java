@@ -91,7 +91,7 @@ class DamagedByPiratesWatcher extends Watcher {
     }
 
     public boolean damagedByEnoughPirates(UUID sourceId) {
-        return damageSourceIds.keySet().contains(sourceId) && damageSourceIds.get(sourceId).size() > 2;
+        return damageSourceIds.containsKey(sourceId) && damageSourceIds.get(sourceId).size() > 2;
     }
 
     @Override

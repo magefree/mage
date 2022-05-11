@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class BaralChiefOfCompliance extends CardImpl {
@@ -35,7 +34,7 @@ public final class BaralChiefOfCompliance extends CardImpl {
     public BaralChiefOfCompliance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-       addSuperType(SuperType.LEGENDARY);
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -44,7 +43,7 @@ public final class BaralChiefOfCompliance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
-        this.addAbility(new SpellCounteredControllerTriggeredAbility(new DrawDiscardControllerEffect(), true));
+        this.addAbility(new SpellCounteredControllerTriggeredAbility(new DrawDiscardControllerEffect(true)));
     }
 
     private BaralChiefOfCompliance(final BaralChiefOfCompliance card) {

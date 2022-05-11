@@ -39,7 +39,7 @@ public final class InvigoratingHotSpring extends CardImpl {
 
         // Invigorating Hot Spring enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.M1M1.createInstance(4)
+                CounterType.P1P1.createInstance(4)
         ), "with four +1/+1 counters on it"));
 
         // Modified creatures you control have haste.

@@ -22,9 +22,9 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, "Academy Manufactor", 1);
         assertPermanentCount(playerA, "Thraben Inspector", 1);
-        assertPermanentCount(playerA, "Clue", 1);
-        assertPermanentCount(playerA, "Food", 1);
-        assertPermanentCount(playerA, "Treasure", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Academy Manufactor", 2);
         assertPermanentCount(playerA, "Anointed Procession", 1);
         assertPermanentCount(playerA, "Thraben Inspector", 1);
-        assertPermanentCount(playerA, "Clue", 6);
-        assertPermanentCount(playerA, "Food", 6);
-        assertPermanentCount(playerA, "Treasure", 6);
+        assertPermanentCount(playerA, "Clue Token", 6);
+        assertPermanentCount(playerA, "Food Token", 6);
+        assertPermanentCount(playerA, "Treasure Token", 6);
     }
 
     @Test
@@ -88,8 +88,8 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         // Gingerbrute token copy becomes a regular Food
         assertPermanentCount(playerA, "Gingerbrute", 0);
         assertPermanentCount(playerB, "Gingerbrute", 0);
-        assertPermanentCount(playerA, "Clue", 3);
-        assertPermanentCount(playerA, "Food", 3);
-        assertPermanentCount(playerA, "Treasure", 3);
+        assertPermanentCount(playerA, "Clue Token", 3);
+        assertPermanentCount(playerA, "Food Token", 3);
+        assertPermanentCount(playerA, "Treasure Token", 3);
     }
 }

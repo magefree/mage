@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,23 +9,21 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.SearchEffect;
-import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KahoMinamoHistorian extends CardImpl {
@@ -88,7 +84,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             if (controller.searchLibrary(target, source, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
@@ -109,8 +105,8 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
     public KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast a card with mana value X "
-                + "exiled with {this} without paying its mana cost";
+        this.staticText = "you may cast a spell with mana value X " +
+                "from among cards exiled with {this} without paying its mana cost";
     }
 
     public KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
@@ -125,24 +121,12 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            FilterCard filter = new FilterCard();
-            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
-            TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
-            Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (cards != null
-                    && !cards.isEmpty()
-                    && controller.choose(Outcome.PlayForFree, cards, target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                }
-            }
-            return true;
+        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
+        if (controller == null || cards.isEmpty()) {
+            return false;
         }
-        return false;
+        FilterCard filter = new FilterCard();
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
     }
 }

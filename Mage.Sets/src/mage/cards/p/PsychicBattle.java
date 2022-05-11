@@ -101,7 +101,7 @@ class PsychicBattleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             Map<Player, Integer> manacostMap = new HashMap<>();
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

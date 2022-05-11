@@ -1,14 +1,11 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -20,8 +17,11 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.watchers.common.LandfallWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -53,7 +53,10 @@ class SearingBlazeEffect extends OneShotEffect {
 
     public SearingBlazeEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls. \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature " +
+                "that player or that planeswalker's controller controls.<br>" + AbilityWord.LANDFALL.formatWord() +
+                "If you had a land enter the battlefield under your control this turn, {this} deals 3 damage " +
+                "to that player or planeswalker and 3 damage to that creature instead.";
     }
 
     public SearingBlazeEffect(final SearingBlazeEffect effect) {
@@ -107,10 +110,10 @@ class SearingBlazeTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
             Player player = game.getPlayerOrPlaneswalkerController(playerId);

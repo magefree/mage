@@ -78,7 +78,7 @@ enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentOrLKI(game);
         if (targetPlayer == null || sourceObject == null) {
             return false;
         }

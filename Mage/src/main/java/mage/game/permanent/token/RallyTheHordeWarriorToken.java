@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class RallyTheHordeWarriorToken extends TokenImpl {
 
     public RallyTheHordeWarriorToken() {
-        super("Warrior", "1/1 red Warrior creature token");
+        super("Warrior Token", "1/1 red Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.WARRIOR);

@@ -23,9 +23,8 @@ public final class ConsultTheNecrosages extends CardImpl {
         // Choose one - Target player draws two cards; or target player discards two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        Mode mode = new Mode();
+        Mode mode = new Mode(new DiscardTargetEffect(2));
         mode.addTarget(new TargetPlayer());
-        mode.addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addMode(mode);
     }
 

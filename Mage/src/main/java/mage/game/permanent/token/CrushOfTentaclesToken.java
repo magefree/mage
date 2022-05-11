@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class CrushOfTentaclesToken extends TokenImpl {
 
     public CrushOfTentaclesToken() {
-        super("Octopus", "8/8 blue Octopus creature");
+        super("Octopus Token", "8/8 blue Octopus creature");
         this.setExpansionSetCodeForImage("BFZ");
         this.cardType.add(CardType.CREATURE);
         this.color.setBlue(true);

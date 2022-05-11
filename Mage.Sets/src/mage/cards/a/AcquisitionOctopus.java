@@ -80,6 +80,6 @@ class AcquisitionOctopusTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} or equipped creature deals combat damage to a player, draw a card.";
+        return "Whenever {this} or equipped creature deals combat damage to a player, draw a card.";
     }
 }

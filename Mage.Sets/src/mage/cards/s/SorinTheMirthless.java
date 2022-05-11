@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,7 +26,7 @@ public final class SorinTheMirthless extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Look at the top card of your library. You may reveal that card and put it into your hand. If you do, you lose life equal to its mana value.
         this.addAbility(new LoyaltyAbility(new SorinTheMirthlessEffect(), 1));

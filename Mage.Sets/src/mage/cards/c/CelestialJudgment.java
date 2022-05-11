@@ -68,7 +68,7 @@ class CelestialJudgmentEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source, game
                 );
         Map<Integer, List<Permanent>> powerMap = permanents
                 .stream()
@@ -89,7 +89,7 @@ class CelestialJudgmentEffect extends OneShotEffect {
             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, entry.getKey()));
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             toKeep.add(target.getFirstTarget());
         }
         for (Permanent permanent : permanents) {

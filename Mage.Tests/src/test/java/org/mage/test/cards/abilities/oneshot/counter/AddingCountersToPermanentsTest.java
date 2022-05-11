@@ -155,6 +155,6 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1);
-        assertPermanentCount(playerA, "Snake", 1);
+        assertPermanentCount(playerA, "Snake Token", 1);
     }
 }

@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
@@ -36,7 +35,7 @@ public final class DovinHandOfControl extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Artifact, instant, and sorcery spells your opponents cast cost {1} more to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.OPPONENT)));

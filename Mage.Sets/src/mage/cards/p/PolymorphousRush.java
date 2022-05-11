@@ -69,7 +69,7 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
             Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(""));
             target.setNotTarget(true);
             target.setTargetName("a creature on the battlefield (creature to copy)");
-            if (target.canChoose(source.getId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
+            if (target.canChoose(controller.getId(), source, game) && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent copyFromCreature = game.getPermanent(target.getFirstTarget());
                 if (copyFromCreature != null) {
                     for (UUID copyToId : getTargetPointer().getTargets(game, source)) {

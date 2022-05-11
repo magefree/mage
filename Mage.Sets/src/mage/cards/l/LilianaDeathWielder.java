@@ -4,7 +4,6 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -39,7 +38,7 @@ public final class LilianaDeathWielder extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +2: Put a -1/-1 counter on up to one target creature.
         LoyaltyAbility ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)), 2);

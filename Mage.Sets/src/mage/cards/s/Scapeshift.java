@@ -45,7 +45,7 @@ class ScapeshiftEffect extends OneShotEffect {
 
     public ScapeshiftEffect() {
         super(Outcome.Neutral);
-        staticText = "Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle";
+        staticText = "Sacrifice any number of lands. Search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle";
     }
 
     public ScapeshiftEffect(final ScapeshiftEffect effect) {

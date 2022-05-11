@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -56,17 +57,11 @@ public final class WardSliver extends CardImpl {
 
 class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
-
-    static {
-        filter.add(SubType.SLIVER.getPredicate());
-    }
-
     protected FilterPermanent protectionFilter;
 
     public WardSliverGainAbilityControlledEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "Slivers have protection from the chosen color";
+        staticText = "all Slivers have protection from the chosen color";
     }
 
     public WardSliverGainAbilityControlledEffect(final WardSliverGainAbilityControlledEffect effect) {
@@ -92,7 +87,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
             }
         }
         if (protectionFilter != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, game)) {
                 perm.addAbility(new ProtectionAbility(protectionFilter), source.getSourceId(), game);
             }
             return true;

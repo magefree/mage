@@ -112,32 +112,6 @@ public class AusHighlander extends Constructed {
             valid = false;
         }
 
-        banned.add("Advantageous Proclamation");
-        banned.add("Amulet of Quoz");
-        banned.add("Backup Plan");
-        banned.add("Brago's Favor");
-        banned.add("Bronze Tablet");
-        banned.add("Chaos Orb");
-        banned.add("Contract from Below");
-        banned.add("Darkpact");
-        banned.add("Demonic Attorney");
-        banned.add("Double Stroke");
-        banned.add("Falling Star");
-        banned.add("Immediate Action");
-        banned.add("Iterative Analysis");
-        banned.add("Jeweled Bird");
-        banned.add("Muzzio's Preparations");
-        banned.add("Power Play");
-        banned.add("Rebirth");
-        banned.add("Secret Summoning");
-        banned.add("Secrets of Paradise");
-        banned.add("Sentinel Dispatch");
-        banned.add("Shahrazad");
-        banned.add("Tempest Efreet");
-        banned.add("Timmerian Fiends");
-        banned.add("Unexpected Potential");
-        banned.add("Worldknit");
-
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());

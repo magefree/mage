@@ -53,7 +53,7 @@ class SerraTheBenevolentEmblemEffect extends ReplacementEffectImpl {
                     && (controller.getLife() - event.getAmount()) < 1
                     && game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_CREATURE,
-                    source.getSourceId(), event.getPlayerId(), game) > 0
+                    event.getPlayerId(), source, game) > 0
             ) {
                 event.setAmount(controller.getLife() - 1);
             }

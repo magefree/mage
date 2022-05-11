@@ -4,7 +4,6 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.TapAllEffect;
@@ -34,7 +33,7 @@ public final class GideonMartialParagon extends CardImpl {
 
         this.subtype.add(SubType.GIDEON);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +2: Untap all creatures you control. Those creatures get +1/+1 until end of turn.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapAllEffect(new FilterControlledCreaturePermanent()), 2);

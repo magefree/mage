@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class BearToken extends TokenImpl {
 
     public BearToken() {
-        super("Bear", "2/2 green Bear creature token");
+        super("Bear Token", "2/2 green Bear creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAR);

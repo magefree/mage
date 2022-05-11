@@ -80,7 +80,7 @@ class MuseVesselExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)
+        if (target.canChoose(player.getId(), source, game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
@@ -135,11 +135,11 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        Card sourceCard = game.getCard(sourceId);
+        Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 possibleTargets.addAll(exile);
@@ -149,10 +149,10 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        Card sourceCard = game.getCard(sourceId);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 return true;

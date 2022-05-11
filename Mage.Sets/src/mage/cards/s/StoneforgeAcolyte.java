@@ -7,14 +7,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -45,8 +44,8 @@ public final class StoneforgeAcolyte extends CardImpl {
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Look at the top four cards of your library.
         // You may reveal an Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filterEquipment, false),
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(4, 1, filterEquipment, PutCards.HAND, PutCards.BOTTOM_ANY),
                 new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filterAlly)));
         ability.setAbilityWord(AbilityWord.COHORT);

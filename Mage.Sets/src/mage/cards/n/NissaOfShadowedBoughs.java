@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -42,7 +41,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Landfall — Whenever a land enters the battlefield under your control, put a loyalty counter on Nissa of Shadowed Boughs.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance())));
@@ -127,7 +126,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         }
         int lands = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + lands + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, lands + 1));
@@ -145,7 +144,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         } else {
             target = new TargetCardInHand(filter);
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

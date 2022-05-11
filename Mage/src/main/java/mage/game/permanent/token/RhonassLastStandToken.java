@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class RhonassLastStandToken extends TokenImpl {
 
     public RhonassLastStandToken() {
-        super("Snake", "5/4 green Snake creature token");
+        super("Snake Token", "5/4 green Snake creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SNAKE);

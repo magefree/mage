@@ -4,7 +4,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -15,26 +15,27 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class AttacksIfAbleAllEffect extends RequirementEffect {
 
-    private final FilterCreaturePermanent filter;
+    private final FilterPermanent filter;
+    private boolean eachCombat;
 
-    public AttacksIfAbleAllEffect(FilterCreaturePermanent filter) {
+    public AttacksIfAbleAllEffect(FilterPermanent filter) {
         this(filter, Duration.WhileOnBattlefield);
     }
 
-    boolean eachCombat;
-
-    public AttacksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
-        this(filter, duration, false);
-    }
-
-    public AttacksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration, boolean eachCombat) {
+    public AttacksIfAbleAllEffect(FilterPermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
-        this.eachCombat = eachCombat;
         if (this.duration == Duration.EndOfTurn) {
-            staticText = filter.getMessage() + " attack " + (eachCombat ? "each combat" : "this turn") + " if able";
+            eachCombat = false;
+            staticText = filter.getMessage() + " attack this turn if able";
         } else {
-            staticText = filter.getMessage() + " attack each " + (eachCombat ? "combat" : "turn") + " if able";
+            eachCombat = true;
+            String durationString = this.duration.toString();
+            if (durationString.isEmpty()) {
+                staticText = filter.getMessage() + " attack each combat if able";
+            } else {
+                staticText = durationString + ", " + filter.getMessage() + " attack each combat if able";
+            }
         }
     }
 
@@ -51,7 +52,7 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+        if (filter.match(permanent, source.getControllerId(), source, game)) {
             if (eachCombat) {
                 return true;
             }

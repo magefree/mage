@@ -111,7 +111,7 @@ class TovolarDireOverlordEffect extends OneShotEffect {
             return true;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getControllerId(), game);
+        player.choose(outcome, target, source, game);
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -6,14 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
@@ -23,7 +21,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class AzcantaTheSunkenRuin extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
+    private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -44,11 +42,8 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
 
         // {2}{U} , {T} : Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(4), false, StaticValue.get(1),
-                        filter, Zone.LIBRARY, false, true, true
-                ), new ManaCostsImpl<>("{2}{U}")
+                new LookLibraryAndPickControllerEffect(4, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY),
+                new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

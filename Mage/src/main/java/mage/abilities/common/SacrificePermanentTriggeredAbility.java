@@ -57,7 +57,7 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (!isControlledBy(event.getPlayerId()) || permanent == null
-                || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().setValue("sacrificedPermanent", permanent);

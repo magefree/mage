@@ -36,15 +36,13 @@ public final class VerdantConfluence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Return target permanent card from your graveyard to your hand;
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard()));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-        mode = new Mode();
-        mode.addEffect(new SearchLibraryPutInPlayEffect(target, true));
+        mode = new Mode(new SearchLibraryPutInPlayEffect(target, true));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

@@ -78,6 +78,7 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> commandCards = new HashMap<>();
+    protected Map<TestPlayer, List<Card>> exiledCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
 
@@ -349,6 +350,15 @@ public abstract class MageTestPlayerBase {
         return res;
     }
 
+    protected List<Card> getExiledCards(TestPlayer player) {
+        if (exiledCards.containsKey(player)) {
+            return exiledCards.get(player);
+        }
+        List<Card> res = new ArrayList<>();
+        exiledCards.put(player, res);
+        return res;
+    }
+
     protected Map<Zone, String> getCommands(TestPlayer player) {
         if (commands.containsKey(player)) {
             return commands.get(player);
@@ -440,6 +450,9 @@ public abstract class MageTestPlayerBase {
                 break;
             case COMMAND:
                 getCommandCards(controllerPlayer).add(newCard);
+                break;
+            case EXILED:
+                getExiledCards(controllerPlayer).add(newCard);
                 break;
             default:
                 Assert.fail("Unsupported zone: " + putAtZone);

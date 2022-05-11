@@ -50,7 +50,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
 
         // Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.
         Effect effect = new BoostSourceEffect(AlrundGodOfTheCosmosValue.instance, AlrundGodOfTheCosmosValue.instance, Duration.EndOfGame);
-        effect.setText("Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.");
+        effect.setText("{this} gets +1/+1 for each card in your hand and each foretold card you own in exile.");
         Ability ability = new SimpleStaticAbility(effect);
         this.getLeftHalfCard().addAbility(ability);
 
@@ -89,7 +89,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
 
     public AlrundGodOfTheCosmosEffect() {
         super(Outcome.Neutral);
-        staticText = ", then reveal the top two cards of your library. Put all cards revealed this way of the chosen type into your hand and the rest on the bottom of your library in any order";
+        staticText = ", then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
     public AlrundGodOfTheCosmosEffect(final AlrundGodOfTheCosmosEffect effect) {

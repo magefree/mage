@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class RedWhiteGolemToken extends TokenImpl {
 
     public RedWhiteGolemToken() {
-        super("Golem", "4/4 red and white Golem artifact creature token");
+        super("Golem Token", "4/4 red and white Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);

@@ -34,7 +34,7 @@ public final class ElementalShamanToken extends TokenImpl {
     }
 
     public ElementalShamanToken(String setCode) {
-        super("Elemental Shaman", "3/1 red Elemental Shaman creature token");
+        super("Elemental Shaman Token", "3/1 red Elemental Shaman creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

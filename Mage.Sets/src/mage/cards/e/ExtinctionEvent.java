@@ -74,7 +74,7 @@ class ExtinctionEventEffect extends OneShotEffect {
         ) ? oddFilter : evenFilter;
         return player.moveCards(
                 game.getBattlefield().getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream().collect(Collectors.toSet()), Zone.EXILED, source, game
         );
     }

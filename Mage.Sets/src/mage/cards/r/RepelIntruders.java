@@ -32,7 +32,7 @@ public final class RepelIntruders extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.W), "Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.U), " Counter up to one target creature spell if {U} was spent to cast this spell"));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "Counter up to one target creature spell if {U} was spent to cast this spell"));
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {W}{U} was spent.)</i>"));
 

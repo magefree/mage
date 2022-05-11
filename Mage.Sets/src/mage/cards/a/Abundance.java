@@ -64,7 +64,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard();
             if (controller.chooseUse(Outcome.Detriment, "Choose card type:",
@@ -79,7 +79,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
             Card selectedCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
+                if (filter.match(card, source.getControllerId(), source, game)) {
                     selectedCard = card;
                     break;
                 }

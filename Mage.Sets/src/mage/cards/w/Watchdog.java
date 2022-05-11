@@ -3,8 +3,8 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
@@ -65,8 +65,8 @@ class WatchdogFilter extends FilterAttackingCreature {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!super.match(permanent, sourceId, playerId, game)) {
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (!super.match(permanent, playerId, source, game)) {
             return false;
         }
 

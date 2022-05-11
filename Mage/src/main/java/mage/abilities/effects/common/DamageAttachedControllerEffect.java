@@ -19,13 +19,13 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public DamageAttachedControllerEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = StaticValue.get(amount);
+        this(StaticValue.get(amount));
     }
 
     public DamageAttachedControllerEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
+        this.staticText = "{this} deals " + amount + " damage to that creature's controller";
     }
 
     public DamageAttachedControllerEffect(final DamageAttachedControllerEffect effect) {
@@ -59,16 +59,5 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        if ("equal to".equals(amount.toString())) {
-            return "{this} deals damage " + amount + " that creatures toughness to that creature's controller";
-        }
-        return "{this} deals " + amount + " damage to that creature's controller";
     }
 }

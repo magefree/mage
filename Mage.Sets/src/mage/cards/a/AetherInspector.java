@@ -36,8 +36,7 @@ public final class AetherInspector extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
         // Whenever Aether Inspector attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.
-        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new PayEnergyCost(2)), false,
-                "Whenever {this} attacks you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token."));
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new PayEnergyCost(2))));
     }
 
     private AetherInspector(final AetherInspector card) {

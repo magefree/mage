@@ -55,8 +55,8 @@ class WarReportEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int lifeToGain = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source.getControllerId(), game);
-            lifeToGain += game.getBattlefield().count(new FilterArtifactPermanent(), source.getSourceId(), source.getControllerId(), game);
+            int lifeToGain = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
+            lifeToGain += game.getBattlefield().count(new FilterArtifactPermanent(), source.getControllerId(), source, game);
             player.gainLife(lifeToGain, game, source);
         }
         return true;

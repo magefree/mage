@@ -38,8 +38,8 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
         assertCounterCount(playerB, gBears, CounterType.M1M1, 1);
         assertPowerToughness(playerB, gBears, 1, 1); // 2/2 with -1/1 counter
-        assertPermanentCount(playerA, "Snake", 1);
-        assertAbility(playerA, "Snake", DeathtouchAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Snake Token", 1);
+        assertAbility(playerA, "Snake Token", DeathtouchAbility.getInstance(), true);
     }
 
     /*
@@ -66,8 +66,8 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         assertCounterCount(playerB, CounterType.POISON, 0);
         assertPowerToughness(playerB, wOmens, -1, 3); // 0/4 with -1/-1 counter
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 1);
-        assertPermanentCount(playerA, "Snake", 1);
-        assertAbility(playerA, "Snake", DeathtouchAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Snake Token", 1);
+        assertAbility(playerA, "Snake Token", DeathtouchAbility.getInstance(), true);
     }
 
     /*
@@ -95,8 +95,8 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, dDruid, CounterType.M1M1, 1);
         assertPowerToughness(playerA, dDruid, -1, 1); // 0/2 with -1/-1
-        assertPermanentCount(playerA, "Snake", 1);
-        assertAbility(playerA, "Snake", DeathtouchAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Snake Token", 1);
+        assertAbility(playerA, "Snake Token", DeathtouchAbility.getInstance(), true);
     }
 
     /**
@@ -122,15 +122,15 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, triumphOfTheHordes);
 
-        attack(1, playerA, "Saproling");
-        block(1, playerB, krakenHatchling, "Saproling");
+        attack(1, playerA, "Saproling Token");
+        block(1, playerB, krakenHatchling, "Saproling Token");
         setStopAt(1, PhaseStep.END_COMBAT);
         setStrictChooseMode(true);
         execute();
 
         assertPowerToughness(playerB, krakenHatchling, -2, 2);
         assertCounterCount(playerB, krakenHatchling, CounterType.M1M1, 2);
-        assertPermanentCount(playerA, "Snake", 1); //Should have triggered when Saproling added -1/-1 counter
+        assertPermanentCount(playerA, "Snake Token", 1); //Should have triggered when Saproling added -1/-1 counter
         assertAllCommandsUsed();
     }
 }

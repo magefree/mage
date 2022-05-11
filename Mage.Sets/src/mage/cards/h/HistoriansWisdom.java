@@ -89,6 +89,6 @@ enum HistoriansWisdomCondition implements Condition {
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, creature.getPower().getValue()));
-        return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).isEmpty();
+        return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).isEmpty();
     }
 }

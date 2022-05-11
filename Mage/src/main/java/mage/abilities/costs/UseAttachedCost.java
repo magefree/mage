@@ -41,7 +41,7 @@ public abstract class UseAttachedCost extends CostImpl {
 
     public UseAttachedCost setMageObjectReference(Ability source, Game game) {
         this.mageObjectReference = new MageObjectReference(source.getSourceId(), game);
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object != null) {
             this.name = object.getName();
         }

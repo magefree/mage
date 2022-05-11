@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class HumanMonkToken extends TokenImpl {
 
     public HumanMonkToken() {
-        super("Human Monk token", "1/1 green Monk creature token with \"{T}: Add {G}.\"");
+        super("Human Monk Token", "1/1 green Human Monk creature token with \"{T}: Add {G}.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HUMAN);

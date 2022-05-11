@@ -1,10 +1,6 @@
-
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -15,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -34,11 +32,11 @@ public final class NightMarketAeronaut extends CardImpl {
 
         // <i>Revolt</i> &mdash; Night Market Aeronaut enters the battlefield with a +1/+1 counter on it if
         // a permanent you controlled left the battlefield this turn.
-        Ability ability = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn", null);
-        ability.addWatcher(new RevoltWatcher());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false,
+                RevoltCondition.instance, "<i>Revolt</i> &mdash; {this} enters the battlefield with " +
+                "a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.", null
+        ), new RevoltWatcher());
     }
 
     private NightMarketAeronaut(final NightMarketAeronaut card) {

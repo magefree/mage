@@ -1,17 +1,16 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -33,7 +32,7 @@ public final class WallOfSouls extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // Whenever Wall of Souls is dealt combat damage, it deals that much damage to target opponent.
+        // Whenever Wall of Souls is dealt combat damage, it deals that much damage to target opponent or planeswalker.
         Ability ability = new WallOfSoulsTriggeredAbility();
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
@@ -52,7 +51,7 @@ public final class WallOfSouls extends CardImpl {
 class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
     public WallOfSoulsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WallOfSoulsDealDamageEffect());
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH, "it"));
     }
 
     public WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
@@ -72,7 +71,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
-            this.getEffects().get(0).setValue("damage", event.getAmount());
+            this.getEffects().setValue("damage", event.getAmount());
             return true;
         }
         return false;
@@ -81,31 +80,5 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getTriggerPhrase() {
         return "Whenever {this} is dealt combat damage, " ;
-    }
-}
-
-class WallOfSoulsDealDamageEffect extends OneShotEffect {
-
-    public WallOfSoulsDealDamageEffect() {
-        super(Outcome.Damage);
-        this.staticText = "it deals that much damage to target opponent or planeswalker";
-    }
-
-    public WallOfSoulsDealDamageEffect(final WallOfSoulsDealDamageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WallOfSoulsDealDamageEffect copy() {
-        return new WallOfSoulsDealDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
-        }
-        return false;
     }
 }

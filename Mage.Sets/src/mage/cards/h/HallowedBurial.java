@@ -42,7 +42,7 @@ class HallowedBurialEffect extends OneShotEffect {
 
     public HallowedBurialEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Put all creatures on the bottom of their owner's libraries";
+        this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }
 
     public HallowedBurialEffect(final HallowedBurialEffect effect) {
@@ -58,7 +58,7 @@ class HallowedBurialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source, game)) {
                 controller.moveCardToLibraryWithInfo(creature, source, game, Zone.BATTLEFIELD, false, true);
             }
             return true;

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class GoblinWizardToken extends TokenImpl {
 
     public GoblinWizardToken() {
-        super("Goblin Wizard", "1/1 red Goblin Wizard creature token with prowess");
+        super("Goblin Wizard Token", "1/1 red Goblin Wizard creature token with prowess");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOBLIN);
         subtype.add(SubType.WIZARD);

@@ -54,4 +54,8 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
                 .collect(Collectors.toCollection(ManaCostsImpl::new));
 
     }
+
+    void incrPhyrexianPaid();
+
+    int getPhyrexianPaid();
 }

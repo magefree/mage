@@ -1,9 +1,5 @@
 package mage.cards.j;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,27 +7,25 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
-import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.ExileZone;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JelevaNephaliasScourge extends CardImpl {
@@ -112,8 +106,8 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
 
     public JelevaNephaliasCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast an instant or sorcery card "
-                + "exiled with it without paying its mana cost";
+        this.staticText = "you may cast an instant or sorcery spell " +
+                "from among cards exiled with {this} without paying its mana cost";
     }
 
     public JelevaNephaliasCastEffect(final JelevaNephaliasCastEffect effect) {
@@ -128,29 +122,14 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (exileZone != null
-                    && exileZone.count(new FilterInstantOrSorceryCard(), game) > 0) {
-                if (controller.chooseUse(outcome, "Cast an instant or sorcery card from "
-                        + "exile without paying its mana cost?", source, game)) {
-                    TargetCardInExile target = new TargetCardInExile(
-                            new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
-                    if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                    game, true, new ApprovingObject(source, game));
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                            return cardWasCast;
-                        }
-                    }
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
+        return CardUtil.castSpellWithAttributesForFree(
+                controller, source, game, cards,
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
+        );
     }
 }
 
@@ -170,8 +149,8 @@ class JelevaNephaliasWatcher extends Watcher {
                 for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell) {
                         Spell spell = (Spell) stackObject;
-                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString() 
-                                + spell.getCard().getZoneChangeCounter(game),
+                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString()
+                                        + spell.getCard().getZoneChangeCounter(game),
                                 spell.getSpellAbility().getManaCostsToPay().manaValue());
                     }
                 }

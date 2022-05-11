@@ -38,6 +38,7 @@ public class TargetDefender extends TargetImpl {
         this.filter = new FilterPlaneswalkerOrPlayer(defenders);
         this.targetName = filter.getMessage();
         this.attackerId = attackerId;
+        this.notTarget = true;
     }
 
     public TargetDefender(final TargetDefender target) {
@@ -52,9 +53,9 @@ public class TargetDefender extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
@@ -104,9 +105,12 @@ public class TargetDefender extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        if (source == null) {
+            return possibleTargets(sourceControllerId, game);
+        }
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null

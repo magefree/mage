@@ -31,7 +31,7 @@ public final class Hystrodon extends CardImpl {
         // Whenever Hystrodon deals combat damage to a player, you may draw a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
         // Morph {1}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}{G}")));
     }
 
     private Hystrodon(final Hystrodon card) {
