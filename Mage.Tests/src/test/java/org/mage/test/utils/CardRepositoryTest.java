@@ -75,27 +75,29 @@ public class CardRepositoryTest {
 
 
     /**
-     *
+     * Checks if the card with name cardName can be found when searched for
+     * using the case sensitive approach.
      *
      * @param cardName The name of the card to search by.
      */
     private void assertFindCaseSensitive(String cardName) {
         List<CardInfo> foundCards = CardRepository.instance.findCards(cardName);
         Assert.assertFalse(
-                "Could not find " + "\"" + cardName + "\n",
+                "Could not find " + "\"" + cardName + "\".",
                 foundCards.isEmpty()
         );
     }
 
     /**
-     *
+     * Checks if the card with name cardName can be found when searched for
+     * using the case insensitive approach.
      *
      * @param cardName The name of the card to search by.
      */
     private void assertFindCaseInsensitive(String cardName) {
         List<CardInfo> foundCards = CardRepository.instance.findCardsCaseInsensitive(cardName);
         Assert.assertFalse(
-                "Could not find " + "\"" + cardName + "\n",
+                "Could not find " + "\"" + cardName + "\".",
                 foundCards.isEmpty()
         );
     }

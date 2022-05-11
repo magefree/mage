@@ -456,11 +456,12 @@ public enum CardRepository {
     }
 
     /**
-     * Find card's reprints from all sets
+     * Find a card's reprints from all sets, using case-sensitive search.
      *
-     * @param name
-     * @param limitByMaxAmount return max amount of different cards (if 0 then return card from all sets)
-     * @return
+     * @param name              the name of the card to search for
+     * @param limitByMaxAmount  return max amount of different cards (if 0 then return card from all sets)
+     * @return                  A list of the reprints of the card if it was found (up to limitByMaxAmount number), or
+     *                          an empty list if the card was not found.
      */
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
@@ -470,23 +471,19 @@ public enum CardRepository {
             // e.g. "Malakir Rebirth // Malakir Mire"
             String searchName = name.contains(" // ") ? name.split(" // ", 2)[0] : name;
 
-            queryBuilder.where().eq("name", new SelectArg(searchName));
+            // Search both the main card name, the name of the back, the split card name, and the adventure name
+            queryBuilder.where()
+                    .eq("name",                             new SelectArg(searchName)).or()
+                    .eq("flipCardName",                     new SelectArg(searchName)).or()
+                    .eq("secondSideName",                   new SelectArg(searchName)).or()
+                    .eq("adventureSpellName",               new SelectArg(searchName)).or()
+                    .eq("modalDoubleFacesSecondSideName",   new SelectArg(searchName));
 
             if (limitByMaxAmount > 0) {
                 queryBuilder.limit(limitByMaxAmount);
             }
 
-            List<CardInfo> result = cardDao.query(queryBuilder.prepare());
-
-            // If no result, then it could still be the back side of a double-faced card
-            if (result.isEmpty()) {
-                // TODO SecondSideName
-                // TODO FlipCardName
-                // TODO modalDoubleFacesSecondSideName
-                // TODO adventureSpellName
-            }
-
-            return result;
+            return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
