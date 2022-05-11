@@ -30,7 +30,7 @@ public final class DwarvenSeaClan extends CardImpl {
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
 
     static {
-        filter.add(new ControllerControlsIslandPredicate());
+        filter.add(ControllerControlsIslandPredicate.instance);
     }
 
     public DwarvenSeaClan(UUID ownerId, CardSetInfo setInfo) {
