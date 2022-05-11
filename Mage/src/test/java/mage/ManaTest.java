@@ -1,8 +1,13 @@
 package mage;
 
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
+import mage.util.CardUtil;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -11,7 +16,7 @@ import static org.junit.Assert.*;
 
 
 /**
- * Custom unit tests for {link Mana}.
+ * Custom unit tests for {@link Mana}.
  *
  * @author githubpoixen@github.com
  */
@@ -686,4 +691,161 @@ public class ManaTest {
         assertEquals(Integer.MAX_VALUE, mana.getGeneric());
         assertEquals(Integer.MAX_VALUE, mana.getAny());
     }
+
+    /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaEnough() {
+        assertAvailableManaEnough("{G}", 1, "", true);
+        assertAvailableManaEnough("{G}", 0, "{G}", true);
+        assertAvailableManaEnough("{R}", 0, "{G}", false);
+        assertAvailableManaEnough("{B}", 0, "{G}", false);
+        assertAvailableManaEnough("{U}", 0, "{G}", false);
+        assertAvailableManaEnough("{W}", 0, "{G}", false);
+        assertAvailableManaEnough("{W}", 0, "{C}", false);
+
+        assertAvailableManaEnough("{R}", 1, "", true);
+        assertAvailableManaEnough("{R}", 0, "{R}", true);
+        assertAvailableManaEnough("{G}", 0, "{R}", false);
+        assertAvailableManaEnough("{B}", 0, "{R}", false);
+        assertAvailableManaEnough("{U}", 0, "{R}", false);
+        assertAvailableManaEnough("{W}", 0, "{R}", false);
+
+        assertAvailableManaEnough("{U}{B}{W}{G}{R}", 4, "{R}", true);
+        assertAvailableManaEnough("{U}{B}{W}{G}{R}", 3, "{R}{B}", true);
+
+        assertAvailableManaEnough("{U}{U}{U}{G}{G}{2}", 2, "{U}{U}{G}{R}{B}", true);
+
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{U}{U}{U}{U}", true);
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{4}", false);
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{B}{B}{4}", false);
+
+        assertAvailableManaEnough("{G}",    0, "{G/W}", true);
+        assertAvailableManaEnough("{G}{W}", 0, "{G/W}{G/W}", true);
+        assertAvailableManaEnough("{W}{W}", 0, "{G/W}{G/W}", true);
+        assertAvailableManaEnough("{G}{G}", 0, "{G/W}{G/W}", true);
+
+        assertAvailableManaEnough("{C}", 1, "", false);
+        assertAvailableManaEnough("{C}", 0, "{C}", true);
+        assertAvailableManaEnough("{C}", 0, "{G}", false);
+        assertAvailableManaEnough("{C}", 0, "{R}", false);
+        assertAvailableManaEnough("{C}", 0, "{B}", false);
+        assertAvailableManaEnough("{C}", 0, "{W}", false);
+        assertAvailableManaEnough("{C}", 0, "{U}", false);
+    }
+
+    /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaReduction() {
+        // cost - reduction - rest
+        assertManaReduction("{G}{G}",       "{G}", "{G}");
+        assertManaReduction("{1}{G}{G}",    "{G}", "{1}{G}");
+        assertManaReduction("{B}{B}",       "{B}", "{B}");
+        assertManaReduction("{1}{B}{B}",    "{B}", "{1}{B}");
+        assertManaReduction("{W}{W}",       "{W}", "{W}");
+        assertManaReduction("{1}{W}{W}",    "{W}", "{1}{W}");
+        assertManaReduction("{U}{U}",       "{U}", "{U}");
+        assertManaReduction("{1}{U}{U}",    "{U}", "{1}{U}");
+        assertManaReduction("{R}{R}",       "{R}", "{R}");
+        assertManaReduction("{1}{R}{R}",    "{R}", "{1}{R}");
+
+        assertManaReduction("{R}{G}{B}{U}{W}", "{R}{G}{B}{U}{W}", "{0}");
+
+        // Hybrid Mana
+        assertManaReduction("{2/B}{2/B}{2/B}", "{B}{B}", "{2/B}");
+        assertManaReduction("{2/B}{2/B}{2/B}", "{B}{B}{B}", "{0}");
+        assertManaReduction("{2/W}{2/W}{2/W}", "{W}{W}", "{2/W}");
+        assertManaReduction("{2/W}{2/W}{2/W}", "{W}{W}{W}", "{0}");
+
+        assertManaReduction("{G/B}{G/B}{G/B}", "{B}{G}{B}", "{0}");
+    }
+
+    /**
+     * Mana.needed is used by the AI to know how much mana it needs in order to be able to play a card.
+     */
+    @Test
+    public void should() {
+        // TODO: How does it handle generic and any.
+        //       How *should* it handle them?
+        testManaNeeded(
+                new Mana(ManaType.COLORLESS, 1), // Available
+                new Mana(ManaType.COLORLESS, 2), // Cost
+                new Mana(ManaType.COLORLESS, 1)  // Needed
+        );
+        testManaNeeded(
+                new Mana(ManaType.RED,      1), // Avaiable
+                new Mana(ManaType.GENERIC,  1), // Cost
+                new Mana()                           // Needed
+        );
+        testManaNeeded(
+                new Mana(ManaType.COLORLESS, 1), // Avaiable
+                new Mana(ManaType.GENERIC,   1), // Cost
+                new Mana()                            // Needed
+        );
+        testManaNeeded(
+                new Mana(),                                                                         // Available
+                new Mana(2, 0, 0, 0, 0, 2, 0, 0), // Cost
+                new Mana(2, 0, 0, 0, 0, 2, 0, 0)  // Needed
+        );
+    }
+
+    /**
+     * Checks if the mana needed calculations produces the expected needed mana amount.
+     *
+     * @param available         The mana currently available.
+     * @param cost              The mana needed for a cost.
+     * @param neededExpected    The mana expected to be required to pay the cost.
+     */
+    private void testManaNeeded(Mana available, Mana cost, Mana neededExpected) {
+        Mana neededActual = cost.needed(available);
+        Assert.assertTrue(
+                "The mana needed to pay " + cost + " given " + available
+                        + " should have been " + neededExpected + " but was calculate to be " + neededActual,
+                neededActual.equalManaValue(neededExpected)
+        );
+    }
+
+    /**
+     * Checks if the given available Mana is enough to pay a given mana cost
+     *
+     * @param manaCostsToPay    The mana cost that needs to be paid.
+     * @param availablyAny      The amount of generic mana available.
+     * @param available         The colored and colorless mana available.
+     * @param expected          boolean indicating if the available mana is expected to cover the mana cost.
+     */
+    private void assertAvailableManaEnough(String manaCostsToPay, int availablyAny, String available, boolean expected) {
+        ManaCost unpaid = new ManaCostsImpl<>(manaCostsToPay);
+        ManaCost costAvailable = new ManaCostsImpl<>(available);
+        Mana manaAvailable = costAvailable.getMana();
+        manaAvailable.setAny(availablyAny);
+        if (expected) {
+            Assert.assertTrue("The available Mana " + costAvailable.getText() + " should be enough to pay the costs " + unpaid.getText(), unpaid.getMana().enough(manaAvailable));
+        } else {
+            Assert.assertFalse("The available Mana " + costAvailable.getText() + " shouldn't be enough to pay the costs " + unpaid.getText(), unpaid.getMana().enough(manaAvailable));
+        }
+    }
+
+    /**
+     * Checks if a given mana reduction left the expected amount of mana costs
+     *
+     * @param manaCostsToPay    The mana cost before reductions are applied.
+     * @param manaToReduce      The amount and types of many to reduced the cost by.
+     * @param restMana          The expected amount of mana left
+     */
+    private void assertManaReduction(String manaCostsToPay, String manaToReduce, String restMana) {
+        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl<>(manaCostsToPay), "Test");
+        CardUtil.adjustCost(spellAbility, new ManaCostsImpl<>(manaToReduce), true);
+        Assert.assertEquals(
+                "The mana cost to pay " + manaCostsToPay + " reduced by " + manaToReduce +
+                        " should left " + restMana + " but the rest was " + spellAbility.getManaCostsToPay(),
+                spellAbility.getManaCostsToPay().getText(),
+                restMana
+        );
+    }
+
 }
