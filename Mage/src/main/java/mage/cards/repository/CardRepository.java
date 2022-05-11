@@ -465,22 +465,25 @@ public enum CardRepository {
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.where().eq("name", new SelectArg(name));
+
+            // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
+            // e.g. "Malakir Rebirth // Malakir Mire"
+            String searchName = name.contains(" // ") ? name.split(" // ", 2)[0] : name;
+
+            queryBuilder.where().eq("name", new SelectArg(searchName));
+
             if (limitByMaxAmount > 0) {
                 queryBuilder.limit(limitByMaxAmount);
             }
 
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
 
-            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
-            if (result.isEmpty() && name.contains(" // ")) {
-                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
-                // OR a split card (e.g. Assault // Battery).
-                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
-                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
-                queryBuilder.where().eq("name", new SelectArg(name.split(" // ", 2)[0]));
-
-                result = cardDao.query(queryBuilder.prepare());
+            // If no result, then it could still be the back side of a double-faced card
+            if (result.isEmpty()) {
+                // TODO SecondSideName
+                // TODO FlipCardName
+                // TODO modalDoubleFacesSecondSideName
+                // TODO adventureSpellName
             }
 
             return result;
@@ -505,25 +508,23 @@ public enum CardRepository {
     public List<CardInfo> findCardsCaseInsensitive(String name) {
         try {
             String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("'", "''");
+
+            // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
+            // e.g. "Malakir Rebirth // Malakir Mire"
+            String searchName = sqlName.contains(" // ") ? sqlName.split(" // ", 2)[0] : sqlName;
+
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
+                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + searchName + '\'',
                     cardDao.getRawRowMapper());
 
             List<CardInfo> result = rawResults.getResults();
 
-            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
-            if (result.isEmpty() && sqlName.contains(" // ")) {
-                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
-                // OR a split card (e.g. Assault // Battery).
-                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
-                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
-                String leftCardName = sqlName.split(" // ", 2)[0];
-
-                GenericRawResults<CardInfo> rawResults2 = cardDao.queryRaw(
-                        "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + leftCardName + '\'',
-                        cardDao.getRawRowMapper());
-
-                result = rawResults2.getResults();
+            // If no result, then it could still be the back side of a double-faced card, e.g. Malakir Mire
+            if (result.isEmpty()) {
+                // TODO SecondSideName
+                // TODO FlipCardName
+                // TODO modalDoubleFacesSecondSideName
+                // TODO adventureSpellName
             }
 
             return result;
