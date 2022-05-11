@@ -78,7 +78,10 @@ enum UnlicensedHearseValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional.of(game
                 .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, sourceAbility)))
+                .getExileZone(CardUtil.getExileZoneId(
+                        game, sourceAbility.getSourceId(),
+                        game.getState().getZoneChangeCounter(sourceAbility.getSourceId())
+                )))
                 .filter(Objects::nonNull)
                 .map(HashSet::size)
                 .orElse(0);
