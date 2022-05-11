@@ -403,7 +403,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana mana values to subtract
      * @throws ArithmeticException thrown if there is not enough available
-     *                             colored mana to pay the generic cost
+     *                             mana to pay the generic cost
      */
     public void subtractCost(final Mana mana) throws ArithmeticException {
         white = CardUtil.overflowDec(white, mana.white);

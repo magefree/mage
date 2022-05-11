@@ -168,14 +168,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
     /**
      * Checks if a given mana reduction left the expected amount of mana costs
      *
-     * @param manaCostsToPay
-     * @param availablyAny
-     * @param available
-     * @param expected
+     * @param manaCostsToPay    The mana cost before reductions are applied.
+     * @param manaToReduce      The amount and types of many to reduced the cost by.
+     * @param restMana          The expected amount of mana left
      */
     private void testManaReduction(String manaCostsToPay, String manaToReduce, String restMana) {
-        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl(manaCostsToPay), "Test");
-        CardUtil.adjustCost(spellAbility, new ManaCostsImpl(manaToReduce), true);
+        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl<>(manaCostsToPay), "Test");
+        CardUtil.adjustCost(spellAbility, new ManaCostsImpl<>(manaToReduce), true);
         Assert.assertTrue("The mana cost to pay " + manaCostsToPay + " reduced by " + manaToReduce + " should left " + restMana + " but the rest was " + spellAbility.getManaCostsToPay().getText(), spellAbility.getManaCostsToPay().getText().equals(restMana));
     }
 
@@ -192,7 +191,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * should be returned after optimization.
      */
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, int expected2) {
-        ManaCost unpaid = new ManaCostsImpl(manaToPay);
+        ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
@@ -214,13 +213,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * We get all mana abilities, then try to auto pay and compare to expected1
      * and expected2 params.
      *
-     * @param manaToPay Mana that should be paid using land.
-     * @param landName Land to use as mana producer.
-     * @param expected1 The amount of mana abilities the land should have.
-     * @param expectedChosen
+     * @param manaToPay         Mana that should be paid using land.
+     * @param landName          Land to use as mana producer.
+     * @param expected1         The amount of mana abilities the land should have.
+     * @param expectedChosen    The mana ability expected to be chosen.
      */
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, Class<? extends BasicManaAbility> expectedChosen) {
-        ManaCost unpaid = new ManaCostsImpl(manaToPay);
+        ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
@@ -236,14 +235,14 @@ public class ManaUtilTest extends CardTestPlayerBase {
     /**
      * Checks if the given available Mana is enough to pay a given mana cost
      *
-     * @param manaCostsToPay
-     * @param availablyAny
-     * @param available
-     * @param expected
+     * @param manaCostsToPay    The mana cost that needs to be paid.
+     * @param availablyAny      The amount of generic mana available.
+     * @param available         The colored and colorless mana available.
+     * @param expected          boolean indicating if the available mana is expected to cover the mana cost.
      */
     private void testManaAvailEnough(String manaCostsToPay, int availablyAny, String available, boolean expected) {
-        ManaCost unpaid = new ManaCostsImpl(manaCostsToPay);
-        ManaCost costAvailable = new ManaCostsImpl(available);
+        ManaCost unpaid = new ManaCostsImpl<>(manaCostsToPay);
+        ManaCost costAvailable = new ManaCostsImpl<>(available);
         Mana manaAvailable = costAvailable.getMana();
         manaAvailable.setAny(availablyAny);
         if (expected) {
@@ -256,8 +255,8 @@ public class ManaUtilTest extends CardTestPlayerBase {
     /**
      * Extracts mana abilities from the card.
      *
-     * @param card Card to extract mana abilities from.
-     * @return
+     * @param card  Card to extract mana abilities from.
+     * @return      Map between the UUID of each ability on the card and the ability.
      */
     private Map<UUID, ActivatedManaAbilityImpl> getManaAbilities(Card card) {
         Map<UUID, ActivatedManaAbilityImpl> useableAbilities = new LinkedHashMap<>();
