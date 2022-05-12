@@ -876,32 +876,43 @@ public abstract class GameImpl implements Game {
     /**
      * Warning, for inner usage only, use player.restoreState as much as possible instead
      *
-     * @param bookmark
-     * @param context  additional information for error message
-     * @return current restored state (if all fine)
+     * @param bookmark  the state number to restore
+     * @param context   additional information for error message
+     * @return          current restored state (if all fine)
      */
     @Override
     public GameState restoreState(int bookmark, String context) {
-        if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
-            if (bookmark != 0) {
-                if (!savedStates.contains(bookmark - 1)) {
-                    if (!savedStates.isEmpty()) { // empty if rollback to a turn was requested before, otherwise unclear why
-                        logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
-                        logger.info("Saved states: " + savedStates.toString());
-                    }
-                } else {
-                    int stateNum = savedStates.get(bookmark - 1);
-                    removeBookmark(bookmark);
-                    GameState restore = gameStates.rollback(stateNum);
-                    if (restore != null) {
-                        state.restore(restore);
-                        playerList.setCurrent(state.getPlayerByOrderId());
-                        return state;
-                    }
-                }
-            }
+        // If player left or game is over no undo is possible - this could lead to wrong winner
+        if (simulation || this.hasEnded()) {
+            return null;
         }
-        return null;
+
+        // If trying to
+        if (bookmark == 0) {
+            return null;
+        }
+
+        // If the saved state does not exist
+        if (!savedStates.contains(bookmark - 1)) {
+            // empty if rollback to a turn was requested before, otherwise unclear why
+            if (!savedStates.isEmpty()) {
+                logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
+                logger.info("Saved states: " + savedStates.toString());
+            }
+            return null;
+        }
+
+        int stateNum = savedStates.get(bookmark - 1);
+        removeBookmark(bookmark);
+
+        GameState restore = gameStates.rollback(stateNum);
+        if (restore == null) {
+            return null;
+        }
+
+        state.restore(restore);
+        playerList.setCurrent(state.getPlayerByOrderId());
+        return state;
     }
 
     @Override

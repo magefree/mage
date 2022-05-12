@@ -1165,10 +1165,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * @param originalAbility
-     * @param game
-     * @param noMana          cast it without paying mana costs
-     * @param approvingObject which object approved the cast
+     * Tries to cast the spell using originalAbility and returns a boolean indicating if it happened.
+     *
+     * @param originalAbility   the original ability cast by
+     * @param game              the game being cast in
+     * @param noMana            cast it without paying mana costs
+     * @param approvingObject   which object approved the cast
      * @return
      */
     @Override
@@ -1187,67 +1189,77 @@ public abstract class PlayerImpl implements Player, Serializable {
             logger.error("Ability without sourceId turn " + game.getTurnNum() + ". Ability: " + ability.getRule());
             return false;
         }
+
         Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            Zone fromZone = game.getState().getZone(card.getMainCard().getId());
-            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                    ability.getId(), ability, playerId, approvingObject);
-            castEvent.setZone(fromZone);
-            if (!game.replaceEvent(castEvent, ability)) {
-                int bookmark = game.bookmarkState();
-                setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
-                card.cast(game, fromZone, ability, playerId);
-                Spell spell = game.getStack().getSpell(ability.getId());
-                if (spell == null) {
-                    logger.error("Got no spell from stack. ability: " + ability.getRule());
-                    return false;
-                }
-                if (card.isCopy()) {
-                    spell.setCopy(true, null);
-                }
-                // Update the zcc to the stack
-                ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+        if (card == null) {
+            return false;
+        }
 
-                // ALTERNATIVE COST from dynamic effects
-                // some effects set sourceId to cast without paying mana costs or other costs
-                if (getCastSourceIdWithAlternateMana().contains(ability.getSourceId())) {
-                    Ability spellAbility = spell.getSpellAbility();
-                    ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId());
-                    Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId());
-                    if (alternateCosts == null) {
-                        noMana = true;
-                    } else {
-                        spellAbility.getManaCosts().clear();
-                        spellAbility.getManaCostsToPay().clear();
-                        spellAbility.getManaCosts().add(alternateCosts.copy());
-                        spellAbility.getManaCostsToPay().add(alternateCosts.copy());
-                    }
-                    spellAbility.getCosts().clear();
-                    if (costs != null) {
-                        spellAbility.getCosts().addAll(costs);
-                    }
-                }
-                clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
+        Zone fromZone = game.getState().getZone(card.getMainCard().getId());
+        GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                ability.getId(), ability, playerId, approvingObject);
+        castEvent.setZone(fromZone);
+        if (game.replaceEvent(castEvent, ability)) {
+            return false;
+        }
 
-                castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                        spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                castEvent.setZone(fromZone);
-                game.fireEvent(castEvent);
-                if (spell.activate(game, noMana)) {
-                    GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
-                            spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                    castedEvent.setZone(fromZone);
-                    game.fireEvent(castedEvent);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(getLogName() + spell.getActivatedMessage(game));
-                    }
-                    game.removeBookmark(bookmark);
-                    resetStoredBookmark(game);
-                    return true;
-                }
-                restoreState(bookmark, ability.getRule(), game);
+        // Move global bookmark to current state (if you activated mana before then you can't rollback it)
+        int bookmark = game.bookmarkState();
+        setStoredBookmark(bookmark);
+
+        card.cast(game, fromZone, ability, playerId);
+        Spell spell = game.getStack().getSpell(ability.getId());
+        if (spell == null) {
+            logger.error("Got no spell from stack. ability: " + ability.getRule());
+            return false;
+        }
+        if (card.isCopy()) {
+            spell.setCopy(true, null);
+        }
+
+        // Update the zcc to the stack
+        ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+
+        // ALTERNATIVE COST from dynamic effects
+        // some effects set sourceId to cast without paying mana costs or other costs
+        if (getCastSourceIdWithAlternateMana().contains(ability.getSourceId())) {
+            Ability spellAbility = spell.getSpellAbility();
+            ManaCosts<ManaCost> alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId());
+            Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId());
+            if (alternateCosts == null) {
+                noMana = true;
+            } else {
+                spellAbility.getManaCosts().clear();
+                spellAbility.getManaCostsToPay().clear();
+                spellAbility.getManaCosts().add(alternateCosts.copy());
+                spellAbility.getManaCostsToPay().add(alternateCosts.copy());
+            }
+            spellAbility.getCosts().clear();
+            if (costs != null) {
+                spellAbility.getCosts().addAll(costs);
             }
         }
+        clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
+
+        castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
+        castEvent.setZone(fromZone);
+        game.fireEvent(castEvent);
+
+        if (spell.activate(game, noMana)) {
+            GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
+                    spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
+            castedEvent.setZone(fromZone);
+            game.fireEvent(castedEvent);
+            if (!game.isSimulation()) {
+                game.informPlayers(getLogName() + spell.getActivatedMessage(game));
+            }
+            game.removeBookmark(bookmark);
+            resetStoredBookmark(game);
+            return true;
+        }
+        restoreState(bookmark, ability.getRule(), game);
+
         return false;
     }
 

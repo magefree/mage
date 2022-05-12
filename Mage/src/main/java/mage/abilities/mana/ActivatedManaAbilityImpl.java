@@ -134,8 +134,8 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      * library)
      * <p>
      * TODO: it helps with single mana activate for mana pool, but will not work
-     * while activates on paying for casting (e.g. user can cheats to see next
-     * draw card)
+     *       while activates on paying for casting (e.g. user can cheats to see next
+     *       draw card)
      *
      * @return
      */
