@@ -44,11 +44,14 @@ public final class RoccoCabarettiCaterer extends CardImpl {
         // When Rocco, Cabaretti Caterer enters the battlefield, if you cast it, you may search your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
-                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
-                ), CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
+                        true
+                ),
+                CastFromEverywhereSourceCondition.instance,
+                "When {this} enters the battlefield, " +
                 "if you cast it, you may search your library for a creature card with mana value X or less, " +
-                "put it onto the battlefield, then shuffle."
-        ));
+                "put it onto the battlefield, then shuffle.")
+        );
     }
 
     private RoccoCabarettiCaterer(final RoccoCabarettiCaterer card) {
@@ -66,6 +69,9 @@ enum RoccoCabarettiCatererPredicate implements ObjectSourcePlayerPredicate<Card>
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getSource() == null) {
+            return false;
+        }
         return input.getObject().getManaValue()
                 <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
     }
