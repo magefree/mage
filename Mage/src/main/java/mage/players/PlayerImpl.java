@@ -1256,9 +1256,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             game.removeBookmark(bookmark);
             resetStoredBookmark(game);
+            // TODO: Clear out list of queued up not-undoable mana abilities
             return true;
         }
         restoreState(bookmark, ability.getRule(), game);
+        // TODO: Get ordered list of not-undoable mana abilities along with targets, etc. and replay them in order
 
         return false;
     }
@@ -1360,6 +1362,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             setStoredBookmark(bookmark);
                         }
                     } else {
+                        // TODO: Add it to a list of abilities to playback
                         resetStoredBookmark(game);
                     }
                     return true;

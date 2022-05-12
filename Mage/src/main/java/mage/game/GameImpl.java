@@ -887,7 +887,7 @@ public abstract class GameImpl implements Game {
             return null;
         }
 
-        // If trying to
+        // Can't restore to before start of game
         if (bookmark == 0) {
             return null;
         }
@@ -916,8 +916,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
