@@ -3,6 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,7 +38,7 @@ public final class ObsessiveCollector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // Whenever Obsessive Collector deals combat damage to a player, seek a card with mana value equal to the number of cards in your hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ObsessiveCollectorEffect(), false));
