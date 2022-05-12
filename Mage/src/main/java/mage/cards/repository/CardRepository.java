@@ -465,11 +465,11 @@ public enum CardRepository {
      */
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-
             // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
             // e.g. "Malakir Rebirth // Malakir Mire"
             String searchName = name.contains(" // ") ? name.split(" // ", 2)[0] : name;
+
+            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
 
             // Search both the main card name, the name of the back, the split card name, and the adventure name
             queryBuilder.where()
@@ -504,27 +504,15 @@ public enum CardRepository {
 
     public List<CardInfo> findCardsCaseInsensitive(String name) {
         try {
-            String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("'", "''");
-
             // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
             // e.g. "Malakir Rebirth // Malakir Mire"
-            String searchName = sqlName.contains(" // ") ? sqlName.split(" // ", 2)[0] : sqlName;
+            String searchName = (name.contains(" // ") ? name.split(" // ", 2)[0] : name).toLowerCase(Locale.ENGLISH);
 
-            GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + searchName + '\'',
-                    cardDao.getRawRowMapper());
+            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+            // TODO: add support for searching by second part of back card name
+            queryBuilder.where().eq("lower_name", new SelectArg(searchName));
 
-            List<CardInfo> result = rawResults.getResults();
-
-            // If no result, then it could still be the back side of a double-faced card, e.g. Malakir Mire
-            if (result.isEmpty()) {
-                // TODO SecondSideName
-                // TODO FlipCardName
-                // TODO modalDoubleFacesSecondSideName
-                // TODO adventureSpellName
-            }
-
-            return result;
+            return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }

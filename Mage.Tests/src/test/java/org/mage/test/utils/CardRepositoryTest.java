@@ -3,6 +3,7 @@ package org.mage.test.utils;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class CardRepositoryTest {
 
     /**
-     * Test CardRepository.findCards for the difficult cases.
+     * Test CardRepository.findCards for the difficult cases when provided with the full card name.
      *
      * CardRepository.findCards is used only for testing purposes.
      */
@@ -71,8 +72,62 @@ public class CardRepositoryTest {
         assertFindCaseSensitive("Dizzying Swoop");
     }
 
-    // TODO: Same three as above but for case-insensitive
+    /**
+     * Test CardRepository.findCardsCaseInsensitive for the difficult cases.
+     *
+     * CardRepository.findCardsCaseInsensitive is used for actual game
+     */
+    @Test
+    public void testFindSplitCardsByFullNameCaseInsensitive() {
+        // Modal double-faced
+        assertFindCaseInsensitive("Malakir Rebirth // Malakir Mire");
+        // Transform double-faced
+        assertFindCaseInsensitive("Brutal Cathar // Moonrage Brute");
+        // Split
+        assertFindCaseInsensitive("Alive // Well");
+        // Flip
+        assertFindCaseInsensitive("Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence");
+        // Adventure
+        assertFindCaseInsensitive("Ardenvale Tactician // Dizzying Swoop");
+    }
 
+    /**
+     * Test CardRepository.findCards for the difficult cases.
+     *
+     * CardRepository.findCards is used only for testing purposes.
+     */
+    @Test
+    public void testFindSplitCardsByMainNameCaseInsensitive() {
+        // Modal double-faced
+        assertFindCaseInsensitive("Malakir Rebirth");
+        // Transform double-faced
+        assertFindCaseInsensitive("Brutal Cathar");
+        // Split
+        assertFindCaseInsensitive("Alive");
+        // Flip
+        assertFindCaseInsensitive("Rune-Tail, Kitsune Ascendant");
+        // Adventure
+        assertFindCaseInsensitive("Ardenvale Tactician");
+    }
+
+    /**
+     * Test CardRepository.findCards for the difficult cases.
+     *
+     * CardRepository.findCards is used only for testing purposes.
+     */
+    @Test
+    public void testFindSplitCardsBySecondNameCaseInsensitive() {
+        // Modal double-faced
+        assertFindCaseInsensitive("Malakir Mire");
+        // Transform double-faced
+        assertFindCaseInsensitive("Moonrage Brute");
+        // Split
+        assertFindCaseInsensitive("Well");
+        // Flip
+        assertFindCaseInsensitive("Rune-Tail's Essence");
+        // Adventure
+        assertFindCaseInsensitive("Dizzying Swoop");
+    }
 
     /**
      * Checks if the card with name cardName can be found when searched for
