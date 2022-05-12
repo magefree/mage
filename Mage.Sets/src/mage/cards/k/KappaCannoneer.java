@@ -3,6 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -35,7 +36,7 @@ public final class KappaCannoneer extends CardImpl {
         this.addAbility(new ImproviseAbility());
 
         // Ward {4}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new WardAbility(new GenericManaCost(4), false));
 
         // Whenever an artifact enters the battlefield under your control, put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
