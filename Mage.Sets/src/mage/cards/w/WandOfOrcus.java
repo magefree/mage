@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
