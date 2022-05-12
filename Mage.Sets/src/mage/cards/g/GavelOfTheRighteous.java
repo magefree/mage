@@ -58,7 +58,8 @@ public final class GavelOfTheRighteous extends CardImpl {
                 new OrCost(
                         "Pay {3} or remove a counter from {this}",
                         new GenericManaCost(3), new RemoveCountersSourceCost()
-                )
+                ),
+                false
         ));
     }
 

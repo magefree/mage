@@ -31,7 +31,7 @@ public final class MaskOfTheSchemer extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private MaskOfTheSchemer(final MaskOfTheSchemer card) {
