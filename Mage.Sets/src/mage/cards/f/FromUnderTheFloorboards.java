@@ -26,7 +26,7 @@ public final class FromUnderTheFloorboards extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Madness {X}{B}{B} <i>(If you discard this card discard it into exile. When you do cast it for its madness cost or put it into your graveyard.
-        Ability ability = (new MadnessAbility(this, new ManaCostsImpl("{X}{B}{B}")));
+        Ability ability = (new MadnessAbility(new ManaCostsImpl("{X}{B}{B}")));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         

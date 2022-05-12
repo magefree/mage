@@ -91,12 +91,12 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player == null || sourcePermanent == null
-                || game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1) {
+                || game.getBattlefield().count(filter, source.getControllerId(), source, game) < 1) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

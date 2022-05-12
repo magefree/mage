@@ -10,8 +10,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
 
     public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
@@ -62,6 +62,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
                     return true;
                 }
                 break;
+            case EACH_PLAYER:
             case ANY:
                 if (setTargetPointer) {
                     this.getEffects().forEach(effect -> {
@@ -80,6 +81,8 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of combat on your turn, " + generateZoneString();
             case OPPONENT:
                 return "At the beginning of each opponent's combat step, " + generateZoneString();
+            case EACH_PLAYER:
+                return "At the beginning of combat on each player's turn, " + generateZoneString();
             case ANY:
                 return "At the beginning of each combat, " + generateZoneString();
         }
@@ -87,9 +90,8 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
+        if (getZone() == Zone.GRAVEYARD) {
+            return "if {this} is in your graveyard, ";
         }
         return "";
     }

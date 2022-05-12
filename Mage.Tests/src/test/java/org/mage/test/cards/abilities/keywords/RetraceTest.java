@@ -115,7 +115,7 @@ public class RetraceTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Worm", 3);
+        assertPermanentCount(playerA, "Worm Token", 3);
 
         assertGraveyardCount(playerA, "Mountain", 1);
 

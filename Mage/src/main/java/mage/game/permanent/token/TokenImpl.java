@@ -30,7 +30,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
-    private UUID lastAddedTokenId;
     private int tokenType;
     private String originalCardNumber;
     private String originalExpansionSetCode;
@@ -76,7 +75,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
-        this.lastAddedTokenId = token.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
@@ -111,11 +109,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     @Override
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public UUID getLastAddedToken() {
-        return lastAddedTokenId;
     }
 
     @Override
@@ -238,6 +231,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
             }
             putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
+            event.getTokens()
+                    .keySet()
+                    .stream()
+                    .map(Token::getLastAddedTokenIds)
+                    .flatMap(Collection::stream)
+                    .distinct()
+                    .filter(uuid -> !this.lastAddedTokenIds.contains(uuid))
+                    .forEach(this.lastAddedTokenIds::add);
             return true;
         }
         return false;
@@ -293,7 +294,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // keep tokens ids
                 if (token instanceof TokenImpl) {
                     ((TokenImpl) token).lastAddedTokenIds.add(permanent.getId());
-                    ((TokenImpl) token).lastAddedTokenId = permanent.getId();
                 }
 
                 // created token events
@@ -349,7 +349,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
                     // select new target
                     auraTarget.setNotTarget(true);
-                    if (!controller.choose(auraOutcome, auraTarget, source.getSourceId(), game)) {
+                    if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                         break;
                     }
                     UUID targetId = auraTarget.getFirstTarget();

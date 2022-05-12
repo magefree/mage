@@ -3,7 +3,6 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -33,7 +32,7 @@ public final class ElspethKnightErrant extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Create a 1/1 white Soldier creature token.
         Token token = new SoldierToken();

@@ -2,7 +2,6 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -25,7 +24,7 @@ public final class KayaBaneOfTheDead extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
+        this.setStartingLoyalty(7);
 
         // Your opponents and permanents your opponents control with hexproof can be the target of spells and abilities you control as though they didn't have hexproof.
         this.addAbility(new SimpleStaticAbility(new KayaBaneOfTheDeadEffect()));
@@ -50,7 +49,7 @@ class KayaBaneOfTheDeadEffect extends AsThoughEffectImpl {
 
     KayaBaneOfTheDeadEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "your opponents and creatures with hexproof they control " +
+        staticText = "your opponents and permanents your opponents control with hexproof " +
                 "can be the targets of spells and abilities you control as though they didn't have hexproof";
     }
 

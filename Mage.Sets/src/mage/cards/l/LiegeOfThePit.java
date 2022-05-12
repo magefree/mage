@@ -39,7 +39,7 @@ public final class LiegeOfThePit extends CardImpl {
         // At the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect(), TargetController.YOU, false));
         // Morph {B}{B}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{B}{B}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{B}{B}{B}{B}")));
     }
 
     private LiegeOfThePit(final LiegeOfThePit card) {
@@ -57,7 +57,7 @@ class LiegeOfThePitEffect extends OneShotEffect {
 
     public LiegeOfThePitEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice a creature other than {this}. If you can't {this} deals 7 damage to you.";
+        this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
     public LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {
@@ -84,8 +84,8 @@ class LiegeOfThePitEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (target.canChoose(player.getId(), source, game)) {
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.sacrifice(source, game);

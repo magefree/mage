@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WurmWithLifelinkToken extends TokenImpl {
 
     public WurmWithLifelinkToken() {
-        super("Phyrexian Wurm", "3/3 colorless Phyrexian Wurm artifact creature token with lifelink");
+        super("Phyrexian Wurm Token", "3/3 colorless Phyrexian Wurm artifact creature token with lifelink");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);
@@ -22,7 +22,7 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(LifelinkAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "SOM");
+        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM");
     }
 
     @Override
@@ -32,8 +32,13 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
         }
-
         if (getOriginalExpansionSetCode().equals("SOM")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("CM2")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("2XM")) {
             this.setTokenType(2);
         }
     }

@@ -65,7 +65,7 @@ public class CipherEffect extends OneShotEffect {
         if (controller != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+            if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseUse(outcome, "Cipher this spell to a creature?", source, game)) {
                 controller.chooseTarget(outcome, target, source, game);
                 Card sourceCard = game.getCard(source.getSourceId());
@@ -118,7 +118,7 @@ class CipherStoreEffect extends OneShotEffect {
             Card copyCard = game.copyCard(cipherCard, source, controller.getId());
             SpellAbility ability = copyCard.getSpellAbility();
             // remove the cipher effect from the copy
-            ability.getEffects().removeIf(effect -> effect instanceof CipherEffect);
+            ability.getEffects().removeIf(CipherEffect.class::isInstance);
             controller.cast(ability, game, true, new ApprovingObject(source, game));
 
         }

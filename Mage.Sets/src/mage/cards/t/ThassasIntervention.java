@@ -4,14 +4,12 @@ import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -29,14 +27,7 @@ public final class ThassasIntervention extends CardImpl {
         // Choose one-
         // • Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                        ManacostVariableValue.REGULAR, false, StaticValue.get(2),
-                        StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false,
-                        true, Zone.HAND, true, false, false
-                ).setBackInRandomOrder(true).setText(
-                "Look at the top X cards of your library. Put up to two of them into your hand " +
-                        "and the rest on the bottom of your library in a random order."
-                )
-        );
+                ManacostVariableValue.REGULAR, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true));
 
         // • Counter target spell unless its controller pays twice {X}.
         Mode mode = new Mode(new CounterUnlessPaysEffect(xValue)

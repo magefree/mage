@@ -85,7 +85,7 @@ class TragicArroganceffect extends OneShotEffect {
                     filterPlaneswalkerPermanent.add(new ControllerIdPredicate(playerId));
                     Target target4 = new TargetPermanent(1, 1, filterPlaneswalkerPermanent, true);
 
-                    if (target1.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    if (target1.canChoose(controller.getId(), source, game)) {
                         controller.chooseTarget(Outcome.Benefit, target1, source, game);
                         Permanent artifact = game.getPermanent(target1.getFirstTarget());
                         if (artifact != null) {
@@ -94,7 +94,7 @@ class TragicArroganceffect extends OneShotEffect {
                         target1.clearChosen();
                     }
 
-                    if (target2.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    if (target2.canChoose(controller.getId(), source, game)) {
                         controller.chooseTarget(Outcome.Benefit, target2, source, game);
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {
@@ -103,7 +103,7 @@ class TragicArroganceffect extends OneShotEffect {
                         target2.clearChosen();
                     }
 
-                    if (target3.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    if (target3.canChoose(controller.getId(), source, game)) {
                         controller.chooseTarget(Outcome.Benefit, target3, source, game);
                         Permanent enchantment = game.getPermanent(target3.getFirstTarget());
                         if (enchantment != null) {
@@ -112,7 +112,7 @@ class TragicArroganceffect extends OneShotEffect {
                         target3.clearChosen();
                     }
 
-                    if (target4.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    if (target4.canChoose(controller.getId(), source, game)) {
                         controller.chooseTarget(Outcome.Benefit, target4, source, game);
                         Permanent planeswalker = game.getPermanent(target4.getFirstTarget());
                         if (planeswalker != null) {

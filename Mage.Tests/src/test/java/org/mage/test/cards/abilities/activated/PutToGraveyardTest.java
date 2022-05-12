@@ -41,7 +41,7 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertExileCount(playerB, 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Eldrazi Scion", 1);
+        assertPermanentCount(playerA, "Eldrazi Scion Token", 1);
 
     }
 

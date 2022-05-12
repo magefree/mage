@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -13,7 +12,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
@@ -56,10 +54,9 @@ public final class PathToTheFestival extends CardImpl {
 
 enum PathToTheFestivalCondition implements Condition {
     instance;
-    private static final DynamicValue xValue = new DomainValue();
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return xValue.calculate(game, source, null) >= 3;
+        return DomainValue.REGULAR.calculate(game, source, null) >= 3;
     }
 }

@@ -94,7 +94,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
             TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
             target.setNotTarget(true);
             if (controller.chooseUse(outcome, "Select a token to copy?", source, game)
-                    && controller.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+                    && controller.choose(Outcome.Neutral, target, source, game)) {
                 Permanent toCopyFromPermanent = game.getPermanent(target.getFirstTarget());
 
                 if (toCopyFromPermanent != null) {

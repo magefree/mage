@@ -32,10 +32,11 @@ public class FixedTargets extends TargetPointerImpl {
 
     public FixedTargets(Cards cards, Game game) {
         super();
-
-        for (UUID targetId : cards) {
-            MageObjectReference mor = new MageObjectReference(targetId, game);
-            targets.add(mor);
+        if (cards != null) {
+            for (UUID targetId : cards) {
+                MageObjectReference mor = new MageObjectReference(targetId, game);
+                targets.add(mor);
+            }
         }
         this.initialized = true;
     }
@@ -92,24 +93,24 @@ public class FixedTargets extends TargetPointerImpl {
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
         // check target not changed zone
-        List<UUID> list = new ArrayList<>();
-        for (MageObjectReference mor : targets) {
-            if (mor.getSourceId() != null && game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
-                list.add(mor.getSourceId());
-            }
-        }
-        return list;
+        return targets
+                .stream()
+                .filter(mor -> mor.zoneCounterIsCurrent(game))
+                .map(MageObjectReference::getSourceId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override
     public UUID getFirst(Game game, Ability source) {
         // check target not changed zone
-        for (MageObjectReference mor : targets) {
-            if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
-                return mor.getSourceId();
-            }
-        }
-        return null;
+        return targets
+                .stream()
+                .filter(mor -> mor.zoneCounterIsCurrent(game))
+                .map(MageObjectReference::getSourceId)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

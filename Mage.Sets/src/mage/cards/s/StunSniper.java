@@ -33,7 +33,7 @@ public final class StunSniper extends CardImpl {
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new TapTargetEffect());
+        ability.addEffect(new TapTargetEffect().setText("tap that creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

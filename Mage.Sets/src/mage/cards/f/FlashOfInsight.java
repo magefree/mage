@@ -1,46 +1,44 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author awjackson
  */
 public final class FlashOfInsight extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("blue cards from your graveyard");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    }
+
     public FlashOfInsight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
 
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new FlashOfInsightEffect());
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                FlashOfInsightValue.instance, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
 
         // Flashback-{1}{U}, Exile X blue cards from your graveyard.
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{U}"));
-        FilterCard filter = new FilterCard("blue cards from your graveyard");
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(Predicates.not(new CardIdPredicate(getId())));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new ExileXFromYourGraveCost(filter));
         this.addAbility(ability);
     }
@@ -55,51 +53,32 @@ public final class FlashOfInsight extends CardImpl {
     }
 }
 
-class FlashOfInsightEffect extends OneShotEffect {
+enum FlashOfInsightValue implements DynamicValue {
+    instance;
 
-    public FlashOfInsightEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public FlashOfInsightEffect(final FlashOfInsightEffect effect) {
-        super(effect);
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        int xValue = sourceAbility.getManaCostsToPay().getX();
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof ExileXFromYourGraveCost) {
+                xValue = ((ExileXFromYourGraveCost) cost).getAmount();
+            }
+        }
+        return xValue;
     }
 
     @Override
-    public FlashOfInsightEffect copy() {
-        return new FlashOfInsightEffect(this);
+    public FlashOfInsightValue copy() {
+        return instance;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
+    public String toString() {
+        return "X";
+    }
 
-        int xValue = source.getManaCostsToPay().getX();
-
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof ExileFromGraveCost) {
-                xValue = ((ExileFromGraveCost) cost).getExiledCards().size();
-            }
-        }
-
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
-        controller.lookAtCards(sourceObject.getIdName(), cards, game);
-
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        target.setNotTarget(true);
-        if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-                cards.remove(card);
-            }
-        }
-        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        return true;
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

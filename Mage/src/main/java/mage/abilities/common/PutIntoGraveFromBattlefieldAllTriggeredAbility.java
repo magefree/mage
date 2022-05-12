@@ -7,7 +7,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -49,7 +48,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
+            if (filter.match(zEvent.getTarget(), this.getControllerId(), this, game)) {
                 if (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
                     return false;
                 }

@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GrovetenderDruidsPlantToken extends TokenImpl {
 
     public GrovetenderDruidsPlantToken() {
-        super("Plant", "1/1 green Plant creature token");
+        super("Plant Token", "1/1 green Plant creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.PLANT);

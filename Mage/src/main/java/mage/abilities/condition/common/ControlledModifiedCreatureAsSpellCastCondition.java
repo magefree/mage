@@ -21,7 +21,7 @@ public enum ControlledModifiedCreatureAsSpellCastCondition implements Condition 
         if (sourceObject == null || watcher == null) {
             return false;
         }
-        return watcher.checkModifiedCondition(new MageObjectReference(sourceObject, game));
+        return watcher.getModifiedCreatureCount(new MageObjectReference(sourceObject, game)) > 0;
     }
 
     @Override

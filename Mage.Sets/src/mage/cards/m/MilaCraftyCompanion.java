@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesTargetControlledPermanentTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -64,7 +63,7 @@ public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
         // Lukka, Wayward Bonder
         // Legendary Planeswalker - Lukka
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.getRightHalfCard().setStartingLoyalty(5);
 
         // +1: You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.
         this.getRightHalfCard().addAbility(new LoyaltyAbility(new LukkaWaywardBonderDiscardEffect(), 1));

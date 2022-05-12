@@ -53,7 +53,7 @@ class WorldShaperEffect extends OneShotEffect {
 
     public WorldShaperEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "put all land cards from your graveyard onto the battlefield tapped";
+        this.staticText = "return all land cards from your graveyard to the battlefield tapped";
     }
 
     public WorldShaperEffect(final WorldShaperEffect effect) {

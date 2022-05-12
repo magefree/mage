@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
@@ -29,7 +28,7 @@ public final class AshiokDreamRender extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Spells and abilities your opponents control can't cause their controller to search their library.
         this.addAbility(new SimpleStaticAbility(new AshiokDreamRenderEffect()));
@@ -74,7 +73,7 @@ class AshiokDreamRenderEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't search libraries (" + mageObject.getLogName() + " in play).";
         }

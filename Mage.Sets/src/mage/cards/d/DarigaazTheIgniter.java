@@ -79,7 +79,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
                 damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
                 FilterCard filter = new FilterCard();
                 filter.add(new ColorPredicate(choice.getColor()));
-                int damage = damagedPlayer.getHand().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int damage = damagedPlayer.getHand().count(filter, source.getControllerId(), source, game);
                 if (damage > 0) {
                     damagedPlayer.damage(damage, source.getSourceId(), source, game);
                 }

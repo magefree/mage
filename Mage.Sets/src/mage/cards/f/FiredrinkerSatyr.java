@@ -5,15 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -31,12 +28,11 @@ public final class FiredrinkerSatyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Firedrinker Satyr is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new FiredrinkerSatyrDealDamageEffect(), false, false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(
+                new DamageControllerEffect(SavedDamageValue.MUCH, "it"), false));
         // {1}{R}: Firedrinker Satyr gets +1/+0 until end of turn and deals 1 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
-        Effect effect = new DamageControllerEffect(1);
-        effect.setText("and deals 1 damage to you");
-        ability.addEffect(effect);
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
+        ability.addEffect(new DamageControllerEffect(1, "and"));
         this.addAbility(ability);
     }
 
@@ -47,35 +43,5 @@ public final class FiredrinkerSatyr extends CardImpl {
     @Override
     public FiredrinkerSatyr copy() {
         return new FiredrinkerSatyr(this);
-    }
-}
-
-class FiredrinkerSatyrDealDamageEffect extends OneShotEffect {
-
-    public FiredrinkerSatyrDealDamageEffect() {
-        super(Outcome.Damage);
-        this.staticText = "it deals that much damage to you";
-    }
-
-    public FiredrinkerSatyrDealDamageEffect(final FiredrinkerSatyrDealDamageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FiredrinkerSatyrDealDamageEffect copy() {
-        return new FiredrinkerSatyrDealDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

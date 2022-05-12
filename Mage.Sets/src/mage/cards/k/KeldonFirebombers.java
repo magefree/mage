@@ -79,7 +79,7 @@ class KeldonFirebombersEffect extends OneShotEffect {
                     FilterLandPermanent playerFilter = filter.copy();
                     playerFilter.add(new ControllerIdPredicate(playerId));
                     Target target = new TargetLandPermanent(amount, amount, playerFilter, true);
-                    player.choose(outcome.Sacrifice, target, source.getSourceId(), game);
+                    player.choose(outcome.Sacrifice, target, source, game);
                     for (UUID landId : target.getTargets()) {
                         Permanent land = game.getPermanent(landId);
                         if (land != null) {

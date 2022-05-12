@@ -43,7 +43,7 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Sidisi, Brood Tyrant", 1);
 
         assertGraveyardCount(playerA, 4);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
 
     }
 
@@ -83,7 +83,7 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Satyr Wayfinder", 1);
         assertHandCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 6);
-        assertPermanentCount(playerA, "Zombie", 2);
+        assertPermanentCount(playerA, "Zombie Token", 2);
 
     }
 
@@ -126,7 +126,7 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 0);
         assertExileCount("Silvercoat Lion", 2);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
 
     }
 

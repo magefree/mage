@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -34,8 +34,11 @@ public final class Aetherplasm extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
-        this.addAbility(new BlocksSourceTriggeredAbility(new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
+        // Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand.
+        // If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
+        this.addAbility(new BlocksCreatureTriggeredAbility(new DoIfCostPaid(
+                new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()
+        )));
     }
 
     private Aetherplasm(final Aetherplasm card) {
@@ -67,7 +70,7 @@ class AetherplasmEffect extends OneShotEffect {
         }
         if (player.chooseUse(Outcome.PutCardInPlay, "Put a creature card from your hand onto the battlefield?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A);
-            if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));

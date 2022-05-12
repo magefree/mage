@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class AkoumStonewakerElementalToken extends TokenImpl {
 
     public AkoumStonewakerElementalToken() {
-        super("Elemental", "3/1 red Elemental creature token with trample and haste");
+        super("Elemental Token", "3/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

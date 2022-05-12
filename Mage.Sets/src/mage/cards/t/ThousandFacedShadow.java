@@ -87,8 +87,14 @@ class ThousandFacedShadowTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
+                && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.HAND
                 && permanent.getId().equals(getSourceId());
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        return permanent != null && permanent.isAttacking();
     }
 
     @Override

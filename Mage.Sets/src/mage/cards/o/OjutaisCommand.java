@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -18,8 +16,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class OjutaisCommand extends CardImpl {
@@ -42,20 +41,15 @@ public final class OjutaisCommand extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetCardInYourGraveyard(filter));
 
         // or You gain 4 life;
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeEffect(4));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().getModes().addMode(new Mode(new GainLifeEffect(4)));
 
         // or Counter target creature spell;
-        mode = new Mode();
+        Mode mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
-        mode.addEffect(new CounterTargetEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Draw a card
-        mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().getModes().addMode(new Mode(new DrawCardSourceControllerEffect(1)));
     }
 
     private OjutaisCommand(final OjutaisCommand card) {

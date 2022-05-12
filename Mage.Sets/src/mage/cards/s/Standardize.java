@@ -57,7 +57,7 @@ class StandardizeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         String chosenType = "";
         if (player != null && sourceObject != null) {
             Choice typeChoice = new ChoiceCreatureType(sourceObject);

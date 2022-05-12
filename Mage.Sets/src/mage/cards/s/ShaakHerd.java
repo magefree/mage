@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,7 +23,7 @@ public final class ShaakHerd extends CardImpl {
     private static final FilterCard filter = new FilterCard("another target creature card");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ShaakHerd(UUID ownerId, CardSetInfo setInfo) {

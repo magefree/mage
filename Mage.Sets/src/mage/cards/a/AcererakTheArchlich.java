@@ -103,7 +103,7 @@ class AcererakTheArchlichEffect extends OneShotEffect {
             }
             TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
             target.setNotTarget(true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {
                 tokens--;

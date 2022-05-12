@@ -4,7 +4,6 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -33,7 +32,7 @@ public final class TezzeretTheSchemer extends CardImpl {
         this.subtype.add(SubType.TEZZERET);
 
         //Starting Loyalty - 5
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Create a colorless artifact token named Etherium Cell which has "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new EtheriumCellToken()), 1));

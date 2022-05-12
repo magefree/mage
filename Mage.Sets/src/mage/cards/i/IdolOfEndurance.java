@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -22,8 +23,9 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -84,28 +86,16 @@ class IdolOfEnduranceExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getGraveyard().getCards(filter, game));
-        MageObjectReference mor = new MageObjectReference(permanent, game);
-        player.moveCards(cards, Zone.EXILED, source, game);
-        Set<MageObjectReference> morSet = cards
-                .getCards(game)
-                .stream()
-                .filter(Objects::nonNull)
-                .map(card -> new MageObjectReference(card, game))
-                .collect(Collectors.toSet());
-        String exileId = "idolOfEndurance_" + mor.getSourceId() + mor.getZoneChangeCounter();
-        if (game.getState().getValue(exileId) == null) {
-            game.getState().setValue(exileId, new HashSet<MageObjectReference>());
-        }
-        ((Set) game.getState().getValue(exileId)).addAll(morSet);
-        game.addDelayedTriggeredAbility(new IdolOfEnduranceDelayedTrigger(exileId), source);
+        player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+        game.addDelayedTriggeredAbility(new IdolOfEnduranceDelayedTrigger(), source);
         return true;
     }
 }
 
 class IdolOfEnduranceDelayedTrigger extends DelayedTriggeredAbility {
 
-    IdolOfEnduranceDelayedTrigger(String exileId) {
-        super(new IdolOfEnduranceLeaveEffect(exileId), Duration.Custom, true, false);
+    IdolOfEnduranceDelayedTrigger() {
+        super(new IdolOfEnduranceLeaveEffect(), Duration.Custom, true, false);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
@@ -138,16 +128,12 @@ class IdolOfEnduranceDelayedTrigger extends DelayedTriggeredAbility {
 
 class IdolOfEnduranceLeaveEffect extends OneShotEffect {
 
-    private final String exileId;
-
-    IdolOfEnduranceLeaveEffect(String exileId) {
+    IdolOfEnduranceLeaveEffect() {
         super(Outcome.Benefit);
-        this.exileId = exileId;
     }
 
     private IdolOfEnduranceLeaveEffect(final IdolOfEnduranceLeaveEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -161,17 +147,11 @@ class IdolOfEnduranceLeaveEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Object object = game.getState().getValue(exileId);
-        if (!(object instanceof Set)) {
-            return false;
-        }
-        Set<MageObjectReference> morSet = (Set<MageObjectReference>) object;
-        return player != null && player.moveCards(
-                morSet.stream()
-                        .map(mor -> mor.getCard(game))
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toSet()),
-                Zone.GRAVEYARD, source, game
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return exileZone != null
+                && !exileZone.isEmpty()
+                && player.moveCards(
+                exileZone, Zone.GRAVEYARD, source, game
         );
     }
 }
@@ -200,28 +180,16 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        IdolOfEnduranceWatcher watcher = game.getState().getWatcher(IdolOfEnduranceWatcher.class);
-        if (watcher != null) {
-            watcher.addPlayable(source, game);
-        }
+        IdolOfEnduranceWatcher.addPlayable(source, game);
     }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        IdolOfEnduranceWatcher watcher = game.getState().getWatcher(IdolOfEnduranceWatcher.class);
-        if (watcher == null || !watcher.checkPermission(affectedControllerId, source, game)) {
+        if (!IdolOfEnduranceWatcher.checkPermission(affectedControllerId, source, game)) {
             return false;
         }
-        Object value = game.getState().getValue(
-                "idolOfEndurance_" + source.getSourceId() + source.getSourceObjectZoneChangeCounter()
-        );
-        if (!(value instanceof Set)) {
-            discard();
-            return false;
-        }
-        Set<MageObjectReference> morSet = (Set<MageObjectReference>) value;
-        if (game.getState().getZone(sourceId) != Zone.EXILED
-                || morSet.stream().noneMatch(mor -> mor.refersTo(sourceId, game))) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null || !exileZone.contains(sourceId)) {
             return false;
         }
         Card card = game.getCard(sourceId);
@@ -248,7 +216,6 @@ class IdolOfEnduranceWatcher extends Watcher {
             }
             morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 
@@ -258,24 +225,27 @@ class IdolOfEnduranceWatcher extends Watcher {
         super.reset();
     }
 
-    boolean checkPermission(UUID playerId, Ability source, Game game) {
+    static boolean checkPermission(UUID playerId, Ability source, Game game) {
         if (!playerId.equals(source.getControllerId())) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
-        );
-        if (!morMap.containsKey(mor)) {
-            return false;
-        }
-        return morMap.get(mor).getOrDefault(playerId, 0) > 0;
+        IdolOfEnduranceWatcher watcher = game.getState().getWatcher(IdolOfEnduranceWatcher.class);
+        MageObjectReference mor = new MageObjectReference(source);
+        return watcher
+                .morMap
+                .containsKey(mor)
+                && watcher
+                .morMap
+                .get(mor)
+                .getOrDefault(playerId, 0) > 0;
     }
 
-    void addPlayable(Ability source, Game game) {
-        MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
-        );
-        morMap.computeIfAbsent(mor, m -> new HashMap<>())
+    static void addPlayable(Ability source, Game game) {
+        MageObjectReference mor = new MageObjectReference(source);
+        game.getState()
+                .getWatcher(IdolOfEnduranceWatcher.class)
+                .morMap
+                .computeIfAbsent(mor, m -> new HashMap<>())
                 .compute(source.getControllerId(), CardUtil::setOrIncrementValue);
     }
 }

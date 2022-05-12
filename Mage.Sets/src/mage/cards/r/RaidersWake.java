@@ -33,7 +33,7 @@ public final class RaidersWake extends CardImpl {
         // Raid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false), RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, target opponent discards a card.");
+                "At the beginning of your end step, if you attacked this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);

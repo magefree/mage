@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
 
     public TitaniaProtectorOfArgothElementalToken() {
-        super("Elemental", "5/3 green Elemental creature token");
+        super("Elemental Token", "5/3 green Elemental creature token");
         this.cardType.add(CardType.CREATURE);
         this.color.setGreen(true);
         this.subtype.add(SubType.ELEMENTAL);

@@ -34,6 +34,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -277,6 +278,6 @@ class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
     @Override
     public String getText(Mode mode) {
-        return "that player may " + getCostText() + ". If they do, " + executingEffects.getText(mode);
+        return "that player may " + CardUtil.addCostVerb(cost.getText()) + ". If they do, " + executingEffects.getText(mode);
     }
 }

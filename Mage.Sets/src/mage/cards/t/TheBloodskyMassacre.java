@@ -115,7 +115,7 @@ class TheBloodskyMassacreEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int berserkers = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int berserkers = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         player.getManaPool().addMana(new Mana(ManaType.RED, berserkers), game, source, true);
         return true;
     }

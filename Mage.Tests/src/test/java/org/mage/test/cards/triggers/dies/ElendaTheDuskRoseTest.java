@@ -75,8 +75,8 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Elenda, the Dusk Rose", 1);
 
-        assertPermanentCount(playerA, "Vampire", 2);
-        assertPowerToughness(playerA, "Vampire", 1, 1, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Vampire Token", 2);
+        assertPowerToughness(playerA, "Vampire Token", 1, 1, Filter.ComparisonScope.All);
     }
 
     @Test
@@ -116,8 +116,8 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Elenda, the Dusk Rose", 0);
 
-        assertPermanentCount(playerA, "Vampire", 2);
-        assertPowerToughness(playerA, "Vampire", 1, 1, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Vampire Token", 2);
+        assertPowerToughness(playerA, "Vampire Token", 1, 1, Filter.ComparisonScope.All);
     }
 
     @Test
@@ -161,8 +161,8 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Elenda, the Dusk Rose", 0);
 
-        assertPermanentCount(playerA, "Vampire", 1);
-        assertPowerToughness(playerA, "Vampire", 1, 1, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Vampire Token", 1);
+        assertPowerToughness(playerA, "Vampire Token", 1, 1, Filter.ComparisonScope.All);
     }
 
 }

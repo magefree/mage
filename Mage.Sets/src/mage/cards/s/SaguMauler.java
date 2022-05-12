@@ -30,7 +30,7 @@ public final class SaguMauler extends CardImpl {
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
         // Morph {3}{G}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{U}")));
     }
 
     private SaguMauler(final SaguMauler card) {

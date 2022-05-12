@@ -39,7 +39,7 @@ public final class BladebackSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(
                         ability, Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                        StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
                 ), HellbentCondition.instance, "<i>Hellbent</i> &mdash; " +
                 "As long as you have no cards in hand, Sliver creatures you control have " +
                 "\"{T}: This creature deals 1 damage to target player or planeswalker.\""

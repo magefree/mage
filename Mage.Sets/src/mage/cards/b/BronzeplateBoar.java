@@ -36,6 +36,7 @@ public final class BronzeplateBoar extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has trample"));
+        this.addAbility(ability);
 
         // Reconfigure {5}
         this.addAbility(new ReconfigureAbility("{5}"));

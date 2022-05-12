@@ -112,7 +112,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered because mana from " + sourceObject.getName() + " was spent to cast it.";
         }

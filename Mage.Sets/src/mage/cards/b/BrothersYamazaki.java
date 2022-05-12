@@ -99,7 +99,7 @@ class BrothersYamazakiIgnoreLegendRuleEffectEffect extends ContinuousRuleModifyi
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.getName().equals("Brothers Yamazaki")) {
-            return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 2;
+            return game.getBattlefield().count(filter, source.getControllerId(), source, game) == 2;
         }
         return false;
     }

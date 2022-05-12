@@ -80,17 +80,17 @@ class MultipleChoiceEffect extends OneShotEffect {
             return true;
         }
         TargetPlayer targetPlayer = new TargetPlayer(0, 1, true);
-        controller.choose(Outcome.Detriment, targetPlayer, source.getSourceId(), game);
+        controller.choose(Outcome.Detriment, targetPlayer, source, game);
         Player player = game.getPlayer(targetPlayer.getFirstTarget());
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), player.getId(), game
+                player.getId(), source, game
         ) <= 0) {
             return true;
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent();
         targetPermanent.setNotTarget(true);
-        player.choose(Outcome.ReturnToHand, targetPermanent, source.getSourceId(), game);
+        player.choose(Outcome.ReturnToHand, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         return permanent == null || player.moveCards(permanent, Zone.HAND, source, game);
     }

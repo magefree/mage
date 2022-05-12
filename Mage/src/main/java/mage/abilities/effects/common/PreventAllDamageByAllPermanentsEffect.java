@@ -5,9 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
-import static mage.constants.Duration.EndOfTurn;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -29,7 +27,7 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
         this(null, duration, onlyCombat);
     }
 
-    public PreventAllDamageByAllPermanentsEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
+    public PreventAllDamageByAllPermanentsEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.filter = filter;
     }
@@ -55,7 +53,7 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
                     return true;
                 }
                 Permanent permanent = game.getPermanent(damageEvent.getSourceId());
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                if (filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }
@@ -68,24 +66,17 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Prevent all ");
+        StringBuilder sb = new StringBuilder("prevent all ");
         if (onlyCombat) {
             sb.append("combat ");
         }
-        sb.append("damage ");
-        if (duration == EndOfTurn) {
-            if (filter != null) {
-                sb.append(filter.getMessage());
-                sb.append(" would deal this turn");
-            } else {
-                sb.append("that would be dealt this turn");
-            }
-        } else {
-            sb.append(duration.toString());
-            if (filter != null) {
-                sb.append(" dealt by ");
-                sb.append(filter.getMessage());
-            }
+        sb.append("damage that would be dealt");
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
+        }
+        if (filter != null) {
+            sb.append(" by ");
+            sb.append(filter.getMessage());
         }
         return sb.toString();
     }

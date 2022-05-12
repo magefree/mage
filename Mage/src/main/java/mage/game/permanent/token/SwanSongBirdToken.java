@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class SwanSongBirdToken extends TokenImpl {
 
     public SwanSongBirdToken() {
-        super("Bird", "2/2 blue Bird creature token with flying");
+        super("Bird Token", "2/2 blue Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);

@@ -138,7 +138,7 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE,
-                        player.getId(), source.getSourceId(), game
+                        player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

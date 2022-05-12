@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class TrollWarriorToken extends TokenImpl {
 
     public TrollWarriorToken() {
-        super("Troll Warrior", "4/4 green Troll Warrior creature token with trample");
+        super("Troll Warrior Token", "4/4 green Troll Warrior creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.TROLL);

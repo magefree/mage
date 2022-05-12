@@ -25,7 +25,7 @@ public class WoodlandChampionTest extends CardTestPlayerBase {
         checkPermanentCounters("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Woodland Champion", CounterType.P1P1, 0);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acorn Harvest");
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Squirrel", 2);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Squirrel Token", 2);
         checkPermanentCounters("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Woodland Champion", CounterType.P1P1, 2);
 
         setStrictChooseMode(true);

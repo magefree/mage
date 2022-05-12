@@ -61,7 +61,7 @@ class StratadonCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, new DomainValue().calculate(game, source, this));
+        CardUtil.reduceCost(abilityToModify, DomainValue.REGULAR.calculate(game, source, this));
         return true;
     }
 

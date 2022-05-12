@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,8 +24,8 @@ public final class ClericOfChillDepths extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Cleric of Chill Depths blocks a creature, that creature doesn't untap during its controller's next untap step.
-        this.addAbility(new BlocksSourceTriggeredAbility(
-                new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true
+        this.addAbility(new BlocksCreatureTriggeredAbility(
+                new DontUntapInControllersNextUntapStepTargetEffect("that creature")
         ));
     }
 

@@ -4,7 +4,6 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -21,7 +20,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.DovinBaanEmblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -35,7 +33,7 @@ public final class DovinBaan extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.
         Effect effect = new BoostTargetEffect(-3, 0, Duration.UntilYourNextTurn);

@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class BloodToken extends TokenImpl {
 
     public BloodToken() {
-        super("Blood", "Blood token");
+        super("Blood Token", "Blood token");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.BLOOD);
 

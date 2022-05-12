@@ -13,7 +13,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -69,7 +68,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }

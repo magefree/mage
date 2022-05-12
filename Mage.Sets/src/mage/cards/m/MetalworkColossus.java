@@ -72,7 +72,7 @@ class MetalworkColossusCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int totalCMC = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             totalCMC += permanent.getManaValue();
         }
         CardUtil.reduceCost(abilityToModify, totalCMC);

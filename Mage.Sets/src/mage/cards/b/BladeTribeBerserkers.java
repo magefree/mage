@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class BladeTribeBerserkers extends CardImpl {
 
-    private static final String effectText = "<i>Metalcraft</i> &mdash; When Blade-Tribe Berserkers enters the battlefield, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.";
+    private static final String effectText = "When {this} enters the battlefield, if you control three or more artifacts, {this} gets +3/+3 and gains haste until end of turn.";
 
     public BladeTribeBerserkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

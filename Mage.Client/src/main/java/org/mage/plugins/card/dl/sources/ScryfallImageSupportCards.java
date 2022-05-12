@@ -189,7 +189,7 @@ public class ScryfallImageSupportCards {
             add("ALA"); // Shards of Alara
             add("PALA"); // Shards of Alara Promos
             add("DD2"); // Duel Decks: Jace vs. Chandra
-            add("PWP09"); // Wizards Play Network 2009
+            add("PW09"); // Wizards Play Network 2009
             add("PDTP"); // Duels of the Planeswalkers 2009 Promos
             //add("PMPS09"); // Magic Premiere Shop 2009
             add("P09"); // Magic Player Rewards 2009
@@ -209,7 +209,7 @@ public class ScryfallImageSupportCards {
             add("DDD"); // Duel Decks: Garruk vs. Liliana
             add("H09"); // Premium Deck Series: Slivers
             add("PDP10"); // Duels of the Planeswalkers 2010 Promos
-            add("PWP10"); // Wizards Play Network 2010
+            add("PW10"); // Wizards Play Network 2010
             //add("PMPS10"); // Magic Premiere Shop 2010
             add("P10"); // Magic Player Rewards 2010
             add("G10"); // Judge Gift Cards 2010
@@ -230,7 +230,7 @@ public class ScryfallImageSupportCards {
             add("TD0"); // Magic Online Theme Decks
             add("PD2"); // Premium Deck Series: Fire and Lightning
             //add("PMPS11"); // Magic Premiere Shop 2011
-            add("PWP11"); // Wizards Play Network 2011
+            add("PW11"); // Wizards Play Network 2011
             //add("PS11"); // Salvat 2011
             add("P11"); // Magic Player Rewards 2011
             add("G11"); // Judge Gift Cards 2011
@@ -252,7 +252,7 @@ public class ScryfallImageSupportCards {
             add("ISD"); // Innistrad
             add("PD3"); // Premium Deck Series: Graveborn
             add("PIDW"); // IDW Comics 2012
-            add("PWP12"); // Wizards Play Network 2012
+            add("PW12"); // Wizards Play Network 2012
             add("PDP12"); // Duels of the Planeswalkers 2012 Promos
             add("J12"); // Judge Gift Cards 2012
             add("F12"); // Friday Night Magic 2012
@@ -503,6 +503,14 @@ public class ScryfallImageSupportCards {
             add("MIC"); // Midnight Hunt Commander
             add("VOW"); // Innistrad: Crimson Vow
             add("VOC"); // Crimson Vow Commander
+            add("Y22"); // Alchemy: Innistrad
+            add("DBL"); // Innistrad: Double Feature
+            add("NEO"); // Kamigawa: Neon Dynasty
+            add("NEC"); // Neon Dynasty Commander
+            add("SNC"); // Streets of New Capenna
+            add("NCC"); // New Capenna Commander
+            add("SLX"); // Universes Within
+            add("CLB"); // Commander Legends: Battle for Baldur's Gate
         }
     };
 

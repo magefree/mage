@@ -57,7 +57,7 @@ class WorldfireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.moveToExile(null, "", source, game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

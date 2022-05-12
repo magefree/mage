@@ -45,8 +45,7 @@ public final class GrabTheReins extends CardImpl {
         target.setTargetName("a creature to take control of");
         this.getSpellAbility().addTarget(target);
         // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to any target.
-        Mode mode = new Mode();
-        mode.addEffect(new GrabTheReinsEffect());
+        Mode mode = new Mode(new GrabTheReinsEffect());
         TargetAnyTarget target2 = new TargetAnyTarget();
         target2.setTargetName("a creature or player to damage");
         mode.addTarget(target2);
@@ -83,7 +82,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         target.setTargetName("a creature to sacrifice");
-        if (!target.canChoose(source.getSourceId(), controllerId, game)) {
+        if (!target.canChoose(controllerId, source, game)) {
             return false;
         }
         Player player = game.getPlayer(controllerId);

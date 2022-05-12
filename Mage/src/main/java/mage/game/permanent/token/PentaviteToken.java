@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class PentaviteToken extends TokenImpl {
 
     public PentaviteToken() {
-        super("Pentavite", "1/1 colorless Pentavite artifact creature token with flying");
+        super("Pentavite Token", "1/1 colorless Pentavite artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PENTAVITE);

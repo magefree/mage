@@ -34,7 +34,7 @@ public final class RiversGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY),
                 new ManaWasSpentCondition(ColoredManaSymbol.B),
-                " If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card")
+                "If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card")
                 .setTargetPointer(new SecondTargetPointer()));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));

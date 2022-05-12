@@ -8,7 +8,6 @@ import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
@@ -274,14 +273,6 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-    }
-
-    @Override
     public UUID getId() {
         return sourceObject.getId();
     }
@@ -308,25 +299,17 @@ public class Commander implements CommandObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
-        return false;
+        return sourceObject.isAllCreatureTypes(game);
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+        sourceObject.setIsAllCreatureTypes(value);
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sourceObject.setIsAllCreatureTypes(game, value);
     }
 
     @Override

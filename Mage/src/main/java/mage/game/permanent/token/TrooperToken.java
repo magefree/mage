@@ -14,7 +14,7 @@ import mage.constants.SubType;
 public final class TrooperToken extends TokenImpl {
 
     public TrooperToken() {
-        super("Trooper", "1/1 white Trooper creature token");
+        super("Trooper Token", "1/1 white Trooper creature token");
         availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);

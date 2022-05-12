@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,14 +24,14 @@ import mage.game.permanent.token.PlantToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TurntimberSower extends CardImpl {
 
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("three creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creatures");
 
     public TurntimberSower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -47,14 +46,9 @@ public final class TurntimberSower extends CardImpl {
 
         // {G}, Sacrifice three creatures: Return target land card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnToHandTargetEffect()
-                        .setText("Return target land card "
-                                + "from your graveyard to your hand"),
-                new ManaCostsImpl("{G}")
+                new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{G}")
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(3, 3, filter, true)
-        ));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND));
         this.addAbility(ability);
     }

@@ -11,10 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -36,7 +33,7 @@ public final class IsochronScepter extends CardImpl {
         // Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new IsochronScepterImprintEffect(),true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
         // {2}, {T}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
@@ -83,7 +80,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         if (controller != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                if (target.canChoose(source.getControllerId(), source, game)
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {

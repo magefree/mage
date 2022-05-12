@@ -5,10 +5,10 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -47,12 +46,10 @@ public final class Necrosynthesis extends CardImpl {
         effect.setText("Enchanted creature has \"Whenever another creature dies, put a +1/+1 counter on this creature.\"");
         this.addAbility(new SimpleStaticAbility(effect));
 
-        // When enchanted creature dies, look at the top X cards of your library, where X is its power. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+        // When enchanted creature dies, look at the top X cards of your library, where X is its power.
+        // Put one of those cards into your hand and the rest on the bottom of your library in a random order.
         DynamicValue attachedPower = new NecrosynthesisAttachedPermanentPowerCount();
-        effect = new LookLibraryAndPickControllerEffect(
-                attachedPower, false, StaticValue.get(1), StaticFilters.FILTER_CARD, false,
-                false
-            ).setBackInRandomOrder(true);
+        effect = new LookLibraryAndPickControllerEffect(attachedPower, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM);
         effect.setText("look at the top X cards of your library, where X is its power. " +
                 "Put one of those cards into your hand and the rest on the bottom of your library in a random order");
         ability = new DiesAttachedTriggeredAbility(effect, "enchanted creature");

@@ -72,7 +72,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
         MageObject engineeredExplosives = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if(engineeredExplosives instanceof Permanent){
             int count = ((Permanent)engineeredExplosives).getCounters(game).getCount(CounterType.CHARGE);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if(permanent.getManaValue() == count){
                     permanent.destroy(source, game, false);
                 }

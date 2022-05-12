@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class RocEggToken extends TokenImpl {
 
     public RocEggToken() {
-        super("Bird", "3/3 white Bird creature token with flying");
+        super("Bird Token", "3/3 white Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.BIRD);
         color.setWhite(true);

@@ -24,7 +24,7 @@ public final class WitnessOfTheAges extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}")));
     }
 
     private WitnessOfTheAges(final WitnessOfTheAges card) {

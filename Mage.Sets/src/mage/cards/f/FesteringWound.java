@@ -68,7 +68,7 @@ class FesteringWoundEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         int amount = game.getPermanent(sourceId).getCounters(game).getCount(CounterType.INFECTION);
         UUID id = this.getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(id);

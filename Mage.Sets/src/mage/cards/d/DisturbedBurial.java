@@ -1,8 +1,6 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,8 +8,9 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DisturbedBurial extends CardImpl {
@@ -23,7 +22,7 @@ public final class DisturbedBurial extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
     }
 
     private DisturbedBurial(final DisturbedBurial card) {

@@ -26,7 +26,7 @@ public final class BojukaBrigand extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(new CantBlockAbility());
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true).setAbilityWord(null));
     }
 
     private BojukaBrigand(final BojukaBrigand card) {

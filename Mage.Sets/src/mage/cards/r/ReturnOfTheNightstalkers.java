@@ -68,7 +68,7 @@ class ReturnOfTheNightstalkersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.moveCards(controller.getGraveyard().getCards(filter1, game), Zone.BATTLEFIELD, source, game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source, game)) {
                 permanent.destroy(source, game, false);
             }
             return true;

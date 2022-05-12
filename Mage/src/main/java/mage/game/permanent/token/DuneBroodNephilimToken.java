@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class DuneBroodNephilimToken extends TokenImpl {
 
     public DuneBroodNephilimToken() {
-        super("Sand", "1/1 colorless Sand creature token");
+        super("Sand Token", "1/1 colorless Sand creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SAND);
         power = new MageInt(1);

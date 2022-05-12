@@ -21,8 +21,6 @@ public interface Token extends MageObject {
 
     String getDescription();
 
-    UUID getLastAddedToken();
-
     List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);

@@ -73,7 +73,7 @@ class SpellboundDragonEffect extends OneShotEffect {
         if(you != null) {
             you.drawCards(1, source, game);
             TargetDiscard target = new TargetDiscard(you.getId());
-            you.choose(Outcome.Discard, target, source.getSourceId(), game);
+            you.choose(Outcome.Discard, target, source, game);
             Card card = you.getHand().get(target.getFirstTarget(), game);
             if (card != null && you.discard(card, false, source, game)) {
                 int cmc = card.getManaValue();

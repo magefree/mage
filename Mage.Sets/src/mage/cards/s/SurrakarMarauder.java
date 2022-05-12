@@ -1,9 +1,9 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,9 @@ public final class SurrakarMarauder extends CardImpl {
 
         // Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. 
         // (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
-        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false));
+        Effect effect = new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("{this} gains intimidate until end of turn. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
+        this.addAbility(new LandfallAbility(effect));
     }
 
     private SurrakarMarauder(final SurrakarMarauder card) {

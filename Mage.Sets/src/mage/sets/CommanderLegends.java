@@ -657,6 +657,8 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Tevesh Szat, Doom of Fools", 512, Rarity.MYTHIC, mage.cards.t.TeveshSzatDoomOfFools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalisse, Reverent Medium", 291, Rarity.UNCOMMON, mage.cards.t.ThalisseReverentMedium.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalisse, Reverent Medium", 611, Rarity.UNCOMMON, mage.cards.t.ThalisseReverentMedium.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Prismatic Piper", 1, Rarity.COMMON, mage.cards.t.ThePrismaticPiper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Prismatic Piper", 546, Rarity.COMMON, mage.cards.t.ThePrismaticPiper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thirst for Knowledge", 103, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thorn of the Black Rose", 154, Rarity.COMMON, mage.cards.t.ThornOfTheBlackRose.class));
         cards.add(new SetCardInfo("Thornwood Falls", 498, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));

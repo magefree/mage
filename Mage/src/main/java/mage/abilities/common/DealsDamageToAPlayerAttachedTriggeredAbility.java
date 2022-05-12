@@ -77,8 +77,8 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 || p == null || !p.getAttachments().contains(this.getSourceId())) {
             return false;
         }
+        getEffects().setValue("damage", event.getAmount());
         if (setFixedTargetPointer) {
-            getEffects().setValue("damage", event.getAmount());
             getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
         return true;
@@ -86,7 +86,11 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
 
     @Override
     public String getTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ").append(attachedDescription);
+        StringBuilder sb = new StringBuilder("Whenever ");
+        sb.append(attachedDescription);
+        if (!attachedDescription.endsWith("creature")) {
+            sb.append(" creature");
+        }
         sb.append(" deals");
         if (onlyCombat) {
             sb.append(" combat");

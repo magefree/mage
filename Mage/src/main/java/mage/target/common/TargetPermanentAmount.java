@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public abstract class TargetPermanentAmount extends TargetAmount {
+public class TargetPermanentAmount extends TargetAmount {
 
     protected final FilterPermanent filter;
 
-    TargetPermanentAmount(int amount, FilterPermanent filter) {
+    public TargetPermanentAmount(int amount, FilterPermanent filter) {
         // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
         // any positive number or zero, unless something (such as damage or counters) is being divided
         // or distributed among “any number” of players and/or objects. In that case, a nonzero number
@@ -31,16 +31,21 @@ public abstract class TargetPermanentAmount extends TargetAmount {
         this(StaticValue.get(amount), filter);
     }
 
-    TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
+    public TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
         super(amount);
         this.zone = Zone.ALL;
         this.filter = filter;
         this.targetName = filter.getMessage();
     }
 
-    TargetPermanentAmount(final TargetPermanentAmount target) {
+    protected TargetPermanentAmount(final TargetPermanentAmount target) {
         super(target);
         this.filter = target.filter.copy();
+    }
+
+    @Override
+    public TargetPermanentAmount copy() {
+        return new TargetPermanentAmount(this);
     }
 
     @Override
@@ -68,7 +73,7 @@ public abstract class TargetPermanentAmount extends TargetAmount {
         }
         MageObject targetSource = source.getSourceObject(game);
         return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
-                && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                && filter.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override
@@ -77,8 +82,8 @@ public abstract class TargetPermanentAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game).size()
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game).size()
                 >= this.minNumberOfTargets;
     }
 
@@ -89,16 +94,16 @@ public abstract class TargetPermanentAmount extends TargetAmount {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             return getTargets()
                     .stream()
                     .collect(Collectors.toSet());
         }
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         return game
                 .getBattlefield()
-                .getActivePermanents(filter, sourceControllerId, sourceId, game)
+                .getActivePermanents(filter, sourceControllerId, source, game)
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
@@ -132,7 +137,4 @@ public abstract class TargetPermanentAmount extends TargetAmount {
         });
         return sb.toString().trim();
     }
-
-    @Override
-    public abstract TargetPermanentAmount copy();
 }

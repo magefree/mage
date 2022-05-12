@@ -57,7 +57,7 @@ public final class BridgeFromBelow extends CardImpl {
 
 class BridgeFromBelowAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
@@ -82,14 +82,12 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null
-                    && filter.match(permanent, sourceId, controllerId, game)) {
-                return true;
-            }
-        }
-        return false;
+        if (!zEvent.isDiesEvent()) { return false; }
+
+        Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        if (permanent == null) { return false; }
+
+        return filter.match(permanent, controllerId, this, game);
     }
 
     @Override

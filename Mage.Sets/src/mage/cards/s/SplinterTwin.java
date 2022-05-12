@@ -62,7 +62,7 @@ class SplinterTwinEffect extends OneShotEffect {
 
     public SplinterTwinEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile it at the beginning of the next end step";
+        this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile that token at the beginning of the next end step";
     }
 
     public SplinterTwinEffect(final SplinterTwinEffect effect) {

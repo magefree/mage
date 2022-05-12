@@ -11,7 +11,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -64,7 +63,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+        if (permanent != null && filterTarget.match(permanent, source.getControllerId(), source, game)) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             MageObject sourceObject;
             if (stackObject instanceof StackAbility) {

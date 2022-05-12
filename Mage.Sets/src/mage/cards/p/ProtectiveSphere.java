@@ -88,7 +88,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
                     CardUtil.addToolTipMarkTags("Last mana used for protective ability: " 
                             + source.getManaCostsToPay().getUsedManaToPay()), game);
         }
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

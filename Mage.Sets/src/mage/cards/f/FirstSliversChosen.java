@@ -28,7 +28,7 @@ public final class FirstSliversChosen extends CardImpl {
         // Sliver creatures you control have exalted.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new ExaltedAbility(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_SLIVERS
         )));
     }
 

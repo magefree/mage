@@ -21,7 +21,7 @@ public final class BeastToken4 extends TokenImpl {
     }
 
     public BeastToken4(String setCode, int tokenType) {
-        super("Beast", "2/2 green Beast creature token");
+        super("Beast Token", "2/2 green Beast creature token");
         setOriginalExpansionSetCode(setCode != null ? setCode : "EXO");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

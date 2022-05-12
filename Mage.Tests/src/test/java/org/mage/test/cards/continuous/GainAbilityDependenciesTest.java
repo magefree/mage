@@ -77,15 +77,15 @@ public class GainAbilityDependenciesTest extends CardTestPlayerBase {
         // cast token
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elephant Ambush");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("token must exist", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elephant", 1);
+        checkPermanentCount("token must exist", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elephant Token", 1);
 
         // equip
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Elephant");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Elephant Token");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // attack with +1 token
-        attack(3, playerA, "Elephant", playerB);
-        checkPermanentCounters("must have counter", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Elephant", CounterType.P1P1, 1);
+        attack(3, playerA, "Elephant Token", playerB);
+        checkPermanentCounters("must have counter", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Elephant Token", CounterType.P1P1, 1);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);

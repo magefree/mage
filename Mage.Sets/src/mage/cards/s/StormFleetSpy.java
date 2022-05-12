@@ -33,7 +33,7 @@ public final class StormFleetSpy extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, draw a card.");
+                "When {this} enters the battlefield, if you attacked this turn, draw a card.");
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());

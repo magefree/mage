@@ -33,7 +33,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filter.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

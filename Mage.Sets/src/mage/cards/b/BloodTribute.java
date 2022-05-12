@@ -7,18 +7,16 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.abilities.text.TextPartSubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.TextPartSubtypePredicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -28,15 +26,18 @@ import java.util.UUID;
  */
 public final class BloodTribute extends CardImpl {
 
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent(SubType.VAMPIRE, "an untapped Vampire you control");
+
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+    }
+
     public BloodTribute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Kicker - Tap an untapped Vampire you control.
-        TextPartSubType textPartVampire = (TextPartSubType) addTextPart(new TextPartSubType(SubType.VAMPIRE));
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Vampire you control");
-        filter.add(new TextPartSubtypePredicate(textPartVampire));
-        filter.add(TappedPredicate.UNTAPPED);
-        this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledPermanent(filter))));
 
         // Target opponent loses half their life, rounded up.
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());

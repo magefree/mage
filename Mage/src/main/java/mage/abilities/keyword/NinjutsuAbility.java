@@ -148,7 +148,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
@@ -165,7 +165,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

@@ -78,14 +78,14 @@ class ImpromptuRaidEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 controller.revealCards(sourceObject.getName(), cards, game);
-                if (filterPutInGraveyard.match(card, source.getSourceId(), source.getControllerId(), game)) {
+                if (filterPutInGraveyard.match(card, source.getControllerId(), source, game)) {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     return true;
                 }

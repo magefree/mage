@@ -92,10 +92,10 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
 
         if (controller != null && sourceObject != null) {
-            if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+            if (controller.getHand().count(filter, source.getControllerId(), source, game) > 0) {
                 if (controller.chooseUse(outcome, "Reveal a Dinosaur card?", source, game)) {
                     TargetCardInHand target = new TargetCardInHand(0, 1, filter);
                     if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {

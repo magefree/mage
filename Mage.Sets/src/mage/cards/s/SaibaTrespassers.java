@@ -28,12 +28,9 @@ public final class SaibaTrespassers extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Channel — {3}{U}, Discard Saiba Trespassers: Tap up to two target creatures you don't control. Those creatures don't untap during their controller's next untap step.
-        Ability ability = new ChannelAbility(
-                "{3}{U}", new TapTargetEffect()
-                .setText("tap up to two target creatures you don't control")
-        );
+        Ability ability = new ChannelAbility("{3}{U}", new TapTargetEffect());
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_CREATURES_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

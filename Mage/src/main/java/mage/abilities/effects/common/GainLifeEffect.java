@@ -60,13 +60,11 @@ public class GainLifeEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
         sb.append("you gain ");
-        if (message.startsWith("that")) {
-            sb.append(message).append(' ');
-        } else if (message.isEmpty() || !life.toString().equals("1")) {
+        if (message.isEmpty() || !life.toString().equals("1")) {
             sb.append(life).append(' ');
         }
         sb.append("life");
-        if (!message.isEmpty() && !message.startsWith("that")) {
+        if (!message.isEmpty()) {
             sb.append(life.toString().equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }

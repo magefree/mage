@@ -1,9 +1,11 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -23,13 +25,15 @@ import java.util.UUID;
  */
 public final class SecretSalvage extends CardImpl {
 
+    private static final FilterCard filter = new FilterNonlandCard("nonland card from your graveyard");
+
     public SecretSalvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         // Exile target nonland card from your graveyard. Search your library for any number of cards with the same name as that card,
         // reveal them, and put them into your hand. Then shuffle your library.
         getSpellAbility().addEffect(new SecretSalvageEffect());
-        getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterNonlandCard("nonland card from your graveyard")));
+        getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
     private SecretSalvage(final SecretSalvage card) {
@@ -46,8 +50,9 @@ class SecretSalvageEffect extends OneShotEffect {
 
     public SecretSalvageEffect() {
         super(Outcome.DrawCard);
-        staticText = "Exile target nonland card from your graveyard. Search your library for any number of cards with the same name as that card, "
-                + "reveal them, and put them into your hand. Then shuffle";
+        staticText = "Exile target nonland card from your graveyard. " +
+                "Search your library for any number of cards with the same name as that card, " +
+                "reveal them, put them into your hand, then shuffle";
     }
 
     public SecretSalvageEffect(final SecretSalvageEffect effect) {
@@ -62,34 +67,16 @@ class SecretSalvageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
-            if (targetCard != null) {
-                controller.moveCards(targetCard, Zone.EXILED, source, game);
-
-                String nameToSearch = CardUtil.getCardNameForSameNameSearch(targetCard);
-                FilterCard nameFilter = new FilterCard();
-                nameFilter.add(new NamePredicate(nameToSearch));
-
-                TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, nameFilter);
-                if (controller.searchLibrary(target, source, game)) {
-                    if (!target.getTargets().isEmpty()) {
-                        Cards cards = new CardsImpl();
-                        for (UUID cardId : target.getTargets()) {
-                            Card card = controller.getLibrary().remove(cardId, game);
-                            if (card != null) {
-                                cards.add(card);
-                            }
-                        }
-                        controller.revealCards(sourceObject.getIdName(), cards, game);
-                        controller.moveCards(cards, Zone.HAND, source, game);
-                    }
-                    controller.shuffleLibrary(source, game);
-                    return true;
-                }
-            }
+        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetCard == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(targetCard, Zone.EXILED, source, game);
+        String nameToSearch = CardUtil.getCardNameForSameNameSearch(targetCard);
+        FilterCard nameFilter = new FilterCard("card named " + nameToSearch);
+        nameFilter.add(new NamePredicate(nameToSearch));
+        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
+                0, Integer.MAX_VALUE, nameFilter
+        ), true, true).apply(game, source);
     }
 }

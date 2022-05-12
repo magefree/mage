@@ -2,11 +2,11 @@ package mage.cards.b;
 
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -24,9 +24,7 @@ public final class BasicConjuration extends CardImpl {
 
         // Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. You gain 3 life.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                6, 1, StaticFilters.FILTER_CARD_CREATURE_A,
-                true, false, Zone.HAND, true
-        ).setBackInRandomOrder(true));
+                6, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 

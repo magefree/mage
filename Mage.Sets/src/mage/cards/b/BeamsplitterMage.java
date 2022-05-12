@@ -112,7 +112,7 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
         }
         return game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                getControllerId(), getSourceId(), game
+                getControllerId(), this, game
         ).stream()
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.isCreature(game))
@@ -165,7 +165,7 @@ class BeamsplitterMageEffect extends OneShotEffect {
         filter.add(new BeamsplitterMagePredicate(spell));
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

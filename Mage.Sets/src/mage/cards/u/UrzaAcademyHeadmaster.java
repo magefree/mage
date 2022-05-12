@@ -3,7 +3,6 @@ package mage.cards.u;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
@@ -11,6 +10,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.*;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
@@ -55,7 +55,7 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Head to AskUrza.com and click +1.
         this.addAbility(new LoyaltyAbility(new UrzaAcademyHeadmasterRandomEffect(1, setInfo), 1));
@@ -213,7 +213,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 17: // TEZZERET AGENT OF BOLAS 1
                                 sb.append("Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.");
-                                effects.add(new LookLibraryAndPickControllerEffect(5, 1, new FilterArtifactCard(), true));
+                                effects.add(new LookLibraryAndPickControllerEffect(5, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_ANY));
                                 break;
                             case 18: // UGIN 1
                                 sb.append("Urza deals 3 damage to any target.");
@@ -431,7 +431,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
                 game.informPlayers(sb.toString());
                 if (target != null) {
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         target.chooseTarget(outcome, controller.getId(), source, game);
                     } else {
                         // 1/19/2018 	(...) If the ability that comes up requires a target and there are no legal targets available, click again until that’s not true.
@@ -486,7 +486,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
             Choice manaChoice = new ChoiceImpl();
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
@@ -559,7 +559,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

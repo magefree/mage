@@ -78,7 +78,7 @@ class HuntedNightmareEffect extends OneShotEffect {
         }
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.DEATHTOUCH.createInstance(), player.getId(), source, game);
     }

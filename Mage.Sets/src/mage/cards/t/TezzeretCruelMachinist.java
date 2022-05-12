@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -36,7 +35,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Draw a card.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1));
@@ -88,7 +87,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cardsToMove = new CardsImpl(target.getTargets());
         if (cardsToMove.isEmpty()) {
             return false;

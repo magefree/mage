@@ -40,7 +40,7 @@ public final class CruelFate extends CardImpl {
 class CruelFateEffect extends OneShotEffect {
 
     CruelFateEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.Detriment);
         this.staticText = "Look at the top five cards of target opponent's library. " +
                 "Put one of those cards into that player's graveyard and the rest on top of their library in any order";
     }
@@ -75,6 +75,6 @@ class CruelFateEffect extends OneShotEffect {
             controller.moveCards(card, Zone.GRAVEYARD, source, game);
             cards.remove(card);
         }
-        return controller.putCardsOnTopOfLibrary(card, game, source, true);
+        return controller.putCardsOnTopOfLibrary(cards, game, source, true);
     }
 }

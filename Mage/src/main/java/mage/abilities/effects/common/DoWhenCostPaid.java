@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -38,23 +37,31 @@ public class DoWhenCostPaid extends OneShotEffect {
         this.optional = effect.optional;
     }
 
+    private boolean checkOptional(Player player, Game game, Ability source) {
+        return optional && !player.chooseUse(
+                ability.getEffects().getOutcome(source, this.outcome),
+                CardUtil.replaceSourceName(
+                        chooseUseText, CardUtil.getSourceName(game, source)
+                ), source, game
+        );
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (player == null || mageObject == null) {
+        if (player == null) {
             return false;
         }
-        String message = CardUtil.replaceSourceName(chooseUseText, mageObject.getLogName());
-        Outcome payOutcome = ability.getEffects().getOutcome(source, this.outcome);
         if (!cost.canPay(source, source, player.getId(), game)
-                || (optional && !player.chooseUse(payOutcome, message, source, game))) {
+                || checkOptional(player, game, source)) {
             return false;
         }
         cost.clearPaid();
         int bookmark = game.bookmarkState();
         if (cost.pay(source, game, source, player.getId(), false)) {
-            ability.getEffects().setTargetPointer(getTargetPointer());
+            if (ability.getTargets().isEmpty()) {
+                ability.getEffects().setTargetPointer(getTargetPointer());
+            }
             game.fireReflexiveTriggeredAbility(ability, source);
             player.resetStoredBookmark(game);
             return true;
@@ -72,16 +79,10 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". When you do, " + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
-    }
-
-    private String getCostText() {
-        StringBuilder sb = new StringBuilder();
-        String costText = cost.getText();
-        if (!CardUtil.checkCostWords(costText)) {
-            sb.append("pay ");
-        }
-        return sb.append(costText).toString();
+        return (optional ? "you may " : "")
+                + CardUtil.addCostVerb(cost.getText())
+                + ". When you do, "
+                + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
     @Override

@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardPutInHandEffect;
 import mage.cards.CardImpl;
@@ -11,8 +10,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class TezzeretsBetrayal extends CardImpl {
@@ -32,7 +32,7 @@ public final class TezzeretsBetrayal extends CardImpl {
 
         // You may search your library and/or graveyard for a card named Tezzeret, Master of Metal, reveal it, and put it into your hand.
         // If you search your library this way, shuffle it.
-        getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
+        getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter, false, true));
     }
 
     private TezzeretsBetrayal(final TezzeretsBetrayal card) {

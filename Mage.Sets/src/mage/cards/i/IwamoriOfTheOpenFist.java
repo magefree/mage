@@ -81,7 +81,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 Target target = new TargetCardInHand(filter);
-                if (opponent != null && target.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                if (opponent != null && target.canChoose(opponent.getId(), source, game)) {
                     if (opponent.chooseUse(Outcome.PutCreatureInPlay, "Put a legendary creature card from your hand onto the battlefield?", source, game)) {
                         if (target.chooseTarget(Outcome.PutCreatureInPlay, opponent.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());

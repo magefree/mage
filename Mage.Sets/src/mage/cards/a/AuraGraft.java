@@ -123,8 +123,8 @@ class MoveTargetAuraEffect extends OneShotEffect {
         filter.add(new PermanentCanBeAttachedToPredicate(enchantment));
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (target.canChoose(oldAttachment.getId(), controller.getId(), game)
-                && controller.choose(outcome, target, oldAttachment.getId(), game)) {
+        if (target.canChoose(controller.getId(), source, game)
+                && controller.choose(outcome, target, source, game)) {
             Permanent newAttachment = game.getPermanent(target.getFirstTarget());
             if (newAttachment != null
                     && oldAttachment.removeAttachment(enchantment.getId(), source, game)) {

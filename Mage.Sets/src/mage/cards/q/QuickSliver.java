@@ -20,7 +20,7 @@ import mage.filter.common.FilterCreatureCard;
  */
 public final class QuickSliver extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Sliver cards");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Sliver spells");
     static {
         filter.add(SubType.SLIVER.getPredicate());
     }

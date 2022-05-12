@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class MockCard extends CardImpl {
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
     // only has MockAbilities.
-    private int startingLoyalty;
+    private final int startingLoyalty;
 
     // mana cost extra info for multiple mana drawing
     // warning, don't use ManaCost objects here due too much memory consumptions
@@ -79,18 +78,16 @@ public class MockCard extends CardImpl {
             this.isModalDoubleFacesCard = true;
         }
 
-        if (this.isPlaneswalker()) {
-            String startingLoyaltyString = card.getStartingLoyalty();
-            if (startingLoyaltyString.isEmpty()) {
-            } else {
-                try {
-                    this.startingLoyalty = Integer.parseInt(startingLoyaltyString);
-                } catch (NumberFormatException e) {
-                    Logger.getLogger(MockCard.class).warn("Planeswalker `" + this.name + "` starting loyalty in bad format: `" + startingLoyaltyString + "`.");
-                }
-            }
+        switch (card.getStartingLoyalty()) {
+            case "X":
+                this.startingLoyalty = -2;
+                break;
+            case "":
+                this.startingLoyalty = -1;
+                break;
+            default:
+                this.startingLoyalty = Integer.parseInt(card.getStartingLoyalty());
         }
-
         this.flipCardName = card.getFlipCardName();
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));

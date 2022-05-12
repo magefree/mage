@@ -16,7 +16,7 @@ public final class ZombieToken2 extends TokenImpl {
     }
 
     public ZombieToken2(int zPower, int zToughness) {
-        super("Zombie", String.valueOf(zPower) + '/' + String.valueOf(zToughness) + " black Zombie creature token");
+        super("Zombie Token", String.valueOf(zPower) + '/' + String.valueOf(zToughness) + " black Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

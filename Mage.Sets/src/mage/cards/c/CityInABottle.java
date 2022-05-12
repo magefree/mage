@@ -158,7 +158,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, this.getSourceId(), this.getControllerId(), game, 1);
+        return game.getBattlefield().contains(filter, this.getSourceId(), this.getControllerId(), this, game, 1);
     }
 
     @Override
@@ -192,7 +192,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.sacrifice(source, game);
         }
         return true;
@@ -239,6 +239,6 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getControllerId(), source, game);
     }
 }

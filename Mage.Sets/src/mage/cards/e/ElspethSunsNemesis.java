@@ -2,7 +2,6 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -27,7 +26,7 @@ public final class ElspethSunsNemesis extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // −1: Up to two target creatures you control each get +2/+1 until end of turn.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(2, 1)

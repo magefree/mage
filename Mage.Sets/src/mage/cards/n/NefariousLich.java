@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -77,8 +76,8 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
             Target target = new TargetCardInYourGraveyard(amount, new FilterCard("card in your graveyard"));
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.choose(Outcome.Exile, target, source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (controller.choose(Outcome.Exile, target, source, game)) {
                     Set<Card> cards = new HashSet<>(amount);
                     for (UUID targetId : target.getTargets()) {
                         Card card = controller.getGraveyard().get(targetId, game);

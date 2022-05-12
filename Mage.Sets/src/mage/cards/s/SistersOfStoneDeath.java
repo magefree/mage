@@ -1,36 +1,43 @@
 package mage.cards.s;
 
-import java.util.LinkedList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.LinkedList;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
  */
 public final class SistersOfStoneDeath extends CardImpl {
 
-    private UUID exileId = UUID.randomUUID();
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature blocking or blocked by {this}");
+
+    static {
+        filter.add(BlockingOrBlockedBySourcePredicate.EITHER);
+    }
 
     public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
@@ -41,21 +48,17 @@ public final class SistersOfStoneDeath extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {G}: Target creature blocks Sisters of Stone Death this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(exileId, this.getIdName()), new ManaCostsImpl("{B}{G}"));
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sisters of Stone Death");
-        filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
-                new BlockingAttackerIdPredicate(this.getId())));
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability2 = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{B}{G}"));
+        ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(ability2);
 
         // {2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SistersOfStoneDeathEffect(exileId), new ManaCostsImpl("{2}{B}")));
-
+        this.addAbility(new SimpleActivatedAbility(new SistersOfStoneDeathEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private SistersOfStoneDeath(final SistersOfStoneDeath card) {
@@ -70,17 +73,13 @@ public final class SistersOfStoneDeath extends CardImpl {
 
 class SistersOfStoneDeathEffect extends OneShotEffect {
 
-    private final UUID exileId;
-
-    public SistersOfStoneDeathEffect(UUID exileId) {
+    public SistersOfStoneDeathEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.exileId = exileId;
         staticText = "Put a creature card exiled with {this} onto the battlefield under your control";
     }
 
     public SistersOfStoneDeathEffect(final SistersOfStoneDeathEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -89,7 +88,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_CREATURE);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(exileId);
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
             if (exile != null) {
                 LinkedList<UUID> cards = new LinkedList<>(exile);
                 for (UUID cardId : cards) {

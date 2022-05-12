@@ -156,8 +156,8 @@ class JarJarBinksTapEffect extends OneShotEffect {
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, highestPower));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                    if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game)) {
+                    if (controller.choose(outcome, target, source, game)) {
                         permanentToTap = game.getPermanent(target.getFirstTarget());
                     }
                 }

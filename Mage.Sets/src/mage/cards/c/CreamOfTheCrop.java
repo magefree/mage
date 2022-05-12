@@ -36,7 +36,7 @@ public final class CreamOfTheCrop extends CardImpl {
                 + "you may look at the top X cards of your library, where X "
                 + "is that creature's power. If you do, put one of those cards "
                 + "on top of your library and the rest on the bottom of "
-                + "your library in any order"));
+                + "your library in any order."));
     }
 
     private CreamOfTheCrop(final CreamOfTheCrop card) {

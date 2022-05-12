@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class OmnathElementalToken extends TokenImpl {
 
     public OmnathElementalToken() {
-        super("Elemental", "5/5 red and green Elemental creature token");
+        super("Elemental Token", "5/5 red and green Elemental creature token");
         setTokenType(1);
         setOriginalExpansionSetCode("BFZ");
         cardType.add(CardType.CREATURE);

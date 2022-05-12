@@ -16,20 +16,19 @@ import java.util.UUID;
  */
 public class UntapTargetEffect extends OneShotEffect {
 
-    protected boolean useOnlyTargetPointer;
-
     public UntapTargetEffect() {
-        this(true);
+        this((String) null);
     }
 
-    public UntapTargetEffect(boolean useOnlyTargetPointer) {
+    public UntapTargetEffect(String text) {
         super(Outcome.Untap);
-        this.useOnlyTargetPointer = useOnlyTargetPointer;
+        if (text != null) {
+            this.staticText = text;
+        }
     }
 
     public UntapTargetEffect(final UntapTargetEffect effect) {
         super(effect);
-        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override
@@ -39,21 +38,10 @@ public class UntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
-            source.getTargets().forEach((target) -> {
-                for (UUID targetId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.untap(game);
-                    }
-                }
-            });
-        } else {
-            for (UUID target : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.untap(game);
-                }
+        for (UUID target : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(target);
+            if (permanent != null) {
+                permanent.untap(game);
             }
         }
         return true;

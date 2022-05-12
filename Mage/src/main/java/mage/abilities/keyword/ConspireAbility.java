@@ -3,13 +3,11 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -21,10 +19,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Objects;
 import java.util.UUID;
 
 /*
@@ -45,62 +43,58 @@ import java.util.UUID;
 public class ConspireAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Conspire";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped creatures you control that share a color with it");
-    protected static final String CONSPIRE_ACTIVATION_KEY = "ConspireActivation";
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent("untapped creatures you control that share a color with it");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
-        filter.add(new SharesColorWithSourcePredicate());
+        filter.add(SharesColorWithSourcePredicate.instance);
         filter.add(CardType.CREATURE.getPredicate());
     }
 
     public enum ConspireTargets {
-        NONE,
-        ONE,
-        MORE
+        NONE(""),
+        ONE(" and you may choose a new target for the copy"),
+        MORE(" and you may choose new targets for the copy");
+        private final String message;
+
+        ConspireTargets(String message) {
+            this.message = message;
+        }
+
+        public String getReminder() {
+            return "as you cast this spell, you may tap two untapped creatures you control " +
+                    "that share a color with it. When you do, copy it" + message;
+        }
     }
 
     private final UUID conspireId;
-    private String reminderText;
-    private OptionalAdditionalCost conspireCost;
+    private UUID addedById = null;
+    private final String reminderText;
+    private final OptionalAdditionalCost conspireCost;
 
     /**
      * Unique Id for a ConspireAbility but may not change while a continuous
      * effect gives Conspire
      *
-     * @param conspireId
      * @param conspireTargets controls the content of the reminder text
      */
-    public ConspireAbility(UUID conspireId, ConspireTargets conspireTargets) {
+    public ConspireAbility(ConspireTargets conspireTargets) {
         super(Zone.STACK, null);
-        this.conspireId = conspireId;
-        switch (conspireTargets) {
-            case NONE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.";
-                break;
-            case ONE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.";
-                break;
-            case MORE:
-                reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.";
-                break;
-        }
-
-        Cost cost = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
-        cost.setText("");
-        addConspireCostAndSetup(new OptionalAdditionalCostImpl(keywordText, " ", reminderText, cost));
-
-        addSubAbility(new ConspireTriggeredAbility(conspireId));
-    }
-
-    private void addConspireCostAndSetup(OptionalAdditionalCost newCost) {
-        this.conspireCost = newCost;
+        this.conspireId = UUID.randomUUID();
+        reminderText = conspireTargets.getReminder();
+        this.conspireCost = new OptionalAdditionalCostImpl(
+                keywordText, " ", reminderText,
+                new TapTargetCost(new TargetControlledPermanent(2, filter))
+        );
         this.conspireCost.setCostType(VariableCostType.ADDITIONAL);
+        this.addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
     public ConspireAbility(final ConspireAbility ability) {
         super(ability);
         this.conspireId = ability.conspireId;
+        this.addedById = ability.addedById;
         this.conspireCost = ability.conspireCost.copy();
         this.reminderText = ability.reminderText;
     }
@@ -113,12 +107,8 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     @Override
     public void addCost(Cost cost) {
         if (conspireCost != null) {
-            ((Costs) conspireCost).add(cost);
+            ((Costs<Cost>) conspireCost).add(cost);
         }
-    }
-
-    public UUID getConspireId() {
-        return conspireId;
     }
 
     @Override
@@ -126,94 +116,67 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         throw new UnsupportedOperationException("Use ConspireAbility.isActivated(Ability ability, Game game) method instead!");
     }
 
-    public boolean isActivated(Ability ability, Game game) {
-        Set<UUID> activations = (Set<UUID>) game.getState().getValue(CONSPIRE_ACTIVATION_KEY + ability.getId());
-        if (activations != null) {
-            return activations.contains(getConspireId());
-        }
-        return false;
-    }
-
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(getControllerId());
-            if (player != null) {
-                resetConspire(ability, game);
-                // AI supports conspire
-                if (conspireCost.canPay(ability, this, getControllerId(), game)
-                        && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
-                    activateConspire(ability, game);
-                    for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext(); ) {
-                        Cost cost = (Cost) it.next();
-                        if (cost instanceof ManaCostsImpl) {
-                            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                        } else {
-                            ability.getCosts().add(cost.copy());
-                        }
-                    }
-                }
+        if (!(ability instanceof SpellAbility)) {
+            return;
+        }
+        Player player = game.getPlayer(getControllerId());
+        if (player == null) {
+            return;
+        }
+        // AI supports conspire
+        if (!conspireCost.canPay(ability, this, getControllerId(), game)
+                || !player.chooseUse(Outcome.Benefit, "Pay "
+                + conspireCost.getText(false) + " ?", ability, game)) {
+            return;
+        }
+        ability.getEffects().setValue("ConspireActivation" + conspireId + addedById, true);
+        for (Iterator<Cost> it = ((Costs<Cost>) conspireCost).iterator(); it.hasNext(); ) {
+            Cost cost = (Cost) it.next();
+            if (cost instanceof ManaCostsImpl) {
+                ability.getManaCostsToPay().add((ManaCostsImpl<?>) cost.copy());
+            } else {
+                ability.getCosts().add(cost.copy());
             }
-        }
-    }
-
-    private void activateConspire(Ability ability, Game game) {
-        Set<UUID> activations = (Set<UUID>) game.getState().getValue(CONSPIRE_ACTIVATION_KEY + ability.getId());
-        if (activations == null) {
-            activations = new HashSet<>();
-            game.getState().setValue(CONSPIRE_ACTIVATION_KEY + ability.getId(), activations);
-        }
-        activations.add(getConspireId());
-    }
-
-    private void resetConspire(Ability ability, Game game) {
-        Set<UUID> activations = (Set<UUID>) game.getState().getValue(CONSPIRE_ACTIVATION_KEY + ability.getId());
-        if (activations != null) {
-            activations.remove(getConspireId());
         }
     }
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        if (conspireCost != null) {
-            sb.append(conspireCost.getText(false));
-            sb.append(' ').append(conspireCost.getReminderText());
-        }
-        return sb.toString();
+        return "Conspire <i>(" + reminderText + ")</i>";
     }
 
     @Override
     public String getCastMessageSuffix() {
-        if (conspireCost != null) {
-            return conspireCost.getCastSuffixMessage(0);
-        } else {
-            return "";
-        }
+        return conspireCost != null ? conspireCost.getCastSuffixMessage(0) : "";
     }
 
-    public String getReminderText() {
-        if (conspireCost != null) {
-            return conspireCost.getReminderText();
-        } else {
-            return "";
-        }
+    public ConspireAbility setAddedById(UUID addedById) {
+        this.addedById = addedById;
+        CardUtil.castStream(
+                this.subAbilities.stream(),
+                ConspireTriggeredAbility.class
+        ).forEach(ability -> ability.setAddedById(addedById));
+        return this;
     }
 }
 
-class ConspireTriggeredAbility extends TriggeredAbilityImpl {
+class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
 
     private final UUID conspireId;
+    private UUID addedById = null;
 
     public ConspireTriggeredAbility(UUID conspireId) {
-        super(Zone.STACK, new ConspireEffect());
-        this.conspireId = conspireId;
+        super(new CopySourceSpellEffect(), false);
         this.setRuleVisible(false);
+        this.conspireId = conspireId;
     }
 
     private ConspireTriggeredAbility(final ConspireTriggeredAbility ability) {
         super(ability);
         this.conspireId = ability.conspireId;
+        this.addedById = ability.addedById;
     }
 
     @Override
@@ -222,73 +185,26 @@ class ConspireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
-            Spell spell = game.getStack().getSpell(event.getSourceId());
-            for (Ability ability : spell.getAbilities(game)) {
-                if (ability instanceof ConspireAbility
-                        && ((ConspireAbility) ability).getConspireId().equals(getConspireId())) {
-                    if (((ConspireAbility) ability).isActivated(spell.getSpellAbility(), game)) {
-                        for (Effect effect : this.getEffects()) {
-                            if (effect instanceof ConspireEffect) {
-                                ((ConspireEffect) effect).setConspiredSpell(spell);
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
+        if (!super.checkTrigger(event, game)) {
+            return false;
         }
-        return false;
-    }
-
-    public UUID getConspireId() {
-        return conspireId;
+        Spell spell = game.getStack().getSpell(event.getSourceId());
+        return spell != null
+                && spell
+                .getSpellAbility()
+                .getEffects()
+                .stream()
+                .map(effect -> effect.getValue("ConspireActivation" + conspireId + addedById))
+                .anyMatch(Objects::nonNull);
     }
 
     @Override
     public String getRule() {
         return "When you pay the conspire costs, copy it and you may choose a new target for the copy.";
     }
-}
 
-class ConspireEffect extends OneShotEffect {
-
-    private Spell conspiredSpell;
-
-    public ConspireEffect() {
-        super(Outcome.Copy);
-    }
-
-    public ConspireEffect(final ConspireEffect effect) {
-        super(effect);
-        this.conspiredSpell = effect.conspiredSpell;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && conspiredSpell != null) {
-            Card card = game.getCard(conspiredSpell.getSourceId());
-            if (card != null) {
-                conspiredSpell.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void setConspiredSpell(Spell conspiredSpell) {
-        this.conspiredSpell = conspiredSpell;
-    }
-
-    @Override
-    public ConspireEffect copy() {
-        return new ConspireEffect(this);
+    public void setAddedById(UUID addedById) {
+        this.addedById = addedById;
     }
 }

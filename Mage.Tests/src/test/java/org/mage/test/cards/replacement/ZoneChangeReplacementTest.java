@@ -75,7 +75,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, 3); // Diabolic Edict + Bridge from Below + Silvercoat Lion
-        assertPermanentCount(playerA, "Zombie", 1); // Silvercoat Lion goes to graveyard so a Zombie tokes is created
+        assertPermanentCount(playerA, "Zombie Token", 1); // Silvercoat Lion goes to graveyard so a Zombie tokes is created
 
     }
 
@@ -99,7 +99,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, 2); // Diabolic Edict + Bridge from Below
-        assertPermanentCount(playerA, "Zombie", 0); // Progenitus never touches graveyard - so no Zombie tokes is created
+        assertPermanentCount(playerA, "Zombie Token", 0); // Progenitus never touches graveyard - so no Zombie tokes is created
 
     }
 

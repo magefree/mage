@@ -73,7 +73,7 @@ class AcolyteOfAfflictionEffect extends OneShotEffect {
         }
         player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.GRAVEYARD, source, game);
         TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
-        if (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+        if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

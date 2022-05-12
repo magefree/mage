@@ -22,7 +22,6 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -50,7 +49,7 @@ public final class StensiaMasquerade extends CardImpl {
         this.addAbility(new StensiaMasqueradeTriggeredAbility());
 
         // Madness {2}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{R}")));
     }
 
     private StensiaMasquerade(final StensiaMasquerade card) {

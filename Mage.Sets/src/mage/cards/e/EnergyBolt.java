@@ -24,8 +24,7 @@ public final class EnergyBolt extends CardImpl {
         // Choose one - Energy Bolt deals X damage to target player; or target player gains X life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new GainLifeTargetEffect(ManacostVariableValue.REGULAR));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

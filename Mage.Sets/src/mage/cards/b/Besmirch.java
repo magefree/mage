@@ -1,9 +1,6 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -20,8 +17,9 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Besmirch extends CardImpl {
@@ -66,24 +64,19 @@ class BesmirchEffect extends OneShotEffect {
             TargetPointer target = new FixedTarget(source.getFirstTarget(), game);
 
             // gain control
-            ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-            effect.setTargetPointer(target);
-            game.addEffect(effect, source);
+            game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
+                    .setTargetPointer(target), source);
 
             // haste
-            effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-            effect.setTargetPointer(target);
-            game.addEffect(effect, source);
+            game.addEffect(new GainAbilityTargetEffect(
+                    HasteAbility.getInstance(), Duration.EndOfTurn
+            ).setTargetPointer(target), source);
 
             // goad
-            Effect effect2 = new GoadTargetEffect();
-            effect2.setTargetPointer(target);
-            effect2.apply(game, source);
+            game.addEffect(new GoadTargetEffect().setTargetPointer(target), source);
 
             // untap
-            effect2 = new UntapTargetEffect();
-            effect2.setTargetPointer(target);
-            effect2.apply(game, source);
+            new UntapTargetEffect().setTargetPointer(target).apply(game, source);
 
             return true;
         }

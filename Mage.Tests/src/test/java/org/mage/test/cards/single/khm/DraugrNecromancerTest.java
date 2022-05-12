@@ -136,7 +136,7 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
 
         assertExileCount(playerB, pair, 1);
         assertGraveyardCount(playerB, pair, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test
@@ -179,7 +179,7 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
 
         assertExileCount(playerB, pair, 1);
         assertGraveyardCount(playerB, pair, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test

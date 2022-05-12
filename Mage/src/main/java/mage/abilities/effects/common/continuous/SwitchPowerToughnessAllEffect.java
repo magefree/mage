@@ -44,7 +44,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                for (Permanent perm :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent perm :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }            
@@ -67,7 +67,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
                     }                    
                 }                
             } else {
-                for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     int power = creature.getPower().getValue();
                     creature.getPower().setValue(creature.getToughness().getValue());
                     creature.getToughness().setValue(power);                    

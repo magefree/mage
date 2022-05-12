@@ -7,8 +7,7 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.Arrays;
 
@@ -17,14 +16,8 @@ import java.util.Arrays;
  */
 public final class PursuedWhaleToken extends TokenImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public PursuedWhaleToken() {
-        super("Pirate", "1/1 red Pirate creature token with \"This creature can't block\" and \"Creatures you control attack each combat if able.\"");
+        super("Pirate Token", "1/1 red Pirate creature token with \"This creature can't block\" and \"Creatures you control attack each combat if able.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.PIRATE);
@@ -33,9 +26,7 @@ public final class PursuedWhaleToken extends TokenImpl {
 
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield)
                 .setText("this creature can't block")));
-        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(
-                filter, Duration.WhileOnBattlefield, true
-        )));
+        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
 
         availableImageSetCodes = Arrays.asList("M21");
     }

@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.Token;
@@ -37,7 +36,7 @@ public final class PonybackBrigade extends CardImpl {
         this.addAbility(new PonybackBrigadeAbility(new GoblinToken()));
 
         // Morph {2}{R}{W}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}{W}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}{W}{B}")));
     }
 
     private PonybackBrigade(final PonybackBrigade card) {

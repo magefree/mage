@@ -56,7 +56,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && counter != null) {
             int affectedTargets = 0;
             for (UUID uuid : targetPointer.getTargets(game, source)) {
@@ -119,6 +119,9 @@ public class AddCountersTargetEffect extends OneShotEffect {
         Target target = mode.getTargets().getEffectTarget(this.targetPointer);
         if (target != null) {
             if (target.getNumberOfTargets() == 0) {
+                if (target.getMaxNumberOfTargets() > 1) {
+                    sb.append("each of ");
+                }
                 sb.append("up to ");
             }
 

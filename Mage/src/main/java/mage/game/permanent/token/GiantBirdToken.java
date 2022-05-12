@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class GiantBirdToken extends TokenImpl {
 
     public GiantBirdToken() {
-        super("Giant Bird", "4/4 red Giant Bird creature token");
+        super("Giant Bird Token", "4/4 red Giant Bird creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GIANT);

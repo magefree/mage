@@ -84,7 +84,7 @@ class OrzhovAdvokistEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(outcome, "Put two +1/+1 counters on a creature you control?", source, game)) {
                         Target target = new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature you control (to add two +1/+1 counters on it)"));
-                        if (player.choose(outcome, target, playerId, game)) {
+                        if (player.choose(outcome, target, source, game)) {
                             creatures.add(target.getFirstTarget());
                             players.add(player.getId());
                         }

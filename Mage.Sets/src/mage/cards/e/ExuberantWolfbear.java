@@ -55,7 +55,7 @@ class ExuberantWolfbearEffect extends OneShotEffect {
 
     ExuberantWolfbearEffect() {
         super(Outcome.Benefit);
-        staticText = "change the base power and toughness of target Human you control " +
+        staticText = "you may change the base power and toughness of target Human you control " +
                 "to {this}'s power and toughness until end of turn";
     }
 

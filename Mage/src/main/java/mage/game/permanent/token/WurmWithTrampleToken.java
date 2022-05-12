@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WurmWithTrampleToken extends TokenImpl {
 
     public WurmWithTrampleToken() {
-        super("Wurm", "5/5 green Wurm creature token with trample");
+        super("Wurm Token", "5/5 green Wurm creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WURM);

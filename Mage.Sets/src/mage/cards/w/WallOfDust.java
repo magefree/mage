@@ -3,7 +3,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class WallOfDust extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Wall of Dust blocks a creature, that creature can't attack during its controller's next turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new WallOfDustRestrictionEffect(), false, true));
+        this.addAbility(new BlocksCreatureTriggeredAbility(new WallOfDustRestrictionEffect()));
     }
 
     private WallOfDust(final WallOfDust card) {

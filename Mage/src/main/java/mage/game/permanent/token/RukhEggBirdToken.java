@@ -17,7 +17,7 @@ public final class RukhEggBirdToken extends TokenImpl {
     }
 
     public RukhEggBirdToken(String setCode) {
-        super("Bird", "4/4 red Bird creature token with flying");
+        super("Bird Token", "4/4 red Bird creature token with flying");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);

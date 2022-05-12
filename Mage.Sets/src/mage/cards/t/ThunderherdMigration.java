@@ -32,9 +32,9 @@ public final class ThunderherdMigration extends CardImpl {
 
         // As an additional cost to cast Thunderherd Migration, reveal a Dinosaur card from your hand or pay {1}.
         this.getSpellAbility().addCost(new OrCost(
-                new RevealTargetFromHandCost(new TargetCardInHand(filter)),
-                new GenericManaCost(1),
-                "reveal a Dinosaur card from your hand or pay {1}"));
+                "reveal a Dinosaur card from your hand or pay {1}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
+                new GenericManaCost(1)
+        ));
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));

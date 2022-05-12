@@ -73,7 +73,7 @@ class ArchfiendOfDepravityEffect extends OneShotEffect {
             List<Permanent> creaturesToSacrifice = new ArrayList<>();
             TargetControlledPermanent target = new TargetControlledPermanent(0, 2, new FilterControlledCreaturePermanent("creatures to keep"), true);
             if (opponent.chooseTarget(outcome, target, source, game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
                     if (permanent != null && !target.getTargets().contains(permanent.getId())) {
                         creaturesToSacrifice.add(permanent);
                     }

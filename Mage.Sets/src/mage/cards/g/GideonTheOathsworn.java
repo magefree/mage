@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -35,7 +34,7 @@ public final class GideonTheOathsworn extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // Whenever you attack with two or more non-Gideon creatures, put a +1/+1 counter on each of those creatures.
         this.addAbility(new GideonTheOathswornTriggeredAbility());

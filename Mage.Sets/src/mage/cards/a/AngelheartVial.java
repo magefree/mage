@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,14 +20,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class AngelheartVial extends CardImpl {
 
     public AngelheartVial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Whenever you're dealt damage, you may put that many charge counters on Angelheart Vial.
         this.addAbility(new AngelheartVialTriggeredAbility());
@@ -36,8 +36,8 @@ public final class AngelheartVial extends CardImpl {
         // {2}, {tap}, Remove four charge counters from Angelheart Vial: You gain 2 life and draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4))));
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4)));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -82,7 +82,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you are dealt damage, you may put that many charge counters on {this}.";
+        return "Whenever you're dealt damage, you may put that many charge counters on {this}.";
     }
 }
 

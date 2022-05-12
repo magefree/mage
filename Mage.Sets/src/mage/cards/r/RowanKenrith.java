@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
@@ -33,7 +32,7 @@ public final class RowanKenrith extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: During target player's next turn, each creature that player controls attacks if able.
         LoyaltyAbility ability = new LoyaltyAbility(new RowanKenrithAttackEffect(), 2);

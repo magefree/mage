@@ -189,7 +189,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
 
         ObjectColor permanentColor;
 
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         for (Permanent permanent : permanents) {
             permanentColor = permanent.getColor(game);

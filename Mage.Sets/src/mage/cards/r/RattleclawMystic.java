@@ -36,7 +36,7 @@ public final class RattleclawMystic extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Morph {2}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}")));
         
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(0, 1, 0, 1,1, 0,0, 0))));

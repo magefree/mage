@@ -2,12 +2,11 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.InstantSorceryExileGraveyardCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
@@ -15,8 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.command.emblems.RalIzzetViceroyEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -36,15 +33,10 @@ public final class RalIzzetViceroy extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-        this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(2), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false
-                ), 1
-        ));
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD), 1));
 
         // -3: Ral, Izzet Viceroy deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
         Ability ability = new LoyaltyAbility(new DamageTargetEffect(

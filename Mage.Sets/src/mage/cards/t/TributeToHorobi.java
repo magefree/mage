@@ -55,7 +55,7 @@ class TributeToHorobiTokenEffect extends OneShotEffect {
 
     public TributeToHorobiTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each opponent creates a 1/1 black Rat Rouge creature token";
+        this.staticText = "Each opponent creates a 1/1 black Rat Rogue creature token";
     }
 
     private TributeToHorobiTokenEffect(final TributeToHorobiTokenEffect effect) {

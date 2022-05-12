@@ -81,8 +81,8 @@ class EquipoiseEffect extends OneShotEffect {
     private void phaseOutCardType(Player controller, Player targetPlayer, CardType cardType, Ability source, Game game) {
         FilterPermanent filter = new FilterControlledPermanent();
         filter.add(cardType.getPredicate());
-        int numberController = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
-        int numberTargetPlayer = game.getBattlefield().count(filter, source.getSourceId(), targetPlayer.getId(), game);
+        int numberController = game.getBattlefield().count(filter, controller.getId(), source, game);
+        int numberTargetPlayer = game.getBattlefield().count(filter, targetPlayer.getId(), source, game);
         int excess = numberTargetPlayer - numberController;
         if (excess > 0) {
             FilterPermanent filterChoose = new FilterPermanent(cardType.toString().toLowerCase(Locale.ENGLISH) + (excess > 1 ? "s" : "") + " of target player");

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -28,10 +27,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class ThornbiteStaff extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a Shaman creature");
-    static {
-        filter.add(SubType.SHAMAN.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SHAMAN, "a Shaman creature");
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");

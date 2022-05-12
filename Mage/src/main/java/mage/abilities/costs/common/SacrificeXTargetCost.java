@@ -14,22 +14,29 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SacrificeXTargetCost extends VariableCostImpl {
 
-    protected FilterControlledPermanent filter;
+    protected final FilterControlledPermanent filter;
+    private final int minValue;
 
     public SacrificeXTargetCost(FilterControlledPermanent filter) {
         this(filter, false);
     }
 
     public SacrificeXTargetCost(FilterControlledPermanent filter, boolean useAsAdditionalCost) {
+        this(filter, useAsAdditionalCost, 0);
+    }
+
+    public SacrificeXTargetCost(FilterControlledPermanent filter, boolean useAsAdditionalCost, int minValue) {
         super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
                 filter.getMessage() + " to sacrifice");
         this.text = (useAsAdditionalCost ? "as an additional cost to cast this spell, sacrifice " : "Sacrifice ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
+        this.minValue = minValue;
     }
 
     public SacrificeXTargetCost(final SacrificeXTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
+        this.minValue = cost.minValue;
     }
 
     @Override
@@ -38,8 +45,13 @@ public class SacrificeXTargetCost extends VariableCostImpl {
     }
 
     @Override
+    public int getMinValue(Ability source, Game game) {
+        return minValue;
+    }
+
+    @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        return game.getBattlefield().count(filter, source.getControllerId(), source, game);
     }
 
     @Override
@@ -47,7 +59,7 @@ public class SacrificeXTargetCost extends VariableCostImpl {
         TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
         return new SacrificeTargetCost(target);
     }
-    
+
     public Filter getFilter() {
         return filter;
     }

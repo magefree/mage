@@ -81,7 +81,7 @@ class PlaneboundAccompliceEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (!controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

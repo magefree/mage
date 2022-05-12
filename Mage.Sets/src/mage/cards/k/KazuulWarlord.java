@@ -19,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class KazuulWarlord extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creature you control");
 
     static {
         filter.add(SubType.ALLY.getPredicate());
@@ -35,7 +35,7 @@ public final class KazuulWarlord extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true).setAbilityWord(null));
     }
 
     private KazuulWarlord(final KazuulWarlord card) {

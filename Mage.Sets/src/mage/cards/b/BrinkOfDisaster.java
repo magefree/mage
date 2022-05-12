@@ -43,7 +43,7 @@ public final class BrinkOfDisaster extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted permanent becomes tapped, destroy it.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted permanent"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "").setTriggerPhrase("When enchanted permanent becomes tapped, "));
     }
 
     private BrinkOfDisaster(final BrinkOfDisaster card) {

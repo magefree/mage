@@ -14,7 +14,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class FlurryOfHornsMinotaurToken extends TokenImpl {
 
     public FlurryOfHornsMinotaurToken() {
-        super("Minotaur", "2/3 red Minotaur creature tokens with haste");
+        super("Minotaur Token", "2/3 red Minotaur creature tokens with haste");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);

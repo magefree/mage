@@ -26,8 +26,7 @@ public final class Winterflame extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("tap"));
         // * Winterflame deals 2 damage to target creature
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(2));
+        Mode mode = new Mode(new DamageTargetEffect(2));
         mode.addTarget(new TargetCreaturePermanent().withChooseHint("deals 2 damage to"));
         this.getSpellAbility().addMode(mode);
 

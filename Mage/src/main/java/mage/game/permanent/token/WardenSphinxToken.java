@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class WardenSphinxToken extends TokenImpl {
 
     public WardenSphinxToken() {
-        super("Sphinx", "4/4 white and blue Sphinx creature token with flying and vigilance");
+        super("Sphinx Token", "4/4 white and blue Sphinx creature token with flying and vigilance");
         this.setOriginalExpansionSetCode("RNA");
         color.setWhite(true);
         color.setBlue(true);

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PhyrexianGermToken extends TokenImpl {
 
     public PhyrexianGermToken() {
-        super("Phyrexian Germ", "0/0 black Phyrexian Germ creature token");
+        super("Phyrexian Germ Token", "0/0 black Phyrexian Germ creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PHYREXIAN);
@@ -20,7 +20,7 @@ public final class PhyrexianGermToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("C14", "C15", "MBS", "MM2", "NPH", "PC2", "MH2");
+        availableImageSetCodes = Arrays.asList("C14", "C15", "MBS", "MM2", "NPH", "PC2", "MH2", "NEC", "2XM");
     }
 
     @Override

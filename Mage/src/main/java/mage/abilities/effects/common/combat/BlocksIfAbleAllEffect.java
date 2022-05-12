@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -23,11 +22,8 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
 
     public BlocksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
-        staticText = new StringBuilder(filter.getMessage())
-                .append(" block ")
-                .append(duration == Duration.EndOfTurn ? "this":"each")
-                .append(" turn if able").toString();
         this.filter = filter;
+        staticText = filter.getMessage() + " block " + (duration == Duration.EndOfTurn ? "this turn" : "each combat") + " if able";
     }
     public BlocksIfAbleAllEffect(final BlocksIfAbleAllEffect effect) {
         super(effect);
@@ -41,7 +37,7 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
     
     @Override
@@ -58,7 +54,4 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
     public boolean mustAttack(Game game) {
         return false;
     }
-
-
-
 }

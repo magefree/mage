@@ -83,7 +83,7 @@ public class ChangelingTest extends CardTestPlayerBase {
      * NOTE: As of 05/06/2017 this test is failing due to a bug in code.
      * See issue #3316
      * <p>
-     * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "snake" type
+     * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "Snake Token" type
      */
     @Test
     public void kasetoOrochiArchmageSnakeTest() {

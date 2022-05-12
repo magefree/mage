@@ -35,7 +35,7 @@ public final class ShieldedAetherThief extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Shield Aether Thief blocks, you get {E}.
-        this.addAbility(new BlocksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(1), false));
 
         // {T}, Pay {E}{E}{E}: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());

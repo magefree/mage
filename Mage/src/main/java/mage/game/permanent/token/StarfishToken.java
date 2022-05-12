@@ -15,7 +15,7 @@ public final class StarfishToken extends TokenImpl {
     }
 
     public StarfishToken(String setCode, int tokenType) {
-        super("Starfish", "0/1 blue Starfish creature token");
+        super("Starfish Token", "0/1 blue Starfish creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.STARFISH);
         color.setBlue(true);

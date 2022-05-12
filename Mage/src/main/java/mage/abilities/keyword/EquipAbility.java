@@ -3,7 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.EquipEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
@@ -39,7 +39,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     }
 
     public EquipAbility(Outcome outcome, Cost cost, Target target, boolean showAbilityHint) {
-        super(Zone.BATTLEFIELD, new EquipEffect(outcome), cost);
+        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
         this.showAbilityHint = showAbilityHint;

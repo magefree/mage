@@ -60,7 +60,7 @@ public final class HowlpackAvenger extends CardImpl {
 class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
 
     HowlpackAvengerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.instance));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
         this.addTarget(new TargetAnyTarget());
     }
 
@@ -91,11 +91,11 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().setValue("damage", damage);
-        return false;
+        return true;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a permanent you control is dealt damage, {this} deals that much damage to any target.";
+    public String getTriggerPhrase() {
+        return "Whenever a permanent you control is dealt damage, ";
     }
 }

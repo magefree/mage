@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +24,7 @@ public final class DovinArchitectOfLaw extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: You gain 2 life and draw a card.
         Ability ability = new LoyaltyAbility(new GainLifeEffect(2), 1);

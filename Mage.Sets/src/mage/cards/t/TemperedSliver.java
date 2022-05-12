@@ -31,7 +31,7 @@ public final class TemperedSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false,"Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.",false
-                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS
         )));
     }
 

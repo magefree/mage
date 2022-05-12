@@ -6,7 +6,7 @@ import mage.constants.SubType;
 
 public final class DinosaurCatToken extends TokenImpl {
     public DinosaurCatToken() {
-        super("Dinosaur Cat", "2/2 red and white Dinosaur Cat creature token");
+        super("Dinosaur Cat Token", "2/2 red and white Dinosaur Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setWhite(true);

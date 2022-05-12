@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class ConstructRedToken extends TokenImpl {
 
     public ConstructRedToken() {
-        super("Construct token", "3/1 red Construct artifact creature token with haste");
+        super("Construct Token", "3/1 red Construct artifact creature token with haste");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
@@ -19,6 +19,15 @@ public final class ConstructRedToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(2);
+        }
     }
 
     public ConstructRedToken(final ConstructRedToken token) {

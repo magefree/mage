@@ -91,7 +91,7 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
         }
         // Or a creature card leaves your graveyard
         return zEvent.getFromZone() == Zone.GRAVEYARD
-                && zEvent.getPlayerId() == this.getControllerId();
+                && card.isOwnedBy(this.getControllerId());
     }
 
     @Override

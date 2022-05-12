@@ -44,8 +44,7 @@ public final class InciteWar extends CardImpl {
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
         // or creatures you control gain first strike until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
+        Mode mode = new Mode(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}

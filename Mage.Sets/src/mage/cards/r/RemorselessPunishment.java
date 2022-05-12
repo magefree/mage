@@ -79,10 +79,10 @@ class RemorselessPunishmentEffect extends OneShotEffect {
                 return;
             }
         }
-        if (game.getBattlefield().containsControlled(filter, source.getSourceId(), opponent.getId(), game, 1)) {
+        if (game.getBattlefield().containsControlled(filter, source.getSourceId(), opponent.getId(), source, game, 1)) {
             if (opponent.chooseUse(outcome, "Choose your " + iteration + " punishment.", null, "Sacrifice a creature or planeswalker", "Lose 5 life", source, game)) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-                if (target.choose(Outcome.Sacrifice, opponent.getId(), source.getId(), game)) {
+                if (target.choose(Outcome.Sacrifice, opponent.getId(), source.getId(), source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {

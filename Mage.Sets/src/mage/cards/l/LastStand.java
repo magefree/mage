@@ -79,27 +79,27 @@ class LastStandEffect extends OneShotEffect {
             // Target opponent loses 2 life for each Swamp you control
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
-                int swamps = game.getBattlefield().count(filterSwamp, source.getSourceId(), source.getControllerId(), game);
+                int swamps = game.getBattlefield().count(filterSwamp, source.getControllerId(), source, game);
                 opponent.loseLife(swamps * 2, game, source, false);
             }
             // Last Stand deals damage equal to the number of Mountains you control to target creature.
             Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (creature != null) {
-                int mountains = game.getBattlefield().count(filterMountain, source.getSourceId(), source.getControllerId(), game);
+                int mountains = game.getBattlefield().count(filterMountain, source.getControllerId(), source, game);
                 if (mountains > 0) {
                     creature.damage(mountains, source.getSourceId(), source, game, false, true);
                 }
             }
             // Create a 1/1 green Saproling creature token for each Forest you control.
-            int forests = game.getBattlefield().count(filterForest, source.getSourceId(), source.getControllerId(), game);
+            int forests = game.getBattlefield().count(filterForest, source.getControllerId(), source, game);
             if (forests > 0) {
                 new CreateTokenEffect(new SaprolingToken(), forests).apply(game, source);
             }
             // You gain 2 life for each Plains you control.
-            int plains = game.getBattlefield().count(filterPlains, source.getSourceId(), source.getControllerId(), game);
+            int plains = game.getBattlefield().count(filterPlains, source.getControllerId(), source, game);
             controller.gainLife(plains * 2, game, source);
             // Draw a card for each Island you control, then discard that many cards
-            int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
+            int islands = game.getBattlefield().count(filterIsland, source.getControllerId(), source, game);
             if (islands > 0) {
                 controller.drawCards(islands, source, game);
                 controller.discard(islands, false, false, source, game);

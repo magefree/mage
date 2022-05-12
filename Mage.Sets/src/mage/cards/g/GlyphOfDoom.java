@@ -108,7 +108,7 @@ class GlyphOfDoomEffect extends OneShotEffect {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 List<Permanent> toDestroy = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetCreature.getSourceId())) {
                         if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game)) {
                             toDestroy.add(creature);

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class PegasusToken2 extends TokenImpl {
 
     public PegasusToken2() {
-        super("Pegasus", "2/2 white Pegasus creature token with flying");
+        super("Pegasus Token", "2/2 white Pegasus creature token with flying");
         this.cardType.add(CardType.CREATURE);
         this.color.setWhite(true);
         this.subtype.add(SubType.PEGASUS);

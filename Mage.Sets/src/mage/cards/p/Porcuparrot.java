@@ -32,9 +32,12 @@ public final class Porcuparrot extends CardImpl {
         this.addAbility(new MutateAbility(this, "{2}{R}"));
 
         // {T}: This creature deals X damage to any target, where X is the number of times this creature has mutated.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(
-                SourceMutatedCount.instance, "this creature"
-        ), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(SourceMutatedCount.instance)
+                        .setText("this creature deals X damage to any target, " +
+                                "where X is the number of times this creature has mutated"),
+                new TapSourceCost()
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

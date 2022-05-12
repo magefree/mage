@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class SvyelunOfSeaAndSky extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.MERFOLK, "other Merfolk");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.MERFOLK);
 
     static {
         filter.add(AnotherPredicate.instance);

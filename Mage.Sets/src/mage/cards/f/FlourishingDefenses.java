@@ -12,6 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElfWarriorToken;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -60,7 +61,10 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.M1M1.getName())) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            Permanent permanent = Optional
+                    .ofNullable(game.getPermanentOrLKIBattlefield(event.getTargetId()))
+                    .orElse(game.getPermanentEntering(event.getTargetId()));
+
             return permanent != null && permanent.isCreature(game);
         }
         return false;

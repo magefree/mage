@@ -8,7 +8,7 @@ import mage.constants.SubType;
 public final class WallOfResurgenceToken extends TokenImpl {
 
     public WallOfResurgenceToken() {
-        super("", "0/0 Elemental creature with haste");
+        super(" Token", "0/0 Elemental creature with haste");
         this.cardType.add(CardType.CREATURE);
 
         this.subtype.add(SubType.ELEMENTAL);

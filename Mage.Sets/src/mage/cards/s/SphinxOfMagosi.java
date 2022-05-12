@@ -31,7 +31,7 @@ public final class SphinxOfMagosi extends CardImpl {
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{U}"));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy(", then"));
         this.addAbility(ability);
     }
 

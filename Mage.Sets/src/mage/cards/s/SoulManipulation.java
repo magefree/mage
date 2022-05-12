@@ -29,8 +29,7 @@ public final class SoulManipulation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE).withChooseHint("counter it"));
 
         // and/or return target creature card from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD).withChooseHint("return it to hand"));
         this.getSpellAbility().addMode(mode);
 

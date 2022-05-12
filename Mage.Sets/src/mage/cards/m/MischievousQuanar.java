@@ -38,7 +38,7 @@ public final class MischievousQuanar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{U}{U}")));
 
         // Morph {1}{U}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}{U}")));
 
         // When Mischievous Quanar is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
         Effect effect2 = new CopyTargetSpellEffect();

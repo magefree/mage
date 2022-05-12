@@ -15,7 +15,7 @@ public final class RitualOfTheReturnedZombieToken extends TokenImpl {
         this(1,1);
     }
     public RitualOfTheReturnedZombieToken(int power, int toughness) {
-        super("Zombie", "black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
+        super("Zombie Token", "black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

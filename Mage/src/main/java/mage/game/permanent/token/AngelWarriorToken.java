@@ -10,7 +10,7 @@ import java.util.Arrays;
 public final class AngelWarriorToken extends TokenImpl {
 
     public AngelWarriorToken() {
-        super("Angel Warrior", "4/4 white Angel Warrior creature token with flying");
+        super("Angel Warrior Token", "4/4 white Angel Warrior creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.ANGEL);

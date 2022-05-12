@@ -66,7 +66,7 @@ enum AspectOfWolfValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int forestCount = game.getBattlefield().count(
-                filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                filter, sourceAbility.getControllerId(), sourceAbility, game
         );
         return forestCount / 2 + (up ? forestCount % 2 : 0);
     }

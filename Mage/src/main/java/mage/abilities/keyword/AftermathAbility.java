@@ -6,8 +6,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCardHalf;
+import mage.cards.SubCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -154,14 +153,10 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
             // If branch so that we also support putting Aftermath on
             // non-split cards for... whatever reason, in case somebody
             // wants to do that in the future.
-            UUID sourceId = source.getSourceId();
+            UUID sourceId = source != null ? source.getSourceId() : null;
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard instanceof SplitCardHalf) {
-                sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
-                sourceId = sourceCard.getId();
-            }
-            if (sourceCard instanceof ModalDoubleFacesCardHalf) {
-                sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
+            if (sourceCard instanceof SubCard) {
+                sourceCard = ((SubCard<?>) sourceCard).getParentCard();
                 sourceId = sourceCard.getId();
             }
 
@@ -178,11 +173,8 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard instanceof SplitCardHalf) {
-            sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
-        }
-        if (sourceCard instanceof ModalDoubleFacesCardHalf) {
-            sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
+        if (sourceCard instanceof SubCard) {
+            sourceCard = ((SubCard<?>) sourceCard).getParentCard();
         }
         if (sourceCard != null) {
             Player player = game.getPlayer(sourceCard.getOwnerId());

@@ -34,7 +34,7 @@ public class HighestCMCOfPermanentValue implements DynamicValue {
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield()
-                    .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility.getSourceId(), game)) {
+                    .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)) {
                 if ((!onlyIfCanBeSacrificed || controller.canPaySacrificeCost(permanent, sourceAbility, sourceAbility.getControllerId(), game))
                         && permanent.getManaValue() > value) {
                     value = permanent.getManaValue();

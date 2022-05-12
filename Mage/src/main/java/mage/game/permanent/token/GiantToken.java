@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class GiantToken extends TokenImpl {
 
     public GiantToken() {
-        super("Giant", "4/4 red Giant creature token");
+        super("Giant Token", "4/4 red Giant creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GIANT);
         color.setRed(true);

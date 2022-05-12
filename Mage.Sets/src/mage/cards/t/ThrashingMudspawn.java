@@ -35,7 +35,7 @@ public final class ThrashingMudspawn extends CardImpl {
         this.addAbility(ability);
 
         // Morph {1}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}{B}")));
 
     }
 

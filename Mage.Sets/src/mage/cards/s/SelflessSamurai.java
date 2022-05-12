@@ -13,7 +13,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -22,6 +25,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SelflessSamurai extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another target creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public SelflessSamurai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -42,7 +52,7 @@ public final class SelflessSamurai extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
