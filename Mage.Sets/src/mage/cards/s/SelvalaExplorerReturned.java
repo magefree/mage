@@ -80,8 +80,12 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         // but Selvala's ability can't be reversed.
         // Whatever mana that ability produced will be in your mana pool and each player will have drawn a card.
         // (2014-05-29)
-
         int maxPotentialGreenMana = 0;
+        List<Mana> netMana = new ArrayList<>();
+
+        if (game == null) {
+            return netMana;
+        }
 
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -95,7 +99,6 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
             }
         }
 
-        List<Mana> netMana = new ArrayList<>();
         netMana.add(Mana.GreenMana(maxPotentialGreenMana));
 
         return netMana;
