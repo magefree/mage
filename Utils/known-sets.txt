@@ -228,6 +228,7 @@ Urza's Legacy|UrzasLegacy|
 Urza's Saga|UrzasSaga|
 Vintage Masters|VintageMasters|
 Visions|Visions|
+Warhammer 40,000|Warhammer40000|
 War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
