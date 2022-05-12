@@ -70,7 +70,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
         player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
         TargetCard target = new JourneyForTheElixirGraveyardTarget(cards);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         cards.addAll(target.getTargets());
         player.revealCards(source, cards, game);
         player.moveCards(cards, Zone.HAND, source, game);
@@ -177,8 +177,8 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Cards alreadyTargeted = new CardsImpl(this.getTargets());
         alreadyTargeted.addAll(cards);
         boolean hasBasic = alreadyTargeted

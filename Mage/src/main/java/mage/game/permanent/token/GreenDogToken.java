@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class GreenDogToken extends TokenImpl {
 
     public GreenDogToken() {
-        super("Dog", "1/1 green Dog creature token");
+        super("Dog Token", "1/1 green Dog creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DOG);
 

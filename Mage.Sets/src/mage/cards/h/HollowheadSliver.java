@@ -36,7 +36,7 @@ public final class HollowheadSliver extends CardImpl {
         ability.addCost(new DiscardCardCost());
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 ability, Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
+                StaticFilters.FILTER_PERMANENT_SLIVERS
         )));
     }
 

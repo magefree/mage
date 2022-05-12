@@ -80,7 +80,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && opponent != null) {
             if (opponent.getLibrary().hasCards()) {
                 Library library = opponent.getLibrary();

@@ -1,4 +1,3 @@
-
 package mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
@@ -6,34 +5,32 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North
  */
 public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private TargetController targetController;
-    private Condition condition;
+    private final TargetController targetController;
+    private final Condition condition;
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect) {
         this(effect, TargetController.ANY);
     }
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController) {
-        this(Zone.ALL, effect, targetController);
+        this(effect, targetController, null);
     }
 
-    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController) {
-        this(zone, effect, targetController, null);
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController, Condition condition) {
+        this(effect, targetController, condition, false);
     }
 
-    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition condition) {
-        super(effect, Duration.Custom);
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController, Condition condition, boolean optional) {
+        super(effect, Duration.Custom, true, optional);
         this.zone = zone;
         this.targetController = targetController;
         this.condition = condition;
@@ -52,32 +49,33 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean correctEndPhase = false;
         switch (targetController) {
             case ANY:
-                correctEndPhase = true;
                 break;
             case YOU:
-                correctEndPhase = event.getPlayerId().equals(this.controllerId);
+                if (!isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
                 break;
             case OPPONENT:
-                if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-                    correctEndPhase = true;
+                if (!game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+                    return false;
                 }
                 break;
             case CONTROLLER_ATTACHED_TO:
-                Permanent attachment = game.getPermanent(sourceId);
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
-                        correctEndPhase = true;
-                    }
+                Permanent attachment = game.getPermanent(getSourceId());
+                if (attachment == null || attachment.getAttachedTo() == null) {
+                    return false;
                 }
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                if (attachedTo == null || !attachedTo.isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("TargetController not supported");
         }
-        if (correctEndPhase) {
-            return !(condition != null && !condition.apply(game, this));
-        }
-        return false;
+        return condition == null || condition.apply(game, this);
     }
 
     @Override
@@ -86,23 +84,17 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     }
 
     @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder();
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                sb.append("At the beginning of your next end step, ");
-                break;
+                return "At the beginning of your next end step, ";
             case OPPONENT:
-                sb.append("At the beginning of an opponent's next end step, ");
-                break;
+                return "At the beginning of an opponent's next end step, ";
             case ANY:
-                sb.append("At the beginning of the next end step, ");
-                break;
+                return "At the beginning of the next end step, ";
             case CONTROLLER_ATTACHED_TO:
-                sb.append("At the beginning of the next end step of enchanted creature's controller, ");
-                break;
+                return "At the beginning of the next end step of enchanted creature's controller, ";
         }
-        sb.append(getEffects().getText(modes.getMode()));
-        return sb.toString();
+        throw new UnsupportedOperationException("TargetController not supported");
     }
 }

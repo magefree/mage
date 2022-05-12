@@ -31,8 +31,11 @@ public final class BarbedShocker extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in their hand, then draws that many cards.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new BarbedShockerEffect(), false, true));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
+                new BarbedShockerEffect(), false, true
+        ));
     }
 
     private BarbedShocker(final BarbedShocker card) {
@@ -49,7 +52,7 @@ class BarbedShockerEffect extends OneShotEffect {
 
     BarbedShockerEffect() {
         super(Outcome.Discard);
-        this.staticText = " that player discards all the cards in their hand, then draws that many cards";
+        this.staticText = "that player discards all the cards in their hand, then draws that many cards";
     }
 
     private BarbedShockerEffect(final BarbedShockerEffect effect) {
@@ -64,11 +67,12 @@ class BarbedShockerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer == null) {
+        if (targetPlayer == null || targetPlayer.getHand().isEmpty()) {
             return false;
         }
-        int count = targetPlayer.discard(targetPlayer.getHand(), false, source, game).size();
-        targetPlayer.drawCards(count, source, game);
+        targetPlayer.drawCards(targetPlayer.discard(
+                targetPlayer.getHand(), false, source, game
+        ).size(), source, game);
         return true;
     }
 }

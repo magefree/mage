@@ -42,7 +42,7 @@ public final class Necrogoyf extends CardImpl {
         ));
 
         // Madness {1}{B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}{B}")));
     }
 
     private Necrogoyf(final Necrogoyf card) {

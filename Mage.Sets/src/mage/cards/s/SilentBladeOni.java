@@ -3,21 +3,20 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.NinjutsuAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -56,8 +55,8 @@ class SilentBladeOniEffect extends OneShotEffect {
 
     SilentBladeOniEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "look at that player's hand. "
-                + "You may cast a nonland card in it without paying that card's mana cost";
+        this.staticText = "look at that player's hand. You may cast a spell " +
+                "from among those cards without paying its mana cost";
     }
 
     private SilentBladeOniEffect(final SilentBladeOniEffect effect) {
@@ -71,32 +70,15 @@ class SilentBladeOniEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent == null 
-                || controller == null) {
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
             return false;
         }
-        Cards cardsInHand = new CardsImpl();
-        cardsInHand.addAll(opponent.getHand());
-        if (cardsInHand.isEmpty()) {
-            return true;
-        }
-        TargetCard target = new TargetCard(
-                0, 1, Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND
+        controller.lookAtCards(opponent.getName(), opponent.getHand(), game);
+        return CardUtil.castSpellWithAttributesForFree(
+                controller, source, game, new CardsImpl(opponent.getHand()),
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        if (!controller.chooseUse(outcome, "Cast a card from " + opponent.getName() + "'s hand?", source, game)
-                || !controller.chooseTarget(outcome, cardsInHand, target, source, game)) {
-            return true;
-        }
-        Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            return false;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        return cardWasCast;
     }
 }

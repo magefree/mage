@@ -16,7 +16,7 @@ public final class InsectToken extends TokenImpl {
     }
 
     public InsectToken(String setCode) {
-        super("Insect", "1/1 green Insect creature token");
+        super("Insect Token", "1/1 green Insect creature token");
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

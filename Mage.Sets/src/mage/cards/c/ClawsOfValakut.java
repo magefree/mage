@@ -42,7 +42,7 @@ public final class ClawsOfValakut extends CardImpl {
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1),
                 new PermanentsOnBattlefieldCount(filter, 0),
                 Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA));
+        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA).setText("and has first strike"));
         this.addAbility(ability);
     }
 

@@ -25,7 +25,7 @@ public final class PhantasmalAbomination extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private PhantasmalAbomination(final PhantasmalAbomination card) {

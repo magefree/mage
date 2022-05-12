@@ -7,7 +7,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -39,7 +38,7 @@ public final class ChandraDressedToKill extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Add {R}. Chandra, Dressed to Kill deals 1 damage to up to one target player or planeswalker.
         Ability ability = new LoyaltyAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(ManaType.RED, 1)), 1);

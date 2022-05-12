@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -17,7 +16,7 @@ import java.util.UUID;
  */
 public final class HazardousConditions extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no counter");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no counters on them");
 
     static {
         filter.add(Predicates.not(CounterAnyPredicate.instance));

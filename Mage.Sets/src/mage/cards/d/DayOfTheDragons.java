@@ -69,7 +69,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Set<Card> toExile = new HashSet<>();
             toExile.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));

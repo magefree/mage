@@ -75,7 +75,7 @@ class TheElderspellEffect extends OneShotEffect {
             }
         }
         TargetPermanent targetPermanent = new TargetPermanent(filter);
-        if (!player.choose(outcome, targetPermanent, source.getSourceId(), game)) {
+        if (!player.choose(outcome, targetPermanent, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());

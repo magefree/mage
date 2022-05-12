@@ -25,7 +25,7 @@ public final class WoollyLoxodon extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}")));
     }
 
     private WoollyLoxodon(final WoollyLoxodon card) {

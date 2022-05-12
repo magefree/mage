@@ -235,7 +235,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             if (effect != null && ability.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
                 if (!target.doneChosing()) {
-                    for (UUID targetId: target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                    for (UUID targetId: target.possibleTargets(ability.getControllerId(), ability.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) ability.copy();
                         SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);

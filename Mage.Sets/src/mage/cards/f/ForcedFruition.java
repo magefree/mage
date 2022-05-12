@@ -23,7 +23,7 @@ public final class ForcedFruition extends CardImpl {
 
         // Whenever an opponent casts a spell, that player draws seven cards.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(7),
-                StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER));
     }
 
     private ForcedFruition(final ForcedFruition card) {

@@ -8,7 +8,7 @@ import mage.constants.SubType;
 public final class TeyoToken extends TokenImpl {
 
     public TeyoToken() {
-        super("Wall", "0/3 white Wall creature token with defender");
+        super("Wall Token", "0/3 white Wall creature token with defender");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.WALL);

@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -20,9 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ArchfiendOfSorrows extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterOpponentsCreaturePermanent("creatures your opponents control");
 
     public ArchfiendOfSorrows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -36,7 +32,7 @@ public final class ArchfiendOfSorrows extends CardImpl {
 
         // When Archfiend of Sorrows enters the battlefield, creatures your opponents control get -2/-2 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(
-                -2, -2, Duration.EndOfTurn, filter, false
+                -2, -2, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false
         )));
 
         // Unearth {3}{B}{B}

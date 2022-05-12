@@ -76,14 +76,14 @@ class LilianasScroungerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ) < 1 || !player.chooseUse(
                 outcome, "Put a loyalty counter on a Liliana planeswalker you control?", source, game
         )) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
     }

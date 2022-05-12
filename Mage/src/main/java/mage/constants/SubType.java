@@ -293,6 +293,7 @@ public enum SubType {
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
+    RACCOON("Raccoon", SubTypeSet.CreatureType),
     RAIDER("Raider", SubTypeSet.CreatureType, true), // Star Wars
     RANGER("Ranger", SubTypeSet.CreatureType),
     RAT("Rat", SubTypeSet.CreatureType),
@@ -436,6 +437,7 @@ public enum SubType {
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
+    MINSC("Minsc", SubTypeSet.PlaneswalkerType),
     MORDENKAINEN("Mordenkainen", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),

@@ -30,7 +30,7 @@ public final class KaronasZealot extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Morph {3}{W}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}{W}")));
 
         // When Karona's Zealot is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, ACCORDING_DURATION)

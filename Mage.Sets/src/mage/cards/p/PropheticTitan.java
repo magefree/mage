@@ -4,16 +4,15 @@ import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
@@ -54,16 +53,13 @@ class PropheticTitanTriggeredAbility extends EntersBattlefieldTriggeredAbility {
     public PropheticTitanTriggeredAbility() {
         super(new DamageTargetEffect(4), false);
         this.addMode(new Mode(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ).setBackInRandomOrder(true).setText("look at the top four cards of your library. " +
-                "Put one of them into your hand and the rest on the bottom of your library in a random order")));
+                4, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM)));
         this.getModes().setChooseText(
                 "choose one. If there are four or more card types among cards in your graveyard, choose both instead."
         );
         this.addTarget(new TargetAnyTarget());
         this.addHint(CardTypesInGraveyardHint.YOU);
-        this.withFlavorWord("Delirium");
+        this.setAbilityWord(AbilityWord.DELIRIUM);
     }
 
     private PropheticTitanTriggeredAbility(final PropheticTitanTriggeredAbility ability) {

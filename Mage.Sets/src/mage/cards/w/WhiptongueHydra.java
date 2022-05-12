@@ -60,7 +60,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
     public WhiptongueHydraEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all creatures with flying. "
-                + "Put a +1/+1 counter on {this} for each permanent destroyed this way";
+                + "Put a +1/+1 counter on {this} for each creature destroyed this way";
     }
 
     public WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {
@@ -76,7 +76,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int destroyedPermanents = 0;
         destroyedPermanents = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ).stream().filter(
                 (permanent) -> (permanent.destroy(source, game, false))
         ).map((_item) -> 1).reduce(destroyedPermanents, Integer::sum);

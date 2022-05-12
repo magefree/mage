@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -36,7 +35,7 @@ public final class SerraTheBenevolent extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SERRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Creatures you control with flying get +1/+1 until end of turn.
         this.addAbility(new LoyaltyAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter)

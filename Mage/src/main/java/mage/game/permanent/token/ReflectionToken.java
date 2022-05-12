@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class ReflectionToken extends TokenImpl {
 
     public ReflectionToken() {
-        super("Reflection", "2/2 white Reflection creature token");
+        super("Reflection Token", "2/2 white Reflection creature token");
         this.setOriginalExpansionSetCode("TMP");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

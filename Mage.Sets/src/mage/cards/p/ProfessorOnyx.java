@@ -5,10 +5,13 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.MagecraftAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +48,7 @@ public final class ProfessorOnyx extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.
         Ability ability = new MagecraftAbility(new LoseLifeOpponentsEffect(2), false);
@@ -54,10 +57,7 @@ public final class ProfessorOnyx extends CardImpl {
 
         // +1: You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
         ability = new LoyaltyAbility(new LoseLifeSourceControllerEffect(1), 1);
-        ability.addEffect(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
-                Zone.GRAVEYARD, false, false, false, Zone.HAND, false
-        ).setText("Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard"));
+        ability.addEffect(new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD));
         this.addAbility(ability);
 
         // −3: Each opponent sacrifices a creature with the greatest power among creatures that player controls.
@@ -127,7 +127,7 @@ class ProfessorOnyxEffect extends OneShotEffect {
                 TargetDiscard target = new TargetDiscard(
                         0, 1, StaticFilters.FILTER_CARD, playerId
                 );
-                player.choose(Outcome.Discard, target, source.getSourceId(), game);
+                player.choose(Outcome.Discard, target, source, game);
                 playerMap.put(playerId, game.getCard(target.getFirstTarget()));
             }
             for (UUID playerId : game.getOpponents(source.getControllerId())) {

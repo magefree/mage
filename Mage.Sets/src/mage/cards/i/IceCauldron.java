@@ -98,7 +98,7 @@ class IceCauldronExileEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Benefit, target, source, game)) {
                 chosenCard = controller.getHand().get(target.getFirstTarget(), game);
             }
             if (chosenCard != null) {

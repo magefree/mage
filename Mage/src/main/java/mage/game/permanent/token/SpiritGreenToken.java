@@ -10,12 +10,21 @@ import mage.constants.SubType;
 public final class SpiritGreenToken extends TokenImpl {
 
     public SpiritGreenToken() {
-        super("Spirit token", "4/5 green Spirit creature token");
+        super("Spirit Token", "4/5 green Spirit creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(5);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
+            setTokenType(3);
+        }
     }
 
     public SpiritGreenToken(final SpiritGreenToken token) {

@@ -116,15 +116,15 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         setTitle("Random Booster Draft Packs Selector");
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        setPreferredSize(new java.awt.Dimension(600, 450));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(875, 475));
+        setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        pnlPacks.setLayout(new java.awt.GridLayout(12, 13));
+        pnlPacks.setLayout(new java.awt.GridLayout(14, 14));
 
         pnlSelect.setLayout(new javax.swing.BoxLayout(pnlSelect, javax.swing.BoxLayout.LINE_AXIS));
 

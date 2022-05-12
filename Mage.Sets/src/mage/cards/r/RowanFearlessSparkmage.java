@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
@@ -33,7 +32,7 @@ public final class RowanFearlessSparkmage extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Up to one target creature gets +3/+0 and gains first strike until end of turn.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(

@@ -19,7 +19,7 @@ import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +34,7 @@ public final class MeasureOfWickedness extends CardImpl {
     private static final FilterCard filter = new FilterCard("another card");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MeasureOfWickedness(UUID ownerId, CardSetInfo setInfo) {

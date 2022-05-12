@@ -67,13 +67,13 @@ class NahirisLithoformingSacrificeEffect extends OneShotEffect {
         }
         int landCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         landCount = Math.min(source.getManaCostsToPay().getX(), landCount);
         TargetPermanent target = new TargetPermanent(
                 landCount, landCount, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         int counter = 0;
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);

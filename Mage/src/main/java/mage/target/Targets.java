@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.targetpointer.*;
 import org.apache.log4j.Logger;
 
@@ -46,14 +45,14 @@ public class Targets extends ArrayList<Target> {
         return stream().allMatch(Target::isChosen);
     }
 
-    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(sourceId, playerId, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
-                if (!target.choose(outcome, playerId, sourceId, game)) {
+                if (!target.choose(outcome, playerId, sourceId, source, game)) {
                     return false;
                 }
             }
@@ -63,7 +62,7 @@ public class Targets extends ArrayList<Target> {
 
     public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
-            if (!canChoose(source.getSourceId(), playerId, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
 
@@ -113,22 +112,22 @@ public class Targets extends ArrayList<Target> {
 
     /**
      * For target choose
-     *
+     * <p>
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
+     * @param source
      * @param game
      * @return - true if enough valid targets exist
      */
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, game));
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return stream().allMatch(target -> target.canChoose(sourceControllerId, source, game));
     }
 
     /**
      * For non target choose (e.g. cost pay)
-     *
+     * <p>
      * Checks if there are enough objects that can be selected. Should not be
      * used for Ability targets since this does not check for protection, shroud
      * etc.

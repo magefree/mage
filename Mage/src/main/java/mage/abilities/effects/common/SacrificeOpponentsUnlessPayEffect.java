@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -60,7 +61,6 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         this.cost = cost;
         this.amount = amount;
         this.filter = filter;
-        setText();
     }
 
     public SacrificeOpponentsUnlessPayEffect(DynamicValue genericMana, FilterPermanent filter, DynamicValue amount) {
@@ -68,7 +68,6 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         this.genericMana = genericMana;
         this.amount = amount;
         this.filter = filter;
-        setText();
     }
 
     public SacrificeOpponentsUnlessPayEffect(final SacrificeOpponentsUnlessPayEffect effect) {
@@ -128,7 +127,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
                     if (numTargets > 0) {
                         TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
 
-                        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                        if (target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             permsToSacrifice.addAll(target.getTargets());
                         }
@@ -150,31 +149,35 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         return true;
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("each opponent sacrifices ");
 
-        if (amount.toString().equals("X")) {
-            sb.append(amount.toString());
-        } else {
-            if (amount.toString().equals("1")) {
-                if (!filter.getMessage().startsWith("a ") && !filter.getMessage().startsWith("an ")) {
-                    sb.append('a');
-                }
-            } else {
+        switch (amount.toString()) {
+            case "1":
+                sb.append(CardUtil.addArticle(filter.getMessage()));
+                break;
+            case "X":
+                sb.append("X ");
+                sb.append(filter.getMessage());
+                break;
+            default:
                 sb.append(CardUtil.numberToText(amount.toString()));
-            }
+                sb.append(' ');
+                sb.append(filter.getMessage());
         }
 
-        sb.append(' ');
-        sb.append(filter.getMessage());
 
-        sb.append(" unless they pay ");
+        sb.append(" unless they ");
 
         if (cost != null) {
-            sb.append(cost.getText());
+            sb.append(CardUtil.addCostVerb(cost.getText()));
         } else {
-            sb.append("{X}");
+            sb.append("pay {X}");
         }
 
         if (genericMana != null && !genericMana.getMessage().isEmpty()) {
@@ -182,6 +185,6 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
             sb.append(genericMana.getMessage());
         }
 
-        staticText = sb.toString();
+        return sb.toString();
     }
 }

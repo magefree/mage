@@ -70,7 +70,7 @@ class WhenFluffyBunniesAttackEffect extends OneShotEffect {
 
         if (controller != null && permanent != null && controller.choose(outcome, choice, game)) {
             if (!game.isSimulation()) {
-                MageObject mageObject = game.getObject(source.getSourceId());
+                MageObject mageObject = game.getObject(source);
                 if (mageObject != null) {
                     game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
                 }

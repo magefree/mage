@@ -50,7 +50,12 @@ class GoblinTutorEffect extends OneShotEffect {
 
     public GoblinTutorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Roll a six-sided die. If you roll a 1, {this} has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle. 2 - A card named Goblin Tutor 3 - An enchantment card 4 - An artifact card 5 - A creature card 6 - An instant or sorcery card";
+        this.staticText = "Roll a six-sided die. If you roll a 1, {this} has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle." +
+                "<br>2 - A card named Goblin Tutor" +
+                "<br>3 - An enchantment" +
+                "<br>4 - An artifact" +
+                "<br>5 - A creature" +
+                "<br>6 - An instant or sorcery";
     }
 
     public GoblinTutorEffect(final GoblinTutorEffect effect) {

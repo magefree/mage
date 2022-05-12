@@ -37,8 +37,7 @@ public final class AcademicProbation extends CardImpl {
         this.getSpellAbility().addEffect(new OpponentsCantCastChosenUntilNextTurnEffect().setText("opponents can't cast spells with the chosen name until your next turn"));
 
         // • Choose target nonland permanent. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
-        Mode restrictMode = new Mode();
-        restrictMode.addEffect(new AcademicProbationRestrictionEffect());
+        Mode restrictMode = new Mode(new AcademicProbationRestrictionEffect());
         restrictMode.addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addMode(restrictMode);
     }

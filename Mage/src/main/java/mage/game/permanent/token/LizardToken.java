@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class LizardToken extends TokenImpl {
 
     public LizardToken() {
-        super("Lizard", "2/2 green Lizard creature token");
+        super("Lizard Token", "2/2 green Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.LIZARD);

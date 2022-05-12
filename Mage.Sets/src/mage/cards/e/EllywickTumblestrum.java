@@ -2,7 +2,6 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
@@ -27,7 +26,7 @@ public final class EllywickTumblestrum extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELLYWICK);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Venture into the dungeon.
         this.addAbility(new LoyaltyAbility(new VentureIntoTheDungeonEffect(), 1));

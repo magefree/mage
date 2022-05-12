@@ -33,7 +33,7 @@ public final class LightningBerserker extends CardImpl {
                 new ManaCostsImpl("{R}")));
         
         // Dash {R}
-        this.addAbility(new DashAbility(this, "{R}"));
+        this.addAbility(new DashAbility("{R}"));
     }
 
     private LightningBerserker(final LightningBerserker card) {

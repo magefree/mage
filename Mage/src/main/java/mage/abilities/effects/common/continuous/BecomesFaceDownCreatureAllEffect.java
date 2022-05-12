@@ -45,7 +45,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (!perm.isFaceDown(game) && !perm.isTransformable()) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);

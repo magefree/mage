@@ -78,7 +78,7 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
         Target target = new TargetControlledCreaturePermanent(
                 1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
         );
-        if (!controller.choose(outcome, target, source.getSourceId(), game)) {
+        if (!controller.choose(outcome, target, source, game)) {
             return false;
         }
         Permanent toSacrifice = game.getPermanent(target.getFirstTarget());

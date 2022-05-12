@@ -43,7 +43,7 @@ public final class SilverFurMaster extends CardImpl {
         // Ninjutsu abilities you activate cost {1} less to activate.
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
                 NinjutsuAbility.class, "Ninjutsu"
-        )));
+        ).setText("ninjutsu abilities you activate cost {1} less to activate")));
 
         // Other Ninja and Rogue creatures you control get +1/+1
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

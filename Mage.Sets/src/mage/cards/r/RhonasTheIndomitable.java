@@ -109,7 +109,7 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getControllerId(), source, game);
                 return permanentsOnBattlefield < 1; // is this correct?
             }
             return true;

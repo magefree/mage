@@ -31,7 +31,7 @@ public final class GriefTyrant extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Grief Tyrant enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
 
         // When Grief Tyrant dies, put a -1/-1 counter on target creature for each -1/-1 counter on Grief Tyrant.
         Ability ability = new DiesSourceTriggeredAbility(new GriefTyrantEffect());

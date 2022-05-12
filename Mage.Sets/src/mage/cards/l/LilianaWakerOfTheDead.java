@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +39,7 @@ public final class LilianaWakerOfTheDead extends CardImpl {
         
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Each player discards a card. Each opponent who can't loses 3 life.
         this.addAbility(new LoyaltyAbility(new LilianaWakerOfTheDeadDiscardEffect(), 1));

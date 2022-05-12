@@ -30,7 +30,7 @@ public final class KillerWhale extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                     Zone.BATTLEFIELD, 
                     new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), 
-                    new ManaCostsImpl("U")));
+                    new ManaCostsImpl<>("{U}")));
     }
 
     private KillerWhale(final KillerWhale card) {

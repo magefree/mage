@@ -104,6 +104,6 @@ public class LilianaTest extends CardTestPlayerBase {
         assertCounterCount(playerA, liliannaUbD, CounterType.LOYALTY, 1);
         assertPermanentCount(playerA, "Carrion Feeder", 1);
 
-        assertPermanentCount(playerA, "Bat", 1);
+        assertPermanentCount(playerA, "Bat Token", 1);
     }
 }

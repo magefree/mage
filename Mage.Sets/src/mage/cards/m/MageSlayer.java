@@ -47,7 +47,7 @@ class MageSlayerEffect extends OneShotEffect {
 
     public MageSlayerEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage equal to the player or planeswalker it's attacking";
+        staticText = "it deals damage equal to its power to the player or planeswalker it's attacking";
     }
 
     public MageSlayerEffect(final MageSlayerEffect effect) {

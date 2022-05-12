@@ -35,7 +35,7 @@ public class CardsInTargetPlayersGraveyardCount implements DynamicValue {
             if (filter == null) {
                 return player.getGraveyard().size();
             } else {
-                return player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility.getSourceId(), game);
+                return player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility, game);
             }
         }
         return 0;

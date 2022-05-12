@@ -1,29 +1,25 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MindclawShaman extends CardImpl {
@@ -55,14 +51,6 @@ public final class MindclawShaman extends CardImpl {
 
 class MindclawShamanEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
-    }
-
     public MindclawShamanEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "target opponent reveals their hand. You may cast "
@@ -80,34 +68,15 @@ class MindclawShamanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (targetOpponent != null && sourceObject != null) {
-            if (!targetOpponent.getHand().isEmpty()) {
-                targetOpponent.revealCards(sourceObject.getName(), targetOpponent.getHand(), game);
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    TargetCard target = new TargetCard(Zone.HAND, filter);
-                    target.setNotTarget(true);
-                    if (controller.choose(Outcome.PlayForFree, targetOpponent.getHand(), target, game)) {
-                        Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
-                        if (chosenCard != null) {
-                            if (controller.chooseUse(Outcome.PlayForFree, "Cast the chosen card without "
-                                    + "paying its mana cost?", source, game)) {
-                                game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
-                                    controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                                            game, true, new ApprovingObject(source, game));
-                                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
-                            } else {
-                                game.informPlayers(sourceObject.getLogName() + ": " 
-                                        + controller.getLogName() + " canceled casting the card.");
-                            }
-                        }
-                    }
-                    return true;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        if (controller == null || opponent == null) {
+            return false;
         }
-        return false;
+        opponent.revealCards(source, opponent.getHand(), game);
+        return CardUtil.castSpellWithAttributesForFree(
+                controller, source, game, new CardsImpl(opponent.getHand()),
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
+        );
     }
 }

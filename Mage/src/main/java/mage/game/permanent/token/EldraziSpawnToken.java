@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class EldraziSpawnToken extends TokenImpl {
 
     public EldraziSpawnToken() {
-        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C}.\"");
+        super("Eldrazi Spawn Token", "0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SPAWN);
@@ -26,7 +26,7 @@ public final class EldraziSpawnToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
 
-        availableImageSetCodes = Arrays.asList("CMD", "DDP", "MM2", "PC2", "ROE", "MIC");
+        availableImageSetCodes = Arrays.asList("CMD", "DDP", "MM2", "PC2", "ROE", "MIC", "2XM");
     }
 
     @Override

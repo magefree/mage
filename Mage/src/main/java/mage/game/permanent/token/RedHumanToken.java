@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class RedHumanToken extends TokenImpl {
 
     public RedHumanToken() {
-        super("Human", "1/1 red Human creature token");
+        super("Human Token", "1/1 red Human creature token");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.HUMAN);
 

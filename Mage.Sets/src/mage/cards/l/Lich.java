@@ -168,8 +168,8 @@ class LichDamageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledPermanent(amount, amount, filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {

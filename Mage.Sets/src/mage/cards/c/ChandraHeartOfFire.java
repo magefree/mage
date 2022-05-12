@@ -4,7 +4,6 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -43,7 +42,7 @@ public final class ChandraHeartOfFire extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         Ability ability = new LoyaltyAbility(new DiscardHandControllerEffect(), 1);
@@ -102,16 +101,16 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
             // from graveyard
             Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true).withChooseHint("from graveyard");
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
                 exiledCards.addAll(cards);
             }
 
             // from library
             target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter).withChooseHint("from library");
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), source, game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
                 exiledCards.addAll(cards);
             }

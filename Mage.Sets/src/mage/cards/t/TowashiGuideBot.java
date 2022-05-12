@@ -83,7 +83,7 @@ enum TowashiGuideBotAdjuster implements CostAdjuster {
     @Override
     public void adjustCosts(Ability ability, Game game) {
         CardUtil.reduceCost(ability, game.getBattlefield().count(
-                filter, ability.getSourceId(), ability.getControllerId(), game
+                filter, ability.getControllerId(), ability, game
         ));
     }
 }

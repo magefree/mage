@@ -6,9 +6,9 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.hint.common.MorbidHint;
@@ -17,7 +17,6 @@ import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -49,10 +48,8 @@ public final class WarlockClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{1}{B}"));
 
         // When this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.addAbility(new BecomesClassLevelTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD,
-                Zone.GRAVEYARD, false, false, false, Zone.HAND, false
-        ), 2));
+        this.addAbility(new BecomesClassLevelTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD), 2));
 
         // {6}{B}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{6}{B}"));

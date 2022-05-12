@@ -26,7 +26,7 @@ public final class MarduShadowspear extends CardImpl {
         // Whenever Mardu Shadowspear attacks, each opponent loses 1 life.
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1),false));
         // Dash {1}{B}
-        this.addAbility(new DashAbility(this, "{1}{B}"));
+        this.addAbility(new DashAbility("{1}{B}"));
     }
 
     private MarduShadowspear(final MarduShadowspear card) {

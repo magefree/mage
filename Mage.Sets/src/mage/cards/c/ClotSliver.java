@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
 import java.util.UUID;
@@ -22,19 +20,19 @@ import java.util.UUID;
  */
 public final class ClotSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Slivers");
-
-    static {
-        filter.add(SubType.SLIVER.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "all Slivers");
 
     public ClotSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect("this permanent"), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                new SimpleActivatedAbility(
+                        new RegenerateSourceEffect("this permanent"), new GenericManaCost(2)
+                ), Duration.WhileOnBattlefield, filter, false
+        )));
     }
 
     private ClotSliver(final ClotSliver card) {

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PhyrexianBeastToken extends TokenImpl {
 
     public PhyrexianBeastToken() {
-        super("Phyrexian Beast", "4/4 green Phyrexian Beast creature token");
+        super("Phyrexian Beast Token", "4/4 green Phyrexian Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.PHYREXIAN);

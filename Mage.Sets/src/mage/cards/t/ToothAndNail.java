@@ -32,8 +32,7 @@ public final class ToothAndNail extends CardImpl {
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURES), true));
         // or put up to two creature cards from your hand onto the battlefield.
-        Mode mode = new Mode();
-        mode.addEffect(new ToothAndNailPutCreatureOnBattlefieldEffect());
+        Mode mode = new Mode(new ToothAndNailPutCreatureOnBattlefieldEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}
@@ -74,7 +73,7 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
-        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                     Zone.BATTLEFIELD, source, game, false, false, false, null);
         }

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -43,7 +43,7 @@ public final class BrimazKingOfOreskos extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new CatSoldierCreatureToken(), 1, false, true), false));
 
         // Whenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance blocking that creature.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
+        this.addAbility(new BlocksCreatureTriggeredAbility(new BrimazKingOfOreskosEffect()));
     }
 
     private BrimazKingOfOreskos(final BrimazKingOfOreskos card) {
@@ -75,31 +75,30 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) { return false; }
 
-        if (controller != null) {
-            Token token = new CatSoldierCreatureToken();
-            token.putOntoBattlefield(1, game, source, source.getControllerId());
-            Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (attackingCreature != null && game.getState().getCombat() != null) {
-                // Possible ruling (see Aetherplasm)
-                // The token you created is blocking the attacking creature,
-                // even if the block couldn't legally be declared (for example, if that creature
-                // enters the battlefield tapped, or it can't block, or the attacking creature
-                // has protection from it)
-                CombatGroup combatGroup = game.getState().getCombat().findGroup(attackingCreature.getId());
-                if (combatGroup != null) {
-                    for (UUID tokenId : token.getLastAddedTokenIds()) {
-                        Permanent catToken = game.getPermanent(tokenId);
-                        if (catToken != null) {
-                            combatGroup.addBlocker(tokenId, source.getControllerId(), game);
-                            game.getCombat().addBlockingGroup(tokenId, attackingCreature.getId(), controller.getId(), game);
-                        }
-                    }
-                    combatGroup.pickBlockerOrder(attackingCreature.getControllerId(), game);
-                }
-            }
-            return true;
+        Token token = new CatSoldierCreatureToken();
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
+        Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (attackingCreature == null || game.getState().getCombat() == null) { return true; }
+
+        // Possible ruling (see Aetherplasm)
+        // The token you created is blocking the attacking creature,
+        // even if the block couldn't legally be declared (for example, if that creature
+        // enters the battlefield tapped, or it can't block, or the attacking creature
+        // has protection from it)
+        CombatGroup combatGroup = game.getState().getCombat().findGroup(attackingCreature.getId());
+        if (combatGroup == null) { return true; }
+
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            Permanent catToken = game.getPermanent(tokenId);
+            if (catToken == null) { continue; }
+
+            combatGroup.addBlocker(tokenId, source.getControllerId(), game);
+            game.getCombat().addBlockingGroup(tokenId, attackingCreature.getId(), controller.getId(), game);
         }
-        return false;
+        combatGroup.pickBlockerOrder(attackingCreature.getControllerId(), game);
+
+        return true;
     }
 }

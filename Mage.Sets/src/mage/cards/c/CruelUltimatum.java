@@ -2,8 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -32,13 +30,13 @@ public final class CruelUltimatum extends CardImpl {
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life.
         // You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"));
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
-
+        this.getSpellAbility().addEffect(new SacrificeEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE,
+                1, "Target opponent"
+        ));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(3).setText(", discards three cards"));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5).setText(", then loses 5 life"));
         this.getSpellAbility().addEffect(new CruelUltimatumEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
     private CruelUltimatum(final CruelUltimatum card) {
@@ -55,7 +53,8 @@ class CruelUltimatumEffect extends OneShotEffect {
 
     public CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return a creature card from your graveyard to your hand";
+        this.staticText = "You return a creature card from your graveyard " +
+                "to your hand, draw three cards, then gain 5 life";
     }
 
     public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
@@ -74,14 +73,13 @@ class CruelUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card == null) {
-                return false;
-            }
-
+        controller.choose(Outcome.ReturnToHand, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
             return controller.moveCards(card, Zone.HAND, source, game);
         }
+        controller.drawCards(1, source, game);
+        controller.gainLife(1, game, source);
         return true;
     }
 }

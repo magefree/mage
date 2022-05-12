@@ -83,7 +83,7 @@ class RiseAndShineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                RiseAndShine.filter, source.getControllerId(), source.getSourceId(), game
+                RiseAndShine.filter, source.getControllerId(), source, game
         );
         if (permanents.isEmpty()) {
             return false;

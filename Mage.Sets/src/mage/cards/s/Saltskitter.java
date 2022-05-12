@@ -32,7 +32,7 @@ public final class Saltskitter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature enters the battlefield, exile Saltskitter. Return Saltskitter to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), filter));
     }
 
     private Saltskitter(final Saltskitter card) {

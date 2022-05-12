@@ -77,7 +77,7 @@ class ManascapeRefractorGainAbilitiesEffect extends ContinuousEffectImpl {
         }
         for (Ability ability : game.getState()
                 .getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .map(permanent -> permanent.getAbilities(game))
                 .flatMap(Collection::stream)

@@ -2,18 +2,15 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.util.UUID;
 
@@ -35,10 +32,12 @@ public final class MangaraTheDiplomat extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or a planeswalker you control, draw a card.
-        this.addAbility(new MangaraTheDiplomatAttackTriggeredAbility());
+        this.addAbility(new MangaraTheDiplomatTriggeredAbility());
 
         // Whenever an opponent casts their second spell each turn, draw a card.
-        this.addAbility(new MangaraTheDiplomatCastTriggeredAbility());
+        this.addAbility(new CastSecondSpellTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), TargetController.OPPONENT
+        ));
     }
 
     private MangaraTheDiplomat(final MangaraTheDiplomat card) {
@@ -51,13 +50,13 @@ public final class MangaraTheDiplomat extends CardImpl {
     }
 }
 
-class MangaraTheDiplomatAttackTriggeredAbility extends TriggeredAbilityImpl {
+class MangaraTheDiplomatTriggeredAbility extends TriggeredAbilityImpl {
 
-    MangaraTheDiplomatAttackTriggeredAbility() {
+    MangaraTheDiplomatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
     }
 
-    private MangaraTheDiplomatAttackTriggeredAbility(final MangaraTheDiplomatAttackTriggeredAbility ability) {
+    private MangaraTheDiplomatTriggeredAbility(final MangaraTheDiplomatTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,8 +80,8 @@ class MangaraTheDiplomatAttackTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public MangaraTheDiplomatAttackTriggeredAbility copy() {
-        return new MangaraTheDiplomatAttackTriggeredAbility(this);
+    public MangaraTheDiplomatTriggeredAbility copy() {
+        return new MangaraTheDiplomatTriggeredAbility(this);
     }
 
     @Override
@@ -90,42 +89,5 @@ class MangaraTheDiplomatAttackTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever an opponent attacks with creatures, " +
                 "if two or more of those creatures are attacking you " +
                 "and/or planeswalkers you control, draw a card.";
-    }
-}
-
-
-class MangaraTheDiplomatCastTriggeredAbility extends TriggeredAbilityImpl {
-
-    MangaraTheDiplomatCastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-    }
-
-    private MangaraTheDiplomatCastTriggeredAbility(final MangaraTheDiplomatCastTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(getControllerId());
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        return player != null
-                && watcher != null
-                && player.hasOpponent(event.getPlayerId(), game)
-                && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
-    }
-
-    @Override
-    public MangaraTheDiplomatCastTriggeredAbility copy() {
-        return new MangaraTheDiplomatCastTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts their second spell each turn, draw a card.";
     }
 }

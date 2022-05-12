@@ -47,7 +47,7 @@ public final class VoidmageProdigy extends CardImpl {
         this.addAbility(ability);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
     }
 
     private VoidmageProdigy(final VoidmageProdigy card) {

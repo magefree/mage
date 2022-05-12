@@ -31,7 +31,7 @@ public final class ScytheTiger extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // When Scythe Tiger enters the battlefield, sacrifice it unless you sacrifice a land.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))).setText("sacrifice it unless you sacrifice a land")));
     }
 
     private ScytheTiger(final ScytheTiger card) {

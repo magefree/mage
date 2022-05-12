@@ -68,7 +68,7 @@ class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) - 1;
         if (count > 0) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

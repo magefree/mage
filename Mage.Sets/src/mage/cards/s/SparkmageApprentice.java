@@ -25,7 +25,7 @@ public final class SparkmageApprentice extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -34,7 +34,7 @@ public final class Archipelagore extends CardImpl {
 
         // Whenever this creature mutates, tap up to X target creatures, where X is the number of times this creature has mutated. Those creatures don't untap during their controller's next untap step.
         Ability ability = new MutatesSourceTriggeredAbility(new TapTargetEffect(
-                "up to X target creatures, where X is the number of times this creature has mutated."
+                "tap up to X target creatures, where X is the number of times this creature has mutated."
         ));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
         ability.setTargetAdjuster(ArchipelagoreAdjuster.instance);

@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,27 +11,35 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class GiltLeafArchdruid extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
+    private static final FilterSpell filter = new FilterSpell("a Druid spell");
+    private static final FilterControlledPermanent filter2
+            = new FilterControlledPermanent(SubType.DRUID, "untapped Druids you control");
 
     static {
-        filterSpell.add(SubType.DRUID.getPredicate());
+        filter.add(SubType.DRUID.getPredicate());
+        filter2.add(TappedPredicate.UNTAPPED);
     }
 
     public GiltLeafArchdruid(UUID ownerId, CardSetInfo setInfo) {
@@ -45,10 +51,15 @@ public final class GiltLeafArchdruid extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Druid spell, you may draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filterSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), filter, true
+        ));
 
         // Tap seven untapped Druids you control: Gain control of all lands target player controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GiltLeafArchdruidEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, new FilterControlledCreaturePermanent(SubType.DRUID, "Druids you control"), true)));
+        Ability ability = new SimpleActivatedAbility(
+                new GiltLeafArchdruidEffect(),
+                new TapTargetCost(new TargetControlledPermanent(7, filter2))
+        );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -121,7 +121,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
 
         execute();
         assertPermanentCount(playerB, "Pharika, God of Affliction", 1);
-        assertPermanentCount(playerA, "Snake", 1);
+        assertPermanentCount(playerA, "Snake Token", 1);
         assertPermanentCount(playerA, "Pine Walker", 1);
 
         assertExileCount("Deathmist Raptor", 1);

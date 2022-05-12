@@ -76,7 +76,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
                 return true;
             }
         }
@@ -88,7 +88,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
                 if (permanent == null) {
                     permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
                 }
-                return permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game);
+                return permanent != null && filter.match(permanent, getControllerId(), this, game);
             }
         }
         return false;

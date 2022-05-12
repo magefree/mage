@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class InspiringStatuary extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("non-artifact spells you cast");
+    private static final FilterCard filter = new FilterCard("nonartifact spells");
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));

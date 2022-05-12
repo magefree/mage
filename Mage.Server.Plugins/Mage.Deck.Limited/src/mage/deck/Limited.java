@@ -13,7 +13,7 @@ import java.util.Map;
 public class Limited extends DeckValidator {
 
     public Limited() {
-        super("Limited");
+        super("Limited", null);
     }
 
     @Override

@@ -116,7 +116,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
         }
 
-        if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) <= 0) {
+        if (controller.getHand().count(filter, source.getControllerId(), source, game) <= 0) {
             return false;
         }
         if (!controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {

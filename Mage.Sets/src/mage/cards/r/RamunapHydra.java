@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.DesertControlledOrGraveyardCondition;
 import mage.abilities.effects.WhileConditionContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -52,7 +53,7 @@ public final class RamunapHydra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(new FilterPermanent(SubType.DESERT, "Desert"), 1, 1)));
 
         // Ramunap Hydra gets +1/+1 as long as there is a Desert card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RamunapHydraBoostEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RamunapHydraBoostEffect(1, 1)).addHint(DesertControlledOrGraveyardCondition.getHint()));
     }
 
     private RamunapHydra(final RamunapHydra card) {

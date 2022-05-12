@@ -32,12 +32,12 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filterCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filterCreatures.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

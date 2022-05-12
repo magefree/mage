@@ -66,7 +66,7 @@ class MarshalingTheTroopsEffect extends OneShotEffect {
         }
 
         TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, MarshalingTheTroops.filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }

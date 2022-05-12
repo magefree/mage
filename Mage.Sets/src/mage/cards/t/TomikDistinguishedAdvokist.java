@@ -11,10 +11,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -27,6 +27,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TomikDistinguishedAdvokist extends CardImpl {
+
+    private static final FilterStackObject filter = new FilterStackObject();
+
+    static {
+        filter.add(TargetedByOpponentsPredicate.instance);
+    }
 
     public TomikDistinguishedAdvokist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -41,8 +47,6 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Lands on the battlefield and land cards in graveyards can't be the targets of spells or abilities your opponents control.
-        FilterObject filter = new FilterStackObject();
-        filter.add(new TargetedByOpponentsPredicate(this.getId()));
         Ability ability = new SimpleStaticAbility(new CantBeTargetedAllEffect(
                 StaticFilters.FILTER_LANDS, filter, Duration.WhileOnBattlefield
         ).setText("lands on the battlefield"));
@@ -63,18 +67,13 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
     }
 }
 
-class TargetedByOpponentsPredicate implements Predicate<MageObject> {
-
-    private final UUID sourceId;
-
-    public TargetedByOpponentsPredicate(UUID sourceId) {
-        this.sourceId = sourceId;
-    }
+enum TargetedByOpponentsPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        StackObject stackObject = game.getStack().getStackObject(input.getId());
-        Permanent source = game.getPermanentOrLKIBattlefield(this.sourceId);
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(input.getObject().getId());
+        Permanent source = input.getSource().getSourcePermanentOrLKI(game);
         if (stackObject != null && source != null) {
             Player controller = game.getPlayer(source.getControllerId());
             return controller != null && game.isOpponent(controller, stackObject.getControllerId());

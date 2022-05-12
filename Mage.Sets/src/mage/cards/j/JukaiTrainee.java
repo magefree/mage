@@ -26,7 +26,9 @@ public final class JukaiTrainee extends CardImpl {
 
         // Whenever Jukai Trainee blocks or becomes blocked, it gets +1/+1 until end of turn.
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn)
+                        .setText("it gets +1/+1 until end of turn"),
+                false, false
         ));
     }
 

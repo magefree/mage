@@ -7,6 +7,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -56,9 +57,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
 
     public CarthTheLionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
-                7, 1, filter, true, false, Zone.HAND, true)
-                .setBackInRandomOrder(true)
-        );
+                7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM));
     }
 
     private CarthTheLionTriggeredAbility(final CarthTheLionTriggeredAbility ability) {

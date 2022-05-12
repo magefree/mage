@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class BirdToken extends TokenImpl {
 
     public BirdToken() {
-        super("Bird", "1/1 white Bird creature token with flying");
+        super("Bird Token", "1/1 white Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.BIRD);

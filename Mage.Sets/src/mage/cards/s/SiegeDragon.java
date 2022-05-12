@@ -19,7 +19,6 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -127,7 +126,7 @@ class SiegeDragonDamageEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defendingPlayerId));
             filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
             for (Permanent permanent : permanents) {
                 permanent.damage(2, source.getSourceId(), source, game, false, true);
             }

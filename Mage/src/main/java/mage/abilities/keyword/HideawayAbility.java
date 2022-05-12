@@ -1,28 +1,26 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -35,34 +33,26 @@ import mage.util.CardUtil;
  * controlled the permanent that exiled this card may look at this card in the
  * exile zone.'"
  */
-public class HideawayAbility extends StaticAbility {
+public class HideawayAbility extends EntersBattlefieldTriggeredAbility {
 
-    public HideawayAbility() {
-        this("land");
-    }
+    private final int amount;
 
-    public HideawayAbility(String name) {
-        super(Zone.ALL, new EntersBattlefieldEffect(new TapSourceEffect(true)));
-        Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
-        ability.setRuleVisible(false);
-        addSubAbility(ability);
-        // Allow controller to look at face down card
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new HideawayLookAtFaceDownCardEffect());
-        ability.setRuleVisible(false);
-        addSubAbility(ability);
-        this.name = name;
+    public HideawayAbility(int amount) {
+        super(new HideawayExileEffect(amount));
+        this.amount = amount;
+        this.addWatcher(new HideawayWatcher());
     }
 
     private HideawayAbility(final HideawayAbility ability) {
         super(ability);
-        this.name = ability.name;
+        this.amount = ability.amount;
     }
 
     @Override
     public String getRule() {
-        return "Hideaway <i>(This " + this.name + " enters the battlefield tapped. "
-                + "When it does, look at the top four cards of your library, exile "
-                + "one face down, then put the rest on the bottom of your library.)</i>";
+        return "Hideaway " + this.amount + " <i>(When this permanent enters the battlefield, look at the top "
+                + CardUtil.numberToText(this.amount) + " cards of your library, exile one face down, " +
+                "then put the rest on the bottom of your library in a random order.)</i>";
     }
 
     @Override
@@ -73,16 +63,17 @@ public class HideawayAbility extends StaticAbility {
 
 class HideawayExileEffect extends OneShotEffect {
 
-    private static FilterCard filter1 = new FilterCard("card to exile face down");
+    private static final FilterCard filter = new FilterCard("card to exile face down");
+    private final int amount;
 
-    public HideawayExileEffect() {
+    HideawayExileEffect(int amount) {
         super(Outcome.Benefit);
-        this.staticText = "look at the top four cards of your library, "
-                + "exile one face down, then put the rest on the bottom of your library";
+        this.amount = amount;
     }
 
-    public HideawayExileEffect(final HideawayExileEffect effect) {
+    private HideawayExileEffect(final HideawayExileEffect effect) {
         super(effect);
+        this.amount = effect.amount;
     }
 
     @Override
@@ -93,45 +84,36 @@ class HideawayExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        
-        // LKI is required for this ruling
-        /*
-        If Watcher for Tomorrow leaves the battlefield before its 
-        triggered ability from hideaway resolves, its leaves-the-battlefield 
-        ability resolves and does nothing. Then its enters-the-battlefield 
-        ability resolves and you exile a card with no way to return it to your hand.
-        */
-        Permanent hideawaySource = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (hideawaySource == null 
-                || controller == null) {
+        if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));
-        if (!cards.isEmpty()) {
-            TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
-            target1.setNotTarget(true);
-            if (controller.choose(Outcome.Detriment, cards, target1, game)) {
-                Card card = cards.get(target1.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                    controller.moveCardToExileWithInfo(card, exileId, "Hideaway (" + hideawaySource.getIdName() + ')', source, game, Zone.LIBRARY, false);
-                    card.setFaceDown(true, game);
-                }
-            }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount));
+        if (cards.isEmpty()) {
+            return true;
         }
-
+        TargetCard target = new TargetCard(Zone.LIBRARY, filter);
+        target.setNotTarget(true);
+        controller.choose(Outcome.Detriment, cards, target, game);
+        Card card = cards.get(target.getFirstTarget(), game);
+        if (card != null) {
+            controller.moveCardsToExile(
+                    card, source, game, false,
+                    CardUtil.getExileZoneId(game, source),
+                    "Hideaway (" + CardUtil.getSourceName(game, source) + ')'
+            );
+            game.addEffect(new HideawayLookAtFaceDownCardEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            card.setFaceDown(true, game);
+        }
+        cards.retainZone(Zone.LIBRARY, game);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }
 
 class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
-    public HideawayLookAtFaceDownCardEffect() {
+    HideawayLookAtFaceDownCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at the cards exiled with {this}";
     }
 
     private HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
@@ -150,24 +132,48 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (game.getState().getZone(objectId) != Zone.EXILED
-                || !game.getState().getCardState(objectId).isFaceDown()) {
-            return false;
-        }
-        // TODO: Does not handle if a player had the control of the land permanent some time before
-        // we would need to add a watcher to handle this
-        Permanent sourcePermanet = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanet != null && sourcePermanet.isControlledBy(affectedControllerId)) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            Card card = game.getCard(objectId);
-            if (exile != null && exile.contains(objectId) && card != null) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    player.lookAtCards("Hideaway by " + sourcePermanet.getIdName(), card, game);
+        return Objects.equals(objectId, getTargetPointer().getFirst(game, source))
+                && HideawayWatcher.check(affectedControllerId, source, game);
+    }
+}
+
+class HideawayWatcher extends Watcher {
+
+    private final Map<MageObjectReference, Set<UUID>> morMap = new HashMap<>();
+
+    HideawayWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        Permanent permanent;
+        UUID playerId;
+        switch (event.getType()) {
+            case GAINED_CONTROL:
+                permanent = game.getPermanent(event.getTargetId());
+                playerId = event.getPlayerId();
+                break;
+            case ENTERS_THE_BATTLEFIELD:
+                permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+                playerId = permanent.getControllerId();
+                break;
+            case BEGINNING_PHASE_PRE:
+                if (game.getTurnNum() == 1) {
+                    morMap.clear();
                 }
-            }
+            default:
+                return;
         }
-        // only the current or a previous controller can see the card, so always return false for reveal request
-        return false;
+        morMap.computeIfAbsent(new MageObjectReference(permanent, game), x -> new HashSet<>()).add(playerId);
+    }
+
+    static boolean check(UUID playerId, Ability source, Game game) {
+        return game
+                .getState()
+                .getWatcher(HideawayWatcher.class)
+                .morMap
+                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .contains(playerId);
     }
 }

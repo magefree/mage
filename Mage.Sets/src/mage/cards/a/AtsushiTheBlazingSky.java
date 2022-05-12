@@ -41,7 +41,7 @@ public final class AtsushiTheBlazingSky extends CardImpl {
         // When Atsushi, the Blazing Sky dies, choose one —
         // • Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
         Ability ability = new DiesSourceTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                3, false, Duration.UntilEndOfYourNextTurn
+                2, false, Duration.UntilEndOfYourNextTurn
         ), false);
 
         // • Create three Treasure tokens.

@@ -19,6 +19,9 @@ public class AttackedThisTurnWatcher extends Watcher {
 
     private final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
     private final Map<MageObjectReference, Integer> attackedThisTurnCreaturesCounts = new HashMap<>();
+    
+    // issue with Robber of the Rich.  it needs to check the subtype of the LKI of the permanent on the battlefield and this fails with MageObjectReference
+    private final Set<Permanent> attackedThisTurnCreaturesPermanentLKI = new HashSet<>();
 
     public AttackedThisTurnWatcher() {
         super(WatcherScope.GAME);
@@ -28,9 +31,13 @@ public class AttackedThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             MageObjectReference mor = new MageObjectReference(event.getSourceId(), game);
+            Permanent permanentOnBattlefield = game.getPermanentOrLKIBattlefield(event.getSourceId());
             this.attackedThisTurnCreatures.add(mor);
             this.attackedThisTurnCreaturesCounts.putIfAbsent(mor, 0);
             this.attackedThisTurnCreaturesCounts.compute(mor, (k, v) -> (v + 1));
+            
+            // bug with Robber of the Rich as noted above
+            this.attackedThisTurnCreaturesPermanentLKI.add(permanentOnBattlefield);
         }
     }
 
@@ -54,11 +61,16 @@ public class AttackedThisTurnWatcher extends Watcher {
         }
         return false;
     }
+    
+    public Set<Permanent> getAttackedThisTurnCreaturesPermanentLKI() {
+        return this.attackedThisTurnCreaturesPermanentLKI;
+    }
 
     @Override
     public void reset() {
         super.reset();
         this.attackedThisTurnCreatures.clear();
         this.attackedThisTurnCreaturesCounts.clear();
+        this.getAttackedThisTurnCreaturesPermanentLKI().clear();
     }
 }

@@ -89,7 +89,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileId != null) {
                 Set<Card> cardsToExile = new LinkedHashSet<>();
-                cardsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+                cardsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
                 controller.moveCardsToExile(cardsToExile, source, game, true, exileId, sourceObject.getIdName());
                 return true;
             }

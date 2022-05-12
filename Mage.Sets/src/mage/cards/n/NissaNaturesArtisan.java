@@ -1,35 +1,24 @@
 package mage.cards.n;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class NissaNaturesArtisan extends CardImpl {
@@ -39,7 +28,7 @@ public final class NissaNaturesArtisan extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +3: You gain 3 life.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(3), 3));
@@ -49,13 +38,12 @@ public final class NissaNaturesArtisan extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NissaNaturesArtisanEffect(), -4));
 
         // -12: Creatures you control get +5/+5 and gain trample until end of turn.
-        Effect effect = new BoostControlledEffect(5, 5, Duration.EndOfTurn);
-        effect.setText("Creature you control get +5/+5");
-        LoyaltyAbility ability = new LoyaltyAbility(effect, -12);
-        Effect effect2 = new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect2.setText("and gain trample until end of turn");
-        ability.addEffect(effect2);
+        LoyaltyAbility ability = new LoyaltyAbility(new BoostControlledEffect(
+                5, 5, Duration.EndOfTurn
+        ).setText("creatures you control get +5/+5"), -12);
+        ability.addEffect(new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and gain trample until end of turn"));
         this.addAbility(ability);
     }
 
@@ -84,7 +72,7 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -93,7 +81,7 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
             for (Card card : cards.getCards(new FilterLandCard(),
-                    source.getSourceId(), source.getControllerId(), game)) {
+                    source.getControllerId(), source, game)) {
                 cards.remove(card);
                 toBattlefield.add(card);
             }

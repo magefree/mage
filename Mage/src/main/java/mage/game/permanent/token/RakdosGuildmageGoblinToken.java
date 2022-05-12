@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class RakdosGuildmageGoblinToken extends TokenImpl {
 
     public RakdosGuildmageGoblinToken() {
-        super("Goblin", "2/1 red Goblin creature token with haste");
+        super("Goblin Token", "2/1 red Goblin creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);

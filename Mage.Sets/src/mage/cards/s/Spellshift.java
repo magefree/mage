@@ -51,7 +51,7 @@ class SpellshiftEffect extends OneShotEffect {
 
     public SpellshiftEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then they shuffle";
+        this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles";
     }
 
     public SpellshiftEffect(final SpellshiftEffect effect) {

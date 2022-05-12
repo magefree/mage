@@ -42,7 +42,7 @@ public final class ArchfiendOfSpite extends CardImpl {
         this.addAbility(new ArchfiendOfSpiteAbility());
 
         // Madness {3}{B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{B}{B}")));
 
     }
 

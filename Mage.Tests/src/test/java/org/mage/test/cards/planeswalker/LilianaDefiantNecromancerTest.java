@@ -38,7 +38,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3); // No balid target with X=1 so no counter is removed
         assertPermanentCount(playerA, "Hill Giant", 0);
@@ -73,7 +73,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertPermanentCount(playerA, "Alesha, Who Smiles at Death", 0);
         assertGraveyardCount(playerA, "Alesha, Who Smiles at Death", 1);
         // because target could not be chosen, the counters were never removed?
@@ -109,7 +109,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertPermanentCount(playerA, "Bronze Sable", 1);
         assertGraveyardCount(playerA, "Bronze Sable", 0);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);

@@ -39,7 +39,7 @@ public final class RagavanNimblePilferer extends CardImpl {
         this.addAbility(ability);
 
         // Dash {1}{R}
-        this.addAbility(new DashAbility(this, "{1}{R}"));
+        this.addAbility(new DashAbility("{1}{R}"));
     }
 
     private RagavanNimblePilferer(final RagavanNimblePilferer card) {

@@ -40,8 +40,7 @@ public final class PlungeIntoDarkness extends CardImpl {
         // Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature;
         this.getSpellAbility().addEffect(new PlungeIntoDarknessLifeEffect());
         // or pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.
-        Mode mode = new Mode();
-        mode.addEffect(new PlungeIntoDarknessSearchEffect());
+        Mode mode = new Mode(new PlungeIntoDarknessSearchEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {B}

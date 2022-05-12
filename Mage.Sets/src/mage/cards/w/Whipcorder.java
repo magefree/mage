@@ -37,7 +37,7 @@ public final class Whipcorder extends CardImpl {
         ability.addCost(new TapSourceCost());        
         this.addAbility(ability);
         // Morph {W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
     }
 
     private Whipcorder(final Whipcorder card) {

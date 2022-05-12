@@ -65,7 +65,7 @@ class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amountToPrevent = new DomainValue().calculate(game, source, this);
+        amountToPrevent = DomainValue.REGULAR.calculate(game, source, this);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class DayOfTheDragonsTest extends CardTestPlayerBase {
 
         assertExileCount("Silvercoat Lion", 1);
         assertExileCount("Pillarfield Ox", 1);
-        assertPermanentCount(playerA, "Dragon", 2);
+        assertPermanentCount(playerA, "Dragon Token", 2);
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Shivan Dragon", 1);
@@ -62,7 +62,7 @@ public class DayOfTheDragonsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Pillarfield Ox", 1);
-        assertPermanentCount(playerA, "Dragon", 0);
+        assertPermanentCount(playerA, "Dragon Token", 0);
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Shivan Dragon", 1);

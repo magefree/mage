@@ -6,7 +6,6 @@ import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.game.permanent.Permanent;
@@ -56,7 +55,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             if (event.getTargetId().equals(enchantment.getAttachedTo())
-                    && filter.match(sourceObject, getSourceId(), getControllerId(), game)) {
+                    && filter.match(sourceObject, getControllerId(), this, game)) {
                 return true;
             }
         }

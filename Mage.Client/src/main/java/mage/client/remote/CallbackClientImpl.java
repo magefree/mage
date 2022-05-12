@@ -466,50 +466,50 @@ public class CallbackClientImpl implements CallbackClient {
         switch (usedPanel.getChatType()) {
             case GAME:
                 usedPanel.receiveMessage("", new StringBuilder()
-                                .append("HOTKEYS:")
-                                .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
-                                .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
-                                .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
-                                .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
-                                .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
-                                .append("</b> - Skip current turn but stop on declare attackers/blockers")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
-                                .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
-                                .append("</b> - Skip everything until your next turn")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
-                                .append("</b> - Skip everything until the end step just prior to your turn")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
-                                .append("</b> - Undo F4/F5/F7/F9/F11")
-                                .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
-                                .append("</b> - Switch in/out to chat text field")
-                                /*
+                        .append("HOTKEYS:")
+                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
+                        .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
+                        .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
+                        .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
+                        .append("</b> - Skip everything until your next turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
+                        .append("</b> - Skip everything until the end step just prior to your turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
+                        .append("</b> - Undo F4/F5/F7/F9/F11")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
+                        .append("</b> - Switch in/out to chat text field")
+                        /*
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
                                 .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
                                 .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
-                                 */
-                                .append("<br/>")
-                                .append("<br/>")
-                                .append("CHAT COMMANDS:")
-                                .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
-                                .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
-                                .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
-                                .append("<br/>").append("<b>/fix</b> - fix freezed game")
-                                .toString(),
+                         */
+                        .append("<br/>")
+                        .append("<br/>")
+                        .append("CHAT COMMANDS:")
+                        .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
+                        .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
+                        .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
+                        .append("<br/>").append("<b>/fix</b> - fix frozen game")
+                        .toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
@@ -519,10 +519,10 @@ public class CallbackClientImpl implements CallbackClient {
             case TABLES:
                 String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
-                                .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
-                                .append("<br/>\\list - show a list of available chat commands.")
-                                .append("<br/>").append(IgnoreList.usage(serverAddress))
-                                .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
+                        .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
+                        .append("<br/>\\list - show a list of available chat commands.")
+                        .append("<br/>").append(IgnoreList.usage(serverAddress))
+                        .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             default:
@@ -628,7 +628,7 @@ public class CallbackClientImpl implements CallbackClient {
         logger.fatal("Client error\n", ex);
         String errorMessage = ex.getMessage();
         if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
-            errorMessage = ex.getClass().getSimpleName() + " - look server or client logs for more details";
+            errorMessage = ex.getClass().getSimpleName() + " - look at server or client logs for more details";
         }
         frame.showError("Server's error: " + errorMessage);
     }

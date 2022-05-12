@@ -77,7 +77,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, true
         );
-        controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game);
+        controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         Card cardChosen = game.getCard(target.getFirstTarget());
         if (cardChosen == null || !controller.moveCards(cardChosen, Zone.EXILED, source, game)) {
             return false;

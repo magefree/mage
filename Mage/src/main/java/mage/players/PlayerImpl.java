@@ -789,7 +789,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return toDiscard;
         }
         TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
-        choose(Outcome.Discard, target, source != null ? source.getSourceId() : null, game);
+        choose(Outcome.Discard, target, source, game);
         toDiscard.addAll(target.getTargets());
         return toDiscard;
     }
@@ -1008,7 +1008,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (card.moveToZone(Zone.LIBRARY, source, game, true)
                         && !(card instanceof PermanentToken) && !card.isCopy()) {
                     Card cardInLib = getLibrary().getFromTop(game);
-                    if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
+                    if (cardInLib != null && cardInLib.getId().equals(card.getMainCard().getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
                         game.informPlayers((withName ? cardInLib.getLogName() : "A card")
@@ -1288,8 +1288,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 114.2a
         ActivationStatus activationStatus = playLandAbility.canActivate(this.playerId, game);
         if (ignoreTiming) {
-            if (!canPlayLand()) {
-                return false; // ignore timing does not mean that more lands than normal can be played
+            if (!canPlayLand() || !isActivePlayer(game)) {
+                // ignore timing does not mean that more lands than normal can be played
+                // it also has to be your turn
+                return false;
             }
         } else {
             if (!activationStatus.canActivate()) {
@@ -1521,10 +1523,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
         TriggeredAbility ability = triggeredAbility.copy();
-        MageObject sourceObject = ability.getSourceObject(game);
-        if (sourceObject != null) {
-            sourceObject.adjustTargets(ability, game);
-        }
+        ability.adjustTargets(game);
         UUID triggerId = null;
         if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
@@ -1571,72 +1570,75 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, ActivatedAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
+    public static LinkedHashMap<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
         Abilities<Ability> allAbilities;
         if (object instanceof Card) {
             allAbilities = ((Card) object).getAbilities(game);
         } else {
             allAbilities = object.getAbilities();
         }
-
-        for (Ability ability : allAbilities) {
-            if (ability instanceof SpellAbility) {
-                SpellAbility spellAbility = (SpellAbility) ability;
-
-                switch (spellAbility.getSpellAbilityType()) {
-                    case BASE_ALTERNATE:
-                        // rules:
-                        // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
-                        // any alternative costs. You can, however, pay additional costs, such as kicker costs.
-                        // If the card has any mandatory additional costs, those must be paid to cast the spell.
-                        // (2021-02-05)
-                        if (!noMana) {
-                            if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
-                                useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
-                            }
-                            return useable;
+        for (SpellAbility spellAbility : allAbilities
+                .stream()
+                .filter(SpellAbility.class::isInstance)
+                .map(SpellAbility.class::cast)
+                .collect(Collectors.toList())) {
+            switch (spellAbility.getSpellAbilityType()) {
+                case BASE_ALTERNATE:
+                    // rules:
+                    // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
+                    // any alternative costs. You can, however, pay additional costs, such as kicker costs.
+                    // If the card has any mandatory additional costs, those must be paid to cast the spell.
+                    // (2021-02-05)
+                    if (!noMana) {
+                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
                         }
-                        break;
-                    case SPLIT_FUSED:
-                        // rules:
-                        // If you cast a split card with fuse from your hand without paying its mana cost,
-                        // you can choose to use its fuse ability and cast both halves without paying their mana costs.
-                        if (zone == Zone.HAND) {
-                            if (spellAbility.canChooseTarget(game, playerId)) {
-                                useable.put(spellAbility.getId(), spellAbility);
-                            }
+                        return useable;
+                    }
+                    break;
+                case SPLIT_FUSED:
+                    // rules:
+                    // If you cast a split card with fuse from your hand without paying its mana cost,
+                    // you can choose to use its fuse ability and cast both halves without paying their mana costs.
+                    if (zone == Zone.HAND) {
+                        if (spellAbility.canChooseTarget(game, playerId)) {
+                            useable.put(spellAbility.getId(), spellAbility);
                         }
-                    case SPLIT:
-                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                    ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                        }
+                    }
+                case SPLIT:
+                    if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility()
+                        );
+                    }
+                    if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility()
+                        );
+                    }
+                    return useable;
+                case SPLIT_AFTERMATH:
+                    if (zone == Zone.GRAVEYARD) {
                         if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getRightHalfCard().getSpellAbility());
                         }
-                        return useable;
-                    case SPLIT_AFTERMATH:
-                        if (zone == Zone.GRAVEYARD) {
-                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getRightHalfCard().getSpellAbility());
-                            }
-                        } else {
-                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                            }
+                    } else {
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                    ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                         }
-                        return useable;
-                    default:
-                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(spellAbility.getId(), spellAbility);
-                        }
-                }
+                    }
+                    return useable;
+                default:
+                    if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                        useable.put(spellAbility.getId(), spellAbility);
+                    }
             }
         }
         return useable;
@@ -2625,10 +2627,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker != null
                 && attacker.canAttack(defenderId, game)
-                && attacker.isControlledBy(playerId)) {
-            if (!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
-                game.undo(playerId);
-            }
+                && attacker.isControlledBy(playerId)
+                && !game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
+            game.undo(playerId);
         }
     }
 
@@ -2731,7 +2732,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            if (newTarget.choose(Outcome.Neutral, searchingController.getId(), targetPlayer.getId(), game)) {
+            if (newTarget.choose(Outcome.Neutral, searchingController.getId(), targetPlayer.getId(), source, game)) {
                 target.getTargets().clear();
                 for (UUID targetId : newTarget.getTargets()) {
                     target.add(targetId, game);
@@ -2759,7 +2760,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Set<Card> cards = this.getLibrary()
                 .getCards(game)
                 .stream()
-                .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
+                .filter(card -> filter.match(card, getId(), source, game))
                 .collect(Collectors.toSet());
         Card card = RandomUtil.randomFromCollection(cards);
         if (card == null) {
@@ -3471,7 +3472,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
             if (availableMana != null) {
-                sourceObject.adjustCosts(copy, game);
+                copy.adjustCosts(game);
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
@@ -3608,9 +3609,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
-                                if (cost instanceof AlternativeCost2) {
-                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
-                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                if (cost instanceof AlternativeCost) {
+                                    if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
                                     }
                                 } else {
                                     if (cost instanceof ManaCost) {
@@ -3630,7 +3631,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 copyAbility = ability.copy();
                                 copyAbility.getManaCostsToPay().clear();
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
-                                sourceObject.adjustCosts(copyAbility, game);
+                                copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
                                 // reduced all cost
@@ -3657,9 +3658,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
-                                if (cost instanceof AlternativeCost2) {
-                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
-                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                if (cost instanceof AlternativeCost) {
+                                    if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
                                     }
                                 } else {
                                     if (cost instanceof ManaCost) {
@@ -3679,7 +3680,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 copyAbility = ability.copy();
                                 copyAbility.getManaCostsToPay().clear();
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
-                                sourceObject.adjustCosts(copyAbility, game);
+                                copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
                                 // reduced all cost
@@ -3707,7 +3708,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         ManaOptions manaFull = availableMana.copy();
         if (ability instanceof SpellAbility) {
             for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
-                    .filter(a -> a instanceof AlternateManaPaymentAbility)
+                    .filter(AlternateManaPaymentAbility.class::isInstance)
                     .map(a -> (AlternateManaPaymentAbility) a)
                     .collect(Collectors.toList())) {
                 ManaOptions manaSpecial = altAbility.getManaOptions(ability, game, ability.getManaCostsToPay());
@@ -3740,7 +3741,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
             if (object.isLand(game)) {
-                playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
+                playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(PlayLandAbility.class::isInstance).findFirst().orElse(null);
             } else if (object instanceof Card) {
                 playAbility = ((Card) object).getSpellAbility();
             }
@@ -4232,7 +4233,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
-        for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
+        for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game)) {
             Ability newOption = option.copy();
             newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, option, game, true);
             if (targetNum < option.getCosts().getTargets().size() - 1) {
@@ -4323,7 +4324,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, source.getSourceId(), controllerId, game);
+        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game);
     }
 
     @Override

@@ -80,7 +80,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
             }
             sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
-        sb.append(" in addition to its other types ").append(this.getDuration().toString());
+        sb.append("in addition to its other types ").append(this.getDuration().toString());
         return sb.toString();
     }
 }

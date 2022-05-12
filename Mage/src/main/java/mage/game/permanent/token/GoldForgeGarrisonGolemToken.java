@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     public GoldForgeGarrisonGolemToken() {
-        super("Golem", "4/4 colorless Golem artifact creature token");
+        super("Golem Token", "4/4 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
 

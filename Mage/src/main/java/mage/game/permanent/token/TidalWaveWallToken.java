@@ -13,7 +13,7 @@ import mage.abilities.keyword.DefenderAbility;
 public final class TidalWaveWallToken extends TokenImpl {
 
     public TidalWaveWallToken() {
-        super("Wall", "5/5 blue Wall creature token with defender");
+        super("Wall Token", "5/5 blue Wall creature token with defender");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.WALL);

@@ -42,7 +42,7 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 
@@ -75,7 +75,7 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 1);
+        assertPermanentCount(playerA, "Angel Token", 1);
 
     }
 
@@ -117,7 +117,7 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA, "Spirit Mantle", 1);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 
@@ -151,7 +151,7 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
 
-        assertPermanentCount(playerA, "Angel", 0);
+        assertPermanentCount(playerA, "Angel Token", 0);
 
     }
 

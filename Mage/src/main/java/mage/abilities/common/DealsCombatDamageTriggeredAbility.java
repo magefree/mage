@@ -1,5 +1,3 @@
-
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -26,13 +24,13 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
-            super(ability);
-            this.usedInPhase = ability.usedInPhase;
+        super(ability);
+        this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
     public DealsCombatDamageTriggeredAbility copy() {
-            return new DealsCombatDamageTriggeredAbility(this);
+        return new DealsCombatDamageTriggeredAbility(this);
     }
 
     @Override
@@ -47,10 +45,10 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
                 && event.getSourceId().equals(this.sourceId)
                 && ((DamagedEvent) event).isCombatDamage()) {
             usedInPhase = true;
+            getEffects().setValue("damage", event.getAmount());
             return true;
-
         }
-        if (event.getType()== GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;
@@ -58,7 +56,6 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-            return "Whenever {this} deals combat damage, " ;
+        return "Whenever {this} deals combat damage, ";
     }
-
 }

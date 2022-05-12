@@ -37,7 +37,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have only 1 singleton ability instance from two attachments",
-                1, permanent.getAbilities(currentGame).stream().filter(a -> a instanceof VigilanceAbility).count());
+                1, permanent.getAbilities(currentGame).stream().filter(VigilanceAbility.class::isInstance).count());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have 2 dynamic ability instances from two attachments",
                 2, permanent.getAbilities(currentGame).stream().filter(
-                        a -> a.getEffects().stream().anyMatch(e -> e instanceof DrawCardSourceControllerEffect)
+                        a -> a.getEffects().stream().anyMatch(DrawCardSourceControllerEffect.class::isInstance)
                 ).count());
     }
 

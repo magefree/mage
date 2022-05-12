@@ -71,7 +71,7 @@ class NullChamberChooseEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        controller.choose(Outcome.Neutral, chosenOpponent, source.getSourceId(), game);
+        controller.choose(Outcome.Neutral, chosenOpponent, source, game);
         Player opponent = game.getPlayer(chosenOpponent.getFirstTarget());
         String cardName = ChooseACardNameEffect.TypeOfName.NOT_BASIC_LAND_NAME.getChoice(controller, game, source, false);
         if (cardName != null) {
@@ -123,7 +123,7 @@ class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }

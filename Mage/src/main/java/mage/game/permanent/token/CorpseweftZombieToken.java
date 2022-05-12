@@ -16,7 +16,7 @@ public final class CorpseweftZombieToken extends TokenImpl {
     }
 
     public CorpseweftZombieToken(int power, int toughness) {
-        super("Zombie Horror", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
+        super("Zombie Horror Token", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ZOMBIE);
         subtype.add(SubType.HORROR);

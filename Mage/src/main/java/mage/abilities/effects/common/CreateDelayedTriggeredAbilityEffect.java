@@ -48,9 +48,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = ability.copy();
         if (this.copyTargets) {
             if (source.getTargets().isEmpty()) {
-                for (Effect effect : delayedAbility.getEffects()) {
-                    effect.setTargetPointer(targetPointer);
-                }
+                delayedAbility.getEffects().setTargetPointer(targetPointer);
             } else {
                 delayedAbility.getTargets().addAll(source.getTargets());
                 for (Effect effect : delayedAbility.getEffects()) {

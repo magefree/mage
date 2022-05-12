@@ -41,14 +41,10 @@ public final class GruulCharm extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
 
         // or gain control of all permanents you own;
-        Mode mode = new Mode();
-        mode.addEffect(new GainControlAllEffect(Duration.EndOfGame, filter2));
-        this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().addMode(new Mode(new GainControlAllEffect(Duration.EndOfGame, filter2)));
 
         // or Gruul Charm deals 3 damage to each creature with flying.
-        Mode mode2 = new Mode();
-        mode2.addEffect(new DamageAllEffect(3, filter3));
-        this.getSpellAbility().addMode(mode2);
+        this.getSpellAbility().addMode(new Mode(new DamageAllEffect(3, filter3)));
     }
 
     private GruulCharm(final GruulCharm card) {

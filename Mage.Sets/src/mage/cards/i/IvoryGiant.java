@@ -37,7 +37,7 @@ public final class IvoryGiant extends CardImpl {
         // When Ivory Giant enters the battlefield, tap all nonwhite creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
         // Suspend 5-{W}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{W"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{W}"), this));
     }
 
     private IvoryGiant(final IvoryGiant card) {

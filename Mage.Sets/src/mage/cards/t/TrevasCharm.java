@@ -26,14 +26,12 @@ public final class TrevasCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
 
         // or exile target attacking creature;
-        Mode mode = new Mode();
-        mode.addEffect(new ExileTargetEffect());
+        Mode mode = new Mode(new ExileTargetEffect());
         mode.addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addMode(mode);
 
         // or draw a card, then discard a card.
-        mode = new Mode();
-        mode.addEffect(new DrawDiscardControllerEffect());
+        mode = new Mode(new DrawDiscardControllerEffect());
         this.getSpellAbility().addMode(mode);
     }
 

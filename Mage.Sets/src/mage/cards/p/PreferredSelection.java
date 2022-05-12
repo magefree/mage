@@ -6,10 +6,10 @@ import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -17,8 +17,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,7 +50,7 @@ class PreferredSelectionEffect extends OneShotEffect {
 
     PreferredSelectionEffect() {
         super(Outcome.Benefit);
-        staticText = "At the beginning of your upkeep, look at the top two cards of your library. " +
+        staticText = "look at the top two cards of your library. " +
                 "You may sacrifice {this} and pay {2}{G}{G}. If you do, put one of those cards into your hand. " +
                 "If you don't, put one of those cards on the bottom of your library.";
     }
@@ -79,15 +77,9 @@ class PreferredSelectionEffect extends OneShotEffect {
                 "sacrifice this permanent and pay {2}{G}{G}"
         );
         return new DoIfCostPaid(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(2), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD, Zone.HAND, true, false
-                ),
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(2), false, StaticValue.get(1),
-                        StaticFilters.FILTER_CARD, Zone.HAND, true, false,
-                        false, Zone.LIBRARY, false, true, false
-                ), cost
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.TOP_ANY),
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.BOTTOM_ANY, PutCards.TOP_ANY),
+                cost
         ).apply(game, source);
     }
 }

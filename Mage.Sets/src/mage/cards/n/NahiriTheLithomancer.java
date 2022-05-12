@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,7 +40,7 @@ public final class NahiriTheLithomancer extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +2: Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
@@ -101,9 +100,9 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
                     if (tokenPermanent != null) {
                         //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
                         Target target = new TargetControlledPermanent(0, 1, filter, true);
-                        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                        if (target.canChoose(controller.getId(), source, game)
                                 && controller.chooseUse(outcome, "Attach an Equipment you control to the created " + tokenPermanent.getIdName() + '?', source, game)) {
-                            if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                            if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                                 Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
                                 if (equipmentPermanent != null) {
                                     Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
@@ -152,14 +151,14 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(Outcome.PutCardInPlay, "Put an Equipment from hand? (No = from graveyard)", source, game)) {
                 Target target = new TargetCardInHand(0, 1, filter);
-                controller.choose(outcome, target, source.getSourceId(), game);
+                controller.choose(outcome, target, source, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             } else {
                 Target target = new TargetCardInYourGraveyard(0, 1, filter);
-                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
+                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), source, game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);

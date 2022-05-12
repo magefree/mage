@@ -96,7 +96,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (!target.canChoose(source.getControllerId(), source, game)) {
                 return false;
             }
             controller.chooseTarget(Outcome.Detriment, target, source, game);

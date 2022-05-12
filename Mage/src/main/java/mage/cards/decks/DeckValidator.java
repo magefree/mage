@@ -15,10 +15,6 @@ public abstract class DeckValidator implements Serializable {
     protected String shortName;
     protected List<DeckValidatorError> errorsList = new ArrayList<>();
 
-    public DeckValidator(String name) {
-        setName(name);
-    }
-
     public DeckValidator(String name, String shortName) {
         setName(name, shortName);
     }
@@ -33,14 +29,13 @@ public abstract class DeckValidator implements Serializable {
         return shortName;
     }
 
-    protected void setName(String name) {
-        this.name = name;
-        this.shortName = name.contains("-") ? name.substring(name.indexOf("-") + 1).trim() : name;
-    }
-
     protected void setName(String name, String shortName) {
         this.name = name;
-        this.shortName = shortName;
+        if (shortName != null) {
+            this.shortName = shortName;
+        } else {
+            this.shortName = name.contains("-") ? name.substring(name.indexOf("-") + 1).trim() : name;
+        }
     }
 
     protected void setShortName(String shortName) {

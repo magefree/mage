@@ -29,7 +29,7 @@ public final class IntrusivePackbeast extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Intrusive Packbeast enters the battlefield, tap up to two target creatures your opponents control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect().setText("tap up to two target creatures your opponents control"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 2));
         this.addAbility(ability);
     }

@@ -65,7 +65,7 @@ class PeerPressureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice choice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice choice = new ChoiceCreatureType(game.getObject(source));
         if (controller != null && controller.choose(Outcome.GainControl, choice, game)) {
             String chosenType = choice.getChoice();
             game.informPlayers(controller.getLogName() + " has chosen " + chosenType);
@@ -83,7 +83,7 @@ class PeerPressureEffect extends OneShotEffect {
                 }
             }
             if (playerWithMost != null && playerWithMost.equals(controller.getId())) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(SubType.byDescription(chosenType), chosenType), controller.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(SubType.byDescription(chosenType), chosenType), controller.getId(), source, game)) {
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);

@@ -10,10 +10,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.ManaUtil;
@@ -39,7 +36,7 @@ public final class ManaChargedDragon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Join forces - Whenever Mana-Charged Dragon attacks or blocks, each player starting with you may pay any amount of mana. Mana-Charged Dragon gets +X/+0 until end of turn, where X is the total amount of mana paid this way.
-        this.addAbility(new ManaChargedDragonTriggeredAbility());
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ManaChargedDragonEffect(), false).setAbilityWord(AbilityWord.JOIN_FORCES));
     }
 
     private ManaChargedDragon(final ManaChargedDragon card) {
@@ -49,18 +46,6 @@ public final class ManaChargedDragon extends CardImpl {
     @Override
     public ManaChargedDragon copy() {
         return new ManaChargedDragon(this);
-    }
-}
-
-class ManaChargedDragonTriggeredAbility extends AttacksOrBlocksTriggeredAbility {
-
-    ManaChargedDragonTriggeredAbility() {
-        super(new ManaChargedDragonEffect(), false);
-    }
-
-    @Override
-    public String getRule() {
-        return "Join forces &mdash; Whenever {this} attacks or blocks, each player starting with you may pay any amount of mana. {this} gets +X/+0 until end of turn, where X is the total amount of mana paid this way";
     }
 }
 

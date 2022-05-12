@@ -87,7 +87,7 @@ class DragonsDiscipleEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (!target.possibleTargets(source.getSourceId(), source.getControllerId(), game).isEmpty()
+            if (!target.possibleTargets(source.getControllerId(), source, game).isEmpty()
                     && controller.chooseUse(outcome, "Reveal a Dragon card from your hand?", source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

@@ -73,7 +73,7 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
 
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
 
     }
 
@@ -102,7 +102,7 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Languish", 1);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 0);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Liliana, Heretical Healer", 1);
@@ -152,7 +152,7 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Cult of the Waxing Moon", 1);
         assertPermanentCount(playerA, "Timber Shredder", 1); // Night-side card of Hinterland Logger, Werewolf (non-human)
-        assertPermanentCount(playerA, "Wolf", 1); // wolf token created
+        assertPermanentCount(playerA, "Wolf Token", 1); // wolf token created
     }
 
     /**
@@ -377,7 +377,7 @@ public class TransformTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 24);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
 
         assertPermanentCount(playerB, "Eldrazi Displacer", 1);
 
@@ -410,7 +410,7 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertLife(playerA, 24);
         assertLife(playerB, 18);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);

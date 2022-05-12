@@ -68,7 +68,7 @@ class SandstoneOracleEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (controller.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.DrawCard, target, source, game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());

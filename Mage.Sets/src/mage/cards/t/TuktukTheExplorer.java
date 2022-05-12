@@ -27,7 +27,7 @@ public final class TuktukTheExplorer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
     }
 
     private TuktukTheExplorer(final TuktukTheExplorer card) {

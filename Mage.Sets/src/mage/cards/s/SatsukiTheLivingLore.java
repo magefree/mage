@@ -37,14 +37,14 @@ public final class SatsukiTheLivingLore extends CardImpl {
             = new FilterCard("Saga card from your graveyard");
 
     static {
-        filter.add(Predicates.or(
+        filter2.add(Predicates.or(
                 SubType.SAGA.getPredicate(),
                 Predicates.and(
                         CardType.ENCHANTMENT.getPredicate(),
                         CardType.CREATURE.getPredicate()
                 )
         ));
-        filter.add(SubType.SAGA.getPredicate());
+        filter3.add(SubType.SAGA.getPredicate());
     }
 
     public SatsukiTheLivingLore(UUID ownerId, CardSetInfo setInfo) {

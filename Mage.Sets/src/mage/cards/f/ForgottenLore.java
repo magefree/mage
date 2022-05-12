@@ -72,7 +72,7 @@ class ForgottenLoreEffect extends OneShotEffect {
             do {
                 chosenCard = new TargetCardInGraveyard(filter);
                 chosenCard.setNotTarget(true);
-                if (chosenCard.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                if (chosenCard.canChoose(opponent.getId(), source, game)) {
                     opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                     card = game.getCard(chosenCard.getFirstTarget());
                     if (card != null) {

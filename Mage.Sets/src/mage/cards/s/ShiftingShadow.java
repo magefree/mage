@@ -1,40 +1,27 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
- * @author Saga
+ * @author TheElk801
  */
 public final class ShiftingShadow extends CardImpl {
 
@@ -50,13 +37,7 @@ public final class ShiftingShadow extends CardImpl {
 
         // Enchanted creature has haste and “At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card.
         // Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order.”
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA));
-        Effect effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(
-                new ShiftingShadowEffect(this.getId()), TargetController.YOU, false), AttachmentType.AURA);
-        effect.setText("and \"At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. "
-                + "Put that card onto the battlefield and attach {this} to it, then put all other cards revealed this way on the bottom of your library in a random order.\"");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ShiftingShadowGainEffect()));
     }
 
     private ShiftingShadow(final ShiftingShadow card) {
@@ -69,75 +50,108 @@ public final class ShiftingShadow extends CardImpl {
     }
 }
 
-class ShiftingShadowEffect extends OneShotEffect {
+class ShiftingShadowGainEffect extends ContinuousEffectImpl {
 
-    private final UUID auraId;
-
-    public ShiftingShadowEffect(UUID auraId) {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. "
-                + "Put that card onto the battlefield and attach {this} to it, then put all other cards revealed this way on the bottom of your library in a random order";
-        this.auraId = auraId;
+    ShiftingShadowGainEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "enchanted creature has haste and \"At the beginning of your upkeep, " +
+                "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
+                "Put that card onto the battlefield and attach {this} to it, then put all other cards " +
+                "revealed this way on the bottom of your library in a random order.\"";
     }
 
-    public ShiftingShadowEffect(final ShiftingShadowEffect effect, UUID auraId) {
+    private ShiftingShadowGainEffect(final ShiftingShadowGainEffect effect) {
         super(effect);
-        this.auraId = auraId;
     }
 
     @Override
-    public ShiftingShadowEffect copy() {
-        return new ShiftingShadowEffect(this, auraId);
+    public ShiftingShadowGainEffect copy() {
+        return new ShiftingShadowGainEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchanted = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && enchanted != null) {
-            Permanent aura = null;
-            int index = 0;
-            while (aura == null && index < enchanted.getAttachments().size()) {
-                UUID attached = enchanted.getAttachments().get(index);
-                if (attached.equals(auraId)) {
-                    aura = game.getPermanentOrLKIBattlefield(attached);
-                } else {
-                    index += 1;
-                }
-            }
-            if (aura != null) {
-                enchanted.destroy(source, game, false);
-                // Because this effect has two steps, we have to call the processAction method here, so that triggered effects of the target going to graveyard go to the stack
-                // If we don't do it here, gained triggered effects to the target will be removed from the following moveCards method and the applyEffcts done there.
-                // Example: {@link org.mage.test.commander.duel.MairsilThePretenderTest#MairsilThePretenderTest Test}
-                game.getState().processAction(game);
-                
-                Cards revealed = new CardsImpl();
-                Cards otherCards = new CardsImpl();
-                for (Card card : controller.getLibrary().getCards(game)) {
-                    revealed.add(card);
-                    if (card != null && card.isCreature(game)) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        Permanent newEnchanted = game.getPermanent(card.getId());
-                        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-                        filter.add(new PermanentIdPredicate(card.getId()));
-                        Target target = new TargetControlledCreaturePermanent(filter);
-                        if (newEnchanted != null) {
-                            target.addTarget(newEnchanted.getId(), source, game);
-                            aura.getSpellAbility().getTargets().clear();
-                            aura.getSpellAbility().getTargets().add(target);
-                            newEnchanted.addAttachment(aura.getId(), source, game);
-                        }
-                        break;
-                    } else {
-                        otherCards.add(card);
-                    }
-                }
-                controller.revealCards(enchanted.getIdName(), revealed, game);
-                controller.putCardsOnBottomOfLibrary(otherCards, game, source, false);
-                return true;
+        Permanent aura = source.getSourcePermanentIfItStillExists(game);
+        if (aura == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(aura.getAttachedTo());
+        if (permanent == null) {
+            return false;
+        }
+        permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+        permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new ShiftingShadowEffect(aura, game), TargetController.YOU, false
+        ), source.getSourceId(), game);
+        return true;
+    }
+}
+
+class ShiftingShadowEffect extends OneShotEffect {
+
+    private final MageObjectReference mor;
+    private final String name;
+
+    ShiftingShadowEffect(Permanent permanent, Game game) {
+        super(Outcome.Benefit);
+        this.mor = new MageObjectReference(permanent, game);
+        this.name = permanent.getName();
+    }
+
+    private ShiftingShadowEffect(final ShiftingShadowEffect effect) {
+        super(effect);
+        this.mor = effect.mor;
+        this.name = effect.name;
+    }
+
+    @Override
+    public ShiftingShadowEffect copy() {
+        return new ShiftingShadowEffect(this);
+    }
+
+    private static Card getCard(Player player, Cards cards, Game game) {
+        for (Card card : player.getLibrary().getCards(game)) {
+            cards.add(card);
+            if (card.isCreature(game)) {
+                return card;
             }
         }
-        return false;
+        return null;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            permanent.destroy(source, game);
+            game.getState().processAction(game);
+        }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return true;
+        }
+        Cards cards = new CardsImpl();
+        Card card = getCard(player, cards, game);
+        player.revealCards(source, cards, game);
+        Permanent creature;
+        if (card != null) {
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            creature = game.getPermanent(card.getId());
+        } else {
+            creature = null;
+        }
+        if (creature != null && mor.zoneCounterIsCurrent(game)) {
+            creature.addAttachment(mor.getSourceId(), source, game);
+        }
+        cards.retainZone(Zone.LIBRARY, game);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
+        return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
+                "Put that card onto the battlefield and attach " + name + " to it, then put all other cards " +
+                "revealed this way on the bottom of your library in a random order.";
     }
 }

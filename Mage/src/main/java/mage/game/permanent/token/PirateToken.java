@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class PirateToken extends TokenImpl {
 
     public PirateToken() {
-        super("Pirate", "2/2 black Pirate creature token with menace");
+        super("Pirate Token", "2/2 black Pirate creature token with menace");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PIRATE);

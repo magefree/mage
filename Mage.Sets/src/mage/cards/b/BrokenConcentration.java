@@ -23,7 +23,7 @@ public final class BrokenConcentration extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         // Madness {3}{U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{U}")));
     }
 
     private BrokenConcentration(final BrokenConcentration card) {

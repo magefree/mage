@@ -109,7 +109,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Blanchwood Armor", 1);
         assertGraveyardCount(playerB, "Frog Tongue", 0);
         assertPermanentCount(playerB, "Frog Tongue", 1);
-        assertPermanentCount(playerB, "Saproling", 8);
+        assertPermanentCount(playerB, "Saproling Token", 8);
         assertPowerToughness(playerB, "Bramble Elemental", 10, 10);
         assertAbility(playerB, "Bramble Elemental", ReachAbility.getInstance(), true);
 

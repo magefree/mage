@@ -65,7 +65,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, new DomainValue(2).calculate(game, source, this));
+        CardUtil.reduceCost(abilityToModify, 2 * DomainValue.REGULAR.calculate(game, source, this));
         return true;
     }
 
@@ -98,7 +98,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             // The cost is reduced by {2} for each basic land type.
-            int domainValueReduction = new DomainValue(2).calculate(game, source, this);
+            int domainValueReduction = 2 * DomainValue.REGULAR.calculate(game, source, this);
             int count = Math.max(0, MAX_DOMAIN_VALUE - domainValueReduction);
             if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}? Or " + permanent.getName() + " will be sacrificed.", source, game)) {
                 Cost cost = ManaUtil.createManaCost(count, false);

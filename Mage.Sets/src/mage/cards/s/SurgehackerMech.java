@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class SurgehackerMech extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker and opponent controls");
+            = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
     private static final FilterPermanent filter2
             = new FilterControlledPermanent(SubType.VEHICLE);
 
@@ -52,7 +52,7 @@ public final class SurgehackerMech extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // When Surgehacker Mech enters the battlefield, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue).setText("it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.addHint(hint));
 

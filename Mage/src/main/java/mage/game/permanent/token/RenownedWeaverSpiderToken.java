@@ -16,7 +16,7 @@ import java.util.Arrays;
 public final class RenownedWeaverSpiderToken extends TokenImpl {
 
     public RenownedWeaverSpiderToken() {
-        super("Spider", "1/3 green Spider enchantment creature token with reach");
+        super("Spider Token", "1/3 green Spider enchantment creature token with reach");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.GREEN);

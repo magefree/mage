@@ -18,10 +18,6 @@ public class Mode implements Serializable {
     protected final Effects effects;
     protected String flavorWord;
 
-    public Mode() {
-        this((Effect) null);
-    }
-
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();
         this.targets = new Targets();
@@ -54,23 +50,25 @@ public class Mode implements Serializable {
         return targets;
     }
 
-    public void addTarget(Target target) {
-        this.addTarget(target, false);
+    public Mode addTarget(Target target) {
+        return this.addTarget(target, false);
     }
 
-    public void addTarget(Target target, Boolean addChooseHintFromEffect) {
+    public Mode addTarget(Target target, Boolean addChooseHintFromEffect) {
         targets.add(target);
         if (addChooseHintFromEffect) {
             target.withChooseHint(this.getEffects().getText(this));
         }
+        return this;
     }
 
     public Effects getEffects() {
         return effects;
     }
 
-    public void addEffect(Effect effect) {
+    public Mode addEffect(Effect effect) {
         effects.add(effect);
+        return this;
     }
 
     public String getFlavorWord() {

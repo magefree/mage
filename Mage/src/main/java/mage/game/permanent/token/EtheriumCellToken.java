@@ -16,7 +16,7 @@ import mage.constants.Zone;
 public final class EtheriumCellToken extends TokenImpl {
 
     public EtheriumCellToken() {
-        super("Etherium Cell", "colorless artifact token named Etherium Cell which has \"{T}, Sacrifice this artifact: Add one mana of any color.\"");
+        super("Etherium Cell", "colorless artifact token named Etherium Cell with \"{T}, Sacrifice this artifact: Add one mana of any color.\"");
         this.setOriginalExpansionSetCode("AER");
         cardType.add(CardType.ARTIFACT);
 

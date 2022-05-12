@@ -32,7 +32,7 @@ public final class BellowingSaddlebrute extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                         new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)),
                         new InvertCondition(RaidCondition.instance),
-                        "<i>Raid</i> &mdash; When {this} enters the battlefield, you lose 4 life unless you attacked this turn.")
+                        "When {this} enters the battlefield, you lose 4 life unless you attacked this turn.")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),
                 new PlayerAttackedWatcher());

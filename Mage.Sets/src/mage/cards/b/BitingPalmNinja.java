@@ -44,7 +44,7 @@ public final class BitingPalmNinja extends CardImpl {
                 new DoWhenCostPaid(new ReflexiveTriggeredAbility(
                         new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND), false,
                         "that player reveals their hand and you choose a nonland card from it. Exile that card"
-                ), new RemoveCountersSourceCost(CounterType.MENACE.createInstance()), "Remove a menace counter?"), false, true
+                ), new RemoveCountersSourceCost(CounterType.MENACE.createInstance()).setText("remove a menace counter from it"), "Remove a menace counter?"), false, true
         ));
     }
 

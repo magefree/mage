@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class GriffinToken extends TokenImpl {
 
     public GriffinToken() {
-        super("Griffin", "2/2 white Griffin creature token with flying");
+        super("Griffin Token", "2/2 white Griffin creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.GRIFFIN);

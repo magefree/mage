@@ -91,8 +91,8 @@ class ThelonsCurseEffect extends OneShotEffect {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {U} and untap a tapped blue creature under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source.getSourceId(), game)) {
-                    Cost cost = new ManaCostsImpl("U");
+                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source, game)) {
+                    Cost cost = new ManaCostsImpl<>("{U}");
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
 
                     if (cost.pay(source, game, source, player.getId(), false)) {

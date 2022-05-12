@@ -40,7 +40,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
+        if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
             manaValues = 0;
             numberCardsRevealed = 0;
             Player player = game.getPlayer(controllerId);
@@ -81,7 +81,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return targets.canChoose(controllerId, source, game);
     }
 
     @Override

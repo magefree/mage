@@ -12,9 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,12 +25,6 @@ import java.util.UUID;
  */
 public final class BushmeatPoacher extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public BushmeatPoacher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
@@ -44,7 +36,7 @@ public final class BushmeatPoacher extends CardImpl {
         // {1}, {T}, Sacrifice another creature: You gain life equal to that creature's toughness. Draw a card.
         Ability ability = new SimpleActivatedAbility(new BushmeatPoacherEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
     }
 
@@ -62,7 +54,7 @@ class BushmeatPoacherEffect extends OneShotEffect {
 
     BushmeatPoacherEffect() {
         super(Outcome.Benefit);
-        staticText = "you gain life equal to that creature's toughness. Draw a card";
+        staticText = "you gain life equal to the sacrificed creature's toughness. Draw a card";
     }
 
     private BushmeatPoacherEffect(final BushmeatPoacherEffect effect) {

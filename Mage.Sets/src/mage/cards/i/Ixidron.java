@@ -3,6 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -43,7 +44,7 @@ public final class Ixidron extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Ixidron enters the battlefield, turn all other nontoken creatures face down.
-        this.addAbility(new EntersBattlefieldAbility(new BecomesFaceDownCreatureAllEffect(filterTurnFaceDown)));
+        this.addAbility(new AsEntersBattlefieldAbility(new BecomesFaceDownCreatureAllEffect(filterTurnFaceDown)));
 
         // Ixidron's power and toughness are each equal to the number of face-down creatures on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));

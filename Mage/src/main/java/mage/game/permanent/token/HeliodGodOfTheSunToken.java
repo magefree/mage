@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class HeliodGodOfTheSunToken extends TokenImpl {
 
     public HeliodGodOfTheSunToken() {
-        super("Cleric", "2/1 white Cleric enchantment creature token");
+        super("Cleric Token", "2/1 white Cleric enchantment creature token");
         this.cardType.add(CardType.CREATURE);
         this.cardType.add(CardType.ENCHANTMENT);
 

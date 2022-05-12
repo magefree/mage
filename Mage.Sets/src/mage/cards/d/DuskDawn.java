@@ -1,21 +1,14 @@
 
 package mage.cards.d;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -23,9 +16,12 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Set;
+import java.util.UUID;
+
 public final class DuskDawn extends SplitCard {
 
-    private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power greater than or equal to 3");
+    private static final FilterCreaturePermanent filterCreatures3orGreater = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
         filterCreatures3orGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
@@ -36,15 +32,12 @@ public final class DuskDawn extends SplitCard {
 
         // Dusk
         // Destroy all creatures with power 3 or greater.
-        Effect destroy = new DestroyAllEffect(filterCreatures3orGreater);
-        destroy.setText("Destroy all creatures with power greater than or equal to 3.");
-        getLeftHalfCard().getSpellAbility().addEffect(destroy);
+        getLeftHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filterCreatures3orGreater));
 
         // Dawn
         // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new DawnEffect());
-
     }
 
     private DuskDawn(final DuskDawn card) {

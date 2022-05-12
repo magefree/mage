@@ -24,7 +24,7 @@ public final class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
     }
 
     public KalonianTwingroveTreefolkWarriorToken() {
-        super("Treefolk Warrior", "green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
+        super("Treefolk Warrior Token", "green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -41,7 +40,7 @@ public final class TeveshSzatDoomOfFools extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SZAT);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Create two 0/1 black Thrull creature tokens.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BreedingPitThrullToken(), 2), 2));
@@ -102,10 +101,10 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
         }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        target.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+        target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -159,7 +158,7 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
 
         // gain control of all commanders
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             game.addEffect(new GainControlTargetEffect(
                     Duration.Custom, true

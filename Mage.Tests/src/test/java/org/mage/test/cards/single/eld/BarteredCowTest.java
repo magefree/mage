@@ -29,7 +29,7 @@ public class BarteredCowTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Bartered Cow", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class BarteredCowTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Funeral Charm", 1);
         assertGraveyardCount(playerA, "Bartered Cow", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class BarteredCowTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Bartered Cow", 1);
         assertHandCount(playerA, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
     }
 
 }

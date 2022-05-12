@@ -55,7 +55,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
                 return false;
             }
 
-            Set<Card> filtered = cards.getCards(filterCard, source.getSourceId(), source.getControllerId(), game);
+            Set<Card> filtered = cards.getCards(filterCard, source.getControllerId(), source, game);
             if (filtered.isEmpty()) {
                 if (!game.isSimulation()) {
                     game.informPlayer(player, "You have no " + filterCard.getMessage() + " outside the game.");

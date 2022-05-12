@@ -22,7 +22,7 @@ public final class WasitoraCatDragonToken extends TokenImpl {
     }
     
     public WasitoraCatDragonToken() {
-        super("Cat Dragon", "3/3 black, red, and green Cat Dragon creature token with flying");
+        super("Cat Dragon Token", "3/3 black, red, and green Cat Dragon creature token with flying");
         
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode("C17");

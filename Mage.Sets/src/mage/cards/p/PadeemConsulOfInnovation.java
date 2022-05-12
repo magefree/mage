@@ -35,7 +35,7 @@ public final class PadeemConsulOfInnovation extends CardImpl {
         // Artifacts you control have hexproof.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 HexproofAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS, false
+                StaticFilters.FILTER_PERMANENT_ARTIFACTS, false
         )));
 
         // At the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.

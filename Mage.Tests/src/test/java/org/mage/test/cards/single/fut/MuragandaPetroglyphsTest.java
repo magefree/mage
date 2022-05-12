@@ -101,7 +101,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, "Soldier", 3, 3);
+        assertPowerToughness(playerA, "Soldier Token", 3, 3);
     }
 
     @Test

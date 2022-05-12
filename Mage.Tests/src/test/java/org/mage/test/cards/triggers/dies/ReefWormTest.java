@@ -24,9 +24,9 @@ public class ReefWormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Reef Worm", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Reef Worm");
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", "Fish");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", "Fish Token");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale Token");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Whale Token");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -36,9 +36,9 @@ public class ReefWormTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Lightning Bolt", 4);
 
-        assertPermanentCount(playerB, "Fish", 0);
-        assertPermanentCount(playerB, "Whale", 0);
-        assertPermanentCount(playerB, "Kraken", 1);
+        assertPermanentCount(playerB, "Fish Token", 0);
+        assertPermanentCount(playerB, "Whale Token", 0);
+        assertPermanentCount(playerB, "Kraken Token", 1);
         assertGraveyardCount(playerB, "Reef Worm", 1);
 
         assertGraveyardCount(playerA, "Lightning Bolt", 4);

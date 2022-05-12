@@ -5,14 +5,10 @@ import mage.MageInt;
 /**
  * @author JayDi85
  */
-public interface ModalDoubleFacesCardHalf extends Card {
+public interface ModalDoubleFacesCardHalf extends SubCard<ModalDoubleFacesCard> {
 
     @Override
     ModalDoubleFacesCardHalf copy();
-
-    void setParentCard(ModalDoubleFacesCard card);
-
-    ModalDoubleFacesCard getParentCard();
 
     void setPT(int power, int toughness);
 

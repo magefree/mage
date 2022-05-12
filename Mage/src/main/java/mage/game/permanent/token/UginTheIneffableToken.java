@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class UginTheIneffableToken extends TokenImpl {
 
     public UginTheIneffableToken() {
-        super("Spirit", "2/2 colorless Spirit creature token");
+        super("Spirit Token", "2/2 colorless Spirit creature token");
         setExpansionSetCodeForImage("WAR"); // default
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);

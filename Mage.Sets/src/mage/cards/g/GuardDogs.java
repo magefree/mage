@@ -69,7 +69,7 @@ class GuardDogsEffect extends PreventionEffectImpl {
     public void init(Ability source, Game game) {
         this.controlledTarget = new TargetControlledPermanent();
         this.controlledTarget.setNotTarget(true);
-        this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
     

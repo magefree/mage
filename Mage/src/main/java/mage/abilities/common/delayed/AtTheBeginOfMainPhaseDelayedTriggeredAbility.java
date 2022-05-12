@@ -20,12 +20,18 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         NEXT_PRECOMBAT_MAIN("next precombat main phase"),
         NEXT_POSTCOMAT_MAIN("next postcombat main phase"),
         NEXT_MAIN("next main phase"),
-        NEXT_MAIN_THIS_TURN("next main phase this turn");
+        NEXT_MAIN_THIS_TURN("next main phase this turn", Duration.EndOfTurn);
 
         private final String text;
+        private final Duration duration;
 
         PhaseSelection(String text) {
+            this(text, Duration.EndOfGame);
+        }
+
+        PhaseSelection(String text, Duration duration) {
             this.text = text;
+            this.duration = duration;
         }
 
         @Override
@@ -38,7 +44,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     private final PhaseSelection phaseSelection;
 
     public AtTheBeginOfMainPhaseDelayedTriggeredAbility(Effect effect, boolean optional, TargetController targetController, PhaseSelection phaseSelection) {
-        super(effect, Duration.EndOfGame, true, optional);
+        super(effect, phaseSelection.duration, true, optional);
         this.targetController = targetController;
         this.phaseSelection = phaseSelection;
 
@@ -101,7 +107,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your " + phaseSelection + ", ";

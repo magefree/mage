@@ -1,21 +1,21 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -27,8 +27,9 @@ import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class NissaStewardOfElements extends CardImpl {
@@ -38,9 +39,7 @@ public final class NissaStewardOfElements extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
-        Ability abilityETB = new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.LOYALTY.createInstance()));
-        abilityETB.setRuleVisible(false);
-        this.addAbility(abilityETB);
+        this.setStartingLoyalty(-2); // -2 loyalty means X
 
         // +2: Scry 2.
         this.addAbility(new LoyaltyAbility(new ScryEffect(2), 2));

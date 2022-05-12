@@ -14,6 +14,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -38,7 +39,7 @@ public final class SoulFoundry extends CardImpl {
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SoulFoundryImprintEffect(), true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
@@ -107,7 +108,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
         if (controller != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                if (target.canChoose(source.getControllerId(), source, game)
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {

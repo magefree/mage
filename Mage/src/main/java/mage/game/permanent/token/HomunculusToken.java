@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class HomunculusToken extends TokenImpl {
 
     public HomunculusToken() {
-        super("Homunculus", "0/1 blue Homunculus artifact creature token");
+        super("Homunculus Token", "0/1 blue Homunculus artifact creature token");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setBlue(true);

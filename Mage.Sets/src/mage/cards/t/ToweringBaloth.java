@@ -23,7 +23,7 @@ public final class ToweringBaloth extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Morph {6}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{G}")));
     }
 
     private ToweringBaloth(final ToweringBaloth card) {

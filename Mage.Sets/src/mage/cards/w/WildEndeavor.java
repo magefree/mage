@@ -50,7 +50,7 @@ class WildEndeavorEffect extends OneShotEffect {
     WildEndeavorEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Roll two d4 and choose one result. " +
-                "Create a number of 3/3 green Beast creature tokens equal to that result." +
+                "Create a number of 3/3 green Beast creature tokens equal to that result. " +
                 "Then search your library for a number of basic land cards " +
                 "equal to the other result, put them onto the battlefield tapped, then shuffle.";
     }

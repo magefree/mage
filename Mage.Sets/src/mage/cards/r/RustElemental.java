@@ -78,8 +78,8 @@ class RustElementalEffect extends OneShotEffect {
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                 // if they can pay the cost, then they must pay
-                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                    controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                if (target.canChoose(controller.getId(), source, game)) {
+                    controller.choose(Outcome.Sacrifice, target, source, game);
                     Permanent artifactSacrifice = game.getPermanent(target.getFirstTarget());
                     if (artifactSacrifice != null) {
                         // sacrifice the chosen artifact

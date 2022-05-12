@@ -22,7 +22,7 @@ public final class DokaiWeaverofLifeToken extends TokenImpl {
     static final FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
     public DokaiWeaverofLifeToken() {
-        super("Elemental", "X/X green Elemental creature token, where X is the number of lands you control");
+        super("Elemental Token", "X/X green Elemental creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEMENTAL);

@@ -1,23 +1,13 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -28,8 +18,9 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LilianaTheNecromancer extends CardImpl {
@@ -39,7 +30,7 @@ public final class LilianaTheNecromancer extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Target player loses 2 life.
         Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(2), 1);
@@ -47,13 +38,13 @@ public final class LilianaTheNecromancer extends CardImpl {
         this.addAbility(ability);
 
         // −1: Return target creature card from your graveyard to your hand.
-        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -1);
+        ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -1);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // −7: Destroy up to two target creatures. Put up to two creature cards from graveyards onto the battlefield under your control.
         ability = new LoyaltyAbility(new DestroyTargetEffect(), -7);
-        ability.addTarget(new TargetCreaturePermanent(0, 2));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
         ability.addEffect(new LilianaTheNecromancerEffect());
         this.addAbility(ability);
     }
@@ -94,7 +85,7 @@ class LilianaTheNecromancerEffect extends OneShotEffect {
         }
         Target target = new TargetCardInGraveyard(0, 2, filter);
         target.setNotTarget(true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         Cards cardsToMove = new CardsImpl();

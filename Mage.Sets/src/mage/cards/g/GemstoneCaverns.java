@@ -82,7 +82,7 @@ class GemstoneCavernsAbility extends StaticAbility implements OpeningHandAction 
 
     @Override
     public String getRule() {
-        return "If {this} is in your opening hand and you're not playing first, you may begin the game with {this} on the battlefield with a luck counter on it. If you do, exile a card from your hand.";
+        return "If {this} is in your opening hand and you're not the starting player, you may begin the game with {this} on the battlefield with a luck counter on it. If you do, exile a card from your hand.";
     }
 
     @Override

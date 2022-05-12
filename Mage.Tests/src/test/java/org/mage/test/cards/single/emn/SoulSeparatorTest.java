@@ -36,8 +36,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Soul Separator", 1);
         assertExileCount("Sylvan Advocate", 1);
         assertPermanentCount(playerA, "Sylvan Advocate", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
-        assertPowerToughness(playerA, "Zombie", 2, 3);
+        assertPermanentCount(playerA, "Zombie Token", 1);
+        assertPowerToughness(playerA, "Zombie Token", 2, 3);
 
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
         Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
@@ -72,8 +72,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Soul Separator", 1);
         assertExileCount("Tree of Perdition", 1);
         assertPermanentCount(playerA, "Tree of Perdition", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
-        assertPowerToughness(playerA, "Zombie", 0, 13);
+        assertPermanentCount(playerA, "Zombie Token", 1);
+        assertPowerToughness(playerA, "Zombie Token", 0, 13);
 
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
         Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));

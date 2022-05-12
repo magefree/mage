@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,15 +10,16 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Malfunction extends CardImpl {
@@ -34,7 +33,7 @@ public final class Malfunction extends CardImpl {
     }
 
     public Malfunction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant artifact or creature.
@@ -45,7 +44,7 @@ public final class Malfunction extends CardImpl {
         this.addAbility(ability);
 
         // When Malfunction enters the battlefield, tap enchanted permanent.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect().setText("tap enchanted permanent")));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
