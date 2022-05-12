@@ -249,3 +249,4 @@ Zendikar Rising|ZNR|
 Zendikar Rising Commander|ZNC|
 Star Wars|SWS|
 Happy Holidays|HHO|
+Warhammer 40,000|40K|
