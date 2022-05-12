@@ -27,7 +27,7 @@ public final class MurderersAxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
 
         // Equip &mdash; Discard a card.
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new DiscardCardCost()));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new DiscardCardCost(), false));
     }
 
     private MurderersAxe(final MurderersAxe card) {

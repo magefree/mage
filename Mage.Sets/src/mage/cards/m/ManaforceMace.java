@@ -30,7 +30,7 @@ public final class ManaforceMace extends CardImpl {
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private ManaforceMace(final ManaforceMace card) {

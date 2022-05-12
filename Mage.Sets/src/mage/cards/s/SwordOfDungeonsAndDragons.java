@@ -60,7 +60,7 @@ public final class SwordOfDungeonsAndDragons extends CardImpl {
         this.addAbility(new SwordOfDungeonsAndDragonsAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SwordOfDungeonsAndDragons(final SwordOfDungeonsAndDragons card) {

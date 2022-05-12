@@ -25,7 +25,7 @@ public final class BladeOfSelves extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MyriadAbility(), AttachmentType.EQUIPMENT)));
         
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), false));
     }
 
     private BladeOfSelves(final BladeOfSelves card) {

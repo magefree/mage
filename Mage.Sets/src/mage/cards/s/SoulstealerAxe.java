@@ -38,7 +38,7 @@ public final class SoulstealerAxe extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SoulstealerAxe(final SoulstealerAxe card) {

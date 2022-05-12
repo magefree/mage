@@ -46,7 +46,7 @@ public final class MaceOfTheValiant extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private MaceOfTheValiant(final MaceOfTheValiant card) {

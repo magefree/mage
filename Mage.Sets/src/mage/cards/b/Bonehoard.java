@@ -34,7 +34,7 @@ public final class Bonehoard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(value, value).setText("equipped creature gets +X/+X, where X is the number of creature cards in all graveyards")));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private Bonehoard(final Bonehoard card) {

@@ -46,7 +46,7 @@ public final class VeteransArmaments extends CardImpl {
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private VeteransArmaments(final VeteransArmaments card) {

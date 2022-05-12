@@ -32,11 +32,15 @@ public final class LivewireLash extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // Equipped creature gets +2/+0
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        // and has "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target."
         LivewireLashAbility ability = new LivewireLashAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private LivewireLash(final LivewireLash card) {

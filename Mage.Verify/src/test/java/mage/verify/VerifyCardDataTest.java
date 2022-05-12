@@ -1420,6 +1420,7 @@ public class VerifyCardDataTest {
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
         hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(EquipAbility.class, "Equip only as a sorcery.");
         hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
 
         for (Class objectClass : hints.keySet()) {

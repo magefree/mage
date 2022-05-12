@@ -38,7 +38,7 @@ public final class BloodforgedBattleAxe extends CardImpl {
         this.addAbility(new BloodforgedBattleAxeAbility());
 
         // Equip 2
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
 
     }
 
