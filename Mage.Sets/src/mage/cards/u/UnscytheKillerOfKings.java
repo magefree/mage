@@ -45,7 +45,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2), false);
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private UnscytheKillerOfKings(final UnscytheKillerOfKings card) {
