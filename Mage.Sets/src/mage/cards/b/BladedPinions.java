@@ -22,9 +22,13 @@ public final class BladedPinions extends CardImpl {
     public BladedPinions (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
+        // Equipped creature has flying and first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equip {2}
+        this.addAbility(new EquipAbility(2, false));
     }
 
     public BladedPinions (final BladedPinions card) {

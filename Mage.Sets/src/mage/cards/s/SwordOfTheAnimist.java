@@ -37,7 +37,7 @@ public final class SwordOfTheAnimist extends CardImpl {
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.addAbility(new AttacksAttachedTriggeredAbility(new SearchLibraryPutInPlayEffect(target, true), true));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SwordOfTheAnimist(final SwordOfTheAnimist card) {

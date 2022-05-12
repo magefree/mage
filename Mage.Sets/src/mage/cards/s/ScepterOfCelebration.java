@@ -41,7 +41,7 @@ public final class ScepterOfCelebration extends CardImpl {
         ), "equipped", false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private ScepterOfCelebration(final ScepterOfCelebration card) {

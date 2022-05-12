@@ -36,7 +36,7 @@ public final class DancingSword extends CardImpl {
         ).setTriggerPhrase("When equipped creature dies, "));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private DancingSword(final DancingSword card) {

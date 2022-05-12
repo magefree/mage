@@ -51,7 +51,7 @@ public final class GiantsAmulet extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private GiantsAmulet(final GiantsAmulet card) {

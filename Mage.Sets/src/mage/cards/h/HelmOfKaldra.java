@@ -63,7 +63,7 @@ public final class HelmOfKaldra extends CardImpl {
                 new HelmOfKaldraCondition(),
                 "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it"));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{2}"), false));
     }
 
     private HelmOfKaldra(final HelmOfKaldra card) {

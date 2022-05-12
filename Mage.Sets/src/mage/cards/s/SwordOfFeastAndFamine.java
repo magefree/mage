@@ -42,7 +42,7 @@ public final class SwordOfFeastAndFamine extends CardImpl {
         this.addAbility(new SwordOfFeastAndFamineAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private SwordOfFeastAndFamine(final SwordOfFeastAndFamine card) {

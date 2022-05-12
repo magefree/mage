@@ -24,8 +24,11 @@ public final class OgresCleaver extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
+        // Equipped creature gets +5/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 0)));
+
+        // Equip {5}
+        this.addAbility(new EquipAbility(5, false));
     }
 
     public OgresCleaver (final OgresCleaver card) {

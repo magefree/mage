@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -49,7 +48,7 @@ public final class WandOfOrcus extends CardImpl {
                 false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private WandOfOrcus(final WandOfOrcus card) {

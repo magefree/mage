@@ -32,7 +32,7 @@ public final class InfiltrationLens extends CardImpl {
         this.addAbility(new EquippedBecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private InfiltrationLens(final InfiltrationLens card) {

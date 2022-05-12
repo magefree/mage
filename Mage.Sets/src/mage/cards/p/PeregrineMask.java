@@ -29,7 +29,7 @@ public final class PeregrineMask extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         this.addAbility(ability);
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private PeregrineMask(final PeregrineMask card) {

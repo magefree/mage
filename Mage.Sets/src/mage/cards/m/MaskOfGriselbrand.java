@@ -40,7 +40,7 @@ public final class MaskOfGriselbrand extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new MaskOfGriselbrandEffect(), "equipped creature"));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private MaskOfGriselbrand(final MaskOfGriselbrand card) {
