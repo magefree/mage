@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class TerentatekCub extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Hunter or Rogue card");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Jedi or Sith");
 
     static {
         filter.add(Predicates.or(SubType.JEDI.getPredicate(), SubType.SITH.getPredicate()));
@@ -37,12 +37,12 @@ public final class TerentatekCub extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able
+        // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostSourceEffect(1, 1, Duration.Custom),
+                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new OpponentControlsPermanentCondition(filter),
                 "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1"));
-        Effect effect = new ConditionalRequirementEffect(new AttacksIfAbleSourceEffect(Duration.Custom), new OpponentControlsPermanentCondition(filter));
+        Effect effect = new ConditionalRequirementEffect(new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield), new OpponentControlsPermanentCondition(filter));
         effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability);
