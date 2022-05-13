@@ -1,11 +1,8 @@
 
 package mage.cards.l;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -19,12 +16,8 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -35,10 +28,7 @@ public final class Lightsaber extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Jedi or Sith");
 
     static {
-        filter.add(Predicates.or(
-                SubType.JEDI.getPredicate(),
-                SubType.SITH.getPredicate()
-        ));
+        filter.add(Predicates.or(SubType.JEDI.getPredicate(), SubType.SITH.getPredicate()));
     }
 
     public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
@@ -52,10 +42,10 @@ public final class Lightsaber extends CardImpl {
         ).setText("and has first strike")));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
 
         // Equip Jedi or Sith {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));
     }
 
     private Lightsaber(final Lightsaber card) {
