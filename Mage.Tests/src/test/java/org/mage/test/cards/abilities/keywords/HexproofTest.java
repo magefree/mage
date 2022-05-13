@@ -154,7 +154,7 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("setup good targets")) {
-                Assert.fail("must thow error about bad targets, but got:\n" + e.getMessage());
+                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
     }

@@ -73,7 +73,6 @@ public class MulldrifterTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ghostly Flicker");
         addTarget(playerA, "Mulldrifter^Merfolk Looter");
-        setChoice(playerA, false); // do not pay evoke cost
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         

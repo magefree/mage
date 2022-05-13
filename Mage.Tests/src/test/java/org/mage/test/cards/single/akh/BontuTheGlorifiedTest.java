@@ -5,12 +5,13 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * {@link BontuTheGlorifiedTest Bontu the Glorified}
+ * Menace, Indestructible
+ * Bontu the Glorified can’t attack or block unless a creature died under your control this turn.
+ * {1}{B}, Sacrifice another creature: Scry 1. Each opponent loses 1 life and you gain 1 life.
+ */
 public class BontuTheGlorifiedTest extends CardTestPlayerBase {
-
-    //Menace
-    //Indestructible
-    //Bontu the Glorified can't attack or block unless a creature died under your control this turn.
-    //{1}{B}, Sacrifice another creature: Scry 1.  Each opponent loses 1 life and you gain 1 life.
     String bontu = "Bontu the Glorified";
     String swamp = "Swamp";
     String grizzly = "Grizzly Bears";
@@ -68,7 +69,6 @@ public class BontuTheGlorifiedTest extends CardTestPlayerBase {
 
     @Test
     public void testBontuSacAbilityTriggersAttack() {
-
         addCard(Zone.BATTLEFIELD, playerA, bontu);
         addCard(Zone.BATTLEFIELD, playerA, swamp, 10);
         addCard(Zone.BATTLEFIELD, playerA, grizzly);
