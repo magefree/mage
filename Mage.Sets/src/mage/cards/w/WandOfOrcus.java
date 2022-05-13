@@ -48,7 +48,7 @@ public final class WandOfOrcus extends CardImpl {
                 false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private WandOfOrcus(final WandOfOrcus card) {

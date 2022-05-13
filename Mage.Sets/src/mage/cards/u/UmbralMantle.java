@@ -18,6 +18,7 @@ import mage.constants.SubType;
 import java.util.UUID;
 
 /**
+ *
  * @author Plopman
  */
 public final class UmbralMantle extends CardImpl {
@@ -32,7 +33,7 @@ public final class UmbralMantle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip {0}
-        this.addAbility(new EquipAbility(0));
+        this.addAbility(new EquipAbility(0, false));
     }
 
     private UmbralMantle(final UmbralMantle card) {
