@@ -1223,6 +1223,7 @@ public final class CardUtil {
             cards.add(cardToCast);
         }
         cards.removeIf(Objects::isNull);
+        cards.removeIf(card -> card.isLand(game));
         cards.removeIf(card -> !filter.match(card, playerId, source, game));
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
