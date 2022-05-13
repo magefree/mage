@@ -92,10 +92,14 @@ class RhysticCaveManaEffect extends ManaEffect {
         super(effect);
     }
 
+    // "The card’s ability has errata so you can’t activate the ability during casting of a spell or activating of an ability."
+    // (2004-10-04)
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        netMana.add(Mana.AnyMana(1));
+        // Returning no mana instead of 1 mana of any color so that it won't highlight spells that need it as castable.
+        // This land must be tapped for mana as an instant and the mana must be floated.
+        netMana.add(new Mana());
         return netMana;
     }
 
