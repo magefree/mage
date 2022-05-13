@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -10,23 +9,19 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SigilOfValor extends CardImpl {
@@ -110,7 +105,7 @@ class SigilOfValorCount implements DynamicValue {
         if (equipment != null && equipment.getAttachedTo() != null) {
             FilterPermanent filterPermanent = new FilterControlledCreaturePermanent();
             filterPermanent.add(Predicates.not(new CardIdPredicate(equipment.getAttachedTo())));
-            return game.getBattlefield().count(filterPermanent, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+            return game.getBattlefield().count(filterPermanent, sourceAbility.getControllerId(), sourceAbility, game);
         }
         return 0;
     }
@@ -127,6 +122,6 @@ class SigilOfValorCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return filter.getMessage();
+        return "";
     }
 }

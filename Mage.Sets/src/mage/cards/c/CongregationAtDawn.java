@@ -61,14 +61,14 @@ class CongregationAtDawnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards"));
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId : target.getTargets()) {
-                        Card card = controller.getLibrary().remove(cardId, game);
+                        Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }
                     controller.revealCards(sourceObject.getName(), revealed, game);

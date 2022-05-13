@@ -23,7 +23,7 @@ public final class ZombieCutthroat extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph-Pay 5 life.
-        this.addAbility(new MorphAbility(this, new PayLifeCost(5)));
+        this.addAbility(new MorphAbility(new PayLifeCost(5)));
     }
 
     private ZombieCutthroat(final ZombieCutthroat card) {

@@ -86,7 +86,7 @@ class NicolBolasTheDeceiverFirstEffect extends OneShotEffect {
                     if (permanents > 0 && opponent.chooseUse(outcome, "Sacrifices a nonland permanent?",
                             "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
                         Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                        if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+                        if (opponent.choose(outcome, target, source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
                                 permanent.sacrifice(source, game);

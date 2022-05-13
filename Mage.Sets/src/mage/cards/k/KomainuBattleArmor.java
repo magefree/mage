@@ -79,7 +79,7 @@ class KomainuBattleArmorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return false;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -128,7 +128,7 @@ class KomainuBattleArmorEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                playerId, source.getSourceId(), game
+                playerId, source, game
         )) {
             game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
         }

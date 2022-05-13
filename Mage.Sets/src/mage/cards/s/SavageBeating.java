@@ -34,8 +34,7 @@ public final class SavageBeating extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
         // or untap all creatures you control and after this phase, there is an additional combat phase.
-        Mode mode = new Mode();
-        mode.addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
+        Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
         mode.addEffect(new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase"));
         this.getSpellAbility().getModes().addMode(mode);
 

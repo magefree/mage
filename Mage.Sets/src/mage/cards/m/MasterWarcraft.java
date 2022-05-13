@@ -116,7 +116,7 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
         if (!controller.chooseTarget(Outcome.Benefit, target, source, game)) {
             return false; // the attack declaration resumes for the active player as normal
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source, game)) {
 
             // Choose creatures that will be attacking this combat
             if (target.getTargets().contains(permanent.getId())) {

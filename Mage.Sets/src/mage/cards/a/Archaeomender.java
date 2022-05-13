@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -18,9 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Archaeomender extends CardImpl {
-
-    private static final FilterCard filter
-            = new FilterArtifactCard("artifact card from your graveyard");
 
     public Archaeomender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -32,7 +28,7 @@ public final class Archaeomender extends CardImpl {
 
         // When Archaeomender enters the battlefield, return target artifact card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

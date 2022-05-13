@@ -50,7 +50,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Murder Investigation", 1);
         assertPermanentCount(playerA, "Safehold Elite", 0);
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
-        assertPermanentCount(playerA, "Soldier", 2);
+        assertPermanentCount(playerA, "Soldier Token", 2);
         assertGraveyardCount(playerB, "Lightning Bolt", 2);
 
         assertActionsCount(playerB, 0);

@@ -32,7 +32,7 @@ public final class BlazingRootwalla extends CardImpl {
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
         // Madness{0}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{0}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{0}")));
     }
 
     private BlazingRootwalla(final BlazingRootwalla card) {

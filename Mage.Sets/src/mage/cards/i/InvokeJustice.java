@@ -84,7 +84,7 @@ class InvokeJusticeEffect extends OneShotEffect {
         }
         TargetAmount target = new TargetPermanentAmount(4, filter);
         target.setNotTarget(true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {

@@ -74,8 +74,8 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        MageObject targetSource = game.getObject(sourceId);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        MageObject targetSource = game.getObject(source);
         Player player = game.getPlayer(sourceControllerId);
         if (player == null) {
             return false;
@@ -84,7 +84,7 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
             return false;
         }
         List<Card> cards = player.getGraveyard().getCards(
-                filter, sourceId, sourceControllerId, game
+                filter, sourceControllerId, source, game
         ).stream().collect(Collectors.toList());
         if (cards.size() < 2) {
             return false;

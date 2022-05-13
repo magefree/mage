@@ -28,7 +28,7 @@ public final class CeruleanWisps extends CardImpl {
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     public CeruleanWisps (final CeruleanWisps card) {

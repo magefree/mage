@@ -8,7 +8,6 @@ import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.constants.SuperType;
 
 import java.util.ArrayList;
 import java.util.List;

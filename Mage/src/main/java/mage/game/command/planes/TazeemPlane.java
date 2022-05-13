@@ -80,7 +80,7 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
         if (cPlane == null || !cPlane.getPlaneType().equals(Planes.PLANE_TAZEEM)) {
             return false;
         }
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override

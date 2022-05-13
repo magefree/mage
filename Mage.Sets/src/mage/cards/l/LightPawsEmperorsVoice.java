@@ -83,7 +83,7 @@ class LightPawsEmperorsVoiceEffect extends OneShotEffect {
             return game.getBattlefield()
                     .getActivePermanents(
                             filter, input.getPlayerId(),
-                            input.getSourceId(), game
+                            input.getSource(), game
                     ).stream()
                     .filter(Objects::nonNull)
                     .noneMatch(permanent -> CardUtil.haveSameNames(permanent, input.getObject()));

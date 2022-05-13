@@ -59,7 +59,7 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (!filter.match(spell, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(spell, getControllerId(), this, game)) {
             return false;
         }
         getEffects().setValue("spellCast", spell);

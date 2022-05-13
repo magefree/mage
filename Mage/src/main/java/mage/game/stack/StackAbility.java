@@ -389,22 +389,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustTargets(ability, game);
-        }
-    }
-
-    @Override
     public boolean checkIfClause(Game game) {
         return true;
     }

@@ -48,7 +48,7 @@ public final class Fiendlash extends CardImpl {
         this.addAbility(new FiendlashTriggeredAbility());
 
         // Equip {2}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), false));
     }
 
     private Fiendlash(final Fiendlash card) {

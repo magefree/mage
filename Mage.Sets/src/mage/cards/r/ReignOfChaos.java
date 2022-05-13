@@ -39,8 +39,7 @@ public final class ReignOfChaos extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(false, true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter1));
         this.getSpellAbility().addTarget(new TargetPermanent(filter2));
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect(false, true));
+        Mode mode = new Mode(new DestroyTargetEffect(false, true));
         mode.addTarget(new TargetPermanent(filter3));
         mode.addTarget(new TargetPermanent(filter4));
         this.getSpellAbility().addMode(mode);

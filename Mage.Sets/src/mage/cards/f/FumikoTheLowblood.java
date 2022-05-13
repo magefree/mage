@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -12,10 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -35,11 +31,8 @@ public final class FumikoTheLowblood extends CardImpl {
         // Fumiko the Lowblood has bushido X, where X is the number of attacking creatures.
         this.addAbility(new BushidoAbility(new AttackingCreatureCount("the number of attacking creatures.")));
 
-        // Creatures your opponents control attack each turn if able.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter)), new AttackedThisTurnWatcher());
-
+        // Creatures your opponents control attack each combat if able.
+        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)));
     }
 
     private FumikoTheLowblood(final FumikoTheLowblood card) {

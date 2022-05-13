@@ -65,7 +65,7 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
 
         ChoiceImpl choice = new ChoiceImpl(true);
@@ -122,7 +122,7 @@ class StaffOfTheLetterMagusEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
-            MageObject mageObject = game.getObject(source.getSourceId());
+            MageObject mageObject = game.getObject(source);
             if (mageObject instanceof Permanent) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                 if (permanent != null && game.getState().getValue(mageObject.getId() + "_letter") != null) {

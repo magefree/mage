@@ -14,7 +14,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 public final class ATATToken extends TokenImpl {
 
     public ATATToken() {
-        super("AT-AT", "5/5 white artifact AT-AT creature tokens with \"When this creature dies, create two 1/1 white Trooper creature tokens.\"", 5, 5);
+        super("AT-AT Token", "5/5 white artifact AT-AT creature tokens with \"When this creature dies, create two 1/1 white Trooper creature tokens.\"", 5, 5);
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);

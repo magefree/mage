@@ -81,7 +81,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {

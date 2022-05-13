@@ -71,7 +71,7 @@ class TectonicHellionEffect extends OneShotEffect {
         game.getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .forEach(uuid -> landMap.put(uuid, game.getBattlefield().getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, uuid, source.getSourceId(), game
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, uuid, source, game
                 ).size()));
         int max = landMap
                 .values()

@@ -7,8 +7,8 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author North
@@ -41,21 +41,16 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
         if (!event.getTargetId().equals(this.getSourceId())) {
             return false;
         }
-        Permanent blocker = game.getPermanent(event.getSourceId());
-        if (!filter.match(blocker, game)) {
+        if (!filter.match(game.getPermanent(event.getSourceId()), getControllerId(), this, game)) {
             return false;
         }
-        for (Effect effect : this.getEffects()) {
-            effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-        }
+        getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
     }
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever {this} becomes blocked by "
-                + (filter.getMessage().startsWith("an ") ? "" : "a ")
-                + filter.getMessage() + ", " ;
+        return "Whenever {this} becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override

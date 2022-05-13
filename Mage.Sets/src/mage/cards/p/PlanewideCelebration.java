@@ -3,7 +3,7 @@ package mage.cards.p;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class PlanewideCelebration extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PlanewideCelebrationToken()));
 
         // • Return target permanent card from your graveyard to your hand.
-        Mode mode = new Mode(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addMode(mode);
 

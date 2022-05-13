@@ -127,7 +127,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
                     if (numTargets > 0) {
                         TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
 
-                        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                        if (target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             permsToSacrifice.addAll(target.getTargets());
                         }

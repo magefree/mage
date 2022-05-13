@@ -46,8 +46,8 @@ public final class GoblinRabblemaster extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Other Goblin creatures you control attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(otherGoblinFilter, Duration.WhileOnBattlefield, true)));
+        // Other Goblin creatures you control attack each combat if able.
+        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(otherGoblinFilter)));
 
         // At the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinToken(true)), TargetController.YOU, false));

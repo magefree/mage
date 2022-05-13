@@ -80,7 +80,7 @@ class CyberdriveAwakenerEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         game.getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .filter(Objects::nonNull)
                 .map(permanent -> new MageObjectReference(permanent, game))

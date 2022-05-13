@@ -9,7 +9,7 @@ import java.util.Arrays;
 public final class GiantWizardToken extends TokenImpl {
 
     public GiantWizardToken() {
-        super("Giant Wizard", "4/4 blue Giant Wizard creature token");
+        super("Giant Wizard Token", "4/4 blue Giant Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.GIANT);

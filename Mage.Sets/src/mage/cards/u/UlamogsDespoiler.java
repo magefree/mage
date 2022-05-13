@@ -78,7 +78,7 @@ class UlamogsDespoilerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInExile(2, 2, filter, null);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Cards cardsToGraveyard = new CardsImpl(target.getTargets());
                     controller.moveCards(cardsToGraveyard, Zone.GRAVEYARD, source, game);

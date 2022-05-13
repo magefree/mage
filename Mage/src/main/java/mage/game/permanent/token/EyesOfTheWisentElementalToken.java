@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class EyesOfTheWisentElementalToken extends TokenImpl {
 
     public EyesOfTheWisentElementalToken() {
-        super("Elemental", "4/4 green Elemental creature token");
+        super("Elemental Token", "4/4 green Elemental creature token");
         this.setOriginalExpansionSetCode("MMA");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

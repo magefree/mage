@@ -52,7 +52,7 @@ public final class FathomTrawl extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller == null || sourceObject == null) {
                 return false;

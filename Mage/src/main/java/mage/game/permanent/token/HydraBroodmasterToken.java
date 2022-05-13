@@ -16,7 +16,7 @@ public final class HydraBroodmasterToken extends TokenImpl {
     }
 
     public HydraBroodmasterToken(int power, int toughness) {
-        super("Hydra", "green Hydra creature token");
+        super("Hydra Token", "green Hydra creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HYDRA);

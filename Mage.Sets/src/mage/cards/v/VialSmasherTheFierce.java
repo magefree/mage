@@ -141,7 +141,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                         FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
                         filter.add(new ControllerIdPredicate(opponent.getId()));
                         TargetPermanent target = new TargetPermanent(1, 1, filter, false);
-                        if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
+                        if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
                                 return permanent.damage(damage, source.getSourceId(), source, game, false, true) > 0;

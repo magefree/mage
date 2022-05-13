@@ -1,23 +1,26 @@
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AshiokNightmareMuseToken;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetNonlandPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -95,6 +98,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(Predicates.not(FaceDownPredicate.instance));
     }
 
     AshiokNightmareMuseCastEffect() {
@@ -117,25 +121,10 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInExile target = new TargetCardInExile(0, 3, filter, null);
-        target.setNotTarget(true);
-        if (!controller.chooseTarget(outcome, target, source, game)) { // method is fine, controller is still choosing the card
-            return false;
-        }
-        for (UUID targetId : target.getTargets()) {
-            if (targetId != null) {
-                Card chosenCard = game.getCard(targetId);
-                if (chosenCard != null
-                        && game.getState().getZone(chosenCard.getId()) == Zone.EXILED // must be exiled
-                        && game.getOpponents(controller.getId()).contains(chosenCard.getOwnerId()) // must be owned by an opponent
-                        && controller.chooseUse(outcome, "Cast " + chosenCard.getName() + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
-                    controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
-                }
-            }
-        }
+        CardUtil.castMultipleWithAttributeForFree(
+                controller, source, game, new CardsImpl(game.getExile().getCards(filter, game)),
+                StaticFilters.FILTER_CARD, 3
+        );
         return true;
     }
 }

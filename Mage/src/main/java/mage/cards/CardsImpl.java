@@ -2,6 +2,7 @@ package mage.cards;
 
 import mage.MageItem;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -110,21 +111,21 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public int count(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
-        if (sourceId == null) {
+    public int count(FilterCard filter, UUID playerId, Ability source, Game game) {
+        if (source == null) {
             return count(filter, playerId, game);
         }
-        return (int) this.stream().filter(card -> filter.match(game.getCard(card), sourceId, playerId, game)).count();
+        return (int) this.stream().filter(card -> filter.match(game.getCard(card), playerId, source, game)).count();
 
     }
 
     @Override
-    public Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+    public Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game) {
         Set<Card> cards = new LinkedHashSet<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) {
-                boolean match = filter.match(card, sourceId, playerId, game);
+                boolean match = filter.match(card, playerId, source, game);
                 if (match) {
                     cards.add(game.getCard(cardId));
                 }
@@ -209,5 +210,10 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public void retainZone(Zone zone, Game game) {
         removeIf(uuid -> game.getState().getZone(uuid) != zone);
+    }
+
+    @Override
+    public void removeZone(Zone zone, Game game) {
+        removeIf(uuid -> game.getState().getZone(uuid) == zone);
     }
 }

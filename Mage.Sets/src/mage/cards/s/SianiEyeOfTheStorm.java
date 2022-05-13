@@ -84,7 +84,7 @@ class SianiEyeOfTheStormEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         return count > 0 && player.scry(count, source, game);
     }
 }

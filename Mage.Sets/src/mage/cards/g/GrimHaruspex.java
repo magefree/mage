@@ -39,7 +39,7 @@ public final class GrimHaruspex extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {B}
-        this.addAbility(new MorphAbility(this, new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new MorphAbility(new ColoredManaCost(ColoredManaSymbol.B)));
         
         // Whenever another nontoken creature you control dies, draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));

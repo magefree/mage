@@ -43,7 +43,7 @@ public final class AvacynsCollar extends CardImpl {
         this.addAbility(new AvacynsCollarTriggeredAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private AvacynsCollar(final AvacynsCollar card) {

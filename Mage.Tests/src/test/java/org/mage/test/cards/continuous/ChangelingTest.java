@@ -3,6 +3,7 @@ package org.mage.test.cards.continuous;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -66,10 +67,11 @@ public class ChangelingTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, copter, 3, 3);
     }
 
+    private static final String mimic = "Metallic Mimic";
+
     @Test
     public void testMetallicMimicChangelingTrigger() {
         // all creatures with the chosen subtype come into play with a +1/+1 counter
-        final String mimic = "Metallic Mimic";
 
         addCard(Zone.HAND, playerA, mimic, 1);
         addCard(Zone.HAND, playerA, woodlandChangeling, 1);
@@ -85,5 +87,45 @@ public class ChangelingTest extends CardTestPlayerBase {
 
         // 2/2 + +1/+1 counter
         assertPowerToughness(playerA, woodlandChangeling, 3, 3);
+    }
+
+    private static final String paragon = "Bramblewood Paragon";
+    private static final String cohort = "Irregular Cohort";
+
+    @Test
+    public void testTokensHaveTypesAsTheyEnter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, paragon);
+        addCard(Zone.HAND, playerA, cohort);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cohort);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, cohort, CounterType.P1P1, 1);
+        assertCounterCount(playerA, "Shapeshifter Token", CounterType.P1P1, 1);
+    }
+
+    private static final String amoeboid = "Amoeboid Changeling";
+
+    @Test
+    public void testTokensCanLoseTypes() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Wizened Cenn");
+        addCard(Zone.BATTLEFIELD, playerA, amoeboid);
+        addCard(Zone.HAND, playerA, cohort);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cohort);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target creature loses", "Shapeshifter Token");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped(amoeboid, true);
+        assertPowerToughness(playerA, "Shapeshifter Token", 2, 2);
     }
 }

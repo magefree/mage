@@ -70,14 +70,9 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getFirstTarget())) {
-            Permanent creature = game.getPermanent(sourceId);
-            if (creature != null) {
-                if (sourceId.equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        if (!affectedControllerId.equals(source.getFirstTarget())) { return false; }
+        Permanent creature = game.getPermanent(sourceId);
+
+        return creature != null &&sourceId.equals(source.getSourceId());
     }
 }

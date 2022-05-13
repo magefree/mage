@@ -26,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class TideforceElemental extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -38,7 +38,7 @@ public final class FledglingMawcor extends CardImpl {
         this.addAbility(ability);
         
         // Morph {U}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}{U}")));
     }
 
     private FledglingMawcor(final FledglingMawcor card) {

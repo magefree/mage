@@ -38,7 +38,7 @@ public final class TalarasBattalion extends CardImpl {
         // Cast Talara's Battalion only if you've cast another green spell this turn.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(
                 TalarasBattalionWatcher::checkSpell,
-                "cast {this} only if you've cast another green spell this turn"
+                "cast this spell only if you've cast another green spell this turn"
         ), new TalarasBattalionWatcher());
 
     }

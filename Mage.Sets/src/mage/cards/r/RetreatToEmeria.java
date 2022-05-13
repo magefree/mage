@@ -23,8 +23,7 @@ public final class RetreatToEmeria extends CardImpl {
 
         // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under you control, choose one - Create a 1/1 white Kor Ally creature token; or Creatures you control get +1/+1 until end of turn.
         LandfallAbility ability = new LandfallAbility(new CreateTokenEffect(new KorAllyToken()), false);
-        Mode mode = new Mode();
-        mode.addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -101,9 +101,7 @@ class VineGeckoWatcher extends Watcher {
             return;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && StaticFilters.FILTER_SPELL_KICKED_A.match(
-                spell, getSourceId(), getControllerId(), game
-        )) {
+        if (spell != null && StaticFilters.FILTER_SPELL_KICKED_A.match(spell, game)) {
             playerSet.add(event.getPlayerId());
         }
     }

@@ -33,7 +33,7 @@ public final class FathomSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph-Return two Islands you control to their owner's hand.
-        this.addAbility(new MorphAbility(this, new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2,2, filter, true))));
+        this.addAbility(new MorphAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2,2, filter, true))));
         // When Fathom Seer is turned face up, draw two cards.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new DrawCardSourceControllerEffect(2)));
     }

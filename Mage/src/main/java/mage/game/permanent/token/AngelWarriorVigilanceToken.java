@@ -11,7 +11,7 @@ import java.util.Arrays;
 public final class AngelWarriorVigilanceToken extends TokenImpl {
 
     public AngelWarriorVigilanceToken() {
-        super("Angel Warrior", "4/4 white Angel Warrior creature token with flying and vigilance");
+        super("Angel Warrior Token", "4/4 white Angel Warrior creature token with flying and vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.ANGEL);

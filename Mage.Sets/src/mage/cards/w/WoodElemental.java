@@ -84,7 +84,7 @@ class WoodElementalEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
+            if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseTarget(Outcome.Detriment, target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     int sacrificedForests = target.getTargets().size();

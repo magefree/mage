@@ -76,7 +76,7 @@ class JestersScepterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetedPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null
                 && targetedPlayer != null
                 && sourceObject != null) {
@@ -125,7 +125,7 @@ class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (sourceObject == null) {
                     return false;
                 }

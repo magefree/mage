@@ -1,9 +1,7 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -12,8 +10,9 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GhoulcallersChant extends CardImpl {
@@ -28,11 +27,10 @@ public final class GhoulcallersChant extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Choose one - Return target creature card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         // or return two target Zombie cards from your graveyard to your hand.
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(2, filter));
         this.getSpellAbility().addMode(mode);
     }

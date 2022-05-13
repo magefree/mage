@@ -13,7 +13,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 public final class EldraziAnnihilatorToken extends TokenImpl {
 
     public EldraziAnnihilatorToken() {
-        super("Eldrazi", "7/7 colorless Eldrazi creature token");
+        super("Eldrazi Token", "7/7 colorless Eldrazi creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         setExpansionSetCodeForImage("PCA");

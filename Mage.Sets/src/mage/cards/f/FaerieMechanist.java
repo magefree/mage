@@ -1,29 +1,22 @@
-
-
 package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX
  */
 public final class FaerieMechanist extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("an artifact card");
-    static {
-            filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public FaerieMechanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}");
@@ -36,7 +29,8 @@ public final class FaerieMechanist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Faerie Mechanist enters the battlefield, look at the top three cards of your library. 
         // You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), filter, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                3, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_ANY)));
     }
 
     private FaerieMechanist(final FaerieMechanist card) {
@@ -47,5 +41,4 @@ public final class FaerieMechanist extends CardImpl {
     public FaerieMechanist copy() {
         return new FaerieMechanist(this);
     }
-
 }

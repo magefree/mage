@@ -72,7 +72,7 @@ class MuYanlingEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, player.getId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, player.getId(), source, game)) {
             creature.tap(source, game);
         }
         return new AddExtraTurnControllerEffect().apply(game, source);

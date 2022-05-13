@@ -24,6 +24,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnce = false;
+    private boolean doOnlyOnce = false;
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -52,6 +53,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnce = ability.triggersOnce;
+        this.doOnlyOnce = ability.doOnlyOnce;
         this.triggerPhrase = ability.triggerPhrase;
     }
 
@@ -106,28 +108,53 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public boolean checkUsedAlready(Game game) {
+        if (!doOnlyOnce) {
+            return true;
+        }
+        Integer lastTurnUsed = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
+        );
+        return lastTurnUsed == null || lastTurnUsed != game.getTurnNum();
+    }
+
+    public TriggeredAbility setDoOnlyOnce(boolean doOnlyOnce) {
+        this.optional = true;
+        this.doOnlyOnce = doOnlyOnce;
+        return this;
+    }
+
+    @Override
     public boolean checkInterveningIfClause(Game game) {
         return true;
     }
 
     @Override
     public boolean resolve(Game game) {
+        if (!checkInterveningIfClause(game)) {
+            return false;
+        }
         if (isOptional()) {
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
-            if (player != null && object != null) {
-                if (!player.chooseUse(getEffects().getOutcome(this), this.getRule(object.getLogName()), this, game)) {
-                    return false;
-                }
-            } else {
+            if (player == null || object == null
+                    || !player.chooseUse(
+                    getEffects().getOutcome(this),
+                    this.getRule(object.getLogName()), this, game
+            )) {
                 return false;
             }
         }
         //20091005 - 603.4
-        if (checkInterveningIfClause(game)) {
-            return super.resolve(game);
+        if (!super.resolve(game)) {
+            return false;
         }
-        return false;
+        if (doOnlyOnce) {
+            game.getState().setValue(CardUtil.getCardZoneString(
+                    "lastTurnUsed" + originalId, sourceId, game
+            ), game.getTurnNum());
+        }
+        return true;
     }
 
     @Override
@@ -160,16 +187,18 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         superRule = newRule.toString();
                     }
                 } else if (this.getTargets().isEmpty()
-                        || ruleLow.startsWith("exile")
+                        || ruleLow.startsWith("attach")
+                        || ruleLow.startsWith("counter")
                         || ruleLow.startsWith("destroy")
-                        || ruleLow.startsWith("return")
-                        || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")
+                        || ruleLow.startsWith("exchange")
+                        || ruleLow.startsWith("exile")
+                        || ruleLow.startsWith("gain")
+                        || ruleLow.startsWith("goad")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
-                        || ruleLow.startsWith("counter")
-                        || ruleLow.startsWith("exchange")
-                        || ruleLow.startsWith("goad")) {
+                        || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("tap")
+                        || ruleLow.startsWith("untap")) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
@@ -179,6 +208,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             sb.append(superRule);
             if (triggersOnce) {
                 sb.append(" This ability triggers only once each turn.");
+            }
+            if (doOnlyOnce) {
+                sb.append(" Do this only once each turn.");
             }
         }
         String prefix;
@@ -329,7 +361,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
         }
         if (sourceObject == null) { // source is no permanent
-            sourceObject = game.getObject(source.getSourceId());
+            sourceObject = game.getObject(source);
             if (sourceObject == null || sourceObject.isPermanent(game)) {
                 return false; // No source object found => ability is not valid
             }

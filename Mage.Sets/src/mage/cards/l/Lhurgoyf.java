@@ -66,7 +66,7 @@ class LhurgoyfEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            MageObject mageObject = game.getObject(source.getSourceId());
+            MageObject mageObject = game.getObject(source);
             if (mageObject != null) {
                 int number = 0;
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

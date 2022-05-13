@@ -169,7 +169,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
         }
-        if (amountString.equals("X")) {
+        if (amountString.equals("X") && !amount.getMessage().isEmpty()) {
             sb.append(", where X is ");
             sb.append(amount.getMessage());
         }

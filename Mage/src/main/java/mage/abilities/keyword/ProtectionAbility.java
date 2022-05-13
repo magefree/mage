@@ -87,9 +87,9 @@ public class ProtectionAbility extends StaticAbility {
 
         if (filter instanceof FilterCard) {
             if (source instanceof Permanent) {
-                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Permanent) source).getControllerId(), game);
+                return !((FilterCard) filter).match((Card) source, ((Permanent) source).getControllerId(), this, game);
             } else if (source instanceof Card) {
-                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Card) source).getOwnerId(), game);
+                return !((FilterCard) filter).match((Card) source, ((Card) source).getOwnerId(), this, game);
             }
             return true;
         }
@@ -125,7 +125,7 @@ public class ProtectionAbility extends StaticAbility {
             } else if (source instanceof Card) {
                 player = game.getPlayer(((Card) source).getOwnerId());
             }
-            return !((FilterPlayer) filter).match(player, getSourceId(), this.getControllerId(), game);
+            return !((FilterPlayer) filter).match(player, this.getControllerId(), this, game);
         }
 
         return true;

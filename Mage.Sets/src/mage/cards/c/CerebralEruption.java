@@ -53,7 +53,7 @@ class CerebralEruptionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);

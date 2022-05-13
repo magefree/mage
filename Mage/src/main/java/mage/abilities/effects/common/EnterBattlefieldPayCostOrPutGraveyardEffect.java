@@ -47,7 +47,7 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && cost != null && sourceObject != null) {
             boolean replace = true;
             if (cost.canPay(source, source, player.getId(), game)) {

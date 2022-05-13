@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class CitizenToken extends TokenImpl {
     
     public CitizenToken() {
-        super("Citizen", "1/1 white Citizen creature token");
+        super("Citizen Token", "1/1 white Citizen creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         

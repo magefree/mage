@@ -35,7 +35,7 @@ public final class SokenzanCrucibleOfDefiance extends CardImpl {
         // Channel — {3}{R}, Discard Sokenzan, Crucible of Defiance: Create two colorless 1/1 Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for each legendary creature you control.
         Ability ability = new ChannelAbility("{3}{R}", new SokenzanCrucibleOfDefianceEffect());
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private SokenzanCrucibleOfDefiance(final SokenzanCrucibleOfDefiance card) {

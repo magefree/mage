@@ -30,7 +30,7 @@ public class ParadoxHazeTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Paradox Haze", 1);
         assertPermanentCount(playerA, "Verdant Force", 1);
-        assertPermanentCount(playerA, "Saproling", 3);// 1 from turn 2 and 2 from turn 3
+        assertPermanentCount(playerA, "Saproling Token", 3);// 1 from turn 2 and 2 from turn 3
     }
 
     @Test
@@ -57,6 +57,6 @@ public class ParadoxHazeTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Paradox Haze", 2);
         assertPermanentCount(playerA, "Verdant Force", 1);
-        assertPermanentCount(playerA, "Saproling", 4); // 1 from turn 2 and 3 from turn 3
+        assertPermanentCount(playerA, "Saproling Token", 4); // 1 from turn 2 and 3 from turn 3
     }
 }

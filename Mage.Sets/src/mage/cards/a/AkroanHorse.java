@@ -37,8 +37,10 @@ public final class AkroanHorse extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // When Akroan Horse enters the battlefield, an opponent gains control of it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AkroanHorseChangeControlEffect(), false));
+
         // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AkroanHorseCreateTokenEffect(), TargetController.YOU, false));
     }
@@ -60,7 +62,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
         this.staticText = "an opponent gains control of it";
     }
 
-    public AkroanHorseChangeControlEffect(final AkroanHorseChangeControlEffect effect) {
+    private AkroanHorseChangeControlEffect(final AkroanHorseChangeControlEffect effect) {
         super(effect);
     }
 
@@ -88,7 +90,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
 
 class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
-    UUID controller;
+    private final UUID controller;
 
     public AkroanHorseGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -107,14 +109,18 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
+        Permanent permanent;
+
+        if (targetPointer == null) {
+            permanent = game.getPermanent(source.getFirstTarget());
+        } else {
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
-        if (permanent != null) {
-            return permanent.changeControllerId(controller, game, source);
-        }
-        return false;
+
+        if (permanent == null) { return false; }
+
+        return permanent.changeControllerId(controller, game, source);
+
     }
 
     @Override
@@ -130,7 +136,7 @@ class AkroanHorseCreateTokenEffect extends OneShotEffect {
         this.staticText = "each opponent creates a 1/1 white Soldier creature token";
     }
 
-    public AkroanHorseCreateTokenEffect(final AkroanHorseCreateTokenEffect effect) {
+    private AkroanHorseCreateTokenEffect(final AkroanHorseCreateTokenEffect effect) {
         super(effect);
     }
 

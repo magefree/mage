@@ -29,7 +29,7 @@ public final class DragonToken extends TokenImpl {
     }
 
     public DragonToken(String setCode, int tokenType) {
-        super("Dragon", "4/4 red Dragon creature token with flying");
+        super("Dragon Token", "4/4 red Dragon creature token with flying");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

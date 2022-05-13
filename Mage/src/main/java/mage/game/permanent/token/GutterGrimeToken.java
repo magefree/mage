@@ -29,7 +29,7 @@ public final class GutterGrimeToken extends TokenImpl {
     }
 
     public GutterGrimeToken(UUID sourceId) {
-        super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
+        super("Ooze Token", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);

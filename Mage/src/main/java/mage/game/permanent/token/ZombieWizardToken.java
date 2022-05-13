@@ -13,7 +13,7 @@ import mage.MageInt;
 public final class ZombieWizardToken extends TokenImpl {
 
     public ZombieWizardToken() {
-        super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");
+        super("Zombie Wizard Token", "1/1 blue and black Zombie Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);

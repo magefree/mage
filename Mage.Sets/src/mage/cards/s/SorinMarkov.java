@@ -35,7 +35,7 @@ public final class SorinMarkov extends CardImpl {
 
         // +2: Sorin Markov deals 2 damage to any target and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
-        ability1.addEffect(new GainLifeEffect(2));
+        ability1.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability1.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);
 

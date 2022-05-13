@@ -63,7 +63,7 @@ class KindredDenialEffect extends OneShotEffect {
             return false;
         }
         int manaValue = spell.getManaValue();
-        spell.counter(source, game);
+        game.getStack().counter(spell.getId(), source, game);;
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, manaValue));
         player.seekCard(filter, source, game);

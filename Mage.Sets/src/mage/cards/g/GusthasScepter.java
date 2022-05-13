@@ -117,10 +117,10 @@ class GusthasScepterReturnEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source));
         target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(card, Zone.HAND, source, game);
     }

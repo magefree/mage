@@ -66,8 +66,8 @@ class KeeperOfTheLightTarget extends TargetPlayer {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         int lifeController = game.getPlayer(sourceControllerId).getLife();
 
@@ -84,9 +84,9 @@ class KeeperOfTheLightTarget extends TargetPlayer {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         Player controller = game.getPlayer(sourceControllerId);
         if (controller != null && targetSource != null) {
             for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -94,7 +94,7 @@ class KeeperOfTheLightTarget extends TargetPlayer {
                 if (player != null
                         && controller.getLife() < player.getLife()
                         && !player.hasLeft()
-                        && filter.match(player, sourceId, sourceControllerId, game)
+                        && filter.match(player, sourceControllerId, source, game)
                         && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {

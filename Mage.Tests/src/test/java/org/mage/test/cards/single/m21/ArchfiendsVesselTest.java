@@ -25,7 +25,7 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
         assertExileCount(playerA, archfiendsVessel, 1);
         assertGraveyardCount(playerA, archfiendsVessel, 0);
@@ -48,7 +48,7 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
         assertExileCount(playerA, archfiendsVessel, 1);
         assertGraveyardCount(playerA, archfiendsVessel, 0);
@@ -73,7 +73,7 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Demon", 0);
+        assertPermanentCount(playerA, "Demon Token", 0);
         assertPermanentCount(playerA, archfiendsVessel, 0);
         assertExileCount(playerA, archfiendsVessel, 0);
         assertGraveyardCount(playerA, archfiendsVessel, 1);

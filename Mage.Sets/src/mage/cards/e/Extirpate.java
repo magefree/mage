@@ -63,7 +63,7 @@ class ExtirpateEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.staticText = "Choose target card in a graveyard other than "
                 + "a basic land card. Search its owner's graveyard, hand, "
-                + "and library for any number of cards with the same name "
+                + "and library for all cards with the same name "
                 + "as that card and exile them. Then that player shuffles";
     }
 
@@ -79,7 +79,7 @@ class ExtirpateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card chosenCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (chosenCard != null && sourceObject != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());

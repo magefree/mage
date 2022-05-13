@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,8 +11,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class LongTermPlans extends CardImpl {
@@ -55,18 +54,16 @@ class LongTermPlansEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, source, game)) {
-                Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-                if (card != null) {
-                    player.shuffleLibrary(source, game);
-                    // must hides the card name from other players
-                    player.putCardOnTopXOfLibrary(card, game, source, 3, false);
-                }
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        TargetCardInLibrary target = new TargetCardInLibrary();
+        player.searchLibrary(target, source, game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        player.shuffleLibrary(source, game);
+        if (card != null) {
+            player.putCardOnTopXOfLibrary(card, game, source, 3, false);
+        }
+        return true;
     }
 }

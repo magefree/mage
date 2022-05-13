@@ -28,7 +28,7 @@ import java.util.UUID;
 public class BlessedDefiance extends CardImpl {
 
     public BlessedDefiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "W");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Target creature you control gets +2/+0 and gains lifelink until end of turn. When that creature dies this turn, create a 1/1 white Spirit creature token with flying.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0)

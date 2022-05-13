@@ -78,12 +78,12 @@ class AetherbornMarauderEffect extends OneShotEffect {
             filter.add(AnotherPredicate.instance);
             filter.add(CounterType.P1P1.getPredicate());
             boolean firstRun = true;
-            while (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+            while (game.getBattlefield().count(filter, source.getControllerId(), source, game) > 0) {
                 if (controller.chooseUse(outcome, "Move " + (firstRun ? "any" : "more") + " +1/+1 counters from other permanents you control to " + sourceObject.getLogName() + '?', source, game)) {
                     firstRun = false;
                     TargetControlledPermanent target = new TargetControlledPermanent(filter);
                     target.setNotTarget(true);
-                    if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                    if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                         Permanent fromPermanent = game.getPermanent(target.getFirstTarget());
                         if (fromPermanent != null) {
                             int numberOfCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);

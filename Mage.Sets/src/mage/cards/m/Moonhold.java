@@ -34,7 +34,7 @@ public final class Moonhold extends CardImpl {
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();
         ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
         effect.setText("Target player can't play lands this turn if {R} was spent to cast this spell");
-        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast it.");
+        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast this spell.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));
@@ -77,7 +77,7 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "you can't play land cards this turn (" + mageObject.getIdName() + ").";
         }
@@ -120,7 +120,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play creature cards this turn (" + mageObject.getIdName() + ").";
         }

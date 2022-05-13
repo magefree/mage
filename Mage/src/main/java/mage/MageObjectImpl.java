@@ -235,16 +235,6 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public final void adjustCosts(Ability ability, Game game) {
-        ability.adjustCosts(game);
-    }
-
-    @Override
-    public final void adjustTargets(Ability ability, Game game) {
-        ability.adjustTargets(game);
-    }
-
-    @Override
     public boolean hasSubtype(SubType value, Game game) {
         if (value == null) {
             return false;

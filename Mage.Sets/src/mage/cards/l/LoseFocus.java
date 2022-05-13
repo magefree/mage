@@ -19,7 +19,7 @@ public final class LoseFocus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Replicate {U}
-        this.addAbility(new ReplicateAbility(this, "{U}"));
+        this.addAbility(new ReplicateAbility("{U}"));
 
         // Counter target spell unless its controller pays {2}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));

@@ -88,7 +88,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
                 && ((DamageEvent)event).isCombatDamage()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (event.getSourceId().equals(permanent.getId())) {
                         return true;
                     }

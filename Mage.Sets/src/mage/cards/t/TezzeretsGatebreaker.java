@@ -8,14 +8,13 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -41,13 +40,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
 
         // When Tezzeret's Gatebreaker enters the battlefield, look at the top five cards of your library. You may reveal a blue or artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        StaticValue.get(5), false, StaticValue.get(1), filter,
-                        Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
-                ).setBackInRandomOrder(true).setText("look at the top five cards of your library. "
-                        + "You may reveal a blue or artifact card from among them and put it into your hand. "
-                        + "Put the rest on the bottom of your library in a random order.")
-        ));
+                new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM)));
 
         // {5}{U}, {T}, Sacrifice Tezzeret's Gatebreaker: Creatures you control can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(

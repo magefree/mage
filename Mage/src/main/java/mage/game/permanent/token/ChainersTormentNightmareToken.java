@@ -22,7 +22,7 @@ public final class ChainersTormentNightmareToken extends TokenImpl {
     public ChainersTormentNightmareToken() { this(0); };
 
     public ChainersTormentNightmareToken(int xValue) {
-        super("Nightmare Horror", "X/X black Nightmare Horror creature token");
+        super("Nightmare Horror Token", "X/X black Nightmare Horror creature token");
         
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode("DOM");

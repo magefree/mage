@@ -28,7 +28,7 @@ public final class VoidmageApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{U}")));
         
         // When Voidmage Apprentice is turned face up, counter target spell.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new CounterTargetEffect(), false);

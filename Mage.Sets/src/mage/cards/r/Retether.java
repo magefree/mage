@@ -74,7 +74,7 @@ class RetetherEffect extends OneShotEffect {
         if (controller != null) {
             Map<Card, Permanent> auraMap = new HashMap<>();
             auraCardsInGraveyard:
-            for (Card aura : controller.getGraveyard().getCards(filterAura, source.getSourceId(), source.getControllerId(), game)) {
+            for (Card aura : controller.getGraveyard().getCards(filterAura, source.getControllerId(), source, game)) {
                 if (aura != null) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature to enchant (" + aura.getLogName() + ')');
                     filter.add(new CanBeEnchantedByPredicate(aura));
@@ -100,9 +100,9 @@ class RetetherEffect extends OneShotEffect {
                     if (target != null) {
                         target.getFilter().add(CardType.CREATURE.getPredicate());
                         target.setNotTarget(true);
-                        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                        if (target.canChoose(controller.getId(), source, game)) {
                             target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
-                            if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                            if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, source, game, true)) {
                                     auraMap.put(aura, permanent);

@@ -60,7 +60,7 @@ public class PreventAllDamageByAllObjectsEffect extends PreventionEffectImpl {
             return false;
         }
         if (filter instanceof FilterInPlay) {
-            return ((FilterInPlay) filter).match(damageSource, source.getSourceId(), source.getControllerId(), game);
+            return ((FilterInPlay) filter).match(damageSource, source.getControllerId(), source, game);
         }
         return filter.match(damageSource, game);
     }

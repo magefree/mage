@@ -36,9 +36,6 @@ public final class RunechantersPike extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-
         // Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT);
         Effect effect2 = new BoostEquippedEffect(new RunechantersPikeValue(), StaticValue.get(0));
@@ -48,6 +45,8 @@ public final class RunechantersPike extends CardImpl {
         ability.addEffect(effect2);
         this.addAbility(ability);
 
+        // Equip {2}
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private RunechantersPike(final RunechantersPike card) {

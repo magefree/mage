@@ -74,7 +74,7 @@ class MirrorEntityEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent perm : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), source, game
         )) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }

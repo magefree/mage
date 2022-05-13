@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class TitanForgeGolemToken extends TokenImpl {
 
     public TitanForgeGolemToken() {
-        super("Golem", "9/9 colorless Golem artifact creature token");
+        super("Golem Token", "9/9 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);

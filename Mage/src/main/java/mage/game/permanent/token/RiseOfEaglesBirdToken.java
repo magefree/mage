@@ -14,7 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class RiseOfEaglesBirdToken extends TokenImpl {
 
     public RiseOfEaglesBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature tokens with flying");
+        super("Bird Token", "2/2 blue Bird enchantment creature tokens with flying");
         this.setOriginalExpansionSetCode("BNG");
         this.setTokenType(2);
         cardType.add(CardType.ENCHANTMENT);

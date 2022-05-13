@@ -69,27 +69,24 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
             return false;
         }
         permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (!filterPermanent.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filterPermanent.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        for (Effect effect : this.getEffects()) {
-            effect.setValue("damage", event.getAmount());
-            effect.setValue("sourceId", event.getSourceId());
-            switch (setTargetPointer) {
-                case PLAYER:
-                    effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                    break;
-                case PERMANENT:
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    break;
-                case PERMANENT_TARGET:
-                    Permanent permanent_target = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                    if (permanent_target != null) {
-                        effect.setTargetPointer(new FixedTarget(permanent_target, game));
-                    }
-                    break;
-            }
-
+        this.getEffects().setValue("damage", event.getAmount());
+        this.getEffects().setValue("sourceId", event.getSourceId());
+        switch (setTargetPointer) {
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                break;
+            case PERMANENT:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                break;
+            case PERMANENT_TARGET:
+                Permanent permanent_target = game.getPermanentOrLKIBattlefield(event.getTargetId());
+                if (permanent_target != null) {
+                    this.getEffects().setTargetPointer(new FixedTarget(permanent_target, game));
+                }
+                break;
         }
         return true;
     }
@@ -97,6 +94,6 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
     @Override
     public String getTriggerPhrase() {
         return "Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " ;
+                + (combatDamageOnly ? "combat " : "") + "damage to a creature, ";
     }
 }

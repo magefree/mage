@@ -1,7 +1,8 @@
 package mage.cards.g;
 
 import mage.abilities.condition.common.CitysBlessingCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.keyword.AscendEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -10,8 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -29,11 +29,9 @@ public final class GoldenDemise extends CardImpl {
         this.getSpellAbility().addHint(PermanentsYouControlHint.instance);
 
         // All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false),
-                new BoostAllEffect(-2, -2, Duration.EndOfTurn),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new AddContinuousEffectToGame(new BoostAllEffect(-2, -2, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false)),
+                new AddContinuousEffectToGame(new BoostAllEffect(-2, -2, Duration.EndOfTurn)),
                 CitysBlessingCondition.instance,
                 "All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn"
         ));

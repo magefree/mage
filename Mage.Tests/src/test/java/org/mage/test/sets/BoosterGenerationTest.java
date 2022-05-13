@@ -353,7 +353,7 @@ public class BoosterGenerationTest extends MageTestBase {
                     fail("Booster can't have more than three snow lands");
             }
 
-            long mdfcCount = booster.stream().filter(card -> card instanceof ModalDoubleFacesCard).count();
+            long mdfcCount = booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count();
             assertTrue("Booster can't have more than one MDFC", mdfcCount < 2);
 
             foundMDFC |= mdfcCount > 0;

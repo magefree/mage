@@ -75,7 +75,7 @@ class WoebringerDemonEffect extends OneShotEffect {
             if (currentPlayer != null) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)) {
+                if (target.canChoose(currentPlayer.getId(), source, game)) {
                     currentPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {

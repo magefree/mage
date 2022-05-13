@@ -120,10 +120,10 @@ class MyrBattlesphereEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
             while (controller.canRespond()) {
                 target.clearChosen();
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game)) {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Myr tapping complete");
-                    controller.choose(outcome, target, source.getControllerId(), game, options);
+                    controller.choose(outcome, target, source, game, options);
                     if (!target.getTargets().isEmpty()) {
                         UUID creature = target.getFirstTarget();
                         if (creature != null) {

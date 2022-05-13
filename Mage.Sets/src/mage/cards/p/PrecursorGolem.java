@@ -144,7 +144,7 @@ class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect 
         Permanent permanent = game.getPermanent((UUID) getValue("targetedGolem"));
         return game.getBattlefield()
                 .getActivePermanents(
-                        filter, player.getId(), source.getSourceId(), game
+                        filter, player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))

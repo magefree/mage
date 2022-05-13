@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class ElfKnightToken extends TokenImpl {
 
     public ElfKnightToken() {
-        super("Elf Knight", "2/2 green and white Elf Knight creature token with vigilance");
+        super("Elf Knight Token", "2/2 green and white Elf Knight creature token with vigilance");
         this.setExpansionSetCodeForImage("GRN");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

@@ -56,12 +56,12 @@ public class StoryweaveTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 0);
-        assertPermanentCount(playerA, "Centaur", 2);
+        assertPermanentCount(playerA, "Centaur Token", 2);
         currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
-                .filter(permanent -> "Centaur".equals(permanent.getName()))
+                .filter(permanent -> "Centaur Token".equals(permanent.getName()))
                 .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2);
     }
 
@@ -81,12 +81,12 @@ public class StoryweaveTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 2);
-        assertPermanentCount(playerA, "Centaur", 2);
+        assertPermanentCount(playerA, "Centaur Token", 2);
         currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
-                .filter(permanent -> "Centaur".equals(permanent.getName()))
+                .filter(permanent -> "Centaur Token".equals(permanent.getName()))
                 .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0);
     }
 }

@@ -40,8 +40,7 @@ public final class BlizzardSpecter extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false, true);
 
         // or that player discards a card.
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(1, false));
+        Mode mode = new Mode(new DiscardTargetEffect(1, false));
         ability.addMode(mode);
 
         this.addAbility(ability);
@@ -80,7 +79,7 @@ class ReturnToHandEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
-        if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
+        if (target.canChoose(targetPlayer.getId(), source, game)) {
             targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

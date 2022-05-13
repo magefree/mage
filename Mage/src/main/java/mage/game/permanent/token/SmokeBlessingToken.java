@@ -13,6 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -35,6 +37,8 @@ public final class SmokeBlessingToken extends TokenImpl {
         this.addAbility(ability);
 
         this.addAbility(new DiesAttachedTriggeredAbility(new SmokeBlessingTokenEffect(), "enchanted creature"));
+
+        availableImageSetCodes = Arrays.asList("NEC");
     }
 
     public SmokeBlessingToken(final SmokeBlessingToken token) {

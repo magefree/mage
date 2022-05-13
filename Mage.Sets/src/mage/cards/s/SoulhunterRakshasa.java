@@ -75,7 +75,7 @@ class SoulhunterRakshasaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (amount > 0) {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {

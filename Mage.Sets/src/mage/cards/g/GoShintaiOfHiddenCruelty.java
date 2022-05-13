@@ -87,7 +87,7 @@ enum GoShintaiOfHiddenCrueltyPredicate implements ObjectSourcePlayerPredicate<Pe
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return input.getObject().getToughness().getValue() <= game.getBattlefield().count(
-                filter, input.getSourceId(), input.getPlayerId(), game
+                filter, input.getPlayerId(), input.getSource(), game
         );
     }
 }

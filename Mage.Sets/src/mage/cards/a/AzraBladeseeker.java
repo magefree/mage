@@ -75,7 +75,7 @@ class AzraBladeseekerEffect extends OneShotEffect {
                 continue;
             }
             Target target = new TargetDiscard(playerId);
-            if (target.choose(Outcome.DrawCard, playerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.DrawCard, playerId, source.getSourceId(), source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     playerCardList.add(new PlayerCard(player, card));

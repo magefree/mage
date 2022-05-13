@@ -60,7 +60,7 @@ class WretchedBanquetEffect extends OneShotEffect {
         if (targetCreature == null) {
             return false;
         }
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
 
         int minPower = targetCreature.getPower().getValue() + 1;
         for (Permanent creature : creatures) {

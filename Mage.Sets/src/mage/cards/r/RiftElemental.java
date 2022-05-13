@@ -78,7 +78,7 @@ class RiftElementalCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Target target = new TargetPermanentOrSuspendedCard(filter, true);
-            if (target.choose(Outcome.Neutral, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.Neutral, controllerId, source.getSourceId(), source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.removeCounters(CounterType.TIME.createInstance(), source, game);
@@ -99,7 +99,7 @@ class RiftElementalCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Target target = new TargetPermanentOrSuspendedCard(filter, true);
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override

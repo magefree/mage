@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.OwlToken;
+import mage.game.permanent.token.BlueBirdToken;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -38,7 +38,7 @@ public final class TheRavensWarning extends CardImpl {
 
         // I — Create a 1/1 blue Bird creature token with flying. You gain 2 life.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new OwlToken()), new GainLifeEffect(2)
+                new CreateTokenEffect(new BlueBirdToken()), new GainLifeEffect(2)
         );
 
         // II — Whenever one or more creatures you control with flying deal combat damage to a player this turn,

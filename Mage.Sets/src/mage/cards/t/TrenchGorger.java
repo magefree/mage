@@ -68,7 +68,7 @@ class TrenchGorgerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterLandCard("any number of land cards"));
-            target.choose(outcome, controller.getId(), controller.getId(), game);
+            target.choose(outcome, controller.getId(), controller.getId(), source, game);
             int count = 0;
             for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);

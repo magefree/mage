@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -10,20 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class SubjugatorAngel extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public SubjugatorAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
@@ -35,7 +27,7 @@ public final class SubjugatorAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Subjugator Angel enters the battlefield, tap all creatures your opponents control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)));
     }
 
     private SubjugatorAngel(final SubjugatorAngel card) {

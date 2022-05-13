@@ -34,7 +34,7 @@ public final class ScoutsWarning extends CardImpl {
         this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ScoutsWarning(final ScoutsWarning card) {

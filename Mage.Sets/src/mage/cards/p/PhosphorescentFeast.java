@@ -62,7 +62,7 @@ class PhosphorescentFeastEffect extends OneShotEffect {
         }
         if (player.getHand().count(new FilterCard(), game) > 0) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard());
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Benefit, target, source, game)) {
 
                 Cards cards = new CardsImpl();
                 for (UUID uuid : target.getTargets()) {

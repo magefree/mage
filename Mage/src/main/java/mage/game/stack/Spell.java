@@ -62,6 +62,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean countered;
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
+    private int startingLoyalty;
 
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
@@ -78,6 +79,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
+        this.startingLoyalty = affectedCard.getStartingLoyalty();
         this.id = ability.getId();
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
@@ -131,6 +133,7 @@ public class Spell extends StackObjectImpl implements Card {
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
+        this.startingLoyalty = spell.startingLoyalty;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -273,7 +276,7 @@ public class Spell extends StackObjectImpl implements Card {
                     CardUtil.copyTo(token).from(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
-                        permId = token.getLastAddedToken();
+                        permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
                         flag = true;
                     } else {
                         permId = null;
@@ -654,11 +657,12 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public int getStartingLoyalty() {
-        return card.getStartingLoyalty();
+        return this.startingLoyalty;
     }
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+        this.startingLoyalty = startingLoyalty;
     }
 
     @Override
@@ -813,20 +817,6 @@ public class Spell extends StackObjectImpl implements Card {
         spellCopy.setControllerId(newController);
         spellCopy.syncZoneChangeCounterOnStack(this, game);
         return spellCopy;
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (card != null) {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (card != null) {
-            card.adjustTargets(ability, game);
-        }
     }
 
     @Override

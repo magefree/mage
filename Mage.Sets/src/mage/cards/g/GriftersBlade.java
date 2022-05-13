@@ -43,7 +43,7 @@ public final class GriftersBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
 
     }
 
@@ -80,7 +80,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+            if (controller.choose(this.outcome, target, source, game)) {
                 Permanent attachToCreature = game.getPermanent(target.getFirstTarget());
                 if (attachToCreature != null) {
                     attachToCreature.addAttachment(mageObject.getId(), source, game);

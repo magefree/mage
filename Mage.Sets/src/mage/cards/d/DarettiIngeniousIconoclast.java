@@ -17,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.DarettiConstructToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInGraveyardOrBattlefield;
+import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -65,7 +65,7 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
                         .setText("Choose target artifact card in a graveyard or artifact on the battlefield. " +
                                 "Create three tokens that are copies of it"), -6
         );
-        ability.addTarget(new TargetCardInGraveyardOrBattlefield(1, 1,
+        ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(1, 1,
                 StaticFilters.FILTER_CARD_ARTIFACT, StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }

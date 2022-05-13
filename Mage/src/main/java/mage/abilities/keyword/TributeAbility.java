@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -74,7 +73,7 @@ class TributeEffect extends OneShotEffect {
                 opponentId = game.getOpponents(controller.getId()).iterator().next();
             } else {
                 Target target = new TargetOpponent();
-                controller.choose(outcome, target, source.getSourceId(), game);
+                controller.choose(outcome, target, source, game);
                 opponentId = target.getFirstTarget();
             }
             if (opponentId != null) {

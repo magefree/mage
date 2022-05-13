@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GnomeToken extends TokenImpl {
 
     public GnomeToken() {
-        super("Gnome", "1/1 colorless Gnome artifact creature token");
+        super("Gnome Token", "1/1 colorless Gnome artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GNOME);

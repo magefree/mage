@@ -28,7 +28,7 @@ public final class SkulkingKnight extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // When Skulking Knight becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private SkulkingKnight(final SkulkingKnight card) {

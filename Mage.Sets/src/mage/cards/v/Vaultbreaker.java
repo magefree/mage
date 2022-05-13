@@ -31,7 +31,7 @@ public final class Vaultbreaker extends CardImpl {
                 new DiscardCardCost()), false, "Whenever {this} attacks, you may discard a card. If you do, draw a card"));
 
         // Dash {2}{R}
-        this.addAbility(new DashAbility(this, "{2}{R}"));
+        this.addAbility(new DashAbility("{2}{R}"));
 
     }
 

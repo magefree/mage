@@ -1,9 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -13,19 +10,20 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class SunscourgeChampion extends CardImpl {
-    
-    private static String rule = "Eternalize - {2}{W}{W}, Discard a card <i>({2}{W}{W}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie";
+
+    private static final String rule = "Eternalize &mdash; {2}{W}{W}, Discard a card. <i>({2}{W}{W}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie)</i>";
 
     public SunscourgeChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -39,7 +37,7 @@ public final class SunscourgeChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SunscourgeChampionEffect(), false));
 
         // Eternalize - {2}{W}{W}, Discard a card.        
-        EternalizeAbility ability = new EternalizeAbility(new ManaCostsImpl("{2}{W}{W}"), this, rule);
+        Ability ability = new EternalizeAbility(new ManaCostsImpl<>("{2}{W}{W}"), this, rule);
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
@@ -67,10 +65,9 @@ class SunscourgeChampionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && permanent != null && sourceObject != null) {
+        if (controller != null && permanent != null) {
             controller.gainLife(permanent.getPower().getValue(), game, source);
             return true;
         }

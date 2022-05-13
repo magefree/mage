@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class ErrandOfDutyKnightToken extends TokenImpl {
 
     public ErrandOfDutyKnightToken() {
-        super("Knight", "1/1 white Knight creature token with banding");
+        super("Knight Token", "1/1 white Knight creature token with banding");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.KNIGHT);
         color.setWhite(true);

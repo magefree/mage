@@ -5,10 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -34,8 +36,10 @@ public final class SummoningTrap extends CardImpl {
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
 
-        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new SummoningTrapEffect());
+        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
+        // Put the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                7, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY));
     }
 
     private SummoningTrap(final SummoningTrap card) {
@@ -102,47 +106,5 @@ class SummoningTrapWatcher extends Watcher {
     public void reset() {
         super.reset();
         players.clear();
-    }
-}
-
-class SummoningTrapEffect extends OneShotEffect {
-
-    public SummoningTrapEffect(final SummoningTrapEffect effect) {
-        super(effect);
-    }
-
-    public SummoningTrapEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order";
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
-        if (!cards.isEmpty()) {
-            TargetCard target = new TargetCard(Zone.LIBRARY,
-                    new FilterCreatureCard(
-                            "creature card to put on the battlefield"));
-            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            if (!cards.isEmpty()) {
-                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public SummoningTrapEffect copy() {
-        return new SummoningTrapEffect(this);
     }
 }

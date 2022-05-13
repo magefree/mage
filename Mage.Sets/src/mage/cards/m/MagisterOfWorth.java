@@ -11,10 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.choices.TwoChoiceVote;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -42,7 +39,7 @@ public final class MagisterOfWorth extends CardImpl {
         // Will of the council - When Magister of Worth enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than Magister of Worth.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new MagisterOfWorthEffect(), false)
-                .withFlavorWord("Will of the council")
+                .setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL)
         );
     }
 

@@ -82,7 +82,7 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells with mana value 3 or less (" + mageObject.getIdName() + ").";
         }

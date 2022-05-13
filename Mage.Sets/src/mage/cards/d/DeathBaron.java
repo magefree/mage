@@ -44,7 +44,7 @@ public final class DeathBaron extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter, false
         ));
         ability.addEffect(new GainAbilityControlledEffect(
-                DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
+                DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter
         ).setText("and have deathtouch"));
         this.addAbility(ability);
     }

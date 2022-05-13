@@ -16,7 +16,7 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
     }
 
     public OviyaPashiriSageLifecrafterToken(int number) {
-        super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
+        super("Construct Token", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

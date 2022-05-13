@@ -80,7 +80,7 @@ enum FirjasRetributionPredicate implements ObjectSourcePlayerPredicate<Permanent
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent permanent = input.getSource().getSourcePermanentOrLKI(game);
         return permanent != null && input.getObject().getPower().getValue() < permanent.getPower().getValue();
     }
 }

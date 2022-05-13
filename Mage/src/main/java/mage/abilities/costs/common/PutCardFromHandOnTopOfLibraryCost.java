@@ -32,8 +32,8 @@ public class PutCardFromHandOnTopOfLibraryCost extends CostImpl {
         TargetCardInHand targetCardInHand = new TargetCardInHand();
         targetCardInHand.setRequired(false);
         Card card;
-        if (targetCardInHand.canChoose(source.getSourceId(), controllerId, game)
-                && controller.choose(Outcome.PreventDamage, targetCardInHand, source.getSourceId(), game)) {
+        if (targetCardInHand.canChoose(controllerId, source, game)
+                && controller.choose(Outcome.PreventDamage, targetCardInHand, source, game)) {
             card = game.getCard(targetCardInHand.getFirstTarget());
             paid = card != null && controller.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, true);
         }

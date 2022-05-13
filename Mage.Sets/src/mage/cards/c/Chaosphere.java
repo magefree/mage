@@ -74,7 +74,7 @@ class ChaosphereEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override

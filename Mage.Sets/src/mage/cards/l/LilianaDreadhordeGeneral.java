@@ -101,13 +101,13 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
                 filter.add(cardType.getPredicate());
                 Target target = new TargetControlledPermanent(filter);
                 target.setNotTarget(true);
-                if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+                if (opponent.choose(outcome, target, source, game)) {
                     keepFilter.add(Predicates.not(new CardIdPredicate(target.getFirstTarget())));
                 }
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (keepFilter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (keepFilter.match(permanent, source.getControllerId(), source, game)) {
                 permanent.sacrifice(source, game);
             }
         }

@@ -1,17 +1,14 @@
 package mage.cards.b;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -21,11 +18,13 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithDifferentNameInLibrary;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class BurningRuneDemon extends CardImpl {
@@ -60,6 +59,13 @@ public final class BurningRuneDemon extends CardImpl {
 
 class BurningRuneDemonEffect extends OneShotEffect {
 
+    private static final FilterCard filter
+            = new FilterCard("cards not named Burning-Rune Demon that have different names");
+
+    static {
+        filter.add(Predicates.not(new NamePredicate("Burning-Rune Demon")));
+    }
+
     public BurningRuneDemonEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for exactly two cards "
@@ -81,7 +87,7 @@ class BurningRuneDemonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInLibrary targetCardInLibrary = new BurningRuneDemonTarget();
+            TargetCardInLibrary targetCardInLibrary = new TargetCardWithDifferentNameInLibrary(2, 2, filter);
             if (controller.searchLibrary(targetCardInLibrary, source, game)) {
                 Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
                 if (!cards.isEmpty()) {
@@ -113,43 +119,5 @@ class BurningRuneDemonEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class BurningRuneDemonTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterCard("cards not named Burning-Rune Demon that have different names");
-
-    static {
-        filter.add(Predicates.not(new NamePredicate("Burning-Rune Demon")));
-    }
-
-    public BurningRuneDemonTarget() {
-        super(2, filter);
-    }
-
-    private BurningRuneDemonTarget(final BurningRuneDemonTarget target) {
-        super(target);
-    }
-
-    @Override
-    public BurningRuneDemonTarget copy() {
-        return new BurningRuneDemonTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null
-                && this.getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(Card::getName)
-                .noneMatch(n -> CardUtil.haveSameNames(card, n, game));
     }
 }

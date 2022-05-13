@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObjectReference;
@@ -11,14 +10,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class ExileTargetIfDiesEffect extends OneShotEffect {
 
     public ExileTargetIfDiesEffect() {
+        this("creature");
+    }
+
+    public ExileTargetIfDiesEffect(String targetName) {
         super(Outcome.Damage);
-        this.staticText = "If that creature would die this turn, exile it instead";
+        this.staticText = "If that " + targetName + " would die this turn, exile it instead";
     }
 
     public ExileTargetIfDiesEffect(final ExileTargetIfDiesEffect effect) {

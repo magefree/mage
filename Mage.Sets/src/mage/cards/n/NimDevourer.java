@@ -82,7 +82,7 @@ class NimDevourerEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
 
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(player.getId(), source, game) && player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     return permanent.sacrifice(source, game);

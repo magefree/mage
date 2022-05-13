@@ -95,12 +95,12 @@ class SlipperyBogbonderEffect extends OneShotEffect {
         FilterPermanent filterPermanent = filter.copy();
         filterPermanent.add(Predicates.not(new PermanentIdPredicate(source.getFirstTarget())));
         if (player == null || creature == null || game.getBattlefield().count(
-                filterPermanent, source.getSourceId(), source.getControllerId(), game
+                filterPermanent, source.getControllerId(), source, game
         ) < 1) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filterPermanent, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         List<Permanent> permanents = target
                 .getTargets()
                 .stream()

@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.constants.SubType;
@@ -8,20 +7,21 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author KholdFuzion
  */
 
-public class ControllerControlsIslandPredicate implements Predicate<Permanent> {
+public enum ControllerControlsIslandPredicate implements Predicate<Permanent> {
+    instance;
 
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return (game.getBattlefield().countAll(filter, input.getControllerId(), game) > 0);
+        return game.getBattlefield().countAll(filter, input.getControllerId(), game) > 0;
     }
 
     @Override

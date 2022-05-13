@@ -31,15 +31,13 @@ public final class JeskaiCharm extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // - Jeskai Charm deals 4 damage to target opponent.
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(4));
+        Mode mode = new Mode(new DamageTargetEffect(4));
         mode.addTarget(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addMode(mode);
         // - Creatures you control get +1/+1 and gain lifelink until end of turn.
-        mode = new Mode();
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Creatures you control get +1/+1");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
         effect.setText("and gain lifelink until end of turn");
         mode.addEffect(effect);

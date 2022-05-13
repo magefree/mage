@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class ClueArtifactToken extends TokenImpl {
 
     public ClueArtifactToken() {
-        super("Clue", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
+        super("Clue Token", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.CLUE);
 
@@ -29,7 +29,7 @@ public final class ClueArtifactToken extends TokenImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC");
+        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM");
     }
 
     @Override

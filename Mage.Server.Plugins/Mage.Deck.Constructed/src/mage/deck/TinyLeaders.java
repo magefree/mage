@@ -59,7 +59,6 @@ public class TinyLeaders extends Constructed {
         banned.add("Mox Sapphire");
         banned.add("Najeela, the Blade-Blossom");
         banned.add("Necropotence");
-        banned.add("Shahrazad");
         banned.add("Sisay, Weatherlight Captain");
         banned.add("Skullclamp");
         banned.add("Sol Ring");

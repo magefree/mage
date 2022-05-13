@@ -79,10 +79,10 @@ enum AerialSurveyorCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getBattlefield().count(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ) > game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         );
     }
 }
@@ -96,7 +96,7 @@ enum AerialSurveyorHint implements Hint {
                 .getActivePermanents(
                         StaticFilters.FILTER_LAND,
                         ability.getControllerId(),
-                        ability.getSourceId(), game
+                        ability, game
                 ).stream()
                 .map(Controllable::getControllerId)
                 .filter(game.getOpponents(ability.getControllerId())::contains)
@@ -110,6 +110,6 @@ enum AerialSurveyorHint implements Hint {
 
     @Override
     public AerialSurveyorHint copy() {
-        return this;
+        return instance;
     }
 }

@@ -59,7 +59,7 @@ class LuminescentRainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
         if (player != null && player.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());

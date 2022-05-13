@@ -71,7 +71,7 @@ class RangeTrooperEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game)) {
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);

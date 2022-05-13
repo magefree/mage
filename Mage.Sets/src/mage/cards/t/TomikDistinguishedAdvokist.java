@@ -73,7 +73,7 @@ enum TargetedByOpponentsPredicate implements ObjectSourcePlayerPredicate<MageObj
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         StackObject stackObject = game.getStack().getStackObject(input.getObject().getId());
-        Permanent source = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent source = input.getSource().getSourcePermanentOrLKI(game);
         if (stackObject != null && source != null) {
             Player controller = game.getPlayer(source.getControllerId());
             return controller != null && game.isOpponent(controller, stackObject.getControllerId());

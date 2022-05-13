@@ -45,7 +45,7 @@ public final class InvertTheSkies extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
-                "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
+                "and creatures you control gain flying until end of turn if {U} was spent to cast this spell"));
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{U} was spent.)</i>"));
 

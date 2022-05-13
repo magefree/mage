@@ -1,8 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -18,10 +15,14 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * The implementation by BetaSteward was discarded as requires special handling
  * in Mage.Core.
- *
+ * <p>
  * Instead it was replaced by conditional continuous effects and builder
  * pattern.
  *
@@ -181,19 +182,24 @@ public class LevelerCardBuilder {
         }
 
         public String getRule() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("<b>Level ").append(level1);
+            StringBuilder sb = new StringBuilder("<b>LEVEL ");
+            sb.append(level1);
             if (level2 == -1) {
                 sb.append('+');
             } else {
-                sb.append('-').append(level2);
+                sb.append('-');
+                sb.append(level2);
             }
-            sb.append(":</b> ").append(power).append('/').append(toughness).append(' ');
-            for (String rule : abilities.getRules("{this}")) {
-                sb.append(rule).append(' ');
+            sb.append("</b><br>");
+            sb.append(power);
+            sb.append('/');
+            sb.append(toughness);
+            List<String> abilityText = abilities.getRules("{this}");
+            if (!abilityText.isEmpty()) {
+                sb.append("<br>");
+                sb.append(abilityText.stream().collect(Collectors.joining("<br>")));
             }
             return sb.toString();
         }
-
     }
 }

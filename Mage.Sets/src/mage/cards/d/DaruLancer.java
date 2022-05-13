@@ -27,7 +27,7 @@ public final class DaruLancer extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Morph {2}{W}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}{W}")));
     }
 
     private DaruLancer(final DaruLancer card) {

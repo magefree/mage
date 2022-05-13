@@ -280,7 +280,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        checkPermanentCount("scions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eldrazi Scion", 4);
+        checkPermanentCount("scions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eldrazi Scion Token", 4);
 
         // test case 1 - playable abilities must not show it as playable (not work, cause we don't known real payment order before payment)
         //checkPlayableAbility("can't use convoke", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Will-Forged Golem", false);
@@ -363,6 +363,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Soldier", 1);
+        assertPermanentCount(playerA, "Soldier Token", 1);
     }
 }

@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class OgreToken extends TokenImpl {
 
     public OgreToken() {
-        super("Ogre", "3/3 red Ogre creature");
+        super("Ogre Token", "3/3 red Ogre creature");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.OGRE);

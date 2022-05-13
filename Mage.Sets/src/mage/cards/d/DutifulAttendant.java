@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,7 +23,7 @@ public final class DutifulAttendant extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("another target creature card from your graveyard");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public DutifulAttendant(UUID ownerId, CardSetInfo setInfo) {

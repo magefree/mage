@@ -8,9 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -28,8 +27,6 @@ public final class IronsoulEnforcer extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPermanent("{this} or a commander you control");
-    private static final FilterCard filter2
-            = new FilterArtifactCard("artifact card from your graveyard");
 
     static {
         filter.add(IronsoulEnforcerPredicate.instance);
@@ -47,7 +44,7 @@ public final class IronsoulEnforcer extends CardImpl {
         Ability ability = new AttacksAloneControlledTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), filter, false, false
         );
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

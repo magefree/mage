@@ -53,11 +53,11 @@ class PhyrexianHydraEffect extends PreventionEffectImpl {
 
     public PhyrexianHydraEffect() {
         super(Duration.WhileOnBattlefield);
+        staticText = "If damage would be dealt to {this}, prevent that damage. Put a -1/-1 counter on {this} for each 1 damage prevented this way";
     }
 
     public PhyrexianHydraEffect(final PhyrexianHydraEffect effect) {
         super(effect);
-        staticText = "If damage would be dealt to {this}, prevent that damage. Put a -1/-1 counter on {this} for each 1 damage prevented this way";
     }
 
     @Override

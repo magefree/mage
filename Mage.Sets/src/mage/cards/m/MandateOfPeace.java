@@ -73,7 +73,7 @@ class MandateOfPeaceOpponentsCantCastSpellsEffect extends ContinuousRuleModifyin
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells this turn (" + mageObject.getIdName() + ").";
         }
@@ -117,11 +117,11 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
         combat.endCombat(game);
         if (!game.getStack().isEmpty()) {
             game.getStack().stream()
-                    .filter(stackObject -> stackObject instanceof Spell)
+                    .filter(Spell.class::isInstance)
                     .forEach(stackObject -> ((Spell) stackObject).moveToExile(null, "", null, game));
 
             game.getStack().stream()
-                    .filter(stackObject -> stackObject instanceof Ability)
+                    .filter(Ability.class::isInstance)
                     .forEach(stackObject -> game.getStack().remove(stackObject, game));
         }
         return true;

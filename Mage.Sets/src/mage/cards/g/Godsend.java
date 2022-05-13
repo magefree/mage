@@ -46,7 +46,7 @@ public final class Godsend extends CardImpl {
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendRuleModifyingEffect()));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private Godsend(final Godsend card) {
@@ -181,7 +181,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + '.';
         }

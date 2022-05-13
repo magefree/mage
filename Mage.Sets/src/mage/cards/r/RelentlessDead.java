@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -79,7 +79,7 @@ class RelentlessDeadEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("Another target Zombie card with mana value {" + payCount + "}");
                 filter.add(SubType.ZOMBIE.getPredicate());
                 filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, payCount));
-                filter.add(new AnotherCardPredicate());
+                filter.add(AnotherPredicate.instance);
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());

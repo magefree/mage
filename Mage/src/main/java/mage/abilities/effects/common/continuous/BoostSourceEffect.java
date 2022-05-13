@@ -23,7 +23,11 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
     private final boolean lockedIn;
 
     public BoostSourceEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, false);
+        this(power, toughness, duration, "{this}");
+    }
+
+    public BoostSourceEffect(int power, int toughness, Duration duration, String description) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, false, description);
     }
 
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {

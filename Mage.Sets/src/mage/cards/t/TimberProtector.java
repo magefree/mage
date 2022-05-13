@@ -1,10 +1,8 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -13,31 +11,32 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class TimberProtector extends CardImpl {
 
-    private static final FilterCreaturePermanent filterTreefolk = new FilterCreaturePermanent("Treefolk creatures");
-    private static final FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
+    private static final FilterCreaturePermanent filterTreefolk
+            = new FilterCreaturePermanent("Treefolk creatures");
+    private static final FilterControlledPermanent filterBoth
+            = new FilterControlledPermanent("other Treefolk and Forests you control");
 
     static {
         filterTreefolk.add(SubType.TREEFOLK.getPredicate());
-        filterBoth.add(Predicates.or(
-                SubType.TREEFOLK.getPredicate(),
-                SubType.FOREST.getPredicate()));
-        filterBoth.add(AnotherPredicate.instance);
+        filterBoth.add(TimberProtectorPredicate.instance);
     }
 
     public TimberProtector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.WARRIOR);
 
@@ -45,11 +44,14 @@ public final class TimberProtector extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Other Treefolk creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterTreefolk, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filterTreefolk, true
+        )));
+
         // Other Treefolk and Forests you control are indestructible.
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterBoth, true);
-        effect.setText("Other Treefolk and Forests you control are indestructible");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterBoth
+        )));
     }
 
     private TimberProtector(final TimberProtector card) {
@@ -59,5 +61,19 @@ public final class TimberProtector extends CardImpl {
     @Override
     public TimberProtector copy() {
         return new TimberProtector(this);
+    }
+}
+
+enum TimberProtectorPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        MageObject obj = input.getObject();
+        if (obj.getId().equals(input.getSourceId())) {
+            return obj.hasSubtype(SubType.FOREST, game);
+        }
+        return obj.hasSubtype(SubType.FOREST, game)
+                || obj.hasSubtype(SubType.TREEFOLK, game);
     }
 }

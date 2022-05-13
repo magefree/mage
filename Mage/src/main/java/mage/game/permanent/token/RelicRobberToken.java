@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class RelicRobberToken extends TokenImpl {
 
     public RelicRobberToken() {
-        super("Goblin Construct", "0/1 colorless Goblin Construct artifact creature token with \"This creature can't block\" and \"At the beginning of your upkeep, this creature deals 1 damage to you.\"");
+        super("Goblin Construct Token", "0/1 colorless Goblin Construct artifact creature token with \"This creature can't block\" and \"At the beginning of your upkeep, this creature deals 1 damage to you.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOBLIN);

@@ -75,7 +75,7 @@ class XenagosManaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
             if (x == 0) {
                 return false;
             }
@@ -123,7 +123,7 @@ class XenagosExileEffect extends OneShotEffect {
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
             target1.setNotTarget(true);
             if (!exiledCards.isEmpty()
-                    && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && target1.canChoose(source.getControllerId(), source, game)
                     && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
                 controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }

@@ -81,7 +81,7 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
             FilterControlledPermanent filter = new FilterControlledPermanent("creature");
             filter.add(CardType.CREATURE.getPredicate());
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-            if (damagedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (damagedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
                 if (objectToBeSacrificed != null) {
                     if (objectToBeSacrificed.sacrifice(source, game)) {

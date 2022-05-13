@@ -31,11 +31,13 @@ public final class StoicEphemera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stoic Ephemera blocks, sacrifice it at end of combat.
-        this.addAbility(new BlocksSourceTriggeredAbility(
-                new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
-                ), false, false, true
-        ));
+        this.addAbility(
+                new BlocksSourceTriggeredAbility(
+                        new CreateDelayedTriggeredAbilityEffect(
+                                new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
+                        ).setText("sacrifice it at end of combat")
+                ).setTriggerPhrase("When {this} blocks, ")
+        );
     }
 
     private StoicEphemera(final StoicEphemera card) {

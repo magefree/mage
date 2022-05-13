@@ -22,7 +22,7 @@ public final class LightningAxe extends CardImpl {
 
 
         // As an additional cost to cast Lightning Axe, discard a card or pay {5}.
-        this.getSpellAbility().addCost(new OrCost(new DiscardCardCost(), new GenericManaCost(5),"discard a card or pay {5}"));
+        this.getSpellAbility().addCost(new OrCost("discard a card or pay {5}", new DiscardCardCost(), new GenericManaCost(5)));
         // Lightning Axe deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

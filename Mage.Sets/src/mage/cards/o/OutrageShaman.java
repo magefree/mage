@@ -10,6 +10,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.SubType;
@@ -36,7 +37,7 @@ public final class OutrageShaman extends CardImpl {
         effect.setText("it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.withFlavorWord("Chroma");
+        ability.setAbilityWord(AbilityWord.CHROMA);
         ability.addHint(new ValueHint("Red mana symbols in your permanents", xValue));
         this.addAbility(ability);
 

@@ -3,7 +3,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -34,7 +34,7 @@ public final class ThunderbladeCharge extends CardImpl {
         // Whenever one or more creatures you control deal combat damage to a player, 
         // if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. 
         // If you do, you may cast it without paying its mana cost.
-        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone.GRAVEYARD,
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl("{2}{R}{R}{R}"))
                         .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. "
                                 + "If you do, you may cast it without paying its mana cost")));

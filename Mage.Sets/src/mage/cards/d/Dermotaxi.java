@@ -88,7 +88,7 @@ class DermotaxiImprintEffect extends OneShotEffect {
         if (!target.canChoose(source.getControllerId(), game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

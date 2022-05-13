@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -12,12 +12,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -29,6 +29,12 @@ import java.util.UUID;
  */
 public final class TameshiRealityArchitect extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
+
+    static {
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+    }
+
     public TameshiRealityArchitect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
@@ -39,13 +45,15 @@ public final class TameshiRealityArchitect extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever one or more noncreature permanents are returned to hand, draw a card. This ability triggers only once each turn.
-        this.addAbility(new TameshiRealityArchitectTriggeredAbility());
+        this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND,
+                new DrawCardSourceControllerEffect(1), filter,
+                "Whenever one or more noncreature permanents are returned to hand, ", false).setTriggersOnce(true));
 
         // {X}{W}, Return a land you control to its owner's hand: Return target artifact or enchantment card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
-                        .setText("return target artifact or enchantment card with " +
-                                "mana value X or less from your graveyard to the battlefield"),
+                        .setText("return target artifact or enchantment card with "
+                                + "mana value X or less from your graveyard to the battlefield"),
                 new ManaCostsImpl<>("{X}{W}")
         );
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
@@ -76,28 +84,5 @@ enum TameshiRealityArchitectAdjuster implements TargetAdjuster {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-    }
-}
-
-class TameshiRealityArchitectTriggeredAbility extends ZoneChangeTriggeredAbility {
-
-    TameshiRealityArchitectTriggeredAbility() {
-        super(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, new DrawCardSourceControllerEffect(1),
-                "Whenever one or more noncreature permanents are returned to hand, ", false);
-        this.setTriggersOnce(true);
-    }
-
-    private TameshiRealityArchitectTriggeredAbility(final TameshiRealityArchitectTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TameshiRealityArchitectTriggeredAbility copy() {
-        return new TameshiRealityArchitectTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return super.checkTrigger(event, game) && !((ZoneChangeEvent) event).getTarget().isCreature(game);
     }
 }

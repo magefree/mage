@@ -116,25 +116,6 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     void setStartingLoyalty(int startingLoyalty);
 
-    /**
-     * Dynamic cost modification for card (process only OWN abilities).
-     * <p>
-     * Usage example: if it need stack related info (like real targets) then must check two
-     * states (game.inCheckPlayableState):
-     * <p>
-     * 1. In playable state it must check all possible use cases (e.g. allow to
-     * reduce on any available target and modes)
-     * <p>
-     * 2. In real cast state it must check current use case (e.g. real selected
-     * targets and modes)
-     *
-     * @param ability
-     * @param game
-     */
-    void adjustCosts(Ability ability, Game game);
-
-    void adjustTargets(Ability ability, Game game);
-
     // memory object copy (not mtg)
     @Override
     MageObject copy();

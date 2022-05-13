@@ -113,7 +113,7 @@ class GrevenPredatorCaptainEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
         );
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());

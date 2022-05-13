@@ -95,7 +95,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
         Target target = new TargetOpponent(true);
         target.setTargetName("an opponent to clash with");
         target.setNotTarget(true);
-        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.Benefit, target, source, game)) {
             return false;
         }
         Player opponent = game.getPlayer(target.getFirstTarget());

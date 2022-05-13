@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -9,8 +8,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class SustainerOfTheRealm extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Sustainer of the Realm blocks, it gets +0/+2 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn, "it")));
     }
 
     private SustainerOfTheRealm(final SustainerOfTheRealm card) {

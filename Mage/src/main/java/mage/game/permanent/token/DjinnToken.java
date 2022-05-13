@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class DjinnToken extends TokenImpl {
 
     public DjinnToken() {
-        super("Djinn", "5/5 colorless Djinn artifact creature token with flying");
+        super("Djinn Token", "5/5 colorless Djinn artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DJINN);

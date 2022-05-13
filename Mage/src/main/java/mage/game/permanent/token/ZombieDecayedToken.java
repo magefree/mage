@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class ZombieDecayedToken extends TokenImpl {
 
     public ZombieDecayedToken() {
-        super("Zombie", "2/2 black Zombie creature token with decayed");
+        super("Zombie Token", "2/2 black Zombie creature token with decayed");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

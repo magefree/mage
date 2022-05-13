@@ -1,24 +1,19 @@
 package mage.cards.c;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.cost.CastWithoutPayingManaCostEffect;
 import mage.abilities.keyword.FriendsForeverAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
-import org.apache.log4j.Logger;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,45 +78,10 @@ class CecilyHauntedMageEffect extends OneShotEffect {
         }
         player.drawCards(1, source, game);
         player.loseLife(1, game, source, false);
-        if (player.getHand().size() < 11) {
-            return true;
-        }
-        // TODO: change this to fit with changes made in https://github.com/magefree/mage/pull/8136 when merged
-        Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        if (!target.canChoose(
-                source.getSourceId(), player.getId(), game
-        ) || !player.chooseUse(
-                Outcome.PlayForFree, "Cast an instant or sorcery spell " +
-                        "from your hand without paying its mana cost?", source, game
-        )) {
-            return true;
-        }
-        Card cardToCast = null;
-        boolean cancel = false;
-        while (player.canRespond()
-                && !cancel) {
-            if (player.chooseTarget(Outcome.PlayForFree, target, source, game)) {
-                cardToCast = game.getCard(target.getFirstTarget());
-                if (cardToCast != null) {
-                    if (cardToCast.getSpellAbility() == null) {
-                        Logger.getLogger(CastWithoutPayingManaCostEffect.class).fatal("Card: "
-                                + cardToCast.getName() + " is no land and has no spell ability!");
-                        cancel = true;
-                    }
-                    if (cardToCast.getSpellAbility().canChooseTarget(game, player.getId())) {
-                        cancel = true;
-                    }
-                }
-            } else {
-                cancel = true;
-            }
-        }
-        if (cardToCast != null) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
-            player.cast(player.chooseAbilityForCast(cardToCast, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
-        }
-        return true;
+        return player.getHand().size() < 11
+                || CardUtil.castSpellWithAttributesForFree(
+                player, source, game, player.getHand().copy(),
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
+        );
     }
 }

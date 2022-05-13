@@ -32,7 +32,7 @@ public final class StreamOfThought extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Replicate {2}{U}{U}
-        this.addAbility(new ReplicateAbility(this, "{2}{U}{U}"));
+        this.addAbility(new ReplicateAbility("{2}{U}{U}"));
     }
 
     private StreamOfThought(final StreamOfThought card) {

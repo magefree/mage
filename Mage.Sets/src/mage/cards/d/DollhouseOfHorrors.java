@@ -6,7 +6,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -20,6 +21,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -58,6 +60,8 @@ public final class DollhouseOfHorrors extends CardImpl {
 
 class DollhouseOfHorrorsEffect extends OneShotEffect {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.CONSTRUCT));
+
     DollhouseOfHorrorsEffect() {
         super(Outcome.Benefit);
         staticText = "create a token that's a copy of the exiled card, except it's a 0/0 Construct artifact in " +
@@ -87,10 +91,12 @@ class DollhouseOfHorrorsEffect extends OneShotEffect {
         effect.setSavedPermanent(new PermanentCard(card, source.getControllerId(), game));
         effect.setAdditionalSubType(SubType.CONSTRUCT);
         effect.addAdditionalAbilities(new SimpleStaticAbility(new BoostSourceEffect(
-                ArtifactYouControlCount.instance,
-                ArtifactYouControlCount.instance,
-                Duration.WhileOnBattlefield
-        ).setText("This creature gets +1/+1 for each artifact you control")));
+                xValue,
+                xValue,
+                Duration.WhileOnBattlefield,
+                false,
+                "this creature"
+        )));
         effect.apply(game, source);
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

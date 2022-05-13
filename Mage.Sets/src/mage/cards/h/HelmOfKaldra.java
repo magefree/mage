@@ -63,7 +63,7 @@ public final class HelmOfKaldra extends CardImpl {
                 new HelmOfKaldraCondition(),
                 "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it"));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{2}"), false));
     }
 
     private HelmOfKaldra(final HelmOfKaldra card) {
@@ -80,13 +80,13 @@ class HelmOfKaldraCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getSourceId(), source.getControllerId(), game) >= 1;
+        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getControllerId(), source, game) >= 1;
     }
 
 }

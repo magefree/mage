@@ -243,20 +243,7 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        if (card.isPlaneswalker()) {
-            switch (card.getStartingLoyalty()) {
-                case -2:
-                    this.startingLoyalty = "X";
-                    break;
-                case -1:
-                    this.startingLoyalty = "";
-                    break;
-                default:
-                    this.startingLoyalty = "" + card.getStartingLoyalty();
-            }
-        } else {
-            this.startingLoyalty = "";
-        }
+        this.startingLoyalty = CardUtil.convertStartingLoyalty(card.getStartingLoyalty());
     }
 
     public Card getCard() {

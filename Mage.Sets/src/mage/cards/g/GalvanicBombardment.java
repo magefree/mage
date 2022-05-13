@@ -64,7 +64,7 @@ class GalvanicBombardmentCardsInControllerGraveyardCount implements DynamicValue
         int amount = 0;
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-                amount += controller.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+                amount += controller.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
             }
         return amount + 2;
     }

@@ -12,14 +12,14 @@ import java.util.Arrays;
 public final class CatToken extends TokenImpl {
 
     public CatToken() {
-        super("Cat", "2/2 white Cat creature token");
+        super("Cat Token", "2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("PMEI", "C14", "C15", "C17", "C18", "M13", "M14", "MBS", "SOM", "CMR");
+        availableImageSetCodes = Arrays.asList("PMEI", "C14", "C15", "C17", "C18", "M13", "M14", "MBS", "SOM", "CMR", "2XM");
     }
 
     public CatToken(final CatToken token) {

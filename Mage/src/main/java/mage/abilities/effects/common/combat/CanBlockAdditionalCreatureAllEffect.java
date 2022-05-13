@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author emerald000
  */
 
@@ -42,13 +41,12 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (permanent != null) {
                 // maxBlocks = 0 equals to "can block any number of creatures"
                 if (amount > 0) {
                     permanent.setMaxBlocks(permanent.getMaxBlocks() + amount);
-                }
-                else {
+                } else {
                     permanent.setMaxBlocks(0);
                 }
             }
@@ -64,12 +62,16 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
     private String setText() {
         StringBuilder sb = new StringBuilder(filter.getMessage());
         sb.append(" can block ");
-        switch(amount) {
+        switch (amount) {
             case 0:
                 sb.append("any number of creatures");
                 break;
+            case 1:
+                sb.append("an additional creature each combat");
+                break;
             default:
-                sb.append(CardUtil.numberToText(amount, "an")).append(" additional creature").append(amount > 1 ? "s" : "");
+                sb.append(CardUtil.numberToText(amount));
+                sb.append(" additional creatures");
         }
         return sb.toString();
     }

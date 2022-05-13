@@ -52,7 +52,7 @@ class CankerousThirstEffect extends OneShotEffect {
 
     public CankerousThirstEffect() {
         super(Outcome.Benefit);
-        this.staticText = "If {B} was spent to cast  {this}, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast this spell, you may have target creature get +3/+3 until end of turn";
+        this.staticText = "If {B} was spent to cast this spell, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast this spell, you may have target creature get +3/+3 until end of turn";
     }
 
     public CankerousThirstEffect(final CankerousThirstEffect effect) {

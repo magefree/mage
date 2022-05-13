@@ -26,7 +26,7 @@ public final class SilverskinArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardTypeAttachedEffect(CardType.ARTIFACT, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}"), false));
     }
 
     private SilverskinArmor(final SilverskinArmor card) {

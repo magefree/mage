@@ -73,7 +73,7 @@ enum EarthshakerKhenraPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() <= sourcePermanent.getPower().getValue();
     }
 }

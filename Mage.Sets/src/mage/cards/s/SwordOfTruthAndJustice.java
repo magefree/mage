@@ -49,7 +49,7 @@ public final class SwordOfTruthAndJustice extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SwordOfTruthAndJustice(final SwordOfTruthAndJustice card) {
@@ -86,7 +86,7 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
         }
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        if (player.choose(outcome, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

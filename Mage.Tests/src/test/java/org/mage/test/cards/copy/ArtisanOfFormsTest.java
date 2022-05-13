@@ -84,7 +84,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Cackling Counterpart", 1);
         assertPermanentCount(playerA, "Artisan of Forms", 0);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Bird", 1);
+        assertPermanentCount(playerA, "Bird Token", 1);
         // 3 Silvercoat Lion at the end
         assertPermanentCount(playerA, "Silvercoat Lion", 3);
 

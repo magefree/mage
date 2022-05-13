@@ -23,8 +23,7 @@ public final class RetreatToCoralhelm extends CardImpl {
         // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - You may tap or untap target creature; or Scry 1.
         LandfallAbility ability = new LandfallAbility(new MayTapOrUntapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
-        Mode mode = new Mode();
-        mode.addEffect(new ScryEffect(1));
+        Mode mode = new Mode(new ScryEffect(1));
         ability.addMode(mode);
         this.addAbility(ability);
     }

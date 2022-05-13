@@ -111,7 +111,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null) {
-                if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
+                if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
                     if (setTargetPointer) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));

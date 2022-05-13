@@ -93,7 +93,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }

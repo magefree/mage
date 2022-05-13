@@ -35,7 +35,7 @@ public final class VrondissRageOfAncients extends CardImpl {
 
         // Whenever you roll one or more dice, you may have Vrondiss, Rage of Ancients deal 1 damage to itself.
         this.addAbility(new OneOrMoreDiceRolledTriggeredAbility(
-                new DamageSelfEffect(1).setText("{this} deal 1 damage to itself"), true
+                new DamageSelfEffect(1).setText("have {this} deal 1 damage to itself"), true
         ));
     }
 

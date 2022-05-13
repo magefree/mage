@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class SoldierVigilanceToken extends TokenImpl {
 
     public SoldierVigilanceToken() {
-        super("Soldier", "2/2 white Soldier creature token with vigilance");
+        super("Soldier Token", "2/2 white Soldier creature token with vigilance");
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

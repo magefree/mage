@@ -35,7 +35,7 @@ public final class MaelstromDjinn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
         // When Maelstrom Djinn is turned face up, put two time counters on it and it gains vanishing.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2)));
         Effect effect = new GainAbilitySourceEffect(new VanishingUpkeepAbility(0), Duration.WhileOnBattlefield);

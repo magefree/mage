@@ -85,7 +85,7 @@ class JinGitaxiasProgressTyrantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
-            spell.counter(source, game);
+            game.getStack().counter(spell.getId(), source, game);;
         }
         return true;
     }

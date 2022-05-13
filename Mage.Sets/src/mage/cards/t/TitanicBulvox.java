@@ -26,7 +26,7 @@ public final class TitanicBulvox extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Morph {4}{G}{G}{G}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}{G}{G}")));
     }
 
     private TitanicBulvox(final TitanicBulvox card) {

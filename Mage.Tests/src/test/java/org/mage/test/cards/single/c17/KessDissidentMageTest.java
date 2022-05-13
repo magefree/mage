@@ -51,7 +51,7 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Centaur", 1);
+        assertPermanentCount(playerA, "Centaur Token", 1);
         assertLife(playerA, 20);
         assertExileCount(playerA, "Alive // Well", 1);
     }
@@ -76,7 +76,7 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Centaur", 1);
+        assertPermanentCount(playerA, "Centaur Token", 1);
         assertLife(playerA, 20 + 2);
         assertGraveyardCount(playerA, "Alive // Well", 1);
     }

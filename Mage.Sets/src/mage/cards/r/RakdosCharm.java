@@ -31,14 +31,12 @@ public final class RakdosCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // or destroy target artifact;
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
 
         // or each creature deals 1 damage to its controller.
-        mode = new Mode();
-        mode.addEffect(new RakdosCharmDamageEffect());
+        mode = new Mode(new RakdosCharmDamageEffect());
         this.getSpellAbility().addMode(mode);
     }
 
@@ -68,7 +66,7 @@ public final class RakdosCharm extends CardImpl {
             FilterPermanent filter = new FilterPermanent();
             filter.add(CardType.CREATURE.getPredicate());
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
                     controller.damage(1, permanent.getId(), source, game);

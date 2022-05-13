@@ -62,7 +62,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_CREATURE,
-                            getTargetPointer().getFirst(game, source), source.getSourceId(), game
+                            getTargetPointer().getFirst(game, source), source, game
                     ).stream()
                     .map(permanent -> new MageObjectReference(permanent, game))
                     .forEach(affectedObjectList::add);

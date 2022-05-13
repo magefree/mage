@@ -105,8 +105,8 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                             }
                         }
                         TargetPlayer target = new TargetPlayer(1, 1, true, filter);
-                        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                            while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                        if (target.canChoose(controller.getId(), source, game)) {
+                            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                                 controller.chooseTarget(outcome, target, source, game);
                             }
                         } else {

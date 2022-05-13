@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class HunterToken extends TokenImpl {
 
     public HunterToken() {
-        super("Hunter", "4/4 red Hunter creature token", 4, 4);
+        super("Hunter Token", "4/4 red Hunter creature token", 4, 4);
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setRed(true);

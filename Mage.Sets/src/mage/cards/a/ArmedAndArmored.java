@@ -108,12 +108,12 @@ class ArmedAndArmoredEquipEffect extends OneShotEffect {
         if (!dwarves.isEmpty() && !equipment.isEmpty()) {
             TargetPermanent target = new TargetPermanent(0, 1, dwarfFilter, true);
             target.withChooseHint("dwarf to be equipped");
-            controller.choose(outcome, target, source.getId(), game);
+            controller.choose(outcome, target, source, game);
             Permanent dwarf = game.getPermanent(target.getFirstTarget());
             if (dwarf != null) {
                 target = new TargetPermanent(0, Integer.MAX_VALUE, equipmentFilter, true);
                 target.withChooseHint("equip to " + dwarf.getLogName());
-                controller.choose(outcome, target, source.getId(), game);
+                controller.choose(outcome, target, source, game);
                 for (UUID targetId : target.getTargets()) {
                     dwarf.addAttachment(targetId, source, game);
                     game.informPlayers(game.getPermanent(targetId).getLogName() + " was attached to " + dwarf.getLogName());

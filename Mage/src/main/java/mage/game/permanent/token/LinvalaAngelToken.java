@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class LinvalaAngelToken extends TokenImpl {
 
     public LinvalaAngelToken() {
-        super("Angel", "3/3 white Angel creature token with flying");
+        super("Angel Token", "3/3 white Angel creature token with flying");
         setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

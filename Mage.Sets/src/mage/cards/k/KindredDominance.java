@@ -59,7 +59,7 @@ class KindredDominanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
         if (controller != null && controller.choose(outcome, typeChoice, game)) {
             game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures not of the chosen type");

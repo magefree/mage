@@ -91,8 +91,11 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
                 }
 
-                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game)) {
+                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
+                    // store the event that led to the triggered event (Strict Proctor)
+                    // numberOfTriggerers event is only checked in replacement effects
+                    game.getState().setValue("triggeringEvent" + ability.getSourceId(), event);
                     if (!game.replaceEvent(numberOfTriggersEvent)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
                             ability.trigger(game, ability.getControllerId(), event);

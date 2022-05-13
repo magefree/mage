@@ -116,7 +116,7 @@ class SorcererClassManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getObject(source);
             return object != null && object.isInstantOrSorcery(game);
         }
         return source instanceof ClassLevelAbility;

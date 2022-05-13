@@ -6,7 +6,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- *
  * @author weirddan455
  */
 public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
@@ -28,7 +27,7 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         super.apply(game, source);
-        Permanent token = game.getPermanent(this.getLastAddedTokenId());
+        Permanent token = game.getPermanent(this.getLastAddedTokenIds().stream().findFirst().orElse(null));
         if (token != null) {
             token.addAttachment(source.getSourceId(), source, game);
             return true;

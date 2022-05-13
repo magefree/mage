@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -439,6 +440,11 @@ public abstract class GameImpl implements Game {
         }
 
         return object;
+    }
+
+    @Override
+    public MageObject getObject(Ability source) {
+        return source != null ? getObject(source.getSourceId()) : null;
     }
 
     /**
@@ -1125,16 +1131,20 @@ public abstract class GameImpl implements Game {
             return;
         }
 
+        // Apply shield counter mechanic from SNC
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new ShieldCounterEffect()), null);
+
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
         for (Player player : state.getPlayers().values()) {
             // Make a list of legal companions present in the sideboard
+            Set<Card> cards = new HashSet<>(player.getLibrary().getCards(this));
             Set<Card> potentialCompanions = new HashSet<>();
             for (Card card : player.getSideboard().getUniqueCards(this)) {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingHandSize)) {
+                        if (companionAbility.isLegal(cards, startingHandSize)) {
                             potentialCompanions.add(card);
                             break;
                         }
@@ -1292,6 +1302,8 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
+        newWatchers.add(new BlockingOrBlockedWatcher());
+        newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
 
         // runtime check - allows only GAME scope (one watcher per game)
@@ -2386,7 +2398,7 @@ public abstract class GameImpl implements Game {
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterPermanent) {
-                                    if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
+                                    if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getControllerId(), perm.getSpellAbility(), this)
                                             || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                         Card card = this.getCard(perm.getId());
                                         if (card != null && card.isCreature(this)) {
@@ -2566,7 +2578,7 @@ public abstract class GameImpl implements Game {
                 filterLegendName.add(SuperType.LEGENDARY.getPredicate());
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
-                if (getBattlefield().contains(filterLegendName, null, legend.getControllerId(), this, 2)) {
+                if (getBattlefield().contains(filterLegendName, null, legend.getControllerId(), null, this, 2)) {
                     if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
                         Player controller = this.getPlayer(legend.getControllerId());
                         if (controller != null) {
@@ -3145,7 +3157,7 @@ public abstract class GameImpl implements Game {
             result.setRemainingAmount(amountToPrevent - result.getPreventedDamage());
         }
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
-        MageObject preventionSource = game.getObject(source.getSourceId());
+        MageObject preventionSource = game.getObject(source);
 
         if (damageSource != null && preventionSource != null) {
             MageObject targetObject = game.getObject(event.getTargetId());

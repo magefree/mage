@@ -222,7 +222,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -246,12 +246,12 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         return chooseRandom(target, game);
     }
 
     @Override
-    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         return chooseRandom(target, game);
     }
 
@@ -294,7 +294,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
         }
