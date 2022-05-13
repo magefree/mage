@@ -19,6 +19,7 @@ public final class Warhammer40000 extends ExpansionSet {
         super("Warhammer 40,000", "40K", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Blood for the Blood God!", 108, Rarity.COMMON, mage.cards.b.BloodForTheBloodGod.class));
         cards.add(new SetCardInfo("Fabricate", 181, Rarity.RARE, mage.cards.f.Fabricate.class));
     }
 }
