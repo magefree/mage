@@ -80,7 +80,7 @@ class TemptingWurmEffect extends OneShotEffect {
                 if (opponent != null){
                     Target target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
                     
-                    if(target.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                    if(target.canChoose(opponent.getId(), source, game)) {
                         if (opponent.chooseUse(Outcome.PutCardInPlay , "Put any artifact, creature, enchantment, and/or land cards cards from your hand onto the battlefield?", source, game)) {
                             if (target.chooseTarget(Outcome.PutCardInPlay, opponent.getId(), source, game)) {
                                 for (UUID cardId: target.getTargets()){

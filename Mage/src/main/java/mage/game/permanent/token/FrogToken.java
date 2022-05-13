@@ -13,7 +13,7 @@ import mage.MageInt;
 public final class FrogToken extends TokenImpl {
 
     public FrogToken() {
-        super("Frog", "1/1 blue Frog creature token");
+        super("Frog Token", "1/1 blue Frog creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.FROG);

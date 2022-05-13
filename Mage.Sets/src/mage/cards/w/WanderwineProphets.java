@@ -35,7 +35,7 @@ public final class WanderwineProphets extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Champion a Merfolk
-        this.addAbility(new ChampionAbility(this, SubType.MERFOLK, false));
+        this.addAbility(new ChampionAbility(this, SubType.MERFOLK));
         // Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new AddExtraTurnControllerEffect(),

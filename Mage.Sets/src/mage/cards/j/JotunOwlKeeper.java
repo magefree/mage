@@ -31,9 +31,8 @@ public final class JotunOwlKeeper extends CardImpl {
 
         // Cumulative upkeep {W} or {U}
         this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                new ManaCostsImpl("{W}"),
-                new ManaCostsImpl("{U}"),
-                "{W} or {U}"
+                "{W} or {U}", new ManaCostsImpl("{W}"),
+                new ManaCostsImpl("{U}")
         )));
 
         // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.

@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class MasterOfWavesElementalToken extends TokenImpl {
 
     public MasterOfWavesElementalToken() {
-        super("Elemental", "1/0 blue Elemental creature");
+        super("Elemental Token", "1/0 blue Elemental creature");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
 

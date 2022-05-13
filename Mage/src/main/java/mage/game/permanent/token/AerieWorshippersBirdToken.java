@@ -15,7 +15,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class AerieWorshippersBirdToken extends TokenImpl {
 
     public AerieWorshippersBirdToken() {
-        super("Bird", "2/2 blue Bird enchantment creature token with flying");
+        super("Bird Token", "2/2 blue Bird enchantment creature token with flying");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);

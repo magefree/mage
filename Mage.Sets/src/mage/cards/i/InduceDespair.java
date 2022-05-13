@@ -25,7 +25,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class InduceDespair extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your hand");
 
     public InduceDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

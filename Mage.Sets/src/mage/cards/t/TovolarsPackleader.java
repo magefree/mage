@@ -58,6 +58,7 @@ public final class TovolarsPackleader extends CardImpl {
         ), new ManaCostsImpl<>("{2}{G}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.addAbility(ability);
 
         // Nightbound
         this.addAbility(new NightboundAbility());

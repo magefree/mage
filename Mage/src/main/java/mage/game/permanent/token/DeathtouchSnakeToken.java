@@ -13,7 +13,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 public final class DeathtouchSnakeToken extends TokenImpl {
 
     public DeathtouchSnakeToken() {
-        super("Snake", "1/1 green Snake creature token with deathtouch");
+        super("Snake Token", "1/1 green Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SNAKE);

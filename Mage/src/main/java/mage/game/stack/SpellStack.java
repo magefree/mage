@@ -68,7 +68,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
         // so if logic is changed here check those spells for needed changes too
         // Concerned cards to check: Hinder, Spell Crumple
         StackObject stackObject = getStackObject(objectId);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
             MageObject targetSourceObject = game.getObject(stackObject.getSourceId());
             String counteredObjectName, targetSourceName;

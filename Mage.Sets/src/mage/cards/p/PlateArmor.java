@@ -40,12 +40,13 @@ public final class PlateArmor extends CardImpl {
                 new WardAbility(new GenericManaCost(1)),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,
-                "and has ward {1}"
+                "and has ward {1}. <i>(Whenever equipped creature becomes the target of a spell or ability an opponent controls, " +
+                        "counter it unless that player pays {1}.)</i>"
         ));
         this.addAbility(ability);
 
         // Equip {3}. This ability costs {1} less to activate for each other Equipment you control.
-        EquipAbility equipAbility = new EquipAbility(3);
+        EquipAbility equipAbility = new EquipAbility(3, false);
         equipAbility.setCostAdjuster(PlateArmorAdjuster.instance);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each other Equipment you control.");
         this.addAbility(equipAbility.addHint(PlateArmorAdjuster.getHint()));

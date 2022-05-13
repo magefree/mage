@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class MelokuTheCloudedMirrorToken extends TokenImpl {
 
     public MelokuTheCloudedMirrorToken() {
-        super("Illusion", "1/1 blue Illusion creature token with flying");
+        super("Illusion Token", "1/1 blue Illusion creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ILLUSION);

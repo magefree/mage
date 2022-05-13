@@ -27,8 +27,7 @@ public final class Pyroblast extends CardImpl {
         this.getSpellAbility().addEffect(new PyroblastCounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
 
-        Mode mode = new Mode();
-        mode.addEffect(new PyroblastDestroyTargetEffect());
+        Mode mode = new Mode(new PyroblastDestroyTargetEffect());
         mode.addTarget(new TargetPermanent());
 
         this.getSpellAbility().addMode(mode);

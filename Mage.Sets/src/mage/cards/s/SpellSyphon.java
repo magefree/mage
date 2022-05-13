@@ -74,7 +74,7 @@ class SpellSyphonEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
             if (player != null && controller != null) {
-                int amount = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
+                int amount = game.getBattlefield().count(filter, controller.getId(), source, game);
                 if (amount == 0) {
                     game.informPlayers("Spell Syphon: no blue permanents in controller's battlefield.");
                 } else {

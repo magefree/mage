@@ -76,7 +76,7 @@ class TormentOfVenomEffect extends OneShotEffect {
                     filter.add(Predicates.not(CardType.LAND.getPredicate()));
                     filter.add(Predicates.not(new PermanentIdPredicate(targetCreature.getId())));
                     Target target = new TargetPermanent(filter);
-                    if (controllingPlayer.choose(outcome, target, source.getSourceId(), game)) {
+                    if (controllingPlayer.choose(outcome, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
                             permanent.sacrifice(source, game);

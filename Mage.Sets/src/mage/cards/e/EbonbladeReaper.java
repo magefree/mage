@@ -36,7 +36,7 @@ public final class EbonbladeReaper extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true));
 
         //Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private EbonbladeReaper(final EbonbladeReaper card) {

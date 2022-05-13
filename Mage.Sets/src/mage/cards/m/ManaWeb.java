@@ -112,7 +112,7 @@ class ManaWebeffect extends OneShotEffect {
         boolean tappedLands = false;
         for (Permanent opponentPermanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                permanent.getControllerId(), source.getSourceId(), game
+                permanent.getControllerId(), source, game
         )) {
             Set<ManaType> manaTypes = AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(opponentPermanent, game);
             if (!Collections.disjoint(manaTypes, manaTypesSource)) {

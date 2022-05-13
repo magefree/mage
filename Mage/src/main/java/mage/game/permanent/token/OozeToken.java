@@ -4,10 +4,12 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class OozeToken extends TokenImpl {
 
     public OozeToken(int power, int toughness) {
-        super("Ooze", power + "/" + toughness + " green ooze creature token");
+        super("Ooze Token", power + "/" + toughness + " green ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.OOZE);
@@ -16,12 +18,14 @@ public final class OozeToken extends TokenImpl {
     }
 
     public OozeToken() {
-        super("Ooze", "X/X green ooze creature token");
+        super("Ooze Token", "X/X green ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.OOZE);
         power = new MageInt(0);
         toughness = new MageInt(0);
+
+        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM");
     }
 
     public OozeToken(final OozeToken token) {

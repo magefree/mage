@@ -142,8 +142,8 @@ class ChunLiCountlessKicksCastEffect extends OneShotEffect {
             if (copiedCard.getSpellAbility() != null) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
                 player.cast(
-                        player.chooseAbilityForCast(copiedCard, game, true),
-                        game, true, new ApprovingObject(source, game)
+                        player.chooseAbilityForCast(copiedCard, game, false),
+                        game, false, new ApprovingObject(source, game)
                 );
                 game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
             } else {

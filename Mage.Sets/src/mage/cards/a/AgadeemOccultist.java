@@ -81,8 +81,8 @@ class AgadeemOccultistEffect extends OneShotEffect {
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(1, 1, filter);
 
         if (controller != null) {
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)
+                    && controller.choose(Outcome.GainControl, target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

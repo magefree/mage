@@ -90,8 +90,8 @@ class SwarmShamblerTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return sourceObject != null
                 && permanent != null
-                && StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1.match(permanent, getSourceId(), getControllerId(), game)
-                && StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS.match(sourceObject, getSourceId(), getControllerId(), game);
+                && StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1.match(permanent, getControllerId(), this, game)
+                && StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS.match(sourceObject, getControllerId(), this, game);
     }
 
     @Override

@@ -33,7 +33,7 @@ public final class HellMongrel extends CardImpl {
         ));
 
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private HellMongrel(final HellMongrel card) {

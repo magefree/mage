@@ -4,15 +4,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.MentorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
 /**
@@ -34,9 +32,7 @@ public final class TruefireCaptain extends CardImpl {
 
         // Whenever Truefire Captain is dealt damage, it deals that much damage to target player.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                new TruefireCaptainEffect(),
-                false, false
-        );
+                new DamageTargetEffect(SavedDamageValue.MUCH, "it"), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -48,28 +44,5 @@ public final class TruefireCaptain extends CardImpl {
     @Override
     public TruefireCaptain copy() {
         return new TruefireCaptain(this);
-    }
-}
-
-class TruefireCaptainEffect extends OneShotEffect {
-
-    public TruefireCaptainEffect() {
-        super(Outcome.Damage);
-        this.staticText = "it deals that much damage to target player";
-    }
-
-    public TruefireCaptainEffect(final TruefireCaptainEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TruefireCaptainEffect copy() {
-        return new TruefireCaptainEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        return new DamageTargetEffect(amount).apply(game, source);
     }
 }

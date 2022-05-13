@@ -85,7 +85,7 @@ class LilianaOfTheDarkRealmsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int swamps = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (swamps < 1) {
             return false;
         }

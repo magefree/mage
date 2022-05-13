@@ -54,7 +54,7 @@ class ActOfAuthorityEffect extends OneShotEffect {
         this.staticText = "you may exile target artifact or enchantment. If you do, its controller gains control of {this}";
     }
 
-    public ActOfAuthorityEffect(final ActOfAuthorityEffect effect) {
+    private ActOfAuthorityEffect(final ActOfAuthorityEffect effect) {
         super(effect);
     }
 
@@ -66,29 +66,32 @@ class ActOfAuthorityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetPermanent != null && new ExileTargetEffect().apply(game, source)) {
-            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-            if (sourcePermanent != null) {
-                ContinuousEffect effect = new ActOfAuthorityGainControlEffect(Duration.Custom, targetPermanent.getControllerId());
-                effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
+        if (targetPermanent == null) { return false; }
+
+        ExileTargetEffect exileTargetEffect = new ExileTargetEffect();
+        if (!exileTargetEffect.apply(game, source)) { return false; }
+
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent == null) { return true; }
+
+        ContinuousEffect effect = new ActOfAuthorityGainControlEffect(Duration.Custom, targetPermanent.getControllerId());
+        effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
+// TODO: These and it's duplicates can probably be replaced by a gain control of effect
 class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
 
-    UUID controller;
+    private final UUID controller;
 
     public ActOfAuthorityGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
     }
 
-    public ActOfAuthorityGainControlEffect(final ActOfAuthorityGainControlEffect effect) {
+    private ActOfAuthorityGainControlEffect(final ActOfAuthorityGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -100,14 +103,16 @@ class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
+        Permanent permanent;
+        if (targetPointer == null) {
+            permanent = game.getPermanent(source.getFirstTarget());
+        } else {
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
-        if (permanent != null) {
-            return permanent.changeControllerId(controller, game, source);
-        }
-        return false;
+
+        if (permanent == null) { return false; }
+
+        return permanent.changeControllerId(controller, game, source);
     }
 
     @Override

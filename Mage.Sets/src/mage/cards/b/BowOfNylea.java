@@ -48,17 +48,14 @@ public final class BowOfNylea extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         // or Bow of Nylea deals 2 damage to target creature with flying;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(2));
+        Mode mode = new Mode(new DamageTargetEffect(2));
         mode.addTarget(new TargetCreaturePermanent(filterFlying));
         ability.addMode(mode);
         // or you gain 3 life;
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(3));
+        mode = new Mode(new GainLifeEffect(3));
         ability.addMode(mode);
         // or put up to four target cards from your graveyard on the bottom of your library in any order.
-        mode = new Mode();
-        mode.addEffect(new PutOnLibraryTargetEffect(false, "put up to four target cards from your graveyard on the bottom of your library in any order"));
+        mode = new Mode(new PutOnLibraryTargetEffect(false, "put up to four target cards from your graveyard on the bottom of your library in any order"));
         mode.addTarget(new TargetCardInYourGraveyard(0, 4, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD));
         ability.addMode(mode);
 

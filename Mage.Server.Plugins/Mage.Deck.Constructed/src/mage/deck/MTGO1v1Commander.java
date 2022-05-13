@@ -1,7 +1,6 @@
 package mage.deck;
 
 /**
- *
  * @author fireshoes
  */
 public class MTGO1v1Commander extends Commander {
@@ -9,7 +8,7 @@ public class MTGO1v1Commander extends Commander {
     public MTGO1v1Commander() {
         super("MTGO 1v1 Commander");
         partnerAllowed = false;
-        
+
         banned.add("Ancestral Recall");
         banned.add("Back to Basics");
         banned.add("Balance");

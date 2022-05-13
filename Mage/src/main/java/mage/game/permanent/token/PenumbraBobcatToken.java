@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class PenumbraBobcatToken extends TokenImpl {
 
     public PenumbraBobcatToken() {
-        super("Cat", "2/1 black Cat creature token");
+        super("Cat Token", "2/1 black Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.CAT);

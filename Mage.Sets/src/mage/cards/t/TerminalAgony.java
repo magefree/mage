@@ -23,7 +23,7 @@ public final class TerminalAgony extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Madness {B}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{B}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{R}")));
     }
 
     private TerminalAgony(final TerminalAgony card) {

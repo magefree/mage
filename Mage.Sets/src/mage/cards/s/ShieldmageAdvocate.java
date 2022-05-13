@@ -82,7 +82,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

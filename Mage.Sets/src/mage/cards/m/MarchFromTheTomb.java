@@ -56,7 +56,7 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         int cmcLeft = 8;
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
@@ -64,7 +64,7 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
                 cmcLeft -= card.getManaValue();
             }
         }
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);

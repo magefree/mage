@@ -88,7 +88,7 @@ class MyojinOfLifesWebPutCreatureOnBattlefieldEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your hand to put onto the battlefield"));
-        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                     Zone.BATTLEFIELD, source, game, false, false, false, null);
         }

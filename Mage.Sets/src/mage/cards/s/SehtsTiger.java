@@ -68,7 +68,7 @@ class SehtsTigerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && mageObject != null && controller.choose(Outcome.Protect, choice, game)) {
             game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());

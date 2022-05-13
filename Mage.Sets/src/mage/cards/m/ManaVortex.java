@@ -123,7 +123,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getControllerId(), this, game) == 0;
     }
 
     @Override

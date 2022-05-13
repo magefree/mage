@@ -384,7 +384,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
 
-            if (target.choose(Outcome.Benefit, attackingPlayerId, null, game)) {
+            if (target.choose(Outcome.Benefit, attackingPlayerId, null, null, game)) {
                 isBanded = true;
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);

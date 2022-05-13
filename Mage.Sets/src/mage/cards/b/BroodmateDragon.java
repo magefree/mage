@@ -19,7 +19,7 @@ import mage.game.permanent.token.DragonToken;
  */
 public final class BroodmateDragon extends CardImpl {
 
-    private static DragonToken dragonToken = new DragonToken();
+    private static final DragonToken dragonToken = new DragonToken();
 
     public BroodmateDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");

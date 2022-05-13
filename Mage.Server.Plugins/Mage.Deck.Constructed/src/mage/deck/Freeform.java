@@ -10,11 +10,7 @@ import mage.cards.decks.DeckValidatorErrorType;
 public class Freeform extends DeckValidator {
 
     public Freeform() {
-        super("Constructed - Freeform");
-    }
-
-    public Freeform(String name) {
-        super(name);
+        this("Constructed - Freeform", null);
     }
 
     public Freeform(String name, String shortName) {

@@ -45,7 +45,7 @@ public class MostCommonColorCondition implements Condition {
         i = 0;
         for (ObjectColor color : ObjectColor.getAllColors()) {
             colorFilters[i].add(new ColorPredicate(color));
-            colorCounts[i] = game.getBattlefield().count(colorFilters[i], source.getId(), source.getControllerId(), game);
+            colorCounts[i] = game.getBattlefield().count(colorFilters[i], source.getControllerId(), source, game);
             i++;
         }
         int max = 0;

@@ -1,13 +1,12 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 
 /**
@@ -16,7 +15,7 @@ import mage.filter.FilterCard;
  */
 public final class KruphixsInsight extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("up to three enchantment cards");
+    private static final FilterCard filter = new FilterCard("enchantment cards");
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
@@ -25,9 +24,13 @@ public final class KruphixsInsight extends CardImpl {
     public KruphixsInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
-
-        // Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(6), false, StaticValue.get(3), filter, Zone.GRAVEYARD, false, true, true,Zone.HAND, false));
+        // Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand
+        // and the rest of the revealed cards into your graveyard.
+        Effect effect = new RevealLibraryPickControllerEffect(6, 3, filter, PutCards.HAND, PutCards.GRAVEYARD, false);
+        effect.setText("reveal the top six cards of your library. " +
+                "Put up to three enchantment cards from among them into your hand " +
+                "and the rest of the revealed cards into your graveyard");
+        this.getSpellAbility().addEffect(effect);
     }
 
     private KruphixsInsight(final KruphixsInsight card) {

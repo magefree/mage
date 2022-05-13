@@ -19,7 +19,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -107,7 +106,7 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId()) &&
-                    filter.match(p, getSourceId(), getControllerId(), game) &&
+                    filter.match(p, getControllerId(), this, game) &&
                     !damagedPlayerIds.contains(event.getPlayerId())) {
                 damagedPlayerIds.add(event.getPlayerId());
                 this.getTargets().clear();

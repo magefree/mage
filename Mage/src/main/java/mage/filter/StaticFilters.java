@@ -64,6 +64,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactCard FILTER_CARD_ARTIFACTS = new FilterArtifactCard("artifact cards");
+
+    static {
+        FILTER_CARD_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT_AN = new FilterArtifactCard("an artifact card");
 
     static {
@@ -122,6 +128,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD = new FilterArtifactCard("artifact card from your graveyard");
+
+    static {
+        FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
@@ -421,11 +433,16 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
+    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
 
     static {
-        FILTER_OPPONENTS_PERMANENT_CREATURE.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURES = new FilterOpponentsCreaturePermanent("creatures your opponents control");
+
+    static {
+        FILTER_OPPONENTS_PERMANENT_CREATURES.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature an opponent controls");
@@ -869,6 +886,12 @@ public final class StaticFilters {
         FILTER_ATTACKING_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterAttackingOrBlockingCreature FILTER_ATTACKING_OR_BLOCKING_CREATURE = new FilterAttackingOrBlockingCreature();
+
+    static {
+        FILTER_ATTACKING_OR_BLOCKING_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterAttackingOrBlockingCreature FILTER_ATTACKING_OR_BLOCKING_CREATURES = new FilterAttackingOrBlockingCreature("attacking or blocking creatures");
 
     static {
@@ -918,6 +941,16 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_CARD_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_CREATURE_OR_LAND = new FilterCard("creature or land card");
+
+    static {
+        FILTER_CARD_CREATURE_OR_LAND.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+        FILTER_CARD_CREATURE_OR_LAND.setLockedFilter(true);
     }
 
     public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");

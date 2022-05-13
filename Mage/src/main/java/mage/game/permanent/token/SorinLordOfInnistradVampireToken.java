@@ -13,7 +13,7 @@ import mage.abilities.keyword.LifelinkAbility;
 public final class SorinLordOfInnistradVampireToken extends TokenImpl {
 
     public SorinLordOfInnistradVampireToken() {
-        super("Vampire", "1/1 black Vampire creature token with lifelink");
+        super("Vampire Token", "1/1 black Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);

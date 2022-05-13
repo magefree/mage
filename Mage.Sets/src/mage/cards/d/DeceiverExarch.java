@@ -42,8 +42,7 @@ public final class DeceiverExarch extends CardImpl {
         // When Deceiver Exarch enters the battlefield, choose one - Untap target permanent you control; or tap target permanent an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect());
         ability.addTarget(new TargetControlledPermanent());
-        Mode mode = new Mode();
-        mode.addEffect(new TapTargetEffect());
+        Mode mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);

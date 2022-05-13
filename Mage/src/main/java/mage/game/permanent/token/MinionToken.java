@@ -17,7 +17,7 @@ public final class MinionToken extends TokenImpl {
     }
     
     public MinionToken(String setCode) {
-        super("Phyrexian Minion", "X/X black Phyrexian Minion creature token");
+        super("Phyrexian Minion Token", "X/X black Phyrexian Minion creature token");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);

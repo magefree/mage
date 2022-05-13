@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class WandOfTheElementsFirstToken extends TokenImpl {
 
     public WandOfTheElementsFirstToken() {
-        super("Elemental", "2/2 blue Elemental creature token with flying");
+        super("Elemental Token", "2/2 blue Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
         this.color.setBlue(true);

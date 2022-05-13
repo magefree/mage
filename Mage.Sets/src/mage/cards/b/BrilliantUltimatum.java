@@ -59,7 +59,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -69,7 +69,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
         controller.moveCardsToExile(pile2.getCards(game), source, game, true, source.getSourceId(), sourceObject.getIdName());
 
         TargetOpponent targetOpponent = new TargetOpponent(true);
-        targetOpponent.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+        targetOpponent.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
         if (opponent != null) {
             TargetCard target = new TargetCard(0, pile2.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));

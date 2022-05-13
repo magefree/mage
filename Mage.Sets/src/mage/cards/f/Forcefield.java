@@ -75,7 +75,7 @@ class ForcefieldEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (controller.choose(Outcome.PreventDamage, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.PreventDamage, target, source, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + creature.getLogName());

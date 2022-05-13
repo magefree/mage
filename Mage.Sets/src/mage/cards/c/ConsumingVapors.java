@@ -64,8 +64,8 @@ class ConsumingVaporsEffect extends OneShotEffect {
         filter.add(TargetController.YOU.getControllerPredicate());
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-        if (player != null && target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (player != null && target.canChoose(player.getId(), source, game)) {
+            player.choose(Outcome.Sacrifice, target, source, game);
 
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

@@ -89,7 +89,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 continue;
             }
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 2.0);
+            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 2.0);
             if (creaturesToSacrifice == 0) {
                 continue;
             }

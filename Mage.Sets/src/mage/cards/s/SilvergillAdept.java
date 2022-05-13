@@ -80,7 +80,7 @@ class SilvergillAdeptCost extends CostImpl {
         if (player.getHand().count(filter, game) > 0
                 && player.chooseUse(Outcome.Benefit, "Reveal a Merfolk card? Otherwise pay {3}.", ability, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Benefit, target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     paid = true;

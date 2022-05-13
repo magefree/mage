@@ -3,8 +3,8 @@ package mage.filter.predicate.permanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.BlockingOrBlockedWatcher;
 
 import java.util.UUID;
 
@@ -18,28 +18,18 @@ public enum BlockingOrBlockedBySourcePredicate implements ObjectSourcePlayerPred
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return game
-                .getCombat()
-                .getGroups()
-                .stream()
-                .anyMatch(combatGroup -> checkBlocks(combatGroup, input.getSourceId(), input.getObject().getId()));
-    }
-
-    private boolean checkBlocks(CombatGroup combatGroup, UUID thisCreature, UUID otherCreature) {
+        Permanent thisCreature = input.getSource().getSourcePermanentOrLKI(game);
+        Permanent otherCreature = input.getObject();
         switch (this) {
             case BLOCKING:
-                return isBlocking(combatGroup, otherCreature, thisCreature);
+                return BlockingOrBlockedWatcher.check(thisCreature, otherCreature, game);
             case BLOCKED_BY:
-                return isBlocking(combatGroup, thisCreature, otherCreature);
+                return BlockingOrBlockedWatcher.check(otherCreature, thisCreature, game);
             case EITHER:
-                return isBlocking(combatGroup, otherCreature, thisCreature)
-                        || isBlocking(combatGroup, thisCreature, otherCreature);
+                return BlockingOrBlockedWatcher.check(otherCreature, thisCreature, game)
+                        || BlockingOrBlockedWatcher.check(thisCreature, otherCreature, game);
         }
         return false;
-    }
-
-    private static final boolean isBlocking(CombatGroup combatGroup, UUID id1, UUID id2) {
-        return combatGroup.getBlockers().contains(id1) && combatGroup.getAttackers().contains(id2);
     }
 
     @Override

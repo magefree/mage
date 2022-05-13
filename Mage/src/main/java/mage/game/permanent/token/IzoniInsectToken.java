@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class IzoniInsectToken extends TokenImpl {
 
     public IzoniInsectToken() {
-        super("Insect", "1/1 black and green Insect creature token");
+        super("Insect Token", "1/1 black and green Insect creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

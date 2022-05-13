@@ -8,12 +8,18 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
 public class MageObjectReferencePredicate implements Predicate<MageItem> {
 
     private final MageObjectReference mor;
+
+    public MageObjectReferencePredicate(UUID sourceId, Game game) {
+        this(new MageObjectReference(sourceId, game));
+    }
 
     public MageObjectReferencePredicate(MageObject mageObject, Game game) {
         this(new MageObjectReference(mageObject, game));

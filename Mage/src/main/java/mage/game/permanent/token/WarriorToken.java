@@ -16,7 +16,7 @@ import mage.util.RandomUtil;
 public final class WarriorToken extends TokenImpl {
 
     public WarriorToken() {
-        super("Warrior", "1/1 white Warrior creature token");
+        super("Warrior Token", "1/1 white Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.WARRIOR);

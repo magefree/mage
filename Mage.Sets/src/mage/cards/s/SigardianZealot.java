@@ -79,7 +79,7 @@ class SigardianZealotEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturesWithDifferentPowers();
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.isEmpty()) {
             return false;

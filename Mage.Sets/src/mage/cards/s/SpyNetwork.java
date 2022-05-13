@@ -35,7 +35,7 @@ public final class SpyNetwork extends CardImpl {
         this.getSpellAbility().addEffect(new SpyNetworkLookAtTargetPlayerHandEffect());
         this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect().setText(" the top card of that player's library"));
         this.getSpellAbility().addEffect(new SpyNetworkFaceDownEffect());
-        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4, false, true));
+        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
@@ -70,7 +70,7 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (you != null && targetPlayer != null) {
             you.lookAtCards("Hand of " + targetPlayer.getName() + " (" + (sourceObject != null ? sourceObject.getIdName() : null) + ')', targetPlayer.getHand(), game);
             return true;
@@ -100,16 +100,16 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && player != null && mageObject != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature controlled by " + player.getLogName());
             filter.add(FaceDownPredicate.instance);
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());

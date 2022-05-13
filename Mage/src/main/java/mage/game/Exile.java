@@ -49,8 +49,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     private ExileZone createZone(UUID id, String name, boolean hidden) {
-        exileZones.putIfAbsent(id, new ExileZone(id, name, hidden));
-        return exileZones.get(id);
+        return exileZones.computeIfAbsent(id, x -> new ExileZone(id, name, hidden));
     }
 
     public ExileZone getExileZone(UUID id) {

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ElfWarriorToken extends TokenImpl {
 
     public ElfWarriorToken() {
-        super("Elf Warrior", "1/1 green Elf Warrior creature token");
+        super("Elf Warrior Token", "1/1 green Elf Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELF);
@@ -35,5 +35,9 @@ public final class ElfWarriorToken extends TokenImpl {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("SHM")) {
+            this.setTokenType(1);
+        }
     }
 }

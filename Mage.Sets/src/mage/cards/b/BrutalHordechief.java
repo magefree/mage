@@ -12,7 +12,7 @@ import mage.abilities.effects.common.combat.ChooseBlockersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -26,12 +26,6 @@ import java.util.UUID;
  */
 public final class BrutalHordechief extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public BrutalHordechief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ORC, SubType.WARRIOR);
@@ -43,7 +37,8 @@ public final class BrutalHordechief extends CardImpl {
 
         // {3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.
         Ability ability = new SimpleActivatedAbility(
-                new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R/W}{R/W}")
+                new BlocksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn),
+                new ManaCostsImpl<>("{3}{R/W}{R/W}")
         );
         ability.addEffect(new ChooseBlockersEffect(Duration.EndOfTurn).setText("and you choose how those creatures block"));
         ability.addWatcher(new ControlCombatRedundancyWatcher());

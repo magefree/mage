@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
-import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.constants.SubType;
@@ -40,7 +40,7 @@ public final class GrazilaxxIllithidScholar extends CardImpl {
         ));
 
         // Whenever one or more creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     private GrazilaxxIllithidScholar(final GrazilaxxIllithidScholar card) {

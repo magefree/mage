@@ -101,7 +101,7 @@ class RaidingPartyEffect extends OneShotEffect {
                     int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
                     int tappedCount = 0;
                     Target untappedCreatureTarget = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-                    if (player.choose(Outcome.Benefit, untappedCreatureTarget, source.getSourceId(), game)) {
+                    if (player.choose(Outcome.Benefit, untappedCreatureTarget, source, game)) {
                         tappedCount = untappedCreatureTarget.getTargets().size();
                         for (UUID creatureId : untappedCreatureTarget.getTargets()) {
                             Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
@@ -112,7 +112,7 @@ class RaidingPartyEffect extends OneShotEffect {
                     }
                     if (tappedCount > 0) {
                         Target plainsToSaveTarget = new TargetPermanent(0, tappedCount * 2, filter2, true);
-                        if (player.choose(Outcome.Benefit, plainsToSaveTarget, source.getSourceId(), game)) {
+                        if (player.choose(Outcome.Benefit, plainsToSaveTarget, source, game)) {
                             for (UUID plainsId : plainsToSaveTarget.getTargets()) {
                                 plainsToSave.add(plainsId);
                                 Permanent plains = game.getPermanent(plainsId);
@@ -124,7 +124,7 @@ class RaidingPartyEffect extends OneShotEffect {
                     }
                 }
             }
-            for (Permanent plains : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent plains : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source, game)) {
                 if (!plainsToSave.contains(plains.getId())) {
                     plains.destroy(source, game, false);
                 }

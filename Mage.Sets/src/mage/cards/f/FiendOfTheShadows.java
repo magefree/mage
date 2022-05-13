@@ -80,7 +80,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetDiscard(player.getId());
-        player.choose(outcome, targetCard, source.getSourceId(), game);
+        player.choose(outcome, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return false;

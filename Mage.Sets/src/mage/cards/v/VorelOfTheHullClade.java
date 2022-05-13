@@ -68,7 +68,7 @@ class VorelOfTheHullCladeEffect extends OneShotEffect {
 
     public VorelOfTheHullCladeEffect() {
         super(Outcome.Benefit);
-        staticText = "For each counter on target artifact, creature, or land, put another of those counters on that permanent";
+        staticText = "double the number of each kind of counter on target artifact, creature, or land";
     }
 
     public VorelOfTheHullCladeEffect(VorelOfTheHullCladeEffect effect) {

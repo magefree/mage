@@ -382,7 +382,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wurmcoil Engine", 1);
 
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
 
     }
 
@@ -574,8 +574,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Wurmcoil Engine", 1);
 
-        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2);
 
     }
 
@@ -605,8 +605,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerB, "Elemental", 1);
-        assertPermanentCount(playerA, "Elemental", 1);
+        assertPermanentCount(playerB, "Elemental Token", 1);
+        assertPermanentCount(playerA, "Elemental Token", 1);
 
     }
 

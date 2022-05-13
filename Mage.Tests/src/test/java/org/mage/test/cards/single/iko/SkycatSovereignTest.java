@@ -80,10 +80,10 @@ public class SkycatSovereignTest extends CardTestPlayerBase {
         
         assertAllCommandsUsed();
         
-        assertPermanentCount(playerA, "Cat Bird", 1);
-        assertColor(playerA, "Cat Bird", ObjectColor.WHITE, true);
-        assertColor(playerA, "Cat Bird", ObjectColor.BLUE, false);
-        assertAbility(playerA, "Cat Bird", FlyingAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Cat Bird Token", 1);
+        assertColor(playerA, "Cat Bird Token", ObjectColor.WHITE, true);
+        assertColor(playerA, "Cat Bird Token", ObjectColor.BLUE, false);
+        assertAbility(playerA, "Cat Bird Token", FlyingAbility.getInstance(), true);
         
         assertPowerToughness(playerA, "Skycat Sovereign", 4, 4);
     }    

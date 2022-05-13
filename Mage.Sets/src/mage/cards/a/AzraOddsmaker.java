@@ -82,7 +82,7 @@ class AzraOddsmakerEffect extends OneShotEffect {
         Permanent permanent = null;
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setNotTarget(true);
-        if (player.choose(Outcome.DrawCard, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.DrawCard, target, source, game)) {
             permanent = game.getPermanent(target.getFirstTarget());
         }
         if (permanent == null) {

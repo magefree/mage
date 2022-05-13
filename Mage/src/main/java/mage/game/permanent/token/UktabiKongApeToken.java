@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class UktabiKongApeToken extends TokenImpl {
 
     public UktabiKongApeToken() {
-        super("Ape", "1/1 green Ape creature token");
+        super("Ape Token", "1/1 green Ape creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.APE);
         color.setGreen(true);

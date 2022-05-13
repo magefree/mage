@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class HuntedDragonKnightToken extends TokenImpl {
 
     public HuntedDragonKnightToken() {
-        super("Knight", "2/2 white Knight creature tokens with first strike");
+        super("Knight Token", "2/2 white Knight creature tokens with first strike");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KNIGHT);

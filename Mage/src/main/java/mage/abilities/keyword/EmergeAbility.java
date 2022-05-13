@@ -52,7 +52,7 @@ public class EmergeAbility extends SpellAbility {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller != null) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(
-                        new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
+                        new FilterControlledCreaturePermanent(), this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
                         return ActivationStatus.getTrue(this, game);
@@ -66,7 +66,7 @@ public class EmergeAbility extends SpellAbility {
     @Override
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
         int maxCMC = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this, game)) {
             int cmc = creature.getManaValue();
             if (cmc > maxCMC) {
                 maxCMC = cmc;
@@ -88,7 +88,7 @@ public class EmergeAbility extends SpellAbility {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null) {
             TargetPermanent target = new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("creature to sacrifice for emerge"));
-            if (controller.choose(Outcome.Sacrifice, target, this.getSourceId(), game)) {
+            if (controller.choose(Outcome.Sacrifice, target, this, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     CardUtil.reduceCost(this, creature.getManaValue());

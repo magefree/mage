@@ -89,8 +89,8 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(prefixText).append('.');
+        StringBuilder sb = new StringBuilder(prefixText);
+        sb.append('.');
         for (TableEntry tableEntry : this.resultsTable) {
             sb.append("<br>");
             if (tableEntry.max == Integer.MAX_VALUE) {

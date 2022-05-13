@@ -29,7 +29,7 @@ public final class MasterOfPearls extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {3}{W}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}{W}")));
         // When Master of Pearls is turned face up, creatures you control get +2/+2 until end of turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(2, 2, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
     }

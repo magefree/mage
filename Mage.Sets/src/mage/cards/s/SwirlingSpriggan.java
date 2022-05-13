@@ -20,7 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public final class SwirlingSpriggan extends CardImpl {
-    
+
     public SwirlingSpriggan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add(SubType.GOBLIN);
@@ -30,7 +30,7 @@ public final class SwirlingSpriggan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {GU}{GU}: Target creature you control becomes the color or colors of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{G/U}{G/U}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -65,7 +65,7 @@ enum MidnightArsonistAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int vampires = game.getBattlefield().count(filter, ability.getSourceId(), ability.getControllerId(), game);
+        int vampires = game.getBattlefield().count(filter, ability.getControllerId(), ability, game);
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(0, vampires, filter2));
     }

@@ -88,7 +88,7 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (targetPlayer != null && mageObject != null) {
             return "This turn you can't cast spells" +
                     " (" + mageObject.getLogName() + ')';

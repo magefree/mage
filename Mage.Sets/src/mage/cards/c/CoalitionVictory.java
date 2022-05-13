@@ -68,33 +68,33 @@ class CoalitionVictoryCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().count(CoalitionVictory.filterPlains, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterPlains, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterIsland, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterIsland, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterSwamp, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterSwamp, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterMountain, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterMountain, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterForest, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterForest, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterWhite, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterWhite, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterBlue, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterBlue, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterBlack, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterBlack, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(CoalitionVictory.filterRed, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(CoalitionVictory.filterRed, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        return game.getBattlefield().count(CoalitionVictory.filterGreen, source.getSourceId(), source.getControllerId(), game) >= 1;
+        return game.getBattlefield().count(CoalitionVictory.filterGreen, source.getControllerId(), source, game) >= 1;
     }
 }

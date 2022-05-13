@@ -47,7 +47,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int available = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int available = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             if (available > 0) {
                 TargetControlledPermanent target = new TargetControlledPermanent(Math.min(number, available), number, filter, true);
                 if (player.chooseTarget(this.outcome, target, source, game)) {

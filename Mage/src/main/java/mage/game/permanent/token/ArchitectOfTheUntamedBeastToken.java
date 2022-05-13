@@ -13,7 +13,7 @@ import mage.MageInt;
 public final class ArchitectOfTheUntamedBeastToken extends TokenImpl {
 
     public ArchitectOfTheUntamedBeastToken() {
-        super("Beast", "6/6 colorless Beast artifact creature token");
+        super("Beast Token", "6/6 colorless Beast artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.BEAST);

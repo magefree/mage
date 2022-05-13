@@ -71,7 +71,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast noncreature spells with mana value greater than " + getLandCount(source, event, game) + " (" + mageObject.getIdName() + ").";
         }
@@ -100,7 +100,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
         int landCount = 0;
         UUID playerId = event.getPlayerId();
         if(playerId != null) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, playerId, source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, playerId, source, game);
             for (Permanent permanent : permanents) {
                 if (permanent.isControlledBy(playerId)) {
                     landCount++;

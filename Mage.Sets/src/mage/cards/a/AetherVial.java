@@ -90,7 +90,7 @@ class AetherVialEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+        if (controller.choose(this.outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 return controller.moveCards(card, Zone.BATTLEFIELD, source, game);

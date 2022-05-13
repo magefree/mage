@@ -44,7 +44,7 @@ public final class NekoTe extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseLifeTargetEffect(1), "equipped creature", false, true, false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2), false));
     }
 
     private NekoTe(final NekoTe card) {

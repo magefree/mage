@@ -70,9 +70,9 @@ class ThrasherBruteFilter extends FilterTeamPermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && (sourceId.equals(permanent.getId())
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        return super.match(permanent, playerId, source, game)
+                && (source.getSourceId().equals(permanent.getId())
                 || permanent.hasSubtype(SubType.WARRIOR, game));
     }
 }

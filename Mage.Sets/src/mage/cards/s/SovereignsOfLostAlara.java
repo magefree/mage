@@ -37,7 +37,7 @@ public final class SovereignsOfLostAlara extends CardImpl {
         this.addAbility(new ExaltedAbility());
 
         // Whenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle your library.
-        this.addAbility(new AttacksAloneControlledTriggeredAbility(new SovereignsOfLostAlaraEffect()));
+        this.addAbility(new AttacksAloneControlledTriggeredAbility(new SovereignsOfLostAlaraEffect(), true, true));
     }
 
     private SovereignsOfLostAlara(final SovereignsOfLostAlara card) {
@@ -54,7 +54,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
 
     public SovereignsOfLostAlaraEffect() {
         super(Outcome.BoostCreature);
-        staticText = "you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle";
+        staticText = "search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle";
     }
 
     public SovereignsOfLostAlaraEffect(final SovereignsOfLostAlaraEffect effect) {
@@ -66,22 +66,21 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && attackingCreature != null) {
-            FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
+            FilterCard filter = new FilterCard("Aura card that could enchant " + attackingCreature.getName());
             filter.add(SubType.AURA.getPredicate());
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
-            if (controller.chooseUse(Outcome.Benefit, "Search your library?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                target.setNotTarget(true);
-                if (controller.searchLibrary(target, source, game)) {
-                    if (target.getFirstTarget() != null) {
-                        Card aura = game.getCard(target.getFirstTarget());
-                        game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
-                        controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                        attackingCreature.addAttachment(aura.getId(), source, game);
-                    }
+            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            target.setNotTarget(true);
+            if (controller.searchLibrary(target, source, game)) {
+                if (target.getFirstTarget() != null) {
+                    Card aura = game.getCard(target.getFirstTarget());
+                    game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
+                    controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
+                    attackingCreature.addAttachment(aura.getId(), source, game);
                 }
             }
             controller.shuffleLibrary(source, game);
+            return true;
         }
         return false;
     }

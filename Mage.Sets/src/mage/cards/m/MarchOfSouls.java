@@ -59,7 +59,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
         Map<UUID, Integer> playersWithCreatures = new HashMap<>();
         for (Permanent p : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURES,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             UUID controllerId = p.getControllerId();
             if (p.destroy(source, game, true)) {

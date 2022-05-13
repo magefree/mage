@@ -58,7 +58,7 @@ public class TimotharBaronOfBats extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward—Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever another nontoken Vampire you control dies, you may pay {1} and exile it.
         // If you do, create a 1/1 black Bat creature token with flying.

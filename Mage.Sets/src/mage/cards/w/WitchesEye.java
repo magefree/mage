@@ -35,7 +35,7 @@ public final class WitchesEye extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(1), false));
     }
 
     private WitchesEye(final WitchesEye card) {

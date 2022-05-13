@@ -22,7 +22,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
 
     public MustBeBlockedByTargetSourceEffect(Duration duration) {
         super(duration);
-        staticText = "Target creature blocks {this} this turn if able";
+        staticText = "target creature blocks {this} this turn if able";
     }
 
     public MustBeBlockedByTargetSourceEffect(final MustBeBlockedByTargetSourceEffect effect) {

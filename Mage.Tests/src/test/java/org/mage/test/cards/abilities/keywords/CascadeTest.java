@@ -42,7 +42,7 @@ public class CascadeTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Predatory Advantage", 1);
         assertPermanentCount(playerA, "Sejiri Merfolk", 1);
-        assertPermanentCount(playerA, "Lizard", 1);
+        assertPermanentCount(playerA, "Lizard Token", 1);
 
     }
 
@@ -196,7 +196,7 @@ public class CascadeTest extends CardTestPlayerBase {
 
         assertLife(playerA, 15);
         assertHandCount(playerA, 5);
-        assertPermanentCount(playerA, "Demon", 0);
+        assertPermanentCount(playerA, "Demon Token", 0);
         assertPermanentCount(playerA, "Enlisted Wurm", 1);
 
     }

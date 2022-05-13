@@ -71,14 +71,14 @@ class TheMimeoplasmEffect extends OneShotEffect {
                 if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", source, game)) {
                     TargetCardInGraveyard targetCopy = new TargetCardInGraveyard(new FilterCreatureCard("creature card to become a copy of"));
                     targetCopy.setNotTarget(true);
-                    if (controller.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
+                    if (controller.choose(Outcome.Copy, targetCopy, source, game)) {
                         Card cardToCopy = game.getCard(targetCopy.getFirstTarget());
                         if (cardToCopy != null) {
                             FilterCreatureCard filter = new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters");
                             filter.add(Predicates.not(new CardIdPredicate(cardToCopy.getId())));
                             TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(filter);
                             targetCounters.setNotTarget(true);
-                            if (controller.choose(Outcome.Copy, targetCounters, source.getSourceId(), game)) {
+                            if (controller.choose(Outcome.Copy, targetCounters, source, game)) {
                                 Card cardForCounters = game.getCard(targetCounters.getFirstTarget());
                                 if (cardForCounters != null) {
                                     Cards cardsToExile = new CardsImpl();

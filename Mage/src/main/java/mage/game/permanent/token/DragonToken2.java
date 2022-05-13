@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class DragonToken2 extends TokenImpl {
 
     public DragonToken2() {
-        super("Dragon", "5/5 red Dragon creature token with flying");
+        super("Dragon Token", "5/5 red Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);

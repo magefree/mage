@@ -64,7 +64,7 @@ public final class LegionsInitiative extends CardImpl {
         )));
 
         // {R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(new LegionsInitiativeExileEffect(), new ManaCostsImpl("{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(new LegionsInitiativeExileEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfCombatDelayedTriggeredAbility(new LegionsInitiativeReturnFromExileEffect())
         ));
@@ -102,7 +102,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         ).stream().filter(Objects::nonNull).forEach(cards::add);
         return player.moveCardsToExile(
                 cards.getCards(game), source, game, true,
@@ -136,7 +136,7 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
         if (player == null || exile == null || exile.isEmpty()) {
             return false;
         }

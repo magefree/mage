@@ -5,10 +5,10 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
@@ -46,15 +46,7 @@ public final class DomriChaosBringer extends CardImpl {
         // creature cards from among them and put them into your hand. Put the rest 
         // on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(2),
-                StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, false,
-                true, true, Zone.HAND, false, false, false
-        ).setText(
-                "Look at the top four cards of your library. "
-                + "You may reveal up to two creature cards from among them "
-                + "and put them into your hand. Put the rest on the bottom of your library "
-                + "in a random order."
-        ), -3));
+                4, 2, StaticFilters.FILTER_CARD_CREATURES, PutCards.HAND, PutCards.BOTTOM_RANDOM), -3));
 
         // −8: You get an emblem with "At the beginning of each end step, create a 4/4 red 
         // and green Beast creature token with trample."

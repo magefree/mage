@@ -98,7 +98,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
             return cards.getRandom(game);
         }
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return cards.get(target.getFirstTarget(), game);
     }
 

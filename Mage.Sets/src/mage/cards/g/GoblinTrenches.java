@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -10,10 +9,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.GoblinTrenchesToken;
+import mage.filter.StaticFilters;
+import mage.game.permanent.token.GoblinSoldierToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -22,14 +19,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class GoblinTrenches extends CardImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
-
     public GoblinTrenches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
 
         // {2}, Sacrifice a land: Create two 1/1 red and white Goblin Soldier creature tokens.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinTrenchesToken(), 2), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new GoblinSoldierToken(), 2), new GenericManaCost(2));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

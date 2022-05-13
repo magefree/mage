@@ -38,7 +38,7 @@ public final class BattlemagesBracers extends CardImpl {
         this.addAbility(new BattlemagesBracersTriggeredAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BattlemagesBracers(final BattlemagesBracers card) {

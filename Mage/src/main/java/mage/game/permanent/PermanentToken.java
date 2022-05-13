@@ -3,6 +3,7 @@ package mage.game.permanent;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
@@ -87,6 +88,10 @@ public class PermanentToken extends PermanentImpl {
         this.subtype.copyFrom(token.getSubtype(game));
         this.tokenDescriptor = token.getTokenDescriptor();
         this.startingLoyalty = token.getStartingLoyalty();
+        // workaround for entersTheBattlefield replacement effects
+        if (this.abilities.containsClass(ChangelingAbility.class)) {
+            this.subtype.setIsAllCreatureTypes(true);
+        }
     }
 
     @Override

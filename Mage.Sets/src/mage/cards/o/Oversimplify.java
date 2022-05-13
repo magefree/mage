@@ -71,7 +71,7 @@ class OversimplifyEffect extends OneShotEffect {
         }
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         );
         Map<UUID, Integer> playerMap = permanents
                 .stream()

@@ -324,7 +324,7 @@ public abstract class StackObjectImpl implements StackObject {
 
             if (targetNames != null
                     && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + targetAmount + '?', ability, game))) {
-                Set<UUID> possibleTargets = target.possibleTargets(this.getSourceId(), getControllerId(), game);
+                Set<UUID> possibleTargets = target.possibleTargets(getControllerId(), ability, game);
                 // choose exactly one other target - already targeted objects are not counted
                 if (forceChange && possibleTargets != null && possibleTargets.size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
                     int iteration = 0;

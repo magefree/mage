@@ -24,7 +24,7 @@ public final class MarshHulk extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Megamorph {6}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{B}"), true));
     }
 
     private MarshHulk(final MarshHulk card) {

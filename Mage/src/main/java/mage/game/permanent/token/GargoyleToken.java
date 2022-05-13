@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class GargoyleToken extends TokenImpl {
 
     public GargoyleToken() {
-        super("Gargoyle", "3/4 colorless Gargoyle artifact creature token with flying");
+        super("Gargoyle Token", "3/4 colorless Gargoyle artifact creature token with flying");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.GARGOYLE);

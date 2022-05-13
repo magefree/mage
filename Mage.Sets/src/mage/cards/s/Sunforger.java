@@ -56,7 +56,7 @@ public final class Sunforger extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
 
     }
 
@@ -178,7 +178,7 @@ class CardCanBeCastPredicate implements Predicate<Card> {
     public boolean apply(Card input, Game game) {
         SpellAbility ability = input.getSpellAbility().copy();
         ability.setControllerId(controllerId);
-        input.adjustTargets(ability, game);
+        ability.adjustTargets(game);
         return ability.canChooseTarget(game, controllerId);
     }
 

@@ -32,7 +32,7 @@ public final class ProwlersHelm extends CardImpl {
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2), false));
     }
 
     private ProwlersHelm(final ProwlersHelm card) {

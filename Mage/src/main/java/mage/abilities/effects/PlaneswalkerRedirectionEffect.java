@@ -10,7 +10,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -60,7 +59,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
                             redirectTarget.add(planeswalker.get(0).getId(), game);
                         }
                     } else {
-                        player.choose(Outcome.Damage, redirectTarget, null, game);
+                        player.choose(Outcome.Damage, redirectTarget, source, game);
                     }
                     if (!game.isSimulation()) {
                         Permanent redirectTo = game.getPermanent(redirectTarget.getFirstTarget());

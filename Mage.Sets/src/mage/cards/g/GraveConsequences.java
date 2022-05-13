@@ -74,7 +74,7 @@ class GraveConsequencesEffect extends OneShotEffect {
         for (Player player : players) {
             TargetCard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE);
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             Cards cards = new CardsImpl(target.getTargets());
             if (!cards.isEmpty()) {
                 player.moveCards(cards, Zone.EXILED, source, game);

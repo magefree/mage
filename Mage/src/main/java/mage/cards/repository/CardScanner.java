@@ -69,6 +69,11 @@ public final class CardScanner {
                         //   downloads unknown cards from the server as texts (images, hints and all other works fine with it)
 
                         cardsToAdd.add(new CardInfo(card));
+                        if (card instanceof SplitCard) {
+                            SplitCard splitCard = (SplitCard) card;
+                            cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                            cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+                        }
                     }
                 }
             }

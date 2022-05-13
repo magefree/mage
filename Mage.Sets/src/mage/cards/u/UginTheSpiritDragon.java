@@ -101,7 +101,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));
         filter.add(Predicates.not(ColorlessPredicate.instance));
         Set<Card> permanentsToExile = new HashSet<>();
-        permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+        permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
         controller.moveCards(permanentsToExile, Zone.EXILED, source, game);
         return true;
     }
@@ -130,7 +130,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
             controller.gainLife(7, game, source);
             controller.drawCards(7, source, game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
-            if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;

@@ -3,19 +3,14 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 
 /**
  *
@@ -33,11 +28,14 @@ public final class JarethLeonineTitan extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Whenever Jareth, Leonine Titan blocks, it gets +7/+7 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(7,7,Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(
+                new BoostSourceEffect(7, 7, Duration.EndOfTurn, "it")
+        ));
         // {W}: Jareth gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}"));
-        this.addAbility(ability);
-
+        this.addAbility(new SimpleActivatedAbility(
+                new GainProtectionFromColorSourceEffect(Duration.EndOfTurn),
+                new ColoredManaCost(ColoredManaSymbol.W)
+        ));
     }
 
     private JarethLeonineTitan(final JarethLeonineTitan card) {

@@ -73,7 +73,7 @@ class MissionBriefingEffect extends OneShotEffect {
         player.surveil(2, source, game);
         Target target = new TargetCardInYourGraveyard(
                 new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

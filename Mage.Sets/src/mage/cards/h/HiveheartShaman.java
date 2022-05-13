@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -83,7 +82,7 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                        input.getPlayerId(), input.getSourceId(), game
+                        input.getPlayerId(), input.getSource(), game
                 )
                 .stream()
                 .map(permanent -> permanent.getSubtype(game))
@@ -94,8 +93,6 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
 }
 
 class HiveheartShamanEffect extends OneShotEffect {
-
-    private static final DynamicValue xValue = new DomainValue();
 
     HiveheartShamanEffect() {
         super(Outcome.Benefit);
@@ -116,7 +113,7 @@ class HiveheartShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new InsectToken();
         token.putOntoBattlefield(1, game, source);
-        int domainCount = xValue.calculate(game, source, this);
+        int domainCount = DomainValue.REGULAR.calculate(game, source, this);
         if (domainCount < 1) {
             return true;
         }

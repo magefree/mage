@@ -12,9 +12,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -69,7 +69,7 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
             return player.moveCards(cards, Zone.HAND, source, game);
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
-        if (!player.choose(outcome, targetOpponent, source.getSourceId(), game)) {
+        if (!player.choose(outcome, targetOpponent, source, game)) {
             return false;
         }
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
@@ -85,12 +85,7 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
             cards.remove(card);
         }
         player.moveCards(cards, Zone.HAND, source, game);
-        if (opponent.chooseUse(outcome, "Cast the exiled card without paying its mana cost?", source, game)) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            opponent.cast(opponent.chooseAbilityForCast(card, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        }
+        CardUtil.castSpellWithAttributesForFree(opponent, source, game, card);
         return true;
     }
 }

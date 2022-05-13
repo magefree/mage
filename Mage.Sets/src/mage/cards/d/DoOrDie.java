@@ -67,7 +67,7 @@ class DoOrDieEffect extends OneShotEffect {
             TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, count, new FilterCreaturePermanent("creatures to put in the first pile"), true);
             List<Permanent> pile1 = new ArrayList<>();
             creatures.setRequired(false);
-            if (player.choose(Outcome.Neutral, creatures, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Neutral, creatures, source, game)) {
                 List<UUID> targets = creatures.getTargets();
                 for (UUID targetId : targets) {
                     Permanent p = game.getPermanent(targetId);

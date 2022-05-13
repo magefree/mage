@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -16,19 +14,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SequesteredStash extends CardImpl {
 
     public SequesteredStash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {R}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -74,11 +73,11 @@ class SequesteredStashEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD);
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Put an artifact card from your graveyard to library?", source, game)
-                && controller.choose(outcome, target, source.getSourceId(), game)) {
+                && controller.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.LIBRARY, source, game);

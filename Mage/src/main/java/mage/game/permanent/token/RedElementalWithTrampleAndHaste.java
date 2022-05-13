@@ -13,7 +13,7 @@ import mage.util.RandomUtil;
 public final class RedElementalWithTrampleAndHaste extends TokenImpl {
 
     public RedElementalWithTrampleAndHaste() {
-        super("Elemental", "7/1 red Elemental creature token with trample and haste");
+        super("Elemental Token", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

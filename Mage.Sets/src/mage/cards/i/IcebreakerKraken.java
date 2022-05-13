@@ -98,7 +98,7 @@ class IcebreakerKrakenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE,
-                source.getFirstTarget(), source.getControllerId(), game
+                source.getFirstTarget(), source, game
         )) {
             if (permanent == null) {
                 continue;

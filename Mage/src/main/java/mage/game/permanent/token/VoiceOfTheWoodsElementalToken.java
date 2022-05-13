@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
 
     public VoiceOfTheWoodsElementalToken() {
-        super("Elemental", "7/7 green Elemental creature token with trample");
+        super("Elemental Token", "7/7 green Elemental creature token with trample");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
 

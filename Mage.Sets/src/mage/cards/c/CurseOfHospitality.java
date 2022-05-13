@@ -75,7 +75,7 @@ enum CurseOfHospitalityPredicate implements ObjectSourcePlayerPredicate<Permanen
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent permanent = game.getPermanent(input.getSourceId());
+        Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
         UUID defenderId = game.getCombat().getDefenderId(input.getObject().getId());
         return permanent != null && defenderId != null && defenderId.equals(permanent.getAttachedTo());
     }

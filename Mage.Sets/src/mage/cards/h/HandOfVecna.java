@@ -42,12 +42,15 @@ public final class HandOfVecna extends CardImpl {
         ));
 
         // Equip—Pay 1 life for each card in your hand.
-        this.addAbility(new EquipAbility(Outcome.Benefit, new PayLifeCost(
-                CardsInControllerHandCount.instance, "1 life for each card in your hand"
-        )));
+        this.addAbility(new EquipAbility(
+                Outcome.Benefit,
+                new PayLifeCost(
+                CardsInControllerHandCount.instance, "1 life for each card in your hand"),
+                false
+        ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private HandOfVecna(final HandOfVecna card) {
@@ -93,7 +96,7 @@ class HandOfVecnaEffect extends OneShotEffect {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent equipped = game.getPermanent(sourcePermanent != null ? sourcePermanent.getAttachedTo() : null);
         List<Permanent> chooseable = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         );
         if (equipped != null) {
             chooseable.add(equipped);
@@ -115,7 +118,7 @@ class HandOfVecnaEffect extends OneShotEffect {
                 ));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                player.choose(outcome, target, source.getSourceId(), game);
+                player.choose(outcome, target, source, game);
                 toBoost = game.getPermanent(target.getFirstTarget());
         }
         int xValue = player.getHand().size();

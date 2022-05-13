@@ -329,12 +329,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
     }
 
-    protected void addAbilities(List<Ability> abilities) {
-        for (Ability ability : abilities) {
-            addAbility(ability);
-        }
-    }
-
     protected void addAbility(Ability ability, Watcher watcher) {
         addAbility(ability);
         ability.addWatcher(watcher);
@@ -550,7 +544,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 removed = true;
                 break;
             default:
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
                         + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
                 break;

@@ -14,54 +14,31 @@ import java.util.stream.Collectors;
 /**
  * @author Loki
  */
-public class DomainValue implements DynamicValue {
-
-    private final int amount;
-    private final boolean countTargetPlayer;
-    private UUID playerId;
-
-    public DomainValue() {
-        this(1);
-    }
-
-    public DomainValue(boolean countTargetPlayer) {
-        this(1, countTargetPlayer);
-    }
-
-    public DomainValue(int amount) {
-        this(amount, false);
-    }
-
-    public DomainValue(int amount, boolean countTargetPlayer) {
-        this.amount = amount;
-        this.countTargetPlayer = countTargetPlayer;
-    }
-
-    public DomainValue(int amount, UUID playerId) {
-        this(amount, false);
-        this.playerId = playerId;
-    }
-
-    public DomainValue(final DomainValue dynamicValue) {
-        this.amount = dynamicValue.amount;
-        this.countTargetPlayer = dynamicValue.countTargetPlayer;
-        this.playerId = dynamicValue.playerId;
-    }
+public enum DomainValue implements DynamicValue {
+    REGULAR,
+    TARGET,
+    ACTIVE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         UUID targetPlayer;
-        if (playerId != null) {
-            targetPlayer = playerId;
-        } else if (countTargetPlayer) {
-            targetPlayer = effect.getTargetPointer().getFirst(game, sourceAbility);
-        } else {
-            targetPlayer = sourceAbility.getControllerId();
+        switch (this) {
+            case ACTIVE:
+                targetPlayer = game.getActivePlayerId();
+                break;
+            case TARGET:
+                targetPlayer = effect.getTargetPointer().getFirst(game, sourceAbility);
+                break;
+            case REGULAR:
+                targetPlayer = sourceAbility.getControllerId();
+                break;
+            default:
+                targetPlayer = null;
         }
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
-                        targetPlayer, sourceAbility.getSourceId(), game
+                        targetPlayer, sourceAbility, game
                 ).stream()
                 .map(permanent -> SubType
                         .getBasicLands()
@@ -70,26 +47,26 @@ public class DomainValue implements DynamicValue {
                         .collect(Collectors.toSet()))
                 .flatMap(Collection::stream)
                 .distinct()
-                .mapToInt(x -> amount)
+                .mapToInt(x -> 1)
                 .sum();
     }
 
     @Override
     public DomainValue copy() {
-        return new DomainValue(this);
+        return this;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(amount);
+        return "1";
     }
 
     public int getAmount() {
-        return amount;
+        return 1;
     }
 
     @Override
     public String getMessage() {
-        return "basic land types among lands " + (countTargetPlayer ? "they control" : "you control");
+        return "basic land type among lands " + (this == TARGET ? "they control" : "you control");
     }
 }

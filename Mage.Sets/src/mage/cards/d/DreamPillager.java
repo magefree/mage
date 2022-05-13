@@ -5,9 +5,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -18,8 +17,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
@@ -38,7 +35,9 @@ public final class DreamPillager extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Dream Pillager deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.
-        this.addAbility(new DreamPillagerTriggeredAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DreamPillagerEffect(),
+                false, true));
     }
 
     private DreamPillager(final DreamPillager card) {
@@ -51,48 +50,11 @@ public final class DreamPillager extends CardImpl {
     }
 }
 
-class DreamPillagerTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DreamPillagerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DreamPillagerEffect(), false);
-    }
-
-    public DreamPillagerTriggeredAbility(final DreamPillagerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DreamPillagerTriggeredAbility copy() {
-        return new DreamPillagerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            for (Effect effect : getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards.";
-    }
-}
-
 class DreamPillagerEffect extends OneShotEffect {
 
     public DreamPillagerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards";
+        this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards";
     }
 
     public DreamPillagerEffect(final DreamPillagerEffect effect) {

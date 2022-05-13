@@ -50,7 +50,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ExileEquippedEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}"), false));
     }
 
     private OathkeeperTakenosDaisho(final OathkeeperTakenosDaisho card) {
@@ -121,7 +121,7 @@ class OathkeeperEquippedMatchesFilterCondition implements Condition {
                 }
             }
             if (attachedTo != null) {
-                return filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game);
+                return filter.match(attachedTo, attachedTo.getControllerId(), source, game);
 
             }
         }

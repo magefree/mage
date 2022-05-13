@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class OminousRoostBirdToken extends TokenImpl {
 
     public OminousRoostBirdToken() {
-        super("Bird", "1/1 blue Bird creature token with flying and \"This creature can block only creatures with flying\"");
+        super("Bird Token", "1/1 blue Bird creature token with flying and \"This creature can block only creatures with flying\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);

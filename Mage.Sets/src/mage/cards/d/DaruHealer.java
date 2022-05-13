@@ -37,7 +37,7 @@ public final class DaruHealer extends CardImpl {
         this.addAbility(ability);
 
         // Morph {W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
 
     }
 

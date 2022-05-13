@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class SpikeToken extends TokenImpl {
 
     public SpikeToken() {
-        super("Spike", "1/1 green Spike creature token");
+        super("Spike Token", "1/1 green Spike creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SPIKE);

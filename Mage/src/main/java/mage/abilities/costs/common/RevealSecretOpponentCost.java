@@ -44,7 +44,7 @@ public class RevealSecretOpponentCost extends CostImpl {
         ChooseSecretOpponentEffect.setSecretOwner(null, source, game); // because only once, the value is set to null
         Player controller = game.getPlayer(controllerId);
         Player opponent = game.getPlayer(opponentId);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && opponent != null && sourceObject != null) {
             if (sourceObject instanceof Permanent) {
                 ((Permanent) sourceObject).addInfo(ChooseSecretOpponentEffect.SECRET_OPPONENT, null, game);

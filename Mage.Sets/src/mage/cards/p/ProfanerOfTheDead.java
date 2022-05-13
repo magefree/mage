@@ -68,7 +68,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
             filter.add(TargetController.OPPONENT.getControllerPredicate());
             filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, exploitedCreature.getToughness().getValue()));
             Cards cardsToHand = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 cardsToHand.add(permanent);
             }
             controller.moveCards(cardsToHand, Zone.HAND, source, game);

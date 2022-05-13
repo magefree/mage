@@ -35,7 +35,7 @@ public final class ButchersCleaver extends CardImpl {
                 new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
 
     }
 

@@ -11,6 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -36,7 +37,7 @@ public final class SelvalasEnforcer extends CardImpl {
         // For each nonland card revealed this way, put a +1/+1 counter on Selvala's Enforcer. Then each player draws a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SelvalasEnforcerEffect(), false);
         ability.addEffect(new DrawCardAllEffect(1).setText("Then each player draws a card"));
-        ability.withFlavorWord("Parley");
+        ability.setAbilityWord(AbilityWord.PARLEY);
         this.addAbility(ability);
     }
 

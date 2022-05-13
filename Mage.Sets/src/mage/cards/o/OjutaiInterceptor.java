@@ -28,7 +28,7 @@ public final class OjutaiInterceptor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Megamorph {3}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{U}"), true));
 
     }
 

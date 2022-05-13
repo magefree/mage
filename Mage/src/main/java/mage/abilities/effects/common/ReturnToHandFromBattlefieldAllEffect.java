@@ -24,7 +24,7 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
     public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
-        staticText = "Return all " + filter.getMessage() + " to their owners' hands";
+        staticText = "return all " + filter.getMessage() + " to their owners' hands";
     }
 
     public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
@@ -37,7 +37,7 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> permanentsToHand = new HashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 permanentsToHand.add(permanent);
             }
             controller.moveCards(permanentsToHand, Zone.HAND, source, game);

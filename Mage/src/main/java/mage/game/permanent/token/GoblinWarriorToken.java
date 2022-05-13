@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class GoblinWarriorToken extends TokenImpl {
 
     public GoblinWarriorToken() {
-        super("Goblin Warrior", "1/1 red and green Goblin Warrior creature token");
+        super("Goblin Warrior Token", "1/1 red and green Goblin Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);

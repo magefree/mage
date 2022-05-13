@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class RebelToken extends TokenImpl {
 
     public RebelToken() {
-        super("Rebel", "1/1 white Rebel creature token", 1, 1);
+        super("Rebel Token", "1/1 white Rebel creature token", 1, 1);
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

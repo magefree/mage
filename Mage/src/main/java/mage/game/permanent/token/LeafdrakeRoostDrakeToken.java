@@ -30,7 +30,7 @@ public final class LeafdrakeRoostDrakeToken extends TokenImpl {
     }
 
     public LeafdrakeRoostDrakeToken(String setCode, int tokenType) {
-        super("Drake", "2/2 green and blue Drake creature token with flying");
+        super("Drake Token", "2/2 green and blue Drake creature token with flying");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

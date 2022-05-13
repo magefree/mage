@@ -57,10 +57,10 @@ public class Brawl extends Constructed {
             Iterator<Card> iter = deck.getSideboard().iterator();
             Card card1 = iter.next();
             Card card2 = iter.next();
-            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            if (card1.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card1;
                 brawler = card2;
-            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            } else if (card2.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card2;
                 brawler = card1;
             } else {
@@ -156,7 +156,8 @@ public class Brawl extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Brawl Companion Invalid", true);
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
+                                String.format("Brawl companion illegal: %s", companionAbility.getLegalRule()), true);
                         valid = false;
                     }
                     break;

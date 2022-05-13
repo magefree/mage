@@ -65,7 +65,7 @@ enum ControlsEachCreatureWithGreatestPowerCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Integer maxPower = null;
         boolean result = false;
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         for (Permanent permanent : permanents) {
             if (permanent == null) {
                 continue;

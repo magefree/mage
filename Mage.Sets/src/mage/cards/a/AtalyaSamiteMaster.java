@@ -54,8 +54,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
 
         // or you gain X life
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("You gain X life. Spend only white mana on X."));
+        Mode mode = new Mode(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("You gain X life. Spend only white mana on X."));
         ability.addMode(mode);
 
         this.addAbility(ability);

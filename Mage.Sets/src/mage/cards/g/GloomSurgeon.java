@@ -52,15 +52,11 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage = event.getAmount();
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.EXILED, source, game);
-            }
-            return true;
+        int damage = event.getAmount();
+        game.preventDamage(event, source, game, Integer.MAX_VALUE);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.moveCards(player.getLibrary().getTopCards(game, damage), Zone.EXILED, source, game);
         }
         return false;
     }

@@ -20,7 +20,7 @@ import mage.target.common.TargetCardInGraveyard;
 public final class NighteyesTheDesecratorToken extends TokenImpl {
 
     public NighteyesTheDesecratorToken() {
-        super("Nighteyes the Desecrator", "");
+        super("Nighteyes the Desecrator Token", "");
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

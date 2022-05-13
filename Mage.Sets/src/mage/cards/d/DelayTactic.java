@@ -38,8 +38,7 @@ public final class DelayTactic extends CardImpl {
             .setText("Creatures you control gain hexproof until end of turn"));
 
         //   Creatures target opponent controls don't untap during their next untap step.
-        Mode mode = new Mode();
-        mode.addEffect(new DelayTacticEffect());
+        Mode mode = new Mode(new DelayTacticEffect());
         mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);
     }

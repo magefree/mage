@@ -64,7 +64,7 @@ class SecludedCourtyardManaBuilder extends ConditionalManaBuilder {
             creatureType = subType;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null
                 && sourceObject != null
                 && mana.getAny() == 0) {
@@ -106,7 +106,7 @@ class SecludedCourtyardManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         // casting a creature card or using its ability
         if (creatureType != null
                 && object != null

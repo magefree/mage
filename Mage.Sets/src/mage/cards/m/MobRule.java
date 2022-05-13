@@ -32,8 +32,7 @@ public final class MobRule extends CardImpl {
         this.getSpellAbility().addEffect(new MobRuleEffect(ComparisonType.MORE_THAN, 3));
 
         // Gain control of all creatures with power 3 or less until end of turn. Untap those creatures. They gain haste until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new MobRuleEffect(ComparisonType.FEWER_THAN, 4));
+        Mode mode = new Mode(new MobRuleEffect(ComparisonType.FEWER_THAN, 4));
         this.getSpellAbility().addMode(mode);
     }
 

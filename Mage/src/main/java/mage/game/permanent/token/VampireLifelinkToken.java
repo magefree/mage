@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class VampireLifelinkToken extends TokenImpl {
 
     public VampireLifelinkToken() {
-        super("Vampire", "2/3 black Vampire creature token with flying and lifelink");
+        super("Vampire Token", "2/3 black Vampire creature token with flying and lifelink");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);

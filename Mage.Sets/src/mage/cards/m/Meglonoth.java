@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -35,7 +35,7 @@ public final class Meglonoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Meglonoth blocks a creature, Meglonoth deals damage to that creature's controller equal to Meglonoth's power.
-        this.addAbility(new BlocksSourceTriggeredAbility(new MeglonothEffect(), false, true));
+        this.addAbility(new BlocksCreatureTriggeredAbility(new MeglonothEffect()));
 
     }
 

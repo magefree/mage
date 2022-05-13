@@ -53,7 +53,7 @@ public class ThingInTheIceTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
         assertHandCount(playerA, "Tireless Tracker", 1); // returned to hand
         assertPermanentCount(playerA, "Tireless Tracker", 0);
         assertPermanentCount(playerB, "Awoken Horror", 1); // transformed

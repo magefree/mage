@@ -13,7 +13,7 @@ import mage.MageInt;
 public final class ForlornPseudammaZombieToken extends TokenImpl {
 
     public ForlornPseudammaZombieToken() {
-        super("Zombie", "2/2 black Zombie enchantment creature token");
+        super("Zombie Token", "2/2 black Zombie enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

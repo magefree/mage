@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,8 +16,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
@@ -58,7 +55,7 @@ public final class CircuDimirLobotomist extends CardImpl {
         this.addAbility(ability);
 
         // Your opponents can't cast nonland cards with the same name as a card exiled with Circu, Dimir Lobotomist.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CircuDimirLobotomistRuleModifyingEffect()));
+        this.addAbility(new SimpleStaticAbility(new CircuDimirLobotomistRuleModifyingEffect()));
     }
 
     private CircuDimirLobotomist(final CircuDimirLobotomist card) {
@@ -91,14 +88,14 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player playerTargetLibrary = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && playerTargetLibrary != null && sourcePermanent != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            controller.moveCardToExileWithInfo(playerTargetLibrary.getLibrary().getFromTop(game), exileId,
-                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')', source, game, Zone.BATTLEFIELD, true);
-            return true;
+        if (controller == null || playerTargetLibrary == null) {
+            return false;
         }
-        return false;
+        controller.moveCardsToExile(
+                playerTargetLibrary.getLibrary().getFromTop(game), source, game, true,
+                CardUtil.getCardExileZoneId(game, source), CardUtil.getSourceName(game, source)
+        );
+        return true;
     }
 }
 
@@ -120,28 +117,23 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null) {
-            return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + '.';
-        }
-        return null;
+        return "You can't cast this spell because a card with the same name is exiled by " + CardUtil.getSourceName(game, source) + '.';
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null) {
-                ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-                if ((exileZone != null)) {
-                    for (Card card : exileZone.getCards(game)) {
-                        if (CardUtil.haveSameNames(card, object)) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (event.getType() != GameEvent.EventType.CAST_SPELL
+                || !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        return object != null
+                && exileZone != null
+                && !exileZone.isEmpty()
+                && exileZone
+                .getCards(game)
+                .stream()
+                .anyMatch(card -> CardUtil.haveSameNames(card, object));
     }
 }

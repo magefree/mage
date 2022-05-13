@@ -111,7 +111,7 @@ class YorionSkyNomadEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         Set<Card> toExile = target.getTargets().stream().map(game::getPermanent).collect(Collectors.toSet());
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());

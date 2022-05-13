@@ -64,7 +64,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(
+        this.addAbility(new MorphAbility(new SacrificeTargetCost(
                 new TargetControlledPermanent(filter)
         )));
 
@@ -128,7 +128,7 @@ class GiftOfDoomEffect extends OneShotEffect {
         }
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)
+        if (player.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null
                 && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, source, game, false)) {
             game.getState().setValue("attachTo:" + giftOfDoom.getId(), target.getFirstTarget());

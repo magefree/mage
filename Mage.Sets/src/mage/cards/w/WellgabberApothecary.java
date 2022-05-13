@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class WellgabberApothecary extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target tapped Merfolk or Kithkin creature this turn");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped Merfolk or Kithkin creature");
 
     static {
         filter.add(TappedPredicate.TAPPED);

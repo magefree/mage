@@ -1,23 +1,21 @@
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -31,6 +29,7 @@ public final class BringToLight extends CardImpl {
         // cost less than or equal to the number of colors of mana spent to cast Bring to Light, exile that card,
         // then shuffle your library. You may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new BringToLightEffect());
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
     }
 
     private BringToLight(final BringToLight card) {
@@ -47,8 +46,8 @@ class BringToLightEffect extends OneShotEffect {
 
     public BringToLightEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "<i>Converge</i> &mdash; Search your library for a creature, instant, or sorcery card with mana "
-                + "value less than or equal to the number of colors of mana spent to cast this spell, exile that card, "
+        this.staticText = "search your library for a creature, instant, or sorcery card with mana value " +
+                "less than or equal to the number of colors of mana spent to cast this spell, exile that card, "
                 + "then shuffle. You may cast that card without paying its mana cost";
     }
 
@@ -64,31 +63,23 @@ class BringToLightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
-            FilterCard filter = new FilterCard("a creature, instant, or sorcery card with mana value "
-                    + "less than or equal to " + numberColors);
-            filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                    CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
-            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, numberColors + 1));
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            controller.searchLibrary(target, source, game);
-            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            if (card != null) {
-                if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
-                        + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
+        FilterCard filter = new FilterCard("a creature, instant, or sorcery card with mana value "
+                + "less than or equal to " + numberColors);
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, numberColors + 1));
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        controller.searchLibrary(target, source, game);
+        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+        if (card != null) {
+            controller.moveCards(card, Zone.EXILED, source, game);
+        }
+        controller.shuffleLibrary(source, game);
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
+        return true;
     }
 }

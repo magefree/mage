@@ -53,7 +53,7 @@ public class BolassCitadelTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
         assertLife(playerA, 19);

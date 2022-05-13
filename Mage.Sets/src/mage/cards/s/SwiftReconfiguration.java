@@ -93,7 +93,7 @@ class SwiftReconfigurationEffect extends ContinuousEffectImpl {
                 permanent.addSubType(game, SubType.VEHICLE);
                 return true;
             case AbilityAddingRemovingEffects_6:
-                permanent.addAbility(new CrewAbility(5));
+                permanent.addAbility(new CrewAbility(5), source.getSourceId(), game);
                 return true;
         }
         return false;

@@ -22,7 +22,7 @@ public final class ThrullToken extends TokenImpl {
     }
 
     public ThrullToken() {
-        super("Thrull", "1/1 black Thrull creature token");
+        super("Thrull Token", "1/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.THRULL);
         color.setBlack(true);

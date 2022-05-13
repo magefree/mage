@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ZendikarsRoilElementalToken extends TokenImpl {
 
     public ZendikarsRoilElementalToken() {
-        super("Elemental", "2/2 green Elemental creature token");
+        super("Elemental Token", "2/2 green Elemental creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
         color.setGreen(true);

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class PhyrexianGoblinToken extends TokenImpl {
 
     public PhyrexianGoblinToken() {
-        super("Phyrexian Goblin", "1/1 red Phyrexian Goblin creature token with haste");
+        super("Phyrexian Goblin Token", "1/1 red Phyrexian Goblin creature token with haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.GOBLIN);

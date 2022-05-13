@@ -36,7 +36,7 @@ public class DeclarationInStoneTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, hGiant, 1);
         assertPermanentCount(playerB, memnite, 0);
         assertExileCount(playerB, memnite, 3);
-        assertPermanentCount(playerB, "Clue", 3); // 3 creatures exiled = 3 clues for them
+        assertPermanentCount(playerB, "Clue Token", 3); // 3 creatures exiled = 3 clues for them
     }
     
     @Test
@@ -62,14 +62,14 @@ public class DeclarationInStoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gTitan);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, dStone, "Zombie");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, dStone, "Zombie Token");
         
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
         
         assertGraveyardCount(playerB, dStone, 1);
         assertPermanentCount(playerA, gTitan, 1);
-        assertPermanentCount(playerA, "Zombie", 0);
-        assertPermanentCount(playerA, "Clue", 0); // tokens exiled do not generate clues
+        assertPermanentCount(playerA, "Zombie Token", 0);
+        assertPermanentCount(playerA, "Clue Token", 0); // tokens exiled do not generate clues
     }
 }

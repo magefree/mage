@@ -34,7 +34,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

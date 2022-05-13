@@ -41,7 +41,7 @@ public final class KarnSilverGolem extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-4, +4, Duration.EndOfTurn), false));
         
         // {1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KarnSilverGolemEffect(), new ManaCostsImpl("{1"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KarnSilverGolemEffect(), new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetPermanent(filterNonCreature));
         this.addAbility(ability);        
     }

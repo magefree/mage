@@ -6,7 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 import java.util.UUID;
 
@@ -15,23 +14,20 @@ import java.util.UUID;
  */
 public class PhaseOutTargetEffect extends OneShotEffect {
 
-    protected String targetDescription;
-    protected boolean useOnlyTargetPointer;
+    protected final String targetDescription;
 
     public PhaseOutTargetEffect() {
-        super(Outcome.Detriment);
+        this((String) null);
     }
 
-    public PhaseOutTargetEffect(String targetDescription, boolean useOnlyTargetPointer) {
+    public PhaseOutTargetEffect(String targetDescription) {
         super(Outcome.Detriment);
         this.targetDescription = targetDescription;
-        this.useOnlyTargetPointer = useOnlyTargetPointer;
     }
 
-    public PhaseOutTargetEffect(final PhaseOutTargetEffect effect) {
+    private PhaseOutTargetEffect(final PhaseOutTargetEffect effect) {
         super(effect);
         this.targetDescription = effect.targetDescription;
-        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override
@@ -41,17 +37,6 @@ public class PhaseOutTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
-            for (Target target : source.getTargets()) {
-                for (UUID targetId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.phaseOut(game);
-                    }
-                }
-            }
-            return true;
-        }
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -66,12 +51,11 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
         StringBuilder sb = new StringBuilder();
         if (targetDescription != null && !targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
         sb.append(" phase");
         if (mode.getTargets().isEmpty()
@@ -81,5 +65,4 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         sb.append(" out");
         return sb.toString();
     }
-
 }

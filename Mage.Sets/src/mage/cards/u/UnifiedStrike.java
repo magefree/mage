@@ -73,8 +73,7 @@ class UnifiedStrikeEffect extends OneShotEffect {
                 .getActivePermanents(
                         filter,
                         source.getControllerId(),
-                        source.getSourceId(),
-                        game
+                        source, game
                 ).size();
         boolean successful = creature.getPower().getValue() <= soldierCount;
         if (successful) {

@@ -82,7 +82,7 @@ class AmuletOfSafekeepingTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (event.getTargetId().equals(getControllerId())
-                && filter.match(stackObject, getSourceId(), getControllerId(), game)) {
+                && filter.match(stackObject, getControllerId(), this, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(stackObject.getId(), game));
             }

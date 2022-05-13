@@ -53,7 +53,7 @@ public final class BoseijuWhoEndures extends CardImpl {
         Ability ability = new ChannelAbility("{1}{G}", new BoseijuWhoEnduresEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private BoseijuWhoEndures(final BoseijuWhoEndures card) {

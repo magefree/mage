@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
 import mage.choices.Choice;
@@ -61,7 +62,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         }
         this.chooseLandType = chooseLandType;
         this.loseOther = loseOther;
-        this.staticText = setText();
     }
 
     public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
@@ -147,8 +147,18 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder("target land becomes ");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder("target ");
+        if (!mode.getTargets().isEmpty()) {
+            sb.append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("land");
+        }
+        sb.append(" becomes ");
         if (chooseLandType) {
             sb.append("the basic land type of your choice");
         } else {
@@ -162,7 +172,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             sb.append(" in addition to its other types");
         }
         if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
-            sb.append(' ').append(duration.toString());
+            sb.append(' ').append(duration);
         }
         return sb.toString();
     }

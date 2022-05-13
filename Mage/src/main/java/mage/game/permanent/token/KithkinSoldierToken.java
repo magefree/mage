@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class KithkinSoldierToken extends TokenImpl {
 
     public KithkinSoldierToken() {
-        super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");
+        super("Kithkin Soldier Token", "1/1 white Kithkin Soldier creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KITHKIN);

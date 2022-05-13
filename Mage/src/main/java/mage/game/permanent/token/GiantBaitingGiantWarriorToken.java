@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class GiantBaitingGiantWarriorToken extends TokenImpl {
 
     public GiantBaitingGiantWarriorToken() {
-        super("Giant Warrior", "4/4 red and green Giant Warrior creature token with haste");
+        super("Giant Warrior Token", "4/4 red and green Giant Warrior creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);

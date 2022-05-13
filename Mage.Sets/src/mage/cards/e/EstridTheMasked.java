@@ -149,10 +149,10 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(controller.getGraveyard().getCards(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ), Zone.BATTLEFIELD, source, game);
         controller.moveCards(controller.getGraveyard().getCards(
-                filter2, source.getSourceId(), source.getControllerId(), game
+                filter2, source.getControllerId(), source, game
         ), Zone.BATTLEFIELD, source, game);
         return true;
     }

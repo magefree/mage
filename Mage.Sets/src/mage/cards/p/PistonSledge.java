@@ -37,11 +37,16 @@ public final class PistonSledge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // When Piston Sledge enters the battlefield, attach it to target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target creature you control"), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
+
+        // Equipped creature gets +3/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+
+        // Equip—Sacrifice an artifact.
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter)), false));
     }
 
     public PistonSledge (final PistonSledge card) {

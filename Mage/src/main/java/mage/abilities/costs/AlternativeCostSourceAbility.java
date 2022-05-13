@@ -16,6 +16,7 @@ import mage.util.CardUtil;
 
 import java.util.Iterator;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -24,7 +25,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     private static final String ALTERNATIVE_COST_ACTIVATION_KEY = "AlternativeCostActivated";
 
-    private Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
+    private Costs<AlternativeCost> alternateCosts = new CostsImpl<>();
     protected Condition condition;
     protected String rule;
     protected FilterCard filter;
@@ -88,15 +89,15 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public void addCost(Cost cost) {
-        AlternativeCost2 alternativeCost = convertToAlternativeCost(cost);
+        AlternativeCost alternativeCost = convertToAlternativeCost(cost);
         if (alternativeCost != null) {
             this.alternateCosts.add(alternativeCost);
         }
     }
 
-    private AlternativeCost2 convertToAlternativeCost(Cost cost) {
+    private AlternativeCost convertToAlternativeCost(Cost cost) {
         //return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
-        return cost != null ? new AlternativeCost2Impl(null, "", "", cost) : null;
+        return cost != null ? new AlternativeCostImpl(null, "", cost) : null;
     }
 
     @Override
@@ -117,13 +118,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (ability != null && AbilityType.SPELL == ability.getAbilityType()) {
             if (filter != null) {
                 Card card = game.getCard(ability.getSourceId());
-                if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {
+                if (!filter.match(card, ability.getControllerId(), ability, game)) {
                     return false;
                 }
             }
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                Costs<AlternativeCost2> alternativeCostsToCheck;
+                Costs<AlternativeCost> alternativeCostsToCheck;
                 if (dynamicCost != null) {
                     alternativeCostsToCheck = new CostsImpl<>();
                     alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
@@ -140,7 +141,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 if (alternativeCostsToCheck.canPay(ability, ability, ability.getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
                     if (ability instanceof SpellAbility) {
-                        ability.getManaCostsToPay().removeIf(manaCost -> manaCost instanceof VariableCost);
+                        ability.getManaCostsToPay().removeIf(VariableCost.class::isInstance);
                         CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
                     } else {
@@ -149,7 +150,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     if (!onlyMana) {
                         ability.getCosts().clear();
                     }
-                    for (AlternativeCost2 alternateCost : alternativeCostsToCheck) {
+                    for (AlternativeCost alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
                             Cost costDetailed = (Cost) it.next();
@@ -207,14 +208,14 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isActivated(Ability source, Game game) {
-        Costs<AlternativeCost2> alternativeCostsToCheck;
+        Costs<AlternativeCost> alternativeCostsToCheck;
         if (dynamicCost != null) {
             alternativeCostsToCheck = new CostsImpl<>();
             alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(source, game)));
         } else {
             alternativeCostsToCheck = this.alternateCosts;
         }
-        for (AlternativeCost2 cost : alternativeCostsToCheck) {
+        for (AlternativeCost cost : alternativeCostsToCheck) {
             if (cost.isActivated(game)) {
                 return true;
             }
@@ -225,6 +226,11 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     @Override
     public String getCastMessageSuffix(Game game) {
         return alternateCosts.isEmpty() ? " without paying its mana costs" : " using alternative casting costs";
+    }
+
+    @Override
+    public void resetCost() {
+
     }
 
     @Override
@@ -245,23 +251,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         }
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost2 alternativeCost : alternateCosts) {
-            if (numberCosts == 0) {
-                if (alternativeCost.getCost() instanceof ManaCost) {
-                    sb.append("pay ");
-                }
-                sb.append(alternativeCost.getText(false));
-                remarkText = alternativeCost.getReminderText();
-            } else {
-                sb.append(" and ");
-                if (alternativeCost.getCost() instanceof ManaCost) {
-                    sb.append("pay ");
-                }
-                String text = alternativeCost.getText(true);
-                sb.append(Character.toLowerCase(text.charAt(0))).append(text.substring(1));
-            }
-            ++numberCosts;
-        }
+        sb.append(CardUtil.concatWithAnd(alternateCosts
+                .stream()
+                .map(cost -> cost.getCost() instanceof ManaCost
+                        ? "pay " + cost.getText(true)
+                        : cost.getText(true))
+                .map(CardUtil::getTextWithFirstCharLowerCase)
+                .collect(Collectors.toList())));
         if (condition == null || alternateCosts.size() == 1) {
             sb.append(" rather than pay this spell's mana cost");
         } else if (alternateCosts.isEmpty()) {

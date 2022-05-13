@@ -49,7 +49,7 @@ public final class LowlandOaf extends CardImpl {
         effect.setText("Target Goblin creature you control gets +1/+0");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying until end of turn. ");
+        effect.setText("and gains flying until end of turn.");
         ability.addEffect(effect);
         ability.addEffect(new LowlandOafEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -87,7 +87,7 @@ class OpenTheOmenpathsCondition extends ManaCondition implements Condition {
         if (!(source instanceof SpellAbility)) {
             return false;
         }
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && (object.isCreature(game) || object.isEnchantment(game));
     }
 

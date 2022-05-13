@@ -15,7 +15,7 @@ public final class SpoilsOfBloodHorrorToken extends TokenImpl {
         this(1);
     }
     public SpoilsOfBloodHorrorToken(int xValue) {
-        super("Horror", "X/X black Horror creature token");
+        super("Horror Token", "X/X black Horror creature token");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

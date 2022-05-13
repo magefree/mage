@@ -13,7 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 public final class HauntedAngelToken extends TokenImpl {
 
     public HauntedAngelToken() {
-        super("Angel", "3/3 black Angel creature token with flying");
+        super("Angel Token", "3/3 black Angel creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ANGEL);

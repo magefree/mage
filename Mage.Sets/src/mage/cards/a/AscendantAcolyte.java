@@ -71,7 +71,7 @@ enum AscendantAcolyteValue implements DynamicValue {
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
                         sourceAbility.getControllerId(),
-                        sourceAbility.getSourceId(), game
+                        sourceAbility, game
                 ).stream()
                 .mapToInt(permanent -> permanent.getCounters(game).getCount(CounterType.P1P1))
                 .sum();

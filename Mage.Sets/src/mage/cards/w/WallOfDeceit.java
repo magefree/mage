@@ -37,7 +37,7 @@ public final class WallOfDeceit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WallOfDeceitEffect(), new ManaCostsImpl("{3}")));
 
         // Morph {U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
     }
 
     private WallOfDeceit(final WallOfDeceit card) {

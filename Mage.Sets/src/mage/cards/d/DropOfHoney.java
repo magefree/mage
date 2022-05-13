@@ -89,8 +89,8 @@ class DropOfHoneyEffect extends OneShotEffect {
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                    if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game)) {
+                    if (controller.choose(outcome, target, source, game)) {
                         permanentToDestroy = game.getPermanent(target.getFirstTarget());
                     }
                 }
@@ -123,7 +123,7 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getSourceId(), this.getControllerId(), game) == 0;
+        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getControllerId(), this, game) == 0;
     }
 
     @Override

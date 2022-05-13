@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class ReflectionBlueToken extends TokenImpl {
 
     public ReflectionBlueToken() {
-        super("Reflection", "3/2 blue Reflection creature token");
+        super("Reflection Token", "3/2 blue Reflection creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.REFLECTION);

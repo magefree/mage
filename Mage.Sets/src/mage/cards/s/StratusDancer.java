@@ -34,7 +34,7 @@ public final class StratusDancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}"), true));
         
         // When Stratus Dancer is turned face up, counter target instant or sorcery spell
         Effect effect = new CounterTargetEffect();

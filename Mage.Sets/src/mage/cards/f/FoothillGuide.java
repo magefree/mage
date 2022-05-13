@@ -34,7 +34,7 @@ public final class FoothillGuide extends CardImpl {
         // Protection from Goblins
         this.addAbility(new ProtectionAbility(filter));
         // Morph {W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
     }
 
     private FoothillGuide(final FoothillGuide card) {

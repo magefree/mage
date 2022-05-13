@@ -84,7 +84,7 @@ class KheruLichLordEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source.getControllerId(), game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source, game));
             Card card = cards.getRandom(game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

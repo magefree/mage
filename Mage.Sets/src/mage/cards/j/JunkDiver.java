@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -25,7 +25,7 @@ public final class JunkDiver extends CardImpl {
     private static final FilterArtifactCard filter = new FilterArtifactCard("another target artifact card from your graveyard");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public JunkDiver(UUID ownerId, CardSetInfo setInfo) {

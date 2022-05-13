@@ -67,7 +67,7 @@ class PlanarOverlayEffect extends OneShotEffect {
                         filter.add(landName.getPredicate());
                         filter.add(TargetController.YOU.getControllerPredicate());
                         Target target = new TargetLandPermanent(1, 1, filter, true);
-                        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                        if (target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(outcome, target, source, game);
                             lands.add(game.getPermanent(target.getFirstTarget()));
                         }

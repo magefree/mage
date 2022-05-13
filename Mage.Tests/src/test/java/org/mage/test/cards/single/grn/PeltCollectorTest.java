@@ -88,7 +88,7 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerB, collector, 1, 1);
 
-        assertPowerToughness(playerA, "Soldier", 2, 2, Filter.ComparisonScope.All);
+        assertPowerToughness(playerA, "Soldier Token", 2, 2, Filter.ComparisonScope.All);
 
         assertPowerToughness(playerA, lion, 3, 3);
         assertPowerToughness(playerA, collector, 3, 3);

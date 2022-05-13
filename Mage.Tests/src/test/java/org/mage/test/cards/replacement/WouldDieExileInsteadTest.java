@@ -44,7 +44,7 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         assertExileCount("Sigiled Starfish", 1);
         assertGraveyardCount(playerB, 0); // all 3 creatures of playerB should be exiled not in graveyard
         assertExileCount("Kalitas, Traitor of Ghet", 0); // player controlled, not opponent so not exiled
-        assertPermanentCount(playerA, "Zombie", 3); // 3 tokens generated from exiling 3 opponent's creatures
+        assertPermanentCount(playerA, "Zombie Token", 3); // 3 tokens generated from exiling 3 opponent's creatures
     }
     
     /*

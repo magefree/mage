@@ -508,7 +508,10 @@ public class ScryfallImageSupportCards {
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
+            add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
+            add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("40K"); // Warhammer 40,000
         }
     };
 

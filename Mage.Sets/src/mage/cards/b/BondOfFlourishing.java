@@ -1,8 +1,8 @@
 package mage.cards.b;
 
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,11 +22,8 @@ public final class BondOfFlourishing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Look at the top three card of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order. You gain 3 life.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false,
-                StaticValue.get(1), filter, false
-        ));
-        this.getSpellAbility().addEffect(new GainLifeEffect(3).setText("You gain 3 life."));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(3, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY));
+        this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
     private BondOfFlourishing(final BondOfFlourishing card) {
