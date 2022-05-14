@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -101,7 +102,7 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
 
 class DreadWightEffect extends OneShotEffect {
 
-    String rule = "doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it.";
+    static final String rule = "doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it.";
 
     public DreadWightEffect() {
         super(Outcome.Detriment);
@@ -122,44 +123,42 @@ class DreadWightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            // add paralyzation counter
-            Effect effect = new AddCountersTargetEffect(CounterType.PARALYZATION.createInstance());
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            effect.apply(game, source);
-            // tap permanent
-            permanent.tap(source, game);
-            // does not untap while paralyzation counter is on it
-            ContinuousRuleModifyingEffect effect2 = new DreadWightDoNotUntapEffect(
-                    Duration.WhileOnBattlefield,
-                    permanent.getId());
-            effect2.setText("This creature doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it");
-            Condition condition = new DreadWightCounterCondition(permanent.getId());
-            ConditionalContinuousRuleModifyingEffect conditionalEffect = new ConditionalContinuousRuleModifyingEffect(
-                    effect2,
-                    condition);
-            Ability ability = new SimpleStaticAbility(
-                    Zone.BATTLEFIELD,
-                    conditionalEffect);
-            ContinuousEffect effect3 = new GainAbilityTargetEffect(
-                    ability,
-                    Duration.WhileOnBattlefield);
-            ability.setRuleVisible(true);
-            effect3.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect3, source);
-            // each gains 4: remove paralyzation counter
-            Ability activatedAbility = new SimpleActivatedAbility(
-                    Zone.BATTLEFIELD,
-                    new RemoveCounterSourceEffect(CounterType.PARALYZATION.createInstance()),
-                    new ManaCostsImpl("{4}"));
-            ContinuousEffect effect4 = new GainAbilityTargetEffect(
-                    activatedAbility,
-                    Duration.WhileOnBattlefield);
-            effect4.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect4, source);
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        // add paralyzation counter
+        Effect effect = new AddCountersTargetEffect(CounterType.PARALYZATION.createInstance());
+        effect.setTargetPointer(new FixedTarget(permanent, game));
+        effect.apply(game, source);
+
+        // tap permanent
+        permanent.tap(source, game);
+
+        // does not untap while paralyzation counter is on it
+        ContinuousRuleModifyingEffect effect2 = new DreadWightDoNotUntapEffect(Duration.WhileOnBattlefield, permanent.getId());
+        effect2.setText(rule);
+
+        Condition condition = new DreadWightCounterCondition(permanent.getId());
+        ConditionalContinuousRuleModifyingEffect conditionalEffect = new ConditionalContinuousRuleModifyingEffect(
+                effect2,
+                condition);
+
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, conditionalEffect);
+        ContinuousEffect effect3 = new GainAbilityTargetEffect(ability, Duration.WhileOnBattlefield);
+        ability.setRuleVisible(true);
+        effect3.setTargetPointer(new FixedTarget(permanent, game));
+        game.addEffect(effect3, source);
+
+        // each gains 4: remove paralyzation counter
+        Ability activatedAbility = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new RemoveCounterSourceEffect(CounterType.PARALYZATION.createInstance()),
+                new GenericManaCost(4));
+        ContinuousEffect effect4 = new GainAbilityTargetEffect(activatedAbility, Duration.WhileOnBattlefield);
+        effect4.setTargetPointer(new FixedTarget(permanent, game));
+        game.addEffect(effect4, source);
+
+        return true;
     }
 }
 

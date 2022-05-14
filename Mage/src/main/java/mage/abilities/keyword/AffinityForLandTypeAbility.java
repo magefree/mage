@@ -40,6 +40,7 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility {
         super(ability);
         this.text = ability.text;
         this.filter = ability.filter.copy();
+        this.landType = ability.landType;
     }
 
     @Override

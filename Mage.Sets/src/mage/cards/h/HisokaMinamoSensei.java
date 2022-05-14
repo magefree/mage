@@ -40,7 +40,7 @@ public final class HisokaMinamoSensei extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetSpell());
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("a card"));
         ability.addCost(new HisokaMinamoSenseiDiscardTargetCost(targetCard));
@@ -60,7 +60,7 @@ public final class HisokaMinamoSensei extends CardImpl {
 
 class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 
-    protected Card card = null;
+    protected Card card;
 
     public HisokaMinamoSenseiDiscardTargetCost(TargetCardInHand target) {
         this.addTarget(target);
@@ -69,23 +69,27 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 
     public HisokaMinamoSenseiDiscardTargetCost(HisokaMinamoSenseiDiscardTargetCost cost) {
         super(cost);
+        this.card = cost.card.copy();
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
-            Player player = game.getPlayer(controllerId);
-            if(player != null) {
-                for (UUID targetId : targets.get(0).getTargets()) {
-                    card = player.getHand().get(targetId, game);
-                    if (card == null) {
-                        return false;
-                    }
-                    paid |= player.discard(card, true, source, game);
+        if (!targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
+            return paid;
+        }
 
-                }
+        Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return paid;
+        }
+
+        for (UUID targetId : targets.get(0).getTargets()) {
+            card = player.getHand().get(targetId, game);
+            if (card != null) {
+                paid |= player.discard(card, true, source, game);
             }
         }
+
         return paid;
     }
 
@@ -106,24 +110,32 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 }
 
 class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
+
     HisokaMinamoSenseiCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell if it has the same mana value as the discarded card";
     }
 
-    HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
+    private HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
-            if (cost != null && cost.getDiscardedCard().getManaValue() == spell.getManaValue()) {
-                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
-            }
+        if (spell == null) {
+            return false;
         }
+
+        HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
+        if (cost == null) {
+            return false;
+        }
+
+        if (cost.getDiscardedCard().getManaValue() == spell.getManaValue()) {
+            return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+        }
+
         return false;
     }
 

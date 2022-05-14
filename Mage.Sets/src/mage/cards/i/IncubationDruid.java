@@ -60,7 +60,7 @@ public final class IncubationDruid extends CardImpl {
 
 class AnyColorLandsProduceManaEffect extends ManaEffect {
 
-    private boolean inManaTypeCalculation = false;
+    private boolean inManaTypeCalculation;
 
     AnyColorLandsProduceManaEffect() {
         super();
@@ -70,6 +70,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
         super(effect);
+        this.inManaTypeCalculation = effect.inManaTypeCalculation;
     }
 
     @Override

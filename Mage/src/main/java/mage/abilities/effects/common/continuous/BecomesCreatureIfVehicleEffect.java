@@ -11,7 +11,7 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
-    private CardType addedType = CardType.CREATURE;
+    private static final CardType addedType = CardType.CREATURE;
 
     public BecomesCreatureIfVehicleEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);

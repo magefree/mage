@@ -21,6 +21,7 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
 
     public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
         super(ability);
+        this.effect = ability.effect.copy();
     }
 
     @Override
@@ -32,10 +33,11 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
         Player controller = game.getPlayer(getControllerId());
-        if (controller != null && enchantment != null) {
-            return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
+        if (controller == null || enchantment == null) {
+            return false;
         }
-        return false;
+
+        return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
     }
 
     @Override
@@ -47,5 +49,4 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     public EnchantedPlayerAttackedTriggeredAbility copy() {
         return new EnchantedPlayerAttackedTriggeredAbility(this);
     }
-
 }

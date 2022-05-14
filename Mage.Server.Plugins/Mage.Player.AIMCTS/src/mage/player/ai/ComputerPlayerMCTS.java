@@ -31,10 +31,13 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     private static final int THINK_MAX_RATIO = 100;
     private static final double THINK_TIME_MULTIPLIER = 2.0;
     private static final boolean USE_MULTIPLE_THREADS = true;
+    private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
 
     protected transient MCTSNode root;
+    protected String lastPhase = "";
+    protected long totalThinkTime;
+    protected long totalSimulations;
     protected int maxThinkTime;
-    private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private int poolSize;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
@@ -50,14 +53,17 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     public ComputerPlayerMCTS(final ComputerPlayerMCTS player) {
         super(player);
+        this.maxThinkTime = player.maxThinkTime;
+        this.poolSize = player.poolSize;
+        this.lastPhase = player.lastPhase;
+        this.totalSimulations = player.totalSimulations;
+        this.totalThinkTime = player.totalThinkTime;
     }
 
     @Override
     public ComputerPlayerMCTS copy() {
         return new ComputerPlayerMCTS(this);
     }
-
-    protected String lastPhase = "";
 
     @Override
     public boolean priority(Game game) {
@@ -151,9 +157,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         logger.info(sb.toString());
         MCTSNode.logHitMiss();
     }
-
-    protected long totalThinkTime = 0;
-    protected long totalSimulations = 0;
 
     protected void applyMCTS(final Game game, final NextAction action) {
 

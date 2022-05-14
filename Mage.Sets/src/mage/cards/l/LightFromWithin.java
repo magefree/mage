@@ -58,7 +58,7 @@ public final class LightFromWithin extends CardImpl {
 
 class LightFromWithinEffect extends ContinuousEffectImpl {
 
-    boolean boosted = false;
+    boolean boosted;
 
     public LightFromWithinEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
@@ -66,6 +66,7 @@ class LightFromWithinEffect extends ContinuousEffectImpl {
 
     public LightFromWithinEffect(final LightFromWithinEffect effect) {
         super(effect);
+        this.boosted = effect.boosted;
     }
 
     @Override

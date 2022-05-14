@@ -61,17 +61,21 @@ class ElkinBottleExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                ContinuousEffect effect = new ElkinBottleCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                game.addEffect(effect, source);
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+
+        controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+        ContinuousEffect effect = new ElkinBottleCastFromExileEffect();
+        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+        game.addEffect(effect, source);
+
+        return true;
     }
 }
 
@@ -86,6 +90,7 @@ class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
 
     public ElkinBottleCastFromExileEffect(final ElkinBottleCastFromExileEffect effect) {
         super(effect);
+        this.sameStep = effect.sameStep;
     }
 
     @Override
@@ -96,9 +101,9 @@ class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
+            return !sameStep
+                    && game.isActivePlayer(source.getControllerId())
+                    || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving();
         } else {
             sameStep = false;
         }

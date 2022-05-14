@@ -31,6 +31,7 @@ public class MomirGame extends GameImpl {
 
     public MomirGame(final MomirGame game) {
         super(game);
+        this.numPlayers = game.numPlayers;
     }
 
     @Override

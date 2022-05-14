@@ -8,7 +8,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -38,7 +38,7 @@ public final class JodahsAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new GenericManaCost(0)));
     }
 
     private JodahsAvenger(final JodahsAvenger card) {
@@ -70,6 +70,7 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
 
     public JodahsAvengerEffect(final JodahsAvengerEffect effect) {
         super(effect);
+        this.gainedAbility = effect.gainedAbility.copy();
     }
 
     @Override
@@ -80,41 +81,46 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose one");
-            choice.setChoices(choices);
-            if (controller.choose(outcome, choice, game)) {
-                switch (choice.getChoice()) {
-                    case "Double strike":
-                        gainedAbility = DoubleStrikeAbility.getInstance();
-                        break;
-                    case "Vigilance":
-                        gainedAbility = VigilanceAbility.getInstance();
-                        break;
-                    case "Shadow":
-                        gainedAbility = ShadowAbility.getInstance();
-                        break;
-                    default:
-                        gainedAbility = ProtectionAbility.from(ObjectColor.RED);
-                        break;
-                }
-            } else {
-                discard();
+        if (controller == null) {
+            return;
+        }
+
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose one");
+        choice.setChoices(choices);
+        if (controller.choose(outcome, choice, game)) {
+            switch (choice.getChoice()) {
+                case "Double strike":
+                    gainedAbility = DoubleStrikeAbility.getInstance();
+                    break;
+                case "Vigilance":
+                    gainedAbility = VigilanceAbility.getInstance();
+                    break;
+                case "Shadow":
+                    gainedAbility = ShadowAbility.getInstance();
+                    break;
+                default:
+                    gainedAbility = ProtectionAbility.from(ObjectColor.RED);
+                    break;
             }
+        } else {
+            discard();
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject != null) {
-            sourceObject.addPower(-1);
-            sourceObject.addToughness(-1);
-            game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
-            return true;
+        if (sourceObject == null) {
+            return false;
         }
-        return false;
+
+        sourceObject.addPower(-1);
+        sourceObject.addToughness(-1);
+        game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
+
+        return true;
     }
 }

@@ -57,6 +57,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;
+        this.firstControlChange = effect.firstControlChange;
     }
 
     @Override

@@ -39,6 +39,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
+        this.alsoLibrary = game.alsoLibrary;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
     }
 
@@ -50,35 +51,37 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         // move tiny leader to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
-            if (player != null) {
-                String commanderName = player.getMatchPlayer().getDeck().getName();
-                Card commander = findCommander(this, player, commanderName);
+            if (player == null) {
+                continue;
+            }
+
+            String commanderName = player.getMatchPlayer().getDeck().getName();
+            Card commander = findCommander(this, player, commanderName);
+            if (commander != null) {
+                // already exists - just move to zone (example: game restart by Karn Liberated)
+                commander.moveToZone(Zone.COMMAND, null, this, true);
+            } else {
+                // create new commander
+                commander = getCommanderCard(commanderName, player.getId());
                 if (commander != null) {
-                    // already exists - just move to zone (example: game restart by Karn Liberated)
+                    Set<Card> cards = new HashSet<>();
+                    cards.add(commander);
+                    this.loadCards(cards, playerId);
+                    player.addCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
+                    Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
+                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
+                    ability.addEffect(new CommanderCostModification(commander));
+                    // Commander rule #4 was removed Jan. 18, 2016
+                    // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                    CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
+                    getState().addWatcher(watcher);
+                    watcher.addCardInfoToCommander(this);
+                    this.getState().addAbility(ability, null);
                 } else {
-                    // create new commander
-                    commander = getCommanderCard(commanderName, player.getId());
-                    if (commander != null) {
-                        Set<Card> cards = new HashSet<>();
-                        cards.add(commander);
-                        this.loadCards(cards, playerId);
-                        player.addCommanderId(commander.getId());
-                        commander.moveToZone(Zone.COMMAND, null, this, true);
-                        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
-                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
-                        ability.addEffect(new CommanderCostModification(commander));
-                        // Commander rule #4 was removed Jan. 18, 2016
-                        // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                        CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
-                        getState().addWatcher(watcher);
-                        watcher.addCardInfoToCommander(this);
-                        this.getState().addAbility(ability, null);
-                    } else {
-                        // GameWorker.call processing errors and write it in magediag.log by defalt
-                        // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
-                        throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
-                    }
+                    // GameWorker.call processing errors and write it in magediag.log by defalt
+                    // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
+                    throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                 }
             }
         }

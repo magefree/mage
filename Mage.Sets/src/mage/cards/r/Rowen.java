@@ -47,8 +47,9 @@ class RowenAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
-    RowenAbility(final RowenAbility ability) {
+    private RowenAbility(final RowenAbility ability) {
         super(ability);
+        this.lastTriggeredTurn = ability.lastTriggeredTurn;
     }
 
     @Override

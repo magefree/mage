@@ -29,6 +29,7 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
 
     public MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
         super(effect);
+        this.attachmentType = effect.attachmentType;
     }
 
     @Override
