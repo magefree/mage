@@ -13,15 +13,12 @@ import mage.players.Player;
  */
 public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected Effect effect;
-
     public EnchantedPlayerAttackedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
     public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
         super(ability);
-        this.effect = ability.effect.copy();
     }
 
     @Override
@@ -33,11 +30,10 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
         Player controller = game.getPlayer(getControllerId());
-        if (controller == null || enchantment == null) {
-            return false;
+        if (controller != null && enchantment != null) {
+            return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
         }
-
-        return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
+        return false;
     }
 
     @Override
@@ -49,4 +45,5 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     public EnchantedPlayerAttackedTriggeredAbility copy() {
         return new EnchantedPlayerAttackedTriggeredAbility(this);
     }
+
 }
