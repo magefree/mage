@@ -61,7 +61,6 @@ public class KeranosGodOfStormsTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Keranos, God of Storms");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Peek", playerA); // you won't do damage because it's not the first draw this turn - Draw in draw phase was the first
-        addTarget(playerB, playerA); // not needed if it works correct
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

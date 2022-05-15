@@ -4,6 +4,7 @@ import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -13,12 +14,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CantCastTest extends CardTestPlayerBase {
 
     /**
-     * I control Void Winnower. But my opponent can cast Jayemdae Tome (that's
-     * converted mana cost is even) They can cast other even spell. Test casting
-     * cost 4
+     * I control Void Winnower.
+     * But my opponent can cast Jayemdae Tome (that's converted mana cost is even).
+     * They can cast other even spell.
+     * Test casting cost 4.
      */
     @Test
-    public void testVoidWinnower1() {
+    public void testVoidWinnowerEvenSpell() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
@@ -30,19 +32,27 @@ public class CantCastTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jayemdae Tome"); // {4}
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertHandCount(playerA, "Jayemdae Tome", 1);
+        try {
+            execute();
+            assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Jayemdae Tome", 0);
+            assertHandCount(playerA, "Jayemdae Tome", 1);
+            assertPermanentCount(playerA, "Jayemdae Tome", 0);
 
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
-     * Test with X=3
+     * Test Blaze ({X}{R}) with X=3 so that it's total cost is even.
      */
     @Test
-    public void testVoidWinnower2() {
+    public void testVoidWinnowerEvenSpellWithX() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
@@ -56,19 +66,30 @@ public class CantCastTest extends CardTestPlayerBase {
         setChoice(playerA, "X=3");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertHandCount(playerA, "Blaze", 1);
+        // TODO: Replace these with checkPlayableAbility when the effect has been implemented so that the card is no
+        //       longer shown as castable.
+        try {
+            execute();
+            assertAllCommandsUsed();
 
-        assertLife(playerB, 20);
+            assertHandCount(playerA, "Blaze", 1);
 
+            assertLife(playerB, 20);
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
-     * Test with X=4
+     * Test Blaze ({X}{R}) with X=4 so that it's total cost is odd.
      */
     @Test
-    public void testVoidWinnower3() {
+    public void testVoidWinnowerUnevenSpellWithX() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
@@ -91,6 +112,9 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test mmorphing a creature.
+     */
     @Test
     public void testVoidWinnowerWithMorph() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
@@ -110,11 +134,17 @@ public class CantCastTest extends CardTestPlayerBase {
         setChoice(playerA, true); // cast it face down as 2/2 creature
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
-        assertHandCount(playerA, "Pine Walker", 1);
+        try {
+            execute();
 
+            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+            assertHandCount(playerA, "Pine Walker", 1);
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -132,12 +162,16 @@ public class CantCastTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertHandCount(playerA, "Mox Opal", 1);
+        try {
+            execute();
 
-        assertLife(playerB, 20);
-
+            assertHandCount(playerA, "Mox Opal", 1);
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -165,7 +199,6 @@ public class CantCastTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Panic", 3);
         assertHandCount(playerA, 4);
         assertGraveyardCount(playerA, "Panic", 1);
-
     }
 
     /**
