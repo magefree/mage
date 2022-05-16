@@ -231,8 +231,12 @@ public class ConstellationTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_DaxosGotBoostAndNewTypeByDependencyEffects() {
+    public void test_DaxosGotBoostAndNewTypeByDependencyEffects_RegularWay() {
         playDaxosAndVampire(false);
+    }
+
+    @Test
+    public void test_DaxosGotBoostAndNewTypeByDependencyEffects_DifferentWay() {
         playDaxosAndVampire(true);
     }
 }

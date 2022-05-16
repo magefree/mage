@@ -36,7 +36,6 @@ public class JacesMindseekerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Mindseeker");
         addTarget(playerA, playerB);
         setChoice(playerA, true);
-        setChoice(playerA, "Lightning Bolt");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

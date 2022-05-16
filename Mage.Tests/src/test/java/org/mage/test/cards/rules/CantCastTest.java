@@ -73,16 +73,15 @@ public class CantCastTest extends CardTestPlayerBase {
             execute();
             assertAllCommandsUsed();
 
-            assertHandCount(playerA, "Blaze", 1);
-
-            assertLife(playerB, 20);
-
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
+
+        assertHandCount(playerA, "Blaze", 1);
+        assertLife(playerB, 20);
     }
 
     /**
@@ -137,14 +136,14 @@ public class CantCastTest extends CardTestPlayerBase {
 
         try {
             execute();
-
-            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
-            assertHandCount(playerA, "Pine Walker", 1);
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertHandCount(playerA, "Pine Walker", 1);
     }
 
     /**
@@ -165,13 +164,13 @@ public class CantCastTest extends CardTestPlayerBase {
 
         try {
             execute();
-
-            assertHandCount(playerA, "Mox Opal", 1);
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
+
+        assertHandCount(playerA, "Mox Opal", 1);
     }
 
     /**
@@ -223,16 +222,30 @@ public class CantCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Llanowar Elves", 1); // Creature {G}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+
         // Abrupt Decay can't be countered.
         // Destroy target nonland permanent with converted mana cost 3 or less.
         addCard(Zone.HAND, playerB, "Abrupt Decay", 1); // {B}{G}
 
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Llanowar Elves");
+
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: You");
         setChoice(playerB, "Ethersworn Canonist");
+
+//        checkPlayableAbility("2nd spell cast", 4, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Abrupt", false);
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abrupt Decay", "Ethersworn Canonist");
         setStopAt(4, PhaseStep.END_TURN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
 
         assertCounterCount(playerA, "Aether Vial", CounterType.CHARGE, 2);
         assertPermanentCount(playerB, "Llanowar Elves", 1);
@@ -258,10 +271,12 @@ public class CantCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Damnation", 1); // SORCERY {2}{B}{B}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alhammarret, High Arbiter");
-        setChoice(playerA, "Damnation");
+        setStrictChooseMode(true);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Damnation");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alhammarret, High Arbiter");
+        addTarget(playerA, "Damnation");
+
+        checkPlayableAbility("damnation check", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Damnation", false);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 

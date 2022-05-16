@@ -36,13 +36,13 @@ public class DenseFoliageTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertPermanentCount(playerB, "Eager Cadet", 1);
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("setup good targets")) {
                 Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
+        assertPermanentCount(playerB, "Eager Cadet", 1);
     }
 
     /**

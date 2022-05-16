@@ -161,8 +161,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Confiscate", "Jace, Unraveler of Secrets");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-8: You get an emblem with");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Blind with Anger", "Rootwater Commando");
-
         attack(3, playerC, "Silvercoat Lion", playerB);
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerC, "Silvercoat Lion");
 
@@ -291,6 +289,9 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.LIBRARY, playerA, "Pillarfield Ox", 1);
 
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Proteus Staff", 1);
+
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
         // top of their library until they reveal a creature card. The player puts that card onto the battlefield and the
@@ -305,9 +306,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerC, "Wall of Air", 1);
         addCard(Zone.LIBRARY, playerC, "Wind Drake", 2);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
-        addCard(Zone.BATTLEFIELD, playerB, "Proteus Staff", 1);
-
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
@@ -316,12 +314,23 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{2}{U}", "Silvercoat Lion"); // not allowed
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerC, "{2}{U}", "Eager Cadet"); // allowed because Needle out of range
+
+        // Concede the game
         concede(3, PhaseStep.POSTCOMBAT_MAIN, playerA);
 
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{U}", "Wall of Air"); // allowed because Needle lost game
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerD must have 0 actions but found 1")) {
+                Assert.fail("must throw error PlayerD canot acting, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerA, 2);
         Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
