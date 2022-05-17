@@ -80,6 +80,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 395, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 363, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Commit // Memory", 216, Rarity.RARE, mage.cards.c.CommitMemory.class));
+        cards.add(new SetCardInfo("Contractual Safeguard", 14, Rarity.RARE, mage.cards.c.ContractualSafeguard.class));
         cards.add(new SetCardInfo("Crash the Party", 57, Rarity.RARE, mage.cards.c.CrashTheParty.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 396, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 397, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
