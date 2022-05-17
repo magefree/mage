@@ -60,8 +60,9 @@ class CaptainsManeuverEffect extends RedirectionEffect {
         staticText = "The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.";
     }
 
-    public CaptainsManeuverEffect(final CaptainsManeuverEffect effect) {
+    private CaptainsManeuverEffect(final CaptainsManeuverEffect effect) {
         super(effect);
+        this.redirectToObject = effect.redirectToObject;
     }
 
     @Override
