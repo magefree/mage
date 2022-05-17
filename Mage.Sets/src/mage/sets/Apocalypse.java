@@ -35,6 +35,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfire Kavu", 58, Rarity.UNCOMMON, mage.cards.b.BloodfireKavu.class));
         cards.add(new SetCardInfo("Bog Gnarr", 76, Rarity.COMMON, mage.cards.b.BogGnarr.class));
         cards.add(new SetCardInfo("Brass Herald", 133, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));
+        cards.add(new SetCardInfo("Captain's Maneuver", 92, Rarity.UNCOMMON, mage.cards.c.CaptainsManeuver.class));
         cards.add(new SetCardInfo("Caves of Koilos", 140, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Ceta Disciple", 19, Rarity.COMMON, mage.cards.c.CetaDisciple.class));
         cards.add(new SetCardInfo("Ceta Sanctuary", 20, Rarity.UNCOMMON, mage.cards.c.CetaSanctuary.class));
@@ -145,7 +146,6 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Suffocating Blast", 124, Rarity.RARE, mage.cards.s.SuffocatingBlast.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 87, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));
         cards.add(new SetCardInfo("Symbiotic Deployment", 88, Rarity.RARE, mage.cards.s.SymbioticDeployment.class));
-        cards.add(new SetCardInfo("Tahngarth's Glare", 70, Rarity.COMMON, mage.cards.t.TahngarthsGlare.class));
         cards.add(new SetCardInfo("Temporal Spring", 125, Rarity.COMMON, mage.cards.t.TemporalSpring.class));
         cards.add(new SetCardInfo("Tidal Courier", 31, Rarity.UNCOMMON, mage.cards.t.TidalCourier.class));
         cards.add(new SetCardInfo("Tranquil Path", 89, Rarity.COMMON, mage.cards.t.TranquilPath.class));
@@ -161,6 +161,5 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Research", 72, Rarity.RARE, mage.cards.w.WildResearch.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 143, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya's Embrace", 127, Rarity.RARE, mage.cards.y.YavimayasEmbrace.class));
-        cards.add(new SetCardInfo("Zombie Boa", 54, Rarity.COMMON, mage.cards.z.ZombieBoa.class));
     }
 }
