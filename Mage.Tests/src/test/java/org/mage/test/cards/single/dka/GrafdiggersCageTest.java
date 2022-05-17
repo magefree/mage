@@ -6,15 +6,21 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.g.GrafdiggersCage Grafdigger's Cage}
+ * {1}
+ * Artifact
+ * Creature cards in graveyards and libraries can’t enter the battlefield.
+ * Players can’t cast spells from graveyards or libraries.
  *
  * @author BetaSteward
  */
 public class GrafdiggersCageTest extends CardTestPlayerBase {
 
+    /**
+     * Test that the flashback ability can't be used.
+     */
     @Test
-    public void testCard1() {
-        // Creature cards can't enter the battlefield from graveyards or libraries.
-        // Players can't cast cards in graveyards or libraries.
+    public void testFlashback() {
         addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         
@@ -22,30 +28,32 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
         // Flashback {1}{B}        
         addCard(Zone.GRAVEYARD, playerA, "Lingering Souls");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
+        checkPlayableAbility("flashback", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit Token", 0);
-        assertGraveyardCount(playerA, "Lingering Souls", 1);
     }
 
+    /**
+     * Test that a creature can't be put onto the battlefield from the graveyard.
+     */
     @Test
-    public void testCard2() {
+    public void testBeingPutOnBattlefieldFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+
+        // Put target creature card from a graveyard onto the battlefield under your control.
+        // That creature is a black Zombie in addition to its other colors and types.
         addCard(Zone.HAND, playerA, "Rise from the Grave", 1);
+
         addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rise from the Grave", "Craw Wurm");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Craw Wurm", 0);
+
         assertGraveyardCount(playerA, "Craw Wurm", 1);
         assertGraveyardCount(playerA, "Rise from the Grave", 1);
     }
@@ -59,24 +67,17 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
      * Same thing goes for cards like Ethersworn Canonist, assuming that the flashback isn't the first non-artifact spell for the turn.
      */
     @Test
-    public void testCard3() {
-        // Creature cards can't enter the battlefield from graveyards or libraries.
-        // Players can't cast cards in graveyards or libraries.
+    public void testFlashbackNonPermanent() {
         addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         
         // Name a nonland card. Target player reveals their hand and discards all cards with that name.
-        // Flashback-Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)       
+        // Flashback - Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
         addCard(Zone.GRAVEYARD, playerA, "Cabal Therapy");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+        checkPlayableAbility("flashback", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Silvercoat Lion", 2);
-        assertGraveyardCount(playerA, "Cabal Therapy", 1);
-    }    
- 
+    }
 }

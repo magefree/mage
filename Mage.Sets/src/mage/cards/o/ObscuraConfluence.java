@@ -47,7 +47,7 @@ public final class ObscuraConfluence extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new ObscuraConfluenceConniveEffect()).addTarget(new TargetCreaturePermanent()));
 
         // • Target player returns a creature card from their graveyard to their hand.
-        this.getSpellAbility().addMode(new Mode(new ObscuraConfluenceConniveEffect()).addTarget(new TargetPlayer()));
+        this.getSpellAbility().addMode(new Mode(new ObscuraConfluenceReturnEffect()).addTarget(new TargetPlayer()));
     }
 
     private ObscuraConfluence(final ObscuraConfluence card) {
@@ -64,7 +64,7 @@ class ObscuraConfluenceConniveEffect extends OneShotEffect {
 
     ObscuraConfluenceConniveEffect() {
         super(Outcome.Benefit);
-        staticText = "target creature connives <i>(Draw a card, then discard a card. " +
+        staticText = "target creature connives. <i>(Draw a card, then discard a card. " +
                 "If you discarded a nonland card, put a +1/+1 counter on that creature.)</i>";
     }
 

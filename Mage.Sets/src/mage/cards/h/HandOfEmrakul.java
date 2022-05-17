@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -23,7 +22,8 @@ public final class HandOfEmrakul extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Eldrazi Spawn");
 
     static {
-        filter.add(new NamePredicate("Eldrazi Spawn"));
+        filter.add(SubType.ELDRAZI.getPredicate());
+        filter.add(SubType.SPAWN.getPredicate());
     }
 
     public HandOfEmrakul(UUID ownerId, CardSetInfo setInfo) {

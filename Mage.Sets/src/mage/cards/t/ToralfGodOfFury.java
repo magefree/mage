@@ -78,7 +78,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
         )));
 
         // Equip {1}{R}
-        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}")));
+        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}"), false));
     }
 
     private ToralfGodOfFury(final ToralfGodOfFury card) {

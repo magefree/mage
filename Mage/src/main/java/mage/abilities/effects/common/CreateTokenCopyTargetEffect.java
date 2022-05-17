@@ -375,7 +375,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (exile) {
             effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile the token copies");
         } else {
-            effect = new SacrificeTargetEffect("sacrifice the token copies");
+            effect = new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
         }
         effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
 

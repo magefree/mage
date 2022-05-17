@@ -511,6 +511,7 @@ public class ScryfallImageSupportCards {
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("40K"); // Warhammer 40,000
         }
     };
 

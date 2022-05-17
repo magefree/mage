@@ -12,7 +12,7 @@ import mage.game.Game;
 public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends CostsImpl<Cost> implements AlternativeCost {
 
     protected String name;
-    protected String reminderText;
+    protected final String reminderText;
     protected boolean isMana;
 
     protected boolean activated;
@@ -21,9 +21,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         this.activated = false;
         this.name = name;
         this.isMana = cost instanceof ManaCost;
-        if (reminderText != null) {
-            this.reminderText = "<i>(" + reminderText + ")</i>";
-        }
+        this.reminderText = reminderText;
         this.add(cost);
     }
 
@@ -63,11 +61,10 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
      */
     @Override
     public String getReminderText() {
-        String replace = "";
         if (reminderText != null && !reminderText.isEmpty()) {
-            replace = reminderText.replace("{cost}", this.getText(true));
+            return "<i>(" + reminderText.replace("{cost}", this.getText(true)) + ")</i>";
         }
-        return replace;
+        return "";
     }
 
     /**

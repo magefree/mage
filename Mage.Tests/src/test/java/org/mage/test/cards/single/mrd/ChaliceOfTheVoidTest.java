@@ -53,7 +53,8 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mental Misstep", "Chalice of the Void", "Chalice of the Void");
+        checkPlayableAbility("can't Mental Misstep", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Mental", false);
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mental Misstep", "Chalice of the Void", "Chalice of the Void");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

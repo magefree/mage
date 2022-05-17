@@ -16,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -47,7 +48,9 @@ public final class BoxingRing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
 
         // Whenever a creature enters the battlefield under your control, it fights up to one target creature you don't control with the same mana value.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoxingRingFightEffect(), filter);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                new BoxingRingFightEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE
+        );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class LifeInsurance extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a nontoken creature");
 
     static {
         filter.add(TokenPredicate.FALSE);

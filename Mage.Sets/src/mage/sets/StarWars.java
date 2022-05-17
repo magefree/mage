@@ -30,6 +30,7 @@ public final class StarWars extends ExpansionSet {
         this.numBoosterRare = 1;
         this.numBoosterDoubleFaced = 1;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 271;
 
         cards.add(new SetCardInfo("A-Wing", 96, Rarity.UNCOMMON, mage.cards.a.AWing.class));
         cards.add(new SetCardInfo("AAT-1", 160, Rarity.UNCOMMON, mage.cards.a.AAT1.class));

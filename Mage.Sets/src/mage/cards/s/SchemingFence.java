@@ -77,10 +77,11 @@ class SchemingFenceChooseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent mageObject = game.getPermanentEntering(source.getSourceId());
-        if (controller == null || mageObject == null) {
+        Permanent schemingFencePermanent = game.getPermanentEntering(source.getSourceId());
+        if (controller == null || schemingFencePermanent == null) {
             return false;
         }
+
         TargetPermanent target = new TargetNonlandPermanent(0, 1, true);
         controller.choose(this.outcome, target, source, game);
         Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
@@ -88,10 +89,10 @@ class SchemingFenceChooseEffect extends OneShotEffect {
             return true;
         }
         game.getState().setValue(
-                mageObject.getId() + "_chosenPermanent",
+                schemingFencePermanent.getId() + "_chosenPermanent",
                 new MageObjectReference(chosenPermanent, game)
         );
-        mageObject.addInfo(
+        schemingFencePermanent.addInfo(
                 "chosen permanent",
                 CardUtil.addToolTipMarkTags(
                         "Chosen permanent: " + chosenPermanent.getIdName()
@@ -129,12 +130,22 @@ class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return Optional.of(game.getState().getValue(source.getId() + "_chosenPermanent"))
-                .filter(Objects::nonNull)
+        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
+            return false;
+        }
+
+        MageObjectReference chosenPermanentMOR = (MageObjectReference) game.getState().getValue(sourcePermanent.getId() + "_chosenPermanent");
+        if (chosenPermanentMOR == null) {
+            return false;
+        }
+
+        return Optional.of(chosenPermanentMOR)
                 .map(MageObjectReference.class::cast)
                 .filter(mor -> mor.zoneCounterIsCurrent(game))
-                .map(MageObjectReference::getSourceId)
-                .equals(event.getSourceId());
+                .map(MageObjectReference::getSourceId) // TODO: Are both of this line and the next one necessary?
+                .map(uuid -> uuid.equals(event.getSourceId()))
+                .orElse(false);
     }
 }
 
@@ -157,20 +168,29 @@ class SchemingFenceGainEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Permanent chosen = Optional.of(game.getState().getValue(source.getId() + "_chosenPermanent"))
-                .filter(Objects::nonNull)
+        if (permanent == null) {
+            return false;
+        }
+
+        MageObjectReference chosenPermanentMOR = (MageObjectReference) game.getState().getValue(source.getSourceId() + "_chosenPermanent");
+        if (chosenPermanentMOR == null) {
+            return false;
+        }
+
+        Permanent chosenPermanent = Optional.of(chosenPermanentMOR)
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getPermanent(game))
                 .orElse(null);
-        if (permanent == null || chosen == null) {
+        if (chosenPermanent == null) {
             return false;
         }
-        for (Ability ability : chosen.getAbilities(game).getActivatedAbilities(Zone.ALL)) {
-            if (ability instanceof LoyaltyAbility) {
+
+        for (Ability ability : chosenPermanent.getAbilities(game).getActivatedAbilities(Zone.ALL)) {
+            if (!(ability instanceof LoyaltyAbility)) {
+                Ability copied = ability.copy();
+                ability.getEffects().setValue("schemingFence", source.getSourceId());
+                permanent.addAbility(copied, source.getSourceId(), game);
             }
-            Ability copied = ability.copy();
-            ability.getEffects().setValue("schemingFence", source.getSourceId());
-            permanent.addAbility(ability, source.getSourceId(), game);
         }
         return true;
     }

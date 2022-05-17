@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -44,6 +45,7 @@ public final class IndulgeExcess extends SplitCard {
         // Excess
         // Aftermath
         // Create a Treasure token for each creature you controlled that dealt combat damage to a player this turn.
+        this.getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         this.getRightHalfCard().getSpellAbility().addEffect(
                 new CreateTokenEffect(new TreasureToken(), ExcessValue.instance)
         );

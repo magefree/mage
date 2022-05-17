@@ -197,19 +197,17 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
     @Test
     public void testKindredDiscovery() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, "Kindred Discovery");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
-        // Skip your draw step.
-        addCard(Zone.BATTLEFIELD, playerB, "Dragon Appeasement");
         addCard(Zone.HAND, playerB, "Clever Impersonator");
         addCard(Zone.HAND, playerB, "Ornithopter", 2);
         addCard(Zone.HAND, playerB, "Memnite");
+        // Skip your draw step.
+        addCard(Zone.BATTLEFIELD, playerB, "Dragon Appeasement");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery");
-        setChoice(playerA, "Construct Token");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery"); // Construct token auto-chosen
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
         setChoice(playerB, "Kindred Discovery");

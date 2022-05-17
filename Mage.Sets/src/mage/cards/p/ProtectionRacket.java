@@ -47,7 +47,7 @@ class ProtectionRacketEffect extends OneShotEffect {
     ProtectionRacketEffect() {
         super(Outcome.Benefit);
         staticText = "repeat the following process for each opponent in turn order. " +
-                "Reveal the top card of your library. That player pay pay life equal to that card's mana value. " +
+                "Reveal the top card of your library. That player may pay life equal to that card's mana value. " +
                 "If they do, exile that card. Otherwise, put it into your hand";
     }
 

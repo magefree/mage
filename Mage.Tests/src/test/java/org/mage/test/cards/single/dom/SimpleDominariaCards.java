@@ -2,6 +2,7 @@ package org.mage.test.cards.single.dom;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,11 +42,12 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Terror");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Knight of Grace");
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        // Knight of Grace has protection from Black so Terror should not be castable
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Terror", false);
         execute();
 
         assertGraveyardCount(playerA, "Knight of Grace", 0);
+        assertHandCount(playerB,      "Terror",          1);
     }
 
     @Test
@@ -66,12 +68,22 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
     @Test
     public void testKnightOfGraceBlackAbility(){
         addCard(Zone.BATTLEFIELD, playerA, "Knight of Grace");
-        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin");
+        addCard(Zone.BATTLEFIELD, playerB, "Avatar of Woe");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: ", "Knight of Grace");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}");
+        addTarget(playerB, "Knight of Grace");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
 
+        try {
+            execute();
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("setup good targets")) {
+                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
+
+        assertTapped("Avatar of Woe", false);
         assertGraveyardCount(playerA, "Knight of Grace", 0);
     }
 

@@ -34,7 +34,7 @@ public final class QuietusSpike extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseHalfLifeTargetEffect(), "equipped creature", false, true));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
     }
 
     private QuietusSpike(final QuietusSpike card) {

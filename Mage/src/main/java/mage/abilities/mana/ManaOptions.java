@@ -466,7 +466,7 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     /**
-     * @param number        of generic mana
+     * @param manaCost
      * @param manaAvailable
      * @return
      */
@@ -498,32 +498,34 @@ public class ManaOptions extends ArrayList<Mana> {
                 for (Mana existingMana : existingManas) {
                     Mana manaToPayFrom = manaAfterFixedPayment.copy();
                     manaToPayFrom.subtract(existingMana);
-                    if (manaToPayFrom.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana(1).toString())) {
+                    String manaString = existingMana.toString();
+
+                    if (manaToPayFrom.getBlack() > 0 && !payCombinationsStrings.contains(manaString + Mana.BlackMana(1))) {
                         manaToPayFrom.subtract(Mana.BlackMana(1));
                         ManaOptions.addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPayFrom.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana(1).toString())) {
+                    if (manaToPayFrom.getBlue() > 0 && !payCombinationsStrings.contains(manaString + Mana.BlueMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.BlueMana(1));
                         ManaOptions.addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPayFrom.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana(1).toString())) {
+                    if (manaToPayFrom.getGreen() > 0 && !payCombinationsStrings.contains(manaString + Mana.GreenMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.GreenMana(1));
                         ManaOptions.addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPayFrom.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana(1).toString())) {
+                    if (manaToPayFrom.getRed() > 0 && !payCombinationsStrings.contains(manaString + Mana.RedMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.RedMana(1));
                         ManaOptions.addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPayFrom.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana(1).toString())) {
+                    if (manaToPayFrom.getWhite() > 0 && !payCombinationsStrings.contains(manaString + Mana.WhiteMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.WhiteMana(1));
                         ManaOptions.addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
-                    if (manaToPayFrom.getColorless() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.ColorlessMana(1).toString())) {
+                    if (manaToPayFrom.getColorless() > 0 && !payCombinationsStrings.contains(manaString + Mana.ColorlessMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.ColorlessMana(1));
                         ManaOptions.addManaCombination(Mana.ColorlessMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     // Pay with any only needed if colored payment was not possible
-                    if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.AnyMana(1).toString())) {
+                    if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0 && !payCombinationsStrings.contains(manaString + Mana.AnyMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.AnyMana(1));
                         ManaOptions.addManaCombination(Mana.AnyMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }

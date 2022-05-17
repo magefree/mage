@@ -80,30 +80,34 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            if (game.inCheckPlayableState()) {
-                int count = netAmount.calculate(game, source, this);
-                if (count > 0) {
-                    // add color combinations
-                    ManaOptions allPossibleMana = new ManaOptions();
-                    for (int i = 0; i < count; ++i) {
-                        ManaOptions currentPossibleMana = new ManaOptions();
-                        for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                            currentPossibleMana.add(new Mana(coloredManaSymbol));
-                        }
-                        allPossibleMana.addMana(currentPossibleMana);
-                    }
-                    allPossibleMana.removeDuplicated();
-                    return allPossibleMana.stream().collect(Collectors.toList());
-                }
-            } else {
-                int amountOfManaLeft = amount.calculate(game, source, this);
-                if (amountOfManaLeft > 0) {
-                    netMana.add(Mana.AnyMana(amountOfManaLeft));
-                }
-            }
+        if (game == null) {
+            return netMana;
         }
-        return netMana;
+
+        if (game.inCheckPlayableState()) {
+            int count = netAmount.calculate(game, source, this);
+            if (count <= 0) {
+                return netMana;
+            }
+            // add color combinations
+            ManaOptions allPossibleMana = new ManaOptions();
+            for (int i = 0; i < count; ++i) {
+                ManaOptions currentPossibleMana = new ManaOptions();
+                for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+                    currentPossibleMana.add(new Mana(coloredManaSymbol));
+                }
+                allPossibleMana.addMana(currentPossibleMana);
+            }
+            allPossibleMana.removeDuplicated();
+            return allPossibleMana.stream().collect(Collectors.toList());
+
+        } else {
+            int amountOfManaLeft = amount.calculate(game, source, this);
+            if (amountOfManaLeft > 0) {
+                netMana.add(Mana.AnyMana(amountOfManaLeft));
+            }
+            return netMana;
+        }
     }
 
     @Override

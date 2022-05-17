@@ -28,7 +28,7 @@ import java.util.*;
  */
 public final class EvelynTheCovetous extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.VAMPIRE, "{this} or another Vampire");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.VAMPIRE, "Vampire");
 
     public EvelynTheCovetous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U/B}{B}{B/R}");

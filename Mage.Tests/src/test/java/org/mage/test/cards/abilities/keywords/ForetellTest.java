@@ -62,4 +62,24 @@ public class ForetellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Behold the Multiverse", 1);  // now in graveyard
         assertHandCount(playerA, 2); // 2 cards drawn
     }
+    
+    @Test
+    public void testDreamDevourerTrigger() {
+        // Issue #8876
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Devourer", 1); // if a card is foretelled, this gets +2 power
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5); // 3 mana for suspend and 2 for foretell
+        addCard(Zone.HAND, playerA, "Sol Talisman", 1);  // Suspend card
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // card to foretell
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Susp"); // suspend the Sol Talisman
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore"); // foretell the Lightning Bolt
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertAllCommandsUsed();
+        assertExileCount(playerA, "Sol Talisman", 1); // suspend card in exile
+        assertExileCount(playerA, "Lightning Bolt", 1); // foretold card in exile
+        assertPowerToughness(playerA, "Dream Devourer", 2, 3);  // +2 power boost from trigger due to foretell of Lightning Bolt
+    }
 }

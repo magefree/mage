@@ -43,7 +43,7 @@ public final class VorpalSword extends CardImpl {
         ), new ManaCostsImpl<>("{5}{B}{B}{B}")));
 
         // Equip {B}{B}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{B}{B}")));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{B}{B}"), false));
     }
 
     private VorpalSword(final VorpalSword card) {

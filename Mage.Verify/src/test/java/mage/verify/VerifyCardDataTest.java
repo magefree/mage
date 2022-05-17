@@ -10,10 +10,7 @@ import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.MultikickerAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -62,7 +59,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "SNC"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "NCC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1423,6 +1420,8 @@ public class VerifyCardDataTest {
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
         hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(EquipAbility.class, "Equip only as a sorcery.");
+        hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
 
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);

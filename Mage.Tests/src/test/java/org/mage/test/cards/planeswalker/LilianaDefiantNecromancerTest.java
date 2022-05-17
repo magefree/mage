@@ -19,7 +19,9 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
         // Lifelink
-        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer,
+        // then return her to the battlefield transformed under her owner's control.
+        // If you do, put a 2/2 black Zombie creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Liliana, Heretical Healer");
 
         addCard(Zone.HAND, playerB, "Lightning Bolt");

@@ -16,7 +16,6 @@ public class PostMortemLungeTest extends CardTestPlayerBase {
     */
     @Test
     public void testExilesCreatureAtEndStep() {
-
         /*
         {X}{B/P} - Sorcery
         Return target creature card with converted mana cost X from your graveyard to the battlefield. 
@@ -25,16 +24,14 @@ public class PostMortemLungeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Postmortem Lunge");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.GRAVEYARD, playerA, "Elite Vanguard"); // {W} 2/1 creature
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Postmortem Lunge");
-        addTarget(playerA, "Elite Vanguard");
-        setChoice(playerA, "Elite Vanguard");
-        
+
         attack(1, playerA, "Elite Vanguard");
-        
+
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        
+
         assertLife(playerB, 18);
         assertGraveyardCount(playerA, "Postmortem Lunge", 1);
         assertExileCount("Elite Vanguard", 1);

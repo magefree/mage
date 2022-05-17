@@ -45,7 +45,7 @@ public final class HeavyArbalest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 
         // Equip {4)
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), false));
     }
 
     private HeavyArbalest(final HeavyArbalest card) {

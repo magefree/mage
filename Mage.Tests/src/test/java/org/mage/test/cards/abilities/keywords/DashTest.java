@@ -8,28 +8,30 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * 702.109. {@link mage.abilities.keyword.DashAbility Dash}
+ * 702.109a Dash represents three abilities: two static abilities that
+ * function while the card with dash is on the stack, one of which may
+ * create a delayed triggered ability, and a static ability that functions
+ * while the object with dash is on the battlefield.
+ *
+ * “Dash [cost]” means “You may cast this card by paying [cost] rather that
+ * its mana cost,” “If this spell's dash cost was paid, return the permanent this
+ * spell becomes to its owner's hand at the beginning of the next end step,”
+ * and “As long as this permanent's dash cost was paid, it has haste.”
+ *
+ * Paying a card's dash cost follows the rules for paying alternative costs
+ * in rules 601.2b and 601.2e–g.
+ *
  * @author BetaSteward
  */
 public class DashTest extends CardTestPlayerBase {
-
     /**
-     * 702.108. Dash 702.108a Dash represents three abilities: two static
-     * abilities that function while the card with dash is on the stack, one of
-     * which may create a delayed triggered ability, and a static ability that
-     * functions while the object with dash is on the battlefield. “Dash [cost]”
-     * means “You may cast this card by paying [cost] rather that its mana
-     * cost,” “If this spell's dash cost was paid, return the permanent this
-     * spell becomes to its owner's hand at the beginning of the next end step,”
-     * and “As long as this permanent's dash cost was paid, it has haste.”
-     * Paying a card's dash cost follows the rules for paying alternative costs
-     * in rules 601.2b and 601.2e–g.
+     * Screamreach Brawler
+     * Creature — Orc Berserker 2/3
+     * {2}{R}
      *
-     */
-    /**
-     * Screamreach Brawler Creature — Orc Berserker 2/3, 2R (3) Dash {1}{R} (You
-     * may cast this spell for its dash cost. If you do, it gains haste, and
-     * it's returned from the battlefield to its owner's hand at the beginning
-     * of the next end step.)
+     * Dash {1}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned
+     * from the battlefield to its owner's hand at the beginning of the next end step.)
      */
     @Test
     public void testDash() {
@@ -56,10 +58,12 @@ public class DashTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
         setChoice(playerA, false);
-        attack(1, playerA, "Screamreach Brawler");
+        checkPlayableAbility("attack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "attack: Scream", false);
 
         setStopAt(2, PhaseStep.UNTAP);
         execute();
+
+        // TODO: Must be a better way to check if a creature can't attack
 
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Screamreach Brawler", 1);

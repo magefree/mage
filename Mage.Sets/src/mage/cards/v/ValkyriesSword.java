@@ -34,7 +34,7 @@ public final class ValkyriesSword extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private ValkyriesSword(final ValkyriesSword card) {
