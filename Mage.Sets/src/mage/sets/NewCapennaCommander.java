@@ -167,6 +167,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jenara, Asura of War", 343, Rarity.MYTHIC, mage.cards.j.JenaraAsuraOfWar.class));
         cards.add(new SetCardInfo("Jund Panorama", 408, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Shrine", 409, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Kamiz, Obscura Oculus", 3, Rarity.MYTHIC, mage.cards.k.KamizObscuraOculus.class));
         cards.add(new SetCardInfo("Karn's Bastion", 410, Rarity.RARE, mage.cards.k.KarnsBastion.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 270, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Kess, Dissident Mage", 344, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
