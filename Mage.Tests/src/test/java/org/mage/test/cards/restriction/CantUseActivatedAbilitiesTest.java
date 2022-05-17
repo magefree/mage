@@ -45,7 +45,8 @@ public class CantUseActivatedAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Adarkar Sentinel"); // Artifact Creature — Soldier (3/3)
         addCard(Zone.BATTLEFIELD, playerB, "Island");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: ");
+        checkPlayableAbility("Can't Tap", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}", false);
+//        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: ");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
                 

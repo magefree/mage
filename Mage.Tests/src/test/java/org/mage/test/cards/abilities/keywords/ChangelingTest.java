@@ -28,7 +28,7 @@ public class ChangelingTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Long-Forgotten Gohei");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Woodland Changeling");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Woodlan", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

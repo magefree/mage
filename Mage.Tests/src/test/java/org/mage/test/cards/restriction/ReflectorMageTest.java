@@ -61,7 +61,7 @@ public class ReflectorMageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
         addTarget(playerA, "Bronze Sable");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bronze Sable"); // should not be allowed
+        checkPlayableAbility("sable not available", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Bronze", false);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 

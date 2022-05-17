@@ -22,7 +22,7 @@ public class SecondGuessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Second Guess");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
+        checkPlayableAbility("can't counter lightning bolt", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Second", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -66,8 +66,9 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock"); // can't be cast (no valid target), so Secon Guess spell stays on hand
+        checkPlayableAbility("can't counter lightning bolt", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Second", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

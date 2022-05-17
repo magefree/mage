@@ -7,15 +7,22 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.a.AltarOfTheLost Altar of the Lost}
+ * {3}
+ * Artifact
+ * Altar of the Lost enters the battlefield tapped.
+ * {T}: Add two mana in any combination of colors.
+ *      Spend this mana only to cast spells with flashback from a graveyard.
  *
  * @author BetaSteward
  */
 public class AltarOfTheLostTest extends CardTestPlayerBase {
 
+    /**
+     * Test that the mana can be used to cast the spell from the graveyard using flashback.
+     */
     @Test
-    public void testCard() {
-        // Altar of the Lost enters the battlefield tapped.
-        // {tap}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
+    public void testFlashback() {
         addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         // Flashback {1}{B}
@@ -31,28 +38,22 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Spirit Token", 2);
     }
 
+    /**
+     * Test that the same card cannot be cast from the hand even though it has a flashback ability.
+     */
     @Test
-    public void testCard1() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+    public void testCantCastFromHand() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains",2 );
         addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         addCard(Zone.HAND, playerA, "Lingering Souls");
 
-        setChoice(playerA, "X=0");
-        setChoice(playerA, "X=0");
-        setChoice(playerA, "X=2");
-        setChoice(playerA, TestPlayer.CHOICE_SKIP);
-
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lingering Souls");
+        checkPlayableAbility("mana not available", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lingering", false);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Spirit Token", 0);
     }
 

@@ -2,8 +2,12 @@ package org.mage.test.cards.single.dka;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  *
@@ -27,15 +31,25 @@ public class FaithsShieldTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Faith's Shield");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        setChoice(playerA, "Red");
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Faith's Shield", "White Knight");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "White Knight");
+        setChoice(playerA, "Red");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, "White Knight");
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        try {
+            execute();
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("setup good targets")) {
+                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+            }
+        }
+
         assertPermanentCount(playerA, "White Knight", 1);
     }
 

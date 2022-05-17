@@ -30,7 +30,8 @@ public class ChampionOfLambholtTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
         addCard(Zone.HAND, playerB, "Increasing Devotion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Increasing Devotion");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Increasing", false);
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Increasing Devotion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
