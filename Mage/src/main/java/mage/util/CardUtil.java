@@ -1099,7 +1099,7 @@ public final class CardUtil {
      * Prepare rules list from abilities
      *
      * @param rulesSource abilities list to show as rules
-     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; exameple: from second or transformed side)
+     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
     public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
@@ -1109,9 +1109,7 @@ public final class CardUtil {
             if (game != null) {
 
                 // debug state
-                for (String data : game.getState().getCardState(cardId).getInfo().values()) {
-                    rules.add(data);
-                }
+                rules.addAll(game.getState().getCardState(cardId).getInfo().values());
 
                 // ability hints
                 List<String> abilityHints = new ArrayList<>();
