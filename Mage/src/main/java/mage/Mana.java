@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Objects;
 
@@ -540,39 +541,47 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         any = 0;
     }
 
+    /**
+     * Used in order to reorder mana combinations so they're returned in the order found on cards.
+     */
     private static final Map<String, String> colorLetterMap = new HashMap<>();
 
     static {
-        colorLetterMap.put("wr", "rw");
-        colorLetterMap.put("wg", "gw");
-        colorLetterMap.put("ug", "gu");
-        colorLetterMap.put("wrg", "rgw");
-        colorLetterMap.put("wug", "gwu");
-        colorLetterMap.put("wur", "urw");
-        colorLetterMap.put("urg", "gur");
-        colorLetterMap.put("ubg", "bgu");
-        colorLetterMap.put("wbr", "rwb");
-        colorLetterMap.put("wbrg", "brgw");
-        colorLetterMap.put("wurg", "rgwu");
-        colorLetterMap.put("wubg", "gwub");
+        colorLetterMap.put("WR", "RW");
+        colorLetterMap.put("WG", "GW");
+        colorLetterMap.put("UG", "GU");
+        colorLetterMap.put("WRG", "RGW");
+        colorLetterMap.put("WUG", "GWU");
+        colorLetterMap.put("WUR", "URW");
+        colorLetterMap.put("URG", "GUR");
+        colorLetterMap.put("UBG", "BGU");
+        colorLetterMap.put("WBG", "RWB");
+        colorLetterMap.put("WBRG", "BRGW");
+        colorLetterMap.put("WURG", "RGWU");
+        colorLetterMap.put("WUBG", "GWUB");
     }
 
+    /**
+     * The use of a StringBuilder was
+     *
+     * @return
+     */
     private String getColorsInOrder() {
         StringBuilder sb = new StringBuilder();
         if (white > 0) {
-            sb.append('w');
+            sb.append("W");
         }
         if (blue > 0) {
-            sb.append('u');
+            sb.append("U");
         }
         if (black > 0) {
-            sb.append('b');
+            sb.append("B");
         }
         if (red > 0) {
-            sb.append('r');
+            sb.append("R");
         }
         if (green > 0) {
-            sb.append('g');
+            sb.append("G");
         }
         String manaString = sb.toString();
         return colorLetterMap.getOrDefault(manaString, manaString);
@@ -580,15 +589,15 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     private int colorCharToAmount(char color) {
         switch (color) {
-            case 'w':
+            case 'W':
                 return white;
-            case 'u':
+            case 'U':
                 return blue;
-            case 'b':
+            case 'B':
                 return black;
-            case 'r':
+            case 'R':
                 return red;
-            case 'g':
+            case 'G':
                 return green;
         }
         return 0;
@@ -602,9 +611,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     @Override
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
+
         if (generic > 0) {
             sbMana.append('{').append(generic).append('}');
         }
+
         // normal mana
         if (colorless < 20) {
             for (int i = 0; i < colorless; i++) {
@@ -613,6 +624,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         } else {
             sbMana.append(colorless).append("{C}");
         }
+
         String colorsInOrder = getColorsInOrder();
         for (char c : colorsInOrder.toCharArray()) {
             int amount = colorCharToAmount(c);
@@ -624,6 +636,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 sbMana.append(amount).append('{').append(c).append('}');
             }
         }
+
         if (any < 20) {
             for (int i = 0; i < any; i++) {
                 sbMana.append("{Any}");
@@ -632,7 +645,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             sbMana.append(any).append("{Any}");
         }
 
-        return sbMana.toString().toUpperCase().replace("ANY", "Any");
+        return sbMana.toString();
     }
 
     /**
@@ -1159,14 +1172,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Returns the mana that is more colored or has a greater amount but does
-     * not contain one less mana in any color but generic if you call with
-     * {1}{W}{R} and {G}{W}{R} you get back {G}{W}{R} if you call with {G}{W}{R}
-     * and {G}{W}{R} you get back {G}{W}{R} if you call with {G}{W}{B} and
-     * {G}{W}{R} you get back null
+     * not contain one less mana in any color but generic.
      *
-     * @param mana1
-     * @param mana2
-     * @return
+     * Examples:
+     *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     *      {G}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     *      {G}{W}{B} and {G}{W}{R} -> null
+     *
+     * @param mana1     The 1st mana to compare.
+     * @param mana2     The 2nd mana to compare.
+     * @return          The greater of the two manas, or null if they're the same
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
         String conditionString1 = "";
