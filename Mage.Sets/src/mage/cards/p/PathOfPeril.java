@@ -25,7 +25,7 @@ public final class PathOfPeril extends CardImpl {
     }
 
     public PathOfPeril(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.SORCERY }, "{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Cleave {4}{W}{B}
         this.addAbility(new CleaveAbility(
