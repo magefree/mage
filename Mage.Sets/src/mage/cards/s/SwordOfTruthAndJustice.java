@@ -66,7 +66,8 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
 
     SwordOfTruthAndJusticeEffect() {
         super(Outcome.Benefit);
-        staticText = "put a +1/+1 counter on a creature you control, then proliferate";
+        staticText = "put a +1/+1 counter on a creature you control, then proliferate. " +
+                "<i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>";
     }
 
     private SwordOfTruthAndJusticeEffect(final SwordOfTruthAndJusticeEffect effect) {
@@ -92,6 +93,6 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
         }
-        return new ProliferateEffect().apply(game, source);
+        return new ProliferateEffect(true).apply(game, source);
     }
 }
