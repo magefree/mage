@@ -13,8 +13,8 @@ public interface OptionalAdditionalCost extends Cost {
     String getName();
 
     /**
-     * Returns the complete text for the addional cost or if onlyCost is true
-     * only the pure text fore the included native cost
+     * Returns the complete text for the additional cost or if onlyCost is true
+     * only the pure text for the included native cost
      *
      * @param onlyCost
      * @return
@@ -30,13 +30,21 @@ public interface OptionalAdditionalCost extends Cost {
 
     void setReminderText(String reminderText);
 
+    /**
+     * Sets the minimum selectable cost
+     */
     void setMinimumCost(int minimumCost);
+
+    /**
+     * Sets the maximum selectable cost
+     */
+    void setMaximumCost(int maximumCost);
 
     /**
      * Returns a text suffix for the game log, that can be added to the cast
      * message.
      *
-     * @param position - if there are multiple costs, it's the postion the cost
+     * @param position - if there are multiple costs, it's the position the cost
      *                 is set (starting with 0)
      * @return
      */
