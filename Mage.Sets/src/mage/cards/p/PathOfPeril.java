@@ -22,7 +22,7 @@ public final class PathOfPeril extends CardImpl {
             = new FilterCreaturePermanent("creatures [with mana value 2 or less]");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public PathOfPeril(UUID ownerId, CardSetInfo setInfo) {
