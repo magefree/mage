@@ -54,6 +54,7 @@ public class PlayerView implements Serializable {
     private final boolean passedAllTurns; // F9
     private final boolean passedUntilEndStepBeforeMyTurn; // F11
     private final boolean monarch;
+    private final boolean initiative;
     private final List<String> designationNames = new ArrayList<>();
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
@@ -153,6 +154,7 @@ public class PlayerView implements Serializable {
         this.passedUntilStackResolved = player.getPassedUntilStackResolved();
         this.passedUntilEndStepBeforeMyTurn = player.getPassedUntilEndStepBeforeMyTurn();
         this.monarch = player.getId().equals(game.getMonarchId());
+        this.initiative = player.getId().equals(game.getInitiativeId());
         for (Designation designation : player.getDesignations()) {
             this.designationNames.add(designation.getName());
         }
@@ -307,6 +309,10 @@ public class PlayerView implements Serializable {
 
     public boolean isMonarch() {
         return monarch;
+    }
+
+    public boolean isInitiative() {
+        return initiative;
     }
 
     public List<String> getDesignationNames() {
