@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -32,10 +33,20 @@ public class MeldTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bruna, the Fading Light");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisela, the Broken Blade");
-        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion"); // Can't cast it because of Gisela
 
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Brisela, Voice of Nightmares", 1);
         assertPermanentCount(playerA, "Bruna, the Fading Light", 0);

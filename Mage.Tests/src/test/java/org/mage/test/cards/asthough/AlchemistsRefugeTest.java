@@ -44,16 +44,10 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Zone.HAND, playerA, "Elite Vanguard");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        checkPlayableAbility("flash on B's turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Elite", false);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        // it shouldn't be possible, so no Elite Vanguard on the battlefield
-        assertPermanentCount(playerA, "Elite Vanguard", 0);
     }
 
     /**
@@ -68,15 +62,9 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Elite Vanguard");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
-        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        checkPlayableAbility("flash on B's turn", 4, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Elite", false);
 
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        assertPermanentCount(playerA, "Elite Vanguard", 0);
     }
-
 }

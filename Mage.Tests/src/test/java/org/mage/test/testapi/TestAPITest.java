@@ -57,5 +57,4 @@ public class TestAPITest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertLife(playerA, 24); // gain 4 life from Last Breath
     }
-
 }

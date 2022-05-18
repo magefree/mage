@@ -3,6 +3,7 @@ package org.mage.test.cards.single.khm;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -78,18 +79,31 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
 
     @Test
     public void testCastFromExileWithoutSnow() {
+        addCard(Zone.HAND, playerA, bolt);
+
         addCard(Zone.BATTLEFIELD, playerA, necromancer);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
-        addCard(Zone.HAND, playerA, bolt);
+
         addCard(Zone.BATTLEFIELD, playerB, bear);
 
+        // Kill playerB's Bear to exile it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, bear);
 
+        // Make sure it can't be cast without the snow land needed for the right colors
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bear);
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
+
+        try { // TODO: The bears are labelled as playable for some reason. Need the try-catch
+            execute();
+            assertAllCommandsUsed();
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Needed error about PlayerA having too many actions, but got:\n" + e.getMessage());
+            }
+        }
 
         assertExileCount(playerB, bear, 1);
         assertCounterOnExiledCardCount(bear, CounterType.ICE, 1);

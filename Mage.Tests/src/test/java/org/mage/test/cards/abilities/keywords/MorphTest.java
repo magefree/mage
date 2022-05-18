@@ -170,22 +170,16 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
-        setChoice(playerB, true); // use to copy a nonland permanent
-        addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.toString()); // Morphed creature
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerB, 20);
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
         assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
         assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
-
     }
 
     /**
@@ -311,7 +305,7 @@ public class MorphTest extends CardTestPlayerBase {
     public void testCounterCastWithMorphEffect() {
         // Sagu Mauler 6/6 - Creature - Beast
         // Trample, hexproof
-        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
         addCard(Zone.HAND, playerA, "Sagu Mauler");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
@@ -324,7 +318,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
         setChoice(playerA, true); // cast it face down as 2/2 creature
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Disdainful Stroke", "Sagu Mauler");
+        checkPlayableAbility("Can't Disdainful Stroke Sagu", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Disdainful", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -651,18 +645,25 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
+        setStrictChooseMode(true);
+
         // return to hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
         addTarget(playerA, "Rattleclaw Mystic");
 
         // try cast as normal -- must not work
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
-        setChoice(playerB, false); // try cast as normal
+        setChoice(playerB, false);
 
-        //setStrictChooseMode(true); // no strict mode - cause can't cast as normal
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
-        execute();
-        //assertAllCommandsUsed();
+
+        try {
+            execute();
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Can't find available command - activate:Cast Rattleclaw Mystic (use checkPlayableAbility for \"non available\" checks)")) {
+                Assert.fail("Should have gotten an error about not being able to cast Rattleclaw, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
