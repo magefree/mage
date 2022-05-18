@@ -87,6 +87,15 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
         }
     }
 
+    @Override
+    public void setMaximumCost(int maximumCost) {
+        for (VariableCost cost : this.getVariableCosts()) {
+            if (cost instanceof VariableManaCost) {
+                ((VariableManaCost) cost).setMaxX(maximumCost);
+            }
+        }
+    }
+
     /**
      * Returns a text suffix for the game log, that can be added to the cast
      * message.
