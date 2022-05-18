@@ -7,16 +7,16 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.d.DaybreakCoronet Daybreak Coronet}
+ * {W}{W}
+ * Enchantment — Aura
+ * Enchant creature with another Aura attached to it
+ * Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink.
+ * (Damage dealt by the creature also causes its controller to gain that much life.)
  *
  * @author LevelX2
  */
 public class DaybreakCoronetTest extends CardTestPlayerBase {
-
-    // Daybreak Coronet {W}{W}
-    // Enchantment — Aura
-    // Enchant creature with another Aura attached to it
-    // Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
-
 
     @Test
     public void testCantEnchantTargetWithoutAura() {
@@ -24,16 +24,12 @@ public class DaybreakCoronetTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.HAND, playerA, "Daybreak Coronet");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daybreak Coronet", "Silvercoat Lion");
+        checkPlayableAbility("can't cast coronet", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Daybreak", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
         assertPermanentCount(playerA, "Daybreak Coronet", 0);
-
     }
 
     @Test
@@ -50,17 +46,14 @@ public class DaybreakCoronetTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
         assertPermanentCount(playerA, "Daybreak Coronet", 1);
-
     }
-    /*
-    If Daybreak Coronet is already attached to a permanent and
-    the other aura is destroyed. The target for Daybreak Coronet
-    gets illegal and the Daybreak Coronet has to go to graveyard.
-    */
+
+    /**
+     * If all other Auras attached to the enchanted creature stop enchanting it,
+     * Daybreak Coronet will be attached to an illegal permanent and will be put into its owner’s graveyard.
+     * (2007-05-01)
+     */
     @Test
     public void testTargetGetsIllegal() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -79,13 +72,9 @@ public class DaybreakCoronetTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
         assertGraveyardCount(playerA, "Holy Strength", 1);
         assertGraveyardCount(playerB, "Demystify", 1);
         assertPermanentCount(playerA, "Daybreak Coronet", 0);
         assertGraveyardCount(playerA, "Daybreak Coronet", 1);
-
     }
 }

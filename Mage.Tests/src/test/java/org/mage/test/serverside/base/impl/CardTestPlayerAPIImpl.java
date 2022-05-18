@@ -439,6 +439,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
     }
 
+    /**
+     * Checks whether or not a given playable ability (someting that lets you cast a card) is available.
+     * This function will only check IF the ability is available or not, it does not check the number of times that it's available.
+     *
+     * If using with mustHave = false be very careful about spelling and options, otherwise you may get a false negative.
+     * It is reccomended that you set up the test so that the ability is available at the point you wish to check it,
+     * check it with checkPlayableAbility(..., mustHave = true), then add whatever condition would stop you from being
+     * able to activat the abiltiy
+     *
+     * TODO: Currently does not work in all cases since some effects list abilities as available,
+     *       only to then give a pop-up about how it can't be played.
+     *       For examples and things to fix, search for:
+     *       "try {
+     *             execute();"
+     *
+     * @param checkName         String to show up if the check fails, for display purposes only.
+     * @param turnNum           The turn number to check on.
+     * @param step              The step to check the ability on.
+     * @param player            The player to be checked for the ability.
+     * @param abilityStartText  The starting portion of the ability name.
+     * @param mustHave          Whether the ability should be activatable of not
+     */
     public void checkPlayableAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String abilityStartText, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
     }
@@ -1084,15 +1106,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", cardName);
         Card found = null;
 
-        if (found == null) {
-            for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-                if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
-                    found = card;
-                    break;
-                }
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
+                found = card;
+                break;
             }
-
         }
+
         Assert.assertNotNull("There is no such card in the exile, cardName=" + cardName, found);
         Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }

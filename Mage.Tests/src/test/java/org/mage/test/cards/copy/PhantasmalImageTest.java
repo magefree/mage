@@ -493,7 +493,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Kitchen Finks", 1);
         assertPowerToughness(playerB, "Kitchen Finks", 2, 1);
-
     }
 
     @Test
@@ -535,7 +534,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Butcher Ghoul", 1);
         assertPowerToughness(playerB, "Butcher Ghoul", 2, 2);
-
     }
 
     /**
@@ -561,7 +559,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Wurmcoil Engine");
+        setChoice(playerA, "Wurmcoil Engine");
 
         attack(2, playerB, "Wurmcoil Engine");
         block(2, playerA, "Wurmcoil Engine", "Wurmcoil Engine");
@@ -576,7 +574,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
         assertPermanentCount(playerB, "Phyrexian Wurm Token", 2);
-
     }
 
     /**
@@ -585,14 +582,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testVoiceOfResurgence() {
-        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
+        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies,
+        // put a green and white Elemental creature token onto the battlefield with
+        // "This creature's power and toughness are each equal to the number of creatures you control."
         addCard(Zone.BATTLEFIELD, playerB, "Voice of Resurgence");
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Voice of Resurgence");
+        setChoice(playerA, "Voice of Resurgence");
 
         attack(2, playerB, "Voice of Resurgence");
         block(2, playerA, "Voice of Resurgence", "Voice of Resurgence");
@@ -607,7 +606,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Elemental Token", 1);
         assertPermanentCount(playerA, "Elemental Token", 1);
-
     }
 
     @Test

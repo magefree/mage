@@ -362,6 +362,7 @@ public class GameEvent implements Serializable {
          */
         BECOME_MONARCH,
         BECOMES_MONARCH,
+        TOOK_INITIATIVE,
         BECOMES_DAY_NIGHT,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,

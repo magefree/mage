@@ -15,7 +15,8 @@ public class UnequipEventTest extends CardTestPlayerBase {
 
     @Test
     public void testGraftedExoskeletonEvent() {
-        // When Nazahn, Revered Bladesmith enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle your library.
+        // When Nazahn, Revered Bladesmith enters the battlefield, search your library for an Equipment card and reveal it.
+        // If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle your library.
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
         addCard(Zone.HAND, playerA, "Nazahn, Revered Bladesmith"); // Creature 5/4  {4}{G}{W}
         // Whenever Hammer of Nazahn or another Equipment enters the battlefiend under your control, you may attach that Equipment to target creature you control.
@@ -31,7 +32,7 @@ public class UnequipEventTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grafted Exoskeleton", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nazahn, Revered Bladesmith");
-        setChoice(playerA, "Hammer of Nazahn");
+        // setChoice(playerA, "Hammer of Nazahn"); // Auto-chosen since it's the only equipment in the library
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}");
 

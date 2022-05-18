@@ -38,7 +38,7 @@ public final class PerrieThePulverizer extends CardImpl {
     );
 
     public PerrieThePulverizer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);

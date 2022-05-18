@@ -7,6 +7,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.m.MistcutterHydra Mistcutter Hydra}
+ * {X}{G}
+ * Creature — Hydra
+ * 0/0
+ *
+ * This spell can’t be countered.
+ * Haste, protection from blue
+ * Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
  *
  * @author LevelX2
  */
@@ -17,11 +25,6 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
      */
     @Test
     public void testHydraNormal3Counters() {
-        // Mistcutter Hydra
-        // Creature — Hydra 0/0, XG (1)
-        // Mistcutter Hydra can't be countered.
-        // Haste, protection from blue
-        // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Mistcutter Hydra");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -43,11 +46,6 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Banishing Light");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
-        // Mistcutter Hydra
-        // Creature — Hydra 0/0, XG (1)
-        // Mistcutter Hydra can't be countered.
-        // Haste, protection from blue
-        // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerB, "Mistcutter Hydra");
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.HAND, playerB, "Disenchant");
@@ -55,15 +53,11 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mistcutter Hydra");
         setChoice(playerB, "X=3");
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banishing Light");
-        setChoice(playerA, "Mistcutter Hydra");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banishing Light"); // Target autochosenj
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant","Banishing Light");
 
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, "Banishing Light", 1);
         assertGraveyardCount(playerB, "Disenchant", 1);
@@ -76,11 +70,6 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
      */
     @Test
     public void testApocalypseHydraNormal3Counters() {
-        // Apocalypse {X}{R}{G}
-        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. 
-        // If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
-        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
-        // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Apocalypse Hydra");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -100,17 +89,13 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
      */
     @Test
     public void testHydraReturnsAfterCounterWithZeroCounters() {
-        // Apocalypse {X}{R}{G}
-        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. 
-        // If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
-        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
-        // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
-        addCard(Zone.HAND, playerA, "Apocalypse Hydra");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Put target artifact or creature card from a graveyard onto the battlefield under
         // your control. Shuffle Beacon of Unrest into its owner's library.
         addCard(Zone.HAND, playerA, "Beacon of Unrest");
+        addCard(Zone.HAND, playerA, "Apocalypse Hydra");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
         addCard(Zone.HAND, playerB, "Counterspell");
@@ -129,8 +114,5 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
         assertHandCount(playerA,"Beacon of Unrest", 0);
         assertPermanentCount(playerA, "Apocalypse Hydra", 0);
         assertGraveyardCount(playerA, "Apocalypse Hydra", 1);
-        
-        
-        // assertPowerToughness(playerA, "Mistcutter Hydra", 3,3);        
     }
 }

@@ -5,9 +5,16 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * {@link mage.cards.p.PowerWordKill Power Word Kill}
+ * {1}{B}
+ * Instant
+ * Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
+ *
+ * @author Ingmar Goudt
+ */
 public class PowerWordKillTest extends CardTestPlayerBase {
 
-    // Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
     private final String powerWordKill = "Power Word Kill";
 
     @Test
@@ -28,9 +35,11 @@ public class PowerWordKillTest extends CardTestPlayerBase {
     public void canNotTargetChangeling(){
         addCard(Zone.HAND, playerA, powerWordKill);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
         addCard(Zone.BATTLEFIELD, playerB, "Avian Changeling");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, powerWordKill, "Avian Changeling");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Power", false);
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertPermanentCount(playerB, "Avian Changeling", 1);

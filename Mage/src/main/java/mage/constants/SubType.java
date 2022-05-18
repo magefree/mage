@@ -31,6 +31,7 @@ public enum SubType {
     TOWER("Tower", SubTypeSet.NonBasicLandType),
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
+    BACKGROUND("Background", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),

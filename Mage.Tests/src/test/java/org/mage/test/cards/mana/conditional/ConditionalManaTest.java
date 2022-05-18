@@ -45,9 +45,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        playerA.addChoice("White");
-        playerA.addChoice("White");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

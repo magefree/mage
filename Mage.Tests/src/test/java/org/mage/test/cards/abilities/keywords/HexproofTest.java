@@ -76,11 +76,13 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
         addCard(Zone.HAND, playerA, "Murder", 2);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Knight of Grace");
-        addCard(Zone.BATTLEFIELD, playerB, "Knight of Malice");
+        addCard(Zone.BATTLEFIELD, playerB, "Knight of Grace");  // White
+        addCard(Zone.BATTLEFIELD, playerB, "Knight of Malice"); // Black
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Knight of Grace");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Knight of Malice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkPlayableAbility("knight of grace", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Murder", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -143,12 +145,14 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         // You have hexproof. (You can't be the target of spells or abilities your opponents control.)
         addCard(Zone.BATTLEFIELD, playerB, "Leyline of Sanctity", 1);
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
         addTarget(playerA, playerB);
 
+        setStopAt(1, PhaseStep.END_TURN);
+
         try {
-            setStrictChooseMode(true);
-            setStopAt(1, PhaseStep.END_TURN);
             execute();
             assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
