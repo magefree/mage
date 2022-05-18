@@ -28,7 +28,8 @@ public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
                 ).stream()
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
-                .sum();
+                .max()
+                .orElse(0);
     }
 
     @Override
