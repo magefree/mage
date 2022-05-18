@@ -1,9 +1,9 @@
 package mage.deck;
 
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.CommanderChooseColorAbility;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.FriendsForeverAbility;
@@ -14,6 +14,7 @@ import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
@@ -46,13 +47,52 @@ public abstract class AbstractCommander extends Constructed {
 
     protected abstract boolean checkBanned(Map<String, Integer> counts);
 
-    protected boolean checkCommander(Card commander) {
-        if ((!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) || !commander.isLegendary())
-                && !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
-            addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
+    protected boolean checkCommander(Card commander, Set<Card> commanders) {
+        return commander.hasCardTypeForDeckbuilding(CardType.CREATURE) && commander.isLegendary()
+                || commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())
+                || commander.hasSubTypeForDeckbuilding(SubType.BACKGROUND) && commanders.size() == 2;
+    }
+
+    protected boolean checkPartners(Set<Card> commanders) {
+        switch (commanders.size()) {
+            case 1:
+                return true;
+            case 2:
+                break;
+            default:
+                return false;
+        }
+        Iterator<Card> iter = commanders.iterator();
+        Card commander1 = iter.next();
+        Card commander2 = iter.next();
+        if (commander1.getAbilities().containsClass(PartnerAbility.class)
+                && commander2.getAbilities().containsClass(PartnerAbility.class)
+                || commander1.getAbilities().containsClass(FriendsForeverAbility.class)
+                && commander2.getAbilities().containsClass(FriendsForeverAbility.class)) {
+            return true;
+        }
+        if (commander1.getAbilities().containsClass(PartnerWithAbility.class)
+                && commander2.getAbilities().containsClass(PartnerWithAbility.class)) {
+            String name1 = CardUtil.castStream(commander2.getAbilities().stream(), PartnerWithAbility.class).map(PartnerWithAbility::getPartnerName).findFirst().orElse(null);
+            String name2 = CardUtil.castStream(commander1.getAbilities().stream(), PartnerWithAbility.class).map(PartnerWithAbility::getPartnerName).findFirst().orElse(null);
+            if (commander1.getName().equals(name1) && commander2.getName().equals(name2)) {
+                return true;
+            }
+            addError(DeckValidatorErrorType.PRIMARY, commander1.getName(), "Commander with invalid Partner (" + commander1.getName() + ')', true);
+            addError(DeckValidatorErrorType.PRIMARY, commander2.getName(), "Commander with invalid Partner (" + commander2.getName() + ')', true);
             return false;
         }
-        return true;
+        if (commander1.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander2.hasSubTypeForDeckbuilding(SubType.BACKGROUND)
+                || commander2.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
+            return true;
+        }
+        if (commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
+            addError(DeckValidatorErrorType.PRIMARY, commander1.getName(), "Background without valid Commander (" + commander1.getName() + ')', true);
+        }
+        if (commander2.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
+            addError(DeckValidatorErrorType.PRIMARY, commander1.getName(), "Background without valid Commander (" + commander2.getName() + ')', true);
+        }
+        return false;
     }
 
     private boolean checkColorIdentity(Deck deck, FilterMana colorIdentity, Set<Card> commanders) {
@@ -175,40 +215,15 @@ public abstract class AbstractCommander extends Constructed {
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         valid = checkCounts(1, counts) && valid;
-
         valid = checkBanned(counts) && valid;
+        valid = checkPartners(commanders) && valid;
 
-        Set<String> commanderNames = new HashSet<>();
-        for (Card commander : commanders) {
-            commanderNames.add(commander.getName());
-        }
-        if (commanders.size() == 2
-                && commanders
-                .stream()
-                .map(MageObject::getAbilities)
-                .filter(abilities -> abilities.contains(PartnerAbility.getInstance()))
-                .count() != 2
-                && commanders
-                .stream()
-                .map(MageObject::getAbilities)
-                .filter(abilities -> abilities.contains(FriendsForeverAbility.getInstance()))
-                .count() != 2
-                && !CardUtil
-                .castStream(commanders.stream().map(MageObject::getAbilities), PartnerWithAbility.class)
-                .map(PartnerWithAbility::getPartnerName)
-                .allMatch(commanderNames::contains)) {
-            for (Card commander : commanders) {
-                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander with invalid Partner (" + commander.getName() + ')', true);
-                valid = false;
-            }
-        }
         for (Card commander : commanders) {
             if (bannedCommander.contains(commander.getName())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) || !commander.isLegendary())
-                    && !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
+            if (!checkCommander(commander, commanders)) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }
@@ -246,16 +261,14 @@ public abstract class AbstractCommander extends Constructed {
         if (companion != null) {
             Set<Card> cards = new HashSet<>(deck.getCards());
             cards.addAll(commanders);
-            for (Ability ability : companion.getAbilities()) {
-                if (ability instanceof CompanionAbility) {
-                    CompanionAbility companionAbility = (CompanionAbility) ability;
-                    if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
-                                String.format("Commander companion illegal: %s", companionAbility.getLegalRule()), true);
-                        valid = false;
-                    }
-                    break;
-                }
+            CompanionAbility companionAbility = CardUtil.castStream(
+                    companion.getAbilities().stream(),
+                    CompanionAbility.class
+            ).findFirst().orElse(null);
+            if (companionAbility == null || !companionAbility.isLegal(cards, getDeckMinSize())) {
+                addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
+                        String.format("Commander companion illegal: %s", companionAbility.getLegalRule()), true);
+                valid = false;
             }
         }
         return valid;
