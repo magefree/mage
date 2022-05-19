@@ -163,6 +163,7 @@ public enum SubType {
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
     GERM("Germ", SubTypeSet.CreatureType),
     GIANT("Giant", SubTypeSet.CreatureType),
+    GITH("Gith", SubTypeSet.CreatureType),
     GNOME("Gnome", SubTypeSet.CreatureType),
     GNOLL("Gnoll", SubTypeSet.CreatureType),
     GOLEM("Golem", SubTypeSet.CreatureType),
