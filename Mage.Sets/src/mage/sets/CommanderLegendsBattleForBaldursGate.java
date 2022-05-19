@@ -49,6 +49,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
+        cards.add(new SetCardInfo("Irenicus's Vile Duplication", 78, Rarity.UNCOMMON, mage.cards.i.IrenicussVileDuplication.class));
         cards.add(new SetCardInfo("Island", 455, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaheira's Respite", 238, Rarity.RARE, mage.cards.j.JaheirasRespite.class));
         cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
