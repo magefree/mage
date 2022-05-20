@@ -64,6 +64,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Irenicus's Vile Duplication", 78, Rarity.UNCOMMON, mage.cards.i.IrenicussVileDuplication.class));
         cards.add(new SetCardInfo("Island", 455, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaheira's Respite", 238, Rarity.RARE, mage.cards.j.JaheirasRespite.class));
+        cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE, mage.cards.l.LaezelVlaakithsChampion.class));
         cards.add(new SetCardInfo("Lightning Bolt", 187, Rarity.COMMON, mage.cards.l.LightningBolt.class));
