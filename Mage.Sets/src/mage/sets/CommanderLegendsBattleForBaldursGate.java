@@ -48,6 +48,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dungeon Delver", 67, Rarity.UNCOMMON, mage.cards.d.DungeonDelver.class));
         cards.add(new SetCardInfo("Dungeoneer's Pack", 312, Rarity.UNCOMMON, mage.cards.d.DungeoneersPack.class));
         cards.add(new SetCardInfo("Elder Brain", 125, Rarity.RARE, mage.cards.e.ElderBrain.class));
+        cards.add(new SetCardInfo("Ellyn Harbreeze, Busybody", 16, Rarity.UNCOMMON, mage.cards.e.EllynHarbreezeBusybody.class));
         cards.add(new SetCardInfo("Elminster", 274, Rarity.MYTHIC, mage.cards.e.Elminster.class));
         cards.add(new SetCardInfo("Elminster's Simulacrum", 561, Rarity.MYTHIC, mage.cards.e.ElminstersSimulacrum.class));
         cards.add(new SetCardInfo("Erinis, Gloom Stalker", 230, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class));
