@@ -81,6 +81,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Moss Diamond", 327, Rarity.COMMON, mage.cards.m.MossDiamond.class));
         cards.add(new SetCardInfo("Mountain", 463, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nalia de'Arnise", 649, Rarity.MYTHIC, mage.cards.n.NaliaDeArnise.class));
+        cards.add(new SetCardInfo("Nemesis Phoenix", 189, Rarity.UNCOMMON, mage.cards.n.NemesisPhoenix.class));
         cards.add(new SetCardInfo("Noble's Purse", 331, Rarity.UNCOMMON, mage.cards.n.NoblesPurse.class));
         cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class));
         cards.add(new SetCardInfo("Passageway Seer", 141, Rarity.UNCOMMON, mage.cards.p.PassagewaySeer.class));
