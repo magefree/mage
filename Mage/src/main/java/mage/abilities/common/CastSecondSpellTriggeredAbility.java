@@ -60,6 +60,10 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 break;
+            case ACTIVE:
+                if (!game.isActivePlayer(event.getPlayerId())) {
+                    return false;
+                }
             case ANY:
                 break;
             default:
@@ -76,6 +80,8 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
                 return "Whenever you cast your second spell each turn, ";
             case OPPONENT:
                 return "Whenever an opponent casts their second spell each turn, ";
+            case ACTIVE:
+                return "Whenever a player casts their second spell during their own, ";
             case ANY:
                 return "Whenever a player casts their second spell each turn, ";
             default:
