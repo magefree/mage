@@ -43,7 +43,7 @@ public final class WilsonRefinedGrizzly extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());

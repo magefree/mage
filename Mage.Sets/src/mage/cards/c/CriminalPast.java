@@ -40,7 +40,8 @@ public final class CriminalPast extends CardImpl {
                 new SimpleStaticAbility(new BoostSourceEffect(
                         xValue, StaticValue.get(0), Duration.WhileOnBattlefield, false, "this creature"
                 )), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        ).setText("and \"This creature gets +X/+0, where X is the number of creature cards in your graveyard.\""));
+        ).setText("and \"This creature gets +X/+0, where X is the number of creature cards in your graveyard.\" " +
+                "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
     }
 
