@@ -79,7 +79,6 @@ public class CascadeTest extends CardTestPlayerBase {
     // won't trigger.
     @Test
     public void testEmptyLibraryCascasde() {
-
         playerA.getLibrary().clear();
 
         addCard(Zone.LIBRARY, playerA, "Plains", 10);
@@ -104,7 +103,6 @@ public class CascadeTest extends CardTestPlayerBase {
 
     @Test
     public void testEmptyLibraryCascasdeNexus() {
-
         playerA.getLibrary().clear();
         addCard(Zone.LIBRARY, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Maelstrom Nexus");
@@ -135,7 +133,6 @@ public class CascadeTest extends CardTestPlayerBase {
      */
     @Test
     public void testRecastCascadeCard() {
-
         playerA.getLibrary().clear();
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
 
@@ -169,7 +166,6 @@ public class CascadeTest extends CardTestPlayerBase {
      */
     @Test
     public void testHaveToPayAdditionalCosts() {
-
         playerA.getLibrary().clear();
         // Choose one -
         // - You draw five cards and you lose 5 life;
@@ -202,39 +198,38 @@ public class CascadeTest extends CardTestPlayerBase {
     }
 
     /**
-     * Cascade work with split cards, cmc = total of halfs.
+     * Cascade work with split cards, mana cost = total of halfs.
      *
      * For example: Ardent Plea + Breaking/Entering
      */
     @Test
     public void testWithSplitSpell() {
-
         playerA.getLibrary().clear();
         // Breaking - Target player puts the top eight cards of their library into their graveyard.
-        // Entering - Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
+        // Entering - Put a creature card from a graveyard onto the battlefield under your control.
+        //            It gains haste until end of turn.
         // Fuse (You may cast one or both halves of this card from your hand.)
         addCard(Zone.LIBRARY, playerA, "Breaking // Entering", 1); // Sorcery {U}{B} // {4}{U}{B}
-        // addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+        // Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less.
+        //          You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
         addCard(Zone.HAND, playerA, "Ardent Plea"); // Enchantment {1}{W}{U}
 
+        setStrictChooseMode(true);
+
+        // When the spell is cast, you cascade, but the only spell you could find is "Breaking // Entering",
+        // but it can't be cast since the mana cost for a spliot it's mana cost of the card is the sum of both halves (8 here)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardent Plea");
-        setChoice(playerA, true);
-        addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Ardent Plea", 1);
         assertGraveyardCount(playerA, "Breaking // Entering", 0);
-
-        assertGraveyardCount(playerB, 0);
-
+        assertLibraryCount(playerA, "Breaking // Entering", 1);
     }
-
 }

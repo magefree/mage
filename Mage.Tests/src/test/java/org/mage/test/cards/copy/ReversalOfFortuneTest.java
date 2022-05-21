@@ -47,6 +47,8 @@ public class ReversalOfFortuneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Reversal of Fortune");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
+//        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reversal of Fortune", playerB);
         addTarget(playerA, "Lightning Bolt");
         setChoice(playerA, false);

@@ -4,7 +4,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
@@ -39,6 +38,14 @@ public class RevoltWatcher extends Watcher {
 
     public boolean revoltActive(UUID playerId) {
         return revoltActivePlayerIds.contains(playerId);
+    }
+
+    public static boolean checkAny(Game game) {
+        return !game
+                .getState()
+                .getWatcher(RevoltWatcher.class)
+                .revoltActivePlayerIds
+                .isEmpty();
     }
 
     @Override

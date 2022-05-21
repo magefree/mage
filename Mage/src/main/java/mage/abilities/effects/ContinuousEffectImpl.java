@@ -366,7 +366,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void addDependencyType(DependencyType dependencyType) {
-        dependencyTypes.add(dependencyType);
+        if (dependencyType != null) {
+            dependencyTypes.add(dependencyType);
+        }
     }
 
     @Override

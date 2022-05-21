@@ -448,7 +448,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * check it with checkPlayableAbility(..., mustHave = true), then add whatever condition would stop you from being
      * able to activat the abiltiy
      *
-     * TODO: Currently does not work
+     * TODO: Currently does not work in all cases since some effects list abilities as available,
+     *       only to then give a pop-up about how it can't be played.
+     *       For examples and things to fix, search for:
+     *       "try {
+     *             execute();"
      *
      * @param checkName         String to show up if the check fails, for display purposes only.
      * @param turnNum           The turn number to check on.
@@ -1102,15 +1106,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", cardName);
         Card found = null;
 
-        if (found == null) {
-            for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-                if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
-                    found = card;
-                    break;
-                }
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
+                found = card;
+                break;
             }
-
         }
+
         Assert.assertNotNull("There is no such card in the exile, cardName=" + cardName, found);
         Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }

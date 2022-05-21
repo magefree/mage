@@ -25,7 +25,7 @@ public class ProtectionTest extends CardTestPlayerBase {
         // When Emrakul is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         addCard(Zone.BATTLEFIELD, playerB, "Emrakul, the Aeons Torn");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murderous Cut", "Emrakul, the Aeons Torn");
+        checkPlayableAbility("Can't murder", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Murderous", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -36,7 +36,7 @@ public final class ParkHeightsMaverick extends CardImpl {
 
         // Whenever Park Heights Maverick deals combat damage to a player or dies, proliferate.
         this.addAbility(new OrTriggeredAbility(
-                Zone.ALL, new ProliferateEffect(), false,
+                Zone.ALL, new ProliferateEffect(false), false,
                 "Whenever {this} deals combat damage to a player or dies, ",
                 new DealsCombatDamageToAPlayerTriggeredAbility(null, false),
                 new DiesSourceTriggeredAbility(null, false)

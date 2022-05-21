@@ -8,10 +8,7 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.KickedSpellPredicate;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -629,6 +626,14 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_CREATURES_CONTROLLED.add(TargetController.YOU.getControllerPredicate());
         FILTER_PERMANENT_CREATURES_CONTROLLED.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURES_OWNED_COMMANDER = new FilterCreaturePermanent("commander creatures you own");
+
+    static {
+        FILTER_CREATURES_OWNED_COMMANDER.add(TargetController.YOU.getOwnerPredicate());
+        FILTER_CREATURES_OWNED_COMMANDER.add(CommanderPredicate.instance);
+        FILTER_CREATURES_OWNED_COMMANDER.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_NON_BLACK = new FilterCreaturePermanent("nonblack creature");

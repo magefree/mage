@@ -35,6 +35,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfire Kavu", 58, Rarity.UNCOMMON, mage.cards.b.BloodfireKavu.class));
         cards.add(new SetCardInfo("Bog Gnarr", 76, Rarity.COMMON, mage.cards.b.BogGnarr.class));
         cards.add(new SetCardInfo("Brass Herald", 133, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));
+        cards.add(new SetCardInfo("Captain's Maneuver", 92, Rarity.UNCOMMON, mage.cards.c.CaptainsManeuver.class));
         cards.add(new SetCardInfo("Caves of Koilos", 140, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Ceta Disciple", 19, Rarity.COMMON, mage.cards.c.CetaDisciple.class));
         cards.add(new SetCardInfo("Ceta Sanctuary", 20, Rarity.UNCOMMON, mage.cards.c.CetaSanctuary.class));

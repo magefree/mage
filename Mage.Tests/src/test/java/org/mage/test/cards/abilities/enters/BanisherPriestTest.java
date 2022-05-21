@@ -6,6 +6,10 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.b.BanisherPriest Banisher Pries}
+ * {1}{W}{W}
+ * Creature — Human Cleric 2/2,
+ * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
  *
  * @author LevelX2
  */
@@ -20,11 +24,6 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
-        /**
-        * Banisher Pries
-        * Creature — Human Cleric 2/2, 1WW
-        * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
-        */
         addCard(Zone.HAND, playerA, "Banisher Priest");
         addCard(Zone.HAND, playerB, "Incinerate");
 
@@ -65,11 +64,6 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
-        /**
-        * Banisher Priest
-        * Creature — Human Cleric 2/2, 1WW
-        * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
-        */
         addCard(Zone.HAND, playerA, "Banisher Priest");
         addCard(Zone.HAND, playerB, "Incinerate");
 
@@ -107,33 +101,24 @@ public class BanisherPriestTest extends CardTestPlayerBase {
      */
     @Test
     public void testBanisherPriestToken() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
-        /**
-        * Banisher Priest
-        * Creature — Human Cleric 2/2, 1WW
-        * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
-        */
         addCard(Zone.GRAVEYARD, playerB, "Banisher Priest");
-
         /**
-         * Seance        {2}{W}{W}
+         * Seance
+         * {2}{W}{W}
          * Enchantment
          * At the beginning of each upkeep, you may exile target creature card from your graveyard.
          * If you do, put a token onto the battlefield that's a copy of that card except it's a
-         * Spirit in addition to its other types. Exile it at the beginning of the next end step.
+         * Spirit in addition to its other types.
+         * Exile it at the beginning of the next end step.
          */
         addCard(Zone.BATTLEFIELD, playerB, "Seance");
-        playerB.addChoice("Banisher Priest"); // return the Banisher Priest from graveyard with Seance
-        playerB.addChoice("Silvercoat Lion"); // Exile the Silvercoat Lion with the triggered ability of the Banisher Priest token
+        addTarget(playerB, "Banisher Priest"); // Return the Banisher Priest from graveyard with Seance
+        // The Silvercoat Lion is autochosen for Banisher Priest's ETB since it's the only creature on the opponent's board
 
-
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
 
         // Banisher Priest should be in exile
         assertExileCount("Banisher Priest", 1);
@@ -141,7 +126,6 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Banisher Priest", 0);
         // Silvercoat Lion should be back on battlefield
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-
     }
 }
 

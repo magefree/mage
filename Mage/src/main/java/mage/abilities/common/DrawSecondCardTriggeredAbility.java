@@ -5,6 +5,7 @@ import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
+import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -21,15 +22,22 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
     private static final Hint hint = new ValueHint(
             "Cards drawn this turn", CardsDrawnThisTurnDynamicValue.instance
     );
+    private final TargetController targetController;
 
     public DrawSecondCardTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, TargetController.YOU);
+    }
+
+    public DrawSecondCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.addWatcher(new DrawSecondCardWatcher());
+        this.targetController = targetController;
         this.addHint(hint);
     }
 
     private DrawSecondCardTriggeredAbility(final DrawSecondCardTriggeredAbility ability) {
         super(ability);
+        this.targetController = ability.targetController;
     }
 
     @Override
@@ -39,13 +47,33 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DrawSecondCardWatcher watcher = game.getState().getWatcher(DrawSecondCardWatcher.class);
-        return watcher != null && watcher.checkEvent(getControllerId(), event);
+        switch (targetController) {
+            case YOU:
+                if (!isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            case ACTIVE:
+                if (!game.isActivePlayer(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("TargetController " + targetController + " not supported");
+        }
+        return DrawSecondCardWatcher.checkEvent(event.getPlayerId(), event, game);
     }
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever you draw your second card each turn, " ;
+        switch (targetController) {
+            case YOU:
+                return "Whenever you draw your second card each turn, ";
+            case ACTIVE:
+                return "Whenever a player draws their second card during their turn, ";
+            default:
+                throw new IllegalArgumentException("TargetController " + targetController + " not supported");
+        }
     }
 
     @Override
@@ -82,7 +110,7 @@ class DrawSecondCardWatcher extends Watcher {
         secondDrawMap.clear();
     }
 
-    boolean checkEvent(UUID playerId, GameEvent event) {
-        return event.getId().equals(secondDrawMap.getOrDefault(playerId, null));
+    static boolean checkEvent(UUID playerId, GameEvent event, Game game) {
+        return event.getId().equals(game.getState().getWatcher(DrawSecondCardWatcher.class).secondDrawMap.getOrDefault(playerId, null));
     }
 }
