@@ -38,7 +38,7 @@ public final class ThrakkusTheButcher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Thrakkus the Butcher attacks, double the power of each dragon you control until end of turn.
-        this.addAbility(new AttacksTriggeredAbility());
+        this.addAbility(new AttacksTriggeredAbility(new ThrakkusTheButcherEffect()));
     }
 
     private ThrakkusTheButcher(final ThrakkusTheButcher card) {
