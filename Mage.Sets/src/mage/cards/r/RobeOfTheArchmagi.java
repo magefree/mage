@@ -43,10 +43,10 @@ public final class RobeOfTheArchmagi extends CardImpl {
         ));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
 
         // Equip Shaman, Warlock, or Wizard {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));
     }
 
     private RobeOfTheArchmagi(final RobeOfTheArchmagi card) {
