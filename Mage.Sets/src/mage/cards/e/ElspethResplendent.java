@@ -144,8 +144,9 @@ class ElspethResplendentLookEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.SHIELD.createInstance(), source, game);
             }
         }
+        cards.remove(card);
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }
