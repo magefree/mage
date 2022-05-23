@@ -81,7 +81,7 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return "Whenever an opponent casts their second spell each turn, ";
             case ACTIVE:
-                return "Whenever a player casts their second spell during their own, ";
+                return "Whenever a player casts their second spell during their turn, ";
             case ANY:
                 return "Whenever a player casts their second spell each turn, ";
             default:

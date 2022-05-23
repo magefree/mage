@@ -36,7 +36,7 @@ public final class TheCouncilOfFour extends CardImpl {
                 false, TargetController.ACTIVE
         ));
 
-        // Whenever a player casts their second spell during their own, you create a 2/2 white Knight creature token.
+        // Whenever a player casts their second spell during their turn, you create a 2/2 white Knight creature token.
         this.addAbility(new CastSecondSpellTriggeredAbility(
                 new CreateTokenEffect(new KnightToken())
                         .setText("you create a 2/2 white Knight creature token"),
