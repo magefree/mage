@@ -71,6 +71,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE, mage.cards.l.LaezelVlaakithsChampion.class));
+        cards.add(new SetCardInfo("Legion Loyalty", 31, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
         cards.add(new SetCardInfo("Lightning Bolt", 187, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 188, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class));
         cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 32, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class));
