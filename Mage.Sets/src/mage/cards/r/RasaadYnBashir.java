@@ -83,9 +83,9 @@ class RasaadYnBashirEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game
         )) {
-            if (permanent.getPower().getValue() != 0) {
+            if (permanent.getToughness().getValue() != 0) {
                 game.addEffect(new BoostTargetEffect(
-                        permanent.getPower().getValue(), 0
+                        0, permanent.getToughness().getValue()
                 ).setTargetPointer(new FixedTarget(permanent, game)), source);
             }
         }
