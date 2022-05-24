@@ -71,6 +71,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Fireball", 175, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Flaming Fist", 18, Rarity.COMMON, mage.cards.f.FlamingFist.class));
         cards.add(new SetCardInfo("Forest", 467, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ganax, Astral Hunter", 176, Rarity.UNCOMMON, mage.cards.g.GanaxAstralHunter.class));
         cards.add(new SetCardInfo("Geode Golem", 316, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
