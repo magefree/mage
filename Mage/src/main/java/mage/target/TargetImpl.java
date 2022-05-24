@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -20,6 +21,8 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TargetImpl implements Target {
+
+    private static final Logger LOGGER = Logger.getLogger(TargetImpl.class);
 
     protected final Map<UUID, Integer> targets = new LinkedHashMap<>();
     protected final Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
@@ -482,6 +485,8 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public UUID getFirstTarget() {
+        LOGGER.warn("invoking TargetImpl->getFirstTarget()");
+        LOGGER.warn("targets: " + targets);
         if (!targets.isEmpty()) {
             return targets.keySet().iterator().next();
         }
