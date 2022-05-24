@@ -34,7 +34,7 @@ public final class SafanaCalimportCutthroat extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
