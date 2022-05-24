@@ -104,7 +104,7 @@
 |Generate|EMBLEM:M21|Garruk, Unleashed||Emblem Garruk|GarrukUnleashedEmblem|
 |Generate|EMBLEM:M21|Liliana, Waker of the Dead||Emblem Liliana|LilianaWakerOfTheDeadEmblem|
 |Generate|EMBLEM:KHM|Kaya the Inexorable||Emblem Kaya|KayaTheInexorableEmblem|
-|Generate|EMBLEM:KHM|Tibalt Cosmic Imposter||Emblem Tibalt|TibaltCosmicImposterEmblem|
+|Generate|EMBLEM:KHM|Tibalt, Cosmic Impostor||Emblem Tibalt|TibaltCosmicImpostorEmblem|
 |Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
 |Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
 |Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|
@@ -769,9 +769,7 @@
 |Generate|TOK:JUD|Wurm|||WurmToken|
 |Generate|TOK:KLD|Beast|||ArchitectOfTheUntamedBeastToken|
 |Generate|TOK:KLD|Construct|1||OviyaPashiriSageLifecrafterToken|
-|Generate|TOK:KLD|Construct|2||OviyaPashiriSageLifecrafterToken|
-|Generate|TOK:KLD|Construct|3||MetallurgicSummoningsConstructToken|
-|Generate|TOK:KLD|Construct|4||MetallurgicSummoningsConstructToken|
+|Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
 |Generate|TOK:KLD|Servo|1||ServoToken|
 |Generate|TOK:KLD|Servo|2||ServoToken|
 |Generate|TOK:KLD|Servo|3||ServoToken|
@@ -1246,7 +1244,7 @@
 |Generate|TOK:RNA|Ooze|||BiogenicOozeToken|
 |Generate|TOK:RNA|Sphinx|||WardenSphinxToken|
 |Generate|TOK:RNA|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RNA|Thopter|||ThopterToken|
+|Generate|TOK:RNA|Thopter|||ThopterColorlessToken|
 |Generate|TOK:RNA|Treasure|||TreasureToken|
 |Generate|TOK:RNA|Zombie|||ZombieToken|
 |Generate|TOK:GRN|Angel|||AngelVigilanceToken|
@@ -1581,7 +1579,7 @@
 |Generate|TOK:AFR|Boo|||BooToken|
 |Generate|TOK:AFR|Devil|||DevilToken|
 |Generate|TOK:AFR|Dog Illusion|||DogIllusionToken|
-# |Generate|TOK:AFR|Faerie Dragon|||xxx| TODO: add after dice pr merge
+# |Generate|TOK:AFR|Faerie Dragon|||FaerieDragonToken|
 |Generate|TOK:AFR|Goblin|||GoblinToken|
 |Generate|TOK:AFR|Guenhwyvar|||GuenhwyvarToken|
 |Generate|TOK:AFR|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
@@ -1761,3 +1759,21 @@
 |Generate|TOK:2XM|Wolf|||WolfToken|
 |Generate|TOK:2XM|Phyrexian Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:2XM|Phyrexian Wurm|2||WurmWithLifelinkToken|
+
+# SNC
+|Generate|TOK:SNC|Angel|||Angel33Token|
+|Generate|TOK:SNC|Cat|||CatHasteToken|
+|Generate|TOK:SNC|Citizen|||CitizenGreenWhiteToken|
+|Generate|TOK:SNC|Devil|||DevilToken|
+|Generate|TOK:SNC|Dog|||DogVigilanceToken|
+|Generate|TOK:SNC|Fish|||FishToken|
+|Generate|TOK:SNC|Ogre Warrior|||OgreWarriorToken|
+|Generate|TOK:SNC|Rhino Warrior|||RhinoWarriorToken|
+|Generate|TOK:SNC|Rogue|||RogueToken|
+|Generate|TOK:SNC|Spirit|||Spirit22Token|
+|Generate|TOK:SNC|Treasure|1||TreasureToken|
+|Generate|TOK:SNC|Treasure|2||TreasureToken|
+|Generate|TOK:SNC|Treasure|3||TreasureToken|
+|Generate|TOK:SNC|Treasure|4||TreasureToken|
+|Generate|TOK:SNC|Treasure|5||TreasureToken|
+|Generate|TOK:SNC|Wizard|||MagesAttendantToken|
