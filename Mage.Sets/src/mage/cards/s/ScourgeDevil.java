@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,8 +9,10 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class ScourgeDevil extends CardImpl {
         // When Scourge Devil enters the battlefield, creatures you control get +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn)));
         // Unearth {2}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{2}{R}")));
     }
 
     private ScourgeDevil(final ScourgeDevil card) {

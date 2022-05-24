@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ScavengeAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class KorozdaMonitor extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Scavenge {5}{G}{G} ({5}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{5}{G}{G}")));
     }
 
     private KorozdaMonitor(final KorozdaMonitor card) {

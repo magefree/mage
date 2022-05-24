@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -20,6 +19,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class DeathmistRaptor extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.GRAVEYARD, new DeathmistRaptorEffect(), new FilterControlledPermanent("a permanent you control"), false, true));
 
         // Megamorph {4}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{G}"), true));
     }
 
     private DeathmistRaptor(final DeathmistRaptor card) {

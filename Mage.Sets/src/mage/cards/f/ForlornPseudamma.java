@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.ForlornPseudammaZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class ForlornPseudamma extends CardImpl {
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // <i>Inspired</i> &mdash; Whenever Forlorn Pseudamma becomes untapped, you may pay {2}{B}. If you do, create a 2/2 black Zombie enchantment creature token.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new ForlornPseudammaZombieToken()), new ManaCostsImpl("{2}{B}"))));
+        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new ForlornPseudammaZombieToken()), new ManaCostsImpl<>("{2}{B}"))));
     }
 
     private ForlornPseudamma(final ForlornPseudamma card) {

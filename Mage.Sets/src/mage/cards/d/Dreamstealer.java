@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class Dreamstealer extends CardImpl {
                 false, true));
 
         // Eternalize {4}{B}{B}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{B}{B}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{B}{B}"), this));
     }
 
     private Dreamstealer(final Dreamstealer card) {

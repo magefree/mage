@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -12,9 +11,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class Woodcloaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {2}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}{G}")));
         // When Woodcloaker is turned face up, target creature gains trample until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

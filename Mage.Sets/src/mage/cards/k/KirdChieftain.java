@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,6 +21,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public final class KirdChieftain extends CardImpl {
         // {4}{G}: Target creature gets +2/+2 and gains trample until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("Target creature gets +2/+2");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{4}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{4}{G}"));
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

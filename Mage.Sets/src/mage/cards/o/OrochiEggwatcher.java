@@ -29,7 +29,6 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,18 +42,16 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author LevelX
@@ -73,7 +70,7 @@ public final class OrochiEggwatcher extends CardImpl {
 
         // {2}{G}, {T}: Create a 1/1 green Snake creature token. If you control ten or more creatures, flip Orochi Eggwatcher.
         Ability ability;
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl("{2}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
@@ -106,7 +103,7 @@ class ShidakoBroodmistress extends TokenImpl {
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

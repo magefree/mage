@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
@@ -12,13 +11,11 @@ import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +33,7 @@ public final class Nihilith extends CardImpl {
         this.addAbility(FearAbility.getInstance());
         
         // Suspend 7-{1}{B}
-        this.addAbility(new SuspendAbility(7, new ManaCostsImpl("{1}{B}"), this, false));
+        this.addAbility(new SuspendAbility(7, new ManaCostsImpl<>("{1}{B}"), this, false));
         
         // Whenever a card is put into an opponent's graveyard from anywhere, if Nihilith is suspended, you may remove a time counter from Nihilith.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class WitnessOfTheAges extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}")));
     }
 
     private WitnessOfTheAges(final WitnessOfTheAges card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class NamelessOne extends CardImpl {
         // Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private NamelessOne(final NamelessOne card) {

@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +14,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -28,7 +29,7 @@ public final class Repopulate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new RepopulateEffect());
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Repopulate(final Repopulate card) {

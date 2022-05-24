@@ -3,7 +3,6 @@
 package mage.cards.d;
 
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -11,6 +10,8 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class DriftingMeadow extends CardImpl {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DriftingMeadow(final DriftingMeadow card) {

@@ -1,8 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -15,12 +13,15 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class LordOfShatterskullPass extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {1}{R}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{R}")));
         // LEVEL 1-5
         // 6/6
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();

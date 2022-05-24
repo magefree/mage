@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,11 +13,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -41,7 +43,7 @@ public final class NephaliaMoondrakes extends CardImpl {
         this.addAbility(ability);
 
         // {4}{U}{U}, Exile Nephalia Moondrakes from your graveyard: Creatures you control gain flying until end of turn.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl("{4}{U}{U}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl<>("{4}{U}{U}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

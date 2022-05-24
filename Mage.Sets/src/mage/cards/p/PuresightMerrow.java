@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -9,17 +8,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +33,7 @@ public final class PuresightMerrow extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {WU}, {untap}: Look at the top card of your library. You may exile that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PuresightMerrowEffect(), new ManaCostsImpl("{W/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PuresightMerrowEffect(), new ManaCostsImpl<>("{W/U}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
 

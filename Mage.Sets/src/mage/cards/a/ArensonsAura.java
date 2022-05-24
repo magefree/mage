@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -17,6 +16,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,12 +38,12 @@ public final class ArensonsAura extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // {W}, Sacrifice an enchantment: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // {3}{U}{U}: Counter target enchantment spell.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{3}{U}{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{3}{U}{U}"));
         ability.addTarget(new TargetSpell(filter2));
         this.addAbility(ability);
     }

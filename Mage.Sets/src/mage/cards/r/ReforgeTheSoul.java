@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -10,6 +9,8 @@ import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class ReforgeTheSoul extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {1}{R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{R}")));
     }
 
     private ReforgeTheSoul(final ReforgeTheSoul card) {

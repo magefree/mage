@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,15 +11,17 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class KrovikanElementalist extends CardImpl {
         // {2}{R}: Target creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}")
+                new ManaCostsImpl<>("{2}{R}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -48,7 +49,7 @@ public final class KrovikanElementalist extends CardImpl {
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(),
                 Duration.EndOfTurn
-        ), new ManaCostsImpl("{U}{U}"));
+        ), new ManaCostsImpl<>("{U}{U}"));
         ability.addEffect(new KrovikanElementalistEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class DrogskolCavalry extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(2), filter));
 
         // {3}{W}: Create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private DrogskolCavalry(final DrogskolCavalry card) {

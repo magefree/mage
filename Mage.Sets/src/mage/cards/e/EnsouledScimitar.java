@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,12 +11,10 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,11 +27,11 @@ public final class EnsouledScimitar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
         // Equipped creature gets +1/+5.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 5)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}")));
     }
 
     private EnsouledScimitar(final EnsouledScimitar card) {

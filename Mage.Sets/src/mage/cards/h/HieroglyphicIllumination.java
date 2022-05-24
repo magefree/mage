@@ -1,13 +1,14 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ public final class HieroglyphicIllumination extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

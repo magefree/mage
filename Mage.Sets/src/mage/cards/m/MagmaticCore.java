@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -26,7 +27,7 @@ public final class MagmaticCore extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // At the beginning of your end step, Magmatic Core deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
         DynamicValue value = new CountersSourceCount(CounterType.AGE);

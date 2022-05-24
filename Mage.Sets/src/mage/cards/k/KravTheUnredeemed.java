@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,16 +12,18 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class KravTheUnredeemed extends CardImpl {
         this.addAbility(new PartnerWithAbility("Regna, the Redeemer", true));
 
         // {B}, Sacrifice X creatures: Target player draws X cards and gains X life. Put X +1/+1 counters on Krav, the Unredeemed.
-        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE));
         this.addAbility(ability);

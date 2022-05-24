@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class RootElemental extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Morph {5}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{G}{G}")));
         // When Root Elemental is turned face up, you may put a creature card from your hand onto the battlefield.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A)));
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -21,6 +20,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -36,7 +37,7 @@ public final class PhyrexianFurnace extends CardImpl {
         this.addAbility(ability);
 
         // {1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new DrawCardSourceControllerEffect(1));

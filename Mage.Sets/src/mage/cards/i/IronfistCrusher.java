@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class IronfistCrusher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
         
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}")));
     }
 
     private IronfistCrusher(final IronfistCrusher card) {

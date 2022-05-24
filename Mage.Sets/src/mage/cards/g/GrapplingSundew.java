@@ -1,11 +1,9 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -13,7 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class GrapplingSundew extends CardImpl {
                 new GainAbilitySourceEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{4}{G}")
+                ), new ManaCostsImpl<>("{4}{G}")
         ));
     }
 

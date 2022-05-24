@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class ThranWeaponry extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}, {tap}: All creatures get +2/+2 for as long as Thran Weaponry remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         

@@ -27,6 +27,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+enum YidaroWanderingMonsterHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Player player = game.getPlayer(ability.getControllerId());
+        YidaroWanderingMonsterWatcher watcher = game.getState().getWatcher(YidaroWanderingMonsterWatcher.class);
+        if (player == null || watcher == null) {
+            return "";
+        }
+        return player.getName() + " has cycled a card named Yidaro, Wandering Monster " + watcher.getYidaroCount(player.getId()) + " times this game";
+    }
+
+    @Override
+    public Hint copy() {
+        return instance;
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -48,7 +67,7 @@ public final class YidaroWanderingMonster extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
 
         // When you cycle Yidaro, Wandering Monster, shuffle it into your library from your graveyard. If you've cycled a card named Yidaro, Wandering Monster four or more times this game, put it onto the battlefield from your graveyard instead.
         this.addAbility(new CycleTriggeredAbility(new YidaroWanderingMonsterEffect())
@@ -115,25 +134,6 @@ class YidaroWanderingMonsterEffect extends OneShotEffect {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         return true;
-    }
-}
-
-enum YidaroWanderingMonsterHint implements Hint {
-    instance;
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        Player player = game.getPlayer(ability.getControllerId());
-        YidaroWanderingMonsterWatcher watcher = game.getState().getWatcher(YidaroWanderingMonsterWatcher.class);
-        if (player == null || watcher == null) {
-            return "";
-        }
-        return player.getName() + " has cycled a card named Yidaro, Wandering Monster " + watcher.getYidaroCount(player.getId()) + " times this game";
-    }
-
-    @Override
-    public Hint copy() {
-        return instance;
     }
 }
 

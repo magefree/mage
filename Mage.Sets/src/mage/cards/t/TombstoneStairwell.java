@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,11 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,6 +20,10 @@ import mage.game.permanent.token.TombspawnZombieToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class TombstoneStairwell extends CardImpl {
         addSuperType(SuperType.WORLD);
 
         // Cumulative upkeep-Pay {1}{B}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{B}")));
 
         // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TombstoneStairwellCreateTokenEffect(), TargetController.ANY, false));

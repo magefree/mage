@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -20,6 +19,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public final class MyrPrototype extends CardImpl {
 class MyrPrototypeCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect {
 
     MyrPrototypeCantAttackUnlessYouPayEffect() {
-        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK_AND_BLOCK);
+        super(new ManaCostsImpl<>("{0}"), RestrictType.ATTACK_AND_BLOCK);
         staticText = "{this} can't attack or block unless you pay {1} for each +1/+1 counter on it";
     }
 

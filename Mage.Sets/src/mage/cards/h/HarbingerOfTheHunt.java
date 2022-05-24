@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,10 +43,10 @@ public final class HarbingerOfTheHunt extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}{R}: Harbinger of the Hunt deals 1 damage to each creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{2}{R}")));
         
         // {2}{G}: Harbinger of the Hunt deals 1 damage to each other creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter2), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter2), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private HarbingerOfTheHunt(final HarbingerOfTheHunt card) {

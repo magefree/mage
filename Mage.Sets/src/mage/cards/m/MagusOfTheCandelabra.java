@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsAdjuster;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -33,7 +34,7 @@ public final class MagusOfTheCandelabra extends CardImpl {
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap X target lands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         ability.setTargetAdjuster(XTargetsAdjuster.instance);

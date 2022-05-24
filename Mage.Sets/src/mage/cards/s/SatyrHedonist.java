@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class SatyrHedonist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Satyr Hedonist: Add {R}{R}{R}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl("{R}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl<>("{R}"));
         ability .addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

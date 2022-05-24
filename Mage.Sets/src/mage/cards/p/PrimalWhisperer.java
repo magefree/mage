@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,11 +10,13 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class PrimalWhisperer extends CardImpl {
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
         // Morph {3}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}")));
     }
 
     private PrimalWhisperer(final PrimalWhisperer card) {

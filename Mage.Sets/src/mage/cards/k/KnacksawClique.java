@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,17 +13,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +40,7 @@ public final class KnacksawClique extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{U}, {untap}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

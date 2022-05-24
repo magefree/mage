@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author BursegSardaukar
@@ -35,7 +36,7 @@ public final class GoblinDynamo extends CardImpl {
         this.addAbility(ability);
         
         //{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

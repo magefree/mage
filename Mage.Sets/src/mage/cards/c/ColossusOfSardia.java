@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class ColossusOfSardia extends CardImpl {
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new UntapSourceEffect(), new ManaCostsImpl("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new UntapSourceEffect(), new ManaCostsImpl<>("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private ColossusOfSardia(final ColossusOfSardia card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class CyclonicRift extends CardImpl {
         // Overload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
         Effect effect = new ReturnToHandFromBattlefieldAllEffect(filter);
         effect.setText("Return each nonland permanent you don't control to its owner's hand");
-        this.addAbility(new OverloadAbility(this, effect, new ManaCostsImpl("{6}{U}")));
+        this.addAbility(new OverloadAbility(this, effect, new ManaCostsImpl<>("{6}{U}")));
     }
 
     private CyclonicRift(final CyclonicRift card) {

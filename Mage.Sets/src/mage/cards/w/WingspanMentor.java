@@ -54,7 +54,7 @@ public final class WingspanMentor extends CardImpl {
 
         // {2}{U}, {T}: Put a +1/+1 counter on each creature you control with flying.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{2}{U}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

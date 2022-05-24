@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -9,8 +8,9 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class AncestralTribute extends CardImpl {
 	this.getSpellAbility().addEffect(new GainLifeEffect((new CardsInControllerGraveyardCount(new FilterCard(), 2))));
 
 	// Flashback {9}{W}{W}{W}
-	this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{9}{W}{W}{W}")));
+	this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{9}{W}{W}{W}")));
 
         
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,11 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class DakraMystic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U},{T}:Each player reveals the top card of their library. You may put the revealed cards into their owners graveyard. If you don't, each player draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DakraMysticEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DakraMysticEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

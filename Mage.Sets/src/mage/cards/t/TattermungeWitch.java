@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,11 +11,13 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class TattermungeWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}{G}: Each blocked creature gets +1/+0 and gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false).setText("each blocked creature gets +1/+0"), new ManaCostsImpl("{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false).setText("each blocked creature gets +1/+0"), new ManaCostsImpl<>("{R}{G}"));
         ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter, "and gains trample until end of turn"));
         this.addAbility(ability);
         

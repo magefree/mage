@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,14 +12,11 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,12 +34,12 @@ public final class HauntedPlateMail extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new HauntedPlateMailToken(), "", Duration.EndOfTurn),
-                new ManaCostsImpl("{0}"),
+                new ManaCostsImpl<>("{0}"),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_CREATURE, ComparisonType.EQUAL_TO, 0),
                 "{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate only if you control no creatures.");
         this.addAbility(ability);
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}")));
     }
 
     private HauntedPlateMail(final HauntedPlateMail card) {

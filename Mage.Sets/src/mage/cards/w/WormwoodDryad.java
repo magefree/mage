@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,13 +32,13 @@ public final class WormwoodDryad extends CardImpl {
 
         // {G}: Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+                new GainAbilitySourceEffect(new ForestwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addEffect(new DamageControllerEffect(1).setText("and deals 1 damage to you"));
         this.addAbility(ability);
 
         // {B}: Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+                new GainAbilitySourceEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl<>("{B}"));
         ability.addEffect(new DamageControllerEffect(1).setText("and deals 1 damage to you"));
         this.addAbility(ability);
     }

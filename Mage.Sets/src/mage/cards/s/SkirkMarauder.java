@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class SkirkMarauder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}")));
         
         // When Skirk Marauder is turned face up, it deals 2 damage to any target.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageTargetEffect(2, "it"));

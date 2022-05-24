@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.CentaurToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class CentaursHerald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, Sacrifice Centaur's Herald: Create a 3/3 green Centaur creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken()), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken()), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

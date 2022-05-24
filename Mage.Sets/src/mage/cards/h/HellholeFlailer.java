@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class HellholeFlailer extends CardImpl {
         this.addAbility(new UnleashAbility());
 
         // {2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl("{2}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

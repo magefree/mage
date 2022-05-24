@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2 & L_J
@@ -29,7 +30,7 @@ public final class ThrashingBrontodon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}, Sacrifice Thrashing Brontodon: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);

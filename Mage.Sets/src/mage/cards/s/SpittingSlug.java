@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
@@ -15,9 +14,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -25,6 +24,8 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class SpittingSlug extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
             new DoIfCostPaid(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), 
                 new SpittingSlugEffect(), 
-                new ManaCostsImpl("{1}{G}")).setText("you may pay {1}{G}. If you do, {this} gains first strike until end of turn. Otherwise, each creature blocking or blocked by {this} gains first strike until end of turn"), 
+                new ManaCostsImpl<>("{1}{G}")).setText("you may pay {1}{G}. If you do, {this} gains first strike until end of turn. Otherwise, each creature blocking or blocked by {this} gains first strike until end of turn"),
             false));
     }
 

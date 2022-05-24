@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -22,6 +21,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -32,7 +33,7 @@ public final class RoyalDecree extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Cumulative upkeep-Pay {W}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{W}")));
 
         // Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.
         this.addAbility(new RoyalDecreeAbility());

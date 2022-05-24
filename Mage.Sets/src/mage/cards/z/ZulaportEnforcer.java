@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -20,6 +19,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class ZulaportEnforcer extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{4}")));
 
         // LEVEL 1-2:  3/3
         // LEVEL 3+: 5/5

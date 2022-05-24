@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,13 +8,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ElfKnightToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class ConclaveGuildmage extends CardImpl {
         // {5}{W}, {T}: Create a 2/2 green and white Elf Knight creature token with vigilance.
         ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new ElfKnightToken()),
-                new ManaCostsImpl("{5}{W}")
+                new ManaCostsImpl<>("{5}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

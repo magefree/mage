@@ -28,13 +28,12 @@ import java.util.UUID;
 public final class LeafkinAvenger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature with power 4 or greater you control");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue2 = new SourcePermanentPowerCount(false);
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
-
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-    private static final DynamicValue xValue2 = new SourcePermanentPowerCount(false);
 
     public LeafkinAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -51,7 +50,7 @@ public final class LeafkinAvenger extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(xValue2)
                         .setText("{this} deals damage equal to its power to target player or planeswalker"),
-                new ManaCostsImpl("{7}{R}")
+                new ManaCostsImpl<>("{7}{R}")
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

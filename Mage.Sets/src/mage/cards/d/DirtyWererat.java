@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,11 +16,9 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class DirtyWererat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}, Discard a card: Regenerate Dirty Wererat.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 

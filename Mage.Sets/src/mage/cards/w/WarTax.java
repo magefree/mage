@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
  *
@@ -30,7 +31,7 @@ public final class WarTax extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // {X}{U}: This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl("{X}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl<>("{X}{U}")));
     }
 
     private WarTax(final WarTax card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,14 +14,11 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +43,7 @@ public final class StrengthOfLunacy extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Madness {B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private StrengthOfLunacy(final StrengthOfLunacy card) {

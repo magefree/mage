@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class KrosanWarchief extends CardImpl {
         // {1}{G}: Regenerate target Beast.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateTargetEffect(),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         Target target = new TargetCreaturePermanent(filterTarget);
         ability.addTarget(target);
         this.addAbility(ability);

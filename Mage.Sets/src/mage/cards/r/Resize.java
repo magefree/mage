@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class Resize extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         
         // Recover {1}{G}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{G}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{1}{G}"), this));
     }
 
     private Resize(final Resize card) {

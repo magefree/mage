@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class WarcryPhoenix extends CardImpl {
         // Whenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(true, true, -1),
-                        new ManaCostsImpl("{2}{R}"))
+                        new ManaCostsImpl<>("{2}{R}"))
                         .setText("you may pay {2}{R}. If you do, return {this} from your graveyard to the battlefield tapped and attacking"),
                 3, StaticFilters.FILTER_PERMANENT_CREATURES));
     }

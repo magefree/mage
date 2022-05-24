@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class WipeClean extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private WipeClean(final WipeClean card) {

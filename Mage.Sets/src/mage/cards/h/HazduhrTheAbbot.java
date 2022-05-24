@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,11 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -23,6 +18,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +42,7 @@ public final class HazduhrTheAbbot extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
@@ -63,7 +60,7 @@ public final class HazduhrTheAbbot extends CardImpl {
 
 class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
         super(duration, 0, UsageType.ONE_USAGE_ABSOLUTE);

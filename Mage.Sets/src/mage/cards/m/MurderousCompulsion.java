@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
@@ -11,6 +10,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class MurderousCompulsion extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Madness {1}{B} <i>(If you discard card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)<i>
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private MurderousCompulsion(final MurderousCompulsion card) {

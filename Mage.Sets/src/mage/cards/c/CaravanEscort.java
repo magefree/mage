@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class CaravanEscort extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}")));
 
         AbilitiesImpl<Ability> levelAbilities = new AbilitiesImpl<>(FirstStrikeAbility.getInstance());
         this.addAbilities(LevelerCardBuilder.construct(

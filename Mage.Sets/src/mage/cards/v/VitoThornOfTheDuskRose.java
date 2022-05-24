@@ -1,11 +1,13 @@
 package mage.cards.v;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,8 +18,6 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.hint.StaticHint;
 
 /**
  * @author TheElk801
@@ -39,7 +39,7 @@ public final class VitoThornOfTheDuskRose extends CardImpl {
         // {3}{B}{B}: Creatures you control gain lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
-        ), new ManaCostsImpl("{3}{B}{B}")));
+        ), new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private VitoThornOfTheDuskRose(final VitoThornOfTheDuskRose card) {

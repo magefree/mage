@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class KederektLeviathan extends CardImpl {
         // When Kederekt Leviathan enters the battlefield, return all other nonland permanents to their owners' hands.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
         // Unearth {6}{U}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{6}{U}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{6}{U}")));
     }
 
     private KederektLeviathan(final KederektLeviathan card) {

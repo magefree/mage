@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class EchoTracer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
         // When Echo Tracer is turned face up, return target creature to its owner's hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());

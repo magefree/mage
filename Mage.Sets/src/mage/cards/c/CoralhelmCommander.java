@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -19,6 +18,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class CoralhelmCommander extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());

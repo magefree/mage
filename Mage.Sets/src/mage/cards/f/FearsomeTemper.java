@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class FearsomeTemper extends CardImpl {
         Effect effect = new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}"));
         grantedAbility.addTarget(new TargetCreaturePermanent());
         effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"{2}{R}: Target creature can't block this creature this turn");

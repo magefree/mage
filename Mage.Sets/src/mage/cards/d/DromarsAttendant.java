@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class DromarsAttendant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 0, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 0, 0, 0, 0, 0), new ManaCostsImpl<>("{1}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

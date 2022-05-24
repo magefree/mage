@@ -24,6 +24,28 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<StackObject> {
+    instance;
+
+    private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
+        return input.getObject()
+                .getStackAbility()
+                .getTargets()
+                .stream()
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .map(MageItem::getId);
+    }
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
+        return makeStream(input, game).anyMatch(input.getSourceId()::equals)
+                && makeStream(input, game).allMatch(input.getSourceId()::equals);
+    }
+}
+
 /**
  * @author LevelX2
  */
@@ -49,7 +71,7 @@ public final class SilverWyvern extends CardImpl {
                 new ChooseNewTargetsTargetEffect(true, true)
                         .setText("Change the target of target spell or ability that targets only {this}. " +
                                 "The new target must be a creature"),
-                new ManaCostsImpl("{U}")
+                new ManaCostsImpl<>("{U}")
         );
         ability.addTarget(new TargetStackObject(filter));
         this.addAbility(ability);
@@ -63,27 +85,5 @@ public final class SilverWyvern extends CardImpl {
     @Override
     public SilverWyvern copy() {
         return new SilverWyvern(this);
-    }
-}
-
-enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        return makeStream(input, game).anyMatch(input.getSourceId()::equals)
-                && makeStream(input, game).allMatch(input.getSourceId()::equals);
-    }
-
-    private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
-        return input.getObject()
-                .getStackAbility()
-                .getTargets()
-                .stream()
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(MageItem::getId);
     }
 }

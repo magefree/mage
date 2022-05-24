@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class RazorfinAbolisher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}, {tap}: Return target creature with a counter on it to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);

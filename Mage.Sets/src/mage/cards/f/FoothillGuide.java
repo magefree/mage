@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class FoothillGuide extends CardImpl {
         // Protection from Goblins
         this.addAbility(new ProtectionAbility(filter));
         // Morph {W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private FoothillGuide(final FoothillGuide card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,12 +11,14 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class ViashinoSandswimmer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Flip a coin. If you win the flip, return Viashino Sandswimmer to its owner's hand. If you lose the flip, sacrifice Viashino Sandswimmer.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private ViashinoSandswimmer(final ViashinoSandswimmer card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -30,7 +31,7 @@ public final class DecreeOfPain extends CardImpl {
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         this.getSpellAbility().addEffect(new DecreeOfPainEffect());
         // Cycling {3}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{B}{B}")));
         // When you cycle Decree of Pain, all creatures get -2/-2 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
         this.addAbility(ability);

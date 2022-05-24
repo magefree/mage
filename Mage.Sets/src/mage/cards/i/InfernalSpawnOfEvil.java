@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -23,6 +22,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponentOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class InfernalSpawnOfEvil extends CardImpl {
         // Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.HAND, new DamageTargetEffect(1),
                 new CompositeCost(
-                    new ManaCostsImpl("{1}{B}"),
+                    new ManaCostsImpl<>("{1}{B}"),
                     new CompositeCost(
                         new RevealSourceFromYourHandCost(),
                         new SayCost("It's coming!"),
@@ -71,7 +72,7 @@ public final class InfernalSpawnOfEvil extends CardImpl {
 
 class SayCost extends CostImpl {
 
-    private String message;
+    private final String message;
 
     public SayCost(String message) {
         this.message = message;

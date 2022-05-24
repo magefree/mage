@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -27,6 +26,8 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -56,7 +57,7 @@ public final class KalitasTraitorOfGhet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KalitasTraitorOfGhetEffect()));
 
         // {2}{B}, Sacrifice another Vampire or Zombie: Put two +1/+1 counters on Kalitas, Traitor of Ghet.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
     }
@@ -120,12 +121,8 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId()) && !(permanent instanceof PermanentToken)) {
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().isCreature(game)) {
-                        return true;
-                    }
-                } else if (permanent.isCreature(game)) {
-                    return true;
-                }
+                    return zEvent.getTarget().isCreature(game);
+                } else return permanent.isCreature(game);
             }
         }
         return false;

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class HarborBandit extends CardImpl {
         // {1}{U}: Harbor Bandit can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{U}")));
+                new ManaCostsImpl<>("{1}{U}")));
     }
 
     private HarborBandit(final HarborBandit card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class ScavengerGrounds extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileGraveyardAllPlayersEffect(),
-                new ManaCostsImpl("{2}"));
+                new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability2);

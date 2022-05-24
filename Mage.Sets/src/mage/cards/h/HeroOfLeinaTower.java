@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,12 +12,14 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ class HeroOfLeinaTowerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (you != null && you.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
             int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             cost.add(new GenericManaCost(costX));

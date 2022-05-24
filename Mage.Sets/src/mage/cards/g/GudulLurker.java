@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class GudulLurker extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
 
         // Megamorph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}"), true));
     }
 
     private GudulLurker(final GudulLurker card) {

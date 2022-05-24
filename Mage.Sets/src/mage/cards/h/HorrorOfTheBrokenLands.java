@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,8 +9,10 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class HorrorOfTheBrokenLands extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn)));
 
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
 
     }
 

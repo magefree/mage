@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class Vanishment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 
         // Miracle {U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
     private Vanishment(final Vanishment card) {

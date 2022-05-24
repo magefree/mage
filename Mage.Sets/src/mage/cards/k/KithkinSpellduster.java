@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class KithkinSpellduster extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}, Sacrifice Kithkin Spellduster: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetEnchantmentPermanent());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -1,19 +1,18 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -22,6 +21,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 /**
  *
  * @author Saga
@@ -42,7 +43,7 @@ public final class KindredBoon extends CardImpl {
         // {1}{W}: Put a divinity counter on target creature you control of the chosen type.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control of the chosen type");
         filter.add(ChosenSubtypePredicate.TRUE);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         

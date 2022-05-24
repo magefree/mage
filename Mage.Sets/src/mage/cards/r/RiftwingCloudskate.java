@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class RiftwingCloudskate extends CardImpl {
         this.addAbility(ability);
 
         // Suspend 3-{1}{U}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private RiftwingCloudskate(final RiftwingCloudskate card) {

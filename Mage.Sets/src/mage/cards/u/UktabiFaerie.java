@@ -1,19 +1,20 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class UktabiFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{G}, Sacrifice Uktabi Faerie: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

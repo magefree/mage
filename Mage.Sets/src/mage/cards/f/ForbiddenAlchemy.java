@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
@@ -8,6 +7,8 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ public final class ForbiddenAlchemy extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.GRAVEYARD));
 
         // Flashback {6}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{6}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{6}{B}")));
     }
 
     private ForbiddenAlchemy(final ForbiddenAlchemy card) {

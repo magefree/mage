@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -12,8 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class SylvanMight extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {2}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{G}")));
     }
 
     private SylvanMight(final SylvanMight card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,13 +14,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -29,6 +22,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +40,7 @@ public final class PaleWayfarer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{W}{W}, {untap}: Target creature gains protection from the color of its controller's choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl("{2}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl<>("{2}{W}{W}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

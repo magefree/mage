@@ -1,15 +1,15 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -25,7 +25,7 @@ public final class DreamTwist extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
 
         // Flashback {1}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private DreamTwist(final DreamTwist card) {

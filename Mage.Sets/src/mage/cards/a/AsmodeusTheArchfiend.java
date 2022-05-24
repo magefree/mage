@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -11,15 +10,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AsmodeusTheArchfiendReplacementEffect()).withFlavorWord("Binding Contract"));
 
         // {B}{B}{B}: Draw seven cards.
-        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new ManaCostsImpl<>("{B}{B}{B}")));
 
         // {B}: Return all cards exiled with Asmodeus the Archfiend to their owner's hand and you lose that much life.
         this.addAbility(new AsmodeusTheArchfiendReturnAbility());
@@ -102,7 +103,7 @@ class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
 class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
     public AsmodeusTheArchfiendReturnAbility() {
-        super(Zone.BATTLEFIELD, new AsmodeusTheArchfiendReturnEffect(), new ManaCostsImpl("{B}"));
+        super(Zone.BATTLEFIELD, new AsmodeusTheArchfiendReturnEffect(), new ManaCostsImpl<>("{B}"));
     }
 
     private AsmodeusTheArchfiendReturnAbility(final AsmodeusTheArchfiendReturnAbility ability) {

@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,8 +14,10 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class UnstableHulk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {3}{R}{R} 
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}{R}")));
     
         //When Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
         Effect effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);

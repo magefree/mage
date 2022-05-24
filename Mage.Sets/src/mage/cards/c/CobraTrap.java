@@ -22,32 +22,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * @author Rafbill
- */
-public final class CobraTrap extends CardImpl {
-
-    public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
-        this.subtype.add(SubType.TRAP);
-
-        // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), CobraTrapCondition.instance), new CobraTrapWatcher());
-
-        // Create four 1/1 green Snake creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
-    }
-
-    private CobraTrap(final CobraTrap card) {
-        super(card);
-    }
-
-    @Override
-    public CobraTrap copy() {
-        return new CobraTrap(this);
-    }
-}
-
 enum CobraTrapCondition implements Condition {
 
     instance;
@@ -65,9 +39,35 @@ enum CobraTrapCondition implements Condition {
 
 }
 
+/**
+ * @author Rafbill
+ */
+public final class CobraTrap extends CardImpl {
+
+    public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
+        this.subtype.add(SubType.TRAP);
+
+        // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{G}"), CobraTrapCondition.instance), new CobraTrapWatcher());
+
+        // Create four 1/1 green Snake creature tokens.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
+    }
+
+    private CobraTrap(final CobraTrap card) {
+        super(card);
+    }
+
+    @Override
+    public CobraTrap copy() {
+        return new CobraTrap(this);
+    }
+}
+
 class CobraTrapWatcher extends Watcher {
 
-    private Set<UUID> players = new HashSet<>();
+    private final Set<UUID> players = new HashSet<>();
 
     public CobraTrapWatcher() {
         super(WatcherScope.GAME);

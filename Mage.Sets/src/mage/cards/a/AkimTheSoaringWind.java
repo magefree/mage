@@ -29,6 +29,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+enum AkimTheSoaringWindCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        AkimTheSoaringWindWatcher watcher = game.getState().getWatcher(AkimTheSoaringWindWatcher.class);
+        return watcher != null && watcher.firstToken(controller.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "you create one or more tokens for the first time each turn";
+    }
+}
+
 /**
  * @author AsterAether
  */
@@ -67,7 +84,7 @@ public final class AkimTheSoaringWind extends CardImpl {
                         Duration.EndOfTurn,
                         filter,
                         false),
-                new ManaCostsImpl("{3}{U}{R}{W}"))
+                new ManaCostsImpl<>("{3}{U}{R}{W}"))
         );
     }
 
@@ -78,23 +95,6 @@ public final class AkimTheSoaringWind extends CardImpl {
     @Override
     public AkimTheSoaringWind copy() {
         return new AkimTheSoaringWind(this);
-    }
-}
-
-enum AkimTheSoaringWindCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        AkimTheSoaringWindWatcher watcher = game.getState().getWatcher(AkimTheSoaringWindWatcher.class);
-        return watcher != null && watcher.firstToken(controller.getId());
-    }
-
-    @Override
-    public String toString() {
-        return "you create one or more tokens for the first time each turn";
     }
 }
 
@@ -137,12 +137,6 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
 class AkimTheSoaringWindWatcher extends Watcher {
 
-    public enum TokenState {
-        NoToken,
-        FirstToken,
-        MoreThanOneToken
-    }
-
     private final Map<UUID, TokenState> playerIds = new HashMap<>();
 
     AkimTheSoaringWindWatcher() {
@@ -171,5 +165,11 @@ class AkimTheSoaringWindWatcher extends Watcher {
 
     boolean firstToken(UUID playerId) {
         return playerIds.getOrDefault(playerId, TokenState.NoToken) == TokenState.FirstToken;
+    }
+
+    public enum TokenState {
+        NoToken,
+        FirstToken,
+        MoreThanOneToken
     }
 }

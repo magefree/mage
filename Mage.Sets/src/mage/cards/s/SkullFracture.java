@@ -1,15 +1,15 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class SkullFracture extends CardImpl {
        this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
        this.getSpellAbility().addTarget(new TargetPlayer());
         // Flashback {3}{B}
-       this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{B}")));
+       this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{B}")));
     }
 
     private SkullFracture(final SkullFracture card) {

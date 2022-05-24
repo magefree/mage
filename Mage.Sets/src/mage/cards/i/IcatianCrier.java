@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.CitizenToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class IcatianCrier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}, Discard a card: Create two 1/1 white Citizen creature tokens.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CitizenToken(), 2), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CitizenToken(), 2), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

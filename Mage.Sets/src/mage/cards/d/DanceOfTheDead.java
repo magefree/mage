@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -35,6 +34,8 @@ import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -252,7 +253,7 @@ class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements 
 class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
     public DanceOfTheDeadDoIfCostPaidEffect() {
-        super(new UntapEnchantedEffect(), new ManaCostsImpl("{1}{B}"));
+        super(new UntapEnchantedEffect(), new ManaCostsImpl<>("{1}{B}"));
     }
 
     public DanceOfTheDeadDoIfCostPaidEffect(final DanceOfTheDeadDoIfCostPaidEffect effect) {

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,13 +13,15 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ class HellkiteChargerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            ManaCosts cost = new ManaCostsImpl("{5}{R}{R}");
+            ManaCosts cost = new ManaCostsImpl<>("{5}{R}{R}");
             if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {

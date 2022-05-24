@@ -2,7 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,12 +20,14 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.InsectInfectToken;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
 public final class TrigonOfInfestation extends CardImpl {
 
-    private static InsectInfectToken insectToken = new InsectInfectToken();
+    private static final InsectInfectToken insectToken = new InsectInfectToken();
 
     public TrigonOfInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
@@ -41,7 +42,7 @@ public final class TrigonOfInfestation extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{G}{G}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{G}{G}"));
         this.addAbility(ability2);
     }
 

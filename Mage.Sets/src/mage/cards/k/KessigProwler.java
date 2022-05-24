@@ -1,8 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -30,7 +30,7 @@ public final class KessigProwler extends CardImpl {
 
         // {4}{G}: Transform Kessig Prowler.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{4}{G}")));
     }
 
     private KessigProwler(final KessigProwler card) {

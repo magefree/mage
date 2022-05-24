@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -11,8 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class WildHunger extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
     }
 
     private WildHunger(final WildHunger card) {

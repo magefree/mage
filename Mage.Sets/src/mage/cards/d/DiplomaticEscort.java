@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
 import mage.target.TargetStackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class DiplomaticEscort extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}, Discard a card: Counter target spell or ability that targets a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetStackObject(filter));

@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +18,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class KjeldoranOutpost extends CardImpl {
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // {1}{W}, {tap}: Create a 1/1 white Soldier creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

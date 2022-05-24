@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -16,17 +15,8 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -34,6 +24,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +43,7 @@ public final class KheruLichLord extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
+                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
     }
 
     private KheruLichLord(final KheruLichLord card) {
@@ -149,13 +141,10 @@ class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && event.getTargetId().equals(getTargetPointer().getFirst(game, source))
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 
     @Override

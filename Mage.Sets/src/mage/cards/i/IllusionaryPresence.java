@@ -1,29 +1,20 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
-import mage.abilities.keyword.ForestwalkAbility;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.abilities.keyword.MountainwalkAbility;
-import mage.abilities.keyword.PlainswalkAbility;
-import mage.abilities.keyword.SwampwalkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +30,7 @@ public final class IllusionaryPresence extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
 
         // At the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChooseBasicLandTypeEffect(Outcome.Neutral), TargetController.YOU, false);

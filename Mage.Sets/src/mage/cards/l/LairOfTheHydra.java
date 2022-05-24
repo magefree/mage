@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +19,8 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author weirddan455
@@ -28,12 +28,11 @@ import mage.game.permanent.token.custom.CreatureToken;
 public final class LairOfTheHydra extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     public LairOfTheHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -47,7 +46,7 @@ public final class LairOfTheHydra extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {X}{G}: Until end of turn, Lair of the Hydra becomes an X/X green Hydra creature. It's still a land. X can't be 0.
-        ManaCostsImpl manaCosts = new ManaCostsImpl("{X}{G}");
+        ManaCostsImpl manaCosts = new ManaCostsImpl<>("{X}{G}");
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);

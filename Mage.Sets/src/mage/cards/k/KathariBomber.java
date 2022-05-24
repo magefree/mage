@@ -39,7 +39,7 @@ public final class KathariBomber extends CardImpl {
         this.addAbility(ability);
 
         // Unearth {3}{B}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{3}{B}{R}")));
     }
 
     private KathariBomber(final KathariBomber card) {

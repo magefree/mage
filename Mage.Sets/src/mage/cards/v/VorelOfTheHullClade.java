@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,17 +9,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +44,7 @@ public final class VorelOfTheHullClade extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}{U}, {tap}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

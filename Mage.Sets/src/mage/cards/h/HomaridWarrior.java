@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,9 +13,11 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class HomaridWarrior extends CardImpl {
 
         // {U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         Effect effect = new DontUntapInControllersNextUntapStepSourceEffect();
         effect.setText("and doesn't untap during your next untap step");
         ability.addEffect(effect);

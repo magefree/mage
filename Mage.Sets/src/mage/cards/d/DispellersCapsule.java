@@ -4,6 +4,7 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -14,7 +15,6 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.abilities.costs.common.TapSourceCost;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class DispellersCapsule extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{W}");
 
         // {2}{W}, {T}, Sacrifice Dispeller's Capsule: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));

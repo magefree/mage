@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,14 +11,12 @@ import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithGreaterP
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +42,7 @@ public final class SilumgarAssassin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithGreaterPowerEffect()));
 
         // Megamorph {2}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}"), true));
 
         // When Silumgar Assassin is turned face up, destroy target creature with power 3 or less an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false);

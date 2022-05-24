@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -25,7 +26,6 @@ import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 
 /**
  * @author L_J
@@ -50,7 +50,7 @@ public final class ScarwoodBandits extends CardImpl {
                                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                                 "gain control of target artifact for as long as {this} remains on the battlefield"),
                         new GenericManaCost(2)),
-                new ManaCostsImpl("{2}{G}"));
+                new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -68,9 +68,9 @@ public final class ScarwoodBandits extends CardImpl {
 
 class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
 
-    protected Effects executingEffects = new Effects();
     private final Cost cost;
-    private String chooseUseText;
+    protected Effects executingEffects = new Effects();
+    private final String chooseUseText;
 
     public DoUnlessAnyOpponentPaysEffect(Effect effect, Cost cost) {
         this(effect, cost, null);

@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,14 +13,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +42,7 @@ public final class OcularHalo extends CardImpl {
         
         // {W}: Enchanted creature gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private OcularHalo(final OcularHalo card) {

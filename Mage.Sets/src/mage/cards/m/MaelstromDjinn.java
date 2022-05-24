@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -16,9 +15,11 @@ import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class MaelstromDjinn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
         // When Maelstrom Djinn is turned face up, put two time counters on it and it gains vanishing.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2)));
         Effect effect = new GainAbilitySourceEffect(new VanishingUpkeepAbility(0), Duration.WhileOnBattlefield);

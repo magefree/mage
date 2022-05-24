@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class SylvanBounty extends CardImpl {
         // Target player gains 8 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(8));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private SylvanBounty(final SylvanBounty card) {

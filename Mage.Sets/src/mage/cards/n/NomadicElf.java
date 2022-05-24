@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.AnyColorManaAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class NomadicElf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Add one mana of any color.
-        this.addAbility(new AnyColorManaAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new AnyColorManaAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private NomadicElf(final NomadicElf card) {

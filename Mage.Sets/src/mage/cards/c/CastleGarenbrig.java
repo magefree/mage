@@ -25,6 +25,16 @@ import mage.game.Game;
 
 import java.util.UUID;
 
+enum CastleGarenbrigManaCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject object = game.getObject(source);
+        return object != null && object.isCreature(game);
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -47,7 +57,7 @@ public final class CastleGarenbrig extends CardImpl {
 
         // {2}{G}{G}, {T}: Add six {G}. Spend this mana only to cast creature spells or activate abilities of creatures.
         Ability ability = new ConditionalColoredManaAbility(
-                new ManaCostsImpl("{2}{G}{G}"), Mana.GreenMana(6), new CastleGarenbrigManaBuilder()
+                new ManaCostsImpl<>("{2}{G}{G}"), Mana.GreenMana(6), new CastleGarenbrigManaBuilder()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -82,18 +92,5 @@ class CastleGarenbrigConditionalMana extends ConditionalMana {
         super(mana);
         this.staticText = "Spend this mana only to cast creature spells or activate abilities of creatures";
         addCondition(CastleGarenbrigManaCondition.instance);
-    }
-}
-
-enum CastleGarenbrigManaCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source);
-        if (object != null && object.isCreature(game)) {
-            return true;
-        }
-        return false;
     }
 }

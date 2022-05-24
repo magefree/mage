@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class FallenFerromancer extends CardImpl {
         
         // {1}{R}, {T}: Fallen Ferromancer deals 1 damage to any target.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

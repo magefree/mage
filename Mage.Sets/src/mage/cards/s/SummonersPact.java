@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class SummonersPact extends CardImpl {
         // Search your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
         // At the beginning of your next upkeep, pay {2}{G}{G}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{2}{G}{G}"))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{2}{G}{G}"))));
     }
 
     private SummonersPact(final SummonersPact card) {

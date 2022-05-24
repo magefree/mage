@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -21,6 +20,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class MartyrOfSands extends CardImpl {
         // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
         Effect effect = new GainLifeEffect(new MultipliedValue(RevealTargetFromHandCostCount.instance, 3));
         effect.setText("You gain three times X life.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}"));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

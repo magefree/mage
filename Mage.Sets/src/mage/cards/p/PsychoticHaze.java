@@ -1,13 +1,14 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class PsychoticHaze extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private PsychoticHaze(final PsychoticHaze card) {

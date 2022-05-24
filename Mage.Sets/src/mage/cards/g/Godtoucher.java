@@ -12,7 +12,10 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
-import mage.game.events.*;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -39,7 +42,7 @@ public final class Godtoucher extends CardImpl {
         // {1}{W}, {T}: Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GodtoucherEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{W}"));
+                new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

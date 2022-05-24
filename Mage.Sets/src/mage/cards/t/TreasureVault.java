@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -14,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.TreasureToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +30,7 @@ public final class TreasureVault extends CardImpl {
         // {X}{X}, {T}, Sacrifice Treasure Vault: Create X Treasure tokens.
         Ability ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new TreasureToken(), ManacostVariableValue.REGULAR),
-                new ManaCostsImpl("{X}{X}")
+                new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

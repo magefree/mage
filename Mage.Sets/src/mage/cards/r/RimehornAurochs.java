@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,7 +13,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -23,6 +25,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth & L_J
@@ -30,13 +34,12 @@ import mage.watchers.common.BlockedAttackerWatcher;
 public final class RimehornAurochs extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Aurochs");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(SubType.AUROCHS.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public RimehornAurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
@@ -52,7 +55,7 @@ public final class RimehornAurochs extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
 
         // {2}{S}: Target creature blocks target creature this turn if able.
-        Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl("{2}{S}"));
+        Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl<>("{2}{S}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that must block")));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that is to be blocked")));
         this.addAbility(ability, new BlockedAttackerWatcher());
@@ -92,12 +95,9 @@ class RimehornAurochsEffect extends RequirementEffect {
                 Permanent attacker = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (attacker != null) {
                     BlockedAttackerWatcher blockedAttackerWatcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
-                    if (blockedAttackerWatcher != null 
-                            && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
-                        // has already blocked this turn, so no need to do again
-                        return false;
-                    }                
-                    return true;
+                    // has already blocked this turn, so no need to do again
+                    return blockedAttackerWatcher == null
+                            || !blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game);
                 } else {
                     discard();
                 }

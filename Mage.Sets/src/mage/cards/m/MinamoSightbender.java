@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +19,21 @@ import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
+
+enum MinamoSightbenderAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterPermanent permanentFilter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
+        permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        ability.getTargets().clear();
+        ability.getTargets().add(new TargetPermanent(permanentFilter));
+    }
+}
 
 /**
  *
@@ -42,7 +56,7 @@ public final class MinamoSightbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
         Target target = new TargetPermanent(filter);
         ability.setTargetAdjuster(MinamoSightbenderAdjuster.instance);
         ability.addTarget(target);
@@ -58,18 +72,5 @@ public final class MinamoSightbender extends CardImpl {
     @Override
     public MinamoSightbender copy() {
         return new MinamoSightbender(this);
-    }
-}
-
-enum MinamoSightbenderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent permanentFilter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
-        permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetPermanent(permanentFilter));
     }
 }

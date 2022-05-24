@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -21,6 +20,8 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -37,7 +38,7 @@ public final class ImaginaryThreats extends CardImpl {
         getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
                 .setText("During that player's next untap step, creatures they control don't untap"));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

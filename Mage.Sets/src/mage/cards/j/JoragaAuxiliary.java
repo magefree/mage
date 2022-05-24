@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class JoragaAuxiliary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {4}{G}{W}: Support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2, true), new ManaCostsImpl("{4}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2, true), new ManaCostsImpl<>("{4}{G}{W}"));
         ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
     }

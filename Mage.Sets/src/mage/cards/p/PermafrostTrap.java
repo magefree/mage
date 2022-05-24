@@ -19,35 +19,6 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *
- * @author jeffwadsworth
- */
-public final class PermafrostTrap extends CardImpl {
-
-    public PermafrostTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
-        this.subtype.add(SubType.TRAP);
-
-        // If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
-
-        // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
-        this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-    }
-
-    private PermafrostTrap(final PermafrostTrap card) {
-        super(card);
-    }
-
-    @Override
-    public PermafrostTrap copy() {
-        return new PermafrostTrap(this);
-    }
-}
-
 enum PermafrostTrapCondition implements Condition {
 
     instance;
@@ -73,5 +44,34 @@ enum PermafrostTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If an opponent had a green creature enter the battlefield under their control this turn";
+    }
+}
+
+/**
+ *
+ * @author jeffwadsworth
+ */
+public final class PermafrostTrap extends CardImpl {
+
+    public PermafrostTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        this.subtype.add(SubType.TRAP);
+
+        // If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
+
+        // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
+        this.getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
+    }
+
+    private PermafrostTrap(final PermafrostTrap card) {
+        super(card);
+    }
+
+    @Override
+    public PermafrostTrap copy() {
+        return new PermafrostTrap(this);
     }
 }

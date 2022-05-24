@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,10 +11,12 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -30,7 +31,7 @@ public final class RakdosKeyrune extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private RakdosKeyrune(final RakdosKeyrune card) {

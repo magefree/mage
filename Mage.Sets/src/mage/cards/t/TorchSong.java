@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class TorchSong extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)),
-                new ManaCostsImpl("{2}{R}")
+                new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

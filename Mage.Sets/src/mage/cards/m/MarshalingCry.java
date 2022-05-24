@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -13,7 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,10 +33,10 @@ public final class MarshalingCry extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
         
         // Flashback {3}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{W}")));
     }
 
     private MarshalingCry(final MarshalingCry card) {

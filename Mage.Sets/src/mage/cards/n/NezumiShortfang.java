@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -21,6 +20,8 @@ import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -37,7 +38,7 @@ public final class NezumiShortfang extends CardImpl {
         this.flipCardName = "Stabwhisker the Odious";
 
         // {1}{B}, {tap}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
@@ -115,8 +116,8 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 class CardsInTargetOpponentHandCondition implements Condition {
 
     private Condition condition;
-    private ComparisonType type;
-    private int count;
+    private final ComparisonType type;
+    private final int count;
 
     public CardsInTargetOpponentHandCondition() {
         this(ComparisonType.EQUAL_TO, 0);

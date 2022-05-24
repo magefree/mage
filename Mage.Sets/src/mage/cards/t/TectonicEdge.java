@@ -2,7 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
@@ -23,6 +22,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetNonBasicLandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -39,7 +40,7 @@ public final class TectonicEdge extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
-                new ManaCostsImpl("{1}"),
+                new ManaCostsImpl<>("{1}"),
                 new OpponentControlsPermanentCondition(
                         new FilterLandPermanent("an opponent controls four or more lands"),
                         ComparisonType.MORE_THAN, 3));

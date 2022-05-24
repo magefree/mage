@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.ConstellationAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class UnderworldCoinsmith extends CardImpl {
         // Constellation - Whenever Underworld Coinsmith or an enchantment enters the battlefield under your control, you gain 1 life.
         this.addAbility(new ConstellationAbility(new GainLifeEffect(1)));
         // {W}{B}, Pay 1 life: Each opponent loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

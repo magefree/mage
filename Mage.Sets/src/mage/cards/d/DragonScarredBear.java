@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class DragonScarredBear extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
             Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
-            new ManaCostsImpl("{1}{G}"),
+            new ManaCostsImpl<>("{1}{G}"),
             FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);

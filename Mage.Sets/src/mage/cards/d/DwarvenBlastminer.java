@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetNonBasicLandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -28,13 +29,13 @@ public final class DwarvenBlastminer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{R}, {tap}: Destroy target nonbasic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
         
         // Morph {R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private DwarvenBlastminer(final DwarvenBlastminer card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ShadowAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class InfiltratorIlKor extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // Suspend 2-{1}{U}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private InfiltratorIlKor(final InfiltratorIlKor card) {

@@ -8,7 +8,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class FolkMedicine extends CardImpl {
         DynamicValue amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
         this.getSpellAbility().addEffect(new GainLifeEffect(amount));
         // Flashback {1}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private FolkMedicine(final FolkMedicine card) {

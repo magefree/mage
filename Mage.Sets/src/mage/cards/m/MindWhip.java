@@ -1,8 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,17 +8,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class MindWhip extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If they don't, Mind Whip deals 2 damage to that player and you tap that creature.
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new MindWhipEffect(),
-                new ManaCostsImpl("{3}"),
+                new ManaCostsImpl<>("{3}"),
                 "");
         effect.setText("that player may pay {3}. If they don't, {this} deals 2 damage to that player and you tap that creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

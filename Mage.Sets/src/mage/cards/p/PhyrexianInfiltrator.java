@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,10 +9,12 @@ import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class PhyrexianInfiltrator extends CardImpl {
 
         // {2}{U}{U}: Exchange control of Phyrexian Infiltrator and target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame,
-            "Exchange control of {this} and target creature", true), new ManaCostsImpl("{2}{U}{U}"));
+            "Exchange control of {this} and target creature", true), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

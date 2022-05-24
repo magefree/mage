@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,10 +9,12 @@ import mage.abilities.effects.common.combat.CantBeBlockedByAllSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SetTargetPointer;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class ShroudedSerpent extends CardImpl {
         
         // Whenever Shrouded Serpent attacks, defending player may pay {4}. If they don't, Shrouded Serpent can't be blocked this turn.
         this.addAbility(new AttacksTriggeredAbility(
-                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new CantBeBlockedByAllSourceEffect(new FilterCreaturePermanent(), Duration.EndOfCombat), new ManaCostsImpl("{4}")), 
+                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new CantBeBlockedByAllSourceEffect(new FilterCreaturePermanent(), Duration.EndOfCombat), new ManaCostsImpl<>("{4}")),
                 false, 
                 "Whenever {this} attacks, defending player may pay {4}. If they don't, {this} can't be blocked this turn.", 
                 SetTargetPointer.PLAYER));

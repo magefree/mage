@@ -74,6 +74,17 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
         super(effect);
     }
 
+    private static FilterCard makeFilter(int xValue) {
+        FilterCard filter = new FilterCreatureCard(
+                "creature card with mana value " +
+                        xValue + " or less from your graveyard"
+        );
+        filter.add(new ManaValuePredicate(
+                ComparisonType.EQUAL_TO, xValue
+        ));
+        return filter;
+    }
+
     @Override
     public IsarethTheAwakenerCreateReflexiveTriggerEffect copy() {
         return new IsarethTheAwakenerCreateReflexiveTriggerEffect(this);
@@ -82,7 +93,7 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player == null
                 || !player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
             return false;
@@ -99,17 +110,6 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
         ability.addTarget(new TargetCardInYourGraveyard(makeFilter(costX)));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
-    }
-
-    private static FilterCard makeFilter(int xValue) {
-        FilterCard filter = new FilterCreatureCard(
-                "creature card with mana value " +
-                        xValue + " or less from your graveyard"
-        );
-        filter.add(new ManaValuePredicate(
-                ComparisonType.EQUAL_TO, xValue
-        ));
-        return filter;
     }
 }
 
@@ -170,12 +170,9 @@ class IsarethTheAwakenerReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
+        return event.getTargetId().equals(source.getFirstTarget())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 
     @Override

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,8 +13,8 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -23,6 +22,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class PhyrexianTotem extends CardImpl {
         this.addAbility(new BlackManaAbility());
         // {2}{B}: {this} becomes a 5/5 black Horror artifact creature with trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
-                new PhyrexianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));
+                new PhyrexianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
         // Whenever {this} is dealt damage, if it's a creature, sacrifice that many permanents.
         this.addAbility(new PhyrexianTotemTriggeredAbility());
     }

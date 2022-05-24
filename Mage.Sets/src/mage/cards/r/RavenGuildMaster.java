@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class RavenGuildMaster extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{U}")));
     }
 
     private RavenGuildMaster(final RavenGuildMaster card) {

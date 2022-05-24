@@ -2,7 +2,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -30,7 +31,7 @@ public final class Rootrunner extends CardImpl {
         this.toughness = new MageInt(3);
 
         //{G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

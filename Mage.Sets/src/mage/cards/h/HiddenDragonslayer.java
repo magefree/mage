@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -12,12 +11,14 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class HiddenDragonslayer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         
         // Megamorph {2}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}"), true));
 
         // When Hidden Dragonslayer is turned face up, destroy target creature with power 4 or greater an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false, false);

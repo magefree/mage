@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -18,6 +17,8 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class WeaponSurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {1}{R}
-        Ability ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{1}{R}"));
         ability.addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter, false));
         this.addAbility(ability);
     }

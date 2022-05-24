@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class Rhox extends CardImpl {
         // You may have Rhox assign its combat damage as though it weren't blocked.
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
         // {2}{G}: Regenerate Rhox.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private Rhox(final Rhox card) {

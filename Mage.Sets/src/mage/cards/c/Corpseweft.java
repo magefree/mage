@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -19,6 +18,8 @@ import mage.game.permanent.token.CorpseweftZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -29,7 +30,7 @@ public final class Corpseweft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // {1}{B}, Exile one or more creature cards from your graveyard: Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         this.addAbility(ability);
     }

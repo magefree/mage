@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class GolgariDecoy extends CardImpl {
         // All creatures able to block Golgari Decoy do so.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
         // Scavenge {3}{G}{G} ({3}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{3}{G}{G}")));
     }
 
     private GolgariDecoy(final GolgariDecoy card) {

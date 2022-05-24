@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class EronTheRelentless extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {R}{R}{R}: Regenerate Eron the Relentless.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{R}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{R}{R}{R}"));
         this.addAbility(ability);
     }
 

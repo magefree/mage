@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class KrosanTusker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cycling {2}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}")));
         // When you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true),

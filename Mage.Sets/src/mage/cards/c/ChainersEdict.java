@@ -1,16 +1,16 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class ChainersEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private ChainersEdict(final ChainersEdict card) {

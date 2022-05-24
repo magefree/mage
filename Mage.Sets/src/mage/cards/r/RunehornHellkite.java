@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class RunehornHellkite extends CardImpl {
         // {5}{R}, Exile Runehorn Hellkite from your graveyard: Each player discards their hand, then draws seven cards.
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DiscardHandAllEffect(), new ManaCostsImpl("{5}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DiscardHandAllEffect(), new ManaCostsImpl<>("{5}{R}"));
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addEffect(effect);
         this.addAbility(ability);

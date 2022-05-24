@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl("{U}{R}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

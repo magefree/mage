@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -26,12 +27,12 @@ public final class Whetwheel extends CardImpl {
 
         // {X}{X}, {tap}: Target player puts the top X cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(
-            ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}{X}"));
+            ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Morph {3}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private Whetwheel(final Whetwheel card) {

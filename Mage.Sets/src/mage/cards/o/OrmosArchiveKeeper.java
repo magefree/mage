@@ -48,7 +48,7 @@ public final class OrmosArchiveKeeper extends CardImpl {
 
         // {1}{U}{U}, Discard three cards with different names: Draw five cards.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(5), new ManaCostsImpl("{1}{U}{U}")
+                new DrawCardSourceControllerEffect(5), new ManaCostsImpl<>("{1}{U}{U}")
         );
         ability.addCost(new DiscardTargetCost(new OrmosArchiveKeeperTarget()));
         this.addAbility(ability);
@@ -104,9 +104,7 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-            if (player != null && !player.hasLost() && !player.getLibrary().hasCards()) {
-                return true;
-            }
+            return player != null && !player.hasLost() && !player.getLibrary().hasCards();
         }
         return false;
     }

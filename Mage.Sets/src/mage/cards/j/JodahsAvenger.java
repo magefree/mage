@@ -1,9 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -24,6 +21,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author Styxo
@@ -38,7 +39,7 @@ public final class JodahsAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl<>("{0}")));
     }
 
     private JodahsAvenger(final JodahsAvenger card) {
@@ -54,7 +55,6 @@ public final class JodahsAvenger extends CardImpl {
 class JodahsAvengerEffect extends ContinuousEffectImpl {
 
     private static final Set<String> choices = new HashSet<>();
-    private Ability gainedAbility;
 
     static {
         choices.add("Double strike");
@@ -62,6 +62,8 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
         choices.add("Vigilance");
         choices.add("Shadow");
     }
+
+    private Ability gainedAbility;
 
     public JodahsAvengerEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.AddAbility);

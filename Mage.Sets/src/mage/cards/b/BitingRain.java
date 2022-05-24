@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.MadnessAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class BitingRain extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
 
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private BitingRain(final BitingRain card) {

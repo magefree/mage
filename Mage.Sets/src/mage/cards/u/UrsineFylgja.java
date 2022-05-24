@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,10 +12,12 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class UrsineFylgja extends CardImpl {
             new RemoveCountersSourceCost(CounterType.HEALING.createInstance(1))));
         // {2}{W}: Put a healing counter on Ursine Fylgja.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
-            new ManaCostsImpl("{2}{W}")));
+            new ManaCostsImpl<>("{2}{W}")));
     }
 
     private UrsineFylgja(final UrsineFylgja card) {

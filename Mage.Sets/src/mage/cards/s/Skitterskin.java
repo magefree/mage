@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -16,8 +15,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class Skitterskin extends CardImpl {
         // {1}{B}: Regenerate Skitterskin. Activate this ability only if you control another colorless creature.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(),
-                new ManaCostsImpl("{1}{B}"),
+                new ManaCostsImpl<>("{1}{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter));
         this.addAbility(ability);
     }

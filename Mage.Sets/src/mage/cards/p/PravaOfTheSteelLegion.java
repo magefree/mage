@@ -48,7 +48,7 @@ public final class PravaOfTheSteelLegion extends CardImpl {
 
         // {3}{W}: Create a 1/1 white Soldier creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{3}{W}")
+                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{3}{W}")
         ));
 
         // Partner

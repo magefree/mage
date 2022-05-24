@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class DuskriderPeregrine extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // Suspend 3-{1}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{W}"), this));
     }
 
     private DuskriderPeregrine(final DuskriderPeregrine card) {

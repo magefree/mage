@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class ResilientKhenra extends CardImpl {
         this.addAbility(ability);
 
         // Eternalize {4}{G}{G}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{G}{G}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{G}{G}"), this));
 
     }
 

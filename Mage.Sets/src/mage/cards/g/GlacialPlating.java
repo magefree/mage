@@ -1,29 +1,25 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
-import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +41,7 @@ public final class GlacialPlating extends CardImpl {
         this.addAbility(ability);
 
         // Cumulative upkeep {snow}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{S}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{S}")));
 
         // Enchanted creature gets +3/+3 for each age counter on Glacial Plating.
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.AGE), 3);

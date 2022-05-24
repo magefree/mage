@@ -1,10 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,11 +11,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -30,6 +22,11 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +42,7 @@ public final class JalumGrifter extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{R}, {T}: Shuffle Jalum Grifter and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose Jalum Grifter, sacrifice it. Otherwise, destroy target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetPermanent());

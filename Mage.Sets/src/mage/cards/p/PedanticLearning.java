@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -13,6 +12,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class PedanticLearning extends CardImpl {
 class PedanticLearningTriggeredAbility extends TriggeredAbilityImpl {
 
     public PedanticLearningTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}")), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}")), false);
     }
 
     public PedanticLearningTriggeredAbility(final PedanticLearningTriggeredAbility ability) {
@@ -59,11 +60,9 @@ class PedanticLearningTriggeredAbility extends TriggeredAbilityImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 UUID cardOwnerId = card.getOwnerId();
-                if (cardOwnerId != null
+                return cardOwnerId != null
                         && card.isOwnedBy(getControllerId())
-                        && card.isLand(game)) {
-                    return true;
-                }
+                        && card.isLand(game);
             }
         }
         return false;

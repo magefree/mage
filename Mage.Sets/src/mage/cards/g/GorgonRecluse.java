@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class GorgonRecluse extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false));
 
         // Madness {B}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}")));
     }
 
     private GorgonRecluse(final GorgonRecluse card) {

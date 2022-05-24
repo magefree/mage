@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class WhipSpineDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}")));
     }
 
     private WhipSpineDrake(final WhipSpineDrake card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,16 +16,13 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +42,7 @@ public final class Gurzigost extends CardImpl {
         // {G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
         Effect effect = new GainAbilitySourceEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("You may have Gurzigost assign its combat damage this turn as though it weren't blocked");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

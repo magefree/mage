@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -13,18 +12,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,10 +84,8 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null 
-                        && creature.isControlledBy(controllerId)) {
-                    return true;
-                }
+                return creature != null
+                        && creature.isControlledBy(controllerId);
             }
         }
         return false;
@@ -111,7 +105,11 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
     public DereviEmpyrialTacticianAbility() {
-        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl("{1}{G}{W}{U}"));
+        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl<>("{1}{G}{W}{U}"));
+    }
+
+    public DereviEmpyrialTacticianAbility(DereviEmpyrialTacticianAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -121,10 +119,6 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
-    }
-
-    public DereviEmpyrialTacticianAbility(DereviEmpyrialTacticianAbility ability) {
-        super(ability);
     }
 
     @Override

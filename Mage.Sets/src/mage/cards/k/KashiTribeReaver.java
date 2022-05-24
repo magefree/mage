@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class KashiTribeReaver extends CardImpl {
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("and it"));
         this.addAbility(ability);
         // {1}{G}: Regenerate Kashi-Tribe Reaver.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private KashiTribeReaver(final KashiTribeReaver card) {

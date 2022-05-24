@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class AkroanPhalanx extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private AkroanPhalanx(final AkroanPhalanx card) {

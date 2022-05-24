@@ -13,8 +13,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,7 +45,7 @@ public final class VileRedeemer extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When you cast Vile Redeemer, you may pay {C}. If you do create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. They have "Sacrifice this creature: Add {C}."
         this.addAbility(
-                new CastSourceTriggeredAbility(new DoIfCostPaid(new VileRedeemerEffect(), new ManaCostsImpl("{C}"), "Pay {C} to create 1/1 colorless Eldrazi Scion creature tokens?"), false),
+                new CastSourceTriggeredAbility(new DoIfCostPaid(new VileRedeemerEffect(), new ManaCostsImpl<>("{C}"), "Pay {C} to create 1/1 colorless Eldrazi Scion creature tokens?"), false),
                 new VileRedeemerNonTokenCreaturesDiedWatcher());
     }
 

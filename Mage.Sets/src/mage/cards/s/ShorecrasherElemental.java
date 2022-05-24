@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -16,14 +15,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,13 +35,13 @@ public final class ShorecrasherElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Exile Shorecrasher Elemental, then return it to the battlefield face down under its owner's control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalEffect(), new ManaCostsImpl<>("{U}")));
 
         // {1}: Shorecrasher Elemental gets +1/-1 or -1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalBoostEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalBoostEffect(), new ManaCostsImpl<>("{1}")));
 
         // Megamorph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}"), true));
 
     }
 
@@ -95,8 +92,8 @@ class ShorecrasherElementalEffect extends OneShotEffect {
 
 class ShorecrasherElementalBoostEffect extends OneShotEffect {
 
-    private static String CHOICE_1 = "+1/-1";
-    private static String CHOICE_2 = "-1/+1";
+    private static final String CHOICE_1 = "+1/-1";
+    private static final String CHOICE_2 = "-1/+1";
 
     public ShorecrasherElementalBoostEffect() {
         super(Outcome.BoostCreature);

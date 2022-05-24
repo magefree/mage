@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class FledglingMawcor extends CardImpl {
         this.addAbility(ability);
         
         // Morph {U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}{U}")));
     }
 
     private FledglingMawcor(final FledglingMawcor card) {

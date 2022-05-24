@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class SaltRoadAmbushers extends CardImpl {
         this.addAbility(new SaltRoadAmbushersTriggeredAbility());
         
         // Megamorph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}"), true));
     }
 
     private SaltRoadAmbushers(final SaltRoadAmbushers card) {

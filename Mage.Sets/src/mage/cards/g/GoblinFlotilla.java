@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
@@ -14,9 +13,11 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class GoblinFlotilla extends CardImpl {
                                         "Blocks or Blocked by Goblin Flotilla"),
                                 false),
                         Duration.EndOfCombat),
-                new ManaCostsImpl("{R}"),
+                new ManaCostsImpl<>("{R}"),
                 "Pay Goblin Flotilla combat effect?"
         );
         effect.setText("unless you pay {R}, whenever {this} blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.");

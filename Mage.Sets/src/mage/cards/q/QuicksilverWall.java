@@ -1,7 +1,6 @@
 
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class QuicksilverWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // {4}: Return Quicksilver Wall to its owner's hand. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new ReturnToHandSourceEffect(true), new ManaCostsImpl("{4}"));
+            new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{4}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

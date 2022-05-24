@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class DaruSanctifier extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
         // When Daru Sanctifier is turned face up, destroy target enchantment.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetEnchantmentPermanent());

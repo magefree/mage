@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,16 +9,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +34,7 @@ public final class IndigoFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}: Target permanent becomes blue in addition to its other colors until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBlueTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBlueTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         

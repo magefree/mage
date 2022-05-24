@@ -1,7 +1,6 @@
 
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class XiraArien extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {B}{R}{G}, {tap}: Target player draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl<>("{B}{R}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

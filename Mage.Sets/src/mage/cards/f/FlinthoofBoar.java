@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class FlinthoofBoar extends CardImpl {
         // {R}: Flinthoof Boar gains haste until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{R}")));
+                new ManaCostsImpl<>("{R}")));
     }
 
     private FlinthoofBoar(final FlinthoofBoar card) {

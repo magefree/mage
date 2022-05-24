@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.BirdToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class MigratoryRoute extends CardImpl {
         getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 4));
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private MigratoryRoute(final MigratoryRoute card) {

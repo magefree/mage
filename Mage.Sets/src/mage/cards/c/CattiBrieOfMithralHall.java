@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -18,15 +16,38 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
+
+enum CattiBrieRemovedCounterValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        int countersRemoved = 0;
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof RemoveAllCountersSourceCost) {
+                countersRemoved = ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
+            }
+        }
+        return countersRemoved;
+    }
+
+    @Override
+    public CattiBrieRemovedCounterValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+}
 
 /**
  *
@@ -66,7 +87,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // attacking or blocking creature an opponent controls, where X is the number of
         // counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl("{1}"));
+                new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl<>("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));
         damageAbility.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
 
@@ -80,30 +101,5 @@ public final class CattiBrieOfMithralHall extends CardImpl {
     @Override
     public CattiBrieOfMithralHall copy() {
         return new CattiBrieOfMithralHall(this);
-    }
-}
-
-enum CattiBrieRemovedCounterValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int countersRemoved = 0;
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof RemoveAllCountersSourceCost) {
-                countersRemoved = ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
-            }
-        }
-        return countersRemoved;
-    }
-
-    @Override
-    public CattiBrieRemovedCounterValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
@@ -13,13 +12,11 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +44,7 @@ public final class SomberwaldAlpha extends CardImpl {
         // {1}{G}: Target creature you control gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), 
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);  
     }

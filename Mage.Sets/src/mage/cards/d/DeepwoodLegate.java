@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.CompoundCondition;
@@ -18,6 +17,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public final class DeepwoodLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
 
         // {B}: Deepwood Legate gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private DeepwoodLegate(final DeepwoodLegate card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class VolcanicRambler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{R}: Volcanic Rambler deals 1 damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

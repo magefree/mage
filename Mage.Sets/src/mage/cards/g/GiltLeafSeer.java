@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class GiltLeafSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {tap}: Look at the top two cards of your library, then put them back in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(2), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(2), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -42,7 +42,7 @@ public final class SmolderingWerewolf extends CardImpl {
 
         // {4}{R}{R}: Transform Smoldering Werewolf.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{4}{R}{R}")));
     }
 
     private SmolderingWerewolf(final SmolderingWerewolf card) {

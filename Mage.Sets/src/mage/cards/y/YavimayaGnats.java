@@ -1,7 +1,6 @@
 
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class YavimayaGnats extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {G}: Regenerate Yavimaya Gnats.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private YavimayaGnats(final YavimayaGnats card) {

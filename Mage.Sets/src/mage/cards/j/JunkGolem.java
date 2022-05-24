@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,12 +11,14 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class JunkGolem extends CardImpl {
         ));
 
         // {1}, Discard a card: Put a +1/+1 counter on Junk Golem.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

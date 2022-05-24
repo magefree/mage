@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class Glarecaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl("{5}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl<>("{5}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

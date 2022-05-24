@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
@@ -31,7 +32,7 @@ public final class EtchedMonstrosity extends CardImpl {
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), " with five -1/-1 counters on it"));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(5)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

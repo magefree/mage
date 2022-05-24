@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class VesselOfNascency extends CardImpl {
         // planeswalker card from among them into your hand. Put the rest into your graveyard.
         Ability ability = new SimpleActivatedAbility(
                 new RevealLibraryPickControllerEffect(4, 1, filter, PutCards.HAND, PutCards.GRAVEYARD),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

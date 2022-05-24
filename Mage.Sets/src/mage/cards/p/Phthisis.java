@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +14,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class Phthisis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Suspend 5-{1}{B}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{1}{B}"), this));
     }
 
     private Phthisis(final Phthisis card) {

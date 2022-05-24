@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -29,7 +30,7 @@ public final class LuxaRiverShrine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}, {T}: You gain 1 life. Put a brick counter on Luxa River Shrine.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersSourceEffect(CounterType.BRICK.createInstance()));
         this.addAbility(ability);

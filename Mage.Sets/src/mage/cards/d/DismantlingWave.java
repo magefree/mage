@@ -19,39 +19,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * @author TheElk801
- */
-public final class DismantlingWave extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterArtifactOrEnchantmentPermanent("artifacts and enchantments");
-
-    public DismantlingWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
-
-        // For each opponent, destroy up to one target artifact or enchantment that player controls.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(false, true)
-                .setText("For each opponent, destroy up to one target artifact or enchantment that player controls."));
-        this.getSpellAbility().setTargetAdjuster(DismantlingWaveAdjuster.instance);
-
-        // Cycling {6}{W}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{6}{W}{W}")));
-
-        // When you cycle Dismantling Wave, destroy all artifacts and enchantments.
-        this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(filter)));
-    }
-
-    private DismantlingWave(final DismantlingWave card) {
-        super(card);
-    }
-
-    @Override
-    public DismantlingWave copy() {
-        return new DismantlingWave(this);
-    }
-}
-
 enum DismantlingWaveAdjuster implements TargetAdjuster {
     instance;
 
@@ -69,5 +36,38 @@ enum DismantlingWaveAdjuster implements TargetAdjuster {
                     filter.add(new ControllerIdPredicate(player.getId()));
                     ability.addTarget(new TargetPermanent(0, 1, filter, false));
                 });
+    }
+}
+
+/**
+ * @author TheElk801
+ */
+public final class DismantlingWave extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterArtifactOrEnchantmentPermanent("artifacts and enchantments");
+
+    public DismantlingWave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
+
+        // For each opponent, destroy up to one target artifact or enchantment that player controls.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(false, true)
+                .setText("For each opponent, destroy up to one target artifact or enchantment that player controls."));
+        this.getSpellAbility().setTargetAdjuster(DismantlingWaveAdjuster.instance);
+
+        // Cycling {6}{W}{W}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{6}{W}{W}")));
+
+        // When you cycle Dismantling Wave, destroy all artifacts and enchantments.
+        this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(filter)));
+    }
+
+    private DismantlingWave(final DismantlingWave card) {
+        super(card);
+    }
+
+    @Override
+    public DismantlingWave copy() {
+        return new DismantlingWave(this);
     }
 }

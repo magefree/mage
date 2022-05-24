@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.EternalizeAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 public final class SteadfastSentinel extends CardImpl {
 
@@ -24,7 +25,7 @@ public final class SteadfastSentinel extends CardImpl {
         addAbility(VigilanceAbility.getInstance());
 
         //Eternalize {4}{W}{W}
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{W}{W}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{W}{W}"), this));
     }
 
 

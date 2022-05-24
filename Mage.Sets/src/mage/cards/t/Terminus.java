@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
@@ -29,7 +30,7 @@ public final class Terminus extends CardImpl {
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new TerminusEffect());
         // Miracle {W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private Terminus(final Terminus card) {

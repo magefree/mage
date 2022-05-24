@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class EssenceFracture extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
         
         // Cycling {2}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private EssenceFracture(final EssenceFracture card) {

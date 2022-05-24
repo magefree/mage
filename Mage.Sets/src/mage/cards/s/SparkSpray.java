@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class SparkSpray extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private SparkSpray(final SparkSpray card) {

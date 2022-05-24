@@ -1,15 +1,15 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class GraspOfPhantoms extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {7}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{U}")));
     }
 
     private GraspOfPhantoms(final GraspOfPhantoms card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
@@ -12,6 +11,8 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class KrovikanRot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         
         // Recover {1}{B}{B}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{B}{B}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{1}{B}{B}"), this));
     }
 
     private KrovikanRot(final KrovikanRot card) {

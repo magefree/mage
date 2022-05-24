@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,10 +9,12 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class SeedcradleWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}{W}: Target creature gets +3/+3 until end of turn. Untap that creature.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}{W}"));
         ability.addEffect(new UntapTargetEffect().setText("untap that creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -1,15 +1,15 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class FerventDenial extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{U}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{U}{U}")));
     }
 
     private FerventDenial(final FerventDenial card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -24,7 +25,7 @@ public final class RingOfRenewal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {5}, {tap}: Discard a card at random, then draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1, true), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1, true), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         Effect effect = new DrawCardSourceControllerEffect(2);
         effect.setText(", then draw two cards");

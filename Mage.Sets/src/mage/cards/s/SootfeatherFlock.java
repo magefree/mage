@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class SootfeatherFlock extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {3}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private SootfeatherFlock(final SootfeatherFlock card) {

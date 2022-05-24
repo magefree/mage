@@ -65,54 +65,35 @@ import java.util.regex.Pattern;
  */
 public abstract class MageTestPlayerBase {
 
-    protected static Logger logger = Logger.getLogger(MageTestPlayerBase.class);
-
-    public static PluginClassLoader classLoader = new PluginClassLoader();
-
+    protected static final String TESTS_PATH = "tests" + File.separator;
     private static final String pluginFolder = "plugins";
-
+    public static PluginClassLoader classLoader = new PluginClassLoader();
+    protected static Logger logger = Logger.getLogger(MageTestPlayerBase.class);
+    protected static Map<String, DeckCardLists> loadedDecks = new HashMap<>(); // deck's cache
+    protected static Map<String, CardInfo> loadedCardInfo = new HashMap<>(); // db card's cache
+    /**
+     * Game instance initialized in load method.
+     */
+    protected static Game currentGame = null;
+    protected static Match currentMatch = null;
+    /**
+     * Player thats starts the game first. By default, it is ComputerA.
+     */
+    protected static Player activePlayer = null;
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
-
     protected Map<TestPlayer, List<Card>> handCards = new HashMap<>();
     protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> commandCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> exiledCards = new HashMap<>();
-
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
-
-    protected static Map<String, DeckCardLists> loadedDecks = new HashMap<>(); // deck's cache
-    protected static Map<String, CardInfo> loadedCardInfo = new HashMap<>(); // db card's cache
-
     protected TestPlayer playerA;
     protected TestPlayer playerB;
     protected TestPlayer playerC;
     protected TestPlayer playerD;
-
-    /**
-     * Game instance initialized in load method.
-     */
-    protected static Game currentGame = null;
-
-    protected static Match currentMatch = null;
-
-    /**
-     * Player thats starts the game first. By default, it is ComputerA.
-     */
-    protected static Player activePlayer = null;
-
     protected Integer stopOnTurn;
-
     protected PhaseStep stopAtStep = PhaseStep.UNTAP;
-
-    protected enum ParserState {
-
-        INIT,
-        OPTIONS,
-        EXPECTED
-    }
-
     protected ParserState parserState;
 
     /**
@@ -123,8 +104,6 @@ public abstract class MageTestPlayerBase {
      * battlefield:ComputerB:Tine Shrike:0 graveyard:ComputerB:Tine Shrike:1
      */
     protected List<String> expectedResults = new ArrayList<>();
-
-    protected static final String TESTS_PATH = "tests" + File.separator;
 
     @BeforeClass
     public static void init() {
@@ -487,7 +466,7 @@ public abstract class MageTestPlayerBase {
      * @param damageAmount
      */
     protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility(
                 "target damage " + damageAmount + " for " + controller.getName(),
@@ -502,7 +481,7 @@ public abstract class MageTestPlayerBase {
      * @param controller
      */
     protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
@@ -518,7 +497,7 @@ public abstract class MageTestPlayerBase {
      */
     protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
         // graveyard
-        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from graveyard for " + controller.getName(),
@@ -527,7 +506,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // exile
-        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from exile for " + controller.getName(),
@@ -536,12 +515,19 @@ public abstract class MageTestPlayerBase {
         );
 
         // library
-        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl<>(""));
         addCustomCardWithAbility(
                 "return from library for " + controller.getName(),
                 controller,
                 ability
         );
+    }
+
+    protected enum ParserState {
+
+        INIT,
+        OPTIONS,
+        EXPECTED
     }
 }
 
@@ -551,31 +537,6 @@ class CustomTestCard extends CardImpl {
     static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
     static private final Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
     static private final Map<String, Set<SubType>> subTypesList = new HashMap<>(); // card name -> additional subtypes
-
-    static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
-        if (!abilitiesList.containsKey(cardName)) {
-            abilitiesList.put(cardName, new AbilitiesImpl<>());
-        }
-        Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
-        if (ability != null) oldAbilities.add(ability);
-
-        spellAbilitiesList.put(cardName, spellAbility);
-    }
-
-    static void clearCustomAbilities(String cardName) {
-        abilitiesList.remove(cardName);
-        spellAbilitiesList.remove(cardName);
-    }
-
-    static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
-        if (subtypes != null) {
-            subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
-        }
-    }
-
-    static void clearAdditionalSubtypes(String cardName) {
-        subTypesList.remove(cardName);
-    }
 
     CustomTestCard(UUID ownerId, CardSetInfo setInfo, CardType cardType, String spellCost) {
         super(ownerId, setInfo, new CardType[]{cardType}, spellCost);
@@ -605,6 +566,31 @@ class CustomTestCard extends CardImpl {
 
     private CustomTestCard(final CustomTestCard card) {
         super(card);
+    }
+
+    static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
+        if (!abilitiesList.containsKey(cardName)) {
+            abilitiesList.put(cardName, new AbilitiesImpl<>());
+        }
+        Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
+        if (ability != null) oldAbilities.add(ability);
+
+        spellAbilitiesList.put(cardName, spellAbility);
+    }
+
+    static void clearCustomAbilities(String cardName) {
+        abilitiesList.remove(cardName);
+        spellAbilitiesList.remove(cardName);
+    }
+
+    static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
+        if (subtypes != null) {
+            subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
+        }
+    }
+
+    static void clearAdditionalSubtypes(String cardName) {
+        subTypesList.remove(cardName);
     }
 
     @Override

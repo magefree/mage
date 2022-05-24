@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,12 +12,14 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class StrongholdOverseer extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // {B}{B}: Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{B}{B}"));
         Effect effect = new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter2, false);
         effect.setText("and creatures without shadow get -1/-0 until end of turn");
         ability.addEffect(effect);

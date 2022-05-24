@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,10 +11,12 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SimicKeyrune extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {G}{U}: Simic Keyrune becomes a 2/3 green and blue Crab artifact creature with hexproof until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SimicKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SimicKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{G}{U}")));
     }
 
     private SimicKeyrune(final SimicKeyrune card) {

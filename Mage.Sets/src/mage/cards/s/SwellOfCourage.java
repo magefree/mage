@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class SwellOfCourage extends CardImpl {
         // Creatures you control get +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
         // Reinforce X-{X}{W}{W}
-        this.addAbility(new ReinforceAbility(ManacostVariableValue.REGULAR, new ManaCostsImpl("{X}{W}{W}")));
+        this.addAbility(new ReinforceAbility(ManacostVariableValue.REGULAR, new ManaCostsImpl<>("{X}{W}{W}")));
     }
 
     private SwellOfCourage(final SwellOfCourage card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,14 +12,12 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +41,7 @@ public final class FelidarUmbra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
 
         // {1}{W}: Attach Felidar Umbra to target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature you control"), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 

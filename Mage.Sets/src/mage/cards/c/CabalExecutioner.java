@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class CabalExecutioner extends CardImpl {
         this.addAbility(new CabalExecutionerAbility());
 
         // Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private CabalExecutioner(final CabalExecutioner card) {

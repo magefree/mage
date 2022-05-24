@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -10,16 +9,14 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +41,7 @@ public final class BrambleSovereign extends CardImpl {
         // Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl("{1}{G}")),
+                new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl<>("{1}{G}")),
                 filter, false, SetTargetPointer.PERMANENT,
                 "Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. "
                 + "If you do, that creature's controller creates a token that's a copy of that creature."

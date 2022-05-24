@@ -1,8 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -19,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -49,7 +49,7 @@ public final class VoldarenPariah extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false))));
 
         // Madness {B}{B}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}{B}")));
     }
 
     private VoldarenPariah(final VoldarenPariah card) {

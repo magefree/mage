@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -26,7 +27,7 @@ public final class StensiaBloodhall extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{B}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

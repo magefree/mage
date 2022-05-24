@@ -1,15 +1,15 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -23,7 +23,7 @@ public final class ArmyOfTheDamned extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13, true, false));
 
         // Flashback {7}{B}{B}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{B}{B}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{B}{B}{B}")));
     }
 
     private ArmyOfTheDamned(final ArmyOfTheDamned card) {

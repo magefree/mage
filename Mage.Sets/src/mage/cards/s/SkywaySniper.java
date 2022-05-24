@@ -41,7 +41,7 @@ public final class SkywaySniper extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // {2}{G}: Skyway Sniper deals 1 damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{2}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

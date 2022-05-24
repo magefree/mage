@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,14 +11,16 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class DulcetSirens extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, {T}: Target creature attacks target opponent this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DulcetSirensForceAttackEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DulcetSirensForceAttackEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addTarget(new TargetOpponent());        
@@ -43,7 +44,7 @@ public final class DulcetSirens extends CardImpl {
 
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private DulcetSirens(final DulcetSirens card) {
@@ -74,10 +75,7 @@ class DulcetSirensForceAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

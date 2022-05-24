@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,8 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +28,7 @@ public final class CripplingFatigue extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
 
         // Flashback-{1}{B}, Pay 3 life
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

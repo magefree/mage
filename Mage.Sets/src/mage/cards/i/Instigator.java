@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,17 +12,15 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class Instigator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}{B}, {tap}, Discard a card: Creatures target player controls attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InstigatorEffect(), new ManaCostsImpl("{1}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InstigatorEffect(), new ManaCostsImpl<>("{1}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());

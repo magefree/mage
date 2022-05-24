@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class RevengeOfTheHunted extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {G}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private RevengeOfTheHunted(final RevengeOfTheHunted card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -11,12 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class ParallelEvolution extends CardImpl {
         this.getSpellAbility().addEffect(new ParallelEvolutionEffect());
 
         // Flashback {4}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{G}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{G}{G}{G}")));
     }
 
     private ParallelEvolution(final ParallelEvolution card) {

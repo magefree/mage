@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.SoldierToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class SecurityDetail extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierToken()),
-                new ManaCostsImpl("{W}{W}"),
+                new ManaCostsImpl<>("{W}{W}"),
                 1,
                 new CreatureCountCondition(0, TargetController.YOU)
         ));

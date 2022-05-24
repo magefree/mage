@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class SpittingGourna extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Morph {4}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{G}")));
     }
 
     private SpittingGourna(final SpittingGourna card) {

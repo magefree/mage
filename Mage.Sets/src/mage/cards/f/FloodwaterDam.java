@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -27,7 +28,7 @@ public final class FloodwaterDam extends CardImpl {
         // {X}{X}{1}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect();
         effect.setText("tap X target lands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{X}{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         this.addAbility(ability);

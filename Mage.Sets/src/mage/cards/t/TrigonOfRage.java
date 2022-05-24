@@ -2,7 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,6 +22,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -45,7 +46,7 @@ public final class TrigonOfRage extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{R}{R}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{R}{R}"));
         this.addAbility(ability2);
     }
 

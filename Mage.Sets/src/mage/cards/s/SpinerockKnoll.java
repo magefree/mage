@@ -23,41 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author emerald000
- */
-public final class SpinerockKnoll extends CardImpl {
-
-    public SpinerockKnoll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-
-        // Hideaway
-        this.addAbility(new HideawayAbility(4));
-        this.addAbility(new EntersBattlefieldTappedAbility());
-
-        // {tap}: Add {R}.
-        this.addAbility(new RedManaAbility());
-
-        // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
-        Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
-                new HideawayPlayEffect(), SpinerockKnollCondition.instance,
-                "you may play the exiled card without paying its mana cost " +
-                        "if an opponent was dealt 7 or more damage this turn"
-        ), new ManaCostsImpl("{R}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new SpinerockKnollWatcher());
-    }
-
-    private SpinerockKnoll(final SpinerockKnoll card) {
-        super(card);
-    }
-
-    @Override
-    public SpinerockKnoll copy() {
-        return new SpinerockKnoll(this);
-    }
-}
-
 enum SpinerockKnollCondition implements Condition {
     instance;
 
@@ -78,6 +43,41 @@ enum SpinerockKnollCondition implements Condition {
     @Override
     public String toString() {
         return "if an opponent was dealt 7 or more damage this turn";
+    }
+}
+
+/**
+ * @author emerald000
+ */
+public final class SpinerockKnoll extends CardImpl {
+
+    public SpinerockKnoll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
+        // Hideaway
+        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // {tap}: Add {R}.
+        this.addAbility(new RedManaAbility());
+
+        // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
+        Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
+                new HideawayPlayEffect(), SpinerockKnollCondition.instance,
+                "you may play the exiled card without paying its mana cost " +
+                        "if an opponent was dealt 7 or more damage this turn"
+        ), new ManaCostsImpl<>("{R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability, new SpinerockKnollWatcher());
+    }
+
+    private SpinerockKnoll(final SpinerockKnoll card) {
+        super(card);
+    }
+
+    @Override
+    public SpinerockKnoll copy() {
+        return new SpinerockKnoll(this);
     }
 }
 

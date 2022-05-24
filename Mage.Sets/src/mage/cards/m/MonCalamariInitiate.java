@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class MonCalamariInitiate extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private MonCalamariInitiate(final MonCalamariInitiate card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,6 +17,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class GoblinWizard extends CardImpl {
 
         // {R}: Target Goblin gains protection from white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         Target target = new TargetPermanent(goblinPermanent);
         ability.addTarget(target);
         this.addAbility(ability);

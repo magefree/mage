@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class ErrantEphemeron extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Suspend 4-{1}{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private ErrantEphemeron(final ErrantEphemeron card) {

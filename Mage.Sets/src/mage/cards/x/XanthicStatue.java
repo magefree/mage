@@ -1,7 +1,6 @@
 
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -25,7 +26,7 @@ public final class XanthicStatue extends CardImpl {
 
         // {5}: Until end of turn, Xanthic Statue becomes an 8/8 Golem artifact creature with trample.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new XanthicStatueCreature(),
-            "", Duration.EndOfTurn), new ManaCostsImpl("{5}")));
+            "", Duration.EndOfTurn), new ManaCostsImpl<>("{5}")));
     }
 
     private XanthicStatue(final XanthicStatue card) {

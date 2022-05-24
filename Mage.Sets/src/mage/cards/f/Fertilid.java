@@ -38,7 +38,7 @@ public final class Fertilid extends CardImpl {
         
         // {1}{G}, Remove a +1/+1 counter from Fertilid: Target player searches their library for a basic land card and puts it onto the battlefield tapped. Then that player shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), new ManaCostsImpl("{1}{G}"));
+                new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

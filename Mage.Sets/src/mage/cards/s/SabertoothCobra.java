@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
@@ -12,8 +11,10 @@ import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class SabertoothCobra extends CardImpl {
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(effect, false, true);
         effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("That player gets another poison counter.");
-        ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{2}"), effect, PhaseStep.UPKEEP, true,
+        ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl<>("{2}"), effect, PhaseStep.UPKEEP, true,
             "That player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that turn."));
         this.addAbility(ability);
     }

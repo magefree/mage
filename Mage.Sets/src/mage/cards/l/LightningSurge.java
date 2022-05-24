@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -11,8 +10,9 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class LightningSurge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {5}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{R}{R}")));
     }
 
     private LightningSurge(final LightningSurge card) {

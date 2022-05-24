@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -14,13 +13,11 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +46,7 @@ public final class RamunapRuins extends CardImpl {
 
         // {2}{R}{R}, {t}, Sacrifice a Desert: Ramunap Ruins deals 2 damage to each opponent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
-                new ManaCostsImpl("{2}{R}{R}"));
+                new ManaCostsImpl<>("{2}{R}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);

@@ -18,6 +18,21 @@ import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
+enum WindbriskHeightsAttackersCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        PlayerAttackedWatcher watcher = game.getState().getWatcher(PlayerAttackedWatcher.class);
+        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
+    }
+
+    @Override
+    public String toString() {
+        return "you attacked with three or more creatures this turn";
+    }
+}
+
 /**
  * @author LevelX2
  */
@@ -38,7 +53,7 @@ public final class WindbriskHeights extends CardImpl {
                 new HideawayPlayEffect(), WindbriskHeightsAttackersCondition.instance,
                 "you may play the exiled card without paying its mana cost " +
                         "if you attacked with three or more creatures this turn"
-        ), new ManaCostsImpl("{W}"));
+        ), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
@@ -50,20 +65,5 @@ public final class WindbriskHeights extends CardImpl {
     @Override
     public WindbriskHeights copy() {
         return new WindbriskHeights(this);
-    }
-}
-
-enum WindbriskHeightsAttackersCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        PlayerAttackedWatcher watcher = game.getState().getWatcher(PlayerAttackedWatcher.class);
-        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
-    }
-
-    @Override
-    public String toString() {
-        return "you attacked with three or more creatures this turn";
     }
 }

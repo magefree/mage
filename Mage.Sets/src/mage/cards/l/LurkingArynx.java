@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -10,12 +9,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +31,7 @@ public final class LurkingArynx extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{G}"),
+                new ManaCostsImpl<>("{2}{G}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         ability.addTarget(new TargetCreaturePermanent());

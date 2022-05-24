@@ -1,17 +1,12 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MadnessAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,6 +15,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +31,7 @@ public final class PsychoticEpisode extends CardImpl {
         this.getSpellAbility().addEffect(new PsychoticEpisodeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private PsychoticEpisode(final PsychoticEpisode card) {

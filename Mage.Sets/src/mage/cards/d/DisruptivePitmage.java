@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class DisruptivePitmage extends CardImpl {
         this.addAbility(ability);
         
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private DisruptivePitmage(final DisruptivePitmage card) {

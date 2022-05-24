@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,19 +11,15 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**
@@ -46,7 +41,7 @@ public final class HisokasGuard extends CardImpl {
         // {1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         filter.add(AnotherPredicate.instance);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
         ability.addTarget(target);

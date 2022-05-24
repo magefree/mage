@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -9,9 +8,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,6 +18,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class ConduitOfStorms extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
         // {3}{R}{R}: Transform Conduit of Storms.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{3}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{3}{R}{R}")));
     }
 
     private ConduitOfStorms(final ConduitOfStorms card) {

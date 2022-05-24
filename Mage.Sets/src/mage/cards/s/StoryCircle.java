@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -19,6 +18,8 @@ import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -32,7 +33,7 @@ public final class StoryCircle extends CardImpl {
         // As Story Circle enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // {W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl<>("{W}")));
     }
 
     private StoryCircle(final StoryCircle card) {
@@ -52,15 +53,15 @@ class StoryCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
         staticText = "The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.";
     }
 
+    public StoryCircleEffect(StoryCircleEffect effect) {
+        super(effect);
+    }
+
     @Override
     public void init(Ability source, Game game) {
         FilterObject filter = targetSource.getFilter();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
         super.init(source, game);
-    }
-
-    public StoryCircleEffect(StoryCircleEffect effect) {
-        super(effect);
     }
 
     @Override

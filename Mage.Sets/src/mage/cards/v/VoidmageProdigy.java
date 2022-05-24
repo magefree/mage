@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,14 +41,14 @@ public final class VoidmageProdigy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{U}, Sacrifice a Wizard: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         Target target = new TargetSpell();
         ability.addTarget(target);
         this.addAbility(ability);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private VoidmageProdigy(final VoidmageProdigy card) {

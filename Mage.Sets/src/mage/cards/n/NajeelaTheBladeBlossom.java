@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
@@ -18,16 +17,12 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WarriorToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +52,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES),
-                new ManaCostsImpl("{W}{U}{B}{R}{G}"),
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}"),
                 new IsPhaseCondition(TurnPhase.COMBAT)
         );
         ability.addEffect(new GainAbilityAllEffect(

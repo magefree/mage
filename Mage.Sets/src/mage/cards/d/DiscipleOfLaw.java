@@ -2,7 +2,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class DiscipleOfLaw extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DiscipleOfLaw(final DiscipleOfLaw card) {

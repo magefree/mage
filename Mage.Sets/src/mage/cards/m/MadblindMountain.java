@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -14,11 +13,13 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class MadblindMountain extends CardImpl {
         // {R}, {tap}: Shuffle your library. Activate this ability only if you control two or more red permanents.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new ShuffleLibrarySourceEffect(),
-                new ManaCostsImpl("{R}"),
+                new ManaCostsImpl<>("{R}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -19,6 +17,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author weirddan455
@@ -26,12 +26,11 @@ import mage.game.permanent.token.custom.CreatureToken;
 public final class HallOfStormGiants extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     public HallOfStormGiants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -55,7 +54,7 @@ public final class HallOfStormGiants extends CardImpl {
                                 "It's still a land. " +
                                 "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
                                 "counter it unless that player pays {3}.)</i>"),
-                new ManaCostsImpl("{5}{U}")));
+                new ManaCostsImpl<>("{5}{U}")));
     }
 
     private HallOfStormGiants(final HallOfStormGiants card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -32,7 +33,7 @@ public final class BrineElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}{U}")));
 
         // When Brine Elemental is turned face up, each opponent skips their next untap step.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BrineElementalEffect()));

@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,13 +10,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoUnlessControllerPaysEffect(
                         new DamageControllerEffect(2),
-                        new ManaCostsImpl("{B}{B}")
+                        new ManaCostsImpl<>("{B}{B}")
                 ),
                 TargetController.YOU, false
         ));

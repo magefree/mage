@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -29,7 +30,7 @@ public final class OngoingInvestigation extends CardImpl {
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(new InvestigateEffect()));
 
         // {1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);

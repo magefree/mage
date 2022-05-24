@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -23,12 +21,14 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
+import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
-import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,14 +38,13 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
+    private static final PermanentsOnTheBattlefieldCondition condition
+            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2, true);
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
         filter2.add(SuperType.LEGENDARY.getPredicate());
     }
-
-    private static final PermanentsOnTheBattlefieldCondition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2, true);
 
     public KolvoriGodOfKinship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -75,7 +74,7 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
         // Put the rest on the bottom of your library in a random order.
         ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(6, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.getLeftHalfCard().addAbility(ability);
 

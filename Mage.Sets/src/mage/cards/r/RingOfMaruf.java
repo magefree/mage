@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -30,7 +31,7 @@ public final class RingOfMaruf extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {5}, {Tap}, Exile Ring of Maruf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addHint(OpenSideboardHint.instance);

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class AnointerPriest extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // Embalm {3}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}"), this));
     }
 
     private AnointerPriest(final AnointerPriest card) {

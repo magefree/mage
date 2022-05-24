@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class Fatestitcher extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Unearth {U}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private Fatestitcher(final Fatestitcher card) {

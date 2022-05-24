@@ -1,9 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -21,15 +18,14 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.Fa
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +98,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 if (card.isCreature(game)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
                     if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl("{0}");
+                        manaCosts = new ManaCostsImpl<>("{0}");
                     }
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);

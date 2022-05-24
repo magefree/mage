@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -11,9 +10,11 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class PatronOfTheWild extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}")));
         // When Patron of the Wild is turned face up, target creature gets +3/+3 until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

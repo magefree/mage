@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class AbsorbVis extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4).setText("and you gain 4 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private AbsorbVis(final AbsorbVis card) {

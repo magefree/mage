@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class MomentaryBlink extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
 
         // Flashback {3}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}")));
     }
 
     private MomentaryBlink(final MomentaryBlink card) {

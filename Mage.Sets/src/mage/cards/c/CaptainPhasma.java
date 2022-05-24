@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,14 +9,16 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperToken;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public final class CaptainPhasma extends CardImpl {
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}{U}{B}{R}{G}: Search your library for a Trooper creature card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private CaptainPhasma(final CaptainPhasma card) {

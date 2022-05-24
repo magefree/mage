@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -9,11 +8,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class GeneralHux extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("This creature gets +1/+1 until end of turn"),
-                new ManaCostsImpl("{B}"));
+                new ManaCostsImpl<>("{B}"));
         Effect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
         effect.setText("until end of turn, target creature gains");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false));

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,12 +34,12 @@ public final class ArmoredGuardian extends CardImpl {
 
         // {1}{W}{W}: Target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
-            new ManaCostsImpl("{1}{W}{W}"));
+            new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // {1}{U}{U}: Armored Guardian gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn),
-            new ManaCostsImpl("{1}{U}{U}")));
+            new ManaCostsImpl<>("{1}{U}{U}")));
     }
 
     private ArmoredGuardian(final ArmoredGuardian card) {

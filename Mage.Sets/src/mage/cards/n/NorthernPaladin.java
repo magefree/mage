@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,12 +17,14 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class NorthernPaladin extends CardImpl {
-    private static FilterPermanent filter = new FilterPermanent("black permanent");
+    private static final FilterPermanent filter = new FilterPermanent("black permanent");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -38,7 +39,7 @@ public final class NorthernPaladin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}{W}, {tap}: Destroy target black permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,12 +14,10 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +44,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostAllEffect(xMinusValue, xMinusValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false,
                         "All creatures get -X/-X until end of turn, where X is the number of cards in your hand", true),
-                new ManaCostsImpl("{B}")
+                new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

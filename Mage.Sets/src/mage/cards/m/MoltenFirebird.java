@@ -1,18 +1,22 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.*;
-import mage.constants.SubType;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.SkipNextDrawStepControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +41,7 @@ public final class MoltenFirebird extends CardImpl {
         this.addAbility(ability);
 
         // {4}{R}: Exile Molten Firebird.
-        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl<>("{4}{R}")));
     }
 
     private MoltenFirebird(final MoltenFirebird card) {

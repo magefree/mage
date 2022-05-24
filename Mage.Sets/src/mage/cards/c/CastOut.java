@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class CastOut extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
 
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -16,11 +15,13 @@ import mage.abilities.keyword.GraftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class SimicBasilisk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_A_CREATURE_P1P1));
         this.addAbility(ability);
     }

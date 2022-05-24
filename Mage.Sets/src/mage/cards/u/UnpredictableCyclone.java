@@ -1,5 +1,6 @@
 package mage.cards.u;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,7 +17,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -30,7 +30,7 @@ public final class UnpredictableCyclone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new UnpredictableCycloneReplacementEffect()));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private UnpredictableCyclone(final UnpredictableCyclone card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -14,6 +13,8 @@ import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Derpthemeus
@@ -24,7 +25,7 @@ public final class DispersingOrb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
         // {3}{U}, Sacrifice a permanent: Return target permanent to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

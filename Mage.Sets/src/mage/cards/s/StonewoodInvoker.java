@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -9,9 +8,11 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class StonewoodInvoker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {7}{G}: Stonewood Invoker gets +5/+5 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(5,5,Duration.EndOfTurn), new ManaCostsImpl("{7}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(5,5,Duration.EndOfTurn), new ManaCostsImpl<>("{7}{G}")));
     }
 
     private StonewoodInvoker(final StonewoodInvoker card) {

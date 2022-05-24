@@ -51,7 +51,7 @@ public final class SteelHellkite extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SteelHellkiteDestroyEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         ), new SteelHellkiteWatcher());
 
     }

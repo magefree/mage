@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class GuardianShieldBearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Megamorph {3}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}"), true));
 
         // When Guardian Shield-Bearer is turned face up, put a +1/+1 counter on another target creature you control.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);

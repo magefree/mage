@@ -26,98 +26,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * @author TheElk801
- */
-public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
-
-    public KianneDeanOfSubstance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
-                "Imbraham, Dean of Theory", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}");
-
-        // 1.
-        // Kianne, Dean of Substance
-        // Legendary Creature - Elf Druid
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getLeftHalfCard().setPT(2, 2);
-
-        // {T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
-                new KianneDeanOfSubstanceExileEffect(), new TapSourceCost()
-        ));
-
-        // {4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(FractalToken.getEffect(
-                KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
-                        "among nonland cards you own in exile with study counters on them"
-        ), new ManaCostsImpl("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
-
-        // 2.
-        // Imbraham, Dean of Theory
-        // Legendary Creature - Bird Wizard
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().setPT(3, 3);
-
-        // Flying
-        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
-
-        // {X}{U}{U}, {T}: Exile the top X cards of your library and put a study counter on each of them. Then you may put a card you own in exile with a study counter on it into your hand.
-        Ability ability = new SimpleActivatedAbility(
-                new ImbrahamDeanOfTheoryEffect(), new ManaCostsImpl("{X}{U}{U}")
-        );
-        ability.addCost(new TapSourceCost());
-        this.getRightHalfCard().addAbility(ability);
-    }
-
-    private KianneDeanOfSubstance(final KianneDeanOfSubstance card) {
-        super(card);
-    }
-
-    @Override
-    public KianneDeanOfSubstance copy() {
-        return new KianneDeanOfSubstance(this);
-    }
-}
-
-class KianneDeanOfSubstanceExileEffect extends OneShotEffect {
-
-    KianneDeanOfSubstanceExileEffect() {
-        super(Outcome.Benefit);
-        staticText = "Exile the top card of your library. If it's a land card, " +
-                "put it into your hand. Otherwise, put a study counter on it.";
-    }
-
-    private KianneDeanOfSubstanceExileEffect(final KianneDeanOfSubstanceExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KianneDeanOfSubstanceExileEffect copy() {
-        return new KianneDeanOfSubstanceExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Card card = player.getLibrary().getFromTop(game);
-        if (card == null) {
-            return false;
-        }
-        player.moveCards(card, Zone.EXILED, source, game);
-        if (card.isLand(game)) {
-            return player.moveCards(card, Zone.HAND, source, game);
-        }
-        return card.getMainCard().addCounters(
-                CounterType.STUDY.createInstance(),
-                player.getId(), source, game
-        );
-    }
-}
-
 enum KianneDeanOfSubstanceValue implements DynamicValue {
     instance;
 
@@ -170,6 +78,98 @@ enum KianneDeanOfSubstanceHint implements Hint {
     @Override
     public KianneDeanOfSubstanceHint copy() {
         return instance;
+    }
+}
+
+/**
+ * @author TheElk801
+ */
+public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
+
+    public KianneDeanOfSubstance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
+                "Imbraham, Dean of Theory", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}");
+
+        // 1.
+        // Kianne, Dean of Substance
+        // Legendary Creature - Elf Druid
+        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
+        this.getLeftHalfCard().setPT(2, 2);
+
+        // {T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
+                new KianneDeanOfSubstanceExileEffect(), new TapSourceCost()
+        ));
+
+        // {4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(FractalToken.getEffect(
+                KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
+                        "among nonland cards you own in exile with study counters on them"
+        ), new ManaCostsImpl<>("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
+
+        // 2.
+        // Imbraham, Dean of Theory
+        // Legendary Creature - Bird Wizard
+        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // {X}{U}{U}, {T}: Exile the top X cards of your library and put a study counter on each of them. Then you may put a card you own in exile with a study counter on it into your hand.
+        Ability ability = new SimpleActivatedAbility(
+                new ImbrahamDeanOfTheoryEffect(), new ManaCostsImpl<>("{X}{U}{U}")
+        );
+        ability.addCost(new TapSourceCost());
+        this.getRightHalfCard().addAbility(ability);
+    }
+
+    private KianneDeanOfSubstance(final KianneDeanOfSubstance card) {
+        super(card);
+    }
+
+    @Override
+    public KianneDeanOfSubstance copy() {
+        return new KianneDeanOfSubstance(this);
+    }
+}
+
+class KianneDeanOfSubstanceExileEffect extends OneShotEffect {
+
+    KianneDeanOfSubstanceExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "Exile the top card of your library. If it's a land card, " +
+                "put it into your hand. Otherwise, put a study counter on it.";
+    }
+
+    private KianneDeanOfSubstanceExileEffect(final KianneDeanOfSubstanceExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public KianneDeanOfSubstanceExileEffect copy() {
+        return new KianneDeanOfSubstanceExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        player.moveCards(card, Zone.EXILED, source, game);
+        if (card.isLand(game)) {
+            return player.moveCards(card, Zone.HAND, source, game);
+        }
+        return card.getMainCard().addCounters(
+                CounterType.STUDY.createInstance(),
+                player.getId(), source, game
+        );
     }
 }
 

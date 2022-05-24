@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class WingbeatWarrior extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}")));
         // When Wingbeat Warrior is turned face up, target creature gains first strike until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

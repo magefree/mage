@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,46 +21,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
-/**
- *
- * @author LevelX2
- */
-public final class HeroesPodium extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each legendary creature");
-    private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-        filter2.add(SuperType.LEGENDARY.getPredicate());
-    }
-
-    public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
-
-        // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
-        this.addAbility(new SimpleStaticAbility(
-                new BoostControlledEffect(HeroesPodiumValue.instance, HeroesPodiumValue.instance, Duration.WhileOnBattlefield, filter, false)));
-        // {X}, {T}: Look at the top X cards of your library.
-        // You may reveal a legendary creature card from among them and put it into your hand.
-        // Put the rest on the bottom of your library in a random order.
-        Ability ability = new SimpleActivatedAbility(
-                new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{X}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-    }
-
-    private HeroesPodium(final HeroesPodium card) {
-        super(card);
-    }
-
-    @Override
-    public HeroesPodium copy() {
-        return new HeroesPodium(this);
-    }
-}
+import java.util.UUID;
 
 enum HeroesPodiumValue implements DynamicValue {
     instance;
@@ -90,5 +50,46 @@ enum HeroesPodiumValue implements DynamicValue {
     @Override
     public HeroesPodiumValue copy() {
         return instance;
+    }
+}
+
+/**
+ *
+ * @author LevelX2
+ */
+public final class HeroesPodium extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each legendary creature");
+    private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
+
+    static {
+        filter.add(SuperType.LEGENDARY.getPredicate());
+        filter2.add(SuperType.LEGENDARY.getPredicate());
+    }
+
+    public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+        addSuperType(SuperType.LEGENDARY);
+
+        // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
+        this.addAbility(new SimpleStaticAbility(
+                new BoostControlledEffect(HeroesPodiumValue.instance, HeroesPodiumValue.instance, Duration.WhileOnBattlefield, filter, false)));
+        // {X}, {T}: Look at the top X cards of your library.
+        // You may reveal a legendary creature card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        Ability ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new ManaCostsImpl<>("{X}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
+
+    private HeroesPodium(final HeroesPodium card) {
+        super(card);
+    }
+
+    @Override
+    public HeroesPodium copy() {
+        return new HeroesPodium(this);
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -8,12 +7,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class DireWolfProwler extends CardImpl {
         Ability ability = new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn).setText("{this} gets +2/+2"),
-                new ManaCostsImpl("{1}{G}")
+                new ManaCostsImpl<>("{1}{G}")
         );
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn")

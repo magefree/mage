@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,13 +10,11 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +35,7 @@ public final class ImprovisedArmor extends CardImpl {
         // Enchanted creature gets +2/+5.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 5, Duration.WhileOnBattlefield)));
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private ImprovisedArmor(final ImprovisedArmor card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class DesertCerodon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private DesertCerodon(final DesertCerodon card) {

@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -8,14 +7,16 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class LegionGuildmage extends CardImpl {
         // {5}{R}, {T}: Legion Guildmage deals 3 damage to each opponent.
         Ability ability = new SimpleActivatedAbility(
                 new DamagePlayersEffect(3, TargetController.OPPONENT),
-                new ManaCostsImpl("{5}{R}")
+                new ManaCostsImpl<>("{5}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -49,7 +50,7 @@ public final class LegionGuildmage extends CardImpl {
         // {2}{W}, {T}: Tap another target creature.
         ability = new SimpleActivatedAbility(
                 new TapTargetEffect("tap another target creature"),
-                new ManaCostsImpl("{2}{W}")
+                new ManaCostsImpl<>("{2}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

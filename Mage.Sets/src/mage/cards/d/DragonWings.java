@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,6 +22,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public final class DragonWings extends CardImpl {
         // Enchanted creature has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Breath from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT, null));

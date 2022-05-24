@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class TawnossWand extends CardImpl {
 
         // {2}, {tap}: Target creature with power 2 or less is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{2}"));
+        ability.addCost(new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent(filter));        
         this.addAbility(ability);        
     }

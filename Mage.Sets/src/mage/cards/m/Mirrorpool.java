@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,9 +17,10 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,14 +47,14 @@ public final class Mirrorpool extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
             // {2}{C}, {T}, Sacrifice Mirrorpool: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{2}{C}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{C}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
         
         // {4}{C}, {T}, Sacrifice Mirrorpool: Create a token that's a copy of target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(), new ManaCostsImpl("{4}{C}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(), new ManaCostsImpl<>("{4}{C}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());

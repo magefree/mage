@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,8 +16,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class SiegeGangCommander extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -1,10 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -22,6 +18,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
@@ -34,7 +34,7 @@ public final class DivineReckoning extends CardImpl {
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
 
         // Flashback {5}{W}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{W}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{W}{W}")));
     }
 
     private DivineReckoning(final DivineReckoning card) {

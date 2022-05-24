@@ -2,7 +2,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,12 +15,14 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class HiredTorturer extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}{B}, {T}: Target opponent loses 2 life and reveals a card at random from their hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl("{3}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl<>("{3}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new HiredTorturerEffect());
         ability.addTarget(new TargetOpponent());

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -21,7 +22,7 @@ public final class RhysticTutor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
-        Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl("{2}"));
+        Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl<>("{2}"));
         effect.setText("Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
     }

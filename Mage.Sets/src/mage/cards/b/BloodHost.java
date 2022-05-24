@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author emerald000
@@ -35,7 +36,7 @@ public final class BloodHost extends CardImpl {
         // {1}{B}, Sacrifice another creature: Put a +1/+1 counter on Blood Host
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on {this}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         // and you gain 2 life.
         effect = new GainLifeEffect(2);

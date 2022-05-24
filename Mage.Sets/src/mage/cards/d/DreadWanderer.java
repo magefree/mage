@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.HeckbentCondition;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class DreadWanderer extends CardImpl {
         ConditionalActivatedAbility ability = new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl("{2}{B}"),
+                new ManaCostsImpl<>("{2}{B}"),
                 HeckbentCondition.instance,
                 "{2}{B}: Return {this} from your graveyard to the battlefield. "
                 + "Activate only as a sorcery "

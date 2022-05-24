@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class ChokingTethers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 4));
         
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
         // When you cycle Choking Tethers, you may tap target creature.
         Ability ability = new CycleTriggeredAbility(new TapTargetEffect(), true);

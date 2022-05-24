@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class BelltollDragon extends CardImpl {
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
         // Megamorph {5}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}{U}"), true));
 
         // When Belltoll Dragon is turned face up, put a +1/+1 counter on each other Dragon creature you control.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));

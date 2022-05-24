@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -28,7 +29,7 @@ public final class DirgeOfDread extends CardImpl {
         // All creatures gain fear until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FearAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES));
         // Cycling {1}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{B}")));
         // When you cycle Dirge of Dread, you may have target creature gain fear until end of turn.
         Ability ability = new CycleTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());

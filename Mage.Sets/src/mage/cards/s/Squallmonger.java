@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +17,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class Squallmonger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Squallmonger deals 1 damage to each creature with flying and each player. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{2}"));
         Effect effect = new DamagePlayersEffect(1);
         effect.setText("and each player");
         ability.addEffect(effect);

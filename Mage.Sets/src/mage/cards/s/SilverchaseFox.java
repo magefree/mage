@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -28,7 +29,7 @@ public final class SilverchaseFox extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{W}, Sacrifice Silverchase Fox: Exile target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetEnchantmentPermanent());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

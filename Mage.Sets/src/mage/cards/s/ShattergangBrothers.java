@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,12 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.constants.*;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -24,6 +17,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.Objects;
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  *
@@ -41,18 +39,18 @@ public final class ShattergangBrothers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}, Sacrifice a creature: Each other player sacrifices a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl("{2}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
         // {2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment.
         filter = new FilterControlledPermanent("an enchantment");
         filter.add(CardType.ENCHANTMENT.getPredicate());
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl("{2}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
@@ -69,7 +67,7 @@ public final class ShattergangBrothers extends CardImpl {
 
 class ShattergangBrothersEffect extends OneShotEffect {
 
-    private FilterControlledPermanent filter;
+    private final FilterControlledPermanent filter;
 
     public ShattergangBrothersEffect(FilterControlledPermanent filter) {
         super(Outcome.Sacrifice);

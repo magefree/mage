@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class WhipstitchedZombie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice Whipstitched Zombie unless you pay {B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")), TargetController.YOU, false));
     }
 
     private WhipstitchedZombie(final WhipstitchedZombie card) {

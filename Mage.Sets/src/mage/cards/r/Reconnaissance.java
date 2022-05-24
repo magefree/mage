@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,13 +17,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
  */
 public final class Reconnaissance extends CardImpl {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
 
     static {
         filter.add(AttackingPredicate.instance);
@@ -34,7 +35,7 @@ public final class Reconnaissance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // {0}: Remove target attacking creature you control from combat and untap it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReconnaissanceRemoveFromCombatEffect(), new ManaCostsImpl("{0}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReconnaissanceRemoveFromCombatEffect(), new ManaCostsImpl<>("{0}"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

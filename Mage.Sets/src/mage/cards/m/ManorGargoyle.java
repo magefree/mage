@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -18,13 +17,30 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
+
+enum HasDefenderCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Abilities<Ability> abilities = permanent.getAbilities();
+            for (Ability ability : abilities) {
+                if (ability.getClass().equals(DefenderAbility.getInstance().getClass())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
 
 /**
  *
@@ -70,7 +86,7 @@ public final class ManorGargoyle extends CardImpl {
         ContinuousEffect effect2 = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn);
         effect2.addDependencyType(DependencyType.LooseDefenderEffect);
         effect2.setText("Until end of turn, {this} loses defender");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl<>("{1}"));
         effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and gains flying");
         ability.addEffect(effect2);
@@ -84,24 +100,5 @@ public final class ManorGargoyle extends CardImpl {
     @Override
     public ManorGargoyle copy() {
         return new ManorGargoyle(this);
-    }
-}
-
-enum HasDefenderCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Abilities<Ability> abilities = permanent.getAbilities();
-            for (Ability ability : abilities) {
-                if (ability.getClass().equals(DefenderAbility.getInstance().getClass())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

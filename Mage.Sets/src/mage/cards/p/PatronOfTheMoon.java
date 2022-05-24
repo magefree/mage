@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -39,7 +40,7 @@ public final class PatronOfTheMoon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}: Put up to two land cards from your hand onto the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheMoonEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheMoonEffect(), new ManaCostsImpl<>("{1}"));
         this.addAbility(ability);
 
     }

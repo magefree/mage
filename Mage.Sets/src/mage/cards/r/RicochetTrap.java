@@ -19,39 +19,6 @@ import mage.watchers.common.SpellsCastWatcher;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class RicochetTrap extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("spell with a single target");
-
-    static {
-        filter.add(new NumberOfTargetsPredicate(1));
-    }
-
-    public RicochetTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.subtype.add(SubType.TRAP);
-
-        // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.instance), new SpellsCastWatcher());
-
-        // Change the target of target spell with a single target.
-        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
-    }
-
-    private RicochetTrap(final RicochetTrap card) {
-        super(card);
-    }
-
-    @Override
-    public RicochetTrap copy() {
-        return new RicochetTrap(this);
-    }
-}
-
 enum RicochetTrapCondition implements Condition {
 
     instance;
@@ -77,5 +44,38 @@ enum RicochetTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If an opponent cast a blue spell this turn";
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class RicochetTrap extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("spell with a single target");
+
+    static {
+        filter.add(new NumberOfTargetsPredicate(1));
+    }
+
+    public RicochetTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.subtype.add(SubType.TRAP);
+
+        // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), RicochetTrapCondition.instance), new SpellsCastWatcher());
+
+        // Change the target of target spell with a single target.
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+    }
+
+    private RicochetTrap(final RicochetTrap card) {
+        super(card);
+    }
+
+    @Override
+    public RicochetTrap copy() {
+        return new RicochetTrap(this);
     }
 }

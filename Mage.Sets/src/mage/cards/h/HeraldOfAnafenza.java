@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.WarriorToken;
 import mage.game.stack.StackAbility;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class HeraldOfAnafenza extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Outlast {2}{W} <em>({2}{W} {T}: Put a +1/+1 counter on this creature.  Outlast only as a sorcery.)</em>
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{2}{W}")));
 
         // Whenever you activate Herald of Anafenza's outlast ability, create a 1/1 white Warrior creature token.
         this.addAbility(new HeraldOfAnafenzaTriggeredAbility());
@@ -73,9 +74,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
-            if (stackAbility != null && (stackAbility.getStackAbility() instanceof OutlastAbility)) {
-                return true;
-            }
+            return stackAbility != null && (stackAbility.getStackAbility() instanceof OutlastAbility);
         }
         return false;
     }

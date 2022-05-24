@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,18 +7,16 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventAllNonCombatDamageToAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MentorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +59,7 @@ public final class TajicLegionsEdge extends CardImpl {
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{R}{W}")
+                ), new ManaCostsImpl<>("{R}{W}")
         ));
     }
 

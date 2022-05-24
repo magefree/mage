@@ -43,7 +43,7 @@ public final class CurseOfTheCabal extends CardImpl {
         this.getSpellAbility().addEffect(new CurseOfTheCabalSacrificeEffect());
 
         // Suspend 2-{2}{B}{B}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{2}{B}{B}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{2}{B}{B}"), this));
 
         // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If they do, put two time counters on Curse of the Cabal.
         this.addAbility(new CurseOfTheCabalInterveningIfTriggeredAbility());
@@ -134,6 +134,10 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         super(CounterType.TIME.createInstance(), StaticValue.get(2), false, true);
     }
 
+    public CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
+        super(effect);
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
@@ -148,10 +152,6 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
             return super.apply(game, source);
         }
         return true;
-    }
-
-    public CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
-        super(effect);
     }
 
     @Override

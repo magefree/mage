@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class StratusDancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{U}"), true));
         
         // When Stratus Dancer is turned face up, counter target instant or sorcery spell
         Effect effect = new CounterTargetEffect();

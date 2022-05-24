@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class MagusOfTheWheel extends CardImpl {
         // {1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards their hand, then draws seven cards.
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardHandAllEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardHandAllEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(effect);

@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -15,9 +14,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +37,7 @@ public final class LabyrinthGuardian extends CardImpl {
         this.addAbility(new LabyrinthGuardianTriggeredAbility());
 
         // Embalm {3}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{U}"), this));
 
     }
 

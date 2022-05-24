@@ -6,7 +6,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class LingeringSouls extends CardImpl {
         // Create two 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 2));
         // Flashback {1}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
     private LingeringSouls(final LingeringSouls card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DefenderAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,8 +31,8 @@ public final class SanctumPlowbeast extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Plainscycling {2}, islandcycling {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SanctumPlowbeast(final SanctumPlowbeast card) {

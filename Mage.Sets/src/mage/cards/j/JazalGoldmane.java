@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class JazalGoldmane extends CardImpl {
         DynamicValue xValue = new AttackingCreatureCount("the number of attacking creatures");
         this.addAbility(new SimpleActivatedAbility(
                 new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, true),
-                new ManaCostsImpl("{3}{W}{W}")));
+                new ManaCostsImpl<>("{3}{W}{W}")));
     }
 
     private JazalGoldmane(final JazalGoldmane card) {

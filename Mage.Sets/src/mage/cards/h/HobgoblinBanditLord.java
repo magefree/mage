@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,58 +10,19 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
-/**
- *
- * @author weirddan455
- */
-public final class HobgoblinBanditLord extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOBLIN, "Goblins");
-
-    public HobgoblinBanditLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-
-        this.subtype.add(SubType.GOBLIN);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // Other Goblins you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filter, true
-        )));
-
-        // {R}, {T}: Hobgoblin Bandit Lord deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target.
-        Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(GoblinsEnteredThisTurnDynamicValue.instance)
-                    .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
-                new ManaCostsImpl("{R}")
-        );
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
-    }
-
-    private HobgoblinBanditLord(final HobgoblinBanditLord card) {
-        super(card);
-    }
-
-    @Override
-    public HobgoblinBanditLord copy() {
-        return new HobgoblinBanditLord(this);
-    }
-}
+import java.util.List;
+import java.util.UUID;
 
 enum GoblinsEnteredThisTurnDynamicValue implements DynamicValue {
     instance;
@@ -98,5 +57,47 @@ enum GoblinsEnteredThisTurnDynamicValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "Goblins that entered the battlefield under your control this turn";
+    }
+}
+
+/**
+ *
+ * @author weirddan455
+ */
+public final class HobgoblinBanditLord extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOBLIN, "Goblins");
+
+    public HobgoblinBanditLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+
+        this.subtype.add(SubType.GOBLIN);
+        this.subtype.add(SubType.ROGUE);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Other Goblins you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, true
+        )));
+
+        // {R}, {T}: Hobgoblin Bandit Lord deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target.
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(GoblinsEnteredThisTurnDynamicValue.instance)
+                    .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
+                new ManaCostsImpl<>("{R}")
+        );
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
+    }
+
+    private HobgoblinBanditLord(final HobgoblinBanditLord card) {
+        super(card);
+    }
+
+    @Override
+    public HobgoblinBanditLord copy() {
+        return new HobgoblinBanditLord(this);
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -19,6 +18,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class HavengulRunebinder extends CardImpl {
         // then put a +1/+1 counter on each Zombie creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),
-                new ManaCostsImpl("{2}{U}"));
+                new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         ability.addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterPermanent).concatBy(", then"));

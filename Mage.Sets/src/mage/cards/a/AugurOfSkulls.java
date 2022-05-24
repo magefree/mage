@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -33,7 +34,7 @@ public final class AugurOfSkulls extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}: Regenerate Augur of Skulls.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
         // Sacrifice Augur of Skulls: Target player discards two cards. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new DiscardTargetEffect(2),

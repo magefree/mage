@@ -1,8 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +14,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -28,7 +29,7 @@ public final class BreakingWave extends CardImpl {
 
         Effect effect = new BreakingWaveEffect();
         // You may cast Breaking Wave as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
         // Simultaneously untap all tapped creatures and tap all untapped creatures.

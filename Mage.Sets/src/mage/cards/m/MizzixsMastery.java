@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -18,7 +19,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -38,7 +38,7 @@ public final class MizzixsMastery extends CardImpl {
 
         // Overload {5}{R}{R}{R}
         Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(),
-                new ManaCostsImpl("{5}{R}{R}{R}"));
+                new ManaCostsImpl<>("{5}{R}{R}{R}"));
         ability.addEffect(new ExileSpellEffect());
         this.addAbility(ability);
     }

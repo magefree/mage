@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,15 +10,13 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.TransformedPredicate;
+
+import java.util.UUID;
 
 
 /**
@@ -29,11 +26,12 @@ import mage.filter.predicate.permanent.TransformedPredicate;
 public final class GrimlockDinobotLeader extends CardImpl{
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs and Vehicles");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
+    
     static {
         filter.add(Predicates.or(SubType.DINOSAUR.getPredicate(), SubType.VEHICLE.getPredicate()));
     }
-    
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
+
     static {
         filter2.add(Predicates.not(SubType.DINOSAUR.getPredicate()));
         filter2.add(Predicates.not(SubType.VEHICLE.getPredicate()));
@@ -55,7 +53,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
         
         // {2}: Grimlock, Dinobot Leader becomes Grimlock, Ferocious King.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private GrimlockDinobotLeader(final GrimlockDinobotLeader card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class Panacea extends CardImpl {
         // {X}{X}, {tap}: Prevent the next X damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR),
-                new ManaCostsImpl("{X}{X}")
+                new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

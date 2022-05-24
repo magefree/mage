@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class FrightshroudCourier extends CardImpl {
         // {2}{B}, {tap}: Target Zombie creature gets +2/+2 and has fear for as long as Frightshroud Courier remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
-            "target Zombie creature gets +2/+2"), new ManaCostsImpl("{2}{B}"));
+            "target Zombie creature gets +2/+2"), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(FearAbility.getInstance(),
             Duration.Custom), SourceTappedCondition.TAPPED,"and has fear for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());

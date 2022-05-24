@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,8 +10,8 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class EfreetWeaponmaster extends CardImpl {
         this.addAbility(new EfreetWeaponmasterAbility());
 
         // Morph {2}{U}{R}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{R}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{R}{W}")));
     }
 
     private EfreetWeaponmaster(final EfreetWeaponmaster card) {
@@ -90,9 +91,7 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                return true;
-            }
+            return sourcePermanent != null && !sourcePermanent.isFaceDown(game);
         }
         return false;
     }

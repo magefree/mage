@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class MayaelTheAnima extends CardImpl {
         // Put the rest on the bottom of your library in any order.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY),
-                new ManaCostsImpl("{3}{R}{G}{W}"));
+                new ManaCostsImpl<>("{3}{R}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

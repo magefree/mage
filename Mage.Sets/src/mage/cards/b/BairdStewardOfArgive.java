@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/4/18.
@@ -32,7 +33,7 @@ public final class BairdStewardOfArgive extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{1}"), true)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{1}"), true)
                 .setText("Creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures")));
     }
 

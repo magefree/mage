@@ -28,12 +28,11 @@ public final class CelestialEnforcer extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterCreaturePermanent("if you control a creature with flying");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public CelestialEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -45,7 +44,7 @@ public final class CelestialEnforcer extends CardImpl {
 
         // {1}{W}, {T}: Tap target creature. Activate this ability only if you control a creature with flying.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{1}{W}"), condition
+                Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"), condition
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

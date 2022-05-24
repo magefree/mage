@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,15 +12,12 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.permanent.token.LeafdrakeRoostDrakeToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +37,7 @@ public final class LeafdrakeRoost extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "{G}{U}, {tap}: Create a 2/2 green and blue Drake creature token with flying."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDrakeToken()), new ManaCostsImpl("{G}{U}"));
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDrakeToken()), new ManaCostsImpl<>("{G}{U}"));
         abilityToGain.addCost(new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted land has \"{G}{U}, {t}: Create a 2/2 green and blue Drake creature token with flying.\"")));

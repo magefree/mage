@@ -6,7 +6,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ public final class BumpInTheNight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private BumpInTheNight(final BumpInTheNight card) {

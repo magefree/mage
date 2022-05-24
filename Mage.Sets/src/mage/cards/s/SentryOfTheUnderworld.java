@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class SentryOfTheUnderworld extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {W}{B}, Pay 3 life: Regenerate Sentry of the Underworld.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

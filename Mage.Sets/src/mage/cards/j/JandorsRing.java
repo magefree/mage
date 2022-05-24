@@ -1,9 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,17 +11,36 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+enum WatchedCardInHandCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
+
+        return watcher != null
+                && game.getPlayer(source.getControllerId()).getHand().contains(watcher.getLastDrewCard(source.getControllerId()));
+    }
+
+    @Override
+    public String toString() {
+        return "if last drawn card is still in hand";
+    }
+
+}
 
 /**
  * @author MarcoMarin
@@ -37,7 +53,7 @@ public final class JandorsRing extends CardImpl {
         Watcher watcher = new JandorsRingWatcher();
         // {2}, {tap}, Discard the last card you drew this turn: Draw a card.
         // TODO: discard has to be a cost not a payment during resolution
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JandorsRingEffect(), new ManaCostsImpl("{2}"), WatchedCardInHandCondition.instance, "{2}, {T}, Discard the last card you drew this turn: Draw a card.");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JandorsRingEffect(), new ManaCostsImpl<>("{2}"), WatchedCardInHandCondition.instance, "{2}, {T}, Discard the last card you drew this turn: Draw a card.");
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, watcher);
     }
@@ -93,7 +109,7 @@ class JandorsRingEffect extends OneShotEffect {
 
 class JandorsRingWatcher extends Watcher {
 
-    private Map<UUID, UUID> lastDrawnCards = new HashMap<>();
+    private final Map<UUID, UUID> lastDrawnCards = new HashMap<>();
 
     public JandorsRingWatcher() {
         super(WatcherScope.GAME);
@@ -115,23 +131,4 @@ class JandorsRingWatcher extends Watcher {
     public UUID getLastDrewCard(UUID playerId) {
         return lastDrawnCards.get(playerId);
     }
-}
-
-enum WatchedCardInHandCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
-
-        return watcher != null
-                && game.getPlayer(source.getControllerId()).getHand().contains(watcher.getLastDrewCard(source.getControllerId()));
-    }
-
-    @Override
-    public String toString() {
-        return "if last drawn card is still in hand";
-    }
-
 }

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -13,6 +12,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class SpitFlame extends CardImpl {
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),
-                        new ManaCostsImpl("{R}")
+                        new ManaCostsImpl<>("{R}")
                 ), filter, false
         ));
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FearAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,9 +31,9 @@ public final class JhessianZombies extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Islandcycling {2}
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
         // Swampcycling {2}
-        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private JhessianZombies(final JhessianZombies card) {

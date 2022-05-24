@@ -58,7 +58,7 @@ public final class InniazTheGaleForce extends CardImpl {
         // {2}{W/U}: Attacking creatures with flying get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
                 1, 1, Duration.EndOfTurn, filter, false
-        ), new ManaCostsImpl("{2}{W/U}")));
+        ), new ManaCostsImpl<>("{2}{W/U}")));
 
         // Whenever three or more creatures you control with flying attack, each player gains control 
         // of a nonland permanent of your choice controlled by the player to their right.
@@ -78,6 +78,47 @@ public final class InniazTheGaleForce extends CardImpl {
 }
 
 class InniazTheGaleForceEffect extends OneShotEffect {
+
+    InniazTheGaleForceEffect() {
+        super(Outcome.Benefit);
+        staticText = "each player gains control of a nonland permanent of your choice controlled by the player to their right.";
+    }
+
+    private InniazTheGaleForceEffect(final InniazTheGaleForceEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public InniazTheGaleForceEffect copy() {
+        return new InniazTheGaleForceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
+        List<PlayerPair> playerPairList = new ArrayList<>();
+        for (int i = 0; i < playerList.size() - 1; i++) {
+            playerPairList.add(new PlayerPair(
+                    game.getPlayer(playerList.get(i)),
+                    game.getPlayer(playerList.get(i + 1))
+            ));
+        }
+        playerPairList.add(new PlayerPair(
+                game.getPlayer(playerList.get(playerList.size() - 1)),
+                game.getPlayer(playerList.get(0))
+        ));
+        for (PlayerPair playerPair : playerPairList) {
+            playerPair.chooseTargets(controller, game, source);
+        }
+        for (PlayerPair playerPair : playerPairList) {
+            playerPair.createEffect(game, source);
+        }
+        return true;
+    }
 
     private static final class PlayerPair {
 
@@ -120,46 +161,5 @@ class InniazTheGaleForceEffect extends OneShotEffect {
                     Duration.Custom, true, leftPlayer.getId()
             ).setTargetPointer(new FixedTarget(target.getFirstTarget(), game)), source);
         }
-    }
-
-    InniazTheGaleForceEffect() {
-        super(Outcome.Benefit);
-        staticText = "each player gains control of a nonland permanent of your choice controlled by the player to their right.";
-    }
-
-    private InniazTheGaleForceEffect(final InniazTheGaleForceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public InniazTheGaleForceEffect copy() {
-        return new InniazTheGaleForceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
-        List<PlayerPair> playerPairList = new ArrayList<>();
-        for (int i = 0; i < playerList.size() - 1; i++) {
-            playerPairList.add(new PlayerPair(
-                    game.getPlayer(playerList.get(i)),
-                    game.getPlayer(playerList.get(i + 1))
-            ));
-        }
-        playerPairList.add(new PlayerPair(
-                game.getPlayer(playerList.get(playerList.size() - 1)),
-                game.getPlayer(playerList.get(0))
-        ));
-        for (PlayerPair playerPair : playerPairList) {
-            playerPair.chooseTargets(controller, game, source);
-        }
-        for (PlayerPair playerPair : playerPairList) {
-            playerPair.createEffect(game, source);
-        }
-        return true;
     }
 }

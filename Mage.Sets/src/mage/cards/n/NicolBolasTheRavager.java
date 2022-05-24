@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Pronoun;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -9,15 +8,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +44,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileAndReturnTransformedSourceEffect(Pronoun.HE),
-                new ManaCostsImpl("{4}{U}{B}{R}")
+                new ManaCostsImpl<>("{4}{U}{B}{R}")
         ));
     }
 

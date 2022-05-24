@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.target.common.TargetSpellOrPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class MaceWindu extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private MaceWindu(final MaceWindu card) {

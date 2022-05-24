@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,10 +13,12 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class LavaclawReaches extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {1}{B}{R}: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with ": This creature gets +X/+0 until end of turn." It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}{R}")));
     }
 
     private LavaclawReaches(final LavaclawReaches card) {
@@ -60,7 +61,7 @@ class LavaclawReachesToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl<>("{X}")));
     }
     public LavaclawReachesToken(final LavaclawReachesToken token) {
         super(token);

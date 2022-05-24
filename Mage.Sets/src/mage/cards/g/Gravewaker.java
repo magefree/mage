@@ -1,19 +1,20 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class Gravewaker extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true)
                         .setText("return target creature card from your graveyard to the battlefield tapped"),
-                new ManaCostsImpl("{5}{B}{B}")
+                new ManaCostsImpl<>("{5}{B}{B}")
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);

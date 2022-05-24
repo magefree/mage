@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class GhoulcallersAccomplice extends CardImpl {
 
         // {3}{B}, Exile Ghoulcaller's Accomplice from your graveyard: Create a 2/2 black Zombie creature token.
         // Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl("{3}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl<>("{3}{B}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class ScourAllPossibilities extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
 
         // Flashback {4}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{U}")));
 
     }
 

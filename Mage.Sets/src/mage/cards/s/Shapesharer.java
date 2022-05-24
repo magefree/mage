@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -40,7 +41,7 @@ public final class Shapesharer extends CardImpl {
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
         Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ShapesharerEffect(),
-                new ManaCostsImpl("{2}{U}"));
+                new ManaCostsImpl<>("{2}{U}"));
         copyAbility.addTarget(new TargetPermanent(filterShapeshifter));
         copyAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(copyAbility);

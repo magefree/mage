@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class RhysticCircle extends CardImpl {
         // {1}: Any player may pay {1}. If no one does, the next time a source of your choice would deal damage to you this turn, prevent that damage.
     this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DoUnlessAnyPlayerPaysEffect(new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn),new GenericManaCost(1)),
-                new ManaCostsImpl("{1}")));
+                new ManaCostsImpl<>("{1}")));
     }
 
     private RhysticCircle(final RhysticCircle card) {

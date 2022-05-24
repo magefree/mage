@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -10,11 +9,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.HumanToken;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class IncreasingDevotion extends CardImpl {
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());
 
         // Flashback {7}{W}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{W}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{W}{W}")));
     }
 
     private IncreasingDevotion(final IncreasingDevotion card) {
@@ -44,7 +44,7 @@ public final class IncreasingDevotion extends CardImpl {
 
 class IncreasingDevotionEffect extends OneShotEffect {
 
-    private static HumanToken token = new HumanToken();
+    private static final HumanToken token = new HumanToken();
 
     public IncreasingDevotionEffect() {
         super(Outcome.PutCreatureInPlay);

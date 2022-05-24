@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -34,7 +34,7 @@ public final class SunCollaredRaptor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}"))
+                new ManaCostsImpl<>("{2}{R}"))
         );
     }
 

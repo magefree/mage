@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class TreespringLorian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{G}")));
     }
 
     private TreespringLorian(final TreespringLorian card) {

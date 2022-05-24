@@ -1,12 +1,10 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -15,10 +13,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class SurvivorOfTheUnseen extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // {T}: Draw two cards, then put a card from your hand on top of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SurvivorOfTheUnseenEffect(), new TapSourceCost()));

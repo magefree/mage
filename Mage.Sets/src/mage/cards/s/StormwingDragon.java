@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class StormwingDragon extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Megamorph {5}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{R}{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{R}{R}"), true));
 
         // When Stormwing Dragon is turned face up, put a +1/+1 counter on each other Dragon creature you control.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));

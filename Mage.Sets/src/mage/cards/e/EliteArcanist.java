@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,40 +24,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
-import mage.ApprovingObject;
-
-/**
- * @author LevelX2
- */
-public final class EliteArcanist extends CardImpl {
-
-    public EliteArcanist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Elite Arcanist enters the battlefield, you may exile an instant card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EliteArcanistImprintEffect(), true));
-
-        // {X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl("{X}"));
-        ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(EliteArcanistAdjuster.instance);
-        this.addAbility(ability);
-    }
-
-    private EliteArcanist(final EliteArcanist card) {
-        super(card);
-    }
-
-    @Override
-    public EliteArcanist copy() {
-        return new EliteArcanist(this);
-    }
-}
 
 enum EliteArcanistAdjuster implements CostAdjuster {
     instance;
@@ -78,6 +45,39 @@ enum EliteArcanistAdjuster implements CostAdjuster {
             ability.getManaCostsToPay().clear();
             ability.getManaCostsToPay().add(new GenericManaCost(cmc));
         }
+    }
+}
+
+/**
+ * @author LevelX2
+ */
+public final class EliteArcanist extends CardImpl {
+
+    public EliteArcanist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // When Elite Arcanist enters the battlefield, you may exile an instant card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EliteArcanistImprintEffect(), true));
+
+        // {X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl<>("{X}"));
+        ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(EliteArcanistAdjuster.instance);
+        this.addAbility(ability);
+    }
+
+    private EliteArcanist(final EliteArcanist card) {
+        super(card);
+    }
+
+    @Override
+    public EliteArcanist copy() {
+        return new EliteArcanist(this);
     }
 }
 

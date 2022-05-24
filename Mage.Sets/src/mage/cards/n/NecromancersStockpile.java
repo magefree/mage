@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -22,6 +21,8 @@ import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  * @author noxx
  */
@@ -32,7 +33,7 @@ public final class NecromancersStockpile extends CardImpl {
 
         // {1}{B}, Discard a creature card: Draw a card.
         // If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE)));
         ability.addEffect(new NecromancersStockpilePutTokenEffect());
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -31,7 +32,7 @@ public final class EnigmaEidolon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, Sacrifice Enigma Eidolon: Target player puts the top three cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

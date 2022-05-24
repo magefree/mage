@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
@@ -9,6 +8,8 @@ import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -24,7 +25,7 @@ public final class TemporalMastery extends CardImpl {
         this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private TemporalMastery(final TemporalMastery card) {

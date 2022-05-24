@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.BeastToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -32,7 +33,7 @@ public final class MidsummerRevel extends CardImpl {
             new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
         // {G}, Sacrifice Midsummer Revel: create X 3/3 green Beast creature tokens, where X is the number of verse counters on Midsummer Revel.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken(),
-            new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl("{G}"));
+            new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class ShefetMonitor extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cycling {3}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{G}")));
 
         // When you cycle Shefet Monitor, you may search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(

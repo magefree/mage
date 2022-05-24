@@ -2,7 +2,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,17 +12,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -40,7 +37,7 @@ public final class HisokaMinamoSensei extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetSpell());
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("a card"));
         ability.addCost(new HisokaMinamoSenseiDiscardTargetCost(targetCard));

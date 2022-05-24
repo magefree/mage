@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,8 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -23,6 +22,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetStackObject;
 import mage.target.Targets;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class Spellskite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {U/P}: Change a target of target spell or ability to Spellskite.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl("{U/P}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl<>("{U/P}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }

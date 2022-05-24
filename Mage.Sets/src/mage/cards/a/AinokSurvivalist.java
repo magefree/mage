@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class AinokSurvivalist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Megamorph {1}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}"), true));
         
         // When Ainok Survivalist is turned face up, destroy target artifact or enchantment an opponent controls.
         Effect effect = new DestroyTargetEffect();

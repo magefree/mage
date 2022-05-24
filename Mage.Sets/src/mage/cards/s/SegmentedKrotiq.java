@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class SegmentedKrotiq extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Megamorph {6}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{G}"), true));
     }
 
     private SegmentedKrotiq(final SegmentedKrotiq card) {

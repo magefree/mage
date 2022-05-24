@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class LieutenantKirtar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetAttackingCreature());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -9,48 +9,20 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-/**
- *
- * @author Rafbill
- */
-public final class SummoningTrap extends CardImpl {
-
-    public SummoningTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
-        this.subtype.add(SubType.TRAP);
-
-        // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
-
-        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
-        // Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                7, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY));
-    }
-
-    private SummoningTrap(final SummoningTrap card) {
-        super(card);
-    }
-
-    @Override
-    public SummoningTrap copy() {
-        return new SummoningTrap(this);
-    }
-}
 
 enum SummoningTrapCondition implements Condition {
 
@@ -68,9 +40,38 @@ enum SummoningTrapCondition implements Condition {
     }
 }
 
+/**
+ *
+ * @author Rafbill
+ */
+public final class SummoningTrap extends CardImpl {
+
+    public SummoningTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
+        this.subtype.add(SubType.TRAP);
+
+        // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
+
+        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
+        // Put the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                7, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY));
+    }
+
+    private SummoningTrap(final SummoningTrap card) {
+        super(card);
+    }
+
+    @Override
+    public SummoningTrap copy() {
+        return new SummoningTrap(this);
+    }
+}
+
 class SummoningTrapWatcher extends Watcher {
 
-    private Set<UUID> players = new HashSet<>();
+    private final Set<UUID> players = new HashSet<>();
 
     public SummoningTrapWatcher() {
         super(WatcherScope.GAME);

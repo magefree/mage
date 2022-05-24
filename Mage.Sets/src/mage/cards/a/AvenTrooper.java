@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class AvenTrooper extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{W}, Discard a card: Aven Trooper gets +1/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

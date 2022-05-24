@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class Downdraft extends CardImpl {
         // {G}: Target creature loses flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), 
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         

@@ -1,11 +1,10 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,6 +13,8 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class JohnnyComboPlayer extends CardImpl {
         this.toughness = new MageInt(1);
         
         // {4}: Search your library for a card, put that card into your hand, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true), new ManaCostsImpl("{4}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true), new ManaCostsImpl<>("{4}")));
     }
 
     private JohnnyComboPlayer(final JohnnyComboPlayer card) {

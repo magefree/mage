@@ -49,7 +49,7 @@ public final class TetsuoUmezawa extends CardImpl {
         // Tetsuo Umezawa can't be the target of Aura spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetsuoUmezawaEffect()));
         // {U}{B}{B}{R}, {tap}: Destroy target tapped or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}{B}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(creatureFilter));
         this.addAbility(ability);
@@ -104,9 +104,7 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
-            if (stackObject.hasSubtype(SubType.AURA, game)) {
-                return true;
-            }
+            return stackObject.hasSubtype(SubType.AURA, game);
         }
         return false;
     }

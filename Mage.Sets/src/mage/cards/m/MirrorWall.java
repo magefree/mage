@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,9 +9,11 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class MirrorWall extends CardImpl {
         // {W}: Mirror Wall can attack this turn as though it didn't have defender.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{W}")));
+                new ManaCostsImpl<>("{W}")));
     }
 
     private MirrorWall(final MirrorWall card) {

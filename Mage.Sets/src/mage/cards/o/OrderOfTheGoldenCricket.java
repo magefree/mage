@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -12,8 +11,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class OrderOfTheGoldenCricket extends CardImpl {
 
         // Whenever Order of the Golden Cricket attacks, you may pay {W}. If you do, it gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(
-                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")),
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")),
                 false,
                 "Whenever {this} attacks, you may pay {W}. If you do, it gains flying until end of turn.");
         this.addAbility(ability);

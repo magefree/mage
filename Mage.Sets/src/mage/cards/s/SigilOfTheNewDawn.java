@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class SigilOfTheNewDawn extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("return that card to your hand");
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
-                new DoIfCostPaid(effect, new ManaCostsImpl("{1}{W}")),
+                new DoIfCostPaid(effect, new ManaCostsImpl<>("{1}{W}")),
                 false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true, true
         ));
     }

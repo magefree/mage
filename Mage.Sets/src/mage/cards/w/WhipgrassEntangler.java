@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,19 +8,21 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class WhipgrassEntangler extends CardImpl {
         Ability abilityToGain = new SimpleStaticAbility(Zone.BATTLEFIELD, new WhipgrassEntanglerCantAttackUnlessYouPayEffect());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(abilityToGain, Duration.EndOfTurn).setText("Until end of turn, target creature gains \"This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield.\""), 
-                new ManaCostsImpl("{1}{W}"));
+                new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -65,7 +66,7 @@ class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnle
     }
 
     WhipgrassEntanglerCantAttackUnlessYouPayEffect() {
-        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK_AND_BLOCK);
+        super(new ManaCostsImpl<>("{0}"), RestrictType.ATTACK_AND_BLOCK);
         staticText = "This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield";
     }
 

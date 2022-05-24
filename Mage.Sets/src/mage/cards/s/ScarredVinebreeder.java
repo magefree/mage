@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class ScarredVinebreeder extends CardImpl {
         // {2}{B}, Exile an Elf card from your graveyard: Scarred Vinebreeder gets +3/+3 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 3, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{B}"));
+                new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         this.addAbility(ability);
     }

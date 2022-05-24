@@ -1,8 +1,5 @@
 package mage.cards.v;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -18,10 +15,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.ModalDoubleFacesCard;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -37,6 +34,10 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new ValkiGodOfLiesRevealExileEffect()));
 
         // X: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl("{X}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl<>("{X}")));
 
         // 2.
         // Tibalt, Cosmic Impostor
@@ -169,9 +170,7 @@ class ValkiGodOfLiesReturnExiledCardAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
+            return zEvent.getFromZone() == Zone.BATTLEFIELD;
         }
         return false;
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
@@ -15,16 +14,13 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +54,7 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         
         // <i>Ferocious</i> &mdash; {2}{G/U}{G/U}: Draw a card for each creature you control with power 4 or greater.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl("{2}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl<>("{2}{G/U}{G/U}"));
         ability.setAbilityWord(AbilityWord.FEROCIOUS);
         this.addAbility(ability);
         

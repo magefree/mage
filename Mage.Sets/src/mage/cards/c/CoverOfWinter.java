@@ -1,25 +1,25 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,13 +33,13 @@ public final class CoverOfWinter extends CardImpl {
         this.addSuperType(SuperType.SNOW);
 
         // Cumulative upkeep {S}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{S}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{S}")));
 
         // If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on Cover of Winter.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CoverOfWinterEffect()));
 
         // {S}: Put an age counter on Cover of Winter.
-        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.AGE.createInstance()), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.AGE.createInstance()), new ManaCostsImpl<>("{S}")));
     }
 
     private CoverOfWinter(final CoverOfWinter card) {

@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
@@ -11,11 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -27,6 +22,8 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.XCMCPermanentAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +47,7 @@ public final class LinessaZephyrMage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}{U}{U}, {tap}: Return target creature with converted mana cost X to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);

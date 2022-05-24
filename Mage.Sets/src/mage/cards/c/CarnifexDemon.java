@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public final class CarnifexDemon extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(),
                         filter
-                ), new ManaCostsImpl("{B}")
+                ), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         this.addAbility(ability);

@@ -19,6 +19,23 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
+enum RuneflareTrapCondition implements Condition {
+
+ instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        CardsAmountDrawnThisTurnWatcher watcher =
+                game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
+        return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
+    }
+
+    @Override
+    public String toString() {
+        return "If an opponent drew three or more cards this turn";
+    }
+}
+
 /**
  *
  * @author jeffwadsworth
@@ -30,7 +47,7 @@ public final class RuneflareTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
@@ -73,22 +90,5 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "target player's cards in hand";
-    }
-}
-
-enum RuneflareTrapCondition implements Condition {
-
- instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        CardsAmountDrawnThisTurnWatcher watcher =
-                game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
-        return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
-    }
-
-    @Override
-    public String toString() {
-        return "If an opponent drew three or more cards this turn";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.LifelinkAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class AbzanGuide extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Morph {2}{W}{B}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}{B}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}{B}{G}")));
     }
 
     private AbzanGuide(final AbzanGuide card) {

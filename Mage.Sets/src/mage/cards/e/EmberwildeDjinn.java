@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,17 +12,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +75,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
         if (player == null || sourceObject == null) {
             return false;
         }
-        Cost cost = new OrCost("{R}{R} or 2 life", new ManaCostsImpl("{R}{R}"), new PayLifeCost(2));
+        Cost cost = new OrCost("{R}{R} or 2 life", new ManaCostsImpl<>("{R}{R}"), new PayLifeCost(2));
         if (player.chooseUse(Outcome.GainControl, "Gain control of " + sourceObject.getLogName() + "?", source, game)) {
             if (cost.pay(source, game, source, player.getId(), false)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, false, player.getId());

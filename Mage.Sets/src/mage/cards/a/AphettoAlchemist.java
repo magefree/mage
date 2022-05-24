@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class AphettoAlchemist extends CardImpl {
         this.addAbility(ability);
         
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private AphettoAlchemist(final AphettoAlchemist card) {

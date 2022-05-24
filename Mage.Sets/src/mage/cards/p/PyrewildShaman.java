@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 public final class PyrewildShaman extends CardImpl {
 
@@ -31,7 +32,7 @@ public final class PyrewildShaman extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}"))
+                new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{3}"))
                         .setText("if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand")));
 
     }

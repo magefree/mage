@@ -43,7 +43,7 @@ public final class KahoMinamoHistorian extends CardImpl {
         // {X}, {tap}: You may cast a card with converted mana cost X exiled with 
         // Kaho without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new KahoMinamoHistorianCastEffect(), new ManaCostsImpl("{X}"));
+                new KahoMinamoHistorianCastEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

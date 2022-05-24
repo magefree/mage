@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -9,8 +8,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class NightbirdsClutches extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
     }
 
     private NightbirdsClutches(final NightbirdsClutches card) {

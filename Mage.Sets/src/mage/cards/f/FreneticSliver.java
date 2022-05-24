@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class FreneticSliver extends CardImpl {
                         new SimpleActivatedAbility(
                                 Zone.BATTLEFIELD,
                                 new FreneticSliverEffect(),
-                                new ManaCostsImpl("{0}")
+                                new ManaCostsImpl<>("{0}")
                         ), Duration.WhileOnBattlefield, filter, rule
                 )
         ));

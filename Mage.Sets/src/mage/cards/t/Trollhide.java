@@ -2,7 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,14 +14,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +40,7 @@ public final class Trollhide extends CardImpl {
         // Enchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")), AttachmentType.AURA);
+            new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")), AttachmentType.AURA);
         effect.setText("and has \"{1}{G}: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

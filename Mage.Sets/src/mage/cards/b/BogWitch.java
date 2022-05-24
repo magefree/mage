@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class BogWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Discard a card: Add {B}{B}{B}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

@@ -26,13 +26,12 @@ import java.util.UUID;
  */
 public final class TheCircleOfLoyalty extends CardImpl {
 
+    static final FilterControlledPermanent filterKnight = new FilterControlledPermanent("Knight you control");
     private static final FilterSpell filterLegendary = new FilterSpell("a legendary spell");
 
     static {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
     }
-
-    static final FilterControlledPermanent filterKnight = new FilterControlledPermanent("Knight you control");
 
     static {
         filterKnight.add(SubType.KNIGHT.getPredicate());
@@ -61,7 +60,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
 
         // {3}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl("{3}{W}")
+                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl<>("{3}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

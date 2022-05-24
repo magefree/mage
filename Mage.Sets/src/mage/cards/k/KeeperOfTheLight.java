@@ -1,9 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -20,6 +17,10 @@ import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class KeeperOfTheLight extends CardImpl {
         // {W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainLifeEffect(3).setText("Choose target opponent who had more life than you did as you activated this ability. You gain 3 life."),
-                new ManaCostsImpl("{W}"));
+                new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new KeeperOfTheLightTarget());
         this.addAbility(ability);

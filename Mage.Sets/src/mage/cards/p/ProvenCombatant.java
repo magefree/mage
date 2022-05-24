@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.EternalizeAbility;
@@ -8,6 +7,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 public final class ProvenCombatant extends CardImpl {
 
@@ -22,7 +23,7 @@ public final class ProvenCombatant extends CardImpl {
         toughness = new MageInt(1);
 
         //Eternalize 4UU
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{U}{U}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{U}{U}"), this));
     }
 
     public ProvenCombatant(final ProvenCombatant provenCombatant){

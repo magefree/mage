@@ -24,6 +24,21 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
+enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        for (Effect effect : ability.getEffects()) {
+            if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
+                int xValue = GetXValue.instance.calculate(game, ability, null);
+                ability.getTargets().clear();
+                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+            }
+        }
+    }
+}
+
 /**
  * @author LevelX2
  */
@@ -61,7 +76,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(true, "Put {this} on top of your library from your graveyard"),
-                new ManaCostsImpl("{5}{B}{B}")));
+                new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private ChampionOfStraySouls(final ChampionOfStraySouls card) {
@@ -71,20 +86,5 @@ public final class ChampionOfStraySouls extends CardImpl {
     @Override
     public ChampionOfStraySouls copy() {
         return new ChampionOfStraySouls(this);
-    }
-}
-
-enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        for (Effect effect : ability.getEffects()) {
-            if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
-                int xValue = GetXValue.instance.calculate(game, ability, null);
-                ability.getTargets().clear();
-                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-            }
-        }
     }
 }

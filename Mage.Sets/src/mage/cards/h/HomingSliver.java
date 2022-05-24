@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,6 +15,8 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class HomingSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HomingSliverEffect()));
         
         // Slivercycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}"), filter, "Slivercycling"));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}"), filter, "Slivercycling"));
     }
 
     private HomingSliver(final HomingSliver card) {

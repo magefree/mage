@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class PrimalBoost extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Cycling {2}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}")));
         // When you cycle Primal Boost, you may have target creature get +1/+1 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());

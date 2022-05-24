@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -15,11 +14,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +65,7 @@ class HornOfPlentyEffect extends OneShotEffect {
         Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
-                Cost cost = new ManaCostsImpl("{1}");
+                Cost cost = new ManaCostsImpl<>("{1}");
                 if (cost.pay(source, game, source, caster.getId(), false, null)) {
                     Effect effect = new DrawCardTargetEffect(1);
                     effect.setTargetPointer(new FixedTarget(caster.getId()));

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author FenrisulfrX
@@ -29,7 +30,7 @@ public final class PowerArmor extends CardImpl {
         // Domain - {3}, {tap}: Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(
                 DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{3}"));
+        ability.addCost(new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -13,11 +12,7 @@ import mage.abilities.effects.RedirectionEffect.UsageType;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,6 +23,8 @@ import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +48,7 @@ public final class ShamanEnKor extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -68,7 +65,7 @@ public final class ShamanEnKor extends CardImpl {
 
 class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     protected MageObjectReference sourceObject;
 
     ShamanEnKorRedirectFromTargetEffect() {

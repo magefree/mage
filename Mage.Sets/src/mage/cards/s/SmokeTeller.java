@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,8 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
@@ -22,6 +21,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class SmokeTeller extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 1U: Look at target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl("{1}{U}")); 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

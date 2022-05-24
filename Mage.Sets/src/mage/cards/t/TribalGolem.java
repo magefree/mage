@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,12 +15,14 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public final class TribalGolem extends CardImpl {
                 new GainAbilitySourceEffect(new SimpleActivatedAbility(
                         Zone.BATTLEFIELD,
                         new RegenerateSourceEffect(),
-                        new ManaCostsImpl("{B}")
+                        new ManaCostsImpl<>("{B}")
                 )),
                 new PermanentsOnTheBattlefieldCondition(filter5),
                 ", and \"{B}: Regenerate {this}\" as long as you control a Zombie"

@@ -47,7 +47,7 @@ public class EchoEffect extends OneShotEffect {
         if (controller != null
                 && source.getSourceObjectIfItStillExists(game) != null) {
             if (game.getContinuousEffects().asThough(source.getSourceId(), AsThoughEffectType.PAY_0_ECHO, source, source.getControllerId(), game) != null) {
-                Cost altCost = new ManaCostsImpl("{0}");
+                Cost altCost = new ManaCostsImpl<>("{0}");
                 if (controller.chooseUse(Outcome.Benefit, "Pay {0} instead of the echo cost?", source, game)) {
                     altCost.clearPaid();
                     if (altCost.pay(source, game, source, source.getControllerId(), false, null)) {

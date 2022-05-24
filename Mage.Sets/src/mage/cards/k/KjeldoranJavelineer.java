@@ -1,12 +1,10 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -14,9 +12,12 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAttackingOrBlockingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class KjeldoranJavelineer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // {T}: Kjeldoran Javelineer deals damage equal to the number of age counters on it to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

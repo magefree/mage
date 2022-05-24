@@ -1,23 +1,24 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.OrCost;
-import mage.constants.SubType;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,8 +38,8 @@ public final class EarthenGoo extends CardImpl {
 
         // Cumulative upkeep {R} or {G}
         this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                "{R} or {G}", new ManaCostsImpl("{R}"),
-                new ManaCostsImpl("{G}")
+                "{R} or {G}", new ManaCostsImpl<>("{R}"),
+                new ManaCostsImpl<>("{G}")
         )));
 
         // Earthen Goo gets +1/+1 for each age counter on it.

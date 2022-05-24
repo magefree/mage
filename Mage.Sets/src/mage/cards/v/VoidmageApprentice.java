@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class VoidmageApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{U}")));
         
         // When Voidmage Apprentice is turned face up, counter target spell.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new CounterTargetEffect(), false);

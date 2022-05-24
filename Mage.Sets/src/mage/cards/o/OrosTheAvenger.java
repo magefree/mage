@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class OrosTheAvenger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl("{2}{W}")), false));
+                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl<>("{2}{W}")), false));
     }
 
     private OrosTheAvenger(final OrosTheAvenger card) {

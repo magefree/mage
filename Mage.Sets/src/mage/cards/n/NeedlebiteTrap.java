@@ -17,34 +17,6 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
 
-/**
- * @author LevelX2
- */
-public final class NeedlebiteTrap extends CardImpl {
-
-    public NeedlebiteTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");
-        this.subtype.add(SubType.TRAP);
-
-        // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());
-
-        // Target player loses 5 life and you gain 5 life.
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
-        this.getSpellAbility().addEffect(new GainLifeEffect(5).concatBy("and"));
-        this.getSpellAbility().addTarget(new TargetPlayer());
-    }
-
-    private NeedlebiteTrap(final NeedlebiteTrap card) {
-        super(card);
-    }
-
-    @Override
-    public NeedlebiteTrap copy() {
-        return new NeedlebiteTrap(this);
-    }
-}
-
 enum NeedlebiteTrapCondition implements Condition {
 
     instance;
@@ -65,5 +37,33 @@ enum NeedlebiteTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If an opponent gained life this turn";
+    }
+}
+
+/**
+ * @author LevelX2
+ */
+public final class NeedlebiteTrap extends CardImpl {
+
+    public NeedlebiteTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");
+        this.subtype.add(SubType.TRAP);
+
+        // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());
+
+        // Target player loses 5 life and you gain 5 life.
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
+        this.getSpellAbility().addEffect(new GainLifeEffect(5).concatBy("and"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+    }
+
+    private NeedlebiteTrap(final NeedlebiteTrap card) {
+        super(card);
+    }
+
+    @Override
+    public NeedlebiteTrap copy() {
+        return new NeedlebiteTrap(this);
     }
 }

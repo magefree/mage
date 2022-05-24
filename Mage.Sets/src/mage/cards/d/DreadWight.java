@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,27 +9,21 @@ import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.*;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -151,7 +144,7 @@ class DreadWightEffect extends OneShotEffect {
             Ability activatedAbility = new SimpleActivatedAbility(
                     Zone.BATTLEFIELD,
                     new RemoveCounterSourceEffect(CounterType.PARALYZATION.createInstance()),
-                    new ManaCostsImpl("{4}"));
+                    new ManaCostsImpl<>("{4}"));
             ContinuousEffect effect4 = new GainAbilityTargetEffect(
                     activatedAbility,
                     Duration.WhileOnBattlefield);

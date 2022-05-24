@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.BloodthirstWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class SkarrganFirebird extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{R}{R}{R}"),
+                new ManaCostsImpl<>("{R}{R}{R}"),
                 new OpponentWasDealtDamageCondition(),
                 null));
     }

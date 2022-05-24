@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -19,9 +18,10 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +45,7 @@ public final class DecreeOfSilence extends CardImpl {
                 " If there are three or more depletion counters on {this}, sacrifice it"));
         this.addAbility(ability);
         // Cycling {4}{U}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{4}{U}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{4}{U}{U}")));
         // When you cycle Decree of Silence, you may counter target spell.
         ability = new CycleTriggeredAbility(new CounterTargetEffect(), true);
         ability.addTarget(new TargetSpell());

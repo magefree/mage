@@ -24,6 +24,23 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
+enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        game.getState().getPlayersInRange(ability.getControllerId(), game).forEach(playerId -> {
+            Player player = game.getPlayer(playerId);
+            if (!(player == null)) {
+                FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
+                filter.add(new ControllerIdPredicate(playerId));
+                ability.addTarget(new TargetPermanent(0, 1, filter));
+            }
+        });
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -56,23 +73,6 @@ public final class NilsDisciplineEnforcer extends CardImpl {
     @Override
     public NilsDisciplineEnforcer copy() {
         return new NilsDisciplineEnforcer(this);
-    }
-}
-
-enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        game.getState().getPlayersInRange(ability.getControllerId(), game).forEach(playerId -> {
-            Player player = game.getPlayer(playerId);
-            if (!(player == null)) {
-                FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
-                filter.add(new ControllerIdPredicate(playerId));
-                ability.addTarget(new TargetPermanent(0, 1, filter));
-            }
-        });
     }
 }
 
@@ -135,7 +135,7 @@ class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
         if (count < 1) {
             return null;
         }
-        return new ManaCostsImpl("{" + count + '}');
+        return new ManaCostsImpl<>("{" + count + '}');
     }
 
     @Override

@@ -26,12 +26,11 @@ public final class GoblinBirdGrabber extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("you control a creature with flying");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public GoblinBirdGrabber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -43,7 +42,7 @@ public final class GoblinBirdGrabber extends CardImpl {
         // {R}: Goblin Bird-Grabber gains flying until end of turn. Activate this ability only if you control a creature with flying.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{R}"), condition));
+        ), new ManaCostsImpl<>("{R}"), condition));
     }
 
     private GoblinBirdGrabber(final GoblinBirdGrabber card) {

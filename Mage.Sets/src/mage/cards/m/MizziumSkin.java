@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**
@@ -35,7 +36,7 @@ public final class MizziumSkin extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 
         // Overload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl("{1}{U}"));
+        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl<>("{1}{U}"));
         ability.addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
         this.addAbility(ability);
     }

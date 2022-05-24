@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class DescendantOfSoramaro extends CardImpl {
         Effect effect = new LookLibraryControllerEffect(CardsInControllerHandCount.instance);
         effect.setText("Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                effect, new ManaCostsImpl("{1}{U}")));
+                effect, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private DescendantOfSoramaro(final DescendantOfSoramaro card) {

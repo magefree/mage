@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class LoreWeaver extends CardImpl {
         this.addAbility(new PartnerWithAbility("Ley Weaver"));
 
         // {5}{U}{U}: Target player draws two cards.
-        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new ManaCostsImpl("{5}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new ManaCostsImpl<>("{5}{U}{U}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

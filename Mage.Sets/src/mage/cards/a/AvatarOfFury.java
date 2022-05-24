@@ -23,6 +23,26 @@ import mage.game.Game;
 
 import java.util.UUID;
 
+enum AvatarOfFuryCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+            if (game.getBattlefield().countAll(StaticFilters.FILTER_LAND, playerId, game) > 6) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "an opponent controls seven or more lands";
+    }
+}
+
 /**
  * @author LevelX2
  */
@@ -53,7 +73,7 @@ public final class AvatarOfFury extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {R}: Avatar of Fury gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private AvatarOfFury(final AvatarOfFury card) {
@@ -63,25 +83,5 @@ public final class AvatarOfFury extends CardImpl {
     @Override
     public AvatarOfFury copy() {
         return new AvatarOfFury(this);
-    }
-}
-
-enum AvatarOfFuryCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            if (game.getBattlefield().countAll(StaticFilters.FILTER_LAND, playerId, game) > 6) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "an opponent controls seven or more lands";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class RiftBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Suspend 1-{R}
-        this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{R}"), this));
+        this.addAbility(new SuspendAbility(1, new ManaCostsImpl<>("{R}"), this));
 
 
     }

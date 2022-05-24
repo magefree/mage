@@ -1,9 +1,5 @@
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -26,6 +22,10 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author noahg
@@ -38,12 +38,12 @@ public final class MuseVessel extends CardImpl {
 
         // {3}, {tap}: Target player exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility tapAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new MuseVesselExileEffect(), new TapSourceCost());
-        tapAbility.addCost(new ManaCostsImpl("{3}"));
+        tapAbility.addCost(new ManaCostsImpl<>("{3}"));
         tapAbility.addTarget(new TargetPlayer());
         this.addAbility(tapAbility);
 
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
-        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl("{1}"));
+        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl<>("{1}"));
         playAbility.addTarget(new TargetCardInMuseVesselExile());
         this.addAbility(playAbility);
     }
@@ -154,9 +154,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && !exile.isEmpty()) {
-                return true;
-            }
+            return exile != null && !exile.isEmpty();
         }
         return false;
     }

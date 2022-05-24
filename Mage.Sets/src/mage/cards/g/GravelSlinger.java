@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class GravelSlinger extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private GravelSlinger(final GravelSlinger card) {

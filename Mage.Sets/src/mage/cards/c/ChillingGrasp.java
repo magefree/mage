@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class ChillingGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
 
         // Madness {3}{U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{U}")));
     }
 
     private ChillingGrasp(final ChillingGrasp card) {

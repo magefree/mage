@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class LethalVapors extends CardImpl {
                 false, SetTargetPointer.PERMANENT, null));
 
         // {0}: Destroy Lethal Vapors. You skip your next turn. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl("{0}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl<>("{0}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new SkipNextTurnSourceEffect());
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

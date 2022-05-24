@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -13,21 +12,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +39,7 @@ public final class HavengulLich extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl<>("{1}"));
         ability.addEffect(new HavengulLichPlayedEffect());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
@@ -129,7 +122,7 @@ class HavengulLichPlayedEffect extends OneShotEffect {
 // when card is played create continuous effect
 class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public HavengulLichDelayedTriggeredAbility(UUID cardId) {
         super(new HavengulLichEffect(cardId), Duration.EndOfTurn);

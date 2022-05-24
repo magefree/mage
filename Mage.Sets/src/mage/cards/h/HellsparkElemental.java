@@ -2,7 +2,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 
 /**
@@ -37,7 +38,7 @@ public final class HellsparkElemental extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
 
         // Unearth {1}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private HellsparkElemental(final HellsparkElemental card) {

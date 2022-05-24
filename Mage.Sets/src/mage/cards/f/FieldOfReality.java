@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -35,7 +36,7 @@ public final class FieldOfReality extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesAttachedEffect(
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SPIRIT, "Spirits"), AttachmentType.AURA)));
         // {1}{U}: Return Field of Reality to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private FieldOfReality(final FieldOfReality card) {

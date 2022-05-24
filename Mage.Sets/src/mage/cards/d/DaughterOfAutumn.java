@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -10,11 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -22,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +41,7 @@ public final class DaughterOfAutumn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DaughterOfAutumnPreventDamageTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -61,7 +58,7 @@ public final class DaughterOfAutumn extends CardImpl {
 
 class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public DaughterOfAutumnPreventDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);

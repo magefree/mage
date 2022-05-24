@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SedraxisSpecter extends CardImpl {
         // Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
         // Unearth {1}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SedraxisSpecter(final SedraxisSpecter card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class FirestormHellkite extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Cumulative upkeep {U}{R}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}{R}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}{R}")));
     }
 
     private FirestormHellkite(final FirestormHellkite card) {

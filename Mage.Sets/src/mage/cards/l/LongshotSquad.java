@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,10 +10,12 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class LongshotSquad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Outlast 1G
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{G}")));
         // Each creature you control with a +1/+1 counter on it has reach.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,

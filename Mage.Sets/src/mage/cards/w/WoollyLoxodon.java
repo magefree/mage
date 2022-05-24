@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class WoollyLoxodon extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Morph 5G
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{G}")));
     }
 
     private WoollyLoxodon(final WoollyLoxodon card) {

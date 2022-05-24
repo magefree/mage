@@ -26,7 +26,7 @@ public final class ResoundingSilence extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         // Cycling {5}{G}{W}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{G}{W}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{G}{W}{U}")));
         // When you cycle Resounding Silence, exile up to two target attacking creatures.
         Ability ability = new CycleTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_ATTACKING_CREATURES));

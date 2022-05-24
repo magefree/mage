@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -23,6 +22,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public final class ThopterSquadron extends CardImpl {
         this.addAbility(firstAbility);
 
         // {1}, Sacrifice another Thopter: Put a +1/+1 counter on Thopter Squadron. Activate this secondAbility only any time you could cast a sorcery.
-        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new ManaCostsImpl("{1}"));
+        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new ManaCostsImpl<>("{1}"));
         secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(secondAbility);
     }

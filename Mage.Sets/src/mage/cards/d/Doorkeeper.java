@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class Doorkeeper extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {2}{U}, {T}: Target player puts the top X cards of their library into their graveyard, where X is the number of creatures with defender you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
@@ -12,13 +11,11 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +39,7 @@ public final class DeepSeaKraken extends CardImpl {
         // Deep-Sea Kraken can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
         // Suspend 9-{2}{U}
-        this.addAbility(new SuspendAbility(9, new ManaCostsImpl("{2}{U}"), this));
+        this.addAbility(new SuspendAbility(9, new ManaCostsImpl<>("{2}{U}"), this));
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), filter, false, SetTargetPointer.NONE), SuspendedCondition.instance,

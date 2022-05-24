@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class IvoryGiant extends CardImpl {
         // When Ivory Giant enters the battlefield, tap all nonwhite creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
         // Suspend 5-{W}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{W}"), this));
     }
 
     private IvoryGiant(final IvoryGiant card) {

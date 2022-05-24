@@ -21,6 +21,19 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
 
+enum EliteHeadhunterPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        MageObject obj = input.getObject();
+        if (obj.getId().equals(input.getSourceId())) {
+            return obj.isArtifact(game);
+        }
+        return obj.isCreature(game) || obj.isArtifact(game);
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -46,7 +59,7 @@ public final class EliteHeadhunter extends CardImpl {
 
         // {B/R}{B/R}{B/R}, Sacrifice another creature or an artifact: Elite Headhunter deals 2 damage to target creature or planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(2), new ManaCostsImpl("{B/R}{B/R}{B/R}")
+                new DamageTargetEffect(2), new ManaCostsImpl<>("{B/R}{B/R}{B/R}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
@@ -60,18 +73,5 @@ public final class EliteHeadhunter extends CardImpl {
     @Override
     public EliteHeadhunter copy() {
         return new EliteHeadhunter(this);
-    }
-}
-
-enum EliteHeadhunterPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        MageObject obj = input.getObject();
-        if (obj.getId().equals(input.getSourceId())) {
-            return obj.isArtifact(game);
-        }
-        return obj.isCreature(game) || obj.isArtifact(game);
     }
 }

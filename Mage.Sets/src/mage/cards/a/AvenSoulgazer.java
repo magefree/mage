@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -23,6 +22,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class AvenSoulgazer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}{W}: Look at target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AvenSoulgazerLookFaceDownEffect(), new ManaCostsImpl("{2}{W}")); 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AvenSoulgazerLookFaceDownEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -21,6 +20,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class MtendaGriffin extends CardImpl {
         Effect effect = new ReturnToHandSourceEffect(true);
         effect.setText("Return Mtenda Griffin to its owner's hand");        
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-               effect, new ManaCostsImpl("{W}"), new IsStepCondition(PhaseStep.UPKEEP));
+               effect, new ManaCostsImpl<>("{W}"), new IsStepCondition(PhaseStep.UPKEEP));
         effect = new ReturnToHandTargetEffect();
         ability.addCost(new TapSourceCost());
         effect.setText("and return target Griffin card from your graveyard to your hand");

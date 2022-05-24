@@ -2,7 +2,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,14 +10,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +37,7 @@ public final class KikuNightsFlower extends CardImpl {
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new KikuNightsFlowerEffect(), 
-                new ManaCostsImpl("{2}{B}{B}")
+                new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());

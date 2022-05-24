@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class LordOfTheAccursed extends CardImpl {
                 new MenaceAbility(),
                 Duration.EndOfTurn,
                 filter, "All Zombies gain menace until end of turn."),
-                new ManaCostsImpl("{1}{B}"));
+                new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

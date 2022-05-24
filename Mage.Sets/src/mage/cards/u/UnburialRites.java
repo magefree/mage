@@ -1,16 +1,16 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -25,7 +25,7 @@ public final class UnburialRites extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Flashback {3}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{W}")));
     }
 
     private UnburialRites(final UnburialRites card) {

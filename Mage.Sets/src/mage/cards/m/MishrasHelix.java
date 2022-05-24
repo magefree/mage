@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,8 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsAdjuster;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -26,7 +27,7 @@ public final class MishrasHelix extends CardImpl {
 
         // {X}, {tap}: Tap X target lands.
         Effect effect = new TapTargetEffect("tap X target lands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
         ability.setTargetAdjuster(XTargetsAdjuster.instance);

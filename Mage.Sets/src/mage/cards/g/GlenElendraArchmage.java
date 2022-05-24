@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class GlenElendraArchmage extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}, Sacrifice Glen Elendra Archmage: Counter target noncreature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class InsatiableGorgers extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // Madness {3}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{R}")));
     }
 
     private InsatiableGorgers(final InsatiableGorgers card) {

@@ -35,7 +35,7 @@ public final class SplinteringWind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // {2}{G}: Splintering Wind deals 1 damage to target creature. Create a 1/1 green Splinter creature token. It has flying and “Cumulative upkeep {G}.” When it leaves the battlefield, it deals 1 damage to you and each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new SplinteringWindCreateTokenEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -86,7 +86,7 @@ class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
 class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID tokenId;
+    private final UUID tokenId;
 
     SplinteringWindDelayedTriggeredAbility(UUID tokenId) {
         super(new DamageControllerEffect(1), Duration.OneUse);
@@ -113,9 +113,7 @@ class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(tokenId)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
+            return zEvent.getFromZone() == Zone.BATTLEFIELD;
         }
         return false;
     }

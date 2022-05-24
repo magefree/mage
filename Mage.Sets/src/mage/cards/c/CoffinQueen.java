@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -13,11 +12,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -25,6 +20,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +40,7 @@ public final class CoffinQueen extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}{B}, {tap}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         ability.addEffect(new CoffinQueenCreateDelayedTriggerEffect());
@@ -118,11 +115,8 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 && event.getTargetId().equals(getSourceId())) {
             return true;
         }
-        if (EventType.ZONE_CHANGE == event.getType()
-                && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return EventType.ZONE_CHANGE == event.getType()
+                && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

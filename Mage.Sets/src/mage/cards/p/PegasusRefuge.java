@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.permanent.token.PegasusToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -23,7 +24,7 @@ public final class PegasusRefuge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // {2}, Discard a card: Create a 1/1 white Pegasus creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

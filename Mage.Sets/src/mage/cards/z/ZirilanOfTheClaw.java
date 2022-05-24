@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -25,6 +24,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -40,7 +41,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
         // {1}{R}{R}, {tap}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library.
         // That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

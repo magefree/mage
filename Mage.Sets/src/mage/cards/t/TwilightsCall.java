@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +15,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -30,7 +31,7 @@ public final class TwilightsCall extends CardImpl {
 
         Effect effect = new TwilightsCallEffect();
         // You may cast Twilight's Call as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
         // Each player returns all creature cards from their graveyard to the battlefield.

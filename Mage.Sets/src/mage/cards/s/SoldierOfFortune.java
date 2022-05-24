@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SoldierOfFortune extends CardImpl {
 		
 		// {R}, {T}: Target player shuffles their library.
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibraryTargetEffect(), new TapSourceCost());
-		ability.addManaCost(new ManaCostsImpl("{R}"));
+		ability.addManaCost(new ManaCostsImpl<>("{R}"));
 		ability.addTarget(new TargetPlayer());
 		this.addAbility(ability);
     }

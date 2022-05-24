@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -16,6 +15,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.*;
 
 /**
  *
@@ -54,7 +55,7 @@ class LeoninArbiterSpecialAction extends SpecialAction {
 
     public LeoninArbiterSpecialAction(final String keyString) {
         super(Zone.BATTLEFIELD);
-        this.addCost(new ManaCostsImpl("{2}"));
+        this.addCost(new ManaCostsImpl<>("{2}"));
         this.addEffect(new LeoninArbiterIgnoreEffect(keyString));
         this.setMayActivate(TargetController.ANY);
     }

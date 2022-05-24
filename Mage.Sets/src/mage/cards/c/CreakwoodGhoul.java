@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 
 /**
@@ -29,7 +30,7 @@ public final class CreakwoodGhoul extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B/G}{B/G}")) ;
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B/G}{B/G}")) ;
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new GainLifeEffect(1));
         this.addAbility(ability);

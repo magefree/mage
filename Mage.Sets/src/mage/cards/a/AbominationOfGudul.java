@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class AbominationOfGudul extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, true));
         
         // Morph 2BGU
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}{G}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}{G}{U}")));
     }
 
     private AbominationOfGudul(final AbominationOfGudul card) {

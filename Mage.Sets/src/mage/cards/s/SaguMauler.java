@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.HexproofAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class SaguMauler extends CardImpl {
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
         // Morph {3}{G}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{U}")));
     }
 
     private SaguMauler(final SaguMauler card) {

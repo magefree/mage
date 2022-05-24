@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -9,8 +8,8 @@ import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +20,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class PaladinOfPrahv extends CardImpl {
         
         // Forecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life.
         Ability ability = new ForecastAbility(new CreateDelayedTriggeredAbilityEffect(
-                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl("{1}{W}"));
+                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -1,12 +1,11 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class Mirrorworks extends CardImpl {
         // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
         // If you do, create a token that's a copy of that artifact.
         Effect effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
-                new ManaCostsImpl("{2}"), "Create a token that's a copy of that artifact?");
+                new ManaCostsImpl<>("{2}"), "Create a token that's a copy of that artifact?");
         effect.setText("you may pay {2}. If you do, create a token that's a copy of that artifact");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, null));
     }

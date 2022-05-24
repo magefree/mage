@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -13,12 +12,14 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public final class ShuYunTheSilentTempest extends CardImpl {
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(
                         new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), 
-                        new ManaCostsImpl("{R/W}{R/W}"),
+                        new ManaCostsImpl<>("{R/W}{R/W}"),
                         "Pay to let target creature gain double strike?"),
                 filter, false);
         ability.addTarget(new TargetCreaturePermanent());

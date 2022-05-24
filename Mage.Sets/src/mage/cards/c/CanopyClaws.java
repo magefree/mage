@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -10,8 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class CanopyClaws extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private CanopyClaws(final CanopyClaws card) {

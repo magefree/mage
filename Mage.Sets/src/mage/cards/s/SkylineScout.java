@@ -31,7 +31,7 @@ public final class SkylineScout extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
                         .setText("it gains flying until end of turn"),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         ), false));
     }
 

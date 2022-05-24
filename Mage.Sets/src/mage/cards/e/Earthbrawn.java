@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ReinforceAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ public final class Earthbrawn extends CardImpl {
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private Earthbrawn(final Earthbrawn card) {

@@ -1,15 +1,15 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class ScorchingMissile extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // Flashback {9}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{9}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{9}{R}")));
 
     }
 

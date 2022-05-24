@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -29,7 +28,7 @@ public final class DesperateRavings extends CardImpl {
         // Draw two cards, then discard a card at random.
         this.getSpellAbility().addEffect(new DesperateRavingsEffect());
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private DesperateRavings(final DesperateRavings card) {

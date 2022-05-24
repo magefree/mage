@@ -1,21 +1,22 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class DurkwoodTracker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}, {tap}: If Durkwood Tracker is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to Durkwood Tracker.
-        Ability ability = new SimpleActivatedAbility(new DurkwoodTrackerEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DurkwoodTrackerEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

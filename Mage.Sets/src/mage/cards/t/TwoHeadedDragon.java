@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class TwoHeadedDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn),new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn),new ManaCostsImpl<>("{1}{R}")));
 
         // Menace (This creature can't be blocked except by two or more creatures.)
         this.addAbility(new MenaceAbility());

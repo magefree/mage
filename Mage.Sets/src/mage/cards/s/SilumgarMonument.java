@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,10 +11,12 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class SilumgarMonument extends CardImpl {
         
         // {4}{U}{B}: Silumgar Monument becomes a 4/4 blue and black Dragon artifact creature with flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
-            (new OjutaiMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{4}{U}{B}")));
+            (new OjutaiMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{U}{B}")));
     }
 
     private SilumgarMonument(final SilumgarMonument card) {

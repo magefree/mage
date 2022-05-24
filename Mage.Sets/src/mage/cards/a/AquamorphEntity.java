@@ -38,7 +38,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(ability);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AquamorphEntity(final AquamorphEntity card) {
@@ -87,9 +87,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             }
         }
         if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
+            return event.getTargetId().equals(source.getSourceId());
         }
         return false;
     }

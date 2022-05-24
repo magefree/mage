@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.SpiritWhiteToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class NearheathChaplain extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         
         // {2}{W}, Exile Neaheath Chaplain from your graveyard: Create two 1/1 white Spirit creature tokens with flying. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new SpiritWhiteToken(), 2), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new SpiritWhiteToken(), 2), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

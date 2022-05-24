@@ -22,6 +22,28 @@ import mage.target.TargetSpell;
 
 import java.util.UUID;
 
+enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
+        if (sourceObject == null || input.getObject() == null) {
+            return false;
+        }
+        for (SpellAbility spellAbility : input.getObject().getSpellAbilities()) {
+            for (Mode mode : spellAbility.getModes().values()) {
+                for (Target target : spellAbility.getTargets()) {
+                    if (target.getTargets().contains(input.getSourceId())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -44,7 +66,7 @@ public final class Mistfolk extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CounterTargetEffect()
                         .setText("counter target spell that targets {this}"),
-                new ManaCostsImpl("{U}")
+                new ManaCostsImpl<>("{U}")
         );
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
@@ -57,27 +79,5 @@ public final class Mistfolk extends CardImpl {
     @Override
     public Mistfolk copy() {
         return new Mistfolk(this);
-    }
-}
-
-enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
-        if (sourceObject == null || input.getObject() == null) {
-            return false;
-        }
-        for (SpellAbility spellAbility : input.getObject().getSpellAbilities()) {
-            for (Mode mode : spellAbility.getModes().values()) {
-                for (Target target : spellAbility.getTargets()) {
-                    if (target.getTargets().contains(input.getSourceId())) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

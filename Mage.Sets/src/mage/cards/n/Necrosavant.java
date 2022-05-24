@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -15,8 +14,11 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  *
@@ -35,7 +37,7 @@ public final class Necrosavant extends CardImpl {
         // {3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false,false),
-                new ManaCostsImpl("{3}{B}{B}"),
+                new ManaCostsImpl<>("{3}{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         );

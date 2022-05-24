@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class FireFieldOgre extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}{B}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{U}{B}{R}")));
     }
 
     private FireFieldOgre(final FireFieldOgre card) {

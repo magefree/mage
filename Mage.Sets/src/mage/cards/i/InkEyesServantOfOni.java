@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class InkEyesServantOfOni extends CardImpl {
         this.addAbility(new InkEyesServantOfOniTriggeredAbility());
 
         // {1}{B}: Regenerate Ink-Eyes.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private InkEyesServantOfOni(final InkEyesServantOfOni card) {

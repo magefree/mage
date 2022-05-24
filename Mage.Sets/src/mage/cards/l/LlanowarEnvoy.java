@@ -1,15 +1,16 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class LlanowarEnvoy extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{1}{G}"));
+        Ability ability = new AnyColorManaAbility(new ManaCostsImpl<>("{1}{G}"));
         this.addAbility(ability);
     }
 

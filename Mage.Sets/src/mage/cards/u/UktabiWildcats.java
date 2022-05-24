@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class UktabiWildcats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         
         // {G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new  RegenerateSourceEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new  RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, sacrificeFilter, true)));
         this.addAbility(ability);
     }

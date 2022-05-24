@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,12 +14,14 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class ThrullWizard extends CardImpl {
         
         // {1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}.
         Cost cost = new OrCost("pay {B} or pay {3}", new ColoredManaCost(ColoredManaSymbol.B), new GenericManaCost(3));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

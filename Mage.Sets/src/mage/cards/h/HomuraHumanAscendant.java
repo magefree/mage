@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -26,9 +25,11 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -115,7 +116,7 @@ class HomurasEssence2 extends TokenImpl {
         Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have flying");
         ability.addEffect(effect);
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         effect = new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter);
         effect.setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
         ability.addEffect(effect);

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class SwelteringSuns extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
         
         //Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private SwelteringSuns(final SwelteringSuns card) {

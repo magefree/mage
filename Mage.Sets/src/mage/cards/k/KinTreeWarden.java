@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class KinTreeWarden extends CardImpl {
         // {2}: Regenerate Kin-Tree Warden
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
         // Morph {G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private KinTreeWarden(final KinTreeWarden card) {

@@ -1,15 +1,15 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.BeastToken2;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +24,7 @@ public final class BeastAttack extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
 
         // Flashback {2}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{G}{G}")));
     }
 
     private BeastAttack(final BeastAttack card) {

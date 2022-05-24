@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SuspendAbility;
@@ -8,6 +7,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 public final class HeroesRemembered extends CardImpl {
 
@@ -17,7 +18,7 @@ public final class HeroesRemembered extends CardImpl {
         //You gain 20 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(20));
         //Suspend 10-{W}
-        this.addAbility(new SuspendAbility(10, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(10, new ManaCostsImpl<>("{W}"), this));
     }
 
     private HeroesRemembered(final HeroesRemembered card) {

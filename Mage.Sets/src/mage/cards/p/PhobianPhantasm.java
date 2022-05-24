@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class PhobianPhantasm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FearAbility.getInstance());
         // Cumulative upkeep {B}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private PhobianPhantasm(final PhobianPhantasm card) {

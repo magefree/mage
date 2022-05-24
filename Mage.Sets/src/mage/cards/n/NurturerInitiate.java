@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,11 +11,13 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class NurturerInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a green spell, you may pay {1}. If you do, target creature gets +1/+1 until end of turn.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")), filter, false);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}")), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

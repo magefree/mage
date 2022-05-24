@@ -1,22 +1,23 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.keyword.SuspendAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class VeilingOddity extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Suspend 4-{1}{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{U}"), this));
 
         // When the last time counter is removed from Veiling Oddity while it's exiled, creatures are unblockable this turn.
         this.addAbility(new VeilingOddityTriggeredAbility());

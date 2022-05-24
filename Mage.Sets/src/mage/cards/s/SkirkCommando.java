@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class SkirkCommando extends CardImpl {
         this.addAbility(new SkirkCommandoTriggeredAbility());
 
         //Morph {2}{R} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}")));
 
     }
 

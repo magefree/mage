@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class ThunderousWrath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Miracle {R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{R}")));
     }
 
     private ThunderousWrath(final ThunderousWrath card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class RockshardElemental extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}{R}")));
     }
 
     private RockshardElemental(final RockshardElemental card) {

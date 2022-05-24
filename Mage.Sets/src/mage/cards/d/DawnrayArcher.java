@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class DawnrayArcher extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // {W}, {tap}: Dawnray Archer deals 1 damage to target attacking or blocking creature.
-       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{W}"));
+       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{W}"));
        ability.addTarget(new TargetAttackingOrBlockingCreature());
        ability.addCost(new TapSourceCost());
        this.addAbility(ability);

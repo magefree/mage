@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,9 +33,9 @@ public final class SkyshroudElf extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {1}: Add {R} or {W}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl<>("{1}"));
         this.addAbility(ability);
-        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl("{1}"));
+        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl<>("{1}"));
         this.addAbility(ability2);
     }
 

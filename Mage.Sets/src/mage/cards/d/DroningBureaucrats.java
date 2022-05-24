@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,16 +8,14 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAllEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +32,7 @@ public final class DroningBureaucrats extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {X}, {tap}: Each creature with converted mana cost X can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(new DroningBureaucratsEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new DroningBureaucratsEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

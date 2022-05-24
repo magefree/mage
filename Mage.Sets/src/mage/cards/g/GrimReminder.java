@@ -1,11 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,23 +8,16 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -48,7 +36,7 @@ public final class GrimReminder extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{B}{B}"),
+                new ManaCostsImpl<>("{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         ));

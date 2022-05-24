@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,13 +10,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +37,7 @@ public final class PetrifiedPlating extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         
         // Suspend 2-{G}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{G}"), this));
     }
 
     private PetrifiedPlating(final PetrifiedPlating card) {

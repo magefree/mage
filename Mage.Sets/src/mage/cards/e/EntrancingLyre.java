@@ -20,6 +20,19 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
+enum EntrancingLyreAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterPermanent filter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        ability.getTargets().clear();
+        ability.getTargets().add(new TargetPermanent(filter));
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -33,7 +46,7 @@ public final class EntrancingLyre extends CardImpl {
 
         // {X}, {T}: Tap target creature with power X or less. It doesn't untap during its controller's untap step for as long as Entrancing Lyre remains tapped.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect("tap target creature with power X or less"), new ManaCostsImpl("{X}")
+                new TapTargetEffect("tap target creature with power X or less"), new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
@@ -48,18 +61,5 @@ public final class EntrancingLyre extends CardImpl {
     @Override
     public EntrancingLyre copy() {
         return new EntrancingLyre(this);
-    }
-}
-
-enum EntrancingLyreAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetPermanent(filter));
     }
 }

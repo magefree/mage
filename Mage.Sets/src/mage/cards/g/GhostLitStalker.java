@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -31,7 +32,7 @@ public final class GhostLitStalker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {4}{B}, {tap}: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2),new ManaCostsImpl("{4}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2),new ManaCostsImpl<>("{4}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

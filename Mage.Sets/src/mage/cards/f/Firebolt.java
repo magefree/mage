@@ -1,15 +1,15 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class Firebolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {4}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}")));
     }
 
     private Firebolt(final Firebolt card) {

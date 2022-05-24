@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,8 +17,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class BidentOfThassa extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, you may draw a card.
         this.addAbility(new BidentOfThassaTriggeredAbility());
         // {1}{U}, {T}: Creatures your opponents control attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BidentOfThassaMustAttackEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BidentOfThassaMustAttackEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -74,9 +74,7 @@ class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.isControlledBy(controllerId)) {
-                return true;
-            }
+            return creature != null && creature.isControlledBy(controllerId);
         }
         return false;
     }
@@ -105,10 +103,7 @@ class BidentOfThassaMustAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override

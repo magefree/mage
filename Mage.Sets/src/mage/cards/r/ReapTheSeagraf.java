@@ -1,14 +1,14 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -19,7 +19,7 @@ public final class ReapTheSeagraf extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
     private ReapTheSeagraf(final ReapTheSeagraf card) {

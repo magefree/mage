@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class CoffinPurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 
         // Flashback {B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{B}")));
     }
 
     private CoffinPurge(final CoffinPurge card) {

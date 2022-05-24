@@ -1,16 +1,15 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class SnappingThragg extends CardImpl {
         this.addAbility(new SnappingThraggTriggeredAbility());
 
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}{R}")));
 
     }
 

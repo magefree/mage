@@ -1,24 +1,21 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +35,7 @@ public final class WeatheredBodyguards extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeatheredBodyguardsEffect()));
 
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}")));
 
     }
 

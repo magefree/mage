@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
@@ -11,6 +10,8 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class BanishingStroke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Miracle {W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private BanishingStroke(final BanishingStroke card) {

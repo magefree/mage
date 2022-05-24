@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -24,6 +23,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +50,7 @@ public final class StensiaMasquerade extends CardImpl {
         this.addAbility(new StensiaMasqueradeTriggeredAbility());
 
         // Madness {2}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{R}")));
     }
 
     private StensiaMasquerade(final StensiaMasquerade card) {

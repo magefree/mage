@@ -1,8 +1,5 @@
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,16 +7,20 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.BeastToken4;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class KeeperOfTheBeasts extends CardImpl {
 
         // {G}, {tap}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new BeastToken4()).setText("Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token."),
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new KeeperOfTheBeastsTarget());
         this.addAbility(ability);

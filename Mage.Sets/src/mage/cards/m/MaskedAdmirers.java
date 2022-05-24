@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class MaskedAdmirers extends CardImpl {
         OneShotEffect effect = new ReturnToHandSourceEffect();
         effect.setText("return {this} from your graveyard to your hand");
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
+                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl<>("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
     }
 
     private MaskedAdmirers(final MaskedAdmirers card) {

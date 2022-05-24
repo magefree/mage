@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,15 +9,13 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +34,7 @@ public final class FortuneThief extends CardImpl {
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FortuneThiefReplacementEffect()));
         // Morph {R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}{R}")));
     }
 
     private FortuneThief(final FortuneThief card) {

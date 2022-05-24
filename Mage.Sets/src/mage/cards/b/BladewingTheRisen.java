@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class BladewingTheRisen extends CardImpl {
         ability.addTarget(target);
          this.addAbility(ability);
         // {B}{R}: Dragon creatures get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private BladewingTheRisen(final BladewingTheRisen card) {

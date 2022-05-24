@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,6 +18,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class ScionOfDarkness extends CardImpl {
         this.addAbility(new ScionOfDarknessTriggeredAbility());
 
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private ScionOfDarkness(final ScionOfDarkness card) {

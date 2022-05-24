@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class PilferingImp extends CardImpl {
                 new DiscardCardYouChooseTargetEffect(
                         StaticFilters.FILTER_CARD_NON_LAND,
                         TargetController.OPPONENT
-                ), new ManaCostsImpl("{1}{B}")
+                ), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

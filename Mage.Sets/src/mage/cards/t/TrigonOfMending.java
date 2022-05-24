@@ -2,7 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -44,7 +45,7 @@ public final class TrigonOfMending extends CardImpl {
         
         // {W}{W}, {T}: Put a charge counter on Trigon of Mending.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{W}{W}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{W}{W}"));
         this.addAbility(ability2);
     }
 

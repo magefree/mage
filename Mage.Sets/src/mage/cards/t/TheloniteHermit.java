@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class TheloniteHermit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
 
         // When Thelonite Hermit is turned face up, create four 1/1 green Saproling creature tokens.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 4)));

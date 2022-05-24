@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetSpellOrPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class BlindSeer extends CardImpl {
 
         // {1}{U}: Target spell or permanent becomes the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.EndOfTurn),
-            new ManaCostsImpl("{1}{U}"));
+            new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability);
     }

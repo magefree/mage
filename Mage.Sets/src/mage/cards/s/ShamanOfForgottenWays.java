@@ -1,14 +1,10 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,16 +14,13 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +42,7 @@ public final class ShamanOfForgottenWays extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
-                new ManaCostsImpl("{9}{G}{G}"), 
+                new ManaCostsImpl<>("{9}{G}{G}"),
                 FormidableCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        

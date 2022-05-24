@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,16 +9,33 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
+
+enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        if (input.getObject().hasSubtype(SubType.TREASURE, game)) {
+            return true;
+        }
+        if (input.getObject().getId().equals(input.getSourceId())) {
+            return false;
+        }
+        return input.getObject().isCreature(game);
+    }
+}
 
 /**
  *
@@ -45,7 +61,7 @@ public final class SkullportMerchant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // {1}{B}, Sacrifice another creature or a Treasure: Draw a card.
-        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
@@ -57,20 +73,5 @@ public final class SkullportMerchant extends CardImpl {
     @Override
     public SkullportMerchant copy() {
         return new SkullportMerchant(this);
-    }
-}
-
-enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        if (input.getObject().hasSubtype(SubType.TREASURE, game)) {
-            return true;
-        }
-        if (input.getObject().getId().equals(input.getSourceId())) {
-            return false;
-        }
-        return input.getObject().isCreature(game);
     }
 }

@@ -43,7 +43,7 @@ public final class KenrithTheReturnedKing extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityAllEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("all creatures gain trample"), new ManaCostsImpl("{R}"));
+        ).setText("all creatures gain trample"), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new GainAbilityAllEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
@@ -52,23 +52,23 @@ public final class KenrithTheReturnedKing extends CardImpl {
 
         // {1}{G}: Put a +1/+1 counter on target creature.
         ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{G}")
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{G}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{W}: Target player gains 5 life.
-        ability = new SimpleActivatedAbility(new GainLifeTargetEffect(5), new ManaCostsImpl("{2}{W}"));
+        ability = new SimpleActivatedAbility(new GainLifeTargetEffect(5), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // {3}{U}: Target player draws a card.
-        ability = new SimpleActivatedAbility(new DrawCardTargetEffect(1), new ManaCostsImpl("{3}{U}"));
+        ability = new SimpleActivatedAbility(new DrawCardTargetEffect(1), new ManaCostsImpl<>("{3}{U}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under its owner's control.
-        ability = new SimpleActivatedAbility(new KenrithTheReturnedKingEffect(), new ManaCostsImpl("{4}{B}"));
+        ability = new SimpleActivatedAbility(new KenrithTheReturnedKingEffect(), new ManaCostsImpl<>("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }

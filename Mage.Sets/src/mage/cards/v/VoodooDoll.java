@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
@@ -26,6 +25,20 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+
+enum VoodooDollAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+        if (sourcePermanent != null) {
+            int pin = sourcePermanent.getCounters(game).getCount(CounterType.PIN);
+            ability.getManaCostsToPay().clear();
+            ability.getManaCostsToPay().add(0, new GenericManaCost(pin * 2));
+        }
+    }
+}
 
 /**
  * @author L_J
@@ -52,7 +65,7 @@ public final class VoodooDoll extends CardImpl {
 
         // {X}{X}, {T}: Voodoo Doll deals damage equal to the number of pin counters on it to any target. X is the number of pin counters on Voodoo Doll.
         ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(new CountersSourceCount(CounterType.PIN)), new ManaCostsImpl("{X}{X}")
+                new DamageTargetEffect(new CountersSourceCount(CounterType.PIN)), new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -67,19 +80,5 @@ public final class VoodooDoll extends CardImpl {
     @Override
     public VoodooDoll copy() {
         return new VoodooDoll(this);
-    }
-}
-
-enum VoodooDollAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-        if (sourcePermanent != null) {
-            int pin = sourcePermanent.getCounters(game).getCount(CounterType.PIN);
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().add(0, new GenericManaCost(pin * 2));
-        }
     }
 }

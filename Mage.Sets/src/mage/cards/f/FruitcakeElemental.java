@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -14,18 +13,13 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +41,7 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7), TargetController.YOU, false));
 
         // {3}: Target player gains control of Fruitcake Elemental.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetPlayer(1, 1, false));
         this.addAbility(ability);
     }

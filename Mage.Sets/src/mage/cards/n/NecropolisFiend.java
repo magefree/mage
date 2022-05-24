@@ -34,53 +34,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
-/**
- * @author LevelX2
- */
-public final class NecropolisFiend extends CardImpl {
-
-    public NecropolisFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{B}{B}");
-        this.subtype.add(SubType.DEMON);
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
-
-        // Delve
-        this.addAbility(new DelveAbility());
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
-        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
-        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
-        effect.setText("Target creature gets -X/-X until end of turn");
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, effect,
-                new ManaCostsImpl("{X}")
-        );
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                1, 1, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
-        ), "Exile X cards from your graveyard"));
-        ability.setTargetAdjuster(NecropolisFiendTargetAdjuster.instance);
-        ability.setCostAdjuster(NecropolisFiendCostAdjuster.instance);
-        this.addAbility(ability);
-
-    }
-
-    private NecropolisFiend(final NecropolisFiend card) {
-        super(card);
-    }
-
-    @Override
-    public NecropolisFiend copy() {
-        return new NecropolisFiend(this);
-    }
-}
-
 enum NecropolisFiendCostAdjuster implements CostAdjuster {
     instance;
 
@@ -116,5 +69,52 @@ enum NecropolisFiendTargetAdjuster implements TargetAdjuster {
                 }
             }
         }
+    }
+}
+
+/**
+ * @author LevelX2
+ */
+public final class NecropolisFiend extends CardImpl {
+
+    public NecropolisFiend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{B}{B}");
+        this.subtype.add(SubType.DEMON);
+
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
+
+        // Delve
+        this.addAbility(new DelveAbility());
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
+        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
+        effect.setText("Target creature gets -X/-X until end of turn");
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD, effect,
+                new ManaCostsImpl<>("{X}")
+        );
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
+                1, 1, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
+        ), "Exile X cards from your graveyard"));
+        ability.setTargetAdjuster(NecropolisFiendTargetAdjuster.instance);
+        ability.setCostAdjuster(NecropolisFiendCostAdjuster.instance);
+        this.addAbility(ability);
+
+    }
+
+    private NecropolisFiend(final NecropolisFiend card) {
+        super(card);
+    }
+
+    @Override
+    public NecropolisFiend copy() {
+        return new NecropolisFiend(this);
     }
 }

@@ -2,8 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +16,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -65,9 +65,7 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
         if (zoneChangeEvent.isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.isControlledBy(this.getControllerId()) && p.isCreature(game)) {
-                return true;
-            }
+            return p.isControlledBy(this.getControllerId()) && p.isCreature(game);
         }
         return false;
     }
@@ -90,7 +88,7 @@ class VigilForTheLostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ManaCostsImpl cost = new ManaCostsImpl("{X}");
+        ManaCostsImpl cost = new ManaCostsImpl<>("{X}");
         cost.clearPaid();
         if (cost.payOrRollback(source, game, source, source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());

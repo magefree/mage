@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,20 +21,21 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
  */
 public final class LinSivviDefiantHero extends CardImpl {
 
+    static final String rule = "Put target Rebel card from your graveyard on the bottom of your library";
     private static final FilterCard filter = new FilterCard("Rebel card from your graveyard");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(SubType.REBEL.getPredicate());
     }
-
-    static final String rule = "Put target Rebel card from your graveyard on the bottom of your library";
 
     public LinSivviDefiantHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -48,7 +48,7 @@ public final class LinSivviDefiantHero extends CardImpl {
         // {X}, {tap}: Search your library for a Rebel permanent card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new LinSivviDefiantHeroEffect(),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

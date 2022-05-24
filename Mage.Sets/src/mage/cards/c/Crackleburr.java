@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -21,9 +20,11 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,14 +52,14 @@ public final class Crackleburr extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {UR}{UR}, {tap}, Tap two untapped red creatures you control: Crackleburr deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{U/R}{U/R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{U/R}{U/R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         // {UR}{UR}, {untap}, Untap two tapped blue creatures you control: Return target creature to its owner's hand.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U/R}{U/R}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U/R}{U/R}"));
         ability2.addCost(new UntapSourceCost());
         ability2.addCost(new UntapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, true)));
         ability2.addTarget(new TargetCreaturePermanent());

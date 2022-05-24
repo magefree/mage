@@ -1,15 +1,15 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +24,7 @@ public final class MoanOfTheUnhallowed extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
 
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private MoanOfTheUnhallowed(final MoanOfTheUnhallowed card) {

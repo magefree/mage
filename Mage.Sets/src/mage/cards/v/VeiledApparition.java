@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -21,6 +20,8 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ class VeilApparitionToken extends TokenImpl {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl("{1}{U}")), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl<>("{1}{U}")), TargetController.YOU, false);
         this.addAbility(ability);
     }
 

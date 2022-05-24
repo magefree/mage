@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,6 +17,8 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class MajorTeroh extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {3}{W}{W}, Sacrifice Major Teroh: Exile all black creatures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAllEffect(filter),new ManaCostsImpl("{3}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAllEffect(filter),new ManaCostsImpl<>("{3}{W}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

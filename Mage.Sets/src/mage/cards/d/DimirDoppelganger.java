@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,11 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -22,6 +17,8 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.functions.CopyApplier;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +34,7 @@ public final class DimirDoppelganger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card, except it has this ability.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         this.addAbility(ability);
 
@@ -102,7 +99,7 @@ class DimirDoppelgangerCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         blueprint.getAbilities().add(ability);
         return true;

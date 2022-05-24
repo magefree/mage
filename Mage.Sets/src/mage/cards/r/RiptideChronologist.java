@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,6 +21,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
@@ -35,7 +36,7 @@ public final class RiptideChronologist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, Sacrifice Riptide Chronologist: Untap all creatures of the creature type of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideChronologistEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideChronologistEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

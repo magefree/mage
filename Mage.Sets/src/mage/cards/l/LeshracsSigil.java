@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,10 +35,10 @@ public final class LeshracsSigil extends CardImpl {
 
         // Whenever an opponent casts a green spell, you may pay {B}{B}. If you do, look at that player's hand and choose a card from it. The player discards that card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl("{B}{B}")), filter, false, SetTargetPointer.PLAYER));
+                Zone.BATTLEFIELD, new DoIfCostPaid(new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl<>("{B}{B}")), filter, false, SetTargetPointer.PLAYER));
 
         // {B}{B}: Return Leshrac's Sigil to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{B}{B}")));
     }
 
     private LeshracsSigil(final LeshracsSigil card) {

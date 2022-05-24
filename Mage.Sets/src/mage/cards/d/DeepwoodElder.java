@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,12 +9,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -23,6 +22,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class DeepwoodElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}{G}{G}, {tap}, Discard a card: X target lands become Forests until end of turn.
-        Ability ability = new SimpleActivatedAbility(new DeepwoodElderEffect(), new ManaCostsImpl("{X}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DeepwoodElderEffect(), new ManaCostsImpl<>("{X}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));

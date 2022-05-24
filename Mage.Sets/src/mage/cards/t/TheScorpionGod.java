@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -17,11 +16,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -31,6 +26,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +53,7 @@ public final class TheScorpionGod extends CardImpl {
         this.addAbility(new TheScorpionGodTriggeredAbility());
 
         // {1}{B}{R}: Put a -1/-1 counter on another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl("{1}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{1}{B}{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
@@ -99,11 +96,9 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-            if (permanent != null
+            return permanent != null
                     && permanent.isCreature(game)
-                    && permanent.getCounters(game).containsKey(CounterType.M1M1)) {
-                return true;
-            }
+                    && permanent.getCounters(game).containsKey(CounterType.M1M1);
         }
         return false;
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -33,7 +34,7 @@ public final class MageRingNetwork extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {1}, {T}: Put a storage counter on Mage-Ring Network.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),
-                new ManaCostsImpl("{1}"));
+                new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.

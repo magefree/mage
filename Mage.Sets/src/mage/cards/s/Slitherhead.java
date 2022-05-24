@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ScavengeAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class Slitherhead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Scavenge {0} ({0}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{0}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{0}")));
     }
 
     private Slitherhead(final Slitherhead card) {

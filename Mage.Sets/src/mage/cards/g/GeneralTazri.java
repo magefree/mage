@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -20,6 +19,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public final class GeneralTazri extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
 
     }
 

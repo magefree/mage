@@ -1,28 +1,29 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class FelhideSpiritbinder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Inspired</i> &mdash; Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}. If you do, create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl("{1}{R}"), "Use effect of {this}?"));
+        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl<>("{1}{R}"), "Use effect of {this}?"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

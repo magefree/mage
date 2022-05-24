@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,6 +11,8 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class SelesnyaLocket extends CardImpl {
         // {G/W}{G/W}{G/W}{G/W}, {T}, Sacrifice Selesnya Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{G/W}{G/W}{G/W}{G/W}")
+                new ManaCostsImpl<>("{G/W}{G/W}{G/W}{G/W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

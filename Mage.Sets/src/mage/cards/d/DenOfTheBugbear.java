@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -21,6 +19,8 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.custom.CreatureToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author weirddan455
@@ -28,12 +28,11 @@ import mage.game.permanent.token.custom.CreatureToken;
 public final class DenOfTheBugbear extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     public DenOfTheBugbear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -57,7 +56,7 @@ public final class DenOfTheBugbear extends CardImpl {
                         .withColor("R")
                         .withSubType(SubType.GOBLIN)
                         .withAbility(ability),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{R}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R}")));
     }
 
     private DenOfTheBugbear(final DenOfTheBugbear card) {

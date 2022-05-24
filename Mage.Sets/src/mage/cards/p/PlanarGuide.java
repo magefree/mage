@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -24,6 +21,10 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
@@ -39,7 +40,7 @@ public final class PlanarGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{W}, Exile Planar Guide: Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

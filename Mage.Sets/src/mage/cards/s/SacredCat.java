@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.EmbalmAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class SacredCat extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Embalm {W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{W}"), this));
     }
 
     private SacredCat(final SacredCat card) {

@@ -31,7 +31,7 @@ public final class NihilisticGlee extends CardImpl {
         // {2}{B}, Discard a card: Target opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(
                 new LoseLifeTargetEffect(1),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addCost(new DiscardCardCost());

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardXTargetCost;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class Conflagrate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
 
         // Flashback-{R}{R}, Discard X cards.
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{R}{R}"));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{R}{R}"));
         ability.addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
 

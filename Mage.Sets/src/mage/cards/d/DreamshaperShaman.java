@@ -44,7 +44,7 @@ public final class DreamshaperShaman extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new RevealCardsFromLibraryUntilEffect(filter, Zone.BATTLEFIELD, Zone.LIBRARY),
                 new CompositeCost(
-                        new ManaCostsImpl("{2}{R}"),
+                        new ManaCostsImpl<>("{2}{R}"),
                         new SacrificeTargetCost(new TargetControlledPermanent(
                                 StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
                         )), "pay {2}{R} and sacrifice a nonland permanent"

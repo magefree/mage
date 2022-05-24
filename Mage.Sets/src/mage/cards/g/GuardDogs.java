@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,16 +10,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +32,7 @@ public final class GuardDogs extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}, {T}: Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GuardDogsEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GuardDogsEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -87,12 +84,10 @@ class GuardDogsEffect extends PreventionEffectImpl {
                     && controlledTarget.getFirstTarget() != null) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(controlledTarget.getFirstTarget());
                 Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-                if (permanent != null
+                return permanent != null
                         && targetPermanent != null
                         && this.getTargetPointer().getTargets(game, source).contains(event.getSourceId())
-                        && permanent.getColor(game).shares(targetPermanent.getColor(game))) {
-                    return true;
-                }
+                        && permanent.getColor(game).shares(targetPermanent.getColor(game));
             }
         }
         return false;

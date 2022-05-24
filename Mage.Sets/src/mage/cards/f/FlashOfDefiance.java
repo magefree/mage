@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
@@ -12,10 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +38,7 @@ public final class FlashOfDefiance extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
         
         // Flashback-{1}{R}, Pay 3 life.
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{R}"));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -18,6 +16,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author weirddan455
@@ -25,12 +25,11 @@ import mage.game.permanent.token.custom.CreatureToken;
 public final class CaveOfTheFrostDragon extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, true);
 
     public CaveOfTheFrostDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -49,7 +48,7 @@ public final class CaveOfTheFrostDragon extends CardImpl {
                         .withColor("W")
                         .withSubType(SubType.DRAGON)
                         .withAbility(FlyingAbility.getInstance()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{4}{W}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private CaveOfTheFrostDragon(final CaveOfTheFrostDragon card) {

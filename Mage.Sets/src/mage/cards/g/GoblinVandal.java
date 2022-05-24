@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,8 +11,8 @@ import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -21,10 +20,11 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +43,7 @@ public final class GoblinVandal extends CardImpl {
         // Whenever Goblin Vandal attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and Goblin Vandal assigns no combat damage this turn.
         Effect effect = new DestroyTargetEffect();
         effect.setText("destroy target artifact defending player controls");
-        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl("{R}"), "Pay {R} to destroy artifact of defending player?");
+        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl<>("{R}"), "Pay {R} to destroy artifact of defending player?");
         effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
         effect.setText("and {this} assigns no combat damage this turn");
         effect2.addEffect(effect);

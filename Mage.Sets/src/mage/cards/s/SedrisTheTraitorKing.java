@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -60,7 +61,7 @@ class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.isCreature(game)) {
-                    UnearthAbility ability = new UnearthAbility(new ManaCostsImpl("{2}{B}"));
+                    UnearthAbility ability = new UnearthAbility(new ManaCostsImpl<>("{2}{B}"));
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());
                     game.getState().addOtherAbility(card, ability);

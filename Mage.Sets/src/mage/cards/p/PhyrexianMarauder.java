@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -20,6 +19,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public final class PhyrexianMarauder extends CardImpl {
 class PhyrexianMarauderCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect {
 
     PhyrexianMarauderCantAttackUnlessYouPayEffect() {
-        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK);
+        super(new ManaCostsImpl<>("{0}"), RestrictType.ATTACK);
         staticText = "{this} can't attack unless you pay {1} for each +1/+1 counter on it";
     }
 

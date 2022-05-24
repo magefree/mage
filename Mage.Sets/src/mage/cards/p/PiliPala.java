@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.UntapSourceCost;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class PiliPala extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}, {untap}: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{2}"));
+        Ability ability = new AnyColorManaAbility(new ManaCostsImpl<>("{2}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
     }

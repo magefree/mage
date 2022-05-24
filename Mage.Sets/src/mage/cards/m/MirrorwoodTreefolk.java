@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,12 +10,14 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class MirrorwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{R}{W}: The next time damage would be dealt to Mirrorwood Treefolk this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorwoodTreefolkEffect(), new ManaCostsImpl("{2}{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorwoodTreefolkEffect(), new ManaCostsImpl<>("{2}{R}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

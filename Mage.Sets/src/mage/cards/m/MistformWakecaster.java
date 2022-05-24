@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -28,6 +27,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -44,10 +45,10 @@ public final class MistformWakecaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}: Mistform Wakecaster becomes the creature type of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new ManaCostsImpl<>("{1}")));
 
         // {2}{U}{U}, {T}: Choose a creature type. Each creature you control becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeControlledEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeControlledEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

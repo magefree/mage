@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,10 +11,15 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.game.permanent.token.DaxosSpiritToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +49,7 @@ public final class DaxosTheReturned extends CardImpl {
 
         // {1}{W}{B}: Create a white and black Spirit enchantment creature token. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl<>("{1}{W}{B}")));
     }
 
     private DaxosTheReturned(final DaxosTheReturned card) {

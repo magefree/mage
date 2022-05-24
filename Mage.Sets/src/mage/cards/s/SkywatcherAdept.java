@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class SkywatcherAdept extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{3}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());

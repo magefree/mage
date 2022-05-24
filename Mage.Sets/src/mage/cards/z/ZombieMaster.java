@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class ZombieMaster extends CardImpl {
         effect.setText("Other Zombie creatures have swampwalk. <i>(They can't be blocked as long as defending player controls a Swamp.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Other Zombies have "{B}: Regenerate this permanent."
-        effect = new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")), Duration.WhileOnBattlefield, filter, true);
+        effect = new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")), Duration.WhileOnBattlefield, filter, true);
         effect.setText("Other Zombies have \"{B}: Regenerate this permanent.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

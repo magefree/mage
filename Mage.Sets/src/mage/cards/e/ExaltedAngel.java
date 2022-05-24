@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class ExaltedAngel extends CardImpl {
         // Whenever Exalted Angel deals damage, you gain that much life.
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
         // Morph {2}{W}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}{W}")));
     }
 
     private ExaltedAngel(final ExaltedAngel card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -23,6 +22,8 @@ import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -41,7 +42,7 @@ public final class RithTheAwakener extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then create a 1/1 green Saproling creature token for each permanent of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));
+                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl<>("{2}{G}")), false));
     }
 
     private RithTheAwakener(final RithTheAwakener card) {

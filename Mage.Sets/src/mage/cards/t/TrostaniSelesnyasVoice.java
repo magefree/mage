@@ -2,8 +2,6 @@
 
 package mage.cards.t;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -15,15 +13,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +40,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
         // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{1}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

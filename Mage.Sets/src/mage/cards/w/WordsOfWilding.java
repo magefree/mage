@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.BearToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -28,7 +29,7 @@ public final class WordsOfWilding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // {1}: The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private WordsOfWilding(final WordsOfWilding card) {

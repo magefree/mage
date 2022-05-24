@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class ShaleskinPlower extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {4}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}")));
         // When Shaleskin Plower is turned face up, destroy target land.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetLandPermanent());

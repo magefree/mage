@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.permanent.token.TrooperToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class KaminoCloningFacility extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(FILTER), true));
 
         // {5}, {T}: Create a 1/1 white Trooper creature tokens.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TrooperToken(), 1), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TrooperToken(), 1), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

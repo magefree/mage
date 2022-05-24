@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,6 +21,8 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.TokenImpl;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -38,7 +39,7 @@ public final class VeiledSerpent extends CardImpl {
                 "Whenever an opponent casts a spell, if Veiled Serpent is an enchantment, Veiled Serpent becomes a 4/4 Serpent creature that can't attack unless defending player controls an Island."));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

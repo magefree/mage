@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class DesolateLighthouse extends CardImpl {
         // {1}{U}{R}, {tap}: Draw a card, then discard a card.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawDiscardControllerEffect(),
-                new ManaCostsImpl("{1}{U}{R}"));
+                new ManaCostsImpl<>("{1}{U}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

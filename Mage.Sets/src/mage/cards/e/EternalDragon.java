@@ -1,22 +1,22 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,13 +38,13 @@ public final class EternalDragon extends CardImpl {
         // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{3}{W}{W}"), 
+                new ManaCostsImpl<>("{3}{W}{W}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         );          
         this.addAbility(ability);
         // PlainscyclingAbility {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private EternalDragon(final EternalDragon card) {

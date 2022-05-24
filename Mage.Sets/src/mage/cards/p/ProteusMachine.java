@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class ProteusMachine extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {0}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{0}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{0}")));
         
         // When Proteus Machine is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BecomesChosenCreatureTypeSourceEffect(false, Duration.Custom)));

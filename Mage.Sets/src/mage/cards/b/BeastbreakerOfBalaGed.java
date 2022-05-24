@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class BeastbreakerOfBalaGed extends LevelerCard {
         this.toughness = new MageInt(2);
 
         // Level up {2}{G} ({2}{G}: Put a level counter on this. Level up only as a sorcery.)
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{G}")));
 
         Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(TrampleAbility.getInstance());

@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.HomunculusToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class PuppetConjurer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}: Create a 0/1 blue Homunculus artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a Homunculus.

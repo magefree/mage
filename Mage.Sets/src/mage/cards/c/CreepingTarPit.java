@@ -2,8 +2,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,10 +12,12 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.custom.CreatureToken;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -40,7 +40,7 @@ public final class CreepingTarPit extends CardImpl {
                         .withColor("BU")
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(new CantBeBlockedSourceAbility()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
     private CreepingTarPit(final CreepingTarPit card) {

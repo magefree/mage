@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -11,9 +10,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +36,7 @@ public final class HowlingGale extends CardImpl {
         effect.setText("and each player");
         this.getSpellAbility().addEffect(effect);
         // Flashback {1}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private HowlingGale(final HowlingGale card) {

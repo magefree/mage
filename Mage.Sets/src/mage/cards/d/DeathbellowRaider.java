@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class DeathbellowRaider extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // {2}{B}: Regenerate Deathbellow Raider.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private DeathbellowRaider(final DeathbellowRaider card) {

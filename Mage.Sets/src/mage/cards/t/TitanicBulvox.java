@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class TitanicBulvox extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Morph {4}{G}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{G}{G}{G}")));
     }
 
     private TitanicBulvox(final TitanicBulvox card) {

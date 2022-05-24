@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ForestcyclingAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,9 +31,9 @@ public final class PaleRecluse extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Forestcycling {2}
-        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl<>("{2}")));
         // plainscycling {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private PaleRecluse(final PaleRecluse card) {

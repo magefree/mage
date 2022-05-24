@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,18 +13,15 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +51,7 @@ public final class ObsidianFireheart extends CardImpl {
         // after Obsidian Fireheart has left the battlefield.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),
-                new ManaCostsImpl("{1}{R}{R}"));
+                new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));
         OneShotEffect effect = new ObsidianFireheartOneShotEffect();
         effect.setText(rule);
@@ -135,11 +131,8 @@ class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent targetLand = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (targetLand != null 
-                && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1) {
-            return true;
-        }
-        return false;
+        return targetLand != null
+                && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1;
     }
 
     @Override

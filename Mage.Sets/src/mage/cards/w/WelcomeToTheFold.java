@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -28,7 +29,7 @@ public final class WelcomeToTheFold extends CardImpl {
         // Madness {X}{U}{U} <i>(If you discard this card
         // discard it into exile. When you do
         // cast it for its madness cost or put it into your graveyard.
-        Ability ability = new MadnessAbility(new ManaCostsImpl("{X}{U}{U}"));
+        Ability ability = new MadnessAbility(new ManaCostsImpl<>("{X}{U}{U}"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

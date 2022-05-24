@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.UUID;
+
 /**
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -26,7 +27,7 @@ public final class FromUnderTheFloorboards extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Madness {X}{B}{B} <i>(If you discard this card discard it into exile. When you do cast it for its madness cost or put it into your graveyard.
-        Ability ability = (new MadnessAbility(new ManaCostsImpl("{X}{B}{B}")));
+        Ability ability = (new MadnessAbility(new ManaCostsImpl<>("{X}{B}{B}")));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         

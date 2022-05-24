@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -22,6 +21,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SnakeToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class HoodedHydra extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SnakeToken(), new CountersSourceCount(CounterType.P1P1)), false));
 
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
 
         // As Hooded Hydra is turned face up, put five +1/+1 counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(5));

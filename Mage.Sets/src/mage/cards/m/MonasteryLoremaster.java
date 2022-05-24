@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class MonasteryLoremaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Megamorph {5}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}"), true));
 
         // When Monastery Loremaster is turned face up, return target noncreature, nonland card from your graveyard to your hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());

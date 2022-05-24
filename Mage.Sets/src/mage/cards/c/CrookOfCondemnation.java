@@ -26,13 +26,13 @@ public final class CrookOfCondemnation extends CardImpl {
 
 
         // {1}, {t}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
 
         // {1}, Exile Crook of Condemnation: Exile all cards from all graveyards.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new ManaCostsImpl("{1}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new ManaCostsImpl<>("{1}"));
         ability2.addCost(new ExileSourceCost());
         this.addAbility(ability2);
 

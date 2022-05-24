@@ -4,7 +4,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -21,6 +20,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  * @author cbt33 / LevelX2
  */
@@ -31,7 +32,7 @@ public final class AegisOfHonor extends CardImpl {
 
 	// {1}: The next time an instant or sorcery spell would deal damage to you this
         //turn, that spell deals that damage to its controller instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl<>("{1}")));
 
     }
 

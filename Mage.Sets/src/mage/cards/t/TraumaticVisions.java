@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class TraumaticVisions extends CardImpl {
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private TraumaticVisions(final TraumaticVisions card) {

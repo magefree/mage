@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -21,6 +20,8 @@ import mage.target.Target;
 import mage.target.TargetSource;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -35,7 +36,7 @@ public final class InterventionPact extends CardImpl {
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new InterventionPactEffect());
         // At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}")), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{1}{W}{W}")), false));
     }
 
     private InterventionPact(final InterventionPact card) {
@@ -119,9 +120,7 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
-            if (event.getSourceId().equals(getTargetPointer().getFirst(game, source))) {
-                return true;
-            }
+            return event.getSourceId().equals(getTargetPointer().getFirst(game, source));
         }
         return false;
     }

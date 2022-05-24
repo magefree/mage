@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,6 +9,9 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
+
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
@@ -24,7 +26,7 @@ public final class Rout extends CardImpl {
 
         Effect effect = new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true);
         // You may cast Rout as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
         // Destroy all creatures. They can't be regenerated.

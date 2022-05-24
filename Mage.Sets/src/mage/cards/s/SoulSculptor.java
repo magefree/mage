@@ -19,6 +19,28 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+enum SoulSculptorCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().getFirst();
+            if (stackObject != null) {
+                return !stackObject.getCardType(game).contains(CardType.CREATURE);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "creature spell cast";
+    }
+
+}
+
 /**
  * @author jeffwadsworth
  */
@@ -34,7 +56,7 @@ public final class SoulSculptor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
-        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -110,28 +132,6 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return Layer.TypeChangingEffects_4 == layer
                 || Layer.AbilityAddingRemovingEffects_6 == layer;
-    }
-
-}
-
-enum SoulSculptorCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getFirst();
-            if (stackObject != null) {
-                return !stackObject.getCardType(game).contains(CardType.CREATURE);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "creature spell cast";
     }
 
 }

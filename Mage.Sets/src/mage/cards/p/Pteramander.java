@@ -22,38 +22,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-/**
- * @author TheElk801
- */
-public final class Pteramander extends CardImpl {
-
-    public Pteramander(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
-
-        this.subtype.add(SubType.SALAMANDER);
-        this.subtype.add(SubType.DRAKE);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // {7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard.
-        Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl("{7}{U}"));
-        ability.setCostAdjuster(PteramanderAdjuster.instance);
-        this.addAbility(ability.addHint(PteramanderAdjuster.getHint()));
-    }
-
-    private Pteramander(final Pteramander card) {
-        super(card);
-    }
-
-    @Override
-    public Pteramander copy() {
-        return new Pteramander(this);
-    }
-}
-
 enum PteramanderAdjuster implements CostAdjuster {
     instance;
 
@@ -73,5 +41,37 @@ enum PteramanderAdjuster implements CostAdjuster {
             int count = cardsCount.calculate(game, ability, null);
             CardUtil.reduceCost(ability, count);
         }
+    }
+}
+
+/**
+ * @author TheElk801
+ */
+public final class Pteramander extends CardImpl {
+
+    public Pteramander(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
+
+        this.subtype.add(SubType.SALAMANDER);
+        this.subtype.add(SubType.DRAKE);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // {7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard.
+        Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl<>("{7}{U}"));
+        ability.setCostAdjuster(PteramanderAdjuster.instance);
+        this.addAbility(ability.addHint(PteramanderAdjuster.getHint()));
+    }
+
+    private Pteramander(final Pteramander card) {
+        super(card);
+    }
+
+    @Override
+    public Pteramander copy() {
+        return new Pteramander(this);
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -18,9 +17,11 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public final class InsidiousMist extends CardImpl {
 
         // Whenever Insideous Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl("{2}{B}"), "Pay {2}{B} to transform?")));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), "Pay {2}{B} to transform?")));
     }
 
     private InsidiousMist(final InsidiousMist card) {

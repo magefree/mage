@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
@@ -11,6 +10,8 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class Icefall extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         
         // Recover {R}{R}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{R}{R}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{R}{R}"), this));
     }
 
     private Icefall(final Icefall card) {

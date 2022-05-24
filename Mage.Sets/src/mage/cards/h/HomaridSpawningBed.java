@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.CamaridToken;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class HomaridSpawningBed extends CardImpl {
 
         // {1}{U}{U}, Sacrifice a blue creature: create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CamaridToken(), new SacrificeCostConvertedMana("creature")),
-                new ManaCostsImpl("{1}{U}{U}"));
+                new ManaCostsImpl<>("{1}{U}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
     }

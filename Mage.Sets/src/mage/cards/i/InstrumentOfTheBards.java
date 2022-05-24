@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,10 +8,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -22,6 +20,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +43,7 @@ public final class InstrumentOfTheBards extends CardImpl {
         // {3}{G}, {T}: Search your library for a creature card with mana value equal to the number of harmony
         // counters on Instrument of Bards, reveal it, and put it into your hand.
         // If that card is legendary, create a Treasure token. Then shuffle.
-        Ability ability = new SimpleActivatedAbility(new InstrumentOfTheBardsEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new InstrumentOfTheBardsEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

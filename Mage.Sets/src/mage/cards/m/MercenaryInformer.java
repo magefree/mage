@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -22,6 +21,8 @@ import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class MercenaryInformer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filterBlack, Duration.WhileOnBattlefield)));
         
         // {2}{W}: Put target nontoken Mercenary on the bottom of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetPermanent(filterMercenary));
         this.addAbility(ability);
     }

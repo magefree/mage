@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,12 +35,12 @@ public final class MercurialChemister extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, {T}: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {R}, {T}, Discard a card: Mercurial Chemister deals damage to target creature equal to the discarded card's converted mana cost.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(DiscardCostCardManaValue.instance), new ManaCostsImpl("{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(DiscardCostCardManaValue.instance), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

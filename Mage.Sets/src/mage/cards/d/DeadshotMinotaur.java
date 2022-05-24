@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class DeadshotMinotaur extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Cycling {RG}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R/G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R/G}")));
     }
 
     private DeadshotMinotaur(final DeadshotMinotaur card) {

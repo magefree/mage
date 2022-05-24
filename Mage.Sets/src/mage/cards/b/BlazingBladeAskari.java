@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class BlazingBladeAskari extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {2}: Blazing Blade Askari becomes colorless until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private BlazingBladeAskari(final BlazingBladeAskari card) {

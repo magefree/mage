@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,11 +44,11 @@ public final class ScourgeOfKherRidges extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {1}{R}: Scourge of Kher Ridges deals 2 damage to each creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new ManaCostsImpl<>("{1}{R}"));
         this.addAbility(ability);
         
         // {5}{R}: Scourge of Kher Ridges deals 6 damage to each other creature with flying.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(6, filter2), new ManaCostsImpl("{5}{R}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(6, filter2), new ManaCostsImpl<>("{5}{R}"));
         this.addAbility(ability2);
     }
 

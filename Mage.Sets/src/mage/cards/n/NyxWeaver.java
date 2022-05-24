@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class NyxWeaver extends CardImpl {
         // At the beginning of your upkeep, put the top two cards of your library into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), TargetController.YOU, false));
         // {1}{B}{G}, Exile Nyx Weaver: Return target card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);

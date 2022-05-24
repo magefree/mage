@@ -2,7 +2,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,9 +15,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 
 
@@ -36,7 +36,7 @@ public final class CarnageGladiator extends CardImpl {
         this.addAbility(new CarnageGladiatorTriggeredAbility());
 
         // {1}{B}{R}: Renegerate Carnage Gladiator.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),new ManaCostsImpl("{1}{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),new ManaCostsImpl<>("{1}{B}{R}")));
 
 
     }

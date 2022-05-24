@@ -1,19 +1,20 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.permanent.token.IxalanVampireToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class AdantoTheFirstFort extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // 2W, T: Create a 1/1 white Vampire creature token with lifelink.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

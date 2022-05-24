@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class MalevolentWhispers extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Madness {3}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{R}")));
     }
 
     private MalevolentWhispers(final MalevolentWhispers card) {

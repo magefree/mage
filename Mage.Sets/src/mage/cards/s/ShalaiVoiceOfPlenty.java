@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,14 +14,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +62,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
                         CounterType.P1P1.createInstance(),
                         StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED
                 ),
-                new ManaCostsImpl("{4}{G}{G}")
+                new ManaCostsImpl<>("{4}{G}{G}")
         ));
 
     }

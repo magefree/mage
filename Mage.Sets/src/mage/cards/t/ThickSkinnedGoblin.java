@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.*;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class ThickSkinnedGoblin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThickSkinnedGoblinCostModificationEffect()));
 
         // {R}: Thick-Skinned Goblin gains protection from red until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private ThickSkinnedGoblin(final ThickSkinnedGoblin card) {

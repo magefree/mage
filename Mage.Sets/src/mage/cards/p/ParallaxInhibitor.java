@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -16,6 +15,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class ParallaxInhibitor extends CardImpl {
 
         // {1}, {tap}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new AddCountersAllEffect(CounterType.FADE.createInstance(), filter), new ManaCostsImpl("{1}"));
+            new AddCountersAllEffect(CounterType.FADE.createInstance(), filter), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

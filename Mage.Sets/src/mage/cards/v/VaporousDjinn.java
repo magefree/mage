@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,12 +11,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,7 @@ class VaporousDjinnEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cost cost = new ManaCostsImpl("{U}{U}");
+            Cost cost = new ManaCostsImpl<>("{U}{U}");
             String message = "Pay {U}{U} to prevent this permanent from phasing out?";
             if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {

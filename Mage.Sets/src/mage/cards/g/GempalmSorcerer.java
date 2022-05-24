@@ -1,11 +1,9 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -14,7 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class GempalmSorcerer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cycling {2}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
 
         // When you cycle Gempalm Sorcerer, Wizard creatures gain flying until end of turn.
         Ability ability = new CycleTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter));

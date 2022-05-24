@@ -22,7 +22,7 @@ public final class CoordinatedCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private CoordinatedCharge(final CoordinatedCharge card) {

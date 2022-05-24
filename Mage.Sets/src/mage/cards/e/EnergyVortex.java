@@ -25,6 +25,15 @@ import mage.util.ManaUtil;
 
 import java.util.UUID;
 
+enum EnergyVortexCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getActivePlayerId().equals(game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -57,7 +66,7 @@ public final class EnergyVortex extends CardImpl {
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
                         ManacostVariableValue.REGULAR, true
-                ), new ManaCostsImpl("{X}"),
+                ), new ManaCostsImpl<>("{X}"),
                 new IsStepCondition(PhaseStep.UPKEEP)
         ));
     }
@@ -69,15 +78,6 @@ public final class EnergyVortex extends CardImpl {
     @Override
     public EnergyVortex copy() {
         return new EnergyVortex(this);
-    }
-}
-
-enum EnergyVortexCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
 }
 

@@ -24,44 +24,6 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
-/**
- * @author TheElk801
- */
-public final class SisayWeatherlightCaptain extends CardImpl {
-
-    public SisayWeatherlightCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                SisayWeatherlightCaptainValue.instance,
-                SisayWeatherlightCaptainValue.instance,
-                Duration.WhileOnBattlefield
-        )));
-
-        // {W}{U}{B}{R}{G}: Search your library for a legendary permanent card with converted mana cost less than Sisay's power, put that card onto the battlefield, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(
-                new SisayWeatherlightCaptainEffect(),
-                new ManaCostsImpl("{W}{U}{B}{R}{G}")
-        ));
-    }
-
-    private SisayWeatherlightCaptain(final SisayWeatherlightCaptain card) {
-        super(card);
-    }
-
-    @Override
-    public SisayWeatherlightCaptain copy() {
-        return new SisayWeatherlightCaptain(this);
-    }
-}
-
 enum SisayWeatherlightCaptainValue implements DynamicValue {
     instance;
 
@@ -91,6 +53,44 @@ enum SisayWeatherlightCaptainValue implements DynamicValue {
     @Override
     public String toString() {
         return "1";
+    }
+}
+
+/**
+ * @author TheElk801
+ */
+public final class SisayWeatherlightCaptain extends CardImpl {
+
+    public SisayWeatherlightCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
+                SisayWeatherlightCaptainValue.instance,
+                SisayWeatherlightCaptainValue.instance,
+                Duration.WhileOnBattlefield
+        )));
+
+        // {W}{U}{B}{R}{G}: Search your library for a legendary permanent card with converted mana cost less than Sisay's power, put that card onto the battlefield, then shuffle your library.
+        this.addAbility(new SimpleActivatedAbility(
+                new SisayWeatherlightCaptainEffect(),
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
+        ));
+    }
+
+    private SisayWeatherlightCaptain(final SisayWeatherlightCaptain card) {
+        super(card);
+    }
+
+    @Override
+    public SisayWeatherlightCaptain copy() {
+        return new SisayWeatherlightCaptain(this);
     }
 }
 

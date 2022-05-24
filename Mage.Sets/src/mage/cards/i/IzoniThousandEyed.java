@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,12 +10,14 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class IzoniThousandEyed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
-                new ManaCostsImpl("{B}{G}")
+                new ManaCostsImpl<>("{B}{G}")
         );
         ability.addEffect(
                 new DrawCardSourceControllerEffect(1).setText("and draw a card")

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class SoulSnare extends CardImpl {
 
         // {W}, Sacrifice Soul Snare: Exile target creature that's attacking you or a planeswalker you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ExileTargetEffect(), new ManaCostsImpl("{W}"));
+                new ExileTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));
         this.addAbility(ability);

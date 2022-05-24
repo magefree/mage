@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlankingAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class KnightOfSursi extends CardImpl {
         // flanking
         this.addAbility(new FlankingAbility());
         // Suspend 3-{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{W}"), this));
     }
 
     private KnightOfSursi(final KnightOfSursi card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class SpinedBasher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private SpinedBasher(final SpinedBasher card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,10 +35,10 @@ public final class WallOfDeceit extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}: Turn Wall of Deceit face down.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WallOfDeceitEffect(), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WallOfDeceitEffect(), new ManaCostsImpl<>("{3}")));
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private WallOfDeceit(final WallOfDeceit card) {

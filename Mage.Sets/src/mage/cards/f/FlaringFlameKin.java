@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,9 +14,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class FlaringFlameKin extends CardImpl {
             new GainAbilitySourceEffect(TrampleAbility.getInstance()), enchanted,
             ", has trample"));
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+            new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(grantedAbility),
             enchanted, ", and has \"{R}: {this} gets +1/+0 until end of turn.\""));
         this.addAbility(ability);

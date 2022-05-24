@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -23,6 +20,10 @@ import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -33,7 +34,7 @@ public final class ProtectiveSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // {1}, Pay 1 life: Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost.
-        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
 
@@ -51,9 +52,9 @@ public final class ProtectiveSphere extends CardImpl {
 
 class ProtectiveSphereEffect extends PreventionEffectImpl {
 
-    private final TargetSource target;
     private static Mana manaUsed;
     private static List<ObjectColor> colorsOfChosenSource = new ArrayList<>();
+    private final TargetSource target;
 
     public ProtectiveSphereEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
@@ -104,9 +105,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
             if (event.getTargetId().equals(source.getControllerId())
                     && event.getSourceId().equals(target.getFirstTarget())) {
                 colorsOfChosenSource = game.getObject(target.getFirstTarget()).getColor(game).getColors();
-                if (colorsOfChosenSource.stream().anyMatch((c) -> (manaUsed.getColor(c.getOneColoredManaSymbol()) > 0))) {
-                    return true;
-                }
+                return colorsOfChosenSource.stream().anyMatch((c) -> (manaUsed.getColor(c.getOneColoredManaSymbol()) > 0));
             }
         }
         return false;

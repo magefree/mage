@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,9 +10,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class WildAesthir extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // {W}{W}: Wild Aesthir gets +2/+0 until end of turn. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private WildAesthir(final WildAesthir card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,10 +27,10 @@ public final class MarangRiverSkeleton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Marang River Skeleton.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
 
         // Megamorph {3}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}"), true));
     }
 
     private MarangRiverSkeleton(final MarangRiverSkeleton card) {

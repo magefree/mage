@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,11 +9,13 @@ import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class GrislyAnglerfish extends CardImpl {
         this.nightCard = true;
 
         // {6}: Creatures your opponents control attack this turn if able.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrislyAnglerfishMustAttackEffect(), new ManaCostsImpl("{6}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrislyAnglerfishMustAttackEffect(), new ManaCostsImpl<>("{6}")));
     }
 
     private GrislyAnglerfish(final GrislyAnglerfish card) {
@@ -64,10 +65,7 @@ class GrislyAnglerfishMustAttackEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override

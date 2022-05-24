@@ -1,8 +1,5 @@
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -18,6 +15,10 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
  */
@@ -27,7 +28,7 @@ public final class DoublingCube extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {T}: Double the amount of each type of mana in your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"))
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl<>("{3}"))
                 .setPoolDependant(true);        
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

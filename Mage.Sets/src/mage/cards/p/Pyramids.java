@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,6 +21,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author MarcoMarin
@@ -41,7 +42,7 @@ public final class Pyramids extends CardImpl {
         // {2}: Choose one - Destroy target Aura attached to a land; 
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target Aura attached to a land");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         //or the next time target land would be destroyed this turn, remove all damage marked on it instead.
         Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn)); //back in the day this was not technically "damage", hopefully this modern description will work nowadays
         mode.addTarget(new TargetLandPermanent());
@@ -65,9 +66,7 @@ class PyramidsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());
-            if (permanent != null && permanent.isLand(game)) {
-                return true;
-            }
+            return permanent != null && permanent.isLand(game);
         }
         return false;
     }

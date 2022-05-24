@@ -18,36 +18,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class DeclarationOfNaught extends CardImpl {
-
-    static final private FilterSpell filter = new FilterSpell("spell with the chosen name");
-
-    public DeclarationOfNaught(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-
-        // As Declaration of Naught enters the battlefield, name a card.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL)));
-
-        // {U}: Counter target spell with the chosen name.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
-        ability.setTargetAdjuster(DeclarationOfNaughtAdjuster.instance);
-        ability.addTarget(new TargetSpell(filter));
-        this.addAbility(ability);
-    }
-
-    private DeclarationOfNaught(final DeclarationOfNaught card) {
-        super(card);
-    }
-
-    @Override
-    public DeclarationOfNaught copy() {
-        return new DeclarationOfNaught(this);
-    }
-}
-
 enum DeclarationOfNaughtAdjuster implements TargetAdjuster {
     instance;
 
@@ -62,5 +32,35 @@ enum DeclarationOfNaughtAdjuster implements TargetAdjuster {
         filterSpell.add(new NamePredicate(chosenName));
         TargetSpell target = new TargetSpell(1, filterSpell);
         ability.addTarget(target);
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class DeclarationOfNaught extends CardImpl {
+
+    static final private FilterSpell filter = new FilterSpell("spell with the chosen name");
+
+    public DeclarationOfNaught(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
+
+        // As Declaration of Naught enters the battlefield, name a card.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL)));
+
+        // {U}: Counter target spell with the chosen name.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
+        ability.setTargetAdjuster(DeclarationOfNaughtAdjuster.instance);
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);
+    }
+
+    private DeclarationOfNaught(final DeclarationOfNaught card) {
+        super(card);
+    }
+
+    @Override
+    public DeclarationOfNaught copy() {
+        return new DeclarationOfNaught(this);
     }
 }

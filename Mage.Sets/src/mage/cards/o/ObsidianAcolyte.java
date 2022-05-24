@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,10 +11,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class ObsidianAcolyte extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // {W}: Target creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+            new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

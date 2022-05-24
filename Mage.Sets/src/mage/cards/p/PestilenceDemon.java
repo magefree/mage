@@ -30,7 +30,7 @@ public final class PestilenceDemon extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private PestilenceDemon(final PestilenceDemon card) {

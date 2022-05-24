@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -13,14 +12,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -41,7 +39,7 @@ public final class TorrentElemental extends CardImpl {
         effect.setText("tap all creatures defending player controls.");
         this.addAbility(new AttacksTriggeredAbility(effect, false, null, SetTargetPointer.PLAYER));
         // {3}{B/G}{B/G}: Put Torrent Elemental from exile onto the battlefield tapped. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.EXILED, new ReturnSourceFromExileToBattlefieldEffect(true), new ManaCostsImpl("{3}{B/G}{B/G}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.EXILED, new ReturnSourceFromExileToBattlefieldEffect(true), new ManaCostsImpl<>("{3}{B/G}{B/G}"));
         this.addAbility(ability);
 
     }
@@ -58,7 +56,7 @@ public final class TorrentElemental extends CardImpl {
 
 class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
 
-    private boolean tapped;
+    private final boolean tapped;
     private boolean ownerControl;
 
     public ReturnSourceFromExileToBattlefieldEffect() {

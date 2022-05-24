@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
 import mage.target.TargetStackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class Willbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {1}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{U}")));
         // When Willbender is turned face up, change the target of target spell or ability with a single target.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ChooseNewTargetsTargetEffect(true, true));
         ability.addTarget(new TargetStackObject(FILTER));

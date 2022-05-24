@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class WalkingArchive extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(new CountersSourceCount(CounterType.P1P1)), TargetController.ANY, false));
         
         // {2}{W}{U}: Put a +1/+1 counter on Walking Archive.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}{W}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{W}{U}")));
     }
 
     private WalkingArchive(final WalkingArchive card) {

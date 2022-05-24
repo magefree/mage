@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -23,6 +22,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -33,7 +34,7 @@ public final class MercadianLift extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Put a winch counter on Mercadian Lift.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

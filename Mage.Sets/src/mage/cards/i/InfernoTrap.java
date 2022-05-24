@@ -20,33 +20,6 @@ import mage.watchers.Watcher;
 
 import java.util.*;
 
-/**
- * @author jeffwadsworth
- */
-public final class InfernoTrap extends CardImpl {
-
-    public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.subtype.add(SubType.TRAP);
-
-        // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), InfernoTrapCondition.instance), new InfernoTrapWatcher());
-
-        // Inferno Trap deals 4 damage to target creature.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    }
-
-    private InfernoTrap(final InfernoTrap card) {
-        super(card);
-    }
-
-    @Override
-    public InfernoTrap copy() {
-        return new InfernoTrap(this);
-    }
-}
-
 enum InfernoTrapCondition implements Condition {
 
     instance;
@@ -67,9 +40,36 @@ enum InfernoTrapCondition implements Condition {
     }
 }
 
+/**
+ * @author jeffwadsworth
+ */
+public final class InfernoTrap extends CardImpl {
+
+    public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.subtype.add(SubType.TRAP);
+
+        // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), InfernoTrapCondition.instance), new InfernoTrapWatcher());
+
+        // Inferno Trap deals 4 damage to target creature.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    }
+
+    private InfernoTrap(final InfernoTrap card) {
+        super(card);
+    }
+
+    @Override
+    public InfernoTrap copy() {
+        return new InfernoTrap(this);
+    }
+}
+
 class InfernoTrapWatcher extends Watcher {
 
-    private Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
+    private final Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
 
     public InfernoTrapWatcher() {
         super(WatcherScope.GAME);

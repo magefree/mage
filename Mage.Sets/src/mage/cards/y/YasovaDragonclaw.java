@@ -1,7 +1,6 @@
 
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -15,17 +14,15 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +48,7 @@ public final class YasovaDragonclaw extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of combat on your turn, you may pay {1}{(U/R)}{(U/R)}.  If you do, gain control of target creature an opponent controls with power less than Yasova Dragonclaw's power until end of turn, untap that creature, and it gains haste until end of turn.
-        DoIfCostPaid effect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{1}{U/R}{U/R}"));
+        DoIfCostPaid effect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{1}{U/R}{U/R}"));
         Effect effect2 = new UntapTargetEffect();
         effect2.setText(", untap that creature");
         effect.addEffect(effect2);

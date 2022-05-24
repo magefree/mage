@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class HelixPinnacle extends CardImpl {
         // {X}: Put X tower counters on Helix Pinnacle.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.TOWER.createInstance(), ManacostVariableValue.REGULAR, true),
-                new ManaCostsImpl("{X}")));
+                new ManaCostsImpl<>("{X}")));
 
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

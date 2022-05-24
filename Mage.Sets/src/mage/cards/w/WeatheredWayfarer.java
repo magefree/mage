@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class WeatheredWayfarer extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
-                new ManaCostsImpl("{W}"),
+                new ManaCostsImpl<>("{W}"),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

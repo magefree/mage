@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -25,7 +26,7 @@ public final class SoldeviDigger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {2}: Put the top card of your graveyard on the bottom of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviDiggerEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviDiggerEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private SoldeviDigger(final SoldeviDigger card) {

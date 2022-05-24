@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class GempalmIncinerator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
         // When you cycle Gempalm Incinerator, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)),true);
         ability.addTarget(new TargetCreaturePermanent());

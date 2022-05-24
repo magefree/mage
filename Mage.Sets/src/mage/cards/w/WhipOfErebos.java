@@ -50,7 +50,7 @@ public final class WhipOfErebos extends CardImpl {
         // If it would leave the battlefield, exile it instead of putting it anywhere else.
         // Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}")
+                Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
@@ -138,12 +138,9 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
+        return event.getTargetId().equals(source.getFirstTarget())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 
     @Override

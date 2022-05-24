@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  * @author North, noxx
@@ -31,7 +32,7 @@ public final class TranscendentMaster extends LevelerCard {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}")));
 
         // Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)
         // LEVEL 6-11

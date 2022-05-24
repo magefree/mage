@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,9 +9,11 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class DuergarMineCaptain extends CardImpl {
         // {1}{RW}, {untap}: Attacking creatures get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false),
-                new ManaCostsImpl("{1}{R/W}")
+                new ManaCostsImpl<>("{1}{R/W}")
         );
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);

@@ -1,14 +1,14 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +22,7 @@ public final class ShatteredPerception extends CardImpl {
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private ShatteredPerception(final ShatteredPerception card) {

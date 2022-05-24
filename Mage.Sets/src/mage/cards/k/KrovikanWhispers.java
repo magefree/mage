@@ -1,28 +1,29 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class KrovikanWhispers extends CardImpl {
         this.addAbility(ability);
 
         // Cumulative upkeep-Pay {U} or {B}.
-        this.addAbility(new CumulativeUpkeepAbility(new OrCost("{U} or {B}", new ManaCostsImpl("{U}"), new ManaCostsImpl("{B}"))));
+        this.addAbility(new CumulativeUpkeepAbility(new OrCost("{U} or {B}", new ManaCostsImpl<>("{U}"), new ManaCostsImpl<>("{B}"))));
 
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));

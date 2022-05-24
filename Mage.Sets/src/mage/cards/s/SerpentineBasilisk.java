@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SerpentineBasilisk extends CardImpl {
                 new CreateDelayedTriggeredAbilityEffect(
                         new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true), false, true));
         // Morph {1}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}{G}")));
     }
 
     private SerpentineBasilisk(final SerpentineBasilisk card) {

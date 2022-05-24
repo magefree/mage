@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -12,13 +11,15 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class RebornHero extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
-                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{W}{W}")
+                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{W}{W}")
                         ))),
                         new CardsInControllerGraveyardCondition(7),
                         "As long as seven or more cards are in your graveyard, "

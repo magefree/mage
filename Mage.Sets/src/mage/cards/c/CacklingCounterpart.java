@@ -1,15 +1,15 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -24,7 +24,7 @@ public final class CacklingCounterpart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{U}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{U}{U}")));
     }
 
     private CacklingCounterpart(final CacklingCounterpart card) {

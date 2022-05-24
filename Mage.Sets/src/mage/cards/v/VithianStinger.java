@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class VithianStinger extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Unearth {1}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private VithianStinger(final VithianStinger card) {

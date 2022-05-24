@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,6 +15,8 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class KiAdiMundi extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
 
         // Meditate {1}{G}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private KiAdiMundi(final KiAdiMundi card) {

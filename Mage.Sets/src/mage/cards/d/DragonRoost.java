@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.permanent.token.DragonToken2;
+
+import java.util.UUID;
 
 /**
  *
@@ -20,7 +21,7 @@ public final class DragonRoost extends CardImpl {
     public DragonRoost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl<>("{5}{R}{R}")));
     }
 
     private DragonRoost(final DragonRoost card) {

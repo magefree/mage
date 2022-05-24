@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class GempalmPolluter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Cycling {B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}{B}")));
 
         // When you cycle Gempalm Polluter, you may have target player lose life equal to the number of Zombies on the battlefield.
         Effect effect = new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter));

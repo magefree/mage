@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class ScholarOfAthreos extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B}: Each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScholarOfAthreosEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScholarOfAthreosEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private ScholarOfAthreos(final ScholarOfAthreos card) {

@@ -2,7 +2,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -18,6 +17,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki, noxx
@@ -31,12 +32,12 @@ public final class NullChampion extends LevelerCard {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{3}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 4, 2),

@@ -6,7 +6,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInTargetPlayersGraveyard;
 
@@ -26,7 +25,7 @@ public final class MemorysJourney extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInTargetPlayersGraveyard(3));
 
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private MemorysJourney(final MemorysJourney card) {

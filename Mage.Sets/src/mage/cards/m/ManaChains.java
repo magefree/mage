@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,13 +10,11 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +34,7 @@ public final class ManaChains extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has "Cumulative upkeep {1}."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-            new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")), AttachmentType.AURA)));
+            new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")), AttachmentType.AURA)));
     }
 
     private ManaChains(final ManaChains card) {

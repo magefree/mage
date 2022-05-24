@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -8,16 +7,38 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
+
+enum FungusElementalCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.getTurnsOnBattlefield() == 0;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "{this} entered the battlefield this turn";
+    }
+
+}
 
 /**
  *
@@ -43,7 +64,7 @@ public final class FungusElemental extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
-                new ManaCostsImpl("{G}"),
+                new ManaCostsImpl<>("{G}"),
                 FungusElementalCondition.instance
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
@@ -58,24 +79,4 @@ public final class FungusElemental extends CardImpl {
     public FungusElemental copy() {
         return new FungusElemental(this);
     }
-}
-
-enum FungusElementalCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.getTurnsOnBattlefield() == 0;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "{this} entered the battlefield this turn";
-    }
-
 }

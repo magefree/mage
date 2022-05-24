@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FearAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class CorpulentCorpse extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Suspend 5-{B}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{B}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{B}"), this));
     }
 
     private CorpulentCorpse(final CorpulentCorpse card) {

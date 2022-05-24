@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class NivMizzetDracogenius extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
         
         // {U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl<>("{U}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

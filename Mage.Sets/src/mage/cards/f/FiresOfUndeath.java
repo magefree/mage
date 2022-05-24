@@ -1,15 +1,15 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class FiresOfUndeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         // Flashback {5}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}")));
     }
 
     private FiresOfUndeath(final FiresOfUndeath card) {

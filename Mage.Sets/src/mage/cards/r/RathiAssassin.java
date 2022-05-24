@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -25,6 +24,8 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +54,7 @@ public final class RathiAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{B}{B}, {T}: Destroy target tapped nonblack creature.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}{B}"));
+        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{B}{B}"));
         destroyAbility.addCost(new TapSourceCost());
         destroyAbility.addTarget(new TargetCreaturePermanent(destroyFilter));
         this.addAbility(destroyAbility);

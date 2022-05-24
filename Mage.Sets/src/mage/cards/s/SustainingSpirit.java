@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +14,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SustainingSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Cumulative upkeep {1}{W}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{W}")));
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SustainingSpiritReplacementEffect()));
 

@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,6 +24,8 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,20 +51,20 @@ public final class WanderingMage extends CardImpl {
 
         // {W}, Pay 1 life: Prevent the next 2 damage that would be dealt to target creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl("{W}"));
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new PayLifeCost(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{U}"));
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl("{B}"));
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl<>("{B}"));
         ability.addCost(new WanderingMageCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         Target target = new TargetControlledCreaturePermanent();

@@ -22,6 +22,26 @@ import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
+enum DeekahFractalTheoristValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Spell spell = (Spell) effect.getValue(MagecraftAbility.SPELL_KEY);
+        return spell != null ? spell.getManaValue() : 0;
+    }
+
+    @Override
+    public DeekahFractalTheoristValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -44,7 +64,7 @@ public final class DeekahFractalTheorist extends CardImpl {
 
         // {3}{U}: Target creature token can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_TOKEN));
         this.addAbility(ability);
@@ -57,25 +77,5 @@ public final class DeekahFractalTheorist extends CardImpl {
     @Override
     public DeekahFractalTheorist copy() {
         return new DeekahFractalTheorist(this);
-    }
-}
-
-enum DeekahFractalTheoristValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Spell spell = (Spell) effect.getValue(MagecraftAbility.SPELL_KEY);
-        return spell != null ? spell.getManaValue() : 0;
-    }
-
-    @Override
-    public DeekahFractalTheoristValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -14,12 +13,14 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class HedronFieldPurists extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {2}{W}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{W}")));
         // LEVEL 1-4
         // 1/4
         // If a source would deal damage to you or a creature you control, prevent 1 of that damage.

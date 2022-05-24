@@ -2,7 +2,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
@@ -30,7 +31,7 @@ public final class SphinxOfMagosi extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy(", then"));
         this.addAbility(ability);
     }

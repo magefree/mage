@@ -28,37 +28,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-/**
- * @author nantuko
- */
-public final class PrototypePortal extends CardImpl {
-
-    public PrototypePortal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-
-        // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PrototypePortalEffect(), true)
-                .setAbilityWord(AbilityWord.IMPRINT)
-        );
-
-        // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
-        ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(PrototypePortalAdjuster.instance);
-        this.addAbility(ability);
-    }
-
-    private PrototypePortal(final PrototypePortal card) {
-        super(card);
-    }
-
-    @Override
-    public PrototypePortal copy() {
-        return new PrototypePortal(this);
-    }
-}
-
 enum PrototypePortalAdjuster implements CostAdjuster {
     instance;
 
@@ -80,6 +49,37 @@ enum PrototypePortalAdjuster implements CostAdjuster {
                 cost.setPaid();
             }
         }
+    }
+}
+
+/**
+ * @author nantuko
+ */
+public final class PrototypePortal extends CardImpl {
+
+    public PrototypePortal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+
+        // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new PrototypePortalEffect(), true)
+                .setAbilityWord(AbilityWord.IMPRINT)
+        );
+
+        // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+        Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl<>("{X}"));
+        ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(PrototypePortalAdjuster.instance);
+        this.addAbility(ability);
+    }
+
+    private PrototypePortal(final PrototypePortal card) {
+        super(card);
+    }
+
+    @Override
+    public PrototypePortal copy() {
+        return new PrototypePortal(this);
     }
 }
 

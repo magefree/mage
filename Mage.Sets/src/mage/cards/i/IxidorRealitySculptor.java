@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class IxidorRealitySculptor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // {2}{U}: Turn target face-down creature face up.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(ability);
     }

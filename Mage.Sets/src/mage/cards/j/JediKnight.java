@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class JediKnight extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private JediKnight(final JediKnight card) {

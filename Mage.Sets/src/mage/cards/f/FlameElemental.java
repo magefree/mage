@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,11 +9,13 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class FlameElemental extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}, Sacrifice Flame Elemental: Flame Elemental deals damage equal to its power to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new SourcePermanentPowerCount(false)), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new SourcePermanentPowerCount(false)), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

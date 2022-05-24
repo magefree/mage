@@ -1,22 +1,23 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class KeeperOfTheFlame extends CardImpl {
         // {R}, {tap}: Choose target opponent who had more life than you did as you activated this ability. Keeper of the Flame deals 2 damage to that player.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(2).setText("Choose target opponent who had more life than you did as you activated this ability. {this} deals 2 damage to that player"),
-                new ManaCostsImpl("{R}"));
+                new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);

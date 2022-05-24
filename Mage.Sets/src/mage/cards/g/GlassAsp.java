@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,8 +9,10 @@ import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class GlassAsp extends CardImpl {
 
         // Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new UnlessPaysDelayedEffect(
-                new ManaCostsImpl("{2}"), new LoseLifeTargetEffect(2), PhaseStep.DRAW, true,
+                new ManaCostsImpl<>("{2}"), new LoseLifeTargetEffect(2), PhaseStep.DRAW, true,
                 "that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step."),
                 false, true));
     }

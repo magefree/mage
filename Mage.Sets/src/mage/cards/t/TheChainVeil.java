@@ -1,9 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -22,6 +19,33 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+enum TheChainVeilCondition implements Condition {
+
+    instance;
+
+
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ActivatedLoyaltyAbilityWatcher watcher = game.getState().getWatcher(ActivatedLoyaltyAbilityWatcher.class);
+        if (watcher != null) {
+            return !watcher.activatedLoyaltyAbility(source.getControllerId());
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "if you didn't activate a loyalty ability of a planeswalker this turn";
+    }
+
+}
+
 /**
  *
  * @author LevelX2
@@ -39,7 +63,7 @@ public final class TheChainVeil extends CardImpl {
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TheChainVeilIncreaseLoyaltyUseEffect(),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -119,29 +143,4 @@ class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.RulesEffects;
     }
-}
-
-enum TheChainVeilCondition implements Condition {
-
-    instance;
-
-
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ActivatedLoyaltyAbilityWatcher watcher = game.getState().getWatcher(ActivatedLoyaltyAbilityWatcher.class);
-        if (watcher != null) {
-            if (!watcher.activatedLoyaltyAbility(source.getControllerId())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "if you didn't activate a loyalty ability of a planeswalker this turn";
-    }
-
 }

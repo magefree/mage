@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
  * @author JRHerlehy Created on 4/7/18.
  */
@@ -27,7 +28,7 @@ public final class DrudgeSentinel extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}: Tap Drudge Sentinel. It gains indestructible until end of turn.
-        Ability ability = new SimpleActivatedAbility(new TapSourceEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(new TapSourceEffect(), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("It gains indestructible until end of turn"));
         this.addAbility(ability);

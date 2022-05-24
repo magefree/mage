@@ -1,13 +1,14 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class ObsessiveSearch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private ObsessiveSearch(final ObsessiveSearch card) {

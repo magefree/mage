@@ -2,7 +2,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -20,6 +19,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com, noxx
@@ -34,7 +35,7 @@ public final class EnclaveCryptologist extends LevelerCard {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{U}")));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
         Abilities<Ability> abilities1 = new AbilitiesImpl<>(ability);

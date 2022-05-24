@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class FesteringEvil extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageEverythingEffect(1), TargetController.YOU, false));
         
         // {B}{B}, Sacrifice Festering Evil: Festering Evil deals 3 damage to each creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

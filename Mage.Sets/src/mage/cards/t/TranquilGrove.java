@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -12,6 +11,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class TranquilGrove extends CardImpl {
 
 
         // {1}{G}{G}: Destroy all other enchantments.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl<>("{1}{G}{G}")));
     }
 
     private TranquilGrove(final TranquilGrove card) {

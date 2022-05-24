@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class GempalmStrider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cycling {2}{G}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}{G}")));
         // When you cycle Gempalm Strider, Elf creatures get +2/+2 until end of turn.
         this.addAbility(new CycleTriggeredAbility(new BoostAllEffect(2,2,Duration.EndOfTurn, filter, false)));
     }

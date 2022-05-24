@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -36,7 +37,7 @@ public final class CorpseConnoisseur extends CardImpl {
         // When Corpse Connoisseur enters the battlefield, you may search your library for a creature card and put that card into your graveyard. If you do, shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyard(), true));
         // Unearth {3}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private CorpseConnoisseur(final CorpseConnoisseur card) {

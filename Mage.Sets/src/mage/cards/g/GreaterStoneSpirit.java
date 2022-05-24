@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,12 +15,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,11 +50,11 @@ public final class GreaterStoneSpirit extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn)
                         .setText("until end of turn, target creature gets +0/+2"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
         effect.setText("and gains \"{R}: This creature gets +1/+0 until end of turn.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}"));
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class ChampionOfWits extends CardImpl {
         this.addAbility(ability);
 
         // Eternalize {5}{U}{U}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{5}{U}{U}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{5}{U}{U}"), this));
     }
 
     private ChampionOfWits(final ChampionOfWits card) {

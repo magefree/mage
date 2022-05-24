@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ public final class Flay extends CardImpl {
 
         // Target player discards a card at random. Then that player discards another card at random unless they pay {1}.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DiscardTargetEffect(1, true), new ManaCostsImpl("{1}"));
+        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DiscardTargetEffect(1, true), new ManaCostsImpl<>("{1}"));
         effect.setText("Then that player discards another card at random unless they pay {1}");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());

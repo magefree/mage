@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,10 +11,12 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class DaruHealer extends CardImpl {
         this.addAbility(ability);
 
         // Morph {W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{W}")));
 
     }
 

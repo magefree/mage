@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,9 +9,11 @@ import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class TrueheartDuelist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
 
         // Embalm {2}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{2}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{2}{W}"), this));
     }
 
     private TrueheartDuelist(final TrueheartDuelist card) {

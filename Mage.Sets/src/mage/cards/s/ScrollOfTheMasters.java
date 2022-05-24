@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -21,6 +20,8 @@ import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class ScrollOfTheMasters extends CardImpl {
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature you control gets +1/+1 until end of turn for each lore counter on {this}");
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}"));
+                Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

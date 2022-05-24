@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class BigGameHunter extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Madness {B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private BigGameHunter(final BigGameHunter card) {

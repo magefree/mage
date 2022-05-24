@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventDamageToTargetMultiAmountEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -9,8 +8,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTargetAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class Embolden extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Flashback {1}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}")));
 
     }
 

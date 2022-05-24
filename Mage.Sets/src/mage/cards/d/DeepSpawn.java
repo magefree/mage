@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,11 +16,9 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +40,7 @@ public final class DeepSpawn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
         // {U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         effect = new DontUntapInControllersNextUntapStepSourceEffect();
         effect.setText("and doesn't untap during your next untap step");
         ability.addEffect(effect);

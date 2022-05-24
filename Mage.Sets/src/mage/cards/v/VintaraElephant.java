@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,11 +9,9 @@ import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +29,7 @@ public final class VintaraElephant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // {3}: Vintara Elephant loses trample until end of turn. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
-            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}"));
+            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

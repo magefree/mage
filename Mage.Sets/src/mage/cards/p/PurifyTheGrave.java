@@ -1,15 +1,15 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class PurifyTheGrave extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private PurifyTheGrave(final PurifyTheGrave card) {

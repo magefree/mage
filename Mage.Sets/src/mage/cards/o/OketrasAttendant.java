@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,10 +31,10 @@ public final class OketrasAttendant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
         // Embalm {3}{W}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}{W}"), this));
 
     }
 

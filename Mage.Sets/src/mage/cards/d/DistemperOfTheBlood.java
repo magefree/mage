@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class DistemperOfTheBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private DistemperOfTheBlood(final DistemperOfTheBlood card) {

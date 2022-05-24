@@ -19,39 +19,6 @@ import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class SlingbowTrap extends CardImpl {
-
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
-
-    public SlingbowTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.subtype.add(SubType.TRAP);
-
-        // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.instance));
-
-        // Destroy target attacking creature with flying.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-    }
-
-    private SlingbowTrap(final SlingbowTrap card) {
-        super(card);
-    }
-
-    @Override
-    public SlingbowTrap copy() {
-        return new SlingbowTrap(this);
-    }
-}
-
 enum SlingbowTrapCondition implements Condition {
 
     instance;
@@ -72,5 +39,38 @@ enum SlingbowTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If a black creature with flying is attacking";
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class SlingbowTrap extends CardImpl {
+
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
+
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
+    }
+
+    public SlingbowTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.subtype.add(SubType.TRAP);
+
+        // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{G}"), SlingbowTrapCondition.instance));
+
+        // Destroy target attacking creature with flying.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+    }
+
+    private SlingbowTrap(final SlingbowTrap card) {
+        super(card);
+    }
+
+    @Override
+    public SlingbowTrap copy() {
+        return new SlingbowTrap(this);
     }
 }

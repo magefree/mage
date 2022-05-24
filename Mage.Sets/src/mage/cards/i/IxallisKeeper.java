@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -17,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class IxallisKeeper extends CardImpl {
         // {7}{G}, {T}, Sacrifice Ixalli's Keeper: Target creature gets +5/+5 and gains trample until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(5, 5, Duration.EndOfTurn)
-                        .setText("Target creature gets +5/+5"), new ManaCostsImpl("{7}{G}"));
+                        .setText("Target creature gets +5/+5"), new ManaCostsImpl<>("{7}{G}"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains trample until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -33,7 +34,7 @@ public final class BringerOfTheBlackDawn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Black Dawn's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may pay 2 life. If you do, search your library for a card, then shuffle your library and put that card on top of it.

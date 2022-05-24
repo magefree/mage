@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class BelbesPortal extends CardImpl {
         filter.add(ChosenSubtypePredicate.TRUE);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(filter),
-                new ManaCostsImpl("{3}"));
+                new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

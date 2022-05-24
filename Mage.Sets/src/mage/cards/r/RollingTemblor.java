@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -9,10 +8,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class RollingTemblor extends CardImpl {
         // Rolling Temblor deals 2 damage to each creature without flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
         // Flashback {4}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
     }
 
     private RollingTemblor(final RollingTemblor card) {

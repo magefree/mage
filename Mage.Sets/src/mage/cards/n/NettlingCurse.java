@@ -1,20 +1,20 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
-import mage.constants.*;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +38,7 @@ public final class NettlingCurse extends CardImpl {
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(3), AttachmentType.AURA));
 
         // {1}{R}: Enchanted creature attacks this turn if able.
-        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private NettlingCurse(final NettlingCurse card) {

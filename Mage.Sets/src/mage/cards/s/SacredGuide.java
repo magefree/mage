@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class SacredGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, Sacrifice Sacred Guide: Reveal cards from the top of your library until you reveal a white card. Put that card into your hand and exile all other cards revealed this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(filterCard, Zone.HAND, Zone.EXILED), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(filterCard, Zone.HAND, Zone.EXILED), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

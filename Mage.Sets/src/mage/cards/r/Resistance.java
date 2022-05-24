@@ -1,7 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,9 +11,14 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +37,7 @@ public final class Resistance extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                         .setText("Target creature gains haste until end of turn"),
-                new ManaCostsImpl("{R}{W}"));
+                new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn).setText("and must attack"));
         //ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, "").setText(""));
         ability.addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn).setText("or block this turn if able"));

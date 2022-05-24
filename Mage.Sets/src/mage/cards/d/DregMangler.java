@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.HasteAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class DregMangler extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Scavenge {3}{B}{G}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{B}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{3}{B}{G}")));
     }
 
     private DregMangler(final DregMangler card) {

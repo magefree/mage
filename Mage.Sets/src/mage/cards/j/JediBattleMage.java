@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class JediBattleMage extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private JediBattleMage(final JediBattleMage card) {

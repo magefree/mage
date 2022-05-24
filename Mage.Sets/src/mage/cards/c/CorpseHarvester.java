@@ -37,7 +37,7 @@ public final class CorpseHarvester extends CardImpl {
         // {1}{B}, {tap}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
                 new CorpseHarvesterTarget(), true
-        ), new ManaCostsImpl("{1}{B}"));
+        ), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
@@ -57,6 +57,8 @@ class CorpseHarvesterTarget extends TargetCardInLibrary {
 
     private static final FilterCard filter
             = new FilterCard("a Zombie card and a Swamp card");
+    private static final SubTypeAssignment subTypeAssigner
+            = new SubTypeAssignment(SubType.ZOMBIE, SubType.SWAMP);
 
     static {
         filter.add(Predicates.or(
@@ -64,9 +66,6 @@ class CorpseHarvesterTarget extends TargetCardInLibrary {
                 SubType.SWAMP.getPredicate()
         ));
     }
-
-    private static final SubTypeAssignment subTypeAssigner
-            = new SubTypeAssignment(SubType.ZOMBIE, SubType.SWAMP);
 
     CorpseHarvesterTarget() {
         super(0, 2, filter);

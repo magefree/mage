@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class LightningCloud extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to any target.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(1), new ManaCostsImpl("{R}")), filter, false);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}")), filter, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

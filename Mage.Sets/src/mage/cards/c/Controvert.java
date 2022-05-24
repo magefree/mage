@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class Controvert extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         
         // Recover {2}{U}{U}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{2}{U}{U}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{2}{U}{U}"), this));
     }
 
     private Controvert(final Controvert card) {

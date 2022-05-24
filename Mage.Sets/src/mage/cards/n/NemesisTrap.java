@@ -10,11 +10,14 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -44,7 +47,7 @@ public final class NemesisTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, false)));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, false)));
 
         // Exile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new NemesisTrapEffect());

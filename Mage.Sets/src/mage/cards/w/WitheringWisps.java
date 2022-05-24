@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -12,14 +11,12 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,18 +57,18 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    @Override
-    public int getMaxActivationsPerTurn(Game game) {
-        return game.getBattlefield().getAllActivePermanents(filter, game).size();
-    }
-
     public WitheringWispsActivatedAbility() {
-        super(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}"));
+        super(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{B}"));
 
     }
 
     public WitheringWispsActivatedAbility(final WitheringWispsActivatedAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public int getMaxActivationsPerTurn(Game game) {
+        return game.getBattlefield().getAllActivePermanents(filter, game).size();
     }
 
     @Override

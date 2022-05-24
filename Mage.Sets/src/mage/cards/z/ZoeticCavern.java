@@ -1,13 +1,14 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -21,7 +22,7 @@ public final class ZoeticCavern extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());        
         // Morph {2}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ZoeticCavern(final ZoeticCavern card) {

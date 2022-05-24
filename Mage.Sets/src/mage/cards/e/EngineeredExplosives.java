@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -32,7 +33,7 @@ public final class EngineeredExplosives extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // {2}, Sacrifice Engineered Explosives: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

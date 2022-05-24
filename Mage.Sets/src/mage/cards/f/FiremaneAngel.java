@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,12 +15,27 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+
+import java.util.UUID;
+
+enum SourceOnBattlefieldOrGraveyardCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
+                || game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD;
+    }
+
+    @Override
+    public String toString() {
+        return "if {this} is in your graveyard or on the battlefield";
+    }
+
+}
 
 /**
  *
@@ -48,7 +62,7 @@ public final class FiremaneAngel extends CardImpl {
         this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private FiremaneAngel(final FiremaneAngel card) {
@@ -59,21 +73,4 @@ public final class FiremaneAngel extends CardImpl {
     public FiremaneAngel copy() {
         return new FiremaneAngel(this);
     }
-}
-
-enum SourceOnBattlefieldOrGraveyardCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                || game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD;
-    }
-
-    @Override
-    public String toString() {
-        return "if {this} is in your graveyard or on the battlefield";
-    }
-
 }

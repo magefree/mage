@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class SedgeSliver extends CardImpl {
                 new GainAbilityAllEffect(boost, Duration.WhileOnBattlefield,
                         filter, "All Sliver creatures have \"This creature gets +1/+1 as long as you control a Swamp.\"")));
         // All Slivers have "{B}: Regenerate this permanent."
-        Ability regenerate = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
+        Ability regenerate = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(regenerate, Duration.WhileOnBattlefield,
                         filterSlivers, "All Slivers have \"{B}: Regenerate this permanent.\"")));

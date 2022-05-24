@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,13 +9,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class StormscaleAnarch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{R}, Discard a card at random: Stormscale Anarch deals 2 damage to any target. If the discarded card was multicolored, Stormscale Anarch deals 4 damage to that creature or player instead.
-        Ability ability = new SimpleActivatedAbility(new StormscaleAnarchEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(new StormscaleAnarchEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

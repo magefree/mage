@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,10 +31,10 @@ public final class VituGhaziGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{G}{W}: Create a 3/3 green Centaur creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new mage.game.permanent.token.CentaurToken()), new ManaCostsImpl("{4}{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new mage.game.permanent.token.CentaurToken()), new ManaCostsImpl<>("{4}{G}{W}")));
 
         // {2}{G}{W}: Populate. (Create a token that's a copy of a creature token you control.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{2}{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl<>("{2}{G}{W}")));
     }
 
     private VituGhaziGuildmage(final VituGhaziGuildmage card) {

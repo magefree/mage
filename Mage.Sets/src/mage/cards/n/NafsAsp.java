@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,8 +9,10 @@ import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class NafsAsp extends CardImpl {
 
         // Whenever Nafs Asp deals damage to a player, that player loses 1 life at the beginning of their next draw step unless they pay {1} before that draw step.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new UnlessPaysDelayedEffect(
-            new ManaCostsImpl("{1}"), new LoseLifeTargetEffect(1), PhaseStep.DRAW, true,
+            new ManaCostsImpl<>("{1}"), new LoseLifeTargetEffect(1), PhaseStep.DRAW, true,
             "that player loses 1 life at the beginning of their next draw step unless they pay {1} before that draw step."),
             false, true));
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -30,7 +31,7 @@ public final class Iceberg extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.ICE.createInstance())));
 
         // {3}: Put an ice counter on Iceberg.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl<>("{3}")));
 
         // Remove an ice counter from Iceberg: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), 

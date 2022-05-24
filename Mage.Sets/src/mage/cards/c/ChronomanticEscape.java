@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class ChronomanticEscape extends CardImpl {
         getSpellAbility().addEffect(effect);
 
         // Suspend 3-{2}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{W}"), this));
     }
 
     private ChronomanticEscape(final ChronomanticEscape card) {

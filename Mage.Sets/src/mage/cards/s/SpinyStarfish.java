@@ -23,6 +23,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+enum SpinyStarfishCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        SpinyStarfishWatcher watcher = game.getState().getWatcher(SpinyStarfishWatcher.class);
+        return watcher != null && watcher.regeneratedCount(source.getSourceId()) != 0;
+    }
+
+    @Override
+    public String toString() {
+        return "if Spiny Starfish regenerated this turn";
+    }
+
+}
+
 /**
  * @author spike
  */
@@ -35,7 +52,7 @@ public final class SpinyStarfish extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Regenerate Spiny Starfish.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}")));
 
         // At the beginning of each end step, if Spiny Starfish regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.
         this.addAbility(
@@ -59,23 +76,6 @@ public final class SpinyStarfish extends CardImpl {
     public SpinyStarfish copy() {
         return new SpinyStarfish(this);
     }
-}
-
-enum SpinyStarfishCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SpinyStarfishWatcher watcher = game.getState().getWatcher(SpinyStarfishWatcher.class);
-        return watcher != null && watcher.regeneratedCount(source.getSourceId()) != 0;
-    }
-
-    @Override
-    public String toString() {
-        return "if Spiny Starfish regenerated this turn";
-    }
-
 }
 
 class SpinyStarfishWatcher extends Watcher {

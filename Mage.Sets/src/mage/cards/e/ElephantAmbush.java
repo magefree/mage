@@ -1,15 +1,15 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.ElephantToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +24,7 @@ public final class ElephantAmbush extends CardImpl {
         // Create a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
         // Flashback {6}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{6}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{6}{G}{G}")));
     }
 
     private ElephantAmbush(final ElephantAmbush card) {

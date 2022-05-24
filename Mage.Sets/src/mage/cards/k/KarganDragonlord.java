@@ -2,7 +2,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -17,9 +16,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class KarganDragonlord extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{R}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());
@@ -43,7 +44,7 @@ public final class KarganDragonlord extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(TrampleAbility.getInstance());
-        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 7, abilities1, 4, 4),

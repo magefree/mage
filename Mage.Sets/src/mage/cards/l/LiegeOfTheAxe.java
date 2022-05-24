@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class LiegeOfTheAxe extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
         // When Liege of the Axe is turned face up, untap it.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new UntapSourceEffect()));
     }

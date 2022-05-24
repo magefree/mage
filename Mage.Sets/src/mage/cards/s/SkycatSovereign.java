@@ -28,13 +28,12 @@ import java.util.UUID;
 public final class SkycatSovereign extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("other creature you control with flying");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public SkycatSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
@@ -52,7 +51,7 @@ public final class SkycatSovereign extends CardImpl {
 
         // {2}{W}{U}: Create a 1/1 white Cat Bird creature token with flying.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new CatBirdToken()), new ManaCostsImpl("{2}{W}{U}")
+                new CreateTokenEffect(new CatBirdToken()), new ManaCostsImpl<>("{2}{W}{U}")
         ));
     }
 

@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class SmitingHelix extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Flashback {R}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{R}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{R}{W}")));
     }
 
     private SmitingHelix(final SmitingHelix card) {

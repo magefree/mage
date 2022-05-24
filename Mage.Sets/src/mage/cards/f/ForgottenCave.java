@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class ForgottenCave extends CardImpl {
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private ForgottenCave(final ForgottenCave card) {

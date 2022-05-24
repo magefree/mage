@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class UktabiEfreet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cumulative upkeep {G}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private UktabiEfreet(final UktabiEfreet card) {

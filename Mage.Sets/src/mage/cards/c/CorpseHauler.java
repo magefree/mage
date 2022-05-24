@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class CorpseHauler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, Sacrifice Corpse Hauler: Return another target creature card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

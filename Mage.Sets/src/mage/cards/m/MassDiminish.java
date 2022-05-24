@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -31,7 +30,7 @@ public final class MassDiminish extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {3}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}")));
     }
 
     private MassDiminish(final MassDiminish card) {

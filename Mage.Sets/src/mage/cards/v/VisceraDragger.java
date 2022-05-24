@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,8 +27,8 @@ public final class VisceraDragger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private VisceraDragger(final VisceraDragger card) {

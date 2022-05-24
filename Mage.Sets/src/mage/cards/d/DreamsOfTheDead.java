@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -29,6 +28,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2 & L_J
@@ -47,7 +48,7 @@ public final class DreamsOfTheDead extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // {1}{U}: Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreamsOfTheDeadEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreamsOfTheDeadEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addEffect(new DreamsOfTheDeadReplacementEffect());
         this.addAbility(ability);
@@ -87,7 +88,7 @@ class DreamsOfTheDeadEffect extends OneShotEffect {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 Permanent creature = game.getPermanent(card.getId());
                 if (creature != null) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")), Duration.Custom);
+                    ContinuousEffect effect = new GainAbilityTargetEffect(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")), Duration.Custom);
                     effect.setTargetPointer(new FixedTarget(creature, game));
                     game.addEffect(effect, source);
                 }
@@ -127,12 +128,9 @@ class DreamsOfTheDeadReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
+        return event.getTargetId().equals(source.getFirstTarget())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
     }
 
     @Override

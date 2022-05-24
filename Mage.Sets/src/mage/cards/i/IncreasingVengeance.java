@@ -7,7 +7,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -41,7 +44,7 @@ public final class IncreasingVengeance extends CardImpl {
         this.getSpellAbility().addTarget(target);
 
         // Flashback {3}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}{R}")));
     }
 
     private IncreasingVengeance(final IncreasingVengeance card) {
@@ -75,7 +78,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        Spell sourceSpell = (Spell) game.getSpell(source.getSourceId());
+        Spell sourceSpell = game.getSpell(source.getSourceId());
         int copies = 1;
         if (sourceSpell != null && sourceSpell.getFromZone() == Zone.GRAVEYARD) {
             copies++;

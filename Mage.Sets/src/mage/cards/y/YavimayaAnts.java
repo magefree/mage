@@ -1,7 +1,6 @@
 
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class YavimayaAnts extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Cumulative upkeep {G}{G}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}{G}")));
     }
 
     private YavimayaAnts(final YavimayaAnts card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class AntlerSkulkin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Target white creature gains persist until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         

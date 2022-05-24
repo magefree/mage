@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -14,17 +13,15 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class ThroughTheBreach extends CardImpl {
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThroughTheBreachEffect());
         // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl("{2}{R}{R}")));
+        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl<>("{2}{R}{R}")));
     }
 
     private ThroughTheBreach(final ThroughTheBreach card) {

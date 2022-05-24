@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class MishrasSelfReplicator extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect()
                         .setText("create a token that's a copy of {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{1}")), filter, false));
+                new ManaCostsImpl<>("{1}")), filter, false));
 
     }
 

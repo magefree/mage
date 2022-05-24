@@ -2,7 +2,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class MoriokReplica extends CardImpl {
         // {1}{B}, Sacrifice Moriok Replica: You draw two cards and you lose 2 life.
         Effect effect = new DrawCardSourceControllerEffect(2);
         effect.setText("You draw two cards");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         effect = new LoseLifeSourceControllerEffect(2);
         effect.setText("and you lose 2 life");
         ability.addCost(new SacrificeSourceCost());

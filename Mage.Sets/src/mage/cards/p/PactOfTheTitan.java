@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.GiantToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class PactOfTheTitan extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GiantToken()));
 
         // At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{4}{R}"))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{4}{R}"))));
     }
 
     private PactOfTheTitan(final PactOfTheTitan card) {

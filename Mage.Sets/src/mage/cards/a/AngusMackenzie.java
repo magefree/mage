@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class AngusMackenzie extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 effect,
-                new ManaCostsImpl("{G}{W}{U}"), 
+                new ManaCostsImpl<>("{G}{W}{U}"),
                 BeforeCombatDamageCondition.getInstance()
         );
         ability.addCost(new TapSourceCost());
@@ -63,10 +64,7 @@ class BeforeCombatDamageCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
             PhaseStep phaseStep = game.getStep().getType();
-            if(phaseStep.getIndex() < PhaseStep.FIRST_COMBAT_DAMAGE.getIndex()) {
-                return true;
-            }
-        return false;
+        return phaseStep.getIndex() < PhaseStep.FIRST_COMBAT_DAMAGE.getIndex();
     }
 
     @Override

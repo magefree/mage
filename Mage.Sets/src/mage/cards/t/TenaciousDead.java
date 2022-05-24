@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class TenaciousDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Tenacious Dead dies, you may pay {1}{B}. If you do, return it to the battlefield tapped under its owner's control.
-        Effect effect = new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(true), new ManaCostsImpl("{1}{B}"));
+        Effect effect = new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(true), new ManaCostsImpl<>("{1}{B}"));
         this.addAbility(new DiesSourceTriggeredAbility(effect, false));
 
     }

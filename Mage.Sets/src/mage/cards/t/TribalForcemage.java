@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,10 +14,12 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class TribalForcemage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {1}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}")));
 
         // When Tribal Forcemage is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
         Effect effect = new ChooseCreatureTypeEffect(Outcome.BoostCreature);

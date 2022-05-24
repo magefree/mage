@@ -44,7 +44,7 @@ public final class TawnossCoffin extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         // {3}, {T}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TawnossCoffinEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{3}"));
+        ability.addCost(new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         //When Tawnos's Coffin leaves the battlefield or becomes untapped, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
@@ -137,8 +137,8 @@ class TawnossCoffinEffect extends OneShotEffect {
                     }
                 }
                 controller.moveCardsToExile(toExile, source, game, true, exileZoneId, sourceObject.getIdName());
-                game.getState().setValue(exileZoneId.toString() + "NotedCounters", enchantedCreature.getCounters(game).copy());
-                game.getState().setValue(exileZoneId.toString() + "EnchantedCreature", enchantedCreature.getId());
+                game.getState().setValue(exileZoneId + "NotedCounters", enchantedCreature.getCounters(game).copy());
+                game.getState().setValue(exileZoneId + "EnchantedCreature", enchantedCreature.getId());
             }
             return true;
         }
@@ -174,7 +174,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         if (exileZone == null) {
             return true;
         }
-        UUID enchantedCreatureId = (UUID) game.getState().getValue(exileZoneId.toString() + "EnchantedCreature");
+        UUID enchantedCreatureId = (UUID) game.getState().getValue(exileZoneId + "EnchantedCreature");
         if (enchantedCreatureId == null) {
             return false;
         }
@@ -189,7 +189,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         Permanent newPermanent = game.getPermanent(enchantedCreature.getId());
         if (newPermanent != null) {
             // Add the noted counters
-            Counters notedCounters = (Counters) game.getState().getValue(exileZoneId.toString() + "NotedCounters");
+            Counters notedCounters = (Counters) game.getState().getValue(exileZoneId + "NotedCounters");
             if (notedCounters != null) {
                 for (Counter c : notedCounters.values()) { //would be nice if could just use that copy function to set the whole field
                     if (c != null) {

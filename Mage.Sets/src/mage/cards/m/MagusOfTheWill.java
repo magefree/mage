@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,19 +12,15 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +38,7 @@ public final class MagusOfTheWill extends CardImpl {
 
         // {2}{B}, {T}, Exile Magus of the Will: Until end of turn, you may play cards from your graveyard.
         // If a card would be put into your graveyard from anywhere else this turn, exile that card instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanPlayCardsFromGraveyardEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanPlayCardsFromGraveyardEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new MagusOfTheWillReplacementEffect());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
@@ -125,9 +120,7 @@ class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.isOwnedBy(source.getControllerId())) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (!(permanent instanceof PermanentToken)) {
-                    return true;
-                }
+                return !(permanent instanceof PermanentToken);
             }
         }
         return false;

@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class GempalmAvenger extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
 
         // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
         Ability ability = new CycleTriggeredAbility(

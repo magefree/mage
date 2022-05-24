@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -15,13 +14,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.CamaridToken;
-import mage.game.permanent.token.CitizenToken;
-import mage.game.permanent.token.GoblinToken;
-import mage.game.permanent.token.SaprolingToken;
-import mage.game.permanent.token.ThrullToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.*;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +31,7 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
         this.addAbility(new AsEntersBattlefieldAbility(new SarpadianEmpiresChooseTokenEffect()));
         // {3}, {T}: Create a 1/1 creature token of the chosen color and type.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SarpadianEmpiresCreateSelectedTokenEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SarpadianEmpiresCreateSelectedTokenEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

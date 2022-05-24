@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -14,9 +13,11 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class MatsuTribeBirdstalker extends CardImpl {
         // {G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{G}")));
+                new ManaCostsImpl<>("{G}")));
     }
 
     private MatsuTribeBirdstalker(final MatsuTribeBirdstalker card) {

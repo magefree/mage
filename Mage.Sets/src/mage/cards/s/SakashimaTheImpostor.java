@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,6 +21,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.functions.CopyApplier;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -61,7 +62,7 @@ class SakashimaTheImpostorCopyApplier extends CopyApplier {
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
         blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
-                new ManaCostsImpl("{2}{U}{U}")
+                new ManaCostsImpl<>("{2}{U}{U}")
         ));
         return true;
     }

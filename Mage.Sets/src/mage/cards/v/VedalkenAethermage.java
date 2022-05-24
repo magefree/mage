@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +47,7 @@ public final class VedalkenAethermage extends CardImpl {
         this.addAbility(ability);
 
         // Wizardcycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}"), filter2, "Wizardcycling"));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}"), filter2, "Wizardcycling"));
     }
 
     private VedalkenAethermage(final VedalkenAethermage card) {

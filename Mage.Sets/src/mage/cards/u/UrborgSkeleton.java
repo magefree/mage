@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class UrborgSkeleton extends CardImpl {
         this.addAbility(new KickerAbility("{3}"));
 
         // {B}: Regenerate Urborg Skeleton.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
 
         // If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
         Ability ability = new EntersBattlefieldAbility(

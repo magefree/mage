@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class SpiketailDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice Spiketail Drake: Counter target spell unless its controller pays {3}.
-         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
+         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl<>("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
     }
 
     private SpiketailDrake(final SpiketailDrake card) {

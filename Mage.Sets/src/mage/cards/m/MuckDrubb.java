@@ -1,11 +1,10 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -24,6 +23,8 @@ import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.util.TargetAddress;
+
+import java.util.UUID;
 
 /**
  * 
@@ -56,7 +57,7 @@ public final class MuckDrubb extends CardImpl {
         this.addAbility(ability);
         
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private MuckDrubb(final MuckDrubb card) {

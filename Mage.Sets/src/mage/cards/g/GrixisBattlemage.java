@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,10 +11,12 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,11 +33,11 @@ public final class GrixisBattlemage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}: Draw a card, then discard a card.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{U}"));
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);
         // {R}, {tap}: Target creature can't block this turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

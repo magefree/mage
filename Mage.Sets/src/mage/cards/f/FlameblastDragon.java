@@ -65,7 +65,7 @@ class FlameblastDragonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}{R}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}{R}");
         if (player != null) {
             if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to any target", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);

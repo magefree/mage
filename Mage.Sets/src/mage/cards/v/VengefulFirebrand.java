@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,6 +21,24 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
+enum VengefulFirebrandCondition implements Condition {
+
+    instance;
+    private static final FilterCard filter = new FilterCard("Warrior");
+
+    static {
+        filter.add(SubType.WARRIOR.getPredicate());
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        return player != null && player.getGraveyard().count(filter, game) > 0;
+    }
+}
+
 /**
  *
  * @author fireshoes
@@ -40,9 +57,9 @@ public final class VengefulFirebrand extends CardImpl {
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                 VengefulFirebrandCondition.instance,
                 "{this} has haste as long as a Warrior card is in your graveyard")));
-        
+
         // {R}: Vengeful Firebrand gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private VengefulFirebrand(final VengefulFirebrand card) {
@@ -52,21 +69,5 @@ public final class VengefulFirebrand extends CardImpl {
     @Override
     public VengefulFirebrand copy() {
         return new VengefulFirebrand(this);
-    }
-}
-
-enum VengefulFirebrandCondition implements Condition {
-
-    instance;
-    private static final FilterCard filter = new FilterCard("Warrior");
-
-    static {
-        filter.add(SubType.WARRIOR.getPredicate());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getGraveyard().count(filter, game) > 0;
     }
 }

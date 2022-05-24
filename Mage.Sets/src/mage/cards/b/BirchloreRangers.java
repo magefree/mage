@@ -1,8 +1,5 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -21,6 +18,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class BirchloreRangers extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));        
         
         // Morph {G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private BirchloreRangers(final BirchloreRangers card) {

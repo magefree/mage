@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,6 +15,8 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class SlipstreamSerpent extends CardImpl {
                 new SacrificeSourceEffect()));
 
         // Morph {5}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}")));
     }
 
     private SlipstreamSerpent(final SlipstreamSerpent card) {

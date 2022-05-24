@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -24,6 +23,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class GleamOfAuthority extends CardImpl {
 
         // Enchanted creature has vigilance and "{W}, {T}: Bloster 1."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl("{W}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl<>("{W}"));
         gainedAbility.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA).setText("and \"{W}, {T}: Bloster 1.\""));
         this.addAbility(ability);

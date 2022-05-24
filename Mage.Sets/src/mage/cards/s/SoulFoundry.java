@@ -28,37 +28,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class SoulFoundry extends CardImpl {
-
-    public SoulFoundry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-
-        // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SoulFoundryImprintEffect(), true)
-                .setAbilityWord(AbilityWord.IMPRINT)
-        );
-
-        // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
-        ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(SoulFoundryAdjuster.instance);
-        this.addAbility(ability);
-    }
-
-    private SoulFoundry(final SoulFoundry card) {
-        super(card);
-    }
-
-    @Override
-    public SoulFoundry copy() {
-        return new SoulFoundry(this);
-    }
-}
-
 enum SoulFoundryAdjuster implements CostAdjuster {
     instance;
 
@@ -81,6 +50,37 @@ enum SoulFoundryAdjuster implements CostAdjuster {
                 cost.setPaid();
             }
         }
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class SoulFoundry extends CardImpl {
+
+    public SoulFoundry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+
+        // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SoulFoundryImprintEffect(), true)
+                .setAbilityWord(AbilityWord.IMPRINT)
+        );
+
+        // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl<>("{X}"));
+        ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(SoulFoundryAdjuster.instance);
+        this.addAbility(ability);
+    }
+
+    private SoulFoundry(final SoulFoundry card) {
+        super(card);
+    }
+
+    @Override
+    public SoulFoundry copy() {
+        return new SoulFoundry(this);
     }
 }
 

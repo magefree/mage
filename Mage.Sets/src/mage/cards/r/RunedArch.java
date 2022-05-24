@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class RunedArch extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(Duration.EndOfGame)
                         .setText("X target creatures with power 2 or less can't be blocked this turn."),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DefenderAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class DirgurNemesis extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Megamorph {6}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{U}"), true));
     }
 
     private DirgurNemesis(final DirgurNemesis card) {

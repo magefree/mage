@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class RusticClachan extends CardImpl {
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // Reinforce 1-{1}{W}
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private RusticClachan(final RusticClachan card) {

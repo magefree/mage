@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.permanent.token.SoldierLifelinkToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class DawnOfHope extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
-                new ManaCostsImpl("{3}{W}")
+                new ManaCostsImpl<>("{3}{W}")
         ));
     }
 

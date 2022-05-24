@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -13,19 +12,13 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -35,6 +28,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +60,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         // Eminence - Whenever another nontoken Wizard enters the battlefield under your control, if Inalla, Archmage Ritualist is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.ALL, new DoIfCostPaid(
-                        new InallaArchmageRitualistEffect(), new ManaCostsImpl("{1}"), "Pay {1} to create a token copy?"),
+                        new InallaArchmageRitualistEffect(), new ManaCostsImpl<>("{1}"), "Pay {1} to create a token copy?"),
                         filter, false, SetTargetPointer.PERMANENT, ""),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "Whenever another nontoken Wizard enters the battlefield under your control, "

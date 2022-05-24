@@ -4,9 +4,9 @@ import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class LeylineOfAbundance extends CardImpl {
 
         // Whenever you tap a creature for mana, add an additional {G}.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                (ManaEffect) new BasicManaEffect(Mana.GreenMana(1))
+                new BasicManaEffect(Mana.GreenMana(1))
                         .setText("add an additional {G}"),
                 filter, SetTargetPointer.NONE
         ));
@@ -43,7 +43,7 @@ public final class LeylineOfAbundance extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(),
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ), new ManaCostsImpl("{6}{G}{G}")));
+        ), new ManaCostsImpl<>("{6}{G}{G}")));
     }
 
     private LeylineOfAbundance(final LeylineOfAbundance card) {

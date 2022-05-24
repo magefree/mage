@@ -1,22 +1,23 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class MountainTitan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new CreateDelayedTriggeredAbilityEffect(new MountainTitanDelayedTriggeredAbility())
                         .setText("until end of turn, whenever you cast a black spell, put a +1/+1 counter on {this}"),
-                new ManaCostsImpl("{1}{R}{R}")
+                new ManaCostsImpl<>("{1}{R}{R}")
         ));
     }
 
@@ -73,9 +74,7 @@ class MountainTitanDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor(game).isBlack()) {
-                return true;
-            }
+            return spell != null && spell.getColor(game).isBlack();
         }
         return false;
     }

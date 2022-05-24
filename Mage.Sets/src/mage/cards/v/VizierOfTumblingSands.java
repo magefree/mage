@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class VizierOfTumblingSands extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
 
         // When you cycle Vizier of Tumbling Sands, untap target permanent.
         ability = new CycleTriggeredAbility(new UntapTargetEffect());

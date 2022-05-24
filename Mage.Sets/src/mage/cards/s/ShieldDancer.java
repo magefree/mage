@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,8 +9,8 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -19,6 +18,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class ShieldDancer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}: The next time target attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShieldDancerRedirectionEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShieldDancerRedirectionEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

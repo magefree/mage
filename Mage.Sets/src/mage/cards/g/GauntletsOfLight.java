@@ -47,7 +47,7 @@ public final class GauntletsOfLight extends CardImpl {
         // Enchanted creature has "{2}{W}: Untap this creature."
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new SimpleActivatedAbility(
-                        new UntapSourceEffect().setText("Untap this creature"), new ManaCostsImpl("{2}{W}")
+                        new UntapSourceEffect().setText("Untap this creature"), new ManaCostsImpl<>("{2}{W}")
                 ), AttachmentType.AURA)
         ));
     }

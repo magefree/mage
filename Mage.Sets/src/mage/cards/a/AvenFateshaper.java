@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class AvenFateshaper extends CardImpl {
         // When Aven Fateshaper enters the battlefield, look at the top four cards of your library, then put them back in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
         // {4}{U}: Look at the top four cards of your library, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(4), new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(4), new ManaCostsImpl<>("{4}{U}")));
     }
 
     private AvenFateshaper(final AvenFateshaper card) {

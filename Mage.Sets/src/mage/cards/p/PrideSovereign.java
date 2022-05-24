@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,6 +22,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.CatToken2;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -42,7 +43,7 @@ public final class PrideSovereign extends CardImpl {
         DynamicValue otherCats = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(otherCats, otherCats, Duration.WhileOnBattlefield)));
         // {W}, {t}, Exert Pride Sovereign: Create two 1/1 white Cat creature tokens with lifelink.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CatToken2(), 2), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CatToken2(), 2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);

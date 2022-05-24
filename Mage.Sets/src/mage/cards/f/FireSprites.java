@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class FireSprites extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {G}, {tap}: Add {R}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

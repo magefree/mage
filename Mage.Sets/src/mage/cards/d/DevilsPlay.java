@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -9,8 +8,9 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class DevilsPlay extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {X}{R}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{X}{R}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{X}{R}{R}{R}")));
     }
 
     private DevilsPlay(final DevilsPlay card) {

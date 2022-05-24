@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,15 +12,17 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public final class PurrajOfUrborg extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        new ManaCostsImpl("{B}")
+                        new ManaCostsImpl<>("{B}")
                 ),
                 filter, false
         ));

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class DaruMender extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{W}")));
         // When Daru Mender is turned face up, regenerate target creature.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RegenerateTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());

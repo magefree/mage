@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -19,7 +20,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author LoneFox
@@ -83,7 +83,7 @@ class SeizuresEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(enchanted.getControllerId());
         if (player != null) {
-            Cost cost = new ManaCostsImpl("{3}");
+            Cost cost = new ManaCostsImpl<>("{3}");
             if (cost.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to avoid damage?", source, game)) {
                 cost.clearPaid();

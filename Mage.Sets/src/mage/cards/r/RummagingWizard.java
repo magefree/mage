@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,11 +11,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class RummagingWizard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Look at the top card of your library. You may put that card into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RummagingWizardLookLibraryEffect(), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RummagingWizardLookLibraryEffect(), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private RummagingWizard(final RummagingWizard card) {

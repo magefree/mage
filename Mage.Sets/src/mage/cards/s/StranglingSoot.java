@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -9,10 +8,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author ilcartographer
@@ -32,7 +32,7 @@ public final class StranglingSoot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private StranglingSoot(final StranglingSoot card) {

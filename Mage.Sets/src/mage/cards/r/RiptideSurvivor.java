@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class RiptideSurvivor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {1}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{U}{U}")));
         // When Riptide Survivor is turned face up, discard two cards, then draw three cards.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DiscardControllerEffect(2));
         Effect effect = new DrawCardSourceControllerEffect(3);

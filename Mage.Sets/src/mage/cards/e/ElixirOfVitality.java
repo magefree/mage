@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class ElixirOfVitality extends CardImpl {
         ability1.addCost(new SacrificeSourceCost());
         this.addAbility(ability1);
         // {8}, {tap}, Sacrifice Elixir of Vitality: You gain 8 life.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), new ManaCostsImpl("{8}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), new ManaCostsImpl<>("{8}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);

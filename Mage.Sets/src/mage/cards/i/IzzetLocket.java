@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,6 +11,8 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class IzzetLocket extends CardImpl {
         // {U/R}{U/R}{U/R}{U/R}, {T}, Sacrifice Izzet Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{U/R}{U/R}{U/R}{U/R}")
+                new ManaCostsImpl<>("{U/R}{U/R}{U/R}{U/R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

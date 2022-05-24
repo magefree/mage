@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class GerrardCapashen extends CardImpl {
 
         // {3}{W}: Tap target creature. Activate this ability only if {this} is attacking.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
-                new ManaCostsImpl("{3}{W}"), SourceAttackingCondition.instance);
+                new ManaCostsImpl<>("{3}{W}"), SourceAttackingCondition.instance);
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

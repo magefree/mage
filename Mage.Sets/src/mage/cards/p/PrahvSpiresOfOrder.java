@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class PrahvSpiresOfOrder extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageBySourceEffect(), new ManaCostsImpl("{4}{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageBySourceEffect(), new ManaCostsImpl<>("{4}{W}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

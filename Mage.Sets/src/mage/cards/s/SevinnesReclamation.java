@@ -7,7 +7,10 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -40,7 +43,7 @@ public final class SevinnesReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new SevinnesReclamationEffect());
 
         // Flashback {4}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{W}")));
     }
 
     private SevinnesReclamation(final SevinnesReclamation card) {

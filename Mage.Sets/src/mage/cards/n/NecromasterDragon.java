@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class NecromasterDragon extends CardImpl {
         
         // Whenever Necromaster Dragon deals combat damage to a player, you may pay {2}. If you do, create a 2/2 black Zombie creature token and each opponent puts the top two cards of their library into their graveyard
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new DoIfCostPaid(new CreateTokenEffect(new ZombieToken(), 1), new ManaCostsImpl("{2}")), false);
+            new DoIfCostPaid(new CreateTokenEffect(new ZombieToken(), 1), new ManaCostsImpl<>("{2}")), false);
         ability.addEffect(new MillCardsEachPlayerEffect(2, TargetController.OPPONENT));
         this.addAbility(ability);
     }

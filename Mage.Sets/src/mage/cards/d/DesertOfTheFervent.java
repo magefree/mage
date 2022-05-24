@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class DesertOfTheFervent extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
 
     }
 

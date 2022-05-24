@@ -11,7 +11,10 @@ import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -36,7 +39,7 @@ public final class WakerOfWaves extends CardImpl {
         // {1}{U}, Discard Waker of Waves: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.HAND,
                 new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD),
-                new ManaCostsImpl("{1}{U}"));
+                new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new DiscardSourceCost());
         this.addAbility(ability);
     }

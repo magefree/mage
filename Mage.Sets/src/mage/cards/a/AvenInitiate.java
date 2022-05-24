@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.EmbalmAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class AvenInitiate extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Embalm {6}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{6}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{6}{U}"), this));
 
     }
 

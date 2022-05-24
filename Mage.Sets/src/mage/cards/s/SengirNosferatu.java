@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,8 +13,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -24,6 +23,8 @@ import mage.game.permanent.token.SengirNosferatuBatToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class SengirNosferatu extends CardImpl {
         // {1}{B}, Exile Sengir Nosferatu: Create a 1/2 black Bat creature token with flying. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
         Effect effect = new CreateTokenEffect(new SengirNosferatuBatToken(), 1);
         effect.setText("Create a 1/2 black Bat creature token with flying. It has \"{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

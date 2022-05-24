@@ -30,7 +30,7 @@ public final class MagusOfTheBalance extends CardImpl {
         // {4}{W}, {T}, Sacrifice Magus of the Balance: Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         Ability ability = new SimpleActivatedAbility(
                 new BalanceEffect(),
-                new ManaCostsImpl("{4}{W}")
+                new ManaCostsImpl<>("{4}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

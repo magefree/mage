@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class TranquilThicket extends CardImpl {
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Cycling {G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private TranquilThicket(final TranquilThicket card) {

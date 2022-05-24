@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public final class Glaciers extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{U}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{U}")), TargetController.YOU, false));
 
         // All Mountains are Plains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaciersEffect()));

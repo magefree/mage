@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,6 +13,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 public final class GavonyTownship extends CardImpl {
 
     public GavonyTownship(UUID ownerId, CardSetInfo setInfo) {
@@ -23,7 +24,7 @@ public final class GavonyTownship extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), new ManaCostsImpl("{2}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), new ManaCostsImpl<>("{2}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

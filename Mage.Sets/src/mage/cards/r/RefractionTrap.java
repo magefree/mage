@@ -26,33 +26,6 @@ import mage.watchers.common.SpellsCastWatcher;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class RefractionTrap extends CardImpl {
-
-    public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.subtype.add(SubType.TRAP);
-
-        // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());
-
-        // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to any target.
-        this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
-    }
-
-    private RefractionTrap(final RefractionTrap card) {
-        super(card);
-    }
-
-    @Override
-    public RefractionTrap copy() {
-        return new RefractionTrap(this);
-    }
-}
-
 enum RefractionTrapCondition implements Condition {
     instance;
 
@@ -78,6 +51,33 @@ enum RefractionTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If an opponent cast a red instant or sorcery spell this turn";
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class RefractionTrap extends CardImpl {
+
+    public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
+        this.subtype.add(SubType.TRAP);
+
+        // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());
+
+        // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to any target.
+        this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
+    }
+
+    private RefractionTrap(final RefractionTrap card) {
+        super(card);
+    }
+
+    @Override
+    public RefractionTrap copy() {
+        return new RefractionTrap(this);
     }
 }
 

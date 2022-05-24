@@ -33,7 +33,7 @@ public final class SplendorMare extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Cycling {1}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{W}")));
 
         // When you cycle Splendor Mare, put a lifelink counter on target creature you control.
         Ability ability = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.LIFELINK.createInstance()));

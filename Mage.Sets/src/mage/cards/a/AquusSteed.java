@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class AquusSteed extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, {T}: Target creature gets -2/-0 until end of turn.
-        Ability secondAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{U}"));
+        Ability secondAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}"));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);

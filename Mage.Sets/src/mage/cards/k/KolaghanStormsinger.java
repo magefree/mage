@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -12,9 +11,11 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class KolaghanStormsinger extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Megamorph {R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}"), true));
 
         // When Kolaghan Stormsinger is turned face up, target creature gains haste until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false);

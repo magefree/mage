@@ -1,9 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,14 +16,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +38,7 @@ public final class FlowstoneSculpture extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}, Discard a card: Put a +1/+1 counter on Flowstone Sculpture or Flowstone Sculpture gains flying, first strike, or trample.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlowstoneSculptureEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlowstoneSculptureEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

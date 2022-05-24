@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
@@ -11,6 +10,8 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class Plunder extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // Suspend 4-{1}{R}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{R}"), this));
     }
 
     private Plunder(final Plunder card) {

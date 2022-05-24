@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class StormcragElemental extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Megamorph {4}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}{R}"), true));
     }
 
     private StormcragElemental(final StormcragElemental card) {

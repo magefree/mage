@@ -2,7 +2,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**
@@ -29,7 +30,7 @@ public final class DeemWorthy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         //Cycling {3}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{R}")));
         // When you cycle Deem Worthy, you may have it deal 2 damage to target creature.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(2),true);
         ability.addTarget(new TargetCreaturePermanent());

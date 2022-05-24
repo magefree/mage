@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,6 +22,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,14 +56,14 @@ public final class DeathriteShaman extends CardImpl {
         this.addAbility(ability);
 
         // {B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new LoseLifeOpponentsEffect(2));
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // {G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));

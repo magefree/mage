@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,11 +37,11 @@ public final class Boneknitter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Morph {2}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private Boneknitter(final Boneknitter card) {

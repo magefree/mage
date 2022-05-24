@@ -7,7 +7,6 @@ package mage.cards.h;
  */
 
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -25,6 +24,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -50,7 +51,7 @@ public final class HeWhoHungers extends CardImpl {
 
         /* {1}, Sacrifice a Spirit: Target opponent reveals their hand. You choose a card from it.
          * That player discards that card. Activate this ability only any time you could cast a sorcery. */
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

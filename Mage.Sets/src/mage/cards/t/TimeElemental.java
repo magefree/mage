@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -23,6 +22,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class TimeElemental extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(ability, true), false));
         
         // {2}{U}{U}, {tap}: Return target permanent that isn't enchanted to its owner's hand.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(ability2);

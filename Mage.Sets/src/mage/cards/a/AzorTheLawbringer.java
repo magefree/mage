@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,15 +15,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -131,9 +128,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
                 if (opponentId.equals(event.getPlayerId())) {
                     MageObject object = game.getObject(event.getSourceId());
                     if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                        if (object.isInstantOrSorcery(game)) {
-                            return true;
-                        }
+                        return object.isInstantOrSorcery(game);
                     }
                 }
             } else {
@@ -161,7 +156,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ManaCosts cost = new ManaCostsImpl("{X}{W}{U}{U}");
+            ManaCosts cost = new ManaCostsImpl<>("{X}{W}{U}{U}");
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, you gain X life and draw X cards.", source, game)) {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));

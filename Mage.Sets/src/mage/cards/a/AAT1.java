@@ -34,7 +34,7 @@ public final class AAT1 extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a repair counter is removed from a creature card your graveyard, you may pay {W/B}. If you do, target player loses 1 life and you gain 1 life. 
-        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl("{W/B}"));
+        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{W/B}"));
         Effect additionalEffect = new GainLifeEffect(1);
         additionalEffect.setText("and you gain 1 life");
         effect.addEffect(additionalEffect);
@@ -73,14 +73,11 @@ public final class AAT1 extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null
+            return card != null
                     && event.getPlayerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && event.getData().equals("repair")) {
-                return true;
-            }
-            return false;
+                    && event.getData().equals("repair");
         }
 
         @Override

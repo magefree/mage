@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,11 +9,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +30,7 @@ public final class FrostRaptor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {S}{S}: Frost Raptor gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}{S}")));
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}{S}")));
     }
 
     private FrostRaptor(final FrostRaptor card) {

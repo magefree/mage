@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,13 +7,15 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class ValiantKnight extends CardImpl {
                 new GainAbilityControlledEffect(
                         DoubleStrikeAbility.getInstance(),
                         Duration.EndOfTurn, filter
-                ), new ManaCostsImpl("{3}{W}{W}")
+                ), new ManaCostsImpl<>("{3}{W}{W}")
         ));
     }
 

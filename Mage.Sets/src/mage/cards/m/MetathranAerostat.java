@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -8,17 +7,19 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class MetathranAerostat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}{U}: You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return Metathran Aerostat to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new MetathranAerostatEffect(), new ManaCostsImpl("{X}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new MetathranAerostatEffect(), new ManaCostsImpl<>("{X}{U}")));
     }
 
     private MetathranAerostat(final MetathranAerostat card) {

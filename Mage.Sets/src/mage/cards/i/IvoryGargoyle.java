@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -11,11 +10,13 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.SkipNextDrawStepControllerEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class IvoryGargoyle extends CardImpl {
         this.addAbility(ability);
 
         // {4}{W}: Exile Ivory Gargoyle.
-        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private IvoryGargoyle(final IvoryGargoyle card) {

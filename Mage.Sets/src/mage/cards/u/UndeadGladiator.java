@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,9 +12,11 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,13 +34,13 @@ public final class UndeadGladiator extends CardImpl {
         // {1}{B}, Discard a card: Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
                 new ReturnSourceFromGraveyardToHandEffect(), 
-                new ManaCostsImpl("{1}{B}"), 
+                new ManaCostsImpl<>("{1}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
         
         // Cycling {1}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private UndeadGladiator(final UndeadGladiator card) {

@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
                         Duration.EndOfTurn
                 ),
-                new ManaCostsImpl("{5}{U}")
+                new ManaCostsImpl<>("{5}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

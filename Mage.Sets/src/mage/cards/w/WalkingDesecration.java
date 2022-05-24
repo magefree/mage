@@ -1,8 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -21,6 +19,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
@@ -33,7 +33,7 @@ public final class WalkingDesecration extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Creatures of the creature type of your choice attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingDesecrationEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingDesecrationEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

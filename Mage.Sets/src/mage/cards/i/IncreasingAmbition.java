@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -17,6 +16,16 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+
+enum IncreasingAmbitionCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getSpell(source.getSourceId());
+        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
+    }
+}
 
 /**
  * @author BetaSteward
@@ -37,7 +46,7 @@ public final class IncreasingAmbition extends CardImpl {
         ));
 
         // Flashback {7}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{B}")));
     }
 
     private IncreasingAmbition(final IncreasingAmbition card) {
@@ -47,15 +56,5 @@ public final class IncreasingAmbition extends CardImpl {
     @Override
     public IncreasingAmbition copy() {
         return new IncreasingAmbition(this);
-    }
-}
-
-enum IncreasingAmbitionCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(source.getSourceId());
-        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
     }
 }

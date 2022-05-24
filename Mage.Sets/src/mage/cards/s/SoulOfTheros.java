@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,9 +15,11 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class SoulOfTheros extends CardImpl {
         // {4}{W}{W}: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
         Effect effect1 = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
         effect1.setText("Creatures you control get +2/+2");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl("{4}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl<>("{4}{W}{W}"));
         Effect effect2 = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and gain first strike");
         ability.addEffect(effect2);
@@ -49,7 +50,7 @@ public final class SoulOfTheros extends CardImpl {
         this.addAbility(ability);
 
         // {4}{W}{W}, Exile Soul of Theros from your graveyard: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, effect1, new ManaCostsImpl("{4}{W}{W}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, effect1, new ManaCostsImpl<>("{4}{W}{W}"));
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addEffect(effect2);
         ability.addEffect(effect3);

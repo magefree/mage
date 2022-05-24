@@ -22,6 +22,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+enum TinybonesTrinketThiefCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TinybonesTrinketThiefWatcher watcher = game.getState().getWatcher(TinybonesTrinketThiefWatcher.class);
+        return watcher != null && watcher.checkPlayer(source.getControllerId());
+    }
+}
+
 /**
  * @author TheElk801
  */
@@ -48,7 +58,7 @@ public final class TinybonesTrinketThief extends CardImpl {
         this.addAbility(ability, new TinybonesTrinketThiefWatcher());
 
         // {4}{B}{B}: Each opponent with no cards in hand loses 10 life.
-        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl("{4}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl<>("{4}{B}{B}")));
     }
 
     private TinybonesTrinketThief(final TinybonesTrinketThief card) {
@@ -58,16 +68,6 @@ public final class TinybonesTrinketThief extends CardImpl {
     @Override
     public TinybonesTrinketThief copy() {
         return new TinybonesTrinketThief(this);
-    }
-}
-
-enum TinybonesTrinketThiefCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        TinybonesTrinketThiefWatcher watcher = game.getState().getWatcher(TinybonesTrinketThiefWatcher.class);
-        return watcher != null && watcher.checkPlayer(source.getControllerId());
     }
 }
 

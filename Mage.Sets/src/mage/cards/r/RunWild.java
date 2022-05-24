@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class RunWild extends CardImpl {
         effect1.setText("Until end of turn, target creature gains trample");
         this.getSpellAbility().addEffect(effect1);
 
-        Effect effect2 = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")), Duration.EndOfTurn);
+        Effect effect2 = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")), Duration.EndOfTurn);
         effect2.setText("and \"{G}: Regenerate this creature\"");
         this.getSpellAbility().addEffect(effect2);
 

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class RonomHulk extends CardImpl {
         // Protection from snow
         this.addAbility(new ProtectionAbility(filter));
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private RonomHulk(final RonomHulk card) {

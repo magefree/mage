@@ -1,20 +1,21 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class GraveyardMarshal extends CardImpl {
                         new ZombieToken(),
                         1, true, false
                 ),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(filter)

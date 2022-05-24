@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class DeadeyeTracker extends CardImpl {
 
         // {1}{B}, {T}: Exile two target cards from an opponent's graveyard. Deadeye Tracker explores.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new ManaCostsImpl<>("{1}{B}"));
         Effect effect = new ExploreSourceEffect();
         effect.setText("{this} explores");
         ability.addEffect(effect);

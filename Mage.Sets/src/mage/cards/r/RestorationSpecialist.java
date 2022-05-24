@@ -35,7 +35,7 @@ public final class RestorationSpecialist extends CardImpl {
         // {W}, Sacrifice Restoration Specialist: Return up to one target artifact card and up to one target enchantment card from your graveyard to your hand.
         Effect effect = new ReturnToHandTargetEffect(true);
         effect.setText("Return up to one target artifact card and up to one target enchantment card from your graveyard to your hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         ability.addTarget(new TargetCardInGraveyard(0, 1, new FilterEnchantmentCard("enchantment card from your graveyard")));
         ability.addCost(new SacrificeSourceCost());

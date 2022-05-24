@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -26,7 +25,7 @@ public final class RayOfDistortion extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         // Flashback {4}{W}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{W}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{W}{W}")));
     }
 
     private RayOfDistortion(final RayOfDistortion card) {

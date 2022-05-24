@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class ShivanMeteor extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(13));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Suspend 2-{1}{R}{R}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{R}{R}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{R}{R}"), this));
     }
 
     private ShivanMeteor(final ShivanMeteor card) {

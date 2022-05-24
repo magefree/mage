@@ -1,8 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -21,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -38,7 +38,7 @@ public final class RishadanPawnshop extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Shuffle target nontoken permanent you control into its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -1,8 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -16,6 +14,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.custom.CreatureToken;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -36,7 +36,7 @@ public final class AzoriusKeyrune extends CardImpl {
                         .withSubType(SubType.BIRD)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{W}{U}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{W}{U}")));
     }
 
     private AzoriusKeyrune(final AzoriusKeyrune card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -10,6 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 public final class AdornedPouncer extends CardImpl {
 
@@ -25,7 +26,7 @@ public final class AdornedPouncer extends CardImpl {
         addAbility(DoubleStrikeAbility.getInstance());
 
         // Eternalize 3WW
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{3}{W}{W}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{3}{W}{W}"), this));
     }
 
     private AdornedPouncer(final AdornedPouncer card) {

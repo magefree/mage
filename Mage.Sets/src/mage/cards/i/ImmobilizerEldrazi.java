@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,12 +11,14 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class ImmobilizerEldrazi extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {2}{C}: Each creature with toughness greater than its power can't block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{2}{C}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{C}"));
 
         this.addAbility(ability);
 

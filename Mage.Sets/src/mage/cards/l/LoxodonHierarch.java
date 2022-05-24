@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class LoxodonHierarch extends CardImpl {
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4));
         this.addAbility(etbAbility);
         // {G}{W}, Sacrifice Loxodon Hierarch: Regenerate each creature you control.
-        Ability activated = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), new ManaCostsImpl("{G}{W}"));
+        Ability activated = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), new ManaCostsImpl<>("{G}{W}"));
         activated.addCost(new SacrificeSourceCost());
         this.addAbility(activated);
     }

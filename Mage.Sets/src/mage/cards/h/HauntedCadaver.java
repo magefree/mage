@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class HauntedCadaver extends CardImpl {
         ability.addEffect( new DiscardTargetEffect(3));
         this.addAbility(ability);
         // Morph {1}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private HauntedCadaver(final HauntedCadaver card) {

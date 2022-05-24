@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,9 +10,11 @@ import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class JediBattleSage extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{G}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private JediBattleSage(final JediBattleSage card) {

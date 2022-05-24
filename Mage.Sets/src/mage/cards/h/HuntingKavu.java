@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,10 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureAttackingYou;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class HuntingKavu extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{R}{G}, {tap}: Exile Hunting Kavu and target creature without flying that's attacking you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl("{1}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl<>("{1}{R}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ExileTargetEffect().setText("and target creature without flying that's attacking you"));
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 public final class GraveScrabbler extends CardImpl {
 
     public GraveScrabbler(UUID ownerId, CardSetInfo setInfo) {
@@ -26,7 +27,7 @@ public final class GraveScrabbler extends CardImpl {
         this.toughness = new MageInt(2);
 
         //Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
 
         //When Grave Scrabbler enters the battlefield, if its madness cost was paid,
         //you may return target creature card from a graveyard to its owner's hand.

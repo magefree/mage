@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class DeathPulse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {1}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{B}{B}")));
         // When you cycle Death Pulse, you may have target creature get -1/-1 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());

@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,12 +10,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +37,7 @@ public final class VolrathTheFallen extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{1}{B}"));
+                new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }

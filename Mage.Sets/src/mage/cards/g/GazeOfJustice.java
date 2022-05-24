@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,12 +9,13 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +41,7 @@ public final class GazeOfJustice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Flashback {5}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{W}")));
     }
 
     private GazeOfJustice(final GazeOfJustice card) {

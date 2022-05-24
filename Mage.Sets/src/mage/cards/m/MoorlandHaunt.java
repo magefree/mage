@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class MoorlandHaunt extends CardImpl {
         // {W}{U}, {tap}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SpiritWhiteToken()),
-                new ManaCostsImpl("{W}{U}"));
+                new ManaCostsImpl<>("{W}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         this.addAbility(ability);

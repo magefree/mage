@@ -132,7 +132,7 @@ public class SuspendAbility extends SpecialAction {
             VariableManaCost xCosts = new VariableManaCost(VariableCostType.ALTERNATIVE);
             xCosts.setMinX(1);
             this.addManaCost(xCosts);
-            cost = new ManaCostsImpl("{X}" + cost.getText());
+            cost = new ManaCostsImpl<>("{X}" + cost.getText());
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
@@ -159,6 +159,12 @@ public class SuspendAbility extends SpecialAction {
             addSubAbility(new SuspendPlayCardAbility());
         }
         ruleText = sb.toString();
+    }
+
+    public SuspendAbility(SuspendAbility ability) {
+        super(ability);
+        this.ruleText = ability.getRule();
+        this.gainedTemporary = ability.gainedTemporary;
     }
 
     /**
@@ -194,12 +200,6 @@ public class SuspendAbility extends SpecialAction {
             game.getState().setValue("SuspendExileId" + controllerId, exileId);
         }
         return exileId;
-    }
-
-    public SuspendAbility(SuspendAbility ability) {
-        super(ability);
-        this.ruleText = ability.getRule();
-        this.gainedTemporary = ability.gainedTemporary;
     }
 
     @Override

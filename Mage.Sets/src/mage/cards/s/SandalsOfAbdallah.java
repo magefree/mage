@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author MarcoMarin
@@ -29,7 +30,7 @@ public final class SandalsOfAbdallah extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));        
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

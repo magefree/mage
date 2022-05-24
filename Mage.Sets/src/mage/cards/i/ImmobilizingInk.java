@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,15 +13,12 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +45,7 @@ public final class ImmobilizingInk extends CardImpl {
                                                     Duration.WhileOnBattlefield,"Enchanted creature doesn't untap during its controller's untap step.")));
         
         // Enchanted creature has "{1}, Discard a card: Untap this creature."
-        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}"));
+        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
         untapAbility.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                                                 new GainAbilityAttachedEffect(untapAbility,

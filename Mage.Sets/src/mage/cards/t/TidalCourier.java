@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class TidalCourier extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
         // {3}{U}: Tidal Courier gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(),
-                Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")));
+                Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private TidalCourier(final TidalCourier card) {

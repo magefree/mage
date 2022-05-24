@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class RattleclawMystic extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Morph {2}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}")));
         
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(0, 1, 0, 1,1, 0,0, 0))));

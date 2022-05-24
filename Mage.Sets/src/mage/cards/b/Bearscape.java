@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -15,6 +14,8 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.BearToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -26,7 +27,7 @@ public final class Bearscape extends CardImpl {
 
 
         // {1}{G}, Exile two cards from your graveyard: Create a 2/2 green Bear creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BearToken()), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BearToken()), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         this.addAbility(ability);
     }

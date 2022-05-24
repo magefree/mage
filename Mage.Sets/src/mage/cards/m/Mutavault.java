@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class Mutavault extends CardImpl {
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new MutavaultToken(), "land", Duration.EndOfTurn),
-                new ManaCostsImpl("{1}")));
+                new ManaCostsImpl<>("{1}")));
     }
 
     private Mutavault(final Mutavault card) {

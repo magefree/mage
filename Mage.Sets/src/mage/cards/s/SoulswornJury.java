@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class SoulswornJury extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

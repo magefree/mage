@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class JungleDelver extends CardImpl {
 
         // {3}{G}: Put a +1/+1 counter on Jungle Delver.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}{G}")));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{G}")));
     }
 
     private JungleDelver(final JungleDelver card) {

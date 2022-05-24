@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,7 @@ public final class SunfireBalm extends CardImpl {
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Cycling {1}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{W}")));
         // When you cycle Sunfire Balm, you may prevent the next 1 damage that would be dealt to any target this turn.
         Ability ability = new CycleTriggeredAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), true);
         ability.addTarget(new TargetAnyTarget());

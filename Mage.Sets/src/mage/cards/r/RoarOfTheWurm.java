@@ -1,15 +1,15 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.WurmToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class RoarOfTheWurm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));
 
         // Flashback {3}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}")));
     }
 
     private RoarOfTheWurm(final RoarOfTheWurm card) {

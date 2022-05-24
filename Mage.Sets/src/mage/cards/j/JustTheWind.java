@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class JustTheWind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private JustTheWind(final JustTheWind card) {

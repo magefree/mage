@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class ArcticAven extends CardImpl {
         // {W}: Arctic Aven gains lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{W}")));
+                new ManaCostsImpl<>("{W}")));
     }
 
     private ArcticAven(final ArcticAven card) {
