@@ -28,6 +28,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BooToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -125,6 +126,7 @@ class MinscBooTimelessHeroesEffect extends OneShotEffect {
         if (permanent.hasSubtype(SubType.HAMSTER, game)) {
             ability.addEffect(new DrawCardSourceControllerEffect(power));
         }
+        ability.addTarget(new TargetAnyTarget());
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
