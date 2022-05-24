@@ -28,6 +28,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Ambition's Cost", 110, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));
         cards.add(new SetCardInfo("Amethyst Dragon", 160, Rarity.UNCOMMON, mage.cards.a.AmethystDragon.class));
         cards.add(new SetCardInfo("Ancient Brass Dragon", 111, Rarity.MYTHIC, mage.cards.a.AncientBrassDragon.class));
+        cards.add(new SetCardInfo("Ancient Copper Dragon", 161, Rarity.MYTHIC, mage.cards.a.AncientCopperDragon.class));
         cards.add(new SetCardInfo("Arcane Encyclopedia", 297, Rarity.UNCOMMON, mage.cards.a.ArcaneEncyclopedia.class));
         cards.add(new SetCardInfo("Arcane Signet", 298, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archivist of Oghma", 4, Rarity.RARE, mage.cards.a.ArchivistOfOghma.class));
