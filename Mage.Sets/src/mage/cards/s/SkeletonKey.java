@@ -41,7 +41,7 @@ public final class SkeletonKey extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SkeletonKey(final SkeletonKey card) {
