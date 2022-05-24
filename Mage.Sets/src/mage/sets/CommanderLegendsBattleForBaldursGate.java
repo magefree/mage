@@ -37,9 +37,11 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Basilisk Collar", 300, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Battle Angels of Tyr", 9, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
         cards.add(new SetCardInfo("Bhaal's Invoker", 163, Rarity.COMMON, mage.cards.b.BhaalsInvoker.class));
+        cards.add(new SetCardInfo("Blade of Selves", 301, Rarity.RARE, mage.cards.b.BladeOfSelves.class));
         cards.add(new SetCardInfo("Blur", 58, Rarity.COMMON, mage.cards.b.Blur.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 348, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 218, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
+        cards.add(new SetCardInfo("Burnished Hart", 303, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Cadira, Caller of the Small", 269, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class));
         cards.add(new SetCardInfo("Campfire", 304, Rarity.UNCOMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 305, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
@@ -58,7 +60,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Elminster", 274, Rarity.MYTHIC, mage.cards.e.Elminster.class));
         cards.add(new SetCardInfo("Elminster's Simulacrum", 561, Rarity.MYTHIC, mage.cards.e.ElminstersSimulacrum.class));
         cards.add(new SetCardInfo("Erinis, Gloom Stalker", 230, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class));
-        cards.add(new SetCardInfo("Faceless One", 1, Rarity.COMMON, mage.cards.f.FacelessOne.class));
+        cards.add(new SetCardInfo("Faceless One", 1, Rarity.SPECIAL, mage.cards.f.FacelessOne.class));
         cards.add(new SetCardInfo("Fang Dragon", 173, Rarity.COMMON, mage.cards.f.FangDragon.class));
         cards.add(new SetCardInfo("Far Traveler", 17, Rarity.UNCOMMON, mage.cards.f.FarTraveler.class));
         cards.add(new SetCardInfo("Firbolg Flutist", 174, Rarity.RARE, mage.cards.f.FirbolgFlutist.class));
