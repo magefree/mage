@@ -125,6 +125,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Robe of the Archmagi", 91, Rarity.RARE, mage.cards.r.RobeOfTheArchmagi.class));
         cards.add(new SetCardInfo("Roving Harper", 40, Rarity.COMMON, mage.cards.r.RovingHarper.class));
         cards.add(new SetCardInfo("Safana, Calimport Cutthroat", 143, Rarity.UNCOMMON, mage.cards.s.SafanaCalimportCutthroat.class));
+        cards.add(new SetCardInfo("Sapphire Dragon", 94, Rarity.UNCOMMON, mage.cards.s.SapphireDragon.class));
         cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class));
         cards.add(new SetCardInfo("Sea Hag", 95, Rarity.COMMON, mage.cards.s.SeaHag.class));
         cards.add(new SetCardInfo("Sea of Clouds", 360, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
