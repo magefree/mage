@@ -34,8 +34,9 @@ public final class GuardDogs extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {2}{W}, {T}: Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GuardDogsEffect(), new ManaCostsImpl("{2}{W}"));
+        // {2}{W}, {T}: Choose a permanent you control.
+        //              Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GuardDogsEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -57,13 +58,14 @@ class GuardDogsEffect extends PreventionEffectImpl {
 
     public GuardDogsEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
-        this.staticText = "Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent";
+        this.staticText = "Choose a permanent you control. " +
+                          "Prevent all combat damage target creature would deal this turn if it shares a color with that permanent";
     }
 
-    public GuardDogsEffect(final GuardDogsEffect effect) {
+    private GuardDogsEffect(final GuardDogsEffect effect) {
         super(effect);
+        this.controlledTarget = effect.controlledTarget.copy();
     }
-    
 
     @Override
     public void init(Ability source, Game game) {
@@ -72,7 +74,6 @@ class GuardDogsEffect extends PreventionEffectImpl {
         this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
-    
 
     @Override
     public GuardDogsEffect copy() {
@@ -81,20 +82,21 @@ class GuardDogsEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject != null
-                    && controlledTarget.getFirstTarget() != null) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(controlledTarget.getFirstTarget());
-                Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-                if (permanent != null
-                        && targetPermanent != null
-                        && this.getTargetPointer().getTargets(game, source).contains(event.getSourceId())
-                        && permanent.getColor(game).shares(targetPermanent.getColor(game))) {
-                    return true;
-                }
-            }
+        if (this.used || !super.applies(event, source, game)) {
+            return false;
         }
-        return false;
+        MageObject mageObject = game.getObject(event.getSourceId());
+        if (mageObject == null || controlledTarget.getFirstTarget() == null) {
+            return false;
+        }
+
+        Permanent permanent = game.getPermanentOrLKIBattlefield(controlledTarget.getFirstTarget());
+        Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (permanent == null || targetPermanent == null) {
+            return false;
+        }
+
+        return this.getTargetPointer().getTargets(game, source).contains(event.getSourceId())
+                && permanent.getColor(game).shares(targetPermanent.getColor(game));
     }
 }

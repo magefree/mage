@@ -30,8 +30,8 @@ import java.util.*;
  */
 public class SimulatedPlayerMCTS extends MCTSPlayer {
 
-    private boolean isSimulatedPlayer;
-    private int actionCount = 0;
+    private final boolean isSimulatedPlayer;
+    private int actionCount;
     private static final Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(Player originalPlayer, boolean isSimulatedPlayer) {
@@ -43,6 +43,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     public SimulatedPlayerMCTS(final SimulatedPlayerMCTS player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
+        this.actionCount = player.actionCount;
     }
 
     @Override

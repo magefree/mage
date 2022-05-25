@@ -81,6 +81,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.tokenDescriptor = token.tokenDescriptor;
     }
 
     @Override

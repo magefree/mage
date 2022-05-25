@@ -39,9 +39,10 @@ public final class IllusionaryPresence extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
 
-        // At the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
+        // At the beginning of your upkeep, choose a land type.
+        // Illusionary Presence gains landwalk of the chosen type until end of turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChooseBasicLandTypeEffect(Outcome.Neutral), TargetController.YOU, false);
         ability.addEffect(new IllusionaryPresenceEffect());
         this.addAbility(ability);
@@ -60,8 +61,6 @@ public final class IllusionaryPresence extends CardImpl {
 
 class IllusionaryPresenceEffect extends OneShotEffect {
 
-    Ability gainedAbility;
-
     public IllusionaryPresenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} gains landwalk of the chosen type until end of turn";
@@ -79,33 +78,38 @@ class IllusionaryPresenceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getObject(source);
-        if (mageObject != null) {
-            SubType landTypeChoice = SubType.byDescription((String) game.getState().getValue(mageObject.getId().toString() + "BasicLandType"));
-            if (landTypeChoice != null) {
-                switch (landTypeChoice) {
-                    case PLAINS:
-                        gainedAbility = new PlainswalkAbility();
-                        break;
-                    case FOREST:
-                        gainedAbility = new ForestwalkAbility();
-                        break;
-                    case SWAMP:
-                        gainedAbility = new SwampwalkAbility();
-                        break;
-                    case ISLAND:
-                        gainedAbility = new IslandwalkAbility();
-                        break;
-                    case MOUNTAIN:
-                        gainedAbility = new MountainwalkAbility();
-                        break;
-                }
-                if (gainedAbility != null) {
-                    GainAbilitySourceEffect effect = new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn);
-                    game.addEffect(effect, source);
-                    return true;
-                }
-            }
+        if (mageObject == null) {
+            return false;
         }
-        return false;
+
+        SubType landTypeChoice = SubType.byDescription((String) game.getState().getValue(mageObject.getId().toString() + "BasicLandType"));
+        if (landTypeChoice == null) {
+            return false;
+        }
+
+        Ability gainedAbility;
+        switch (landTypeChoice) {
+            case PLAINS:
+                gainedAbility = new PlainswalkAbility();
+                break;
+            case FOREST:
+                gainedAbility = new ForestwalkAbility();
+                break;
+            case SWAMP:
+                gainedAbility = new SwampwalkAbility();
+                break;
+            case ISLAND:
+                gainedAbility = new IslandwalkAbility();
+                break;
+            case MOUNTAIN:
+                gainedAbility = new MountainwalkAbility();
+                break;
+            default:
+                return false;
+        }
+
+        GainAbilitySourceEffect effect = new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn);
+        game.addEffect(effect, source);
+        return true;
     }
 }

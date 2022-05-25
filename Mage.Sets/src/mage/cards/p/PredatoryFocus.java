@@ -46,6 +46,7 @@ class PredatoryFocusEffect extends AsThoughEffectImpl {
 
     public PredatoryFocusEffect(PredatoryFocusEffect effect) {
         super(effect);
+        this.choseUse = effect.choseUse;
     }
 
     @Override

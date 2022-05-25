@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInLibrary;
@@ -39,8 +38,9 @@ public final class InventorsFair extends CardImpl {
         // {t}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library.
-        // Activate this ability only if you control threeor more artifacts.
+        // {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it,
+        //                                      put it into your hand, then shuffle your library.
+        //                                      Activate this ability only if you control three or more artifacts.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT), true),
                 new GenericManaCost(4), MetalcraftCondition.instance);
         ability.addCost(new TapSourceCost());
@@ -60,8 +60,6 @@ public final class InventorsFair extends CardImpl {
 }
 
 class InventorsFairAbility extends TriggeredAbilityImpl {
-
-    private FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     public InventorsFairAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1));
@@ -88,7 +86,7 @@ class InventorsFairAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 3;
+        return game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, this.controllerId, game) >= 3;
     }
 
     @Override

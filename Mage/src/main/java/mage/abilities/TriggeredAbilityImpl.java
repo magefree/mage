@@ -23,10 +23,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
-    private boolean triggersOnce = false;
-    private boolean doOnlyOnce = false;
-    private GameEvent triggerEvent = null;
-    private String triggerPhrase = null;
+    private boolean triggersOnce;
+    private boolean doOnlyOnce;
+    private GameEvent triggerEvent;
+    private String triggerPhrase;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -55,6 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.triggersOnce = ability.triggersOnce;
         this.doOnlyOnce = ability.doOnlyOnce;
         this.triggerPhrase = ability.triggerPhrase;
+        this.triggerEvent = ability.triggerEvent;
     }
 
     @Override

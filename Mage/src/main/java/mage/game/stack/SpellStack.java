@@ -30,6 +30,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
         for (StackObject spell : stack) {
             this.addLast(spell.copy());
         }
+        this.dateLastAdded = stack.dateLastAdded;
     }
 
     //resolve top StackObject

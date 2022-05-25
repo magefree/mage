@@ -100,8 +100,6 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
 class VerdantSuccessionEffect extends OneShotEffect {
 
-    private Permanent permanent;
-
     VerdantSuccessionEffect() {
         super(Outcome.PutCardInPlay);
     }
@@ -118,26 +116,36 @@ class VerdantSuccessionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getObject(source);
-        if(mageObject != null) {
-            permanent = (Permanent) game.getState().getValue("verdantSuccession" + mageObject);
-            if (permanent != null) {
-                Player controller = game.getPlayer(permanent.getControllerId());
-                if (controller != null) {
-                    FilterCard filterCard = new FilterCard("Card named " + permanent.getName());
-                    filterCard.add(new NamePredicate(permanent.getName()));
-                    TargetCardInLibrary target = new TargetCardInLibrary(filterCard);
-                    controller.searchLibrary(target, source, game);
-                    if (!target.getTargets().isEmpty()) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null
-                                && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            controller.shuffleLibrary(source, game);
-                        }
-                        return true;
-                    }
-                }
+        if (mageObject == null) {
+            return false;
+        }
+
+        Permanent permanent = (Permanent) game.getState().getValue("verdantSuccession" + mageObject);
+        if (permanent == null) {
+            return false;
+        }
+
+        Player controller = game.getPlayer(permanent.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        FilterCard filterCard = new FilterCard("Card named " + permanent.getName());
+        filterCard.add(new NamePredicate(permanent.getName()));
+
+        TargetCardInLibrary target = new TargetCardInLibrary(filterCard);
+        if (!controller.searchLibrary(target, source, game)) {
+            return false;
+        }
+
+        if (!target.getTargets().isEmpty()) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
-        return false;
+
+        controller.shuffleLibrary(source, game); // Shuffle even if no card was found since it revealed the order of cards.
+        return true;
     }
 }

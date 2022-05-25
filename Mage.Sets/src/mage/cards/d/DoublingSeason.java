@@ -80,7 +80,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
 
-    private boolean landPlayed = false; // a played land is not an effect
+    private boolean landPlayed; // a played land is not an effect
 
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
@@ -89,6 +89,7 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
 
     private DoublingSeasonCounterEffect(final DoublingSeasonCounterEffect effect) {
         super(effect);
+        this.landPlayed = effect.landPlayed;
     }
 
     @Override
@@ -110,8 +111,7 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         }
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
-            landPlayed = (permanent != null
-                    && permanent.isLand(game));  // a played land is not an effect
+            landPlayed = (permanent != null && permanent.isLand(game));  // a played land is not an effect
         }
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())

@@ -2,8 +2,11 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -28,7 +31,7 @@ public final class WarCadence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl<>("{X}{R}")));
 
     }
 
@@ -53,26 +56,28 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
     WarCadenceReplacementEffect(WarCadenceReplacementEffect effect) {
         super(effect);
+        this.xCosts = effect.xCosts.copy();
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            int amount = xCosts.calculate(game, source, this);
-            if (amount > 0) {
-                String mana = "{" + amount + '}';
-                ManaCostsImpl cost = new ManaCostsImpl(mana);
-                if (cost.canPay(source, source, event.getPlayerId(), game)
-                        && player.chooseUse(Outcome.Benefit, "Pay " + mana + " to declare blocker?", source, game)) {
-                    if (cost.payOrRollback(source, game, source, event.getPlayerId())) {
-                        return false;
-                    }
-                }
-                return true;
-            }
+        if (player == null) {
+            return false;
         }
-        return false;
+
+        int amount = xCosts.calculate(game, source, this);
+        if (amount <= 0) {
+            return false;
+        }
+
+        String mana = "{" + amount + '}';
+        ManaCostsImpl<ManaCost> cost = new ManaCostsImpl<>(mana);
+        if (cost.canPay(source, source, event.getPlayerId(), game)
+                && player.chooseUse(Outcome.Benefit, "Pay " + mana + " to declare blocker?", source, game)) {
+            return !cost.payOrRollback(source, game, source, event.getPlayerId());
+        }
+        return true;
     }
 
     @Override

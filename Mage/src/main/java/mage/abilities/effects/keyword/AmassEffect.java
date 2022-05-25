@@ -32,7 +32,7 @@ public class AmassEffect extends OneShotEffect {
     }
 
     private final DynamicValue amassNumber;
-    private UUID amassedCreatureId = null;
+    private UUID amassedCreatureId;
 
     public AmassEffect(int amassNumber) {
         this(StaticValue.get(amassNumber));
@@ -53,6 +53,7 @@ public class AmassEffect extends OneShotEffect {
     private AmassEffect(final AmassEffect effect) {
         super(effect);
         this.amassNumber = effect.amassNumber;
+        this.amassedCreatureId = effect.amassedCreatureId;
     }
 
     @Override

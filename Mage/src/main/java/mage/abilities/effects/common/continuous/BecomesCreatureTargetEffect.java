@@ -22,7 +22,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean addStillALandText;
     protected boolean loseName;
     protected boolean keepAbilities;
-    protected boolean removeSubtypes = false;
+    protected boolean removeSubtypes;
 
 
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
@@ -58,6 +58,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.addStillALandText = effect.addStillALandText;
         this.loseName = effect.loseName;
         this.keepAbilities = effect.keepAbilities;
+        this.removeSubtypes = effect.removeSubtypes;
     }
 
     @Override

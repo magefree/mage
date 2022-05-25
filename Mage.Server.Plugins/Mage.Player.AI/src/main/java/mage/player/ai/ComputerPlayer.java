@@ -67,7 +67,7 @@ import java.util.Map.Entry;
 public class ComputerPlayer extends PlayerImpl implements Player {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
-    private long lastThinkTime = 0; // msecs for last AI actions calc
+    private long lastThinkTime; // msecs for last AI actions calc
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
 
@@ -105,6 +105,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     public ComputerPlayer(final ComputerPlayer player) {
         super(player);
+        this.lastThinkTime = player.lastThinkTime;
+        this.PASSIVITY_PENALTY = player.PASSIVITY_PENALTY;
+        this.COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = player.COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS;
     }
 
     @Override

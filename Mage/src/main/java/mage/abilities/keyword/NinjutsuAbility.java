@@ -135,7 +135,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
         filter.add(UnblockedPredicate.instance);
     }
 
-    private UUID defendingPlayerId = null;
+    private UUID defendingPlayerId;
 
     public ReturnAttackerToHandTargetCost() {
         this.addTarget(new TargetControlledPermanent(filter));
@@ -144,6 +144,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     public ReturnAttackerToHandTargetCost(ReturnAttackerToHandTargetCost cost) {
         super(cost);
+        this.defendingPlayerId = cost.defendingPlayerId;
     }
 
     @Override
@@ -152,8 +153,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
-                if (permanent == null
-                        || controller == null) {
+                if (permanent == null || controller == null) {
                     return false;
                 }
                 defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());

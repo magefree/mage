@@ -10,9 +10,10 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 
+// TODO: Remove this class? Nothing uses it.
 public class ReturnCreaturesFromExileEffect extends OneShotEffect {
 
-    private UUID exileId;
+    private final UUID exileId;
     private boolean byOwner;
 
     public ReturnCreaturesFromExileEffect(UUID exileId, boolean byOwner, String description) {
@@ -23,9 +24,10 @@ public class ReturnCreaturesFromExileEffect extends OneShotEffect {
     }
 
 
-    public ReturnCreaturesFromExileEffect(final ReturnCreaturesFromExileEffect effect) {
+    private ReturnCreaturesFromExileEffect(final ReturnCreaturesFromExileEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
+        this.byOwner = effect.byOwner;
     }
 
     @Override

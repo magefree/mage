@@ -49,6 +49,7 @@ class PrimitiveEtchingsAbility extends TriggeredAbilityImpl {
 
     PrimitiveEtchingsAbility(final PrimitiveEtchingsAbility ability) {
         super(ability);
+        this.lastTriggeredTurn = ability.lastTriggeredTurn;
     }
 
     @Override
