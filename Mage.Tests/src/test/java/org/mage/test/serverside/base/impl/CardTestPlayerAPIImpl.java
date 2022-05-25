@@ -1386,7 +1386,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertGraveyardCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getGraveyard().size();
-        Assert.assertEquals("(Graveyard) Card counts are not equal ", count, actual);
+        Assert.assertEquals("(Graveyard) Card counts for " + player.getName() + " are not equal", count, actual);
     }
 
     /**
