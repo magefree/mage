@@ -45,7 +45,7 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
-    private boolean wonAlready;
+    private boolean wonAlready = false;
 
     static {
         filter.add(new NamePredicate("The Cheese Stands Alone"));
@@ -56,9 +56,8 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
         staticText = "When you control no permanents other than {this} and have no cards in hand, you win the game";
     }
 
-    private CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
+    public CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
         super(effect);
-        this.wonAlready = effect.wonAlready;
     }
 
     @Override

@@ -33,8 +33,7 @@ public final class GabrielAngelfire extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3.
-        // Gabriel Angelfire gains that ability until your next upkeep.
+        // At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect(), TargetController.YOU, false));
     }
 
@@ -65,10 +64,9 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
         staticText = "choose flying, first strike, trample, or rampage 3. {this} gains that ability until your next upkeep";
     }
 
-    private GabrielAngelfireGainAbilityEffect(final GabrielAngelfireGainAbilityEffect effect) {
+    public GabrielAngelfireGainAbilityEffect(final GabrielAngelfireGainAbilityEffect effect) {
         super(effect);
         ability.newId();
-        this.sameStep = effect.sameStep;
     }
 
     @Override
@@ -79,7 +77,9 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            return !sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving();
+            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
         } else {
             sameStep = false;
         }
@@ -89,32 +89,29 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return;
-        }
-
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose one");
-        choice.setChoices(choices);
-        if (controller.choose(outcome, choice, game)) {
-            switch (choice.getChoice()) {
-                case "First strike":
-                    ability = FirstStrikeAbility.getInstance();
-                    break;
-                case "Trample":
-                    ability = TrampleAbility.getInstance();
-                    break;
-                case "Rampage 3":
-                    ability = new RampageAbility(3);
-                    break;
-                default:
-                    ability = FlyingAbility.getInstance();
-                    break;
+        if (controller != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose one");
+            choice.setChoices(choices);
+            if (controller.choose(outcome, choice, game)) {
+                switch (choice.getChoice()) {
+                    case "First strike":
+                        ability = FirstStrikeAbility.getInstance();
+                        break;
+                    case "Trample":
+                        ability = TrampleAbility.getInstance();
+                        break;
+                    case "Rampage 3":
+                        ability = new RampageAbility(3);
+                        break;
+                    default:
+                        ability = FlyingAbility.getInstance();
+                        break;
+                }
+            } else {
+                discard();
             }
-        } else {
-            discard();
         }
     }
 

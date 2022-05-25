@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import javafx.event.EventType;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -56,7 +55,6 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
 
     public GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
         super(effect);
-        this.wonFlip = effect.wonFlip;
     }
 
     @Override
@@ -90,14 +88,10 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (object == null || controller == null) {
+        if (controller == null || object == null
+                || !(this.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0)) {
             return false;
         }
-
-        if (!(this.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0)) {
-            return false;
-        }
-
         DamageEvent damageEvent = (DamageEvent) event;
         if (!damageEvent.isCombatDamage() || wonFlip) {
             return false;

@@ -49,7 +49,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             this.add(cost.copy());
         }
         this.phyrexian = costs.phyrexian;
-        this.phyrexianPaid = costs.phyrexianPaid;
     }
 
     @Override

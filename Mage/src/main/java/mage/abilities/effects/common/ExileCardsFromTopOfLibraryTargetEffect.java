@@ -17,6 +17,7 @@ import mage.util.CardUtil;
 public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
 
     int amount;
+    String targetName;
 
     public ExileCardsFromTopOfLibraryTargetEffect(int amount) {
         this(amount, null);

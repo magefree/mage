@@ -21,7 +21,6 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
 
     public DontUntapInControllersNextUntapStepSourceEffect(final DontUntapInControllersNextUntapStepSourceEffect effect) {
         super(effect);
-        this.validForTurnNum = effect.validForTurnNum;
     }
 
     @Override

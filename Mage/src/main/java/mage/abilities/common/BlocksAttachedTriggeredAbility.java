@@ -15,8 +15,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean setFixedTargetPointer;
-    private final String attachedDescription;
+    private boolean setFixedTargetPointer;
+    private String attachedDescription;
     private boolean setFixedTargetPointerToBlocked;
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
@@ -40,7 +40,6 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.attachedDescription = ability.attachedDescription;
-        this.setFixedTargetPointerToBlocked = ability.setFixedTargetPointerToBlocked;
     }
 
     @Override
