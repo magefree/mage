@@ -27,7 +27,7 @@ public final class TreasureToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20", "M21", "CMR", "KHM", "STX", "MH2", "AFR", "VOW", "NEO", "SLD", "2XM");
+        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20", "M21", "CMR", "KHM", "STX", "MH2", "AFR", "VOW", "NEO", "SLD", "2XM", "SNC");
     }
 
     public TreasureToken(final TreasureToken token) {
@@ -44,6 +44,9 @@ public final class TreasureToken extends TokenImpl {
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("XLN")) {
             this.setTokenType(RandomUtil.nextInt(4) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SNC")) {
+            this.setTokenType(RandomUtil.nextInt(5) + 1);
         }
     }
 }

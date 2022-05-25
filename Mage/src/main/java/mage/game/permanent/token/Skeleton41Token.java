@@ -10,9 +10,9 @@ import java.util.Arrays;
 /**
  * @author TheElk801
  */
-public final class UndercitySkeletonToken extends TokenImpl {
+public final class Skeleton41Token extends TokenImpl {
 
-    public UndercitySkeletonToken() {
+    public Skeleton41Token() {
         super("Skeleton Token", "4/1 black Skeleton creature token with menace");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SKELETON);
@@ -25,11 +25,11 @@ public final class UndercitySkeletonToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("CLB");
     }
 
-    public UndercitySkeletonToken(final UndercitySkeletonToken token) {
+    public Skeleton41Token(final Skeleton41Token token) {
         super(token);
     }
 
-    public UndercitySkeletonToken copy() {
-        return new UndercitySkeletonToken(this);
+    public Skeleton41Token copy() {
+        return new Skeleton41Token(this);
     }
 }

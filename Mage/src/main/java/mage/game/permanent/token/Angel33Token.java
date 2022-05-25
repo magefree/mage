@@ -23,7 +23,7 @@ public final class Angel33Token extends TokenImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("AFR");
+        availableImageSetCodes = Arrays.asList("AFR", "SNC");
     }
 
     public Angel33Token(final Angel33Token token) {

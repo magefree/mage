@@ -36,6 +36,14 @@ public interface Target extends Serializable {
     // methods for targets
     boolean canChoose(UUID sourceControllerId, Ability source, Game game);
 
+    /**
+     * Returns a set of all possible targets that match the criteria of the implemented Target class.
+     *
+     * @param sourceControllerId    UUID of the ability's controller
+     * @param source                Ability which requires the targets
+     * @param game                  Current game
+     * @return                      Set of the UUIDs of possible targets
+     */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);

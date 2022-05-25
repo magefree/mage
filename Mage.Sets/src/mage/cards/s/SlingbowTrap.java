@@ -15,7 +15,7 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class SlingbowTrap extends CardImpl {
 
         // Destroy target attacking creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private SlingbowTrap(final SlingbowTrap card) {

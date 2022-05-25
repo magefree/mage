@@ -131,11 +131,8 @@ public class ScryfallImageSupportTokens {
             //KLD
             put("KLD/Beast", "https://api.scryfall.com/cards/tkld/1/en?format=image");
             put("KLD/Emblem Chandra", "https://api.scryfall.com/cards/tkld/10/en?format=image");
-            // same construct images uses for different classes, so KLD have 4 instead 2 tokens
             put("KLD/Construct/1", "https://api.scryfall.com/cards/tkld/2/en?format=image");
             put("KLD/Construct/2", "https://api.scryfall.com/cards/tkld/3/en?format=image");
-            put("KLD/Construct/3", "https://api.scryfall.com/cards/tkld/2/en?format=image");
-            put("KLD/Construct/4", "https://api.scryfall.com/cards/tkld/3/en?format=image");
             put("KLD/Emblem Dovin", "https://api.scryfall.com/cards/tkld/12/en?format=image");
             put("KLD/Emblem Nissa", "https://api.scryfall.com/cards/tkld/11/en?format=image");
             put("KLD/Servo/1", "https://api.scryfall.com/cards/tkld/4/en?format=image");
@@ -520,7 +517,7 @@ public class ScryfallImageSupportTokens {
             put("KHM/Troll Warrior", "https://api.scryfall.com/cards/tkhm/16/en?format=image");
             put("KHM/Zombie Berserker", "https://api.scryfall.com/cards/tkhm/9/en?format=image");
             put("KHM/Emblem Kaya the Inexorable", "https://api.scryfall.com/cards/tkhm/20/en?format=image");
-            put("KHM/Emblem Tibalt Cosmic Imposter", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
+            put("KHM/Emblem Tibalt, Cosmic Impostor", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
             put("KHM/Emblem Tyvar Kell", "https://api.scryfall.com/cards/tkhm/22/en?format=image");
 
             // KHC
@@ -841,6 +838,33 @@ public class ScryfallImageSupportTokens {
             put ("2XM/Wolf", "https://api.scryfall.com/cards/t2xm/19/en?format=image");
             put ("2XM/Phyrexian Wurm/1", "https://api.scryfall.com/cards/t2xm/29/en?format=image");
             put ("2XM/Phyrexian Wurm/2", "https://api.scryfall.com/cards/t2xm/30/en?format=image");
+
+            // DTK
+            put ("DTK/Djinn Monk", "https://api.scryfall.com/cards/tdtk/2/en?format=image");
+            put ("DTK/Dragon", "https://api.scryfall.com/cards/tdtk/5/en?format=image");
+            put ("DTK/Goblin", "https://api.scryfall.com/cards/tdtk/6/en?format=image");
+            put ("DTK/Emblem Narset", "https://api.scryfall.com/cards/tdtk/8/en?format=image");
+            put ("DTK/Warrior", "https://api.scryfall.com/cards/tdtk/1/en?format=image");
+            put ("DTK/Zombie", "https://api.scryfall.com/cards/tdtk/3/en?format=image");
+            put ("DTK/Zombie Horror", "https://api.scryfall.com/cards/tdtk/4/en?format=image");
+
+            // SNC
+            put ("SNC/Angel", "https://api.scryfall.com/cards/tsnc/2/en?format=image");
+            put ("SNC/Cat", "https://api.scryfall.com/cards/tsnc/9/en?format=image");
+            put ("SNC/Citizen", "https://api.scryfall.com/cards/tsnc/12/en?format=image");
+            put ("SNC/Devil", "https://api.scryfall.com/cards/tsnc/8/en?format=image");
+            put ("SNC/Dog", "https://api.scryfall.com/cards/tsnc/10/en?format=image");
+            put ("SNC/Fish", "https://api.scryfall.com/cards/tsnc/4/en?format=image");
+            put ("SNC/Ogre Warrior", "https://api.scryfall.com/cards/tsnc/6/en?format=image");
+            put ("SNC/Rhino Warrior", "https://api.scryfall.com/cards/tsnc/11/en?format=image");
+            put ("SNC/Rogue", "https://api.scryfall.com/cards/tsnc/7/en?format=image");
+            put ("SNC/Spirit", "https://api.scryfall.com/cards/tsnc/3/en?format=image");
+            put ("SNC/Treasure/1", "https://api.scryfall.com/cards/tsnc/13/en?format=image");
+            put ("SNC/Treasure/2", "https://api.scryfall.com/cards/tsnc/14/en?format=image");
+            put ("SNC/Treasure/3", "https://api.scryfall.com/cards/tsnc/15/en?format=image");
+            put ("SNC/Treasure/4", "https://api.scryfall.com/cards/tsnc/16/en?format=image");
+            put ("SNC/Treasure/5", "https://api.scryfall.com/cards/tsnc/17/en?format=image");
+            put ("SNC/Wizard", "https://api.scryfall.com/cards/tsnc/5/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

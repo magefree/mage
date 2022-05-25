@@ -36,9 +36,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     * Fracturing Gust is bugged. In a match against Affinity, it worked
-     * properly when cast from hand. When I cast it from graveyard c/o
-     * Snapcaster Mage flashback, it destroyed my opponent's Darksteel Citadels,
+     * Fracturing Gust is bugged.
+     * In a match against Affinity, it worked properly when cast from hand.
+     * When I cast it from graveyard c/o Snapcaster Mage flashback, it destroyed my opponent's Darksteel Citadels,
      * which it did not do when cast from my hand.
      */
     @Test
@@ -53,9 +53,10 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Berserkers' Onslaught", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Darksteel Citadel", 1);
 
-        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Fracturing Gust");
+        // Fracturing Gust is the only possible target, it's auto-chosen
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {2}{G/W}{G/W}{G/W}"); // now snapcaster mage is dead so -13/-13
 
@@ -129,13 +130,14 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     * My opponent put Iona on the battlefield using Unburial Rites, but my game
-     * log didn't show me the color they chose.
+     * My opponent put Iona on the battlefield using Unburial Rites,
+     * but my game log didn't show me the color they chose.
      */
     @Test
     public void testUnburialRites() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+
         // Return target creature card from your graveyard to the battlefield.
         // Flashback {3}{W}
         addCard(Zone.HAND, playerA, "Unburial Rites", 1); // Sorcery - {4}{B}
@@ -144,12 +146,12 @@ public class FlashbackTest extends CardTestPlayerBase {
         // As Iona, Shield of Emeria enters the battlefield, choose a color.
         // Your opponents can't cast spells of the chosen color.
         addCard(Zone.GRAVEYARD, playerA, "Iona, Shield of Emeria");
-
         // As Lurebound Scarecrow enters the battlefield, choose a color.
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         addCard(Zone.GRAVEYARD, playerA, "Lurebound Scarecrow"); // Enchantment - {2}{U}
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unburial Rites", "Iona, Shield of Emeria");
@@ -158,8 +160,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}");
         addTarget(playerA, "Lurebound Scarecrow");
         setChoice(playerA, "White");
-
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -173,7 +173,7 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     *
+     * Check that the Converge ability picks up on the color used when a card is cast for flashback.
      */
     @Test
     public void testFlashbackWithConverge() {
@@ -188,9 +188,10 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Unified Front"); // {3}{W}
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
-        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Unified Front");
+        // Unified Front is the only possible target for Snapcaster Mage, it's auto-chosen
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}");
 
@@ -232,9 +233,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     * Ancestral Vision has no casting cost (this is different to a casting cost
-     * of {0}). Snapcaster Mage, for example, is able to give it flashback
-     * whilst it is in the graveyard.
+     * Ancestral Vision has no casting cost (this is different to a casting cost of {0}).
+     * <p>
+     * Snapcaster Mage, for example, is able to give it flashback whilst it is in the graveyard.
      * <p>
      * However the controller should not be able to cast Ancestral Visions from
      * the graveyard for {0} mana.
@@ -246,7 +247,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Ancestral Vision", 1);
 
         // Flash
-        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
@@ -254,8 +256,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Ancestral Vision");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
-        addTarget(playerA, playerA);
+        checkPlayableAbility("No flashback", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -296,9 +297,11 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Runic Repetition", 1);
     }
 
+    /**
+     * Check that Altar's Reap additional cost (sacrificing a creature) still applies when cast through flashback.
+     */
     @Test
     public void testAltarsReap() {
-
         addCard(Zone.LIBRARY, playerA, "Island", 2);
         // As an additional cost to cast Altar's Reap, sacrifice a creature.
         // Draw two cards.
@@ -310,7 +313,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
         // The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Altar's Reap");
+        // Altar's Reap is the only possible target for Snapcaster Mages' ability, its auto-chosen.
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "Snapcaster Mage");
@@ -343,7 +346,8 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Icefall Regent", 1);
 
-        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Terminate");
 
@@ -366,24 +370,27 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
 
-        // Buyback {5}(You may pay an additional {5} as you cast this spell. If you do, put this card into your hand as it resolves.)
+        // Buyback {5} (You may pay an additional {5} as you cast this spell.
+        //              If you do, put this card into your hand as it resolves.)
         // Draw a card.
         addCard(Zone.GRAVEYARD, playerA, "Whispers of the Muse", 1); // {U}
 
-        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Whispers of the Muse");
+//        setChoice(playerA, "Whispers of the Muse");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Whispers of the Muse
-        setChoice(playerA, true);
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
         assertGraveyardCount(playerA, "Whispers of the Muse", 0);
-        assertExileCount("Whispers of the Muse", 1);
-        assertHandCount(playerA, 1);
 
+        assertExileCount("Whispers of the Muse", 1);
+
+        assertHandCount(playerA, 1);
     }
 
     /**
@@ -408,28 +415,26 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTappedCount("Island", true, 2);
     }
 
-    /*
+    /**
      * Bug: Firecat Blitz when cast via Flashback requests sacrificing mountains twice
+     *
+     * Firecat Blitz
+     * {X}{R}{R}
+     * Sorcery
+     * Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
+     * Flashback—{R}{R}, Sacrifice X Mountains.
      */
     @Test
     public void firecatBlitzFlashback() {
-
-        /*
-        Firecat Blitz {X}{R}{R}
-         Sorcery
-        Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
-        Flashback—{R}{R}, Sacrifice X Mountains.
-         */
         String fCatBlitz = "Firecat Blitz";
         String mountain = "Mountain";
 
         addCard(Zone.GRAVEYARD, playerA, fCatBlitz);
         addCard(Zone.BATTLEFIELD, playerA, mountain, 6);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback blitz
-
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Firecat
         setChoice(playerA, "X=1");
-        addTarget(playerA, mountain);
+        // Mountain is auto-sacrificed
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -439,30 +444,31 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, mountain, 1);
     }
 
-    /*
-     * Reported bug: Battle Screech doesn't flashback (i get the pop up to choose flashback, tap the creatures and nothing happens)
+    /**
+     * Reported bug: Battle Screech doesn't flashback
+     *               (I get the pop up to choose flashback, tap the creatures and nothing happens)
+     *
+     * Battle Screech
+     * {2}{W}{W}
+     * Sorcery
+     * Create two 1/1 white Bird creature tokens with flying.
+     * Flashback—Tap three untapped white creatures you control.
      */
     @Test
     public void battleScreechFlashback() {
-
-        /*
-        Battle Screech {2}{W}{W}
-        Sorcery
-        Create two 1/1 white Bird creature tokens with flying.
-        Flashback—Tap three untapped white creatures you control.
-         */
-        String bScreech = "Battle Screech";
+        String bScreech  = "Battle Screech";
         String eVanguard = "Elite Vanguard"; // {W} 2/1
-        String yOx = "Yoked Ox"; // {W} 0/4
-        String wKnight = "White Knight"; // {W}{W} 2/2
+        String yOx       = "Yoked Ox";       // {W} 0/4
+        String wKnight   = "White Knight";   // {W}{W} 2/2
 
         addCard(Zone.GRAVEYARD, playerA, bScreech);
+
         addCard(Zone.BATTLEFIELD, playerA, eVanguard);
         addCard(Zone.BATTLEFIELD, playerA, yOx);
         addCard(Zone.BATTLEFIELD, playerA, wKnight);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Battle Screech
-        addTarget(playerA, eVanguard + '^' + yOx + '^' + wKnight);
+        // Only 3 creature under playerA's control, let them get auto-tapped
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -470,23 +476,23 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTapped(eVanguard, true);
         assertTapped(yOx, true);
         assertTapped(wKnight, true);
-        assertExileCount(playerA, bScreech, 1); // this fails, but the creatures are tapped as part of paying the cost
-        assertPermanentCount(playerA, "Bird Token", 2); // if you comment out the above line, this is failing as well
+        assertExileCount(playerA, bScreech, 1);
+        assertPermanentCount(playerA, "Bird Token", 2);
     }
 
-    /*
-     Reported bug: tried to flashback Dread Return, it allowed me to sac the creatures but the spell did not resolve after the costs had been paid.
-     It did not allow me to select a creature to return from yard to board.
+    /**
+     * Reported bug: Tried to flashback Dread Return,
+     *               it allowed me to sac the creatures but the spell did not resolve after the costs had been paid.
+     *               It did not allow me to select a creature to return from yard to board.
+     *
+     * Dread Return
+     * {2}{B}{B}
+     * Sorcery
+     * Return target creature card from your graveyard to the battlefield.
+     * Flashback—Sacrifice three creatures
      */
     @Test
     public void dreadReturnFlashback() {
-
-        /*
-        Dread Return {2}{B}{B}
-        Sorcery
-        Return target creature card from your graveyard to the battlefield.
-        Flashback—Sacrifice three creatures
-         */
         String dReturn = "Dread Return";
         String yOx = "Yoked Ox"; // {W} 0/4
         String eVanguard = "Elite Vanguard"; // {W} 2/1
@@ -495,13 +501,14 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         addCard(Zone.GRAVEYARD, playerA, dReturn);
         addCard(Zone.GRAVEYARD, playerA, bSable);
+
         addCard(Zone.BATTLEFIELD, playerA, yOx);
         addCard(Zone.BATTLEFIELD, playerA, eVanguard);
         addCard(Zone.BATTLEFIELD, playerA, memnite);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Dread Return
         addTarget(playerA, bSable); // return to battlefield
-        addTarget(playerA, yOx + '^' + eVanguard + '^' + memnite); // sac 3 creatures
+        // Only 3 creature under playerA's control, let them be auto-sac'ed to pay
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -514,7 +521,7 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     * I can play Force of Will with flashback paying his alternative mana cost.
+     * I can play Force of Will with flashback paying its alternative mana cost.
      * The ruling say no to it, because we only can choose one alternative cost
      * to a spell, and the flashback cost is already an alternative cost.
      */
@@ -522,9 +529,11 @@ public class FlashbackTest extends CardTestPlayerBase {
     public void testSnapcasterMageSpellWithAlternateCost() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // Creature {1}{U}
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
         // The flashback cost is equal to its mana cost.
-        addCard(Zone.HAND, playerA, "Snapcaster Mage", 2); // Creature{1}{U}
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 2);
 
         // You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.
         // Counter target spell.
@@ -541,16 +550,27 @@ public class FlashbackTest extends CardTestPlayerBase {
         addTarget(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
+
+        // TODO: Can't use checkPlayableAbility on Force of Will in this case.
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to play Force of Will, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Snapcaster Mage", 0);
-        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
 
+        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
         assertGraveyardCount(playerA, "Force of Will", 1);
+
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
         assertLife(playerA, 20);
-
     }
 
     /**

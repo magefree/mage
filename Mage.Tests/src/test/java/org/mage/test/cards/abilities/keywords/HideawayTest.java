@@ -140,7 +140,9 @@ public class HideawayTest extends CardTestPlayerBase {
 
     @Test
     public void testCannotPlayLandIfNotOwnTurn() {
-        // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
+        // Hideaway (This land enters the battlefield tapped.
+        //           When it does, look at the top four cards of your library, exile one face down,
+        //           then put the rest on the bottom of your library.)
         // {T}: Add {G}.
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.        
         addCard(Zone.HAND, playerA, "Mosswort Bridge");
@@ -150,17 +152,20 @@ public class HideawayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Dross Crocodile", 2);// 5/1
 
+        setStrictChooseMode(true);
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mosswort Bridge");
         setChoice(playerA, "Ghost Quarter");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+        setChoice(playerA, true);
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
-        assertPermanentCount(playerA, "Ghost Quarter", 0);
-        assertTapped("Mosswort Bridge", true);
+        assertTapped("Mosswort Bridge", true); // Tapped from activating the ability
+        assertPermanentCount(playerA, "Ghost Quarter", 0); // Land couldn't be played since not playerA's turn
     }
 
     @Test

@@ -57,7 +57,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Courser of Kruphix");
+        setChoice(playerA, "Yes"); // Courser of Kruphix is the only option, say Yes to cast for free
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -89,12 +89,14 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Secret Plans");
         skipInitShuffling(); // to keep this card on top of library
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls");
         setChoice(playerA, true); // cast it face down as 2/2 creature
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Secret Plans");
+        setChoice(playerA, "Yes"); // Cast Secret Plan without paying Only one possible target (Secret Plan)
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -132,7 +134,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sylvan Library");
+        setChoice(playerA, "Yes"); // Sylvan Library is the only option, say Yes to cast for free
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -146,16 +148,15 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         assertHandCount(playerA, 3);
         assertLife(playerA, 12);
         assertLife(playerB, 20);
-
     }
 
     /**
      * I cast a Villainous Wealth in Vintage Cube, and when it came time to cast
      * my opponent's cards (Mox Sapphire, Mox Emerald, Brainstorm, Snapcaster
      * Mage, Fact or Fiction and a Quicken), it rolled back to before I had cast
-     * my spell after Quicken resolved. I have the error, but the forums won't
-     * let me post them. I did find it was replicatable whenever you try to cast
-     * Quicken off a Villainous Wealth.
+     * my spell after Quicken resolved.
+     * I have the error, but the forums won't let me post them.
+     * I did find it was replicatable whenever you try to cast Quicken off a Villainous Wealth.
      */
     @Test
     public void testVillainousWealthAndQuicken() {
@@ -178,11 +179,19 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Mox Sapphire");
         skipInitShuffling(); // to keep this card on top of library
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicken");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Sapphire");
+
+        setChoice(playerA, "Mox Emerald");
+        setChoice(playerA, "Yes");
+
+        setChoice(playerA, "Mox Sapphire");
+        setChoice(playerA, "Yes");
+
+        // Quicken is auto-chosen since it's the last of the 3 cards. Only need to say Yes to casting for free.
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -192,6 +201,5 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mox Emerald", 1);
         assertPermanentCount(playerA, "Mox Sapphire", 1);
         assertGraveyardCount(playerB, "Quicken", 1);
-
     }
 }

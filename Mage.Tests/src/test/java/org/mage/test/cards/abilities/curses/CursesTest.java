@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.curses;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -68,7 +69,8 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Exhaustion", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+
+        checkPlayableAbility("Can't cast a 2nd spell", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Lightning", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -116,10 +118,9 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
-        setChoice(playerB, true);
-        setChoice(playerB, "Curse of Exhaustion");
-        setChoice(playerB, "targetPlayer=PlayerA");
-        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        // Choices for Copy Enchantment get auto-chosen
+
+        checkPlayableAbility("Can't cast a 2nd spell", 4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Lightning", false);
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
@@ -151,7 +152,8 @@ public class CursesTest extends CardTestPlayerBase {
         setChoice(playerB, "PlayerA");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        checkPlayableAbility("Can't cast a 2nd spell", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Lightning", false);
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -292,7 +294,6 @@ public class CursesTest extends CardTestPlayerBase {
 
     @Test
     public void cruelRealityHasBothCreatureAndPwChoosePw() {
-
         String ugin = "Ugin, the Spirit Dragon";
         String memnite = "Memnite"; // {0} 1/1
 
@@ -315,7 +316,6 @@ public class CursesTest extends CardTestPlayerBase {
 
     @Test
     public void cruelRealityHasBothCreatureAndPwChooseCreature() {
-
         String ugin = "Ugin, the Spirit Dragon";
         String memnite = "Memnite"; // {0} 1/1
 
@@ -338,7 +338,6 @@ public class CursesTest extends CardTestPlayerBase {
 
     @Test
     public void cruelRealityOnlyHasCreatureNoChoiceMade() {
-
         String memnite = "Memnite"; // {0} 1/1
 
         addCard(Zone.HAND, playerA, cReality);
@@ -357,7 +356,6 @@ public class CursesTest extends CardTestPlayerBase {
 
     @Test
     public void cruelRealityOnlyHasPwNoChoiceMade() {
-
         String ugin = "Ugin, the Spirit Dragon";
 
         addCard(Zone.HAND, playerA, cReality);
@@ -376,35 +374,40 @@ public class CursesTest extends CardTestPlayerBase {
 
     @Test
     public void cruelRealityOnlyHasCreatureTryToChooseNotToSac() {
-
         String memnite = "Memnite"; // {0} 1/1
 
         addCard(Zone.HAND, playerA, cReality);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
         addCard(Zone.BATTLEFIELD, playerB, memnite);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
-        setChoice(playerB, false);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
-        execute();
 
-        assertGraveyardCount(playerB, memnite, 1);
-        assertPermanentCount(playerA, cReality, 1);
-        assertLife(playerB, 20);
+        try {
+            execute();
+            assertAllCommandsUsed();
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Missing CHOICE def for turn 2, step UPKEEP, PlayerB")) {
+                Assert.fail("Should have had error about needing a target, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     @Test
     public void cruelRealityNoCreatureOrPwForcesLifeLoss() {
-
         String gPrison = "Ghostly Prison"; // {2}{W} enchantment - doesnt matter text for this
 
         addCard(Zone.HAND, playerA, cReality);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
         addCard(Zone.BATTLEFIELD, playerB, gPrison);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
-        setChoice(playerB, gPrison); // try to set choice to enchantment
+        // No choice needed since no valid target available for Cruel Reality's triggered ability
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -414,10 +417,10 @@ public class CursesTest extends CardTestPlayerBase {
         assertLife(playerB, 15);
     }
 
-    /*
+    /**
      * Reported bug issue #3326
      * When {Witchbane Orb} triggers when entering the field and there IS a curse attached to you, an error message (I sadly skipped) appears and your turn is reset.
-        This happened to me in a 4-player Commander game with {Curse of the Shallow Graves} on the field.
+     * This happened to me in a 4-player Commander game with {Curse of the Shallow Graves} on the field.
      */
     @Test
     public void witchbaneOrbDestroysCursesOnETB() {

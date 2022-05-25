@@ -393,6 +393,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
+
+    static {
+        FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.add(AnotherCreatureOrAnArtifactPredicate.instance);
+        FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();
 
     static {
@@ -883,6 +890,12 @@ public final class StaticFilters {
     static {
         FILTER_CREATURE_TOKENS.add(TokenPredicate.TRUE);
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
+    }
+
+    public static final FilterAttackingCreature FILTER_ATTACKING_CREATURE = new FilterAttackingCreature();
+
+    static {
+        FILTER_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");

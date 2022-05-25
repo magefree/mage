@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
+import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -30,6 +31,8 @@ public final class MagesAttendantToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this creature"));
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     private MagesAttendantToken(final MagesAttendantToken token) {
