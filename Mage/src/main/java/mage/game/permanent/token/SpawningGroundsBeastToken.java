@@ -22,7 +22,7 @@ public final class SpawningGroundsBeastToken extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C13", "");
+        availableImageSetCodes = Arrays.asList("C18");
     }
 
     public SpawningGroundsBeastToken(final SpawningGroundsBeastToken token) {
