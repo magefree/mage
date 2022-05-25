@@ -48,7 +48,6 @@
 |Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
 |Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
-|Generate|EMBLEM!:C14|Emblem Daretti||Emblem Daretti|DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM!:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
 |Generate|EMBLEM!:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
@@ -300,12 +299,10 @@
 |Generate|TOK:C14|Elephant|||ElephantToken|
 |Generate|TOK:C14|Elf Druid|||ElfDruidToken|
 |Generate|TOK:C14|Elf Warrior|||ElfWarriorToken|
-|Generate|TOK:C14|Equipment|||NahiriTheLithomancerEquipmentToken|
 |Generate|TOK:C14|Fish|||ReefWormFishToken|
 |Generate|TOK:C14|Gargoyle|||GargoyleToken|
-|Generate|TOK:C14|Germ|||PhyrexianGermToken|
+|Generate|TOK:C14|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:C14|Goat|||GoatToken|
-|Generate|TOK:C14|Goblin Golem|||TuktukTheReturnedToken|
 |Generate|TOK:C14|Goblin|||GoblinToken|
 |Generate|TOK:C14|Horror|||SpoilsOfBloodHorrorToken|
 |Generate|TOK:C14|Kor Soldier|||KorSoldierToken|
@@ -315,12 +312,13 @@
 |Generate|TOK:C14|Pentavite|||PentaviteToken|
 |Generate|TOK:C14|Soldier|||SoldierToken|
 |Generate|TOK:C14|Spirit|||SpiritWhiteToken|
-|Generate|TOK:C14|Stoneforged Blade||
+|Generate|TOK:C14|Stoneforged Blade|||NahiriTheLithomancerEquipmentToken|
 |Generate|TOK:C14|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:C14|Tuktuk the Returned|||TuktukTheReturnedToken|
 |Generate|TOK:C14|Whale|||ReefWormWhaleToken|
 |Generate|TOK:C14|Wolf|||WolfToken|
-|Generate|TOK:C14|Wurm|1||WurmWithDeathtouchToken|
-|Generate|TOK:C14|Wurm|2||WurmWithLifelinkToken|
+|Generate|TOK:C14|Phyrexian Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:C14|Phyrexian Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:C14|Zombie|1||ZombieToken|
 |Generate|TOK:C14|Zombie|2||StitcherGeralfZombieToken|
 |Generate|TOK:C15|Angel|||AngelToken|
@@ -436,7 +434,6 @@
 |Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:CMA|Elephant|||ElephantToken|
-|Generate|TOK:C14|Elf Druid|||ElfDruidToken|
 |Generate|TOK:CMA|Elf Warrior||
 |Generate|TOK:CMA|Gargoyle|||GargoyleToken|
 |Generate|TOK:CMA|Kithkin Soldier|||KithkinSoldierToken|
