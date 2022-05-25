@@ -30,7 +30,7 @@ public final class GhostLantern extends AdventureCard {
         ), false, StaticFilters.FILTER_CONTROLLED_A_CREATURE));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
 
         // Bind Spirit
         // Return target creature card from your graveyard to your hand.
