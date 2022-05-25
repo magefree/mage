@@ -28,9 +28,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class SimulatedPlayer extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer.class);
-    private final boolean isSimulatedPlayer;
+    private boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions;
-    private static final PassAbility pass = new PassAbility();
+    private static PassAbility pass = new PassAbility();
     protected int maxDepth;
 
     public SimulatedPlayer(Player originalPlayer, boolean isSimulatedPlayer, int maxDepth) {
@@ -44,7 +44,6 @@ public class SimulatedPlayer extends ComputerPlayer {
     public SimulatedPlayer(final SimulatedPlayer player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.maxDepth = player.maxDepth;
     }
 
     @Override

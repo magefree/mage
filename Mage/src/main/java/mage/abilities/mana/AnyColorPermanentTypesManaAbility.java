@@ -57,7 +57,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
     private final FilterPermanent filter;
     private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if true only colors can be produced (no Colorless mana).
 
-    private boolean inManaTypeCalculation;
+    private boolean inManaTypeCalculation = false;
 
     public AnyColorPermanentTypesManaEffect(TargetController targetController, boolean onlyColors, FilterPermanent permanentTypes) {
         super();
@@ -72,7 +72,6 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
         super(effect);
         this.filter = effect.filter.copy();
         this.onlyColors = effect.onlyColors;
-        this.inManaTypeCalculation = effect.inManaTypeCalculation;
     }
 
     @Override

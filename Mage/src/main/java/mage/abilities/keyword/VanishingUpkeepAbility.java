@@ -12,8 +12,8 @@ import mage.util.CardUtil;
 
 public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    private final int vanishingAmount;
-    private final String permanentType;
+    private int vanishingAmount;
+    private String permanentType;
 
     public VanishingUpkeepAbility(int vanishingEffect) {
         super(new VanishingEffect(), TargetController.YOU, false);
@@ -27,10 +27,9 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
         this.permanentType = permanentType;
     }
 
-    private VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
+    public VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
         super(ability);
         this.vanishingAmount = ability.vanishingAmount;
-        this.permanentType = ability.permanentType;
     }
 
     @Override
@@ -64,16 +63,15 @@ class VanishingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
-        if (p == null) {
-            return false;
+        if (p != null) {
+            int amount = p.getCounters(game).getCount(CounterType.TIME);
+            if (amount > 0) {
+                p.removeCounters(CounterType.TIME.createInstance(), source, game);
+                game.informPlayers("Removed a time counter from " + p.getLogName() + " (" + amount + " left)");
+            }
+            return true;
         }
-
-        int amount = p.getCounters(game).getCount(CounterType.TIME);
-        if (amount > 0) {
-            p.removeCounters(CounterType.TIME.createInstance(), source, game);
-            game.informPlayers("Removed a time counter from " + p.getLogName() + " (" + amount + " left)");
-        }
-        return true;
+        return false;
     }
 
     @Override

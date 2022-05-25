@@ -60,7 +60,6 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
 
     private LivingBreakthroughEffect(final LivingBreakthroughEffect effect) {
         super(effect);
-        this.manaValue = effect.manaValue;
     }
 
     @Override

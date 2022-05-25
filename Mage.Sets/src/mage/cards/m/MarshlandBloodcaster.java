@@ -70,7 +70,6 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 
     public MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
         super(effect);
-        this.spellsCast = effect.spellsCast;
     }
 
     @Override

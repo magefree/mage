@@ -86,7 +86,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
 
 class FrayingSanityEffect extends OneShotEffect {
 
-    int xAmount;
+    int xAmount = 0;
 
     public FrayingSanityEffect() {
         super(Outcome.Detriment);
@@ -95,7 +95,6 @@ class FrayingSanityEffect extends OneShotEffect {
 
     public FrayingSanityEffect(final FrayingSanityEffect effect) {
         super(effect);
-        this.xAmount = effect.xAmount;
     }
 
     @Override

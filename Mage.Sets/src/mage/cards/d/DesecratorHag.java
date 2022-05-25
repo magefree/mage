@@ -30,8 +30,7 @@ public final class DesecratorHag extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Desecrator Hag enters the battlefield, return to your hand the creature card in your graveyard with the greatest power.
-        // If two or more cards are tied for greatest power, you choose one of them.
+        // When Desecrator Hag enters the battlefield, return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DesecratorHagEffect(), false));
 
     }
@@ -48,21 +47,17 @@ public final class DesecratorHag extends CardImpl {
 
 class DesecratorHagEffect extends OneShotEffect {
 
-    int creatureGreatestPower;
+    int creatureGreatestPower = 0;
     Cards cards = new CardsImpl();
     TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard());
 
     public DesecratorHagEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "return to your hand the creature card in your graveyard with the greatest power. " +
-                          "If two or more cards are tied for greatest power, you choose one of them";
+        this.staticText = "return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them";
     }
 
     public DesecratorHagEffect(final DesecratorHagEffect effect) {
         super(effect);
-        this.creatureGreatestPower = effect.creatureGreatestPower;
-        this.cards = effect.cards.copy();
-        this.target = effect.target.copy();
     }
 
     @Override
@@ -73,40 +68,35 @@ class DesecratorHagEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
-            return false;
-        }
-
-        for (Card card : you.getGraveyard().getCards(game)) {
-            if (card.isCreature(game)) {
-                if (card.getPower().getValue() > creatureGreatestPower) {
-                    creatureGreatestPower = card.getPower().getValue();
-                    cards.clear();
-                    cards.add(card);
-                } else {
-                    if (card.getPower().getValue() == creatureGreatestPower) {
+        if (you != null) {
+            for (Card card : you.getGraveyard().getCards(game)) {
+                if (card.isCreature(game)) {
+                    if (card.getPower().getValue() > creatureGreatestPower) {
+                        creatureGreatestPower = card.getPower().getValue();
+                        cards.clear();
                         cards.add(card);
+                    } else {
+                        if (card.getPower().getValue() == creatureGreatestPower) {
+                            cards.add(card);
+                        }
                     }
                 }
             }
-        }
-
-        if (cards.isEmpty()) {
-            return false;
-        } else if (cards.size() == 1) {
-            return you.moveCards(cards, Zone.HAND, source, game);
-        } else {
-            if (you.choose(Outcome.DrawCard, cards, target, game)) {
-                if (target == null) {
-                    return false;
-                }
-
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    return you.moveCards(card, Zone.HAND, source, game);
-                }
+            if (cards.isEmpty()) {
+                return true;
             }
-            return false;
+            if (cards.size() > 1
+                    && you.choose(Outcome.DrawCard, cards, target, game)) {
+                if (target != null) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        return you.moveCards(card, Zone.HAND, source, game);
+                    }
+                }
+            } else {
+                return you.moveCards(cards, Zone.HAND, source, game);
+            }
         }
+        return false;
     }
 }

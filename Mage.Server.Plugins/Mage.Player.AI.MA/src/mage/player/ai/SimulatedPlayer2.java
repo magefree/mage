@@ -58,7 +58,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         this.suggested = new ArrayList<>(player.suggested);
         // this.allActions = player.allActions; // dynamic, no need to copy
         this.originalPlayer = player.originalPlayer.copy();
-        this.forced = player.forced;
     }
 
     @Override

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,6 +45,8 @@ public final class ScuteMob extends CardImpl {
 
 class ScuteMobAbility extends TriggeredAbilityImpl {
 
+    private FilterLandPermanent filter = new FilterLandPermanent();
+
     public ScuteMobAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)));
     }
@@ -71,7 +72,7 @@ class ScuteMobAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(StaticFilters.FILTER_LAND, this.controllerId, game) >= 5;
+        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 5;
     }
 
     @Override

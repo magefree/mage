@@ -50,10 +50,11 @@ public final class GloomwidowsFeast extends CardImpl {
 
 class GloomwidowsFeastEffect extends OneShotEffect {
 
+    boolean applied = false;
+
     public GloomwidowsFeastEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature with flying. " +
-                          "If that creature was blue or black, create a 1/2 green Spider creature token with reach";
+        this.staticText = "Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach";
     }
 
     public GloomwidowsFeastEffect(final GloomwidowsFeastEffect effect) {
@@ -68,20 +69,15 @@ class GloomwidowsFeastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature == null) {
-            return false;
-        }
-
-        targetCreature.destroy(source, game, false);
-        Permanent destroyedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (destroyedCreature == null) {
-            return false;
-        }
-
-        if (destroyedCreature.getColor(game).isBlue() || destroyedCreature.getColor(game).isBlack()) {
-            SpiderToken token = new SpiderToken();
-            token.putOntoBattlefield(1, game, source, source.getControllerId());
-            return true;
+        if (targetCreature != null) {
+            targetCreature.destroy(source, game, false);
+            Permanent destroyedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+            if (destroyedCreature.getColor(game).isBlue()
+                    || destroyedCreature.getColor(game).isBlack()) {
+                SpiderToken token = new SpiderToken();
+                token.putOntoBattlefield(1, game, source, source.getControllerId());
+                return true;
+            }
         }
         return false;
     }

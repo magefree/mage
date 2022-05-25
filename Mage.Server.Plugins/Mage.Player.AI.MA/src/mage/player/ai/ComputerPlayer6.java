@@ -68,7 +68,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
-    protected int lastLoggedTurn;
+    protected int lastLoggedTurn = 0;
     protected static final String BLANKS = "...............................................";
 
     static {
@@ -80,7 +80,11 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
         super(name, range);
-        maxDepth = Math.max(skill, 4);
+        if (skill < 4) {
+            maxDepth = 4;
+        } else {
+            maxDepth = skill;
+        }
         maxThink = skill * 3;
         maxNodes = Config2.maxNodes;
         getSuggestedActions();
@@ -90,11 +94,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     public ComputerPlayer6(final ComputerPlayer6 player) {
         super(player);
         this.maxDepth = player.maxDepth;
-        this.maxNodes = player.maxNodes;
-        this.maxThink = player.maxThink;
-        this.lastLoggedTurn = player.lastLoggedTurn;
         this.currentScore = player.currentScore;
-        this.root = player.root;
         if (player.combat != null) {
             this.combat = player.combat.copy();
         }
@@ -102,8 +102,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
         this.actionCache = player.actionCache;
-        this.attackersList.addAll(player.attackersList);
-        this.attackersToCheck.addAll(player.attackersToCheck);
     }
 
     @Override

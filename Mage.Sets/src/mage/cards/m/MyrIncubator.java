@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -31,10 +30,8 @@ public final class MyrIncubator extends CardImpl {
     public MyrIncubator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        // {6}, {tap}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them,
-        //                                      then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield.
-        //                                      Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrIncubatorEffect(), new GenericManaCost(6));
+        // {6}, {tap}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them, then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrIncubatorEffect(), new ManaCostsImpl("{6}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -59,39 +56,32 @@ class MyrIncubatorEffect extends SearchEffect {
         filter.add(CardType.ARTIFACT.getPredicate());
     }
     
-    int tokensToCreate;
+    int tokensToCreate = 0;
 
     MyrIncubatorEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        staticText = "Search your library for any number of artifact cards, exile them, " +
-                     "then create that many 1/1 colorless Myr artifact creature tokens. " +
-                     "Then shuffle";
+        staticText = "Search your library for any number of artifact cards, exile them, then create that many 1/1 colorless Myr artifact creature tokens. Then shuffle";
     }
 
     MyrIncubatorEffect(final MyrIncubatorEffect effect) {
         super(effect);
-        this.tokensToCreate = effect.tokensToCreate;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        if (!controller.searchLibrary(target, source, game)) {
-            return false;
-        }
-
-        if (!target.getTargets().isEmpty()) {
-            tokensToCreate = target.getTargets().size();
-            controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+        if (controller != null 
+                && controller.searchLibrary(target, source, game)) {
+            if (!target.getTargets().isEmpty()) {
+                tokensToCreate = target.getTargets().size();
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+            }
             CreateTokenEffect effect = new CreateTokenEffect(new MyrToken(), tokensToCreate);
             effect.apply(game, source);
+            controller.shuffleLibrary(source, game);
+            return true;
         }
-        controller.shuffleLibrary(source, game);
-        return true;
+        return false;
     }
 
     @Override

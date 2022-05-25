@@ -55,6 +55,7 @@ public final class NaturesBlessing extends CardImpl {
 class NaturesBlessingEffect extends OneShotEffect {
 
     private static final Set<String> choices = new HashSet<>();
+    private Ability gainedAbility;
 
     static {
         choices.add("+1/+1 counter");
@@ -81,33 +82,30 @@ class NaturesBlessingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (controller == null || targetPermanent == null) {
-            return false;
-        }
-
-        Ability gainedAbility = null;
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose one");
-        choice.setChoices(choices);
-        if (controller.choose(outcome, choice, game)) {
-            switch (choice.getChoice()) {
-                case "Banding":
-                    gainedAbility = BandingAbility.getInstance();
-                    break;
-                case "First strike":
-                    gainedAbility = FirstStrikeAbility.getInstance();
-                    break;
-                case "Trample":
-                    gainedAbility = TrampleAbility.getInstance();
+        if (controller != null && targetPermanent != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose one");
+            choice.setChoices(choices);
+            if (controller.choose(outcome, choice, game)) {
+                switch (choice.getChoice()) {
+                    case "Banding":
+                        gainedAbility = BandingAbility.getInstance();
+                        break;
+                    case "First strike":
+                        gainedAbility = FirstStrikeAbility.getInstance();
+                        break;
+                    case "Trample":
+                        gainedAbility = TrampleAbility.getInstance();
+                }
             }
+            if (gainedAbility != null) {
+                game.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom), source);
+            } else {
+                targetPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+                game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + targetPermanent.getLogName());
+            }
+            return true;
         }
-
-        if (gainedAbility != null) {
-            game.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom), source);
-        } else {
-            targetPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + targetPermanent.getLogName());
-        }
-        return true;
+        return false;
     }
 }

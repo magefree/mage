@@ -46,8 +46,7 @@ public final class KarnLiberated extends CardImpl {
         ability2.addTarget(new TargetPermanent());
         this.addAbility(ability2);
 
-        // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated.
-        //      Then put those cards onto the battlefield under your control.
+        // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
         this.addAbility(new LoyaltyAbility(new KarnLiberatedEffect(), -14));
     }
 
@@ -63,10 +62,11 @@ public final class KarnLiberated extends CardImpl {
 
 class KarnLiberatedEffect extends OneShotEffect {
 
+    private UUID exileId;
+
     public KarnLiberatedEffect() {
         super(Outcome.ExtraTurn);
-        this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. " +
-                          "Then put those cards onto the battlefield under your control";
+        this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control";
     }
 
     public KarnLiberatedEffect(final KarnLiberatedEffect effect) {
@@ -75,7 +75,6 @@ class KarnLiberatedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = null;
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject == null) {
             return false;
@@ -85,7 +84,8 @@ class KarnLiberatedEffect extends OneShotEffect {
             exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
-                    if (!card.hasSubtype(SubType.AURA, game) && card.isPermanent(game)) {
+                    if (!card.hasSubtype(SubType.AURA, game)
+                            && card.isPermanent(game)) {
                         cards.add(card);
                     }
                 }

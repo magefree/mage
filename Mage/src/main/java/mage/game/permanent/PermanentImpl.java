@@ -73,9 +73,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean morphed = false;
     protected int classLevel = 1;
     protected final Set<UUID> goadingPlayers = new HashSet<>();
-    // The UUID of the controller under who the permanent first entered the battelfield under.
     protected UUID originalControllerId;
-    // The UUID of the current controller.
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
     protected int damage;
@@ -131,7 +129,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.flipped = permanent.flipped;
         this.originalControllerId = permanent.originalControllerId;
         this.controllerId = permanent.controllerId;
-        this.beforeResetControllerId = permanent.controllerId;
         this.damage = permanent.damage;
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
@@ -144,9 +141,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.deathtouched = permanent.deathtouched;
         this.markedLifelink = permanent.markedLifelink;
 
-        this.connectedCards.putAll(permanent.connectedCards);
+        for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
+            this.connectedCards.put(entry.getKey(), entry.getValue());
+        }
         if (permanent.dealtDamageByThisTurn != null) {
-            this.dealtDamageByThisTurn = new HashSet<>(permanent.dealtDamageByThisTurn);
+            dealtDamageByThisTurn = new HashSet<>(permanent.dealtDamageByThisTurn);
         }
         if (permanent.markedDamage != null) {
             markedDamage = new ArrayList<>();
@@ -172,7 +171,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
         this.transformCount = permanent.transformCount;
-        this.removedFromCombat = permanent.removedFromCombat;
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
@@ -195,14 +193,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         abilities.setControllerId(controllerId);
     }
 
-    /**
-     * Used to override the original controller of a permanent to be different than the player who cast the spell
-     * or activated the ability.
-     *
-     * E.g. Xantcha, Sleeper Agent. Who enters the battlefield directly under someone else's control.
-     *
-     * @param originalControllerId The UUID of the original controller of the permanent
-     */
     @Override
     public void setOriginalControllerId(UUID originalControllerId) {
         this.originalControllerId = originalControllerId;
@@ -774,7 +764,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean checkControlChanged(Game game) {
-        // TODO Put a break point and see what's going on with controllerID, beforeResetControllerID, and originalControllerID
         if (!controllerId.equals(beforeResetControllerId)) {
             this.removeFromCombat(game);
             this.controlledFromStartOfControllerTurn = false;
@@ -915,7 +904,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @return
      */
     private int doDamage(int damageAmount, UUID attackerId, Ability source, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
-        int damageDone;
+        int damageDone = 0;
         if (damageAmount < 1 || !canDamage(game.getObject(attackerId), game)) {
             return 0;
         }
@@ -1769,22 +1758,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
-            return false;
+        if (controller != null) {
+            ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
+            ZoneChangeInfo zoneChangeInfo;
+            if (toZone == Zone.LIBRARY) {
+                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+            } else {
+                zoneChangeInfo = new ZoneChangeInfo(event);
+            }
+            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
+            //20180810 - 701.3d
+            detachAllAttachments(game);
+            return successfullyMoved;
         }
-
-        ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
-        ZoneChangeInfo zoneChangeInfo;
-        if (toZone == Zone.LIBRARY) {
-            zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
-        } else {
-            zoneChangeInfo = new ZoneChangeInfo(event);
-        }
-        boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
-        //20180810 - 701.3d
-        detachAllAttachments(game);
-
-        return successfullyMoved;
+        return false;
     }
 
     @Override
