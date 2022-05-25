@@ -647,4 +647,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
+    
+    boolean isTurnOrderReversed();
 }

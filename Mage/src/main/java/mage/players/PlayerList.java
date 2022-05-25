@@ -47,7 +47,11 @@ public class PlayerList extends CircularList<UUID> {
         }
         Player player;
         while (true) {
-            player = game.getPlayer(super.getNext());
+            if(game.isTurnOrderReversed()){
+                player = game.getPlayer(super.getPrevious());
+            } else{
+                player = game.getPlayer(super.getNext());
+            }
             if (player.isInGame()) {
                 break;
             }
