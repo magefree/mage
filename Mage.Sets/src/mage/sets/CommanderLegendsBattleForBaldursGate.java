@@ -145,6 +145,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sea of Clouds", 360, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Shadowheart, Dark Justiciar", 146, Rarity.RARE, mage.cards.s.ShadowheartDarkJusticiar.class));
         cards.add(new SetCardInfo("Shameless Charlatan", 96, Rarity.RARE, mage.cards.s.ShamelessCharlatan.class));
+        cards.add(new SetCardInfo("Sharpshooter Elf", 253, Rarity.UNCOMMON, mage.cards.s.SharpshooterElf.class));
         cards.add(new SetCardInfo("Silvanus's Invoker", 254, Rarity.COMMON, mage.cards.s.SilvanussInvoker.class));
         cards.add(new SetCardInfo("Skanos Dragonheart", 255, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class));
         cards.add(new SetCardInfo("Skullwinder", 256, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
