@@ -412,7 +412,7 @@
 |Generate|TOK:C19|Egg|||AtlaPalaniToken|
 |Generate|TOK:C19|Eldrazi|||EldraziToken|
 |Generate|TOK:C19|Gargoyle|||GargoyleToken|
-|Generate|TOK:C19|Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:C19|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:C19|Human|||HumanToken|
 |Generate|TOK:C19|Pegasus|||PegasusToken|
 |Generate|TOK:C19|Plant|||GrismoldPlantToken|
@@ -420,7 +420,7 @@
 |Generate|TOK:C19|Saproling|||SaprolingToken|
 |Generate|TOK:C19|Sculpture|||DoomedArtisanToken|
 |Generate|TOK:C19|Snake|||SnakeToken|
-|Generate|TOK:C19|Spirit|||SpiritToken|
+|Generate|TOK:C19|Spirit|||SpiritWhiteToken|
 |Generate|TOK:C19|Treasure|||TreasureToken|
 |Generate|TOK:C19|Wurm|||WurmToken|
 |Generate|TOK:C19|Zombie|1||ZombieToken|

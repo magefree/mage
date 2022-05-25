@@ -319,7 +319,7 @@ public class ScryfallImageSupportTokens {
             put("C19/Egg", "https://api.scryfall.com/cards/tc19/16/en?format=image");
             put("C19/Eldrazi", "https://api.scryfall.com/cards/tc19/26/en?format=image");
             put("C19/Gargoyle", "https://api.scryfall.com/cards/tc19/22/en?format=image");
-            put("C19/Horror", "https://api.scryfall.com/cards/tc19/23/en?format=image");
+            put("C19/Phyrexian Horror", "https://api.scryfall.com/cards/tc19/23/en?format=image");
             put("C19/Human", "https://api.scryfall.com/cards/tc19/3/en?format=image");
             put("C19/Emblem Ob Nixilis Reignited", "https://api.scryfall.com/cards/tc19/29/en?format=image");
             put("C19/Pegasus", "https://api.scryfall.com/cards/tc19/4/en?format=image");
@@ -331,8 +331,8 @@ public class ScryfallImageSupportTokens {
             put("C19/Spirit", "https://api.scryfall.com/cards/tc19/5/en?format=image");
             put("C19/Treasure", "https://api.scryfall.com/cards/tc19/25/en?format=image");
             put("C19/Wurm", "https://api.scryfall.com/cards/tc19/21/en?format=image");
-            put("C19/Zombie/1", "https://api.scryfall.com/cards/tc19/11/en?format=image");
-            put("C19/Zombie/2", "https://api.scryfall.com/cards/tc19/10/en?format=image");
+            put("C19/Zombie/1", "https://api.scryfall.com/cards/tc19/10/en?format=image");
+            put("C19/Zombie/2", "https://api.scryfall.com/cards/tc19/11/en?format=image");
 
             // ELD
             put("ELD/Bear", "https://api.scryfall.com/cards/teld/8/en?format=image");
