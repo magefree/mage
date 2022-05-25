@@ -930,6 +930,29 @@ public class ScryfallImageSupportTokens {
             put ("C15/Wolf", "https://api.scryfall.com/cards/tc15/19/en?format=image");
             put ("C15/Zombie", "https://api.scryfall.com/cards/tc15/8/en?format=image");
 
+            // C16
+            put ("C16/Beast", "https://api.scryfall.com/cards/tc16/14/en?format=image");
+            put ("C16/Bird/1", "https://api.scryfall.com/cards/tc16/7/en?format=image");
+            put ("C16/Bird/2", "https://api.scryfall.com/cards/tc16/2/en?format=image");
+            put ("C16/Emblem Daretti", "https://api.scryfall.com/cards/tc16/21/en?format=image");
+            put ("C16/Elemental", "https://api.scryfall.com/cards/tc16/3/en?format=image");
+            put ("C16/Elf Warrior", "https://api.scryfall.com/cards/tc16/15/en?format=image");
+            put ("C16/Phyrexian Germ", "https://api.scryfall.com/cards/tc16/10/en?format=image");
+            put ("C16/Goat", "https://api.scryfall.com/cards/tc16/4/en?format=image");
+            put ("C16/Goblin", "https://api.scryfall.com/cards/tc16/12/en?format=image");
+            put ("C16/Phyrexian Horror", "https://api.scryfall.com/cards/tc16/19/en?format=image");
+            put ("C16/Myr", "https://api.scryfall.com/cards/tc16/20/en?format=image");
+            put ("C16/Ogre", "https://api.scryfall.com/cards/tc16/13/en?format=image");
+            put ("C16/Saproling/1", "https://api.scryfall.com/cards/tc16/16/en?format=image");
+            put ("C16/Saproling/2", "https://api.scryfall.com/cards/tc16/17/en?format=image");
+            put ("C16/Soldier", "https://api.scryfall.com/cards/tc16/5/en?format=image");
+            put ("C16/Spirit/1", "https://api.scryfall.com/cards/tc16/1/en?format=image");
+            put ("C16/Spirit/2", "https://api.scryfall.com/cards/tc16/6/en?format=image");
+            put ("C16/Squid", "https://api.scryfall.com/cards/tc16/8/en?format=image");
+            put ("C16/Thopter", "https://api.scryfall.com/cards/tc16/9/en?format=image");
+            put ("C16/Worm", "https://api.scryfall.com/cards/tc16/18/en?format=image");
+            put ("C16/Zombie", "https://api.scryfall.com/cards/tc16/11/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

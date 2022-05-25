@@ -345,26 +345,26 @@
 |Generate|TOK:C15|Spirit|2||WhiteBlackSpiritToken|
 |Generate|TOK:C15|Wolf|||WolfToken|
 |Generate|TOK:C15|Zombie|||ZombieToken|
-|Generate|TOK:C16|Beast||
-|Generate|TOK:C16|Bird|1|
-|Generate|TOK:C16|Bird|2|
+|Generate|TOK:C16|Beast|||BeastToken|
+|Generate|TOK:C16|Bird|1||SwanSongBirdToken|
+|Generate|TOK:C16|Bird|2||BirdToken|
 |Generate|TOK:C16|Elemental|||WhiteElementalToken|
-|Generate|TOK:C16|Elf Warrior||
-|Generate|TOK:C16|Germ||
-|Generate|TOK:C16|Goat||
+|Generate|TOK:C16|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:C16|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:C16|Goat|||GoatToken|
 |Generate|TOK:C16|Goblin|||SpyMasterGoblinToken|
-|Generate|TOK:C16|Horror||
-|Generate|TOK:C16|Myr||
-|Generate|TOK:C16|Ogre||
-|Generate|TOK:C16|Saproling|1|
-|Generate|TOK:C16|Saproling|2|
-|Generate|TOK:C16|Soldier||
-|Generate|TOK:C16|Spirit|1|
-|Generate|TOK:C16|Spirit|2|
-|Generate|TOK:C16|Squid||
-|Generate|TOK:C16|Thopter||
-|Generate|TOK:C16|Worm||
-|Generate|TOK:C16|Zombie||
+|Generate|TOK:C16|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:C16|Myr|||MyrToken|
+|Generate|TOK:C16|Ogre|||OgreToken|
+|Generate|TOK:C16|Saproling|1||SaprolingToken|
+|Generate|TOK:C16|Saproling|2||SaprolingToken|
+|Generate|TOK:C16|Soldier|||SoldierToken|
+|Generate|TOK:C16|Spirit|1||SpiritToken|
+|Generate|TOK:C16|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:C16|Squid|||ChasmSkulkerSquidToken|
+|Generate|TOK:C16|Thopter|||ThopterToken|
+|Generate|TOK:C16|Worm|||WormHarvestToken|
+|Generate|TOK:C16|Zombie|||ZombieToken|
 |Generate|TOK:C17|Bat||
 |Generate|TOK:C17|Cat|||CatToken|
 |Generate|TOK:C17|Cat Dragon|||WasitoraCatDragonToken|
