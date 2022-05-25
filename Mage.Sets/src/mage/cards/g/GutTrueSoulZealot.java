@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -12,10 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.Skeleton41Token;
 
 import java.util.UUID;
@@ -24,13 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GutTrueSoulZealot extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("another creature or an artifact");
-
-    static {
-        filter.add(GutTrueSoulZealotPredicate.instance);
-    }
 
     public GutTrueSoulZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -45,7 +34,7 @@ public final class GutTrueSoulZealot extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(
                         new Skeleton41Token(), 1, true, true
-                ), new SacrificeTargetCost(filter)
+                ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE)
         ), 1));
 
         // Choose a Background
@@ -59,19 +48,5 @@ public final class GutTrueSoulZealot extends CardImpl {
     @Override
     public GutTrueSoulZealot copy() {
         return new GutTrueSoulZealot(this);
-    }
-}
-
-enum GutTrueSoulZealotPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        MageObject obj = input.getObject();
-        if (obj.getId().equals(input.getSourceId())) {
-            return obj.isArtifact(game);
-        }
-        return obj.isArtifact(game)
-                || obj.isCreature(game);
     }
 }
