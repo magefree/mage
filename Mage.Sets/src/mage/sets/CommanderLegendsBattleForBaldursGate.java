@@ -84,6 +84,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Geode Golem", 316, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
+        cards.add(new SetCardInfo("Gut, True Soul Zealot", 180, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class));
         cards.add(new SetCardInfo("Hammers of Moradin", 25, Rarity.UNCOMMON, mage.cards.h.HammersOfMoradin.class));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
         cards.add(new SetCardInfo("Irenicus's Vile Duplication", 78, Rarity.UNCOMMON, mage.cards.i.IrenicussVileDuplication.class));

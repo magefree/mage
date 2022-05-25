@@ -23,7 +23,7 @@ import mage.game.command.Dungeon;
 import mage.game.command.DungeonRoom;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
-import mage.game.permanent.token.UndercitySkeletonToken;
+import mage.game.permanent.token.Skeleton41Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
@@ -65,7 +65,7 @@ public class UndercityDungeon extends Dungeon {
 
         DungeonRoom archives = new DungeonRoom("Archives", new DrawCardSourceControllerEffect(1));
 
-        DungeonRoom catacombs = new DungeonRoom("Catacombs", new CreateTokenEffect(new UndercitySkeletonToken()));
+        DungeonRoom catacombs = new DungeonRoom("Catacombs", new CreateTokenEffect(new Skeleton41Token()));
 
         DungeonRoom throneOfTheDeadThree = new DungeonRoom("Throne of the Dead Three", new ThroneOfTheDeadThreeEffect());
 
