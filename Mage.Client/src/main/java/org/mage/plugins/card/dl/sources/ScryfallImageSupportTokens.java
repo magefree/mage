@@ -904,6 +904,32 @@ public class ScryfallImageSupportTokens {
             put ("C14/Zombie/1", "https://api.scryfall.com/cards/tc14/16/en?format=image");
             put ("C14/Zombie/2", "https://api.scryfall.com/cards/tc14/11/en?format=image");
 
+            // C15
+            put ("C15/Angel", "https://api.scryfall.com/cards/tc15/2/en?format=image");
+            put ("C15/Bear", "https://api.scryfall.com/cards/tc15/12/en?format=image");
+            put ("C15/Beast", "https://api.scryfall.com/cards/tc15/13/en?format=image");
+            put ("C15/Cat", "https://api.scryfall.com/cards/tc15/3/en?format=image");
+            put ("C15/Dragon", "https://api.scryfall.com/cards/tc15/9/en?format=image");
+            put ("C15/Drake", "https://api.scryfall.com/cards/tc15/6/en?format=image");
+            put ("C15/Elemental", "https://api.scryfall.com/cards/tc15/20/en?format=image");
+            put ("C15/Elemental Shaman", "https://api.scryfall.com/cards/tc15/10/en?format=image");
+            put ("C15/Elephant", "https://api.scryfall.com/cards/tc15/14/en?format=image");
+            put ("C15/Frog Lizard", "https://api.scryfall.com/cards/tc15/15/en?format=image");
+            put ("C15/Phyrexian Germ", "https://api.scryfall.com/cards/tc15/7/en?format=image");
+            put ("C15/Gold", "https://api.scryfall.com/cards/tc15/24/en?format=image");
+            put ("C15/Knight/1", "https://api.scryfall.com/cards/tc15/4/en?format=image");
+            put ("C15/Knight/2", "https://api.scryfall.com/cards/tc15/5/en?format=image");
+            put ("C15/Lightning Rager", "https://api.scryfall.com/cards/tc15/11/en?format=image");
+            put ("C15/Saproling", "https://api.scryfall.com/cards/tc15/16/en?format=image");
+            put ("C15/Shapeshifter", "https://api.scryfall.com/cards/tc15/1/en?format=image");
+            put ("C15/Snake/1", "https://api.scryfall.com/cards/tc15/17/en?format=image");
+            put ("C15/Snake/2", "https://api.scryfall.com/cards/tc15/21/en?format=image");
+            put ("C15/Spider", "https://api.scryfall.com/cards/tc15/18/en?format=image");
+            put ("C15/Spirit/1", "https://api.scryfall.com/cards/tc15/23/en?format=image");
+            put ("C15/Spirit/2", "https://api.scryfall.com/cards/tc15/22/en?format=image");
+            put ("C15/Wolf", "https://api.scryfall.com/cards/tc15/19/en?format=image");
+            put ("C15/Zombie", "https://api.scryfall.com/cards/tc15/8/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
