@@ -39,7 +39,7 @@ public final class NineFingersKeene extends CardImpl {
         // Ward—Pay 9 life.
         this.addAbility(new WardAbility(new PayLifeCost(9), false));
 
-        // Whenever Nine-Fingers Keene deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise put the rest on the bottom of your library in a random order.
+        // Whenever Nine-Fingers Keene deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NineFingersKeeneEffect(), false));
     }
 
@@ -66,7 +66,7 @@ class NineFingersKeeneEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "look at the top nine cards of your library. You may put a Gate card " +
                 "from among them onto the battlefield. Then if you control nine or more Gates, " +
-                "put the rest into your hand. Otherwise put the rest on the bottom of your library in a random order";
+                "put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order";
     }
 
     private NineFingersKeeneEffect(final NineFingersKeeneEffect effect) {

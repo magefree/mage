@@ -35,7 +35,7 @@ public final class DisplacerKitten extends CardImpl {
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
         ));
-        this.addAbility(ability);
+        this.addAbility(ability.withFlavorWord("Avoidance"));
     }
 
     private DisplacerKitten(final DisplacerKitten card) {
