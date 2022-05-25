@@ -6,13 +6,22 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.h.HavengulLich Havengul Lich}
+ * {3}{U}{B}
+ * Creature — Zombie Wizard
+ * {1}: You may cast target creature card in a graveyard this turn.
+ *      When you cast it this turn, Havengul Lich gains all activated abilities of that card until end of turn.
+ * 4/4
  *
  * @author BetaSteward
  */
 public class HavengulLichTest extends CardTestPlayerBase {
 
+    /**
+     * Check that the ability works as intented.
+     */
     @Test
-    public void testCard() {
+    public void testWorksOnTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
@@ -32,46 +41,46 @@ public class HavengulLichTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
     }
 
+    /**
+     * Check that the ability only allows you to play the chosen card on the curent turn.
+     */
     @Test
-    public void testCard1() {
+    public void testDoesNotWorkNextTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
         addCard(Zone.GRAVEYARD, playerA, "Black Cat");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Black Cat");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Black Cat");
+        checkPlayableAbility("Can't work this turn", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Black", false);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Havengul Lich", 1);
         assertPermanentCount(playerA, "Black Cat", 0);
         assertGraveyardCount(playerA, 1);
     }
 
+    /**
+     * Check that Havengul Lich only keeps the abilities for current turn.
+     */
     @Test
     public void testCard2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich
-        // gains all activated abilities of that card until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
         // {T}: Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB); // only inm turn 1, so Havengul Lich has the abilit ylost now
+
+        // Havengul Lich must lose the ability to tap (Prodigal Pyromancer still has summoning sickness)
+        checkPlayableAbility("Can't tap", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this}", false);
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 19);
         assertPermanentCount(playerA, "Havengul Lich", 1);
         assertPermanentCount(playerA, "Prodigal Pyromancer", 1);
-        assertTapped("Prodigal Pyromancer", true);
-        assertTapped("Havengul Lich", false);
         assertGraveyardCount(playerA, 0);
     }
 
@@ -110,7 +119,5 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Havengul Lich", 1);
         assertGraveyardCount(playerA, "Perilous Myr", 1);
-
     }
-
 }

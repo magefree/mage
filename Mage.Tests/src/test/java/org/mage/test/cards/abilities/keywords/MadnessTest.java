@@ -76,7 +76,6 @@ public class MadnessTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Raven's Crime", 1);
         assertGraveyardCount(playerA, "Arrogant Wurm", 1);
         assertHandCount(playerA, 0);
-
     }
 
     @Test
@@ -93,19 +92,19 @@ public class MadnessTest extends CardTestPlayerBase {
         // Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
         addCard(Zone.HAND, playerB, "Haunting Hymn");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
-        setChoice(playerA, true); // use madness triggered ability
-        setChoice(playerA, true); // use madness cast
-
         setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
+        setChoice(playerA, true); // Can't Vampirefor madness cost
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        setStrictChooseMode(true);
 
-        assertGraveyardCount(playerB, "Haunting Hymn", 1);
-        assertGraveyardCount(playerB, "Haunting Hymn", 1);
         assertPermanentCount(playerA, "Vampire Aristocrat", 1);
+        assertGraveyardCount(playerA, 0);
 
+        assertGraveyardCount(playerB, 1);
+        assertGraveyardCount(playerB, "Haunting Hymn", 1);
     }
 
     @Test
@@ -113,7 +112,8 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
         // Madness {X}{R}
-        // Avacyn's Judgment deals 2 damage divided as you choose among any number of target creatures and/or players. If Avacyn's Judgment's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
+        // Avacyn's Judgment deals 2 damage divided as you choose among any number of target creatures and/or players.
+        // If Avacyn's Judgment's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
         addCard(Zone.HAND, playerA, "Avacyn's Judgment", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
@@ -135,7 +135,6 @@ public class MadnessTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Haunting Hymn", 1);
         assertGraveyardCount(playerA, "Avacyn's Judgment", 1);
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
-
     }
 
     /**

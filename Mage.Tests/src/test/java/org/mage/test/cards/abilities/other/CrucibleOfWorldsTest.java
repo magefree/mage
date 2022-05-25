@@ -8,18 +8,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * Crucible of Worlds
+ * {3}
+ * Artifact
+ * You may play lands from your graveyard.
  *
  * @author BetaSteward
  */
 public class CrucibleOfWorldsTest extends CardTestPlayerBase {
-
-    /** 
-     * Crucible of Worlds
-     * Artifact, 3 (3)
-     * You may play land cards from your graveyard.
-     *
-     */
-
     @Test
     public void testPlayLand() {
         addCard(Zone.BATTLEFIELD, playerA, "Crucible of Worlds");
@@ -32,7 +28,6 @@ public class CrucibleOfWorldsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Swamp", 0);
-
     }
 
     @Test
@@ -42,8 +37,8 @@ public class CrucibleOfWorldsTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Plains");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Swamp");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Play Plains");
-        
+        checkPlayableAbility("Can't play Plains", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Play Plains", false);
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -51,7 +46,5 @@ public class CrucibleOfWorldsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Swamp", 0);
         assertPermanentCount(playerA, "Plains", 0);
         assertGraveyardCount(playerA, "Plains", 1);
-
     }
-    
 }

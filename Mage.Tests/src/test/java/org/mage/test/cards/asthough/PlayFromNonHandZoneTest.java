@@ -2,6 +2,7 @@ package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -25,7 +26,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertPowerToughness(playerA, "Worldheart Phoenix", 2, 2);
-
     }
 
     @Test
@@ -37,13 +37,21 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.GRAVEYARD, playerA, "Worldheart Phoenix");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worldheart Phoenix"); // can only be cast by {W}{U}{B}{R}{G}
+        // can only be cast by {W}{U}{B}{R}{G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worldheart Phoenix");
 
         setStopAt(1, PhaseStep.END_COMBAT);
-        execute();
+
+        // TODO: Needed since it shows up as castable to checkPLayableAbility
+        try {
+            execute();
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Must have thrown error about not being able to cast Worldheart Phoenix, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Worldheart Phoenix", 0);
-
     }
 
     @Test
@@ -65,20 +73,22 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertPermanentCount(playerA, "Worldheart Phoenix", 1);
-
     }
 
     @Test
     public void testNarsetEnlightenedMaster() {
         // First strike
         // Hexproof
-        // Whenever Narset, Enlightented Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+        // Whenever Narset, Enlightented Master attacks, exile the top four cards of your library.
+        // Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Narset, Enlightened Master", 1);
 
         skipInitShuffling();
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion");
         addCard(Zone.LIBRARY, playerB, "Abzan Banner");
-        // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash. (You may cast it any time you could cast an instant.)
+        // Ferocious - If you control a creature with power 4 or greater,
+        //             you may cast Dragon Grip as though it had flash.
+        //             (You may cast it any time you could cast an instant.)
         // Enchant creature
         // Enchanted creature gets +2/+0 and has first strike.
         addCard(Zone.LIBRARY, playerB, "Dragon Grip");
@@ -88,28 +98,31 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         attack(2, playerB, "Narset, Enlightened Master");
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion"); // can't be cast from exile
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abzan Banner"); // can be cast from exile
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Dragon Grip", "Narset, Enlightened Master"); // can be cast from exile
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Peach Garden Oath"); // can be cast from exile
+        // Can NOT cast from exile
+        checkPlayableAbility("Can't cast Silvercoat", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Silvercoat", false);
+
+        // CAN cast from exile
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abzan Banner");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Dragon Grip", "Narset, Enlightened Master");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Peach Garden Oath");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertExileCount("Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Abzan Banner", 1);
+        assertPermanentCount(playerB, "Dragon Grip", 1);
+
         assertGraveyardCount(playerB, "Peach Garden Oath", 1);
-        assertExileCount(playerB, "Dragon Grip", 0);
         assertGraveyardCount(playerB, "Dragon Grip", 0);
+
+        assertExileCount(playerB, "Silvercoat Lion", 1);
+        assertExileCount(playerB, "Dragon Grip", 0);
 
         assertPowerToughness(playerB, "Narset, Enlightened Master", 5, 2);
 
         assertHandCount(playerB, "Plains", 1);
         assertLife(playerA, 17);
         assertLife(playerB, 22);
-
-        assertPermanentCount(playerB, "Dragon Grip", 1);
-
     }
 
     @Test
