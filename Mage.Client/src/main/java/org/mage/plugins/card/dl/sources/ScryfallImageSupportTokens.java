@@ -953,6 +953,19 @@ public class ScryfallImageSupportTokens {
             put ("C16/Worm", "https://api.scryfall.com/cards/tc16/18/en?format=image");
             put ("C16/Zombie", "https://api.scryfall.com/cards/tc16/11/en?format=image");
 
+            // C17
+            put ("C17/Bat", "https://api.scryfall.com/cards/tc17/2/en?format=image");
+            put ("C17/Cat", "https://api.scryfall.com/cards/tc17/1/en?format=image");
+            put ("C17/Cat Dragon", "https://api.scryfall.com/cards/tc17/9/en?format=image");
+            put ("C17/Cat Warrior", "https://api.scryfall.com/cards/tc17/8/en?format=image");
+            put ("C17/Dragon/1", "https://api.scryfall.com/cards/tc17/6/en?format=image");
+            put ("C17/Dragon/2", "https://api.scryfall.com/cards/tc17/7/en?format=image");
+            put ("C17/Eldrazi Spawn", "https://api.scryfall.com/cards/tc17/11/en?format=image");
+            put ("C17/Gold", "https://api.scryfall.com/cards/tc17/10/en?format=image");
+            put ("C17/Rat", "https://api.scryfall.com/cards/tc17/3/en?format=image");
+            put ("C17/Vampire", "https://api.scryfall.com/cards/tc17/4/en?format=image");
+            put ("C17/Zombie", "https://api.scryfall.com/cards/tc17/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

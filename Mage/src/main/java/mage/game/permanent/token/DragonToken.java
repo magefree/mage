@@ -47,4 +47,13 @@ public final class DragonToken extends TokenImpl {
     public DragonToken copy() {
         return new DragonToken(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C17")) {
+            setTokenType(1);
+        }
+    }
 }

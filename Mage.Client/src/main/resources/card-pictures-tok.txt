@@ -365,17 +365,17 @@
 |Generate|TOK:C16|Thopter|||ThopterToken|
 |Generate|TOK:C16|Worm|||WormHarvestToken|
 |Generate|TOK:C16|Zombie|||ZombieToken|
-|Generate|TOK:C17|Bat||
+|Generate|TOK:C17|Bat|||BatToken|
 |Generate|TOK:C17|Cat|||CatToken|
 |Generate|TOK:C17|Cat Dragon|||WasitoraCatDragonToken|
-|Generate|TOK:C17|Cat Warrior||
+|Generate|TOK:C17|Cat Warrior|||CatWarriorToken|
 |Generate|TOK:C17|Dragon|1||DragonToken|
 |Generate|TOK:C17|Dragon|2||UtvaraHellkiteDragonToken|
-|Generate|TOK:C17|Eldrazi Spawn||
-|Generate|TOK:C17|Gold||
+|Generate|TOK:C17|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:C17|Gold|||GoldToken|
 |Generate|TOK:C17|Rat|||DeathtouchRatToken|
 |Generate|TOK:C17|Vampire|||EdgarMarkovToken|
-|Generate|TOK:C17|Zombie||
+|Generate|TOK:C17|Zombie|||ZombieToken|
 |Generate|TOK:C18|Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:C18|Angel|||AngelToken|
 |Generate|TOK:C18|Cat|||CatToken|
