@@ -156,6 +156,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Thunderwave", 201, Rarity.UNCOMMON, mage.cards.t.Thunderwave.class));
         cards.add(new SetCardInfo("Treasure Keeper", 341, Rarity.UNCOMMON, mage.cards.t.TreasureKeeper.class));
         cards.add(new SetCardInfo("Tymora's Invoker", 101, Rarity.COMMON, mage.cards.t.TymorasInvoker.class));
+        cards.add(new SetCardInfo("Veteran Soldier", 48, Rarity.UNCOMMON, mage.cards.v.VeteranSoldier.class));
         cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class));
         cards.add(new SetCardInfo("Vrock", 157, Rarity.UNCOMMON, mage.cards.v.Vrock.class));
         cards.add(new SetCardInfo("Wand of Wonder", 204, Rarity.RARE, mage.cards.w.WandOfWonder.class));
