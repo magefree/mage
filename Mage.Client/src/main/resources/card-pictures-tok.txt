@@ -376,8 +376,9 @@
 |Generate|TOK:C17|Rat|||DeathtouchRatToken|
 |Generate|TOK:C17|Vampire|||EdgarMarkovToken|
 |Generate|TOK:C17|Zombie|||ZombieToken|
-|Generate|TOK:C18|Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:C18|Angel|||AngelToken|
+|Generate|TOK:C18|Beast|1||BeastToken2|
+|Generate|TOK:C18|Beast|2||SpawningGroundsBeastToken|
 |Generate|TOK:C18|Cat|||CatToken|
 |Generate|TOK:C18|Cat Warrior|||CatWarriorToken|
 |Generate|TOK:C18|Clue|||ClueArtifactToken|
@@ -386,14 +387,18 @@
 |Generate|TOK:C18|Dragon|||DragonEggDragonToken|
 |Generate|TOK:C18|Dragon Egg|||NestingDragonToken|
 |Generate|TOK:C18|Elemental|||DokaiWeaverofLifeToken|
-|Generate|TOK:C18|Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:C18|Mask|||MaskToken|
+|Generate|TOK:C18|Myr|||MyrToken|
+|Generate|TOK:C18|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:C18|Phyrexian Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:C18|Plant|||PlantToken|
 |Generate|TOK:C18|Servo|||ServoToken|
+|Generate|TOK:C18|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:C18|Soldier|||SoldierToken|
 |Generate|TOK:C18|Survivor|||SurvivorToken|
 |Generate|TOK:C18|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:C18|Thopter|2||ThopterColorlessToken|
-|Generate|TOK:C18|Thopter|3||ThopterColorlessToken|
+|Generate|TOK:C18|Thopter|3||ThopterToken|
 |Generate|TOK:C18|Worm|||WormHarvestToken|
 |Generate|TOK:C18|Zombie|||ZombieToken|
 |Generate|TOK:C19|Assassin|||AssassinToken|
