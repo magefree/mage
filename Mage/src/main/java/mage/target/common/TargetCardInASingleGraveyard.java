@@ -31,16 +31,17 @@ public class TargetCardInASingleGraveyard extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         UUID firstTarget = this.getFirstTarget();
-        if (firstTarget == null) {
-            return false;
+
+        // If a card is already targeted, ensure that this new target has the same owner as currently chosen target
+        if (firstTarget != null) {
+            Card card = game.getCard(firstTarget);
+            Card targetCard = game.getCard(id);
+            if (card == null || targetCard == null || !card.isOwnedBy(targetCard.getOwnerId())) {
+                return false;
+            }
         }
 
-        Card card = game.getCard(firstTarget);
-        Card targetCard = game.getCard(id);
-        if (card == null || targetCard == null || !card.isOwnedBy(targetCard.getOwnerId())) {
-            return false;
-        }
-
+        // If it has the same owner (or no target picked) check that it's a valid target with super
         return super.canTarget(id, source, game);
     }
 
