@@ -171,6 +171,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sword Coast Sailor", 98, Rarity.UNCOMMON, mage.cards.s.SwordCoastSailor.class));
         cards.add(new SetCardInfo("Tabaxi Toucaneers", 46, Rarity.COMMON, mage.cards.t.TabaxiToucaneers.class));
         cards.add(new SetCardInfo("Tasha, the Witch Queen", 294, Rarity.MYTHIC, mage.cards.t.TashaTheWitchQueen.class));
+        cards.add(new SetCardInfo("Taunting Kobold", 199, Rarity.UNCOMMON, mage.cards.t.TauntingKobold.class));
         cards.add(new SetCardInfo("The Council of Four", 271, Rarity.RARE, mage.cards.t.TheCouncilOfFour.class));
         cards.add(new SetCardInfo("Thrakkus the Butcher", 295, Rarity.UNCOMMON, mage.cards.t.ThrakkusTheButcher.class));
         cards.add(new SetCardInfo("Thunderwave", 201, Rarity.UNCOMMON, mage.cards.t.Thunderwave.class));
