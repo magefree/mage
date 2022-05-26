@@ -37,7 +37,7 @@ public final class TwoHandedAxe extends AdventureCard {
         ));
 
         // Equip {1}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{R}"), false));
 
         // Sweeping Cleave
         // Target creature you control gains double strike until end of turn.

@@ -41,7 +41,7 @@ public final class HornOfValhalla extends AdventureCard {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
 
         // Ysgard's Call
         // Create X 1/1 white Soldier creature tokens.
