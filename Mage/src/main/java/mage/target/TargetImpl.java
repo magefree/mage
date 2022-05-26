@@ -9,12 +9,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
-import mage.game.permanent.Permanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -175,7 +175,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean doneChosing() {
+    public boolean doneChoosing() {
         return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
     }
 
@@ -284,7 +284,7 @@ public abstract class TargetImpl implements Target {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChosing());
+        } while (!isChosen() && !doneChoosing());
         return chosen;
     }
 
@@ -321,7 +321,7 @@ public abstract class TargetImpl implements Target {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChosing());
+        } while (!isChosen() && !doneChoosing());
 
         return chosen;
     }

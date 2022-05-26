@@ -19,7 +19,7 @@ public interface Target extends Serializable {
 
     boolean isChosen();
 
-    boolean doneChosing();
+    boolean doneChoosing();
 
     void clearChosen();
 
