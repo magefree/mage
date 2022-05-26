@@ -121,6 +121,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 188, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class));
         cards.add(new SetCardInfo("Lozhan, Dragons' Legacy", 281, Rarity.UNCOMMON, mage.cards.l.LozhanDragonsLegacy.class));
         cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 32, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class));
+        cards.add(new SetCardInfo("Lurking Green Dragon", 239, Rarity.COMMON, mage.cards.l.LurkingGreenDragon.class));
         cards.add(new SetCardInfo("Luxury Suite", 355, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Mahadi, Emporium Master", 282, Rarity.UNCOMMON, mage.cards.m.MahadiEmporiumMaster.class));
         cards.add(new SetCardInfo("Manor Gate", 356, Rarity.COMMON, mage.cards.m.ManorGate.class));
