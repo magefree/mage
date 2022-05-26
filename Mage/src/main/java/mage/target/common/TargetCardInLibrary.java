@@ -85,7 +85,7 @@ public class TargetCardInLibrary extends TargetCard {
                 return chosen;
             }
             chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen() && !doneChosing());
+        } while (!isChosen() && !doneChoosing());
         return chosen;
     }
 
