@@ -99,6 +99,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 234, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class));
         cards.add(new SetCardInfo("Hammers of Moradin", 25, Rarity.UNCOMMON, mage.cards.h.HammersOfMoradin.class));
         cards.add(new SetCardInfo("Hardy Outlander", 235, Rarity.UNCOMMON, mage.cards.h.HardyOutlander.class));
+        cards.add(new SetCardInfo("Heap Gate", 354, Rarity.COMMON, mage.cards.h.HeapGate.class));
         cards.add(new SetCardInfo("Horn of Valhalla", 26, Rarity.RARE, mage.cards.h.HornOfValhalla.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
