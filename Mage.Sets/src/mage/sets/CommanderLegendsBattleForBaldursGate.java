@@ -164,6 +164,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("The Council of Four", 271, Rarity.RARE, mage.cards.t.TheCouncilOfFour.class));
         cards.add(new SetCardInfo("Thrakkus the Butcher", 295, Rarity.UNCOMMON, mage.cards.t.ThrakkusTheButcher.class));
         cards.add(new SetCardInfo("Thunderwave", 201, Rarity.UNCOMMON, mage.cards.t.Thunderwave.class));
+        cards.add(new SetCardInfo("Tomb of Horrors Adventurer", 100, Rarity.RARE, mage.cards.t.TombOfHorrorsAdventurer.class));
         cards.add(new SetCardInfo("Treasure Keeper", 341, Rarity.UNCOMMON, mage.cards.t.TreasureKeeper.class));
         cards.add(new SetCardInfo("Two-Handed Axe", 203, Rarity.UNCOMMON, mage.cards.t.TwoHandedAxe.class));
         cards.add(new SetCardInfo("Tymora's Invoker", 101, Rarity.COMMON, mage.cards.t.TymorasInvoker.class));
