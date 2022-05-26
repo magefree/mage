@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -20,6 +22,8 @@ public final class PentaviteToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("M12", "C14", "CM2"));
     }
 
     public PentaviteToken(final PentaviteToken token) {
