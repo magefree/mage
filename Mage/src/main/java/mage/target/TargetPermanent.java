@@ -69,10 +69,8 @@ public class TargetPermanent extends TargetObject {
                         return false;
                     }
                 }
-                return filter.match(permanent, controllerId, source, game);
-            } else {
-                return filter.match(permanent, controllerId, source, game);
             }
+            return filter.match(permanent, controllerId, source, game);
         }
         return false;
     }
