@@ -46,6 +46,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Angels of Tyr", 9, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
         cards.add(new SetCardInfo("Bhaal's Invoker", 163, Rarity.COMMON, mage.cards.b.BhaalsInvoker.class));
         cards.add(new SetCardInfo("Bhaal, Lord of Murder", 268, Rarity.RARE, mage.cards.b.BhaalLordOfMurder.class));
+        cards.add(new SetCardInfo("Black Dragon Gate", 347, Rarity.COMMON, mage.cards.b.BlackDragonGate.class));
         cards.add(new SetCardInfo("Blade of Selves", 301, Rarity.RARE, mage.cards.b.BladeOfSelves.class));
         cards.add(new SetCardInfo("Blur", 58, Rarity.COMMON, mage.cards.b.Blur.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 348, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
