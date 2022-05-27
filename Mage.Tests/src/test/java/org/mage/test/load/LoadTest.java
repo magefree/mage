@@ -3,6 +3,7 @@ package org.mage.test.load;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardScanner;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
@@ -272,7 +273,7 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void test_TwoAIPlayGame_Multiple() {
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
@@ -305,6 +306,114 @@ public class LoadTest {
         gameResults.printResultHeader();
         gameResults.printResultData();
         gameResults.printResultTotal();
+    }
+
+    /**
+     * Helper function to run a single game of Commander between a variable number of AI players.
+     *
+     * @param gameName  name of the game for logging purposes
+     * @param numAI     the number of AI players
+     * @param decks     list of decks for the AI to use, one for each AI
+     */
+    public void playAICommanderGame(String gameName, int numAI, List<DeckCardLists> decks, LoadTestGameResult gameResult) {
+        // Check inputs
+        decks.forEach(Assert::assertNotNull);
+
+        Assert.assertTrue("Too many AI players", numAI <= 10);
+
+        Assert.assertEquals("Number of AI players {" + numAI + "} " +
+                        "and number provided decks {" + decks.size() + "} " +
+                        "are not equal.",
+                numAI,
+                decks.size()
+        );
+
+        // Creature monitor and game source
+        LoadPlayer monitor = new LoadPlayer("monitor", true);
+        Optional<TableView> checkGame;
+
+        // Create the game (Commander Free For All)
+        GameTypeView gameType = monitor.session.getGameTypes().get(3);
+        MatchOptions gameOptions = createCommanderGameOptions(gameName, gameType, monitor.session, numAI, PlayerType.COMPUTER_MAD);
+        TableView game = monitor.session.createTable(monitor.roomID, gameOptions);
+        UUID tableId = game.getTableId();
+
+        // AI join game
+        for (int i = 0 ; i < numAI ; i++) {
+            Assert.assertTrue(monitor.session.joinTable(
+                    monitor.roomID,
+                    tableId,
+                    "AI_" + i,
+                    PlayerType.COMPUTER_MAD,
+                    6,
+                    decks.get(i),
+                    ""
+            ));
+        }
+
+        // Start the match
+        Assert.assertTrue(monitor.session.startMatch(monitor.roomID, tableId));
+
+        // Play until game over
+        gameResult.start();
+        boolean startWatching = false;
+
+        while (true) {
+            GameView gameView = monitor.client.getLastGameView();
+
+            checkGame = monitor.getTable(tableId);
+            TableState state = checkGame.get().getTableState();
+
+            logger.warn(checkGame.get().getTableName()
+                    + (gameView != null ? ", turn " + gameView.getTurn() + ", " + gameView.getStep().toString() : "")
+                    + (gameView != null ? ", active " + gameView.getActivePlayerName() : "")
+                    + ", " + state);
+
+            if (state == TableState.FINISHED) {
+                gameResult.finish(gameView);
+                break;
+            }
+
+            if (!startWatching && state == TableState.DUELING) {
+                Assert.assertTrue(monitor.session.watchGame(checkGame.get().getGames().iterator().next()));
+                startWatching = true;
+            }
+
+            if (gameView != null) {
+                for (PlayerView p : gameView.getPlayers()) {
+                    logger.info(p.getName() + " - Life=" + p.getLife() + "; Lib=" + p.getLibraryCount());
+                }
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+    }
+
+    /**
+     * Run a single game of Commander between AI players all using the same deck.
+     */
+    @Ignore
+    @Test
+    public void test_AIPlayCommanderGame() {
+        // Number of AI to use
+        int numAI = 4;
+
+        // Prepare the decks
+        String deckPack = "";
+        ArrayList<DeckCardLists> decks = new ArrayList<>(numAI);
+        for (int i = 0 ; i < numAI ; i++) {
+            decks.add(DeckImporter.importDeckFromFile(deckPack, false));
+        }
+
+        // Create the storage for the game result
+        LoadTestGameResult gameResult = new LoadTestGameResult(0, "test game", 0);
+
+        // Run the test
+        playAICommanderGame(numAI + "AI Game", numAI, decks, gameResult);
     }
 
     @Test
@@ -472,6 +581,23 @@ public class LoadTest {
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(TEST_PROXY_TYPE);
         con.setProxyType(proxyType);
         return con;
+    }
+
+    private MatchOptions createCommanderGameOptions(String gameName, GameTypeView gameTypeView, Session session, int numSeats, PlayerType playerType) {
+        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), true, numSeats);
+
+        for (int i=0; i < numSeats; i++) {
+            options.getPlayerTypes().add(playerType);
+        }
+
+        options.setDeckType(session.getDeckTypes()[23]); // Variant Magic - Commander
+        options.setLimited(false);
+        options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
+        options.setRange(RangeOfInfluence.ALL);
+        options.setWinsNeeded(1);
+        options.setMatchTimeLimit(MatchTimeLimit.MIN__15);
+
+        return options;
     }
 
     private MatchOptions createSimpleGameOptions(String gameName, GameTypeView gameTypeView, Session session, PlayerType playersType) {
@@ -721,12 +847,8 @@ public class LoadTest {
             this.finalGameView = finalGameView;
         }
 
-        public int getLife1() {
-            return this.finalGameView.getPlayers().get(0).getLife();
-        }
-
-        public int getLife2() {
-            return this.finalGameView.getPlayers().get(1).getLife();
+        public int getLife(int playerNum) {
+            return this.finalGameView.getPlayers().get(playerNum).getLife();
         }
 
         public int getTurn() {
@@ -776,8 +898,8 @@ public class LoadTest {
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
                     String.valueOf(gameResult.getTurn()), //"turn",
-                    String.valueOf(gameResult.getLife1()), //"player 1",
-                    String.valueOf(gameResult.getLife2()), //"player 2",
+                    String.valueOf(gameResult.getLife(1)), //"player 1",
+                    String.valueOf(gameResult.getLife(2)), //"player 2",
                     String.valueOf(gameResult.getDuration()),// "time, sec",
                     String.valueOf(gameResult.getDuration() / gameResult.getTurn()) //"per turn, sec"
             );
@@ -803,11 +925,11 @@ public class LoadTest {
         }
 
         private int getAvgLife1() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getLife1).sum() / this.size();
+            return this.values().stream().mapToInt(gr -> gr.getLife(1)).sum() / this.size();
         }
 
         private int getAvgLife2() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
+            return this.values().stream().mapToInt(gr -> gr.getLife(2)).sum() / this.size();
         }
 
         private int getAvgDuration() {
