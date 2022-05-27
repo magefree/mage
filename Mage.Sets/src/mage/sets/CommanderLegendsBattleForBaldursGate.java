@@ -203,6 +203,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("You're Confronted by Robbers", 53, Rarity.COMMON, mage.cards.y.YoureConfrontedByRobbers.class));
         cards.add(new SetCardInfo("Young Blue Dragon", 106, Rarity.COMMON, mage.cards.y.YoungBlueDragon.class));
         cards.add(new SetCardInfo("Young Red Dragon", 210, Rarity.COMMON, mage.cards.y.YoungRedDragon.class));
+        cards.add(new SetCardInfo("Your Temple Is Under Attack", 52, Rarity.COMMON, mage.cards.y.YourTempleIsUnderAttack.class));
         cards.add(new SetCardInfo("Zevlor, Elturel Exile", 296, Rarity.RARE, mage.cards.z.ZevlorElturelExile.class));
     }
 }
