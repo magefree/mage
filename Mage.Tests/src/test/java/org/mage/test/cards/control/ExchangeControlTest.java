@@ -173,7 +173,16 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         attack(2, playerB, "War Falcon");
 
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Needed error about PlayerB having too many actions, but got:\n" + e.getMessage());
+            }
+        }
 
         // check creatures changes their controllers
         assertPermanentCount(playerA, "Llanowar Elves", 1);

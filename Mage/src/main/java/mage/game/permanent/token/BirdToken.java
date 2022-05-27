@@ -24,7 +24,7 @@ public final class BirdToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN",
-                "MH1", "C20", "M21", "ZNC", "KHC", "MH2");
+                "MH1", "C16", "C20", "M21", "ZNC", "KHC", "MH2");
     }
 
     public BirdToken(final BirdToken token) {
@@ -41,7 +41,7 @@ public final class BirdToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
+            setTokenType(2);
         }
     }
 }

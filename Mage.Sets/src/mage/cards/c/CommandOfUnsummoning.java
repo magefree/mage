@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.AttackedThisStepCondition;
@@ -11,12 +10,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
-import mage.filter.common.FilterAttackingCreature;
 import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CommandOfUnsummoning extends CardImpl {
@@ -34,7 +33,7 @@ public final class CommandOfUnsummoning extends CardImpl {
 
         // Return one or two target attacking creatures to their owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return one or two target attacking creatures to their owner's hand."));
-        this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 2, new FilterAttackingCreature(), false));
+        this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 2));
     }
 
     private CommandOfUnsummoning(final CommandOfUnsummoning card) {

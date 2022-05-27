@@ -397,7 +397,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChosing()) {
+                if (!target.doneChoosing()) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -750,10 +750,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -768,10 +768,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (targets.isEmpty()) {
             return super.choose(outcome, cards, target, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }

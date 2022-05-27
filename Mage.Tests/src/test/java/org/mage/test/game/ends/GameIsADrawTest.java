@@ -95,10 +95,11 @@ public class GameIsADrawTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stuffy Doll");
         setChoice(playerA, "PlayerA");
-        setChoice(playerA, "PlayerA");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Stuffy Doll");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals");
+        setChoice(playerA, "Yes");
+        setChoice(playerB, "Yes");
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
@@ -112,7 +113,6 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
         Assert.assertTrue("Infinite loop detected, game has be de a draw.", currentGame.isADraw());
-
     }
 
     /**

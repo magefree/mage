@@ -386,7 +386,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
-    void ventureIntoDungeon(UUID playerId);
+    void ventureIntoDungeon(UUID playerId, boolean undercity);
 
     /**
      * Tells whether the current game has day or night, defaults to false
@@ -519,6 +519,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void setMonarchId(Ability source, UUID monarchId);
 
+    UUID getInitiativeId();
+
+    void takeInitiative(Ability source, UUID initiativeId);
+
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
 
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
@@ -643,4 +647,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
+    
+    boolean isTurnOrderReversed();
 }

@@ -45,7 +45,7 @@ public class ZurTheEnchanterTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Diplomatic Immunity", "Zur the Enchanter");
 
         attack(2, playerB, "Zur the Enchanter");
-        setChoice(playerB, "Empyrial Armor");
+        // setChoice(playerB, "Empyrial Armor"); // No need for this choice since the AI will autosearch and autopick this
         setChoice(playerB, "Zur the Enchanter");
 
         setStopAt(2, PhaseStep.END_TURN);

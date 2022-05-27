@@ -45,11 +45,11 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean isChosen() {
-        return doneChosing();
+        return doneChoosing();
     }
 
     @Override
-    public boolean doneChosing() {
+    public boolean doneChoosing() {
         return amountWasSet
                 && (remainingAmount == 0
                 || (getMinNumberOfTargets() < getMaxNumberOfTargets()

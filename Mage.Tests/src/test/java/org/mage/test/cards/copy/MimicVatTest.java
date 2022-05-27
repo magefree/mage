@@ -6,6 +6,15 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.m.MimicVat Mimic Vat}
+ * {3}
+ * Artifact
+ * Imprint — Whenever a nontoken creature dies, you may exile that card.
+ *           If you do, return each other card exiled with Mimic Vat to its owner’s graveyard.
+ * {3}, {T}: Create a token that’s a copy of a card exiled with Mimic Vat.
+ *           It gains haste.
+ *           Exile it at the beginning of the next end step.
+ *
  * @author LevelX2
  */
 public class MimicVatTest extends CardTestPlayerBase {
@@ -22,8 +31,6 @@ public class MimicVatTest extends CardTestPlayerBase {
     @Test
     public void TestClone() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
-        // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -62,8 +69,6 @@ public class MimicVatTest extends CardTestPlayerBase {
     @Test
     public void TestPhyrexianMetamorph() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
-        // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Create a token that's a copy of a card exiled with Mimic Vat. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -76,6 +81,7 @@ public class MimicVatTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
         setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
         setChoice(playerA, true);
 
@@ -87,9 +93,8 @@ public class MimicVatTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount("Phyrexian Metamorph", 1);
-        assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
     }
 
     /**
@@ -100,30 +105,26 @@ public class MimicVatTest extends CardTestPlayerBase {
      */
     @Test
     public void TestExileFails() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Create a token that's a copy of a card exiled with Mimic Vat. It gains haste. Exile it at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1);
 
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
         // Exile up to four target cards from a single graveyard.
         // Transmute {1}{B}{B}
         addCard(Zone.HAND, playerB, "Shred Memory", 1); // Instant {1}{B}
 
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerA, true);
-        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shred Memory", "Silvercoat Lion", "Whenever a nontoken creature dies");
-        setChoice(playerA, true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
-        setChoice(playerA, true);
-        setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -133,6 +134,5 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         assertExileCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
-
     }
 }

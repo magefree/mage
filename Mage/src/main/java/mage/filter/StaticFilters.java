@@ -8,10 +8,7 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.KickedSpellPredicate;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -396,6 +393,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
+
+    static {
+        FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.add(AnotherCreatureOrAnArtifactPredicate.instance);
+        FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();
 
     static {
@@ -629,6 +633,14 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_CREATURES_CONTROLLED.add(TargetController.YOU.getControllerPredicate());
         FILTER_PERMANENT_CREATURES_CONTROLLED.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURES_OWNED_COMMANDER = new FilterCreaturePermanent("commander creatures you own");
+
+    static {
+        FILTER_CREATURES_OWNED_COMMANDER.add(TargetController.YOU.getOwnerPredicate());
+        FILTER_CREATURES_OWNED_COMMANDER.add(CommanderPredicate.instance);
+        FILTER_CREATURES_OWNED_COMMANDER.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_NON_BLACK = new FilterCreaturePermanent("nonblack creature");
@@ -878,6 +890,12 @@ public final class StaticFilters {
     static {
         FILTER_CREATURE_TOKENS.add(TokenPredicate.TRUE);
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
+    }
+
+    public static final FilterAttackingCreature FILTER_ATTACKING_CREATURE = new FilterAttackingCreature();
+
+    static {
+        FILTER_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");

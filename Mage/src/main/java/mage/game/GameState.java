@@ -76,6 +76,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private UUID priorityPlayerId; // player that has currently priority
     private UUID playerByOrderId; // player that has currently priority
     private UUID monarchId; // player that is the monarch
+    private UUID initiativeId; // player that has the initiative
     private SpellStack stack;
     private Command command;
     private boolean isPlaneChase;
@@ -107,6 +108,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean manaBurn;
     private boolean hasDayNight;
     private boolean isDaytime = true;
+    private boolean reverseTurnOrder = false;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -144,6 +146,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.priorityPlayerId = state.priorityPlayerId;
         this.playerByOrderId = state.playerByOrderId;
         this.monarchId = state.monarchId;
+        this.initiativeId = state.initiativeId;
         this.turn = state.turn.copy();
 
         this.stack = state.stack.copy();
@@ -251,6 +254,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.playerByOrderId = state.playerByOrderId;
         this.priorityPlayerId = state.priorityPlayerId;
         this.monarchId = state.monarchId;
+        this.initiativeId = state.initiativeId;
         this.stack = state.stack;
         this.command = state.command;
         this.isPlaneChase = state.isPlaneChase;
@@ -482,6 +486,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setMonarchId(UUID monarchId) {
         this.monarchId = monarchId;
+    }
+
+    public UUID getInitiativeId() {
+        return initiativeId;
+    }
+
+    public void setInitiativeId(UUID initiativeId) {
+        this.initiativeId = initiativeId;
     }
 
     public UUID getChoosingPlayerId() {
@@ -1435,9 +1447,21 @@ public class GameState implements Serializable, Copyable<GameState> {
     boolean isDaytime() {
         return isDaytime;
     }
-
+    
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
+    }
+
+    public boolean setReverseTurnOrder(boolean reverse){
+        if(this.reverseTurnOrder&&reverse){
+            this.reverseTurnOrder = false;
+        } else {
+            this.reverseTurnOrder = reverse;
+        }
+        return this.reverseTurnOrder;
+    }
+    public boolean getReverseTurnOrder(){
+        return this.reverseTurnOrder;
     }
 }

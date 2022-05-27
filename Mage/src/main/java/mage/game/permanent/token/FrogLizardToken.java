@@ -20,7 +20,7 @@ public final class FrogLizardToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("RNA", "C21");
+        availableImageSetCodes = Arrays.asList("RNA", "C15", "C21");
     }
 
     public FrogLizardToken(final FrogLizardToken token) {

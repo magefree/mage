@@ -16,7 +16,11 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     private final Condition interveningIfClauseCondition;
 
     public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, null, isOptional);
+        this(effect, targetController, null, isOptional);
+    }
+
+    public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, interveningIfClauseCondition, isOptional);
     }
 
     public BeginningOfEndStepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {

@@ -7,6 +7,13 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.t.ThadaAdelAcquisitor Thada Adel, Acquisitor}
+ * {1}{U}{U}
+ * Legendary Creature — Merfolk Rogue
+ * P/T 2/2
+ * Islandwalk (This creature can’t be blocked as long as defending player controls an Island.)
+ * Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player’s library for an artifact card and exile it.
+ * Then that player shuffles. Until end of turn, you may play that card.
  *
  * @author LevelX2
  */
@@ -31,9 +38,6 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
     @Test
     public void testCastWithThadaAdelAcquisitor() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        // Islandwalk
-        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library.
-        // Until end of turn, you may play that card.
         addCard(Zone.BATTLEFIELD, playerA, "Thada Adel, Acquisitor", 1); // Creature {1}{U}{U} 2/2
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
@@ -44,7 +48,9 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wildwood Rebirth"); // Instant {1}{G}
 
         attack(1, playerA, "Thada Adel, Acquisitor");
-        setChoice(playerA, "Bottle Gnomes");
+        addTarget(playerA, "Bottle Gnomes");
+
+//        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bottle Gnomes");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
@@ -64,9 +70,6 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
     @Test
     public void testCastWithThadaAdelAcquisitorReturnedFromBattlefield() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        // Islandwalk
-        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library.
-        // Until end of turn, you may play that card.
         addCard(Zone.BATTLEFIELD, playerA, "Thada Adel, Acquisitor", 1); // Creature {1}{U}{U} 2/2
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
@@ -78,7 +81,7 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Saving Grasp"); // Instant {U}
 
         attack(1, playerA, "Thada Adel, Acquisitor");
-        setChoice(playerA, "Bottle Gnomes");
+        addTarget(playerA, "Bottle Gnomes");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bottle Gnomes");
 

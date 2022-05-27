@@ -18,11 +18,10 @@ import java.util.UUID;
  */
 public final class PathOfPeril extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creatures [with mana value 2 or less]");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures [with mana value 2 or less]");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public PathOfPeril(UUID ownerId, CardSetInfo setInfo) {
@@ -30,8 +29,7 @@ public final class PathOfPeril extends CardImpl {
 
         // Cleave {4}{W}{B}
         this.addAbility(new CleaveAbility(
-                this, new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES), "{4}{W}{B}"
-        ));
+                this, new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES), "{4}{W}{B}"));
 
         // Destroy all creatures [with mana value 2 or less].
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

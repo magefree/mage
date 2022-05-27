@@ -250,7 +250,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     }
                     // add the target
                     target.add(permanent.getId(), game);
-                    if (target.doneChosing()) {
+                    if (target.doneChoosing()) {
                         return true;
                     }
                 }
@@ -1994,7 +1994,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // we still use playerId when getting cards even if they don't control the search
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
-        while (!target.doneChosing()) {
+        while (!target.doneChoosing()) {
             Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
@@ -2025,7 +2025,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
-        while (!target.doneChosing()) {
+        while (!target.doneChoosing()) {
             Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, null, game);
             if (card != null) {
                 target.add(card.getId(), game);
@@ -2992,7 +2992,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
-        return (SpellAbility) useable.values().stream().findFirst().orElse(null);
+        return useable.values().stream().findFirst().orElse(null);
     }
 
     @Override

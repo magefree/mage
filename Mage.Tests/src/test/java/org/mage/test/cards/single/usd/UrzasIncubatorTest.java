@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.u.UrzasIncubator Urza's Incubator}
+ * {3}
+ * Artifact
+ * As Urza’s Incubator enters the battlefield, choose a creature type.
+ * Creature spells of the chosen type cost {2} less to cast.
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
@@ -17,12 +22,6 @@ public class UrzasIncubatorTest extends CardTestPlayerBase {
     */
     @Test
     public void testEldraziCostReduction() {
-  
-        /*        
-        Urza's Incubator (3) Artifact
-            As Urza's Incubator enters the battlefield, choose a creature type.
-            Creature spells of the chosen type cost 2 less to cast.
-        */
         addCard(Zone.HAND, playerA, "Urza's Incubator", 1);
         addCard(Zone.HAND, playerA, "Eldrazi Displacer", 1); // {2}{W} eldrazi 3/3
         addCard(Zone.HAND, playerA, "Eldrazi Mimic", 2); // {2} eldrazi 2/1
@@ -47,23 +46,19 @@ public class UrzasIncubatorTest extends CardTestPlayerBase {
     */
     @Test
     public void testEldraziCostReductionWastesRequirement() {
-  
-        /*        
-        Urza's Incubator (3) Artifact
-            As Urza's Incubator enters the battlefield, choose a creature type.
-            Creature spells of the chosen type cost 2 less to cast.
-        */
         addCard(Zone.HAND, playerA, "Urza's Incubator", 1);
-        addCard(Zone.HAND, playerA, "Thought-Knot Seer", 1); // {3}{<>} eldrazi 4/4
+        addCard(Zone.HAND, playerA, "Thought-Knot Seer", 1); // {3}{C} eldrazi 4/4
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Incubator"); // taps 3 plains
         setChoice(playerA, "Eldrazi");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Thought-Knot Seer"); // 2 plains remaining, but <> required
+
+        // Don't have the colorless mana to cast it
+        checkPlayableAbility("Not enough mana", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Thought-Knot", false);
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertPermanentCount(playerA, "Urza's Incubator", 1);
-        assertPermanentCount(playerA, "Thought-Knot Seer", 0); // should not be able to cast
     }
 }
