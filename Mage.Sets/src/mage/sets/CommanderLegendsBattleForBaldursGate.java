@@ -149,6 +149,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Oceanus Dragon", 87, Rarity.COMMON, mage.cards.o.OceanusDragon.class));
         cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class));
         cards.add(new SetCardInfo("Passageway Seer", 141, Rarity.UNCOMMON, mage.cards.p.PassagewaySeer.class));
+        cards.add(new SetCardInfo("Patriar's Seal", 332, Rarity.UNCOMMON, mage.cards.p.PatriarsSeal.class));
         cards.add(new SetCardInfo("Plains", 451, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raised by Giants", 250, Rarity.RARE, mage.cards.r.RaisedByGiants.class));
         cards.add(new SetCardInfo("Raphael, Fiendish Savior", 292, Rarity.RARE, mage.cards.r.RaphaelFiendishSavior.class));
