@@ -68,6 +68,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Dragon", 13, Rarity.UNCOMMON, mage.cards.c.CrystalDragon.class));
         cards.add(new SetCardInfo("Cultist of the Absolute", 123, Rarity.RARE, mage.cards.c.CultistOfTheAbsolute.class));
         cards.add(new SetCardInfo("Displacer Kitten", 63, Rarity.RARE, mage.cards.d.DisplacerKitten.class));
+        cards.add(new SetCardInfo("Dragonborn Looter", 65, Rarity.COMMON, mage.cards.d.DragonbornLooter.class));
         cards.add(new SetCardInfo("Dread Linnorm", 225, Rarity.COMMON, mage.cards.d.DreadLinnorm.class));
         cards.add(new SetCardInfo("Drillworks Mole", 311, Rarity.UNCOMMON, mage.cards.d.DrillworksMole.class));
         cards.add(new SetCardInfo("Duke Ulder Ravengard", 272, Rarity.RARE, mage.cards.d.DukeUlderRavengard.class));
