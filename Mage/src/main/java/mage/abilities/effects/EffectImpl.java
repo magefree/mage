@@ -42,7 +42,9 @@ public abstract class EffectImpl implements Effect {
         if (effect.values != null) {
             values = new HashMap<>();
             Map<String, Object> map = effect.values;
-            values.putAll(map);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                values.put(entry.getKey(), entry.getValue());
+            }
         }
     }
 

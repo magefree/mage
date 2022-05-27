@@ -97,21 +97,12 @@ class DubiousChallengeEffect extends OneShotEffect {
 
 class DubiousChallengeMoveToBattlefieldEffect extends OneShotEffect {
 
-    private Cards cards;
-    private Player player;
-
     public DubiousChallengeMoveToBattlefieldEffect() {
         super(Outcome.Benefit);
     }
 
     public DubiousChallengeMoveToBattlefieldEffect(final DubiousChallengeMoveToBattlefieldEffect effect) {
         super(effect);
-        if (effect.cards != null) {
-            this.cards = effect.cards.copy();
-        }
-        if (effect.player != null) {
-            this.player = effect.player.copy();
-        }
     }
 
     @Override
@@ -126,10 +117,12 @@ class DubiousChallengeMoveToBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (cards == null || player == null) {
-            return false;
+        if (cards != null && player != null) {
+            return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         }
-
-        return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        return false;
     }
+
+    private Cards cards;
+    private Player player;
 }

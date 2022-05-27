@@ -19,7 +19,7 @@ public final class CarnivoreToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C13", "EMA", "TMP");
+        availableImageSetCodes = Arrays.asList("EMA", "TMP");
     }
 
     public CarnivoreToken(final CarnivoreToken token) {

@@ -29,7 +29,7 @@ public final class LightningRagerToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
 
-        availableImageSetCodes = Arrays.asList("C15");
+        availableImageSetCodes = Arrays.asList("C15", "CM2", "NCC");
     }
 
     public LightningRagerToken(final LightningRagerToken token) {
@@ -38,15 +38,5 @@ public final class LightningRagerToken extends TokenImpl {
 
     public LightningRagerToken copy() {
         return new LightningRagerToken(this);
-    }
-
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            this.setTokenType(2);
-        }
     }
 }

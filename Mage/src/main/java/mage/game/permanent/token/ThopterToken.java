@@ -34,6 +34,10 @@ public final class ThopterToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("2XM")) {
             this.setTokenType(2);
         }
+
+        if (getOriginalExpansionSetCode().equals("C18")) {
+            this.setTokenType(3);
+        }
     }
 
     public ThopterToken(final ThopterToken token) {

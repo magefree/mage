@@ -85,9 +85,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
-    private int stepNum;
-    private UUID turnId;
-    private boolean extraTurn;
+    private int stepNum = 0;
+    private UUID turnId = null;
+    private boolean extraTurn = false;
     private boolean legendaryRuleActive = true;
     private boolean gameOver;
     private boolean paused;
@@ -105,9 +105,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
-    private boolean manaBurn;
-    private boolean hasDayNight;
+    private boolean manaBurn = false;
+    private boolean hasDayNight = false;
     private boolean isDaytime = true;
+    private boolean reverseTurnOrder = false;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -157,7 +158,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.turnId = state.turnId;
         this.extraTurn = state.extraTurn;
         this.legendaryRuleActive = state.legendaryRuleActive;
         this.effects = state.effects.copy();
@@ -200,7 +200,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay.addAll(state.commandersToStay);
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
-        this.manaBurn = state.manaBurn;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     public void clearOnGameRestart() {
@@ -291,6 +291,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay = state.commandersToStay;
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     @Override
@@ -1446,9 +1447,21 @@ public class GameState implements Serializable, Copyable<GameState> {
     boolean isDaytime() {
         return isDaytime;
     }
-
+    
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
+    }
+
+    public boolean setReverseTurnOrder(boolean reverse){
+        if(this.reverseTurnOrder&&reverse){
+            this.reverseTurnOrder = false;
+        } else {
+            this.reverseTurnOrder = reverse;
+        }
+        return this.reverseTurnOrder;
+    }
+    public boolean getReverseTurnOrder(){
+        return this.reverseTurnOrder;
     }
 }

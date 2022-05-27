@@ -56,7 +56,6 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
-        this.paired = effect.paired;
     }
 
     @Override
@@ -67,11 +66,12 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-
         UUID permanentId = targetPointer.getFirst(game, source);
         Permanent target = game.getPermanent(permanentId);
-        if (target != null && target.getPairedCard() != null) {
-            this.paired = target.getPairedCard();
+        if (target != null) {
+            if (target.getPairedCard() != null) {
+                this.paired = target.getPairedCard();
+            }
         }
     }
 

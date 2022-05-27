@@ -33,9 +33,7 @@ public final class DesperateGambit extends CardImpl {
     public DesperateGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Choose a source you control and flip a coin.
-        // If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead.
-        // If you lose the flip, the next time it would deal damage this turn, prevent that damage.
+        // Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
         this.getSpellAbility().addEffect(new DesperateGambitEffect());
     }
 
@@ -56,16 +54,13 @@ class DesperateGambitEffect extends PreventionEffectImpl {
 
     public DesperateGambitEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        staticText = "Choose a source you control and flip a coin. " +
-                     "If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. " +
-                     "If you lose the flip, the next time it would deal damage this turn, prevent that damage";
+        staticText = "Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage";
         this.target = new TargetControlledSource();
     }
 
     public DesperateGambitEffect(final DesperateGambitEffect effect) {
         super(effect);
         this.target = effect.target.copy();
-        this.wonFlip = effect.wonFlip;
     }
 
     @Override

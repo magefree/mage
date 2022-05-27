@@ -24,7 +24,7 @@ public final class PhyrexianRebirthHorrorToken extends TokenImpl {
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
 
-        availableImageSetCodes = Arrays.asList("C18", "C19", "MBS", "CMR");
+        availableImageSetCodes = Arrays.asList("C16", "C18", "C19", "MBS", "CMR");
     }
 
     public PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {

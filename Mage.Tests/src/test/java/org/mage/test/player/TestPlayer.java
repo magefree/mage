@@ -83,7 +83,7 @@ public class TestPlayer implements Player {
     public static final String DIE_ROLL = "[die_roll]: ";
 
     private int maxCallsWithoutAction = 400;
-    private int foundNoAction;
+    private int foundNoAction = 0;
 
     // full playable AI, TODO: can be deleted?
     private boolean AIPlayer;
@@ -106,9 +106,9 @@ public class TestPlayer implements Player {
     // - enable checks for wrong or missing choice commands (you must set up all choices by unit test)
     // - enable inner choice dialogs accessable by set up choices
     //   (example: card call TestPlayer's choice, but it uses another choices, see docs in TestComputerPlayer)
-    private boolean strictChooseMode;
+    private boolean strictChooseMode = false;
 
-    private String[] groupsForTargetHandling;
+    private String[] groupsForTargetHandling = null;
 
     // Tracks the initial turns (turn 0s) both players are given at the start of the game.
     // Before actual turns start. Needed for checking attacker/blocker legality in the tests
@@ -146,7 +146,6 @@ public class TestPlayer implements Player {
             this.groupsForTargetHandling = testPlayer.groupsForTargetHandling.clone();
         }
         this.strictChooseMode = testPlayer.strictChooseMode;
-        this.maxCallsWithoutAction = testPlayer.maxCallsWithoutAction;
     }
 
     public void addChoice(String choice) {

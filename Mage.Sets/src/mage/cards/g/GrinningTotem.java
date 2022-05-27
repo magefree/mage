@@ -102,7 +102,6 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     public GrinningTotemMayPlayEffect(final GrinningTotemMayPlayEffect effect) {
         super(effect);
-        this.sameStep = effect.sameStep;
     }
 
     @Override
@@ -113,7 +112,9 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            return !sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving();
+            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
         } else {
             sameStep = false;
         }
@@ -197,10 +198,10 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ExileZone zone = game.getExile().getExileZone(exileZoneId);
-        if (controller == null || zone == null) {
-            return false;
+        if (controller != null && zone != null) {
+            return controller.moveCards(zone, Zone.GRAVEYARD, source, game);
         }
-
-        return controller.moveCards(zone, Zone.GRAVEYARD, source, game);
+        return false;
     }
+
 }

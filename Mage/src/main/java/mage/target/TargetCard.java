@@ -51,7 +51,8 @@ public class TargetCard extends TargetObject {
     }
 
     /**
-     * Checks if there are enough {@link Card} that can be chosen.
+     * Checks if there are enough {@link Card cards} in the appropriate zone that the player can choose from among them
+     * or if they are autochosen since there are fewer than the minimum number.
      *
      * @param sourceControllerId - controller of the target event source
      * @param source
@@ -160,6 +161,7 @@ public class TargetCard extends TargetObject {
                 switch (zone) {
                     case HAND:
                         for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
+                            // TODO: Why for sourceId == null?
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }

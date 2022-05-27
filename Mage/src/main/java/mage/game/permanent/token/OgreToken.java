@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -18,6 +20,8 @@ public final class OgreToken extends TokenImpl {
         subtype.add(SubType.OGRE);
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = Arrays.asList("WWK", "C16", "NCC");
     }
 
     public OgreToken(final OgreToken token) {

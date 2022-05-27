@@ -31,7 +31,6 @@ public final class SlumberingTora extends CardImpl {
 
     public SlumberingTora(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-
         // {2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn,
         // where X is the discarded card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
@@ -50,7 +49,7 @@ public final class SlumberingTora extends CardImpl {
 
     private static class SlumberingToraEffect extends ContinuousEffectImpl {
 
-        private int convManaCosts;
+        private int convManaCosts = 0;
 
         private SlumberingToraEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);
@@ -60,7 +59,6 @@ public final class SlumberingTora extends CardImpl {
 
         private SlumberingToraEffect(final SlumberingToraEffect effect) {
             super(effect);
-            this.convManaCosts = effect.convManaCosts;
         }
 
         @Override

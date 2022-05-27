@@ -80,24 +80,13 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (controller == null || opponent == null || permanent == null) {
-            return false;
-        }
-
-        String msg1 = "Have all damage dealt to " + controller.getLogName() +
-                     " be decremented from echo counters on " + permanent.getLogName() +
-                     " until " + controller.getLogName() + "'s next upkeep instead?";
-
-        String msg2 = "Until " + controller.getLogName() +
-                      "'s next upkeep, for each 1 damage that would be dealt to " + controller.getLogName() +
-                      ", an echo counter from " + permanent.getLogName() + " is removed instead";
-
-        if (opponent.chooseUse(outcome, msg1, source, game)) {
-            game.informPlayers(msg2);
-            game.addEffect(new SoulEchoReplacementEffect(), source);
+        if (controller != null && opponent != null && permanent != null) {
+            if (opponent.chooseUse(outcome, "Have all damage dealt to " + controller.getLogName() + " be decremented from echo counters on " + permanent.getLogName() + " until " + controller.getLogName() + "'s next upkeep instead?", source, game)) {
+                game.informPlayers("Until " + controller.getLogName() + "'s next upkeep, for each 1 damage that would be dealt to " + controller.getLogName() + ", an echo counter from " + permanent.getLogName() + " is removed instead");
+                game.addEffect(new SoulEchoReplacementEffect(), source);
+            }
             return true;
         }
-
         return false;
     }
 }
@@ -110,15 +99,16 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
         super(Duration.Custom, Outcome.PreventDamage);
     }
 
-    private SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
+    SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
         super(effect);
-        this.sameStep = effect.sameStep;
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            return !sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving();
+            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
         } else {
             sameStep = false;
         }
@@ -127,18 +117,14 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (permanent == null && controller == null) {
-            return false;
-        }
         DamageEvent damageEvent = (DamageEvent) event;
         int damage = damageEvent.getAmount();
-
-        permanent.removeCounters(CounterType.ECHO.createInstance(damage), source, game);
-        game.informPlayers(controller.getLogName() + ": " + damage + " damage replaced with " + permanent.getLogName());
-
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null && controller != null) {
+            permanent.removeCounters(CounterType.ECHO.createInstance(damage), source, game);
+            game.informPlayers(controller.getLogName() + ": " + damage + " damage replaced with " + permanent.getLogName());
+        }
         return true;
     }
 

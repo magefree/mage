@@ -76,11 +76,7 @@ public class CardDownloadData {
         this.tokenDescriptor = card.tokenDescriptor;
         this.tokenClassName = card.tokenClassName;
         this.fileName = card.fileName;
-        this.splitCard = card.splitCard;
-        this.flipCard = card.flipCard;
-        this.flippedSide = card.flippedSide;
-        this.downloadName = card.downloadName;
-        this.isType2 = card.isType2;
+
     }
 
     @Override

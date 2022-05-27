@@ -31,7 +31,7 @@ import java.util.*;
 public class RandomPlayer extends ComputerPlayer {
 
     private final boolean isSimulatedPlayer;
-    private int actionCount;
+    private int actionCount = 0;
 
     protected PassAbility pass = new PassAbility();
 
@@ -43,8 +43,6 @@ public class RandomPlayer extends ComputerPlayer {
     public RandomPlayer(final RandomPlayer player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.actionCount = player.actionCount;
-        this.pass = player.pass.copy();
     }
 
     @Override

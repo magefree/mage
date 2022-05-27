@@ -48,14 +48,11 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
 
     public ImpulsiveManeuversEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        staticText = "flip a coin. " +
-                     "If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. " +
-                     "If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage";
+        staticText = "flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage";
     }
 
     public ImpulsiveManeuversEffect(final ImpulsiveManeuversEffect effect) {
         super(effect);
-        this.wonFlip = effect.wonFlip;
     }
 
     @Override
@@ -89,25 +86,21 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || object == null) {
-            return false;
+        if (controller != null && object != null) {
+            if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
+                DamageEvent damageEvent = (DamageEvent) event;
+                if (damageEvent.isCombatDamage()) {
+                    if (wonFlip) {
+                        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
+                        this.discard();
+                    } else {
+                        preventDamageAction(event, source, game);
+                        this.discard();
+                        return true;
+                    }
+                }
+            }
         }
-
-        if (!super.applies(event, source, game)) {
-            return false;
-        }
-
-        if (!(event instanceof DamageEvent) || !((DamageEvent) event).isCombatDamage() || event.getAmount() <= 0) {
-            return false;
-        }
-
-        if (wonFlip) {
-            event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        } else {
-            preventDamageAction(event, source, game);
-        }
-
-        this.discard();
-        return true;
+        return false;
     }
 }
