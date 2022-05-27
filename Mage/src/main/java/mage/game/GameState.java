@@ -200,6 +200,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay.addAll(state.commandersToStay);
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     public void clearOnGameRestart() {
@@ -290,6 +291,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay = state.commandersToStay;
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     @Override
