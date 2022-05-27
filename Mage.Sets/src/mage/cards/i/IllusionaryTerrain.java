@@ -141,10 +141,8 @@ class ChooseTwoBasicLandTypesEffect extends OneShotEffect {
         this.staticText = "choose two basic land types";
     }
 
-    private ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
+    public ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
         super(effect);
-        this.choiceOne = effect.choiceOne;
-        this.choiceTwo = effect.choiceTwo;
     }
 
     @Override

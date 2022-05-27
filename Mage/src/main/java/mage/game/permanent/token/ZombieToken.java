@@ -20,7 +20,7 @@ public final class ZombieToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15",
+        availableImageSetCodes = Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "C18",
                 "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17",
                 "CNS", "MMA", "BNG", "KTK", "DTK", "ORI", "OGW",
                 "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01",
@@ -36,7 +36,7 @@ public final class ZombieToken extends TokenImpl {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
         if (getOriginalExpansionSetCode().equals("C14")) {
-            this.setTokenType(2);
+            this.setTokenType(1);
         }
         if (getOriginalExpansionSetCode().equals("EMN")) {
             this.setTokenType(RandomUtil.nextInt(4) + 1);

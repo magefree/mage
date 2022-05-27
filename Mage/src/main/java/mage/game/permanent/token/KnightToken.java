@@ -23,7 +23,7 @@ public final class KnightToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(VigilanceAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C13", "C15", "CMA", "DGM", "ORI", "RTR", "M19", "ELD", "M21", "AFC", "MIC", "DOM");
+        availableImageSetCodes = Arrays.asList("C15", "CMA", "DGM", "ORI", "RTR", "M19", "ELD", "M21", "AFC", "MIC", "DOM");
     }
 
     public KnightToken(final KnightToken token) {

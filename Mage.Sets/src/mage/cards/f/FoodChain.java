@@ -34,9 +34,7 @@ public final class FoodChain extends CardImpl {
     public FoodChain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // Exile a creature you control: Add X mana of any one color,
-        //                               where X is the exiled creature's converted mana cost plus one.
-        //                               Spend this mana only to cast creature spells.
+        // Exile a creature you control: Add X mana of any one color, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new FoodChainManaEffect(),
                 new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true)));
         this.addAbility(ability);
@@ -70,13 +68,11 @@ class FoodChainManaEffect extends ManaEffect {
     ConditionalManaBuilder manaBuilder = new FoodChainManaBuilder();
 
     FoodChainManaEffect() {
-        this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's mana value. " +
-                          "Spend this mana only to cast creature spells";
+        this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells";
     }
 
     FoodChainManaEffect(final FoodChainManaEffect effect) {
         super(effect);
-        this.manaBuilder = effect.manaBuilder;
     }
 
     @Override
@@ -87,25 +83,21 @@ class FoodChainManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        if (game == null) {
-            return netMana;
-        }
-
-        int cmc = -1;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.isCreature(game)) {
-                cmc = Math.max(cmc, permanent.getManaCost().manaValue());
+        if (game != null) {
+            int cmc = -1;
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+                if (permanent.isCreature(game)) {
+                    cmc = Math.max(cmc, permanent.getManaCost().manaValue());
+                }
+            }
+            if (cmc != -1) {
+                netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.BlueMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.RedMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
             }
         }
-
-        if (cmc != -1) {
-            netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.BlueMana( cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.RedMana(  cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
-        }
-
         return netMana;
     }
 
@@ -115,27 +107,24 @@ class FoodChainManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return mana;
-        }
-
-        int manaCostExiled = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost.isPaid() && cost instanceof ExileTargetCost) {
-                for (Card card : ((ExileTargetCost) cost).getPermanents()) {
-                    manaCostExiled += card.getManaValue();
+        if (controller != null) {
+            int manaCostExiled = 0;
+            for (Cost cost : source.getCosts()) {
+                if (cost.isPaid() && cost instanceof ExileTargetCost) {
+                    for (Card card : ((ExileTargetCost) cost).getPermanents()) {
+                        manaCostExiled += card.getManaValue();
+                    }
                 }
             }
+            ChoiceColor choice = new ChoiceColor();
+            if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                return mana;
+            }
+            Mana chosen = choice.getMana(manaCostExiled + 1);
+            return manaBuilder.setMana(chosen, source, game).build();
         }
-
-        ChoiceColor choice = new ChoiceColor();
-        if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
-            return mana;
-        }
-
-        Mana chosen = choice.getMana(manaCostExiled + 1);
-        return manaBuilder.setMana(chosen, source, game).build();
+        return mana;
     }
+
 }

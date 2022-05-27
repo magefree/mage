@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.Skeleton41Token;
+import mage.game.permanent.token.SkeletonMenaceToken;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class GutTrueSoulZealot extends CardImpl {
         // Whenever you attack, you may sacrifice another creature or an artifact. If you do, create a 4/1 black Skeleton creature token with menace that's tapped and attacking.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(
-                        new Skeleton41Token(), 1, true, true
+                        new SkeletonMenaceToken(), 1, true, true
                 ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE)
         ), 1));
 

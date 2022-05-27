@@ -18,7 +18,7 @@ public final class BatToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("GVL", "DDD", "GPT", "MMA", "M19", "MID", "VOC");
+        availableImageSetCodes = Arrays.asList("C17", "GVL", "DDD", "GPT", "MMA", "M19", "MID", "VOC");
     }
 
     public BatToken(final BatToken token) {

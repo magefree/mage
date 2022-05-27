@@ -3769,6 +3769,11 @@ public abstract class GameImpl implements Game {
     public boolean isGameStopped() {
         return gameStopped;
     }
+    
+    @Override
+    public boolean isTurnOrderReversed() {
+        return state.getReverseTurnOrder();
+    }
 
     @Override
     public String toString() {

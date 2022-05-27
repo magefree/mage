@@ -70,7 +70,11 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
+        if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2) {
+            this.getEffects().setValue("spellCast", game.getSpell(event.getTargetId()));
+            return true;
+        }
+        return false;
     }
 
     @Override

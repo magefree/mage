@@ -59,6 +59,8 @@ public final class KrovikanVampire extends CardImpl {
 
 class KrovikanVampireEffect extends OneShotEffect {
 
+    Set<UUID> creaturesAffected = new HashSet<>();
+
     KrovikanVampireEffect() {
         super(Outcome.Neutral);
         staticText = "put that card onto the battlefield under your control. Sacrifice it when you lose control of {this}";
@@ -72,24 +74,25 @@ class KrovikanVampireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent krovikanVampire = game.getPermanent(source.getSourceId());
-        Set<UUID> creaturesAffected = (Set<UUID>) game.getState().getValue(source.getSourceId() + "creatureToGainControl");
-        if (creaturesAffected == null || controller == null || krovikanVampire == null) {
-            return false;
+        creaturesAffected = (Set<UUID>) game.getState().getValue(source.getSourceId() + "creatureToGainControl");
+        if (creaturesAffected != null
+                && controller != null
+                && krovikanVampire != null) {
+            creaturesAffected.stream().map((creatureId) -> {
+                controller.moveCards(game.getCard(creatureId), Zone.BATTLEFIELD, source, game, false, false, false, null);
+                return creatureId;
+            }).map((creatureId) -> {
+                OneShotEffect effect = new SacrificeTargetEffect();
+                effect.setText("Sacrifice this if Krovikan Vampire leaves the battlefield or its current controller loses control of it.");
+                effect.setTargetPointer(new FixedTarget(creatureId, game));
+                return effect;
+            }).map((effect) -> new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId())).forEachOrdered((dTA) -> {
+                game.addDelayedTriggeredAbility(dTA, source);
+            });
+            creaturesAffected.clear();
+            return true;
         }
-
-        creaturesAffected.stream().map((creatureId) -> {
-            controller.moveCards(game.getCard(creatureId), Zone.BATTLEFIELD, source, game, false, false, false, null);
-            return creatureId;
-        }).map((creatureId) -> {
-            OneShotEffect effect = new SacrificeTargetEffect();
-            effect.setText("Sacrifice this if Krovikan Vampire leaves the battlefield or its current controller loses control of it.");
-            effect.setTargetPointer(new FixedTarget(creatureId, game));
-            return effect;
-        }).map((effect) -> new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId())).forEachOrdered((dTA) -> {
-            game.addDelayedTriggeredAbility(dTA, source);
-        });
-        creaturesAffected.clear();
-        return true;
+        return false;
     }
 
     @Override
@@ -106,24 +109,21 @@ class KrovikanVampireInterveningIfCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         KrovikanVampireCreaturesDiedWatcher watcherDied = game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
         KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
-        if (watcherDied == null) {
-            return false;
-        }
-
-        Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
-        creaturesThatDiedThisTurn.stream().filter((mor) -> (watcherDamaged != null)).forEachOrdered((mor) -> {
-            watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
-                    && mor == mor2)).forEachOrdered((_item) -> {
-                creaturesAffected.add(mor);
+        if (watcherDied != null) {
+            Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
+            creaturesThatDiedThisTurn.stream().filter((mor) -> (watcherDamaged != null)).forEachOrdered((mor) -> {
+                watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
+                        && mor == mor2)).forEachOrdered((_item) -> {
+                    creaturesAffected.add(mor);
+                });
             });
-        });
-
-        if (creaturesAffected == null || creaturesAffected.isEmpty()) {
-            return false;
+            if (creaturesAffected != null
+                    && creaturesAffected.size() > 0) {
+                game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
+                return true;
+            }
         }
-
-        game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
-        return true;
+        return false;
     }
 
     @Override
@@ -142,15 +142,14 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT || !sourceId.equals(event.getSourceId())) {
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT
+                || !sourceId.equals(event.getSourceId())) {
             return;
         }
-
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null || !permanent.isCreature(game)) {
             return;
         }
-
         damagedBySource.add(event.getTargetId());
     }
 
@@ -216,10 +215,14 @@ class KrovikanVampireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL || event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            return event.getTargetId().equals(krovikanVampire);
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL
+                && event.getTargetId().equals(krovikanVampire)) {
+            return true;
         }
-
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+                && event.getTargetId().equals(krovikanVampire)) {
+            return true;
+        }
         return false;
     }
 

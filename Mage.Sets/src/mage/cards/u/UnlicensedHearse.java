@@ -39,13 +39,15 @@ enum UnlicensedHearseValue implements DynamicValue {
         if (unlicensedHearse == null) {
             return 0;
         }
+
         // use the source card, not the source object of the ability to grab the correct zcc
-        ExileZone cardsExiledWithUnlicensedHearse
-                = game.getExile().getExileZone(
-                        CardUtil.getExileZoneId(game, unlicensedHearse.getId(), unlicensedHearse.getZoneChangeCounter(game)));
+        ExileZone cardsExiledWithUnlicensedHearse = game.getExile().getExileZone(
+                        CardUtil.getExileZoneId(game, unlicensedHearse.getId(), unlicensedHearse.getZoneChangeCounter(game))
+        );
         if (cardsExiledWithUnlicensedHearse == null) {
             return 0;
         }
+
         return cardsExiledWithUnlicensedHearse.size();
     }
 
@@ -72,8 +74,7 @@ public final class UnlicensedHearse extends CardImpl {
         this.toughness = new MageInt(0);
 
         // {T}: Exile up to two target cards from a single graveyard.
-        Ability ability
-                = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
 
@@ -81,8 +82,9 @@ public final class UnlicensedHearse extends CardImpl {
         this.addAbility(
                 new SimpleStaticAbility(
                         Zone.ALL,
-                        new SetPowerToughnessSourceEffect(UnlicensedHearseValue.instance, Duration.EndOfGame))
-                        .addHint(hint));
+                        new SetPowerToughnessSourceEffect(UnlicensedHearseValue.instance, Duration.EndOfGame)
+                ).addHint(hint)
+        );
 
         // Crew 2
         this.addAbility(new CrewAbility(2));

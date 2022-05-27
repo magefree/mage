@@ -37,7 +37,7 @@ public final class HuntedDragonKnightToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            setTokenType(2);
+            setTokenType(1);
         }
     }
 }

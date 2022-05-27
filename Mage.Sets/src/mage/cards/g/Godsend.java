@@ -61,7 +61,7 @@ public final class Godsend extends CardImpl {
 
 class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final Set<UUID> possibleTargets = new HashSet<>();
+    private Set<UUID> possibleTargets = new HashSet<>();
 
     GodsendTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GodsendExileEffect(), true);
@@ -69,7 +69,6 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
     GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
         super(ability);
-        this.possibleTargets.addAll(ability.possibleTargets);
     }
 
     @Override
@@ -154,19 +153,13 @@ class GodsendExileEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (creature == null || controller == null || sourcePermanent == null) {
-            return false;
-        }
+        if (creature != null && controller != null && sourcePermanent != null) {
+            UUID exileId = CardUtil.getCardExileZoneId(game, source);
+            controller.moveCardToExileWithInfo(creature, exileId,
+                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')', source, game, Zone.BATTLEFIELD, true);
 
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
-        return controller.moveCardToExileWithInfo(
-                creature,
-                exileId,
-                sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')',
-                source,
-                game,
-                Zone.BATTLEFIELD,
-                true);
+        }
+        return false;
     }
 }
 
@@ -197,30 +190,19 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
-            return false;
-        }
-
-        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            return false;
-        }
-
-        MageObject object = game.getObject(event.getSourceId());
-        if (object == null) {
-            return false;
-        }
-
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (exileZone == null) {
-            return false;
-        }
-
-        for (Card card : exileZone.getCards(game)) {
-            if ((card.getName().equals(object.getName()))) {
-                return true;
+        if (event.getType() == GameEvent.EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            MageObject object = game.getObject(event.getSourceId());
+            if (object != null) {
+                ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+                if ((exileZone != null)) {
+                    for (Card card : exileZone.getCards(game)) {
+                        if ((card.getName().equals(object.getName()))) {
+                            return true;
+                        }
+                    }
+                }
             }
         }
-
         return false;
     }
 }
