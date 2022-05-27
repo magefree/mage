@@ -92,10 +92,15 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         if (this.isEmpty()) {
             return null;
         }
-        MageObject object = game.getObject(RandomUtil.randomFromCollection(this)); // neccessary if permanent tokens are in the collection
+
+        MageObject object = game.getObject(RandomUtil.randomFromCollection(this));
+        // neccessary if permanent tokens are in the collection
         if (object instanceof Card) {
             return (Card) object;
         }
+
+        // TODO: Why is this returning null if the random card happened to be a token?
+        //       Why not pick a random card out of only the ones that are actually cards?
         return null;
     }
 
@@ -134,6 +139,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         return cards;
     }
 
+    // TODO: Why is this used a completely different implementation than the version without the filter?
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
         return stream().map(game::getCard).filter(Objects::nonNull).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
@@ -197,13 +203,15 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Collection<Card> getUniqueCards(Game game) {
-        Map<String, Card> cards = new HashMap<>();
+        Map<String, Card> cards = new HashMap<>(this.size());
+
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) {
                 cards.putIfAbsent(card.getName(), card);
             }
         }
+
         return cards.values();
     }
 
