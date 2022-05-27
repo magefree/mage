@@ -113,24 +113,30 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int size = manaSymbols.size();
-            Mana mana = new Mana();
-            List<String> manaStrings = new ArrayList<>(size);
-            for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                manaStrings.add(coloredManaSymbol.toString());
-            }
-            List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, 0, amount.calculate(game, source, this), MultiAmountType.MANA, game);
-            for (int i = 0; i < size; i++) {
-                ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
-                int amount = manaList.get(i);
-                for (int j = 0; j < amount; j++) {
-                    mana.add(new Mana(coloredManaSymbol));
-                }
-            }
-            return mana;
+        if (player == null) {
+            return null;
         }
-        return null;
+
+        // Calculate which mana colors are available as options
+        int size = manaSymbols.size();
+        Mana mana = new Mana();
+        List<String> manaStrings = new ArrayList<>(size);
+        for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+            manaStrings.add(coloredManaSymbol.toString());
+        }
+
+        // Ask player for color distribution
+        int manaAmount = amount.calculate(game, source, this);
+        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, manaAmount, manaAmount, MultiAmountType.MANA, game);
+
+        // Covert choices to mana
+        for (int i = 0; i < size; i++) {
+            ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
+            int amount = manaList.get(i);
+
+            mana.add(new Mana(coloredManaSymbol, amount));
+        }
+        return mana;
     }
 
     @Override
