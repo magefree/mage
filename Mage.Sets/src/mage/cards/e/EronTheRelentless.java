@@ -33,7 +33,7 @@ public final class EronTheRelentless extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {R}{R}{R}: Regenerate Eron the Relentless.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{R}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{R}{R}{R}"));
         this.addAbility(ability);
     }
 

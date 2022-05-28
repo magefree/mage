@@ -38,7 +38,7 @@ public final class Erosion extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // At the beginning of the upkeep of enchanted land's controller, destroy that land unless that player pays {1} or 1 life.
-        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DestroyAttachedToEffect("enchanted land"), new OrCost("{1} or 1 life", new ManaCostsImpl("{1}"), new PayLifeCost(1)));
+        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DestroyAttachedToEffect("enchanted land"), new OrCost("{1} or 1 life", new ManaCostsImpl<>("{1}"), new PayLifeCost(1)));
         effect.setText("destroy that land unless that player pays {1} or 1 life");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted land's controller, "));
     }
