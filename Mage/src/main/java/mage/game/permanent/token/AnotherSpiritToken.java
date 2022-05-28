@@ -22,7 +22,7 @@ public final class AnotherSpiritToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("BOK", "VOC");
+        availableImageSetCodes = Arrays.asList("VOC");
     }
 
     @Override

@@ -18,7 +18,7 @@ public final class EldraziToken extends TokenImpl {
         power = new MageInt(10);
         toughness = new MageInt(10);
 
-        availableImageSetCodes = Arrays.asList("BFZ", "C19", "C21");
+        availableImageSetCodes = Arrays.asList("BFZ", "C19", "C21", "NCC");
     }
 
     public EldraziToken(final EldraziToken token) {
