@@ -32,7 +32,7 @@ public final class HeraldOfAnafenza extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Outlast {2}{W} <em>({2}{W} {T}: Put a +1/+1 counter on this creature.  Outlast only as a sorcery.)</em>
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{2}{W}")));
 
         // Whenever you activate Herald of Anafenza's outlast ability, create a 1/1 white Warrior creature token.
         this.addAbility(new HeraldOfAnafenzaTriggeredAbility());

@@ -30,7 +30,7 @@ public final class HexParasite extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{B/P}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HexParasiteEffect(), new ManaCostsImpl("{X}{B/P}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HexParasiteEffect(), new ManaCostsImpl<>("{X}{B/P}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class HematiteGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{R}: Hematite Golem gets +2/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private HematiteGolem(final HematiteGolem card) {

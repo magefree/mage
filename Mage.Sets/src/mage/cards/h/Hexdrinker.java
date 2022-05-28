@@ -35,7 +35,7 @@ public final class Hexdrinker extends LevelerCard {
         this.toughness = new MageInt(1);
 
         // Level up {1}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}")));
 
         // LEVEL 3-7
         // 4/4

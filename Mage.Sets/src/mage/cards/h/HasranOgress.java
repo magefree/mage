@@ -61,7 +61,7 @@ class HasranOgressEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cost cost = new ManaCostsImpl("{2}");
+            Cost cost = new ManaCostsImpl<>("{2}");
             if (!(controller.chooseUse(Outcome.Benefit, "Pay {2}?", source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {
                 controller.damage(3, source.getSourceId(), source, game);

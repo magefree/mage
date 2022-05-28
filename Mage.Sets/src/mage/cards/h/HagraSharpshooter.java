@@ -30,7 +30,7 @@ public final class HagraSharpshooter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{B}: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ManaCostsImpl("{4}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

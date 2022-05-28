@@ -37,7 +37,7 @@ public final class HangedExecutioner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
 
         // {3}{W}, Exile Hanged Executioner: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
