@@ -1493,7 +1493,6 @@
 # C21
 |Generate|TOK:C21|Beast|1||BeastToken|
 |Generate|TOK:C21|Beast|2||BeastToken2|
-|Generate|TOK:C21|Fungus Beast|||FungusBeastToken|
 |Generate|TOK:C21|Boar|||Boar2Token|
 # no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tc21/6/champion-of-wits
 # no need tokens for Copy, but scryfall have it: https://scryfall.com/card/tc21/30/copy
@@ -1507,6 +1506,7 @@
 |Generate|TOK:C21|Fish|||ReefWormFishToken|
 |Generate|TOK:C21|Food|||FoodToken|
 |Generate|TOK:C21|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:C21|Fungus Beast|||FungusBeastToken|
 |Generate|TOK:C21|Golem|1||GolemFlyingToken|
 |Generate|TOK:C21|Golem|2||GolemVigilanceToken|
 |Generate|TOK:C21|Golem|3||GolemTrampleToken|
