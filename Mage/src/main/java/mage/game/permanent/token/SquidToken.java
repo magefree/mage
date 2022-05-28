@@ -26,7 +26,7 @@ public final class SquidToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("M15", "C16");
     }
 
-    public SquidToken(final SquidToken token) {
+    private SquidToken(final SquidToken token) {
         super(token);
     }
 
