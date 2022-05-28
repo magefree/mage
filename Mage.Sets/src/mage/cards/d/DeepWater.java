@@ -27,7 +27,7 @@ public final class DeepWater extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // {U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.
-        this.addAbility(new SimpleActivatedAbility(new DeepWaterReplacementEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DeepWaterReplacementEffect(), new ManaCostsImpl<>("{U}")));
     }
 
     private DeepWater(final DeepWater card) {

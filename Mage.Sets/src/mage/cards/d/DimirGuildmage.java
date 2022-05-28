@@ -30,11 +30,11 @@ public final class DimirGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{U}: Target player draws a card. Activate this ability only any time you could cast a sorcery.
-        Ability firstAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{3}{U}"));
+        Ability firstAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl<>("{3}{U}"));
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
         // {3}{B}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}{B}"));
+        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{3}{B}"));
         secondAbility.addTarget(new TargetPlayer());
         this.addAbility(secondAbility);
     }

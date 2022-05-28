@@ -32,7 +32,7 @@ public final class DragonHatchling extends CardImpl {
         // {R}: Dragon Hatchling gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}")));
+                new ManaCostsImpl<>("{R}")));
     }
 
     private DragonHatchling(final DragonHatchling card) {

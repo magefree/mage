@@ -30,7 +30,7 @@ public final class Douse extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
         
         // {1}{U}: Counter target red spell.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

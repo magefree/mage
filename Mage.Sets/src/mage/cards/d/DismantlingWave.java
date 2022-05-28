@@ -36,7 +36,7 @@ public final class DismantlingWave extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DismantlingWaveAdjuster.instance);
 
         // Cycling {6}{W}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{6}{W}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{6}{W}{W}")));
 
         // When you cycle Dismantling Wave, destroy all artifacts and enchantments.
         this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(filter)));

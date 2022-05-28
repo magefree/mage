@@ -24,7 +24,7 @@ public final class DeadbridgeGoliath extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Scavenge {4}{G}{G} ({4}{G}{G} , Exile this card from your graveyard: Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{G}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{G}{G}")));
     }
 
     private DeadbridgeGoliath(final DeadbridgeGoliath card) {

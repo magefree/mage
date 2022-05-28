@@ -40,7 +40,7 @@ public final class Dragonrage extends CardImpl {
                 new PermanentsOnBattlefieldCount(filter)));
         
         // Until end of turn, attacking creatures you control gain "{R}: This creature gets +1/+0 until end of turn."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         Effect effect = new GainAbilityAllEffect(abilityToGain, Duration.EndOfTurn, filter);
         effect.setText("Until end of turn, attacking creatures you control gain \"{R}: This creature gets +1/+0 until end of turn.\"");
         this.getSpellAbility().addEffect(effect);        

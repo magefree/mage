@@ -151,7 +151,7 @@ class DreadWightEffect extends OneShotEffect {
             Ability activatedAbility = new SimpleActivatedAbility(
                     Zone.BATTLEFIELD,
                     new RemoveCounterSourceEffect(CounterType.PARALYZATION.createInstance()),
-                    new ManaCostsImpl("{4}"));
+                    new ManaCostsImpl<>("{4}"));
             ContinuousEffect effect4 = new GainAbilityTargetEffect(
                     activatedAbility,
                     Duration.WhileOnBattlefield);

@@ -27,7 +27,7 @@ public final class DiscipleOfLaw extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DiscipleOfLaw(final DiscipleOfLaw card) {

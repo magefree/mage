@@ -25,7 +25,7 @@ public final class Drowned extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Drowned.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private Drowned(final Drowned card) {

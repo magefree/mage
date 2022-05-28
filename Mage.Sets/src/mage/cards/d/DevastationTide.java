@@ -23,7 +23,7 @@ public final class DevastationTide extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));
 
         // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private DevastationTide(final DevastationTide card) {
