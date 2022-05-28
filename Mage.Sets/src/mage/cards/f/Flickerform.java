@@ -48,7 +48,7 @@ public final class Flickerform extends CardImpl {
         this.addAbility(ability);
 
         // {2}{W}{W}: Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlickerformEffect(), new ManaCostsImpl("{2}{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlickerformEffect(), new ManaCostsImpl<>("{2}{W}{W}")));
     }
 
     private Flickerform(final Flickerform card) {

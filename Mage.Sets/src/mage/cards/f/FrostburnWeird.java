@@ -27,7 +27,7 @@ public final class FrostburnWeird extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {U/R}: Frostburn Weird gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U/R}")));
     }
 
     private FrostburnWeird(final FrostburnWeird card) {

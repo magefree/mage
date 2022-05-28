@@ -35,7 +35,7 @@ public final class FirstSphereGargantua extends CardImpl {
         this.addAbility(ability);
 
         // Unearth {2}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private FirstSphereGargantua(final FirstSphereGargantua card) {
