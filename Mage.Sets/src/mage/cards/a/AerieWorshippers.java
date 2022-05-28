@@ -28,7 +28,7 @@ public final class AerieWorshippers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Inspired</i> &mdash; Whenever Aerie Worshipers becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl("{2}{U}"))));
+        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl<>("{2}{U}"))));
     }
 
     private AerieWorshippers(final AerieWorshippers card) {

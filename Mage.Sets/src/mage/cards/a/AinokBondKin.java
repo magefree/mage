@@ -28,7 +28,7 @@ public final class AinokBondKin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Outlast {1}{W} <em>({1}{W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)</em>
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{W}")));
 
         // Each creature you control with a +1/+1 counter on it has first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(

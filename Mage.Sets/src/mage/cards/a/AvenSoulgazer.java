@@ -47,7 +47,7 @@ public final class AvenSoulgazer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}{W}: Look at target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AvenSoulgazerLookFaceDownEffect(), new ManaCostsImpl("{2}{W}")); 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AvenSoulgazerLookFaceDownEffect(), new ManaCostsImpl<>("{2}{W}")); 
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

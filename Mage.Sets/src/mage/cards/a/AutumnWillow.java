@@ -32,7 +32,7 @@ public final class AutumnWillow extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // {G}: Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnWillowEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnWillowEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
