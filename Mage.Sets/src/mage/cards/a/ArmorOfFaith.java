@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class ArmorOfFaith extends CardImpl {
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
         // {W}: Enchanted creature gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private ArmorOfFaith(final ArmorOfFaith card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class AsphodelWanderer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}: Regenerate Asphodel Wanderer.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private AsphodelWanderer(final AsphodelWanderer card) {

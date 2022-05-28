@@ -13,6 +13,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -30,7 +31,6 @@ import mage.util.CardUtil;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.cards.CardsImpl;
 
 /**
  * @author TheElk801
@@ -48,7 +48,7 @@ public final class ArcaneArtisan extends CardImpl {
         // {2}{U}, {T}: Target player draws a card, then exiles a card from their hand. If a creature card is exiled this way, that player creates a token that's a copy of that card.
         Ability ability = new SimpleActivatedAbility(
                 new ArcaneArtisanCreateTokenEffect(),
-                new ManaCostsImpl("{2}{U}")
+                new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

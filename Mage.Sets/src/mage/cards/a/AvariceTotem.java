@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class AvariceTotem extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {5}: Exchange control of Avarice Totem and target nonland permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), new ManaCostsImpl<>("{5}"));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

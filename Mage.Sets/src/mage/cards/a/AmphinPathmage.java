@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class AmphinPathmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
@@ -19,6 +18,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class AkoumFirebird extends CardImpl {
         // <i>Landfall</i>-Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}.
         // If you do, return Akoum Firebird from your graveyard to the battlefield.
         this.addAbility(new AkoumFirebirdLandfallAbility(new DoIfCostPaid(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl("{4}{R}{R}")), false));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{4}{R}{R}")), false));
     }
 
     private AkoumFirebird(final AkoumFirebird card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -11,6 +10,8 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class AtarkaBeastbreaker extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(4,4, Duration.EndOfTurn),
-                new ManaCostsImpl("{4}{G}"),
+                new ManaCostsImpl<>("{4}{G}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);

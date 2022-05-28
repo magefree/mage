@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class ArcticWolves extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
         // When Arctic Wolves enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }

@@ -1,13 +1,11 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +38,7 @@ public final class AuriokSalvagers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{W}: Return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(),new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(),new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

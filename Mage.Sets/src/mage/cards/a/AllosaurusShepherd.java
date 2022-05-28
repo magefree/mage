@@ -12,13 +12,16 @@ import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
-import mage.filter.FilterSpell;
 
 public class AllosaurusShepherd extends CardImpl {
 
@@ -50,7 +53,7 @@ public class AllosaurusShepherd extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SetPowerToughnessAllEffect(5, 5, Duration.EndOfTurn, elvesFilter, true)
                         .setText("Until end of turn, each Elf creature you control has base power and toughness 5/5"),
-                new ManaCostsImpl("{4}{G}{G}"));
+                new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addEffect(new CreaturesBecomeOtherTypeEffect(elvesFilter, SubType.DINOSAUR, Duration.EndOfTurn)
                 .setText("and becomes a Dinosaur in addition to its other creature types"));
         this.addAbility(ability);

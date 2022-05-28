@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class ArcanumWings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         // Aura swap {2}{U}
-        this.addAbility(new AuraSwapAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new AuraSwapAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private ArcanumWings(final ArcanumWings card) {

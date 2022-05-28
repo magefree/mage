@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class AvenLiberator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}")));
         // When Aven Liberator is turned face up, target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetControlledCreaturePermanent());

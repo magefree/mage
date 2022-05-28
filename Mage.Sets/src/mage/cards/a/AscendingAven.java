@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class AscendingAven extends CardImpl {
         // Ascending Aven can block only creatures with flying.
         this.addAbility(new CanBlockOnlyFlyingAbility());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AscendingAven(final AscendingAven card) {

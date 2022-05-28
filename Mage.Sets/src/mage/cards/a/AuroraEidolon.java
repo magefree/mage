@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,6 +18,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -32,7 +33,7 @@ public final class AuroraEidolon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, Sacrifice Aurora Eidolon: Prevent the next 3 damage that would be dealt to any target this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 3), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 3), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

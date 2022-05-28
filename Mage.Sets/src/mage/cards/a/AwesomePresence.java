@@ -40,7 +40,7 @@ public final class AwesomePresence extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.
-        this.addAbility(new SimpleStaticAbility(new AwesomePresenceRestrictionEffect(new ManaCostsImpl("{3}"))));
+        this.addAbility(new SimpleStaticAbility(new AwesomePresenceRestrictionEffect(new ManaCostsImpl<>("{3}"))));
 
     }
 

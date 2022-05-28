@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -16,6 +15,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class AlchemistsRefuge extends CardImpl {
         // {G}{U}, {tap}: You may cast spells this turn as though they had flash.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filter)),
-                new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
+                new CompositeCost(new ManaCostsImpl<>("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
     private AlchemistsRefuge(final AlchemistsRefuge card) {

@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +62,7 @@ public final class AsForetold extends CardImpl {
  */
 class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
 
-    private int counters;
+    private final int counters;
 
     public SpellWithManaCostLessThanOrEqualToCondition(int counters) {
         this.counters = counters;
@@ -86,7 +87,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     private boolean wasActivated;
 
     AsForetoldAlternativeCost(int timeCounters) {
-        super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
+        super(new ManaCostsImpl<>("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
     }
 
     private AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {

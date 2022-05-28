@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class AbbeyMatron extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}, {tap}: Abbey Matron gets +0/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

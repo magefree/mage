@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.other.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedAbility;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class AyeshaTanaka extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // {T}: Counter target activated ability from an artifact source unless that ability's controller pays {W}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{W}")), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl<>("{W}")), new TapSourceCost());
         ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
     }

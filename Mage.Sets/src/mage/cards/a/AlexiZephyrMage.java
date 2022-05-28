@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetadjustment.XTargetsAdjuster;
 
+import java.util.UUID;
+
 /**
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -38,7 +39,7 @@ public final class AlexiZephyrMage extends CardImpl {
         // {X}{U}, {tap}, Discard two cards: Return X target creatures to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return X target creatures to their owner's hands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterInstantOrSorceryCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class AcademyElite extends CardImpl {
                 "with X +1/+1 counters on it, where X is the number of instant and sorcery cards in all graveyards"));
 
         // {2}{U}, Remove a +1/+1 counter from Academy Elite: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
     }

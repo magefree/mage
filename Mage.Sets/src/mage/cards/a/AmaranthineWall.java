@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class AmaranthineWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // {2}: Amaranthine Wall gains indestructible until end of turn.
         GainAbilitySourceEffect effect = new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}"));
         this.addAbility(ability);
     }
 

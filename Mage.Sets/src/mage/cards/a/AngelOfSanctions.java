@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class AngelOfSanctions extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {5}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{W}"), this));
 
     }
 

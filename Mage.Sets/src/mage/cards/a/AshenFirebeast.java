@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class AshenFirebeast extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {1}{R}: Ashen Firebeast deals 1 damage to each creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AshenFirebeast(final AshenFirebeast card) {

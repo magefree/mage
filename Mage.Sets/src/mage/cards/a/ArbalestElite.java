@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class ArbalestElite extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}, {tap}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());

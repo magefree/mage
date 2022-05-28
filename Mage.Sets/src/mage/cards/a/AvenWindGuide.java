@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,6 +17,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public final class AvenWindGuide extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {4}{W}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{4}{W}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{4}{W}{U}"), this));
     }
 
     private AvenWindGuide(final AvenWindGuide card) {

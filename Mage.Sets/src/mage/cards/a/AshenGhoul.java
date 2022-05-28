@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -19,40 +18,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-/**
- *
- * @author TheElk801
- */
-public final class AshenGhoul extends CardImpl {
-
-    public AshenGhoul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-
-        this.subtype.add(SubType.ZOMBIE);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
-
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-
-        // {B}: Return Ashen Ghoul from your graveyard to the battlefield. Activate this ability only during your upkeep and only if three or more creature cards are above Ashen Ghoul.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl("{B}"),
-                AshenGhoulCondition.instance
-        ));
-    }
-
-    private AshenGhoul(final AshenGhoul card) {
-        super(card);
-    }
-
-    @Override
-    public AshenGhoul copy() {
-        return new AshenGhoul(this);
-    }
-}
+import java.util.UUID;
 
 enum AshenGhoulCondition implements Condition {
 
@@ -86,5 +52,40 @@ enum AshenGhoulCondition implements Condition {
     @Override
     public String toString() {
         return "only during your upkeep and only if three or more creature cards are above {this}";
+    }
+}
+
+/**
+ *
+ * @author TheElk801
+ */
+public final class AshenGhoul extends CardImpl {
+
+    public AshenGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+
+        this.subtype.add(SubType.ZOMBIE);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
+        // {B}: Return Ashen Ghoul from your graveyard to the battlefield. Activate this ability only during your upkeep and only if three or more creature cards are above Ashen Ghoul.
+        this.addAbility(new ConditionalActivatedAbility(
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ManaCostsImpl<>("{B}"),
+                AshenGhoulCondition.instance
+        ));
+    }
+
+    private AshenGhoul(final AshenGhoul card) {
+        super(card);
+    }
+
+    @Override
+    public AshenGhoul copy() {
+        return new AshenGhoul(this);
     }
 }

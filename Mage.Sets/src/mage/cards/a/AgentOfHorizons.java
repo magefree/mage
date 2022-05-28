@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class AgentOfHorizons extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Agent of Horizons can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AgentOfHorizons(final AgentOfHorizons card) {

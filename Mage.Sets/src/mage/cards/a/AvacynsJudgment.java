@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -25,7 +26,7 @@ public final class AvacynsJudgment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Madness {X}{R}
-        Ability ability = new MadnessAbility(new ManaCostsImpl("{X}{R}"));
+        Ability ability = new MadnessAbility(new ManaCostsImpl<>("{X}{R}"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

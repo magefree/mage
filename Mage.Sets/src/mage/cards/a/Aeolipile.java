@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -24,7 +25,7 @@ public final class Aeolipile extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Aeolipile: Aeolipile deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

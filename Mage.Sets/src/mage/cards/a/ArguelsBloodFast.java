@@ -1,8 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +18,8 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -32,7 +32,7 @@ public final class ArguelsBloodFast extends CardImpl {
         this.secondSideCardClazz = mage.cards.t.TempleOfAclazotz.class;
 
         // {1}{B}, Pay 2 life: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
 

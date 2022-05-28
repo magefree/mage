@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Quercitron
@@ -33,7 +34,7 @@ public final class AbyssalHunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{B}"));
         Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
         effect.setText("{this} deals damage equal to {this}'s power to that creature.");
         ability.addEffect(effect);

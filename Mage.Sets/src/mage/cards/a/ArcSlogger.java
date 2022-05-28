@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class ArcSlogger extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {R}, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new ExileFromTopOfLibraryCost(10));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

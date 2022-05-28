@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -26,6 +25,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ public final class AyliEternalPilgrim extends CardImpl {
         ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileTargetEffect(),
-                new ManaCostsImpl("{1}{W}{B}"),
+                new ManaCostsImpl<>("{1}{W}{B}"),
                 new AyliEternalPilgrimCondition(),
                 "{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.");
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));

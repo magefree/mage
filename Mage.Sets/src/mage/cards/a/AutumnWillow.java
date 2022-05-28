@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class AutumnWillow extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // {G}: Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnWillowEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnWillowEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

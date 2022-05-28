@@ -38,7 +38,7 @@ public final class AxgardArmory extends CardImpl {
                 new SearchLibraryPutInHandEffect(new AxgardArmoryTarget(), true)
                         .setText("search your library for an Aura card and/or an Equipment card, reveal them, " +
                                 "put them into your hand, then shuffle"),
-                new ManaCostsImpl("{1}{R}{R}{W}")
+                new ManaCostsImpl<>("{1}{R}{R}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -59,6 +59,8 @@ class AxgardArmoryTarget extends TargetCardInLibrary {
 
     private static final FilterCard filter
             = new FilterCard("an Aura card and/or an Equipment card");
+    private static final SubTypeAssignment subTypeAssigner
+            = new SubTypeAssignment(SubType.AURA, SubType.EQUIPMENT);
 
     static {
         filter.add(Predicates.or(
@@ -66,9 +68,6 @@ class AxgardArmoryTarget extends TargetCardInLibrary {
                 SubType.EQUIPMENT.getPredicate()
         ));
     }
-
-    private static final SubTypeAssignment subTypeAssigner
-            = new SubTypeAssignment(SubType.AURA, SubType.EQUIPMENT);
 
     AxgardArmoryTarget() {
         super(0, 2, filter);

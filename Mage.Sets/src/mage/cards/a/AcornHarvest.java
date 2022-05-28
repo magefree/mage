@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -9,8 +8,9 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.SquirrelToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class AcornHarvest extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken(), 2));
 
         // Flashback-{1}{G} - Pay 3 life.
-        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{G}"));
+        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
         

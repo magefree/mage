@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class AnuridSwarmsnapper extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // {1}{G}: Anurid Swarmsnapper can block an additional creature this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private AnuridSwarmsnapper(final AnuridSwarmsnapper card) {

@@ -37,7 +37,7 @@ public final class AstralDrift extends CardImpl {
         this.addAbility(new AstralDriftTriggeredAbility());
 
         // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
     }
 
     private AstralDrift(final AstralDrift card) {
@@ -79,10 +79,7 @@ class AstralDriftTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (game.getPermanent(getSourceId()) == null || !event.getPlayerId().equals(controllerId)) {
-            return false;
-        }
-        return true;
+        return game.getPermanent(getSourceId()) != null && event.getPlayerId().equals(controllerId);
     }
 
     @Override
