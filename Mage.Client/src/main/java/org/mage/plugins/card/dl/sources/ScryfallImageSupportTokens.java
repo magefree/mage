@@ -1006,6 +1006,24 @@ public class ScryfallImageSupportTokens {
             put ("NCC/Wurm", "https://api.scryfall.com/cards/tncc/31/en?format=image");
             put ("NCC/Zombie", "https://api.scryfall.com/cards/tncc/16/en?format=image");
 
+            // MED
+            put ("MED/Beast", "https://api.scryfall.com/cards/tmed/W1/en?format=image");
+            put ("MED/Construct/1", "https://api.scryfall.com/cards/tmed/R1/en?format=image");
+            put ("MED/Construct/2", "https://api.scryfall.com/cards/tmed/G3/en?format=image");
+            put ("MED/Emblem Dack", "https://api.scryfall.com/cards/tmed/R2/en?format=image");
+            put ("MED/Emblem Domri", "https://api.scryfall.com/cards/tmed/R3/en?format=image");
+            put ("MED/Dragon", "https://api.scryfall.com/cards/tmed/W2/en?format=image");
+            put ("MED/Emblem Elspeth", "https://api.scryfall.com/cards/tmed/G4/en?format=image");
+            put ("MED/Emblem Garruk", "https://api.scryfall.com/cards/tmed/W3/en?format=image");
+            put ("MED/Emblem Jaya Ballard", "https://api.scryfall.com/cards/tmed/R4/en?format=image");
+            put ("MED/Emblem Liliana", "https://api.scryfall.com/cards/tmed/G5/en?format=image");
+            put ("MED/Emblem Ral", "https://api.scryfall.com/cards/tmed/G6/en?format=image");
+            put ("MED/Soldier", "https://api.scryfall.com/cards/tmed/G1/en?format=image");
+            put ("MED/Emblem Tamiyo", "https://api.scryfall.com/cards/tmed/R5/en?format=image");
+            put ("MED/Emblem Teferi", "https://api.scryfall.com/cards/tmed/G7/en?format=image");
+            put ("MED/Emblem Vraska", "https://api.scryfall.com/cards/tmed/G8/en?format=image");
+            put ("MED/Zombie", "https://api.scryfall.com/cards/tmed/G2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

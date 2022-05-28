@@ -70,6 +70,16 @@
 |Generate|EMBLEM!:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
 |Generate|EMBLEM!:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
 |Generate|EMBLEM!:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
+|Generate|EMBLEM!:MED|Emblem Dack|||DackFaydenEmblem|
+|Generate|EMBLEM!:MED|Emblem Domri|||DomriChaosBringerEmblem|
+|Generate|EMBLEM!:MED|Emblem Elspeth|||ElspethKnightErrantEmblem|
+|Generate|EMBLEM!:MED|Emblem Garruk|||GarrukApexPredatorEmblem|
+|Generate|EMBLEM!:MED|Emblem Jaya Ballard|||JayaBallardEmblem|
+|Generate|EMBLEM!:MED|Emblem Liliana|||LilianaTheLastHopeEmblem|
+|Generate|EMBLEM!:MED|Emblem Ral|||RalIzzetViceroyEmblem|
+|Generate|EMBLEM!:MED|Emblem Tamiyo|||TamiyoTheMoonSageEmblem|
+|Generate|EMBLEM!:MED|Emblem Teferi|||TeferiHeroOfDominariaEmblem|
+|Generate|EMBLEM!:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
 |Generate|EMBLEM:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
@@ -853,12 +863,11 @@
 |Generate|TOK:ME4|Djinn|||DjinnToken|
 |Generate|TOK:ME4|Goblin|||GoblinToken|
 |Generate|TOK:ME4|Tetravite|||TetraviteToken|
-|Generate|TOK:MED|Assembly-Worker|||AssemblyWorkerToken|
-|Generate|TOK:MED|Camarid|||CamaridToken|
-|Generate|TOK:MED|Citizen|||CitizenToken|
-|Generate|TOK:MED|Hippo|||HippoToken|
-|Generate|TOK:MED|Snake|||SerpentGeneratorSnakeToken|
-|Generate|TOK:MED|Thrull|||BreedingPitBlackInsectToken|
+|Generate|TOK:MED|Beast|||GarrukApexPredatorBeastToken|
+|Generate|TOK:MED|Construct|1||KarnConstructToken|
+|Generate|TOK:MED|Construct|2||DarettiConstructToken|
+|Generate|TOK:MED|Dragon|||DragonToken|
+|Generate|TOK:MED|Soldier|||SoldierToken|
 |Generate|TOK:MED|Zombie|||ZombieToken|
 |Generate|TOK:MIR|Cat|||WaitingInTheWeedsCatToken|
 |Generate|TOK:MIR|Goblin Scout|||GoblinScountsToken|
