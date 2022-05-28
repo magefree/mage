@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -32,7 +33,7 @@ public final class BringerOfTheRedDawn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Red Dawn's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.

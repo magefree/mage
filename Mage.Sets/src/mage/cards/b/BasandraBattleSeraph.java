@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class BasandraBattleSeraph extends CardImpl {
         // {R}: Target creature attacks this turn if able.
         Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
         effect.setOutcome(Outcome.Detriment);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
@@ -84,9 +85,6 @@ class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
-            return true;
-        }
-        return false;
+        return game.getPhase().getType() == TurnPhase.COMBAT;
     }
 }

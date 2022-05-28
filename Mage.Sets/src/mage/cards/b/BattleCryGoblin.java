@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,13 +9,15 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.PackTacticsAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoblinToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class BattleCryGoblin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)
                     .setText("Goblins you control get +1/+0"),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)

@@ -18,32 +18,6 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author jeffwadsworth
- */
-public final class BalothCageTrap extends CardImpl {
-
-    public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
-        this.subtype.add(SubType.TRAP);
-
-        // If an opponent had an artifact enter the battlefield under their control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
-
-        // Create a 4/4 green Beast creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
-    }
-
-    private BalothCageTrap(final BalothCageTrap card) {
-        super(card);
-    }
-
-    @Override
-    public BalothCageTrap copy() {
-        return new BalothCageTrap(this);
-    }
-}
-
 enum BalothCageTrapCondition implements Condition {
 
     instance;
@@ -69,5 +43,31 @@ enum BalothCageTrapCondition implements Condition {
     @Override
     public String toString() {
         return "If an opponent had an artifact enter the battlefield under their control this turn";
+    }
+}
+
+/**
+ * @author jeffwadsworth
+ */
+public final class BalothCageTrap extends CardImpl {
+
+    public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
+        this.subtype.add(SubType.TRAP);
+
+        // If an opponent had an artifact enter the battlefield under their control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{G}"), BalothCageTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
+
+        // Create a 4/4 green Beast creature token.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
+    }
+
+    private BalothCageTrap(final BalothCageTrap card) {
+        super(card);
+    }
+
+    @Override
+    public BalothCageTrap copy() {
+        return new BalothCageTrap(this);
     }
 }

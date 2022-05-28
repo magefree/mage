@@ -1,8 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.IntCompareCondition;
@@ -24,6 +22,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(ability2);
 
         // *Buzz - 2, T: Draw a card.
-        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"), new BuzzCondition());
+        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition());
         ability3.addCost(new TapSourceCost());
         this.addAbility(ability3);
     }

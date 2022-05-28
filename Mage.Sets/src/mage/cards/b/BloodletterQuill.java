@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PutCountersSourceCost;
@@ -17,6 +16,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class BloodletterQuill extends CardImpl {
         this.addAbility(ability);
         // {U}{B}: Remove a blood counter from Bloodletter Quill.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl("{U}{B}")));
+                new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl<>("{U}{B}")));
     }
 
     private BloodletterQuill(final BloodletterQuill card) {

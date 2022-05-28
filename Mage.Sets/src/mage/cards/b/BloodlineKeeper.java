@@ -1,8 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -22,6 +20,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.VampireToken;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -50,7 +50,7 @@ public final class BloodlineKeeper extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{B}"),
+                new ManaCostsImpl<>("{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
         this.addAbility(ability);
     }

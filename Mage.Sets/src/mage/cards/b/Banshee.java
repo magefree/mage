@@ -1,12 +1,11 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.HalfValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -17,6 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class Banshee extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}, {T}: Banshee deals half X damage, rounded down, to any target, and half X damage, rounded up, to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new HalfValue(ManacostVariableValue.REGULAR, false)).setText("Banshee deals half X damage, rounded down, to any target,"), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new HalfValue(ManacostVariableValue.REGULAR, false)).setText("Banshee deals half X damage, rounded down, to any target,"), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(new HalfValue(ManacostVariableValue.REGULAR, true)).setText(" and half X damage, rounded up, to you"));
         ability.addTarget(new TargetAnyTarget());

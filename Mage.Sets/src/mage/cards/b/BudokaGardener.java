@@ -9,9 +9,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -20,8 +22,6 @@ import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
-import mage.filter.StaticFilters;
 
 /**
  * @author Loki
@@ -97,7 +97,7 @@ class DokaiWeaverofLife extends TokenImpl {
         toughness = new MageInt(3);
 
         // {4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

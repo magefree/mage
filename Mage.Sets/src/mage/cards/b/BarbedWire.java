@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,14 +8,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +36,7 @@ public final class BarbedWire extends CardImpl {
 
         // {2}: Prevent the next 1 damage that would be dealt by Barbed Wire this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BarbedWirePreventionEffect(), new ManaCostsImpl("{2}")));
+                new BarbedWirePreventionEffect(), new ManaCostsImpl<>("{2}")));
 
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -9,6 +8,8 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class BarrenMoor extends CardImpl {
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private BarrenMoor(final BarrenMoor card) {

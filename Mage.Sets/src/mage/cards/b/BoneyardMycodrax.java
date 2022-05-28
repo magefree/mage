@@ -25,12 +25,11 @@ import java.util.UUID;
 public final class BoneyardMycodrax extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("other creature cards");
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
 
     public BoneyardMycodrax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -43,7 +42,7 @@ public final class BoneyardMycodrax extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // Scavenge {4}{B}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{B}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{B}")));
 
     }
 

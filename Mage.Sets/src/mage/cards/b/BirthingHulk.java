@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.EldraziScionToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class BirthingHulk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // {1}{C}: Regenerate Birthing Hulk.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{C}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{C}")));
 
     }
 

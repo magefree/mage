@@ -1,16 +1,16 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class BashToBits extends CardImpl {
         Target target = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(target);
         // Flashback {4}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
     }
 
     private BashToBits(final BashToBits card) {

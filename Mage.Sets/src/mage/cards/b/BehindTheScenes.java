@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+
+import java.util.UUID;
+
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
@@ -31,7 +33,7 @@ public final class BehindTheScenes extends CardImpl {
         // {4}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES),
-                new ManaCostsImpl("{4}{W}")));
+                new ManaCostsImpl<>("{4}{W}")));
     }
 
     private BehindTheScenes(final BehindTheScenes card) {

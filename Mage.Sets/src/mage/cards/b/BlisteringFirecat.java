@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class BlisteringFirecat extends CardImpl {
         // At the beginning of the end step, sacrifice Blistering Firecat.
          this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
         // Morph {R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}{R}")));
     }
 
     private BlisteringFirecat(final BlisteringFirecat card) {

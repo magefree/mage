@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class BaneOfTheLiving extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {X}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{X}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{X}{B}{B}")));
 
         // When Bane of the Living is turned face up, all creatures get -X/-X until end of turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null, true)));

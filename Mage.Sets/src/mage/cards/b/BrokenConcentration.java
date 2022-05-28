@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
@@ -9,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class BrokenConcentration extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         // Madness {3}{U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{U}")));
     }
 
     private BrokenConcentration(final BrokenConcentration card) {

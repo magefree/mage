@@ -1,17 +1,18 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.WarriorToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class BlaringRecruiter extends CardImpl {
         this.addAbility(new PartnerWithAbility("Blaring Captain"));
 
         // {2}{W}: Create a 1/1 white Warrior creature token.
-        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorToken()), new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorToken()), new ManaCostsImpl<>("{2}{W}")));
     }
 
     private BlaringRecruiter(final BlaringRecruiter card) {

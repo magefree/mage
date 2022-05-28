@@ -1,8 +1,5 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -25,6 +22,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author LevelX2, TheElk801
  */
@@ -40,7 +41,7 @@ public final class BronzehideLion extends CardImpl {
         // {G}{W}: Bronzehide Lion gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{G}{W}")));
+        ), new ManaCostsImpl<>("{G}{W}")));
 
         // When Bronzehide Lion dies, return it to the battlefield.
         // It's an Aura enchantment with enchant creature you control and
@@ -109,7 +110,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
     private final int zoneChangeCounter;
     private final Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityAttachedEffect(
             IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
-    ), new ManaCostsImpl("{G}{W}"));
+    ), new ManaCostsImpl<>("{G}{W}"));
 
     BronzehideLionContinuousEffect(int zoneChangeCounter) {
         super(Duration.Custom, Outcome.Neutral);

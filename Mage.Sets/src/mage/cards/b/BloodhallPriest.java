@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class BloodhallPriest extends CardImpl {
         ));
 
         // Madness {1}{B}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}{R}")));
     }
 
     private BloodhallPriest(final BloodhallPriest card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +10,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class BorealGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {S}: Boreal Griffin gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private BorealGriffin(final BorealGriffin card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,8 +19,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SoldierToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +46,7 @@ public final class BenalishCommander extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
 
         // Suspend X-{X}{W}{W}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{W}{W}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{W}{W}"), this, true));
 
         // Whenever a time counter is removed from Benalish Commander while it's exiled, create a 1/1 white Soldier creature token.
         this.addAbility(new BenalishCommanderTriggeredAbility());
