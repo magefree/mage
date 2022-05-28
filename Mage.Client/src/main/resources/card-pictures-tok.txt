@@ -361,7 +361,7 @@
 |Generate|TOK:C16|Soldier|||SoldierToken|
 |Generate|TOK:C16|Spirit|1||SpiritToken|
 |Generate|TOK:C16|Spirit|2||SpiritWhiteToken|
-|Generate|TOK:C16|Squid|||ChasmSkulkerSquidToken|
+|Generate|TOK:C16|Squid|||SquidToken|
 |Generate|TOK:C16|Thopter|||ThopterToken|
 |Generate|TOK:C16|Worm|||WormHarvestToken|
 |Generate|TOK:C16|Zombie|||ZombieToken|
@@ -834,7 +834,7 @@
 |Generate|TOK:M15|Sliver|||SliverToken|
 |Generate|TOK:M15|Soldier|||SoldierToken|
 |Generate|TOK:M15|Spirit|||SpiritWhiteToken|
-|Generate|TOK:M15|Squid|||ChasmSkulkerSquidToken|
+|Generate|TOK:M15|Squid|||SquidToken|
 |Generate|TOK:M15|Treefolk Warrior|||KalonianTwingroveTreefolkWarriorToken|
 |Generate|TOK:M15|Zombie|||ZombieToken|
 |Generate|TOK:MBS|Cat|||CatToken|
