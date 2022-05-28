@@ -790,7 +790,8 @@
 |Generate|TOK:M11|Avatar|||AvatarToken|
 |Generate|TOK:M11|Beast|||BeastToken|
 |Generate|TOK:M11|Bird|||RocEggToken|
-|Generate|TOK:M11|Ooze|1||Ooze2Token|
+|Generate|TOK:M11|Ooze|1||OozeToken|
+|Generate|TOK:M11|Ooze|2||Ooze2Token|
 |Generate|TOK:M11|Zombie|||ZombieToken|
 |Generate|TOK:M12|Beast|||BeastToken|
 |Generate|TOK:M12|Bird|||RocEggToken|
@@ -1748,3 +1749,39 @@
 |Generate|TOK:SNC|Treasure|4||TreasureToken|
 |Generate|TOK:SNC|Treasure|5||TreasureToken|
 |Generate|TOK:SNC|Wizard|||MagesAttendantToken|
+
+# NCC
+|Generate|TOK:NCC|Beast|||BeastToken|
+|Generate|TOK:NCC|Cat Beast|||CatBeastToken|
+|Generate|TOK:NCC|Clue|||ClueArtifactToken|
+|Generate|TOK:NCC|Demon|||DemonFlyingToken|
+|Generate|TOK:NCC|Devil|||DevilToken|
+|Generate|TOK:NCC|Drake|||DrakeToken|
+|Generate|TOK:NCC|Eldrazi|||EldraziToken|
+|Generate|TOK:NCC|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:NCC|Elemental|1||RekindlingPhoenixToken|
+|Generate|TOK:NCC|Elemental|2||CallTheSkyBreakerElementalToken|
+|Generate|TOK:NCC|Elemental|3||WhiteElementalToken|
+|Generate|TOK:NCC|Elephant|||ElephantToken|
+|Generate|TOK:NCC|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:NCC|Faerie|||FaerieToken|
+|Generate|TOK:NCC|Food|||FoodToken|
+|Generate|TOK:NCC|Goat|||GoatToken|
+|Generate|TOK:NCC|Human|||HumanToken|
+|Generate|TOK:NCC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:NCC|Insect|||InsectToken|
+|Generate|TOK:NCC|Lightning Rager|||LightningRagerToken|
+|Generate|TOK:NCC|Ogre|||OgreToken|
+|Generate|TOK:NCC|Ooze|1||OozeToken|
+|Generate|TOK:NCC|Ooze|2||Ooze2Token|
+|Generate|TOK:NCC|Plant|||PlantToken|
+|Generate|TOK:NCC|Saproling|||SaprolingToken|
+|Generate|TOK:NCC|Soldier|1||SoldierLifelinkToken|
+|Generate|TOK:NCC|Soldier|2||SoldierTokenWithHaste|
+|Generate|TOK:NCC|Spider|||SpiderToken|
+|Generate|TOK:NCC|Squid|||SquidToken|
+|Generate|TOK:NCC|Tentacle|||TentacleToken|
+|Generate|TOK:NCC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:NCC|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:NCC|Wurm|||Wurm55Token|
+|Generate|TOK:NCC|Zombie|||ZombieToken|

@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -16,6 +18,8 @@ public final class TentacleToken extends TokenImpl {
         subtype.add(SubType.TENTACLE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("THB", "NCC");
     }
 
     private TentacleToken(final TentacleToken token) {

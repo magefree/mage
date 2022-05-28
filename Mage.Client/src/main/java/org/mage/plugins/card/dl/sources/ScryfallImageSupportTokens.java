@@ -970,6 +970,42 @@ public class ScryfallImageSupportTokens {
             put ("C17/Vampire", "https://api.scryfall.com/cards/tc17/4/en?format=image");
             put ("C17/Zombie", "https://api.scryfall.com/cards/tc17/5/en?format=image");
 
+            // NCC
+            put ("NCC/Beast", "https://api.scryfall.com/cards/tncc/21/en?format=image");
+            put ("NCC/Cat Beast", "https://api.scryfall.com/cards/tncc/4/en?format=image");
+            put ("NCC/Clue", "https://api.scryfall.com/cards/tncc/34/en?format=image");
+            put ("NCC/Demon", "https://api.scryfall.com/cards/tncc/15/en?format=image");
+            put ("NCC/Devil", "https://api.scryfall.com/cards/tncc/17/en?format=image");
+            put ("NCC/Drake", "https://api.scryfall.com/cards/tncc/10/en?format=image");
+            put ("NCC/Eldrazi", "https://api.scryfall.com/cards/tncc/1/en?format=image");
+            put ("NCC/Eldrazi Spawn", "https://api.scryfall.com/cards/tncc/2/en?format=image");
+            put ("NCC/Elemental/1", "https://api.scryfall.com/cards/tncc/18/en?format=image");
+            put ("NCC/Elemental/2", "https://api.scryfall.com/cards/tncc/32/en?format=image");
+            put ("NCC/Elemental/3", "https://api.scryfall.com/cards/tncc/5/en?format=image");
+            put ("NCC/Elephant", "https://api.scryfall.com/cards/tncc/22/en?format=image");
+            put ("NCC/Elf Warrior", "https://api.scryfall.com/cards/tncc/23/en?format=image");
+            put ("NCC/Faerie", "https://api.scryfall.com/cards/tncc/11/en?format=image");
+            put ("NCC/Food", "https://api.scryfall.com/cards/tncc/35/en?format=image");
+            put ("NCC/Goat", "https://api.scryfall.com/cards/tncc/6/en?format=image");
+            put ("NCC/Human", "https://api.scryfall.com/cards/tncc/7/en?format=image");
+            put ("NCC/Human Soldier", "https://api.scryfall.com/cards/tncc/8/en?format=image");
+            put ("NCC/Insect", "https://api.scryfall.com/cards/tncc/24/en?format=image");
+            put ("NCC/Lightning Rager", "https://api.scryfall.com/cards/tncc/19/en?format=image");
+            put ("NCC/Ogre", "https://api.scryfall.com/cards/tncc/20/en?format=image");
+            put ("NCC/Ooze/1", "https://api.scryfall.com/cards/tncc/25/en?format=image");
+            put ("NCC/Ooze/2", "https://api.scryfall.com/cards/tncc/26/en?format=image");
+            put ("NCC/Plant", "https://api.scryfall.com/cards/tncc/27/en?format=image");
+            put ("NCC/Saproling", "https://api.scryfall.com/cards/tncc/28/en?format=image");
+            put ("NCC/Soldier/1", "https://api.scryfall.com/cards/tncc/9/en?format=image");
+            put ("NCC/Soldier/2", "https://api.scryfall.com/cards/tncc/33/en?format=image");
+            put ("NCC/Spider", "https://api.scryfall.com/cards/tncc/29/en?format=image");
+            put ("NCC/Squid", "https://api.scryfall.com/cards/tncc/12/en?format=image");
+            put ("NCC/Tentacle", "https://api.scryfall.com/cards/tncc/13/en?format=image");
+            put ("NCC/Thopter", "https://api.scryfall.com/cards/tncc/36/en?format=image");
+            put ("NCC/Treefolk", "https://api.scryfall.com/cards/tncc/30/en?format=image");
+            put ("NCC/Wurm", "https://api.scryfall.com/cards/tncc/31/en?format=image");
+            put ("NCC/Zombie", "https://api.scryfall.com/cards/tncc/16/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

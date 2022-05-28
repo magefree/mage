@@ -23,7 +23,7 @@ public final class SquidToken extends TokenImpl {
 
         this.addAbility(new IslandwalkAbility());
 
-        availableImageSetCodes = Arrays.asList("M15", "C16");
+        availableImageSetCodes = Arrays.asList("M15", "C16", "NCC");
     }
 
     private SquidToken(final SquidToken token) {
