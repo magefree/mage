@@ -28,13 +28,13 @@ public final class BlastFromThePast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{R}")));
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
         // Kicker {2}{R}
         this.addAbility(new KickerAbility("{2}{R}"));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
         // Buyback {4}{R}
         this.addAbility(new BuybackAbility("{4}{R}"));
 

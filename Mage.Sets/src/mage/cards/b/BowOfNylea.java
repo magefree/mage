@@ -44,7 +44,7 @@ public final class BowOfNylea extends CardImpl {
         // {1}{G}, {T}: Choose one - Put a +1/+1 counter on target creature;
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         // or Bow of Nylea deals 2 damage to target creature with flying;
