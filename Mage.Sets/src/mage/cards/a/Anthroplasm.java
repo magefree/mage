@@ -36,7 +36,7 @@ public final class Anthroplasm extends CardImpl {
         // Anthroplasm enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
         // {X}, {tap}: Remove all +1/+1 counters from Anthroplasm and put X +1/+1 counters on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnthroplasmEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnthroplasmEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

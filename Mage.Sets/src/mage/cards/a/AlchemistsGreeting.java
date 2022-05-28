@@ -24,7 +24,7 @@ public final class AlchemistsGreeting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AlchemistsGreeting(final AlchemistsGreeting card) {

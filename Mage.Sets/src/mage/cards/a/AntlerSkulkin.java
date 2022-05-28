@@ -40,7 +40,7 @@ public final class AntlerSkulkin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Target white creature gains persist until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         

@@ -43,7 +43,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         // {X}, {tap}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana on X. 
         PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR);
         effect.setText("Prevent the next X damage that would be dealt to target creature this turn. Spend only white mana on X.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
 
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);
