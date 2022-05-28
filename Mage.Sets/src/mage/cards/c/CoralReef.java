@@ -57,7 +57,7 @@ public final class CoralReef extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(islandFilter))));
         
         // {U}, Tap an untapped blue creature you control, Remove a polyp counter from Coral Reef: Put a +0/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P0P1.createInstance()), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P0P1.createInstance()), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(untappedBlueCreatureFilter)));
         ability.addCost(new RemoveCountersSourceCost(CounterType.POLYP.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

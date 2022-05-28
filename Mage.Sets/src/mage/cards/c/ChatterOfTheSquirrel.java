@@ -25,7 +25,7 @@ public final class ChatterOfTheSquirrel extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken()));
         
         // Flashback {1}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private ChatterOfTheSquirrel(final ChatterOfTheSquirrel card) {

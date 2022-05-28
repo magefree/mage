@@ -26,7 +26,7 @@ public final class ChargingSlateback extends CardImpl {
         // Charging Slateback can't block.
         this.addAbility(new CantBlockAbility());
         // Morph {4}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}")));
     }
 
     private ChargingSlateback(final ChargingSlateback card) {

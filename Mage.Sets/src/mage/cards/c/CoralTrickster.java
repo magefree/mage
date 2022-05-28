@@ -28,7 +28,7 @@ public final class CoralTrickster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
         // When Coral Trickster is turned face up, you may tap or untap target permanent.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new MayTapOrUntapTargetEffect());
         ability.addTarget(new TargetPermanent());

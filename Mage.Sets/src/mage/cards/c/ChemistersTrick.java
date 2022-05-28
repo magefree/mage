@@ -35,7 +35,7 @@ public final class ChemistersTrick extends CardImpl {
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
 
         // Overload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(-2, 0, Duration.EndOfTurn, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false), new ManaCostsImpl("{3}{U}{R}"));
+        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(-2, 0, Duration.EndOfTurn, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false), new ManaCostsImpl<>("{3}{U}{R}"));
         ability.addEffect(new ChemistersTrickEffect());
         this.addAbility(ability);
     }

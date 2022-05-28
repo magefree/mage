@@ -57,7 +57,7 @@ public final class CharnelTroll extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new ManaCostsImpl("{B}{G}")
+                new ManaCostsImpl<>("{B}{G}")
         );
         ability.addCost(new DiscardTargetCost(
                 new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)

@@ -49,7 +49,7 @@ public final class CaveOfTheFrostDragon extends CardImpl {
                         .withColor("W")
                         .withSubType(SubType.DRAGON)
                         .withAbility(FlyingAbility.getInstance()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{4}{W}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private CaveOfTheFrostDragon(final CaveOfTheFrostDragon card) {

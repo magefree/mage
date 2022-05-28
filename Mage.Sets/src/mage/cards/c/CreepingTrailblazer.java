@@ -46,7 +46,7 @@ public final class CreepingTrailblazer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true)
                         .setText("{this} gets +1/+1 until end of turn for each Elemental you control."),
-                new ManaCostsImpl("{2}{R}{G}")
+                new ManaCostsImpl<>("{2}{R}{G}")
         ));
     }
 
