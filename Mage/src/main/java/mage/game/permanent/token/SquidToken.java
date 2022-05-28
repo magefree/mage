@@ -5,16 +5,16 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
+import java.util.Arrays;
 
 /**
  *
  * @author spjspj
  */
-public final class CoralBarrierSquidToken extends TokenImpl {
+public final class SquidToken extends TokenImpl {
 
-    public CoralBarrierSquidToken() {
-        super("Squid Token", "1/1 blue Squid creature token with islandwalk");
-        this.setOriginalExpansionSetCode("M15");
+    public SquidToken() {
+        super("Squid Token", "1/1 blue Squid creature token with Islandwalk");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SQUID);
@@ -22,12 +22,15 @@ public final class CoralBarrierSquidToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new IslandwalkAbility());
+
+        availableImageSetCodes = Arrays.asList("M15", "C16");
     }
-    public CoralBarrierSquidToken(final CoralBarrierSquidToken token) {
+
+    private SquidToken(final SquidToken token) {
         super(token);
     }
 
-    public CoralBarrierSquidToken copy() {
-        return new CoralBarrierSquidToken(this);
+    public SquidToken copy() {
+        return new SquidToken(this);
     }
 }
