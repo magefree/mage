@@ -2043,7 +2043,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
-     * the choosen order by player
+     * the chosen order by player
      *
      * @return
      */

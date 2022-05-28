@@ -105,7 +105,7 @@ class AetherspoutsEffect extends OneShotEffect {
                     }
                 }
             }
-            TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last choosen will be the top most)"));
+            TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last chosen will be the top most)"));
             while (cards.size() > 1) {
                 if (!player.canRespond()) {
                     return false;
@@ -145,7 +145,7 @@ class AetherspoutsEffect extends OneShotEffect {
                     }
                 }
             }
-            target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last choosen will be bottommost card)"));
+            target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last chosen will be bottommost card)"));
             while (player.canRespond() && cards.size() > 1) {
                 player.choose(Outcome.Neutral, cards, target, game);
 
