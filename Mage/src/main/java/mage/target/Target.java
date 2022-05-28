@@ -130,7 +130,7 @@ public interface Target extends Serializable {
 
     Target copy();
 
-    // some targets are choosen from players that are not the controller of the ability (e.g. Pandemonium)
+    // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)
     void setTargetController(UUID playerId);
 
     UUID getTargetController();

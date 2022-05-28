@@ -120,9 +120,9 @@ class ArchangelOfStrifeWarEffect extends BoostAllEffect {
         if (permanent != null) {
             UUID controllerId = permanent.getControllerId();
 
-            String choosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
+            String chosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
 
-            return creaturefilter.match(permanent, game) && choosenMode != null && choosenMode.equals("war");
+            return creaturefilter.match(permanent, game) && chosenMode != null && chosenMode.equals("war");
         }
 
         return false;
@@ -151,9 +151,9 @@ class ArchangelOfStrifePeaceEffect extends BoostAllEffect {
         if (permanent != null) {
             UUID controllerId = permanent.getControllerId();
 
-            String choosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
+            String chosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
 
-            return creaturefilter.match(permanent, game) && choosenMode != null && choosenMode.equals("peace");
+            return creaturefilter.match(permanent, game) && chosenMode != null && chosenMode.equals("peace");
         }
 
         return false;

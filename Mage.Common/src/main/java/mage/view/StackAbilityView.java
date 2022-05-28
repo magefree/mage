@@ -122,7 +122,7 @@ public class StackAbilityView extends CardView {
             getRules().add("<i>Related objects: " + names + "</i>");
         }
 
-        // show for modal ability, which mode was choosen
+        // show for modal ability, which mode was chosen
         if (ability.isModal()) {
             Modes modes = ability.getModes();
             for (UUID modeId : modes.getSelectedModes()) {
