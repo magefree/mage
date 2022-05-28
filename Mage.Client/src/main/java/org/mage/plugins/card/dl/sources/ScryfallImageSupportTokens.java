@@ -487,7 +487,7 @@ public class ScryfallImageSupportTokens {
             put("CMR/Elephant", "https://api.scryfall.com/cards/tcmr/20/en?format=image");
             put("CMR/Elf Warrior", "https://api.scryfall.com/cards/tcmr/8/en?format=image");
             put("CMR/Golem", "https://api.scryfall.com/cards/tcmr/9/en?format=image");
-            put("CMR/Horror", "https://api.scryfall.com/cards/tcmr/10/en?format=image");
+            put("CMR/Phyrexian Horror", "https://api.scryfall.com/cards/tcmr/10/en?format=image");
             put("CMR/Illusion", "https://api.scryfall.com/cards/tcmr/17/en?format=image");
             put("CMR/Plant", "https://api.scryfall.com/cards/tcmr/21/en?format=image");
             put("CMR/Rock", "https://api.scryfall.com/cards/tcmr/11/en?format=image");

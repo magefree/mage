@@ -1421,7 +1421,7 @@
 |Generate|TOK:CMR|Elephant|||ElephantToken|
 |Generate|TOK:CMR|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:CMR|Golem|||GolemToken|
-|Generate|TOK:CMR|Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:CMR|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:CMR|Illusion|||MelokuTheCloudedMirrorToken|
 |Generate|TOK:CMR|Plant|||PlantToken|
 |Generate|TOK:CMR|Rock|||RockToken|
