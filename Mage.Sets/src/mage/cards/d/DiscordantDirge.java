@@ -39,7 +39,7 @@ public final class DiscordantDirge extends CardImpl {
         // {B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DiscordantDirgeEffect(),
-                new ManaCostsImpl("{B}"));
+                new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

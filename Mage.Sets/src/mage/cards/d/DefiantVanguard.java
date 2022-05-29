@@ -58,7 +58,7 @@ public final class DefiantVanguard extends CardImpl {
         // {5}, {tap}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
-                new ManaCostsImpl("{5}"));
+                new ManaCostsImpl<>("{5}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }

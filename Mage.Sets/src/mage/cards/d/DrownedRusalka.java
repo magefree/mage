@@ -31,7 +31,7 @@ public final class DrownedRusalka extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, Sacrifice a creature: Discard a card, then draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);

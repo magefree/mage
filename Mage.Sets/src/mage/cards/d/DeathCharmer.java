@@ -26,7 +26,7 @@ public final class DeathCharmer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Death Charmer deals combat damage to a creature, that creature's controller loses 2 life unless they pay {2}.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetControllerEffect(2), new ManaCostsImpl("{2}")), false, true));
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetControllerEffect(2), new ManaCostsImpl<>("{2}")), false, true));
     }
 
     private DeathCharmer(final DeathCharmer card) {

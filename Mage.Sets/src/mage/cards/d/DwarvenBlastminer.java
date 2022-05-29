@@ -28,13 +28,13 @@ public final class DwarvenBlastminer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{R}, {tap}: Destroy target nonbasic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
         
         // Morph {R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private DwarvenBlastminer(final DwarvenBlastminer card) {

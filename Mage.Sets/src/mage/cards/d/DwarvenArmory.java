@@ -30,7 +30,7 @@ public final class DwarvenArmory extends CardImpl {
         // {2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new AddCountersTargetEffect(CounterType.P2P2.createInstance()),
-                new ManaCostsImpl("{2}"),
+                new ManaCostsImpl<>("{2}"),
                 new IsStepCondition(PhaseStep.UPKEEP, false),
                 null);
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));

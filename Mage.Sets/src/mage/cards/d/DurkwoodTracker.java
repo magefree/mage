@@ -31,7 +31,7 @@ public final class DurkwoodTracker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}, {tap}: If Durkwood Tracker is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to Durkwood Tracker.
-        Ability ability = new SimpleActivatedAbility(new DurkwoodTrackerEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DurkwoodTrackerEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
