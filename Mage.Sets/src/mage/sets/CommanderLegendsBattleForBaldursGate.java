@@ -66,6 +66,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Cadira, Caller of the Small", 269, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class));
         cards.add(new SetCardInfo("Campfire", 304, Rarity.UNCOMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Candlekeep Sage", 60, Rarity.COMMON, mage.cards.c.CandlekeepSage.class));
+        cards.add(new SetCardInfo("Carefree Swinemaster", 219, Rarity.COMMON, mage.cards.c.CarefreeSwinemaster.class));
         cards.add(new SetCardInfo("Cast Down", 119, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 305, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
         cards.add(new SetCardInfo("Chardalyn Dragon", 306, Rarity.COMMON, mage.cards.c.ChardalynDragon.class));
