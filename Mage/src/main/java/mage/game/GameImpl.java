@@ -3703,11 +3703,17 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void takeInitiative(Ability source, UUID initiativeId) {
-        if (getInitiativeId() == null) {
+        // First time someone takes the initiative
+        if (getInitiativeId() == null) { // 1. Nobody has initiative
             getState().addDesignation(new Initiative(), this, initiativeId);
-        } else if (!getInitiativeId().equals(initiativeId)) {
-            getState().setInitiativeId(initiativeId);
         }
+
+        // Update it every time, even if it doesn't have to change to make the code simpler.
+        // It only really has to change under 2 circumstances:
+        //      1. First time someone takes the initiative
+        //      2. A player taking the initiative when another player currently has it.
+        getState().setInitiativeId(initiativeId);
+
         informPlayers(getPlayer(initiativeId).getLogName() + " takes the initiative");
         fireEvent(new GameEvent(GameEvent.EventType.TOOK_INITIATIVE, initiativeId, source, initiativeId));
     }
