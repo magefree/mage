@@ -124,6 +124,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
         cards.add(new SetCardInfo("Greatsword of Tyr", 22, Rarity.COMMON, mage.cards.g.GreatswordOfTyr.class));
         cards.add(new SetCardInfo("Guardian Naga", 23, Rarity.COMMON, mage.cards.g.GuardianNaga.class));
+        cards.add(new SetCardInfo("Guiding Bolt", 24, Rarity.COMMON, mage.cards.g.GuidingBolt.class));
         cards.add(new SetCardInfo("Guild Artisan", 179, Rarity.UNCOMMON, mage.cards.g.GuildArtisan.class));
         cards.add(new SetCardInfo("Gut, True Soul Zealot", 180, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class));
         cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 234, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class));
