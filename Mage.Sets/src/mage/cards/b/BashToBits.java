@@ -27,7 +27,7 @@ public final class BashToBits extends CardImpl {
         Target target = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(target);
         // Flashback {4}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
     }
 
     private BashToBits(final BashToBits card) {

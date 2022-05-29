@@ -37,7 +37,7 @@ public final class BogNaughty extends CardImpl {
 
         // {2}{B}, Sacrifice a Food: Target creature gets -3/-3 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")
+                new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());

@@ -38,7 +38,7 @@ public final class BrandOfIllOmen extends CardImpl {
         this.addAbility(ability);
 
         // Cumulative upkeep {R}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{R}")));
 
         // Enchanted creature's controller can't cast creature spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrandOfIllOmenEffect()));

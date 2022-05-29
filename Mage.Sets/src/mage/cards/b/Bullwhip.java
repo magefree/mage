@@ -26,7 +26,7 @@ public final class Bullwhip extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
         Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
         effect.setText("that creature attacks this turn if able");
         ability.addEffect(effect);

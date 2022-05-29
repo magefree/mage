@@ -33,7 +33,7 @@ public final class BrimstoneMage extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{3}{R}")));
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

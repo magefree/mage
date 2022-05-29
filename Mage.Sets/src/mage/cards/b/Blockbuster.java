@@ -30,7 +30,7 @@ public final class Blockbuster extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // {1}{R}, Sacrifice Blockbuster: Blockbuster deals 3 damage to each tapped creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

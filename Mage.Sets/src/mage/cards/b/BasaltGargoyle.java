@@ -32,7 +32,7 @@ public final class BasaltGargoyle extends CardImpl {
         // Echo {2}{R}
         this.addAbility(new EchoAbility("{2}{R}"));
         // {R}: Basalt Gargoyle gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private BasaltGargoyle(final BasaltGargoyle card) {

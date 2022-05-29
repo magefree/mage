@@ -41,7 +41,7 @@ public final class Backslide extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

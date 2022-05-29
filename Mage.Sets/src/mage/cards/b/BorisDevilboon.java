@@ -30,7 +30,7 @@ public final class BorisDevilboon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}{R}, {tap}: Create a 1/1 black and red Demon creature token named Minor Demon.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MinorDemonToken()), new ManaCostsImpl("{2}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MinorDemonToken()), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

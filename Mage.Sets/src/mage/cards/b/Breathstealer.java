@@ -27,7 +27,7 @@ public final class Breathstealer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}: Breathstealer gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private Breathstealer(final Breathstealer card) {

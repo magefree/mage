@@ -35,7 +35,7 @@ public final class BattleCryGoblin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)
                     .setText("Goblins you control get +1/+0"),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)

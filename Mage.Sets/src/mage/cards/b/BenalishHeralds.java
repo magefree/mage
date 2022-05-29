@@ -28,7 +28,7 @@ public final class BenalishHeralds extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}{U}, {tap}: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
