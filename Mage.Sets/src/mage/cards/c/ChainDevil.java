@@ -22,7 +22,7 @@ public final class ChainDevil extends CardImpl {
             = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(TokenPredicate.FALSE)
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ChainDevil(UUID ownerId, CardSetInfo setInfo) {

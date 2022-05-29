@@ -1,4 +1,4 @@
-package mage.cards.b;
+package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,16 +15,16 @@ import mage.constants.SubType;
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author TheElk801
  */
-public final class BladedPinions extends CardImpl {
+public final class CloakOfTheBat extends CardImpl {
 
-    public BladedPinions(UUID ownerId, CardSetInfo setInfo) {
+    public CloakOfTheBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equipped creature has flying and first strike.
+        // Equipped creature has flying and haste.
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 FlyingAbility.getInstance(), AttachmentType.EQUIPMENT
         ));
@@ -34,16 +34,15 @@ public final class BladedPinions extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(2));
     }
 
-    public BladedPinions(final BladedPinions card) {
+    private CloakOfTheBat(final CloakOfTheBat card) {
         super(card);
     }
 
     @Override
-    public BladedPinions copy() {
-        return new BladedPinions(this);
+    public CloakOfTheBat copy() {
+        return new CloakOfTheBat(this);
     }
-
 }
