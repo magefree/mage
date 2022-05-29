@@ -86,10 +86,10 @@ class TeferisRealmEffect extends OneShotEffect {
             if (!player.choose(outcome, choiceImpl, game)) {
                 return false;
             }
-            String choosenType = choiceImpl.getChoice();
+            String chosenType = choiceImpl.getChoice();
             FilterPermanent filter = new FilterPermanent();
             filter.add(TokenPredicate.FALSE);
-            switch (choosenType) {
+            switch (chosenType) {
                 case ARTIFACT:
                     filter.add(CardType.ARTIFACT.getPredicate());
                     break;
@@ -106,7 +106,7 @@ class TeferisRealmEffect extends OneShotEffect {
                 default:
                     return false;
             }
-            game.informPlayers(player.getLogName() + " chooses " + choosenType + "s to phase out");
+            game.informPlayers(player.getLogName() + " chooses " + chosenType + "s to phase out");
             List<UUID> permIds = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
                 permIds.add(permanent.getId());

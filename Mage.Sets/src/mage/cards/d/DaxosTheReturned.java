@@ -45,7 +45,7 @@ public final class DaxosTheReturned extends CardImpl {
 
         // {1}{W}{B}: Create a white and black Spirit enchantment creature token. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl<>("{1}{W}{B}")));
     }
 
     private DaxosTheReturned(final DaxosTheReturned card) {

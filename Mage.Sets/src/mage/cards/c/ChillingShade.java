@@ -31,7 +31,7 @@ public final class ChillingShade extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {S}: Chilling Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private ChillingShade(final ChillingShade card) {

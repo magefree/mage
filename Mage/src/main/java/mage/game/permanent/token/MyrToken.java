@@ -16,7 +16,7 @@ public final class MyrToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C14", "C16", "C18", "DST", "MBS", "MM2", "MRD", "NPH", "SOM", "MH1", "C21", "NEC", "2XM");
+        availableImageSetCodes = Arrays.asList("C14", "C16", "C18", "DST", "MBS", "MM2", "MRD", "NPH", "SOM", "MH1", "C21", "NEC", "2XM", "BBD", "DDU");
     }
 
     public MyrToken(final MyrToken token) {

@@ -28,7 +28,7 @@ public final class AgentOfHorizons extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Agent of Horizons can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AgentOfHorizons(final AgentOfHorizons card) {

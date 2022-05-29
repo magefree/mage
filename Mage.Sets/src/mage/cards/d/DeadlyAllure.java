@@ -33,7 +33,7 @@ public final class DeadlyAllure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{G}")));
 
     }
 

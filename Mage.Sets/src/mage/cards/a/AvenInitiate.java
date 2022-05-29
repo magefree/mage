@@ -29,7 +29,7 @@ public final class AvenInitiate extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Embalm {6}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{6}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{6}{U}"), this));
 
     }
 

@@ -97,7 +97,7 @@ class MindSwordsEffect extends OneShotEffect {
             cards.addAll(target.getTargets());
             cardsToExile.put(playerId, cards);
         }
-        // Exile all choosen cards
+        // Exile all chosen cards
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player == null) {

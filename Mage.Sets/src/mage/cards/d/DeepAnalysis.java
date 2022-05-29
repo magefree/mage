@@ -26,7 +26,7 @@ public final class DeepAnalysis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback-{1}{U}, Pay 3 life.
-        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{U}"));
+        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

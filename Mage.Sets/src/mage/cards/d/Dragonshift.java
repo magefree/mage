@@ -42,7 +42,7 @@ public final class Dragonshift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {3}{U}{U}{R}{R}
-        Ability ability = new OverloadAbility(this, new LoseAllAbilitiesAllEffect(new FilterControlledCreaturePermanent(""), Duration.EndOfTurn), new ManaCostsImpl("{3}{U}{U}{R}{R}"));
+        Ability ability = new OverloadAbility(this, new LoseAllAbilitiesAllEffect(new FilterControlledCreaturePermanent(""), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}{U}{R}{R}"));
         ability.addEffect(new BecomesCreatureAllEffect(
                 new CreatureToken(4, 4, "blue and red Dragon with base power and toughness 4/4 and with flying")
                         .withColor("UR")

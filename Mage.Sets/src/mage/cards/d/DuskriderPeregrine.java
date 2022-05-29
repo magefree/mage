@@ -32,7 +32,7 @@ public final class DuskriderPeregrine extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // Suspend 3-{1}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{W}"), this));
     }
 
     private DuskriderPeregrine(final DuskriderPeregrine card) {

@@ -27,7 +27,7 @@ public final class Dynacharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));
 
         // Overload {2}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BoostControlledEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new OverloadAbility(this, new BoostControlledEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private Dynacharge(final Dynacharge card) {

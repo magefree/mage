@@ -45,7 +45,7 @@ public final class CelestialEnforcer extends CardImpl {
 
         // {1}{W}, {T}: Tap target creature. Activate this ability only if you control a creature with flying.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{1}{W}"), condition
+                Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"), condition
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

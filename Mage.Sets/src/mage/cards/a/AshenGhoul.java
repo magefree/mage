@@ -39,7 +39,7 @@ public final class AshenGhoul extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl("{B}"),
+                new ManaCostsImpl<>("{B}"),
                 AshenGhoulCondition.instance
         ));
     }

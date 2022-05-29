@@ -41,7 +41,7 @@ public final class DeathmistRaptor extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.GRAVEYARD, new DeathmistRaptorEffect(), new FilterControlledPermanent("a permanent you control"), false, true));
 
         // Megamorph {4}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{G}"), true));
     }
 
     private DeathmistRaptor(final DeathmistRaptor card) {

@@ -44,7 +44,7 @@ public final class Detritivore extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new NonBasicLandsInOpponentsGraveyards(), Duration.EndOfGame)));
 
         // Suspend X-{X}{3}{R}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{3}{R}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{R}"), this, true));
 
         // Whenever a time counter is removed from Detritivore while it's exiled, destroy target nonbasic land.
         this.addAbility(new DetritivoreTriggeredAbility());

@@ -28,7 +28,7 @@ public final class AutumnalGloom extends CardImpl {
         this.secondSideCardClazz = AncientOfTheEquinox.class;
 
         // {B}: Put the top card of your library into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(1), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(1), new ManaCostsImpl<>("{B}")));
 
         // <i>Delirium</i> &mdash; At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
         this.addAbility(new TransformAbility());

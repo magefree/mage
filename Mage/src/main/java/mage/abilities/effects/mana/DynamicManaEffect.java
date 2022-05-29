@@ -158,7 +158,7 @@ public class DynamicManaEffect extends ManaEffect {
                     manaStrings.add("B");
                     manaStrings.add("R");
                     manaStrings.add("G");
-                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, count, MultiAmountType.MANA, game);
+                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, count, count, MultiAmountType.MANA, game);
                     computedMana.add(new Mana(choices.get(0), choices.get(1), choices.get(2), choices.get(3), choices.get(4), 0, 0, 0));
                 }
             }

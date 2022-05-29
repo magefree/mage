@@ -28,7 +28,7 @@ public final class BlisteringDieflyn extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{B/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{B/R}")));
     }
 
     private BlisteringDieflyn(final BlisteringDieflyn card) {

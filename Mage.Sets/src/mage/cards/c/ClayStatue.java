@@ -24,7 +24,7 @@ public final class ClayStatue extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}: Regenerate Clay Statue.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private ClayStatue(final ClayStatue card) {

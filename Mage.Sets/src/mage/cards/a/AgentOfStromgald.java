@@ -26,7 +26,7 @@ public final class AgentOfStromgald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Add {B}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl<>("{R}")));
     }
 
     private AgentOfStromgald(final AgentOfStromgald card) {

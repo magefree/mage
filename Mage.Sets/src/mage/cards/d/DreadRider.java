@@ -31,7 +31,7 @@ public final class DreadRider extends CardImpl {
         this.toughness = new MageInt(7);
 
         // {1}{B}, {T}, Exile a creature card from your graveyard: Target opponent loses 3 life.
-        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)));
         ability.addTarget(new TargetOpponent());

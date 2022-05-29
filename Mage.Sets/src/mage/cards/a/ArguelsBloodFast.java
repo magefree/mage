@@ -32,7 +32,7 @@ public final class ArguelsBloodFast extends CardImpl {
         this.secondSideCardClazz = mage.cards.t.TempleOfAclazotz.class;
 
         // {1}{B}, Pay 2 life: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
 

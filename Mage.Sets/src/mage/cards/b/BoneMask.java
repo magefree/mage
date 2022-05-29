@@ -29,7 +29,7 @@ public final class BoneMask extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {tap}: The next time a source of your choice would deal damage to you this turn, prevent that damage. Exile cards from the top of your library equal to the damage prevented this way.
-        Ability ability = new SimpleActivatedAbility(new BoneMaskEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new BoneMaskEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSource());
         this.addAbility(ability);

@@ -28,7 +28,7 @@ public final class DaruSanctifier extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
         // When Daru Sanctifier is turned face up, destroy target enchantment.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetEnchantmentPermanent());

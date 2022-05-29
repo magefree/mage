@@ -34,7 +34,7 @@ public final class AvengerEnDal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}, {T}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetAttackingCreature());

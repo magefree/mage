@@ -67,7 +67,7 @@ public final class AkimTheSoaringWind extends CardImpl {
                         Duration.EndOfTurn,
                         filter,
                         false),
-                new ManaCostsImpl("{3}{U}{R}{W}"))
+                new ManaCostsImpl<>("{3}{U}{R}{W}"))
         );
     }
 

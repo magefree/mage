@@ -515,12 +515,28 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Counters getEnterWithCounters(UUID sourceId);
 
+    /**
+     * Get the UUID of the current player who is the Monarch, or null if nobody has it.
+     *
+     * @return UUID of the Monarch (null if nobody has it).
+     */
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
 
+    /**
+     * Get the UUID of the current player who has the initiative, or null if nobody has it.
+     *
+     * @return UUID of the player who currently has the Initiative (null if nobody has it).
+     */
     UUID getInitiativeId();
 
+    /**
+     * Function to call for a player to take the initiative.
+     *
+     * @param source        The ability granting initiative.
+     * @param initiativeId  UUID of the player taking the initiative
+     */
     void takeInitiative(Ability source, UUID initiativeId);
 
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
