@@ -191,6 +191,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Raphael, Fiendish Savior", 292, Rarity.RARE, mage.cards.r.RaphaelFiendishSavior.class));
         cards.add(new SetCardInfo("Rasaad yn Bashir", 37, Rarity.UNCOMMON, mage.cards.r.RasaadYnBashir.class));
         cards.add(new SetCardInfo("Reckless Barbarian", 193, Rarity.COMMON, mage.cards.r.RecklessBarbarian.class));
+        cards.add(new SetCardInfo("Recruitment Drive", 38, Rarity.COMMON, mage.cards.r.RecruitmentDrive.class));
         cards.add(new SetCardInfo("Reflecting Pool", 358, Rarity.RARE, mage.cards.r.ReflectingPool.class));
         cards.add(new SetCardInfo("Renari, Merchant of Marvels", 90, Rarity.UNCOMMON, mage.cards.r.RenariMerchantOfMarvels.class));
         cards.add(new SetCardInfo("Rilsa Rael, Kingpin", 293, Rarity.UNCOMMON, mage.cards.r.RilsaRaelKingpin.class));
