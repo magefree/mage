@@ -22,7 +22,7 @@ public final class AssemblyWorkerToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("4ED", "ATQ", "DDF", "EMA", "MED", "TSR");
+        availableImageSetCodes = Arrays.asList("4ED", "ATQ", "DDF", "EMA", "TSR");
     }
 
     public AssemblyWorkerToken(final AssemblyWorkerToken token) {

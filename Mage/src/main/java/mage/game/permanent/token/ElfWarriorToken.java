@@ -20,7 +20,7 @@ public final class ElfWarriorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C14", "C16", "EVG", "EMA", "LRW", "MOR", "ORI", "SHM", "M19", "CMR", "KHM", "NCC");
+        availableImageSetCodes = Arrays.asList("C14", "C16", "EVG", "EMA", "LRW", "MOR", "ORI", "SHM", "M19", "CMR", "KHM", "NCC", "DDU");
     }
 
     public ElfWarriorToken(final ElfWarriorToken token) {

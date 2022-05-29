@@ -22,7 +22,7 @@ public final class BeastToken extends TokenImpl {
 
         availableImageSetCodes = Arrays.asList("5DN", "C14", "C16", "C19", "CMA", "CMD", "CN2", "GVL",
                 "DD3C", "DD3GVL", "DDD", "DDL", "DST", "E01", "EVE", "LRW", "M10", "M11", "M12",
-                "M13", "M14", "M15", "MM3", "NPH", "PC2", "USG", "M19", "IKO", "M21", "CMR", "C21", "AFC", "MIC", "NEC", "2XM", "NCC");
+                "M13", "M14", "M15", "MM3", "NPH", "PC2", "USG", "M19", "IKO", "M21", "CMR", "C21", "AFC", "MIC", "NEC", "2XM", "NCC", "BBD");
     }
 
     @Override
