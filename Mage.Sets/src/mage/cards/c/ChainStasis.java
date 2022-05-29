@@ -76,7 +76,7 @@ class ChainStasisEffect extends OneShotEffect {
             if (player == null) {
                 return false;
             }
-            Cost cost = new ManaCostsImpl("{2}{U}");
+            Cost cost = new ManaCostsImpl<>("{2}{U}");
             if (cost.pay(source, game, source, controller.getId(), false)) {
                 if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                     Spell spell = game.getStack().getSpell(source.getSourceId());

@@ -26,7 +26,7 @@ public final class ChokingTethers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 4));
         
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
         // When you cycle Choking Tethers, you may tap target creature.
         Ability ability = new CycleTriggeredAbility(new TapTargetEffect(), true);

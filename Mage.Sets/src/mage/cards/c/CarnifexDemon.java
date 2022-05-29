@@ -51,7 +51,7 @@ public final class CarnifexDemon extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(),
                         filter
-                ), new ManaCostsImpl("{B}")
+                ), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         this.addAbility(ability);

@@ -42,7 +42,7 @@ public final class CytoplastManipulator extends CardImpl {
                 new GainControlTargetEffect(Duration.Custom, true),
                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                 "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);

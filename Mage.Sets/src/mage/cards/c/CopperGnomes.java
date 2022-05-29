@@ -31,7 +31,7 @@ public final class CopperGnomes extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_ARTIFACT_AN),
-                new ManaCostsImpl("{4}")
+                new ManaCostsImpl<>("{4}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -42,7 +42,7 @@ public final class CastOut extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
 
     }
 
