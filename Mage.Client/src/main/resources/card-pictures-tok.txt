@@ -1804,3 +1804,9 @@
 |Generate|TOK:BBD|Warrior|||WarriorToken|
 |Generate|TOK:BBD|Zombie|||ZombieToken|
 |Generate|TOK:BBD|Zombie Giant|||QuestForTheGravelordZombieToken|
+
+# DDU
+|Generate|TOK:DDU|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:DDU|Myr|||MyrToken|
+|Generate|TOK:DDU|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:DDU|Thopter|2||ThopterColorlessToken|

@@ -1034,6 +1034,12 @@ public class ScryfallImageSupportTokens {
             put ("BBD/Zombie", "https://api.scryfall.com/cards/tbbd/3/en?format=image");
             put ("BBD/Zombie Giant", "https://api.scryfall.com/cards/tbbd/4/en?format=image");
 
+            // DDU
+            put ("DDU/Elf Warrior", "https://api.scryfall.com/cards/tddu/1/en?format=image");
+            put ("DDU/Myr", "https://api.scryfall.com/cards/tddu/2/en?format=image");
+            put ("DDU/Thopter/1", "https://api.scryfall.com/cards/tddu/3/en?format=image");
+            put ("DDU/Thopter/2", "https://api.scryfall.com/cards/tddu/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
