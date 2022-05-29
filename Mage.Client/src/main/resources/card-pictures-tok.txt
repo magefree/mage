@@ -80,6 +80,8 @@
 |Generate|EMBLEM!:MED|Emblem Tamiyo|||TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM!:MED|Emblem Teferi|||TeferiHeroOfDominariaEmblem|
 |Generate|EMBLEM!:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
+|Generate|EMBLEM!:BBD|Emblem Rowan Kenrith|||RowanKenrithEmblem|
+|Generate|EMBLEM!:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
 |Generate|EMBLEM:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
@@ -1794,3 +1796,11 @@
 |Generate|TOK:NCC|Treefolk|||SylvanOfferingTreefolkToken|
 |Generate|TOK:NCC|Wurm|||Wurm55Token|
 |Generate|TOK:NCC|Zombie|||ZombieToken|
+
+# BBD
+|Generate|TOK:BBD|Beast|||BeastToken|
+|Generate|TOK:BBD|Myr|||MyrToken|
+|Generate|TOK:BBD|Spirit|||SpiritWhiteToken|
+|Generate|TOK:BBD|Warrior|||WarriorToken|
+|Generate|TOK:BBD|Zombie|||ZombieToken|
+|Generate|TOK:BBD|Zombie Giant|||QuestForTheGravelordZombieToken|

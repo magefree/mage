@@ -1024,6 +1024,16 @@ public class ScryfallImageSupportTokens {
             put ("MED/Emblem Vraska", "https://api.scryfall.com/cards/tmed/G8/en?format=image");
             put ("MED/Zombie", "https://api.scryfall.com/cards/tmed/G2/en?format=image");
 
+            // BBD
+            put ("BBD/Beast", "https://api.scryfall.com/cards/tbbd/5/en?format=image");
+            put ("BBD/Myr", "https://api.scryfall.com/cards/tbbd/6/en?format=image");
+            put ("BBD/Emblem Rowan Kenrith", "https://api.scryfall.com/cards/tbbd/8/en?format=image");
+            put ("BBD/Spirit", "https://api.scryfall.com/cards/tbbd/1/en?format=image");
+            put ("BBD/Warrior", "https://api.scryfall.com/cards/tbbd/2/en?format=image");
+            put ("BBD/Emblem Will Kenrith", "https://api.scryfall.com/cards/tbbd/7/en?format=image");
+            put ("BBD/Zombie", "https://api.scryfall.com/cards/tbbd/3/en?format=image");
+            put ("BBD/Zombie Giant", "https://api.scryfall.com/cards/tbbd/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
