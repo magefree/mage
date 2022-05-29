@@ -42,6 +42,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Astarion's Thirst", 114, Rarity.RARE, mage.cards.a.AstarionsThirst.class));
         cards.add(new SetCardInfo("Astarion, the Decadent", 265, Rarity.RARE, mage.cards.a.AstarionTheDecadent.class));
         cards.add(new SetCardInfo("Astral Confrontation", 6, Rarity.COMMON, mage.cards.a.AstralConfrontation.class));
+        cards.add(new SetCardInfo("Atrocious Experiment", 115, Rarity.COMMON, mage.cards.a.AtrociousExperiment.class));
         cards.add(new SetCardInfo("Avenging Hunter", 215, Rarity.COMMON, mage.cards.a.AvengingHunter.class));
         cards.add(new SetCardInfo("Baba Lysaga, Night Witch", 266, Rarity.RARE, mage.cards.b.BabaLysagaNightWitch.class));
         cards.add(new SetCardInfo("Bag of Holding", 299, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
