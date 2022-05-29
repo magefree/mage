@@ -198,7 +198,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowheart, Dark Justiciar", 146, Rarity.RARE, mage.cards.s.ShadowheartDarkJusticiar.class));
         cards.add(new SetCardInfo("Shameless Charlatan", 96, Rarity.RARE, mage.cards.s.ShamelessCharlatan.class));
         cards.add(new SetCardInfo("Sharpshooter Elf", 253, Rarity.UNCOMMON, mage.cards.s.SharpshooterElf.class));
-        cards.add(new SetCardInfo("Shiny Impetus", 194, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
+        cards.add(new SetCardInfo("Shiny Impetus", 194, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Silvanus's Invoker", 254, Rarity.COMMON, mage.cards.s.SilvanussInvoker.class));
         cards.add(new SetCardInfo("Skanos Dragonheart", 255, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class));
         cards.add(new SetCardInfo("Skullport Merchant", 149, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
@@ -236,7 +236,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("White Plume Adventurer", 49, Rarity.RARE, mage.cards.w.WhitePlumeAdventurer.class));
         cards.add(new SetCardInfo("Wilson, Refined Grizzly", 261, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class));
         cards.add(new SetCardInfo("Wyll, Blade of Frontiers", 208, Rarity.RARE, mage.cards.w.WyllBladeOfFrontiers.class));
-        cards.add(new SetCardInfo("You Meet in a Tavern", 263, Rarity.UNCOMMON, mage.cards.y.YouMeetInATavern.class));
+        cards.add(new SetCardInfo("You Meet in a Tavern", 263, Rarity.COMMON, mage.cards.y.YouMeetInATavern.class));
         cards.add(new SetCardInfo("You're Confronted by Robbers", 53, Rarity.COMMON, mage.cards.y.YoureConfrontedByRobbers.class));
         cards.add(new SetCardInfo("Young Blue Dragon", 106, Rarity.COMMON, mage.cards.y.YoungBlueDragon.class));
         cards.add(new SetCardInfo("Young Red Dragon", 210, Rarity.COMMON, mage.cards.y.YoungRedDragon.class));
