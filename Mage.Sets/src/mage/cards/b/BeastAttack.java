@@ -24,7 +24,7 @@ public final class BeastAttack extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
 
         // Flashback {2}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{G}{G}")));
     }
 
     private BeastAttack(final BeastAttack card) {

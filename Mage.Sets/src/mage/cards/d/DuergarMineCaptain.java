@@ -32,7 +32,7 @@ public final class DuergarMineCaptain extends CardImpl {
         // {1}{RW}, {untap}: Attacking creatures get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false),
-                new ManaCostsImpl("{1}{R/W}")
+                new ManaCostsImpl<>("{1}{R/W}")
         );
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);

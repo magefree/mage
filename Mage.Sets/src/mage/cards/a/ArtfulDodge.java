@@ -25,7 +25,7 @@ public final class ArtfulDodge extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
     private ArtfulDodge(final ArtfulDodge card) {

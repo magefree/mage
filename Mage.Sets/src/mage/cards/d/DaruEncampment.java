@@ -35,7 +35,7 @@ public final class DaruEncampment extends CardImpl {
         // {W}, {tap}: Target Soldier creature gets +1/+1 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{W}"));
+                new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

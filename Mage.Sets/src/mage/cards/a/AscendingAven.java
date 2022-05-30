@@ -30,7 +30,7 @@ public final class AscendingAven extends CardImpl {
         // Ascending Aven can block only creatures with flying.
         this.addAbility(new CanBlockOnlyFlyingAbility());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AscendingAven(final AscendingAven card) {

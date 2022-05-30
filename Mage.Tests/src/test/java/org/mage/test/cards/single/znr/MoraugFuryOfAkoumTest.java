@@ -41,6 +41,13 @@ public class MoraugFuryOfAkoumTest extends CardTestPlayerBase {
         attack(1, playerA, corpse);
     }
 
+    /**
+     * If the landfall ability resolves during your precombat main phase,
+     * the additional combat phase will happen before your regular combat phase.
+     * You’ll untap creatures you control at the beginning of the additional combat
+     * but not at the beginning of your regular combat.
+     *      (2020-09-25)
+     */
     @Test
     public void testPrecombatLandfall() {
         makeCombatCounter();
@@ -54,11 +61,16 @@ public class MoraugFuryOfAkoumTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, mountain);
 
         attackWithAttackers();
-        // untap trigger already happened, creatures are still tapped and can't attack again
-        attackWithAttackers(); // 0 damage
 
         setStopAt(1, PhaseStep.END_TURN);
+
         execute();
+
+        // untap trigger already happened, creatures are still tapped and can't attack again
+        assertTapped(lion, true);
+        assertTapped(bear, true);
+        assertTapped(corpse, true);
+
         assertLife(playerA, 20 + 2);
         assertLife(playerB, 100 - 9 - 0);
     }

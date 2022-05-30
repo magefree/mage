@@ -39,7 +39,7 @@ public final class BanewhipPunisher extends CardImpl {
         this.addAbility(etbAbility);
         
         // {B}, sacrifice Banewhip Punisher: Destroy target creature that has a -1/-1 counter on it.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}"));
+        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{B}"));
         destroyAbility.addCost(new SacrificeSourceCost());
         destroyAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(destroyAbility);

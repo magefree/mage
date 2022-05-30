@@ -36,7 +36,7 @@ public final class CabalPit extends CardImpl {
         // Threshold - {B}, {T}, Sacrifice Cabal Pit: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new BoostTargetEffect(-2,-2, Duration.EndOfTurn),
-            new ManaCostsImpl("{B}"),
+            new ManaCostsImpl<>("{B}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());

@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -22,6 +24,8 @@ public final class SylvanOfferingTreefolkToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+
+        availableImageSetCodes = Arrays.asList("C14", "CMA", "NCC");
     }
 
     public SylvanOfferingTreefolkToken(final SylvanOfferingTreefolkToken token) {

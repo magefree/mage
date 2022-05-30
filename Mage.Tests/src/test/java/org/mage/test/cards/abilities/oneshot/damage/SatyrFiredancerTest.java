@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.s.SatyrFiredancer Satyr Firedancer}
+ * {1}{R}
+ * Enchantment Creature — Satyr
+ * Whenever an instant or sorcery spell you control deals damage to an opponent,
+ * Satyr Firedancer deals that much damage to target creature that player controls.
  *
  * @author LevelX2
  */
@@ -14,7 +19,6 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
 
     @Test
     public void testDamageFromInstantToPlayer() {
-        // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -34,44 +38,46 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
 
+    /**
+     * Check that Satyr won't trigger from combat damage.
+     */
     @Test
     public void testDamageFromAttackWontTrigger() {
-        // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
+
         attack(1, playerA, "Pillarfield Ox");
-        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-
-        assertGraveyardCount(playerB, "Silvercoat Lion", 0);
-        assertPermanentCount(playerB, "Silvercoat Lion", 1);
     }
 
+    /**
+     * Check that Satyr doesn't trigger from an ability.
+     */
     @Test
-    public void testDamageFromOtherCreature() {
-        // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.
+    public void testDamageFromAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
 
         // {T}: Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer", 1);
 
+        setStrictChooseMode(true);
+
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
-        addTarget(playerA, playerB);
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 19);
-
     }
 
     @Test

@@ -25,7 +25,7 @@ public final class DissentersDeliverance extends CardImpl {
         getSpellAbility().addTarget(new TargetArtifactPermanent());
         
         // Cycling {G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{G}")));
 
     }
 

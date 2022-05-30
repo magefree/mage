@@ -46,7 +46,7 @@ public final class DeepwoodLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
 
         // {B}: Deepwood Legate gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private DeepwoodLegate(final DeepwoodLegate card) {

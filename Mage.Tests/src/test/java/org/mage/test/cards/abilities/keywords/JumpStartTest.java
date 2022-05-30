@@ -89,7 +89,8 @@ public class JumpStartTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experimental Frenzy");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Direct Current with jump-start", playerB);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("Can't cast lightning bolt", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Lightning", false);
+//        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -99,12 +100,9 @@ public class JumpStartTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Direct Current", 0);
         assertExileCount(playerA, "Direct Current", 1);
 
-        assertHandCount(playerA, "Lightning Bolt", 1); // prevented to cast from hand by Experimental Frenzy
         assertGraveyardCount(playerA, "Lightning Bolt", 1); // Discarded by using  jump-start
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-
     }
-
 }

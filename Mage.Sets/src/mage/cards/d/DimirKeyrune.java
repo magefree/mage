@@ -35,7 +35,7 @@ public final class DimirKeyrune extends CardImpl {
                 .withColor("UB")
                 .withSubType(SubType.HORROR)
                 .withAbility(new CantBeBlockedSourceAbility()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{U}{B}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{U}{B}")));
     }
 
     private DimirKeyrune(final DimirKeyrune card) {

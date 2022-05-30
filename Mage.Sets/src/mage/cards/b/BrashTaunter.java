@@ -50,7 +50,7 @@ public final class BrashTaunter extends CardImpl {
         this.addAbility(ability);
 
         // {2}{R}, {T}: Brash Taunter fights another target creature.
-        ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl("{2}{R}"));
+        ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -14,7 +14,6 @@ public class PanharmoniconTest extends CardTestPlayerBase {
 
     /**
      * Check that Panharmonicon adds EtB triggers correctly.
-     *
      */
     @Test
     public void testAddsTrigger() {
@@ -37,7 +36,6 @@ public class PanharmoniconTest extends CardTestPlayerBase {
 
     /**
      * Check that Panharmonicon doesn't add to opponents' triggers.
-     *
      */
     @Test
     public void testDoesntAddOpponentsTriggers() {
@@ -60,7 +58,6 @@ public class PanharmoniconTest extends CardTestPlayerBase {
 
     /**
      * Check that Panharmonicon doesn't add to lands triggers.
-     *
      */
     @Test
     public void testDoesntAddLandsTriggers() {
@@ -79,7 +76,6 @@ public class PanharmoniconTest extends CardTestPlayerBase {
 
     /**
      * Check that Panharmonicon doesn't add to non-permanents triggers.
-     *
      */
     @Test
     public void testDoesntAddNonPermanentsTriggers() {
@@ -91,9 +87,11 @@ public class PanharmoniconTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Scion of Ugin");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Ugin");
         setChoice(playerA, false); // Return Bladewing's Thrall from your graveyard to the battlefield?
-        setChoice(playerA, true); // Should not get run since there is only one trigger.
+        // There should only be one trigger, so no need for another choice
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

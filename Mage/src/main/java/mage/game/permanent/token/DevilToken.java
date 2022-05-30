@@ -34,7 +34,7 @@ public final class DevilToken extends TokenImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("SOI", "WAR", "AFR", "MID", "SNC");
+        availableImageSetCodes = Arrays.asList("SOI", "WAR", "AFR", "MID", "SNC", "NCC");
     }
 
     public DevilToken(final DevilToken token) {

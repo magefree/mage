@@ -23,7 +23,7 @@ public final class AladdinsRing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");
 
         // {8}, {tap}: Aladdin's Ring deals 4 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{8}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl<>("{8}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

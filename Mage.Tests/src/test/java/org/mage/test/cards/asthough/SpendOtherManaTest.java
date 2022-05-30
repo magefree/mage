@@ -76,13 +76,15 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
      * of Nissa in play. Pretty sure Oath is working usually, so here were the
      * conditions in my game:
      * <p>
-     * -Cast Dark Petition with spell mastery -Attempt to cast Nissa, Voice of
-     * Zendikar using the triple black mana from Dark Petition
+     * 1. Cast Dark Petition with spell mastery
+     * 2. Attempt to cast Nissa, Voice of Zendikar using the triple black mana from Dark Petition
      */
     @Test
     public void testOathOfNissaWithDarkPetition() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // When Oath of Nissa enters the battlefield, look at the top three cards of your library.
+        // You may reveal a creature, land, or planeswalker card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in any order.
         // You may spend mana as though it were mana of any color to cast planeswalker spells.
         addCard(Zone.BATTLEFIELD, playerA, "Oath of Nissa");
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 2);
@@ -97,7 +99,8 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Nissa, Voice of Zendikar"); // {1}{G}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dark Petition");
-        setChoice(playerA, "Nissa, Voice of Zendikar");
+        addTarget(playerA, "Nissa, Voice of Zendikar");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Voice of Zendikar");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

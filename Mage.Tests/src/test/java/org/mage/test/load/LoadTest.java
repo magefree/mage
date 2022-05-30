@@ -3,6 +3,7 @@ package org.mage.test.load;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardScanner;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
@@ -43,7 +44,11 @@ public class LoadTest {
     private static final int TEST_PORT = 17171;
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME = "user";
-    private static final String TEST_AI_SETS_USAGE = "CMR"; // set in generated decks for AI games (empty for all sets usage)
+    private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
+    private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
+    private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage)
+    private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
+    private static final String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
     @BeforeClass
     public static void initDatabase() {
@@ -152,7 +157,7 @@ public class LoadTest {
         LoadPlayer player2 = new LoadPlayer("2");
 
         // game by user 1
-        GameTypeView gameType = player1.session.getGameTypes().get(0);
+        GameTypeView gameType = prepareGameType(player1.session);
         MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, player1.session);
         TableView game = player1.session.createTable(player1.roomID, gameOptions);
         UUID tableId = game.getTableId();
@@ -211,17 +216,29 @@ public class LoadTest {
         LoadPlayer monitor = new LoadPlayer("monitor", true);
 
         // game by monitor
-        GameTypeView gameType = monitor.session.getGameTypes().get(0);
+        GameTypeView gameType = prepareGameType(monitor.session);
         MatchOptions gameOptions = createSimpleGameOptionsForAI(gameType, monitor.session, gameName);
         TableView game = monitor.session.createTable(monitor.roomID, gameOptions);
         UUID tableId = game.getTableId();
 
-        DeckCardLists deckList = DeckTestUtils.buildRandomDeckAndInitCards(deckColors, false, deckAllowedSets);
+        // deck load
+        DeckCardLists deckListRandom = DeckTestUtils.buildRandomDeckAndInitCards(deckColors, false, deckAllowedSets);
+        DeckCardLists deckList1 = deckListRandom;
+        DeckCardLists deckList2 = deckListRandom;
+        if (!TEST_AI_CUSTOM_DECK_PATH_1.isEmpty()) {
+            deckList1 = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_1, false);
+            Assert.assertFalse("Can't load custom deck 1 from " + TEST_AI_CUSTOM_DECK_PATH_1, deckList1.getCards().isEmpty());
+        }
+        if (!TEST_AI_CUSTOM_DECK_PATH_2.isEmpty()) {
+            deckList2 = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_2, false);
+            Assert.assertFalse("Can't load custom deck 2 from " + TEST_AI_CUSTOM_DECK_PATH_2, deckList2.getCards().isEmpty());
+        }
+
         Optional<TableView> checkGame;
 
         // join AI
-        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList, ""));
-        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_2", PlayerType.COMPUTER_MAD, 5, deckList, ""));
+        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList1, ""));
+        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_2", PlayerType.COMPUTER_MAD, 5, deckList2, ""));
 
         // match start
         Assert.assertTrue(monitor.session.startMatch(monitor.roomID, tableId));
@@ -268,7 +285,7 @@ public class LoadTest {
     @Ignore
     public void test_TwoAIPlayGame_One() {
         LoadTestGameResult gameResult = new LoadTestGameResult(0, "test game", 0);
-        playTwoAIGame("Single AI game", "WGUBR", TEST_AI_SETS_USAGE, gameResult);
+        playTwoAIGame("Single AI game", "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
     }
 
     @Test
@@ -297,7 +314,7 @@ public class LoadTest {
             RandomUtil.setSeed(randomSeed);
             String gameName = "AI game #" + (i + 1);
             LoadTestGameResult gameResult = gameResults.createGame(i + 1, gameName, randomSeed);
-            playTwoAIGame(gameName, "WGUBR", TEST_AI_SETS_USAGE, gameResult);
+            playTwoAIGame(gameName, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
         }
 
         // results
@@ -475,12 +492,14 @@ public class LoadTest {
     }
 
     private MatchOptions createSimpleGameOptions(String gameName, GameTypeView gameTypeView, Session session, PlayerType playersType) {
-        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), false, 2);
+        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), true, 2);
 
         options.getPlayerTypes().add(playersType);
         options.getPlayerTypes().add(playersType);
 
-        options.setDeckType(session.getDeckTypes()[0]);
+        Assert.assertTrue("Can't find game type on the server: " + TEST_AI_DECK_TYPE,
+                Arrays.asList(session.getDeckTypes()).contains(TEST_AI_DECK_TYPE));
+        options.setDeckType(TEST_AI_DECK_TYPE);
         options.setLimited(false);
         options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
         options.setRange(RangeOfInfluence.ALL);
@@ -550,7 +569,7 @@ public class LoadTest {
         }
 
         public UUID createNewTable() {
-            GameTypeView gameType = this.session.getGameTypes().get(0);
+            GameTypeView gameType = prepareGameType(this.session);
             MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, this.session);
             TableView game = this.session.createTable(this.roomID, gameOptions);
             this.createdTableID = game.getTableId();
@@ -817,5 +836,15 @@ public class LoadTest {
         private int getAvgDurationPerTurn() {
             return getAvgDuration() / getAvgTurn();
         }
+    }
+
+    private GameTypeView prepareGameType(Session session) {
+        GameTypeView gameType = session.getGameTypes()
+                .stream()
+                .filter(m -> m.getName().equals(TEST_AI_GAME_MODE))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull("Can't find game type on the server: " + TEST_AI_GAME_MODE, gameType);
+        return gameType;
     }
 }

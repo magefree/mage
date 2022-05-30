@@ -122,7 +122,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String SHOW_COMMAND_HAND = "HAND";
     public static final String SHOW_COMMAND_COMMAND = "COMMAND";
     public static final String SHOW_COMMAND_BATTLEFIELD = "BATTLEFIELD";
-    public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
+    public static final String SHOW_COMMAND_GRAVEYARD = "GRAVEYARD";
     public static final String SHOW_COMMAND_EXILE = "EXILE";
     public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
     public static final String SHOW_COMMAND_AVAILABLE_MANA = "AVAILABLE_MANA";
@@ -581,7 +581,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void showGraveyard(String showName, int turnNum, PhaseStep step, TestPlayer player) {
-        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYEARD);
+        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYARD);
     }
 
     public void showExile(String showName, int turnNum, PhaseStep step, TestPlayer player) {

@@ -16,7 +16,7 @@ public final class PlantToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("ARC", "C18", "DDP", "OGW", "PC2", "WWK", "XLN", "ZEN", "ZNR", "CMR", "NEC", "2XM");
+        availableImageSetCodes = Arrays.asList("ARC", "C18", "DDP", "OGW", "PC2", "WWK", "XLN", "ZEN", "ZNR", "CMR", "NEC", "2XM", "NCC");
     }
 
     public PlantToken(final PlantToken token) {

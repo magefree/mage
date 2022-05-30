@@ -91,31 +91,38 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         this.flag = mana.flag;
     }
 
+
+    public Mana(final ColoredManaSymbol color) {
+        this(color, 1);
+    }
+
     /**
      * Creates {@link Mana} object from {@link ColoredManaSymbol}. Created
      * {@link Mana} will have a single mana of the passed in
      * {@link ColoredManaSymbol} color.
      *
-     * @param color The color to create the {@link Mana} object with.
+     * @param color  the color to create the {@link Mana} object with.
+     * @param amount the number of mana to add of the given color
      */
-    public Mana(final ColoredManaSymbol color) {
+
+    public Mana(final ColoredManaSymbol color, int amount) {
         this();
         Objects.requireNonNull(color, "The passed in ColoredManaSymbol can not be null");
         switch (color) {
             case W:
-                white = CardUtil.overflowInc(white, 1);
+                white = CardUtil.overflowInc(white, amount);
                 break;
             case U:
-                blue = CardUtil.overflowInc(blue, 1);
+                blue = CardUtil.overflowInc(blue, amount);
                 break;
             case B:
-                black = CardUtil.overflowInc(black, 1);
+                black = CardUtil.overflowInc(black, amount);
                 break;
             case R:
-                red = CardUtil.overflowInc(red, 1);
+                red = CardUtil.overflowInc(red, amount);
                 break;
             case G:
-                green = CardUtil.overflowInc(green, 1);
+                green = CardUtil.overflowInc(green, amount);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown mana color: " + color);

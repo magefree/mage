@@ -37,7 +37,7 @@ public final class ArcanumWings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         // Aura swap {2}{U}
-        this.addAbility(new AuraSwapAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new AuraSwapAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private ArcanumWings(final ArcanumWings card) {

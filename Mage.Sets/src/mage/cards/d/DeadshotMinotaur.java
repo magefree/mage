@@ -43,7 +43,7 @@ public final class DeadshotMinotaur extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Cycling {RG}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R/G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R/G}")));
     }
 
     private DeadshotMinotaur(final DeadshotMinotaur card) {

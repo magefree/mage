@@ -37,7 +37,7 @@ public final class AstralDrift extends CardImpl {
         this.addAbility(new AstralDriftTriggeredAbility());
 
         // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
     }
 
     private AstralDrift(final AstralDrift card) {

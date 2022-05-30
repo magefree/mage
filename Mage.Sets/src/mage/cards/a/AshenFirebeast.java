@@ -36,7 +36,7 @@ public final class AshenFirebeast extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {1}{R}: Ashen Firebeast deals 1 damage to each creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AshenFirebeast(final AshenFirebeast card) {

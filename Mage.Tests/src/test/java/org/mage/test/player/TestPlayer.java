@@ -976,7 +976,7 @@ public class TestPlayer implements Player {
                         }
 
                         // show graveyard
-                        if (params[0].equals(SHOW_COMMAND_GRAVEYEARD) && params.length == 1) {
+                        if (params[0].equals(SHOW_COMMAND_GRAVEYARD) && params.length == 1) {
                             printStart(action.getActionName());
                             printCards(computerPlayer.getGraveyard().getCards(game));
                             printEnd();

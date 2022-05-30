@@ -6,11 +6,19 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.k.KarfellHarbinger Karfell Harbinger}
+ * {1}{U}
+ * Creature — Zombie Wizard
+ * {T}: Add {U}. Spend this mana only to foretell a card from your hand or cast an instant or sorcery spell.
+ *
  * @author TheElk801
  */
 
 public class KarfellHarbingerTest extends CardTestPlayerBase {
 
+    /**
+     * Test that spending the money on Foretell works.
+     */
     @Test
     public void testForetellMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
@@ -27,6 +35,9 @@ public class KarfellHarbingerTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Augury Raven", 0);
     }
 
+    /**
+     * Test that spending the mana on an instant works.
+     */
     @Test
     public void testSpellMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Karfell Harbinger");
@@ -42,12 +53,15 @@ public class KarfellHarbingerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Obsessive Search", 1);
     }
 
+    /**
+     * Test that you can't use the mana on something else.
+     */
     @Test
     public void testOtherMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Karfell Harbinger");
         addCard(Zone.HAND, playerA, "Flying Men");
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flying Men");
+        checkPlayableAbility("can't cast flying man", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Flying", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

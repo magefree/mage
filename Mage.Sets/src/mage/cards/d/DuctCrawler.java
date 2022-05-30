@@ -29,7 +29,7 @@ public final class DuctCrawler extends CardImpl {
 
         // {1}{R}: Target creature can't block Duct Crawler this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), 
-        		new ManaCostsImpl("{1}{R}"));
+        		new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
