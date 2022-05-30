@@ -276,6 +276,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Undermountain Adventurer", 260, Rarity.RARE, mage.cards.u.UndermountainAdventurer.class));
         cards.add(new SetCardInfo("Universal Solvent", 342, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
         cards.add(new SetCardInfo("Veteran Soldier", 48, Rarity.UNCOMMON, mage.cards.v.VeteranSoldier.class));
+        cards.add(new SetCardInfo("Vicious Battlerager", 155, Rarity.COMMON, mage.cards.v.ViciousBattlerager.class));
         cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class));
         cards.add(new SetCardInfo("Vrock", 157, Rarity.UNCOMMON, mage.cards.v.Vrock.class));
         cards.add(new SetCardInfo("Wand of Wonder", 204, Rarity.RARE, mage.cards.w.WandOfWonder.class));
