@@ -147,6 +147,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
         cards.add(new SetCardInfo("Inspired Tinkering", 183, Rarity.UNCOMMON, mage.cards.i.InspiredTinkering.class));
         cards.add(new SetCardInfo("Inspiring Leader", 28, Rarity.UNCOMMON, mage.cards.i.InspiringLeader.class));
+        cards.add(new SetCardInfo("Insufferable Balladeer", 184, Rarity.COMMON, mage.cards.i.InsufferableBalladeer.class));
         cards.add(new SetCardInfo("Irenicus's Vile Duplication", 78, Rarity.UNCOMMON, mage.cards.i.IrenicussVileDuplication.class));
         cards.add(new SetCardInfo("Iron Mastiff", 317, Rarity.UNCOMMON, mage.cards.i.IronMastiff.class));
         cards.add(new SetCardInfo("Island", 455, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
