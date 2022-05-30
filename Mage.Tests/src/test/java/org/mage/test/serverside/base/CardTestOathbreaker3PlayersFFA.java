@@ -24,9 +24,9 @@ public abstract class CardTestOathbreaker3PlayersFFA extends CardTestPlayerAPIIm
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new OathbreakerFreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        playerA = createPlayer(game, playerA, "PlayerA", deckNameA);
-        playerB = createPlayer(game, playerB, "PlayerB", deckNameB);
-        playerC = createPlayer(game, playerC, "PlayerC", deckNameC);
+        playerA = createPlayer(game, "PlayerA", deckNameA);
+        playerB = createPlayer(game, "PlayerB", deckNameB);
+        playerC = createPlayer(game, "PlayerC", deckNameC);
         return game;
     }
 
