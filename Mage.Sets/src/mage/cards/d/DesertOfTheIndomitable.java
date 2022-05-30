@@ -29,7 +29,7 @@ public final class DesertOfTheIndomitable extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // Cycling {1}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{G}")));
 
     }
 

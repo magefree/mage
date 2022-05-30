@@ -30,7 +30,7 @@ public final class AlmightyBrushwagg extends CardImpl {
 
         // {3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
+                new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")
         ));
     }
 

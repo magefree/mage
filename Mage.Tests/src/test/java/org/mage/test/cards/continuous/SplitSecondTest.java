@@ -2,6 +2,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -20,7 +21,18 @@ public class SplitSecondTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell", "Sudden Shock");
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
+
+        // TODO: Needed, see https://github.com/magefree/mage/issues/8973
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about trying to use Counterspell, but got:\n" + e.getMessage());
+            }
+        }
 
         assertHandCount(playerA, "Counterspell", 1);
         assertGraveyardCount(playerA, "Sudden Shock", 1);

@@ -25,7 +25,7 @@ public final class FieryTemper extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private FieryTemper(final FieryTemper card) {

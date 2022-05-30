@@ -18,7 +18,7 @@ public final class SwanSongBirdToken extends TokenImpl {
         color.setBlue(true);
         subtype.add(SubType.BIRD);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(2);
+            setTokenType(1);
         }
         power = new MageInt(2);
         toughness = new MageInt(2);

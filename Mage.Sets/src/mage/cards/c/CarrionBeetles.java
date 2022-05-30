@@ -28,7 +28,7 @@ public final class CarrionBeetles extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, {T}: Exile up to three target cards from a single graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);

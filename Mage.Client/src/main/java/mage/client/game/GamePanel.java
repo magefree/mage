@@ -1381,11 +1381,11 @@ public final class GamePanel extends javax.swing.JPanel {
             needZone = (Zone) lastGameData.options.get("targetZone");
         }
 
-        List<UUID> needChoosen;
+        List<UUID> needChosen;
         if (lastGameData.options != null && lastGameData.options.containsKey("chosen")) {
-            needChoosen = (List<UUID>) lastGameData.options.get("chosen");
+            needChosen = (List<UUID>) lastGameData.options.get("chosen");
         } else {
-            needChoosen = new ArrayList<>();
+            needChosen = new ArrayList<>();
         }
 
         Set<UUID> needSelectable;
@@ -1402,7 +1402,7 @@ public final class GamePanel extends javax.swing.JPanel {
             needPlayable = new PlayableObjectsList();
         }
 
-        if (needChoosen.isEmpty() && needSelectable.isEmpty() && needPlayable.isEmpty()) {
+        if (needChosen.isEmpty() && needSelectable.isEmpty() && needPlayable.isEmpty()) {
             return;
         }
 
@@ -1412,7 +1412,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }
-                if (needChoosen.contains(card.getId())) {
+                if (needChosen.contains(card.getId())) {
                     card.setSelected(true);
                 }
                 if (needPlayable.containsObject(card.getId())) {
@@ -1427,7 +1427,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
                 }
-                if (needChoosen.contains(card.getKey())) {
+                if (needChosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
                 // users can activate abilities of the spell on the stack (example: Lightning Storm);
@@ -1444,7 +1444,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(perm.getKey())) {
                         perm.getValue().setChoosable(true);
                     }
-                    if (needChoosen.contains(perm.getKey())) {
+                    if (needChosen.contains(perm.getKey())) {
                         perm.getValue().setSelected(true);
                     }
                     if (needPlayable.containsObject(perm.getKey())) {
@@ -1461,7 +1461,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(card.getKey())) {
                         card.getValue().setChoosable(true);
                     }
-                    if (needChoosen.contains(card.getKey())) {
+                    if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
                     if (needPlayable.containsObject(card.getKey())) {
@@ -1478,7 +1478,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(card.getKey())) {
                         card.getValue().setChoosable(true);
                     }
-                    if (needChoosen.contains(card.getKey())) {
+                    if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
                     if (needPlayable.containsObject(card.getKey())) {
@@ -1488,7 +1488,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         // sideboards (old windows all the time, e.g. unattached from game data)
-        prepareSelectableWindows(sideboardWindows.values(), needSelectable, needChoosen, needPlayable);
+        prepareSelectableWindows(sideboardWindows.values(), needSelectable, needChosen, needPlayable);
 
         // exile
         if (needZone == Zone.EXILED || needZone == Zone.ALL) {
@@ -1498,7 +1498,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(card.getId())) {
                         card.setChoosable(true);
                     }
-                    if (needChoosen.contains(card.getId())) {
+                    if (needChosen.contains(card.getId())) {
                         card.setSelected(true);
                     }
                     if (needPlayable.containsObject(card.getId())) {
@@ -1513,7 +1513,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(card.getKey())) {
                         card.getValue().setChoosable(true);
                     }
-                    if (needChoosen.contains(card.getKey())) {
+                    if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
                     if (needPlayable.containsObject(card.getKey())) {
@@ -1530,7 +1530,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needSelectable.contains(com.getId())) {
                         com.setChoosable(true);
                     }
-                    if (needChoosen.contains(com.getId())) {
+                    if (needChosen.contains(com.getId())) {
                         com.setSelected(true);
                     }
                     if (needPlayable.containsObject(com.getId())) {
@@ -1546,7 +1546,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
                 }
-                if (needChoosen.contains(card.getKey())) {
+                if (needChosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
                 if (needPlayable.containsObject(card.getKey())) {
@@ -1561,7 +1561,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
                 }
-                if (needChoosen.contains(card.getKey())) {
+                if (needChosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
                 if (needPlayable.containsObject(card.getKey())) {
@@ -1570,7 +1570,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         // revealed (old windows)
-        prepareSelectableWindows(revealed.values(), needSelectable, needChoosen, needPlayable);
+        prepareSelectableWindows(revealed.values(), needSelectable, needChosen, needPlayable);
 
         // looked at (current cards)
         for (LookedAtView look : lastGameData.game.getLookedAt()) {
@@ -1581,13 +1581,13 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         // looked at (old windows)
-        prepareSelectableWindows(lookedAt.values(), needSelectable, needChoosen, needPlayable);
+        prepareSelectableWindows(lookedAt.values(), needSelectable, needChosen, needPlayable);
     }
 
     private void prepareSelectableWindows(
             Collection<CardInfoWindowDialog> windows,
             Set<UUID> needSelectable,
-            List<UUID> needChoosen,
+            List<UUID> needChosen,
             PlayableObjectsList needPlayable
     ) {
         // lookAt or reveals windows clean up on next priority, so users can see dialogs, but xmage can't restore it
@@ -1596,7 +1596,7 @@ public final class GamePanel extends javax.swing.JPanel {
             for (MageCard mageCard : window.getMageCardsForUpdate().values()) {
                 CardView cardView = mageCard.getOriginal();
                 cardView.setChoosable(needSelectable.contains(cardView.getId()));
-                cardView.setSelected(needChoosen.contains(cardView.getId()));
+                cardView.setSelected(needChosen.contains(cardView.getId()));
                 if (needPlayable.containsObject(cardView.getId())) {
                     cardView.setPlayableStats(needPlayable.getStats(cardView.getId()));
                 } else {

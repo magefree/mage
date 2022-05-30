@@ -34,7 +34,7 @@ public final class DauthiJackal extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
         
         // {B}{B}, Sacrifice Dauthi Jackal: Destroy target blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
         this.addAbility(ability);

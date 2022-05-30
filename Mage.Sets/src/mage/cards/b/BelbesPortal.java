@@ -33,7 +33,7 @@ public final class BelbesPortal extends CardImpl {
         filter.add(ChosenSubtypePredicate.TRUE);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(filter),
-                new ManaCostsImpl("{3}"));
+                new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -48,7 +48,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
 
         // {1}{R}: Flamescroll Celebrant gets +2/+0 until end of turn.
         this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         ));
 
         // 2.

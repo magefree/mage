@@ -145,7 +145,7 @@ class ElspethResplendentLookEffect extends OneShotEffect {
             }
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }

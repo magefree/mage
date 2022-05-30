@@ -26,7 +26,7 @@ public final class DirgurNemesis extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Megamorph {6}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{U}"), true));
     }
 
     private DirgurNemesis(final DirgurNemesis card) {

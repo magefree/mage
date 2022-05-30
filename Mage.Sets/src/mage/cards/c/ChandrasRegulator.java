@@ -84,7 +84,7 @@ class ChandrasRegulatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCostsImpl cost = new ManaCostsImpl("{1}");
+        ManaCostsImpl cost = new ManaCostsImpl<>("{1}");
         if (player == null) {
             return false;
         }

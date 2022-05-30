@@ -6,6 +6,15 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.f.FrostpyreArcanist Frostpyre Arcanist}
+ * {4}{U}
+ * Creature — Giant Wizard
+ * This spell costs {1} less to cast if you control a Giant or a Wizard.
+ * When Frostpyre Arcanist enters the battlefield,
+ * search your library for an instant or sorcery card with the same name as a card in your graveyard,
+ * reveal it, put it into your hand, then shuffle.
+ * 2/5
+ *
  * @author TheElk801
  */
 public class FrostpyreArcanistTest extends CardTestPlayerBase {
@@ -20,10 +29,11 @@ public class FrostpyreArcanistTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, bolt);
         addCard(Zone.HAND, playerA, arcanist);
 
-        addTarget(playerA, bolt);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcanist);
-
         setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcanist);
+        addTarget(playerA, bolt);
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -38,8 +48,8 @@ public class FrostpyreArcanistTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, bolt);
         addCard(Zone.HAND, playerA, arcanist);
 
-        addTarget(playerA, bolt);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcanist);
+        // Let the choice be made automatically since there is no sorcery or instant card in the graveyard.
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

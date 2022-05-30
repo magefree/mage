@@ -32,4 +32,13 @@ public final class DemonToken extends TokenImpl {
     public DemonToken copy() {
         return new DemonToken(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
+            setTokenType(1);
+        }
+    }
 }

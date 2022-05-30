@@ -19,8 +19,8 @@ public final class ElephantToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "CMA", "CMD", "CNS", "GVL", "DDD",
-                "EMA", "INV", "JUD", "MM2", "ODY", "ROE", "TSP", "VMA", "WWK", "MH1", "CMR", "C21", "MIC", "NEC", "2XM");
+        availableImageSetCodes = Arrays.asList("C14", "C15", "CMA", "CMD", "CNS", "GVL", "DDD",
+                "EMA", "INV", "JUD", "MM2", "ODY", "ROE", "TSP", "VMA", "WWK", "MH1", "CMR", "C21", "MIC", "NEC", "2XM", "NCC");
     }
 
     public ElephantToken(final ElephantToken token) {

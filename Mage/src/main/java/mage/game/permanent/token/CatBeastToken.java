@@ -20,7 +20,7 @@ public final class CatBeastToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("ZNR");
+        availableImageSetCodes = Arrays.asList("ZNR", "NCC");
     }
 
     public CatBeastToken(final CatBeastToken token) {

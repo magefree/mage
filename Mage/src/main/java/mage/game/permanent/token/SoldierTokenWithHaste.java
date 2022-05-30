@@ -22,7 +22,7 @@ public final class SoldierTokenWithHaste extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("GTC", "MM3");
+        availableImageSetCodes = Arrays.asList("GTC", "MM3", "NCC");
     }
 
 
@@ -34,6 +34,9 @@ public final class SoldierTokenWithHaste extends TokenImpl {
             setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
+            setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
             setTokenType(2);
         }
     }

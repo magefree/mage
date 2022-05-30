@@ -553,13 +553,13 @@ public class KickerTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
     }
 
+    /**
+     * Bug: When I cast Orim's Chant with Kicker cost, the player can play spells
+     *      anyway during the turn.
+     *      It seems like the kicker cost trigger an "instead" creatures can't attack.
+     */
     @Test
     public void test_Single_OrimsChants() {
-        // bug:
-        // When I cast Orim's Chant with Kicker cost, the player can play spells
-        // anyway during the turn. It seems like the kicker cost trigger an
-        // "instead" creatures can't attack.
-
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 1); // Haste   1/1
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
@@ -577,11 +577,19 @@ public class KickerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
-        // attack must be restricted, so no attack commands available
-        //setStrictChooseMode(true);
+        // Attack must be restricted, so no attack commands available
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
-        //assertAllCommandsUsed();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
+            }
+        }
 
         assertGraveyardCount(playerA, "Orim's Chant", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 0);

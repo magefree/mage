@@ -26,7 +26,7 @@ public final class CrudeRampart extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Morph {4}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{W}")));
     }
 
     private CrudeRampart(final CrudeRampart card) {

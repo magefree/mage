@@ -24,7 +24,7 @@ public final class DisruptingScepter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {T}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{3}"), MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         ability.addHint(MyTurnHint.instance);

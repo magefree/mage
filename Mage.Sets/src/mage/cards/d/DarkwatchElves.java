@@ -25,7 +25,7 @@ public final class DarkwatchElves extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DarkwatchElves(final DarkwatchElves card) {

@@ -7,6 +7,8 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -21,6 +23,25 @@ public final class Ooze2Token extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new OozeToken(1, 1), 2), false));
+
+        availableImageSetCodes = Arrays.asList("M11", "PCA", "NCC");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M11")) {
+            setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("PCA")) {
+            setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
+            setTokenType(2);
+        }
     }
 
     public Ooze2Token(final Ooze2Token token) {

@@ -40,7 +40,7 @@ public final class FreneticSliver extends CardImpl {
                         new SimpleActivatedAbility(
                                 Zone.BATTLEFIELD,
                                 new FreneticSliverEffect(),
-                                new ManaCostsImpl("{0}")
+                                new ManaCostsImpl<>("{0}")
                         ), Duration.WhileOnBattlefield, filter, rule
                 )
         ));

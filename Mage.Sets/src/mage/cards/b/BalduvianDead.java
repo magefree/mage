@@ -37,7 +37,7 @@ public final class BalduvianDead extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{R}, Exile a creature card from your graveyard: Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalduvianDeadEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalduvianDeadEffect(), new ManaCostsImpl<>("{2}{R}"));
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         ability.addCost(new ExileFromGraveCost(target));
         this.addAbility(ability);

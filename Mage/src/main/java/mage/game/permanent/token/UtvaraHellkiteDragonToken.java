@@ -38,5 +38,14 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
     public UtvaraHellkiteDragonToken copy() {
         return new UtvaraHellkiteDragonToken(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C17")) {
+            setTokenType(2);
+        }
+    }
     
 }

@@ -36,7 +36,7 @@ public final class Farmstead extends CardImpl {
 
         // Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{W}{W}")),
+                new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl<>("{W}{W}")),
                 TargetController.YOU, false);
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life.\"");

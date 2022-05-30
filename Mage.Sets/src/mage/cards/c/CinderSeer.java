@@ -36,7 +36,7 @@ public final class CinderSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{R}, {tap}: Reveal any number of red cards in your hand. Cinder Seer deals X damage to any target, where X is the number of cards revealed this way.
-        Ability ability = new SimpleActivatedAbility(new CinderSeerEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(new CinderSeerEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

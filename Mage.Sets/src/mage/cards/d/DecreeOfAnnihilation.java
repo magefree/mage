@@ -34,7 +34,7 @@ public final class DecreeOfAnnihilation extends CardImpl {
         this.getSpellAbility().addEffect(new DecreeOfAnnihilationEffect());
 
         // Cycling {5}{R}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{R}{R}")));
 
         // When you cycle Decree of Annihilation, destroy all lands.
         this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_LANDS), false));

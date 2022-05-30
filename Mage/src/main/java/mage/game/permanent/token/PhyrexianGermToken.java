@@ -20,7 +20,7 @@ public final class PhyrexianGermToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("C14", "C15", "MBS", "MM2", "NPH", "PC2", "MH2", "NEC", "2XM");
+        availableImageSetCodes = Arrays.asList("C14", "C15", "C16", "MBS", "MM2", "NPH", "PC2", "MH2", "NEC", "2XM");
     }
 
     @Override

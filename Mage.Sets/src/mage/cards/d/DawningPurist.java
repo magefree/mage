@@ -37,7 +37,7 @@ public final class DawningPurist extends CardImpl {
         this.addAbility(new DawningPuristTriggeredAbility());
 
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private DawningPurist(final DawningPurist card) {

@@ -20,7 +20,7 @@ public final class EchoesOfTheKinTree extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // {2}{W}: Bolster 1.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1),new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1),new ManaCostsImpl<>("{2}{W}")));
     }
 
     private EchoesOfTheKinTree(final EchoesOfTheKinTree card) {

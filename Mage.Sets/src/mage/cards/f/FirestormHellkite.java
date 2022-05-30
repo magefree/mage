@@ -29,7 +29,7 @@ public final class FirestormHellkite extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Cumulative upkeep {U}{R}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}{R}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}{R}")));
     }
 
     private FirestormHellkite(final FirestormHellkite card) {

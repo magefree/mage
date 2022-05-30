@@ -45,7 +45,7 @@ public final class ArcticAven extends CardImpl {
         // {W}: Arctic Aven gains lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{W}")));
+                new ManaCostsImpl<>("{W}")));
     }
 
     private ArcticAven(final ArcticAven card) {

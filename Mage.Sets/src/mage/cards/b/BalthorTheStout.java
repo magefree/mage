@@ -42,7 +42,7 @@ public final class BalthorTheStout extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         
         // {R}: Another target Barbarian creature gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn),new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn),new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent(1, 1, filter2, true));
         this.addAbility(ability);
     }

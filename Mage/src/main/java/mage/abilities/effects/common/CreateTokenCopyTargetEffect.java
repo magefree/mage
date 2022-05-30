@@ -318,40 +318,64 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return addedTokenPermanents;
     }
 
-    public void setAdditionalSubType(SubType additionalSubType) {
+    public CreateTokenCopyTargetEffect setAdditionalSubType(SubType additionalSubType) {
         this.additionalSubType = additionalSubType;
+        return this;
     }
 
-    public void setOnlySubType(SubType onlySubType) {
+    public CreateTokenCopyTargetEffect setOnlySubType(SubType onlySubType) {
         this.onlySubType = onlySubType;
+        return this;
     }
 
-    public void setOnlyColor(ObjectColor color) {
+    public CreateTokenCopyTargetEffect setOnlyColor(ObjectColor color) {
         this.color = color;
+        return this;
     }
 
-    public void setUseLKI(boolean useLKI) {
+    public CreateTokenCopyTargetEffect setUseLKI(boolean useLKI) {
         this.useLKI = useLKI;
+        return this;
     }
 
-    public void setBecomesArtifact(boolean becomesArtifact) {
+    public CreateTokenCopyTargetEffect setBecomesArtifact(boolean becomesArtifact) {
         this.becomesArtifact = becomesArtifact;
+        return this;
     }
 
-    public void setIsntLegendary(boolean isntLegendary) {
+    public CreateTokenCopyTargetEffect setIsntLegendary(boolean isntLegendary) {
         this.isntLegendary = isntLegendary;
+        return this;
     }
 
-    public void setHasHaste(boolean hasHaste) {
+    public CreateTokenCopyTargetEffect setHasHaste(boolean hasHaste) {
         this.hasHaste = hasHaste;
+        return this;
     }
 
-    public void setStartingLoyalty(int startingLoyalty) {
+    public CreateTokenCopyTargetEffect setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+        return this;
     }
 
-    public void setNumber(int number) {
+    public CreateTokenCopyTargetEffect setNumber(int number) {
         this.number = number;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect addAbilityClassesToRemoveFromTokens(Class<? extends Ability> clazz) {
+        this.abilityClazzesToRemove.add(clazz);return this;
+    }
+
+    public CreateTokenCopyTargetEffect addAdditionalAbilities(Ability... abilities) {
+        this.additionalAbilities.addAll(Arrays.asList(abilities));
+        return this;
+    }
+
+
+    public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
+        this.savedPermanent = savedPermanent;
+        return this;
     }
 
     public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
@@ -393,19 +417,5 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         game.addDelayedTriggeredAbility(exileAbility, source);
-    }
-
-    public void addAbilityClassesToRemoveFromTokens(Class<? extends Ability> clazz) {
-        this.abilityClazzesToRemove.add(clazz);
-    }
-
-    public void addAdditionalAbilities(Ability... abilities) {
-        this.additionalAbilities.addAll(Arrays.asList(abilities));
-    }
-
-
-    public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
-        this.savedPermanent = savedPermanent;
-        return this;
     }
 }

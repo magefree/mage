@@ -25,7 +25,7 @@ public final class EntreatTheAngels extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.REGULAR));
 
         // Miracle {X}{W}{W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{W}{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{X}{W}{W}")));
     }
 
     private EntreatTheAngels(final EntreatTheAngels card) {

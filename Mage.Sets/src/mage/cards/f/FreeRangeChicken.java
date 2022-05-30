@@ -32,7 +32,7 @@ public final class FreeRangeChicken extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Roll two six-sided dice. If both results are the same, Free-Range Chicken gets +X/+X until end of turn, where X is that result. If the total of those results is equal to any other total you have rolled this turn for Free-Range Chicken, sacrifice it. (For example, if you roll two 3s, Free-Range Chicken gets +3/+3. If you roll a total of 6 for Free-Range Chicken later that turn, sacrifice it.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreeRangeChickenEffect(), new ManaCostsImpl("{1}{G}")), new FreeRangeChickenWatcher());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreeRangeChickenEffect(), new ManaCostsImpl<>("{1}{G}")), new FreeRangeChickenWatcher());
     }
 
     private FreeRangeChicken(final FreeRangeChicken card) {

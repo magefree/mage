@@ -30,7 +30,7 @@ public final class FontOfAgonies extends CardImpl {
         this.addAbility(new FontOfAgoniesTriggeredAbility());
 
         // {1}{B}, Remove four blood counters from Font of Agonies: Destroy target creature.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.BLOOD.createInstance(4)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

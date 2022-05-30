@@ -32,7 +32,7 @@ public final class DawnglareInvoker extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES),
-                new ManaCostsImpl("{8}"));
+                new ManaCostsImpl<>("{8}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

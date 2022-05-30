@@ -25,7 +25,7 @@ public final class AdornedPouncer extends CardImpl {
         addAbility(DoubleStrikeAbility.getInstance());
 
         // Eternalize 3WW
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{3}{W}{W}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{3}{W}{W}"), this));
     }
 
     private AdornedPouncer(final AdornedPouncer card) {

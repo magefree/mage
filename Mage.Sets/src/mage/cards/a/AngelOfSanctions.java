@@ -48,7 +48,7 @@ public final class AngelOfSanctions extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {5}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{W}"), this));
 
     }
 

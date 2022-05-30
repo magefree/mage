@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,10 +13,11 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class AerialGuide extends CardImpl {
@@ -27,11 +27,11 @@ public final class AerialGuide extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
-    
+
     public AerialGuide(UUID ownerId, CardSetInfo setInfo) {
-        
+
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        
+
         this.subtype.add(SubType.DRAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -41,9 +41,9 @@ public final class AerialGuide extends CardImpl {
 
         // Whenever Aerial Guide attacks, another target attacking creature gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         addAbility(ability);
-        
+
     }
 
     private AerialGuide(final AerialGuide card) {

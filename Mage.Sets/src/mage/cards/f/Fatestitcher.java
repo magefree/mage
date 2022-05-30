@@ -42,7 +42,7 @@ public final class Fatestitcher extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Unearth {U}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private Fatestitcher(final Fatestitcher card) {

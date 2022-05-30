@@ -35,7 +35,7 @@ public final class CanopyDragon extends CardImpl {
         // {1}{G}: Canopy Dragon gains flying and loses trample until end of turn.
         Effect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("{this} gains flying");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
         effect = new LoseAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and loses trample until end of turn");
         ability.addEffect(effect);
