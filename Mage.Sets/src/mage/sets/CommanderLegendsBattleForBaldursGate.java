@@ -106,6 +106,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Elturel Survivors", 172, Rarity.RARE, mage.cards.e.ElturelSurvivors.class));
         cards.add(new SetCardInfo("Emerald Dragon", 229, Rarity.UNCOMMON, mage.cards.e.EmeraldDragon.class));
         cards.add(new SetCardInfo("Erinis, Gloom Stalker", 230, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class));
+        cards.add(new SetCardInfo("Ettercap", 231, Rarity.COMMON, mage.cards.e.Ettercap.class));
         cards.add(new SetCardInfo("Evolving Wilds", 352, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Explore the Underdark", 232, Rarity.UNCOMMON, mage.cards.e.ExploreTheUnderdark.class));
         cards.add(new SetCardInfo("Faceless One", 1, Rarity.SPECIAL, mage.cards.f.FacelessOne.class));
