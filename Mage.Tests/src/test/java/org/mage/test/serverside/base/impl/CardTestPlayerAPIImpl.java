@@ -161,7 +161,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         CardScanner.scan(errorsList);
 
         if (errorsList.size() > 0) {
-            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+            Assert.fail("Found errors on card loading: " + '\n' + String.join("\n", errorsList));
         }
     }
 
