@@ -34,7 +34,7 @@ public final class EnergyStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // Prevent all damage that would be dealt by instant and sorcery spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
