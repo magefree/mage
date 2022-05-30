@@ -231,6 +231,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Spire Garden", 361, Rarity.RARE, mage.cards.s.SpireGarden.class));
         cards.add(new SetCardInfo("Steadfast Unicorn", 44, Rarity.COMMON, mage.cards.s.SteadfastUnicorn.class));
         cards.add(new SetCardInfo("Stirge", 150, Rarity.COMMON, mage.cards.s.Stirge.class));
+        cards.add(new SetCardInfo("Stirring Bard", 195, Rarity.COMMON, mage.cards.s.StirringBard.class));
         cards.add(new SetCardInfo("Stoneskin", 45, Rarity.UNCOMMON, mage.cards.s.Stoneskin.class));
         cards.add(new SetCardInfo("Stonespeaker Crystal", 338, Rarity.UNCOMMON, mage.cards.s.StonespeakerCrystal.class));
         cards.add(new SetCardInfo("Street Urchin", 197, Rarity.UNCOMMON, mage.cards.s.StreetUrchin.class));
