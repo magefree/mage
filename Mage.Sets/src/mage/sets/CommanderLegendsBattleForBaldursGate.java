@@ -183,6 +183,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 463, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murder", 134, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Myconid Spore Tender", 243, Rarity.COMMON, mage.cards.m.MyconidSporeTender.class));
+        cards.add(new SetCardInfo("Myrkul's Invoker", 136, Rarity.COMMON, mage.cards.m.MyrkulsInvoker.class));
         cards.add(new SetCardInfo("Mystery Key", 85, Rarity.UNCOMMON, mage.cards.m.MysteryKey.class));
         cards.add(new SetCardInfo("Nalia de'Arnise", 649, Rarity.MYTHIC, mage.cards.n.NaliaDeArnise.class));
         cards.add(new SetCardInfo("Nature's Lore", 244, Rarity.COMMON, mage.cards.n.NaturesLore.class));
