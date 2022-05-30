@@ -139,7 +139,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameC;
     protected String deckNameD;
 
-    private int rollbackBlock = 0; // used to handle actions that have to be added aufter a rollback
+    private int rollbackBlock = 0; // used to handle actions that have to be added after a rollback
     private boolean rollbackBlockActive = false;
     private TestPlayer rollbackPlayer = null;
 
