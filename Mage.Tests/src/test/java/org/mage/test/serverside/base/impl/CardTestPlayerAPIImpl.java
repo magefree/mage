@@ -78,7 +78,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // commands for run
     public static final String RUN_COMMAND_CODE = "code";
 
-    // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
     public static final String CHECK_COMMAND_DAMAGE = "DAMAGE";
     public static final String CHECK_COMMAND_LIFE = "LIFE";
@@ -555,7 +554,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * should be used once before initialization to form the library in certain
      * order.
      * <p>
-     * Warning, if you doesn't add cards to hand then player will lose the game
+     * Warning, if you don't add cards to hand then player will lose the game
      * on draw and test return unused actions (game ended too early)
      *
      * @param player {@link Player} to remove all library cards from.
@@ -596,10 +595,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player   {@link Player} to add cards for. Use either playerA or
      *                 playerB.
      * @param cardName Card name in string format.
+     * @return {@link List<UUID>} An array with a single element: the UUID for the card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName) {
-        addCard(gameZone, player, cardName, 1, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName) {
+        return addCard(gameZone, player, cardName, 1, false);
     }
 
     /**
@@ -610,10 +610,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                 playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
+     * @return {@link List<UUID>} An array containing UUIDs corresponding to each card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
-        addCard(gameZone, player, cardName, count, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
+        return addCard(gameZone, player, cardName, count, false);
     }
 
     /**
@@ -628,9 +629,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                 permanent should be tapped. In case gameZone is other
      *                 than Battlefield, {@link IllegalArgumentException} is
      *                 thrown
+     * @return {@link List<UUID>} An array containing UUIDs corresponding to each card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         // aliases for mage objects
         String aliasName = "";
@@ -650,6 +652,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (cardInfo == null) {
             throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
         }
+        List<UUID> uuidList = new ArrayList<>();
 
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
@@ -663,6 +666,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 if (!aliasName.isEmpty()) {
                     player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), p.getId());
                 }
+                uuidList.add(permCard.getId());
+
             }
         } else {
             if (tapped) {
@@ -672,11 +677,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.getCard();
                 cards.add(newCard);
+                uuidList.add(newCard.getId());
                 if (!aliasName.isEmpty()) {
                     player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
                 }
             }
         }
+        return uuidList;
     }
 
     public void addPlane(Player player, Planes plane) {
