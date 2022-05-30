@@ -36,7 +36,6 @@ public final class CarnelianOrbOfDragonkind extends CardImpl {
 
     public CarnelianOrbOfDragonkind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
-        
 
         // {T}: Add {R}. If that mana is spent on a Dragon creature spell, it gains haste until end of turn.
         Mana mana = Mana.RedMana(1);
@@ -68,14 +67,26 @@ class CarnelianOrbOfDragonkindWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject target = game.getObject(event.getTargetId());
-            if (event.getSourceId() != null
-                    && event.getSourceId().equals(this.getSourceId()) && target != null && target.isCreature(game) && target.hasSubtype(SubType.DRAGON, game) && event.getFlag()) {
-                if (target instanceof Spell) {
-                    this.creatures.add(((Spell) target).getCard().getId());
-                }
-            }
+        if (event.getType() != GameEvent.EventType.MANA_PAID) {
+            return;
+        }
+
+        MageObject target = game.getObject(event.getTargetId());
+        if (target == null || !(target instanceof Spell)) {
+            return;
+        }
+
+        // Mana from Orb
+        if (!event.getFlag()) {
+            return;
+        }
+
+        if (event.getSourceId() == null || !event.getSourceId().equals(this.getSourceId())) {
+            return;
+        }
+
+        if (target.isCreature(game) && target.hasSubtype(SubType.DRAGON, game)) {
+            this.creatures.add(((Spell) target).getCard().getId());
         }
     }
 
@@ -109,15 +120,15 @@ class CarnelianOrbOfDragonkindHasteEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         CarnelianOrbOfDragonkindWatcher watcher = game.getState().getWatcher(CarnelianOrbOfDragonkindWatcher.class, source.getSourceId());
-        if (watcher != null) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatureCastWithOrbsMana(perm.getId())) {
-                    perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-                }
-            }
-            return true;
+        if (watcher == null) {
+            return false;
         }
-        return false;
-    }
 
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
+            if (watcher.creatureCastWithOrbsMana(perm.getId())) {
+                perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+            }
+        }
+        return true;
+    }
 }
