@@ -26,7 +26,7 @@ public interface Cards extends Set<UUID>, Serializable {
      *
      * @param cardId UUID of the card to get
      * @param game   the current game
-     * @return       The Card corresponding the UUID, or null if that UUID is not in the set
+     * @return       The Card corresponding to the UUID, or null if that UUID is not in the set
      */
     Card get(UUID cardId, Game game);
 
