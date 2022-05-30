@@ -38,6 +38,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 298, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archivist of Oghma", 4, Rarity.RARE, mage.cards.a.ArchivistOfOghma.class));
         cards.add(new SetCardInfo("Armor of Shadows", 112, Rarity.COMMON, mage.cards.a.ArmorOfShadows.class));
+        cards.add(new SetCardInfo("Arms of Hadar", 113, Rarity.COMMON, mage.cards.a.ArmsOfHadar.class));
         cards.add(new SetCardInfo("Ascend from Avernus", 5, Rarity.RARE, mage.cards.a.AscendFromAvernus.class));
         cards.add(new SetCardInfo("Astarion's Thirst", 114, Rarity.RARE, mage.cards.a.AstarionsThirst.class));
         cards.add(new SetCardInfo("Astarion, the Decadent", 265, Rarity.RARE, mage.cards.a.AstarionTheDecadent.class));
