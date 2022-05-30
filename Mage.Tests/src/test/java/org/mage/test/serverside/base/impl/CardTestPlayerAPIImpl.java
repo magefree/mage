@@ -87,7 +87,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String RUN_COMMAND_CODE = "code";
 
     static {
-        // cards can be played/casted by activate ability command too
+        // cards can be played/cast by activate ability command too
         assertTrue("musts contains activate ability part", ACTIVATE_PLAY.startsWith(ACTIVATE_ABILITY));
         assertTrue("musts contains activate ability part", ACTIVATE_CAST.startsWith(ACTIVATE_ABILITY));
     }
@@ -139,7 +139,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameC;
     protected String deckNameD;
 
-    private int rollbackBlock = 0; // used to handle actions that have to be added aufter a rollback
+    private int rollbackBlock = 0; // used to handle actions that have to be added after a rollback
     private boolean rollbackBlockActive = false;
     private TestPlayer rollbackPlayer = null;
 
@@ -442,24 +442,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Checks whether or not a given playable ability (someting that lets you cast a card) is available.
      * This function will only check IF the ability is available or not, it does not check the number of times that it's available.
-     *
+     * <p>
      * If using with mustHave = false be very careful about spelling and options, otherwise you may get a false negative.
      * It is reccomended that you set up the test so that the ability is available at the point you wish to check it,
      * check it with checkPlayableAbility(..., mustHave = true), then add whatever condition would stop you from being
      * able to activat the abiltiy
-     *
+     * <p>
      * TODO: Currently does not work in all cases since some effects list abilities as available,
      *       only to then give a pop-up about how it can't be played.
      *       For examples and things to fix, search for:
      *       "try {
      *             execute();"
      *
-     * @param checkName         String to show up if the check fails, for display purposes only.
-     * @param turnNum           The turn number to check on.
-     * @param step              The step to check the ability on.
-     * @param player            The player to be checked for the ability.
-     * @param abilityStartText  The starting portion of the ability name.
-     * @param mustHave          Whether the ability should be activatable of not
+     * @param checkName        String to show up if the check fails, for display purposes only.
+     * @param turnNum          The turn number to check on.
+     * @param step             The step to check the ability on.
+     * @param player           The player to be checked for the ability.
+     * @param abilityStartText The starting portion of the ability name.
+     * @param mustHave         Whether the ability should be activatable of not
      */
     public void checkPlayableAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String abilityStartText, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
@@ -609,7 +609,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * should be used once before initialization to form the library in certain
      * order.
      * <p>
-     * Warning, if you doesn't add cards to hand then player will lose the game
+     * Warning, if you don't add cards to hand then player will lose the game
      * on draw and test return unused actions (game ended too early)
      *
      * @param player {@link Player} to remove all library cards from.
@@ -652,8 +652,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Card name in string format.
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName) {
-        addCard(gameZone, player, cardName, 1, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName) {
+        return addCard(gameZone, player, cardName, 1, false);
     }
 
     /**
@@ -666,8 +666,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Amount of cards to be added.
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
-        addCard(gameZone, player, cardName, count, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
+        return addCard(gameZone, player, cardName, count, false);
     }
 
     /**
@@ -684,7 +684,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                 thrown
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         // aliases for mage objects
         String aliasName = "";
@@ -704,6 +704,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (cardInfo == null) {
             throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
         }
+        List<UUID> uuid_list = new ArrayList<>();
 
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
@@ -717,6 +718,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 if (!aliasName.isEmpty()) {
                     player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), p.getId());
                 }
+                uuid_list.add(permCard.getId());
+
             }
         } else {
             if (tapped) {
@@ -726,11 +729,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.getCard();
                 cards.add(newCard);
+                uuid_list.add(newCard.getId());
                 if (!aliasName.isEmpty()) {
                     player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
                 }
             }
         }
+        return uuid_list;
     }
 
     public void addPlane(Player player, Planes plane) {
@@ -1596,13 +1601,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-       assertTrue(theAttachment + " was not attached to " + thePermanent,
-               permanents.stream()
-               .anyMatch(permanent -> permanent.getAttachments()
-                       .stream()
-                       .map(id -> currentGame.getCard(id))
-                       .map(MageObject::getName)
-                       .collect(Collectors.toList()).contains(theAttachment)));
+        assertTrue(theAttachment + " was not attached to " + thePermanent,
+                permanents.stream()
+                        .anyMatch(permanent -> permanent.getAttachments()
+                                .stream()
+                                .map(id -> currentGame.getCard(id))
+                                .map(MageObject::getName)
+                                .collect(Collectors.toList()).contains(theAttachment)));
 
 
     }
@@ -2052,7 +2057,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Set next result of next die roll (uses for both normal or planar rolls)
-     *
+     * <p>
      * For planar rolls:
      * 1..2 - chaos
      * 3..7 - blank
