@@ -84,17 +84,16 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
     }
 
     /**
-     * https://github.com/magefree/mage/issues/4529 Some spell effects that
-     * effect the use of mana abilities on lands are inoperative. Example
-     * Spreading Seas transforms enchanted land into an island and it loses all
-     * other abilities. The AI does not recognize this and is able to use all
-     * abilities of the enchanted land including all previous mana abilities and
-     * activated abilities, in addition to now also being an island due to
-     * Spreading Sea's effect.
+     * https://github.com/magefree/mage/issues/4529
+     * Some spell effects that effect the use of mana abilities on lands are inoperative.
+     * Example, Spreading Seas transforms enchanted land into an island and it loses all
+     * other abilities.
+     * The AI does not recognize this and is able to use all abilities of the enchanted
+     * land including all previous mana abilities and activated abilities,
+     * in addition to now also being an island due to Spreading Sea's effect.
      */
     @Test
     public void testSpreadingRemovesOtherAbilities() {
-
         // Enchant land
         // When Spreading Seas enters the battlefield, draw a card.
         // Enchanted land is an Island.
@@ -107,7 +106,8 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Kher Keep");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{R}"); // Ability should not be available
+        // Kher Keep loses all abilit
+        checkPlayableAbility("", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{R}", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

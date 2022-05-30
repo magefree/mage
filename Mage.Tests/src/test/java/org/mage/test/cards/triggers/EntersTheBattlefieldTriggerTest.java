@@ -181,24 +181,28 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
      */
     @Test
     public void testWildPair() {
-
-        // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
+        // Whenever a creature enters the battlefield, if you cast it from your hand,
+        // you may search your library for a creature card with the same total power and toughness and put it onto the battlefield.
+        // If you do, shuffle your library.
         addCard(Zone.BATTLEFIELD, playerA, "Wild Pair");
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        setChoice(playerA, "Silvercoat Lion");
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes"); // Yes for Wild Pair to find another creature
+        // Silvercoat Lion is the only other choice, let it be auto-chosen
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
-
     }
 
-    // Test self trigger
+    /**
+     * Test self trigger for Noxious Ghoul.
+     */
     @Test
     public void testNoxiousGhoul1() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
