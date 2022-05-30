@@ -1,11 +1,10 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -15,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -31,11 +29,7 @@ public final class SkyclavePickAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Skyclave Pick-Axe enters the battlefield, attach it to target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new SkyclavePickAxeEffect()));
