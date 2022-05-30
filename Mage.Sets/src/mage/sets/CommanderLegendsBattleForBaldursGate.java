@@ -195,6 +195,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Patron of the Arts", 191, Rarity.COMMON, mage.cards.p.PatronOfTheArts.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 333, Rarity.COMMON, mage.cards.p.PilgrimsEye.class));
         cards.add(new SetCardInfo("Plains", 451, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Poison the Blade", 248, Rarity.COMMON, mage.cards.p.PoisonTheBlade.class));
         cards.add(new SetCardInfo("Predatory Impetus", 249, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Prophetic Prism", 335, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Psychic Impetus", 89, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
