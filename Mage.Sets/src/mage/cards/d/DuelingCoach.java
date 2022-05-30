@@ -43,7 +43,7 @@ public final class DuelingCoach extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
                         StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1),
-                new ManaCostsImpl("{4}{W}")
+                new ManaCostsImpl<>("{4}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

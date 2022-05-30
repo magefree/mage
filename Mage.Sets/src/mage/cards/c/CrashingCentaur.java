@@ -37,7 +37,7 @@ public final class CrashingCentaur extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}, Discard a card: Crashing Centaur gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 

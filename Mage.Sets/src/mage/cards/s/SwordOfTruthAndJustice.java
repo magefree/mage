@@ -49,7 +49,7 @@ public final class SwordOfTruthAndJustice extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SwordOfTruthAndJustice(final SwordOfTruthAndJustice card) {
@@ -66,7 +66,8 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
 
     SwordOfTruthAndJusticeEffect() {
         super(Outcome.Benefit);
-        staticText = "put a +1/+1 counter on a creature you control, then proliferate";
+        staticText = "put a +1/+1 counter on a creature you control, then proliferate. " +
+                "<i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>";
     }
 
     private SwordOfTruthAndJusticeEffect(final SwordOfTruthAndJusticeEffect effect) {
@@ -92,6 +93,6 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
         }
-        return new ProliferateEffect().apply(game, source);
+        return new ProliferateEffect(true).apply(game, source);
     }
 }

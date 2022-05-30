@@ -15,12 +15,11 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class PitfallTrap extends CardImpl {
@@ -32,7 +31,7 @@ public final class PitfallTrap extends CardImpl {
     }
 
     public PitfallTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.subtype.add(SubType.TRAP);
 
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.
@@ -40,7 +39,7 @@ public final class PitfallTrap extends CardImpl {
 
         // Destroy target attacking creature without flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private PitfallTrap(final PitfallTrap card) {
@@ -55,7 +54,7 @@ public final class PitfallTrap extends CardImpl {
 
 enum PitfallTrapCondition implements Condition {
 
-   instance;
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

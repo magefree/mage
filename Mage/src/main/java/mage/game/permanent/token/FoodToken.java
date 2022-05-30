@@ -36,7 +36,7 @@ public final class FoodToken extends TokenImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("ELD", "C21", "MH2");
+        availableImageSetCodes = Arrays.asList("ELD", "C21", "MH2", "NCC");
     }
 
     @Override

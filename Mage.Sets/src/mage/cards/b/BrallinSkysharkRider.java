@@ -50,7 +50,7 @@ public final class BrallinSkysharkRider extends CardImpl {
         // {R}: Target Shark gains trample until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{R}"));
+        ), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -52,7 +52,7 @@ public final class ThirstingAxe extends CardImpl {
         this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private ThirstingAxe(final ThirstingAxe card) {

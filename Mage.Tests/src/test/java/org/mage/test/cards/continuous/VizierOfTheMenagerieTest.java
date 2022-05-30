@@ -60,12 +60,10 @@ public class VizierOfTheMenagerieTest extends CardTestPlayerBase {
         // A non-green creature card should not have Yeva's effect
         addCard(Zone.LIBRARY, playerA, "Cabal Therapist");
 
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Cabal Therapist");
+        checkPlayableAbility("Can't flash Cabal Therapist", 1, PhaseStep.BEGIN_COMBAT, playerA, "Cast Cabal", false);
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-
-        assertPermanentCount(playerA, "Cabal Therapist", 0);
     }
 
     @Test
@@ -98,12 +96,10 @@ public class VizierOfTheMenagerieTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Cabal Therapist");
 
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Cabal Therapist");
+        checkPlayableAbility("Can't flash Cabal Therapist", 1, PhaseStep.BEGIN_COMBAT, playerA, "Cast Cabal", false);
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-
-        assertPermanentCount(playerA, "Cabal Therapist", 0);
     }
 
     @Test
@@ -121,7 +117,7 @@ public class VizierOfTheMenagerieTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        //Should have been able to cast using the one Forest because Vizier's effect
+        // Should have been able to cast using the one Forest because Vizier's effect
         assertPermanentCount(playerA, "Bloodcrazed Goblin", 1);
     }
 
@@ -132,16 +128,13 @@ public class VizierOfTheMenagerieTest extends CardTestPlayerBase {
     public void testCantCastNonCreatureWithAnyMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Vizier of the Menagerie");
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
-        //Instant that grants +1/+0 to all creatures you control
+        // Instant that grants +1/+0 to all creatures you control
         addCard(Zone.HAND, playerA, "Banners Raised");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banners Raised");
+        checkPlayableAbility("Wrong mana for Banners Raised", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Banners", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        //Should not have +1/+0 effect
-        assertPowerToughness(playerA, "Vizier of the Menagerie", 3, 4);
     }
 
     @Test
@@ -172,16 +165,12 @@ public class VizierOfTheMenagerieTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Vizier of the Menagerie");
         addCard(Zone.LIBRARY, playerA, "Vizier of the Menagerie");
         addCard(Zone.HAND, playerA, "Vizier of the Menagerie");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Llanowar Elves");
+        checkPlayableAbility("Wrong mana for Llanowar Elves", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Llanowar", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        //Did not have correct mana and no Vizier = Could not have casted Llanowar
-        assertPermanentCount(playerA, "Llanowar Elves", 0);
     }
-
 }

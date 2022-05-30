@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -23,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 
 /**
  * @author TheElk801
@@ -41,7 +40,7 @@ public final class BallroomBrawlers extends CardImpl {
 
         // Whenever Ballroom Brawlers attacks, Ballroom Brawlers and up to one other target creature you control each gain your choice of first strike or lifelink until end of turn.
         Ability ability = new AttacksTriggeredAbility(new BallroomBrawlersEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

@@ -32,7 +32,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Darksteel Colossus", 0);
         assertGraveyardCount(playerA, 5); // 4 + Tome Scour
-
     }
 
     @Test
@@ -68,7 +67,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
-        setChoice(playerA, "Silvercoat Lion");
+        // setChoice(playerA, "Silvercoat Lion"); // Only creature they could sacrifice, its auto-chosen
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -76,11 +75,12 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, 3); // Diabolic Edict + Bridge from Below + Silvercoat Lion
         assertPermanentCount(playerA, "Zombie Token", 1); // Silvercoat Lion goes to graveyard so a Zombie tokes is created
-
     }
 
     @Test
     public void testDoesntTriggerDiesTriggeredAbilities() {
+        // If Progenitus would be put into a graveyard from anywhere,
+        // reveal Progenitus and shuffle it into its owner’s library instead.
         addCard(Zone.BATTLEFIELD, playerA, "Progenitus");
         // Diabolic Edict - Instant - {1}{B}
         // Target player sacrifices a creature.
@@ -92,7 +92,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
-        setChoice(playerA, "Progenitus");
+        // setChoice(playerA, "Progenitus"); // Only creature they could sacrifice, its auto-chosen
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -100,7 +100,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, 2); // Diabolic Edict + Bridge from Below
         assertPermanentCount(playerA, "Zombie Token", 0); // Progenitus never touches graveyard - so no Zombie tokes is created
-
+        assertLibraryCount(playerA, "Progenitus", 1);
     }
 
     // Have Progenitus and Humility on the battlefield. Destroy Progenitus. Progenitus should go to the graveyard
@@ -120,7 +120,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
-        setChoice(playerA, "Progenitus");
+        // setChoice(playerA, "Progenitus"); // Only creature they could sacrifice, its auto-chosen
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -128,7 +128,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, "Progenitus", 1);
         assertGraveyardCount(playerA, 2); // Diabolic Edict + Progenitus
-
     }
 
     @Test
@@ -167,7 +166,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertExileCount("Silvercoat Lion", 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-
     }
 
     // A creature gets damage from Kumano's Pupils and is destroyed after.
@@ -202,7 +200,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertExileCount("Pillarfield Ox", 1);
         assertGraveyardCount(playerB, "Pillarfield Ox", 0);
-
     }
 
     // A creature gets damage from Kumano's Pupils and returns to hand after.
@@ -248,7 +245,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertExileCount("Pillarfield Ox", 0);
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
-
     }
 
     /**
@@ -283,9 +279,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Legacy Weapon", 0);
 
         assertGraveyardCount(playerB, "Mana Drain", 1);
-
         assertPermanentCount(playerB, "Legacy Weapon", 1);
-
     }
 
     /**
@@ -317,7 +311,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Terror", 1);
         assertExileCount("Silvercoat Lion", 1);
-
     }
 
     /**
@@ -353,7 +346,6 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Jace, Vryn's Prodigy", 0);
         assertPermanentCount(playerB, "Jace, Telepath Unbound", 1);
         assertCounterCount("Jace, Telepath Unbound", CounterType.LOYALTY, 6);
-
     }
 
     /**
@@ -389,6 +381,5 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertExileCount("Skyraker Giant", 1);
         assertPermanentCount(playerA, "Anafenza, the Foremost", 0);
         assertGraveyardCount(playerA, "Anafenza, the Foremost", 1);
-
     }
 }

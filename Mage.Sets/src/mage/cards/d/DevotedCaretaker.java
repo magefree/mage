@@ -41,7 +41,7 @@ public final class DevotedCaretaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {tap}: Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetControlledPermanent();
         ability.addTarget(target);

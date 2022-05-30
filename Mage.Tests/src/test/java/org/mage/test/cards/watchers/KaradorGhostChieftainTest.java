@@ -6,19 +6,20 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.k.KaradorGhostChieftain Karador, Ghost Chieftain}
+ * {5}{W}{B}{G}
+ * Legendary Creature — Centaur Spirit
+ * This spell costs {1} less to cast for each creature card in your graveyard.
+ * During each of your turns, you may cast a creature spell from your graveyard.
+ * 3/4
  *
  * @author BetaSteward
  */
 public class KaradorGhostChieftainTest extends CardTestPlayerBase {
-    /*
-     * Karador, Ghost Chieftain
-     * Legendary Creature — Centaur Spirit 3/4, 5WBG (8)
-     * Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
-     * During each of your turns, you may cast one creature card from your graveyard.
-     *
-    */
-    
-    // test that can play spell from graveyard
+
+    /**
+     * Test that you can cast a spell from the graveyard.
+     */
     @Test
     public void testPlayFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -30,12 +31,13 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
                 
-        this.assertPermanentCount(playerA, "Raging Goblin", 1);
-        this.assertGraveyardCount(playerA, "Raging Goblin", 0);
-        
+        assertPermanentCount(playerA, "Raging Goblin", 1);
+        assertGraveyardCount(playerA, "Raging Goblin", 0);
     }
-    
-    // test that can only play one spell from graveyard
+
+    /**
+     * Test that you can cast from your graveyard.
+     */
     @Test
     public void testPlayOneFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -48,12 +50,13 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
                 
-        this.assertPermanentCount(playerA, "Raging Goblin", 1);
-        this.assertGraveyardCount(playerA, "Raging Goblin", 1);
-        
+        assertPermanentCount(playerA, "Raging Goblin", 1);
+        assertGraveyardCount(playerA, "Raging Goblin", 1);
     }
 
-    // test that can only play one spell from graveyard per turn
+    /**
+     * Test that can cast only one spell from your graveyard per turn
+     */
     @Test
     public void testPlayOneFromGraveyardPerTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -61,14 +64,15 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Raging Goblin", 2);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raging Goblin");
+        checkPlayableAbility("Can't cast 2nd spell this turn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Raging", false);
+
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Raging Goblin");
-        
+        checkPlayableAbility("Can't cast 2nd spell this turn", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Raging", false);
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-                
-        this.assertPermanentCount(playerA, "Raging Goblin", 2);
-        this.assertGraveyardCount(playerA, "Raging Goblin", 0);
-        
+
+        assertPermanentCount(playerA, "Raging Goblin", 2);
+        assertGraveyardCount(playerA, "Raging Goblin", 0);
     }
-    
 }

@@ -44,7 +44,7 @@ public final class Spellbinder extends CardImpl {
         this.addAbility(new SpellbinderTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private Spellbinder(final Spellbinder card) {

@@ -37,7 +37,7 @@ public final class AshmouthBlade extends CardImpl {
         ability.addEffect(effect);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private AshmouthBlade(final AshmouthBlade card) {

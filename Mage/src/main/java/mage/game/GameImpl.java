@@ -26,6 +26,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
+import mage.designations.Initiative;
 import mage.designations.Monarch;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -36,6 +37,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
 import mage.game.command.*;
+import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -536,21 +538,24 @@ public abstract class GameImpl implements Game {
         ));
     }
 
-    private Dungeon getOrCreateDungeon(UUID playerId) {
+    private Dungeon getOrCreateDungeon(UUID playerId, boolean undercity) {
         Dungeon dungeon = this.getPlayerDungeon(playerId);
         if (dungeon != null && dungeon.hasNextRoom()) {
             return dungeon;
         }
         removeDungeon(dungeon);
-        return this.addDungeon(Dungeon.selectDungeon(playerId, this), playerId);
+        return this.addDungeon(undercity ? new UndercityDungeon() : Dungeon.selectDungeon(playerId, this), playerId);
     }
 
     @Override
-    public void ventureIntoDungeon(UUID playerId) {
+    public void ventureIntoDungeon(UUID playerId, boolean undercity) {
+        if (playerId == null) {
+            return;
+        }
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
             return;
         }
-        this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
+        this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
@@ -2038,7 +2043,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
-     * the choosen order by player
+     * the chosen order by player
      *
      * @return
      */
@@ -3692,6 +3697,28 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public UUID getInitiativeId() {
+        return getState().getInitiativeId();
+    }
+
+    @Override
+    public void takeInitiative(Ability source, UUID initiativeId) {
+        // First time someone takes the initiative
+        if (getInitiativeId() == null) { // 1. Nobody has initiative
+            getState().addDesignation(new Initiative(), this, initiativeId);
+        }
+
+        // Update it every time, even if it doesn't have to change to make the code simpler.
+        // It only really has to change under 2 circumstances:
+        //      1. First time someone takes the initiative
+        //      2. A player taking the initiative when another player currently has it.
+        getState().setInitiativeId(initiativeId);
+
+        informPlayers(getPlayer(initiativeId).getLogName() + " takes the initiative");
+        fireEvent(new GameEvent(GameEvent.EventType.TOOK_INITIATIVE, initiativeId, source, initiativeId));
+    }
+
+    @Override
     public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return damagePlayerOrPlaneswalker(playerOrWalker, damage, attackerId, source, game, combatDamage, preventable, null);
     }
@@ -3747,6 +3774,11 @@ public abstract class GameImpl implements Game {
     @Override
     public boolean isGameStopped() {
         return gameStopped;
+    }
+    
+    @Override
+    public boolean isTurnOrderReversed() {
+        return state.getReverseTurnOrder();
     }
 
     @Override

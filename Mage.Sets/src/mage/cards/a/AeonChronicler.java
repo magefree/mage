@@ -39,7 +39,7 @@ public final class AeonChronicler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)));
         
         // Suspend X-{X}{3}{U}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{3}{U}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{U}"), this, true));
         
         // Whenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.
         this.addAbility(new AeonChroniclerTriggeredAbility());

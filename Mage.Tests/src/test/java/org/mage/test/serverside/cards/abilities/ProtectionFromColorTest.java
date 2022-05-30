@@ -17,12 +17,10 @@ public class ProtectionFromColorTest extends CardTestPlayerBase {
         // tapped White Knight with Protection from Black
         addCard(Zone.BATTLEFIELD, playerB, "White Knight", 1, true);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature.", "White Knight");
+        checkPlayableAbility("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        // no one should be destroyed
-        assertPermanentCount(playerB, "White Knight", 1);
     }
 
     @Test

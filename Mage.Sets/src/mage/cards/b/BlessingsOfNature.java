@@ -23,7 +23,7 @@ public final class BlessingsOfNature extends CardImpl {
         this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 4, false, "any number of target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
 
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private BlessingsOfNature(final BlessingsOfNature card) {

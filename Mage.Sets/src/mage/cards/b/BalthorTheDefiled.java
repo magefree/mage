@@ -41,7 +41,7 @@ public final class BalthorTheDefiled extends CardImpl {
                 new FilterCreaturePermanent(SubType.MINION, "Minion creatures"), false)));
 
         // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from their graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
 

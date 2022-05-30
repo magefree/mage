@@ -45,7 +45,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private UnscytheKillerOfKings(final UnscytheKillerOfKings card) {
@@ -131,10 +131,13 @@ class UnscytheEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
+        if (card == null) {
+            return false;
+        }
+        if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
             ZombieToken zombie = new ZombieToken();
             return zombie.putOntoBattlefield(1, game, source, source.getControllerId());
         }
-        return true;
+        return false;
     }
 }

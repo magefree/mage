@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
@@ -40,10 +41,10 @@ public final class N1Starfighter extends CardImpl {
 
         // Whenever N-1 Starfighter deals combat damage to a player, you may pay {1}{W/U}. If you do,
         // exile another target creature you control, then return that card to the battlefield under its owner's control.
-        // P.S. original card have error with missing target word (another target creature)
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
+        DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{1}{W/U}"));
+        doIfCostPaid.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(","));
+
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(doIfCostPaid, false);
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

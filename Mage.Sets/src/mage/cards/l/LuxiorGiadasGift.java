@@ -43,10 +43,10 @@ public final class LuxiorGiadasGift extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LuxiorGiadasGiftEffect()));
 
         // Equip planeswalker {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter), false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private LuxiorGiadasGift(final LuxiorGiadasGift card) {

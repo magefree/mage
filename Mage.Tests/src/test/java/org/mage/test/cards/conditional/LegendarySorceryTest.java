@@ -38,7 +38,6 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akroma, Angel of Wrath", 1);
         assertPermanentCount(playerB, "Akroma, Angel of Wrath", 1);
-
     }
 
     @Test
@@ -53,13 +52,12 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Flying, first strike, vigilance, trample, haste, protection from black and from red
         addCard(Zone.BATTLEFIELD, playerB, "Akroma, Angel of Wrath", 1); // Legendary
 
-        // can't cast cause you don't have a legendary creature (only opponent have)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
+        // Can't cast cause you don't have a legendary creature (only opponent have)
+        checkPlayableAbility("Can't cast Legendary Sorcery", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Urza's", false);
 
-        //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        //assertAllCommandsUsed();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Urza's Ruinous Blast", 0);
 
@@ -116,6 +114,5 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akroma, Angel of Wrath", 1);
         assertPermanentCount(playerB, "Akroma, Angel of Wrath", 1);
-
     }
 }

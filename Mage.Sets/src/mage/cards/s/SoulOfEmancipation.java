@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,6 +12,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Angel33Token;
@@ -90,7 +90,7 @@ class SoulOfEmancipationEffect extends OneShotEffect {
         Map<UUID, Integer> playerMap = permanents
                 .stream()
                 .collect(Collectors.toMap(
-                        MageItem::getId,
+                        Controllable::getControllerId,
                         x -> 1,
                         Integer::sum
                 ));

@@ -19,7 +19,7 @@ public final class OneDozenEyesBeastToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
 
-        availableImageSetCodes = Arrays.asList("C13", "MRD");
+        availableImageSetCodes = Arrays.asList("MRD");
     }
 
     public OneDozenEyesBeastToken(final OneDozenEyesBeastToken token) {

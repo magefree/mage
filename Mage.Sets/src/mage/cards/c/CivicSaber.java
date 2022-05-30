@@ -32,8 +32,9 @@ public final class CivicSaber extends CardImpl {
  
         // Equipped creature gets +1/+0 for each of its colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
  
     private CivicSaber(final CivicSaber card) {

@@ -36,7 +36,7 @@ public final class AzoriusKeyrune extends CardImpl {
                         .withSubType(SubType.BIRD)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{W}{U}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{W}{U}")));
     }
 
     private AzoriusKeyrune(final AzoriusKeyrune card) {

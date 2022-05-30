@@ -38,7 +38,7 @@ public final class AlexiZephyrMage extends CardImpl {
         // {X}{U}, {tap}, Discard two cards: Return X target creatures to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return X target creatures to their owner's hands");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));

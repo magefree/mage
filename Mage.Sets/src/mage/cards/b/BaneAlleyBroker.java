@@ -71,7 +71,7 @@ public final class BaneAlleyBroker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BaneAlleyBrokerLookAtCardEffect()));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(new BaneAlleyBrokerReturnToHandEffect(), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(new BaneAlleyBrokerReturnToHandEffect(), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

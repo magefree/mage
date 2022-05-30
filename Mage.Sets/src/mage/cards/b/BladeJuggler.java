@@ -28,7 +28,7 @@ public final class BladeJuggler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spectacle {2}{B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{2}{B}")));
 
         // When Blade Juggler enters the battlefield, it deals 1 damage to you and you draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(

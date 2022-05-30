@@ -35,7 +35,7 @@ public final class BidentOfThassa extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, you may draw a card.
         this.addAbility(new BidentOfThassaTriggeredAbility());
         // {1}{U}, {T}: Creatures your opponents control attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BidentOfThassaMustAttackEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BidentOfThassaMustAttackEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

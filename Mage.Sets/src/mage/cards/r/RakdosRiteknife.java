@@ -54,7 +54,7 @@ public final class RakdosRiteknife extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private RakdosRiteknife(final RakdosRiteknife card) {

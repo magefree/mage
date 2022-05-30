@@ -29,4 +29,13 @@ public final class Construct4Token extends TokenImpl {
     public Construct4Token copy() {
         return new Construct4Token(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C18")) {
+            this.setTokenType(1);
+        }
+    }
 }

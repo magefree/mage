@@ -30,7 +30,7 @@ public final class CentaurVeteran extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {G}, Discard a card: Regenerate Centaur Veteran.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

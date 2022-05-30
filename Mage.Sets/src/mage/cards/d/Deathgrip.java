@@ -29,7 +29,7 @@ public final class Deathgrip extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
 
         // {B}{B}: Counter target green spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{B}{B}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

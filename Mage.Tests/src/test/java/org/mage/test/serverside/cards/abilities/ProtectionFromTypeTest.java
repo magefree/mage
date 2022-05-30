@@ -17,7 +17,7 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Tel-Jilad Fallen");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Remove a charge counter from {this}, {T}: put a -1/-1 counter on target creature.", "Tel-Jilad Fallen");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove", false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -45,7 +45,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 4);
         assertPermanentCount(playerA, "Forest", 6);
         assertPermanentCount(playerA, "Swamp", 1);
-
     }
 
     @Test
@@ -74,7 +73,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
 
         assertPermanentCount(playerA, "Zombie Token", 1);
-
     }
 
     /**
@@ -106,7 +104,6 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Liliana, Heretical Healer", 1);
-
     }
 
     @Test
@@ -433,7 +430,8 @@ public class TransformTest extends CardTestPlayerBase {
     public void testCopyTransformedThingInTheIce() {
         // Defender
         // Thing in the Ice enters the battlefield with four ice counters on it.
-        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
+        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice.
+        // Then if it has no ice counters on it, transform it.
         addCard(Zone.HAND, playerA, "Thing in the Ice"); // Creature {1}{U}
         // Creatures you control get +1/+0 until end of turn.
         addCard(Zone.HAND, playerA, "Banners Raised", 4); // Creature {R}
@@ -453,7 +451,6 @@ public class TransformTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        addTarget(playerB, "Awoken Horror");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

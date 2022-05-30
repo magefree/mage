@@ -26,7 +26,7 @@ public final class DevilsPlay extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {X}{R}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{X}{R}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{X}{R}{R}{R}")));
     }
 
     private DevilsPlay(final DevilsPlay card) {

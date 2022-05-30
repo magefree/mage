@@ -33,7 +33,7 @@ public final class MeteoricMace extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
 
         // Cascade
         this.addAbility(new CascadeAbility());

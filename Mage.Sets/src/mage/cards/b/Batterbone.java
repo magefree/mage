@@ -40,7 +40,7 @@ public final class Batterbone extends CardImpl {
         this.addAbility(ability);
 
         // Equip {5}
-        this.addAbility(new EquipAbility(5));
+        this.addAbility(new EquipAbility(5, false));
     }
 
     private Batterbone(final Batterbone card) {

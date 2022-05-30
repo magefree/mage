@@ -60,7 +60,7 @@ public final class Embercleave extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private Embercleave(final Embercleave card) {

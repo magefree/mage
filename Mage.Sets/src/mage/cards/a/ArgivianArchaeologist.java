@@ -29,7 +29,7 @@ public final class ArgivianArchaeologist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}{W}, {tap}: Return target artifact card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD);
         ability.addTarget(target);

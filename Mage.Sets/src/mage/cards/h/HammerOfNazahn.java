@@ -47,7 +47,7 @@ public final class HammerOfNazahn extends CardImpl {
         this.addAbility(abilityEquipped);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
 
     }
 

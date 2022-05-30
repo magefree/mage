@@ -17,7 +17,7 @@ public final class DragonToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA", "MM3", "C17", "WAR"));
+        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA", "MM3", "C17", "WAR", "MED"));
     }
 
     public DragonToken() {
@@ -46,5 +46,14 @@ public final class DragonToken extends TokenImpl {
 
     public DragonToken copy() {
         return new DragonToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C17")) {
+            setTokenType(1);
+        }
     }
 }

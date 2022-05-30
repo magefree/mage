@@ -62,8 +62,7 @@ public class JaceTest extends CardTestPlayerBase {
         // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
         addCard(Zone.BATTLEFIELD, playerB, "Containment Priest", 1); // {2}{U}{U}
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
-        setChoice(playerA, "Pillarfield Ox");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card"); // The Ox is auto-chosen
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -93,8 +92,7 @@ public class JaceTest extends CardTestPlayerBase {
         // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
         addCard(Zone.BATTLEFIELD, playerB, "Containment Priest", 1); // {2}{U}{U}
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
-        setChoice(playerA, "Pillarfield Ox");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card"); // The Ox is auto-chosen
 
         rollbackTurns(3, PhaseStep.BEGIN_COMBAT, playerA, 0); // Start of turn 3
 
@@ -119,7 +117,8 @@ public class JaceTest extends CardTestPlayerBase {
         // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         String jVryn = "Jace, Vryn's Prodigy"; // {U}{1} 0/2
 
-        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
+        //−3: You may cast target instant or sorcery card from your graveyard this turn.
+        //    If that card would be put into your graveyard this turn, exile it instead.
         String jTelepath = "Jace, Telepath Unbound"; // 5 loyalty
 
         // Sorcery, Suspend 4 {U}. Target player draws three cards.
@@ -131,11 +130,14 @@ public class JaceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, ancestralVision);
         addCard(Zone.HAND, playerA, "Swamp", 1);
 
+        setStrictChooseMode(true);
+
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
         setChoice(playerA, "Swamp");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
         addTarget(playerA, ancestralVision);
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, ancestralVision);
+
+        checkPlayableAbility("Can't cast Ancestral Vision", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + ancestralVision, false);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -175,7 +177,5 @@ public class JaceTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Perimeter Captain", 1);
         assertGraveyardCount(playerB, "Perimeter Captain", 1);
-
     }
-
 }

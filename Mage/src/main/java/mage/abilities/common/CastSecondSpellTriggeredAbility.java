@@ -60,13 +60,21 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 break;
+            case ACTIVE:
+                if (!game.isActivePlayer(event.getPlayerId())) {
+                    return false;
+                }
             case ANY:
                 break;
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
+        if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2) {
+            this.getEffects().setValue("spellCast", game.getSpell(event.getTargetId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -76,6 +84,8 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
                 return "Whenever you cast your second spell each turn, ";
             case OPPONENT:
                 return "Whenever an opponent casts their second spell each turn, ";
+            case ACTIVE:
+                return "Whenever a player casts their second spell during their turn, ";
             case ANY:
                 return "Whenever a player casts their second spell each turn, ";
             default:

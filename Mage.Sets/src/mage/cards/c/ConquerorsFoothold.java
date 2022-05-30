@@ -32,21 +32,21 @@ public final class ConquerorsFoothold extends CardImpl {
         // {2}, {T}: Draw a card, then discard a card.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawDiscardControllerEffect(),
-                new ManaCostsImpl("{2}"));
+                new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {4}, {T}: Draw a card.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 
         // {6}, {T}: Return target card from your graveyard to your hand.
         SimpleActivatedAbility ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToHandTargetEffect(),
-                new ManaCostsImpl("{6}"));
+                new ManaCostsImpl<>("{6}"));
         ability3.addCost(new TapSourceCost());
         ability3.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability3);

@@ -43,7 +43,7 @@ public final class BoneyardMycodrax extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // Scavenge {4}{B}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{B}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{B}")));
 
     }
 

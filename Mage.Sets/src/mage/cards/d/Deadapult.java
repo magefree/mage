@@ -33,7 +33,7 @@ public final class Deadapult extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // {R}, Sacrifice a Zombie: Deadapult deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

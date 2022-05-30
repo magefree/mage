@@ -33,7 +33,7 @@ public final class AuriokReplica extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, Sacrifice Auriok Replica: Prevent all damage a source of your choice would deal to you this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AuriokReplicaEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AuriokReplicaEffect(), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetSource());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

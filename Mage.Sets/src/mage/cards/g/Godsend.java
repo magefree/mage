@@ -46,7 +46,7 @@ public final class Godsend extends CardImpl {
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendRuleModifyingEffect()));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private Godsend(final Godsend card) {

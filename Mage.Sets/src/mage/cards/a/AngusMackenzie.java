@@ -36,7 +36,7 @@ public final class AngusMackenzie extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 effect,
-                new ManaCostsImpl("{G}{W}{U}"), 
+                new ManaCostsImpl<>("{G}{W}{U}"), 
                 BeforeCombatDamageCondition.getInstance()
         );
         ability.addCost(new TapSourceCost());

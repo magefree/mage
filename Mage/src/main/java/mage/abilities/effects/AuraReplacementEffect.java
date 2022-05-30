@@ -110,6 +110,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             if (target != null) {
+                target.withChooseHint("to attach " + card.getName() + " to");
                 target.setNotTarget(true); // always not target because this way it's not handled targeted
                 target.clearChosen(); // necessary if e.g. aura is blinked multiple times
             }

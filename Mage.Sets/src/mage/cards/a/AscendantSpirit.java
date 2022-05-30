@@ -35,7 +35,7 @@ public final class AscendantSpirit extends CardImpl {
         // {S}{S}: Ascendant Spirit becomes a Spirit Warrior with base power and toughness 2/3.
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR
-        ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl("{S}{S}"));
+        ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl<>("{S}{S}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
                 2, 3, Duration.Custom, SubLayer.SetPT_7b
         ).setText("with base power and toughness 2/3"));
@@ -43,12 +43,12 @@ public final class AscendantSpirit extends CardImpl {
 
         // {S}{S}{S}: If Ascendant Spirit is a Warrior, put a flying counter on it and it becomes a Spirit Warrior Angel with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
-                new AscendantSpiritWarriorEffect(), new ManaCostsImpl("{S}{S}{S}")
+                new AscendantSpiritWarriorEffect(), new ManaCostsImpl<>("{S}{S}{S}")
         ));
 
         // {S}{S}{S}{S}: If Ascendant Spirit is an Angel, put two +1/+1 counters on it and it gains "Whenever this creature deals damage to a player, draw a card."
         this.addAbility(new SimpleActivatedAbility(
-                new AscendantSpiritAngelEffect(), new ManaCostsImpl("{S}{S}{S}{S}")
+                new AscendantSpiritAngelEffect(), new ManaCostsImpl<>("{S}{S}{S}{S}")
         ));
     }
 

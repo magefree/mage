@@ -32,7 +32,7 @@ public final class CitanulFlute extends CardImpl {
 
         // {X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it,
         // and put it into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(new CitanulFluteSearchEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new CitanulFluteSearchEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

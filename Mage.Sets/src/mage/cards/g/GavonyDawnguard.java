@@ -38,7 +38,7 @@ public final class GavonyDawnguard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new GenericManaCost(1)));
+        this.addAbility(new WardAbility(new GenericManaCost(1), false));
 
         // If it's neither day nor night, it becomes day as Gavony Dawnguard enters the battlefield.
         this.addAbility(new BecomeDayAsEntersAbility());

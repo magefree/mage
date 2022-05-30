@@ -41,7 +41,7 @@ public final class SaiOfTheShinobi extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null, true));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private SaiOfTheShinobi(final SaiOfTheShinobi card) {

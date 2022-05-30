@@ -19,7 +19,7 @@ public class DiscardEffectsTest extends CardTestPlayerBase {
         // Loxodon Smiter can't be countered.
         // If a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.
         addCard(Zone.HAND, playerB, "Loxodon Smiter");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize");
         addTarget(playerA, playerB);
         setChoice(playerA, "Loxodon Smiter");
@@ -40,7 +40,8 @@ public class DiscardEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Loxodon Smiter");
         addCard(Zone.HAND, playerA, "Sift"); // {3}{U} Sorcery - draw 3 discard 1
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        
+
+        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sift");
         setChoice(playerA, "Loxodon Smiter");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

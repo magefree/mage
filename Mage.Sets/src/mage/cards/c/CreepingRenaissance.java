@@ -32,7 +32,7 @@ public final class CreepingRenaissance extends CardImpl {
         this.getSpellAbility().addEffect(new CreepingRenaissanceEffect());
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{G}{G}")));
     }
 
     private CreepingRenaissance(final CreepingRenaissance card) {

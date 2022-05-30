@@ -39,7 +39,7 @@ public final class DreadDefiler extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {3}{C}, Exile a creature card from your graveyard: Target opponent loses life equal to the exiled card's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreadDefilerEffect(), new ManaCostsImpl("{3}{C}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreadDefilerEffect(), new ManaCostsImpl<>("{3}{C}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

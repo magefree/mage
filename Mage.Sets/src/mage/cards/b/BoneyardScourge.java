@@ -47,7 +47,7 @@ public final class BoneyardScourge extends CardImpl {
 
         // Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay 1B. If you do, return Boneyard Scourge from your graveyard to the battlefield.
         TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{1}{B}")),
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")),
                 filter);
         this.addAbility(ability);
     }

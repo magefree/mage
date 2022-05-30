@@ -33,7 +33,7 @@ public final class ColossalSkyturtle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Channel — {2}{G}, Discard Colossal Skyturtle: Return target card from your graveyard to your hand.
         Ability ability = new ChannelAbility("{2}{G}", new ReturnFromGraveyardToHandTargetEffect());
