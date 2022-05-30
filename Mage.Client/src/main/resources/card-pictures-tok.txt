@@ -610,7 +610,7 @@
 |Generate|TOK:DST|Insect|||InsectToken|
 |Generate|TOK:DST|Myr|||MyrToken|
 |Generate|TOK:DST|Spawn|||SpawningPitToken|
-|Generate|TOK:DTK|Djinn Monk|||SkywiseTeachingsToken|
+|Generate|TOK:DTK|Djinn Monk|||DjinnMonkToken|
 |Generate|TOK:DTK|Dragon|||DragonToken|
 |Generate|TOK:DTK|Goblin|||GoblinToken|
 |Generate|TOK:DTK|Morph||
