@@ -24,7 +24,7 @@ public final class DesertCerodon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private DesertCerodon(final DesertCerodon card) {

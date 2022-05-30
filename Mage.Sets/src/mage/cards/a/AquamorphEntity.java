@@ -38,7 +38,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(ability);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private AquamorphEntity(final AquamorphEntity card) {

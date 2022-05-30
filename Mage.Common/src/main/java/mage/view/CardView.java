@@ -556,7 +556,7 @@ public class CardView extends SimpleCardView {
                 }
             }
 
-            // show for modal spell, which mode was choosen
+            // show for modal spell, which mode was chosen
             if (spell.getSpellAbility().isModal()) {
                 for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
                     Mode mode = spell.getSpellAbility().getModes().get(modeId);

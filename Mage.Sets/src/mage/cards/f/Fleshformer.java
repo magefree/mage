@@ -37,7 +37,7 @@ public final class Fleshformer extends CardImpl {
         // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+2");
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);
         effect = new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains fear until end of turn");
         ability.addEffect(effect);

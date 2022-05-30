@@ -27,7 +27,7 @@ public final class BurrentonBombardier extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Reinforce 2—{2}{W} ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)
-        this.addAbility(new ReinforceAbility(2, new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new ReinforceAbility(2, new ManaCostsImpl<>("{2}{W}")));
     }
 
     public BurrentonBombardier (final BurrentonBombardier card) {

@@ -63,21 +63,21 @@ class StrongholdGambitEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
-            Map<UUID, UUID> choosenCard = new LinkedHashMap<>();
+            Map<UUID, UUID> chosenCards = new LinkedHashMap<>();
             for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !player.getHand().isEmpty()) {
                     TargetCardInHand target = new TargetCardInHand();
                     if (player.choose(Outcome.Benefit, target, source, game)) {
-                        choosenCard.put(playerId, target.getFirstTarget());
+                        chosenCards.put(playerId, target.getFirstTarget());
                     }
                 }
             }
             int lowestCMC = Integer.MAX_VALUE;
             for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && choosenCard.containsKey(playerId)) {
-                    Card card = game.getCard(choosenCard.get(playerId));
+                if (player != null && chosenCards.containsKey(playerId)) {
+                    Card card = game.getCard(chosenCards.get(playerId));
                     if (card != null) {
                         Cards cardsToReveal = new CardsImpl(card);
                         player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cardsToReveal, game);
@@ -92,8 +92,8 @@ class StrongholdGambitEffect extends OneShotEffect {
                 Cards creaturesToBattlefield = new CardsImpl();
                 for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null && choosenCard.containsKey(playerId)) {
-                        Card card = game.getCard(choosenCard.get(playerId));
+                    if (player != null && chosenCards.containsKey(playerId)) {
+                        Card card = game.getCard(chosenCards.get(playerId));
                         if (card != null) {
                             if (card.isCreature(game)
                                     && lowestCMC == card.getManaValue()) {

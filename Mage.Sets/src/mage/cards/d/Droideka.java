@@ -28,7 +28,7 @@ public final class Droideka extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {2}{U}: Change a target of target spell or ability to Droideka.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeATargetOfTargetSpellAbilityToSourceEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeATargetOfTargetSpellAbilityToSourceEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
 

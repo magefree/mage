@@ -42,7 +42,7 @@ public final class EliteArcanist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EliteArcanistImprintEffect(), true));
 
         // {X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(EliteArcanistAdjuster.instance);
         this.addAbility(ability);

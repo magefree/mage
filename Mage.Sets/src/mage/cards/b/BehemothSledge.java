@@ -31,7 +31,7 @@ public final class BehemothSledge extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
     }
 
     private BehemothSledge(BehemothSledge me) {
@@ -42,5 +42,4 @@ public final class BehemothSledge extends CardImpl {
     public BehemothSledge copy() {
         return new BehemothSledge(this);
     }
-
 }

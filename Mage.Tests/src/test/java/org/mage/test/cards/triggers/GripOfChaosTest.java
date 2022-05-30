@@ -39,6 +39,8 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felidar Guardian");
 
         setChoice(playerA, "When "); // Select order of Felidar trigger
@@ -53,7 +55,6 @@ public class GripOfChaosTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
-        setStrictChooseMode(true);
         execute();
 
         assertPermanentCount(playerA, "Felidar Guardian", 1);

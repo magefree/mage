@@ -30,7 +30,7 @@ public final class FaceOfFear extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B}, Discard a card: Face of Fear gains fear until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new DiscardCardCost(false));
         this.addAbility(ability);
     }

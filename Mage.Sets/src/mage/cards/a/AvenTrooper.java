@@ -32,7 +32,7 @@ public final class AvenTrooper extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{W}, Discard a card: Aven Trooper gets +1/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

@@ -43,13 +43,15 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
-        addTarget(playerA, "Abzan Banner");
+        // {G} was not spent, so no target is chosen
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Tin Street Hooligan", 1);
-        assertPermanentCount(playerB, "Abzan Banner", 1);
     }
 
     @Test

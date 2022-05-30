@@ -56,7 +56,7 @@ public final class CrownOfSkemfar extends CardImpl {
 
         // {2}{G}: Return Bounty of Skemfar from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{G}")
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{G}")
         ));
     }
 

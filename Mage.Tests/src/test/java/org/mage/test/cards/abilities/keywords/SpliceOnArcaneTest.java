@@ -19,7 +19,6 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      */
     @Test
     public void testSpliceThroughTheBreach() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // Sorcery - Arcane  {R}
         // Lava Spike deals 3 damage to target player.
@@ -33,7 +32,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
         addTarget(playerA, "Through the Breach");
-        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
+        setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -83,11 +82,12 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
     /**
      * Nourishing Shoal's interaction with Splicing Through the Breach is
-     * bugged. You should still need to pay 2RR as an additional cost, which is
+     * bugged.
+     * You should still need to pay 2RR as an additional cost, which is
      * not affected by the alternate casting method of Shoal, but you are able
-     * to Splice it for free. This is a very relevant bug right now due to the
-     * appearance of the deck over the weekend, and it makes the deck absurdly
-     * powerful.
+     * to Splice it for free.
+     * This is a very relevant bug right now due to the appearance of the deck
+     * over the weekend, and it makes the deck absurdly powerful.
      */
     @Test
     public void testSpliceThroughTheBreach2() {
@@ -105,7 +105,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
         addTarget(playerA, "Through the Breach");
-        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
+        setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

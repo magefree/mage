@@ -7,18 +7,16 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * Obstinate Baloth {2}{G}{G}
+ * Creature - Beast
+ * When Obstinate Baloth enters the battlefield, you gain 4 life.
+ * If a spell or ability an opponent controls causes you to discard Obstinate Baloth,
+ * put it onto the battlefield instead of putting it into your graveyard.
  *
  * @author LevelX2
  */
 public class ObstinateBalothTest extends CardTestPlayerBase {
 
-    /**
-     * Obstinate Baloth {2}{G}{G}
-     * Creature - Beast
-     * When Obstinate Baloth enters the battlefield, you gain 4 life.
-     * If a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard.
-     * 
-     */
     @Test
     public void TestLifeGainIfForcedToDiscard() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -28,7 +26,7 @@ public class ObstinateBalothTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Obstinate Baloth");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerB);
-        setChoice(playerB, "Obstinate Baloth");
+        // Let choice be autopicked since there is only one option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -40,11 +38,10 @@ public class ObstinateBalothTest extends CardTestPlayerBase {
         assertLife(playerB, 24); // + 4 from Obstinate Baloth entering the battlefield
     }
 
-    /*
-        Obstinate Baloth enters the battlefield and will also be sacrificed during the
-        resolution of Smallpox. So it's triggered ability goes to the stack as the
-        Obstinate Baloth has already left the battlefield again.
-        So EntersBattlefieldTriggeredAbility has to work in all zones as a consequence.
+    /**
+     * Obstinate Baloth enters the battlefield and will also be sacrificed during the resolution of Smallpox.
+     * So it's triggered ability goes to the stack as the Obstinate Baloth has already left the battlefield again.
+     * So EntersBattlefieldTriggeredAbility has to work in all zones as a consequence.
     */
     @Test
     public void TestWithSmallpox() {
@@ -54,9 +51,16 @@ public class ObstinateBalothTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Obstinate Baloth");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smallpox");
-        setChoice(playerB, "Obstinate Baloth"); // comes into play after directly after discard
-        setChoice(playerB, "Obstinate Baloth"); // and can and has to be sacrificed here
+        // playerB - Discard a card - Its ability will send it to the battlefield instead of the graveyard
+        addTarget(playerB, "Obstinate Baloth");
+        // playerB - Sacrifice a creature
+        setChoice(playerB, "Obstinate Baloth");
+
+        // playerA - Sacrifice a land
+        setChoice(playerA, "Swamp");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

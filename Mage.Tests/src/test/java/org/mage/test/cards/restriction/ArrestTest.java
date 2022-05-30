@@ -3,6 +3,7 @@ package org.mage.test.cards.restriction;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -26,7 +27,17 @@ public class ArrestTest extends CardTestPlayerBase {
         attack(2, playerB, "Selesnya Guildmage");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Arrest", 1);
         assertPermanentCount(playerB, "Saproling Token", 0); // can't use ability so no Saproling

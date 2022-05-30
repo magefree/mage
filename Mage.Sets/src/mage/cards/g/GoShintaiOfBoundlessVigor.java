@@ -8,6 +8,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +33,7 @@ public final class GoShintaiOfBoundlessVigor extends CardImpl {
             = new FilterPermanent(SubType.SHRINE, "Shrine");
     private static final DynamicValue xValue
             = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SHRINE));
+    private static final Hint hint = new ValueHint("Shrines you control", xValue);
 
     public GoShintaiOfBoundlessVigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}");
@@ -52,7 +55,7 @@ public final class GoShintaiOfBoundlessVigor extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), TargetController.YOU, false));
+        ), TargetController.YOU, false).addHint(hint));
     }
 
     private GoShintaiOfBoundlessVigor(final GoShintaiOfBoundlessVigor card) {

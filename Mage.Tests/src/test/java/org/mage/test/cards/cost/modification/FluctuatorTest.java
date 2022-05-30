@@ -56,14 +56,10 @@ public class FluctuatorTest extends CardTestPlayerBase {
         // Cycling abilities you activate cost you up to {2} less to activate.
         addCard(Zone.BATTLEFIELD, playerA, "Fluctuator");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
-        setChoice(playerA, "2"); // reduce 1 generic mana
+        checkPlayableAbility("Can't cycle", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertGraveyardCount(playerA, "Akroma's Vengeance", 0);
-        assertHandCount(playerA, 1);
     }
 
     /**

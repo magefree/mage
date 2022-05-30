@@ -44,7 +44,7 @@ public final class Blizzard extends CardImpl {
         ));
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // Creatures with flying don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(

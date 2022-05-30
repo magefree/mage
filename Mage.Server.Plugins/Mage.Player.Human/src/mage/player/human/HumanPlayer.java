@@ -556,7 +556,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target instanceof TargetPermanent) {
                     if (((TargetPermanent) target).canTarget(abilityControllerId, responseId, source, game, false)) {
                         target.add(responseId, game);
-                        if (target.doneChosing()) {
+                        if (target.doneChoosing()) {
                             return true;
                         }
                     }
@@ -568,7 +568,7 @@ public class HumanPlayer extends PlayerImpl {
                                 target.remove(responseId);
                             } else {
                                 target.addTarget(responseId, (Ability) object, game);
-                                if (target.doneChosing()) {
+                                if (target.doneChoosing()) {
                                     return true;
                                 }
                             }
@@ -578,7 +578,7 @@ public class HumanPlayer extends PlayerImpl {
                             target.remove(responseId);
                         } else {
                             target.addTarget(responseId, null, game);
-                            if (target.doneChosing()) {
+                            if (target.doneChoosing()) {
                                 return true;
                             }
                         }
@@ -646,7 +646,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (possibleTargets.contains(responseId)) {
                     if (target.canTarget(abilityControllerId, responseId, source, game)) {
                         target.addTarget(responseId, source, game);
-                        if (target.doneChosing()) {
+                        if (target.doneChoosing()) {
                             return true;
                         }
                     }
@@ -733,7 +733,7 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     if (target.canTarget(abilityControllerId, responseId, null, cards, game)) {
                         target.add(responseId, game);
-                        if (target.doneChosing()) {
+                        if (target.doneChoosing()) {
                             return true;
                         }
                     }
@@ -807,7 +807,7 @@ public class HumanPlayer extends PlayerImpl {
                     target.remove(responseId);
                 } else if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                     target.addTarget(responseId, source, game);
-                    if (target.doneChosing()) {
+                    if (target.doneChoosing()) {
                         return true;
                     }
                 }

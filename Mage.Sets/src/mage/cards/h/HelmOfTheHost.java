@@ -40,7 +40,7 @@ public final class HelmOfTheHost extends CardImpl {
         this.addAbility(ability);
 
         // Equip {5}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5), false));
     }
 
     private HelmOfTheHost(final HelmOfTheHost card) {

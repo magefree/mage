@@ -37,7 +37,7 @@ public final class GeneratorServant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}, Sacrifice Generator Servant: Add {C}{C}.  If that mana is spent on a creature spell, it gains haste until end of turn.
+        // {T}, Sacrifice Generator Servant: Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.
         Mana mana = Mana.ColorlessMana(2);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
@@ -68,14 +68,26 @@ class GeneratorServantWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            MageObject target = game.getObject(event.getTargetId());
-            if (event.getSourceId() != null
-                    && event.getSourceId().equals(this.getSourceId()) && target != null && target.isCreature(game) && event.getFlag()) {
-                if (target instanceof Spell) {
-                    this.creatures.add(((Spell) target).getCard().getId());
-                }
-            }
+        if (event.getType() != GameEvent.EventType.MANA_PAID) {
+            return;
+        }
+
+        MageObject target = game.getObject(event.getTargetId());
+        if (target == null || !(target instanceof Spell)) {
+            return;
+        }
+
+        // Mana from Generator Servant
+        if (!event.getFlag()) {
+            return;
+        }
+
+        if (event.getSourceId() == null || !event.getSourceId().equals(this.getSourceId())) {
+            return;
+        }
+
+        if (target.isCreature(game)) {
+            this.creatures.add(((Spell) target).getCard().getId());
         }
     }
 
@@ -109,15 +121,15 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
-        if (watcher != null) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatureCastWithServantsMana(perm.getId())) {
-                    perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-                }
-            }
-            return true;
+        if (watcher == null) {
+            return false;
         }
-        return false;
-    }
 
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
+            if (watcher.creatureCastWithServantsMana(perm.getId())) {
+                perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+            }
+        }
+        return true;
+    }
 }

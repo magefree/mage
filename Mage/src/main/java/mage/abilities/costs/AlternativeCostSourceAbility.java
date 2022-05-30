@@ -16,6 +16,7 @@ import mage.util.CardUtil;
 
 import java.util.Iterator;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -250,23 +251,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         }
         int numberCosts = 0;
         String remarkText = "";
-        for (AlternativeCost alternativeCost : alternateCosts) {
-            if (numberCosts == 0) {
-                if (alternativeCost.getCost() instanceof ManaCost) {
-                    sb.append("pay ");
-                }
-                sb.append(alternativeCost.getText(false));
-                remarkText = alternativeCost.getReminderText();
-            } else {
-                sb.append(" and ");
-                if (alternativeCost.getCost() instanceof ManaCost) {
-                    sb.append("pay ");
-                }
-                String text = alternativeCost.getText(true);
-                sb.append(Character.toLowerCase(text.charAt(0))).append(text.substring(1));
-            }
-            ++numberCosts;
-        }
+        sb.append(CardUtil.concatWithAnd(alternateCosts
+                .stream()
+                .map(cost -> cost.getCost() instanceof ManaCost
+                        ? "pay " + cost.getText(true)
+                        : cost.getText(true))
+                .map(CardUtil::getTextWithFirstCharLowerCase)
+                .collect(Collectors.toList())));
         if (condition == null || alternateCosts.size() == 1) {
             sb.append(" rather than pay this spell's mana cost");
         } else if (alternateCosts.isEmpty()) {

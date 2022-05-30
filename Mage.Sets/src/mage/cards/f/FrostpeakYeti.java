@@ -28,7 +28,7 @@ public final class FrostpeakYeti extends CardImpl {
 
         // {1}{S}: Frostpeak Yeti can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{S}")
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{S}")
         ));
     }
 

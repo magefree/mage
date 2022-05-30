@@ -55,7 +55,7 @@ public final class AvenWindGuide extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {4}{W}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{4}{W}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{4}{W}{U}"), this));
     }
 
     private AvenWindGuide(final AvenWindGuide card) {

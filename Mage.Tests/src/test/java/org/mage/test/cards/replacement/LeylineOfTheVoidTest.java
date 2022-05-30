@@ -86,14 +86,15 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
          // Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite");
-                
+
+        setStrictChooseMode(true);
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder");
-        setChoice(playerA, "Memnite");
-        setChoice(playerB, true);
-        
+        addTarget(playerA, "Memnite");
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        
+
         assertHandCount(playerB, 1); // card drawn for turn
         assertExileCount(playerB, 1);
         

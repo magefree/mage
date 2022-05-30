@@ -48,9 +48,12 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
 
-    // Trinisphere interacts incorrectly with Phyrexian mana. As implemented, Gitaxian Probe gets a required cost of {2}{U/P},
-    // which allows paying 2 life and only 2 mana. This is incorrect: Trinisphere requires that at least 3 mana be paid, and
-    // payment through life doesn't count. (Source: http://blogs.magicjudges.org/rulestips/2012/08/how-trinisphere-works-with-phyrexian-mana/)
+    /**
+     * Trinisphere interacts incorrectly with Phyrexian mana.
+     * As implemented, Gitaxian Probe gets a required cost of {2}{U/P}, which allows paying 2 life and only 2 mana.
+     * This is incorrect: Trinisphere requires that at least 3 mana be paid, and payment through life doesn't count.
+     * (Source: http://blogs.magicjudges.org/rulestips/2012/08/how-trinisphere-works-with-phyrexian-mana/)
+     */
     @Test
     public void testCardTrinispherePhyrexianMana() {
         // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
@@ -62,11 +65,19 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {U/P}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gitaxian Probe", playerA);
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertHandCount(playerB, "Gitaxian Probe", 1);
-        assertGraveyardCount(playerB, "Gitaxian Probe", 0);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -86,15 +97,13 @@ public class CostModificationTest extends CardTestPlayerBase {
         // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerA, "Myr Superion");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G}.");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        assertPermanentCount(playerA, "Myr Superion", 1); // Can be cast because mana was produced by a creature
+        // Can be cast because mana was produced by a creature
+        assertPermanentCount(playerA, "Myr Superion", 1);
     }
 
     @Test
@@ -105,14 +114,19 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Myr Superion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        try {
+            execute();
+            assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Myr Superion", 0); // Can't be cast because mana was not produced by a creature
-        assertHandCount(playerA, "Myr Superion", 1); // Can't be cast because mana was not produced by a creature
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /*
@@ -171,7 +185,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, divination);
 
         // Doom Blade cast by the opponent should cost {2}{B} now with the cost increase in effect for opponent spells.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, doomBlade, gArbiter);
+        checkPlayableAbility("Can't Doom Blade", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Doom", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

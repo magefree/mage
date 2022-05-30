@@ -40,7 +40,7 @@ public final class FlameshadowConjuring extends CardImpl {
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new FlameshadowConjuringEffect(), new ManaCostsImpl("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
+                new FlameshadowConjuringEffect(), new ManaCostsImpl<>("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
                 filterNontoken, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, "
                 + "you may pay {R}. If you do, create a token that's a copy of that creature. "

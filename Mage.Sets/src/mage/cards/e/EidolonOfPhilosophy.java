@@ -29,7 +29,7 @@ public final class EidolonOfPhilosophy extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {6}{U}, Sacrifice Eidolon of Philosophy: Draw three cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ManaCostsImpl("{6}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("{6}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

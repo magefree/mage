@@ -26,7 +26,7 @@ public final class Downsize extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4, 0, Duration.EndOfTurn));
 
         // Overload {2}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BoostAllEffect(-4, 0, Duration.EndOfTurn, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new OverloadAbility(this, new BoostAllEffect(-4, 0, Duration.EndOfTurn, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false), new ManaCostsImpl<>("{2}{U}")));
 
     }
 

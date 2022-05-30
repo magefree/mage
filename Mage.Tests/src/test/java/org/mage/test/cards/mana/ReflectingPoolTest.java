@@ -43,7 +43,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
-
     }
 
     /**
@@ -165,12 +164,12 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1); // do not have any mana
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         Assert.assertEquals(0, playerA.getManaPool().getMana().count());
-        assertPermanentCount(playerA, bear1, 0);
     }
 
     @Test
@@ -178,12 +177,10 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1); // do not have any mana
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        Assert.assertEquals(0, playerA.getManaPool().getMana().count());
-        assertPermanentCount(playerA, bear1, 0);
     }
 
     @Test
@@ -205,11 +202,10 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1G, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1G); // have only {W} mana, can't cast
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertPermanentCount(playerA, bear1G, 0);
     }
 
     @Test

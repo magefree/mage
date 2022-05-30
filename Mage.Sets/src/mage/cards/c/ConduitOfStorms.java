@@ -43,7 +43,7 @@ public final class ConduitOfStorms extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
         // {3}{R}{R}: Transform Conduit of Storms.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{3}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{3}{R}{R}")));
     }
 
     private ConduitOfStorms(final ConduitOfStorms card) {

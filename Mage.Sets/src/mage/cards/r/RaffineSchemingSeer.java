@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.OneShotEffect;
@@ -46,7 +47,7 @@ public final class RaffineSchemingSeer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new GenericManaCost(1), false));
 
         // Whenever you attack, target creature connives X, where X is the number of attacking creatures.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new RaffineSchemingSeerEffect(), 1);

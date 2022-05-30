@@ -29,7 +29,7 @@ public final class EtheriumHornSorcerer extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {1}{U}{R}: Return Etherium-Horn Sorcerer to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}{R}")));
 
         // Cascade
         this.addAbility(new CascadeAbility());

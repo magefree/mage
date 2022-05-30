@@ -18,7 +18,7 @@ public final class LeafdrakeRoostDrakeToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C13", "CMA"));
+        tokenImageSets.addAll(Arrays.asList("CMA"));
     }
 
     public LeafdrakeRoostDrakeToken() {

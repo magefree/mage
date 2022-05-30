@@ -35,7 +35,7 @@ public final class DulcetSirens extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, {T}: Target creature attacks target opponent this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DulcetSirensForceAttackEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DulcetSirensForceAttackEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addTarget(new TargetOpponent());        
@@ -43,7 +43,7 @@ public final class DulcetSirens extends CardImpl {
 
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private DulcetSirens(final DulcetSirens card) {

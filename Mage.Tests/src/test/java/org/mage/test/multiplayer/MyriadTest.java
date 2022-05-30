@@ -111,9 +111,10 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerC, "Pillarfield Ox", 1);
         addCard(Zone.BATTLEFIELD, playerC, "Grizzly Bears", 1);
 
-        // Equipped creature has myriad.(Whenever this creature attacks, for each opponent other than the defending player,
-        // put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker
-        // they control. Exile those tokens at the end of combat.)
+        // Equipped creature has myriad. (Whenever this creature attacks, for each opponent other than the defending
+        //                                player, put a token that's a copy of this creature onto the battlefield tapped
+        //                                and attacking that player or a planeswalker they control.
+        //                                Exile those tokens at the end of combat.)
         // Equip {4}
         addCard(Zone.BATTLEFIELD, playerD, "Blade of Selves");
         addCard(Zone.BATTLEFIELD, playerD, "Island", 4);
@@ -123,20 +124,27 @@ public class MyriadTest extends CardTestMultiPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Man-o'-War");
         addTarget(playerD, "Silvercoat Lion");
+
         activateAbility(6, PhaseStep.PRECOMBAT_MAIN, playerD, "Equip", "Man-o'-War");
 
         attack(6, playerD, "Man-o'-War", playerC);
+        setChoice(playerD, "Yes"); // for playerB
+        setChoice(playerD, "Yes"); // for playerA
         addTarget(playerD, "Silvercoat Lion");
         addTarget(playerD, "Pillarfield Ox");
-        addTarget(playerD, "Grizzly Bears");
 
         setStopAt(6, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
+        // Tokens exiled, only original left
         assertPermanentCount(playerD, "Man-o'-War", 1);
-        assertPermanentCount(playerC, "Silvercoat Lion", 0);
-        assertPermanentCount(playerC, "Pillarfield Ox", 0);
-        assertPermanentCount(playerC, "Grizzly Bears", 1); // not in range
+
+        // Returned to hand by Man-o'-War
+        assertPermanentCount(playerC, "Silvercoat Lion", 0);  // 1 by original and 1 by token
+        assertPermanentCount(playerC, "Pillarfield Ox", 0);   // by token
+
+        // Still on the battlefield since only 3 Man-o'-War triggers
+        assertPermanentCount(playerC, "Grizzly Bears", 1);
 
         assertHandCount(playerC, "Silvercoat Lion", 2);
         assertHandCount(playerC, "Pillarfield Ox", 1);

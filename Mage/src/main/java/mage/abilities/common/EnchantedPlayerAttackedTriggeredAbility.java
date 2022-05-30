@@ -13,8 +13,6 @@ import mage.players.Player;
  */
 public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected Effect effect;
-
     public EnchantedPlayerAttackedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }

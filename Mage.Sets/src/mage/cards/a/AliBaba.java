@@ -35,7 +35,7 @@ public final class AliBaba extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Tap target Wall.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

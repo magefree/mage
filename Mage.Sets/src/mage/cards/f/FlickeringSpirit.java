@@ -34,7 +34,7 @@ public final class FlickeringSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        this.addAbility(new SimpleActivatedAbility(new FlickeringSpiritEffect(), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new FlickeringSpiritEffect(), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private FlickeringSpirit(final FlickeringSpirit card) {

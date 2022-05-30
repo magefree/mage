@@ -56,7 +56,7 @@ public final class FiendArtisan extends CardImpl {
 
         // {X}{B/G}, {T}, Sacrifice another creature: Search your library for a creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new FiendArtisanEffect(), new ManaCostsImpl("{X}{B/G}")
+                Zone.BATTLEFIELD, new FiendArtisanEffect(), new ManaCostsImpl<>("{X}{B/G}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

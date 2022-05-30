@@ -27,7 +27,7 @@ public final class BelbesArmor extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
                 new MultipliedValue(ManacostVariableValue.REGULAR, -1),
                 ManacostVariableValue.REGULAR, Duration.EndOfTurn
-        ).setText("Target creature gets -X/+X until end of turn"), new ManaCostsImpl("{X}"));
+        ).setText("Target creature gets -X/+X until end of turn"), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

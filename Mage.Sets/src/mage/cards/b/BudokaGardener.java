@@ -97,7 +97,7 @@ class DokaiWeaverofLife extends TokenImpl {
         toughness = new MageInt(3);
 
         // {4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

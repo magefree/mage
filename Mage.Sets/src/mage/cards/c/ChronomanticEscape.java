@@ -34,7 +34,7 @@ public final class ChronomanticEscape extends CardImpl {
         getSpellAbility().addEffect(effect);
 
         // Suspend 3-{2}{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{W}"), this));
     }
 
     private ChronomanticEscape(final ChronomanticEscape card) {

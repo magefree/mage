@@ -37,7 +37,7 @@ public final class Creeperhulk extends CardImpl {
         // {1}{G}: Until end of turn, target creature you control has base power and toughness 5/5 and gains trample.
         Effect effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature you control has base power and toughness 5/5");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains Trample"));
         this.addAbility(ability);

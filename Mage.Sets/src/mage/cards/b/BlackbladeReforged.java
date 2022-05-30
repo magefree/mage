@@ -38,10 +38,10 @@ public final class BlackbladeReforged extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(count, count)));
 
         // Equip legendary creature (3)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent(filter)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent(filter), false));
 
         // Equip {7}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7), false));
     }
 
     private BlackbladeReforged(final BlackbladeReforged card) {

@@ -16,11 +16,12 @@ public class SerraAscendantTest extends CardTestPlayerBase {
     /**
      * The game goes on; they play Serra Ascendant on turn one, pass the
      * turn, you play your newly unbanned Wild Nacatl with a Stomping Ground and
-     * also pass the turn. On turn 2, they cast a Martyr of Sands and sacrifice
-     * it, revealing 3 white cards to gain 9 life and end up at 29. They go to
-     * the combat phase, declare Serra as an attacker, and you happily block
-     * him, thinking that this is such a bad move from them. After the damage is
-     * dealt, the Serra is still there, bigger than ever.
+     * also pass the turn.
+     * On turn 2, they cast a Martyr of Sands and sacrifice it,
+     * revealing 3 white cards to gain 9 life and end up at 29.
+     * They go to the combat phase, declare Serra as an attacker, and you happily block
+     * him, thinking that this is such a bad move from them.
+     * After the damage is dealt, the Serra is still there, bigger than ever.
      */
     @Test
     public void testSilence() {
@@ -33,7 +34,7 @@ public class SerraAscendantTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Stomping Ground", 1);
         addCard(Zone.HAND, playerB, "Wild Nacatl", 1);
-        
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Ascendant");
         
@@ -44,7 +45,9 @@ public class SerraAscendantTest extends CardTestPlayerBase {
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Martyr of Sands");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, You may reveal X white cards from your hand");
-        setChoice(playerA,"X=3");
+        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Silvercoat Lion");
         
         attack(3, playerA, "Serra Ascendant");
         block(3, playerB, "Wild Nacatl", "Serra Ascendant");
@@ -62,7 +65,5 @@ public class SerraAscendantTest extends CardTestPlayerBase {
     
         assertPermanentCount(playerA, "Serra Ascendant", 1);
         assertPowerToughness(playerA, "Serra Ascendant", 6, 6);
-        
-    }       
-
+    }
 }

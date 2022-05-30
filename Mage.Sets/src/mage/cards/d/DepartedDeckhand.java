@@ -62,7 +62,7 @@ public final class DepartedDeckhand extends CardImpl {
                 new CantBeBlockedTargetEffect(
                         filter, Duration.EndOfTurn
                 ).setText("Another target creature you control can't be blocked this turn except by Spirits"),
-                new ManaCostsImpl("{3}{U}")
+                new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);

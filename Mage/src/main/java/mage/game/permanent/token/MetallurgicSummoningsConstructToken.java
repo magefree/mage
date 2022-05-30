@@ -40,7 +40,7 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
-            setTokenType(RandomUtil.nextInt(2) + 3); // from 3 to 4
+            setTokenType(2);
         }
     }
 }

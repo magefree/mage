@@ -42,7 +42,7 @@ public final class Lucille extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new LucilleEffect()));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private Lucille(final Lucille card) {

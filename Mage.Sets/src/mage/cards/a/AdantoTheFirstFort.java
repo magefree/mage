@@ -32,7 +32,7 @@ public final class AdantoTheFirstFort extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // 2W, T: Create a 1/1 white Vampire creature token with lifelink.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -27,7 +27,7 @@ public final class DrillBit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Spectacle {B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{B}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{B}")));
     }
 
     private DrillBit(final DrillBit card) {

@@ -45,7 +45,7 @@ public final class FelhideSpiritbinder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Inspired</i> &mdash; Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}. If you do, create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl("{1}{R}"), "Use effect of {this}?"));
+        Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl<>("{1}{R}"), "Use effect of {this}?"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

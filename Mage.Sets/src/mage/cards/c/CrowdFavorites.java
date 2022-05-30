@@ -30,11 +30,11 @@ public final class CrowdFavorites extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {3}{W}: Crowd Favorites gets +0/+5 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 5, Duration.EndOfTurn), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 5, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private CrowdFavorites(final CrowdFavorites card) {

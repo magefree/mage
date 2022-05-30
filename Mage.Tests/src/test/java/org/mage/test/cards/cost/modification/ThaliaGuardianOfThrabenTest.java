@@ -14,22 +14,19 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ThaliaGuardianOfThrabenTest extends CardTestPlayerBase {
 
     @Test
-    public void testCard() {
+    public void testShouldNotHaveEnoughMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Thalia, Guardian of Thraben");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("Not enough mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-        assertGraveyardCount(playerA, 0);
     }
 
     @Test
-    public void testCard1() {
+    public void testShouldHaveEnoughMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Thalia, Guardian of Thraben");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -42,5 +39,4 @@ public class ThaliaGuardianOfThrabenTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
         assertGraveyardCount(playerA, 1);
     }
-
 }

@@ -30,7 +30,7 @@ public final class FrontlineSage extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(new ExaltedAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -6,8 +6,15 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * also tests regenerate and tests that permanents with protection can be
- * sacrificed
+ * {@link mage.cards.f.FiendOfTheShadows Fiend of the Shadows}
+ * {3}{B}{B}
+ * Creature — Vampire Wizard
+ * Flying
+ * Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
+ * Sacrifice a Human: Regenerate Fiend of the Shadows.
+ * 3/3
+ *
+ * Also tests regenerate and tests that permanents with protection can be sacrificed
  *
  * @author BetaSteward
  */
@@ -16,14 +23,15 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "White Knight");
-        // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
-        // Sacrifice a Human: Regenerate Fiend of the Shadows.
         addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a Human: Regenerate {this}.");
-        addTarget(playerA, "White Knight");
+        setChoice(playerA, "White Knight");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Fiend of the Shadows");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -38,8 +46,6 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCardExile1() {
-        // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
-        // Sacrifice a Human: Regenerate Fiend of the Shadows.
         addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
         removeAllCardsFromHand(playerB);
         addCard(Zone.HAND, playerB, "Swamp");
@@ -80,5 +86,4 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
     }
-
 }

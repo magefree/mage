@@ -45,6 +45,15 @@ public final class DaxosSpiritToken extends TokenImpl {
     public DaxosSpiritToken copy() {
         return new DaxosSpiritToken(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("C15")) {
+            this.setTokenType(1);
+        }
+    }
 }
 
 class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {

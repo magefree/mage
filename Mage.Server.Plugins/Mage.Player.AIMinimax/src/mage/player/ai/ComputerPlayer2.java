@@ -234,11 +234,11 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             SearchEffect effect = getSearchEffect((StackAbility) ability);
             if (effect != null && ability.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChosing()) {
+                if (!target.doneChoosing()) {
                     for (UUID targetId: target.possibleTargets(ability.getControllerId(), ability.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) ability.copy();
-                        SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
+                        SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
                         sim.getStack().push(newAbility);
                         SimulationNode newNode = new SimulationNode(node, sim, ability.getControllerId());
@@ -465,10 +465,10 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         if (targets.isEmpty())
             return super.chooseTarget(outcome, cards, target, source, game);
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId: targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -482,10 +482,10 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
         if (targets.isEmpty())
             return super.choose(outcome, cards, target, game);
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId: targets) {
                 target.add(targetId, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -717,7 +717,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     protected String indent(int num) {
         char[] fill = new char[num];
         Arrays.fill(fill, ' ');
-        return Integer.toString(num) + new String(fill);
+        return num + new String(fill);
     }
 
 }

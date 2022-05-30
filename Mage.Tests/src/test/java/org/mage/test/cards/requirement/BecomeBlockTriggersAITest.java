@@ -61,7 +61,6 @@ public class BecomeBlockTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         } catch (UnsupportedOperationException ue) {
             Assert.assertEquals("Balduvian Bears cannot block Nessian Boar it is already blocking the maximum amount of creatures.", ue.getMessage());
         }
-        //assertAllCommandsUsed(); // must have 1 missing command (block)
     }
 
     @Test

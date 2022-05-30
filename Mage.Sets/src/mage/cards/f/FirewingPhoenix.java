@@ -29,7 +29,7 @@ public final class FirewingPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{R}{R}{R}: Return Firewing Phoenix from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{1}{R}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{1}{R}{R}{R}")));
     }
 
     private FirewingPhoenix(final FirewingPhoenix card) {

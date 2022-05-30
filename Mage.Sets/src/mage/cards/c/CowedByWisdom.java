@@ -70,7 +70,7 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.getHand().isEmpty()) {
-            ManaCosts manaCosts = new ManaCostsImpl();
+            ManaCosts manaCosts = new ManaCostsImpl<>();
             manaCosts.add(new GenericManaCost(controller.getHand().size()));
             return manaCosts;
         }

@@ -34,7 +34,7 @@ public final class BosiumStrip extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {T}: Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BosiumStripCastFromGraveyardEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BosiumStripCastFromGraveyardEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new BosiumStripReplacementEffect());
         this.addAbility(ability, new CastFromGraveyardWatcher());

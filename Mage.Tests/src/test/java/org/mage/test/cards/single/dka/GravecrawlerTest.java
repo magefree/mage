@@ -11,18 +11,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GravecrawlerTest extends CardTestPlayerBase {
 
-  /*  Cryptoplasm
-   *  Creature — Shapeshifter 2/2, 1UU
-   *  At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
-   *
-   *
+  /*
+   *  Gravecrawler
    *  Creature — Zombie 2/1, B
    *  Gravecrawler can't block.
    *  You may cast Gravecrawler from your graveyard as long as you control a Zombie.
    */
 
     @Test
-    public void testCard() {
+    public void testShouldBeCastable() {
         addCard(Zone.GRAVEYARD, playerA, "Gravecrawler");
         addCard(Zone.BATTLEFIELD, playerA, "Black Cat");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
@@ -31,28 +28,28 @@ public class GravecrawlerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Gravecrawler", 1);
         assertGraveyardCount(playerA, 0);
     }
 
     @Test
-    public void testCard1() {
+    public void testShouldNotBeCastable() {
         addCard(Zone.GRAVEYARD, playerA, "Gravecrawler");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gravecrawler");
+        checkPlayableAbility("befre", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Gravecrawler", false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Gravecrawler", 0);
-        assertGraveyardCount(playerA, 1);
+        assertGraveyardCount(playerA, "Gravecrawler", 1);
     }
 
     /*
+     *  Cryptoplasm
+     *  Creature — Shapeshifter 2/2, 1UU
+     *  At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+     *
      *  Elite Vanguard
      *  Creature — Human Soldier 2/1, W
      *
@@ -63,7 +60,7 @@ public class GravecrawlerTest extends CardTestPlayerBase {
     @Test
     public void testCopiedCantBlockAbilityWorks() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Zone.HAND, playerA, "Cryptoplasm");
+        addCard(Zone.HAND,        playerA, "Cryptoplasm");
         addCard(Zone.BATTLEFIELD, playerA, "Fervor");
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 

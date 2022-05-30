@@ -37,7 +37,7 @@ public final class DragonsoulKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {W}{U}{B}{R}{G}: Until end of turn, Dragonsoul Knight becomes a Dragon, gets +5/+3, and gains flying and trample.
-        Ability ability = new SimpleActivatedAbility(new DragonsoulKnightEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DragonsoulKnightEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         Effect effect = new BoostSourceEffect(5, 3, Duration.EndOfTurn);
         effect.setText(", gets +5/+3");
         ability.addEffect(effect);

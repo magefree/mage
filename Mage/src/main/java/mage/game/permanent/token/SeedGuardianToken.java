@@ -23,7 +23,7 @@ public final class SeedGuardianToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 
-        availableImageSetCodes = Arrays.asList("C13", "CHK", "OGW");
+        availableImageSetCodes = Arrays.asList("CHK", "OGW");
     }
 
     public SeedGuardianToken(final SeedGuardianToken token) {

@@ -32,7 +32,7 @@ public final class EmeraldDragonfly extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {G}{G}: Emerald Dragonfly gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}{G}")));
     }
 
     private EmeraldDragonfly(final EmeraldDragonfly card) {
