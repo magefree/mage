@@ -38,7 +38,8 @@ public final class MyrkulsInvoker extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(false), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ).setText("and gain menace until end of turn"));
+        ).setText("and gain menace until end of turn " +
+                "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability.withFlavorWord("Psychic Blades"));
     }
 
