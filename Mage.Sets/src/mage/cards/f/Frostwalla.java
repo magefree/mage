@@ -28,7 +28,7 @@ public final class Frostwalla extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         2, 2, Duration.EndOfTurn
-                ), new ManaCostsImpl("{S}")
+                ), new ManaCostsImpl<>("{S}")
         ));
     }
 

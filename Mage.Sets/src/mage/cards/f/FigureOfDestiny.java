@@ -33,7 +33,7 @@ public final class FigureOfDestiny extends CardImpl {
         // {RW}: Figure of Destiny becomes a Kithkin Spirit with base power and toughness 2/2.
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.KITHKIN, SubType.SPIRIT
-        ).setText("{this} becomes a Kithkin Spirit"), new ManaCostsImpl("{R/W}"));
+        ).setText("{this} becomes a Kithkin Spirit"), new ManaCostsImpl<>("{R/W}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
                 2, 2, Duration.Custom, SubLayer.SetPT_7b
         ).setText("with base power and toughness 2/2"));
@@ -41,12 +41,12 @@ public final class FigureOfDestiny extends CardImpl {
 
         // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
-                new FigureOfDestinySpiritEffect(), new ManaCostsImpl("{R/W}{R/W}{R/W}")
+                new FigureOfDestinySpiritEffect(), new ManaCostsImpl<>("{R/W}{R/W}{R/W}")
         ));
 
         // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
         this.addAbility(new SimpleActivatedAbility(
-                new FigureOfDestinyWarriorEffect(), new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")
+                new FigureOfDestinyWarriorEffect(), new ManaCostsImpl<>("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")
         ));
     }
 

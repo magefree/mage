@@ -36,13 +36,13 @@ public final class FolioOfFancies extends CardImpl {
 
         // {X}{X}, {T}: Each player draws X cards.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardAllEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}{X}")
+                new DrawCardAllEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {2}{U}, {T}: Each opponent puts a number of cards equal to the number of cards in their hand from the top of their library into their graveyard.
-        ability = new SimpleActivatedAbility(new FolioOfFanciesEffect(), new ManaCostsImpl("{2}{U}"));
+        ability = new SimpleActivatedAbility(new FolioOfFanciesEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

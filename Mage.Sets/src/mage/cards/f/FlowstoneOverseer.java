@@ -29,7 +29,7 @@ public final class FlowstoneOverseer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {R}{R}: Target creature gets +1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

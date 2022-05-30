@@ -31,7 +31,7 @@ public final class FaerieFormation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{U}: Create a 1/1 blue Faerie creature token with flying. Draw a card.
-        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new FaerieToken()), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new FaerieToken()), new ManaCostsImpl<>("{3}{U}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card"));
         this.addAbility(ability);
     }

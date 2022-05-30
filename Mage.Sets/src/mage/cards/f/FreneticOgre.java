@@ -29,7 +29,7 @@ public final class FreneticOgre extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {R}, Discard a card at random: Frenetic Ogre gets +3/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new DiscardCardCost(true));
         this.addAbility(ability);
     }

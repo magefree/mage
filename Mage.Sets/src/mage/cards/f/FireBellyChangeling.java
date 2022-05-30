@@ -31,7 +31,7 @@ public final class FireBellyChangeling extends CardImpl {
 
         // {R}: Fire-Belly Changeling gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"), 2));
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"), 2));
     }
 
     private FireBellyChangeling(final FireBellyChangeling card) {

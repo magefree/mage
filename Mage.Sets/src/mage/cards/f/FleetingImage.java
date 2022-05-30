@@ -29,7 +29,7 @@ public final class FleetingImage extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}: Return Fleeting Image to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private FleetingImage(final FleetingImage card) {

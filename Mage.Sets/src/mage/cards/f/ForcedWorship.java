@@ -41,7 +41,7 @@ public final class ForcedWorship extends CardImpl {
         // Enchanted creature can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
         // {2}{W}: Return Forced Worship to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{W}")));
     }
 
     public ForcedWorship (final ForcedWorship card) {

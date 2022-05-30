@@ -29,7 +29,7 @@ public final class FencerClique extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Put Fencer Clique on top of its owner's library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl<>("{U}")));
     }
 
     private FencerClique(final FencerClique card) {
