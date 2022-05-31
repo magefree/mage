@@ -76,6 +76,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Chardalyn Dragon", 306, Rarity.COMMON, mage.cards.c.ChardalynDragon.class));
         cards.add(new SetCardInfo("Circle of the Land Druid", 220, Rarity.COMMON, mage.cards.c.CircleOfTheLandDruid.class));
         cards.add(new SetCardInfo("Citadel Gate", 349, Rarity.COMMON, mage.cards.c.CitadelGate.class));
+        cards.add(new SetCardInfo("Clan Crafter", 651, Rarity.MYTHIC, mage.cards.c.ClanCrafter.class));
         cards.add(new SetCardInfo("Cliffgate", 350, Rarity.COMMON, mage.cards.c.Cliffgate.class));
         cards.add(new SetCardInfo("Cloak of the Bat", 307, Rarity.COMMON, mage.cards.c.CloakOfTheBat.class));
         cards.add(new SetCardInfo("Cloakwood Hermit", 221, Rarity.UNCOMMON, mage.cards.c.CloakwoodHermit.class));
