@@ -28,7 +28,7 @@ public final class PackAttack extends CardImpl {
         // Attacking creatures get +X/+0 until end of turn, where X is the number of players being attacked.
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 PackAttackValue.instance, StaticValue.get(0), Duration.EndOfTurn,
-                StaticFilters.FILTER_ATTACKING_CREATURES, false, null, true
+                StaticFilters.FILTER_ATTACKING_CREATURES, false, null
         ));
 
         // Draw a card.

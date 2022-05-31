@@ -34,7 +34,7 @@ public final class BaneOfTheLiving extends CardImpl {
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{X}{B}{B}")));
 
         // When Bane of the Living is turned face up, all creatures get -X/-X until end of turn.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null, true)));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null)));
     }
 
     private BaneOfTheLiving(final BaneOfTheLiving card) {

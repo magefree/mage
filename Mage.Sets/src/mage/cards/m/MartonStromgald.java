@@ -45,10 +45,10 @@ public final class MartonStromgald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Marton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Marton Stromgald.
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(attackingValue, attackingValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true, null, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(attackingValue, attackingValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true, null), false));
 
         // Whenever Marton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Marton Stromgald.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostAllEffect(blockingValue, blockingValue, Duration.EndOfTurn, StaticFilters.FILTER_BLOCKING_CREATURES, true, null, true), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostAllEffect(blockingValue, blockingValue, Duration.EndOfTurn, StaticFilters.FILTER_BLOCKING_CREATURES, true, null), false));
     }
 
     private MartonStromgald(final MartonStromgald card) {

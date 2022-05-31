@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.Locale;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostAllEffect extends ContinuousEffectImpl {
@@ -28,7 +27,6 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     protected DynamicValue toughness;
     protected boolean excludeSource;
     protected FilterCreaturePermanent filter;
-    protected boolean lockedInPT;
 
     public BoostAllEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, false);
@@ -51,17 +49,12 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
-        this(power, toughness, duration, filter, excludeSource, rule, false);
-    }
-
-    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule, boolean lockedInPT) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
         this.excludeSource = excludeSource;
 
-        this.lockedInPT = lockedInPT;
         if (rule == null || rule.isEmpty()) {
             setText();
         } else {
@@ -75,7 +68,6 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         this.toughness = effect.toughness;
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
-        this.lockedInPT = effect.lockedInPT;
     }
 
     @Override
@@ -93,8 +85,6 @@ public class BoostAllEffect extends ContinuousEffectImpl {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
-        }
-        if (lockedInPT) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
@@ -103,7 +93,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     permanent.addPower(power.calculate(game, source, this));

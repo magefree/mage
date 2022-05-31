@@ -40,7 +40,7 @@ public final class DeadOfWinter extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, xValue, Duration.EndOfTurn, filter, false,
                 "All nonsnow creatures get -X/-X until end of turn," +
-                        " where X is the number of snow permanents you control.", true
+                        " where X is the number of snow permanents you control."
         ));
         this.getSpellAbility().addHint(hint);
     }
