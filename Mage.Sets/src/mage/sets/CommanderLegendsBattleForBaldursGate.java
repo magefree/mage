@@ -91,6 +91,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
         cards.add(new SetCardInfo("Consuming Aberration", 640, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Contact Other Plane", 62, Rarity.COMMON, mage.cards.c.ContactOtherPlane.class));
+        cards.add(new SetCardInfo("Contraband Livestock", 12, Rarity.UNCOMMON, mage.cards.c.ContrabandLivestock.class));
         cards.add(new SetCardInfo("Criminal Past", 122, Rarity.UNCOMMON, mage.cards.c.CriminalPast.class));
         cards.add(new SetCardInfo("Crystal Dragon", 13, Rarity.UNCOMMON, mage.cards.c.CrystalDragon.class));
         cards.add(new SetCardInfo("Cultist of the Absolute", 123, Rarity.RARE, mage.cards.c.CultistOfTheAbsolute.class));
