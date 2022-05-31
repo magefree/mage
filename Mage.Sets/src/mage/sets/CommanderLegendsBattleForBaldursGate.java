@@ -85,6 +85,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Badger", 223, Rarity.COMMON, mage.cards.c.ColossalBadger.class));
         cards.add(new SetCardInfo("Command Tower", 351, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
+        cards.add(new SetCardInfo("Consuming Aberration", 640, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Contact Other Plane", 62, Rarity.COMMON, mage.cards.c.ContactOtherPlane.class));
         cards.add(new SetCardInfo("Criminal Past", 122, Rarity.UNCOMMON, mage.cards.c.CriminalPast.class));
         cards.add(new SetCardInfo("Crystal Dragon", 13, Rarity.UNCOMMON, mage.cards.c.CrystalDragon.class));
@@ -141,6 +142,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian Naga", 23, Rarity.COMMON, mage.cards.g.GuardianNaga.class));
         cards.add(new SetCardInfo("Guiding Bolt", 24, Rarity.COMMON, mage.cards.g.GuidingBolt.class));
         cards.add(new SetCardInfo("Guild Artisan", 179, Rarity.UNCOMMON, mage.cards.g.GuildArtisan.class));
+        cards.add(new SetCardInfo("Guiltfeeder", 756, Rarity.RARE, mage.cards.g.Guiltfeeder.class));
         cards.add(new SetCardInfo("Gut, True Soul Zealot", 180, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class));
         cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 234, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class));
         cards.add(new SetCardInfo("Hammers of Moradin", 25, Rarity.UNCOMMON, mage.cards.h.HammersOfMoradin.class));
@@ -239,6 +241,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sea Gate", 359, Rarity.COMMON, mage.cards.s.SeaGate.class));
         cards.add(new SetCardInfo("Sea Hag", 95, Rarity.COMMON, mage.cards.s.SeaHag.class));
         cards.add(new SetCardInfo("Sea of Clouds", 360, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
+        cards.add(new SetCardInfo("Sewer Nemesis", 777, Rarity.RARE, mage.cards.s.SewerNemesis.class));
         cards.add(new SetCardInfo("Shadowheart, Dark Justiciar", 146, Rarity.RARE, mage.cards.s.ShadowheartDarkJusticiar.class));
         cards.add(new SetCardInfo("Shameless Charlatan", 96, Rarity.RARE, mage.cards.s.ShamelessCharlatan.class));
         cards.add(new SetCardInfo("Sharpshooter Elf", 253, Rarity.UNCOMMON, mage.cards.s.SharpshooterElf.class));

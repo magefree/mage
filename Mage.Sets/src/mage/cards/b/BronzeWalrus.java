@@ -21,7 +21,7 @@ public final class BronzeWalrus extends CardImpl {
 
         this.subtype.add(SubType.WALRUS);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
         // When Bronze Walrus enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
