@@ -60,6 +60,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Blessed Hippogriff", 11, Rarity.COMMON, mage.cards.b.BlessedHippogriff.class));
         cards.add(new SetCardInfo("Bloodboil Sorcerer", 164, Rarity.UNCOMMON, mage.cards.b.BloodboilSorcerer.class));
         cards.add(new SetCardInfo("Blur", 58, Rarity.COMMON, mage.cards.b.Blur.class));
+        cards.add(new SetCardInfo("Bonecaller Cleric", 117, Rarity.UNCOMMON, mage.cards.b.BonecallerCleric.class));
         cards.add(new SetCardInfo("Bothersome Quasit", 674, Rarity.RARE, mage.cards.b.BothersomeQuasit.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 348, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 218, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
