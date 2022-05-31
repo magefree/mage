@@ -140,6 +140,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Gate Colossus", 315, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Genasi Enforcers", 177, Rarity.COMMON, mage.cards.g.GenasiEnforcers.class));
         cards.add(new SetCardInfo("Geode Golem", 316, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
+        cards.add(new SetCardInfo("Ghastly Death Tyrant", 127, Rarity.COMMON, mage.cards.g.GhastlyDeathTyrant.class));
         cards.add(new SetCardInfo("Ghost Lantern", 128, Rarity.UNCOMMON, mage.cards.g.GhostLantern.class));
         cards.add(new SetCardInfo("Giant Ankheg", 233, Rarity.UNCOMMON, mage.cards.g.GiantAnkheg.class));
         cards.add(new SetCardInfo("Githzerai Monk", 20, Rarity.UNCOMMON, mage.cards.g.GithzeraiMonk.class));
