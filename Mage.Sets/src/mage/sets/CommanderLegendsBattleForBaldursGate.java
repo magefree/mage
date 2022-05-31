@@ -269,6 +269,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Street Urchin", 197, Rarity.UNCOMMON, mage.cards.s.StreetUrchin.class));
         cards.add(new SetCardInfo("Summon Undead", 151, Rarity.COMMON, mage.cards.s.SummonUndead.class));
         cards.add(new SetCardInfo("Swamp", 459, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swashbuckler Extraordinaire", 198, Rarity.UNCOMMON, mage.cards.s.SwashbucklerExtraordinaire.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 339, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Sword Coast Sailor", 98, Rarity.UNCOMMON, mage.cards.s.SwordCoastSailor.class));
         cards.add(new SetCardInfo("Sword Coast Serpent", 99, Rarity.COMMON, mage.cards.s.SwordCoastSerpent.class));
