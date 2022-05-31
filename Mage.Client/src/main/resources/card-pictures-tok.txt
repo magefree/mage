@@ -1810,3 +1810,12 @@
 |Generate|TOK:DDU|Myr|||MyrToken|
 |Generate|TOK:DDU|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:DDU|Thopter|2||ThopterColorlessToken|
+
+# IMA
+|Generate|TOK:IMA|Angel|||AngelToken|
+|Generate|TOK:IMA|Beast|||BeastToken2|
+|Generate|TOK:IMA|Bird|||BirdToken|
+|Generate|TOK:IMA|Djinn Monk|||DjinnMonkToken|
+|Generate|TOK:IMA|Dragon|1||DragonEggDragonToken|
+|Generate|TOK:IMA|Dragon|2||DragonToken2|
+|Generate|TOK:IMA|Spirit|||SpiritWhiteToken|

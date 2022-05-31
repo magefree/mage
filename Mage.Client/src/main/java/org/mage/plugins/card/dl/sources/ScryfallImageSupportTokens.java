@@ -1040,6 +1040,15 @@ public class ScryfallImageSupportTokens {
             put ("DDU/Thopter/1", "https://api.scryfall.com/cards/tddu/3/en?format=image");
             put ("DDU/Thopter/2", "https://api.scryfall.com/cards/tddu/4/en?format=image");
 
+            // IMA
+            put ("IMA/Angel", "https://api.scryfall.com/cards/tima/1/en?format=image");
+            put ("IMA/Beast", "https://api.scryfall.com/cards/tima/7/en?format=image");
+            put ("IMA/Bird", "https://api.scryfall.com/cards/tima/2/en?format=image");
+            put ("IMA/Djinn Monk", "https://api.scryfall.com/cards/tima/4/en?format=image");
+            put ("IMA/Dragon/1", "https://api.scryfall.com/cards/tima/5/en?format=image");
+            put ("IMA/Dragon/2", "https://api.scryfall.com/cards/tima/6/en?format=image");
+            put ("IMA/Spirit", "https://api.scryfall.com/cards/tima/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
