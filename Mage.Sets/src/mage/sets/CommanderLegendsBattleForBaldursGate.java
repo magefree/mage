@@ -191,6 +191,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Stone", 325, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class));
+        cards.add(new SetCardInfo("Mocking Doppelganger", 667, Rarity.RARE, mage.cards.m.MockingDoppelganger.class));
         cards.add(new SetCardInfo("Mold Folk", 133, Rarity.COMMON, mage.cards.m.MoldFolk.class));
         cards.add(new SetCardInfo("Monster Manual", 242, Rarity.RARE, mage.cards.m.MonsterManual.class));
         cards.add(new SetCardInfo("Moonshae Pixie", 84, Rarity.UNCOMMON, mage.cards.m.MoonshaePixie.class));
