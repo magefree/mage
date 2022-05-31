@@ -21,7 +21,7 @@ public final class EarthTremor extends CardImpl {
         // Earth Tremor deals damage to target creature or planeswalker equal to the number of lands you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(LandsYouControlCount.instance));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
-        this.getSpellAbility().addHint(LandsYouControlHint.instance)
+        this.getSpellAbility().addHint(LandsYouControlHint.instance);
     }
 
     private EarthTremor(final EarthTremor card) {
