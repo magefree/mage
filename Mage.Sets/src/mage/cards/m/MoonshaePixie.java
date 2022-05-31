@@ -46,7 +46,7 @@ public final class MoonshaePixie extends AdventureCard {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(MoonshaePixieValue.instance)
                         .setText("draw cards equal to the number of opponents who were dealt combat damage this turn")
-        ), new MoonshaePixieWatcher());
+        ).addHint(hint), new MoonshaePixieWatcher());
 
         // Pixie Dust
         // Up to three target creatures gain flying until end of turn.
