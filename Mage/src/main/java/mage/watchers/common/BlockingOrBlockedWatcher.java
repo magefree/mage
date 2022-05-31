@@ -53,4 +53,14 @@ public class BlockingOrBlockedWatcher extends Watcher {
                 .stream()
                 .anyMatch(mor -> mor.refersTo(blocker, game));
     }
+
+    public static boolean check(Permanent blocker, Game game) {
+        return game.getState()
+                .getWatcher(BlockingOrBlockedWatcher.class)
+                .blockerMap
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .anyMatch(mor -> mor.refersTo(blocker, game));
+    }
 }
