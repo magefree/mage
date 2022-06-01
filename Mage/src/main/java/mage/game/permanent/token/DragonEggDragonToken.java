@@ -46,5 +46,8 @@ public final class DragonEggDragonToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("IMA")) {
             this.setTokenType(1);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M19")) {
+            this.setTokenType(1);
+        }
     }
 }
