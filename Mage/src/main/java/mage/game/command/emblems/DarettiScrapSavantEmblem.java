@@ -26,7 +26,6 @@ public final class DarettiScrapSavantEmblem extends Emblem {
 
     public DarettiScrapSavantEmblem() {
         setName("Emblem Daretti");
-        this.setExpansionSetCodeForImage("C14");
 
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }

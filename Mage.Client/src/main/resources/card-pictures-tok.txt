@@ -51,6 +51,7 @@
 |Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM!:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
 |Generate|EMBLEM!:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM!:CM2|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM:C19|Ob Nixilis Reignited||Emblem Nixilis|ObNixilisReignitedEmblem|
 |Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
 |Generate|EMBLEM!:DTK|Emblem Narset|||NarsetTranscendentEmblem|
@@ -1810,3 +1811,31 @@
 |Generate|TOK:DDU|Myr|||MyrToken|
 |Generate|TOK:DDU|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:DDU|Thopter|2||ThopterColorlessToken|
+
+# IMA
+|Generate|TOK:IMA|Angel|||AngelToken|
+|Generate|TOK:IMA|Beast|||BeastToken2|
+|Generate|TOK:IMA|Bird|||BirdToken|
+|Generate|TOK:IMA|Djinn Monk|||DjinnMonkToken|
+|Generate|TOK:IMA|Dragon|1||DragonEggDragonToken|
+|Generate|TOK:IMA|Dragon|2||DragonToken2|
+|Generate|TOK:IMA|Spirit|||SpiritWhiteToken|
+
+# CM2
+|Generate|TOK:CM2|Bird|||BirdToken|
+|Generate|TOK:CM2|Elemental Shaman|||ElementalShamanToken|
+|Generate|TOK:CM2|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:CM2|Goat|||GoatToken|
+|Generate|TOK:CM2|Goblin|||GoblinToken|
+|Generate|TOK:CM2|Knight|||HuntedDragonKnightToken|
+|Generate|TOK:CM2|Lightning Rager|||LightningRagerToken|
+|Generate|TOK:CM2|Myr|||MyrToken|
+|Generate|TOK:CM2|Pentavite|||PentaviteToken|
+|Generate|TOK:CM2|Saproling|||SaprolingToken|
+|Generate|TOK:CM2|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:CM2|Spirit|||SpiritWhiteToken|
+|Generate|TOK:CM2|Triskelavite|||TriskelaviteToken|
+|Generate|TOK:CM2|Tuktuk the Returned|||TuktukTheReturnedToken|
+|Generate|TOK:CM2|Phyrexian Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:CM2|Phyrexian Wurm|2||WurmWithLifelinkToken|
+|Generate|TOK:CM2|Zombie|||ZombieToken|
