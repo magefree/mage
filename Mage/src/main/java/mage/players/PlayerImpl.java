@@ -3669,6 +3669,22 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
+                            // Add a copy of the dynamic cost for this ability if there is one.
+                            // E.g. from Kentaro, the Smiling Cat
+                            if (alternateSourceCosts instanceof AlternativeCostSourceAbility) {
+                                DynamicCost dynamicCost = ((AlternativeCostSourceAbility) alternateSourceCosts).getDynamicCost();
+                                if (dynamicCost != null) {
+                                    Cost cost = dynamicCost.getCost(ability, game);
+                                    // TODO: I don't know if this first if-check is needed, I don't think any of the dynamics values are alternative costs.
+                                    if (cost instanceof AlternativeCost) {
+                                        cost = ((AlternativeCost) cost).getCost();
+                                    }
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
+                                }
+                            }
+
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
