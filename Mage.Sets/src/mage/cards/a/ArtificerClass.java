@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.Card;
@@ -50,7 +50,7 @@ public final class ArtificerClass extends CardImpl {
 
         // The first artifact spell you cast each turn costs {1} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new SpellsCostReductionAllEffect(filter, 1)
+                new SpellsCostReductionControllerEffect(filter, 1)
                         .setText("the first artifact spell you cast each turn costs {1} less to cast")
         ), new ArtificerClassWatcher());
 
