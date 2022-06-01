@@ -1069,6 +1069,27 @@ public class ScryfallImageSupportTokens {
             put ("CM2/Phyrexian Wurm/2", "https://api.scryfall.com/cards/tcm2/17/en?format=image");
             put ("CM2/Zombie", "https://api.scryfall.com/cards/tcm2/7/en?format=image");
 
+            // CMA
+            put ("CMA/Beast/1", "https://api.scryfall.com/cards/tcma/7/en?format=image");
+            put ("CMA/Beast/2", "https://api.scryfall.com/cards/tcma/8/en?format=image");
+            put ("CMA/Dragon", "https://api.scryfall.com/cards/tcma/6/en?format=image");
+            put ("CMA/Drake", "https://api.scryfall.com/cards/tcma/18/en?format=image");
+            put ("CMA/Elemental", "https://api.scryfall.com/cards/tcma/9/en?format=image");
+            put ("CMA/Elephant", "https://api.scryfall.com/cards/tcma/10/en?format=image");
+            put ("CMA/Elf Druid", "https://api.scryfall.com/cards/tcma/11/en?format=image");
+            put ("CMA/Elf Warrior", "https://api.scryfall.com/cards/tcma/12/en?format=image");
+            put ("CMA/Gargoyle", "https://api.scryfall.com/cards/tcma/19/en?format=image");
+            put ("CMA/Phyrexian Germ", "https://api.scryfall.com/cards/tcma/4/en?format=image");
+            put ("CMA/Kithkin Soldier", "https://api.scryfall.com/cards/tcma/1/en?format=image");
+            put ("CMA/Knight", "https://api.scryfall.com/cards/tcma/2/en?format=image");
+            put ("CMA/Saproling", "https://api.scryfall.com/cards/tcma/13/en?format=image");
+            put ("CMA/Spider", "https://api.scryfall.com/cards/tcma/14/en?format=image");
+            put ("CMA/Spirit", "https://api.scryfall.com/cards/tcma/3/en?format=image");
+            put ("CMA/Treefolk", "https://api.scryfall.com/cards/tcma/15/en?format=image");
+            put ("CMA/Wolf/1", "https://api.scryfall.com/cards/tcma/16/en?format=image");
+            put ("CMA/Wolf/2", "https://api.scryfall.com/cards/tcma/17/en?format=image");
+            put ("CMA/Zombie", "https://api.scryfall.com/cards/tcma/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

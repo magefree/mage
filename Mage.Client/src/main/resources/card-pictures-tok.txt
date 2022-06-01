@@ -448,14 +448,18 @@
 |Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:CMA|Elephant|||ElephantToken|
-|Generate|TOK:CMA|Elf Warrior||
+|Generate|TOK:CMA|Elf Druid|||ElfDruidToken|
+|Generate|TOK:CMA|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:CMA|Gargoyle|||GargoyleToken|
+|Generate|TOK:CMA|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:CMA|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:CMA|Knight|||KnightToken|
 |Generate|TOK:CMA|Saproling|||SaprolingToken|
+|Generate|TOK:CMA|Spider|||SpiderToken|
 |Generate|TOK:CMA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CMA|Treefolk|||SylvanOfferingTreefolkToken|
-|Generate|TOK:CMA|Wolf|||WolfToken|
+|Generate|TOK:CMA|Wolf|1||WolfToken|
+|Generate|TOK:CMA|Wolf|2||WolfToken|
 |Generate|TOK:CMA|Zombie|||ZombieToken|
 |Generate|TOK:CMD|Beast|1||BeastToken2|
 |Generate|TOK:CMD|Beast|2||BeastToken|
