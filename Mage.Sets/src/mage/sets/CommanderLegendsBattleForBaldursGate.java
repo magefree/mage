@@ -171,6 +171,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Horn of Valhalla", 26, Rarity.RARE, mage.cards.h.HornOfValhalla.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
         cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
+        cards.add(new SetCardInfo("Ingenious Artillerist", 182, Rarity.COMMON, mage.cards.i.IngeniousArtillerist.class));
         cards.add(new SetCardInfo("Inspired Tinkering", 183, Rarity.UNCOMMON, mage.cards.i.InspiredTinkering.class));
         cards.add(new SetCardInfo("Inspiring Leader", 28, Rarity.UNCOMMON, mage.cards.i.InspiringLeader.class));
         cards.add(new SetCardInfo("Insufferable Balladeer", 184, Rarity.COMMON, mage.cards.i.InsufferableBalladeer.class));
