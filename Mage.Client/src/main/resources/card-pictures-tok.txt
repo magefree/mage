@@ -838,12 +838,11 @@
 |Generate|TOK:M14|Sliver||
 |Generate|TOK:M14|Wolf|||WolfToken|
 |Generate|TOK:M14|Zombie|||ZombieToken|
-|Generate|TOK:M15|Beast|1||BeastToken|
-|Generate|TOK:M15|Beast|2||GarrukApexPredatorBeastToken|
+|Generate|TOK:M15|Beast|1||GarrukApexPredatorBeastToken|
+|Generate|TOK:M15|Beast|2||BeastToken|
 |Generate|TOK:M15|Dragon|||BroodKeeperDragonToken|
-|Generate|TOK:M15|Goblin|1||GoblinTokenWithHaste|
-# |Generate|TOK:M15|Goblin|2||GoblinToken|  #does not exist
-|Generate|TOK:M15|Insect|||InsectToken|
+|Generate|TOK:M15|Goblin|||GoblinToken|
+|Generate|TOK:M15|Insect|||InsectDeathToken|
 |Generate|TOK:M15|Land Mine|||LandMineToken|
 |Generate|TOK:M15|Sliver|||SliverToken|
 |Generate|TOK:M15|Soldier|||SoldierToken|
