@@ -18,6 +18,7 @@ import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Dungeon;
@@ -560,6 +561,36 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
+     * Handles X mana costs where each mana has to be a different color (Emblazoned Golem)
+     */
+    private String handleManaXDifferentCost(Game game, Player controller, int amountMana) {
+        if (amountMana >= 5) {
+            return("{W}{U}{B}{R}{G}");
+        }
+
+        // Choose a different color of mana X times
+        ArrayList<ChoiceColor> chosenColors = new ArrayList<>();
+        for (int i = 0; i < amountMana; i++) {
+            ChoiceColor choice = new ChoiceColor();
+            for (ChoiceColor alreadyChosen : chosenColors) {
+                choice.removeColorFromChoices(alreadyChosen.getChoice());
+            }
+
+            if (controller.choose(Outcome.Benefit, choice, game)) {
+                chosenColors.add(choice);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (ChoiceColor choice : chosenColors) {
+            sb.append('{').append(choice.getColor()).append('}');
+        }
+
+        // Reset local stringBuilder
+        threadLocalBuilder.get();
+        return sb.toString();
+    }
+
+    /**
      * Handles X mana costs and sets manaCostsToPay.
      *
      * @param game
@@ -586,8 +617,8 @@ public abstract class AbilityImpl implements Ability {
                 if (variableManaCost == null) {
                     variableManaCost = (VariableManaCost) cost;
                 } else {
-                    // only one VariableManCost per spell (or is it possible to have more?)
-                    logger.error("Variable mana cost allowes only in one instance per ability: " + this);
+                    // only one VariableManaCost per spell (or is it possible to have more?)
+                    logger.error("Variable mana cost allowed only in one instance per ability: " + this);
                 }
             }
         }
@@ -600,7 +631,9 @@ public abstract class AbilityImpl implements Ability {
                             "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
                     StringBuilder manaString = threadLocalBuilder.get();
-                    if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
+                    if (false) { // TODO the conditional
+                        manaString.append(handleManaXDifferentCost(game, controller, amountMana));
+                    } else if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
                         manaString.append('{').append(amountMana).append('}');
                     } else {
                         String manaSymbol = null;
@@ -626,6 +659,7 @@ public abstract class AbilityImpl implements Ability {
                             manaString.append('{').append(manaSymbol).append('}');
                         }
                     }
+                    System.out.println(manaString);
                     manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
                     manaCostsToPay.setX(xValue * xValueMultiplier, amountMana);
                 }
