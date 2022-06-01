@@ -1049,6 +1049,26 @@ public class ScryfallImageSupportTokens {
             put ("IMA/Dragon/2", "https://api.scryfall.com/cards/tima/6/en?format=image");
             put ("IMA/Spirit", "https://api.scryfall.com/cards/tima/3/en?format=image");
 
+            // CM2
+            put ("CM2/Bird", "https://api.scryfall.com/cards/tcm2/2/en?format=image");
+            put ("CM2/Emblem Daretti", "https://api.scryfall.com/cards/tcm2/18/en?format=image");
+            put ("CM2/Elemental Shaman", "https://api.scryfall.com/cards/tcm2/8/en?format=image");
+            put ("CM2/Phyrexian Germ", "https://api.scryfall.com/cards/tcm2/6/en?format=image");
+            put ("CM2/Goat", "https://api.scryfall.com/cards/tcm2/3/en?format=image");
+            put ("CM2/Goblin", "https://api.scryfall.com/cards/tcm2/9/en?format=image");
+            put ("CM2/Knight", "https://api.scryfall.com/cards/tcm2/4/en?format=image");
+            put ("CM2/Lightning Rager", "https://api.scryfall.com/cards/tcm2/10/en?format=image");
+            put ("CM2/Myr", "https://api.scryfall.com/cards/tcm2/12/en?format=image");
+            put ("CM2/Pentavite", "https://api.scryfall.com/cards/tcm2/13/en?format=image");
+            put ("CM2/Saproling", "https://api.scryfall.com/cards/tcm2/11/en?format=image");
+            put ("CM2/Shapeshifter", "https://api.scryfall.com/cards/tcm2/1/en?format=image");
+            put ("CM2/Spirit", "https://api.scryfall.com/cards/tcm2/5/en?format=image");
+            put ("CM2/Triskelavite", "https://api.scryfall.com/cards/tcm2/14/en?format=image");
+            put ("CM2/Tuktuk the Returned", "https://api.scryfall.com/cards/tcm2/15/en?format=image");
+            put ("CM2/Phyrexian Wurm/1", "https://api.scryfall.com/cards/tcm2/16/en?format=image");
+            put ("CM2/Phyrexian Wurm/2", "https://api.scryfall.com/cards/tcm2/17/en?format=image");
+            put ("CM2/Zombie", "https://api.scryfall.com/cards/tcm2/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

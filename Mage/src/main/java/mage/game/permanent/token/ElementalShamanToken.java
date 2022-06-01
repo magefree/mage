@@ -18,7 +18,7 @@ public final class ElementalShamanToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C15", "JVC", "DD2", "LRW"));
+        tokenImageSets.addAll(Arrays.asList("C15", "JVC", "DD2", "LRW", "CM2"));
     }
 
     public ElementalShamanToken(boolean withHaste) {
