@@ -385,8 +385,26 @@ public class ScryfallImageSupportTokens {
             put("IKO/Kraken", "https://api.scryfall.com/cards/tiko/6/en?format=image");
             put("IKO/Shark", "https://api.scryfall.com/cards/tiko/7/en?format=image");
 
-            // PCA (planes)
+            // PCA
+            put("PCA/Angel", "https://api.scryfall.com/cards/tpca/5/en?format=image");
+            put("PCA/Beast", "https://api.scryfall.com/cards/tpca/13/en?format=image");
+            put("PCA/Boar", "https://api.scryfall.com/cards/tpca/14/en?format=image");
+            put("PCA/Dragon", "https://api.scryfall.com/cards/tpca/10/en?format=image");
             put("PCA/Eldrazi", "https://api.scryfall.com/cards/tpca/1/en?format=image");
+            put("PCA/Eldrazi Spawn/1", "https://api.scryfall.com/cards/tpca/2/en?format=image");
+            put("PCA/Eldrazi Spawn/2", "https://api.scryfall.com/cards/tpca/3/en?format=image");
+            put("PCA/Eldrazi Spawn/3", "https://api.scryfall.com/cards/tpca/4/en?format=image");
+            put("PCA/Phyrexian Germ", "https://api.scryfall.com/cards/tpca/7/en?format=image");
+            put("PCA/Goat", "https://api.scryfall.com/cards/tpca/6/en?format=image");
+            put("PCA/Goblin", "https://api.scryfall.com/cards/tpca/11/en?format=image");
+            put("PCA/Hellion", "https://api.scryfall.com/cards/tpca/12/en?format=image");
+            put("PCA/Insect", "https://api.scryfall.com/cards/tpca/15/en?format=image");
+            put("PCA/Ooze/1", "https://api.scryfall.com/cards/tpca/16/en?format=image");
+            put("PCA/Ooze/2", "https://api.scryfall.com/cards/tpca/17/en?format=image");
+            put("PCA/Plant", "https://api.scryfall.com/cards/tpca/18/en?format=image");
+            put("PCA/Saproling", "https://api.scryfall.com/cards/tpca/19/en?format=image");
+            put("PCA/Spider", "https://api.scryfall.com/cards/tpca/8/en?format=image");
+            put("PCA/Zombie", "https://api.scryfall.com/cards/tpca/9/en?format=image");
             put("PCA/Plane - Academy at Tolaria West", "https://api.scryfall.com/cards/opca/9/en?format=image");
             put("PCA/Plane - Agyrem", "https://api.scryfall.com/cards/opca/11/en?format=image");
             put("PCA/Plane - Akoum", "https://api.scryfall.com/cards/opca/12/en?format=image");

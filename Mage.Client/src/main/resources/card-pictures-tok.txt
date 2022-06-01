@@ -154,7 +154,6 @@
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|TOK:ANA|Goblin|||GoblinToken|
 |Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
-|Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
@@ -1843,3 +1842,24 @@
 |Generate|TOK:CM2|Phyrexian Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:CM2|Phyrexian Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:CM2|Zombie|||ZombieToken|
+
+# PCA
+|Generate|TOK:PCA|Angel|||AngelToken|
+|Generate|TOK:PCA|Beast|||BeastToken|
+|Generate|TOK:PCA|Boar|||BoarToken|
+|Generate|TOK:PCA|Dragon|||DragonToken2|
+|Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
+|Generate|TOK:PCA|Eldrazi Spawn|1||EldraziSpawnToken|
+|Generate|TOK:PCA|Eldrazi Spawn|2||EldraziSpawnToken|
+|Generate|TOK:PCA|Eldrazi Spawn|3||EldraziSpawnToken|
+|Generate|TOK:PCA|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:PCA|Goat|||GoatToken|
+|Generate|TOK:PCA|Goblin|||GoblinToken|
+|Generate|TOK:PCA|Hellion|||HellionToken|
+|Generate|TOK:PCA|Insect|||InsectToken|
+|Generate|TOK:PCA|Ooze|1||OozeToken|
+|Generate|TOK:PCA|Ooze|2||Ooze2Token|
+|Generate|TOK:PCA|Plant|||PlantToken|
+|Generate|TOK:PCA|Saproling|||SaprolingToken|
+|Generate|TOK:PCA|Spider|||PenumbraSpiderToken|
+|Generate|TOK:PCA|Zombie|||ZombieToken|

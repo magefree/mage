@@ -32,7 +32,7 @@ public final class GoblinToken extends TokenImpl {
 
         availableImageSetCodes = Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
                 "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "EVG", "MM2",
-                "MM3", "EMA", "C16", "DOM", "ANA", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR", "NEC", "M19", "CM2");
+                "MM3", "EMA", "C16", "DOM", "ANA", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR", "NEC", "M19", "CM2", "PCA");
     }
 
     public GoblinToken(final GoblinToken token) {
