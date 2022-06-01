@@ -49,11 +49,11 @@ class ContrabandLivestockEffect extends RollDieWithResultTableEffect {
     ContrabandLivestockEffect() {
         super(20, "exile target creature, then roll a d20");
         this.addTableEntry(1, 9, new CreateTokenTargetEffect(new OxGreenToken())
-                .setText("that creature's controller creates a 4/4 green Ox creature token"));
+                .setText("its controller creates a 4/4 green Ox creature token"));
         this.addTableEntry(10, 19, new CreateTokenTargetEffect(new Boar2Token())
-                .setText("that creature's controller creates a 2/2 green Boar creature token"));
+                .setText("its controller creates a 2/2 green Boar creature token"));
         this.addTableEntry(20, 20, new CreateTokenTargetEffect(new GoatToken())
-                .setText("that creature's controller creates a 0/1 white Goat creature token"));
+                .setText("its controller creates a 0/1 white Goat creature token"));
     }
 
     private ContrabandLivestockEffect(final ContrabandLivestockEffect effect) {
