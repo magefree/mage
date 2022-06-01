@@ -449,9 +449,14 @@ public final class ManaUtil {
     }
 
     /**
-     * Converts a collection of mana symbols into a single condensed string e.g.
-     * {1}{1}{1}{1}{1}{W} = {5}{W} {2}{B}{2}{B}{2}{B} = {6}{B}{B}{B}
-     * {1}{2}{R}{U}{1}{1} = {5}{R}{U} {B}{G}{R} = {B}{G}{R}
+     * Converts a collection of mana symbols into a single condensed string e.g:
+     *      {1}{1}{1}{1}{1}{W}   = {5}{W}
+     *      {2}{B}{2}{B}{2}{B}   = {6}{B}{B}{B}
+     *      {1}{2}{R}{U}{1}{1}   = {5}{R}{U}
+     *      {B}{G}{R}            = {B}{G}{R}
+     *
+     * @param rawCost   the uncondensed version of the mana String.
+     * @return          the condensed version of the mana String.
      */
     public static String condenseManaCostString(String rawCost) {
         int total = 0;
