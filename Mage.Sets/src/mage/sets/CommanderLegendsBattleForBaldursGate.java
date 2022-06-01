@@ -222,6 +222,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 244, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Nautiloid Ship", 328, Rarity.MYTHIC, mage.cards.n.NautiloidShip.class));
         cards.add(new SetCardInfo("Navigation Orb", 329, Rarity.COMMON, mage.cards.n.NavigationOrb.class));
+        cards.add(new SetCardInfo("Nefarious Imp", 137, Rarity.COMMON, mage.cards.n.NefariousImp.class));
         cards.add(new SetCardInfo("Nemesis Phoenix", 189, Rarity.UNCOMMON, mage.cards.n.NemesisPhoenix.class));
         cards.add(new SetCardInfo("Nimbleclaw Adept", 86, Rarity.COMMON, mage.cards.n.NimbleclawAdept.class));
         cards.add(new SetCardInfo("Nimblewright Schematic", 330, Rarity.COMMON, mage.cards.n.NimblewrightSchematic.class));
