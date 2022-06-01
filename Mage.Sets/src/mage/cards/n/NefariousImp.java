@@ -84,7 +84,7 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more permanents you control leave the battlefield, scry 1.";
+    public String getTriggerPhrase() {
+        return "Whenever one or more permanents you control leave the battlefield, ";
     }
 }
