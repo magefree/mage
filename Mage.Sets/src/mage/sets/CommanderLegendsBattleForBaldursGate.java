@@ -210,6 +210,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Morphic Pool", 357, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Moss Diamond", 327, Rarity.COMMON, mage.cards.m.MossDiamond.class));
         cards.add(new SetCardInfo("Mountain", 463, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Multiclass Baldric", 684, Rarity.RARE, mage.cards.m.MulticlassBaldric.class));
         cards.add(new SetCardInfo("Murder", 134, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Myconid Spore Tender", 243, Rarity.COMMON, mage.cards.m.MyconidSporeTender.class));
         cards.add(new SetCardInfo("Myrkul's Edict", 135, Rarity.COMMON, mage.cards.m.MyrkulsEdict.class));
