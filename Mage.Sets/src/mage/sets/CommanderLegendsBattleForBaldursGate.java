@@ -60,6 +60,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Bhaal's Invoker", 163, Rarity.COMMON, mage.cards.b.BhaalsInvoker.class));
         cards.add(new SetCardInfo("Bhaal, Lord of Murder", 268, Rarity.RARE, mage.cards.b.BhaalLordOfMurder.class));
         cards.add(new SetCardInfo("Black Dragon Gate", 347, Rarity.COMMON, mage.cards.b.BlackDragonGate.class));
+        cards.add(new SetCardInfo("Black Market Connections", 669, Rarity.RARE, mage.cards.b.BlackMarketConnections.class));
         cards.add(new SetCardInfo("Blade of Selves", 301, Rarity.RARE, mage.cards.b.BladeOfSelves.class));
         cards.add(new SetCardInfo("Blessed Hippogriff", 11, Rarity.COMMON, mage.cards.b.BlessedHippogriff.class));
         cards.add(new SetCardInfo("Blood Money", 116, Rarity.MYTHIC, mage.cards.b.BloodMoney.class));
