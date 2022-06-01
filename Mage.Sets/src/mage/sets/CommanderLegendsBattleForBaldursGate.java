@@ -270,6 +270,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Skullwinder", 256, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
         cards.add(new SetCardInfo("Sky Diamond", 337, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Slaughter the Strong", 43, Rarity.UNCOMMON, mage.cards.s.SlaughterTheStrong.class));
+        cards.add(new SetCardInfo("Solemn Doomguide", 672, Rarity.RARE, mage.cards.s.SolemnDoomguide.class));
         cards.add(new SetCardInfo("Spectacular Showdown", 679, Rarity.RARE, mage.cards.s.SpectacularShowdown.class));
         cards.add(new SetCardInfo("Spire Garden", 361, Rarity.RARE, mage.cards.s.SpireGarden.class));
         cards.add(new SetCardInfo("Steadfast Unicorn", 44, Rarity.COMMON, mage.cards.s.SteadfastUnicorn.class));
