@@ -57,6 +57,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Basilisk Collar", 300, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Basilisk Gate", 346, Rarity.COMMON, mage.cards.b.BasiliskGate.class));
         cards.add(new SetCardInfo("Battle Angels of Tyr", 9, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
+        cards.add(new SetCardInfo("Beckoning Will-o'-Wisp", 10, Rarity.UNCOMMON, mage.cards.b.BeckoningWillOWisp.class));
         cards.add(new SetCardInfo("Bhaal's Invoker", 163, Rarity.COMMON, mage.cards.b.BhaalsInvoker.class));
         cards.add(new SetCardInfo("Bhaal, Lord of Murder", 268, Rarity.RARE, mage.cards.b.BhaalLordOfMurder.class));
         cards.add(new SetCardInfo("Black Dragon Gate", 347, Rarity.COMMON, mage.cards.b.BlackDragonGate.class));
