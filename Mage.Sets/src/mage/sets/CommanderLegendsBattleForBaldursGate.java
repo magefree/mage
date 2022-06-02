@@ -406,6 +406,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 907, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patriar's Seal", 332, Rarity.UNCOMMON, mage.cards.p.PatriarsSeal.class));
         cards.add(new SetCardInfo("Patron of the Arts", 191, Rarity.COMMON, mage.cards.p.PatronOfTheArts.class));
+        cards.add(new SetCardInfo("Pegasus Guardian", 36, Rarity.COMMON, mage.cards.p.PegasusGuardian.class));
         cards.add(new SetCardInfo("Phyrexian Rager", 766, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Phyrexian Revoker", 868, Rarity.RARE, mage.cards.p.PhyrexianRevoker.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 333, Rarity.COMMON, mage.cards.p.PilgrimsEye.class));
