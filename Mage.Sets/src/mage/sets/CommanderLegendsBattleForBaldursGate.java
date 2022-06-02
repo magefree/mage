@@ -265,6 +265,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sailors' Bane", 93, Rarity.UNCOMMON, mage.cards.s.SailorsBane.class));
         cards.add(new SetCardInfo("Sapphire Dragon", 94, Rarity.UNCOMMON, mage.cards.s.SapphireDragon.class));
         cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class));
+        cards.add(new SetCardInfo("Scaled Nurturer", 252, Rarity.COMMON, mage.cards.s.ScaledNurturer.class));
         cards.add(new SetCardInfo("Scouting Hawk", 41, Rarity.COMMON, mage.cards.s.ScoutingHawk.class));
         cards.add(new SetCardInfo("Sea Gate", 359, Rarity.COMMON, mage.cards.s.SeaGate.class));
         cards.add(new SetCardInfo("Sea Hag", 95, Rarity.COMMON, mage.cards.s.SeaHag.class));
