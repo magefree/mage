@@ -582,6 +582,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Xenagos, the Reveler", 853, Rarity.MYTHIC, mage.cards.x.XenagosTheReveler.class));
         cards.add(new SetCardInfo("You Meet in a Tavern", 263, Rarity.COMMON, mage.cards.y.YouMeetInATavern.class));
         cards.add(new SetCardInfo("You're Confronted by Robbers", 53, Rarity.COMMON, mage.cards.y.YoureConfrontedByRobbers.class));
+        cards.add(new SetCardInfo("You've Been Caught Stealing", 211, Rarity.COMMON, mage.cards.y.YouveBeenCaughtStealing.class));
         cards.add(new SetCardInfo("Young Blue Dragon", 106, Rarity.COMMON, mage.cards.y.YoungBlueDragon.class));
         cards.add(new SetCardInfo("Young Red Dragon", 210, Rarity.COMMON, mage.cards.y.YoungRedDragon.class));
         cards.add(new SetCardInfo("Your Temple Is Under Attack", 52, Rarity.COMMON, mage.cards.y.YourTempleIsUnderAttack.class));
