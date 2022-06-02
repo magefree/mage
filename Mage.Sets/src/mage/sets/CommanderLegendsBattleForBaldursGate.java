@@ -244,6 +244,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Ankheg", 233, Rarity.UNCOMMON, mage.cards.g.GiantAnkheg.class));
         cards.add(new SetCardInfo("Githzerai Monk", 20, Rarity.UNCOMMON, mage.cards.g.GithzeraiMonk.class));
         cards.add(new SetCardInfo("Glorious Protector", 695, Rarity.RARE, mage.cards.g.GloriousProtector.class));
+        cards.add(new SetCardInfo("Gnoll War Band", 178, Rarity.UNCOMMON, mage.cards.g.GnollWarBand.class));
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Goliath Paladin", 21, Rarity.COMMON, mage.cards.g.GoliathPaladin.class));
