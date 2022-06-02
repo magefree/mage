@@ -172,6 +172,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Domineering Will", 719, Rarity.RARE, mage.cards.d.DomineeringWill.class));
         cards.add(new SetCardInfo("Draconic Lore", 64, Rarity.COMMON, mage.cards.d.DraconicLore.class));
         cards.add(new SetCardInfo("Draconic Muralists", 224, Rarity.UNCOMMON, mage.cards.d.DraconicMuralists.class));
+        cards.add(new SetCardInfo("Dragon Cultist", 170, Rarity.UNCOMMON, mage.cards.d.DragonCultist.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 858, Rarity.RARE, mage.cards.d.DragonsHoard.class));
         cards.add(new SetCardInfo("Dragonborn Looter", 65, Rarity.COMMON, mage.cards.d.DragonbornLooter.class));
         cards.add(new SetCardInfo("Drakuseth, Maw of Flames", 790, Rarity.RARE, mage.cards.d.DrakusethMawOfFlames.class));
