@@ -307,6 +307,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 800, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keiga, the Tide Star", 725, Rarity.RARE, mage.cards.k.KeigaTheTideStar.class));
+        cards.add(new SetCardInfo("Kenku Artificer", 80, Rarity.COMMON, mage.cards.k.KenkuArtificer.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 898, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kher Keep", 899, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Kindred Discovery", 81, Rarity.RARE, mage.cards.k.KindredDiscovery.class));
