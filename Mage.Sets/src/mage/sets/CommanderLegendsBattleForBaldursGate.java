@@ -270,6 +270,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Hammers of Moradin", 25, Rarity.UNCOMMON, mage.cards.h.HammersOfMoradin.class));
         cards.add(new SetCardInfo("Hardy Outlander", 235, Rarity.UNCOMMON, mage.cards.h.HardyOutlander.class));
         cards.add(new SetCardInfo("Harper Recruiter", 659, Rarity.RARE, mage.cards.h.HarperRecruiter.class));
+        cards.add(new SetCardInfo("Haunted One", 654, Rarity.MYTHIC, mage.cards.h.HauntedOne.class));
         cards.add(new SetCardInfo("Heap Gate", 354, Rarity.COMMON, mage.cards.h.HeapGate.class));
         cards.add(new SetCardInfo("Hedron Archive", 861, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Herald's Horn", 862, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
