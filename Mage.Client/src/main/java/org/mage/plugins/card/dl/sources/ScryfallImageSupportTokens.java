@@ -1124,6 +1124,21 @@ public class ScryfallImageSupportTokens {
             put ("M15/Treefolk Warrior", "https://api.scryfall.com/cards/tm15/11/en?format=image");
             put ("M15/Zombie", "https://api.scryfall.com/cards/tm15/6/en?format=image");
 
+            // M14
+            put ("M14/Angel", "https://api.scryfall.com/cards/tm14/2/en?format=image");
+            put ("M14/Beast", "https://api.scryfall.com/cards/tm14/9/en?format=image");
+            put ("M14/Cat", "https://api.scryfall.com/cards/tm14/3/en?format=image");
+            put ("M14/Dragon", "https://api.scryfall.com/cards/tm14/6/en?format=image");
+            put ("M14/Elemental/1", "https://api.scryfall.com/cards/tm14/7/en?format=image");
+            put ("M14/Elemental/2", "https://api.scryfall.com/cards/tm14/8/en?format=image");
+            put ("M14/Emblem Garruk, Caller of Beasts", "https://api.scryfall.com/cards/tm14/13/en?format=image");
+            put ("M14/Goat", "https://api.scryfall.com/cards/tm14/4/en?format=image");
+            put ("M14/Emblem Liliana of the Dark Realms", "https://api.scryfall.com/cards/tm14/12/en?format=image");
+            put ("M14/Saproling", "https://api.scryfall.com/cards/tm14/10/en?format=image");
+            put ("M14/Sliver", "https://api.scryfall.com/cards/tm14/1/en?format=image");
+            put ("M14/Wolf", "https://api.scryfall.com/cards/tm14/11/en?format=image");
+            put ("M14/Zombie", "https://api.scryfall.com/cards/tm14/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

@@ -835,7 +835,7 @@
 |Generate|TOK:M14|Elemental|2||RedElementalToken|
 |Generate|TOK:M14|Goat|||GoatToken|
 |Generate|TOK:M14|Saproling|||SaprolingToken|
-|Generate|TOK:M14|Sliver||
+|Generate|TOK:M14|Sliver|||SliverToken|
 |Generate|TOK:M14|Wolf|||WolfToken|
 |Generate|TOK:M14|Zombie|||ZombieToken|
 |Generate|TOK:M15|Beast|1||GarrukApexPredatorBeastToken|
