@@ -166,6 +166,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Signet", 857, Rarity.COMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 788, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 749, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
+        cards.add(new SetCardInfo("Dire Mimic", 310, Rarity.COMMON, mage.cards.d.DireMimic.class));
         cards.add(new SetCardInfo("Displacer Kitten", 63, Rarity.RARE, mage.cards.d.DisplacerKitten.class));
         cards.add(new SetCardInfo("Disrupt Decorum", 789, Rarity.RARE, mage.cards.d.DisruptDecorum.class));
         cards.add(new SetCardInfo("Dissipation Field", 718, Rarity.RARE, mage.cards.d.DissipationField.class));
