@@ -321,6 +321,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 187, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightning Greaves", 864, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 188, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class));
+        cards.add(new SetCardInfo("Loot Dispute", 677, Rarity.RARE, mage.cards.l.LootDispute.class));
         cards.add(new SetCardInfo("Lovestruck Beast", 827, Rarity.RARE, mage.cards.l.LovestruckBeast.class));
         cards.add(new SetCardInfo("Lozhan, Dragons' Legacy", 281, Rarity.UNCOMMON, mage.cards.l.LozhanDragonsLegacy.class));
         cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 32, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class));
