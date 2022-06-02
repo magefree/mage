@@ -44,6 +44,7 @@ public enum CounterType {
     DEATHTOUCH("deathtouch"),
     DELAY("delay"),
     DEPLETION("depletion"),
+    DESCENT("descent"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
     DIVINITY("divinity"),
