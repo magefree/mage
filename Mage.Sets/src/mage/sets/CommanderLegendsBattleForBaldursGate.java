@@ -586,6 +586,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Wyll, Blade of Frontiers", 208, Rarity.RARE, mage.cards.w.WyllBladeOfFrontiers.class));
         cards.add(new SetCardInfo("Wyrm's Crossing Patrol", 51, Rarity.COMMON, mage.cards.w.WyrmsCrossingPatrol.class));
         cards.add(new SetCardInfo("Xenagos, the Reveler", 853, Rarity.MYTHIC, mage.cards.x.XenagosTheReveler.class));
+        cards.add(new SetCardInfo("You Look Upon the Tarrasque", 262, Rarity.UNCOMMON, mage.cards.y.YouLookUponTheTarrasque.class));
         cards.add(new SetCardInfo("You Meet in a Tavern", 263, Rarity.COMMON, mage.cards.y.YouMeetInATavern.class));
         cards.add(new SetCardInfo("You're Confronted by Robbers", 53, Rarity.COMMON, mage.cards.y.YoureConfrontedByRobbers.class));
         cards.add(new SetCardInfo("You've Been Caught Stealing", 211, Rarity.COMMON, mage.cards.y.YouveBeenCaughtStealing.class));
