@@ -3,6 +3,7 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -29,10 +30,11 @@ public final class DungeoneersPack extends CardImpl {
 
         // {2}, {T}, Sacrifice Dungeoneer's Pack: You take the initiative, gain 3 life, draw a card, and create a Treasure token. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new TakeTheInitiativeEffect(), new GenericManaCost(2));
-        ability.addEffect(new GainLifeEffect(3).concatBy(","));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addEffect(new GainLifeEffect(3).concatBy(", you"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(","));
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy(", and"));
-        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 

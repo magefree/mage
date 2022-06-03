@@ -44,10 +44,14 @@ public final class BeckoningWillOWisp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Lure the Unwary — At the beginning of combat on your turn, choose an opponent.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BeckoningWillOWispEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new BeckoningWillOWispEffect(), TargetController.YOU, false
+        ).withFlavorWord("Lure the Unwary"));
 
         // Creatures attacking the last chosen player get +1/+0.
-        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+                1, 0, Duration.WhileOnBattlefield, filter, false
+        )));
     }
 
     private BeckoningWillOWisp(final BeckoningWillOWisp card) {

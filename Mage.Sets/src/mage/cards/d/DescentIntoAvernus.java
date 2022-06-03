@@ -38,7 +38,7 @@ public final class DescentIntoAvernus extends CardImpl {
         ability.addEffect(new DescentIntoAvernusEffect());
         ability.addEffect(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.ANY
-        ).concatBy("and"));
+        ).setText("and {this} deals X damage to each player, where X is the number of descent counters on {this}"));
         this.addAbility(ability);
     }
 

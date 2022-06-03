@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -29,8 +29,8 @@ public final class CloakOfTheBat extends CardImpl {
                 FlyingAbility.getInstance(), AttachmentType.EQUIPMENT
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
-                FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
-        ).setText("and first strike"));
+                HasteAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and haste"));
         this.addAbility(ability);
 
         // Equip {2}

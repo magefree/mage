@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class CaptainNghathrod extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.HORROR);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.HORROR, "a Horror");
     private static final FilterCard filter2 = new FilterCard(
             "artifact or creature card in an opponent's graveyard that was put there from their library this turn"
     );
