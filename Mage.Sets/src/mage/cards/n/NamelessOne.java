@@ -38,7 +38,7 @@ public final class NamelessOne extends CardImpl {
         // Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private NamelessOne(final NamelessOne card) {

@@ -31,7 +31,7 @@ public final class NetterEnDal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, {tap}, Discard a card: Target creature can't attack this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());

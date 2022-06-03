@@ -27,7 +27,7 @@ public final class NeedlebiteTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{B}"), NeedlebiteTrapCondition.instance), new PlayerGainedLifeWatcher());
 
         // Target player loses 5 life and you gain 5 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));

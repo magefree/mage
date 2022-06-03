@@ -63,7 +63,7 @@ public final class NiambiEsteemedSpeaker extends CardImpl {
 
         // {1}{W}{U}, {T}, Discard a legendary card: Draw two cards.
         ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{1}{W}{U}")
+                new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{1}{W}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter2)));
