@@ -104,6 +104,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Calculating Lich", 742, Rarity.MYTHIC, mage.cards.c.CalculatingLich.class));
         cards.add(new SetCardInfo("Campfire", 304, Rarity.UNCOMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Candlekeep Sage", 60, Rarity.COMMON, mage.cards.c.CandlekeepSage.class));
+        cards.add(new SetCardInfo("Captain N'ghathrod", 646, Rarity.MYTHIC, mage.cards.c.CaptainNghathrod.class));
         cards.add(new SetCardInfo("Carefree Swinemaster", 219, Rarity.COMMON, mage.cards.c.CarefreeSwinemaster.class));
         cards.add(new SetCardInfo("Carnelian Orb of Dragonkind", 166, Rarity.COMMON, mage.cards.c.CarnelianOrbOfDragonkind.class));
         cards.add(new SetCardInfo("Cast Down", 119, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
