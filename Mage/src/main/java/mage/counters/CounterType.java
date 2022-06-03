@@ -151,6 +151,7 @@ public enum CounterType {
     REACH("reach"),
     REPAIR("repair"),
     RITUAL("ritual"),
+    ROPE("rope"),
     RUST("rust"),
     QUEST("quest"),
     SILVER("silver"),
