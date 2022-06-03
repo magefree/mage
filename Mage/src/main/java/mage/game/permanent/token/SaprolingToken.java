@@ -51,7 +51,8 @@ public final class SaprolingToken extends TokenImpl {
                 "NEC",
                 "2XM",
                 "NCC",
-                "CM2"
+                "CM2",
+                "PCA"
         ));
     }
 

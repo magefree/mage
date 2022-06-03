@@ -20,7 +20,7 @@ public final class KithkinSoldierToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("CMD", "EVE", "LRW", "MMA", "MOR", "SHM", "MMA", "KHC");
+        availableImageSetCodes = Arrays.asList("CMD", "EVE", "LRW", "MMA", "MOR", "SHM", "MMA", "KHC", "CMA");
     }
 
     public KithkinSoldierToken(final KithkinSoldierToken token) {

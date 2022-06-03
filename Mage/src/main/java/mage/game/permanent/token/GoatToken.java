@@ -16,7 +16,7 @@ public final class GoatToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("EVE", "M13", "M14", "C14", "C16", "ELD", "THB", "NCC", "CM2"));
+        tokenImageSets.addAll(Arrays.asList("EVE", "M13", "M14", "C14", "C16", "ELD", "THB", "NCC", "CM2", "PCA"));
     }
 
     public GoatToken() {

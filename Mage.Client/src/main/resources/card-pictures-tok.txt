@@ -154,7 +154,6 @@
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|TOK:ANA|Goblin|||GoblinToken|
 |Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
-|Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
@@ -448,14 +447,18 @@
 |Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:CMA|Elephant|||ElephantToken|
-|Generate|TOK:CMA|Elf Warrior||
+|Generate|TOK:CMA|Elf Druid|||ElfDruidToken|
+|Generate|TOK:CMA|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:CMA|Gargoyle|||GargoyleToken|
+|Generate|TOK:CMA|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:CMA|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:CMA|Knight|||KnightToken|
 |Generate|TOK:CMA|Saproling|||SaprolingToken|
+|Generate|TOK:CMA|Spider|||SpiderToken|
 |Generate|TOK:CMA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CMA|Treefolk|||SylvanOfferingTreefolkToken|
-|Generate|TOK:CMA|Wolf|||WolfToken|
+|Generate|TOK:CMA|Wolf|1||WolfToken|
+|Generate|TOK:CMA|Wolf|2||WolfToken|
 |Generate|TOK:CMA|Zombie|||ZombieToken|
 |Generate|TOK:CMD|Beast|1||BeastToken2|
 |Generate|TOK:CMD|Beast|2||BeastToken|
@@ -832,15 +835,14 @@
 |Generate|TOK:M14|Elemental|2||RedElementalToken|
 |Generate|TOK:M14|Goat|||GoatToken|
 |Generate|TOK:M14|Saproling|||SaprolingToken|
-|Generate|TOK:M14|Sliver||
+|Generate|TOK:M14|Sliver|||SliverToken|
 |Generate|TOK:M14|Wolf|||WolfToken|
 |Generate|TOK:M14|Zombie|||ZombieToken|
-|Generate|TOK:M15|Beast|1||BeastToken|
-|Generate|TOK:M15|Beast|2||GarrukApexPredatorBeastToken|
+|Generate|TOK:M15|Beast|1||GarrukApexPredatorBeastToken|
+|Generate|TOK:M15|Beast|2||BeastToken|
 |Generate|TOK:M15|Dragon|||BroodKeeperDragonToken|
-|Generate|TOK:M15|Goblin|1||GoblinTokenWithHaste|
-# |Generate|TOK:M15|Goblin|2||GoblinToken|  #does not exist
-|Generate|TOK:M15|Insect|||InsectToken|
+|Generate|TOK:M15|Goblin|||GoblinToken|
+|Generate|TOK:M15|Insect|||InsectDeathToken|
 |Generate|TOK:M15|Land Mine|||LandMineToken|
 |Generate|TOK:M15|Sliver|||SliverToken|
 |Generate|TOK:M15|Soldier|||SoldierToken|
@@ -1839,3 +1841,24 @@
 |Generate|TOK:CM2|Phyrexian Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:CM2|Phyrexian Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:CM2|Zombie|||ZombieToken|
+
+# PCA
+|Generate|TOK:PCA|Angel|||AngelToken|
+|Generate|TOK:PCA|Beast|||BeastToken|
+|Generate|TOK:PCA|Boar|||BoarToken|
+|Generate|TOK:PCA|Dragon|||DragonToken2|
+|Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
+|Generate|TOK:PCA|Eldrazi Spawn|1||EldraziSpawnToken|
+|Generate|TOK:PCA|Eldrazi Spawn|2||EldraziSpawnToken|
+|Generate|TOK:PCA|Eldrazi Spawn|3||EldraziSpawnToken|
+|Generate|TOK:PCA|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:PCA|Goat|||GoatToken|
+|Generate|TOK:PCA|Goblin|||GoblinToken|
+|Generate|TOK:PCA|Hellion|||HellionToken|
+|Generate|TOK:PCA|Insect|||InsectToken|
+|Generate|TOK:PCA|Ooze|1||OozeToken|
+|Generate|TOK:PCA|Ooze|2||Ooze2Token|
+|Generate|TOK:PCA|Plant|||PlantToken|
+|Generate|TOK:PCA|Saproling|||SaprolingToken|
+|Generate|TOK:PCA|Spider|||PenumbraSpiderToken|
+|Generate|TOK:PCA|Zombie|||ZombieToken|
