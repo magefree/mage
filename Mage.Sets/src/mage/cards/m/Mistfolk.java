@@ -44,7 +44,7 @@ public final class Mistfolk extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CounterTargetEffect()
                         .setText("counter target spell that targets {this}"),
-                new ManaCostsImpl("{U}")
+                new ManaCostsImpl<>("{U}")
         );
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

@@ -44,7 +44,7 @@ public final class MineLayer extends CardImpl {
 
         // {1}{R}, {tap}: Put a mine counter on target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.MINE.createInstance()), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 

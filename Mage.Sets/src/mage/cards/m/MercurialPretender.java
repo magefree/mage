@@ -35,7 +35,7 @@ public final class MercurialPretender extends CardImpl {
         // You may have Mercurial Pretender enter the battlefield as a copy of any creature you control,
         // except it has "{2}{U}{U}: Return this creature to its owner's hand."
         Effect effect = new CopyPermanentEffect(new FilterControlledCreaturePermanent(),
-                new AbilityCopyApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}"))));
+                new AbilityCopyApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{U}{U}"))));
         effect.setText(effectText);
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }

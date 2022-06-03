@@ -26,7 +26,7 @@ public final class MoltenRavager extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private MoltenRavager(final MoltenRavager card) {

@@ -32,7 +32,7 @@ public final class MerrowWavebreakers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{U}, {untap}: Merrow Wavebreakers gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
         

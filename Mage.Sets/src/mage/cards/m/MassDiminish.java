@@ -31,7 +31,7 @@ public final class MassDiminish extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {3}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}")));
     }
 
     private MassDiminish(final MassDiminish card) {

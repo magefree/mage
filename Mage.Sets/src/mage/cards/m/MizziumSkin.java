@@ -35,7 +35,7 @@ public final class MizziumSkin extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 
         // Overload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl("{1}{U}"));
+        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl<>("{1}{U}"));
         ability.addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
         this.addAbility(ability);
     }

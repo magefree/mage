@@ -39,7 +39,7 @@ public final class MagmaOpus extends CardImpl {
 
         // {U/R}{U/R}, Discard Magma Opus: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{U/R}{U/R}")
+                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{U/R}{U/R}")
         );
         ability.addCost(new DiscardSourceCost());
         this.addAbility(ability);

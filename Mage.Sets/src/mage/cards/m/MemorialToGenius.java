@@ -30,7 +30,7 @@ public final class MemorialToGenius extends CardImpl {
         this.addAbility(new BlueManaAbility());
         
         // {4}{U}, {T}, Sacrifice Memorial to Genius: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{4}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{4}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

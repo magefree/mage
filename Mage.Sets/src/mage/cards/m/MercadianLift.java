@@ -33,7 +33,7 @@ public final class MercadianLift extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Put a winch counter on Mercadian Lift.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
