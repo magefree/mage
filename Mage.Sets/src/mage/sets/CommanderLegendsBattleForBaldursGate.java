@@ -343,6 +343,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Marching Duodrone", 321, Rarity.COMMON, mage.cards.m.MarchingDuodrone.class));
         cards.add(new SetCardInfo("Mardu Strike Leader", 761, Rarity.RARE, mage.cards.m.MarduStrikeLeader.class));
         cards.add(new SetCardInfo("Martial Impetus", 33, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
+        cards.add(new SetCardInfo("Marut", 322, Rarity.COMMON, mage.cards.m.Marut.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 865, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
         cards.add(new SetCardInfo("Memory Plunder", 849, Rarity.RARE, mage.cards.m.MemoryPlunder.class));
         cards.add(new SetCardInfo("Meteor Golem", 323, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
