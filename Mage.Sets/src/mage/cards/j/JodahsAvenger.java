@@ -38,7 +38,7 @@ public final class JodahsAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl<>("{0}")));
     }
 
     private JodahsAvenger(final JodahsAvenger card) {
