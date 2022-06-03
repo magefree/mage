@@ -37,7 +37,7 @@ public final class LingeringPhantom extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect()
                 .setText("return {this} from your graveyard to your hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{B}")),
+                new ManaCostsImpl<>("{B}")),
                 filter, false, false
         ));
     }
