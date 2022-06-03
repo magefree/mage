@@ -16,7 +16,7 @@ public class EntersBattlefieldAttachToTarget extends EntersBattlefieldTriggeredA
     }
 
     public EntersBattlefieldAttachToTarget(FilterPermanent filter) {
-        super(new AttachEffect(Outcome.BoostCreature, "attach it to target" + filter.getMessage()));
+        super(new AttachEffect(Outcome.BoostCreature, "attach it to target " + filter.getMessage()));
         this.addTarget(new TargetPermanent(filter));
     }
 
