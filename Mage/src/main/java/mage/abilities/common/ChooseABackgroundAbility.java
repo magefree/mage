@@ -23,7 +23,7 @@ public class ChooseABackgroundAbility extends StaticAbility implements MageSingl
     }
 
     private ChooseABackgroundAbility() {
-        super(Zone.ALL, new InfoEffect("choose a background <i>(You can have a Background as a second commander.)</i>"));
+        super(Zone.ALL, new InfoEffect("choose a Background <i>(You can have a Background as a second commander.)</i>"));
     }
 
     @Override
