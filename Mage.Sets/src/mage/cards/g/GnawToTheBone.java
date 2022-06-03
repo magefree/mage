@@ -26,7 +26,7 @@ public final class GnawToTheBone extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(value));
 
         // Flashback {2}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}")));
     }
 
     private GnawToTheBone(final GnawToTheBone card) {

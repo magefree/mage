@@ -46,7 +46,7 @@ public final class GethLordOfTheVault extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl<>("{X}{B}"));
         ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
