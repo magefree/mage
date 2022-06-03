@@ -263,12 +263,12 @@ public class VerifyCardDataTest {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
-            if (card instanceof SplitCard) {
-                check(((SplitCard) card).getLeftHalfCard(), cardIndex);
-                check(((SplitCard) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
-                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
+            if (card instanceof CardWithHalves) {
+                check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
+                check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
+            } else if (card instanceof AdventureCard) {
+                check(card, cardIndex);
+                check(((AdventureCard) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -1673,9 +1673,25 @@ public class VerifyCardDataTest {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
         }
 
+        if (ref.subtypes.contains("Adventure")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = new StringBuilder("Adventure ")
+                        .append(ref.types.get(0))
+                        .append(" - ")
+                        .append(ref.faceName)
+                        .append(' ')
+                        .append(ref.manaCost)
+                        .append(" - ")
+                        .append(refRules[i])
+                        .toString();
+            }
+        }
+
+
         String[] cardRules = card
                 .getRules()
                 .stream()
+                .filter(s -> !(card instanceof AdventureCard) || !s.startsWith("Adventure "))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
