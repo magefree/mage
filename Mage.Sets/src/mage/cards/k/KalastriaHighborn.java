@@ -40,7 +40,7 @@ public final class KalastriaHighborn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Kalastria Highborn or another Vampire you control dies, you may pay {B}. If you do, target player loses 2 life and you gain 2 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DoIfCostPaid(new LoseGainEffect(), new ManaCostsImpl("{B}")), false, filter);
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DoIfCostPaid(new LoseGainEffect(), new ManaCostsImpl<>("{B}")), false, filter);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -75,7 +75,7 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
         // Put the rest on the bottom of your library in a random order.
         ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(6, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.getLeftHalfCard().addAbility(ability);
 

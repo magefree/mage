@@ -33,7 +33,7 @@ public final class KazanduTuskcaller extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{G}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
