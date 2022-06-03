@@ -24,7 +24,7 @@ public final class IdleThoughts extends CardImpl {
 
         // {2}: Draw a card if you have no cards in hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl("{2}")));
+                new DrawCardSourceControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl<>("{2}")));
     }
 
     private IdleThoughts(final IdleThoughts card) {

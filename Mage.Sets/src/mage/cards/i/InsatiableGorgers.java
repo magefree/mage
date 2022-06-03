@@ -28,7 +28,7 @@ public final class InsatiableGorgers extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // Madness {3}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{R}")));
     }
 
     private InsatiableGorgers(final InsatiableGorgers card) {

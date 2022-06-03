@@ -38,7 +38,7 @@ public final class InkfathomWitch extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // {2}{U}{B}: Each unblocked creature has base power and toughness 4/1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessAllEffect(4, 1, Duration.EndOfTurn, filter, true), new ManaCostsImpl("{2}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessAllEffect(4, 1, Duration.EndOfTurn, filter, true), new ManaCostsImpl<>("{2}{U}{B}")));
     }
 
     private InkfathomWitch(final InkfathomWitch card) {

@@ -48,7 +48,7 @@ public final class IthHighArcanist extends CardImpl {
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
         // Suspend 4-{W}{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{W}{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{W}{U}"), this));
     }
 
     private IthHighArcanist(final IthHighArcanist card) {
