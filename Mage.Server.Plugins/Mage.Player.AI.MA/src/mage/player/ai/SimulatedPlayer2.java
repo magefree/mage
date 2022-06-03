@@ -348,7 +348,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.sort(list, new Comparator<Combat>() {
             @Override
             public int compare(Combat o1, Combat o2) {
-                return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
+                return Integer.valueOf(o2.getGroups().size()).compareTo(o1.getGroups().size());
             }
         });
         return list;
