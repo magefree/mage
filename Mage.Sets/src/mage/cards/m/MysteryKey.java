@@ -28,7 +28,7 @@ public final class MysteryKey extends CardImpl {
                         new DrawCardSourceControllerEffect(3),
                         new SacrificeSourceCost(), null, false
                 ), "equipped", false
-        ));
+        ).setTriggerPhrase("When equipped creature deals combat damage to a player, "));
 
         // Equip {1}
         this.addAbility(new EquipAbility(1));

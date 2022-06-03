@@ -3,7 +3,7 @@ package mage.cards.y;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.PreventAllNonCombatDamageToAllEffect;
+import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -11,7 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -23,14 +26,21 @@ import java.util.UUID;
  */
 public final class YouLookUponTheTarrasque extends CardImpl {
 
+    private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer(
+            "you and creatures you control",
+            StaticFilters.FILTER_CONTROLLED_CREATURES, new FilterPlayer()
+    );
+
+    static {
+        filter.getPlayerFilter().add(TargetController.YOU.getPlayerPredicate());
+    }
+
     public YouLookUponTheTarrasque(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}");
 
         // Choose one —
         // • Run and Hide — Prevent all combat damage that would be dealt to you and creatures you control this turn.
-        this.getSpellAbility().addEffect(new PreventAllNonCombatDamageToAllEffect(
-                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
-        ));
+        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter, true));
         this.getSpellAbility().withFirstModeFlavorWord("Run and Hide");
 
         // • Gather Your Courage — Target creature gets +5/+5 and gains indestructible until end of turn. All creatures your opponents control able to block that creature this turn do so.

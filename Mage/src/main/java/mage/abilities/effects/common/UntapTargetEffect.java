@@ -68,7 +68,10 @@ public class UntapTargetEffect extends OneShotEffect {
         if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
             sb.append(haveTargetWord ? " " : " target ");
-            sb.append(target.getTargetName()).append('s');
+            sb.append(target.getTargetName());
+            if (!target.getTargetName().endsWith("s")) {
+                sb.append('s');
+            }
         } else {
             sb.append(haveTargetWord ? "" : "target ");
             sb.append(target.getTargetName());

@@ -36,6 +36,8 @@ public final class Thunderwave extends CardImpl {
 
         // 20 | Thunderwave deals 6 damage to each creature your opponents control.
         effect.addTableEntry(20, 20, new DamageAllEffect(6, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+
+        this.getSpellAbility().addEffect(effect);
     }
 
     private Thunderwave(final Thunderwave card) {

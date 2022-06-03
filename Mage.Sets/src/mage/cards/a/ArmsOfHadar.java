@@ -1,11 +1,11 @@
 package mage.cards.a;
 
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class ArmsOfHadar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures target player controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures target player controls");
 
     static {
         filter.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
@@ -26,7 +26,9 @@ public final class ArmsOfHadar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Creatures target player controls get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-2, -2));
+        this.getSpellAbility().addEffect(new BoostAllEffect(
+                -2, -2, Duration.EndOfTurn, filter, false
+        ));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
