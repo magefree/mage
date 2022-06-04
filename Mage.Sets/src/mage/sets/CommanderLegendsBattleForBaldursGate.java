@@ -239,6 +239,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Creation", 721, Rarity.RARE, mage.cards.f.ForgottenCreation.class));
         cards.add(new SetCardInfo("Fractured Sanity", 722, Rarity.RARE, mage.cards.f.FracturedSanity.class));
         cards.add(new SetCardInfo("Fraying Line", 314, Rarity.RARE, mage.cards.f.FrayingLine.class));
+        cards.add(new SetCardInfo("From the Catacombs", 671, Rarity.RARE, mage.cards.f.FromTheCatacombs.class));
         cards.add(new SetCardInfo("Frontline Medic", 693, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
         cards.add(new SetCardInfo("Galepowder Mage", 694, Rarity.RARE, mage.cards.g.GalepowderMage.class));
         cards.add(new SetCardInfo("Game Trail", 894, Rarity.RARE, mage.cards.g.GameTrail.class));
