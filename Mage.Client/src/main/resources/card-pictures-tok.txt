@@ -933,13 +933,9 @@
 |Generate|TOK:NEM|Saproling|1||SaprolingBurstToken|
 |Generate|TOK:NEM|Saproling|2||SaprolingToken|
 |Generate|TOK:NPH|Beast|||BeastToken|
-|Generate|TOK:NPH|Germ|||PhyrexianGermToken|
-|Generate|TOK:NPH|Goblin|||GoblinTokenWithHaste|
-|Generate|TOK:NPH|Goblin|||GoblinToken|
-|Generate|TOK:NPH|Golem|||GolemToken|
-|Generate|TOK:NPH|Insect|||InsectInfectToken|
-|Generate|TOK:NPH|Insect|||InsectToken|
-|Generate|TOK:NPH|Myr|||MyrToken|
+|Generate|TOK:NPH|Phyrexian Goblin|||PhyrexianGoblinToken|
+|Generate|TOK:NPH|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:NPH|Phyrexian Myr|||PhyrexianMyrToken|
 |Generate|TOK:ODY|Bear|||BearToken|
 |Generate|TOK:ODY|Beast|||BeastToken2|
 |Generate|TOK:ODY|Elephant|||ElephantToken|
