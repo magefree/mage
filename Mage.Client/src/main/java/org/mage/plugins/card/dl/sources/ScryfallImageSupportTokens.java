@@ -1317,6 +1317,10 @@ public class ScryfallImageSupportTokens {
             put ("DKA/Emblem Sorin, Lord of Innistrad", "https://api.scryfall.com/cards/tdka/3/en?format=image");
             put ("DKA/Vampire", "https://api.scryfall.com/cards/tdka/2/en?format=image");
 
+            // DDI
+            put ("DDI/Emblem Koth of the Hammer", "https://api.scryfall.com/cards/tddi/2/en?format=image");
+            put ("DDI/Emblem Venser, the Sojourner", "https://api.scryfall.com/cards/tddi/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
