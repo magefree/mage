@@ -1278,6 +1278,13 @@ public class ScryfallImageSupportTokens {
             put ("SOM/Phyrexian Wurm/1", "https://api.scryfall.com/cards/tsom/8/en?format=image");
             put ("SOM/Phyrexian Wurm/2", "https://api.scryfall.com/cards/tsom/9/en?format=image");
 
+            // MBS
+            put ("MBS/Phyrexian Germ", "https://api.scryfall.com/cards/tmbs/1/en?format=image");
+            put ("MBS/Golem", "https://api.scryfall.com/cards/tmbs/3/en?format=image");
+            put ("MBS/Phyrexian Horror", "https://api.scryfall.com/cards/tmbs/4/en?format=image");
+            put ("MBS/Thopter", "https://api.scryfall.com/cards/tmbs/5/en?format=image");
+            put ("MBS/Zombie", "https://api.scryfall.com/cards/tmbs/2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

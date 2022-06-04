@@ -831,12 +831,9 @@
 |Generate|TOK:M15|Squid|||SquidToken|
 |Generate|TOK:M15|Treefolk Warrior|||KalonianTwingroveTreefolkWarriorToken|
 |Generate|TOK:M15|Zombie|||ZombieToken|
-|Generate|TOK:MBS|Cat|||CatToken|
-|Generate|TOK:MBS|Germ|||PhyrexianGermToken|
+|Generate|TOK:MBS|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:MBS|Golem|||TitanForgeGolemToken|
-|Generate|TOK:MBS|Horror|||PhyrexianRebirthHorrorToken|
-|Generate|TOK:MBS|Myr|||MyrToken|
-|Generate|TOK:MBS|Soldier|||SoldierToken|
+|Generate|TOK:MBS|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:MBS|Thopter|||ThopterColorlessToken|
 |Generate|TOK:MBS|Zombie|||ZombieToken|
 |Generate|TOK:ME2|Caribou|||CaribouToken|
