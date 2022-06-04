@@ -1021,16 +1021,13 @@
 |Generate|TOK:RIX|Elemental|2||RedElementalToken|
 |Generate|TOK:RIX|Golem|||GoldForgeGarrisonGolemToken|
 |Generate|TOK:RIX|Saproling|||SaprolingToken|
-|Generate|TOK:ROE|Dragon|||DragonToken2|
 |Generate|TOK:ROE|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:ROE|Eldrazi Spawn|2||EldraziSpawnToken|
 |Generate|TOK:ROE|Eldrazi Spawn|3||EldraziSpawnToken|
 |Generate|TOK:ROE|Elemental|||DevastatingSummonsElementalToken|
-|Generate|TOK:ROE|Elephant|||ElephantToken|
-|Generate|TOK:ROE|Goblin Golem|||TuktukTheReturnedToken|
 |Generate|TOK:ROE|Hellion|||HellionToken|
-|Generate|TOK:ROE|Kor Soldier|||KorSoldierToken|
-|Generate|TOK:ROE|Ooze|||MysticGenesisOozeToken|
+|Generate|TOK:ROE|Ooze|||OozeToken|
+|Generate|TOK:ROE|Tuktuk the Returned|||TuktukTheReturnedToken|
 |Generate|TOK:RTR|Assassin|||AssassinToken|
 |Generate|TOK:RTR|Bird|||BirdToken|
 |Generate|TOK:RTR|Centaur|||CentaurToken|

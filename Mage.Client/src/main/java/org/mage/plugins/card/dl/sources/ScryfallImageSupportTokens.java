@@ -1245,6 +1245,15 @@ public class ScryfallImageSupportTokens {
             put ("WWK/Plant", "https://api.scryfall.com/cards/twwk/5/en?format=image");
             put ("WWK/Soldier Ally", "https://api.scryfall.com/cards/twwk/1/en?format=image");
 
+            // ROE
+            put ("ROE/Eldrazi Spawn/1", "https://api.scryfall.com/cards/troe/1a/en?format=image");
+            put ("ROE/Eldrazi Spawn/2", "https://api.scryfall.com/cards/troe/1b/en?format=image");
+            put ("ROE/Eldrazi Spawn/3", "https://api.scryfall.com/cards/troe/1c/en?format=image");
+            put ("ROE/Elemental", "https://api.scryfall.com/cards/troe/2/en?format=image");
+            put ("ROE/Hellion", "https://api.scryfall.com/cards/troe/3/en?format=image");
+            put ("ROE/Ooze", "https://api.scryfall.com/cards/troe/4/en?format=image");
+            put ("ROE/Tuktuk the Returned", "https://api.scryfall.com/cards/troe/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
