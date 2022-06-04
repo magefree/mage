@@ -1193,14 +1193,12 @@
 |Generate|TOK:ZEN|Angel|||AngelToken|
 |Generate|TOK:ZEN|Beast|||BeastToken2|
 |Generate|TOK:ZEN|Bird|||BirdToken|
-|Generate|TOK:ZEN|Elemental|1||RedElementalWithTrampleAndHaste|
-|Generate|TOK:ZEN|Elemental|2||RedElementalWithTrampleAndHaste|
+|Generate|TOK:ZEN|Elemental|||RedElementalWithTrampleAndHaste|
 |Generate|TOK:ZEN|Illusion|||IllusionToken|
 |Generate|TOK:ZEN|Kor Soldier|||KorSoldierToken|
-|Generate|TOK:ZEN|Merfolk||
-|Generate|TOK:ZEN|Plant|||PlantToken|
+|Generate|TOK:ZEN|Merfolk|||MerfolkToken|
 |Generate|TOK:ZEN|Snake|||SnakeToken|
-|Generate|TOK:ZEN|Vampire||
+|Generate|TOK:ZEN|Vampire|||KalitasVampireToken|
 |Generate|TOK:ZEN|Wolf|||WolfToken|
 |Generate|TOK:ZEN|Zombie Giant|||QuestForTheGravelordZombieToken|
 |Generate|TOK:RNA|Beast|||RedGreenBeastToken|
