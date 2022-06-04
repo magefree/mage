@@ -1298,6 +1298,20 @@ public class ScryfallImageSupportTokens {
             put ("DDH/Griffin", "https://api.scryfall.com/cards/tddh/1/en?format=image");
             put ("DDH/Saproling", "https://api.scryfall.com/cards/tddh/2/en?format=image");
 
+            // ISD
+            put ("ISD/Angel", "https://api.scryfall.com/cards/tisd/1/en?format=image");
+            put ("ISD/Demon", "https://api.scryfall.com/cards/tisd/4/en?format=image");
+            put ("ISD/Homunculus", "https://api.scryfall.com/cards/tisd/3/en?format=image");
+            put ("ISD/Ooze", "https://api.scryfall.com/cards/tisd/10/en?format=image");
+            put ("ISD/Spider", "https://api.scryfall.com/cards/tisd/11/en?format=image");
+            put ("ISD/Spirit", "https://api.scryfall.com/cards/tisd/2/en?format=image");
+            put ("ISD/Vampire", "https://api.scryfall.com/cards/tisd/5/en?format=image");
+            put ("ISD/Wolf/1", "https://api.scryfall.com/cards/tisd/6/en?format=image");
+            put ("ISD/Wolf/2", "https://api.scryfall.com/cards/tisd/12/en?format=image");
+            put ("ISD/Zombie/1", "https://api.scryfall.com/cards/tisd/7/en?format=image");
+            put ("ISD/Zombie/2", "https://api.scryfall.com/cards/tisd/8/en?format=image");
+            put ("ISD/Zombie/3", "https://api.scryfall.com/cards/tisd/9/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

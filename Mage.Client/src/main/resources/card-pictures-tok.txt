@@ -716,7 +716,7 @@
 |Generate|TOK:ISD|Spider|||SpiderToken|
 |Generate|TOK:ISD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:ISD|Vampire|||VampireToken|
-|Generate|TOK:ISD|Wolf|1||WolfToken|
+|Generate|TOK:ISD|Wolf|1||WolfTokenWithDeathtouch|
 |Generate|TOK:ISD|Wolf|2||WolfToken|
 |Generate|TOK:ISD|Zombie|1||ZombieToken|
 |Generate|TOK:ISD|Zombie|2||ZombieToken|

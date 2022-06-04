@@ -31,7 +31,7 @@ public final class WolfToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 images
+            this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 images
