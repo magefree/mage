@@ -1237,6 +1237,14 @@ public class ScryfallImageSupportTokens {
             put ("ZEN/Wolf", "https://api.scryfall.com/cards/tzen/11/en?format=image");
             put ("ZEN/Zombie Giant", "https://api.scryfall.com/cards/tzen/7/en?format=image");
 
+            // WWK
+            put ("WWK/Construct", "https://api.scryfall.com/cards/twwk/6/en?format=image");
+            put ("WWK/Dragon", "https://api.scryfall.com/cards/twwk/2/en?format=image");
+            put ("WWK/Elephant", "https://api.scryfall.com/cards/twwk/4/en?format=image");
+            put ("WWK/Ogre", "https://api.scryfall.com/cards/twwk/3/en?format=image");
+            put ("WWK/Plant", "https://api.scryfall.com/cards/twwk/5/en?format=image");
+            put ("WWK/Soldier Ally", "https://api.scryfall.com/cards/twwk/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

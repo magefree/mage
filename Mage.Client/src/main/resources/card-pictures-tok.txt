@@ -1177,9 +1177,7 @@
 |Generate|TOK:WWK|Elephant|||ElephantToken|
 |Generate|TOK:WWK|Ogre|||OgreToken|
 |Generate|TOK:WWK|Plant|||PlantToken|
-|Generate|TOK:WWK|Snake|||SnakeToken|
 |Generate|TOK:WWK|Soldier Ally|||JoinTheRanksSoldierToken|
-|Generate|TOK:WWK|Wolf|||WolfToken|
 |Generate|TOK:XLN|Dinosaur|||DinosaurToken|
 |Generate|TOK:XLN|Illusion|||JaceCunningCastawayIllusionToken|
 |Generate|TOK:XLN|Merfolk|||MerfolkHexproofToken|
