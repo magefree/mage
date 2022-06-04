@@ -532,7 +532,6 @@
 |Generate|TOK:DDH|Saproling|||SaprolingToken|
 |Generate|TOK:DDJ|Saproling|||SaprolingToken|
 |Generate|TOK:DDK|Spirit|||SpiritWhiteToken|
-|Generate|TOK:DDK|Vampire|||SorinLordOfInnistradVampireToken|
 |Generate|TOK:DDL|Beast|||BeastToken|
 |Generate|TOK:DDL|Griffin|||GriffinToken|
 |Generate|TOK:DDM|Assassin|||AssassinToken|

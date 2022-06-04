@@ -1358,6 +1358,9 @@ public class ScryfallImageSupportTokens {
             put ("GTC/Soldier", "https://api.scryfall.com/cards/tgtc/6/en?format=image");
             put ("GTC/Spirit", "https://api.scryfall.com/cards/tgtc/7/en?format=image");
 
+            // DDK
+            put ("DDK/Spirit", "https://api.scryfall.com/cards/tddk/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
