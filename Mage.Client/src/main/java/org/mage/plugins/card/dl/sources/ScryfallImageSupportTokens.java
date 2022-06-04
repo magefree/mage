@@ -1194,6 +1194,18 @@ public class ScryfallImageSupportTokens {
             put ("CON/Angel", "https://api.scryfall.com/cards/tcon/1/en?format=image");
             put ("CON/Elemental", "https://api.scryfall.com/cards/tcon/2/en?format=image");
 
+            // ALA
+            put ("ALA/Beast", "https://api.scryfall.com/cards/tala/10/en?format=image");
+            put ("ALA/Dragon", "https://api.scryfall.com/cards/tala/6/en?format=image");
+            put ("ALA/Goblin", "https://api.scryfall.com/cards/tala/7/en?format=image");
+            put ("ALA/Homunculus", "https://api.scryfall.com/cards/tala/2/en?format=image");
+            put ("ALA/Ooze", "https://api.scryfall.com/cards/tala/8/en?format=image");
+            put ("ALA/Saproling", "https://api.scryfall.com/cards/tala/9/en?format=image");
+            put ("ALA/Skeleton", "https://api.scryfall.com/cards/tala/4/en?format=image");
+            put ("ALA/Soldier", "https://api.scryfall.com/cards/tala/1/en?format=image");
+            put ("ALA/Thopter", "https://api.scryfall.com/cards/tala/3/en?format=image");
+            put ("ALA/Zombie", "https://api.scryfall.com/cards/tala/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

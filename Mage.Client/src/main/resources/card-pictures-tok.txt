@@ -231,10 +231,9 @@
 
 |Generate|TOK:ALA|Beast|||GodSireBeastToken|
 |Generate|TOK:ALA|Dragon|||DragonToken|
-|Generate|TOK:ALA|Goblin|||GoblinTokenWithHaste|
 |Generate|TOK:ALA|Goblin|||GoblinToken|
 |Generate|TOK:ALA|Homunculus|||HomunculusToken|
-|Generate|TOK:ALA|Ooze|||MysticGenesisOozeToken|
+|Generate|TOK:ALA|Ooze|||OozeToken|
 |Generate|TOK:ALA|Saproling|||SaprolingToken|
 |Generate|TOK:ALA|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:ALA|Soldier|||SoldierToken|
