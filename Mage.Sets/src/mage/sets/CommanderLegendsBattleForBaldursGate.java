@@ -553,6 +553,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Tiamat's Fanatics", 202, Rarity.COMMON, mage.cards.t.TiamatsFanatics.class));
         cards.add(new SetCardInfo("Tomb of Horrors Adventurer", 100, Rarity.RARE, mage.cards.t.TombOfHorrorsAdventurer.class));
         cards.add(new SetCardInfo("Topaz Dragon", 153, Rarity.UNCOMMON, mage.cards.t.TopazDragon.class));
+        cards.add(new SetCardInfo("Trailblazer's Torch", 340, Rarity.COMMON, mage.cards.t.TrailblazersTorch.class));
         cards.add(new SetCardInfo("Traverse the Outlands", 258, Rarity.RARE, mage.cards.t.TraverseTheOutlands.class));
         cards.add(new SetCardInfo("Treasure Keeper", 341, Rarity.UNCOMMON, mage.cards.t.TreasureKeeper.class));
         cards.add(new SetCardInfo("Two-Handed Axe", 203, Rarity.UNCOMMON, mage.cards.t.TwoHandedAxe.class));
