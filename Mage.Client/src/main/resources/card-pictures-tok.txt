@@ -251,15 +251,10 @@
 |Generate|TOK:APC|Kavu|||PenumbraKavuToken|
 |Generate|TOK:APC|Saproling|||SaprolingToken|
 |Generate|TOK:APC|Wurm|||PenumbraWurmToken|
-|Generate|TOK:ARB|Bird Soldier|||BirdSoldierToke|
+|Generate|TOK:ARB|Bird Soldier|||BirdSoldierToken|
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
-|Generate|TOK:ARB|Goblin|||GoblinToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
-|Generate|TOK:ARB|Saproling|||SaprolingToken|
-|Generate|TOK:ARB|Soldier|||SoldierToken|
-|Generate|TOK:ARB|Thopter|||ThopterToken|
 |Generate|TOK:ARB|Zombie Wizard|||ZombieWizardToken|
-|Generate|TOK:ARB|Zombie|||ZombieToken|
 |Generate|TOK:ARC|Goblin|||GoblinToken|
 |Generate|TOK:ARC|Goblin|||RakdosGuildmageGoblinToken|
 |Generate|TOK:ARC|Plant|||PlantToken|
