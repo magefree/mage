@@ -1348,6 +1348,16 @@ public class ScryfallImageSupportTokens {
             put ("RTR/Soldier", "https://api.scryfall.com/cards/trtr/3/en?format=image");
             put ("RTR/Wurm", "https://api.scryfall.com/cards/trtr/11/en?format=image");
 
+            // GTC
+            put ("GTC/Angel", "https://api.scryfall.com/cards/tgtc/1/en?format=image");
+            put ("GTC/Cleric", "https://api.scryfall.com/cards/tgtc/4/en?format=image");
+            put ("GTC/Emblem Domri Rade", "https://api.scryfall.com/cards/tgtc/8/en?format=image");
+            put ("GTC/Frog Lizard", "https://api.scryfall.com/cards/tgtc/3/en?format=image");
+            put ("GTC/Horror", "https://api.scryfall.com/cards/tgtc/5/en?format=image");
+            put ("GTC/Rat", "https://api.scryfall.com/cards/tgtc/2/en?format=image");
+            put ("GTC/Soldier", "https://api.scryfall.com/cards/tgtc/6/en?format=image");
+            put ("GTC/Spirit", "https://api.scryfall.com/cards/tgtc/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

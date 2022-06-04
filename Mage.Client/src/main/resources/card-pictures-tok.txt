@@ -668,14 +668,11 @@
 |Generate|TOK:GPT|Wurm|||WurmToken|
 |Generate|TOK:GTC|Angel|||AngelToken|
 |Generate|TOK:GTC|Cleric|||DeathpactAngelToken|
-|Generate|TOK:GTC|Frog Lizard|||RapidHybridizationToken|
+|Generate|TOK:GTC|Frog Lizard|||FrogLizardToken|
 |Generate|TOK:GTC|Horror|||NightwingHorrorToken|
-|Generate|TOK:GTC|Knight|||KnightWatch|
-|Generate|TOK:GTC|Ooze|||MysticGenesisOozeToken|
 |Generate|TOK:GTC|Rat|||RatToken|
-|Generate|TOK:GTC|Soldier|1||SoldierToken|
-|Generate|TOK:GTC|Soldier|2||SoldierTokenWithHaste|
-|Generate|TOK:GTC|Spirit|||TeysaEnvoyOfGhostsToken|
+|Generate|TOK:GTC|Soldier|||SoldierTokenWithHaste|
+|Generate|TOK:GTC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:H17|Dragon|||DragonTokenGold|
 |Generate|TOK:HML|Plant Wall|||KelpToken|
 |Generate|TOK:HML|Serf|||SerfToken|
