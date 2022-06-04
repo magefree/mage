@@ -1847,3 +1847,8 @@
 |Generate|TOK:PCA|Saproling|||SaprolingToken|
 |Generate|TOK:PCA|Spider|||PenumbraSpiderToken|
 |Generate|TOK:PCA|Zombie|||ZombieToken|
+
+# DD1
+|Generate|TOK:DD1|Elemental|||VoiceOfTheWoodsElementalToken|
+|Generate|TOK:DD1|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:DD1|Goblin|||GoblinToken|

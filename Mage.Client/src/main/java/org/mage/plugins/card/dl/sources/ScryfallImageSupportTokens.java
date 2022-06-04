@@ -1211,6 +1211,11 @@ public class ScryfallImageSupportTokens {
             put ("MOR/Giant Warrior", "https://api.scryfall.com/cards/tmor/1/en?format=image");
             put ("MOR/Treefolk Shaman", "https://api.scryfall.com/cards/tmor/3/en?format=image");
 
+            // DD1
+            put ("DD1/Elemental", "https://api.scryfall.com/cards/tdd1/T1/en?format=image");
+            put ("DD1/Elf Warrior", "https://api.scryfall.com/cards/tdd1/T2/en?format=image");
+            put ("DD1/Goblin", "https://api.scryfall.com/cards/tdd1/T3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
