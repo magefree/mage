@@ -41,7 +41,7 @@ public final class MiirymSentinelWyrm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever another nontoken Dragon enters the battlefield under your control, create a token that's a copy of it, except the token isn't legendary if that Dragon is legendary.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
