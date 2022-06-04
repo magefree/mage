@@ -1262,6 +1262,11 @@ public class ScryfallImageSupportTokens {
             put ("DDE/Phyrexian Minion", "https://api.scryfall.com/cards/tdde/2/en?format=image");
             put ("DDE/Saproling", "https://api.scryfall.com/cards/tdde/3/en?format=image");
 
+            // DDD
+            put ("DDD/Beast/1", "https://api.scryfall.com/cards/tddd/1/en?format=image");
+            put ("DDD/Beast/2", "https://api.scryfall.com/cards/tddd/2/en?format=image");
+            put ("DDD/Elephant", "https://api.scryfall.com/cards/tddd/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
