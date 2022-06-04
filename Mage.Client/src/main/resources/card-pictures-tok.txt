@@ -525,10 +525,8 @@
 |Generate|TOK:DDD|Beast|1||BeastToken|
 |Generate|TOK:DDD|Beast|2||BeastToken2|
 |Generate|TOK:DDD|Elephant|||ElephantToken|
-|Generate|TOK:DDE|Hornet||
-|Generate|TOK:DDE|Insect|||HornetToken|
-|Generate|TOK:DDE|Insect|||WaspToken|
-|Generate|TOK:DDE|Minion|||MinionToken|
+|Generate|TOK:DDE|Hornet|||HornetToken|
+|Generate|TOK:DDE|Phyrexian Minion|||MinionToken|
 |Generate|TOK:DDE|Saproling|||SaprolingToken|
 |Generate|TOK:DDF|Soldier|||SoldierToken|
 |Generate|TOK:DDG|Ape|||PongifyApeToken|

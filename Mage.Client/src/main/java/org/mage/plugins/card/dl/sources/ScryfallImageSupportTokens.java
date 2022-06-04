@@ -1257,6 +1257,11 @@ public class ScryfallImageSupportTokens {
             // DDF
             put ("DDF/Soldier", "https://api.scryfall.com/cards/tddf/1/en?format=image");
 
+            // DDE
+            put ("DDE/Hornet", "https://api.scryfall.com/cards/tdde/1/en?format=image");
+            put ("DDE/Phyrexian Minion", "https://api.scryfall.com/cards/tdde/2/en?format=image");
+            put ("DDE/Saproling", "https://api.scryfall.com/cards/tdde/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
