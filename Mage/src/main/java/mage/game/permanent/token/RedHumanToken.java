@@ -31,7 +31,7 @@ public final class RedHumanToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode().equals("AVR")) {
-            this.setTokenType(2);
+            this.setTokenType(1);
         }
     }
 

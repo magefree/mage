@@ -1321,6 +1321,16 @@ public class ScryfallImageSupportTokens {
             put ("DDI/Emblem Koth of the Hammer", "https://api.scryfall.com/cards/tddi/2/en?format=image");
             put ("DDI/Emblem Venser, the Sojourner", "https://api.scryfall.com/cards/tddi/1/en?format=image");
 
+            // AVR
+            put ("AVR/Angel", "https://api.scryfall.com/cards/tavr/1/en?format=image");
+            put ("AVR/Demon", "https://api.scryfall.com/cards/tavr/5/en?format=image");
+            put ("AVR/Human/1", "https://api.scryfall.com/cards/tavr/7/en?format=image");
+            put ("AVR/Human/2", "https://api.scryfall.com/cards/tavr/2/en?format=image");
+            put ("AVR/Spirit/1", "https://api.scryfall.com/cards/tavr/4/en?format=image");
+            put ("AVR/Spirit/2", "https://api.scryfall.com/cards/tavr/3/en?format=image");
+            put ("AVR/Emblem Tamiyo, the Moon Sage", "https://api.scryfall.com/cards/tavr/8/en?format=image");
+            put ("AVR/Zombie", "https://api.scryfall.com/cards/tavr/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

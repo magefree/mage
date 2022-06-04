@@ -262,10 +262,10 @@
 |Generate|TOK:ATQ|Tetravite|||TetraviteToken|
 |Generate|TOK:AVR|Angel|||AngelToken|
 |Generate|TOK:AVR|Demon|||DemonToken|
-|Generate|TOK:AVR|Human|1||HumanToken|
-|Generate|TOK:AVR|Human|2||RedHumanToken|
-|Generate|TOK:AVR|Spirit|1||SpiritWhiteToken|
-|Generate|TOK:AVR|Spirit|2||Spirit|
+|Generate|TOK:AVR|Human|1||RedHumanToken|
+|Generate|TOK:AVR|Human|2||HumanToken|
+|Generate|TOK:AVR|Spirit|1||SpiritBlueToken|
+|Generate|TOK:AVR|Spirit|2||SpiritWhiteToken|
 |Generate|TOK:AVR|Zombie|||ZombieToken|
 |Generate|TOK:BFZ|Dragon|||DragonToken2|
 |Generate|TOK:BFZ|Eldrazi Scion|1||EldraziScionToken|
