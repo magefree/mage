@@ -930,14 +930,9 @@
 |Generate|TOK:MMQ|Soldier|||SoldierToken|
 |Generate|TOK:MMQ|Spirit|||SpiritWhiteToken|
 |Generate|TOK:MMQ|Zombie|||ZombieToken|
-|Generate|TOK:MOR|Elemental|||WalkerOfTheGroveToken|
-|Generate|TOK:MOR|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:MOR|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MOR|Giant Warrior|||GiantWarriorToken|
-|Generate|TOK:MOR|Goblin Rogue|||GoblinRogueToken|
-|Generate|TOK:MOR|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:MOR|Treefolk Shaman|||TreefolkShamanToken|
-|Generate|TOK:MOR|Wolf|||WolfToken|
 |Generate|TOK:MRD|Beast|||OneDozenEyesBeastToken|
 |Generate|TOK:MRD|Demon|||ReignOfThePitToken|
 |Generate|TOK:MRD|Elemental|||ElementalTokenWithHaste|

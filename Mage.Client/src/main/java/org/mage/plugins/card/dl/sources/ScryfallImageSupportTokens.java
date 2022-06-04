@@ -1206,6 +1206,11 @@ public class ScryfallImageSupportTokens {
             put ("ALA/Thopter", "https://api.scryfall.com/cards/tala/3/en?format=image");
             put ("ALA/Zombie", "https://api.scryfall.com/cards/tala/5/en?format=image");
 
+            // MOR
+            put ("MOR/Faerie Rogue", "https://api.scryfall.com/cards/tmor/2/en?format=image");
+            put ("MOR/Giant Warrior", "https://api.scryfall.com/cards/tmor/1/en?format=image");
+            put ("MOR/Treefolk Shaman", "https://api.scryfall.com/cards/tmor/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
