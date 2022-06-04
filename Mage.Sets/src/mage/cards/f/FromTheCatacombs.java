@@ -37,7 +37,7 @@ public final class FromTheCatacombs extends CardImpl {
         this.getSpellAbility().addEffect(new TakeTheInitiativeEffect().concatBy("<br>"));
 
         // Escape—{3}{B}{B}, Exile four other cards from your graveyard.
-        this.addAbility(new EscapeAbility(this, "Escape", 4));
+        this.addAbility(new EscapeAbility(this, "{3}{B}{B}", 4));
     }
 
     private FromTheCatacombs(final FromTheCatacombs card) {
