@@ -1331,6 +1331,9 @@ public class ScryfallImageSupportTokens {
             put ("AVR/Emblem Tamiyo, the Moon Sage", "https://api.scryfall.com/cards/tavr/8/en?format=image");
             put ("AVR/Zombie", "https://api.scryfall.com/cards/tavr/6/en?format=image");
 
+            // DDJ
+            put ("DDJ/Saproling", "https://api.scryfall.com/cards/tddj/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

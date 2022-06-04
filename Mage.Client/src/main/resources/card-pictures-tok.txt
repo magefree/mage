@@ -531,8 +531,6 @@
 |Generate|TOK:DDH|Griffin|||GriffinToken|
 |Generate|TOK:DDH|Saproling|||SaprolingToken|
 |Generate|TOK:DDJ|Saproling|||SaprolingToken|
-|Generate|TOK:DDJ|Weird|||WeirdToken|
-|Generate|TOK:DDJ|Zombie|||ZombieToken|
 |Generate|TOK:DDK|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DDK|Vampire|||SorinLordOfInnistradVampireToken|
 |Generate|TOK:DDL|Beast|||BeastToken|
