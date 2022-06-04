@@ -493,6 +493,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Shameless Charlatan", 96, Rarity.RARE, mage.cards.s.ShamelessCharlatan.class));
         cards.add(new SetCardInfo("Sharpshooter Elf", 253, Rarity.UNCOMMON, mage.cards.s.SharpshooterElf.class));
         cards.add(new SetCardInfo("Shiny Impetus", 194, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
+        cards.add(new SetCardInfo("Sigil of Myrkul", 147, Rarity.UNCOMMON, mage.cards.s.SigilOfMyrkul.class));
         cards.add(new SetCardInfo("Silvanus's Invoker", 254, Rarity.COMMON, mage.cards.s.SilvanussInvoker.class));
         cards.add(new SetCardInfo("Sivriss, Nightmare Speaker", 148, Rarity.UNCOMMON, mage.cards.s.SivrissNightmareSpeaker.class));
         cards.add(new SetCardInfo("Skanos Dragonheart", 255, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class));
