@@ -1285,6 +1285,9 @@ public class ScryfallImageSupportTokens {
             put ("MBS/Thopter", "https://api.scryfall.com/cards/tmbs/5/en?format=image");
             put ("MBS/Zombie", "https://api.scryfall.com/cards/tmbs/2/en?format=image");
 
+            // DDG
+            put ("DDG/Goblin", "https://api.scryfall.com/cards/tddg/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

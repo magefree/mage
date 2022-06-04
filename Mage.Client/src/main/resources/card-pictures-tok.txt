@@ -527,9 +527,7 @@
 |Generate|TOK:DDE|Phyrexian Minion|||MinionToken|
 |Generate|TOK:DDE|Saproling|||SaprolingToken|
 |Generate|TOK:DDF|Soldier|||SoldierToken|
-|Generate|TOK:DDG|Ape|||PongifyApeToken|
 |Generate|TOK:DDG|Goblin|||GoblinToken|
-|Generate|TOK:DDG|Griffin|||GriffinToken|
 |Generate|TOK:DDH|Griffin|||GriffinToken|
 |Generate|TOK:DDH|Saproling|||SaprolingToken|
 |Generate|TOK:DDJ|Saproling|||SaprolingToken|
