@@ -83,7 +83,7 @@
 |Generate|EMBLEM!:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
 |Generate|EMBLEM!:BBD|Emblem Rowan Kenrith|||RowanKenrithEmblem|
 |Generate|EMBLEM!:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
-|Generate|EMBLEM:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
+|Generate|EMBLEM:THS|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
 |Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|KothOfTheHammerEmblem|

@@ -1368,6 +1368,19 @@ public class ScryfallImageSupportTokens {
             put ("DDL/Beast", "https://api.scryfall.com/cards/tddl/2/en?format=image");
             put ("DDL/Griffin", "https://api.scryfall.com/cards/tddl/1/en?format=image");
 
+            // THS
+            put ("THS/Bird", "https://api.scryfall.com/cards/tths/4/en?format=image");
+            put ("THS/Boar", "https://api.scryfall.com/cards/tths/8/en?format=image");
+            put ("THS/Cleric", "https://api.scryfall.com/cards/tths/1/en?format=image");
+            put ("THS/Elemental", "https://api.scryfall.com/cards/tths/5/en?format=image");
+            put ("THS/Emblem Elspeth, Sun's Champion", "https://api.scryfall.com/cards/tths/11/en?format=image");
+            put ("THS/Golem", "https://api.scryfall.com/cards/tths/10/en?format=image");
+            put ("THS/Harpy", "https://api.scryfall.com/cards/tths/6/en?format=image");
+            put ("THS/Satyr", "https://api.scryfall.com/cards/tths/9/en?format=image");
+            put ("THS/Soldier/1", "https://api.scryfall.com/cards/tths/2/en?format=image");
+            put ("THS/Soldier/2", "https://api.scryfall.com/cards/tths/3/en?format=image");
+            put ("THS/Soldier/3", "https://api.scryfall.com/cards/tths/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
