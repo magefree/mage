@@ -821,8 +821,7 @@
 |Generate|TOK:M13|Drake|||DrakeToken|
 |Generate|TOK:M13|Goat|||GoatToken|
 |Generate|TOK:M13|Goblin|||GoblinToken|
-|Generate|TOK:M13|Hellion|1||HellionHasteToken|
-|Generate|TOK:M13|Hellion|2||HellionToken|
+|Generate|TOK:M13|Hellion|||HellionHasteToken|
 |Generate|TOK:M13|Saproling|||SaprolingToken|
 |Generate|TOK:M13|Soldier|||SoldierToken|
 |Generate|TOK:M13|Wurm|||WurmToken|
