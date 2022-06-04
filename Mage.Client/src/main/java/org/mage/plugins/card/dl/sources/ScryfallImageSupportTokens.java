@@ -1312,6 +1312,11 @@ public class ScryfallImageSupportTokens {
             put ("ISD/Zombie/2", "https://api.scryfall.com/cards/tisd/8/en?format=image");
             put ("ISD/Zombie/3", "https://api.scryfall.com/cards/tisd/9/en?format=image");
 
+            // DKA
+            put ("DKA/Human", "https://api.scryfall.com/cards/tdka/1/en?format=image");
+            put ("DKA/Emblem Sorin, Lord of Innistrad", "https://api.scryfall.com/cards/tdka/3/en?format=image");
+            put ("DKA/Vampire", "https://api.scryfall.com/cards/tdka/2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

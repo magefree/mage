@@ -568,10 +568,7 @@
 |Generate|TOK:DIS|Saproling|||SaprolingToken|
 |Generate|TOK:DIS|Snake|||PatagiaViperSnakeToken|
 |Generate|TOK:DKA|Human|||HumanToken|
-|Generate|TOK:DKA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DKA|Vampire|||SorinLordOfInnistradVampireToken|
-|Generate|TOK:DKA|Wolf|||WolfToken|
-|Generate|TOK:DKA|Zombie|||ZombieToken|
 |Generate|TOK:DOM|Cleric|||BelzenlokClericToken|
 |Generate|TOK:DOM|Construct|||KarnConstructToken|
 |Generate|TOK:DOM|Demon|||BelzenlokDemonToken|
