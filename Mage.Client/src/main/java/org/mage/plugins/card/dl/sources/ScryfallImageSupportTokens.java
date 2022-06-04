@@ -1152,6 +1152,15 @@ public class ScryfallImageSupportTokens {
             put ("M13/Wurm", "https://api.scryfall.com/cards/tm13/10/en?format=image");
             put ("M13/Zombie", "https://api.scryfall.com/cards/tm13/5/en?format=image");
 
+            // M12
+            put ("M12/Beast", "https://api.scryfall.com/cards/tm12/4/en?format=image");
+            put ("M12/Bird", "https://api.scryfall.com/cards/tm12/1/en?format=image");
+            put ("M12/Pentavite", "https://api.scryfall.com/cards/tm12/7/en?format=image");
+            put ("M12/Saproling", "https://api.scryfall.com/cards/tm12/5/en?format=image");
+            put ("M12/Soldier", "https://api.scryfall.com/cards/tm12/2/en?format=image");
+            put ("M12/Wurm", "https://api.scryfall.com/cards/tm12/6/en?format=image");
+            put ("M12/Zombie", "https://api.scryfall.com/cards/tm12/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
