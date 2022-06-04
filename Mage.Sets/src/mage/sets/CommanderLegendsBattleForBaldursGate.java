@@ -453,6 +453,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 913, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Roving Harper", 40, Rarity.COMMON, mage.cards.r.RovingHarper.class));
         cards.add(new SetCardInfo("Rowan Kenrith", 805, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class));
+        cards.add(new SetCardInfo("Rug of Smothering", 336, Rarity.UNCOMMON, mage.cards.r.RugOfSmothering.class));
         cards.add(new SetCardInfo("Rumor Gatherer", 705, Rarity.UNCOMMON, mage.cards.r.RumorGatherer.class));
         cards.add(new SetCardInfo("Run Away Together", 92, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Ryusei, the Falling Star", 806, Rarity.RARE, mage.cards.r.RyuseiTheFallingStar.class));
