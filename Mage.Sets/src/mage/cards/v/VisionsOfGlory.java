@@ -3,6 +3,7 @@ package mage.cards.v;
 import mage.abilities.costs.costadjusters.CommanderManaValueAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.dynamicvalue.common.GreatestCommanderManaValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -29,7 +30,8 @@ public final class VisionsOfGlory extends CardImpl {
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{8}{W}{W}"))
                 .setAbilityName("This spell costs {X} less to cast this way, where X is the greatest mana value " +
                         "of a commander you own on the battlefield or in the command zone.")
-                .setCostAdjuster(CommanderManaValueAdjuster.instance));
+                .setCostAdjuster(CommanderManaValueAdjuster.instance)
+                .addHint(GreatestCommanderManaValue.getHint()));
     }
 
     private VisionsOfGlory(final VisionsOfGlory card) {

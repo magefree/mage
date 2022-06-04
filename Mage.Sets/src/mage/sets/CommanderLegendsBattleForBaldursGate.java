@@ -336,6 +336,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mage's Attendant", 698, Rarity.UNCOMMON, mage.cards.m.MagesAttendant.class));
         cards.add(new SetCardInfo("Magus of the Balance", 699, Rarity.RARE, mage.cards.m.MagusOfTheBalance.class));
         cards.add(new SetCardInfo("Mahadi, Emporium Master", 282, Rarity.UNCOMMON, mage.cards.m.MahadiEmporiumMaster.class));
+        cards.add(new SetCardInfo("Majestic Genesis", 240, Rarity.MYTHIC, mage.cards.m.MajesticGenesis.class));
         cards.add(new SetCardInfo("Malakir Blood-Priest", 760, Rarity.COMMON, mage.cards.m.MalakirBloodPriest.class));
         cards.add(new SetCardInfo("Managorger Hydra", 828, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Manifold Key", 319, Rarity.UNCOMMON, mage.cards.m.ManifoldKey.class));
