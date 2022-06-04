@@ -549,15 +549,7 @@
 |Generate|TOK:DDQ|Human|||HumanToken|
 |Generate|TOK:DDQ|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DDQ|Zombie|||ZombieToken|
-|Generate|TOK:DGM|Bird|||BirdToken|
-|Generate|TOK:DGM|Centaur|||CentaurToken|
 |Generate|TOK:DGM|Elemental|||VoiceOfResurgenceToken|
-|Generate|TOK:DGM|Knight|||KnightToken|
-|Generate|TOK:DGM|Rhino|||RhinoToken|
-|Generate|TOK:DGM|Soldier|||SoldierTokenWithHaste|
-|Generate|TOK:DGM|Spirit|||TeysaEnvoyOfGhostsToken|
-|Generate|TOK:DGM|Wurm|1||WurmWithTrampleToken|
-|Generate|TOK:DGM|Wurm|2||Wurm55Token|
 |Generate|TOK:DIS|Bird|||WhiteBlueBirdToken|
 |Generate|TOK:DIS|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|

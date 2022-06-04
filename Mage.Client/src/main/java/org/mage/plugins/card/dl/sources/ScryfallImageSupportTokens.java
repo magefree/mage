@@ -1361,6 +1361,9 @@ public class ScryfallImageSupportTokens {
             // DDK
             put ("DDK/Spirit", "https://api.scryfall.com/cards/tddk/1/en?format=image");
 
+            // DGM
+            put ("DGM/Elemental", "https://api.scryfall.com/cards/tdgm/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
