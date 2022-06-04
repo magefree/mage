@@ -45,7 +45,7 @@ public final class FrayingLine extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may pay {2}. If they do, they put a rope counter on a creature they control. Otherwise, exile Fraying Line and each creature without a rope counter on it, then remove all rope counters from all creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new FrayingLineEffect(), TargetController.ACTIVE, true
+                new FrayingLineEffect(), TargetController.ACTIVE, false
         ));
     }
 

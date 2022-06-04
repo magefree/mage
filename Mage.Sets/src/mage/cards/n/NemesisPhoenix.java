@@ -37,7 +37,8 @@ public final class NemesisPhoenix extends CardImpl {
         // {2}{R}: Return Nemesis Phoenix from your graveyard to the battlefield tapped and attacking. Activate only during the declare attackers step and only if you're attacking two or more opponents.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnToBattlefieldUnderOwnerControlSourceEffect(true, true, -1),
+                new ReturnToBattlefieldUnderOwnerControlSourceEffect(true, true, -1)
+                        .setText("return {this} from your graveyard to the battlefield tapped and attacking"),
                 new ManaCostsImpl<>("{2}{R}"), NemesisPhoenixCondition.instance
         ));
     }

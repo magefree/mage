@@ -59,6 +59,7 @@ public final class SharpshooterElf extends CardImpl {
                 new DamageTargetEffect(xValue, "it"), true
         );
         ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private SharpshooterElf(final SharpshooterElf card) {

@@ -465,6 +465,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class));
         cards.add(new SetCardInfo("Scaled Nurturer", 252, Rarity.COMMON, mage.cards.s.ScaledNurturer.class));
         cards.add(new SetCardInfo("Scouting Hawk", 41, Rarity.COMMON, mage.cards.s.ScoutingHawk.class));
+        cards.add(new SetCardInfo("Sculpted Sunburst", 42, Rarity.RARE, mage.cards.s.SculptedSunburst.class));
         cards.add(new SetCardInfo("Sea Gate", 359, Rarity.COMMON, mage.cards.s.SeaGate.class));
         cards.add(new SetCardInfo("Sea Hag", 95, Rarity.COMMON, mage.cards.s.SeaHag.class));
         cards.add(new SetCardInfo("Sea of Clouds", 360, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
@@ -511,6 +512,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Stonespeaker Crystal", 338, Rarity.UNCOMMON, mage.cards.s.StonespeakerCrystal.class));
         cards.add(new SetCardInfo("Street Urchin", 197, Rarity.UNCOMMON, mage.cards.s.StreetUrchin.class));
         cards.add(new SetCardInfo("Stuffy Doll", 875, Rarity.RARE, mage.cards.s.StuffyDoll.class));
+        cards.add(new SetCardInfo("Stunning Strike", 97, Rarity.COMMON, mage.cards.s.StunningStrike.class));
         cards.add(new SetCardInfo("Summon Undead", 151, Rarity.COMMON, mage.cards.s.SummonUndead.class));
         cards.add(new SetCardInfo("Sunken Hollow", 918, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swamp", 459, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -557,6 +559,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Uchuulon", 673, Rarity.RARE, mage.cards.u.Uchuulon.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 710, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Undercellar Myconid", 259, Rarity.COMMON, mage.cards.u.UndercellarMyconid.class));
+        cards.add(new SetCardInfo("Undercellar Sweep", 47, Rarity.UNCOMMON, mage.cards.u.UndercellarSweep.class));
         cards.add(new SetCardInfo("Underdark Explorer", 154, Rarity.COMMON, mage.cards.u.UnderdarkExplorer.class));
         cards.add(new SetCardInfo("Undermountain Adventurer", 260, Rarity.RARE, mage.cards.u.UndermountainAdventurer.class));
         cards.add(new SetCardInfo("Universal Solvent", 342, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
@@ -564,6 +567,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Valiant Changeling", 711, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 927, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Vengeful Ancestor", 812, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
+        cards.add(new SetCardInfo("Venture Forth", 683, Rarity.RARE, mage.cards.v.VentureForth.class));
         cards.add(new SetCardInfo("Veteran Soldier", 48, Rarity.UNCOMMON, mage.cards.v.VeteranSoldier.class));
         cards.add(new SetCardInfo("Vexing Puzzlebox", 343, Rarity.MYTHIC, mage.cards.v.VexingPuzzlebox.class));
         cards.add(new SetCardInfo("Vicious Battlerager", 155, Rarity.COMMON, mage.cards.v.ViciousBattlerager.class));
