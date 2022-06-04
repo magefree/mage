@@ -1075,12 +1075,12 @@
 |Generate|TOK:SOM|Cat|||CatToken|
 |Generate|TOK:SOM|Goblin|||GoblinToken|
 |Generate|TOK:SOM|Golem|||GolemToken|
-|Generate|TOK:SOM|Insect|||InsectInfectToken|
+|Generate|TOK:SOM|Phyrexian Insect|||InsectInfectToken|
 |Generate|TOK:SOM|Myr|||MyrToken|
 |Generate|TOK:SOM|Soldier|||SoldierToken|
 |Generate|TOK:SOM|Wolf|||WolfToken|
-|Generate|TOK:SOM|Wurm|1||WurmWithDeathtouchToken|
-|Generate|TOK:SOM|Wurm|2||WurmWithLifelinkToken|
+|Generate|TOK:SOM|Phyrexian Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:SOM|Phyrexian Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:SWS|Ewok|||EwokToken|
 |Generate|TOK:SWS|B-Wing|||RebelStarshipToken|
 |Generate|TOK:SWS|Hunter|||HunterToken|

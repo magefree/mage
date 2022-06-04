@@ -1267,6 +1267,17 @@ public class ScryfallImageSupportTokens {
             put ("DDD/Beast/2", "https://api.scryfall.com/cards/tddd/2/en?format=image");
             put ("DDD/Elephant", "https://api.scryfall.com/cards/tddd/3/en?format=image");
 
+            // SOM
+            put ("SOM/Cat", "https://api.scryfall.com/cards/tsom/1/en?format=image");
+            put ("SOM/Goblin", "https://api.scryfall.com/cards/tsom/3/en?format=image");
+            put ("SOM/Golem", "https://api.scryfall.com/cards/tsom/6/en?format=image");
+            put ("SOM/Phyrexian Insect", "https://api.scryfall.com/cards/tsom/4/en?format=image");
+            put ("SOM/Myr", "https://api.scryfall.com/cards/tsom/7/en?format=image");
+            put ("SOM/Soldier", "https://api.scryfall.com/cards/tsom/2/en?format=image");
+            put ("SOM/Wolf", "https://api.scryfall.com/cards/tsom/5/en?format=image");
+            put ("SOM/Phyrexian Wurm/1", "https://api.scryfall.com/cards/tsom/8/en?format=image");
+            put ("SOM/Phyrexian Wurm/2", "https://api.scryfall.com/cards/tsom/9/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
