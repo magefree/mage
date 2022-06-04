@@ -160,6 +160,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnbringer Cleric", 15, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Deadly Dispute", 124, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class));
+        cards.add(new SetCardInfo("Delayed Blast Fireball", 676, Rarity.RARE, mage.cards.d.DelayedBlastFireball.class));
         cards.add(new SetCardInfo("Demon Bolt", 787, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Descent into Avernus", 169, Rarity.RARE, mage.cards.d.DescentIntoAvernus.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 890, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
