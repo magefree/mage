@@ -76,7 +76,7 @@ public final class MulticlassBaldric extends CardImpl {
         )).addHint(PartyCountHint.instance));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private MulticlassBaldric(final MulticlassBaldric card) {

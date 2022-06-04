@@ -92,9 +92,6 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "CLB", "Bronze Walrus"); // temporary
-        skipListAddName(SKIP_LIST_PT, "CLB", "Explosive Crystal"); // temporary
-        skipListAddName(SKIP_LIST_PT, "CLB", "Banishing Coils"); // temporary
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
