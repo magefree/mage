@@ -21,7 +21,7 @@ public final class MysticGenesisOozeToken extends TokenImpl {
         subtype.add(SubType.OOZE);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-        setOriginalExpansionSetCode("RTR");
+        setOriginalExpansionSetCode("MM3");
     }
 
     public MysticGenesisOozeToken(final MysticGenesisOozeToken token) {

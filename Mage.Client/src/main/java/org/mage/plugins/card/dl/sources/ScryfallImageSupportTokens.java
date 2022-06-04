@@ -1334,6 +1334,20 @@ public class ScryfallImageSupportTokens {
             // DDJ
             put ("DDJ/Saproling", "https://api.scryfall.com/cards/tddj/1/en?format=image");
 
+            // RTR
+            put ("RTR/Assassin", "https://api.scryfall.com/cards/trtr/4/en?format=image");
+            put ("RTR/Bird", "https://api.scryfall.com/cards/trtr/1/en?format=image");
+            put ("RTR/Centaur", "https://api.scryfall.com/cards/trtr/7/en?format=image");
+            put ("RTR/Dragon", "https://api.scryfall.com/cards/trtr/5/en?format=image");
+            put ("RTR/Elemental", "https://api.scryfall.com/cards/trtr/12/en?format=image");
+            put ("RTR/Goblin", "https://api.scryfall.com/cards/trtr/6/en?format=image");
+            put ("RTR/Knight", "https://api.scryfall.com/cards/trtr/2/en?format=image");
+            put ("RTR/Ooze", "https://api.scryfall.com/cards/trtr/8/en?format=image");
+            put ("RTR/Rhino", "https://api.scryfall.com/cards/trtr/9/en?format=image");
+            put ("RTR/Saproling", "https://api.scryfall.com/cards/trtr/10/en?format=image");
+            put ("RTR/Soldier", "https://api.scryfall.com/cards/trtr/3/en?format=image");
+            put ("RTR/Wurm", "https://api.scryfall.com/cards/trtr/11/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

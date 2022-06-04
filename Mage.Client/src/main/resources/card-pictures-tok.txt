@@ -1015,7 +1015,7 @@
 |Generate|TOK:RTR|Elemental|||GreenAndWhiteElementalToken|
 |Generate|TOK:RTR|Goblin|||GoblinToken|
 |Generate|TOK:RTR|Knight|||KnightToken|
-|Generate|TOK:RTR|Ooze|||MysticGenesisOozeToken|
+|Generate|TOK:RTR|Ooze|||OozeToken|
 |Generate|TOK:RTR|Rhino|||RhinoToken|
 |Generate|TOK:RTR|Saproling|||SaprolingToken|
 |Generate|TOK:RTR|Soldier|||SoldierToken|
