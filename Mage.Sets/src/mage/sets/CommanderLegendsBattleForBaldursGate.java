@@ -566,6 +566,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Valiant Changeling", 711, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 927, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Vengeful Ancestor", 812, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
+        cards.add(new SetCardInfo("Venture Forth", 683, Rarity.RARE, mage.cards.v.VentureForth.class));
         cards.add(new SetCardInfo("Veteran Soldier", 48, Rarity.UNCOMMON, mage.cards.v.VeteranSoldier.class));
         cards.add(new SetCardInfo("Vexing Puzzlebox", 343, Rarity.MYTHIC, mage.cards.v.VexingPuzzlebox.class));
         cards.add(new SetCardInfo("Vicious Battlerager", 155, Rarity.COMMON, mage.cards.v.ViciousBattlerager.class));
