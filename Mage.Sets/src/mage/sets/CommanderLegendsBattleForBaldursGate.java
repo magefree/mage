@@ -360,6 +360,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror Entity", 701, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mizzium Mortars", 803, Rarity.RARE, mage.cards.m.MizziumMortars.class));
         cards.add(new SetCardInfo("Mocking Doppelganger", 667, Rarity.RARE, mage.cards.m.MockingDoppelganger.class));
+        cards.add(new SetCardInfo("Modify Memory", 83, Rarity.UNCOMMON, mage.cards.m.ModifyMemory.class));
         cards.add(new SetCardInfo("Mold Folk", 133, Rarity.COMMON, mage.cards.m.MoldFolk.class));
         cards.add(new SetCardInfo("Monster Manual", 242, Rarity.RARE, mage.cards.m.MonsterManual.class));
         cards.add(new SetCardInfo("Moonshae Pixie", 84, Rarity.UNCOMMON, mage.cards.m.MoonshaePixie.class));
