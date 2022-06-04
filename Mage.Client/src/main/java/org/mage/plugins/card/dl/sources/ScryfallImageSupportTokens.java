@@ -1185,6 +1185,11 @@ public class ScryfallImageSupportTokens {
             put ("ARB/Lizard", "https://api.scryfall.com/cards/tarb/2/en?format=image");
             put ("ARB/Zombie Wizard", "https://api.scryfall.com/cards/tarb/4/en?format=image");
 
+            // DDC
+            put ("DDC/Demon", "https://api.scryfall.com/cards/tddc/2/en?format=image");
+            put ("DDC/Spirit", "https://api.scryfall.com/cards/tddc/1/en?format=image");
+            put ("DDC/Thrull", "https://api.scryfall.com/cards/tddc/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

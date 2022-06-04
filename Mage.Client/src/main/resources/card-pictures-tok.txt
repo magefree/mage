@@ -524,9 +524,9 @@
 |Generate|TOK:GVL|Beast|2||BeastToken|
 |Generate|TOK:GVL|Elephant|||ElephantToken|
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
-|Generate|TOK:DDC|Demon|||ReignOfThePitToken|
+|Generate|TOK:DDC|Demon|||DemonFlyingToken|
 |Generate|TOK:DDC|Spirit|||SpiritWhiteToken|
-|Generate|TOK:DDC|Thrull|||BreedingPitBlackInsectToken|
+|Generate|TOK:DDC|Thrull|||BreedingPitThrullToken|
 |Generate|TOK:DDD|Ape|||PongifyApeToken|
 |Generate|TOK:DDD|Bat|||BatToken|
 |Generate|TOK:DDD|Beast|1||BeastToken|
