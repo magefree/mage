@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
@@ -59,10 +59,10 @@ public final class StunningStrike extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StunningStrikeEffect()));
 
         // As long as enchanted creature isn't legendary, it doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new DontUntapInControllersUntapStepEnchantedEffect(), condition, "as long as " +
-                "enchanted creature isn't legendary, it doesn't untap during its controller's untap step"
-        )));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(
+                new DontUntapInControllersUntapStepEnchantedEffect(), condition
+        ).setText("as long as enchanted creature isn't legendary, " +
+                "it doesn't untap during its controller's untap step")));
     }
 
     private StunningStrike(final StunningStrike card) {
