@@ -114,6 +114,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Embereth", 883, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
         cards.add(new SetCardInfo("Castle Locthwain", 884, Rarity.RARE, mage.cards.c.CastleLocthwain.class));
         cards.add(new SetCardInfo("Castle Vantress", 885, Rarity.RARE, mage.cards.c.CastleVantress.class));
+        cards.add(new SetCardInfo("Caves of Chaos Adventurer", 167, Rarity.RARE, mage.cards.c.CavesOfChaosAdventurer.class));
         cards.add(new SetCardInfo("Chain Devil", 120, Rarity.COMMON, mage.cards.c.ChainDevil.class));
         cards.add(new SetCardInfo("Chain Reaction", 783, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Changeling Outcast", 743, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
