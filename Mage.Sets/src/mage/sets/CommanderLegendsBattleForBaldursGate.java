@@ -557,6 +557,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Uchuulon", 673, Rarity.RARE, mage.cards.u.Uchuulon.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 710, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Undercellar Myconid", 259, Rarity.COMMON, mage.cards.u.UndercellarMyconid.class));
+        cards.add(new SetCardInfo("Undercellar Sweep", 47, Rarity.UNCOMMON, mage.cards.u.UndercellarSweep.class));
         cards.add(new SetCardInfo("Underdark Explorer", 154, Rarity.COMMON, mage.cards.u.UnderdarkExplorer.class));
         cards.add(new SetCardInfo("Undermountain Adventurer", 260, Rarity.RARE, mage.cards.u.UndermountainAdventurer.class));
         cards.add(new SetCardInfo("Universal Solvent", 342, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
