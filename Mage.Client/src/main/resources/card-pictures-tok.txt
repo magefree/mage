@@ -494,9 +494,6 @@
 |Generate|TOK:CNS|Zombie|||ZombieToken|
 |Generate|TOK:CON|Angel|||AngelToken|
 |Generate|TOK:CON|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:CON|Saproling|||SaprolingToken|
-|Generate|TOK:CON|Soldier|||SoldierToken|
-|Generate|TOK:CON|Zombie|||ZombieToken|
 |Generate|TOK:CSP|Bird|||BirdToken|
 |Generate|TOK:CSP|Graveborn|||SekKuarDeathkeeperGravebornToken|
 |Generate|TOK:CSP|Marit Lage|||MaritLageToken|

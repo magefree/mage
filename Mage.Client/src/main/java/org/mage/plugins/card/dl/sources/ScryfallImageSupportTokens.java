@@ -1190,6 +1190,10 @@ public class ScryfallImageSupportTokens {
             put ("DDC/Spirit", "https://api.scryfall.com/cards/tddc/1/en?format=image");
             put ("DDC/Thrull", "https://api.scryfall.com/cards/tddc/3/en?format=image");
 
+            // CON
+            put ("CON/Angel", "https://api.scryfall.com/cards/tcon/1/en?format=image");
+            put ("CON/Elemental", "https://api.scryfall.com/cards/tcon/2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
