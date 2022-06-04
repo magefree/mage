@@ -63,7 +63,7 @@ class JourneyToTheLostCityEffect extends RollDieWithResultTableEffect {
                         "then put a +1/+1 counter on it for each creature card among those cards")
         );
         this.addTableEntry(
-                1, 9,
+                20, 20,
                 new InfoEffect("put all permanent cards exiled with {this} onto the battlefield, then sacrifice it")
         );
     }

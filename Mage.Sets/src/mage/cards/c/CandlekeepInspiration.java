@@ -35,7 +35,9 @@ public final class CandlekeepInspiration extends CardImpl {
         this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(
                 CandlekeepInspirationValue.instance, CandlekeepInspirationValue.instance,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE, true
-        ));
+        ).setText("until end of turn, creatures you control have base power and toughness X/X, " +
+                "where X is the number of cards you own in exile and in your graveyard " +
+                "that are instant cards, are sorcery cards, and/or have an Adventure"));
         this.getSpellAbility().addHint(hint);
     }
 

@@ -39,7 +39,7 @@ public final class Uchuulon extends CardImpl {
         ));
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public Uchuulon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

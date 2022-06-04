@@ -32,7 +32,7 @@ public final class DungeoneersPack extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(new TakeTheInitiativeEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new GainLifeEffect(3).setText("gain 3 life"));
+        ability.addEffect(new GainLifeEffect(3).setText(", gain 3 life"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(","));
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy(", and"));
         this.addAbility(ability);
