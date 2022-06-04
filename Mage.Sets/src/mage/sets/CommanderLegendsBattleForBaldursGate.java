@@ -103,6 +103,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Bygone Bishop", 689, Rarity.RARE, mage.cards.b.BygoneBishop.class));
         cards.add(new SetCardInfo("Cadira, Caller of the Small", 269, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class));
         cards.add(new SetCardInfo("Calculating Lich", 742, Rarity.MYTHIC, mage.cards.c.CalculatingLich.class));
+        cards.add(new SetCardInfo("Call to the Void", 118, Rarity.RARE, mage.cards.c.CallToTheVoid.class));
         cards.add(new SetCardInfo("Campfire", 304, Rarity.UNCOMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Candlekeep Inspiration", 59, Rarity.UNCOMMON, mage.cards.c.CandlekeepInspiration.class));
         cards.add(new SetCardInfo("Candlekeep Sage", 60, Rarity.COMMON, mage.cards.c.CandlekeepSage.class));
