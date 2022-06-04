@@ -426,6 +426,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 451, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poison the Blade", 248, Rarity.COMMON, mage.cards.p.PoisonTheBlade.class));
         cards.add(new SetCardInfo("Pontiff of Blight", 768, Rarity.RARE, mage.cards.p.PontiffOfBlight.class));
+        cards.add(new SetCardInfo("Popular Entertainer", 192, Rarity.RARE, mage.cards.p.PopularEntertainer.class));
         cards.add(new SetCardInfo("Port of Karfell", 908, Rarity.UNCOMMON, mage.cards.p.PortOfKarfell.class));
         cards.add(new SetCardInfo("Predatory Impetus", 249, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Priest of Ancient Lore", 704, Rarity.COMMON, mage.cards.p.PriestOfAncientLore.class));
