@@ -1294,6 +1294,10 @@ public class ScryfallImageSupportTokens {
             put ("NPH/Phyrexian Golem", "https://api.scryfall.com/cards/tnph/3/en?format=image");
             put ("NPH/Phyrexian Myr", "https://api.scryfall.com/cards/tnph/4/en?format=image");
 
+            // DDH
+            put ("DDH/Griffin", "https://api.scryfall.com/cards/tddh/1/en?format=image");
+            put ("DDH/Saproling", "https://api.scryfall.com/cards/tddh/2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
