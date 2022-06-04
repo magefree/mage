@@ -154,15 +154,12 @@
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|TOK:ANA|Goblin|||GoblinToken|
 |Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
-|Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
-|Generate|TOK:10E|Insect|||WaspToken|
 |Generate|TOK:10E|Saproling|||SaprolingToken|
-|Generate|TOK:10E|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:10E|Soldier|||SoldierToken|
+|Generate|TOK:10E|Wasp|||WaspToken|
 |Generate|TOK:10E|Zombie|||ZombieToken|
-|Generate|TOK:2ED|Insect|||WaspToken|
 |Generate|TOK:3ED|Djinn|||DjinnToken|
 |Generate|TOK:3ED|Insect|||WaspToken|
 |Generate|TOK:4ED|Assembly-Worker|||AssemblyWorkerToken|
