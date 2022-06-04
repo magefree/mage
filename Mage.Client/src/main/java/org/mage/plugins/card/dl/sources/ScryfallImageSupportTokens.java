@@ -1254,6 +1254,9 @@ public class ScryfallImageSupportTokens {
             put ("ROE/Ooze", "https://api.scryfall.com/cards/troe/4/en?format=image");
             put ("ROE/Tuktuk the Returned", "https://api.scryfall.com/cards/troe/5/en?format=image");
 
+            // DDF
+            put ("DDF/Soldier", "https://api.scryfall.com/cards/tddf/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

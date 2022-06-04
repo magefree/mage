@@ -530,8 +530,6 @@
 |Generate|TOK:DDE|Insect|||WaspToken|
 |Generate|TOK:DDE|Minion|||MinionToken|
 |Generate|TOK:DDE|Saproling|||SaprolingToken|
-|Generate|TOK:DDF|Assembly-Worker|||AssemblyWorkerToken|
-|Generate|TOK:DDF|Pentavite|||PentaviteToken|
 |Generate|TOK:DDF|Soldier|||SoldierToken|
 |Generate|TOK:DDG|Ape|||PongifyApeToken|
 |Generate|TOK:DDG|Goblin|||GoblinToken|
