@@ -186,6 +186,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dross Harvester", 750, Rarity.RARE, mage.cards.d.DrossHarvester.class));
         cards.add(new SetCardInfo("Drown in the Loch", 842, Rarity.UNCOMMON, mage.cards.d.DrownInTheLoch.class));
         cards.add(new SetCardInfo("Drownyard Temple", 892, Rarity.RARE, mage.cards.d.DrownyardTemple.class));
+        cards.add(new SetCardInfo("Druid of the Emerald Grove", 226, Rarity.COMMON, mage.cards.d.DruidOfTheEmeraldGrove.class));
         cards.add(new SetCardInfo("Druidic Ritual", 227, Rarity.COMMON, mage.cards.d.DruidicRitual.class));
         cards.add(new SetCardInfo("Duke Ulder Ravengard", 272, Rarity.RARE, mage.cards.d.DukeUlderRavengard.class));
         cards.add(new SetCardInfo("Dungeon Delver", 67, Rarity.UNCOMMON, mage.cards.d.DungeonDelver.class));
