@@ -594,6 +594,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class));
         cards.add(new SetCardInfo("Vivien, Champion of the Wilds", 838, Rarity.RARE, mage.cards.v.VivienChampionOfTheWilds.class));
         cards.add(new SetCardInfo("Volcanic Torrent", 813, Rarity.UNCOMMON, mage.cards.v.VolcanicTorrent.class));
+        cards.add(new SetCardInfo("Volo, Itinerant Scholar", 103, Rarity.MYTHIC, mage.cards.v.VoloItinerantScholar.class));
         cards.add(new SetCardInfo("Vrock", 157, Rarity.UNCOMMON, mage.cards.v.Vrock.class));
         cards.add(new SetCardInfo("Wand of Wonder", 204, Rarity.RARE, mage.cards.w.WandOfWonder.class));
         cards.add(new SetCardInfo("Wandering Fumarole", 928, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
