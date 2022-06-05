@@ -19,7 +19,7 @@ public final class BreedingPitThrullToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("CMR");
+        availableImageSetCodes = Arrays.asList("CMR", "DDC");
     }
 
     public BreedingPitThrullToken(final BreedingPitThrullToken token) {

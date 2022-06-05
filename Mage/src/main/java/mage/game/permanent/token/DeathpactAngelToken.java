@@ -15,6 +15,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -44,6 +46,8 @@ public final class DeathpactAngelToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("GTC", "GK2");
     }
 
     public DeathpactAngelToken(final DeathpactAngelToken token) {

@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -23,6 +25,8 @@ public final class NightwingHorrorToken extends TokenImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("GTC");
     }
 
     public NightwingHorrorToken(final NightwingHorrorToken token) {

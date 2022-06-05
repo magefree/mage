@@ -21,8 +21,8 @@ public final class WolfToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("BNG", "C14", "C15", "CMA", "CMD", "CNS", "DKA", "EVE", "ISD",
-                "LRW", "M10", "M14", "MM2", "MOR", "SHM", "SOI", "SOM", "V10", "WWK", "ZEN", "WAR", "M20",
+        availableImageSetCodes = Arrays.asList("BNG", "C14", "C15", "CMA", "CMD", "CNS", "EVE", "ISD",
+                "LRW", "M10", "M14", "MM2", "SHM", "SOI", "SOM", "V10", "ZEN", "WAR", "M20",
                 "THB", "AFR", "MID", "VOW", "2XM");
     }
 
@@ -31,7 +31,7 @@ public final class WolfToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 images
+            this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 images

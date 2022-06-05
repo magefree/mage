@@ -38,5 +38,8 @@ public final class HumanToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("VOW")) {
             this.setTokenType(2);
         }
+        if (getOriginalExpansionSetCode().equals("AVR")) {
+            this.setTokenType(2);
+        }
     }
 }

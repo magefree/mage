@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -19,6 +21,8 @@ public final class GiantWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(5);
         toughness = new MageInt(5);
+
+        availableImageSetCodes = Arrays.asList("MOR", "MMA");
     }
 
     public GiantWarriorToken(final GiantWarriorToken token) {

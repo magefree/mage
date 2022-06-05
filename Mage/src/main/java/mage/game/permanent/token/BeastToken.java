@@ -50,6 +50,9 @@ public final class BeastToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
             setTokenType(1);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DDD")) {
+            setTokenType(1);
+        }
     }
 
     public BeastToken(final BeastToken token) {

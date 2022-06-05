@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -22,6 +24,8 @@ public final class XenagosSatyrToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("THS");
     }
     public XenagosSatyrToken(final XenagosSatyrToken token) {
         super(token);

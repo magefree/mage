@@ -31,7 +31,7 @@ public final class SpiritWhiteToken extends TokenImpl {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
-            setTokenType(1);
+            setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
             setTokenType(2);
