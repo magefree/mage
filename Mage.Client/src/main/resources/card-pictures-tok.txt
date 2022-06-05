@@ -802,7 +802,7 @@
 |Generate|TOK:M14|Zombie|||ZombieToken|
 |Generate|TOK:M15|Beast|1||GarrukApexPredatorBeastToken|
 |Generate|TOK:M15|Beast|2||BeastToken|
-|Generate|TOK:M15|Dragon|||BroodKeeperDragonToken|
+|Generate|TOK:M15|Dragon|||DragonEggDragonToken|
 |Generate|TOK:M15|Goblin|||GoblinToken|
 |Generate|TOK:M15|Insect|||InsectDeathToken|
 |Generate|TOK:M15|Land Mine|||LandMineToken|
