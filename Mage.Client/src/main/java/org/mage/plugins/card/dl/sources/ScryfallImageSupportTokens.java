@@ -1381,6 +1381,15 @@ public class ScryfallImageSupportTokens {
             put ("THS/Soldier/2", "https://api.scryfall.com/cards/tths/3/en?format=image");
             put ("THS/Soldier/3", "https://api.scryfall.com/cards/tths/7/en?format=image");
 
+            // EVE
+            put ("EVE/Beast", "https://api.scryfall.com/cards/teve/3/en?format=image");
+            put ("EVE/Bird", "https://api.scryfall.com/cards/teve/2/en?format=image");
+            put ("EVE/Elemental", "https://api.scryfall.com/cards/teve/5/en?format=image");
+            put ("EVE/Goat", "https://api.scryfall.com/cards/teve/1/en?format=image");
+            put ("EVE/Goblin Soldier", "https://api.scryfall.com/cards/teve/7/en?format=image");
+            put ("EVE/Spirit", "https://api.scryfall.com/cards/teve/4/en?format=image");
+            put ("EVE/Worm", "https://api.scryfall.com/cards/teve/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

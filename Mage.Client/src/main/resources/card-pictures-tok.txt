@@ -629,9 +629,7 @@
 |Generate|TOK:EVE|Elemental|||CallTheSkyBreakerElementalToken|
 |Generate|TOK:EVE|Goat|||GoatToken|
 |Generate|TOK:EVE|Goblin Soldier|||GoblinSoldierToken|
-|Generate|TOK:EVE|Kithkin Soldier|||KithkinSoldierToken|
-|Generate|TOK:EVE|Spirit|||BeckonApparitionToken|
-|Generate|TOK:EVE|Wolf|||WolfToken|
+|Generate|TOK:EVE|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:EVE|Worm|||BlackGreenWormToken|
 |Generate|TOK:EVG|Elemental|||VoiceOfTheWoodsElementalToken|
 |Generate|TOK:EVG|Elf Warrior|||ElfWarriorToken|
