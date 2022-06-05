@@ -36,7 +36,7 @@ public final class BeastToken extends TokenImpl {
             this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GVL")) {
-            this.setTokenType(2);
+            this.setTokenType(1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C19")) {
             this.setTokenType(1);

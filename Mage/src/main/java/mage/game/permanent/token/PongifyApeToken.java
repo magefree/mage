@@ -21,7 +21,7 @@ public final class PongifyApeToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("C14", "GVL", "PLC", "ULG", "UNH", "TSR");
+        availableImageSetCodes = Arrays.asList("C14", "PLC", "ULG", "UNH", "TSR");
     }
 
     public PongifyApeToken(final PongifyApeToken token) {
