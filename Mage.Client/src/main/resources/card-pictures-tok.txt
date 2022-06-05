@@ -926,7 +926,7 @@
 |Generate|TOK:ODY|Squirrel|||SquirrelToken|
 |Generate|TOK:ODY|Wurm|||WurmToken|
 |Generate|TOK:ODY|Zombie|||ZombieToken|
-|Generate|TOK:OGW|Angel|||LinvalaAngelToken|
+|Generate|TOK:OGW|Angel|||Angel33Token|
 |Generate|TOK:OGW|Eldrazi Scion|1||EldraziScionToken|
 |Generate|TOK:OGW|Eldrazi Scion|2||EldraziScionToken|
 |Generate|TOK:OGW|Eldrazi Scion|3||EldraziScionToken|
