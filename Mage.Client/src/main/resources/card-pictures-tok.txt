@@ -505,9 +505,9 @@
 |Generate|TOK:DD3C|Beast|1|
 |Generate|TOK:DD3C|Beast|2|
 |Generate|TOK:DD3C|Elephant||
-|Generate|TOK:DVD|Demon|||ReignOfThePitToken|
+|Generate|TOK:DVD|Demon|||DemonFlyingToken|
 |Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
-|Generate|TOK:DVD|Thrull|||BreedingPitBlackInsectToken|
+|Generate|TOK:DVD|Thrull|||BreedingPitThrullToken|
 |Generate|TOK:DD3D|Elemental Shaman||
 |Generate|TOK:GVL|Bat|||BatToken|
 |Generate|TOK:GVL|Beast|1||BeastToken|

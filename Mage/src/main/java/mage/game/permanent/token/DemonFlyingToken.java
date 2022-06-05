@@ -26,7 +26,7 @@ public final class DemonFlyingToken extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "C21", "NCC", "DDC", "CNS");
+        availableImageSetCodes = Arrays.asList("C14", "C21", "NCC", "DDC", "CNS", "DVD");
     }
 
     public DemonFlyingToken(final DemonFlyingToken token) {

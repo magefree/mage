@@ -1458,6 +1458,11 @@ public class ScryfallImageSupportTokens {
             put ("GVL/Beast/2", "https://api.scryfall.com/cards/tgvl/9/en?format=image");
             put ("GVL/Elephant", "https://api.scryfall.com/cards/tgvl/10/en?format=image");
 
+            // DVD
+            put ("DVD/Demon", "https://api.scryfall.com/cards/tdvd/6/en?format=image");
+            put ("DVD/Spirit", "https://api.scryfall.com/cards/tdvd/5/en?format=image");
+            put ("DVD/Thrull", "https://api.scryfall.com/cards/tdvd/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
