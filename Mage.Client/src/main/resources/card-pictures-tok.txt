@@ -509,8 +509,6 @@
 |Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DVD|Thrull|||BreedingPitBlackInsectToken|
 |Generate|TOK:DD3D|Elemental Shaman||
-|Generate|TOK:EVG|Elf Warrior|||ElfWarriorToken|
-|Generate|TOK:EVG|Goblin|||GoblinToken|
 |Generate|TOK:GVL|Ape|||PongifyApeToken|
 |Generate|TOK:GVL|Bat|||BatToken|
 |Generate|TOK:GVL|Beast|1||BeastToken2|

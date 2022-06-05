@@ -1447,6 +1447,11 @@ public class ScryfallImageSupportTokens {
             put ("KTK/Warrior/2", "https://api.scryfall.com/cards/tktk/4/en?format=image");
             put ("KTK/Zombie", "https://api.scryfall.com/cards/tktk/6/en?format=image");
 
+            // EVG
+            put ("EVG/Elemental", "https://api.scryfall.com/cards/tevg/1/en?format=image");
+            put ("EVG/Elf Warrior", "https://api.scryfall.com/cards/tevg/2/en?format=image");
+            put ("EVG/Goblin", "https://api.scryfall.com/cards/tevg/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
