@@ -1430,6 +1430,9 @@ public class ScryfallImageSupportTokens {
             put ("CNS/Wolf", "https://api.scryfall.com/cards/tcns/7/en?format=image");
             put ("CNS/Zombie", "https://api.scryfall.com/cards/tcns/3/en?format=image");
 
+            // DDN
+            put ("DDN/Goblin", "https://api.scryfall.com/cards/ddn/82/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
