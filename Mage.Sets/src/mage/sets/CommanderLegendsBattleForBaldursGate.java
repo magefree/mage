@@ -421,6 +421,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Attack", 190, Rarity.COMMON, mage.cards.p.PackAttack.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 140, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Passageway Seer", 141, Rarity.UNCOMMON, mage.cards.p.PassagewaySeer.class));
+        cards.add(new SetCardInfo("Passionate Archaeologist", 656, Rarity.MYTHIC, mage.cards.p.PassionateArchaeologist.class));
         cards.add(new SetCardInfo("Path of Ancestry", 907, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patriar's Seal", 332, Rarity.UNCOMMON, mage.cards.p.PatriarsSeal.class));
         cards.add(new SetCardInfo("Patron of the Arts", 191, Rarity.COMMON, mage.cards.p.PatronOfTheArts.class));
