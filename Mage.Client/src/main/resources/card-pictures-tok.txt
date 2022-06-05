@@ -283,7 +283,7 @@
 |Generate|TOK:BNG|Cat Soldier|||CatSoldierCreatureToken|
 |Generate|TOK:BNG|Centaur|||CentaurEnchantmentCreatureToken|
 |Generate|TOK:BNG|Elemental|||SatyrNyxSmithElementalToken|
-|Generate|TOK:BNG|Gold||
+|Generate|TOK:BNG|Gold|||GoldToken|
 |Generate|TOK:BNG|Kraken|||Kraken99Token|
 |Generate|TOK:BNG|Soldier|||GodFavoredGeneralSoldierToken|
 |Generate|TOK:BNG|Wolf|||WolfToken|

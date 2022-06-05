@@ -1390,6 +1390,19 @@ public class ScryfallImageSupportTokens {
             put ("EVE/Spirit", "https://api.scryfall.com/cards/teve/4/en?format=image");
             put ("EVE/Worm", "https://api.scryfall.com/cards/teve/6/en?format=image");
 
+            // BNG
+            put ("BNG/Bird/1", "https://api.scryfall.com/cards/tbng/4/en?format=image");
+            put ("BNG/Bird/2", "https://api.scryfall.com/cards/tbng/1/en?format=image");
+            put ("BNG/Cat Soldier", "https://api.scryfall.com/cards/tbng/2/en?format=image");
+            put ("BNG/Centaur", "https://api.scryfall.com/cards/tbng/8/en?format=image");
+            put ("BNG/Elemental", "https://api.scryfall.com/cards/tbng/7/en?format=image");
+            put ("BNG/Gold", "https://api.scryfall.com/cards/tbng/10/en?format=image");
+            put ("BNG/Emblem Kiora, the Crashing Wave", "https://api.scryfall.com/cards/tbng/11/en?format=image");
+            put ("BNG/Kraken", "https://api.scryfall.com/cards/tbng/5/en?format=image");
+            put ("BNG/Soldier", "https://api.scryfall.com/cards/tbng/3/en?format=image");
+            put ("BNG/Wolf", "https://api.scryfall.com/cards/tbng/9/en?format=image");
+            put ("BNG/Zombie", "https://api.scryfall.com/cards/tbng/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
