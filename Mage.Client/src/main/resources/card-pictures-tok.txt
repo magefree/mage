@@ -535,7 +535,6 @@
 |Generate|TOK:DDL|Beast|||BeastToken|
 |Generate|TOK:DDL|Griffin|||GriffinToken|
 |Generate|TOK:DDM|Assassin|||AssassinToken|
-|Generate|TOK:DDM|Illusion|||IllusionToken|
 |Generate|TOK:DDN|Goblin|||GoblinToken|
 |Generate|TOK:DDO|Kraken|||Kraken99Token|
 |Generate|TOK:DDO|Soldier|||SoldierToken|

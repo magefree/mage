@@ -1403,6 +1403,9 @@ public class ScryfallImageSupportTokens {
             put ("BNG/Wolf", "https://api.scryfall.com/cards/tbng/9/en?format=image");
             put ("BNG/Zombie", "https://api.scryfall.com/cards/tbng/6/en?format=image");
 
+            // DDM
+            put ("DDM/Assassin", "https://api.scryfall.com/cards/tddm/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
