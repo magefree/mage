@@ -231,6 +231,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Felisa, Fang of Silverquill", 845, Rarity.MYTHIC, mage.cards.f.FelisaFangOfSilverquill.class));
         cards.add(new SetCardInfo("Fellwar Stone", 860, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feywild Caretaker", 69, Rarity.UNCOMMON, mage.cards.f.FeywildCaretaker.class));
+        cards.add(new SetCardInfo("Feywild Visitor", 70, Rarity.UNCOMMON, mage.cards.f.FeywildVisitor.class));
         cards.add(new SetCardInfo("Firbolg Flutist", 174, Rarity.RARE, mage.cards.f.FirbolgFlutist.class));
         cards.add(new SetCardInfo("Fire Diamond", 313, Rarity.COMMON, mage.cards.f.FireDiamond.class));
         cards.add(new SetCardInfo("Fireball", 175, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
