@@ -1468,6 +1468,10 @@ public class ScryfallImageSupportTokens {
             put ("FRF/Spirit", "https://api.scryfall.com/cards/tfrf/2/en?format=image");
             put ("FRF/Warrior", "https://api.scryfall.com/cards/tfrf/3/en?format=image");
 
+            // DDO
+            put ("DDO/Kraken", "https://api.scryfall.com/cards/ddo/67/en?format=image");
+            put ("DDO/Soldier", "https://api.scryfall.com/cards/ddo/66/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
