@@ -724,11 +724,9 @@
 |Generate|TOK:KLD|Thopter|3||ThopterColorlessToken|
 |Generate|TOK:KTK|Bear|||BearsCompanionBearToken|
 |Generate|TOK:KTK|Bird|||WingmateRocToken|
-|Generate|TOK:KTK|Goblin|||GoblinTokenWithHaste|
 |Generate|TOK:KTK|Goblin|||GoblinToken|
-|Generate|TOK:KTK|Morph|||
 |Generate|TOK:KTK|Snake|||SnakeToken|
-|Generate|TOK:KTK|Spirit Warrior||
+|Generate|TOK:KTK|Spirit Warrior|||SpiritWarriorToken|
 |Generate|TOK:KTK|Spirit|||SpiritWhiteToken|
 |Generate|TOK:KTK|Vampire|||VampireToken|
 |Generate|TOK:KTK|Warrior|1||WarriorToken|

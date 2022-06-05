@@ -1433,6 +1433,20 @@ public class ScryfallImageSupportTokens {
             // DDN
             put ("DDN/Goblin", "https://api.scryfall.com/cards/ddn/82/en?format=image");
 
+            // KTK
+            put ("KTK/Bear", "https://api.scryfall.com/cards/tktk/8/en?format=image");
+            put ("KTK/Bird", "https://api.scryfall.com/cards/tktk/1/en?format=image");
+            put ("KTK/Goblin", "https://api.scryfall.com/cards/tktk/7/en?format=image");
+            put ("KTK/Emblem Sarkhan", "https://api.scryfall.com/cards/tktk/12/en?format=image");
+            put ("KTK/Snake", "https://api.scryfall.com/cards/tktk/9/en?format=image");
+            put ("KTK/Emblem Sorin", "https://api.scryfall.com/cards/tktk/13/en?format=image");
+            put ("KTK/Spirit", "https://api.scryfall.com/cards/tktk/2/en?format=image");
+            put ("KTK/Spirit Warrior", "https://api.scryfall.com/cards/tktk/10/en?format=image");
+            put ("KTK/Vampire", "https://api.scryfall.com/cards/tktk/5/en?format=image");
+            put ("KTK/Warrior/1", "https://api.scryfall.com/cards/tktk/3/en?format=image");
+            put ("KTK/Warrior/2", "https://api.scryfall.com/cards/tktk/4/en?format=image");
+            put ("KTK/Zombie", "https://api.scryfall.com/cards/tktk/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
