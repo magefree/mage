@@ -363,7 +363,7 @@
 |Generate|TOK:C16|Spirit|2||SpiritWhiteToken|
 |Generate|TOK:C16|Squid|||SquidToken|
 |Generate|TOK:C16|Thopter|||ThopterToken|
-|Generate|TOK:C16|Worm|||WormHarvestToken|
+|Generate|TOK:C16|Worm|||BlackGreenWormToken|
 |Generate|TOK:C16|Zombie|||ZombieToken|
 |Generate|TOK:C17|Bat|||BatToken|
 |Generate|TOK:C17|Cat|||CatToken|
@@ -399,7 +399,7 @@
 |Generate|TOK:C18|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:C18|Thopter|2||ThopterColorlessToken|
 |Generate|TOK:C18|Thopter|3||ThopterToken|
-|Generate|TOK:C18|Worm|||WormHarvestToken|
+|Generate|TOK:C18|Worm|||BlackGreenWormToken|
 |Generate|TOK:C18|Zombie|||ZombieToken|
 |Generate|TOK:C19|Assassin|||AssassinToken|
 |Generate|TOK:C19|Beast|1||BeastToken|
@@ -632,7 +632,7 @@
 |Generate|TOK:EVE|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:EVE|Spirit|||BeckonApparitionToken|
 |Generate|TOK:EVE|Wolf|||WolfToken|
-|Generate|TOK:EVE|Worm|||WormHarvestToken|
+|Generate|TOK:EVE|Worm|||BlackGreenWormToken|
 |Generate|TOK:EVG|Elemental|||VoiceOfTheWoodsElementalToken|
 |Generate|TOK:EVG|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:EVG|Goblin|||GoblinToken|
@@ -855,7 +855,7 @@
 |Generate|TOK:MM2|Spirit|||SpiritWhiteToken|
 |Generate|TOK:MM2|Thrull|||ThrullToken|
 |Generate|TOK:MM2|Wolf|||WolfToken|
-|Generate|TOK:MM2|Worm|||WormHarvestToken|
+|Generate|TOK:MM2|Worm|||BlackGreenWormToken|
 |Generate|TOK:MM3|Angel||
 |Generate|TOK:MM3|Beast|1|
 |Generate|TOK:MM3|Beast|2|
@@ -889,7 +889,7 @@
 |Generate|TOK:MMA|Soldier|||SoldierToken|
 |Generate|TOK:MMA|Spider|||PenumbraSpiderToken|
 |Generate|TOK:MMA|Treefolk Shaman|||TreefolkShamanToken|
-|Generate|TOK:MMA|Worm|||WormHarvestToken|
+|Generate|TOK:MMA|Worm|||BlackGreenWormToken|
 |Generate|TOK:MMA|Zombie|||ZombieToken|
 |Generate|TOK:MMQ|Ape|||ApeToken|
 |Generate|TOK:MMQ|Insect Butterfly|||ButterflyToken|

@@ -5,13 +5,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
  */
-public final class WormHarvestToken extends TokenImpl {
+public final class BlackGreenWormToken extends TokenImpl {
 
-    public WormHarvestToken() {
+    public BlackGreenWormToken() {
         super("Worm Token", "1/1 black and green Worm creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -19,13 +21,15 @@ public final class WormHarvestToken extends TokenImpl {
         subtype.add(SubType.WORM);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("EVE", "MMA", "MM2", "C16", "C18");
     }
 
-    public WormHarvestToken(final WormHarvestToken token) {
+    public BlackGreenWormToken(final BlackGreenWormToken token) {
         super(token);
     }
 
-    public WormHarvestToken copy() {
-        return new WormHarvestToken(this);
+    public BlackGreenWormToken copy() {
+        return new BlackGreenWormToken(this);
     }
 }
