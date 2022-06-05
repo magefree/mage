@@ -43,5 +43,8 @@ public final class BirdToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
             setTokenType(2);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("BNG")) {
+            setTokenType(2);
+        }
     }
 }

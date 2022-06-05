@@ -278,8 +278,8 @@
 |Generate|TOK:BFZ|Kor Ally|||KorAllyToken|
 |Generate|TOK:BFZ|Octopus|||OctopusToken|
 |Generate|TOK:BFZ|Plant|||GrovetenderDruidsPlantToken|
-|Generate|TOK:BNG|Bird|1||BirdToken|
-|Generate|TOK:BNG|Bird|2||AerieWorshippersBirdToken|
+|Generate|TOK:BNG|Bird|1||EnchantmentBirdToken|
+|Generate|TOK:BNG|Bird|2||BirdToken|
 |Generate|TOK:BNG|Cat Soldier|||CatSoldierCreatureToken|
 |Generate|TOK:BNG|Centaur|||CentaurEnchantmentCreatureToken|
 |Generate|TOK:BNG|Elemental|||SatyrNyxSmithElementalToken|
