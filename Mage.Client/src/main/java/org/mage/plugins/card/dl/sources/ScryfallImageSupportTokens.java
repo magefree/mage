@@ -1463,6 +1463,11 @@ public class ScryfallImageSupportTokens {
             put ("DVD/Spirit", "https://api.scryfall.com/cards/tdvd/5/en?format=image");
             put ("DVD/Thrull", "https://api.scryfall.com/cards/tdvd/7/en?format=image");
 
+            // FRF
+            put ("FRF/Monk", "https://api.scryfall.com/cards/tfrf/1/en?format=image");
+            put ("FRF/Spirit", "https://api.scryfall.com/cards/tfrf/2/en?format=image");
+            put ("FRF/Warrior", "https://api.scryfall.com/cards/tfrf/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

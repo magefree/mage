@@ -640,7 +640,6 @@
 |Generate|TOK:FEM|Thrull|||BreedingPitBlackInsectToken|
 |Generate|TOK:FNMP|Human||
 |Generate|TOK:FNMP|Wolf||
-|Generate|TOK:FRF|Manifest||
 |Generate|TOK:FRF|Monk|||MonasteryMentorToken|
 |Generate|TOK:FRF|Spirit|||SpiritWhiteToken|
 |Generate|TOK:FRF|Warrior|||MarduStrikeLeaderWarriorToken|
