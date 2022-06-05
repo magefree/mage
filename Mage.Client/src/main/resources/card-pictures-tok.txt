@@ -94,6 +94,7 @@
 |Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
 |Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
+|Generate|EMBLEM:MD1|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
@@ -1803,3 +1804,8 @@
 |Generate|TOK:DD1|Elemental|||VoiceOfTheWoodsElementalToken|
 |Generate|TOK:DD1|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:DD1|Goblin|||GoblinToken|
+
+# MD1
+|Generate|TOK:MD1|Phyrexian Myr|||PhyrexianMyrToken|
+|Generate|TOK:MD1|Soldier|||SoldierToken|
+|Generate|TOK:MD1|Spirit|||SpiritWhiteToken|

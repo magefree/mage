@@ -17,7 +17,7 @@ public final class PhyrexianMyrToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("NPH");
+        availableImageSetCodes = Arrays.asList("NPH", "MD1");
     }
 
     public PhyrexianMyrToken(final PhyrexianMyrToken token) {
