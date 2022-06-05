@@ -480,9 +480,8 @@
 |Generate|TOK:CN2|Soldier|2|
 |Generate|TOK:CN2|Spirit||
 |Generate|TOK:CN2|Zombie||
-|Generate|TOK:CNS|Constructdefender|||DarettiConstructToken|
-|Generate|TOK:CNS|Construct||
-|Generate|TOK:CNS|Demon|||ReignOfThePitToken|
+|Generate|TOK:CNS|Construct|||DarettiConstructToken|
+|Generate|TOK:CNS|Demon|||DemonFlyingToken|
 |Generate|TOK:CNS|Elephant|||ElephantToken|
 |Generate|TOK:CNS|Ogre||
 |Generate|TOK:CNS|Spirit|||SpiritWhiteToken|

@@ -1420,6 +1420,16 @@ public class ScryfallImageSupportTokens {
             put ("MD1/Soldier", "https://api.scryfall.com/cards/tmd1/1/en?format=image");
             put ("MD1/Spirit", "https://api.scryfall.com/cards/tmd1/2/en?format=image");
 
+            // CNS
+            put ("CNS/Construct", "https://api.scryfall.com/cards/tcns/8/en?format=image");
+            put ("CNS/Emblem Dack Fayden", "https://api.scryfall.com/cards/tcns/9/en?format=image");
+            put ("CNS/Demon", "https://api.scryfall.com/cards/tcns/2/en?format=image");
+            put ("CNS/Elephant", "https://api.scryfall.com/cards/tcns/5/en?format=image");
+            put ("CNS/Spirit", "https://api.scryfall.com/cards/tcns/1/en?format=image");
+            put ("CNS/Squirrel", "https://api.scryfall.com/cards/tcns/6/en?format=image");
+            put ("CNS/Wolf", "https://api.scryfall.com/cards/tcns/7/en?format=image");
+            put ("CNS/Zombie", "https://api.scryfall.com/cards/tcns/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
