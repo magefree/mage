@@ -1472,6 +1472,24 @@ public class ScryfallImageSupportTokens {
             put ("DDO/Kraken", "https://api.scryfall.com/cards/ddo/67/en?format=image");
             put ("DDO/Soldier", "https://api.scryfall.com/cards/ddo/66/en?format=image");
 
+            // MM2
+            put ("MM2/Eldrazi Spawn/1", "https://api.scryfall.com/cards/tmm2/1/en?format=image");
+            put ("MM2/Eldrazi Spawn/2", "https://api.scryfall.com/cards/tmm2/2/en?format=image");
+            put ("MM2/Eldrazi Spawn/3", "https://api.scryfall.com/cards/tmm2/3/en?format=image");
+            put ("MM2/Elephant", "https://api.scryfall.com/cards/tmm2/9/en?format=image");
+            put ("MM2/Faerie Rogue", "https://api.scryfall.com/cards/tmm2/6/en?format=image");
+            put ("MM2/Phyrexian Germ", "https://api.scryfall.com/cards/tmm2/7/en?format=image");
+            put ("MM2/Golem", "https://api.scryfall.com/cards/tmm2/15/en?format=image");
+            put ("MM2/Insect", "https://api.scryfall.com/cards/tmm2/10/en?format=image");
+            put ("MM2/Myr", "https://api.scryfall.com/cards/tmm2/16/en?format=image");
+            put ("MM2/Saproling", "https://api.scryfall.com/cards/tmm2/11/en?format=image");
+            put ("MM2/Snake", "https://api.scryfall.com/cards/tmm2/12/en?format=image");
+            put ("MM2/Soldier", "https://api.scryfall.com/cards/tmm2/4/en?format=image");
+            put ("MM2/Spirit", "https://api.scryfall.com/cards/tmm2/5/en?format=image");
+            put ("MM2/Thrull", "https://api.scryfall.com/cards/tmm2/8/en?format=image");
+            put ("MM2/Wolf", "https://api.scryfall.com/cards/tmm2/13/en?format=image");
+            put ("MM2/Worm", "https://api.scryfall.com/cards/tmm2/14/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

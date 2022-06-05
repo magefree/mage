@@ -832,7 +832,7 @@
 |Generate|TOK:MM2|Eldrazi Spawn|3||EldraziSpawnToken|
 |Generate|TOK:MM2|Elephant|||ElephantToken|
 |Generate|TOK:MM2|Faerie Rogue|||FaerieRogueToken|
-|Generate|TOK:MM2|Germ|||PhyrexianGermToken|
+|Generate|TOK:MM2|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:MM2|Golem|||GolemToken|
 |Generate|TOK:MM2|Insect|||InsectToken|
 |Generate|TOK:MM2|Myr|||MyrToken|
