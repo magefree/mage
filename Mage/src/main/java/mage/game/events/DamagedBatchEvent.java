@@ -1,7 +1,9 @@
 package mage.game.events;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -20,6 +22,24 @@ public abstract class DamagedBatchEvent extends GameEvent {
         return events;
     }
 
+    @Override
+    public int getAmount() {
+        return events
+                .stream()
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+    }
+
+    @Override
+    public UUID getTargetId() {
+        return events
+                .stream()
+                .map(GameEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+    }
+
     public void addEvent(DamagedEvent event) {
         this.events.add(event);
     }
@@ -29,13 +49,15 @@ public abstract class DamagedBatchEvent extends GameEvent {
     }
 
     public static DamagedBatchEvent makeEvent(DamagedEvent damagedEvent) {
-        DamagedBatchEvent event = null;
+        DamagedBatchEvent event;
         if (damagedEvent instanceof DamagedPlayerEvent) {
             event = new DamagedPlayerBatchEvent();
             event.addEvent(damagedEvent);
         } else if (damagedEvent instanceof DamagedPermanentEvent) {
             event = new DamagedPermanentBatchEvent();
             event.addEvent(damagedEvent);
+        } else {
+            event = null;
         }
         return event;
     }

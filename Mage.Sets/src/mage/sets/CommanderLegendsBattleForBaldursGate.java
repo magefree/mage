@@ -611,6 +611,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Winter Eladrin", 104, Rarity.COMMON, mage.cards.w.WinterEladrin.class));
         cards.add(new SetCardInfo("Wizards of Thay", 105, Rarity.RARE, mage.cards.w.WizardsOfThay.class));
         cards.add(new SetCardInfo("Woe Strider", 774, Rarity.RARE, mage.cards.w.WoeStrider.class));
+        cards.add(new SetCardInfo("Wrathful Red Dragon", 207, Rarity.RARE, mage.cards.w.WrathfulRedDragon.class));
         cards.add(new SetCardInfo("Wyll's Reversal", 209, Rarity.RARE, mage.cards.w.WyllsReversal.class));
         cards.add(new SetCardInfo("Wyll, Blade of Frontiers", 208, Rarity.RARE, mage.cards.w.WyllBladeOfFrontiers.class));
         cards.add(new SetCardInfo("Wyrm's Crossing Patrol", 51, Rarity.COMMON, mage.cards.w.WyrmsCrossingPatrol.class));
