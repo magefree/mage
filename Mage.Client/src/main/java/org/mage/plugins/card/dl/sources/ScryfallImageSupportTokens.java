@@ -1406,6 +1406,14 @@ public class ScryfallImageSupportTokens {
             // DDM
             put ("DDM/Assassin", "https://api.scryfall.com/cards/tddm/1/en?format=image");
 
+            // JOU
+            put ("JOU/Hydra", "https://api.scryfall.com/cards/tjou/4/en?format=image");
+            put ("JOU/Minotaur", "https://api.scryfall.com/cards/tjou/3/en?format=image");
+            put ("JOU/Snake", "https://api.scryfall.com/cards/tjou/6/en?format=image");
+            put ("JOU/Sphinx", "https://api.scryfall.com/cards/tjou/1/en?format=image");
+            put ("JOU/Spider", "https://api.scryfall.com/cards/tjou/5/en?format=image");
+            put ("JOU/Zombie", "https://api.scryfall.com/cards/tjou/2/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

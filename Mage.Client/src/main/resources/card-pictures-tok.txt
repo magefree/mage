@@ -701,13 +701,9 @@
 |Generate|TOK:ISD|Zombie|1||ZombieToken|
 |Generate|TOK:ISD|Zombie|2||ZombieToken|
 |Generate|TOK:ISD|Zombie|3||ZombieToken|
-|Generate|TOK:JOU|Bird|||AerieWorshippersBirdToken|
-|Generate|TOK:JOU|Gold||
 |Generate|TOK:JOU|Hydra|||HydraBroodmasterToken|
 |Generate|TOK:JOU|Minotaur|||FlurryOfHornsMinotaurToken|
-|Generate|TOK:JOU|Satyr|||XenagosSatyrToken|
 |Generate|TOK:JOU|Snake|||PharikaSnakeToken|
-|Generate|TOK:JOU|Soldier|||SoldierToken|
 |Generate|TOK:JOU|Sphinx|||HourOfNeedSphinxToken|
 |Generate|TOK:JOU|Spider|||RenownedWeaverSpiderToken|
 |Generate|TOK:JOU|Zombie||RitualOfTheReturnedZombieToken|
