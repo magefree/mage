@@ -38,7 +38,7 @@ public final class KazuulsTollCollector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new KazuulsTollCollectorEffect(), new ManaCostsImpl("{0}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new KazuulsTollCollectorEffect(), new ManaCostsImpl<>("{0}"));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

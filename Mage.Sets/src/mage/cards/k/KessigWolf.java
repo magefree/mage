@@ -30,7 +30,7 @@ public final class KessigWolf extends CardImpl {
         // {1}{R}: Kessig Wolf gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{R}")));
+                new ManaCostsImpl<>("{1}{R}")));
     }
 
     private KessigWolf(final KessigWolf card) {

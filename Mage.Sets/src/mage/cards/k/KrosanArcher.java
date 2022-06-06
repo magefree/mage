@@ -33,7 +33,7 @@ public final class KrosanArcher extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // {G}, Discard a card: Krosan Archer gets +0/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,2, Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,2, Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

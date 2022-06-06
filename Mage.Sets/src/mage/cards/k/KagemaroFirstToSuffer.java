@@ -47,7 +47,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostAllEffect(xMinusValue, xMinusValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false,
                         "All creatures get -X/-X until end of turn, where X is the number of cards in your hand"),
-                new ManaCostsImpl("{B}")
+                new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
