@@ -1831,3 +1831,6 @@
 |Generate|TOK:A25|Stangg Twin|||StanggTwinToken|
 |Generate|TOK:A25|Whale|||ReefWormWhaleToken|
 |Generate|TOK:A25|Wolf|||WolfToken|
+
+# GS1
+|Generate|TOK:GS1|Mowu|||MowuToken|

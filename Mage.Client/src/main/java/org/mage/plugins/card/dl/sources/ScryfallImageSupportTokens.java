@@ -1621,6 +1621,9 @@ public class ScryfallImageSupportTokens {
             put ("A25/Whale", "https://api.scryfall.com/cards/ta25/7/en?format=image");
             put ("A25/Wolf", "https://api.scryfall.com/cards/ta25/13/en?format=image");
 
+            // GS1
+            put ("GS1/Mowu", "https://api.scryfall.com/cards/gs1/T1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
