@@ -46,6 +46,7 @@
 |Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM!:DDR|Emblem Nixilis|||ObNixilisReignitedEmblem|
 |Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
@@ -1800,3 +1801,10 @@
 
 # V16
 |Generate|TOK:V16|Marit Lage|||MaritLageToken|
+
+# DDR
+|Generate|TOK:DDR|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:DDR|Demon|||DemonToken|
+|Generate|TOK:DDR|Zombie Giant|||QuestForTheGravelordZombieToken|
+|Generate|TOK:DDR|Elemental|||WalkerOfTheGroveToken|
+|Generate|TOK:DDR|Plant|||PlantToken|

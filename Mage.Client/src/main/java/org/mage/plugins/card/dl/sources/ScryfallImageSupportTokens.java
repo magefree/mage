@@ -1551,6 +1551,14 @@ public class ScryfallImageSupportTokens {
             put ("CN2/Spirit", "https://api.scryfall.com/cards/tcn2/4/en?format=image");
             put ("CN2/Zombie", "https://api.scryfall.com/cards/tcn2/6/en?format=image");
 
+            // DDR
+            put ("DDR/Eldrazi Scion", "https://api.scryfall.com/cards/ddr/71/en?format=image");
+            put ("DDR/Demon", "https://api.scryfall.com/cards/ddr/72/en?format=image");
+            put ("DDR/Zombie Giant", "https://api.scryfall.com/cards/ddr/73/en?format=image");
+            put ("DDR/Elemental", "https://api.scryfall.com/cards/ddr/74/en?format=image");
+            put ("DDR/Plant", "https://api.scryfall.com/cards/ddr/75/en?format=image");
+            put ("DDR/Emblem Nixilis", "https://api.scryfall.com/cards/ddr/76/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
