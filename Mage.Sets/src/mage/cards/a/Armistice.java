@@ -27,7 +27,7 @@ public final class Armistice extends CardImpl {
         // {3}{W}{W}: You draw a card and target opponent gains 3 life.
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("You draw a card");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{W}{W}"));
         effect = new GainLifeTargetEffect(3);
         effect.setText("and target opponent gains 3 life");
         ability.addEffect(effect);

@@ -40,7 +40,7 @@ public final class DetainmentSpell extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesAttachedEffect()));
 
         // {1}{W}: Attach Detainment Spell to target creature.
-        ability = new SimpleActivatedAbility(new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature"), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature"), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

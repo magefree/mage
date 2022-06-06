@@ -40,7 +40,7 @@ public final class KikuNightsFlower extends CardImpl {
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new KikuNightsFlowerEffect(), 
-                new ManaCostsImpl("{2}{B}{B}")
+                new ManaCostsImpl<>("{2}{B}{B}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());

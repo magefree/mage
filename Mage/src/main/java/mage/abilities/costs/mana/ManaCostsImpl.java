@@ -42,7 +42,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         load(mana);
     }
 
-    public ManaCostsImpl(final ManaCostsImpl<T> costs) {
+    private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
         for (T cost : costs) {
@@ -151,7 +151,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      *
      * @param ability
      * @param game
-     * @param sourceId
+     * @param source
      * @param payingPlayerId
      * @return true if the cost was paid
      */

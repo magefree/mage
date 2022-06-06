@@ -27,7 +27,7 @@ public final class EyesOfTheWatcher extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever you cast an instant or sorcery spell, you may pay {1}. If you do, scry 2.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ScryEffect(2), new ManaCostsImpl("{1}")), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ScryEffect(2), new ManaCostsImpl<>("{1}")), filter, false));
     }
 
     private EyesOfTheWatcher(final EyesOfTheWatcher card) {

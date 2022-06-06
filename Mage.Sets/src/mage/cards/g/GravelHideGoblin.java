@@ -27,7 +27,7 @@ public final class GravelHideGoblin extends CardImpl {
 
         // {3}{G}: Gravel-Hide Goblin gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")
         ));
     }
 

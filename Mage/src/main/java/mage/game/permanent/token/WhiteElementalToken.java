@@ -21,7 +21,7 @@ public final class WhiteElementalToken extends TokenImpl {
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("LRW", "C16", "C20", "RTR");
+        availableImageSetCodes = Arrays.asList("LRW", "C16", "C20", "RTR", "NCC");
     }
 
     @Override
@@ -34,6 +34,10 @@ public final class WhiteElementalToken extends TokenImpl {
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("LRW")) {
             setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
+            setTokenType(3);
         }
     }
 

@@ -39,7 +39,7 @@ public final class LudevicsTestSubject extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HATCHLING.createInstance()), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HATCHLING.createInstance()), new ManaCostsImpl<>("{1}{U}"));
         ability.addEffect(new LudevicsTestSubjectEffect());
         this.addAbility(ability);
     }

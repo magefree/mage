@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -21,6 +23,8 @@ public final class DjinnMonkToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("DTK", "IMA");
     }
 
     public DjinnMonkToken(final DjinnMonkToken token) {

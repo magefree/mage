@@ -31,7 +31,7 @@ public final class MisthoofKirin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         
         // Megamorph {1}{W} <i>(You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)</i>
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}"), true));
     }
 
     private MisthoofKirin(final MisthoofKirin card) {

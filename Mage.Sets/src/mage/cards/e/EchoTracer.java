@@ -28,7 +28,7 @@ public final class EchoTracer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
         // When Echo Tracer is turned face up, return target creature to its owner's hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());

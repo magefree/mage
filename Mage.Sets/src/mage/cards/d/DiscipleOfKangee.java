@@ -36,7 +36,7 @@ public final class DiscipleOfKangee extends CardImpl {
         // {U}, {T}: Target creature gains flying and becomes blue until end of turn.
         Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains flying");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"));
         effect = new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn);
         effect.setText("and becomes blue until end of turn.");
         ability.addEffect(effect);

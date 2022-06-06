@@ -50,7 +50,7 @@ public final class GoblinWizard extends CardImpl {
 
         // {R}: Target Goblin gains protection from white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         Target target = new TargetPermanent(goblinPermanent);
         ability.addTarget(target);
         this.addAbility(ability);

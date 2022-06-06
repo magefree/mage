@@ -85,9 +85,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
-    private int stepNum;
-    private UUID turnId;
-    private boolean extraTurn;
+    private int stepNum = 0;
+    private UUID turnId = null;
+    private boolean extraTurn = false;
     private boolean legendaryRuleActive = true;
     private boolean gameOver;
     private boolean paused;
@@ -105,8 +105,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
-    private boolean manaBurn;
-    private boolean hasDayNight;
+    private boolean manaBurn = false;
+    private boolean hasDayNight = false;
     private boolean isDaytime = true;
     private boolean reverseTurnOrder = false;
 
@@ -202,6 +202,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
         this.manaBurn = state.manaBurn;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     public void clearOnGameRestart() {
@@ -292,6 +293,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay = state.commandersToStay;
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
+        this.reverseTurnOrder = state.reverseTurnOrder;
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class NobleTemplar extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Plainscycling {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private NobleTemplar(final NobleTemplar card) {

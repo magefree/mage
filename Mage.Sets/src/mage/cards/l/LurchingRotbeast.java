@@ -25,7 +25,7 @@ public final class LurchingRotbeast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
 
     }
 

@@ -24,7 +24,7 @@ public final class PenumbraSpiderToken extends TokenImpl {
 
         addAbility(ReachAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("MMA", "PC2", "TSP", "TSR");
+        availableImageSetCodes = Arrays.asList("MMA", "PC2", "TSP", "TSR", "PCA");
     }
 
     public PenumbraSpiderToken(final PenumbraSpiderToken token) {

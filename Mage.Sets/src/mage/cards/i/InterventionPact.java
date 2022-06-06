@@ -35,7 +35,7 @@ public final class InterventionPact extends CardImpl {
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new InterventionPactEffect());
         // At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}")), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{1}{W}{W}")), false));
     }
 
     private InterventionPact(final InterventionPact card) {

@@ -40,7 +40,7 @@ public final class GlyphKeeper extends CardImpl {
         this.addAbility(new GlyphKeeperAbility(), new NumberOfTimesPermanentTargetedATurnWatcher());
 
         // Embalm {5}{U}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{U}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{U}{U}"), this));
 
     }
 

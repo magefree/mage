@@ -47,7 +47,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileAndReturnTransformedSourceEffect(Pronoun.HE),
-                new ManaCostsImpl("{4}{U}{B}{R}")
+                new ManaCostsImpl<>("{4}{U}{B}{R}")
         ));
     }
 

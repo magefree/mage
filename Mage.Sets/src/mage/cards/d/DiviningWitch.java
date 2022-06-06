@@ -35,7 +35,7 @@ public final class DiviningWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}, {tap}, Discard a card: Name a card. Exile the top six cards of your library. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiviningWitchEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiviningWitchEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);

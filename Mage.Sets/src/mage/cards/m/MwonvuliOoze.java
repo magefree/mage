@@ -32,7 +32,7 @@ public final class MwonvuliOoze extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
         // Mwonvuli Ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new MwonvuliOozePTValue(), Duration.EndOfGame)));
     }

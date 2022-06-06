@@ -25,7 +25,7 @@ public final class IronWill extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private IronWill(final IronWill card) {

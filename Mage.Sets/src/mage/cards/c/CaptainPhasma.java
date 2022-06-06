@@ -51,7 +51,7 @@ public final class CaptainPhasma extends CardImpl {
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}{U}{B}{R}{G}: Search your library for a Trooper creature card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private CaptainPhasma(final CaptainPhasma card) {

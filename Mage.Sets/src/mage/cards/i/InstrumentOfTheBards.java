@@ -43,7 +43,7 @@ public final class InstrumentOfTheBards extends CardImpl {
         // {3}{G}, {T}: Search your library for a creature card with mana value equal to the number of harmony
         // counters on Instrument of Bards, reveal it, and put it into your hand.
         // If that card is legendary, create a Treasure token. Then shuffle.
-        Ability ability = new SimpleActivatedAbility(new InstrumentOfTheBardsEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new InstrumentOfTheBardsEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

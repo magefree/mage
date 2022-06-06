@@ -59,7 +59,7 @@ class MyrIncubatorEffect extends SearchEffect {
         filter.add(CardType.ARTIFACT.getPredicate());
     }
     
-    int tokensToCreate;
+    int tokensToCreate = 0;
 
     MyrIncubatorEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);

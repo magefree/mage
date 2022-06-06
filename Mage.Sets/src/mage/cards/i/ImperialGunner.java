@@ -32,7 +32,7 @@ public final class ImperialGunner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1},{T}: Imperial Gunner deals 1 damage to target player or Starship creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetAnyTarget(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -39,7 +39,9 @@ public final class RobeOfTheArchmagi extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, you draw that many cards.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new DrawCardSourceControllerEffect(SavedDamageValue.MANY), "equipped", false
+                new DrawCardSourceControllerEffect(SavedDamageValue.MANY)
+                        .setText("you draw that many cards"),
+                "equipped", false
         ));
 
         // Equip {4}

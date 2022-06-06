@@ -29,7 +29,7 @@ public final class DrifterIlDal extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}")), TargetController.YOU, false));
     }
 
     private DrifterIlDal(final DrifterIlDal card) {

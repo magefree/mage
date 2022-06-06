@@ -86,7 +86,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
             controller.chooseTarget(Outcome.Benefit, revealedCards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                game.informPlayers("The choosen card name is [" + GameLog.getColoredObjectName(card) + ']');
+                game.informPlayers("The chosen card name is [" + GameLog.getColoredObjectName(card) + ']');
                 Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
                 if (sourcePermanent == null) {
                     sourcePermanent = game.getPermanentEntering(source.getSourceId());

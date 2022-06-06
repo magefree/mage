@@ -64,7 +64,7 @@ public class KeeperOfTheMind extends CardImpl {
         // {U}, {tap}: Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.setTargetAdjuster(KeeperOfTheMindAdjuster.instance);
         this.addAbility(ability);

@@ -42,7 +42,7 @@ public final class GhenArcanumWeaver extends CardImpl {
 
         // {R}{W}{B}, {T}, Sacrifice an enchantment: Return target enchantment card from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{R}{W}{B}")
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{R}{W}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

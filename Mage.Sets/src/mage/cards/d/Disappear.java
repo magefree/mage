@@ -38,7 +38,7 @@ public final class Disappear extends CardImpl {
         this.addAbility(ability);
 
         // {U}: Return enchanted creature and Disappear to their owners' hands.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DisappearEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DisappearEffect(), new ManaCostsImpl<>("{U}")));
         
     }
 

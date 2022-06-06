@@ -29,7 +29,7 @@ public final class DesertOfTheGlorified extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // Cycling {1}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{B}")));
 
     }
 

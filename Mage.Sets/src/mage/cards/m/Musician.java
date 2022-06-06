@@ -36,7 +36,7 @@ public final class Musician extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // {tap}: Put a music counter on target creature. If it doesn't have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.
         Effect effect = new DoUnlessControllerPaysEffect(

@@ -62,7 +62,7 @@ public final class ErebosBleakHearted extends CardImpl {
 
         // {1}{B}, Sacrifice another creature: Target creature gets -2/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(-2, -1), new ManaCostsImpl("{1}{B}")
+                new BoostTargetEffect(-2, -1), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeTargetCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)

@@ -66,10 +66,10 @@ public class PlayCardsFromGraveyardTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Ancestral Vision");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
-        // you may not suspend it from graveyard
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
+        // You may not suspend it from graveyard
+        checkPlayableAbility("Can't suspend", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend", false);
         // It may not be possible to cast it from graveyard
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision");
+        checkPlayableAbility("Can't cast 0 cost cards", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ancestral", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -85,5 +85,4 @@ public class PlayCardsFromGraveyardTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
-
 }

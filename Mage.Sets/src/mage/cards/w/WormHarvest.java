@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandCard;
-import mage.game.permanent.token.WormHarvestToken;
+import mage.game.permanent.token.BlackGreenWormToken;
 
 /**
  *
@@ -22,7 +22,7 @@ public final class WormHarvest extends CardImpl {
 
         // Create a 1/1 black and green Worm creature token for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WormHarvestToken(), value));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BlackGreenWormToken(), value));
 
         // Retrace
         this.addAbility(new RetraceAbility(this));

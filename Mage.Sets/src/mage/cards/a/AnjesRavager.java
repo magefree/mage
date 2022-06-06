@@ -39,7 +39,7 @@ public final class AnjesRavager extends CardImpl {
         this.addAbility(ability);
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private AnjesRavager(final AnjesRavager card) {

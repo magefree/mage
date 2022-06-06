@@ -13,8 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -104,12 +103,15 @@ class MarisiBreakerOfTheCoilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE,
-                targetPointer.getFirst(game, source), game
-        )) {
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
+        UUID playerId = getTargetPointer().getFirst(game, source);
+        if (playerId == null) {
+            return false;
         }
+        game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTargets(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game
+                ), game
+        )), source);
         return true;
     }
 }

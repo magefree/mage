@@ -47,7 +47,7 @@ public final class MetallurgicSummonings extends CardImpl {
 
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl("{3}{U}{U}"),
+                new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl<>("{3}{U}{U}"),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
                 "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
                 + " Activate only if you control six or more artifacts.");

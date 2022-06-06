@@ -18,7 +18,7 @@ public final class ChandraAwakenedInfernoEmblem extends Emblem {
 
     public ChandraAwakenedInfernoEmblem() {
         setName("Emblem Chandra");
-        setExpansionSetCodeForImage("M19");
+        setExpansionSetCodeForImage("M20");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
                 Zone.COMMAND, new DamageControllerEffect(1, "this emblem"),
                 TargetController.YOU, false, true

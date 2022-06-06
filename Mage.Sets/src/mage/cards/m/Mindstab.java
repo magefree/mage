@@ -25,7 +25,7 @@ public final class Mindstab extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Suspend 4—{B} (Rather than cast this card from your hand, you may pay {B} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{B}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{B}"), this));
     }
 
     private Mindstab(final Mindstab card) {

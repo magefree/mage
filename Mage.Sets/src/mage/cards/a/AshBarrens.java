@@ -22,7 +22,7 @@ public final class AshBarrens extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Basic landcycling {1}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private AshBarrens(final AshBarrens card) {

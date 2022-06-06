@@ -34,12 +34,12 @@ public final class FlailingManticore extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // {1}: Flailing Manticore gets +1/+1 until end of turn. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn) , new ManaCostsImpl("{1}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn) , new ManaCostsImpl<>("{1}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
         // {1}: Flailing Manticore gets -1/-1 until end of turn. Any player may activate this ability.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Duration.EndOfTurn) , new ManaCostsImpl("{1}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Duration.EndOfTurn) , new ManaCostsImpl<>("{1}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

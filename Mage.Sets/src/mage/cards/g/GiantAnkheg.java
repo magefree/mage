@@ -43,7 +43,7 @@ public final class GiantAnkheg extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(2), false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
-        ));
+        ).setText("and ward {2}"));
         this.addAbility(ability);
     }
 

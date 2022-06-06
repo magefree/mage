@@ -28,7 +28,7 @@ public final class AncientExcavation extends CardImpl {
         this.getSpellAbility().addEffect(new AncientExcavationEffect());
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private AncientExcavation(final AncientExcavation card) {

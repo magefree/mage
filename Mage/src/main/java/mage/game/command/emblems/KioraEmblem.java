@@ -20,6 +20,7 @@ public final class KioraEmblem extends Emblem {
 
     public KioraEmblem() {
         this.setName("Emblem Kiora");
+        this.setExpansionSetCodeForImage("BNG");
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new Kraken99Token()), TargetController.YOU, null, false);
         this.getAbilities().add(ability);
     }

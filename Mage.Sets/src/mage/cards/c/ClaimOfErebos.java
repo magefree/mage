@@ -36,7 +36,7 @@ public final class ClaimOfErebos extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has "{1}{B}, {T}: Target player loses 2 life."
-        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{1}{B}"));
+        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{1}{B}"));
         grantedAbility.addCost(new TapSourceCost());
         grantedAbility.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));

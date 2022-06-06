@@ -32,7 +32,7 @@ public final class AerialCaravan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(1).setText("Exile the top card of your library. " +
                                 "Until end of turn, you may play that card. <i>(Reveal the card as you exile it.)</i>"),
-                new ManaCostsImpl("{1}{U}{U}")));
+                new ManaCostsImpl<>("{1}{U}{U}")));
     }
 
     private AerialCaravan(final AerialCaravan card) {

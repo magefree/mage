@@ -27,7 +27,7 @@ public final class MetathranZombie extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Metathran Zombie.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private MetathranZombie(final MetathranZombie card) {

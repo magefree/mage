@@ -27,7 +27,7 @@ public final class ErrantEphemeron extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Suspend 4-{1}{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private ErrantEphemeron(final ErrantEphemeron card) {

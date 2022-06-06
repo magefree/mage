@@ -23,7 +23,7 @@ public final class DregscapeZombie extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         // Unearth {B} ({B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private DregscapeZombie(final DregscapeZombie card) {

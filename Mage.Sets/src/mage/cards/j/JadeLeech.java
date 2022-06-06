@@ -35,7 +35,7 @@ public final class JadeLeech extends CardImpl {
 
         // Green spells you cast cost {G} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{G}"), filter, TargetController.YOU)));
+                new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{G}"), filter, TargetController.YOU)));
     }
 
     private JadeLeech(final JadeLeech card) {

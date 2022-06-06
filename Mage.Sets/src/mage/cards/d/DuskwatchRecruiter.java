@@ -35,7 +35,7 @@ public final class DuskwatchRecruiter extends CardImpl {
         // Put the rest on the bottom of your library in any order.
         this.addAbility(new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(3, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_ANY),
-                new ManaCostsImpl("{2}{G}")));
+                new ManaCostsImpl<>("{2}{G}")));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Duskwatch Recruiter.
         this.addAbility(new TransformAbility());

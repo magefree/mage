@@ -27,7 +27,7 @@ public final class GiantDustwasp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Suspend 4-{1}{G}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{G}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{G}"), this));
     }
 
     private GiantDustwasp(final GiantDustwasp card) {

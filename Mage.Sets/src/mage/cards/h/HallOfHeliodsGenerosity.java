@@ -33,7 +33,7 @@ public final class HallOfHeliodsGenerosity extends CardImpl {
 
         // {1}{W}, {T}: Put target enchantment card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(
-                new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{1}{W}")
+                new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

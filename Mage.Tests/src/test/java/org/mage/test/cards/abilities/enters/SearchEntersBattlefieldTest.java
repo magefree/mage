@@ -20,14 +20,12 @@ public class SearchEntersBattlefieldTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdant Catacombs");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay");
-        setChoice(playerA, "Forest");
+        addTarget(playerA, "Forest");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Verdant Catacombs", 1);
         assertPermanentCount(playerA, "Forest", 1);
         assertTapped("Forest", false);
-
     }
-
 }

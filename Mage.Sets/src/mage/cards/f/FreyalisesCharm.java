@@ -33,12 +33,12 @@ public final class FreyalisesCharm extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DoIfCostPaid(
                         new DrawCardSourceControllerEffect(1, "you"),
-                        new ManaCostsImpl("{G}{G}")
+                        new ManaCostsImpl<>("{G}{G}")
                 ), filter, false
         ));
 
         // {G}{G}: Return Freyalise's Charm to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{G}{G}")));
     }
 
     private FreyalisesCharm(final FreyalisesCharm card) {

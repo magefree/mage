@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -18,6 +20,8 @@ public final class MarduStrikeLeaderWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("FRF");
     }
 
     public MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {

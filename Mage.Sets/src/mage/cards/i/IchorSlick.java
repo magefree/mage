@@ -27,10 +27,10 @@ public final class IchorSlick extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
         // Madness {3}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private IchorSlick(final IchorSlick card) {

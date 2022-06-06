@@ -37,7 +37,7 @@ public final class GatewayShade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Gateway Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1, Duration.EndOfTurn),new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1, Duration.EndOfTurn),new ManaCostsImpl<>("{B}")));
 
         // Tap an untapped Gate you control: Gateway Shade gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn),new TapTargetCost(new TargetControlledPermanent(1,1,filter, true))));

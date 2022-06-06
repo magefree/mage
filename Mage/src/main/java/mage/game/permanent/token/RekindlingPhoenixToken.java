@@ -16,6 +16,9 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.RandomUtil;
+
+import java.util.Arrays;
 
 /**
  *
@@ -39,6 +42,21 @@ public final class RekindlingPhoenixToken extends TokenImpl {
         filter.add(new NamePredicate("Rekindling Phoenix"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("RIX", "NCC");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("RIX")) {
+            this.setTokenType(1);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
+            this.setTokenType(1);
+        }
     }
 
     public RekindlingPhoenixToken(final RekindlingPhoenixToken token) {

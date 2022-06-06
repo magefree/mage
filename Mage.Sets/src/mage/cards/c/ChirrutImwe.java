@@ -43,7 +43,7 @@ public final class ChirrutImwe extends CardImpl {
         // {1}{W}: Prevent all combat damage that would be dealt to Chirrut Imwe until end of turn.
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to {this} until end of turn");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private ChirrutImwe(final ChirrutImwe card) {

@@ -39,7 +39,7 @@ public final class DesiccatedNaga extends CardImpl {
         // {3}{B}: Target opponent loses 2 life and you gain 2 life. Activate this ability only if you control a Liliana planeswalker.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(2),
-                new ManaCostsImpl("{3}{B}"),
+                new ManaCostsImpl<>("{3}{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter));
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetOpponent());

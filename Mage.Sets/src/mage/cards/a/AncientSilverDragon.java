@@ -33,11 +33,14 @@ public final class AncientSilverDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Ancient Silver Dragon deals combat damage to a player, roll a d20. Draw cards equal to the result. You have no maximum hand size for the rest of the game.
+        // Whenever Ancient Silver Dragon deals combat damage to a player, roll a d20.
+        // Draw cards equal to the result.
+        // You have no maximum hand size for the rest of the game.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AncientSilverDragonEffect(), false);
         ability.addEffect(new MaximumHandSizeControllerEffect(
                 Integer.MAX_VALUE, Duration.EndOfGame, MaximumHandSizeControllerEffect.HandSizeModification.SET
         ));
+        this.addAbility(ability);
     }
 
     private AncientSilverDragon(final AncientSilverDragon card) {

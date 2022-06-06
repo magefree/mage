@@ -33,7 +33,7 @@ public final class InitiatesOfTheEbonHand extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Add {B}. If this ability has been activated four or more times this turn, sacrifice Initiates of the Ebon Hand at the beginning of the next end step.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, BlackMana(1), new ManaCostsImpl("{1}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, BlackMana(1), new ManaCostsImpl<>("{1}"));
         ability.addEffect(new InitiatesOfTheEbonHandEffect());
         this.addAbility(ability);
     }

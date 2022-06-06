@@ -6,14 +6,26 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.d.DuskDawn Dusk}
+ * {2}{W}{W}
+ * Sorcery
+ * Destroy all creatures with power 3 or greater.
+ *
+ * {@link mage.cards.d.DuskDawn Dawn}
+ * {3}{W}{W}
+ * Sorcery
+ * Aftermath (Cast this spell only from your graveyard. Then exile it.)
+ * Return all creature cards with power 2 or less from your graveyard to your hand.
  *
  * @author Quercitron
  */
 public class DuskDawnTest extends CardTestPlayerBase {
 
+    /**
+     * Test that you can properly cast Dusk (regular part) from hand
+     */
     @Test
     public void testCastDusk() {
-        //Cast dusk from hand
         addCard(Zone.BATTLEFIELD, playerB, "Watchwolf");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Dusk // Dawn");
@@ -22,19 +34,24 @@ public class DuskDawnTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertTappedCount("Plains", true, 4); // check that we paid the right side's mana
+        // check that we paid the right side's mana
+        assertTappedCount("Plains", true, 4);
+
         assertPermanentCount(playerB, "Watchwolf", 0);
         assertGraveyardCount(playerB, "Watchwolf", 1);
         assertGraveyardCount(playerA, "Dusk // Dawn", 1);
     }
 
+    /**
+     * Test that you cannot cast Dusk (Reguar part) from graveyard.
+     */
     @Test
     public void testCastDuskFromGraveyardFail() {
-        //Fail to cast dusk from graveyard
         addCard(Zone.BATTLEFIELD, playerB, "Watchwolf");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.GRAVEYARD, playerA, "Dusk // Dawn");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dusk");
+
+        checkPlayableAbility("Can't cast Dusk", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dusk", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -44,12 +61,11 @@ public class DuskDawnTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Dusk // Dawn", 1);
     }
 
+    /**
+     * Test that you can cast Dawn (Aftermath part) from graveyard.
+     */
     @Test
     public void testCastDawnFromGraveyard() {
-        // Dusk
-        // Destroy all creatures with power 3 or greater.
-        // Dawn
-        // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Dusk // Dawn");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.GRAVEYARD, playerA, "Devoted Hero");
@@ -59,34 +75,32 @@ public class DuskDawnTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // Dusk dawn should have been cast and exiled
-        // devoted hero should be in the hand
-        // watchwolf should still be in the yard
-        assertHandCount(playerA, "Devoted Hero", 1);
-        assertGraveyardCount(playerA, "Devoted Hero", 0);
-        assertGraveyardCount(playerA, "Watchwolf", 1);
+        // Dusk // Dawn should have been cast and exiled
         assertExileCount(playerA, "Dusk // Dawn", 1);
         assertGraveyardCount(playerA, "Dusk // Dawn", 0);
+
+        // Devoted hero should be in the hand
+        assertHandCount(playerA, "Devoted Hero", 1);
+        assertGraveyardCount(playerA, "Devoted Hero", 0);
+
+        // Watchwolf should still be in the graveyard
+        assertGraveyardCount(playerA, "Watchwolf", 1);
     }
 
-    // Fail to cast Dawn (Aftermath part)  from hand
+    /**
+     * Test that you can't cast Dawn (Aftermath part) from hand.
+     */
     @Test
     public void testCastDawnFail() {
-        // Dusk {2}{W}{W}
-        // Destroy all creatures with power 3 or greater.
-        // Dawn {3}{W}{W}
-        // Return all creature cards with power less than or equal to 2 from your graveyard to your hand.
         addCard(Zone.HAND, playerA, "Dusk // Dawn");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.GRAVEYARD, playerA, "Devoted Hero"); // Creature 1/2 {W}
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dawn");
+
+        checkPlayableAbility("Can't cast Dawn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dawn", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // Dusk dawn shouldn't have been cast and devoted hero should still be in the yard
         assertHandCount(playerA, "Dusk // Dawn", 1);
-        assertGraveyardCount(playerA, "Devoted Hero", 1);
     }
-
 }

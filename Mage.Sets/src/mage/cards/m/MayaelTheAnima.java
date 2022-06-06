@@ -43,7 +43,7 @@ public final class MayaelTheAnima extends CardImpl {
         // Put the rest on the bottom of your library in any order.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY),
-                new ManaCostsImpl("{3}{R}{G}{W}"));
+                new ManaCostsImpl<>("{3}{R}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

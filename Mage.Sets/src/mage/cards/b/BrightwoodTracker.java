@@ -32,7 +32,7 @@ public final class BrightwoodTracker extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{5}{G}"));
+                new ManaCostsImpl<>("{5}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -36,7 +36,7 @@ public final class CabalExecutioner extends CardImpl {
         this.addAbility(new CabalExecutionerAbility());
 
         // Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private CabalExecutioner(final CabalExecutioner card) {

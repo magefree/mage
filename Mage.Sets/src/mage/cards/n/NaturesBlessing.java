@@ -36,7 +36,7 @@ public final class NaturesBlessing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
 
         // {G}{W}, Discard a card: Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NaturesBlessingEffect(), new ManaCostsImpl("{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NaturesBlessingEffect(), new ManaCostsImpl<>("{G}{W}"));
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

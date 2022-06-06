@@ -24,7 +24,7 @@ public final class GlacialStalker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}")));
     }
 
     private GlacialStalker(final GlacialStalker card) {

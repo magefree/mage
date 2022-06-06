@@ -59,7 +59,7 @@ public final class LathlissDragonQueen extends CardImpl {
                         1, 0, Duration.EndOfTurn,
                         filter2, false
                 ),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         ));
     }
 

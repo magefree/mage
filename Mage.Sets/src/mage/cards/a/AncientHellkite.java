@@ -42,7 +42,7 @@ public final class AncientHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {R}: Ancient Hellkite deals 1 damage to target creature defending player controls. Activate this ability only if Ancient Hellkite is attacking.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"), SourceAttackingCondition.instance);
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"), SourceAttackingCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -28,7 +28,7 @@ public final class AbzanGuide extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Morph {2}{W}{B}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{W}{B}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{W}{B}{G}")));
     }
 
     private AbzanGuide(final AbzanGuide card) {

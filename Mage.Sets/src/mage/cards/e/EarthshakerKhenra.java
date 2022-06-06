@@ -55,7 +55,7 @@ public final class EarthshakerKhenra extends CardImpl {
         this.addAbility(ability);
 
         // Eternalize {4}{R}{R}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{R}{R}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{R}{R}"), this));
     }
 
     private EarthshakerKhenra(final EarthshakerKhenra card) {

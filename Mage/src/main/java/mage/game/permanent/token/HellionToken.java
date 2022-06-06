@@ -5,6 +5,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -18,6 +20,8 @@ public final class HellionToken extends TokenImpl {
         subtype.add(SubType.HELLION);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("ROE", "DDP", "PCA");
     }
 
     public HellionToken(final HellionToken token) {

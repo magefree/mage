@@ -35,7 +35,7 @@ public final class IslandFishJasconius extends CardImpl {
         // At the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl("{U}{U}{U}")),
+                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}")),
                 TargetController.YOU,
                 false));
         

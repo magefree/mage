@@ -38,7 +38,7 @@ public final class ColossusOfSardia extends CardImpl {
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new UntapSourceEffect(), new ManaCostsImpl("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new UntapSourceEffect(), new ManaCostsImpl<>("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private ColossusOfSardia(final ColossusOfSardia card) {

@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.BroodKeeperDragonToken;
+import mage.game.permanent.token.DragonEggDragonToken;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class BroodKeeper extends CardImpl {
 
         // Whenever an Aura becomes attached to Brood Keeper, create a 2/2 red Dragon creature token with flying.
         // It has "{R}: This creature gets +1/+0 until end of turn."
-        Effect effect = new CreateTokenEffect(new BroodKeeperDragonToken());
+        Effect effect = new CreateTokenEffect(new DragonEggDragonToken());
         effect.setText("create a 2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
         this.addAbility(new AuraAttachedTriggeredAbility(effect, false));
     }

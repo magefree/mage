@@ -52,7 +52,7 @@ public final class KinnanBonderProdigy extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         this.addAbility(new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, filter2, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{5}{G}{U}")));
+                new ManaCostsImpl<>("{5}{G}{U}")));
     }
 
     private KinnanBonderProdigy(final KinnanBonderProdigy card) {

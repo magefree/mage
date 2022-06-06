@@ -43,7 +43,7 @@ public final class Bookwurm extends CardImpl {
         this.addAbility(ability);
 
         // {2}{G}: Put Bookwurm from your graveyard into your library third from the top.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new BookwurmEffect(), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new BookwurmEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private Bookwurm(final Bookwurm card) {

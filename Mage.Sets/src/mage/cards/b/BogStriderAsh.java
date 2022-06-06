@@ -35,7 +35,7 @@ public final class BogStriderAsh extends CardImpl {
         this.addAbility(new SwampwalkAbility());
 
         // Whenever a player casts a Goblin spell, you may pay {G}. If you do, you gain 2 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(2), new ManaCostsImpl("{G}")), filter, false));
+        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(2), new ManaCostsImpl<>("{G}")), filter, false));
     }
 
     private BogStriderAsh(final BogStriderAsh card) {

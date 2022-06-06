@@ -30,7 +30,7 @@ public final class FlamingFist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new AttacksTriggeredAbility(new GainAbilitySourceEffect(
                         DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-                ).setText("it gains double strike until end of turn")),
+                ).setText("it gains double strike until end of turn")).setTriggerPhrase("Whenever this creature attacks, "),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         )));
     }

@@ -301,11 +301,11 @@ public final class StaticFilters {
         FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledArtifactPermanent FILTER_ARTIFACTS_NON_CREATURE = new FilterControlledArtifactPermanent("Noncreature artifacts");
+    public static final FilterControlledArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterControlledArtifactPermanent("noncreature artifact");
 
     static {
-        FILTER_ARTIFACTS_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        FILTER_ARTIFACTS_NON_CREATURE.setLockedFilter(true);
+        FILTER_ARTIFACT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        FILTER_ARTIFACT_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature");

@@ -122,7 +122,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String SHOW_COMMAND_HAND = "HAND";
     public static final String SHOW_COMMAND_COMMAND = "COMMAND";
     public static final String SHOW_COMMAND_BATTLEFIELD = "BATTLEFIELD";
-    public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
+    public static final String SHOW_COMMAND_GRAVEYARD = "GRAVEYARD";
     public static final String SHOW_COMMAND_EXILE = "EXILE";
     public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
     public static final String SHOW_COMMAND_AVAILABLE_MANA = "AVAILABLE_MANA";
@@ -139,7 +139,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameC;
     protected String deckNameD;
 
-    private int rollbackBlock = 0; // used to handle actions that have to be added aufter a rollback
+    private int rollbackBlock = 0; // used to handle actions that have to be added after a rollback
     private boolean rollbackBlockActive = false;
     private TestPlayer rollbackPlayer = null;
 
@@ -161,7 +161,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         CardScanner.scan(errorsList);
 
         if (errorsList.size() > 0) {
-            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+            Assert.fail("Found errors on card loading: " + '\n' + String.join("\n", errorsList));
         }
     }
 
@@ -253,11 +253,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     abstract protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException;
 
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name) throws GameException {
-        return createPlayer(game, player, name, "RB Aggro.dck");
+        return createPlayer(game, name, "RB Aggro.dck");
     }
 
-    protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
-        player = createNewPlayer(name, game.getRangeOfInfluence());
+    protected TestPlayer createPlayer(Game game, String name, String deckName) throws GameException {
+        TestPlayer player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
 
         logger.debug("Loading deck...");
@@ -581,7 +581,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void showGraveyard(String showName, int turnNum, PhaseStep step, TestPlayer player) {
-        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYEARD);
+        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYARD);
     }
 
     public void showExile(String showName, int turnNum, PhaseStep step, TestPlayer player) {
@@ -1963,7 +1963,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", attacker);
         assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
         assertAliaseSupportInActivateCommand(planeswalker, false);
-        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
+        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$planeswalker=" + planeswalker);
     }
 
     public void attackSkip(int turnNum, TestPlayer player) {

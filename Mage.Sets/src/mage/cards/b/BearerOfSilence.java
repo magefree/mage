@@ -34,7 +34,7 @@ public final class BearerOfSilence extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When you cast Bearer of Silence, you may pay {1}{C}. If you do, target opponent sacrifices a creature.
-        Ability ability = new CastSourceTriggeredAbility(new DoIfCostPaid(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"), new ManaCostsImpl("{1}{C}")));
+        Ability ability = new CastSourceTriggeredAbility(new DoIfCostPaid(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"), new ManaCostsImpl<>("{1}{C}")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
