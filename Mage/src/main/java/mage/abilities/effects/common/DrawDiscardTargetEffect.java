@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -10,34 +8,40 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class DrawDiscardTargetEffect extends OneShotEffect {
 
-    private int cardsToDraw;
-    private int cardsToDiscard;
-
-    public DrawDiscardTargetEffect() {
-        this(1,1);
-    }
+    private final int cardsToDraw;
+    private final int cardsToDiscard;
+    private final boolean random;
 
     public DrawDiscardTargetEffect(int cardsToDraw, int cardsToDiscard) {
+        this(cardsToDraw, cardsToDiscard, false);
+    }
+
+    public DrawDiscardTargetEffect(int cardsToDraw, int cardsToDiscard, boolean random) {
         super(Outcome.DrawCard);
         this.cardsToDraw = cardsToDraw;
         this.cardsToDiscard = cardsToDiscard;
-        staticText = new StringBuilder("Target player draws ")
-                .append(cardsToDraw == 1?"a": CardUtil.numberToText(cardsToDraw))
-                .append(" card").append(cardsToDraw == 1?"": "s")
+        this.random = random;
+        staticText = new StringBuilder("target player draws ")
+                .append(CardUtil.numberToText(cardsToDraw, "a"))
+                .append(" card")
+                .append(cardsToDraw > 1 ? "s" : "")
                 .append(", then discards ")
-                .append(cardsToDiscard == 1?"a": CardUtil.numberToText(cardsToDiscard))
-                .append(" card").append(cardsToDiscard == 1?"": "s").toString();
+                .append(CardUtil.numberToText(cardsToDiscard, "a"))
+                .append(" card")
+                .append(cardsToDiscard > 1 ? "s" : "")
+                .append(random ? "at random" : "")
+                .toString();
     }
 
-    public DrawDiscardTargetEffect(final DrawDiscardTargetEffect effect) {
+    private DrawDiscardTargetEffect(final DrawDiscardTargetEffect effect) {
         super(effect);
         this.cardsToDraw = effect.cardsToDraw;
         this.cardsToDiscard = effect.cardsToDiscard;
+        this.random = effect.random;
     }
 
     @Override
@@ -50,10 +54,9 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.drawCards(cardsToDraw, source, game);
-            player.discard(cardsToDiscard, false, false, source, game);
+            player.discard(cardsToDiscard, random, false, source, game);
             return true;
         }
         return false;
     }
-
 }
