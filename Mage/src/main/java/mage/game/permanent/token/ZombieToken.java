@@ -31,7 +31,7 @@ public final class ZombieToken extends TokenImpl {
                 "M20", "C19", "C20", "THB",
                 "M21", "CMR", "C21", "MH2",
                 "AFR", "MIC", "VOW", "UMA",
-                "NCC");
+                "NCC", "MED", "BBD", "M19", "CM2", "PCA", "AVR", "DDQ", "CN2");
     }
 
     @Override
@@ -45,7 +45,7 @@ public final class ZombieToken extends TokenImpl {
             this.setTokenType(1);
         }
         if (getOriginalExpansionSetCode().equals("EMN")) {
-            this.setTokenType(RandomUtil.nextInt(4) + 1);
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
         if (getOriginalExpansionSetCode().equals("C19")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);

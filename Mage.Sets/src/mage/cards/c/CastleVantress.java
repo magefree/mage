@@ -42,7 +42,7 @@ public final class CastleVantress extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {2}{U}{U}, {T}: Scry 2.
-        Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

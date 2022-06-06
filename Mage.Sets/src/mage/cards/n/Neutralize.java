@@ -23,7 +23,7 @@ public final class Neutralize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Neutralize(final Neutralize card) {

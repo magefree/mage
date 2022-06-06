@@ -39,14 +39,14 @@ public final class KamahlFistOfKrosa extends CardImpl {
         // {G}: Target land becomes a 1/1 creature until end of turn. It's still a land.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureTargetEffect(new CreatureToken(1, 1), false, true, Duration.EndOfTurn),
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
 		ability.addTarget(new TargetLandPermanent());
 		this.addAbility(ability);
 		
         // {2}{G}{G}{G}: Creatures you control get +3/+3 and gain trample until end of turn.
         SimpleActivatedAbility boostAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(3, 3, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{G}{G}{G}"));
+                new ManaCostsImpl<>("{2}{G}{G}{G}"));
 		boostAbility.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 		this.addAbility(boostAbility);
     }

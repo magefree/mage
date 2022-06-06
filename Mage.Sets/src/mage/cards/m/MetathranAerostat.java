@@ -37,7 +37,7 @@ public final class MetathranAerostat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}{U}: You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return Metathran Aerostat to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new MetathranAerostatEffect(), new ManaCostsImpl("{X}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new MetathranAerostatEffect(), new ManaCostsImpl<>("{X}{U}")));
     }
 
     private MetathranAerostat(final MetathranAerostat card) {

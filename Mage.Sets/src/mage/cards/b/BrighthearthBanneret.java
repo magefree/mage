@@ -39,7 +39,7 @@ public final class BrighthearthBanneret extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Reinforce 1-{1}{R}
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{R}")));
     }
 
     private BrighthearthBanneret(final BrighthearthBanneret card) {

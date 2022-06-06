@@ -40,7 +40,7 @@ public final class BasandraBattleSeraph extends CardImpl {
         // {R}: Target creature attacks this turn if able.
         Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
         effect.setOutcome(Outcome.Detriment);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         

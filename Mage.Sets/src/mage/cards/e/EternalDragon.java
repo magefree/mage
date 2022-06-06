@@ -38,13 +38,13 @@ public final class EternalDragon extends CardImpl {
         // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{3}{W}{W}"), 
+                new ManaCostsImpl<>("{3}{W}{W}"), 
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         );          
         this.addAbility(ability);
         // PlainscyclingAbility {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private EternalDragon(final EternalDragon card) {

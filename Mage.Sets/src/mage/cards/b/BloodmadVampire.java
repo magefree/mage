@@ -29,7 +29,7 @@ public final class BloodmadVampire extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private BloodmadVampire(final BloodmadVampire card) {

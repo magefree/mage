@@ -25,6 +25,15 @@ public final class ZombieToken2 extends TokenImpl {
         setOriginalExpansionSetCode("EMN");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMN")) {
+            this.setTokenType(4);
+        }
+    }
+
     public ZombieToken2(final ZombieToken2 token) {
         super(token);
     }

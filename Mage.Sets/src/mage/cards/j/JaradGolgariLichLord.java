@@ -50,7 +50,7 @@ public final class JaradGolgariLichLord extends CardImpl {
         this.addAbility(ability);
 
         // {1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(SacrificeCostCreaturesPower.instance), new ManaCostsImpl("{1}{B}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(SacrificeCostCreaturesPower.instance), new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
         this.addAbility(ability);
 

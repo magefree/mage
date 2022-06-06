@@ -52,7 +52,7 @@ public final class Fylgja extends CardImpl {
 
         // {2}{W}: Put a healing counter on Fylgja.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
-                new ManaCostsImpl("{2}{W}")));
+                new ManaCostsImpl<>("{2}{W}")));
     }
 
     private Fylgja(final Fylgja card) {

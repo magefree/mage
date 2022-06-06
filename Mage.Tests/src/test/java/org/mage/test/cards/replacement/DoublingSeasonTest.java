@@ -3,6 +3,7 @@ package org.mage.test.cards.replacement;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -134,8 +135,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
     }
 
     /**
-     * Doubling Season doesn't create two tokens from opponent's Rite of Raging
-     * Storm
+     * Doubling Season doesn't create two tokens from opponent's Rite of Raging Storm
      */
     @Test
     public void testDoubleRiteOfRagingStorm() {
@@ -149,8 +149,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of the Raging Storm");
 
-        attack(2, playerB, "Lightning Rager"); // Can't attack
-
         attack(3, playerA, "Lightning Rager");
         attack(3, playerA, "Lightning Rager");
 
@@ -163,7 +161,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         assertLife(playerB, 10);
         assertLife(playerA, 20);
-
     }
 
     @Test
@@ -182,15 +179,20 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         attack(2, playerB, "Lightning Rager:1"); // Can't attack
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 2")) {
+                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Rite of the Raging Storm", 1);
-
         assertPermanentCount(playerB, "Lightning Rager", 2);
-
-        assertLife(playerB, 20);
-        assertLife(playerA, 20);
-
     }
 
     /**

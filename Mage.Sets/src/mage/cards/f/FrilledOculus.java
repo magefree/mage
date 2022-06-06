@@ -27,7 +27,7 @@ public final class FrilledOculus extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Frilled Oculus gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private FrilledOculus(final FrilledOculus card) {

@@ -33,7 +33,7 @@ public final class EmpressGalina extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}{U}, {tap}: Gain control of target legendary permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

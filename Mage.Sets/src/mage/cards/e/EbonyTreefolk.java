@@ -26,7 +26,7 @@ public final class EbonyTreefolk extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
     }
 
     private EbonyTreefolk(final EbonyTreefolk card) {

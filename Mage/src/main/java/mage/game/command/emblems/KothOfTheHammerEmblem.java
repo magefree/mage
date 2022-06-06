@@ -39,7 +39,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
 
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
-        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to any target.'\"";
+        staticText = "Mountains you control have '{T}: This land deals 1 damage to any target.'";
     }
 
     public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {

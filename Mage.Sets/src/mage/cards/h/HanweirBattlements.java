@@ -32,7 +32,7 @@ public final class HanweirBattlements extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {R},{T}: Target creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -41,7 +41,7 @@ public final class HanweirBattlements extends CardImpl {
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new MeldEffect("Hanweir Garrison",
                         new HanweirTheWrithingTownship(ownerId, new CardSetInfo("Hanweir, the Writhing Township", "EMN", "130", Rarity.RARE))),
-                new ManaCostsImpl("{3}{R}{R}"), new MeldCondition("Hanweir Garrison"),
+                new ManaCostsImpl<>("{3}{R}{R}"), new MeldCondition("Hanweir Garrison"),
                 "{3}{R}{R}, {T}: If you both own and control {this} and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.");
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

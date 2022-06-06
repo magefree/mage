@@ -32,7 +32,7 @@ public final class BorosCluestone extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {R}{W}, {T}, Sacrifice Boros Cluestone: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{R}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

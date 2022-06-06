@@ -32,7 +32,7 @@ public final class LavaballTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent had two or more lands enter the battlefield under their control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{R}{R}"), LavaballTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{3}{R}{R}"), LavaballTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

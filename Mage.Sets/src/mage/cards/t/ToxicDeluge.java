@@ -27,7 +27,7 @@ public final class ToxicDeluge extends CardImpl {
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
 
         // All creatures get -X/-X until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null, true));
+        this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null));
     }
 
     private ToxicDeluge(final ToxicDeluge card) {

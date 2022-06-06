@@ -396,13 +396,12 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         Assert.assertEquals(eliteVanguard.getPairedCard(), null);
     }
 
-    /*
+    /**
      * Reported bug: Soulbond should use the stack, but unable to use instant speed removal since no trigger occurs
      */
     @Test
     // Soulbond does not currently use the stack, so this test will fail until then
     public void testRespondToSoulboundWithRemoval() {
-
         // When Palinchron enters the battlefield, untap up to seven lands.
         // {2}{U}{U}: Return Palinchron to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Palinchron"); // 4/5 flying

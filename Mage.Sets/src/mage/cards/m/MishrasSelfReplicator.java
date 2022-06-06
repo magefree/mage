@@ -37,7 +37,7 @@ public final class MishrasSelfReplicator extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect()
                         .setText("create a token that's a copy of {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{1}")), filter, false));
+                new ManaCostsImpl<>("{1}")), filter, false));
 
     }
 

@@ -57,7 +57,7 @@ public final class DenOfTheBugbear extends CardImpl {
                         .withColor("R")
                         .withSubType(SubType.GOBLIN)
                         .withAbility(ability),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{R}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R}")));
     }
 
     private DenOfTheBugbear(final DenOfTheBugbear card) {

@@ -38,7 +38,7 @@ public final class Glarecaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl("{5}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl<>("{5}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -7,6 +7,7 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +19,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public final class AncientBrassDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Ancient Brass Dragon deals combat damage to a player, roll a d20. When you do, put any number of target creature cards with mana value X or less from graveyards onto the battlefield under your control, where X is the result.
+        // Whenever Ancient Brass Dragon deals combat damage to a player, roll a d20. When you do, put any number of target creature cards with total mana value X or less from graveyards onto the battlefield under your control, where X is the result.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AncientBrassDragonEffect(), false));
     }
 
@@ -56,7 +57,7 @@ class AncientBrassDragonEffect extends OneShotEffect {
 
     AncientBrassDragonEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a d20. When you do, put any number of target creature cards with mana value X " +
+        staticText = "roll a d20. When you do, put any number of target creature cards with total mana value X " +
                 "or less from graveyards onto the battlefield under your control, where X is the result";
     }
 
@@ -76,13 +77,54 @@ class AncientBrassDragonEffect extends OneShotEffect {
             return false;
         }
         int result = player.rollDice(outcome, source, game, 20);
-        FilterCard filter = new FilterCreatureCard("creature cards with mana value " + result + " or less");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, result));
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false
         );
-        ability.addTarget(new TargetCardInGraveyard(0, Integer.MAX_VALUE, filter));
+        ability.addTarget(new AncientBrassDragonTarget(result));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
+    }
+}
+
+class AncientBrassDragonTarget extends TargetCardInYourGraveyard {
+
+    private final int xValue;
+
+    AncientBrassDragonTarget(int xValue) {
+        super(0, Integer.MAX_VALUE, makeFilter(xValue), false);
+        this.xValue = xValue;
+    }
+
+    private AncientBrassDragonTarget(final AncientBrassDragonTarget target) {
+        super(target);
+        this.xValue = target.xValue;
+    }
+
+    @Override
+    public AncientBrassDragonTarget copy() {
+        return new AncientBrassDragonTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(controllerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        return card != null &&
+                this.getTargets()
+                        .stream()
+                        .map(game::getCard)
+                        .mapToInt(Card::getManaValue)
+                        .sum() + card.getManaValue() <= xValue;
+    }
+
+    private static final FilterCard makeFilter(int xValue) {
+        FilterCard filter = new FilterCreatureCard(
+                "creature cards with total mana value " +
+                        xValue + " or less from your graveyard"
+        );
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
+        return filter;
     }
 }

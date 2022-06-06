@@ -38,7 +38,7 @@ public final class FledglingDragon extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +3/+3"));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),
             new CardsInControllerGraveyardCondition(7), "and has \"{R}: {this} gets +1/+0 until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);

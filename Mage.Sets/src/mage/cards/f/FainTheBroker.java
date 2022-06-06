@@ -62,7 +62,7 @@ public final class FainTheBroker extends CardImpl {
         this.addAbility(ability);
 
         // {3}{B}: Untap Fain, the Broker.
-        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{3}{B}")));
     }
 
     private FainTheBroker(final FainTheBroker card) {

@@ -28,7 +28,7 @@ public final class GanaxAstralHunter extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

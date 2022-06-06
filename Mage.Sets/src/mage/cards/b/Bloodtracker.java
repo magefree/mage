@@ -35,7 +35,7 @@ public final class Bloodtracker extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {B}, Pay 2 life: Put a +1/+1 counter on Bloodtracker.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{B}"));
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
 

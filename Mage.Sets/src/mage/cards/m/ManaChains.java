@@ -37,7 +37,7 @@ public final class ManaChains extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has "Cumulative upkeep {1}."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-            new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")), AttachmentType.AURA)));
+            new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")), AttachmentType.AURA)));
     }
 
     private ManaChains(final ManaChains card) {

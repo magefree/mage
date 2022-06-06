@@ -72,7 +72,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     public RowanKenrithAttackEffect() {
         super(Duration.Custom);
-        staticText = "During target player's next turn, creatures that player controls attack if able";
+        staticText = "During target player's next turn, each creature that player controls attacks if able";
     }
 
     public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {

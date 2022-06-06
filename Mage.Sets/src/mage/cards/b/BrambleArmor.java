@@ -1,17 +1,13 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -26,11 +22,7 @@ public final class BrambleArmor extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Bramble Armor enters the battlefield, attach it to target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Equipped creature gets +2/+1.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));

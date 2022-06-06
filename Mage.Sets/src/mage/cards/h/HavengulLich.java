@@ -46,7 +46,7 @@ public final class HavengulLich extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl<>("{1}"));
         ability.addEffect(new HavengulLichPlayedEffect());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);

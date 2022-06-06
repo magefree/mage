@@ -30,7 +30,7 @@ public final class EmberEyeWolf extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {1}{R}: Ember-Eye Wolf gets +2/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private EmberEyeWolf(final EmberEyeWolf card) {

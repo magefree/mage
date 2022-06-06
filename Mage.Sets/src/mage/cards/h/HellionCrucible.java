@@ -31,12 +31,12 @@ public final class HellionCrucible extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{R}, {tap}: Put a pressure counter on Hellion Crucible.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PRESSURE.createInstance()), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PRESSURE.createInstance()), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {1}{R}, {tap}, Remove two pressure counters from Hellion Crucible and sacrifice it: Create a 4/4 red Hellion creature token with haste.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HellionHasteToken(), 1), new ManaCostsImpl("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HellionHasteToken(), 1), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.PRESSURE.createInstance(2)));
         ability.addCost(new SacrificeSourceCost());

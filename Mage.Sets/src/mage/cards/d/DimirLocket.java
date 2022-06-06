@@ -29,7 +29,7 @@ public final class DimirLocket extends CardImpl {
         // {U/B}{U/B}{U/B}{U/B}, {T}, Sacrifice Dimir Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{U/B}{U/B}{U/B}{U/B}")
+                new ManaCostsImpl<>("{U/B}{U/B}{U/B}{U/B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

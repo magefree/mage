@@ -30,7 +30,7 @@ public final class RoilmagesTrick extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, StaticValue.get(0), Duration.EndOfTurn,
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false, null, true
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false, null
         ));
 
         // Draw a card.

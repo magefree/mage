@@ -39,7 +39,7 @@ public final class DailyRegimen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.P1P1.createInstance(),"enchanted creature"),
-                new ManaCostsImpl("{1}{W}")));
+                new ManaCostsImpl<>("{1}{W}")));
     }
 
     private DailyRegimen(final DailyRegimen card) {

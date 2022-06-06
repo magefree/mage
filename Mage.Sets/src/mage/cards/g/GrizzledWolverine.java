@@ -28,7 +28,7 @@ public final class GrizzledWolverine extends CardImpl {
         // {R}: Grizzled Wolverine gets +2/+0 until end of turn. Activate this ability only during the declare blockers step, only if at least one creature is blocking Grizzled Wolverine, and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}"), 1, GrizzledWolverineCondition.instance
+                new ManaCostsImpl<>("{R}"), 1, GrizzledWolverineCondition.instance
         ));
     }
 

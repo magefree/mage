@@ -30,7 +30,7 @@ public final class DiscipleOfGrace extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Cycling {2} ({2}, Discard this card: Draw a card.)        
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DiscipleOfGrace(final DiscipleOfGrace card) {

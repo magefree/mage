@@ -49,7 +49,7 @@ public final class NightshadeAssassin extends CardImpl {
         this.addAbility(ability);
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private NightshadeAssassin(final NightshadeAssassin card) {

@@ -17,13 +17,12 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
     
     static final private List<String> tokenImageSets = new ArrayList<>();
     static {
-        tokenImageSets.addAll(Arrays.asList("C17"));
+        tokenImageSets.addAll(Arrays.asList("RTR", "C17"));
     }
 
     public UtvaraHellkiteDragonToken() {
         super("Dragon Token", "6/6 red Dragon creature token with flying");
         availableImageSetCodes = tokenImageSets;
-        setExpansionSetCodeForImage("C17");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);

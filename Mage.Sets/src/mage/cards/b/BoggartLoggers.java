@@ -42,7 +42,7 @@ public final class BoggartLoggers extends CardImpl {
         this.addAbility(new ForestwalkAbility());
         
         // {2}{B}, Sacrifice Boggart Loggers: Destroy target Treefolk or Forest.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

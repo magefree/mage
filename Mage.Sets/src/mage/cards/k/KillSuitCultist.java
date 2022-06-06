@@ -38,7 +38,7 @@ public final class KillSuitCultist extends CardImpl {
         // Kill-Suit Cultist attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // {B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KillSuitCultistEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KillSuitCultistEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -30,7 +30,7 @@ public final class GhituEncampment extends CardImpl {
         this.addAbility(new RedManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new GhituEncampmentToken(), "land", Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{R}")));
+                new ManaCostsImpl<>("{1}{R}")));
     }
 
     private GhituEncampment(final GhituEncampment card) {

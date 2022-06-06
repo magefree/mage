@@ -32,7 +32,7 @@ public final class CreativeOutburst extends CardImpl {
 
         // {U/R}{U/R}, Discard Creative Outburst: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{U/R}{U/R}")
+                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{U/R}{U/R}")
         );
         ability.addCost(new DiscardSourceCost());
         this.addAbility(ability);

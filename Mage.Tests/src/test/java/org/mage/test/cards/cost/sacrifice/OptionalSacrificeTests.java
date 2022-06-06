@@ -73,12 +73,12 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
      */
     @Test
     public void testGlintHawkNoArtifactControlled() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Glint Hawk");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -151,12 +151,12 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
      */
     @Test
     public void testDrakeFamiliarNoEnchantmentControlled() {
-
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

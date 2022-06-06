@@ -52,7 +52,7 @@ public final class FootfallCrater extends CardImpl {
         )));
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private FootfallCrater(final FootfallCrater card) {

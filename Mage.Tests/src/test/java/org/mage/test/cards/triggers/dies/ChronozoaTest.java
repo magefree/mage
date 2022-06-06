@@ -43,5 +43,4 @@ public class ChronozoaTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 0);
     }
-
 }

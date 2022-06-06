@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -41,6 +42,7 @@ public final class BasiliskGate extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
         ), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.addHint(hint));
     }

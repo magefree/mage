@@ -35,7 +35,7 @@ public final class InnerFlameIgniter extends CardImpl {
 
         // {2}{R}: Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")
         );
         ContinuousEffect effectIf3rdResolution = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(Outcome.AddAbility, 3, effectIf3rdResolution));

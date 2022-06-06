@@ -41,7 +41,7 @@ public final class EpiphanyStorm extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "{R}, {T}, Discard a card: Draw a card."
-        Ability drawAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}"));
+        Ability drawAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{R}"));
         drawAbility.addCost(new TapSourceCost());
         drawAbility.addCost(new DiscardCardCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(drawAbility, AttachmentType.AURA)));

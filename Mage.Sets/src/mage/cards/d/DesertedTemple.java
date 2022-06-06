@@ -26,7 +26,7 @@ public final class DesertedTemple extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

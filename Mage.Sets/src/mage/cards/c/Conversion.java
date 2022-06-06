@@ -31,7 +31,7 @@ public final class Conversion extends CardImpl {
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new ManaCostsImpl("{W}{W}")),
+                        new ManaCostsImpl<>("{W}{W}")),
                 TargetController.YOU,
                 false));
 

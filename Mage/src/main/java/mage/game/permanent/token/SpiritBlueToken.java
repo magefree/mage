@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -21,6 +23,16 @@ public final class SpiritBlueToken extends TokenImpl {
         toughness = new MageInt(1);
         setTokenType(2);
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AVR");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
+            setTokenType(1);
+        }
     }
 
     public SpiritBlueToken(final SpiritBlueToken token) {

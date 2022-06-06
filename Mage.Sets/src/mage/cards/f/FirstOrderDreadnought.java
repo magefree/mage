@@ -31,7 +31,7 @@ public final class FirstOrderDreadnought extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // {2}{B}, {T}: Destroy target creature.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

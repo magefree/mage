@@ -31,10 +31,10 @@ public final class LocustSwarm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {G}: Regenerate Locust Swarm.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
         
         // {G}: Untap Locust Swarm. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private LocustSwarm(final LocustSwarm card) {

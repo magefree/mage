@@ -34,7 +34,7 @@ public final class GoblinArchaeologist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {T]: Flip a coin. If you win the flip, destroy target artifact and untap Goblin Archaeologist. If you lose the flip, sacrifice Goblin Archaeologist.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinArchaeologistEffect(),new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinArchaeologistEffect(),new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

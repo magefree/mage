@@ -39,6 +39,10 @@ public class UndercityDungeon extends Dungeon {
     public UndercityDungeon() {
         super("Undercity", "CLB");
 
+        // Secret Entrance — Search your library for a basic land card,
+        //                   reveal it,
+        //                   put it into your hand,
+        //                   then shuffle. (Leads to: Forge, Lost Well)
         DungeonRoom secretEntrance = new DungeonRoom(
                 "Secret Entrance",
                 new SearchLibraryPutInHandEffect(
@@ -46,27 +50,38 @@ public class UndercityDungeon extends Dungeon {
                 )
         );
 
+        // Forge — Put two +1/+1 counters on target creature. (Leads to: Trap!, Arena)
         DungeonRoom forge = new DungeonRoom(
-                "Forge", new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                "Forge", new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))
         );
         forge.addTarget(new TargetCreaturePermanent());
 
+        // Lost Well — Scry 2. (Leads to: Arena, Stash)
         DungeonRoom lostWell = new DungeonRoom(
                 "Lost Well", new ScryEffect(2, false)
         );
 
+        // Trap! — Target player loses 5 life. (Leads to: Archives)
         DungeonRoom trap = new DungeonRoom("Trap!", new LoseLifeTargetEffect(5));
         trap.addTarget(new TargetPlayer());
 
+        // Arena — Goad target creature. (Leads to: Archives, Catacombs)
         DungeonRoom arena = new DungeonRoom("Arena", new GoadTargetEffect());
         arena.addTarget(new TargetCreaturePermanent());
 
+        // Stash — Create a Treasure token. (Leads to: Catacombs)
         DungeonRoom stash = new DungeonRoom("Stash", new CreateTokenEffect(new TreasureToken()));
 
+        // Archives — Draw a card. (Leads to: Throne of the Dead Three)
         DungeonRoom archives = new DungeonRoom("Archives", new DrawCardSourceControllerEffect(1));
 
+        // Catacombs — Create a 4/1 black Skeleton creature token with menace. (Leads to: Throne of the Dead Three)
         DungeonRoom catacombs = new DungeonRoom("Catacombs", new CreateTokenEffect(new SkeletonMenaceToken()));
 
+        // Throne of the Dead Three — Reveal the top ten cards of your library.
+        //                            Put a creature card from among them onto the battlefield with three +1/+1 counters on it.
+        //                            It gains hexproof until your next turn.
+        //                            Then shuffle.
         DungeonRoom throneOfTheDeadThree = new DungeonRoom("Throne of the Dead Three", new ThroneOfTheDeadThreeEffect());
 
         secretEntrance.addNextRoom(forge);

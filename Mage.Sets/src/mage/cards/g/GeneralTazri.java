@@ -51,7 +51,7 @@ public final class GeneralTazri extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
 
     }
 

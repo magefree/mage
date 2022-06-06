@@ -38,7 +38,7 @@ public final class CephalidRetainer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}{U}: Tap target creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

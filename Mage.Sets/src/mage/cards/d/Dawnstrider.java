@@ -32,7 +32,7 @@ public final class Dawnstrider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}, Discard a card: Prevent all combat damage that would be dealt this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);

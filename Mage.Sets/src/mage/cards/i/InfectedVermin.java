@@ -30,11 +30,11 @@ public final class InfectedVermin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}: Infected Vermin deals 1 damage to each creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{2}{B}")));
         // Threshold - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new DamageEverythingEffect(3),
-                new ManaCostsImpl("{3}{B}"),
+                new ManaCostsImpl<>("{3}{B}"),
                 new CardsInControllerGraveyardCondition(7));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

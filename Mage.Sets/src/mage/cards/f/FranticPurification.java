@@ -25,7 +25,7 @@ public final class FranticPurification extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
 
         // Madness {W}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private FranticPurification(final FranticPurification card) {

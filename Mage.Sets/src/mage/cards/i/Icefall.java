@@ -34,7 +34,7 @@ public final class Icefall extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         
         // Recover {R}{R}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{R}{R}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{R}{R}"), this));
     }
 
     private Icefall(final Icefall card) {

@@ -35,7 +35,7 @@ public final class KrosanAvenger extends CardImpl {
         // Threshold - {1}{G}: Regenerate Krosan Avenger. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
-            new ManaCostsImpl("{1}{G}"),
+            new ManaCostsImpl<>("{1}{G}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);

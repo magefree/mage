@@ -29,7 +29,7 @@ public final class CaravanEscort extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}")));
 
         AbilitiesImpl<Ability> levelAbilities = new AbilitiesImpl<>(FirstStrikeAbility.getInstance());
         this.addAbilities(LevelerCardBuilder.construct(

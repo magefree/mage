@@ -21,7 +21,7 @@ public final class BoonOfTheWishGiver extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private BoonOfTheWishGiver(final BoonOfTheWishGiver card) {

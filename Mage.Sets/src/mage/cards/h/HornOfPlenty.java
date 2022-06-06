@@ -65,7 +65,7 @@ class HornOfPlentyEffect extends OneShotEffect {
         Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
-                Cost cost = new ManaCostsImpl("{1}");
+                Cost cost = new ManaCostsImpl<>("{1}");
                 if (cost.pay(source, game, source, caster.getId(), false, null)) {
                     Effect effect = new DrawCardTargetEffect(1);
                     effect.setTargetPointer(new FixedTarget(caster.getId()));

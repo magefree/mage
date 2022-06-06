@@ -36,7 +36,7 @@ public final class BanishingStroke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Miracle {W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private BanishingStroke(final BanishingStroke card) {

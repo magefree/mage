@@ -26,7 +26,7 @@ public final class FireFieldOgre extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}{B}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{U}{B}{R}")));
     }
 
     private FireFieldOgre(final FireFieldOgre card) {

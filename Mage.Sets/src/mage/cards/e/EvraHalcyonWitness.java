@@ -40,7 +40,7 @@ public final class EvraHalcyonWitness extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {4}: Exchange your life total with Evra, Halcyon Witness's power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EvraHalcyonWitnessEffect(), new ManaCostsImpl("{4}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EvraHalcyonWitnessEffect(), new ManaCostsImpl<>("{4}")));
     }
 
     private EvraHalcyonWitness(final EvraHalcyonWitness card) {

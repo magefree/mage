@@ -31,7 +31,7 @@ public final class MirrorwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{R}{W}: The next time damage would be dealt to Mirrorwood Treefolk this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorwoodTreefolkEffect(), new ManaCostsImpl("{2}{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorwoodTreefolkEffect(), new ManaCostsImpl<>("{2}{R}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

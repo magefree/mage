@@ -70,7 +70,7 @@ public final class ManorGargoyle extends CardImpl {
         ContinuousEffect effect2 = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn);
         effect2.addDependencyType(DependencyType.LooseDefenderEffect);
         effect2.setText("Until end of turn, {this} loses defender");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl<>("{1}"));
         effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and gains flying");
         ability.addEffect(effect2);

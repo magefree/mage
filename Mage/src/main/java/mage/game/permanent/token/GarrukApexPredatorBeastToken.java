@@ -5,6 +5,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.util.RandomUtil;
+
+import java.util.Arrays;
 
 /**
  *
@@ -24,6 +27,16 @@ public final class GarrukApexPredatorBeastToken extends TokenImpl {
 
         abilities.add(DeathtouchAbility.getInstance());
 
+        availableImageSetCodes = Arrays.asList("M15", "MED");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("M15")) {
+            this.setTokenType(1);
+        }
     }
 
     public GarrukApexPredatorBeastToken(final GarrukApexPredatorBeastToken token) {

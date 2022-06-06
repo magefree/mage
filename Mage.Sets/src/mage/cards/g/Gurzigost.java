@@ -46,7 +46,7 @@ public final class Gurzigost extends CardImpl {
         // {G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
         Effect effect = new GainAbilitySourceEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("You may have Gurzigost assign its combat damage this turn as though it weren't blocked");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

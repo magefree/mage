@@ -41,7 +41,7 @@ public final class JediInstructor extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private JediInstructor(final JediInstructor card) {

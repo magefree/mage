@@ -76,7 +76,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Copy constructor. Creates a {@link Mana} object from existing
      * {@link Mana}
      *
-     * @param mana object to create copy from
+     * @param mana object to create copy from.
      */
     public Mana(final Mana mana) {
         Objects.requireNonNull(mana, "The passed in mana can not be null");
@@ -129,6 +129,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    /**
+     * Creates a {@link Mana} object of one mana of the passed {@link ManaType}.
+     *
+     * @param manaType The type of mana to set to one.
+     */
     public Mana(final ManaType manaType) {
         this();
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
@@ -159,6 +164,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    /**
+     * Creates a {@link Mana} object of #num mana of the passed {@link ManaType}.
+     *
+     * @param manaType  The type of mana to set.
+     * @param num       The number of mana available of the passed ManaType.
+     **/
     public Mana(final ManaType manaType, int num) {
         this();
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
@@ -311,7 +322,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Increases the given mana by one.
      *
-     * @param manaType
+     * @param manaType the type of mana to increase by one.
      */
     public void increase(ManaType manaType) {
         switch (manaType) {
@@ -411,18 +422,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana mana values to subtract
      * @throws ArithmeticException thrown if there is not enough available
-     *                             colored mana to pay the generic cost
+     *                             mana to pay the generic cost
      */
     public void subtractCost(final Mana mana) throws ArithmeticException {
-        white = CardUtil.overflowDec(white, mana.white);
-        blue = CardUtil.overflowDec(blue, mana.blue);
-        black = CardUtil.overflowDec(black, mana.black);
-        red = CardUtil.overflowDec(red, mana.red);
-        green = CardUtil.overflowDec(green, mana.green);
-        generic = CardUtil.overflowDec(generic, mana.generic);
-        colorless = CardUtil.overflowDec(colorless, mana.colorless);
-        any = CardUtil.overflowDec(any, mana.any);
+        this.subtract(mana);
 
+        // Handle any unpaid generic mana costs
         while (generic < 0) {
             int oldColorless = generic;
             if (white > 0) {
@@ -666,17 +671,32 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns if there is enough available mana to pay the mana provided by the
-     * passed in {@link Mana} object.
+     * Returns if the cost (this) can be paid by the mana provided by the passed in {@link Mana} object.
      *
-     * @param cost the cost to compare too.
-     * @return if there is enough available mana to pay.
+     * @param avail The mana to compare too.
+     * @return      boolean indicating if there is enough available mana to pay.
      */
-    public boolean enough(final Mana cost) {
-        Mana compare = cost.copy();
+    public boolean enough(final Mana avail) {
+        Mana compare = avail.copy();
+
+        // Subtract the mana cost (this) from the mana available (compare).
+        // This will only subtract like mana types from one another (e.g. green from green, coloreless from colorless).
         compare.subtract(this);
+
+        // A negative value for compare.X means that mana of type X from the cost could not be paid by mana
+        // of the same kind from the available mana.
+        // Check each of the types, and see if there is enough mana of any color left to pay for the colors.
+
+        if (compare.colorless < 0) { // Put first to shortcut the calculations
+            // Colorless mana can only be paid by colorless mana.
+            // If there's a negative value, then there's nothing else that can be used to pay for it.
+            return false;
+        }
         if (compare.white < 0) {
             compare.any = CardUtil.overflowInc(compare.any, compare.white);
+            // A negatice value means that there was more mana of the given type required than there was mana of any
+            // color to pay for it.
+            // So, there is not enough mana to pay the avail.
             if (compare.any < 0) {
                 return false;
             }
@@ -710,13 +730,6 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             }
             compare.green = 0;
         }
-        if (compare.colorless < 0) {
-            compare.any = CardUtil.overflowInc(compare.any, compare.colorless);
-            if (compare.any < 0) {
-                return false;
-            }
-            compare.colorless = 0;
-        }
         if (compare.generic < 0) {
             compare.generic = CardUtil.overflowInc(compare.generic, compare.white);
             compare.generic = CardUtil.overflowInc(compare.generic, compare.blue);
@@ -731,16 +744,27 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns the total mana needed to meet the passed in {@link Mana} object.
+     * Returns the total mana needed to meet the cost of this given the available mana passed in
+     * as a {@link Mana} object.
      *
-     * @param cost the mana cost
-     * @return the total mana needed to meet the passes in {@link Mana} object.
+     * Used by the AI to calculate what mana it needs to obtain for a spell to become playable.
+     *
+     * @param avail the mana available to pay the cost
+     * @return      the total mana needed to pay this given the available mana passed in as a {@link Mana} object.
      */
-    public Mana needed(final Mana cost) {
-        Mana compare = cost.copy();
+    public Mana needed(final Mana avail) {
+        Mana compare = avail.copy();
+
+        // Subtract the mana cost (this) from the mana available (compare).
+        // This will only subtract like mana types from one another (e.g. green from green, coloreless from colorless).
         compare.subtract(this);
+
+        // A negative value for compare.X means that mana of type X from the cost could not be paid by mana
+        // of the same kind from the available mana (this).
         if (compare.white < 0 && compare.any > 0) {
+            // Calculate how much of the unpaid colored mana can be covered by mana of any color
             int diff = Math.min(compare.any, Math.abs(compare.white));
+            // Make the payment
             compare.any = CardUtil.overflowDec(compare.any, diff);
             compare.white = CardUtil.overflowInc(compare.white, diff);
         }
@@ -764,25 +788,30 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             compare.any = CardUtil.overflowDec(compare.any, diff);
             compare.green = CardUtil.overflowInc(compare.green, diff);
         }
-        if (compare.colorless < 0 && compare.any > 0) {
-            int diff = Math.min(compare.any, Math.abs(compare.colorless));
-            compare.any = CardUtil.overflowDec(compare.any, diff);
-            compare.colorless = CardUtil.overflowInc(compare.colorless, diff);
-        }
+
+        // Colorless mana can only be paid by colorless sources, so a check for it is not performed.
+
         if (compare.generic < 0) {
+            // Calculate total leftover mana available to pay for generic costs
             int remaining = 0;
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.white));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.blue));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.black));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.red));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.green));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.colorless));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.any));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.white));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.blue));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.black));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.red));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.green));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.colorless));
+            remaining = CardUtil.overflowInc(remaining, Math.max(0, compare.any));
+
             if (remaining > 0) {
+                // Calculate how much of the unpaid generic cost can be paid by the leftover mana
                 int diff = Math.min(remaining, Math.abs(compare.generic));
+                // Make the payment
                 compare.generic = CardUtil.overflowInc(compare.generic, diff);
             }
         }
+
+        // Create the mana object holding the mana needed to pay the cost
+        // If the value in compare is positive it means that there's excess mana of that type, and no more is needed.
         Mana needed = new Mana();
         if (compare.white < 0) {
             needed.white = CardUtil.overflowDec(needed.white, compare.white);

@@ -36,7 +36,7 @@ public final class ElfDruidToken extends TokenImpl {
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
-        availableImageSetCodes = Arrays.asList("C14");
+        availableImageSetCodes = Arrays.asList("C14", "CMA");
     }
 
     public ElfDruidToken(final ElfDruidToken token) {

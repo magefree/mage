@@ -27,7 +27,7 @@ public final class MyrQuadropod extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}: Switch Myr Quadropod's power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
     }
 
     private MyrQuadropod(final MyrQuadropod card) {

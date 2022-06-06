@@ -36,7 +36,7 @@ public final class DarkDepths extends CardImpl {
         // Dark Depths enters the battlefield with ten ice counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(10)), "with ten ice counters on it"));
         // {3}: Remove an ice counter from Dark Depths.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl<>("{3}")));
         // When Dark Depths has no ice counters on it, sacrifice it. If you do, create a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage.
         this.addAbility(new DarkDepthsAbility());
     }

@@ -57,7 +57,7 @@ public final class MarathWillOfTheWild extends CardImpl {
         // {X}, Remove X +1/+1 counters from Marath: Choose one - Put X +1/+1 counters on target creature;
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), ManacostVariableValue.REGULAR);
         effect.setText("Put X +1/+1 counters on target creature");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
         ability.addTarget(new TargetCreaturePermanent());
 

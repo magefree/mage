@@ -28,9 +28,11 @@ public final class BonecrusherGiant extends AdventureCard {
         this.toughness = new MageInt(3);
 
         // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell's controller.
-        this.addAbility(new BecomesTargetTriggeredAbility(new DamageTargetEffect(
-                2, true, "that's spell's controller", "{this}"
-        ), StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER));
+        this.addAbility(new BecomesTargetTriggeredAbility(
+                new DamageTargetEffect(
+                        2, true, "that spell's controller", "{this}"
+                ), StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever {this} becomes the target of a spell, "));
 
         // Stomp
         // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.

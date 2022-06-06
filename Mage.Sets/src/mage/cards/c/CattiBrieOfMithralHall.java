@@ -66,7 +66,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // attacking or blocking creature an opponent controls, where X is the number of
         // counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl("{1}"));
+                new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl<>("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));
         damageAbility.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
 

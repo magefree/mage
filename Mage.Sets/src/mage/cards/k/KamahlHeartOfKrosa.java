@@ -50,7 +50,7 @@ public final class KamahlHeartOfKrosa extends CardImpl {
                 .withAbility(IndestructibleAbility.getInstance())
                 .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn
-        ), new ManaCostsImpl("{1}{G}"));
+        ), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 

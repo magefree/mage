@@ -40,7 +40,7 @@ public final class HollowOne extends CardImpl {
         this.addAbility(ability, new CardsCycledOrDiscardedThisTurnWatcher());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private HollowOne(final HollowOne card) {

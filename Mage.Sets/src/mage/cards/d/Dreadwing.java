@@ -32,7 +32,7 @@ public final class Dreadwing extends CardImpl {
         // {1}{U}{R}: Dreadwing gets +3/+0 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(3, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +3/+0");
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl(("{1}{U}{R}")));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>(("{1}{U}{R}")));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.getEffects().add(effect);
