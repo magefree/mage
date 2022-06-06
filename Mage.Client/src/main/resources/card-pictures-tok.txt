@@ -538,7 +538,6 @@
 |Generate|TOK:DDP|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:DDP|Eldrazi Spawn|2||EldraziSpawnToken|
 |Generate|TOK:DDP|Eldrazi Spawn|3||EldraziSpawnToken|
-|Generate|TOK:DDP|Elemental|||WallOfResurgenceToken|
 |Generate|TOK:DDP|Hellion|||HellionToken|
 |Generate|TOK:DDP|Plant|||PlantToken|
 |Generate|TOK:DDQ|Angel|||AngelToken|

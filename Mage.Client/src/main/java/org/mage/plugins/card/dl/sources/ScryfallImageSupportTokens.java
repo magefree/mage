@@ -1506,6 +1506,13 @@ public class ScryfallImageSupportTokens {
             put ("ORI/Thopter/2", "https://api.scryfall.com/cards/tori/11/en?format=image");
             put ("ORI/Zombie", "https://api.scryfall.com/cards/tori/5/en?format=image");
 
+            // DDP
+            put ("DDP/Eldrazi Spawn/1", "https://api.scryfall.com/cards/ddp/76/en?format=image");
+            put ("DDP/Eldrazi Spawn/2", "https://api.scryfall.com/cards/ddp/77/en?format=image");
+            put ("DDP/Eldrazi Spawn/3", "https://api.scryfall.com/cards/ddp/78/en?format=image");
+            put ("DDP/Hellion", "https://api.scryfall.com/cards/ddp/79/en?format=image");
+            put ("DDP/Plant", "https://api.scryfall.com/cards/ddp/80/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
