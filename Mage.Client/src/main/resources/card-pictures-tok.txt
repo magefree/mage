@@ -1802,3 +1802,12 @@
 |Generate|TOK:DDR|Zombie Giant|||QuestForTheGravelordZombieToken|
 |Generate|TOK:DDR|Elemental|||WalkerOfTheGroveToken|
 |Generate|TOK:DDR|Plant|||PlantToken|
+
+# DDS
+|Generate|TOK:DDS|Beast|||BeastToken2|
+|Generate|TOK:DDS|Drake|||DrakeToken|
+|Generate|TOK:DDS|Elemental|||RedElementalToken|
+|Generate|TOK:DDS|Elephant|||ElephantToken|
+|Generate|TOK:DDS|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:DDS|Goblin|||GoblinToken|
+|Generate|TOK:DDS|Wurm|||WurmToken|
