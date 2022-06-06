@@ -30,7 +30,7 @@ public final class MonasteryFlock extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private MonasteryFlock(final MonasteryFlock card) {

@@ -33,10 +33,10 @@ public final class MarshalingCry extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
         
         // Flashback {3}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{W}")));
     }
 
     private MarshalingCry(final MarshalingCry card) {

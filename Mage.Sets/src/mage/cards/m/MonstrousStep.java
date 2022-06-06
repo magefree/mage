@@ -48,7 +48,7 @@ public final class MonstrousStep extends CardImpl {
         this.getSpellAbility().addTarget(target);
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private MonstrousStep(final MonstrousStep card) {
