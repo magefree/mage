@@ -1559,6 +1559,29 @@ public class ScryfallImageSupportTokens {
             put ("DDR/Plant", "https://api.scryfall.com/cards/ddr/75/en?format=image");
             put ("DDR/Emblem Nixilis", "https://api.scryfall.com/cards/ddr/76/en?format=image");
 
+            // MM3
+            put ("MM3/Angel", "https://api.scryfall.com/cards/tmm3/1/en?format=image");
+            put ("MM3/Beast/1", "https://api.scryfall.com/cards/tmm3/9/en?format=image");
+            put ("MM3/Beast/2", "https://api.scryfall.com/cards/tmm3/10/en?format=image");
+            put ("MM3/Bird", "https://api.scryfall.com/cards/tmm3/2/en?format=image");
+            put ("MM3/Centaur", "https://api.scryfall.com/cards/tmm3/11/en?format=image");
+            put ("MM3/Emblem Domri", "https://api.scryfall.com/cards/tmm3/21/en?format=image");
+            put ("MM3/Dragon", "https://api.scryfall.com/cards/tmm3/7/en?format=image");
+            put ("MM3/Elemental", "https://api.scryfall.com/cards/tmm3/16/en?format=image");
+            put ("MM3/Elephant", "https://api.scryfall.com/cards/tmm3/12/en?format=image");
+            put ("MM3/Giant Warrior", "https://api.scryfall.com/cards/tmm3/17/en?format=image");
+            put ("MM3/Goblin", "https://api.scryfall.com/cards/tmm3/8/en?format=image");
+            put ("MM3/Goblin Warrior", "https://api.scryfall.com/cards/tmm3/18/en?format=image");
+            put ("MM3/Phyrexian Golem", "https://api.scryfall.com/cards/tmm3/20/en?format=image");
+            put ("MM3/Ooze", "https://api.scryfall.com/cards/tmm3/13/en?format=image");
+            put ("MM3/Saproling", "https://api.scryfall.com/cards/tmm3/14/en?format=image");
+            put ("MM3/Soldier/1", "https://api.scryfall.com/cards/tmm3/3/en?format=image");
+            put ("MM3/Soldier/2", "https://api.scryfall.com/cards/tmm3/19/en?format=image");
+            put ("MM3/Spider", "https://api.scryfall.com/cards/tmm3/5/en?format=image");
+            put ("MM3/Spirit", "https://api.scryfall.com/cards/tmm3/4/en?format=image");
+            put ("MM3/Wurm", "https://api.scryfall.com/cards/tmm3/15/en?format=image");
+            put ("MM3/Zombie", "https://api.scryfall.com/cards/tmm3/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

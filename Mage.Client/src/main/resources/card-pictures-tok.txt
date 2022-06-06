@@ -839,26 +839,26 @@
 |Generate|TOK:MM2|Thrull|||ThrullToken|
 |Generate|TOK:MM2|Wolf|||WolfToken|
 |Generate|TOK:MM2|Worm|||BlackGreenWormToken|
-|Generate|TOK:MM3|Angel||
-|Generate|TOK:MM3|Beast|1|
-|Generate|TOK:MM3|Beast|2|
-|Generate|TOK:MM3|Bird||
-|Generate|TOK:MM3|Centaur||
-|Generate|TOK:MM3|Dragon||
+|Generate|TOK:MM3|Angel|||AngelToken|
+|Generate|TOK:MM3|Beast|1||BeastToken|
+|Generate|TOK:MM3|Beast|2||BeastToken2|
+|Generate|TOK:MM3|Bird|||BirdToken|
+|Generate|TOK:MM3|Centaur|||CentaurToken|
+|Generate|TOK:MM3|Dragon|||DragonToken|
 |Generate|TOK:MM3|Elemental|||VoiceOfResurgenceToken|
-|Generate|TOK:MM3|Elephant||
-|Generate|TOK:MM3|Giant Warrior||
-|Generate|TOK:MM3|Goblin Warrior||
-|Generate|TOK:MM3|Goblin||
-|Generate|TOK:MM3|Golem||
-|Generate|TOK:MM3|Ooze||
-|Generate|TOK:MM3|Saproling||
-|Generate|TOK:MM3|Soldier|1|
-|Generate|TOK:MM3|Soldier|2|
-|Generate|TOK:MM3|Spider||
-|Generate|TOK:MM3|Spirit||
-|Generate|TOK:MM3|Wurm||
-|Generate|TOK:MM3|Zombie||
+|Generate|TOK:MM3|Elephant|||ElephantToken|
+|Generate|TOK:MM3|Giant Warrior|||GiantBaitingGiantWarriorToken|
+|Generate|TOK:MM3|Goblin|||GoblinToken|
+|Generate|TOK:MM3|Goblin Warrior|||GoblinWarriorToken|
+|Generate|TOK:MM3|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:MM3|Ooze|||OozeToken|
+|Generate|TOK:MM3|Saproling|||SaprolingToken|
+|Generate|TOK:MM3|Soldier|1||SoldierToken|
+|Generate|TOK:MM3|Soldier|2||SoldierTokenWithHaste|
+|Generate|TOK:MM3|Spider|||PenumbraSpiderToken|
+|Generate|TOK:MM3|Spirit|||SpiritWhiteToken|
+|Generate|TOK:MM3|Wurm|||WurmWithTrampleToken|
+|Generate|TOK:MM3|Zombie|||ZombieToken|
 |Generate|TOK:MMA|Bat|||BatToken|
 |Generate|TOK:MMA|Dragon|||DragonToken|
 |Generate|TOK:MMA|Elemental|||WalkerOfTheGroveToken|

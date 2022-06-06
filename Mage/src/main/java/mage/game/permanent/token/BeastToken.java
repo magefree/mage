@@ -45,7 +45,7 @@ public final class BeastToken extends TokenImpl {
             setTokenType(RandomUtil.nextInt(2) + 1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
+            setTokenType(1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
             setTokenType(1);

@@ -32,7 +32,6 @@ public final class SaprolingToken extends TokenImpl {
                 "NEM",
                 "RTR",
                 "C15",
-                "MM3",
                 "INV",
                 "C16", // 2 different token images...
                 "CMA",

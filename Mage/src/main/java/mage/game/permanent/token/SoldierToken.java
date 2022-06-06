@@ -39,7 +39,7 @@ public final class SoldierToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
+            this.setTokenType(1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("THS")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
