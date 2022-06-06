@@ -1799,3 +1799,6 @@
 |Generate|TOK:MD1|Phyrexian Myr|||PhyrexianMyrToken|
 |Generate|TOK:MD1|Soldier|||SoldierToken|
 |Generate|TOK:MD1|Spirit|||SpiritWhiteToken|
+
+# V16
+|Generate|TOK:V16|Marit Lage|||MaritLageToken|

@@ -1537,6 +1537,9 @@ public class ScryfallImageSupportTokens {
             put ("EMA/Wurm", "https://api.scryfall.com/cards/tema/13/en?format=image");
             put ("EMA/Zombie", "https://api.scryfall.com/cards/tema/6/en?format=image");
 
+            // V16
+            put ("V16/Marit Lage", "https://api.scryfall.com/cards/v16/16/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
