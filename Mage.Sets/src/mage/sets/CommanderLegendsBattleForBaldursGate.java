@@ -263,6 +263,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Goliath Paladin", 21, Rarity.COMMON, mage.cards.g.GoliathPaladin.class));
+        cards.add(new SetCardInfo("Gond Gate", 353, Rarity.UNCOMMON, mage.cards.g.GondGate.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 753, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
         cards.add(new SetCardInfo("Gray Harbor Merfolk", 75, Rarity.COMMON, mage.cards.g.GrayHarborMerfolk.class));
