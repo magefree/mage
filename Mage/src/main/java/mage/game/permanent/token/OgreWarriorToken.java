@@ -19,7 +19,7 @@ public final class OgreWarriorToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("SNC", "CLB");
+        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     public OgreWarriorToken(final OgreWarriorToken token) {

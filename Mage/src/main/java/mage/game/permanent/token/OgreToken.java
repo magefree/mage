@@ -21,7 +21,7 @@ public final class OgreToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("WWK", "C16", "NCC");
+        availableImageSetCodes = Arrays.asList("WWK", "C16", "NCC", "CLB");
     }
 
     public OgreToken(final OgreToken token) {
