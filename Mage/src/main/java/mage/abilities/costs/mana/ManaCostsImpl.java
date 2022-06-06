@@ -42,13 +42,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         load(mana);
     }
 
-    public ManaCostsImpl(final ManaCostsImpl<T> costs) {
+    private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
         for (T cost : costs) {
             this.add(cost.copy());
         }
         this.phyrexian = costs.phyrexian;
+        this.phyrexianPaid = costs.phyrexianPaid;
     }
 
     @Override

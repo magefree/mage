@@ -25,7 +25,7 @@ public final class GildedLight extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private GildedLight(final GildedLight card) {

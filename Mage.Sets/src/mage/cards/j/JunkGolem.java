@@ -43,7 +43,7 @@ public final class JunkGolem extends CardImpl {
         ));
 
         // {1}, Discard a card: Put a +1/+1 counter on Junk Golem.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

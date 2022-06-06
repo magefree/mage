@@ -49,11 +49,11 @@ public final class GreaterStoneSpirit extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn)
                         .setText("until end of turn, target creature gets +0/+2"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
         effect.setText("and gains \"{R}: This creature gets +1/+0 until end of turn.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}"));
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

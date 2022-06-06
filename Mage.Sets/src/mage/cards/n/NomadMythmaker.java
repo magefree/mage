@@ -44,7 +44,7 @@ public final class NomadMythmaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {tap}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NomadMythmakerEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NomadMythmakerEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(1, FILTER));
         this.addAbility(ability);

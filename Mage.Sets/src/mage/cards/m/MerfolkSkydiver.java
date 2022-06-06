@@ -41,7 +41,7 @@ public final class MerfolkSkydiver extends CardImpl {
         this.addAbility(ability);
 
         // {3}{G}{U}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-        this.addAbility(new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl("{3}{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl<>("{3}{G}{U}")));
     }
 
     private MerfolkSkydiver(final MerfolkSkydiver card) {

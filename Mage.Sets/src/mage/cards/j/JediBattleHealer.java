@@ -33,7 +33,7 @@ public final class JediBattleHealer extends CardImpl {
          this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));      
         
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private JediBattleHealer(final JediBattleHealer card) {

@@ -35,7 +35,7 @@ public final class MistfireWeaver extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
         // When Misfire Weaver is turned face up, target creature  you control gains hexproof until end of turn
         Effect effect = new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);

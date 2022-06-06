@@ -48,7 +48,7 @@ public final class HobgoblinBanditLord extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(GoblinsEnteredThisTurnDynamicValue.instance)
                     .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

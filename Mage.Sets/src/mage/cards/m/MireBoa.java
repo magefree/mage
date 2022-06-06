@@ -29,7 +29,7 @@ public final class MireBoa extends CardImpl {
         this.addAbility(new SwampwalkAbility());
         
         // {G}: Regenerate Mire Boa.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private MireBoa(final MireBoa card) {

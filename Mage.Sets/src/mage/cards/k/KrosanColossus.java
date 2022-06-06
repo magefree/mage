@@ -23,7 +23,7 @@ public final class KrosanColossus extends CardImpl {
         this.toughness = new MageInt(9);
 
         // Morph {6}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{G}{G}")));
     }
 
     private KrosanColossus(final KrosanColossus card) {

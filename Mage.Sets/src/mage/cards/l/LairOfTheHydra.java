@@ -47,7 +47,7 @@ public final class LairOfTheHydra extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {X}{G}: Until end of turn, Lair of the Hydra becomes an X/X green Hydra creature. It's still a land. X can't be 0.
-        ManaCostsImpl manaCosts = new ManaCostsImpl("{X}{G}");
+        ManaCostsImpl manaCosts = new ManaCostsImpl<>("{X}{G}");
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);

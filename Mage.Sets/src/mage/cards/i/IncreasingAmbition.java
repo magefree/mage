@@ -37,7 +37,7 @@ public final class IncreasingAmbition extends CardImpl {
         ));
 
         // Flashback {7}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{B}")));
     }
 
     private IncreasingAmbition(final IncreasingAmbition card) {

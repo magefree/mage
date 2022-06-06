@@ -44,7 +44,7 @@ public final class KnacksawClique extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{U}, {untap}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

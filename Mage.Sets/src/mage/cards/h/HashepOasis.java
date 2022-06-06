@@ -46,7 +46,7 @@ public final class HashepOasis extends CardImpl {
         addAbility(ability);
         
         // {1}{G}{G}, {t}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate this ability only any time you could cast a sorcery.
-        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3,Duration.EndOfTurn), new ManaCostsImpl("{1}{G}{G}"));
+        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3,Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

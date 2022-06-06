@@ -26,7 +26,7 @@ public final class MerfolkSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Merfolk Seer dies, you may pay {1}{U}. If you do, draw a card.
-        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{U}"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{U}"))));
     }
 
     private MerfolkSeer(final MerfolkSeer card) {

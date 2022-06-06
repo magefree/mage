@@ -37,7 +37,7 @@ public final class GorillaShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}{X}{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
         this.addAbility(ability);

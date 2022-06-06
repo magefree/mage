@@ -40,7 +40,7 @@ public final class GelidShackles extends CardImpl {
         
         // {snow}: Enchanted creature gains defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{S}")));        
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));        
     }
 
     private GelidShackles(final GelidShackles card) {

@@ -47,14 +47,14 @@ public final class JayaBallardTaskMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}, Discard a card: Destroy target blue permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());        
         this.addAbility(ability);
         
         // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost()); 
@@ -62,7 +62,7 @@ public final class JayaBallardTaskMage extends CardImpl {
         this.addAbility(ability, new DamagedByWatcher(false));
         
         // {5}{R}{R}, {tap}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6), new ManaCostsImpl("{5}{R}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6), new ManaCostsImpl<>("{5}{R}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());        
         this.addAbility(ability);

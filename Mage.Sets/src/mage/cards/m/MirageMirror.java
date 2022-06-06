@@ -30,7 +30,7 @@ public final class MirageMirror extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}: Mirage Mirror becomes a copy of target artifact, creature, enchantment, or land until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirageMirrorCopyEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirageMirrorCopyEffect(), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE_ENCHANTMENT_OR_LAND));
         this.addAbility(ability);
     }

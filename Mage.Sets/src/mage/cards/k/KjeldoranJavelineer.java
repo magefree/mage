@@ -33,7 +33,7 @@ public final class KjeldoranJavelineer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // {T}: Kjeldoran Javelineer deals damage equal to the number of age counters on it to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

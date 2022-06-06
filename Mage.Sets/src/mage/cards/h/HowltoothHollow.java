@@ -41,7 +41,7 @@ public final class HowltoothHollow extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
                 new HideawayPlayEffect(), condition, "you may play the exiled card " +
                 "without paying its mana cost if each player has no cards in hand"
-        ), new ManaCostsImpl("{B}"));
+        ), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

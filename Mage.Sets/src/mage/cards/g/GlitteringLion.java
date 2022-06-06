@@ -32,7 +32,7 @@ public final class GlitteringLion extends CardImpl {
         // Prevent all damage that would be dealt to Glittering Lion.
         this.addAbility(GlitteringLionAbility.getInstance());
         // {3}: Until end of turn, Glittering Lion loses "Prevent all damage that would be dealt to Glittering Lion." Any player may activate this ability.
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(GlitteringLionAbility.getInstance(), Duration.EndOfTurn).setText("Until end of turn, {this} loses \"Prevent all damage that would be dealt to {this}.\" Any player may activate this ability"), new ManaCostsImpl("{3}"));
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(GlitteringLionAbility.getInstance(), Duration.EndOfTurn).setText("Until end of turn, {this} loses \"Prevent all damage that would be dealt to {this}.\" Any player may activate this ability"), new ManaCostsImpl<>("{3}"));
         ability2.setMayActivate(TargetController.ANY);
         this.addAbility(ability2);
     }

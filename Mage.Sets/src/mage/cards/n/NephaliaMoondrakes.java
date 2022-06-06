@@ -41,7 +41,7 @@ public final class NephaliaMoondrakes extends CardImpl {
         this.addAbility(ability);
 
         // {4}{U}{U}, Exile Nephalia Moondrakes from your graveyard: Creatures you control gain flying until end of turn.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl("{4}{U}{U}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl<>("{4}{U}{U}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

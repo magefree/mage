@@ -28,7 +28,7 @@ public final class KurosTaken extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(1));
         // {1}{B}: Regenerate Kuro's Taken.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private KurosTaken(final KurosTaken card) {

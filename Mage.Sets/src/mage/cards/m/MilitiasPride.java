@@ -45,7 +45,7 @@ public final class MilitiasPride extends CardImpl {
 class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
 
     public MilitiasPrideTriggerAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl("{W}")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl<>("{W}")));
     }
 
     public MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {

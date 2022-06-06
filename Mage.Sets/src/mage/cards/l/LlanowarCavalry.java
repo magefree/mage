@@ -28,7 +28,7 @@ public final class LlanowarCavalry extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {W}: Llanowar Cavalry gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private LlanowarCavalry(final LlanowarCavalry card) {

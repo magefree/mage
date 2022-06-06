@@ -30,7 +30,7 @@ public final class Glaciers extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{U}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{U}")), TargetController.YOU, false));
 
         // All Mountains are Plains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaciersEffect()));

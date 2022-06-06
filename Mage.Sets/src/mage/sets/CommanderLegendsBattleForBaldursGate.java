@@ -263,6 +263,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
         cards.add(new SetCardInfo("Goliath Paladin", 21, Rarity.COMMON, mage.cards.g.GoliathPaladin.class));
+        cards.add(new SetCardInfo("Gond Gate", 353, Rarity.UNCOMMON, mage.cards.g.GondGate.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 753, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Gorion, Wise Mentor", 276, Rarity.RARE, mage.cards.g.GorionWiseMentor.class));
         cards.add(new SetCardInfo("Gray Harbor Merfolk", 75, Rarity.COMMON, mage.cards.g.GrayHarborMerfolk.class));
@@ -270,6 +271,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Grazilaxx, Illithid Scholar", 723, Rarity.RARE, mage.cards.g.GrazilaxxIllithidScholar.class));
         cards.add(new SetCardInfo("Greater Gargadon", 796, Rarity.RARE, mage.cards.g.GreaterGargadon.class));
         cards.add(new SetCardInfo("Greatsword of Tyr", 22, Rarity.COMMON, mage.cards.g.GreatswordOfTyr.class));
+        cards.add(new SetCardInfo("Green Slime", 680, Rarity.RARE, mage.cards.g.GreenSlime.class));
         cards.add(new SetCardInfo("Grim Haruspex", 754, Rarity.RARE, mage.cards.g.GrimHaruspex.class));
         cards.add(new SetCardInfo("Grim Hireling", 755, Rarity.RARE, mage.cards.g.GrimHireling.class));
         cards.add(new SetCardInfo("Grumgully, the Generous", 847, Rarity.UNCOMMON, mage.cards.g.GrumgullyTheGenerous.class));
@@ -361,6 +363,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Plunder", 849, Rarity.RARE, mage.cards.m.MemoryPlunder.class));
         cards.add(new SetCardInfo("Meteor Golem", 323, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Midnight Clock", 727, Rarity.RARE, mage.cards.m.MidnightClock.class));
+        cards.add(new SetCardInfo("Mighty Servant of Leuk-o", 324, Rarity.RARE, mage.cards.m.MightyServantOfLeukO.class));
         cards.add(new SetCardInfo("Miirym, Sentinel Wyrm", 284, Rarity.RARE, mage.cards.m.MiirymSentinelWyrm.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 700, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mind Flayer", 728, Rarity.RARE, mage.cards.m.MindFlayer.class));
@@ -594,6 +597,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class));
         cards.add(new SetCardInfo("Vivien, Champion of the Wilds", 838, Rarity.RARE, mage.cards.v.VivienChampionOfTheWilds.class));
         cards.add(new SetCardInfo("Volcanic Torrent", 813, Rarity.UNCOMMON, mage.cards.v.VolcanicTorrent.class));
+        cards.add(new SetCardInfo("Volo, Itinerant Scholar", 103, Rarity.MYTHIC, mage.cards.v.VoloItinerantScholar.class));
         cards.add(new SetCardInfo("Vrock", 157, Rarity.UNCOMMON, mage.cards.v.Vrock.class));
         cards.add(new SetCardInfo("Wand of Wonder", 204, Rarity.RARE, mage.cards.w.WandOfWonder.class));
         cards.add(new SetCardInfo("Wandering Fumarole", 928, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
