@@ -38,7 +38,7 @@ public final class NaturesWrath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}")), TargetController.YOU, false));
 
         // Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(

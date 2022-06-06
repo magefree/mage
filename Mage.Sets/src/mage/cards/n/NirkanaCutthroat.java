@@ -30,7 +30,7 @@ public final class NirkanaCutthroat extends LevelerCard {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{B}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(DeathtouchAbility.getInstance());

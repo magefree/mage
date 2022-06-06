@@ -57,7 +57,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES),
-                new ManaCostsImpl("{W}{U}{B}{R}{G}"),
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}"),
                 new IsPhaseCondition(TurnPhase.COMBAT)
         );
         ability.addEffect(new GainAbilityAllEffect(
