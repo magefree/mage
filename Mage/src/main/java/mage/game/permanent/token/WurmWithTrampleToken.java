@@ -21,7 +21,7 @@ public final class WurmWithTrampleToken extends TokenImpl {
         toughness = new MageInt(5);
         addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("RTR", "MM3");
+        availableImageSetCodes = Arrays.asList("RTR", "MM3", "GK1");
     }
 
     public WurmWithTrampleToken(final WurmWithTrampleToken token) {

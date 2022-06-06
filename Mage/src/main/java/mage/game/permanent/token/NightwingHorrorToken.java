@@ -26,7 +26,7 @@ public final class NightwingHorrorToken extends TokenImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("GTC");
+        availableImageSetCodes = Arrays.asList("GTC", "GK1");
     }
 
     public NightwingHorrorToken(final NightwingHorrorToken token) {

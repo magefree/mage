@@ -51,7 +51,8 @@ public final class SaprolingToken extends TokenImpl {
                 "2XM",
                 "NCC",
                 "CM2",
-                "PCA"
+                "PCA",
+                "GK1"
         ));
     }
 
@@ -89,6 +90,9 @@ public final class SaprolingToken extends TokenImpl {
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GK1")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 }

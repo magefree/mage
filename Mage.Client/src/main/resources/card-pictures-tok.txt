@@ -1834,3 +1834,15 @@
 
 # GS1
 |Generate|TOK:GS1|Mowu|||MowuToken|
+
+# GK1
+|Generate|TOK:GK1|Centaur|||CentaurToken|
+|Generate|TOK:GK1|Elemental|||GreenAndWhiteElementalToken|
+|Generate|TOK:GK1|Goblin|||GoblinToken|
+|Generate|TOK:GK1|Horror|||NightwingHorrorToken|
+|Generate|TOK:GK1|Saproling|1||SaprolingToken|
+|Generate|TOK:GK1|Saproling|2||SaprolingToken|
+|Generate|TOK:GK1|Soldier|||SoldierTokenWithHaste|
+|Generate|TOK:GK1|Voja|||VojaToken|
+|Generate|TOK:GK1|Weird|||WeirdToken|
+|Generate|TOK:GK1|Wurm|||WurmWithTrampleToken|
