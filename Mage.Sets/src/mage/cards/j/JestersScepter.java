@@ -43,7 +43,7 @@ public final class JestersScepter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new JestersScepterLookAtCardEffect()));
 
         // {2}, {tap}, Put a card exiled with Jester's Scepter into its owner's graveyard: Counter target spell if it has the same name as that card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JestersScepterCounterEffect(), new ManaCostsImpl("{2}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JestersScepterCounterEffect(), new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new JestersScepterCost());
         ability2.addTarget(new TargetSpell());

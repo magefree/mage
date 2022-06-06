@@ -40,7 +40,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
                 CardsInControllerHandCount.instance, CardsInControllerHandCount.instance,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +
-                "where X is the number of cards in your hand"), new ManaCostsImpl("{4}{G}{G}")));
+                "where X is the number of cards in your hand"), new ManaCostsImpl<>("{4}{G}{G}")));
     }
 
     private JolraelMwonvuliRecluse(final JolraelMwonvuliRecluse card) {
