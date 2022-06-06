@@ -18,7 +18,7 @@ public final class GoldToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C15", "C17", "THB"));
+        tokenImageSets.addAll(Arrays.asList("BNG", "C15", "C17", "THB", "CLB"));
     }
 
     public GoldToken() {

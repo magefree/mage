@@ -14,6 +14,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -33,6 +34,8 @@ public final class VolosJournalToken extends TokenImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new VolosJournalTokenEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
         ).addHint(VolosJournalTokenHint.instance));
+
+        availableImageSetCodes = Arrays.asList("CLB");
     }
 
     public VolosJournalToken(final VolosJournalToken token) {

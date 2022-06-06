@@ -19,7 +19,7 @@ public final class ConstructToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("ZNR", "NEO");
+        availableImageSetCodes = Arrays.asList("ZNR", "NEO", "CLB");
     }
 
     @Override

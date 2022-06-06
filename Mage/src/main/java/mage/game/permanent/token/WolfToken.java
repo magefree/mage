@@ -23,7 +23,7 @@ public final class WolfToken extends TokenImpl {
 
         availableImageSetCodes = Arrays.asList("BNG", "C14", "C15", "CMA", "CMD", "CNS", "ISD",
                 "LRW", "M10", "M14", "MM2", "SHM", "SOI", "SOM", "V10", "ZEN", "WAR", "M20",
-                "THB", "AFR", "MID", "VOW", "2XM", "A25");
+                "THB", "AFR", "MID", "VOW", "2XM", "A25", "CLB");
     }
 
     @Override

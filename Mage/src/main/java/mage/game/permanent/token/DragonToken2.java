@@ -22,7 +22,7 @@ public final class DragonToken2 extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("10E", "BFZ", "C15", "C19", "CMA", "CMD", "SCG", "WWK", "M19", "KHM", "AFC", "IMA", "PCA", "CN2", "GN2");
+        availableImageSetCodes = Arrays.asList("10E", "BFZ", "C15", "C19", "CMA", "CMD", "SCG", "WWK", "M19", "KHM", "AFC", "IMA", "PCA", "CN2", "GN2", "CLB");
     }
 
     public DragonToken2(final DragonToken2 token) {
@@ -44,6 +44,9 @@ public final class DragonToken2 extends TokenImpl {
             this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GN2")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CLB")) {
             this.setTokenType(2);
         }
     }

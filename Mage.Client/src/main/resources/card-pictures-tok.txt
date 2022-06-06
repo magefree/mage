@@ -84,6 +84,8 @@
 |Generate|EMBLEM!:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
 |Generate|EMBLEM!:BBD|Emblem Rowan Kenrith|||RowanKenrithEmblem|
 |Generate|EMBLEM!:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
+|Generate|EMBLEM!:CLB|Emblem Rowan Kenrith|||RowanKenrithEmblem|
+|Generate|EMBLEM!:CLB|Emblem Will Kenrith|||WillKenrithEmblem|
 |Generate|EMBLEM:THS|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
@@ -1862,3 +1864,51 @@
 |Generate|TOK:GN2|Dinosaur|||DinosaurToken|
 |Generate|TOK:GN2|Dragon|1||DragonEggDragonToken|
 |Generate|TOK:GN2|Dragon|2||DragonToken2|
+
+# CLB
+|Generate|TOK:CLB|Angel Warrior|||AngelWarriorVigilanceToken|
+|Generate|TOK:CLB|Beast|||BeastToken|
+|Generate|TOK:CLB|Boar|||Boar2Token|
+|Generate|TOK:CLB|Boo|||BooToken|
+|Generate|TOK:CLB|Centaur|||HuntedCentaurToken|
+|Generate|TOK:CLB|Clue|||ClueArtifactToken|
+|Generate|TOK:CLB|Construct|||ConstructToken|
+|Generate|TOK:CLB|Demon|||Demon33Token|
+|Generate|TOK:CLB|Devil|||DevilToken|
+|Generate|TOK:CLB|Dragon|1||DragonToken|
+|Generate|TOK:CLB|Dragon|2||DragonToken2|
+|Generate|TOK:CLB|Eldrazi Horror|||EldraziHorrorToken|
+|Generate|TOK:CLB|Faerie Dragon|||FaerieDragonToken|
+|Generate|TOK:CLB|Goat|||GoatToken|
+|Generate|TOK:CLB|Goblin|||SpyMasterGoblinToken|
+|Generate|TOK:CLB|Gold|||GoldToken|
+|Generate|TOK:CLB|Horror|||Horror2Token|
+|Generate|TOK:CLB|Human|||HumanToken|
+|Generate|TOK:CLB|Inkling|||InklingToken|
+|Generate|TOK:CLB|Insect|||InsectDeathToken|
+|Generate|TOK:CLB|Knight|||WaylayToken|
+|Generate|TOK:CLB|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:CLB|Kor Warrior|||KorWarriorToken|
+|Generate|TOK:CLB|Ogre|||OgreToken|
+|Generate|TOK:CLB|Ox|||OxGreenToken|
+|Generate|TOK:CLB|Pegasus|||PegasusToken|
+|Generate|TOK:CLB|Phyrexian Beast|||PhyrexianBeastToken|
+|Generate|TOK:CLB|Pirate|||PursuedWhaleToken|
+|Generate|TOK:CLB|Rabbit|||RabbitToken|
+|Generate|TOK:CLB|Saproling|||SaprolingToken|
+|Generate|TOK:CLB|Satyr|||XenagosSatyrToken|
+|Generate|TOK:CLB|Shapeshifter|1||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:CLB|Shapeshifter|2||ShapeshifterToken|
+|Generate|TOK:CLB|Shapeshifter|3||Shapeshifter32Token|
+|Generate|TOK:CLB|Shapeshifter|4||ShapeshifterBlueToken|
+|Generate|TOK:CLB|Skeleton|||SkeletonMenaceToken|
+|Generate|TOK:CLB|Soldier|||SoldierToken|
+|Generate|TOK:CLB|Spider|||SpiderToken|
+|Generate|TOK:CLB|Squid|||SquidToken|
+|Generate|TOK:CLB|Squirrel|||SquirrelToken|
+|Generate|TOK:CLB|Treasure|||TreasureToken|
+|Generate|TOK:CLB|Volo's Journal|||VolosJournalToken|
+|Generate|TOK:CLB|Warrior|||MarduStrikeLeaderWarriorToken|
+|Generate|TOK:CLB|Wizard|||MagesAttendantToken|
+|Generate|TOK:CLB|Wolf|||WolfToken|
+|Generate|TOK:CLB|Wurm|||Wurm55Token|
