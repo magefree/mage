@@ -1490,6 +1490,22 @@ public class ScryfallImageSupportTokens {
             put ("MM2/Wolf", "https://api.scryfall.com/cards/tmm2/13/en?format=image");
             put ("MM2/Worm", "https://api.scryfall.com/cards/tmm2/14/en?format=image");
 
+            // ORI
+            put ("ORI/Angel", "https://api.scryfall.com/cards/tori/1/en?format=image");
+            put ("ORI/Ashaya, the Awoken World", "https://api.scryfall.com/cards/tori/7/en?format=image");
+            put ("ORI/Emblem Chandra", "https://api.scryfall.com/cards/tori/14/en?format=image");
+            put ("ORI/Demon", "https://api.scryfall.com/cards/tori/4/en?format=image");
+            put ("ORI/Elemental", "https://api.scryfall.com/cards/tori/8/en?format=image");
+            put ("ORI/Elf Warrior", "https://api.scryfall.com/cards/tori/9/en?format=image");
+            put ("ORI/Goblin", "https://api.scryfall.com/cards/tori/6/en?format=image");
+            put ("ORI/Emblem Jace", "https://api.scryfall.com/cards/tori/12/en?format=image");
+            put ("ORI/Knight", "https://api.scryfall.com/cards/tori/2/en?format=image");
+            put ("ORI/Emblem Liliana", "https://api.scryfall.com/cards/tori/13/en?format=image");
+            put ("ORI/Soldier", "https://api.scryfall.com/cards/tori/3/en?format=image");
+            put ("ORI/Thopter/1", "https://api.scryfall.com/cards/tori/10/en?format=image");
+            put ("ORI/Thopter/2", "https://api.scryfall.com/cards/tori/11/en?format=image");
+            put ("ORI/Zombie", "https://api.scryfall.com/cards/tori/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
