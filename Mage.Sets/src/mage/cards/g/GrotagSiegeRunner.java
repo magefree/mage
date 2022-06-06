@@ -41,7 +41,7 @@ public final class GrotagSiegeRunner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Grotag Siege-Runner: Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         Effect effect = new DamageTargetControllerEffect(2);
         effect.setText("{this} deals 2 damage to that creature's controller");

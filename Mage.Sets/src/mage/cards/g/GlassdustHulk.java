@@ -45,7 +45,7 @@ public final class GlassdustHulk extends CardImpl {
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability);
 
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W/U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W/U}")));
     }
 
     private GlassdustHulk(final GlassdustHulk card) {

@@ -39,7 +39,7 @@ public final class Godtoucher extends CardImpl {
         // {1}{W}, {T}: Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GodtoucherEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{W}"));
+                new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

@@ -45,7 +45,7 @@ public final class GlacialPlating extends CardImpl {
         this.addAbility(ability);
 
         // Cumulative upkeep {snow}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{S}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{S}")));
 
         // Enchanted creature gets +3/+3 for each age counter on Glacial Plating.
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.AGE), 3);
