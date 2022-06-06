@@ -50,7 +50,7 @@ public final class LeechriddenSwamp extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new LeechriddenSwampLoseLifeEffect(),
-                new ManaCostsImpl("{B}"),
+                new ManaCostsImpl<>("{B}"),
                 new PermanentsOnTheBattlefieldCondition(
                         filter, 
                         ComparisonType.MORE_THAN, 

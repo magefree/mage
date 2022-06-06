@@ -29,7 +29,7 @@ public final class LiegeOfTheAxe extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
         // When Liege of the Axe is turned face up, untap it.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new UntapSourceEffect()));
     }

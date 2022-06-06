@@ -43,7 +43,7 @@ public final class LeylineOfAbundance extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(),
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ), new ManaCostsImpl("{6}{G}{G}")));
+        ), new ManaCostsImpl<>("{6}{G}{G}")));
     }
 
     private LeylineOfAbundance(final LeylineOfAbundance card) {

@@ -47,13 +47,13 @@ public final class LivioOathswornSentinel extends CardImpl {
 
         // {1}{W}: Choose another target creature. Its controller may exile it with an aegis counter on it.
         Ability ability = new SimpleActivatedAbility(
-                new LivioOathswornSentinelExileEffect(), new ManaCostsImpl("{1}{W}")
+                new LivioOathswornSentinelExileEffect(), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {2}{W}, {T}: Return all exiled cards with aegis counters on them to the battlefield under their owners' control.
-        ability = new SimpleActivatedAbility(new LivioOathswornSentinelReturnEffect(), new ManaCostsImpl("{2}{W}"));
+        ability = new SimpleActivatedAbility(new LivioOathswornSentinelReturnEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
