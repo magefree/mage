@@ -1513,6 +1513,12 @@ public class ScryfallImageSupportTokens {
             put ("DDP/Hellion", "https://api.scryfall.com/cards/ddp/79/en?format=image");
             put ("DDP/Plant", "https://api.scryfall.com/cards/ddp/80/en?format=image");
 
+            // DDQ
+            put ("DDQ/Angel", "https://api.scryfall.com/cards/ddq/77/en?format=image");
+            put ("DDQ/Human", "https://api.scryfall.com/cards/ddq/78/en?format=image");
+            put ("DDQ/Spirit", "https://api.scryfall.com/cards/ddq/79/en?format=image");
+            put ("DDQ/Zombie", "https://api.scryfall.com/cards/ddq/80/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

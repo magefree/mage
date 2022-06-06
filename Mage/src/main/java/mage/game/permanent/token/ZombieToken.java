@@ -31,7 +31,7 @@ public final class ZombieToken extends TokenImpl {
                 "M20", "C19", "C20", "THB",
                 "M21", "CMR", "C21", "MH2",
                 "AFR", "MIC", "VOW", "UMA",
-                "NCC", "MED", "BBD", "M19", "CM2", "PCA", "AVR");
+                "NCC", "MED", "BBD", "M19", "CM2", "PCA", "AVR", "DDQ");
     }
 
     @Override
