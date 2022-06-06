@@ -46,6 +46,10 @@ public final class RedElementalToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("UMA")) {
             setTokenType(RandomUtil.nextInt(2) + 2); // 2..3
         }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(1);
+        }
     }
 
     public RedElementalToken(final RedElementalToken token) {

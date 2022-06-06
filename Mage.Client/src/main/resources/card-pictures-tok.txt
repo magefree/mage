@@ -588,9 +588,7 @@
 |Generate|TOK:E01|Spirit|||SpiritWhiteToken|
 |Generate|TOK:E01|Zombie|||ZombieToken|
 |Generate|TOK:E02|Saproling|||SaprolingToken|
-|Generate|TOK:EMA|Assembly-Worker|||AssemblyWorkerToken|
-|Generate|TOK:EMA|Beast|||CarnivoreToken|
-|Generate|TOK:EMA|Carnivore||
+|Generate|TOK:EMA|Carnivore|||CarnivoreToken|
 |Generate|TOK:EMA|Dragon|||DragonEggDragonToken|
 |Generate|TOK:EMA|Elemental|1||RedElementalToken|
 |Generate|TOK:EMA|Elemental|2||CallTheSkyBreakerElementalToken|
@@ -600,8 +598,8 @@
 |Generate|TOK:EMA|Goblin|||GoblinToken|
 |Generate|TOK:EMA|Serf|||SerfToken|
 |Generate|TOK:EMA|Soldier|||SoldierToken|
-|Generate|TOK:EMA|Spirit|1||SpiritWhiteToken|
-|Generate|TOK:EMA|Spirit|2||SpiritToken|
+|Generate|TOK:EMA|Spirit|1||SpiritToken|
+|Generate|TOK:EMA|Spirit|2||SpiritWhiteToken|
 |Generate|TOK:EMA|Wall|||TidalWaveWallToken|
 |Generate|TOK:EMA|Wurm|||WurmToken|
 |Generate|TOK:EMA|Zombie|||ZombieToken|

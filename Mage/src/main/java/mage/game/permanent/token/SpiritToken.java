@@ -26,7 +26,7 @@ public final class SpiritToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-            setTokenType(2);
+            setTokenType(1);
         }
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {

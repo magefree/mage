@@ -1519,6 +1519,24 @@ public class ScryfallImageSupportTokens {
             put ("DDQ/Spirit", "https://api.scryfall.com/cards/ddq/79/en?format=image");
             put ("DDQ/Zombie", "https://api.scryfall.com/cards/ddq/80/en?format=image");
 
+            // EMA
+            put ("EMA/Carnivore", "https://api.scryfall.com/cards/tema/7/en?format=image");
+            put ("EMA/Emblem Dack Fayden", "https://api.scryfall.com/cards/tema/16/en?format=image");
+            put ("EMA/Dragon", "https://api.scryfall.com/cards/tema/8/en?format=image");
+            put ("EMA/Elemental/1", "https://api.scryfall.com/cards/tema/9/en?format=image");
+            put ("EMA/Elemental/2", "https://api.scryfall.com/cards/tema/14/en?format=image");
+            put ("EMA/Elephant", "https://api.scryfall.com/cards/tema/11/en?format=image");
+            put ("EMA/Elf Warrior", "https://api.scryfall.com/cards/tema/12/en?format=image");
+            put ("EMA/Goblin", "https://api.scryfall.com/cards/tema/10/en?format=image");
+            put ("EMA/Goblin Soldier", "https://api.scryfall.com/cards/tema/15/en?format=image");
+            put ("EMA/Serf", "https://api.scryfall.com/cards/tema/5/en?format=image");
+            put ("EMA/Soldier", "https://api.scryfall.com/cards/tema/2/en?format=image");
+            put ("EMA/Spirit/1", "https://api.scryfall.com/cards/tema/1/en?format=image");
+            put ("EMA/Spirit/2", "https://api.scryfall.com/cards/tema/3/en?format=image");
+            put ("EMA/Wall", "https://api.scryfall.com/cards/tema/4/en?format=image");
+            put ("EMA/Wurm", "https://api.scryfall.com/cards/tema/13/en?format=image");
+            put ("EMA/Zombie", "https://api.scryfall.com/cards/tema/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
