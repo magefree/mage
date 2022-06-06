@@ -22,7 +22,7 @@ public final class DragonToken2 extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("10E", "BFZ", "C15", "C19", "CMA", "CMD", "ONS", "SCG", "WWK", "M19", "KHM", "AFC", "IMA", "PCA");
+        availableImageSetCodes = Arrays.asList("10E", "BFZ", "C15", "C19", "CMA", "CMD", "ONS", "SCG", "WWK", "M19", "KHM", "AFC", "IMA", "PCA", "CN2");
     }
 
     public DragonToken2(final DragonToken2 token) {

@@ -1540,6 +1540,17 @@ public class ScryfallImageSupportTokens {
             // V16
             put ("V16/Marit Lage", "https://api.scryfall.com/cards/v16/16/en?format=image");
 
+            // CN2
+            put ("CN2/Assassin", "https://api.scryfall.com/cards/tcn2/5/en?format=image");
+            put ("CN2/Beast", "https://api.scryfall.com/cards/tcn2/10/en?format=image");
+            put ("CN2/Construct", "https://api.scryfall.com/cards/tcn2/12/en?format=image");
+            put ("CN2/Dragon", "https://api.scryfall.com/cards/tcn2/7/en?format=image");
+            put ("CN2/Insect", "https://api.scryfall.com/cards/tcn2/11/en?format=image");
+            put ("CN2/Lizard", "https://api.scryfall.com/cards/tcn2/9/en?format=image");
+            put ("CN2/Soldier", "https://api.scryfall.com/cards/tcn2/2/en?format=image");
+            put ("CN2/Spirit", "https://api.scryfall.com/cards/tcn2/4/en?format=image");
+            put ("CN2/Zombie", "https://api.scryfall.com/cards/tcn2/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
