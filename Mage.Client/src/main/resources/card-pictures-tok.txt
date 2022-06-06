@@ -1857,3 +1857,8 @@
 |Generate|TOK:GK2|Saproling|||SaprolingToken|
 |Generate|TOK:GK2|Spirit|||SpiritWhiteToken|
 |Generate|TOK:GK2|Wurm|||WurmToken|
+
+# GN2
+|Generate|TOK:GN2|Dinosaur|||DinosaurToken|
+|Generate|TOK:GN2|Dragon|1||DragonEggDragonToken|
+|Generate|TOK:GN2|Dragon|2||DragonToken2|
