@@ -270,6 +270,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Grazilaxx, Illithid Scholar", 723, Rarity.RARE, mage.cards.g.GrazilaxxIllithidScholar.class));
         cards.add(new SetCardInfo("Greater Gargadon", 796, Rarity.RARE, mage.cards.g.GreaterGargadon.class));
         cards.add(new SetCardInfo("Greatsword of Tyr", 22, Rarity.COMMON, mage.cards.g.GreatswordOfTyr.class));
+        cards.add(new SetCardInfo("Green Slime", 680, Rarity.RARE, mage.cards.g.GreenSlime.class));
         cards.add(new SetCardInfo("Grim Haruspex", 754, Rarity.RARE, mage.cards.g.GrimHaruspex.class));
         cards.add(new SetCardInfo("Grim Hireling", 755, Rarity.RARE, mage.cards.g.GrimHireling.class));
         cards.add(new SetCardInfo("Grumgully, the Generous", 847, Rarity.UNCOMMON, mage.cards.g.GrumgullyTheGenerous.class));
