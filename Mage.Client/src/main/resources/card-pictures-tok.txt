@@ -585,7 +585,6 @@
 |Generate|TOK:E01|Beast|2||BeastToken2|
 |Generate|TOK:E01|Soldier|||SoldierToken|
 |Generate|TOK:E01|Spirit|||SpiritWhiteToken|
-|Generate|TOK:E01|Zombie|||ZombieToken|
 |Generate|TOK:E02|Saproling|||SaprolingToken|
 |Generate|TOK:EMA|Carnivore|||CarnivoreToken|
 |Generate|TOK:EMA|Dragon|||DragonEggDragonToken|

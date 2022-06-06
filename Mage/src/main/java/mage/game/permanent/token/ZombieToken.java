@@ -27,7 +27,7 @@ public final class ZombieToken extends TokenImpl {
                 "MMA", "BNG", "KTK", "DTK",
                 "ORI", "OGW", "SOI", "EMN",
                 "EMA", "MM3", "AKH", "CMA",
-                "E01", "RNA", "WAR", "MH1",
+                "RNA", "WAR", "MH1",
                 "M20", "C19", "C20", "THB",
                 "M21", "CMR", "C21", "MH2",
                 "AFR", "MIC", "VOW", "UMA",
