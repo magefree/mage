@@ -31,7 +31,7 @@ public final class HauntedCadaver extends CardImpl {
         ability.addEffect( new DiscardTargetEffect(3));
         this.addAbility(ability);
         // Morph {1}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private HauntedCadaver(final HauntedCadaver card) {

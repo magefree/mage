@@ -45,7 +45,7 @@ public final class HanSoloScrumrat extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chewbacca, the Beast"));
 
         // R: Han Solo, Scrumrat gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // Whenever Han Solo, Scrumrat deals damage during your turn, put a +1/+1 counter on another target creature you control.
         Ability ability = new HanSoloScrumratTriggeredAbility();

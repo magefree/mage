@@ -26,7 +26,7 @@ public final class HornedTroll extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}: Regenerate Horned Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private HornedTroll(final HornedTroll card) {

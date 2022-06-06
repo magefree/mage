@@ -54,7 +54,7 @@ public final class HornbashMentor extends CardImpl {
 
         // {2}{G}, {T}: Put a +1/+1 counter on each creature you control with trample.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{2}{G}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{2}{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

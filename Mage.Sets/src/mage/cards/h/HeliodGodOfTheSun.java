@@ -49,7 +49,7 @@ public final class HeliodGodOfTheSun extends CardImpl {
 
         // {2}{W}{W}: Create a 2/1 white Cleric enchantment creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new HeliodGodOfTheSunToken()), new ManaCostsImpl("{2}{W}{W}")
+                new CreateTokenEffect(new HeliodGodOfTheSunToken()), new ManaCostsImpl<>("{2}{W}{W}")
         ));
 
     }

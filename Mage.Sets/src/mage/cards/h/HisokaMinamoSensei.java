@@ -40,7 +40,7 @@ public final class HisokaMinamoSensei extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetSpell());
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("a card"));
         ability.addCost(new HisokaMinamoSenseiDiscardTargetCost(targetCard));

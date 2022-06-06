@@ -115,7 +115,7 @@ class HomurasEssence2 extends TokenImpl {
         Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have flying");
         ability.addEffect(effect);
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         effect = new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter);
         effect.setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
         ability.addEffect(effect);

@@ -34,7 +34,7 @@ public final class HolisticWisdom extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
 
         // {2}, Exile a card from your hand: Return target card from your graveyard to your hand if it shares a card type with the card exiled this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HolisticWisdomEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HolisticWisdomEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new ExileFromHandCost(new TargetCardInHand(new FilterCard("a card from your hand"))));
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);

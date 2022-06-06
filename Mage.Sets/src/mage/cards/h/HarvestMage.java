@@ -36,7 +36,7 @@ public final class HarvestMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {T}, Discard a card: Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(new HarvestMageReplacementEffect(), new ManaCostsImpl("{G}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new HarvestMageReplacementEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

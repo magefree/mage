@@ -43,7 +43,7 @@ public final class HiredTorturer extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}{B}, {T}: Target opponent loses 2 life and reveals a card at random from their hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl("{3}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl<>("{3}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new HiredTorturerEffect());
         ability.addTarget(new TargetOpponent());

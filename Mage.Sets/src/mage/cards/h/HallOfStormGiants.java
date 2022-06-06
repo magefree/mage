@@ -55,7 +55,7 @@ public final class HallOfStormGiants extends CardImpl {
                                 "It's still a land. " +
                                 "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
                                 "counter it unless that player pays {3}.)</i>"),
-                new ManaCostsImpl("{5}{U}")));
+                new ManaCostsImpl<>("{5}{U}")));
     }
 
     private HallOfStormGiants(final HallOfStormGiants card) {

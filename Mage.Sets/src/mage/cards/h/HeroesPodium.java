@@ -48,7 +48,7 @@ public final class HeroesPodium extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
