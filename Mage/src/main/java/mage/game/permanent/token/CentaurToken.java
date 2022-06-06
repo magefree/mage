@@ -20,7 +20,7 @@ public final class CentaurToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("C19", "ONS", "RTR", "RNA", "MIC", "MM3");
+        availableImageSetCodes = Arrays.asList("C19", "RTR", "RNA", "MIC", "MM3");
     }
 
     public CentaurToken(final CentaurToken token) {

@@ -920,12 +920,6 @@
 |Generate|TOK:OGW|Elemental|2||ElementalTokenWithHaste|
 |Generate|TOK:OGW|Plant|||PlantToken|
 |Generate|TOK:OGW|Zombie|||ZombieToken|
-|Generate|TOK:ONS|Bear|||BearToken|
-|Generate|TOK:ONS|Centaur|||CentaurToken|
-|Generate|TOK:ONS|Dragon|||DragonToken2|
-|Generate|TOK:ONS|Insect|||InsectToken|
-|Generate|TOK:ONS|Soldier|||SoldierToken|
-|Generate|TOK:ONS|Zombie|||ZombieToken|
 |Generate|TOK:ORI|Angel|||AngelToken|
 |Generate|TOK:ORI|Ashaya, the Awoken World|||NissaSageAnimistToken|
 |Generate|TOK:ORI|Demon|||DemonToken|
