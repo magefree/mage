@@ -363,6 +363,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Plunder", 849, Rarity.RARE, mage.cards.m.MemoryPlunder.class));
         cards.add(new SetCardInfo("Meteor Golem", 323, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Midnight Clock", 727, Rarity.RARE, mage.cards.m.MidnightClock.class));
+        cards.add(new SetCardInfo("Mighty Servant of Leuk-o", 324, Rarity.RARE, mage.cards.m.MightyServantOfLeukO.class));
         cards.add(new SetCardInfo("Miirym, Sentinel Wyrm", 284, Rarity.RARE, mage.cards.m.MiirymSentinelWyrm.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 700, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mind Flayer", 728, Rarity.RARE, mage.cards.m.MindFlayer.class));
