@@ -1636,6 +1636,17 @@ public class ScryfallImageSupportTokens {
             put ("GK1/Weird", "https://api.scryfall.com/cards/tgk1/3/en?format=image");
             put ("GK1/Wurm", "https://api.scryfall.com/cards/tgk1/9/en?format=image");
 
+            // GK2
+            put ("GK2/Bat", "https://api.scryfall.com/cards/tgk2/3/en?format=image");
+            put ("GK2/Bird", "https://api.scryfall.com/cards/tgk2/1/en?format=image");
+            put ("GK2/Cleric", "https://api.scryfall.com/cards/tgk2/4/en?format=image");
+            put ("GK2/Dragon", "https://api.scryfall.com/cards/tgk2/5/en?format=image");
+            put ("GK2/Goblin", "https://api.scryfall.com/cards/tgk2/6/en?format=image");
+            put ("GK2/Ooze", "https://api.scryfall.com/cards/tgk2/9/en?format=image");
+            put ("GK2/Saproling", "https://api.scryfall.com/cards/tgk2/7/en?format=image");
+            put ("GK2/Spirit", "https://api.scryfall.com/cards/tgk2/2/en?format=image");
+            put ("GK2/Wurm", "https://api.scryfall.com/cards/tgk2/8/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

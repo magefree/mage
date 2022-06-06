@@ -19,7 +19,7 @@ public final class WurmToken extends TokenImpl {
         power = new MageInt(6);
         toughness = new MageInt(6);
 
-        availableImageSetCodes = Arrays.asList("C19", "EMA", "GPT", "JUD", "M12", "M13", "MM3", "ODY", "VMA", "C21", "DDS");
+        availableImageSetCodes = Arrays.asList("C19", "EMA", "GPT", "JUD", "M12", "M13", "MM3", "ODY", "VMA", "C21", "DDS", "GK2");
     }
 
     @Override

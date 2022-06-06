@@ -1846,3 +1846,14 @@
 |Generate|TOK:GK1|Voja|||VojaToken|
 |Generate|TOK:GK1|Weird|||WeirdToken|
 |Generate|TOK:GK1|Wurm|||WurmWithTrampleToken|
+
+# GK2
+|Generate|TOK:GK2|Bat|||BatToken|
+|Generate|TOK:GK2|Bird|||WhiteBlueBirdToken|
+|Generate|TOK:GK2|Cleric|||DeathpactAngelToken|
+|Generate|TOK:GK2|Dragon|||UtvaraHellkiteDragonToken|
+|Generate|TOK:GK2|Goblin|||RakdosGuildmageGoblinToken|
+|Generate|TOK:GK2|Ooze|||OozeToken|
+|Generate|TOK:GK2|Saproling|||SaprolingToken|
+|Generate|TOK:GK2|Spirit|||SpiritWhiteToken|
+|Generate|TOK:GK2|Wurm|||WurmToken|
