@@ -447,6 +447,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 730, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Prophetic Prism", 335, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Pseudodragon Familiar", 88, Rarity.COMMON, mage.cards.p.PseudodragonFamiliar.class));
+        cards.add(new SetCardInfo("Psionic Ritual", 668, Rarity.RARE, mage.cards.p.PsionicRitual.class));
         cards.add(new SetCardInfo("Psychic Impetus", 89, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 869, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 731, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
