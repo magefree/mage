@@ -1815,3 +1815,19 @@
 |Generate|TOK:DDT|Elemental|||MasterOfWavesElementalToken|
 |Generate|TOK:DDT|Goblin|||GoblinToken|
 |Generate|TOK:DDT|Wall|||TidalWaveWallToken|
+
+# A25
+|Generate|TOK:A25|Angel|||AngelToken|
+|Generate|TOK:A25|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:A25|Fish|||ReefWormFishToken|
+|Generate|TOK:A25|Goblin|||GoblinToken|
+|Generate|TOK:A25|Insect|||InsectToken|
+|Generate|TOK:A25|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:A25|Kraken|||Kraken99Token|
+|Generate|TOK:A25|Skeleton|||SkeletonRegenerateToken|
+|Generate|TOK:A25|Soldier|||SoldierToken|
+|Generate|TOK:A25|Spirit|1||SpiritToken|
+|Generate|TOK:A25|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:A25|Stangg Twin|||StanggTwinToken|
+|Generate|TOK:A25|Whale|||ReefWormWhaleToken|
+|Generate|TOK:A25|Wolf|||WolfToken|

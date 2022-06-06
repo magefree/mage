@@ -21,7 +21,7 @@ public final class KherKeepKoboldToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("TSR");
+        availableImageSetCodes = Arrays.asList("A25", "TSR");
     }
     public KherKeepKoboldToken(final KherKeepKoboldToken token) {
         super(token);

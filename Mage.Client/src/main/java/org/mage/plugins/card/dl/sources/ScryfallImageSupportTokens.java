@@ -1605,6 +1605,22 @@ public class ScryfallImageSupportTokens {
             // E02
             put ("E02/Saproling", "https://api.scryfall.com/cards/e02/T1/en?format=image");
 
+            // A25
+            put ("A25/Angel", "https://api.scryfall.com/cards/ta25/2/en?format=image");
+            put ("A25/Elf Warrior", "https://api.scryfall.com/cards/ta25/11/en?format=image");
+            put ("A25/Fish", "https://api.scryfall.com/cards/ta25/5/en?format=image");
+            put ("A25/Goblin", "https://api.scryfall.com/cards/ta25/9/en?format=image");
+            put ("A25/Insect", "https://api.scryfall.com/cards/ta25/12/en?format=image");
+            put ("A25/Kobolds of Kher Keep", "https://api.scryfall.com/cards/ta25/10/en?format=image");
+            put ("A25/Kraken", "https://api.scryfall.com/cards/ta25/6/en?format=image");
+            put ("A25/Skeleton", "https://api.scryfall.com/cards/ta25/8/en?format=image");
+            put ("A25/Soldier", "https://api.scryfall.com/cards/ta25/3/en?format=image");
+            put ("A25/Spirit/1", "https://api.scryfall.com/cards/ta25/1/en?format=image");
+            put ("A25/Spirit/2", "https://api.scryfall.com/cards/ta25/4/en?format=image");
+            put ("A25/Stangg Twin", "https://api.scryfall.com/cards/ta25/14/en?format=image");
+            put ("A25/Whale", "https://api.scryfall.com/cards/ta25/7/en?format=image");
+            put ("A25/Wolf", "https://api.scryfall.com/cards/ta25/13/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
