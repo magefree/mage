@@ -1810,3 +1810,8 @@
 |Generate|TOK:DDS|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:DDS|Goblin|||GoblinToken|
 |Generate|TOK:DDS|Wurm|||WurmToken|
+
+# DDT
+|Generate|TOK:DDT|Elemental|||MasterOfWavesElementalToken|
+|Generate|TOK:DDT|Goblin|||GoblinToken|
+|Generate|TOK:DDT|Wall|||TidalWaveWallToken|
