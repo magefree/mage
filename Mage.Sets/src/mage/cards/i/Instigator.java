@@ -39,7 +39,7 @@ public final class Instigator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}{B}, {tap}, Discard a card: Creatures target player controls attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InstigatorEffect(), new ManaCostsImpl("{1}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InstigatorEffect(), new ManaCostsImpl<>("{1}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());

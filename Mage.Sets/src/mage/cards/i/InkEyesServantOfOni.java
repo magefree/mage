@@ -44,7 +44,7 @@ public final class InkEyesServantOfOni extends CardImpl {
         this.addAbility(new InkEyesServantOfOniTriggeredAbility());
 
         // {1}{B}: Regenerate Ink-Eyes.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private InkEyesServantOfOni(final InkEyesServantOfOni card) {

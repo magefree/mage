@@ -31,7 +31,7 @@ public final class IngeniousSkaab extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // {U}: Ingenius Skaab gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private IngeniousSkaab(final IngeniousSkaab card) {

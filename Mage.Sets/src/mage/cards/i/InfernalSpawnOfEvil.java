@@ -48,7 +48,7 @@ public final class InfernalSpawnOfEvil extends CardImpl {
         // Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.HAND, new DamageTargetEffect(1),
                 new CompositeCost(
-                    new ManaCostsImpl("{1}{B}"),
+                    new ManaCostsImpl<>("{1}{B}"),
                     new CompositeCost(
                         new RevealSourceFromYourHandCost(),
                         new SayCost("It's coming!"),

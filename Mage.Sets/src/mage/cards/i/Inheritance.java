@@ -21,7 +21,7 @@ public final class Inheritance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Whenever a creature dies, you may pay {3}. If you do, draw a card.
-        Ability ability = new DiesCreatureTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}")), false);
+        Ability ability = new DiesCreatureTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{3}")), false);
         this.addAbility(ability);
     }
 
