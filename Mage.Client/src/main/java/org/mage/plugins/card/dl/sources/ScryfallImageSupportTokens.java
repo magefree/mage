@@ -1602,6 +1602,9 @@ public class ScryfallImageSupportTokens {
             put ("DDT/Goblin", "https://api.scryfall.com/cards/tddt/3/en?format=image");
             put ("DDT/Wall", "https://api.scryfall.com/cards/tddt/2/en?format=image");
 
+            // E02
+            put ("E02/Saproling", "https://api.scryfall.com/cards/e02/T1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
