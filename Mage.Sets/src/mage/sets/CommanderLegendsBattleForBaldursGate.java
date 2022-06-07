@@ -422,6 +422,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Outpost Siege", 804, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 729, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Overwhelming Encounter", 245, Rarity.UNCOMMON, mage.cards.o.OverwhelmingEncounter.class));
+        cards.add(new SetCardInfo("Owlbear Cub", 246, Rarity.RARE, mage.cards.o.OwlbearCub.class));
         cards.add(new SetCardInfo("Owlbear Shepherd", 247, Rarity.UNCOMMON, mage.cards.o.OwlbearShepherd.class));
         cards.add(new SetCardInfo("Pack Attack", 190, Rarity.COMMON, mage.cards.p.PackAttack.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 140, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
