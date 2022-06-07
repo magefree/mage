@@ -693,7 +693,7 @@
 |Generate|TOK:ISD|Zombie|2||ZombieToken|
 |Generate|TOK:ISD|Zombie|3||ZombieToken|
 |Generate|TOK:JOU|Hydra|||HydraBroodmasterToken|
-|Generate|TOK:JOU|Minotaur|||FlurryOfHornsMinotaurToken|
+|Generate|TOK:JOU|Minotaur|||MinotaurToken|
 |Generate|TOK:JOU|Snake|||PharikaSnakeToken|
 |Generate|TOK:JOU|Sphinx|||HourOfNeedSphinxToken|
 |Generate|TOK:JOU|Spider|||RenownedWeaverSpiderToken|
