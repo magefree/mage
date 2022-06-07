@@ -93,6 +93,6 @@ class FeywildVisitorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever one or more nontoken creatures you control deal combat damage to a player, you";
+        return "Whenever one or more nontoken creatures you control deal combat damage to a player, you ";
     }
 }

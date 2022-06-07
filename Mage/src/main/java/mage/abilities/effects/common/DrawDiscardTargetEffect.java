@@ -33,7 +33,7 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
                 .append(CardUtil.numberToText(cardsToDiscard, "a"))
                 .append(" card")
                 .append(cardsToDiscard > 1 ? "s" : "")
-                .append(random ? "at random" : "")
+                .append(random ? " at random" : "")
                 .toString();
     }
 

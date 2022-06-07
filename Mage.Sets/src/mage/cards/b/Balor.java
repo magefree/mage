@@ -61,7 +61,7 @@ public final class Balor extends CardImpl {
         Ability ability = new OrTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DrawDiscardTargetEffect(
-                        1, 1, true
+                        3, 3, true
                 ), false, "Whenever {this} attacks or dies, ",
                 new AttacksTriggeredAbility(null, false),
                 new DiesSourceTriggeredAbility(null, false)
@@ -73,12 +73,13 @@ public final class Balor extends CardImpl {
 
         // • Target opponent sacrifices a nontoken artifact.
         ability.addMode(new Mode(new SacrificeEffect(
-                filter4, 1, null
+                filter4, 1, "target opponent"
         )).addTarget(new TargetPlayer(filter2).setTargetTag(2).withChooseHint("to sacrifice an artifact")));
 
         // • Balor deals damage to target opponent equal to the number of cards in their hand.
         ability.addMode(new Mode(new BalorEffect()).addTarget(new TargetPlayer(filter3)
                 .setTargetTag(3).withChooseHint("to deal damage")));
+        this.addAbility(ability);
     }
 
     private Balor(final Balor card) {

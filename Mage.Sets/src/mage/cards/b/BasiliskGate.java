@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class BasiliskGate extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledPermanent(SubType.GATE, "Gates you control")
+            new FilterControlledPermanent(SubType.GATE, "Gates you control"), null
     );
     private static final Hint hint = new ValueHint("Gates you control", xValue);
 

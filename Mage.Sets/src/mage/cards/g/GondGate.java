@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class GondGate extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GATE);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GATE, "Gate");
 
     public GondGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
