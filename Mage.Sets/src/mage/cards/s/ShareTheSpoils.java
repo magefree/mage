@@ -28,14 +28,17 @@ import java.util.UUID;
 public final class ShareTheSpoils extends CardImpl {
 
     public ShareTheSpoils(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        super(ownderId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
 
         // When Share the Spoils enters the battlefield or an opponent loses the game,
-        // exile the top card of each player’s library.exile the top card of each player’s library.
+        // exile the top card of each player’s library.exile the top card of each
+        // player’s library.
         this.addAbility(new ShareTheSpoilsExileETBAndPlayerLossAbility());
 
-        // During each player’s turn, that player may play a land or cast a spell from among cards exiled with Share the Spoils,
-        // and they may spend mana as though it were mana of any color to cast that spell.
+        // During each player’s turn, that player may play a land or cast a spell from
+        // among cards exiled with Share the Spoils,
+        // and they may spend mana as though it were mana of any color to cast that
+        // spell.
         Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayExiledCardEffect());
         castAbility.setIdentifier(MageIdentifier.ShareTheSpoilsWatcher);
         this.addAbility(castAbility, new ShareTheSpoilsWatcher());
@@ -55,7 +58,7 @@ public final class ShareTheSpoils extends CardImpl {
     }
 }
 
-//-- Exile from Everyone --//
+// -- Exile from Everyone --//
 class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
 
     ShareTheSpoilsExileETBAndPlayerLossAbility() {
@@ -70,7 +73,7 @@ class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD ||
                 event.getType() == GameEvent.EventType.LOST || // Player conceedes
-                event.getType() == GameEvent.EventType.LOSES;  // Player loses by all other means
+                event.getType() == GameEvent.EventType.LOSES; // Player loses by all other means
     }
 
     @Override
@@ -130,8 +133,7 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
                     game,
                     true,
                     CardUtil.getExileZoneId(game, source),
-                    CardUtil.getSourceName(game, source)
-            );
+                    CardUtil.getSourceName(game, source));
 
             if (moved) {
                 ShareTheSpoilsSpendAnyManaEffect effect = new ShareTheSpoilsSpendAnyManaEffect();
@@ -148,7 +150,7 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
     }
 }
 
-//-- Play a card Exiled by Share the Spoils --//
+// -- Play a card Exiled by Share the Spoils --//
 class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
 
     ShareTheSpoilsPlayExiledCardEffect() {
@@ -178,7 +180,8 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
         // TODO: This is a workaround for #8706, remove when that's fixed.
         int zoneChangeCounter = game.getState().getZoneChangeCounter(source.getSourceId());
         // Not a card exiled with this Share the Spoils
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
+        ExileZone exileZone = game.getExile()
+                .getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
         if (exileZone == null) {
             return false;
         }
@@ -205,7 +208,7 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
     }
 }
 
-//-- Spend mana as any color --//
+// -- Spend mana as any color --//
 class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     ShareTheSpoilsSpendAnyManaEffect() {
@@ -254,13 +257,17 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
     }
 
     @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source,
+            Game game) {
         return mana.getFirstAvailable();
     }
 }
 
-//-- Exile another card when a card is played that was exiled with Share the Spoils  --//
+// -- Exile another card when a card is played that was exiled with Share the
+// Spoils --//
 class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
+
+    private UUID triggeringPlayerID;
 
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
         super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
@@ -269,6 +276,8 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
         super(ability);
+
+        triggeringPlayerID = ability.triggeringPlayerID;
     }
 
     @Override
@@ -290,6 +299,19 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     public String getTriggerPhrase() {
         return "When they do";
     }
+
+    @Override
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
+        // Keep track of who triggered this ability, so the effect can know later.
+        // Do this before the ability is copied in super.trigger()
+        triggeringPlayerID = triggeringEvent.getPlayerId();
+
+        super.trigger(game, controllerId, triggeringEvent);
+    }
+
+    public UUID getTriggeringPlayerID() {
+        return triggeringPlayerID;
+    }
 }
 
 class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
@@ -305,7 +327,7 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
             return false;
         }
 
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(((ShareTheSpoilsExileCardWhenPlayACardAbility) source).getTriggeringPlayerID());
         if (player == null) {
             return false;
         }
@@ -321,8 +343,7 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
                 game,
                 true,
                 CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceName(game, source)
-        );
+                CardUtil.getSourceName(game, source));
 
         if (moved) {
             ShareTheSpoilsSpendAnyManaEffect effect = new ShareTheSpoilsSpendAnyManaEffect();
