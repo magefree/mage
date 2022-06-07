@@ -434,7 +434,6 @@
 |Generate|TOK:CHK|Illusion|||MelokuTheCloudedMirrorToken|
 |Generate|TOK:CHK|Rat|||RatToken|
 |Generate|TOK:CHK|Snake|||SnakeToken|
-|Generate|TOK:CHK|Spirit|||SpiritToken|
 |Generate|TOK:CHR|Snake|||SerpentGeneratorSnakeToken|
 |Generate|TOK:CMA|Beast|1||BeastToken|
 |Generate|TOK:CMA|Beast|2||BeastToken2|
@@ -629,7 +628,6 @@
 |Generate|TOK:EVG|Goblin|||GoblinToken|
 |Generate|TOK:EXO|Pegasus|||PegasusToken|
 |Generate|TOK:EXO|Thopter|||ThopterColorlessToken|
-|Generate|TOK:EXP|Spirit|||SpiritToken|
 |Generate|TOK:FEM|Camarid|||CamaridToken|
 |Generate|TOK:FEM|Citizen|||CitizenToken|
 |Generate|TOK:FEM|Goblin|||GoblinToken|
@@ -1021,7 +1019,6 @@
 |Generate|TOK:SOI|Zombie|||ZombieToken|
 |Generate|TOK:SOK|Elemental|||ElementalTokenWithHaste|
 |Generate|TOK:SOK|Snake|||SnakeToken|
-|Generate|TOK:SOK|Spirit|||SpiritToken|
 |Generate|TOK:SOK|Urami|||UramiToken|
 |Generate|TOK:SOK|Warrior|||RallyTheHordeWarriorToken|
 |Generate|TOK:SOM|Cat|||CatToken|
@@ -1091,7 +1088,6 @@
 |Generate|TOK:UST|Storm Crow|||StormCrowToken|
 |Generate|TOK:V10|Wolf|||WolfToken|
 |Generate|TOK:V11|Faerie Rogue|||OonaQueenFaerieToken|
-|Generate|TOK:V12|Spirit|||SpiritToken|
 |Generate|TOK:VIS|Butterfly|||ButterflyToken|
 |Generate|TOK:VIS|Insect|||InsectToken|
 |Generate|TOK:VIS|Prism|||PrismToken|
