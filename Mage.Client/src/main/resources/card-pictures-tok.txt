@@ -990,7 +990,7 @@
 |Generate|TOK:SCG|Goblin|||GoblinToken|
 |Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
-|Generate|TOK:SHM|Elemental|2||ElementalMasteryElementalToken|
+|Generate|TOK:SHM|Elemental|2||Elemental11HasteToken|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
 |Generate|TOK:SHM|Elf Warrior|2||GreenWhiteElfWarriorToken|
 |Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieRogueToken|

@@ -20,7 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElementalMasteryElementalToken;
+import mage.game.permanent.token.Elemental11HasteToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -78,7 +78,7 @@ class ElementalMasteryEffect extends OneShotEffect {
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
             if (power > 0) {
-                CreateTokenEffect effect = new CreateTokenEffect(new ElementalMasteryElementalToken(), power);
+                CreateTokenEffect effect = new CreateTokenEffect(new Elemental11HasteToken(), power);
                 effect.apply(game, source);
                 effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;
