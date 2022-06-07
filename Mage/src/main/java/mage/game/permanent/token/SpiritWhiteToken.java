@@ -23,7 +23,7 @@ public final class SpiritWhiteToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
-                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C19", "C20", "CMR", "KHM",
+                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "M20", "C19", "C20", "CMR", "KHM",
                 "MID", "VOW", "UMA", "BBD", "IMA", "CM2", "MD1", "DVD", "DDQ", "CN2", "A25", "GK2");
     }
 
