@@ -31,8 +31,8 @@ public final class GoblinToken extends TokenImpl {
         toughness = new MageInt(1);
 
         availableImageSetCodes = Arrays.asList("10E", "ALA", "SOM", "M10", "M13", "RTR",
-                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "MM2",
-                "MM3", "EMA", "C16", "DOM", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR", "NEC", "M19", "CM2", "PCA", "DD1", "DDS", "DDT", "A25", "GRN", "GK1");
+                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN",
+                "MM3", "EMA", "DOM", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR", "NEC", "M19", "CM2", "PCA", "DD1", "DDS", "DDT", "A25", "GRN", "GK1");
     }
 
     public GoblinToken(final GoblinToken token) {
