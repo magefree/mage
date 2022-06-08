@@ -156,8 +156,6 @@
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
 |Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
-|Generate|TOK:ANA|Goblin|||GoblinToken|
-|Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
 |Generate|TOK:10E|Saproling|||SaprolingToken|
