@@ -15,14 +15,7 @@ import mage.constants.SubType;
  */
 public final class ElementalShamanToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C15", "JVC", "DD2", "LRW", "CM2"));
-    }
-
     public ElementalShamanToken(boolean withHaste) {
-        this("DD2");
         if (withHaste) {
             addAbility(HasteAbility.getInstance());
             description = description + " with haste";
@@ -30,19 +23,15 @@ public final class ElementalShamanToken extends TokenImpl {
     }
 
     public ElementalShamanToken() {
-        this("LRW");
-    }
-
-    public ElementalShamanToken(String setCode) {
         super("Elemental Shaman Token", "3/1 red Elemental Shaman creature token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
         subtype.add(SubType.SHAMAN);
         power = new MageInt(3);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("C15", "JVC", "DD2", "LRW", "CM2");
     }
 
     public ElementalShamanToken(final ElementalShamanToken token) {
