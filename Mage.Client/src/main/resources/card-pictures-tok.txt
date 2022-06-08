@@ -784,13 +784,6 @@
 |Generate|TOK:MED|Dragon|||DragonToken|
 |Generate|TOK:MED|Soldier|||SoldierToken|
 |Generate|TOK:MED|Zombie|||ZombieToken|
-|Generate|TOK:MIR|Cat|||WaitingInTheWeedsCatToken|
-|Generate|TOK:MIR|Goblin Scout|||GoblinScountsToken|
-|Generate|TOK:MIR|Pegasus|||PegasusToken|
-|Generate|TOK:MIR|Spirit|||SpiritWhiteToken|
-|Generate|TOK:MIR|Wall|||TidalWaveWallToken|
-|Generate|TOK:MIR|Wall|||WoodToken|
-|Generate|TOK:MIR|Zombie|||ZombieToken|
 |Generate|TOK:MM2|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:MM2|Eldrazi Spawn|2||EldraziSpawnToken|
 |Generate|TOK:MM2|Eldrazi Spawn|3||EldraziSpawnToken|
