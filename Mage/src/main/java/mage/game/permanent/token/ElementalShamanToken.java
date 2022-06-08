@@ -16,6 +16,8 @@ import mage.constants.SubType;
 public final class ElementalShamanToken extends TokenImpl {
 
     public ElementalShamanToken(boolean withHaste) {
+        this();
+
         if (withHaste) {
             addAbility(HasteAbility.getInstance());
             description = description + " with haste";
