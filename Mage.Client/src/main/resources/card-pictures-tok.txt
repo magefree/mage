@@ -164,11 +164,6 @@
 |Generate|TOK:10E|Soldier|||SoldierToken|
 |Generate|TOK:10E|Wasp|||WaspToken|
 |Generate|TOK:10E|Zombie|||ZombieToken|
-|Generate|TOK:5DN|Avatar|||KaldraToken|
-|Generate|TOK:5DN|Beast|||BeastToken|
-|Generate|TOK:5DN|Golem|||GuardianIdolGolemToken|
-|Generate|TOK:5DN|Insect|||InsectToken|
-|Generate|TOK:5DN|Pincher|||PincherToken|
 |Generate|TOK:5ED|Caribou|||CaribouToken|
 |Generate|TOK:5ED|Citizen|||CitizenToken|
 |Generate|TOK:5ED|Djinn|||DjinnToken|
