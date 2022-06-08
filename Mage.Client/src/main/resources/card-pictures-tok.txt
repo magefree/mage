@@ -614,13 +614,6 @@
 |Generate|TOK:FRF|Monk|||MonasteryMentorToken|
 |Generate|TOK:FRF|Spirit|||SpiritWhiteToken|
 |Generate|TOK:FRF|Warrior|||MarduStrikeLeaderWarriorToken|
-|Generate|TOK:GPT|Bat|||BatToken|
-|Generate|TOK:GPT|Pegasus|||PegasusToken|
-|Generate|TOK:GPT|Sand|||DuneBroodNephilimToken|
-|Generate|TOK:GPT|Saproling|||SaprolingToken|
-|Generate|TOK:GPT|Spirit|||SpiritWhiteToken|
-|Generate|TOK:GPT|Weird|||WeirdToken|
-|Generate|TOK:GPT|Wurm|||WurmToken|
 |Generate|TOK:GTC|Angel|||AngelToken|
 |Generate|TOK:GTC|Cleric|||DeathpactAngelToken|
 |Generate|TOK:GTC|Frog Lizard|||FrogLizardToken|
