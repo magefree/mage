@@ -164,10 +164,6 @@
 |Generate|TOK:10E|Soldier|||SoldierToken|
 |Generate|TOK:10E|Wasp|||WaspToken|
 |Generate|TOK:10E|Zombie|||ZombieToken|
-|Generate|TOK:4ED|Assembly-Worker|||AssemblyWorkerToken|
-|Generate|TOK:4ED|Djinn|||DjinnToken|
-|Generate|TOK:4ED|Insect|||WaspToken|
-|Generate|TOK:4ED|Tetravite|||TetraviteToken|
 |Generate|TOK:5DN|Avatar|||KaldraToken|
 |Generate|TOK:5DN|Beast|||BeastToken|
 |Generate|TOK:5DN|Golem|||GuardianIdolGolemToken|
