@@ -604,8 +604,6 @@
 |Generate|TOK:EVG|Elemental|||VoiceOfTheWoodsElementalToken|
 |Generate|TOK:EVG|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:EVG|Goblin|||GoblinToken|
-|Generate|TOK:EXO|Pegasus|||PegasusToken|
-|Generate|TOK:EXO|Thopter|||ThopterColorlessToken|
 |Generate|TOK:FEM|Camarid|||CamaridToken|
 |Generate|TOK:FEM|Citizen|||CitizenToken|
 |Generate|TOK:FEM|Goblin|||GoblinToken|
