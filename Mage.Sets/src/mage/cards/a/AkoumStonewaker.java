@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.AkoumStonewakerElementalToken;
+import mage.game.permanent.token.Elemental31TrampleHasteToken;
 
 /**
  *
@@ -65,7 +65,7 @@ class AkoumStonewakerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        CreateTokenEffect effect = new CreateTokenEffect(new AkoumStonewakerElementalToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new Elemental31TrampleHasteToken());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

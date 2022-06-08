@@ -277,7 +277,7 @@
 |Generate|TOK:BFZ|Eldrazi Scion|3||EldraziScionToken|
 |Generate|TOK:BFZ|Eldrazi|||EldraziToken|
 |Generate|TOK:BFZ|Elemental|1||OmnathElementalToken|
-|Generate|TOK:BFZ|Elemental|2||AkoumStonewakerElementalToken|
+|Generate|TOK:BFZ|Elemental|2||Elemental31TrampleHasteToken|
 |Generate|TOK:BFZ|Knight Ally|||KnightAllyToken|
 |Generate|TOK:BFZ|Kor Ally|||KorAllyToken|
 |Generate|TOK:BFZ|Octopus|||OctopusToken|
@@ -556,7 +556,7 @@
 |Generate|TOK:DOM|Cleric|||BelzenlokClericToken|
 |Generate|TOK:DOM|Construct|||KarnConstructToken|
 |Generate|TOK:DOM|Demon|||BelzenlokDemonToken|
-|Generate|TOK:DOM|Elemental|||ValdukElementalToken|
+|Generate|TOK:DOM|Elemental|||Elemental31TrampleHasteToken|
 |Generate|TOK:DOM|Goblin|||GoblinToken|
 |Generate|TOK:DOM|Karox Bladewing|||KaroxBladewingDragonToken|
 |Generate|TOK:DOM|Knight|1||KnightToken|
@@ -1180,7 +1180,7 @@
 |Generate|TOK:MH1|Bird|||BirdToken|
 |Generate|TOK:MH1|Construct|||KarnConstructToken|
 |Generate|TOK:MH1|Elemental|1||RedElementalToken|
-|Generate|TOK:MH1|Elemental|2||AkoumStonewakerElementalToken|
+|Generate|TOK:MH1|Elemental|2||Elemental31TrampleHasteToken|
 |Generate|TOK:MH1|Elephant|||ElephantToken|
 |Generate|TOK:MH1|Goblin|||GoblinToken|
 |Generate|TOK:MH1|Golem|||GolemToken|
