@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentCard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -59,6 +60,7 @@ class PlanarVoidTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() != Zone.GRAVEYARD
+                || !(zEvent.getTarget() instanceof PermanentCard)
                 || event.getTargetId().equals(getSourceId())) {
             return false;
         }
