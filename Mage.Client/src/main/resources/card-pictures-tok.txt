@@ -255,11 +255,6 @@
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
 |Generate|TOK:ARB|Zombie Wizard|||ZombieWizardToken|
-|Generate|TOK:ARC|Goblin|||GoblinToken|
-|Generate|TOK:ARC|Goblin|||RakdosGuildmageGoblinToken|
-|Generate|TOK:ARC|Plant|||PlantToken|
-|Generate|TOK:ARC|Saproling|||SaprolingToken|
-|Generate|TOK:ARC|Zombie|||ZombieToken|
 |Generate|TOK:ARN|Bird|||RukhEggBirdToken|
 |Generate|TOK:ARN|Djinn|||DjinnToken|
 |Generate|TOK:ATQ|Assembly-Worker|||AssemblyWorkerToken|
