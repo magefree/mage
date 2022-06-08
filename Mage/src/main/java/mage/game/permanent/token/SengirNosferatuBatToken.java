@@ -44,7 +44,7 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("TSP", "TSR");
+        availableImageSetCodes = Arrays.asList("TSR");
     }
 
     public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
