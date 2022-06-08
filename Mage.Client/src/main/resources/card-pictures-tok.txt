@@ -1012,13 +1012,6 @@
 |Generate|TOK:THS|Soldier|1||SoldierToken|
 |Generate|TOK:THS|Soldier|2||SoldierToken|
 |Generate|TOK:THS|Soldier|3||AkroanSoldierToken|
-|Generate|TOK:TMP|Beast|||CarnivoreToken|
-|Generate|TOK:TMP|Dog|||GreenDogToken|
-|Generate|TOK:TMP|Pegasus|||PegasusToken|
-|Generate|TOK:TMP|Reflection|||ReflectionToken|
-|Generate|TOK:TMP|Saproling|||SaprolingToken|
-|Generate|TOK:TMP|Spirit|||SpiritWhiteToken|
-|Generate|TOK:TMP|Zombie|||ZombieToken|
 |Generate|TOK:TOR|Squirrel|||SquirrelToken|
 |Generate|TOK:TSP|Assembly-Worker|||AssembleWorkerToken|
 |Generate|TOK:TSP|Bat|||SengirNosferatuBatToken|
