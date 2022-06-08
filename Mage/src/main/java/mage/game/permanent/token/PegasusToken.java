@@ -22,7 +22,7 @@ public final class PegasusToken extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "C19", "CMD", "EXO", "GPT", "MIR", "TMP", "TSP", "THB", "KHC", "CLB");
+        availableImageSetCodes = Arrays.asList("C14", "C19", "EXO", "GPT", "MIR", "TMP", "TSP", "THB", "KHC", "CLB");
     }
 
     public PegasusToken(final PegasusToken token) {

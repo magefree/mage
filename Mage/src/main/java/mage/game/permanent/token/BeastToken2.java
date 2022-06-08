@@ -19,7 +19,7 @@ public final class BeastToken2 extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("C14", "C15", "C18", "C19", "CMA", "CMD", "GVL", "DDD",
+        availableImageSetCodes = Arrays.asList("C14", "C15", "C18", "C19", "CMA", "GVL", "DDD",
                 "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR", "C21", "MH2", "MID", "IMA", "MM3", "DDS");
     }
 

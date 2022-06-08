@@ -449,23 +449,6 @@
 |Generate|TOK:CMA|Wolf|1||WolfToken|
 |Generate|TOK:CMA|Wolf|2||WolfToken|
 |Generate|TOK:CMA|Zombie|||ZombieToken|
-|Generate|TOK:CMD|Beast|1||BeastToken2|
-|Generate|TOK:CMD|Beast|2||BeastToken|
-|Generate|TOK:CMD|Dragon|||DragonToken2|
-|Generate|TOK:CMD|Eldrazi Spawn|||EldraziSpawnToken|
-|Generate|TOK:CMD|Elemental|||CallTheSkyBreakerElementalToken|
-|Generate|TOK:CMD|Elephant|||ElephantToken|
-|Generate|TOK:CMD|Insect|||InsectToken|
-|Generate|TOK:CMD|Kithkin Soldier|||KithkinSoldierToken|
-|Generate|TOK:CMD|Pegasus|||PegasusToken|
-|Generate|TOK:CMD|Saproling|||SaprolingToken|
-|Generate|TOK:CMD|Snake|||SnakeToken|
-|Generate|TOK:CMD|Soldier|||SoldierToken|
-|Generate|TOK:CMD|Spirit|||SpiritWhiteToken|
-|Generate|TOK:CMD|Squirrel|||SquirrelToken|
-|Generate|TOK:CMD|Triskelavite|||TriskelaviteToken|
-|Generate|TOK:CMD|Wolf|||WolfToken|
-|Generate|TOK:CMD|Zombie|||ZombieToken|
 |Generate|TOK:CN2|Assassin|||QueenMarchesaAssassinToken|
 |Generate|TOK:CN2|Beast|||BeastToken|
 |Generate|TOK:CN2|Construct|||DarettiConstructToken|

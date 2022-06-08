@@ -20,7 +20,7 @@ public final class BeastToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("5DN", "C14", "C16", "C19", "CMA", "CMD", "CN2", "GVL",
+        availableImageSetCodes = Arrays.asList("5DN", "C14", "C16", "C19", "CMA", "CN2", "GVL",
                 "DD3C", "DD3GVL", "DDD", "DDL", "DST", "E01", "EVE", "LRW", "M10", "M11", "M12",
                 "M13", "M14", "M15", "MM3", "NPH", "PC2", "USG", "M19", "IKO", "M21", "CMR", "C21", "AFC", "MIC", "NEC", "2XM", "NCC", "BBD", "PCA", "CLB");
     }
@@ -30,9 +30,6 @@ public final class BeastToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M15")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMD")) {
             this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GVL")) {
