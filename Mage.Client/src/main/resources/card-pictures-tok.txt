@@ -731,13 +731,13 @@
 # LGN don't have tokens, from wiki: A Sliver token for Brood Sliver and a Goblin token for Warbreak Trumpeter were featured as a Magic Player Reward.
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
-|Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:LRW|Elemental|1||WalkerOfTheGroveToken|
 |Generate|TOK:LRW|Elemental|2||WhiteElementalToken|
+|Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:LRW|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:LRW|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:LRW|Kithkin Soldier|||KithkinSoldierToken|
-|Generate|TOK:LRW|Merfolk Wizard||
+|Generate|TOK:LRW|Merfolk Wizard|||MerfolkWizardToken|
 |Generate|TOK:LRW|Shapeshifter|||CribSwapShapeshifterWhiteToken|
 |Generate|TOK:LRW|Wolf|||WolfToken|
 |Generate|TOK:M10|Avatar|||AvatarToken|

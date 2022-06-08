@@ -1702,6 +1702,19 @@ public class ScryfallImageSupportTokens {
             put ("CLB/Wolf", "https://api.scryfall.com/cards/tclb/43/en?format=image");
             put ("CLB/Wurm", "https://api.scryfall.com/cards/tclb/44/en?format=image");
 
+            // LRW
+            put ("LRW/Avatar", "https://api.scryfall.com/cards/tlrw/1/en?format=image");
+            put ("LRW/Beast", "https://api.scryfall.com/cards/tlrw/7/en?format=image");
+            put ("LRW/Elemental/1", "https://api.scryfall.com/cards/tlrw/8/en?format=image");
+            put ("LRW/Elemental/2", "https://api.scryfall.com/cards/tlrw/2/en?format=image");
+            put ("LRW/Elemental Shaman", "https://api.scryfall.com/cards/tlrw/6/en?format=image");
+            put ("LRW/Elf Warrior", "https://api.scryfall.com/cards/tlrw/9/en?format=image");
+            put ("LRW/Goblin Rogue", "https://api.scryfall.com/cards/tlrw/5/en?format=image");
+            put ("LRW/Kithkin Soldier", "https://api.scryfall.com/cards/tlrw/3/en?format=image");
+            put ("LRW/Merfolk Wizard", "https://api.scryfall.com/cards/tlrw/4/en?format=image");
+            put ("LRW/Shapeshifter", "https://api.scryfall.com/cards/tlrw/11/en?format=image");
+            put ("LRW/Wolf", "https://api.scryfall.com/cards/tlrw/10/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
