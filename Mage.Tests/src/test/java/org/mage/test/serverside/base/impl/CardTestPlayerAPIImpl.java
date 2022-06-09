@@ -252,7 +252,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     abstract protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException;
 
-    protected TestPlayer createPlayer(Game game, TestPlayer player, String name) throws GameException {
+    protected TestPlayer createPlayer(Game game, String name) throws GameException {
         return createPlayer(game, name, "RB Aggro.dck");
     }
 
