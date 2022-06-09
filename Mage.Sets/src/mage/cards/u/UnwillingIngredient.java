@@ -36,7 +36,7 @@ public final class UnwillingIngredient extends CardImpl {
                 Zone.GRAVEYARD,
                 new DrawCardSourceControllerEffect(1)
                         .setText("you draw a card"),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         ability.addCost(new ExileSourceFromGraveCost());

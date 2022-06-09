@@ -41,7 +41,7 @@ public final class UnderhandedDesigns extends CardImpl {
         // {1}{B}, Sacrifice Underhanded Designs: Destroy target creature. Activate this ability only if you control two or more artifacts.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
-                new ManaCostsImpl("{1}{B}"),
+                new ManaCostsImpl<>("{1}{B}"),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent("you control two or more artifacts"), ComparisonType.MORE_THAN, 1));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
