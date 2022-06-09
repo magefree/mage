@@ -28,7 +28,7 @@ public final class ZarichiTiger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // 1{W}, {T}: You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
