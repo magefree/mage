@@ -65,7 +65,7 @@ public final class OsgirTheReconstructor extends CardImpl {
         // {X},{T}, Exile an artifact with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as
         Ability copyAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
                 new OsgirTheReconstructorCreateArtifactTokensEffect(),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         copyAbility.addCost(new TapSourceCost());
         copyAbility.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(), "Exile an artifact card with mana value X from your graveyard"));
 

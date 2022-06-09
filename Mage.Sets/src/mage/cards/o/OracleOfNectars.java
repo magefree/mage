@@ -30,7 +30,7 @@ public final class OracleOfNectars extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}, {tap}: You gain X life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
