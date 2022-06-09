@@ -33,7 +33,7 @@ public final class TitanothRex extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Cycling {1}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{G}")));
 
         // When you cycle Titanoth Rex, put a trample counter on target creature you control.
         Ability ability = new CycleTriggeredAbility(

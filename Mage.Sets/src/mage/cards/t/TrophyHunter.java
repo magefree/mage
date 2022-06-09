@@ -40,7 +40,7 @@ public final class TrophyHunter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Trophy Hunter deals 1 damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

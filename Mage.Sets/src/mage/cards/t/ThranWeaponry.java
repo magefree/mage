@@ -32,7 +32,7 @@ public final class ThranWeaponry extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}, {tap}: All creatures get +2/+2 for as long as Thran Weaponry remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         

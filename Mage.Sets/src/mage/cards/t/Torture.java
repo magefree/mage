@@ -44,7 +44,7 @@ public final class Torture extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.M1M1.createInstance(),"enchanted creature"),
-                new ManaCostsImpl("{1}{B}")));
+                new ManaCostsImpl<>("{1}{B}")));
     }
 
     private Torture(final Torture card) {
