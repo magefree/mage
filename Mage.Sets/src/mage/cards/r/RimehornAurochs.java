@@ -52,7 +52,7 @@ public final class RimehornAurochs extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
 
         // {2}{S}: Target creature blocks target creature this turn if able.
-        Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl("{2}{S}"));
+        Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl<>("{2}{S}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that must block")));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that is to be blocked")));
         this.addAbility(ability, new BlockedAttackerWatcher());

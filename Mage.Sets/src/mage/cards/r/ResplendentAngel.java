@@ -44,7 +44,7 @@ public final class ResplendentAngel extends CardImpl {
         // {3}{W}{W}{W}: Until end of turn, Resplendent Angel gets +2/+2 and gains lifelink.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 2, 2, Duration.EndOfTurn
-        ).setText("until end of turn, {this} gets +2/+2"), new ManaCostsImpl("{3}{W}{W}{W}"));
+        ).setText("until end of turn, {this} gets +2/+2"), new ManaCostsImpl<>("{3}{W}{W}{W}"));
         ability.addEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains lifelink"));

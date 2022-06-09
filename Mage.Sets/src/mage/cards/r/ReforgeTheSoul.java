@@ -27,7 +27,7 @@ public final class ReforgeTheSoul extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {1}{R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{R}")));
     }
 
     private ReforgeTheSoul(final ReforgeTheSoul card) {

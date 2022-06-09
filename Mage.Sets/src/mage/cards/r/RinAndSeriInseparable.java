@@ -72,7 +72,7 @@ public final class RinAndSeriInseparable extends CardImpl {
         DynamicValue catCount = new PermanentsOnBattlefieldCount(catPermanentFilter);
         Effect lifeGainEffect = new GainLifeEffect(catCount);
         lifeGainEffect.setText("You gain life equal to the number of Cats you control");
-        Ability ability = new SimpleActivatedAbility(damageEffect, new ManaCostsImpl("{R}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(damageEffect, new ManaCostsImpl<>("{R}{G}{W}"));
         ability.addEffect(lifeGainEffect);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
