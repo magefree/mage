@@ -25,7 +25,7 @@ public final class Vanishment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 
         // Miracle {U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
     private Vanishment(final Vanishment card) {

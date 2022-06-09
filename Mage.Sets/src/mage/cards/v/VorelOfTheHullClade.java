@@ -47,7 +47,7 @@ public final class VorelOfTheHullClade extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}{U}, {tap}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

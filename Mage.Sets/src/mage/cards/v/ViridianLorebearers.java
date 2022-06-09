@@ -43,7 +43,7 @@ public final class ViridianLorebearers extends CardImpl {
         // {3}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
         Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

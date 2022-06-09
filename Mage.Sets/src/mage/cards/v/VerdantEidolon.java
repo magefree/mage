@@ -30,7 +30,7 @@ public final class VerdantEidolon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, Sacrifice Verdant Eidolon: Add three mana of any one color.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.

@@ -32,7 +32,7 @@ public final class VintaraElephant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // {3}: Vintara Elephant loses trample until end of turn. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
-            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}"));
+            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
