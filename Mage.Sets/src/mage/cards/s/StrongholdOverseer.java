@@ -45,7 +45,7 @@ public final class StrongholdOverseer extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // {B}{B}: Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{B}{B}"));
         Effect effect = new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter2, false);
         effect.setText("and creatures without shadow get -1/-0 until end of turn");
         ability.addEffect(effect);

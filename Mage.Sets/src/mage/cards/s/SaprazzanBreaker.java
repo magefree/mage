@@ -29,7 +29,7 @@ public final class SaprazzanBreaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Put the top card of your library into your graveyard. If that card is a land card, Saprazzan Breaker can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SaprazzanBreakerEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SaprazzanBreakerEffect(), new ManaCostsImpl<>("{U}")));
     }
 
     private SaprazzanBreaker(final SaprazzanBreaker card) {

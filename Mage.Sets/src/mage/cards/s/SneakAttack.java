@@ -35,7 +35,7 @@ public final class SneakAttack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(new SneakAttackEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new SneakAttackEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private SneakAttack(final SneakAttack card) {

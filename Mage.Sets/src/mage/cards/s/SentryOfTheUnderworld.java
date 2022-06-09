@@ -35,7 +35,7 @@ public final class SentryOfTheUnderworld extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {W}{B}, Pay 3 life: Regenerate Sentry of the Underworld.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

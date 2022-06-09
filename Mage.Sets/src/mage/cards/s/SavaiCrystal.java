@@ -25,7 +25,7 @@ public final class SavaiCrystal extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SavaiCrystal(final SavaiCrystal card) {

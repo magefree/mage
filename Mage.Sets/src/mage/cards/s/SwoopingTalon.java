@@ -32,7 +32,7 @@ public final class SwoopingTalon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}: Swooping Talon loses flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
-            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}")));
         // Provoke
         this.addAbility(new ProvokeAbility());
     }

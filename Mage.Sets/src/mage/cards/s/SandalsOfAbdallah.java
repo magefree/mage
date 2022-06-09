@@ -29,7 +29,7 @@ public final class SandalsOfAbdallah extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));        
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

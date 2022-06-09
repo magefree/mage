@@ -30,8 +30,8 @@ public final class SanctumPlowbeast extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Plainscycling {2}, islandcycling {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SanctumPlowbeast(final SanctumPlowbeast card) {

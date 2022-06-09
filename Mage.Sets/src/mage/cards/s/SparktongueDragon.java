@@ -37,7 +37,7 @@ public final class SparktongueDragon extends CardImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                ability, new ManaCostsImpl("{2}{R}"),
+                ability, new ManaCostsImpl<>("{2}{R}"),
                 "Pay {2}{R} to deal 3 damage?"
         )));
     }

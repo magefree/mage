@@ -34,7 +34,7 @@ public final class SoldeviHeretic extends CardImpl {
         this.toughness = new MageInt(2);
         
         // {W}, {tap}: Prevent the next 2 damage that would be dealt to target creature this turn. Target opponent may draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn ,2), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn ,2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new DrawCardTargetEffect(1, true);

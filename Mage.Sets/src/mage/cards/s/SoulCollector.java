@@ -31,7 +31,7 @@ public final class SoulCollector extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect().setText("return that card to the battlefield under your control")));
 
         // Morph {B}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{B}{B}{B}")));
     }
 
     private SoulCollector(final SoulCollector card) {

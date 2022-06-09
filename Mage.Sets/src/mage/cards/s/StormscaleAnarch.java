@@ -33,7 +33,7 @@ public final class StormscaleAnarch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{R}, Discard a card at random: Stormscale Anarch deals 2 damage to any target. If the discarded card was multicolored, Stormscale Anarch deals 4 damage to that creature or player instead.
-        Ability ability = new SimpleActivatedAbility(new StormscaleAnarchEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(new StormscaleAnarchEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

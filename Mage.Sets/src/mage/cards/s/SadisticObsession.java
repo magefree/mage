@@ -37,7 +37,7 @@ public final class SadisticObsession extends CardImpl {
 
         // Enchanted creature has "{B}, {T}: Put a -1/-1 counter on target creature."
         ability = new SimpleActivatedAbility(new AddCountersTargetEffect(
-                CounterType.M1M1.createInstance()), new ManaCostsImpl("{B}")
+                CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -49,7 +49,7 @@ public final class SaiMasterThopterist extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{1}{U}")
+                new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new SacrificeTargetCost(
                 new TargetControlledPermanent(2, 2, filter2, false)
