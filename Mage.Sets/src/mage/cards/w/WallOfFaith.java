@@ -29,7 +29,7 @@ public final class WallOfFaith extends CardImpl {
     this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private WallOfFaith(final WallOfFaith card) {

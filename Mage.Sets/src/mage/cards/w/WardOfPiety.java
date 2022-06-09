@@ -41,7 +41,7 @@ public final class WardOfPiety extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WardOfPietyPreventDamageTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WardOfPietyPreventDamageTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

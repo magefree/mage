@@ -37,7 +37,7 @@ public final class WeatheredWayfarer extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
-                new ManaCostsImpl("{W}"),
+                new ManaCostsImpl<>("{W}"),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

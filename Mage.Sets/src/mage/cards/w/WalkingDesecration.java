@@ -33,7 +33,7 @@ public final class WalkingDesecration extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Creatures of the creature type of your choice attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingDesecrationEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingDesecrationEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

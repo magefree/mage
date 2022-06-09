@@ -35,7 +35,7 @@ public final class WirewoodLodge extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {G}, {T}: Untap target Elf.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class WillOTheWisp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {B}: Regenerate Will-o'-the-Wisp.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private WillOTheWisp(final WillOTheWisp card) {
