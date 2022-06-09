@@ -33,7 +33,7 @@ public final class PhyrexianIronfoot extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}{S}")));
     }
 
     private PhyrexianIronfoot(final PhyrexianIronfoot card) {

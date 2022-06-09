@@ -53,7 +53,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
 
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")
         ));
     }
 

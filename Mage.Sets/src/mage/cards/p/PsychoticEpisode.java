@@ -34,7 +34,7 @@ public final class PsychoticEpisode extends CardImpl {
         this.getSpellAbility().addEffect(new PsychoticEpisodeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private PsychoticEpisode(final PsychoticEpisode card) {

@@ -45,7 +45,7 @@ public final class PaleWayfarer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{W}{W}, {untap}: Target creature gains protection from the color of its controller's choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl("{2}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl<>("{2}{W}{W}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

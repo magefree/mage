@@ -44,7 +44,7 @@ public final class PharikaGodOfAffliction extends CardImpl {
                 .addHint(DevotionCount.BG.getHint()));
 
         // {B}{G}: Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
-        Ability ability = new SimpleActivatedAbility(new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new PharikaExileEffect(), new ManaCostsImpl<>("{B}{G}"));
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
