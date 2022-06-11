@@ -52,23 +52,6 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     }
 
     /**
-     * Default game initialization params for white player (that plays with Plains)
-     */
-    public void useWhiteDefault() {
-        // *** ComputerA ***
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.HAND, playerA, "Plains", 5);
-        removeAllCardsFromLibrary(playerA);
-        addCard(Zone.LIBRARY, playerA, "Plains", 10);
-
-        // *** ComputerB ***
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        removeAllCardsFromLibrary(playerB);
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    /**
      * Removes all cards from player's library from the game.
      * Usually this should be used once before initialization to form the library in certain order.
      *

@@ -176,24 +176,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Default game initialization params for white player (that plays with
-     * Plains)
-     */
-    public void useWhiteDefault() {
-        // *** ComputerA ***
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.HAND, playerA, "Plains", 5);
-        removeAllCardsFromLibrary(playerA);
-        addCard(Zone.LIBRARY, playerA, "Plains", 10);
-
-        // *** ComputerB ***
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        removeAllCardsFromLibrary(playerB);
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    /**
      * @throws GameException
      * @throws FileNotFoundException
      */
