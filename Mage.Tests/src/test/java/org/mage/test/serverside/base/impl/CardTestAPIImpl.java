@@ -1,10 +1,10 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
@@ -186,9 +186,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     @Override
     public void setLife(TestPlayer player, int life) {
         if (player.equals(playerA)) {
-            commandsA.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsA.put(Zone.OUTSIDE, "life:" + life);
         } else if (player.equals(playerB)) {
-            commandsB.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsB.put(Zone.OUTSIDE, "life:" + life);
         }
     }
 
@@ -392,25 +392,25 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     }
 
     public void playLand(Player player, String cardName) {
-        player.addAction("play:"+cardName);
+        player.addAction("play:" + cardName);
     }
 
     public void castSpell(Player player, String cardName) {
-        player.addAction("cast:"+cardName);
+        player.addAction("cast:" + cardName);
     }
 
     public void addFixedTarget(Player player, String cardName, Player target) {
-        player.addAction("cast:"+cardName + ";name=" + target.getName());
+        player.addAction("cast:" + cardName + ";name=" + target.getName());
     }
 
     public void addFixedTarget(Player player, String cardName, String targetName) {
-        player.addAction("cast:"+cardName + ";name=" + targetName);
+        player.addAction("cast:" + cardName + ";name=" + targetName);
     }
 
     public void useAbility(Player player, String cardName) {
     }
 
     public void attack(Player player, String cardName) {
-        player.addAction("attack:"+cardName);
+        player.addAction("attack:" + cardName);
     }
 }
