@@ -84,7 +84,7 @@ public class JoleneThePlunderQueenTest extends CardTestCommander4Players {
      * B with a Jolene
      * C other player.
      *
-     * A attacks both B, no trigger, no treasure.
+     * A attacks only B, no trigger, no treasure.
      */
     @Test
     public void testAttackingJoleneOnly() {
