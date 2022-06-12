@@ -78,8 +78,8 @@ class CruelUltimatumEffect extends OneShotEffect {
         if (card != null) {
             return controller.moveCards(card, Zone.HAND, source, game);
         }
-        controller.drawCards(1, source, game);
-        controller.gainLife(1, game, source);
+        controller.drawCards(3, source, game);
+        controller.gainLife(5, game, source);
         return true;
     }
 }
