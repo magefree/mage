@@ -459,7 +459,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             }
             if (symbol.length() == 1 || isNumeric(symbol)) {
                 if (Character.isDigit(symbol.charAt(0))) {
-                    this.add(new GenericManaCost(Integer.valueOf(symbol)));
+                    this.add(new GenericManaCost(Integer.parseInt(symbol)));
                 } else if (symbol.equals("S")) {
                     this.add(new SnowManaCost());
                 } else if (symbol.equals("C")) {

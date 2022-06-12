@@ -1616,7 +1616,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int count = 0;
         if (indexedMatcher.matches()) {
             cardName = indexedMatcher.group(1);
-            index = Integer.valueOf(indexedMatcher.group(2));
+            index = Integer.parseInt(indexedMatcher.group(2));
         }
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
