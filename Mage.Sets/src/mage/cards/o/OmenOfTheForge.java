@@ -34,7 +34,7 @@ public final class OmenOfTheForge extends CardImpl {
         this.addAbility(ability);
 
         // {2}{R}, Sacrifice Omen of the Forge: Scry 2.
-        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{R}"));
+        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

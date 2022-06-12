@@ -37,7 +37,7 @@ public final class OathOfLimDul extends CardImpl {
         this.addAbility(new OathOfLimDulTriggeredAbility());
 
         // {B}{B}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{B}{B}")));
 
     }
 

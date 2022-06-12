@@ -48,7 +48,7 @@ public final class OrmosArchiveKeeper extends CardImpl {
 
         // {1}{U}{U}, Discard three cards with different names: Draw five cards.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(5), new ManaCostsImpl("{1}{U}{U}")
+                new DrawCardSourceControllerEffect(5), new ManaCostsImpl<>("{1}{U}{U}")
         );
         ability.addCost(new DiscardTargetCost(new OrmosArchiveKeeperTarget()));
         this.addAbility(ability);
