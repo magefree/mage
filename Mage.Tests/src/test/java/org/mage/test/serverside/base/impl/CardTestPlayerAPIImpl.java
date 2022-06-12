@@ -52,23 +52,32 @@ import static org.junit.Assert.assertTrue;
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
+    // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
+    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+
+    private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
+
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
     public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
     public static final String SHOW_PREFIX = "show:"; // prefix for all show commands
     public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
     public static final String RUN_PREFIX = "run:"; // prefix for all run commands
+
     // prefix for activate commands
     // can be called with alias, example: @card_ref ability text
     public static final String ACTIVATE_ABILITY = "activate:";
     public static final String ACTIVATE_PLAY = "activate:Play ";
     public static final String ACTIVATE_CAST = "activate:Cast ";
     public static final String ACTIVATE_MANA = "manaActivate:";
+
     // commands for AI
     public static final String AI_COMMAND_PLAY_PRIORITY = "play priority";
     public static final String AI_COMMAND_PLAY_STEP = "play step";
+
     // commands for run
     public static final String RUN_COMMAND_CODE = "code";
+
     // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
     public static final String CHECK_COMMAND_DAMAGE = "DAMAGE";
@@ -93,6 +102,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PLAYER_IN_GAME = "PLAYER_IN_GAME";
     public static final String CHECK_COMMAND_STACK_SIZE = "STACK_SIZE";
     public static final String CHECK_COMMAND_STACK_OBJECT = "STACK_OBJECT";
+
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
     public static final String SHOW_COMMAND_HAND = "HAND";
@@ -104,11 +114,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String SHOW_COMMAND_AVAILABLE_MANA = "AVAILABLE_MANA";
     public static final String SHOW_COMMAND_ALIASES = "ALIASES";
     public static final String SHOW_COMMAND_STACK = "STACK";
+
     // TODO: add target player param to commands
     public static final String ALIAS_COMMAND_ADD = "ADD";
-    // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
-    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
-    private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 
     static {
         // aliases can be used in check commands, so all prefixes and delimeters must be unique
