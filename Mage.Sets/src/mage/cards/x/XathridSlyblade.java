@@ -38,7 +38,7 @@ public final class XathridSlyblade extends CardImpl {
         // {3}{B}: Until end of turn, Xathrid Slyblade loses hexproof and gains first strike and deathtouch.
         Effect effect = new LoseAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Until end of turn, {this} loses hexproof");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{B}"));
         Effect effect2 = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and gains first strike");
         ability.addEffect(effect2);
