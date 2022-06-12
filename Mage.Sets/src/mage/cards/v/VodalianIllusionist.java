@@ -29,7 +29,7 @@ public final class VodalianIllusionist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}{U}, {tap}: Target creature phases out.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -60,7 +60,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new ValkiGodOfLiesRevealExileEffect()));
 
         // X: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl("{X}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl<>("{X}")));
 
         // 2.
         // Tibalt, Cosmic Impostor
