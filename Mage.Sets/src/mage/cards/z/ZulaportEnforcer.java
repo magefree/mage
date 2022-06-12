@@ -41,7 +41,7 @@ public final class ZulaportEnforcer extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{4}")));
 
         // LEVEL 1-2:  3/3
         // LEVEL 3+: 5/5

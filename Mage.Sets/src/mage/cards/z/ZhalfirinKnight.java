@@ -31,7 +31,7 @@ public final class ZhalfirinKnight extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {W}{W}: Zhalfirin Knight gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private ZhalfirinKnight(final ZhalfirinKnight card) {
