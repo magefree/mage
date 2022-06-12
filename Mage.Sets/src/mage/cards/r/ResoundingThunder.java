@@ -26,7 +26,7 @@ public final class ResoundingThunder extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Cycling {5}{B}{R}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{B}{R}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{B}{R}{G}")));
         // When you cycle Resounding Thunder, it deals 6 damage to any target.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(6, "it"));
         ability.addTarget(new TargetAnyTarget());

@@ -30,12 +30,12 @@ public final class ResoluteRider extends CardImpl {
         // {W/B}{W/B}: Resolute Rider gains lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{W/B}{W/B}")));
+        ), new ManaCostsImpl<>("{W/B}{W/B}")));
 
         // {W/B}{W/B}{W/B}: Resolute Rider gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{W/B}{W/B}{W/B}")));
+        ), new ManaCostsImpl<>("{W/B}{W/B}{W/B}")));
     }
 
     private ResoluteRider(final ResoluteRider card) {

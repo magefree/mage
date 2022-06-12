@@ -39,7 +39,7 @@ public final class RakeclawGargantuan extends CardImpl {
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{1}"));
+                new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ public final class RainbowCrow extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         //
         // {1}: Rainbow Crow becomes the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}")));
     }
 
     private RainbowCrow(final RainbowCrow card) {

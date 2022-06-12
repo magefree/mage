@@ -45,7 +45,7 @@ public final class RoilingHorror extends CardImpl {
         ));
 
         // Suspend X-{X}{B}{B}{B}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{B}{B}{B}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{B}{B}{B}"), this, true));
 
         // Whenever a time counter is removed from Roiling Horror while it's exiled, target player loses 1 life and you gain 1 life.
         this.addAbility(new RoilingHorrorTriggeredAbility());

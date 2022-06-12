@@ -27,7 +27,7 @@ public final class RiverBoa extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new IslandwalkAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private RiverBoa(final RiverBoa card) {

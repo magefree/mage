@@ -21,7 +21,7 @@ public final class RhysticTutor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
-        Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl("{2}"));
+        Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl<>("{2}"));
         effect.setText("Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
     }

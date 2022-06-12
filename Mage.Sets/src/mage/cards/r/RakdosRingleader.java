@@ -36,7 +36,7 @@ public final class RakdosRingleader extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, true), false, true));
         
         // {B}: Regenerate Rakdos Ringleader.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private RakdosRingleader(final RakdosRingleader card) {

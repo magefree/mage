@@ -27,7 +27,7 @@ public final class ReveredUnicorn extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // When Revered Unicorn leaves the battlefield, you gain life equal to the number of age counters on it.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GainLifeEffect(new CountersSourceCount(CounterType.AGE)), false));
     }

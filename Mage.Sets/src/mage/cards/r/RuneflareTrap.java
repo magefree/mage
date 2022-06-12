@@ -30,7 +30,7 @@ public final class RuneflareTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));

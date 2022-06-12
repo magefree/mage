@@ -31,7 +31,7 @@ public final class Regeneration extends CardImpl {
         this.addAbility(ability);
 
         // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl<>("{G}")));
     }
 
     private Regeneration(final Regeneration card) {

@@ -30,7 +30,7 @@ public final class RecklessEmbermage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{R}: Reckless Embermage deals 1 damage to any target and 1 damage to itself.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
         ability.addEffect(new DamageSelfEffect(1));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
