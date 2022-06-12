@@ -36,7 +36,7 @@ public final class WarpingWurm extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoUnlessControllerPaysEffect(
                         new PhaseOutSourceEffect(),
-                        new ManaCostsImpl("{2}{G}{U}")
+                        new ManaCostsImpl<>("{2}{G}{U}")
                 ).setText("{this} phases out unless you pay {2}{G}{U}"),
                 TargetController.YOU, false
         ));

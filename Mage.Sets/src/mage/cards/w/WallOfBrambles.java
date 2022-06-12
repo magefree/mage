@@ -29,7 +29,7 @@ public final class WallOfBrambles extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {G}: Regenerate Wall of Brambles.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private WallOfBrambles(final WallOfBrambles card) {
