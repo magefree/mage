@@ -57,7 +57,7 @@ public final class PhyrexianMarauder extends CardImpl {
 class PhyrexianMarauderCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect {
 
     PhyrexianMarauderCantAttackUnlessYouPayEffect() {
-        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK);
+        super(new ManaCostsImpl<>("{0}"), RestrictType.ATTACK);
         staticText = "{this} can't attack unless you pay {1} for each +1/+1 counter on it";
     }
 

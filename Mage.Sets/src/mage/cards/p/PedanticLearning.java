@@ -40,7 +40,7 @@ public final class PedanticLearning extends CardImpl {
 class PedanticLearningTriggeredAbility extends TriggeredAbilityImpl {
 
     public PedanticLearningTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}")), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}")), false);
     }
 
     public PedanticLearningTriggeredAbility(final PedanticLearningTriggeredAbility ability) {

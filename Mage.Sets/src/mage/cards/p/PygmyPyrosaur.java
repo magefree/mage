@@ -30,7 +30,7 @@ public final class PygmyPyrosaur extends CardImpl {
         // Pygmy Pyrosaur can't block.
         this.addAbility(new CantBlockAbility());
         // {R}: Pygmy Pyrosaur gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private PygmyPyrosaur(final PygmyPyrosaur card) {

@@ -28,7 +28,7 @@ public final class PatronOfTheWild extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}")));
         // When Patron of the Wild is turned face up, target creature gets +3/+3 until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

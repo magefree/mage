@@ -36,7 +36,7 @@ public final class PuresightMerrow extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {WU}, {untap}: Look at the top card of your library. You may exile that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PuresightMerrowEffect(), new ManaCostsImpl("{W/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PuresightMerrowEffect(), new ManaCostsImpl<>("{W/U}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
 

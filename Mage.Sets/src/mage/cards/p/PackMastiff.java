@@ -35,7 +35,7 @@ public final class PackMastiff extends CardImpl {
         // {1}{R}: Each creature you control named Pack Mastiff gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
                 1, 0, Duration.EndOfTurn, filter
-        ).setText("Each creature you control named Pack Mastiff gets +1/+0 until end of turn."), new ManaCostsImpl("{1}{R}")));
+        ).setText("Each creature you control named Pack Mastiff gets +1/+0 until end of turn."), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private PackMastiff(final PackMastiff card) {

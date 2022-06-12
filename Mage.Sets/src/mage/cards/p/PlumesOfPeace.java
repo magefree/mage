@@ -38,7 +38,7 @@ public final class PlumesOfPeace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // Forecast - {W}{U}, Reveal Plumes of Peace from your hand: Tap target creature.
-        ForecastAbility ability = new ForecastAbility(new TapTargetEffect(), new ManaCostsImpl("{W}{U}"));
+        ForecastAbility ability = new ForecastAbility(new TapTargetEffect(), new ManaCostsImpl<>("{W}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

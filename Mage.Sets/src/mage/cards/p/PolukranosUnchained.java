@@ -54,7 +54,7 @@ public final class PolukranosUnchained extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(true)));
 
         // {1}{B}{G}: Polukranos fights another target creature.
-        Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl("{1}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
