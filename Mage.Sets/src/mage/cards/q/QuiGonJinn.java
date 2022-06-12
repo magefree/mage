@@ -54,7 +54,7 @@ public final class QuiGonJinn extends CardImpl {
         this.addAbility(abitity);
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private QuiGonJinn(final QuiGonJinn card) {

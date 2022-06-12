@@ -24,7 +24,7 @@ public final class QuicksilverAmulet extends CardImpl {
         // {4}, {tap}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
