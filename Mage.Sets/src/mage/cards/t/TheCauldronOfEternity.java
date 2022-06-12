@@ -48,7 +48,7 @@ public final class TheCauldronOfEternity extends CardImpl {
 
         // {2}{B}, {T}, Pay 2 life: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}")
+                Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(2));

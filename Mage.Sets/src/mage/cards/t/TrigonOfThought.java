@@ -38,7 +38,7 @@ public final class TrigonOfThought extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{U}{U}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{U}{U}"));
         this.addAbility(ability2);
     }
 

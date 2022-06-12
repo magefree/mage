@@ -51,7 +51,7 @@ public final class TemmetVizierOfNaktamun extends CardImpl {
         this.addAbility(ability);
 
         // Embalm {3}{W}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}{U}"), this));
     }
 
     private TemmetVizierOfNaktamun(final TemmetVizierOfNaktamun card) {

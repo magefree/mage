@@ -48,7 +48,7 @@ public final class TheLocustGod extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new CreateTokenEffect(new TheLocustGodInsectToken(), 1, false, false), false));
 
         // {2}{U}{R}: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl("{2}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl<>("{2}{U}{R}"));
         this.addAbility(ability);
 
         // When The Locust God dies, return it to its owner's hand at the beginning of the next end step.

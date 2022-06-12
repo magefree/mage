@@ -30,7 +30,7 @@ public final class Twigwalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}, Sacrifice Twigwalker: Two target creatures each get +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(2, 2, new FilterCreaturePermanent("creatures each"), false));
         this.addAbility(ability);

@@ -39,7 +39,7 @@ public final class ThroughTheBreach extends CardImpl {
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThroughTheBreachEffect());
         // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl("{2}{R}{R}")));
+        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl<>("{2}{R}{R}")));
     }
 
     private ThroughTheBreach(final ThroughTheBreach card) {

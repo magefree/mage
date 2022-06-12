@@ -35,7 +35,7 @@ public final class TimmyPowerGamer extends CardImpl {
         // {4}: You may put a creature card from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         this.addAbility(ability);
     }
 

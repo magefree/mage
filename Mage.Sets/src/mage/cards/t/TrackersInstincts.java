@@ -24,7 +24,7 @@ public final class TrackersInstincts extends CardImpl {
                 4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.GRAVEYARD, false));
 
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private TrackersInstincts(final TrackersInstincts card) {

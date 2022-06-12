@@ -49,7 +49,7 @@ public final class TheScarabGod extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheScarabGodEffect(), TargetController.YOU, false));
 
         // {2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheScarabGodEffect2(), new ManaCostsImpl("{2}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(1, 1, new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
 

@@ -25,7 +25,7 @@ public final class ThunderousWrath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Miracle {R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{R}")));
     }
 
     private ThunderousWrath(final ThunderousWrath card) {

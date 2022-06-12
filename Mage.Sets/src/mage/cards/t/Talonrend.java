@@ -27,7 +27,7 @@ public final class Talonrend extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U/R}")));
     }
 
     private Talonrend(final Talonrend card) {
