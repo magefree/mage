@@ -2,6 +2,7 @@ package org.mage.test.serverside.base;
 
 import java.util.List;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -59,6 +60,8 @@ public interface CardTestAPI {
      * @param count Amount of cards to be added.
      */
     void addCard(Zone gameZone, TestPlayer player, String cardName, int count);
+
+    void addCard(Zone gameZone, TestPlayer player, Class<? extends Card> cardClass);
 
     /**
      * Add any amount of cards to specified zone of specified player.

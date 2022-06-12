@@ -671,6 +671,35 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Add a specified card for the specified player in the specified zone.
+     *
+     * @param gameZone {@link mage.constants.Zone} The game zone to which
+     *                                            the card will be added.
+     * @param player {@link Player} The player for whom the card will be added.
+     * @param cardClass {@link Card} The class of the card which will be added.
+     */
+    public void addCard(Zone gameZone, TestPlayer player, Class<? extends Card> cardClass) {
+        Optional<CardInfo> cardInfo = CardRepository.instance.findCardsByClass(
+                cardClass.getCanonicalName()).stream().findFirst();
+        if (!cardInfo.isPresent()) {
+            throw new RuntimeException(String.format(
+                    "Card Info not found for card %s.",
+                    cardClass.getCanonicalName()
+            ));
+        }
+        Card cardToAdd = cardInfo.get().getCard();
+
+        if (gameZone == Zone.BATTLEFIELD) {
+            cardToAdd = CardUtil.getDefaultCardSideForBattlefield(currentGame, cardToAdd);
+            PermanentCard permanentCard = new PermanentCard(cardToAdd, player.getId(), currentGame);
+            getBattlefieldCards(player).add(permanentCard);
+        } else {
+            List<Card> cards = getCardList(gameZone, player);
+            cards.add(cardToAdd);
+        }
+    }
+
+    /**
      * Add any amount of cards to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
