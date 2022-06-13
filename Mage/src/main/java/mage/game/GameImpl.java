@@ -1963,12 +1963,12 @@ public abstract class GameImpl implements Game {
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
-            Ability manaAbiltiy = ability.copy();
-            if (manaAbiltiy.getSourceObjectZoneChangeCounter() == 0) {
-                manaAbiltiy.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
+            Ability manaAbility = ability.copy();
+            if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
+                manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            manaAbiltiy.activate(this, false);
-            manaAbiltiy.resolve(this);
+            manaAbility.activate(this, false);
+            manaAbility.resolve(this);
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
