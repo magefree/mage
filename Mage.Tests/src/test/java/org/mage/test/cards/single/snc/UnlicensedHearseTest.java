@@ -1,5 +1,8 @@
 package org.mage.test.cards.single.snc;
 
+import mage.cards.f.ForestBear;
+import mage.cards.g.GrizzlyBears;
+import mage.cards.u.UnlicensedHearse;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Before;
@@ -25,9 +28,9 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
      */
     @Before
     public void createHearseAndFillGraveyard() {
-        addCard(Zone.BATTLEFIELD, playerA, "Unlicensed Hearse");
-        addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears");
-        addCard(Zone.GRAVEYARD, playerB, "Forest Bear");
+        addCard(Zone.BATTLEFIELD, playerA, UnlicensedHearse.class);
+        addCard(Zone.GRAVEYARD, playerB, GrizzlyBears.class);
+        addCard(Zone.GRAVEYARD, playerB, ForestBear.class);
     }
 
     /**
