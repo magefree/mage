@@ -1,10 +1,10 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
@@ -24,33 +24,6 @@ import java.util.UUID;
  * @author ayratn
  */
 public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAPI {
-
-    /**
-     * Default game initialization params for red player (that plays with Mountains)
-     */
-    @Override
-    public void useRedDefault() {
-        // *** ComputerA ***
-        // battlefield:ComputerA:Mountain:5
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        // hand:ComputerA:Mountain:4
-        addCard(Zone.HAND, playerA, "Mountain", 5);
-        // library:ComputerA:clear:0
-        removeAllCardsFromLibrary(playerA);
-        // library:ComputerA:Mountain:10
-        addCard(Zone.LIBRARY, playerA, "Mountain", 10);
-
-        // *** ComputerB ***
-        // battlefield:ComputerB:Plains:2
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        // hand:ComputerB:Plains:2
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        // library:ComputerB:clear:0
-        removeAllCardsFromLibrary(playerB);
-        // library:ComputerB:Plains:10
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
     /**
      * Default game initialization params for white player (that plays with Plains)
      */
