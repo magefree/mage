@@ -49,7 +49,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Arms of Hadar", 113, Rarity.COMMON, mage.cards.a.ArmsOfHadar.class));
         cards.add(new SetCardInfo("Artificer Class", 663, Rarity.RARE, mage.cards.a.ArtificerClass.class));
         cards.add(new SetCardInfo("Ascend from Avernus", 5, Rarity.RARE, mage.cards.a.AscendFromAvernus.class));
-        cards.add(new SetCardInfo("Ash Barrens", 880, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Ash Barrens", 880, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Astarion's Thirst", 114, Rarity.RARE, mage.cards.a.AstarionsThirst.class));
         cards.add(new SetCardInfo("Astarion, the Decadent", 265, Rarity.RARE, mage.cards.a.AstarionTheDecadent.class));
         cards.add(new SetCardInfo("Astral Confrontation", 6, Rarity.COMMON, mage.cards.a.AstralConfrontation.class));
@@ -152,7 +152,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Crippling Fear", 745, Rarity.RARE, mage.cards.c.CripplingFear.class));
         cards.add(new SetCardInfo("Crystal Dragon", 13, Rarity.UNCOMMON, mage.cards.c.CrystalDragon.class));
         cards.add(new SetCardInfo("Cultist of the Absolute", 123, Rarity.RARE, mage.cards.c.CultistOfTheAbsolute.class));
-        cards.add(new SetCardInfo("Cultivate", 821, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Cultivate", 821, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Curse of Opulence", 786, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Curse of Verbosity", 717, Rarity.UNCOMMON, mage.cards.c.CurseOfVerbosity.class));
         cards.add(new SetCardInfo("Curse of the Swine", 716, Rarity.RARE, mage.cards.c.CurseOfTheSwine.class));
