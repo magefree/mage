@@ -724,10 +724,6 @@ public abstract class GameImpl implements Game {
         return Optional.empty();
     }
 
-    //    @Override
-//    public Zone getZone(UUID objectId) {
-//        return state.getZone(objectId);
-//    }
     @Override
     public void setZone(UUID objectId, Zone zone) {
         state.setZone(objectId, zone);
@@ -752,30 +748,6 @@ public abstract class GameImpl implements Game {
         }
     }
 
-    //    /**
-//     * Starts check if game is over or if playerId is given let the player
-//     * concede.
-//     *
-//     * @param playerId
-//     * @return
-//     */
-//    @Override
-//    public synchronized boolean gameOver(UUID playerId) {
-//        if (playerId == null) {
-//            boolean result = checkIfGameIsOver();
-//            return result;
-//        } else {
-//            logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
-//            concedingPlayers.add(playerId);
-//            Player player = getPlayer(state.getPriorityPlayerId());
-//            if (player != null && player.isHuman()) {
-//                player.signalPlayerConcede();
-//            } else {
-//                checkConcede();
-//            }
-//            return true;
-//        }
-//    }
     @Override
     public void setConcedingPlayer(UUID playerId) {
         Player player = null;
