@@ -83,6 +83,6 @@ enum PassionateArchaeologistValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "";
     }
 }
