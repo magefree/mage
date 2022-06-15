@@ -16,14 +16,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -78,8 +78,8 @@ class RogueClassExileEffect extends OneShotEffect {
 
     RogueClassExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top card of that player's library face down. " +
-                "You may look at it for as long as it remains exiled";
+        staticText = "exile the top card of that player's library face down. "
+                + "You may look at it for as long as it remains exiled";
     }
 
     private RogueClassExileEffect(final RogueClassExileEffect effect) {
@@ -95,21 +95,27 @@ class RogueClassExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || opponent == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null 
+                || opponent == null
+                || sourceObject == null) {
             return false;
         }
         Card card = opponent.getLibrary().getFromTop(game);
         if (card == null) {
             return false;
         }
-        controller.moveCardsToExile(
-                card, source, game, false,
-                CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceName(game, source)
-        );
-        card.setFaceDown(true, game);
-        game.addEffect(new RogueClassLookEffect().setTargetPointer(new FixedTarget(card, game)), source);
-        return true;
+        // exileId must remain consistent among all checks
+        UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
+            card.setFaceDown(true, game);
+            game.addEffect(new RogueClassLookEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            // store the exileId and the zcc of the card put into exile.  this is used to verify the "rogueclassmanaeffect" if the card is cast from exile
+            // note that the rogueclassmanaeffect will check its validity only when the card is out of the exile zone, so it can't be checked directly
+            game.getState().setValue(card.getId().toString() + game.getState().getZoneChangeCounter(card.getId()), exileZoneId);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -148,7 +154,7 @@ class RogueClassLookEffect extends AsThoughEffectImpl {
 class RogueClassPlayEffect extends AsThoughEffectImpl {
 
     RogueClassPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "you may play cards exiled with {this}";
     }
 
@@ -168,18 +174,28 @@ class RogueClassPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)) {
+        MageObject sourceObject = source.getSourceObject(game);
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
             return false;
         }
-        ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId));
+        objectId = theCard.getMainCard().getId(); // for split cards
+        
+        UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        // this check happens while the chosen card is in the exile zone
+        if (game.getExile().getExileZone(exileZoneId).contains(objectId)
+                && affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            return card != null;
+        }
+        return false;
     }
 }
 
 class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     RogueClassManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = ", and you may spend mana as though it were mana of any color to cast those spells";
     }
 
@@ -199,10 +215,29 @@ class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEff
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return source.isControlledBy(affectedControllerId)
-                && exileZone != null
-                && exileZone.contains(CardUtil.getMainCardId(game, objectId));
+        // this check occurs when the chosen card is outside of the exile zone, so the exileId must be retrieved from history
+        MageObject sourceObject = source.getSourceObject(game);
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards
+
+        // get the current zcc of the chosen exiled card
+        int zcc = game.getState().getZoneChangeCounter(theCard.getId());
+        // retrieve the exileId of this source card
+        UUID exileId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        // retrieve the exileId stored on the chosen exiled card (note that we subtract 1 from it due to it being moved from the exile zone to the stack
+        UUID storedExileIdOfTheCard = (UUID) game.getState().getValue(theCard.getId().toString() + (zcc - 1));
+
+        if (objectId != null
+                && game.getState().getZone(objectId) == Zone.STACK
+                && exileId == storedExileIdOfTheCard
+                && affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            return card != null;
+        }
+        return false;
     }
 
     @Override
