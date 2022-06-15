@@ -147,14 +147,15 @@ class RogueClassLookEffect extends AsThoughEffectImpl {
             return false;
         }
         return source.isControlledBy(affectedControllerId)
-                && cardId.equals(objectId);
+                && cardId.equals(objectId)
+                && game.getState().getZone(cardId) == Zone.EXILED;
     }
 }
 
 class RogueClassPlayEffect extends AsThoughEffectImpl {
 
     RogueClassPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may play cards exiled with {this}";
     }
 
@@ -195,7 +196,7 @@ class RogueClassPlayEffect extends AsThoughEffectImpl {
 class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     RogueClassManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = ", and you may spend mana as though it were mana of any color to cast those spells";
     }
 
