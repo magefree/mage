@@ -46,7 +46,7 @@ public class DisturbAbility extends SpellAbility {
         this.manaCost = manaCost;
         this.getManaCosts().clear();
         this.getManaCostsToPay().clear();
-        this.addManaCost(new ManaCostsImpl(manaCost));
+        this.addManaCost(new ManaCostsImpl<>(manaCost));
         this.addSubAbility(new TransformAbility());
     }
 
