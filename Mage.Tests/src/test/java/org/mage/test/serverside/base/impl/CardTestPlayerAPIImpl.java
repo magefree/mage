@@ -862,6 +862,29 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Given the ID of a permanent on the battlefield, assert that the permanent exists and assert that its power
+     * and toughness match the passed in values.
+     *
+     * @param permanentID       The UUID of a permanent expected to be present on the battlefield
+     * @param expectedPower     The expected power of the aforementioned permanent
+     * @param expectedToughness The expected toughness of the aforementioned permanent
+     */
+    public void assertPowerToughness(UUID permanentID, int expectedPower, int expectedToughness) {
+        Assert.assertTrue(String.format("No permanent found on the battlefield with UUID %s.", permanentID),
+                currentGame.getBattlefield().containsPermanent(permanentID));
+
+        Permanent permanent = currentGame.getBattlefield().getPermanent(permanentID);
+
+        Assert.assertEquals(String.format("Expected permanent to have power %d but its actual power was %d.", expectedPower,
+                        permanent.getPower().getValue()),
+                expectedPower, permanent.getPower().getValue());
+
+        Assert.assertEquals(String.format("Expected permanent to have toughness %d but its actual toughness was %d.",
+                        expectedToughness, permanent.getToughness().getValue()),
+                expectedToughness, permanent.getToughness().getValue());
+    }
+
+    /**
      * See
      * {@link #assertPowerToughness(mage.players.Player, String, int, int, mage.filter.Filter.ComparisonScope)}
      *
