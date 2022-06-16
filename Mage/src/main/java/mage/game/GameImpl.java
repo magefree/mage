@@ -2583,7 +2583,7 @@ public abstract class GameImpl implements Game {
                 filterLegendName.add(SuperType.LEGENDARY.getPredicate());
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
-                if (getBattlefield().contains(filterLegendName, null, legend.getControllerId(), null, this, 2)) {
+                if (getBattlefield().contains(filterLegendName, legend.getControllerId(), null, this, 2)) {
                     if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
                         Player controller = this.getPlayer(legend.getControllerId());
                         if (controller != null) {

@@ -120,7 +120,7 @@ public class Battlefield implements Serializable {
     }
 
     public boolean contains(FilterPermanent filter, Ability source, Game game, int num) {
-        return contains(filter, source.getSourceId(), source.getControllerId(), source, game, num);
+        return contains(filter, source.getControllerId(), source, game, num);
     }
 
     /**
@@ -129,14 +129,13 @@ public class Battlefield implements Serializable {
      * matches the supplied filter.
      *
      * @param filter
-     * @param sourceId       can be null for default SBA checks like legendary rule
      * @param sourcePlayerId
      * @param source
      * @param game
      * @param num
      * @return boolean
      */
-    public boolean contains(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Ability source, Game game, int num) {
+    public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Ability source, Game game, int num) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return field.values().stream()
                     .filter(permanent -> filter.match(permanent, sourcePlayerId, source, game)
