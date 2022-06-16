@@ -156,6 +156,14 @@ public class Battlefield implements Serializable {
         field.put(permanent.getId(), permanent);
     }
 
+    /**
+     * Find a permanent on the battlefield by its ID. If working with cards and you want to check it on the battlefield
+     * then use game.getState().getZone() instead. For one card, its card ID and permanent ID may be different (for
+     * example: mdf card puts half card to battlefield, not the main card).
+     *
+     * @param key The UUID of a permanent to be retrieved
+     * @return The permanent matching the passed in UUID
+     */
     public Permanent getPermanent(UUID key) {
         return field.get(key);
     }
@@ -165,12 +173,10 @@ public class Battlefield implements Serializable {
     }
 
     /**
-     * Find permanent on the battlefield by id. If you works with cards and want to check it on battlefield then
-     * use game.getState().getZone() instead. Card's id and permanent's id can be different (example: mdf card
-     * puts half card to battlefield, not the main card).
+     * Check whether the battlefield contains a permanent with the passed in UUID.
      *
-     * @param key
-     * @return
+     * @param key The UUID whose existence we're checking for among permanents on the battlefield
+     * @return Whether the passed in UUID matches a permanent on the battlefield
      */
     public boolean containsPermanent(UUID key) {
         return field.containsKey(key);
