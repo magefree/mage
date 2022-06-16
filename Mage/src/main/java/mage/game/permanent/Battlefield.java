@@ -93,7 +93,7 @@ public class Battlefield implements Serializable {
     }
 
     public boolean containsControlled(FilterPermanent filter, Ability source, Game game, int num) {
-        return containsControlled(filter, source.getSourceId(), source.getControllerId(), source, game, num);
+        return containsControlled(filter, source.getControllerId(), source, game, num);
     }
 
     /**
@@ -102,21 +102,19 @@ public class Battlefield implements Serializable {
      * ignores the range of influence.
      *
      * @param filter
-     * @param sourceId
      * @param controllerId controller and source can be different (from different players)
      * @param source
      * @param game
      * @param num
      * @return boolean
      */
-    public boolean containsControlled(FilterPermanent filter, UUID sourceId, UUID controllerId, Ability source, Game game, int num) {
+    public boolean containsControlled(FilterPermanent filter, UUID controllerId, Ability source, Game game, int num) {
         return field.values()
                 .stream()
                 .filter(permanent -> permanent.isControlledBy(controllerId)
                         && filter.match(permanent, controllerId, source, game)
                         && permanent.isPhasedIn())
                 .count() >= num;
-
     }
 
     public boolean contains(FilterPermanent filter, Ability source, Game game, int num) {
