@@ -32,7 +32,7 @@ public final class SteelbaneHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // {2}{G}, Remove a +1/+1 counter from Steelbane Hydra: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);

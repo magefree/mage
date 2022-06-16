@@ -49,7 +49,7 @@ public final class ScourgeOfValkas extends CardImpl {
         this.addAbility(ability);
 
         // {R}: Scourge of Valkas gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private ScourgeOfValkas(final ScourgeOfValkas card) {

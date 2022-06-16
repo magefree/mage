@@ -35,7 +35,7 @@ public final class SunflareShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}, {tap}: Sunflare Shaman deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SunflareShamanEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SunflareShamanEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

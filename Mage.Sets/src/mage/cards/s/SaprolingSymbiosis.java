@@ -25,7 +25,7 @@ public final class SaprolingSymbiosis extends CardImpl {
         Effect effect = new CreateTokenEffect(new SaprolingToken(), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE));
 
         // You may cast Saproling Symbiosis as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);

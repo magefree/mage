@@ -33,7 +33,7 @@ public final class SamiteAlchemist extends CardImpl {
         // {W}{W}, {tap}: Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
-                new ManaCostsImpl("{W}{W}")
+                new ManaCostsImpl<>("{W}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new TapTargetEffect("Tap that creature"));

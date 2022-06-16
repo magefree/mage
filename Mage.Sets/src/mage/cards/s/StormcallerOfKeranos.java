@@ -30,7 +30,7 @@ public final class StormcallerOfKeranos extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {1}{U}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private StormcallerOfKeranos(final StormcallerOfKeranos card) {

@@ -47,7 +47,7 @@ public final class ShivsEmbrace extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
     }
 

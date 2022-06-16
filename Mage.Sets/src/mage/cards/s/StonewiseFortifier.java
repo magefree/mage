@@ -35,7 +35,7 @@ public final class StonewiseFortifier extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl("{4}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl<>("{4}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

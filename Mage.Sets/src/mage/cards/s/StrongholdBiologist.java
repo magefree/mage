@@ -31,7 +31,7 @@ public final class StrongholdBiologist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{U}, {tap}, Discard a card: Counter target creature spell.
-        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetSpell(new FilterCreatureSpell()));

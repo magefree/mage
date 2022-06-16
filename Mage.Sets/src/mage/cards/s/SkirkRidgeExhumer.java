@@ -30,7 +30,7 @@ public final class SkirkRidgeExhumer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Discard a card: Create a 1/1 black Zombie Goblin creature token named Festering Goblin. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FesteringGoblinToken()), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FesteringGoblinToken()), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

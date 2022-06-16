@@ -38,7 +38,7 @@ public final class SerraPaladin extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}{W}, {tap}: Target creature gains vigilance until end of turn.
-        ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{W}"));
+        ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

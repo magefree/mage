@@ -29,7 +29,7 @@ public final class SewerRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, Pay 1 life: Sewer Rats gets +1/+0 until end of turn. Activate this ability no more than three times each turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{B}"), 3);
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{B}"), 3);
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

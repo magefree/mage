@@ -26,7 +26,7 @@ public final class StarlightInvoker extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl("{7}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl<>("{7}{W}")));
     }
 
     private StarlightInvoker(final StarlightInvoker card) {

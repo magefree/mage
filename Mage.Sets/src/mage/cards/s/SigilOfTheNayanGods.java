@@ -43,7 +43,7 @@ public final class SigilOfTheNayanGods extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
         // Cycling {G/W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{G/W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{G/W}")));
     }
 
     private SigilOfTheNayanGods(final SigilOfTheNayanGods card) {

@@ -42,13 +42,13 @@ public final class SoulOfShandalar extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {3}{R}{R}: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
         this.addAbility(ability);
 
         // {3}{R}{R}, Exile Soul of Shandalar from your graveyard: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());

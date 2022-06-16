@@ -52,7 +52,7 @@ public final class SoulfireGrandMaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of your graveyard as it resolves.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulfireGrandMasterCastFromHandReplacementEffect(), new ManaCostsImpl("{2}{U/R}{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulfireGrandMasterCastFromHandReplacementEffect(), new ManaCostsImpl<>("{2}{U/R}{U/R}")));
 
     }
 
