@@ -64,14 +64,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
     public static final String RUN_PREFIX = "run:"; // prefix for all run commands
 
-    static {
-        // aliases can be used in check commands, so all prefixes and delimeters must be unique
-        // already uses by targets: ^ $ [ ]
-        Assert.assertFalse("prefix must be unique", CHECK_PARAM_DELIMETER.contains(ALIAS_PREFIX));
-        Assert.assertFalse("prefix must be unique", CHECK_PREFIX.contains(ALIAS_PREFIX));
-        Assert.assertFalse("prefix must be unique", ALIAS_PREFIX.contains(CHECK_PREFIX));
-    }
-
     // prefix for activate commands
     // can be called with alias, example: @card_ref ability text
     public static final String ACTIVATE_ABILITY = "activate:";
@@ -85,12 +77,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     // commands for run
     public static final String RUN_COMMAND_CODE = "code";
-
-    static {
-        // cards can be played/casted by activate ability command too
-        assertTrue("musts contains activate ability part", ACTIVATE_PLAY.startsWith(ACTIVATE_ABILITY));
-        assertTrue("musts contains activate ability part", ACTIVATE_CAST.startsWith(ACTIVATE_ABILITY));
-    }
 
     // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
@@ -132,6 +118,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // TODO: add target player param to commands
     public static final String ALIAS_COMMAND_ADD = "ADD";
 
+    static {
+        // aliases can be used in check commands, so all prefixes and delimeters must be unique
+        // already uses by targets: ^ $ [ ]
+        Assert.assertFalse("prefix must be unique", CHECK_PARAM_DELIMETER.contains(ALIAS_PREFIX));
+        Assert.assertFalse("prefix must be unique", CHECK_PREFIX.contains(ALIAS_PREFIX));
+        Assert.assertFalse("prefix must be unique", ALIAS_PREFIX.contains(CHECK_PREFIX));
+    }
+
+    static {
+        // cards can be played/casted by activate ability command too
+        assertTrue("musts contains activate ability part", ACTIVATE_PLAY.startsWith(ACTIVATE_ABILITY));
+        assertTrue("musts contains activate ability part", ACTIVATE_CAST.startsWith(ACTIVATE_ABILITY));
+    }
+
     protected GameOptions gameOptions;
 
     protected String deckNameA;
@@ -142,15 +142,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private int rollbackBlock = 0; // used to handle actions that have to be added after a rollback
     private boolean rollbackBlockActive = false;
     private TestPlayer rollbackPlayer = null;
-
-    protected enum ExpectedType {
-        TURN_NUMBER,
-        RESULT,
-        LIFE,
-        BATTLEFIELD,
-        GRAVEYARD,
-        UNKNOWN
-    }
 
     public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
@@ -189,24 +180,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         // library:ComputerB:clear:0
         removeAllCardsFromLibrary(playerB);
         // library:ComputerB:Plains:10
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    /**
-     * Default game initialization params for white player (that plays with
-     * Plains)
-     */
-    public void useWhiteDefault() {
-        // *** ComputerA ***
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.HAND, playerA, "Plains", 5);
-        removeAllCardsFromLibrary(playerA);
-        addCard(Zone.LIBRARY, playerA, "Plains", 10);
-
-        // *** ComputerB ***
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        removeAllCardsFromLibrary(playerB);
         addCard(Zone.LIBRARY, playerB, "Plains", 10);
     }
 
@@ -442,24 +415,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Checks whether or not a given playable ability (someting that lets you cast a card) is available.
      * This function will only check IF the ability is available or not, it does not check the number of times that it's available.
-     *
+     * <p>
      * If using with mustHave = false be very careful about spelling and options, otherwise you may get a false negative.
      * It is reccomended that you set up the test so that the ability is available at the point you wish to check it,
      * check it with checkPlayableAbility(..., mustHave = true), then add whatever condition would stop you from being
      * able to activat the abiltiy
-     *
+     * <p>
      * TODO: Currently does not work in all cases since some effects list abilities as available,
      *       only to then give a pop-up about how it can't be played.
      *       For examples and things to fix, search for:
      *       "try {
      *             execute();"
      *
-     * @param checkName         String to show up if the check fails, for display purposes only.
-     * @param turnNum           The turn number to check on.
-     * @param step              The step to check the ability on.
-     * @param player            The player to be checked for the ability.
-     * @param abilityStartText  The starting portion of the ability name.
-     * @param mustHave          Whether the ability should be activatable of not
+     * @param checkName        String to show up if the check fails, for display purposes only.
+     * @param turnNum          The turn number to check on.
+     * @param step             The step to check the ability on.
+     * @param player           The player to be checked for the ability.
+     * @param abilityStartText The starting portion of the ability name.
+     * @param mustHave         Whether the ability should be activatable of not
      */
     public void checkPlayableAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String abilityStartText, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
@@ -1596,13 +1569,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-       assertTrue(theAttachment + " was not attached to " + thePermanent,
-               permanents.stream()
-               .anyMatch(permanent -> permanent.getAttachments()
-                       .stream()
-                       .map(id -> currentGame.getCard(id))
-                       .map(MageObject::getName)
-                       .collect(Collectors.toList()).contains(theAttachment)));
+        assertTrue(theAttachment + " was not attached to " + thePermanent,
+                permanents.stream()
+                        .anyMatch(permanent -> permanent.getAttachments()
+                                .stream()
+                                .map(id -> currentGame.getCard(id))
+                                .map(MageObject::getName)
+                                .collect(Collectors.toList()).contains(theAttachment)));
 
 
     }
@@ -1783,12 +1756,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         assertAliaseSupportInActivateCommand(cardName, true);
         assertAliaseSupportInActivateCommand(targetName, true);
         addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName + "$target=" + targetName);
-    }
-
-    public enum StackClause {
-        WHILE_ON_STACK,
-        WHILE_COPY_ON_STACK,
-        WHILE_NOT_ON_STACK
     }
 
     /**
@@ -2052,7 +2019,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Set next result of next die roll (uses for both normal or planar rolls)
-     *
+     * <p>
      * For planar rolls:
      * 1..2 - chaos
      * 3..7 - blank
@@ -2194,7 +2161,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-
     public void assertWonTheGame(Player player) {
 
         assertTrue(player.getName() + " has not won the game.", player.hasWon());
@@ -2218,5 +2184,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public GameView getGameView(Player player) {
         // prepare client-server data for tests
         return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
+    }
+
+    protected enum ExpectedType {
+        TURN_NUMBER,
+        RESULT,
+        LIFE,
+        BATTLEFIELD,
+        GRAVEYARD,
+        UNKNOWN
+    }
+
+    public enum StackClause {
+        WHILE_ON_STACK,
+        WHILE_COPY_ON_STACK,
+        WHILE_NOT_ON_STACK
     }
 }
