@@ -157,33 +157,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Default game initialization params for red player (that plays with
-     * Mountains)
-     */
-    @Override
-    public void useRedDefault() {
-        // *** ComputerA ***
-        // battlefield:ComputerA:Mountain:5
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        // hand:ComputerA:Mountain:4
-        addCard(Zone.HAND, playerA, "Mountain", 5);
-        // library:ComputerA:clear:0
-        removeAllCardsFromLibrary(playerA);
-        // library:ComputerA:Mountain:10
-        addCard(Zone.LIBRARY, playerA, "Mountain", 10);
-
-        // *** ComputerB ***
-        // battlefield:ComputerB:Plains:2
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        // hand:ComputerB:Plains:2
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        // library:ComputerB:clear:0
-        removeAllCardsFromLibrary(playerB);
-        // library:ComputerB:Plains:10
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    /**
      * @throws GameException
      * @throws FileNotFoundException
      */
