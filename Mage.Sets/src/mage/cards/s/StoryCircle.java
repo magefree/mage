@@ -32,7 +32,7 @@ public final class StoryCircle extends CardImpl {
         // As Story Circle enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // {W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl<>("{W}")));
     }
 
     private StoryCircle(final StoryCircle card) {

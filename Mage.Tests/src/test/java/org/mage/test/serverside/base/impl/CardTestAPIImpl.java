@@ -25,23 +25,6 @@ import java.util.UUID;
  */
 public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAPI {
     /**
-     * Default game initialization params for white player (that plays with Plains)
-     */
-    public void useWhiteDefault() {
-        // *** ComputerA ***
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.HAND, playerA, "Plains", 5);
-        removeAllCardsFromLibrary(playerA);
-        addCard(Zone.LIBRARY, playerA, "Plains", 10);
-
-        // *** ComputerB ***
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Zone.HAND, playerB, "Plains", 2);
-        removeAllCardsFromLibrary(playerB);
-        addCard(Zone.LIBRARY, playerB, "Plains", 10);
-    }
-
-    /**
      * Removes all cards from player's library from the game.
      * Usually this should be used once before initialization to form the library in certain order.
      *
@@ -159,9 +142,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     @Override
     public void setLife(TestPlayer player, int life) {
         if (player.equals(playerA)) {
-            commandsA.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsA.put(Zone.OUTSIDE, "life:" + life);
         } else if (player.equals(playerB)) {
-            commandsB.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsB.put(Zone.OUTSIDE, "life:" + life);
         }
     }
 
@@ -365,25 +348,25 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     }
 
     public void playLand(Player player, String cardName) {
-        player.addAction("play:"+cardName);
+        player.addAction("play:" + cardName);
     }
 
     public void castSpell(Player player, String cardName) {
-        player.addAction("cast:"+cardName);
+        player.addAction("cast:" + cardName);
     }
 
     public void addFixedTarget(Player player, String cardName, Player target) {
-        player.addAction("cast:"+cardName + ";name=" + target.getName());
+        player.addAction("cast:" + cardName + ";name=" + target.getName());
     }
 
     public void addFixedTarget(Player player, String cardName, String targetName) {
-        player.addAction("cast:"+cardName + ";name=" + targetName);
+        player.addAction("cast:" + cardName + ";name=" + targetName);
     }
 
     public void useAbility(Player player, String cardName) {
     }
 
     public void attack(Player player, String cardName) {
-        player.addAction("attack:"+cardName);
+        player.addAction("attack:" + cardName);
     }
 }

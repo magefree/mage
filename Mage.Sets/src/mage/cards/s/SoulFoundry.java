@@ -43,7 +43,7 @@ public final class SoulFoundry extends CardImpl {
         );
 
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(SoulFoundryAdjuster.instance);
         this.addAbility(ability);

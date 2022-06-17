@@ -48,7 +48,7 @@ public final class SisayWeatherlightCaptain extends CardImpl {
         // {W}{U}{B}{R}{G}: Search your library for a legendary permanent card with converted mana cost less than Sisay's power, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(
                 new SisayWeatherlightCaptainEffect(),
-                new ManaCostsImpl("{W}{U}{B}{R}{G}")
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
         ));
     }
 

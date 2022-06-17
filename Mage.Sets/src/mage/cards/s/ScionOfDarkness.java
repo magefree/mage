@@ -40,7 +40,7 @@ public final class ScionOfDarkness extends CardImpl {
         this.addAbility(new ScionOfDarknessTriggeredAbility());
 
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private ScionOfDarkness(final ScionOfDarkness card) {

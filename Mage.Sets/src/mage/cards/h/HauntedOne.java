@@ -46,10 +46,10 @@ public final class HauntedOne extends CardImpl {
         ).setTriggerPhrase("Whenever this creature becomes tapped, ");
         ability.addEffect(new GainAbilitySourceEffect(
                 new UndyingAbility(), Duration.EndOfTurn
-        ).setText("and other creatures you control that share a creature type with it"));
+        ).setText("and other creatures you control that share a creature type"));
         ability.addEffect(new BoostAllEffect(
                 2, 0, Duration.EndOfTurn, filter, true
-        ).setText("each get +2/+0"));
+        ).setText("with it each get +2/+0"));
         ability.addEffect(new GainAbilityAllEffect(
                 new UndyingAbility(), Duration.EndOfTurn, filter, true
         ).setText("and gain undying until end of turn"));

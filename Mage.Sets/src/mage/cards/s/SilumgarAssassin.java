@@ -45,7 +45,7 @@ public final class SilumgarAssassin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithGreaterPowerEffect()));
 
         // Megamorph {2}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}"), true));
 
         // When Silumgar Assassin is turned face up, destroy target creature with power 3 or less an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false);

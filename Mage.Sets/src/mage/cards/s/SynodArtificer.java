@@ -42,7 +42,7 @@ public final class SynodArtificer extends CardImpl {
         // {X}, {tap}: Tap X target noncreature artifacts.
         Effect tapEffect = new TapTargetEffect();
         tapEffect.setText("Tap X target noncreature artifacts.");
-        Ability tapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, tapEffect, new ManaCostsImpl("{X}"));
+        Ability tapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, tapEffect, new ManaCostsImpl<>("{X}"));
         tapAbility.addCost(new TapSourceCost());
         tapAbility.setTargetAdjuster(XTargetsAdjuster.instance);
         tapAbility.addTarget(new TargetPermanent(filter));
@@ -51,7 +51,7 @@ public final class SynodArtificer extends CardImpl {
         // {X}, {tap}: Untap X target noncreature artifacts.
         Effect untapEffect = new UntapTargetEffect();
         untapEffect.setText("Untap X target noncreature artifacts.");
-        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, untapEffect, new ManaCostsImpl("{X}"));
+        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, untapEffect, new ManaCostsImpl<>("{X}"));
         untapAbility.addCost(new TapSourceCost());
         untapAbility.setTargetAdjuster(XTargetsAdjuster.instance);
         untapAbility.addTarget(new TargetPermanent(filter));

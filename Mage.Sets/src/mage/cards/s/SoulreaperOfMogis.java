@@ -30,7 +30,7 @@ public final class SoulreaperOfMogis extends CardImpl {
 
         // {2}{B}, Sacrifice a creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{B}")
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeTargetCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)

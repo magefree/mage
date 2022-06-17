@@ -47,7 +47,7 @@ public final class StrengthOfIsolation extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Madness {W}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private StrengthOfIsolation(final StrengthOfIsolation card) {

@@ -31,7 +31,7 @@ public final class SwordOfKaldra extends CardImpl {
         // Whenever equipped creature deals damage to a creature, exile that creature.
         this.addAbility(new SwordOfKaldraTriggeredAbility());
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}")));
     }
 
     private SwordOfKaldra(final SwordOfKaldra card) {

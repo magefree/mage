@@ -24,7 +24,7 @@ public final class ScornfulEgotist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private ScornfulEgotist(final ScornfulEgotist card) {

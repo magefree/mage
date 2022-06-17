@@ -42,7 +42,7 @@ public final class SpittingSlug extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
             new DoIfCostPaid(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), 
                 new SpittingSlugEffect(), 
-                new ManaCostsImpl("{1}{G}")).setText("you may pay {1}{G}. If you do, {this} gains first strike until end of turn. Otherwise, each creature blocking or blocked by {this} gains first strike until end of turn"), 
+                new ManaCostsImpl<>("{1}{G}")).setText("you may pay {1}{G}. If you do, {this} gains first strike until end of turn. Otherwise, each creature blocking or blocked by {this} gains first strike until end of turn"),
             false));
     }
 

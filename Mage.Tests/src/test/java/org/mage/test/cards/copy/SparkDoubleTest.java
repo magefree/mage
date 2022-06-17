@@ -207,7 +207,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
     @Test
     public void test_CopyOfSparksCopy_ByAbility() {
-        Ability ability = new SimpleActivatedAbility(new CreateTokenCopyTargetEffect(), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenCopyTargetEffect(), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility("copy", playerA, ability);
 

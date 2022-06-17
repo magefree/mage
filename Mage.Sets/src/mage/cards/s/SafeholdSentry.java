@@ -31,7 +31,7 @@ public final class SafeholdSentry extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}, {untap}: Safehold Sentry gets +0/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
         
