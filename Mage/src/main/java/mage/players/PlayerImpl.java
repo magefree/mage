@@ -3297,7 +3297,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
             Boolean canUse = null;
             boolean canAdd = false;
-            boolean useLater = false; // sources with mana costs or mana pool dependency 
+            boolean useLater = false; // sources with mana costs or mana pool dependency
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
             for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
@@ -3606,7 +3606,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
                     if (((AlternativeSourceCosts) alternateSourceCostsAbility).isAvailable(ability, game)) {
                         if (alternateSourceCostsAbility.getCosts().canPay(ability, ability, playerId, game)) {
-                            ManaCostsImpl manaCosts = new ManaCostsImpl();
+                            ManaCostsImpl manaCosts = new ManaCostsImpl<>();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
                                 if (cost instanceof AlternativeCost) {
@@ -3655,7 +3655,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (alternateSourceCosts instanceof Ability) {
                     if (alternateSourceCosts.isAvailable(ability, game)) {
                         if (((Ability) alternateSourceCosts).getCosts().canPay(ability, ability, playerId, game)) {
-                            ManaCostsImpl manaCosts = new ManaCostsImpl();
+                            ManaCostsImpl manaCosts = new ManaCostsImpl<>();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
                                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
                                 if (cost instanceof AlternativeCost) {

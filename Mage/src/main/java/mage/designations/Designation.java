@@ -30,7 +30,7 @@ public abstract class Designation implements MageObject {
 
     private static final List<CardType> emptySet = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
-    private static final ManaCostsImpl emptyCost = new ManaCostsImpl();
+    private static final ManaCostsImpl emptyCost = new ManaCostsImpl<>();
 
     private String name;
     private final DesignationType designationType;

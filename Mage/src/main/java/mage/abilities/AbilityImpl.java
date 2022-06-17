@@ -626,7 +626,7 @@ public abstract class AbilityImpl implements Ability {
                             manaString.append('{').append(manaSymbol).append('}');
                         }
                     }
-                    manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
+                    manaCostsToPay.add(new ManaCostsImpl<>(manaString.toString()));
                     manaCostsToPay.setX(xValue * xValueMultiplier, amountMana);
                 }
                 variableManaCost.setPaid();

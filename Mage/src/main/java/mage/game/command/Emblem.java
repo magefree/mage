@@ -33,7 +33,7 @@ public class Emblem implements CommandObject {
 
     private static List<CardType> emptySet = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl();
+    private static ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private String name = "";
     private UUID id;
