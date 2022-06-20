@@ -19,9 +19,9 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  * @author TheElk801
@@ -57,8 +57,8 @@ class AncientBrassDragonEffect extends OneShotEffect {
 
     AncientBrassDragonEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a d20. When you do, put any number of target creature cards with total mana value X " +
-                "or less from graveyards onto the battlefield under your control, where X is the result";
+        staticText = "roll a d20. When you do, put any number of target creature cards with total mana value X "
+                + "or less from graveyards onto the battlefield under your control, where X is the result";
     }
 
     private AncientBrassDragonEffect(final AncientBrassDragonEffect effect) {
@@ -86,7 +86,7 @@ class AncientBrassDragonEffect extends OneShotEffect {
     }
 }
 
-class AncientBrassDragonTarget extends TargetCardInYourGraveyard {
+class AncientBrassDragonTarget extends TargetCardInGraveyard {
 
     private final int xValue;
 
@@ -111,8 +111,8 @@ class AncientBrassDragonTarget extends TargetCardInYourGraveyard {
             return false;
         }
         Card card = game.getCard(id);
-        return card != null &&
-                this.getTargets()
+        return card != null
+                && this.getTargets()
                         .stream()
                         .map(game::getCard)
                         .mapToInt(Card::getManaValue)
@@ -121,8 +121,8 @@ class AncientBrassDragonTarget extends TargetCardInYourGraveyard {
 
     private static final FilterCard makeFilter(int xValue) {
         FilterCard filter = new FilterCreatureCard(
-                "creature cards with total mana value " +
-                        xValue + " or less from your graveyard"
+                "creature cards with total mana value "
+                + xValue + " or less from graveyards"
         );
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         return filter;
