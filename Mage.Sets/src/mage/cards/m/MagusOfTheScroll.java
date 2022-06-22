@@ -34,7 +34,7 @@ public final class MagusOfTheScroll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new MagusOfTheScrollEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

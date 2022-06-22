@@ -28,7 +28,7 @@ public final class SoothsayerAdept extends CardImpl {
 
         // {1}{U}, {T}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(), new ManaCostsImpl("{1}{U}")
+                new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

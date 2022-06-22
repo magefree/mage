@@ -508,7 +508,7 @@ public class MCTSNode {
         int count = 0;
         while(playablesIterator.hasNext()) {
             String next = playablesIterator.next();
-            int cacheTurn = Integer.valueOf(next.split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(next.split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 playablesIterator.remove();
                 count++;
@@ -518,7 +518,7 @@ public class MCTSNode {
         Set<String> attacksKeys = attacksCache.keySet();
         Iterator<String> attacksIterator = attacksKeys.iterator();
         while(attacksIterator.hasNext()) {
-            int cacheTurn = Integer.valueOf(attacksIterator.next().split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(attacksIterator.next().split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 attacksIterator.remove();
                 count++;
@@ -528,7 +528,7 @@ public class MCTSNode {
         Set<String> blocksKeys = blocksCache.keySet();
         Iterator<String> blocksIterator = blocksKeys.iterator();
         while(blocksIterator.hasNext()) {
-            int cacheTurn = Integer.valueOf(blocksIterator.next().split(":", 2)[0].substring(1));
+            int cacheTurn = Integer.parseInt(blocksIterator.next().split(":", 2)[0].substring(1));
             if (cacheTurn < turnNum) {
                 blocksIterator.remove();
                 count++;

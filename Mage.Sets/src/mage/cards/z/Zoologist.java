@@ -34,7 +34,7 @@ public final class Zoologist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{G}, {tap}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZoologistEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZoologistEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

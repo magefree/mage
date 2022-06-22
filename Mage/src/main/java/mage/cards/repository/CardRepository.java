@@ -206,7 +206,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
-            Where where = qb.where();
+            Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
                     where.like("types", '%' + CardType.LAND.name() + '%')
@@ -278,7 +278,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
-            Where where = qb.where();
+            Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
                     where.not().like("types", '%' + CardType.LAND.name() + '%')
@@ -298,7 +298,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
-            Where where = qb.where();
+            Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
                     where.not().like("types", '%' + CardType.LAND.name() + '%')

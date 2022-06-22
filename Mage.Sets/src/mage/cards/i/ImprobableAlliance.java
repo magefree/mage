@@ -25,7 +25,7 @@ public final class ImprobableAlliance extends CardImpl {
 
         // {4}{U}{R}: Draw a card, then discard a card.
         this.addAbility(new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl("{4}{U}{R}")
+                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{4}{U}{R}")
         ));
     }
 

@@ -37,7 +37,7 @@ public final class UrzasAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Urza's Avenger gets -1/-1 and gains your choice of banding, flying, first strike, or trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasAvengerEffect(), new ManaCostsImpl<>("{0}")));
     }
 
     private UrzasAvenger(final UrzasAvenger card) {

@@ -20,7 +20,7 @@ public final class RedElementalToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("EMA", "M14", "SHM", "MH1", "M20", "RIX", "UMA", "NEC");
+        availableImageSetCodes = Arrays.asList("EMA", "M14", "SHM", "MH1", "M20", "RIX", "UMA", "NEC", "DDS");
     }
 
     @Override
@@ -45,6 +45,10 @@ public final class RedElementalToken extends TokenImpl {
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("UMA")) {
             setTokenType(RandomUtil.nextInt(2) + 2); // 2..3
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(1);
         }
     }
 

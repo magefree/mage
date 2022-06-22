@@ -125,3 +125,5 @@ First steps for Xmage's developers:
 * [Development Testing Tools](https://github.com/magefree/mage/wiki/Development-Testing-Tools)
 * [Development Workflow](https://github.com/magefree/mage/wiki/Development-Workflow)
 * [Development HOWTO Guides](https://github.com/magefree/mage/wiki/Development-HOWTO-Guides)
+
+[Torch icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/torch)

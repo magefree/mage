@@ -38,7 +38,7 @@ public final class TrevaTheRenewer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Treva, the Renewer deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new TrevaTheRenewerEffect(), new ManaCostsImpl("{2}{W}")), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new TrevaTheRenewerEffect(), new ManaCostsImpl<>("{2}{W}")), false));
     }
 
     private TrevaTheRenewer(final TrevaTheRenewer card) {

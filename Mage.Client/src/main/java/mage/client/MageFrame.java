@@ -1317,7 +1317,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     i++;
                 }
                 if (arg.startsWith(PORT_ARG)) {
-                    startPort = Integer.valueOf(args[i + 1]);
+                    startPort = Integer.parseInt(args[i + 1]);
                     i++;
                 }
                 if (arg.startsWith(DEBUG_ARG)) {

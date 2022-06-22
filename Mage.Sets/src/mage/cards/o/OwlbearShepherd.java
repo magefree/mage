@@ -1,9 +1,10 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -39,7 +40,7 @@ public final class OwlbearShepherd extends CardImpl {
         // At the beginning of your end step, if creatures you control have total power and toughness 8 or greater, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, OwlbearShepherdCondition.instance, false
+                TargetController.YOU, FormidableCondition.instance, false
         ).addHint(hint));
     }
 
@@ -50,20 +51,6 @@ public final class OwlbearShepherd extends CardImpl {
     @Override
     public OwlbearShepherd copy() {
         return new OwlbearShepherd(this);
-    }
-}
-
-enum OwlbearShepherdCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return OwlbearShepherdValue.instance.calculate(game, source, null) >= 8;
-    }
-
-    @Override
-    public String toString() {
-        return "creatures you control have total power and toughness 8 or greater";
     }
 }
 
@@ -78,7 +65,8 @@ enum OwlbearShepherdValue implements DynamicValue {
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
                         sourceAbility.getControllerId(), sourceAbility, game
                 ).stream()
-                .mapToInt(permanent -> permanent.getPower().getValue() + permanent.getToughness().getValue())
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
                 .sum();
     }
 

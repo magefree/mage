@@ -97,7 +97,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new ManaCostsImpl("{R}{R}{R}");
+        Cost cost = new ManaCostsImpl<>("{R}{R}{R}");
         if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(Outcome.Benefit, "Pay {R}{R}{R}?", source, game)
                 || !cost.pay(source, game, source, player.getId(), false)) {

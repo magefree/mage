@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.constants.SuperType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author L_J
@@ -23,6 +25,8 @@ public final class StanggTwinToken extends TokenImpl {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("A25");
     }
 
     public StanggTwinToken(final StanggTwinToken token) {

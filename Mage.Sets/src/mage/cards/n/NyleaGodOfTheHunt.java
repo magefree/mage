@@ -50,7 +50,7 @@ public final class NyleaGodOfTheHunt extends CardImpl {
 
         // {3}{G}: Target creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

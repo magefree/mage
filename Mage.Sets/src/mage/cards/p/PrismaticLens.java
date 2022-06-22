@@ -23,7 +23,7 @@ public final class PrismaticLens extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{1}"));
+        Ability ability = new AnyColorManaAbility(new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

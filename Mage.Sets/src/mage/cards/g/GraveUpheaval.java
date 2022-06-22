@@ -25,7 +25,7 @@ public final class GraveUpheaval extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private GraveUpheaval(final GraveUpheaval card) {

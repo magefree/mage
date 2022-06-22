@@ -34,7 +34,7 @@ public final class RiptideMangler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{U}: Change Riptide Mangler's base power to target creature's power.
-        Ability ability = new SimpleActivatedAbility(new RiptideManglerEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new RiptideManglerEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

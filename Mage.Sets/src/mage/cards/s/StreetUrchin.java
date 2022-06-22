@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -33,6 +34,7 @@ public final class StreetUrchin extends CardImpl {
                 new DamageTargetEffect(1, "this creature"), new GenericManaCost(1)
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE));
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CREATURES_OWNED_COMMANDER

@@ -27,7 +27,7 @@ public final class SkirkMarauder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}")));
         
         // When Skirk Marauder is turned face up, it deals 2 damage to any target.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageTargetEffect(2, "it"));

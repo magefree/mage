@@ -39,7 +39,7 @@ public final class MidnightClock extends CardImpl {
 
         // {2}{U}: Put an hour counter on Midnight Clock.
         this.addAbility(new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.HOUR.createInstance()), new ManaCostsImpl("{2}{U}")
+                new AddCountersSourceEffect(CounterType.HOUR.createInstance()), new ManaCostsImpl<>("{2}{U}")
         ));
 
         // At the beginning of each upkeep, put an hour counter on Midnight Clock.

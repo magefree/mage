@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
@@ -57,6 +58,7 @@ public final class RilsaRaelKingpin extends CardImpl {
                 new GainAbilityTargetEffect(new MenaceAbility(false)),
                 CompletedDungeonCondition.instance, "and menace until end of turn"
         ));
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

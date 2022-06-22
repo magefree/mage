@@ -44,13 +44,13 @@ public final class AnimatingFaerie extends AdventureCard {
         // Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.
         this.getSpellCard().getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("Target noncreature artifact you control becomes"));
+        ).setText("Target noncreature artifact you control becomes a 0/0 artifact creature"));
         this.getSpellCard().getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
-        ).setText("a 0/0 artifact creature"));
+        ).setText("Put four +1/+1 counters on it."));
         this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
-        ).setText("Put four +1/+1 counters on it."));
+        ).setText(" "));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 

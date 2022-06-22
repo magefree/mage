@@ -17,9 +17,9 @@ public class StormTheVaultTest extends CardTestPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
         return game;
     }
 

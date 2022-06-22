@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -34,7 +35,6 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
         this.whoDrawCard = whoDrawCard;
-        setText();
     }
 
     public DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
@@ -59,7 +59,11 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         boolean oneCard = (amount instanceof StaticValue
                 && amount.calculate(null, null, this) == 1)
@@ -77,7 +81,6 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
             sb.append(" for each ");
         }
         sb.append(message);
-        staticText = sb.toString();
+        return sb.toString();
     }
-
 }

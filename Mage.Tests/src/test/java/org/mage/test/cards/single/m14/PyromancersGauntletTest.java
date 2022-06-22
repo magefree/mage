@@ -79,7 +79,7 @@ public class PyromancersGauntletTest extends CardTestPlayerBase {
 
     @Test
     public void with3PlayersTest() throws GameException {
-        playerC = createPlayer(currentGame, playerC, "PlayerC");
+        playerC = createPlayer(currentGame, "PlayerC");
 
         setStrictChooseMode(true);
 

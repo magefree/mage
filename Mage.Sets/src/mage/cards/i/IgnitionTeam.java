@@ -48,7 +48,7 @@ public final class IgnitionTeam extends CardImpl {
         // {2}{R}, Remove a +1/+1 counter from Ignition Team: Target land becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
                 new ElementalCreatureToken(4, 4, "4/4 red Elemental creature", new ObjectColor("R")),
-                false, true, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+                false, true, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

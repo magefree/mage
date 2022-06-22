@@ -34,7 +34,7 @@ public final class QuicksilverElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {U}: Quicksilver Elemental gains all activated abilities of target creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(new QuicksilverElementalEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(new QuicksilverElementalEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

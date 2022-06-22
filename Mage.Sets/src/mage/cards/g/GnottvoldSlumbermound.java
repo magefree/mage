@@ -33,7 +33,7 @@ public final class GnottvoldSlumbermound extends CardImpl {
 
         // {3}{R}{G}{G}, {T}, Sacrifice Gnottvold Slumbermound: Destroy target land. Create a 4/4 green Troll Warrior creature token with trample.
         Ability ability = new SimpleActivatedAbility(
-                new DestroyTargetEffect().setText("destroy target land."), new ManaCostsImpl("{3}{R}{G}{G}")
+                new DestroyTargetEffect().setText("destroy target land."), new ManaCostsImpl<>("{3}{R}{G}{G}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

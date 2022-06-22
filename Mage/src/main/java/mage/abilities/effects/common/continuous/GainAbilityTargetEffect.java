@@ -9,6 +9,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -218,7 +219,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                 if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                     sb.append("up to ");
                 }
-                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" gain ");
             } else {
                 if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
                     sb.append("target ");

@@ -37,7 +37,7 @@ public final class PlagueBoiler extends CardImpl {
         // At the beginning of your upkeep, put a plague counter on Plague Boiler.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), TargetController.YOU, false));
         // {1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlagueBoilerEffect(), new ManaCostsImpl("{1}{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlagueBoilerEffect(), new ManaCostsImpl<>("{1}{B}{G}")));
         // When Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
         this.addAbility(new PlagueBoilerTriggeredAbility());
 

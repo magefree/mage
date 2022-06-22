@@ -38,7 +38,7 @@ public final class StrandsOfUndeath extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl<>("{B}")));
         
         Ability abilityDiscard = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2));
         abilityDiscard.addTarget(new TargetPlayer());

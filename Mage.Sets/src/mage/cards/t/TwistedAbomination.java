@@ -28,9 +28,9 @@ public final class TwistedAbomination extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}: Regenerate Twisted Abomination.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
         // Swampcycling {2}
-        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private TwistedAbomination(final TwistedAbomination card) {

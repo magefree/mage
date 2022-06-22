@@ -37,7 +37,7 @@ public final class JandorsRing extends CardImpl {
         Watcher watcher = new JandorsRingWatcher();
         // {2}, {tap}, Discard the last card you drew this turn: Draw a card.
         // TODO: discard has to be a cost not a payment during resolution
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JandorsRingEffect(), new ManaCostsImpl("{2}"), WatchedCardInHandCondition.instance, "{2}, {T}, Discard the last card you drew this turn: Draw a card.");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JandorsRingEffect(), new ManaCostsImpl<>("{2}"), WatchedCardInHandCondition.instance, "{2}, {T}, Discard the last card you drew this turn: Draw a card.");
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, watcher);
     }

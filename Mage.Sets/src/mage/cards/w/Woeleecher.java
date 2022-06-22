@@ -35,7 +35,7 @@ public final class Woeleecher extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {W}, {tap}: Remove a -1/-1 counter from target creature. If you do, you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WoeleecherEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WoeleecherEffect(), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

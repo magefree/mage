@@ -28,7 +28,7 @@ public final class StonefareCrocodile extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}: Stonefare Crocodile gains lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private StonefareCrocodile(final StonefareCrocodile card) {

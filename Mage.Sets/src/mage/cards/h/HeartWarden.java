@@ -32,7 +32,7 @@ public final class HeartWarden extends CardImpl {
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // {2}, Sacrifice Heart Warden: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

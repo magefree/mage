@@ -42,7 +42,7 @@ public final class KrasisIncubation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
 
         // {1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl("{1}{G}{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl<>("{1}{G}{U}"));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
 

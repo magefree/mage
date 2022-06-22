@@ -39,7 +39,7 @@ public final class ZhalfirinCommander extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {1}{W}{W}: Target Knight creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

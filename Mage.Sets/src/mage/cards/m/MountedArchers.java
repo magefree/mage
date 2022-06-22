@@ -32,7 +32,7 @@ public final class MountedArchers extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         
         // {W}: Mounted Archers can block an additional creature this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{W}")));
     }
 
     private MountedArchers(final MountedArchers card) {

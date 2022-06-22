@@ -34,7 +34,7 @@ public final class GlintwingInvoker extends CardImpl {
         // {7}{U}: Glintwing Invoker gets +3/+3 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(3, 3, Duration.EndOfTurn);
         effect.setText("{this} gets +3/+3");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{7}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{7}{U}"));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

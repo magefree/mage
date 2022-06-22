@@ -48,7 +48,7 @@ public final class NarfiBetrayerKing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
-                new ManaCostsImpl("{S}{S}{S}")
+                new ManaCostsImpl<>("{S}{S}{S}")
         ));
     }
 

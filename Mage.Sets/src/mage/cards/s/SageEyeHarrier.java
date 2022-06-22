@@ -28,7 +28,7 @@ public final class SageEyeHarrier extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}")));
     }
 
     private SageEyeHarrier(final SageEyeHarrier card) {

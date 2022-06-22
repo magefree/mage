@@ -28,7 +28,7 @@ public final class HoodedKavu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}: Hooded Kavu gains fear until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private HoodedKavu(final HoodedKavu card) {

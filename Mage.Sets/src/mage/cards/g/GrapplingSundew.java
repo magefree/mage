@@ -40,7 +40,7 @@ public final class GrapplingSundew extends CardImpl {
                 new GainAbilitySourceEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{4}{G}")
+                ), new ManaCostsImpl<>("{4}{G}")
         ));
     }
 

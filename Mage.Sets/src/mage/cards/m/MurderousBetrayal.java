@@ -30,7 +30,7 @@ public final class MurderousBetrayal extends CardImpl {
         // {B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new MurderousBetrayalCost());
-        ability.addCost(new ManaCostsImpl("{B}{B}"));
+        ability.addCost(new ManaCostsImpl<>("{B}{B}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
     }

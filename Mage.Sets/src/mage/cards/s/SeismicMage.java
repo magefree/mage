@@ -30,7 +30,7 @@ public final class SeismicMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{R}, {tap}, Discard a card: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetLandPermanent());

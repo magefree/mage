@@ -30,7 +30,7 @@ public final class PhyrexianInfiltrator extends CardImpl {
 
         // {2}{U}{U}: Exchange control of Phyrexian Infiltrator and target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame,
-            "Exchange control of {this} and target creature", true), new ManaCostsImpl("{2}{U}{U}"));
+            "Exchange control of {this} and target creature", true), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -35,7 +35,7 @@ public final class SeaHag extends AdventureCard {
 
         // Aquatic Ingress
         // Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 0));
+        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 0).setText("up to two target creatures each get +1/+0 until end of turn"));
         this.getSpellCard().getSpellAbility().addEffect(new CantBeBlockedTargetEffect().setText("and can't be blocked this turn"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }

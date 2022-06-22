@@ -96,7 +96,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public final OptionalAdditionalCost addKickerCost(String manaString) {
         OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
-                keywordText, reminderText, new ManaCostsImpl(manaString));
+                keywordText, reminderText, new ManaCostsImpl<>(manaString));
         addKickerCostAndSetup(newCost);
         return newCost;
     }

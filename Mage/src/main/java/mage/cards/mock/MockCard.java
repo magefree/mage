@@ -49,7 +49,7 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        //this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        //this.manaCost = new ManaCostsImpl<>(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
         this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
         this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);

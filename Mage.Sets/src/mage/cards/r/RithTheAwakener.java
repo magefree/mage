@@ -41,7 +41,7 @@ public final class RithTheAwakener extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then create a 1/1 green Saproling creature token for each permanent of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));
+                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl<>("{2}{G}")), false));
     }
 
     private RithTheAwakener(final RithTheAwakener card) {

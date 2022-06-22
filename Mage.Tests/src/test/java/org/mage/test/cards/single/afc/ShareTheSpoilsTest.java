@@ -523,4 +523,45 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         assertGraveyardCount(playerA, 1);
     }
+
+    /**
+     * When a card exiled by Share the Spoils is played, another card is exiled.
+     * Check that this newly exiled card is correctly taken from the deck of the player who played the card,
+     * AND NOT from the controller of Share the Spoils.
+     *
+     * For https://github.com/magefree/mage/issues/9046
+     */
+    @Test
+    public void checkExileFromCorrectDeck() {
+        addCard(Zone.HAND, playerA, shareTheSpoils);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+
+        // 3rd from the top, exiled when card is played with Share the Spoils
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // {R}
+        // 2nd from the top, exile when Share the Spoils is cast
+        addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
+        // Topmost, draw at beginning of turn
+        addCard(Zone.LIBRARY, playerA, "Reliquary Tower");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Exotic Orchard");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerD);
+
+        setStopAt(2, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerD, "Exotic Orchard",1);
+
+        assertExileCount(playerA, 0); // playerA's Exotic Orchard was played by playerD
+        assertExileCount(playerB, 1);
+        assertExileCount(playerC, 1);
+        assertExileCount(playerD, 2); // 2nd card exiled when they played the Exotic Orchard
+    }
 }

@@ -31,7 +31,7 @@ public final class RiteOfHarmony extends CardImpl {
         getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RiteOfHarmonyTriggeredAbility()));
 
         // Flashback {2}{G}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{W}")));
 
     }
 

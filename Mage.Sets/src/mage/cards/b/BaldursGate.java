@@ -47,7 +47,8 @@ public final class BaldursGate extends CardImpl {
 
         // {2}, {T}: Add X mana of any one color, where X is the number of other Gates you control.
         Ability ability = new DynamicManaAbility(
-                Mana.AnyMana(1), xValue, new GenericManaCost(2), null, true
+                Mana.AnyMana(1), xValue, new GenericManaCost(2), "Add X mana of any one color, " +
+                "where X is the number of other Gates you control.", true
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(hint));

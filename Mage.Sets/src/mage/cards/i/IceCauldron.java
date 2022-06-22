@@ -43,7 +43,7 @@ public final class IceCauldron extends CardImpl {
 
         // {X}, {T}: Put a charge counter on Ice Cauldron and exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Note the type and amount of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Ice Cauldron.
         ConditionalActivatedAbility ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new ManaCostsImpl("{X}"), new SourceHasCounterCondition(CounterType.CHARGE, 0, 0));
+                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new ManaCostsImpl<>("{X}"), new SourceHasCounterCondition(CounterType.CHARGE, 0, 0));
         ability.addEffect(new IceCauldronExileEffect());
         ability.addEffect(new IceCauldronNoteManaEffect());
         ability.addCost(new TapSourceCost());

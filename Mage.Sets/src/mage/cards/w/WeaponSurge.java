@@ -42,7 +42,7 @@ public final class WeaponSurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {1}{R}
-        Ability ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{1}{R}"));
         ability.addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter, false));
         this.addAbility(ability);
     }

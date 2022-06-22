@@ -22,7 +22,7 @@ public final class DomriRadeEmblem extends Emblem {
     // "Creatures you control have double strike, trample, hexproof and haste."
 
     public DomriRadeEmblem() {
-        this.setName("Emblem Domri Rade");
+        this.setName("Emblem Domri");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
 
         CompoundAbility compoundAbilities = new CompoundAbility(

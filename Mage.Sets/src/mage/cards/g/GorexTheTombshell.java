@@ -1,24 +1,23 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -51,7 +50,12 @@ public final class GorexTheTombshell extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Gorex, the Tombshell attacks or dies, choose a card at random exiled with Gorex and put that card into its owner's hand.
-        this.addAbility(new GorexTheTombshellTriggeredAbility());
+        this.addAbility(new OrTriggeredAbility(
+                Zone.BATTLEFIELD, new GorexTheTombshellReturnEffect(), false,
+                "Whenever {this} attacks or dies, ",
+                new AttacksTriggeredAbility(null, false),
+                new DiesSourceTriggeredAbility(null, false)
+        ));
     }
 
     private GorexTheTombshell(final GorexTheTombshell card) {
@@ -106,52 +110,11 @@ class GorexTheTombshellCostReductionEffect extends CostModificationEffectImpl {
     }
 }
 
-class GorexTheTombshellTriggeredAbility extends TriggeredAbilityImpl {
-
-    GorexTheTombshellTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GorexTheTombshellReturnEffect());
-    }
-
-    private GorexTheTombshellTriggeredAbility(final GorexTheTombshellTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GorexTheTombshellTriggeredAbility copy() {
-        return new GorexTheTombshellTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            return event.getSourceId().equals(getSourceId());
-        }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.isDiesEvent() && event.getTargetId().equals(getSourceId());
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks or dies, choose a card at random " +
-                "exiled with {this} and put that card into its owner's hand.";
-    }
-}
-
 class GorexTheTombshellReturnEffect extends OneShotEffect {
 
     GorexTheTombshellReturnEffect() {
         super(Outcome.Benefit);
+        staticText = "choose a card at random exiled with {this} and put that card into its owner's hand";
     }
 
     private GorexTheTombshellReturnEffect(final GorexTheTombshellReturnEffect effect) {

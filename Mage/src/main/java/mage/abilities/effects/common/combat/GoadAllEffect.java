@@ -1,26 +1,36 @@
 package mage.abilities.effects.common.combat;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.constants.SubLayer;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
  */
-public class GoadAllEffect extends OneShotEffect {
+public class GoadAllEffect extends ContinuousEffectImpl {
 
-    public GoadAllEffect() {
-        super(Outcome.Benefit);
-        staticText = "Goad all creatures you don't control. <i>(Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)</i>";
+    private final FilterPermanent filter;
+
+    public GoadAllEffect(FilterPermanent filter) {
+        this(Duration.UntilYourNextTurn, filter);
     }
 
-    public GoadAllEffect(final GoadAllEffect effect) {
+    public GoadAllEffect(Duration duration, FilterPermanent filter) {
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        this.filter = filter;
+    }
+
+    private GoadAllEffect(final GoadAllEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
@@ -29,14 +39,42 @@ public class GoadAllEffect extends OneShotEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            game.getBattlefield()
+                    .getActivePermanents(
+                            filter, source.getControllerId(), source, game
+                    ).stream()
+                    .map(permanent -> new MageObjectReference(permanent, game))
+                    .forEach(this.affectedObjectList::add);
+        }
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-            if (!creature.isControlledBy(source.getControllerId())) {
-                Effect effect = new GoadTargetEffect();
-                effect.setTargetPointer(new FixedTarget(creature, game));
-                effect.apply(game, source);
+        if (this.affectedObjectsSet) {
+            this.affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game));
+            if (affectedObjectList.isEmpty()) {
+                discard();
+                return false;
             }
+            for (MageObjectReference mor : this.affectedObjectList) {
+                mor.getPermanent(game).addGoadingPlayer(source.getControllerId());
+            }
+            return true;
+        }
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            creature.addGoadingPlayer(source.getControllerId());
         }
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "Goad all " + filter.getMessage() + ". <i>(Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)</i>";
     }
 }

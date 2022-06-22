@@ -28,7 +28,7 @@ public final class PursuedWhaleToken extends TokenImpl {
                 .setText("this creature can't block")));
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
 
-        availableImageSetCodes = Arrays.asList("M21");
+        availableImageSetCodes = Arrays.asList("M21", "CLB");
     }
 
     private PursuedWhaleToken(final PursuedWhaleToken token) {

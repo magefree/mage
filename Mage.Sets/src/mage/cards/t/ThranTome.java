@@ -29,7 +29,7 @@ public final class ThranTome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
-        Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

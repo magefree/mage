@@ -26,7 +26,7 @@ public final class Safeguard extends CardImpl {
         // {2}{W}: Prevent all combat damage that would be dealt by target creature this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt by target creature this turn.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

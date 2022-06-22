@@ -59,7 +59,7 @@ class GigantoplasmCopyApplier extends CopyApplier {
         DynamicValue variableMana = ManacostVariableValue.REGULAR;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         blueprint.getAbilities().add(ability);
         return true;
     }

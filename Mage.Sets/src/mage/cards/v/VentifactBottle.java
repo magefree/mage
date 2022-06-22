@@ -37,7 +37,7 @@ public final class VentifactBottle extends CardImpl {
         // {X}{1}, {tap}: Put X charge counters on Ventifact Bottle. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), ManacostVariableValue.REGULAR, true),
-                new ManaCostsImpl("{1}{X}"));
+                new ManaCostsImpl<>("{1}{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your precombat main phase, if Ventifact Bottle has a charge counter on it, tap it and remove all charge counters from it. Add {C} for each charge counter removed this way.

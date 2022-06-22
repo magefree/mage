@@ -39,7 +39,7 @@ public final class RasaadYnBashir extends CardImpl {
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
         this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, false
+                StaticFilters.FILTER_PERMANENT_CREATURE, true
         )));
 
         // Whenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.

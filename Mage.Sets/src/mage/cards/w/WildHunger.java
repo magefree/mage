@@ -29,7 +29,7 @@ public final class WildHunger extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
     }
 
     private WildHunger(final WildHunger card) {

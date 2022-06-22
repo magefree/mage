@@ -31,7 +31,7 @@ public final class LoxodonStalwart extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {W}: Loxodon Stalwart gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private LoxodonStalwart(final LoxodonStalwart card) {

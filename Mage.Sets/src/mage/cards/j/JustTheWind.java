@@ -24,7 +24,7 @@ public final class JustTheWind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private JustTheWind(final JustTheWind card) {

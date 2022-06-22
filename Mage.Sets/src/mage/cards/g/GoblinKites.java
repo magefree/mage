@@ -37,7 +37,7 @@ public final class GoblinKites extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // {R}: Target creature you control with toughness 2 or less gains flying until end of turn. Flip a coin at the beginning of the next end step. If you lose the flip, sacrifice that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(new GoblinKitesEffect(), TargetController.NEXT, false), Duration.EndOfTurn));
         this.addAbility(ability);

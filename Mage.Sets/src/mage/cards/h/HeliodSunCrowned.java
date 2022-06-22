@@ -69,7 +69,7 @@ public final class HeliodSunCrowned extends CardImpl {
         // {1}{W}: Another target creature gains lifelink until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{1}{W}"));
+        ), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }

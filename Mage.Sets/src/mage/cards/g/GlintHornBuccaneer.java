@@ -43,7 +43,7 @@ public final class GlintHornBuccaneer extends CardImpl {
         // {1}{R}, Discard a card: Draw a card. Activate this ability only if Glint-Horn Buccaneer is attacking.
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{1}{R}"), SourceAttackingCondition.instance
+                new ManaCostsImpl<>("{1}{R}"), SourceAttackingCondition.instance
         );
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

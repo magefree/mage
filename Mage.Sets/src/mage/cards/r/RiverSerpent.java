@@ -34,7 +34,7 @@ public final class RiverSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RiverSerpentEffect()));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private RiverSerpent(final RiverSerpent card) {

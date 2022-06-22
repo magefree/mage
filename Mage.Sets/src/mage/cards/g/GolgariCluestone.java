@@ -32,7 +32,7 @@ public final class GolgariCluestone extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {B}{G}, {T}, Sacrifice Golgari Cluestone: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{B}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

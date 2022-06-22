@@ -35,7 +35,7 @@ public final class VithianStinger extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Unearth {1}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private VithianStinger(final VithianStinger card) {

@@ -21,7 +21,7 @@ public final class DemonToken extends TokenImpl {
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21", "2XM"));
+        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21", "2XM", "DDR"));
     }
 
     public DemonToken(final DemonToken token) {

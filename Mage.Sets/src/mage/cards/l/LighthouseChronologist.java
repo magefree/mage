@@ -33,7 +33,7 @@ public final class LighthouseChronologist extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{U}")));
 
         // LEVEL 4-6
         // 2/4

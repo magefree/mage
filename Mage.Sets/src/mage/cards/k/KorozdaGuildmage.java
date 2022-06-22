@@ -47,7 +47,7 @@ public final class KorozdaGuildmage extends CardImpl {
         // {1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{1}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}{G}"));
         effect = new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains intimidate until end of turn. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
         ability.addEffect(effect);
@@ -55,7 +55,7 @@ public final class KorozdaGuildmage extends CardImpl {
         this.addAbility(ability);
 
         // {2}{B}{G}, Sacrifice a nontoken creature: create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
-        ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl("{2}{B}{G}"));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl<>("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true)));
         this.addAbility(ability);
         

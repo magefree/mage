@@ -49,7 +49,7 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
     }
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility
-            = new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SourceIsSpellCondition.instance, null, filter, true);
+            = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SourceIsSpellCondition.instance, null, filter, true);
 
     public RooftopStormRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

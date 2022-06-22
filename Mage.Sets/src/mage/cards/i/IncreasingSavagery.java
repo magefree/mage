@@ -30,7 +30,7 @@ public final class IncreasingSavagery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{G}{G}")));
     }
 
     private IncreasingSavagery(final IncreasingSavagery card) {

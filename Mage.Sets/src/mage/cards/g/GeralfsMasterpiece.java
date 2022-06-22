@@ -47,7 +47,7 @@ public final class GeralfsMasterpiece extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {3}{U}, Discard three cards: Return Geralf's Masterpiece from your graveyard to the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(3, new FilterCard("three cards"))));
         this.addAbility(ability);
     }

@@ -35,7 +35,7 @@ public final class LumberingFalls extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {2}{G}{U}: Lumbering Falls becomes a 3/3 green and blue Elemental creature with hexproof until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LumberingFallsToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LumberingFallsToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}{U}")));
     }
 
     private LumberingFalls(final LumberingFalls card) {

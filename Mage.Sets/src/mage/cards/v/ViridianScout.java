@@ -38,7 +38,7 @@ public final class ViridianScout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{G}, Sacrifice Viridian Scout: Viridian Scout deals 2 damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

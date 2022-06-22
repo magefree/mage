@@ -39,7 +39,7 @@ public final class HeartPiercerManticore extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true));
 
         // Embalm {5}{R}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{R}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{R}"), this));
     }
 
     private HeartPiercerManticore(final HeartPiercerManticore card) {

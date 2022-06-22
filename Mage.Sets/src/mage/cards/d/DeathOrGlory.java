@@ -61,7 +61,7 @@ class DeathOrGloryEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
             if (!cards.isEmpty()) {
-                TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
+                TargetCard targetCards = new TargetCard(0, cards.size(), Zone.GRAVEYARD, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();
                 if (controller.choose(Outcome.Neutral, cards, targetCards, game)) {
                     List<UUID> targets = targetCards.getTargets();
@@ -73,8 +73,7 @@ class DeathOrGloryEffect extends OneShotEffect {
                         }
                     }
                 }
-                List<Card> pile2 = new ArrayList<>();
-                pile2.addAll(cards.getCards(game));
+                List<Card> pile2 = new ArrayList<>(cards.getCards(game));
 
                 StringBuilder sb = new StringBuilder("First pile of ").append(controller.getLogName()).append(": ");
                 sb.append(pile1.stream().map(Card::getLogName).collect(Collectors.joining(", ")));
@@ -103,10 +102,8 @@ class DeathOrGloryEffect extends OneShotEffect {
                             pile1Zone = Zone.BATTLEFIELD;
                             pile2Zone = Zone.EXILED;
                         }
-                        Set<Card> pile1Set = new HashSet<>();
-                        Set<Card> pile2Set = new HashSet<>();
-                        pile1Set.addAll(pile1);
-                        pile2Set.addAll(pile2);
+                        Set<Card> pile1Set = new HashSet<>(pile1);
+                        Set<Card> pile2Set = new HashSet<>(pile2);
                         controller.moveCards(pile1Set, pile1Zone, source, game, false, false, false, null);
                         controller.moveCards(pile2Set, pile2Zone, source, game, false, false, false, null);
                     }

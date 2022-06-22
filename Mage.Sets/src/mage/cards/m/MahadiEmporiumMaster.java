@@ -34,7 +34,7 @@ public final class MahadiEmporiumMaster extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(
                         new TreasureToken(), CreaturesDiedThisTurnCount.instance
-                ), TargetController.YOU, false
+                ).setText("create a Treasure token for each creature that died this turn"), TargetController.YOU, false
         ).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
     }
 

@@ -19,7 +19,7 @@ public final class GolemToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("MM2", "NPH", "SOM", "MH1", "M20", "CMR", "2XM");
+        availableImageSetCodes = Arrays.asList("MM2", "SOM", "MH1", "M20", "CMR", "2XM");
     }
 
     public GolemToken(final GolemToken token) {

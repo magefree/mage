@@ -38,7 +38,7 @@ public final class GrimlockFerociousKing extends CardImpl{
         
         // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private GrimlockFerociousKing(final GrimlockFerociousKing card) {

@@ -32,7 +32,7 @@ public final class OrzhovCluestone extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {W}{B}, {T}, Sacrifice Orzhov Cluestone: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

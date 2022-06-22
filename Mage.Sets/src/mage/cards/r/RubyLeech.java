@@ -38,7 +38,7 @@ public final class RubyLeech extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Red spells you cast cost {R} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{R}"), filter, TargetController.YOU)));
+                new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{R}"), filter, TargetController.YOU)));
     }
 
     private RubyLeech(final RubyLeech card) {

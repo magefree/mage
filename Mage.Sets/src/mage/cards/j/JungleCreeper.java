@@ -26,7 +26,7 @@ public final class JungleCreeper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}{B}{G}: Return Jungle Creeper from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{3}{B}{G}")));
     }
 
     private JungleCreeper(final JungleCreeper card) {

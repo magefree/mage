@@ -29,7 +29,7 @@ public final class PitImp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {B}: Pit Imp gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{B}"), 2));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl<>("{B}"), 2));
     }
 
     private PitImp(final PitImp card) {

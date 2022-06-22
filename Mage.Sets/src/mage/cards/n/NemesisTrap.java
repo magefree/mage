@@ -44,7 +44,7 @@ public final class NemesisTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, false)));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, false)));
 
         // Exile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new NemesisTrapEffect());

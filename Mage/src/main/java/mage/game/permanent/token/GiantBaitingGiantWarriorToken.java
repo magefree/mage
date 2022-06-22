@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -22,6 +24,8 @@ public final class GiantBaitingGiantWarriorToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("SHM", "MM3");
     }
 
     public GiantBaitingGiantWarriorToken(final GiantBaitingGiantWarriorToken token) {

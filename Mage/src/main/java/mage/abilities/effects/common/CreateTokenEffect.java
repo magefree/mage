@@ -28,6 +28,7 @@ public class CreateTokenEffect extends OneShotEffect {
     private final DynamicValue amount;
     private final boolean tapped;
     private final boolean attacking;
+    private String additionalRules;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
@@ -62,6 +63,7 @@ public class CreateTokenEffect extends OneShotEffect {
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
+        this.additionalRules = effect.additionalRules;
     }
 
     @Override
@@ -104,11 +106,18 @@ public class CreateTokenEffect extends OneShotEffect {
         }
     }
 
+    public CreateTokenEffect withAdditionalRules(String additionalRules) {
+        this.additionalRules = additionalRules;
+        setText();
+        return this;
+    }
+
     private void setText() {
         if (token.getDescription().contains(", a legendary")) {
             staticText = "create " + token.getDescription();
             return;
         }
+
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
             if (tapped && !attacking) {
@@ -131,6 +140,7 @@ public class CreateTokenEffect extends OneShotEffect {
                 sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
             }
         }
+
         if (attacking) {
             if (amount.toString().equals("1")) {
                 sb.append(" that's");
@@ -142,6 +152,7 @@ public class CreateTokenEffect extends OneShotEffect {
             }
             sb.append(" attacking");
         }
+
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
@@ -151,6 +162,11 @@ public class CreateTokenEffect extends OneShotEffect {
             }
         }
         sb.append(message);
+
+        if (this.additionalRules != null) {
+            sb.append(" " + this.additionalRules);
+        }
+
         staticText = sb.toString();
     }
 }

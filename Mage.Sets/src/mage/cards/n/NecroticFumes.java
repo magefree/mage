@@ -7,7 +7,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -24,7 +23,7 @@ public final class NecroticFumes extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // As an additional cost to cast this spell, exile a creature you control.
-        this.getSpellAbility().addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
+        this.getSpellAbility().addCost(new ExileTargetCost(new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true)));
 
         // Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -39,7 +39,7 @@ public final class KnightOfTheEbonLegion extends CardImpl {
         // {2}{B}: Knight of the Ebon Legion gets +3/+3 and gains deathtouch until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 3, 3, Duration.EndOfTurn
-        ).setText("{this} gets +3/+3"), new ManaCostsImpl("{2}{B}"));
+        ).setText("{this} gets +3/+3"), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains deathtouch until end of turn"));

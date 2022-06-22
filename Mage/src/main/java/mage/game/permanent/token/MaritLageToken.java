@@ -27,7 +27,7 @@ public final class MaritLageToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("CSP", "MH1", "UMA", "2XM"));
+        availableImageSetCodes.addAll(Arrays.asList("CSP", "MH1", "UMA", "2XM", "V16"));
     }
 
     public MaritLageToken(final MaritLageToken token) {

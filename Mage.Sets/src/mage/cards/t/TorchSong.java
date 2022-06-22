@@ -35,7 +35,7 @@ public final class TorchSong extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)),
-                new ManaCostsImpl("{2}{R}")
+                new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
