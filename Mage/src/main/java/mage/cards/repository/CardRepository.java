@@ -434,13 +434,19 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findCardWPreferredSet(String name, String expansion, boolean caseInsensitive) {
+    /**
+     * Function to find a card by name from a specific set.
+     * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from the same set.
+     *
+     * @param name      name of the card, or side of the card, to find
+     * @param expansion the set name from which to find the card
+     * @return
+     */
+    public CardInfo findCardWPreferredSet(String name, String expansion) {
         List<CardInfo> cards;
-        if (caseInsensitive) {
-            cards = findCardsCaseInsensitive(name);
-        } else {
-            cards = findCards(name);
-        }
+
+        cards = findCards(name);
+
         if (!cards.isEmpty()) {
             for (CardInfo cardinfo : cards) {
                 if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
