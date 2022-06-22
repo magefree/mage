@@ -3,7 +3,9 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
@@ -13,7 +15,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
+import mage.game.permanent.token.CitizenGreenWhiteToken;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.*;
 
@@ -69,8 +75,21 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
 
         // Ask the players to vote
         MasterOfCeremoniesVote vote = new MasterOfCeremoniesVote();
-        // TODO: Add AI hint
-        vote.doVotes(source, game);
+        vote.doVotes(source, game, (voteHandler, aiPlayer, aiDecidingPlayer, aiSource, aiGame) -> {
+            // Return "" for self since controller doesn't get a vote. Won't be used anyway.
+            if (aiSource.isControlledBy(aiDecidingPlayer.getId())) {
+                return "";
+            }
+
+            // Draw is an option since we won't deck ourselves
+            if (aiDecidingPlayer.getLibrary().size() != 0) {
+                return "Secret";
+            }
+
+            // TODO: Not sure what a simple criteria for choosing between a 1/1 and a treasure token would be,
+            //       But the 1/1 is likely less useful than a treasure.
+            return "Friends";
+        });
 
         // Go through each vote and apply effects
         for (UUID opponentId : game.getOpponents(controller.getId())) {
@@ -85,18 +104,32 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             for (String opponentsVote : opponentsVotes) {
                 switch (opponentsVote) {
                     case "Money": // You and that player each create a Treasure token.
+                        Token treasureOpponent = new TreasureToken();
+                        treasureOpponent.putOntoBattlefield(1, game, source, opponentId);
+
+                        Token treasureController = new TreasureToken();
+                        treasureController.putOntoBattlefield(1, game, source, controller.getId());
 
                         break;
                     case "Friends": // You and that player each create a 1/1 green and white Citizen creature token.
+                        Token citizenOpponent = new CitizenGreenWhiteToken();
+                        citizenOpponent.putOntoBattlefield(1, game, source, opponentId);
+
+                        Token citizenOwner = new CitizenGreenWhiteToken();
+                        citizenOwner.putOntoBattlefield(1, game, source, opponentId);
 
                         break;
-                    case "": // You and that player each draw a card.
+                    case "Secret": // You and that player each draw a card.
+                        Effect drawEffectOpponent = new DrawCardTargetEffect(1);
+                        drawEffectOpponent.setTargetPointer(new FixedTarget(opponentId));
+                        drawEffectOpponent.apply(game, source);
+
+                        Effect drawEffectController = new DrawCardTargetEffect(1);
+                        drawEffectController.setTargetPointer(new FixedTarget(controller.getId()));
+                        drawEffectController.apply(game, source);
 
                         break;
-                    default:
-                        // TODO: Do I need this here?
                 }
-
             }
         }
 
@@ -112,7 +145,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
         return new MasterOfCeremoniesChoiceEffect(this);
     }
 }
-// Expropriate
+
 class MasterOfCeremoniesVote extends VoteHandler<String> {
 
     @Override
@@ -122,7 +155,11 @@ class MasterOfCeremoniesVote extends VoteHandler<String> {
 
     @Override
     protected String playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
-        // TODO: Limit the vote to only opponents
+        // Don't show a choose diagram to the ownder of the ability
+        UUID ownerId = source.getSourceId();
+        if (ownerId.equals(decidingPlayer.getId())) {
+            return "";
+        }
 
         // Create the chooser
         ChoiceImpl chooseOutcome = new ChoiceImpl();
