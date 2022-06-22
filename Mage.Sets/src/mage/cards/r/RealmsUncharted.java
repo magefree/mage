@@ -69,9 +69,9 @@ class RealmsUnchartedEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
-        player.searchLibrary(target, source, game);
-        Cards cards = new CardsImpl(target.getTargets());
+        TargetCardInLibrary targetCards = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
+        player.searchLibrary(targetCards, source, game);
+        Cards cards = new CardsImpl(targetCards.getTargets());
         cards.retainZone(Zone.LIBRARY, game);
         if (cards.isEmpty()) {
             player.shuffleLibrary(source, game);
@@ -81,7 +81,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
         if (cards.size() > 2) {
             TargetOpponent targetOpponent = new TargetOpponent();
             targetOpponent.setNotTarget(true);
-            player.choose(outcome, target, source, game);
+            player.choose(outcome, targetOpponent, source, game);
             Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
             Cards cardsToKeep = new CardsImpl();
             cardsToKeep.addAll(cards);
