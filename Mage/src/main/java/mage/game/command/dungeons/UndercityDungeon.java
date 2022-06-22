@@ -93,6 +93,7 @@ public class UndercityDungeon extends Dungeon {
         trap.addNextRoom(archives);
         arena.addNextRoom(archives);
         arena.addNextRoom(catacombs);
+        stash.addNextRoom(catacombs);
         archives.addNextRoom(throneOfTheDeadThree);
         catacombs.addNextRoom(throneOfTheDeadThree);
 
@@ -157,7 +158,7 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(card.getId());
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
             game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance())
                     .setTargetPointer(new FixedTarget(permanent, game)), source);
         }
