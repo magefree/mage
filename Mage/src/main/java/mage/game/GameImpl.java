@@ -724,10 +724,6 @@ public abstract class GameImpl implements Game {
         return Optional.empty();
     }
 
-    //    @Override
-//    public Zone getZone(UUID objectId) {
-//        return state.getZone(objectId);
-//    }
     @Override
     public void setZone(UUID objectId, Zone zone) {
         state.setZone(objectId, zone);
@@ -752,30 +748,6 @@ public abstract class GameImpl implements Game {
         }
     }
 
-    //    /**
-//     * Starts check if game is over or if playerId is given let the player
-//     * concede.
-//     *
-//     * @param playerId
-//     * @return
-//     */
-//    @Override
-//    public synchronized boolean gameOver(UUID playerId) {
-//        if (playerId == null) {
-//            boolean result = checkIfGameIsOver();
-//            return result;
-//        } else {
-//            logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
-//            concedingPlayers.add(playerId);
-//            Player player = getPlayer(state.getPriorityPlayerId());
-//            if (player != null && player.isHuman()) {
-//                player.signalPlayerConcede();
-//            } else {
-//                checkConcede();
-//            }
-//            return true;
-//        }
-//    }
     @Override
     public void setConcedingPlayer(UUID playerId) {
         Player player = null;
@@ -1963,12 +1935,12 @@ public abstract class GameImpl implements Game {
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
-            Ability manaAbiltiy = ability.copy();
-            if (manaAbiltiy.getSourceObjectZoneChangeCounter() == 0) {
-                manaAbiltiy.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
+            Ability manaAbility = ability.copy();
+            if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
+                manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            manaAbiltiy.activate(this, false);
-            manaAbiltiy.resolve(this);
+            manaAbility.activate(this, false);
+            manaAbility.resolve(this);
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
@@ -2583,7 +2555,7 @@ public abstract class GameImpl implements Game {
                 filterLegendName.add(SuperType.LEGENDARY.getPredicate());
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
-                if (getBattlefield().contains(filterLegendName, null, legend.getControllerId(), null, this, 2)) {
+                if (getBattlefield().contains(filterLegendName, legend.getControllerId(), null, this, 2)) {
                     if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
                         Player controller = this.getPlayer(legend.getControllerId());
                         if (controller != null) {

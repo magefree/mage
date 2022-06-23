@@ -33,7 +33,7 @@ public final class PhyrexianGrimoire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {4}, {tap}: Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianGrimoireEffect(), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianGrimoireEffect(), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

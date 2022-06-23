@@ -23,7 +23,7 @@ public final class RhysticShield extends CardImpl {
 
         // Creatures you control get +0/+1 until end of turn. They get an additional +0/+2 until end of turn unless any player pays {2}.
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-        Effect effect = new DoUnlessAnyPlayerPaysEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), new ManaCostsImpl("{2}"));
+        Effect effect = new DoUnlessAnyPlayerPaysEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), new ManaCostsImpl<>("{2}"));
         effect.setText("They get an additional +0/+2 until end of turn unless any player pays {2}");
         this.getSpellAbility().addEffect(effect);
     }

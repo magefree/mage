@@ -39,7 +39,8 @@ public final class CauldronFamiliar extends CardImpl {
 
         // Sacrifice a Food: Return Cauldron Familiar from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))
         ));
     }

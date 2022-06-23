@@ -135,7 +135,7 @@ class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
         if (count < 1) {
             return null;
         }
-        return new ManaCostsImpl("{" + count + '}');
+        return new ManaCostsImpl<>("{" + count + '}');
     }
 
     @Override

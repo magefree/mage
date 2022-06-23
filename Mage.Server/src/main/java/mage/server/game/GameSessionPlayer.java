@@ -149,7 +149,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 userRequestMessage.setRelatedUser(requestingUserId, requestingUser.get().getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
-                userRequestMessage.setButton2("Deny", PlayerAction.DENY_PERMISSON_TO_ROLLBACK_TURN);
+                userRequestMessage.setButton2("Deny", PlayerAction.DENY_PERMISSION_TO_ROLLBACK_TURN);
                 requestedUser.get().fireCallback(new ClientCallback(ClientCallbackMethod.USER_REQUEST_DIALOG, game.getId(), userRequestMessage));
             }
         }

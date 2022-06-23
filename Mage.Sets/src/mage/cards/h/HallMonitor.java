@@ -34,7 +34,7 @@ public final class HallMonitor extends CardImpl {
 
         // {1}{R}, {T}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

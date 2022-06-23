@@ -24,7 +24,7 @@ public final class MorgueTheft extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         // Flashback {4}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{B}")));
 
     }
 

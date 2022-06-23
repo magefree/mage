@@ -39,7 +39,7 @@ public final class TectonicEdge extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
-                new ManaCostsImpl("{1}"),
+                new ManaCostsImpl<>("{1}"),
                 new OpponentControlsPermanentCondition(
                         new FilterLandPermanent("an opponent controls four or more lands"),
                         ComparisonType.MORE_THAN, 3));

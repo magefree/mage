@@ -41,7 +41,7 @@ public final class SyndicateGuildmage extends CardImpl {
 
         // {1}{W}, {T}: Tap target creature with power 4 or greater.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(), new ManaCostsImpl("{1}{W}")
+                new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
@@ -49,7 +49,7 @@ public final class SyndicateGuildmage extends CardImpl {
 
         // {4}{B}, {T}: Syndicate Guildmage deals 2 damage to target opponent or planeswalker.
         ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(2), new ManaCostsImpl("{4}{B}")
+                new DamageTargetEffect(2), new ManaCostsImpl<>("{4}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentOrPlaneswalker());

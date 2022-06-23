@@ -33,7 +33,7 @@ public final class HomaridWarrior extends CardImpl {
 
         // {U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+            ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         Effect effect = new DontUntapInControllersNextUntapStepSourceEffect();
         effect.setText("and doesn't untap during your next untap step");
         ability.addEffect(effect);

@@ -47,7 +47,15 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
                 .mapToInt(Integer::intValue)
                 .max()
                 .orElse(0);
+        int totalRoll = ((DiceRolledEvent) event)
+                .getResults()
+                .stream()
+                .filter(Integer.class::isInstance) // only numerical die result can be masured
+                .map(Integer.class::cast)
+                .mapToInt(Integer::intValue)
+                .sum();
         this.getEffects().setValue("maxDieRoll", maxRoll);
+        this.getEffects().setValue("totalDieRoll", totalRoll);
         return true;
     }
 

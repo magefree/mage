@@ -37,7 +37,7 @@ public final class RuthlessSniper extends CardImpl {
                                 CounterType.M1M1.createInstance(),
                                 StaticValue.get(1),
                                 Outcome.Removal),
-                        new ManaCostsImpl("{1}")));
+                        new ManaCostsImpl<>("{1}")));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

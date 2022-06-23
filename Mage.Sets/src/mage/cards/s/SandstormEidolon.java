@@ -32,7 +32,7 @@ public final class SandstormEidolon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, Sacrifice Sandstorm Eidolon: Target creature can't block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

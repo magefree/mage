@@ -29,7 +29,7 @@ public final class HengeGuardian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}: Henge Guardian gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private HengeGuardian(final HengeGuardian card) {

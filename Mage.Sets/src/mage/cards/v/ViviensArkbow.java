@@ -30,7 +30,7 @@ public final class ViviensArkbow extends CardImpl {
 
         // {X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
-                new ViviensArkbowEffect(), new ManaCostsImpl("{X}")
+                new ViviensArkbowEffect(), new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

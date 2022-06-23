@@ -69,6 +69,6 @@ class FirstComeFirstServedPredicate implements Predicate<Permanent> {
         String str = input.getCardNumber();
         Matcher matcher = Pattern.compile("\\d+").matcher(str);
         matcher.find();
-        return Integer.valueOf(matcher.group());
+        return Integer.parseInt(matcher.group());
     }
 }

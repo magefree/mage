@@ -44,7 +44,7 @@ public final class OketraTheTrue extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OketraTheTrueRestrictionEffect()));
 
         // {3}{W}: Create a 1/1 white Warrior creature token with vigilance.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private OketraTheTrue(final OketraTheTrue card) {

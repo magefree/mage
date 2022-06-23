@@ -7,10 +7,14 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -136,7 +140,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         boolean quotes = forceQuotes
                 || ability instanceof SimpleActivatedAbility
-                ||ability instanceof ActivatedManaAbilityImpl
+                || ability instanceof ActivatedManaAbilityImpl
                 || ability instanceof TriggeredAbility;
         boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
         if (excludeSource && !each) {
@@ -150,10 +154,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         }
         if (quotes) {
             sb.append('"');
-        }
-        sb.append(ability.getRule());
-        if (quotes) {
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
+        } else {
+            sb.append(ability.getRule());
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

@@ -32,7 +32,7 @@ public final class PlaneswalkersMischief extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // {3}{U}: Target opponent reveals a card at random from their hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersMischiefEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersMischiefEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

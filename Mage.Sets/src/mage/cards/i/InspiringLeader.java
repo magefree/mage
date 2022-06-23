@@ -30,7 +30,7 @@ public final class InspiringLeader extends CardImpl {
                         2, 2, Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CREATURE_TOKENS
                 )), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )));
+        ).withForceQuotes()));
     }
 
     private InspiringLeader(final InspiringLeader card) {

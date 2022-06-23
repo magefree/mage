@@ -32,7 +32,7 @@ public final class MagesAttendantToken extends TokenImpl {
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("SNC");
+        availableImageSetCodes = Arrays.asList("SNC", "CLB");
     }
 
     private MagesAttendantToken(final MagesAttendantToken token) {

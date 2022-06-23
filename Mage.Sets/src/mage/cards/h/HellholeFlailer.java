@@ -35,7 +35,7 @@ public final class HellholeFlailer extends CardImpl {
         this.addAbility(new UnleashAbility());
 
         // {2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl("{2}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

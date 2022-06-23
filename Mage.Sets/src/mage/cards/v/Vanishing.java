@@ -35,7 +35,7 @@ public final class Vanishing extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}: Enchanted creature phases out.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutAttachedEffect(), new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutAttachedEffect(), new ManaCostsImpl<>("{U}{U}")));
     }
 
     private Vanishing(final Vanishing card) {

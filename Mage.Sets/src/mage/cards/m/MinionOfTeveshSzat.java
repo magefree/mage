@@ -37,7 +37,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoUnlessControllerPaysEffect(
                         new DamageControllerEffect(2),
-                        new ManaCostsImpl("{B}{B}")
+                        new ManaCostsImpl<>("{B}{B}")
                 ),
                 TargetController.YOU, false
         ));

@@ -46,7 +46,7 @@ public final class TrapDigger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}, {tap}: Put a trap counter on target land you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.TRAP.createInstance()), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.TRAP.createInstance()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);

@@ -47,7 +47,7 @@ public final class StrengthOfLunacy extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Madness {B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private StrengthOfLunacy(final StrengthOfLunacy card) {

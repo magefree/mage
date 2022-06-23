@@ -52,7 +52,7 @@ public final class VolrathsCurse extends CardImpl {
         this.addAbility(new VolrathsCurseSpecialAction());
 
         // {1}{U}: Return Volrath's Curse to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
 
     }
 

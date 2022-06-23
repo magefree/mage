@@ -34,7 +34,7 @@ public final class ObsidianAcolyte extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // {W}: Target creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+            new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -25,7 +25,7 @@ public final class MizziumMortars extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
 
         // Overload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DamageAllEffect(4, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl("{3}{R}{R}{R}")));
+        this.addAbility(new OverloadAbility(this, new DamageAllEffect(4, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl<>("{3}{R}{R}{R}")));
     }
 
     private MizziumMortars(final MizziumMortars card) {

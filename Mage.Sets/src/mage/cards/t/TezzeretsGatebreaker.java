@@ -48,7 +48,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
                         Duration.EndOfTurn
                 ),
-                new ManaCostsImpl("{5}{U}")
+                new ManaCostsImpl<>("{5}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

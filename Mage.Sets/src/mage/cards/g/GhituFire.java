@@ -25,7 +25,7 @@ public final class GhituFire extends CardImpl {
 
         Effect effect = new DamageTargetEffect(ManacostVariableValue.REGULAR);
         // You may cast Ghitu Fire as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         ability.addTarget(new TargetAnyTarget());
         ability.setRuleAtTheTop(true);

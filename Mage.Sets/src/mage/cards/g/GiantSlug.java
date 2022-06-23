@@ -37,7 +37,7 @@ public final class GiantSlug extends CardImpl {
         // {5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.
         this.addAbility(new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new GiantSlugEffect())
-        ), new ManaCostsImpl("{5}")));
+        ), new ManaCostsImpl<>("{5}")));
     }
 
     private GiantSlug(final GiantSlug card) {

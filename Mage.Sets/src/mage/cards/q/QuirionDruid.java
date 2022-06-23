@@ -35,7 +35,7 @@ public final class QuirionDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {T}: Target land becomes a 2/2 green creature that’s still a land. <i>(This effect lasts indefinitely.)</i>
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new QuirionDruidToken(), false, true, Duration.Custom), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new QuirionDruidToken(), false, true, Duration.Custom), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

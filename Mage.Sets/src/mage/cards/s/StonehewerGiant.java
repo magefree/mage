@@ -44,7 +44,7 @@ public final class StonehewerGiant extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new StonehewerGiantEffect(),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

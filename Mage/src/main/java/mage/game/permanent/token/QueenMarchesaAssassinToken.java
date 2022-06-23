@@ -7,6 +7,8 @@ import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -22,6 +24,8 @@ public final class QueenMarchesaAssassinToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("CN2");
     }
 
     public QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {

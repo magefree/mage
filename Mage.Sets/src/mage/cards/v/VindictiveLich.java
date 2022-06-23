@@ -12,10 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterOpponent;
+import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.target.Target;
-import mage.target.common.TargetOpponent;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -23,6 +23,17 @@ import java.util.UUID;
  * @author anonymous
  */
 public final class VindictiveLich extends CardImpl {
+
+    private static final FilterPlayer filter0 = new FilterPlayer("a different player");
+    private static final FilterPlayer filter1 = new FilterOpponent();
+    private static final FilterPlayer filter2 = new FilterOpponent();
+    private static final FilterPlayer filter3 = new FilterOpponent();
+
+    static {
+        filter1.add(new AnotherTargetPredicate(1, true));
+        filter2.add(new AnotherTargetPredicate(2, true));
+        filter3.add(new AnotherTargetPredicate(3, true));
+    }
 
     public VindictiveLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -34,34 +45,22 @@ public final class VindictiveLich extends CardImpl {
         // When Vindictive Lich dies, choose one or more. Each mode must target a different player.
 
         // * Target opponent sacrifices a creature.
-        Ability ability = new DiesSourceTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"));
+        Ability ability = new DiesSourceTriggeredAbility(new SacrificeEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"
+        ));
         ability.getModes().setMinModes(1);
         ability.getModes().setMaxModes(3);
         ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setMaxModesFilter(new FilterOpponent("a different player"));
-        FilterOpponent filter = new FilterOpponent();
-        filter.add(new AnotherTargetPredicate(1, true));
-        Target target = new TargetOpponent(filter, false).withChooseHint("who sacrifice a creature");
-        target.setTargetTag(1);
-        ability.addTarget(target);
+        ability.getModes().setMaxModesFilter(filter0);
+        ability.addTarget(new TargetPlayer(filter1).setTargetTag(1).withChooseHint("to sacrifice a creature"));
 
         // * Target opponent discards two cards.
-        Mode mode = new Mode(new DiscardTargetEffect(2, false));
-        filter = new FilterOpponent();
-        filter.add(new AnotherTargetPredicate(2, true));
-        target = new TargetOpponent(filter, false);
-        target.setTargetTag(2);
-        mode.addTarget(target.withChooseHint("who discard a card"));
-        ability.addMode(mode);
+        ability.addMode(new Mode(new DiscardTargetEffect(2, false))
+                .addTarget(new TargetPlayer(filter2).setTargetTag(2).withChooseHint("to discard a card")));
 
         // * Target opponent loses 5 life.
-        mode = new Mode(new LoseLifeTargetEffect(5));
-        filter = new FilterOpponent();
-        filter.add(new AnotherTargetPredicate(3, true));
-        target = new TargetOpponent(filter, false);
-        target.setTargetTag(3);
-        mode.addTarget(target.withChooseHint("who lose 5 life"));
-        ability.addMode(mode);
+        ability.addMode(new Mode(new LoseLifeTargetEffect(5))
+                .addTarget(new TargetPlayer(filter3).setTargetTag(3).withChooseHint("to lose 5 life")));
         this.addAbility(ability);
     }
 
@@ -73,5 +72,4 @@ public final class VindictiveLich extends CardImpl {
     public VindictiveLich copy() {
         return new VindictiveLich(this);
     }
-
 }

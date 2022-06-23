@@ -34,7 +34,7 @@ public final class WallOfOneThousandCuts extends CardImpl {
 
         // {W}: Wall of One Thousand Cuts can attack this turn as though it didn't have defender.
         this.addAbility(new SimpleActivatedAbility(
-                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}")
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}")
         ));
     }
 

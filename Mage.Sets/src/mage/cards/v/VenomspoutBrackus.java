@@ -40,12 +40,12 @@ public final class VenomspoutBrackus extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{G}, {tap}: Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
 
     }
 

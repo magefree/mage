@@ -42,7 +42,7 @@ public final class WalkingArchive extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(new CountersSourceCount(CounterType.P1P1)), TargetController.ANY, false));
         
         // {2}{W}{U}: Put a +1/+1 counter on Walking Archive.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}{W}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{W}{U}")));
     }
 
     private WalkingArchive(final WalkingArchive card) {

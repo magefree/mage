@@ -7,7 +7,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.RiseOfEaglesBirdToken;
+import mage.game.permanent.token.EnchantmentBirdToken;
 
 /**
  *
@@ -19,7 +19,7 @@ public final class RiseOfEagles extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfEaglesBirdToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EnchantmentBirdToken(), 2));
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

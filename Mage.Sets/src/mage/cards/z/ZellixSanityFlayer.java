@@ -88,6 +88,6 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever a player mills one or more creature cards, you";
+        return "Whenever a player mills one or more creature cards, you ";
     }
 }

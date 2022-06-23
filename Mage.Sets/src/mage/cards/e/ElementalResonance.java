@@ -118,7 +118,7 @@ class ElementalResonanceEffect extends OneShotEffect {
         Integer generic = 0;
         for (String str : Arrays.asList(manaString.replaceAll("[^-?0-9]+", " ").trim().split(" "))) {
             if (!str.equals("")) {
-                generic += Integer.valueOf(str);
+                generic += Integer.parseInt(str);
             }
         }
         out.setColorless(generic);

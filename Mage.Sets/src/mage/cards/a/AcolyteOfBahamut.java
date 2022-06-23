@@ -44,7 +44,7 @@ public final class AcolyteOfBahamut extends CardImpl {
                         new SpellsCostReductionControllerEffect(filter, 2)
                                 .setText("the first Dragon spell you cast each turn costs {2} less to cast")
                 ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )), new AcolyteOfBahamutWatcher());
+        ).withForceQuotes()), new AcolyteOfBahamutWatcher());
     }
 
     private AcolyteOfBahamut(final AcolyteOfBahamut card) {

@@ -24,7 +24,7 @@ public final class RallyThePeasants extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
 
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}")));
     }
 
     private RallyThePeasants(final RallyThePeasants card) {

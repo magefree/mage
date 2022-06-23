@@ -28,7 +28,7 @@ public final class ManorSkeleton extends CardImpl {
 
         this.addAbility(HasteAbility.getInstance());
         // {1}{B}: Regenerate Manor Skeleton.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private ManorSkeleton(final ManorSkeleton card) {

@@ -32,7 +32,7 @@ public final class PhyrexianPortal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}: If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianPortalEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianPortalEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

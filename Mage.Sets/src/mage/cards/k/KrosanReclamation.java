@@ -26,7 +26,7 @@ public final class KrosanReclamation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInTargetPlayersGraveyard(2));
 
         // Flashback {1}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private KrosanReclamation(final KrosanReclamation card) {

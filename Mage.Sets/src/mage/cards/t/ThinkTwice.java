@@ -24,7 +24,7 @@ public final class ThinkTwice extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private ThinkTwice(final ThinkTwice card) {

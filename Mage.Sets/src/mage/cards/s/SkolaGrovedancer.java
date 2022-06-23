@@ -35,7 +35,7 @@ public final class SkolaGrovedancer extends CardImpl {
 
         // {2}{G}: Put the top card of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new MillCardsControllerEffect(1), new ManaCostsImpl("{2}{G}")
+                new MillCardsControllerEffect(1), new ManaCostsImpl<>("{2}{G}")
         ));
     }
 

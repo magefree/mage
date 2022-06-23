@@ -29,7 +29,7 @@ public final class PatrolSignaler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {untap}: Create a 1/1 white Kithkin Soldier creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KithkinSoldierToken()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KithkinSoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
     }

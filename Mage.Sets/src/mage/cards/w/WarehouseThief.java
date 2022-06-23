@@ -10,6 +10,7 @@ import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -40,7 +41,7 @@ public final class WarehouseThief extends CardImpl {
 
         // {2}, {T}, Sacrifice an artifact or creature: Exile the top card of your library. Until the end of your next turn, you may play that card.
         Ability ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), new GenericManaCost(2)
+                new ExileTopXMayPlayUntilEndOfTurnEffect(1, false, Duration.UntilEndOfYourNextTurn), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));

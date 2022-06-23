@@ -29,7 +29,7 @@ public final class DungeonDelver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new SimpleStaticAbility(new DungeonDelverEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )));
+        ).withForceQuotes()));
     }
 
     private DungeonDelver(final DungeonDelver card) {

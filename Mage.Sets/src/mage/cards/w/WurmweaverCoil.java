@@ -47,7 +47,7 @@ public final class WurmweaverCoil extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Duration.WhileOnBattlefield)));
-        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WurmToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
+        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WurmToken(), 1), new ManaCostsImpl<>("{G}{G}{G}"));
         activatedAbility.addCost(new SacrificeSourceCost());
         this.addAbility(activatedAbility);
     }

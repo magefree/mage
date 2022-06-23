@@ -34,7 +34,7 @@ public final class MemorialToUnity extends CardImpl {
         // Then put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{2}{G}"));
+                new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -37,7 +37,7 @@ public final class GuardianShieldBearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Megamorph {3}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}"), true));
 
         // When Guardian Shield-Bearer is turned face up, put a +1/+1 counter on another target creature you control.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);

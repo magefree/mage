@@ -55,7 +55,7 @@ public final class ObsidianFireheart extends CardImpl {
         // after Obsidian Fireheart has left the battlefield.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),
-                new ManaCostsImpl("{1}{R}{R}"));
+                new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));
         OneShotEffect effect = new ObsidianFireheartOneShotEffect();
         effect.setText(rule);

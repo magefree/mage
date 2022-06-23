@@ -34,7 +34,8 @@ public final class GutTrueSoulZealot extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(
                         new SkeletonMenaceToken(), 1, true, true
-                ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE)
+                ).withAdditionalRules("<i>(It can't be blocked except by two or more creatures.)</i>"),
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE)
         ), 1));
 
         // Choose a Background

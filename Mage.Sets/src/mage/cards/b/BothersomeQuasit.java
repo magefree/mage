@@ -40,7 +40,7 @@ public final class BothersomeQuasit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Goaded creatures your opponents control can't block.
         this.addAbility(new SimpleStaticAbility(

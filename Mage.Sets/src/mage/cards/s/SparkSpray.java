@@ -25,7 +25,7 @@ public final class SparkSpray extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private SparkSpray(final SparkSpray card) {

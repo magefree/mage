@@ -61,7 +61,7 @@ class SakashimaTheImpostorCopyApplier extends CopyApplier {
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
         blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
-                new ManaCostsImpl("{2}{U}{U}")
+                new ManaCostsImpl<>("{2}{U}{U}")
         ));
         return true;
     }

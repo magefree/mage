@@ -33,7 +33,7 @@ public final class SvyelunitePriest extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{U}, {tap}: Target creature gains shroud until end of turn. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}{U}"), 
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}{U}"),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

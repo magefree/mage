@@ -37,7 +37,7 @@ public final class ZombieMusher extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
 
         // {snow}: Regenerate Zombie Musher.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{S}")));
     }
 
     private ZombieMusher(final ZombieMusher card) {

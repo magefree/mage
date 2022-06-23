@@ -43,7 +43,7 @@ public final class IronrootWarlord extends CardImpl {
 
         // {3}{G}{W}: Create a 1/1 white Soldier creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{3}{G}{W}")
+                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{3}{G}{W}")
         ));
     }
 

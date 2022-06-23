@@ -82,7 +82,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
 
     @Test
     public void testPriceOfProgressMultiplayer() throws GameException {
-        playerC = createPlayer(currentGame, playerC, "PlayerC");
+        playerC = createPlayer(currentGame, "PlayerC");
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         // Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.

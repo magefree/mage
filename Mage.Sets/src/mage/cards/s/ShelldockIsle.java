@@ -39,7 +39,7 @@ public final class ShelldockIsle extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
                 new HideawayPlayEffect(), condition, "you may play the exiled card " +
                 "without paying its mana cost if a library has twenty or fewer cards in it"
-        ), new ManaCostsImpl("{U}"));
+        ), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

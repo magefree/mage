@@ -34,7 +34,7 @@ public final class LethalVapors extends CardImpl {
                 false, SetTargetPointer.PERMANENT, null));
 
         // {0}: Destroy Lethal Vapors. You skip your next turn. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl("{0}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl<>("{0}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new SkipNextTurnSourceEffect());
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

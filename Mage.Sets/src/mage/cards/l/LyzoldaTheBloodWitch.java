@@ -56,7 +56,7 @@ public final class LyzoldaTheBloodWitch extends CardImpl {
                 new DamageTargetEffect(2),
                 new SacrificedWasCondition(redFilter),
                 "{this} deals 2 damage to any target if the sacrificed creature was red");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         effect = new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 new SacrificedWasCondition(blackFilter),

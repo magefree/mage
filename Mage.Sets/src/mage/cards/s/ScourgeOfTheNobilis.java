@@ -41,7 +41,7 @@ public final class ScourgeOfTheNobilis extends CardImpl {
         // As long as enchanted creature is red, it gets +1/+1 and has "{RW}: This creature gets +1/+0 until end of turn."
         SimpleStaticAbility redAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.RED), "As long as enchanted creature is red, it gets +1/+1"));
         redAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(
-                new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R/W}")), AttachmentType.AURA),
+                new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R/W}")), AttachmentType.AURA),
                 new EnchantedCreatureColorCondition(ObjectColor.RED), "and has \"{R/W}: This creature gets +1/+0 until end of turn.\""));
         this.addAbility(redAbility);
 

@@ -48,7 +48,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         // {1}{B}: Regenerate Korlash.
         Effect effect = new RegenerateSourceEffect();
         effect.setText("Regenerate Korlash.");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}")));
         
         // Grandeur - Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.
         effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true, true);

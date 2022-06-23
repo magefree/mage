@@ -45,7 +45,7 @@ public final class ScrollOfTheMasters extends CardImpl {
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature you control gets +1/+1 until end of turn for each lore counter on {this}");
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}"));
+                Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

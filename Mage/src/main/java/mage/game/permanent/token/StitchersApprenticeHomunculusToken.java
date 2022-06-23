@@ -21,7 +21,7 @@ public final class StitchersApprenticeHomunculusToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("UMA");
+        availableImageSetCodes = Arrays.asList("ISD", "UMA");
     }
 
     public StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {

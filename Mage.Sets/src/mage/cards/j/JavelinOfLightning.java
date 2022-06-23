@@ -41,7 +41,7 @@ public final class JavelinOfLightning extends CardImpl {
                 "as long as it's your turn, equipped creature gets +2/+0"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
-        ), MyTurnCondition.instance, "and first strike"));
+        ), MyTurnCondition.instance, "and has first strike"));
         this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Equip {4}

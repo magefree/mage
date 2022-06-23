@@ -256,7 +256,7 @@ public class TestPlayer implements Player {
         int index = 0;
         if (indexedMatcher.matches()) {
             filteredName = indexedMatcher.group(1);
-            index = Integer.valueOf(indexedMatcher.group(2));
+            index = Integer.parseInt(indexedMatcher.group(2));
         }
         filter.add(new NamePredicate(filteredName, true)); // must find any cards even without names
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);

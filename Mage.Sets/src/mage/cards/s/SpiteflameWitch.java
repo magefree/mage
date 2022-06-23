@@ -26,7 +26,7 @@ public final class SpiteflameWitch extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private SpiteflameWitch(final SpiteflameWitch card) {

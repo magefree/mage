@@ -35,7 +35,7 @@ public final class PitfallTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), PitfallTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), PitfallTrapCondition.instance));
 
         // Destroy target attacking creature without flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

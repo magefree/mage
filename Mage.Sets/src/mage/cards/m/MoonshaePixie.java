@@ -15,10 +15,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -51,7 +52,9 @@ public final class MoonshaePixie extends AdventureCard {
         // Pixie Dust
         // Up to three target creatures gain flying until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance()));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(
+                0, 3, StaticFilters.FILTER_PERMANENT_CREATURES
+        ));
     }
 
     private MoonshaePixie(final MoonshaePixie card) {

@@ -27,7 +27,7 @@ public final class GudulLurker extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
 
         // Megamorph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}"), true));
     }
 
     private GudulLurker(final GudulLurker card) {

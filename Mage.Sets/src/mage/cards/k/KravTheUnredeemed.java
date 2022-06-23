@@ -42,7 +42,7 @@ public final class KravTheUnredeemed extends CardImpl {
         this.addAbility(new PartnerWithAbility("Regna, the Redeemer", true));
 
         // {B}, Sacrifice X creatures: Target player draws X cards and gains X life. Put X +1/+1 counters on Krav, the Unredeemed.
-        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE));
         this.addAbility(ability);

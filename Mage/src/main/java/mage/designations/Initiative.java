@@ -7,6 +7,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPlayerBatchEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -61,13 +62,12 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(game.getInitiativeId())) {
-            return false;
-        }
         DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
         UUID playerId = dEvent
                 .getEvents()
                 .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .filter(e -> e.getTargetId().equals(game.getInitiativeId()))
                 .map(GameEvent::getSourceId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)

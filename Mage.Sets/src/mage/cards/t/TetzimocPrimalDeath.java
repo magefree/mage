@@ -45,7 +45,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // {B}, Reveal Tetzimoc, Primal Death from your hand: Put a prey counter on target creature. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.HAND, new AddCountersTargetEffect(CounterType.PREY.createInstance()), new ManaCostsImpl("{B}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.HAND, new AddCountersTargetEffect(CounterType.PREY.createInstance()), new ManaCostsImpl<>("{B}"), MyTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new RevealSourceFromYourHandCost());
         ability.addHint(MyTurnHint.instance);

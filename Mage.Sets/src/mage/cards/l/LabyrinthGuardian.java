@@ -37,7 +37,7 @@ public final class LabyrinthGuardian extends CardImpl {
         this.addAbility(new LabyrinthGuardianTriggeredAbility());
 
         // Embalm {3}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{U}"), this));
 
     }
 
