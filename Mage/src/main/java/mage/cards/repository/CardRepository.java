@@ -2,7 +2,6 @@ package mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -463,6 +462,15 @@ public enum CardRepository {
 
     /**
      * Find a card's reprints from all sets, using case-sensitive search.
+     * It allows for cards to be searched by their full name, or in the case of multi-name cards of the type "A // B"
+     * To search for them using "A", "B", or "A // B".
+     *
+     * Note of how the function works:
+     *      Out of all card types (Split, MDFC, Adventure, Flip, Transform)
+     *      ONLY Split cards (Fire // Ice) MUST be queried for by the full name when querying by "name".
+     *      Searching for it by either half will return an incorrect result.
+     *      ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
+     *      when querying by "name".
      *
      * @param name              the name of the card to search for
      * @param limitByMaxAmount  return max amount of different cards (if 0 then return card from all sets)
@@ -470,26 +478,72 @@ public enum CardRepository {
      *                          an empty list if the card was not found.
      */
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
+        List<CardInfo> results;
+        QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+        if (limitByMaxAmount > 0) {
+            queryBuilder.limit(limitByMaxAmount);
+        }
+
         try {
-            // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
-            // e.g. "Malakir Rebirth // Malakir Mire"
-            String searchName = name.contains(" // ") ? name.split(" // ", 2)[0] : name;
+            if (name.contains(" // ")) {
+                // Try to see if it's a split card first.
+                // Could be made faster by searching assuming it's NOT a split card an using the first half first,
+                // but this is easier to understand.
+                queryBuilder.where().eq("name", new SelectArg(name));
+                results = cardDao.query(queryBuilder.prepare());
 
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+                // Result comes back empty, try to search using the first half
+                if (results.isEmpty()) {
+                    String mainCardName = name.split(" // ", 2)[0];
+                    queryBuilder.where().eq("name", new SelectArg(mainCardName));
+                    results = cardDao.query(queryBuilder.prepare());
+                }
+            } else {
+                // Cannot tell if given the full name of a card, or only one half.
+                // Cannot tell if only one half of a card with multiple parts is specified or a card with a single name
+                // Search both the main card name, the name of the back, the split card name, and the adventure name
 
-            // Search both the main card name, the name of the back, the split card name, and the adventure name
-            queryBuilder.where()
-                    .eq("name",                             new SelectArg(searchName)).or()
-                    .eq("flipCardName",                     new SelectArg(searchName)).or()
-                    .eq("secondSideName",                   new SelectArg(searchName)).or()
-                    .eq("adventureSpellName",               new SelectArg(searchName)).or()
-                    .eq("modalDoubleFacesSecondSideName",   new SelectArg(searchName));
+                // Search by main part first
+                queryBuilder.where().eq("name", new SelectArg(name));
+                results = cardDao.query(queryBuilder.prepare());
 
-            if (limitByMaxAmount > 0) {
-                queryBuilder.limit(limitByMaxAmount);
+                if (results.isEmpty()) {
+                    // Nothing found when looking for main name, try looking under the other names
+                    queryBuilder.where()
+                            .eq("flipCardName",                     new SelectArg(name)).or()
+                            .eq("secondSideName",                   new SelectArg(name)).or()
+                            .eq("adventureSpellName",               new SelectArg(name)).or()
+                            .eq("modalDoubleFacesSecondSideName",   new SelectArg(name));
+                    results = cardDao.query(queryBuilder.prepare());
+                } else {
+                    // Check that a full card was found and not a SplitCardHalf
+                    // Can be caused by searching for "Fire" instead of "Fire // Ice"
+                    CardInfo firstCardInfo = results.get(0);
+                    if (firstCardInfo.isSplitCardHalf()) {
+                        // TODO: Find card by setCode and CardNumber, get name from there, and search again!
+                        // Find the main card by it's setCode and CardNumber
+                        queryBuilder.where()
+                                .eq("setCode", new SelectArg(firstCardInfo.setCode)).and()
+                                .eq("cardNumber", new SelectArg(firstCardInfo.cardNumber));
+                        List<CardInfo> tmpResults = cardDao.query(queryBuilder.prepare());
+
+                        String fullSplitCardName = null;
+                        for (CardInfo cardInfo : tmpResults) {
+                            if (cardInfo.isSplitCard()) {
+                                fullSplitCardName = cardInfo.name;
+                                break;
+                            }
+                        }
+                        if (fullSplitCardName == null) {
+                            return Collections.emptyList();
+                        }
+
+                        queryBuilder.where().eq("name", new SelectArg(fullSplitCardName));
+                        results = cardDao.query(queryBuilder.prepare());
+                    }
+                }
             }
-
-            return cardDao.query(queryBuilder.prepare());
+            return results;
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
