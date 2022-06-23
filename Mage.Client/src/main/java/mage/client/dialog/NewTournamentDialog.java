@@ -1314,7 +1314,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setDraftCubeName("");
             tOptions.getMatchOptions().setDeckType((String) this.cbDeckType.getSelectedItem());
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
-            tOptions.getMatchOptions().setLimited(false);
+            tOptions.getMatchOptions().setLimited(tOptions.getMatchOptions().getDeckType().startsWith("Limited"));
         }
 
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
