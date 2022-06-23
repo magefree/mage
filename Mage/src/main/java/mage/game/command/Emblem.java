@@ -46,7 +46,7 @@ public class Emblem implements CommandObject {
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
 
-    // list of set codes token images are available for
+    // list of set codes emblem images are available for
     protected List<String> availableImageSetCodes = new ArrayList<>();
 
     public Emblem() {
