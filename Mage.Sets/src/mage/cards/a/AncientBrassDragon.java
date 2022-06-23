@@ -124,7 +124,7 @@ class AncientBrassDragonTarget extends TargetCardInGraveyard {
                 "creature cards with total mana value "
                 + xValue + " or less from graveyards"
         );
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue+1));
         return filter;
     }
 }
