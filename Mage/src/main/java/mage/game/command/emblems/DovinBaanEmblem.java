@@ -21,6 +21,8 @@ public final class DovinBaanEmblem extends Emblem {
         this.setName("Emblem Dovin");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new DovinBaanCantUntapEffect());
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("KLD");
     }
 }
 

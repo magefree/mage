@@ -1,5 +1,6 @@
 package mage.game.command.emblems;
 
+import java.util.Arrays;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -27,7 +28,7 @@ public final class JayaBallardEmblem extends Emblem {
 
     public JayaBallardEmblem() {
         setName("Emblem Jaya Ballard");
-        this.setExpansionSetCodeForImage("DOM");
+        availableImageSetCodes = Arrays.asList("DOM", "MED");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new JayaBallardCastFromGraveyardEffect());
         ability.addEffect(new JayaBallardReplacementEffect());
         this.getAbilities().add(ability);
