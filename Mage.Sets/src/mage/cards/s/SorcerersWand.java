@@ -19,6 +19,7 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -46,7 +47,7 @@ public final class SorcerersWand extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private SorcerersWand(final SorcerersWand card) {

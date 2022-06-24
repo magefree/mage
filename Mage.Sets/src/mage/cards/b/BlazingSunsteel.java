@@ -23,6 +23,8 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -43,7 +45,7 @@ public final class BlazingSunsteel extends CardImpl {
         this.addAbility(new BlazingSunsteelTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private BlazingSunsteel(final BlazingSunsteel card) {

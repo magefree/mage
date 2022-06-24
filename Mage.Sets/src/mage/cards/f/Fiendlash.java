@@ -24,6 +24,7 @@ import mage.game.events.DamagedPermanentBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -48,7 +49,7 @@ public final class Fiendlash extends CardImpl {
         this.addAbility(new FiendlashTriggeredAbility());
 
         // Equip {2}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), new TargetControlledCreaturePermanent(), false));
     }
 
     private Fiendlash(final Fiendlash card) {
@@ -79,7 +80,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;//DAMAGED_PERMANENT_BATCH;
     }
 
     @Override
@@ -93,7 +94,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
         if (attachedCreature == null) {
                 return false;
         }
-
+        System.out.println("We get here in the trigger of Fiendlash!!");
         game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
 
         DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;

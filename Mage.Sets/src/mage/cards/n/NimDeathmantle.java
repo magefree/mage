@@ -27,6 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.ManaUtil;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -54,7 +55,7 @@ public final class NimDeathmantle extends CardImpl {
         this.addAbility(new NimDeathmantleTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private NimDeathmantle(final NimDeathmantle card) {

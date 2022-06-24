@@ -13,6 +13,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class SharpenedPitchfork extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private SharpenedPitchfork(final SharpenedPitchfork card) {

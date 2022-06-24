@@ -12,6 +12,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author North
@@ -34,7 +35,7 @@ public final class TrailblazersBoots extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private TrailblazersBoots(final TrailblazersBoots card) {

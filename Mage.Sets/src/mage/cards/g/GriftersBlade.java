@@ -43,7 +43,7 @@ public final class GriftersBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
 
     }
 

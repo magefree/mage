@@ -15,6 +15,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -39,7 +41,7 @@ public final class LeatherArmor extends CardImpl {
         this.addAbility(ability);
 
         // Equip {0}. Activate only once each turn.
-        EquipAbility equipAbility = new EquipAbility(0, false);
+        EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0), new TargetControlledCreaturePermanent(), false);
         equipAbility.setMaxActivationsPerTurn(1);
         this.addAbility(equipAbility);
     }

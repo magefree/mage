@@ -16,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -36,7 +38,7 @@ public final class RobeOfStars extends CardImpl {
         ).withFlavorWord("Astral Projection"));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private RobeOfStars(final RobeOfStars card) {

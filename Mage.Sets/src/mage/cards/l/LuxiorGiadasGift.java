@@ -20,6 +20,7 @@ import mage.target.TargetPermanent;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -46,7 +47,7 @@ public final class LuxiorGiadasGift extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter), false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private LuxiorGiadasGift(final LuxiorGiadasGift card) {
