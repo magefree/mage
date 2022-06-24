@@ -18,6 +18,8 @@ import mage.constants.SubType;
 import mage.game.permanent.token.DwarfBerserkerToken;
 
 import java.util.UUID;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -42,7 +44,7 @@ public final class DwarvenHammer extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private DwarvenHammer(final DwarvenHammer card) {

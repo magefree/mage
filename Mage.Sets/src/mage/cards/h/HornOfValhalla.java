@@ -14,6 +14,9 @@ import mage.constants.SubType;
 import mage.game.permanent.token.SoldierToken;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -31,7 +34,7 @@ public final class HornOfValhalla extends AdventureCard {
         ).setText("equipped creature gets +1/+1 for each creature you control")).addHint(CreaturesYouControlHint.instance));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
 
         // Ysgard's Call
         // Create X 1/1 white Soldier creature tokens.

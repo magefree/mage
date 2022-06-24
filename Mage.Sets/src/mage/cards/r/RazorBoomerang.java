@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author jeffwadsworth
@@ -41,7 +42,7 @@ public final class RazorBoomerang extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RazorBoomerang(final RazorBoomerang card) {

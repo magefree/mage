@@ -18,6 +18,7 @@ import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Loki
@@ -51,7 +52,7 @@ public final class UmezawasJitte extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private UmezawasJitte(final UmezawasJitte card) {

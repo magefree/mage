@@ -16,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -45,7 +46,7 @@ public final class RobeOfTheArchmagi extends CardImpl {
         ));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
 
         // Equip Shaman, Warlock, or Wizard {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));

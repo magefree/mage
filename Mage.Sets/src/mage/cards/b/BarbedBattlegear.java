@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class BarbedBattlegear extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, -1)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.Neutral, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     public BarbedBattlegear (final BarbedBattlegear card) {

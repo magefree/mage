@@ -16,6 +16,8 @@ import mage.filter.FilterPermanent;
 import mage.game.permanent.token.ZombieToken;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author zeffirojoe
@@ -48,7 +50,7 @@ public final class WandOfOrcus extends CardImpl {
                 false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private WandOfOrcus(final WandOfOrcus card) {

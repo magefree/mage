@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenAttachSourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -17,7 +18,9 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.permanent.token.ZombieBerserkerToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -45,7 +48,7 @@ public final class DraugrsHelm extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private DraugrsHelm(final DraugrsHelm card) {

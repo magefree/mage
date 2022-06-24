@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class BladeOfTheBloodchief extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new BladeOfTheBloodchiefEffect(), false));
 
         //Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private BladeOfTheBloodchief(final BladeOfTheBloodchief card) {

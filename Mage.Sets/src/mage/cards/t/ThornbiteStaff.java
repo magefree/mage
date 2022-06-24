@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class ThornbiteStaff extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private ThornbiteStaff(final ThornbiteStaff card) {
