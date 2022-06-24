@@ -425,7 +425,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 UUID tableId = (UUID) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN + 3);
                 UUID gameId = (UUID) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN + 2);
                 String action = (String) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN);
-                String deckType = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_DECK_TYPE);
+                String gameType = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_GAME_TYPE);
                 boolean isTournament = (Boolean) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN + 1);
                 String owner = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_OWNER);
                 String pwdColumn = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_PASSWORD);
@@ -454,14 +454,14 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         if (isTournament) {
                             LOGGER.info("Joining tournament " + tableId);
-                            if (deckType.startsWith("Limited")) {
+                            if (!gameType.startsWith("Constructed")) {
                                 if (TablesTableModel.PASSWORD_VALUE_YES.equals(pwdColumn)) {
-                                    joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
+                                    joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
                                 } else {
                                     SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), PlayerType.HUMAN, 1, null, "");
                                 }
                             } else {
-                                joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
+                                joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
                             }
                         } else {
                             LOGGER.info("Joining table " + tableId);
