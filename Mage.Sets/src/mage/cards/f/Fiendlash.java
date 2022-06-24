@@ -34,7 +34,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public final class Fiendlash extends CardImpl {
 
     public Fiendlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -80,7 +80,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;//DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
     }
 
     @Override
@@ -92,9 +92,9 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
         UUID attachedCreature = equipment.getAttachedTo();
         if (attachedCreature == null) {
-                return false;
+            return false;
         }
-        System.out.println("We get here in the trigger of Fiendlash!!");
+
         game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
 
         DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
