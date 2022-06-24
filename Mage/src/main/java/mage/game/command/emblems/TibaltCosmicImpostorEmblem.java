@@ -24,6 +24,8 @@ public final class TibaltCosmicImpostorEmblem extends Emblem {
     public TibaltCosmicImpostorEmblem() {
         setName("Emblem Tibalt");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImpostorPlayFromExileEffect()));
+
+        this.setExpansionSetCodeForImage("KHM");
     }
 }
 

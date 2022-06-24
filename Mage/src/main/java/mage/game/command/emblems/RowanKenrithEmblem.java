@@ -9,6 +9,8 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -18,6 +20,8 @@ public final class RowanKenrithEmblem extends Emblem {
     public RowanKenrithEmblem() {
         this.setName("Emblem Rowan Kenrith");
         this.getAbilities().add(new RowanKenrithEmblemTriggeredAbility());
+
+        availableImageSetCodes = Arrays.asList("BBD", "CLB");
     }
 }
 

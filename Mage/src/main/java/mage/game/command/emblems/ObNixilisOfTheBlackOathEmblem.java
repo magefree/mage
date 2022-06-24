@@ -34,5 +34,7 @@ public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
         effect.setText("and draw X cards, where X is the sacrificed creature's power");
         ability.addEffect(effect);
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("C14");
     }
 }
