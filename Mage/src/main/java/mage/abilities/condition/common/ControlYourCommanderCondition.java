@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * Checks if a player control ANY (not just their own) commander.
+ * Checks if a player controls their commander.
  *
- * @author TheElk801
+ * @author Alex-Vasile
  */
-public enum ControlACommanderCondition implements Condition {
+public enum ControlYourCommanderCondition implements Condition {
     instance;
 
     @Override
@@ -27,12 +27,12 @@ public enum ControlACommanderCondition implements Condition {
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .map(Permanent::getControllerId)
+                .map(Permanent::getOwnerId)
                 .anyMatch(source.getControllerId()::equals);
     }
 
     @Override
     public String toString() {
-        return "If a control a commander";
+        return "If you control your commander";
     }
 }
