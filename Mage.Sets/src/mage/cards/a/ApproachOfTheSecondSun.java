@@ -21,6 +21,7 @@ import java.util.UUID;
 
 /**
  * @author stravant
+ * @author the-red-lily
  */
 public final class ApproachOfTheSecondSun extends CardImpl {
 
@@ -64,28 +65,28 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell spell = game.getStack().getSpell(source.getSourceId(), false);
-        if (controller != null && spell != null) {
-            ApproachOfTheSecondSunWatcher watcher
-                    = game.getState().getWatcher(ApproachOfTheSecondSunWatcher.class);
-            if (watcher != null
-                    && watcher.getApproachesCast(controller.getId()) > 1
-                    && spell.getFromZone() == Zone.HAND) {
-                // Win the game
-                controller.won(game);
-            } else {
-                // Gain 7 life and put this back into library.
-                controller.gainLife(7, game, source);
+        if (controller == null)
+            return false;
+        Spell nonCopySpell = game.getStack().getSpell(source.getSourceId(), false);
+        ApproachOfTheSecondSunWatcher watcher
+                = game.getState().getWatcher(ApproachOfTheSecondSunWatcher.class);
+        if (nonCopySpell != null && watcher != null
+                && watcher.getApproachesCast(controller.getId()) > 1
+                && nonCopySpell.getFromZone() == Zone.HAND) {
+            // Win the game
+            controller.won(game);
+        } else {
+            // Gain 7 life and put this back into library.
+            controller.gainLife(7, game, source);
 
-                // Put this into the library as the 7th from the top
-                Card spellCard = game.getStack().getSpell(source.getSourceId(), false).getCard();
-                if (spellCard != null) {
+            // Put this into the library as the 7th from the top
+            if (nonCopySpell != null) {
+                Card spellCard = nonCopySpell.getCard();
+                if (spellCard != null)
                     controller.putCardOnTopXOfLibrary(spellCard, game, source, 7, true);
-                }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }
 
