@@ -464,7 +464,7 @@ public enum CardRepository {
      *
      * Note of how the function works:
      *      Out of all card types (Split, MDFC, Adventure, Flip, Transform)
-     *      ONLY Split cards (Fire // Ice) MUST be queried for by the full name when querying by "name".
+     *      ONLY Split cards (Fire // Ice) MUST be queried in the DB by the full name when querying by "name".
      *      Searching for it by either half will return an incorrect result.
      *      ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
      *      when querying by "name".
@@ -482,25 +482,21 @@ public enum CardRepository {
         }
 
         try {
-            if (name.contains(" // ")) {
-                // Try to see if it's a split card first.
-                // Could be made faster by searching assuming it's NOT a split card an using the first half first,
-                // but this is easier to understand.
+            if (name.contains(" // ")) { //
+                // Try to see if it's a split card first. (Split card stored in DB under full card name)
+                // Could be made faster by searching assuming it's NOT a split card and first searching by the first
+                // half of the name, but this is easier to understand.
                 queryBuilder.where().eq("name", new SelectArg(name));
                 results = cardDao.query(queryBuilder.prepare());
 
-                // Result comes back empty, try to search using the first half
+                // Result comes back empty, try to search using the first half (could be Adventure, MDFC, etc.)
                 if (results.isEmpty()) {
                     String mainCardName = name.split(" // ", 2)[0];
                     queryBuilder.where().eq("name", new SelectArg(mainCardName));
-                    results = cardDao.query(queryBuilder.prepare());
+                    results = cardDao.query(queryBuilder.prepare());  // If still empty, then card can't be found
                 }
-            } else {
-                // Cannot tell if given the full name of a card, or only one half.
-                // Cannot tell if only one half of a card with multiple parts is specified or a card with a single name
-                // Search both the main card name, the name of the back, the split card name, and the adventure name
-
-                // Search by main part first
+            } else { // Cannot tell if string represents the full name of a card or only part of it.
+                // Assume it is the full card name
                 queryBuilder.where().eq("name", new SelectArg(name));
                 results = cardDao.query(queryBuilder.prepare());
 
