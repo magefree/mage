@@ -33,6 +33,6 @@ public enum ControlACommanderCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If a control a commander";
+        return "If you control a commander";
     }
 }
