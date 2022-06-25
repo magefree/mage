@@ -62,7 +62,11 @@ class GondGateEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((EntersTheBattlefieldEvent) event).getTarget().setTapped(false);
+        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (target != null) {
+            target.setTapped(false);
+        }
+
         return false;
     }
 
@@ -73,8 +77,17 @@ class GondGateEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
+
         Permanent targetObject = ((EntersTheBattlefieldEvent) event).getTarget();
-        return targetObject != null
+        if (targetObject == null) {
+            return false;
+        }
+
+        return !sourceObject.getId().equals(targetObject.getId())
                 && targetObject.isControlledBy(source.getControllerId())
                 && targetObject.hasSubtype(SubType.GATE, game);
     }
