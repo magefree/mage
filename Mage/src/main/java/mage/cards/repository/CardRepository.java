@@ -30,7 +30,7 @@ public enum CardRepository {
 
     private static final Logger logger = Logger.getLogger(CardRepository.class);
 
-    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
+    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 54;
@@ -386,17 +386,14 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive) {
-        return findPreferredCoreExpansionCard(name, caseInsensitive, null);
+    public CardInfo findPreferredCoreExpansionCard(String name) {
+        return findPreferredCoreExpansionCard(name, null);
     }
 
-    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive, String preferredSetCode) {
+    public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
         List<CardInfo> cards;
-        if (caseInsensitive) {
-            cards = findCardsCaseInsensitive(name);
-        } else {
-            cards = findCards(name);
-        }
+        cards = findCards(name);
+
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
@@ -453,7 +450,7 @@ public enum CardRepository {
                 }
             }
         }
-        return findPreferredCoreExpansionCard(name, true);
+        return findPreferredCoreExpansionCard(name);
     }
 
     public List<CardInfo> findCards(String name) {
@@ -461,7 +458,7 @@ public enum CardRepository {
     }
 
     /**
-     * Find a card's reprints from all sets, using case-sensitive search.
+     * Find a card's reprints from all sets.
      * It allows for cards to be searched by their full name, or in the case of multi-name cards of the type "A // B"
      * To search for them using "A", "B", or "A // B".
      *
@@ -520,7 +517,6 @@ public enum CardRepository {
                     // Can be caused by searching for "Fire" instead of "Fire // Ice"
                     CardInfo firstCardInfo = results.get(0);
                     if (firstCardInfo.isSplitCardHalf()) {
-                        // TODO: Find card by setCode and CardNumber, get name from there, and search again!
                         // Find the main card by it's setCode and CardNumber
                         queryBuilder.where()
                                 .eq("setCode", new SelectArg(firstCardInfo.setCode)).and()
@@ -559,24 +555,6 @@ public enum CardRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
-        return Collections.emptyList();
-    }
-
-    public List<CardInfo> findCardsCaseInsensitive(String name) {
-        try {
-            // Deal with Split, Adventure, Double-faced, etc. cards when the full full name is specified,
-            // e.g. "Malakir Rebirth // Malakir Mire"
-            String searchName = (name.contains(" // ") ? name.split(" // ", 2)[0] : name).toLowerCase(Locale.ENGLISH);
-
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            // TODO: add support for searching by second part of back card name
-            queryBuilder.where().eq("lower_name", new SelectArg(searchName));
-
-            return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
-        }
-
         return Collections.emptyList();
     }
 

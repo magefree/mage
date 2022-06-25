@@ -3,7 +3,6 @@ package org.mage.test.utils;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,15 +22,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsByFullName() {
         // Modal double-faced
-        assertFindCaseSensitive("Malakir Rebirth // Malakir Mire");
+        assertFindCard("Malakir Rebirth // Malakir Mire");
         // Transform double-faced
-        assertFindCaseSensitive("Brutal Cathar // Moonrage Brute");
+        assertFindCard("Brutal Cathar // Moonrage Brute");
         // Split
-        assertFindCaseSensitive("Alive // Well");
+        assertFindCard("Alive // Well");
         // Flip
-        assertFindCaseSensitive("Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence");
+        assertFindCard("Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence");
         // Adventure
-        assertFindCaseSensitive("Ardenvale Tactician // Dizzying Swoop");
+        assertFindCard("Ardenvale Tactician // Dizzying Swoop");
     }
 
     /**
@@ -42,15 +41,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsByMainName() {
         // Modal double-faced
-        assertFindCaseSensitive("Malakir Rebirth");
+        assertFindCard("Malakir Rebirth");
         // Transform double-faced
-        assertFindCaseSensitive("Brutal Cathar");
+        assertFindCard("Brutal Cathar");
         // Split
-        assertFindCaseSensitive("Alive");
+        assertFindCard("Alive");
         // Flip
-        assertFindCaseSensitive("Rune-Tail, Kitsune Ascendant");
+        assertFindCard("Rune-Tail, Kitsune Ascendant");
         // Adventure
-        assertFindCaseSensitive("Ardenvale Tactician");
+        assertFindCard("Ardenvale Tactician");
     }
 
     /**
@@ -61,15 +60,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsBySecondName() {
         // Modal double-faced
-        assertFindCaseSensitive("Malakir Mire");
+        assertFindCard("Malakir Mire");
         // Transform double-faced
-        assertFindCaseSensitive("Moonrage Brute");
+        assertFindCard("Moonrage Brute");
         // Split
-        assertFindCaseSensitive("Well");
+        assertFindCard("Well");
         // Flip
-        assertFindCaseSensitive("Rune-Tail's Essence");
+        assertFindCard("Rune-Tail's Essence");
         // Adventure
-        assertFindCaseSensitive("Dizzying Swoop");
+        assertFindCard("Dizzying Swoop");
     }
 
     /**
@@ -80,15 +79,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsByFullNameCaseInsensitive() {
         // Modal double-faced
-        assertFindCaseInsensitive("Malakir Rebirth // Malakir Mire");
+        assertFindCard("malakIR rebirTH // maLAkir mIRe");
         // Transform double-faced
-        assertFindCaseInsensitive("Brutal Cathar // Moonrage Brute");
+        assertFindCard("brutAL cathAR // moonRAge BRUte");
         // Split
-        assertFindCaseInsensitive("Alive // Well");
+        assertFindCard("aliVE // wELl");
         // Flip
-        assertFindCaseInsensitive("Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence");
+        assertFindCard("ruNE-taIL, kitsuNE ascendaNT // rUNe-tAIl's essENce");
         // Adventure
-        assertFindCaseInsensitive("Ardenvale Tactician // Dizzying Swoop");
+        assertFindCard("ardenvaLE tacticiAN // dizzYIng sWOop");
     }
 
     /**
@@ -99,15 +98,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsByMainNameCaseInsensitive() {
         // Modal double-faced
-        assertFindCaseInsensitive("Malakir Rebirth");
+        assertFindCard("malakIR rebirTH");
         // Transform double-faced
-        assertFindCaseInsensitive("Brutal Cathar");
+        assertFindCard("brutAL cathAR");
         // Split
-        assertFindCaseInsensitive("Alive");
+        assertFindCard("aliVE");
         // Flip
-        assertFindCaseInsensitive("Rune-Tail, Kitsune Ascendant");
+        assertFindCard("ruNE-taIL, kitsuNE ascendaNT");
         // Adventure
-        assertFindCaseInsensitive("Ardenvale Tactician");
+        assertFindCard("ardenvaLE tacticiAN");
     }
 
     /**
@@ -118,15 +117,15 @@ public class CardRepositoryTest {
     @Test
     public void testFindSplitCardsBySecondNameCaseInsensitive() {
         // Modal double-faced
-        assertFindCaseInsensitive("Malakir Mire");
+        assertFindCard("maLAkir mIRe");
         // Transform double-faced
-        assertFindCaseInsensitive("Moonrage Brute");
+        assertFindCard("moonRAge BRUte");
         // Split
-        assertFindCaseInsensitive("Well");
+        assertFindCard("wELl");
         // Flip
-        assertFindCaseInsensitive("Rune-Tail's Essence");
+        assertFindCard("rUNe-tAIl's essENce");
         // Adventure
-        assertFindCaseInsensitive("Dizzying Swoop");
+        assertFindCard("dizzYIng sWOop");
     }
 
     /**
@@ -135,22 +134,8 @@ public class CardRepositoryTest {
      *
      * @param cardName The name of the card to search by.
      */
-    private void assertFindCaseSensitive(String cardName) {
+    private void assertFindCard(String cardName) {
         List<CardInfo> foundCards = CardRepository.instance.findCards(cardName);
-        Assert.assertFalse(
-                "Could not find " + "\"" + cardName + "\".",
-                foundCards.isEmpty()
-        );
-    }
-
-    /**
-     * Checks if the card with name cardName can be found when searched for
-     * using the case insensitive approach.
-     *
-     * @param cardName The name of the card to search by.
-     */
-    private void assertFindCaseInsensitive(String cardName) {
-        List<CardInfo> foundCards = CardRepository.instance.findCardsCaseInsensitive(cardName);
         Assert.assertFalse(
                 "Could not find " + "\"" + cardName + "\".",
                 foundCards.isEmpty()
