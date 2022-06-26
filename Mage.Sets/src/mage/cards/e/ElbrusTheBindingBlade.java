@@ -19,6 +19,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author BetaSteward
@@ -38,7 +39,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {

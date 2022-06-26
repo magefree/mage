@@ -25,5 +25,7 @@ public final class ChandraTorchOfDefianceEmblem extends Emblem {
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A, false, false);
         ability.addTarget(new TargetAnyTarget());
         getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("KLD");
     }
 }

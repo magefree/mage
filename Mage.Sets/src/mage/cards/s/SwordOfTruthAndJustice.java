@@ -49,7 +49,7 @@ public final class SwordOfTruthAndJustice extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private SwordOfTruthAndJustice(final SwordOfTruthAndJustice card) {

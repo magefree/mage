@@ -18,6 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author halljared
@@ -38,7 +39,7 @@ public final class NeglectedHeirloom extends CardImpl {
         this.addAbility(new NeglectedHeirloomTriggeredAbility());
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private NeglectedHeirloom(final NeglectedHeirloom card) {

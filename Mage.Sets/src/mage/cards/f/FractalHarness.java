@@ -19,6 +19,8 @@ import mage.game.permanent.token.FractalToken;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -39,7 +41,7 @@ public final class FractalHarness extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private FractalHarness(final FractalHarness card) {

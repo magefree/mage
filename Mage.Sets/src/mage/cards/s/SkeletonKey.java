@@ -19,6 +19,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class SkeletonKey extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private SkeletonKey(final SkeletonKey card) {

@@ -489,7 +489,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public static boolean isChrismasTime(Date currentTime) {
+    public static boolean isChristmasTime(Date currentTime) {
         // from december 15 to january 15
         Calendar cal = new GregorianCalendar();
         cal.setTime(currentTime);
@@ -513,9 +513,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         String filename;
         float ratio;
-        if (isChrismasTime(Calendar.getInstance().getTime())) {
-            // chrismass logo
-            LOGGER.info("Yo Ho Ho, Merry Christmas and a Happy New Year");
+        if (isChristmasTime(Calendar.getInstance().getTime())) {
+            // Christmas logo
+            LOGGER.info("Ho Ho Ho, Merry Christmas and a Happy New Year");
             filename = "/label-xmage-christmas.png";
             ratio = 539.0f / 318.0f;
         } else {

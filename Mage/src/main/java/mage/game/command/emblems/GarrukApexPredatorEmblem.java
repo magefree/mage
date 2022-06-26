@@ -11,6 +11,8 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -30,5 +32,7 @@ public final class GarrukApexPredatorEmblem extends Emblem {
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         ability.addEffect(effect.concatBy("and"));
         this.getAbilities().add(ability);
+
+        availableImageSetCodes = Arrays.asList("M15", "MED");
     }
 }

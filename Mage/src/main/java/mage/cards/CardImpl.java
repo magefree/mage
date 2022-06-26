@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.ReconfigureAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -31,6 +30,7 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import mage.abilities.keyword.ReconfigureAbility;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -821,9 +821,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return false;
         }
         if (attachment.hasSubtype(SubType.EQUIPMENT, game)
-                && (attachment.isCreature(game)
-                && !attachment.getAbilities(game).containsClass(ReconfigureAbility.class)
-                || !this.isCreature(game))) {
+                && (attachment.isCreature(game)  // seems strange and perhaps someone knows why this is checked.
+                && !attachment.getAbilities(game).containsClass(ReconfigureAbility.class))) {
             return false;
         }
         if (attachment.hasSubtype(SubType.FORTIFICATION, game)

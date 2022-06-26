@@ -604,7 +604,7 @@ public class NewTableDialog extends MageDialog {
             options.getPlayerTypes().add(player.getPlayerType());
         }
         options.setDeckType((String) this.cbDeckType.getSelectedItem());
-        options.setLimited(false);
+        options.setLimited(options.getDeckType().startsWith("Limited"));
         options.setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
         options.setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());

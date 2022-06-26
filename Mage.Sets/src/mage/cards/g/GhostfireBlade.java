@@ -16,6 +16,9 @@ import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author LevelX2
@@ -30,7 +33,7 @@ public final class GhostfireBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip {3}
-        Ability ability = new EquipAbility(3, false);
+        Ability ability = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false);
         ability.setCostAdjuster(GhostfireBladeAdjuster.instance);
         this.addAbility(ability);
 

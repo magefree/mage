@@ -7,6 +7,7 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -18,6 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -40,7 +42,7 @@ public final class MaskOfGriselbrand extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new MaskOfGriselbrandEffect(), "equipped creature"));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private MaskOfGriselbrand(final MaskOfGriselbrand card) {

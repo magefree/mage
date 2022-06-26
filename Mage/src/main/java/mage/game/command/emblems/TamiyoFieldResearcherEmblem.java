@@ -18,5 +18,7 @@ public final class TamiyoFieldResearcherEmblem extends Emblem {
         this.setName("Emblem Tamiyo");
 
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new CastFromHandWithoutPayingManaCostEffect()));
+
+        this.setExpansionSetCodeForImage("EMN");
     }
 }

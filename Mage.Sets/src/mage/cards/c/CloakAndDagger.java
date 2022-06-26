@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class CloakAndDagger extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private CloakAndDagger(final CloakAndDagger card) {

@@ -20,6 +20,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -53,7 +54,7 @@ public final class TeamPennant extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private TeamPennant(final TeamPennant card) {

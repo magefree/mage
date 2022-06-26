@@ -20,6 +20,7 @@ import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -49,7 +50,7 @@ public final class SwordOfSinewAndSteel extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private SwordOfSinewAndSteel(final SwordOfSinewAndSteel card) {

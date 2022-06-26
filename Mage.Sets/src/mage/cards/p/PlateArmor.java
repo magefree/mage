@@ -21,6 +21,7 @@ import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
@@ -46,7 +47,7 @@ public final class PlateArmor extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}. This ability costs {1} less to activate for each other Equipment you control.
-        EquipAbility equipAbility = new EquipAbility(3, false);
+        EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false);
         equipAbility.setCostAdjuster(PlateArmorAdjuster.instance);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each other Equipment you control.");
         this.addAbility(equipAbility.addHint(PlateArmorAdjuster.getHint()));

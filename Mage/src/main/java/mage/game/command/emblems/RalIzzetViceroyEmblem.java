@@ -9,6 +9,8 @@ import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.Arrays;
+
 /**
  *
  * @author TheElk801
@@ -28,5 +30,7 @@ public final class RalIzzetViceroyEmblem extends Emblem {
         );
         ability.addTarget(new TargetAnyTarget());
         getAbilities().add(ability);
+
+        availableImageSetCodes = Arrays.asList("MED", "GRN");
     }
 }

@@ -17,6 +17,9 @@ import mage.constants.SubType;
 import mage.game.permanent.token.CitizenGreenWhiteToken;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -41,7 +44,7 @@ public final class ScepterOfCelebration extends CardImpl {
         ), "equipped", false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private ScepterOfCelebration(final ScepterOfCelebration card) {
