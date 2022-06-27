@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -47,8 +48,8 @@ public final class FalcoSparaPactweaver extends CardImpl {
         // Falco Spara, Pactweaver enters the battlefield with a shield counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)),
-                "with a shield counter on it. <i>(If it would be dealt damage " +
-                        "or destroyed, remove a shield counter from it instead.)</i>"
+                "with a shield counter on it. <i>(If it would be dealt damage "
+                + "or destroyed, remove a shield counter from it instead.)</i>"
         ));
 
         // You may look at the top card of your library any time.
@@ -72,8 +73,8 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
 
     FalcoSparaPactweaverEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
-        staticText = "you may cast spells from the top of your library by removing " +
-                "a counter from a creature you control in addition to paying their other costs";
+        staticText = "you may cast spells from the top of your library by removing "
+                + "a counter from a creature you control in addition to paying their other costs";
     }
 
     private FalcoSparaPactweaverEffect(final FalcoSparaPactweaverEffect effect) {
@@ -110,7 +111,7 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
         }
 
         Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent()));
+        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
         player.setCastSourceIdWithAlternateMana(cardToCheck.getId(), cardToCheck.getManaCost(), newCosts);
         return true;
