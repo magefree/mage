@@ -2502,7 +2502,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
-            Collections.sort(pickedCards, new Comparator<PickedCard>() {
+            pickedCards.sort(new Comparator<PickedCard>() {
                 @Override
                 public int compare(PickedCard o1, PickedCard o2) {
                     if (o1.score.equals(o2.score)) {
