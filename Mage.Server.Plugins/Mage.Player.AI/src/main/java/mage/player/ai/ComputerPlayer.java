@@ -136,7 +136,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
-        // - affected controler can be different from target controller (another player makes choices for controller)
+        // - affected controller can be different from target controller (another player makes choices for controller)
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
