@@ -26,13 +26,6 @@ import java.util.UUID;
  */
 public final class AbaddonTheDespoiler extends CardImpl {
 
-    private static final FilterSpell baseFilter = new FilterSpell();
-
-    static {
-        baseFilter.add(new CastFromZonePredicate(Zone.HAND));
-    }
-
-    //TODO: this hint isn't used. Use it or clean it up
     private static final Hint hint = new ValueHint(
             "Total life lost by opponents this turn", OpponentsLostLifeCount.instance
     );
@@ -50,16 +43,18 @@ public final class AbaddonTheDespoiler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Mark of the Chaos Ascendant — During your turn, spells you cast from your hand with mana value X or less have cascade, where X is the total amount of life your opponents have lost this turn.
-        FilterSpell filter = baseFilter.copy();
+        final FilterSpell filter = new FilterSpell();
         Ability markOfTheChaosAscendant = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySpellsEffect(new CascadeAbility(false), filter),
                 MyTurnCondition.instance, "during your turn, spells you cast from " +
                 "your hand with mana value X or less have cascade, where X is the " +
                 "total amount of life your opponents have lost this turn"
         ));
-        filter.add(new DynamicManaValuePredicate(ComparisonType.FEWER_THAN, new IntPlusDynamicValue(1, OpponentsLostLifeCount.instance),
+        filter.add(new CastFromZonePredicate(Zone.HAND));
+        filter.add(new DynamicManaValuePredicate(ComparisonType.FEWER_THAN,
+                new IntPlusDynamicValue(1, OpponentsLostLifeCount.instance), //Add one to convert <= to <
                 markOfTheChaosAscendant, null));
-        this.addAbility(markOfTheChaosAscendant);
+        this.addAbility(markOfTheChaosAscendant.addHint(hint));
     }
 
     private AbaddonTheDespoiler(final AbaddonTheDespoiler card) {
