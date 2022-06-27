@@ -75,42 +75,25 @@ public class RandomPlayer extends ComputerPlayer {
     private Ability getAction(Game game) {
         List<ActivatedAbility> playables = getPlayableAbilities(game);
         Ability ability;
-        while (true) {
-            if (playables.size() == 1) {
-                ability = playables.get(0);
+        if (playables.size() == 1) {
+            ability = playables.get(0);
+        } else {
+            ability = playables.get(RandomUtil.nextInt(playables.size()));
+        }
+        List<Ability> options = getPlayableOptions(ability, game);
+        if (!options.isEmpty()) {
+            if (options.size() == 1) {
+                ability = options.get(0);
             } else {
-                ability = playables.get(RandomUtil.nextInt(playables.size()));
+                ability = options.get(RandomUtil.nextInt(options.size()));
             }
-            List<Ability> options = getPlayableOptions(ability, game);
-            if (!options.isEmpty()) {
-                if (options.size() == 1) {
-                    ability = options.get(0);
-                } else {
-                    ability = options.get(RandomUtil.nextInt(options.size()));
-                }
+        }
+        if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
+            int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
+            if (amount > 0) {
+                ability = ability.copy();
+                ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
             }
-            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
-                int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
-                if (amount > 0) {
-                    ability = ability.copy();
-                    ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
-                }
-            }
-            // check if ability kills player, if not then it's ok to play
-//            if (ability.isUsesStack()) {
-//                Game testSim = game.copy();
-//                activateAbility((ActivatedAbility) ability, testSim);
-//                StackObject testAbility = testSim.getStack().pop();
-//                testAbility.resolve(testSim);
-//                testSim.applyEffects();
-//                testSim.checkStateAndTriggered();
-//                if (!testSim.getPlayer(playerId).hasLost()) {
-//                    break;
-//                }
-//            }
-//            else {
-            break;
-//            }
         }
         return ability;
     }
