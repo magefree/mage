@@ -64,11 +64,12 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell spell = game.getStack().getSpell(source.getSourceId(), false);
+        Spell spell = game.getStack().getSpell(source.getSourceId());
         if (controller != null && spell != null) {
             ApproachOfTheSecondSunWatcher watcher
                     = game.getState().getWatcher(ApproachOfTheSecondSunWatcher.class);
             if (watcher != null
+                    && !spell.isCopy()
                     && watcher.getApproachesCast(controller.getId()) > 1
                     && spell.getFromZone() == Zone.HAND) {
                 // Win the game
@@ -78,7 +79,10 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 controller.gainLife(7, game, source);
 
                 // Put this into the library as the 7th from the top
-                Card spellCard = game.getStack().getSpell(source.getSourceId(), false).getCard();
+                if (spell.isCopy()) {
+                    return true;
+                }
+                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
                     controller.putCardOnTopXOfLibrary(spellCard, game, source, 7, true);
                 }
