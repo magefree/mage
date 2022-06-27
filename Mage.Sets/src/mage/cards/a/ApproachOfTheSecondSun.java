@@ -65,31 +65,28 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (controller != null && spell != null) {
-            ApproachOfTheSecondSunWatcher watcher
-                    = game.getState().getWatcher(ApproachOfTheSecondSunWatcher.class);
-            if (watcher != null
-                    && !spell.isCopy()
-                    && watcher.getApproachesCast(controller.getId()) > 1
-                    && spell.getFromZone() == Zone.HAND) {
-                // Win the game
-                controller.won(game);
-            } else {
-                // Gain 7 life and put this back into library.
-                controller.gainLife(7, game, source);
-
-                // Put this into the library as the 7th from the top
-                if (spell.isCopy()) {
-                    return true;
-                }
-                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-                if (spellCard != null) {
-                    controller.putCardOnTopXOfLibrary(spellCard, game, source, 7, true);
-                }
-            }
-            return true;
+        ApproachOfTheSecondSunWatcher watcher
+                = game.getState().getWatcher(ApproachOfTheSecondSunWatcher.class);
+        if (controller == null || spell == null || watcher == null) {
+            return false;
         }
-        return false;
+        //If this spell was cast from your hand and you've cast another spell named {this} this game
+        if (!spell.isCopy() //TODO: copied spells should not be "from" hand
+                && spell.getFromZone() == Zone.HAND
+                && watcher.getApproachesCast(controller.getId()) > 1) {
+            // Win the game
+            controller.won(game);
+        } else {
+            // Gain 7 life and put this back into library.
+            controller.gainLife(7, game, source);
+
+            // Put this into the library as the 7th from the top
+            Card spellCard = spell.getCard();
+            if (spellCard != null) { //No need to check copies, copies put to library cease to exist as state based action
+                controller.putCardOnTopXOfLibrary(spellCard, game, source, 7, true);
+            }
+        }
+        return true;
     }
 }
 
