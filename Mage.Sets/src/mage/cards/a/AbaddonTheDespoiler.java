@@ -1,9 +1,11 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.hint.Hint;
@@ -12,17 +14,10 @@ import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.card.CastFromZonePredicate;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.filter.predicate.mageobject.DynamicManaValuePredicate;
 
 import java.util.UUID;
 
@@ -31,13 +26,13 @@ import java.util.UUID;
  */
 public final class AbaddonTheDespoiler extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterSpell();
+    private static final FilterSpell baseFilter = new FilterSpell();
 
     static {
-        filter.add(new CastFromZonePredicate(Zone.HAND));
-        filter.add(AbaddonTheDespoilerPredicate.instance);
+        baseFilter.add(new CastFromZonePredicate(Zone.HAND));
     }
 
+    //TODO: this hint isn't used. Use it or clean it up
     private static final Hint hint = new ValueHint(
             "Total life lost by opponents this turn", OpponentsLostLifeCount.instance
     );
@@ -55,12 +50,16 @@ public final class AbaddonTheDespoiler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Mark of the Chaos Ascendant — During your turn, spells you cast from your hand with mana value X or less have cascade, where X is the total amount of life your opponents have lost this turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        FilterSpell filter = baseFilter.copy();
+        Ability markOfTheChaosAscendant = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySpellsEffect(new CascadeAbility(false), filter),
                 MyTurnCondition.instance, "during your turn, spells you cast from " +
                 "your hand with mana value X or less have cascade, where X is the " +
                 "total amount of life your opponents have lost this turn"
-        )));
+        ));
+        filter.add(new DynamicManaValuePredicate(ComparisonType.FEWER_THAN, new IntPlusDynamicValue(1, OpponentsLostLifeCount.instance),
+                markOfTheChaosAscendant, null));
+        this.addAbility(markOfTheChaosAscendant);
     }
 
     private AbaddonTheDespoiler(final AbaddonTheDespoiler card) {
@@ -70,17 +69,5 @@ public final class AbaddonTheDespoiler extends CardImpl {
     @Override
     public AbaddonTheDespoiler copy() {
         return new AbaddonTheDespoiler(this);
-    }
-}
-
-enum AbaddonTheDespoilerPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.getManaValue() <= game
-                .getState()
-                .getWatcher(PlayerLostLifeWatcher.class)
-                .getAllOppLifeLost(input.getControllerId(), game);
     }
 }
