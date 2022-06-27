@@ -32,7 +32,7 @@ public final class Seasinger extends CardImpl {
     private static final FilterPermanent filter
             = new FilterPermanent("Island");
     private static final FilterPermanent filter2
-            = new FilterCreaturePermanent("creature whose controler controls an Island");
+            = new FilterCreaturePermanent("creature whose controller controls an Island");
 
     static {
         filter.add(SubType.ISLAND.getPredicate());
