@@ -2592,8 +2592,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
         FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
-        List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
-        return blockers;
+        return game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
     }
 
     protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
