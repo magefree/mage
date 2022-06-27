@@ -7,7 +7,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
-import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.MulliganType;
@@ -18,7 +17,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,14 +32,14 @@ public class TestPlayRandomGame extends MageTestBase {
 
     @Test
     @Ignore
-    public void playGames() throws GameException, FileNotFoundException {
+    public void playGames() {
         for (int i = 1; i < 100; i++) {
             logger.info("Playing game: " + i);
             playOneGame();
         }
     }
 
-    private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
+    private void playOneGame() throws IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
 
         Player computerA = createRandomPlayer("ComputerA");
