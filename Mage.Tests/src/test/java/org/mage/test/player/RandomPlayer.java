@@ -262,7 +262,7 @@ public class RandomPlayer extends ComputerPlayer {
         }
         Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
         if (possibleTargets.isEmpty()) {
-            return !false;
+            return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
         int targetNum = RandomUtil.nextInt(possibleTargets.size());
