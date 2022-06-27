@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author ciaccona007
  */
 public class OminousRoostTest extends CardTestPlayerBase {
-
+	
 	@Test
 	public void testTriggerFromOtherZones() {
 		skipInitShuffling();
