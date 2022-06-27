@@ -466,9 +466,29 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
-        if (Outcome.PutManaInPool == outcome) {
-            if (currentlyUnpaidMana != null
-                    && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
+        // Try to autopay for mana
+        if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
+            // Check that the spell currently being paid for does NOT have sunburst
+            // See: https://github.com/magefree/mage/issues/9070
+            boolean sunburst = false;
+            if (!game.getStack().isEmpty()) {
+                if (game.getStack().getFirst() instanceof Spell) {
+                    Spell spellBeingCast = (Spell) game.getStack().getFirst();
+                    if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
+                        Card cardBeingCast = game.getCard(spellBeingCast.getSourceId());
+                        if (cardBeingCast != null) {
+                            Abilities<Ability> abilities = cardBeingCast.getAbilities(game);
+                            for (Ability ability : abilities) {
+                                if (ability instanceof SunburstAbility) {
+                                    sunburst = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (!sunburst && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;
             }
         }
@@ -1503,19 +1523,19 @@ public class HumanPlayer extends PlayerImpl {
             if (!useableAbilities.isEmpty()) {
                 // Added to ensure that mana is not being autopaid for Sunburst cards since the color choices matter
                 // See https://github.com/magefree/mage/issues/9070
-                boolean suburst = false;
+                boolean sunburst = false;
                 Card cardBeingCast = game.getCard(abilityToCast.getSourceId());
                 if (cardBeingCast != null) {
                     Abilities<Ability> abilities = cardBeingCast.getAbilities(game);
                     for (Ability ability : abilities) {
                         if (ability instanceof SunburstAbility) {
-                            suburst = true;
+                            sunburst = true;
                             break;
                         }
                     }
                 }
 
-                if (!suburst) {
+                if (!sunburst) {
                     useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 }
                 currentlyUnpaidMana = unpaid;
