@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
@@ -1500,7 +1501,23 @@ public class HumanPlayer extends PlayerImpl {
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
-                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                // Added to ensure that mana is not being autopaid for Sunburst cards since the color choices matter
+                // See https://github.com/magefree/mage/issues/9070
+                boolean suburst = false;
+                Card cardBeingCast = game.getCard(abilityToCast.getSourceId());
+                if (cardBeingCast != null) {
+                    Abilities<Ability> abilities = cardBeingCast.getAbilities(game);
+                    for (Ability ability : abilities) {
+                        if (ability instanceof SunburstAbility) {
+                            suburst = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!suburst) {
+                    useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                }
                 currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
                 currentlyUnpaidMana = null;
