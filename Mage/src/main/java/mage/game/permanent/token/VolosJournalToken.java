@@ -18,13 +18,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
 public final class VolosJournalToken extends TokenImpl {
-
-    private static final FilterCard filter = new FilterCard("spells");
 
     public VolosJournalToken() {
         super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
@@ -51,6 +50,7 @@ public final class VolosJournalToken extends TokenImpl {
     }
 
     public static Set<String> getNotedTypes(Game game, UUID sourceId, int zcc) {
+        // TODO: This returns different values depending on if it's being called by apply() or getText().
         String key = "notedTypes_" + sourceId + '_' + zcc;
         Object value = game.getState().getValue(key);
         if (value == null) {
@@ -99,31 +99,42 @@ class VolosJournalTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<String> types = VolosJournalToken.getNotedTypes(game, source);
         Spell spell = (Spell) getValue("spellCast");
         if (spell == null) {
             return false;
         }
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return true;
+        }
+
+        Set<String> types = VolosJournalToken.getNotedTypes(game, source);
+
         ChoiceCreatureType choice = new ChoiceCreatureType();
-        choice.getChoices().removeIf(types::contains);
+
+        // By default ChoiceCreatureType pre-populates all creatures into choices
+        // Limit the available choices to those on the creature being cast
         if (!spell.isAllCreatureTypes(game)) {
-            spell.getSubtype(game)
+            choice.setChoices(
+                    spell.getSubtype(game)
                     .stream()
                     .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
                     .map(SubType::getDescription)
-                    .forEach(s -> choice.getChoices().removeIf(s::equals));
+                    .collect(Collectors.toSet())
+            );
         }
+        // Remove from the possible choices the subtypes which have already been chosen.
+        choice.getChoices().removeIf(types::contains);
+
         switch (choice.getChoices().size()) {
             case 0:
                 return false;
             case 1:
-                types.add(RandomUtil.randomFromCollection(choice.getChoices()));
+                types.add(choice.getChoices().stream().findFirst().get());
                 return true;
         }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
+
         player.choose(outcome, choice, game);
         types.add(choice.getChoice());
         return true;
