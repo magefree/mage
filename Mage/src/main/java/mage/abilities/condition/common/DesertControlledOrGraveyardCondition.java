@@ -48,21 +48,21 @@ public enum DesertControlledOrGraveyardCondition implements Condition {
         public String getText(Game game, Ability ability) {
             StringBuilder sb = new StringBuilder();
             if (game.getBattlefield().contains(filter, ability, game, 1)) {
-                sb.append("You control a Desert");
+                sb.append("You control a Desert.");
             }
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null && player.getGraveyard().count(filter2, game) > 0) {
                 if (sb.length() > 0) {
                     sb.append("<br>");
                 }
-                sb.append("You have a Desert card in your graveyard");
+                sb.append("You have a Desert card in your graveyard.");
             }
             return sb.toString();
         }
 
         @Override
         public Hint copy() {
-            return null;
+            return this;
         }
     }
 }
