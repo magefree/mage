@@ -52,7 +52,7 @@ class CracklingDoomEffect extends OneShotEffect {
 
     public CracklingDoomEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures they control";
+        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures that player controls";
     }
 
     public CracklingDoomEffect(final CracklingDoomEffect effect) {

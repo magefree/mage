@@ -42,7 +42,7 @@ public final class GhaveGuruOfSpores extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Ghave, Guru of Spores enters the battlefield with five +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), "with five +1/+1 counters on it"));
 
         // {1}, Remove a +1/+1 counter from a creature you control: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));

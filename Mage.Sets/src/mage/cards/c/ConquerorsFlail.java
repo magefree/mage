@@ -1,8 +1,6 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,17 +12,18 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class ConquerorsFlail extends CardImpl {
@@ -35,10 +34,12 @@ public final class ConquerorsFlail extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each color among permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new ConquerorsFlailColorCount(), new ConquerorsFlailColorCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
+                ConquerorsFlailColorCount.instance, ConquerorsFlailColorCount.instance, Duration.WhileOnBattlefield
+        )));
 
         // As long as Conqueror's Flail is attached to a creature, your opponents can't cast spells during your turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConquerorsFlailEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConquerorsFlailEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
@@ -54,38 +55,18 @@ public final class ConquerorsFlail extends CardImpl {
     }
 }
 
-class ConquerorsFlailColorCount implements DynamicValue {
+enum ConquerorsFlailColorCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        int count = 0;
-        if (controller != null) {
-            Mana mana = new Mana();
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {
-                    mana.increaseBlack();
-                    count++;
-                }
-                if (mana.getBlue() == 0 && permanent.getColor(game).isBlue()) {
-                    mana.increaseBlue();
-                    count++;
-                }
-                if (mana.getRed() == 0 && permanent.getColor(game).isRed()) {
-                    mana.increaseRed();
-                    count++;
-                }
-                if (mana.getGreen() == 0 && permanent.getColor(game).isGreen()) {
-                    mana.increaseGreen();
-                    count++;
-                }
-                if (mana.getWhite() == 0 && permanent.getColor(game).isWhite()) {
-                    mana.increaseWhite();
-                    count++;
-                }
-            }
-        }
-        return count;
+        ObjectColor color = new ObjectColor("");
+        game.getBattlefield()
+                .getAllActivePermanents(sourceAbility.getControllerId())
+                .stream()
+                .map(permanent -> permanent.getColor(game))
+                .forEach(color::addColor);
+        return color.getColorCount();
     }
 
     @Override
@@ -95,12 +76,12 @@ class ConquerorsFlailColorCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each color among permanents you control";
+        return "color among permanents you control";
     }
 
     @Override
     public ConquerorsFlailColorCount copy() {
-        return new ConquerorsFlailColorCount();
+        return this;
     }
 }
 
@@ -108,7 +89,7 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
 
     public ConquerorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As long as {this} is attached to a creature, your opponents can't cast spells during your turn";
+        staticText = "as long as {this} is attached to a creature, your opponents can't cast spells during your turn";
     }
 
     public ConquerorsFlailEffect(final ConquerorsFlailEffect effect) {
@@ -132,20 +113,15 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        boolean isAttached = false;
-        if (permanent != null) {
-            UUID attachedTo = permanent.getAttachedTo();
-            Permanent attachment = game.getPermanent(attachedTo);
-            if (attachment != null) {
-                isAttached = true;
-            }
-        }
-
-        if (isAttached && game.isActivePlayer(source.getControllerId())
-                && game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            return true;
-        }
-        return false;
+        return game.isActivePlayer(source.getControllerId())
+                && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
+                && Optional
+                .of(source.getSourcePermanentIfItStillExists(game))
+                .filter(Objects::nonNull)
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .map(permanent -> permanent.isCreature(game))
+                .orElse(false);
     }
 }
