@@ -14,12 +14,17 @@ import static org.mage.test.player.TestPlayer.TARGET_SKIP;
  * @author the-red-lily
  */
 public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
+
     @Test
     public void testWinGameTest() {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 14);
+
+        //Otherwise, put {this} into its owner's library seventh from the top and you gain 7 life.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
+
+        //If this spell was cast from your hand and you've cast another spell named {this} this game, you win the game.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
 
         setStrictChooseMode(true);
@@ -40,8 +45,11 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Approach of the Second Sun");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 7);
+
+        //First cast of Approach for playerA
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        //First cast of Approach for playerB
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Approach of the Second Sun");
 
         setStrictChooseMode(true);
@@ -61,6 +69,8 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 1);
         addCard(Zone.HAND, playerA, "Concentrate", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 15);
+
+        //Cast Approach then draw 6
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
         checkLibraryCount("Approach of the Second Sun went to library",
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 1);
@@ -69,6 +79,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
 
         checkLibraryCount("Approach of the Second Sun is not in top 6 cards",
                 3, PhaseStep.UPKEEP, playerA, "Approach of the Second Sun", 1);
+
         //Draw step
         checkLibraryCount("Approach of the Second Sun is 7th card",
                 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 0);
@@ -96,6 +107,8 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Concentrate", 2);
         addCard(Zone.HAND, playerA, "Equal Treatment", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 24);
+
+        //Cast Approach then draw 7 cards
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Concentrate", true); //Draw 3
         checkStackSize("Empty Stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
@@ -104,6 +117,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equal Treatment", true); //Draw 1
         checkStackSize("Empty Stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
 
+        //This card changed zones, so it counts as “another spell” named Approach of the Second Sun.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
 
         setStrictChooseMode(true);
@@ -127,14 +141,16 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 1);
         addCard(Zone.HAND, playerA, "Concentrate", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 15);
+
+        //Cast Approach and draw 3 so all that is left in our library is Approach
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Concentrate"); //Draw 3
 
         //2 players, so playerA gets draw step on turn 3
         checkLibraryCount("Approach of the Second Sun is not in top 3 cards",
                 3, PhaseStep.UPKEEP, playerA, "Approach of the Second Sun", 1);
+
         //Draw step
-        showLibrary("Library", 3, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkLibraryCount("Approach of the Second Sun is 4th card",
                 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 0);
         checkHandCardCount("Approach of the Second Sun is 4th card",
@@ -162,6 +178,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Finale of Promise", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mystic Monastery", 25);
 
+        //first may have been cast from anywhere.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Finale of Promise", true);
         //You may cast up to one target instant card and/or up to one target sorcery card from your graveyard each with mana value X or less without paying their mana costs. If a spell cast this way would be put into your graveyard, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies.
         setChoice(playerA, "X=7"); //each with mana value X or less
@@ -173,6 +190,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 1);
 
         //This casting should not win the game, just gain life
+        // The second Approach of the Second Sun that you cast must be cast from your hand,
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Finale of Promise", true);
         setChoice(playerA, "X=7"); //each with mana value X or less
         setChoice(playerA, "Yes"); //You may cast
@@ -205,6 +223,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mystic Monastery", 25);
         addCard(Zone.BATTLEFIELD, playerA, "Demilich");
 
+        //Copied CARD counts as first Approach cast
         attack(1, playerA, "Demilich");
         //Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
         addTarget(playerA, "Approach of the Second Sun"); //exile up to one target instant or sorcery card from your graveyard. Copy it.
@@ -213,6 +232,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         checkLibraryCount("Copied Card Approach of the Second Sun cast from graveyard does not go to library",
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 0);
 
+        //Copied CARD does not count as second Approach cast
         attack(3, playerA, "Demilich");
         //Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
         addTarget(playerA, "Approach of the Second Sun"); //exile up to one target instant or sorcery card from your graveyard. Copy it.
@@ -244,6 +264,8 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 2);
         addCard(Zone.HAND, playerA, "Fork", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mystic Monastery", 18);
+
+        //First copy doesn't cause first cast of Approach to win the game
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fork", "Approach of the Second Sun", "Cast Approach of the Second Sun"); //Copy Approach of the Second Sun
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 2); //Wait for Fork to copy and for copy to resolve
@@ -257,6 +279,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         checkLibraryCount("Approach of the Second Sun goes to library",
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 1);
 
+        //Second copy doesn't win the game
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Approach of the Second Sun");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fork", "Approach of the Second Sun", "Cast Approach of the Second Sun"); //Copy Approach of the Second Sun
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 2); //Wait for Fork to copy and for copy to resolve
@@ -287,6 +310,8 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 2);
         addCard(Zone.HAND, playerA, "Counterspell", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 16);
+
+        //If your first Approach of the Second Sun was countered, you'll still win the game as your second one resolves.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell", "Approach of the Second Sun", "Cast Approach of the Second Sun");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
@@ -313,6 +338,8 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 2);
         addCard(Zone.HAND, playerA, "Counterspell", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 16);
+
+        // If the second one you cast is countered, you won't win the game.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell", "Approach of the Second Sun", "Cast Approach of the Second Sun");
