@@ -199,6 +199,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Clock", 226, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Migration Path", 301, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mimic Vat", 372, Rarity.RARE, mage.cards.m.MimicVat.class));
+        cards.add(new SetCardInfo("Misfortune Teller", 38, Rarity.RARE, mage.cards.m.MisfortuneTeller.class));
         cards.add(new SetCardInfo("Mitotic Slime", 302, Rarity.RARE, mage.cards.m.MitoticSlime.class));
         cards.add(new SetCardInfo("Mossfire Valley", 414, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 415, Rarity.RARE, mage.cards.m.MosswortBridge.class));
