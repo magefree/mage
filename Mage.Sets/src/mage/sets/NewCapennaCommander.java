@@ -166,6 +166,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inkfathom Witch", 342, Rarity.UNCOMMON, mage.cards.i.InkfathomWitch.class));
         cards.add(new SetCardInfo("Intangible Virtue", 204, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Izzet Signet", 369, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jailbreak", 17, Rarity.RARE, mage.cards.j.Jailbreak.class));
         cards.add(new SetCardInfo("Jenara, Asura of War", 343, Rarity.MYTHIC, mage.cards.j.JenaraAsuraOfWar.class));
         cards.add(new SetCardInfo("Jund Panorama", 408, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Shrine", 409, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
