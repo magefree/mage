@@ -27,6 +27,7 @@ public final class MythosOfBrokkos extends CardImpl {
 
     public MythosOfBrokkos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
+        this.setCaresAboutManaColorManualOverride(true);
 
         // If {U}{B} was spent to cast Mythos of Brokkos, search your library for a card, put that card into your graveyard, then shuffle your library.
         // Return up to two permanent cards from your graveyard to your hand.

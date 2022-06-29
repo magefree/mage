@@ -29,6 +29,7 @@ public final class CankerousThirst extends CardImpl {
 
     public CankerousThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B/G}");
+        this.setCaresAboutManaColorManualOverride(true);
 
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new CankerousThirstEffect());

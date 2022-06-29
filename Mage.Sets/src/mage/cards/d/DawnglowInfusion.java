@@ -21,6 +21,7 @@ public final class DawnglowInfusion extends CardImpl {
 
     public DawnglowInfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/W}");
+        this.setCaresAboutManaColorManualOverride(true);
 
 
         // You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it.

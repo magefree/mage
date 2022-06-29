@@ -23,6 +23,7 @@ public final class MythosOfNethroi extends CardImpl {
 
     public MythosOfNethroi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
+        this.setCaresAboutManaColorManualOverride(true);
 
         // Destroy target nonland permanent if it's a creature or if {G}{W} was spent to cast this spell.
         this.getSpellAbility().addEffect(new MythosOfNethroiEffect());
