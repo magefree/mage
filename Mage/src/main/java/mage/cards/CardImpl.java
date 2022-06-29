@@ -54,7 +54,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected List<UUID> attachments = new ArrayList<>();
     // True if the card has effects which care about the color of mana spent on it (e.g. Sunburst).
     // This value is used for any cards which have custom ability/effects since these cannot be automatically found.
-    protected boolean setCaresAboutManaColorManualOverride;
+    protected boolean caresAboutManaColorManualOverride;
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -132,7 +132,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
-        setCaresAboutManaColorManualOverride = card.setCaresAboutManaColorManualOverride;
+        caresAboutManaColorManualOverride = card.caresAboutManaColorManualOverride;
 
         this.attachments.addAll(card.attachments);
     }
@@ -904,7 +904,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      */
     public boolean caresAboutManaColor() {
         // Card which has been manually set as caring about mana color.
-        if (setCaresAboutManaColorManualOverride) {
+        if (caresAboutManaColorManualOverride) {
             return true;
         }
 
@@ -943,9 +943,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      * MUST be used for cards that implement custom abilities/effects that care about mana color (e.g. Cankerous Thirst)
      * Does not have to be used for cards that use common abilities/effects (e.g. Ogre Savant).
      *
-     * @param setCaresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
+     * @param caresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
      */
-    public void setCaresAboutManaColorManualOverride(boolean setCaresAboutManaColorManualOverride) {
-        this.setCaresAboutManaColorManualOverride = setCaresAboutManaColorManualOverride;
+    public void setCaresAboutManaColorManualOverride(boolean caresAboutManaColorManualOverride) {
+        this.caresAboutManaColorManualOverride = caresAboutManaColorManualOverride;
     }
 }
