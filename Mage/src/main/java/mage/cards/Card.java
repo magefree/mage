@@ -87,6 +87,13 @@ public interface Card extends MageObject {
      */
     boolean caresAboutManaColor();
 
+    /**
+     * Manually set if a card cares about the mana color.
+     * MUST be used for cards that implement custom abilities/effects that care about mana color (e.g. Cankerous Thirst)
+     * Does not have to be used for cards that use common abilities/effects (e.g. Ogre Savant).
+     *
+     * @param setCaresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
+     */
     void setCaresAboutManaColorManualOverride(boolean setCaresAboutManaColorManualOverride);
 
     void assignNewId();
