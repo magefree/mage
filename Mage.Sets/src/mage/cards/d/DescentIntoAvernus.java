@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -71,8 +70,7 @@ class DescentIntoAvernusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = Optional
-                .of(source.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+                .ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.DESCENT))
                 .orElse(0);

@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -69,8 +68,7 @@ enum MyrkulLordOfBonesCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return Optional.of(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(game.getPlayer(source.getControllerId()))
                 .map(Player::getLife)
                 .map(x -> 2 * x >= game.getStartingLife())
                 .orElse(false);

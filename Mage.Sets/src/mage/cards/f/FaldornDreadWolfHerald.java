@@ -21,7 +21,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.WolfToken;
 import mage.game.stack.Spell;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -90,8 +89,7 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
                 return eEvent.getFromZone() == Zone.EXILED && eEvent.getTarget().isLand(game);
             case SPELL_CAST:
                 return Optional
-                        .of(game.getSpell(event.getTargetId()))
-                        .filter(Objects::nonNull)
+                        .ofNullable(game.getSpell(event.getTargetId()))
                         .map(Spell::getFromZone)
                         .equals(Zone.EXILED);
         }

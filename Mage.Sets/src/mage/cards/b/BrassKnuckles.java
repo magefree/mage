@@ -64,8 +64,7 @@ enum BrassKnucklesCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return Optional
-                .of(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)

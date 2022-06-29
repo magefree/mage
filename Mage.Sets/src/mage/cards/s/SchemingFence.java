@@ -140,7 +140,7 @@ class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
 
-        return Optional.of(chosenPermanentMOR)
+        return Optional.ofNullable(chosenPermanentMOR)
                 .map(MageObjectReference.class::cast)
                 .filter(mor -> mor.zoneCounterIsCurrent(game))
                 .map(MageObjectReference::getSourceId) // TODO: Are both of this line and the next one necessary?
@@ -177,7 +177,7 @@ class SchemingFenceGainEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        Permanent chosenPermanent = Optional.of(chosenPermanentMOR)
+        Permanent chosenPermanent = Optional.ofNullable(chosenPermanentMOR)
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getPermanent(game))
                 .orElse(null);

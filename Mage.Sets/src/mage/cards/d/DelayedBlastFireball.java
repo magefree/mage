@@ -56,7 +56,7 @@ enum DelayedBlastFireballValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
-                .of(sourceAbility.getSourceObjectIfItStillExists(game))
+                .ofNullable(sourceAbility.getSourceObjectIfItStillExists(game))
                 .filter(Spell.class::isInstance)
                 .map(Spell.class::cast)
                 .map(Spell::getFromZone)
