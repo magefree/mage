@@ -475,7 +475,7 @@ public class HumanPlayer extends PlayerImpl {
                 Spell spellBeingCast = (Spell) game.getStack().getFirst();
                 if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
                     CardImpl card = (CardImpl) game.getCard(spellBeingCast.getSourceId());
-                    caresAboutManaColor = card.caresAboutManaColor();
+                    caresAboutManaColor = card.caresAboutManaColor(game);
                 }
             }
 
@@ -1517,7 +1517,7 @@ public class HumanPlayer extends PlayerImpl {
                 boolean caresAboutManaColor = false;
                 if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
                     CardImpl card = (CardImpl) game.getCard(abilityToCast.getSourceId());
-                    caresAboutManaColor = card.caresAboutManaColor();
+                    caresAboutManaColor = card.caresAboutManaColor(game);
                 }
 
                 // Don't auto-pay if the spell cares about the color

@@ -902,7 +902,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      *
      * @return Whether the given spell cares about the mana color used to pay for it.
      */
-    public boolean caresAboutManaColor() {
+    public boolean caresAboutManaColor(Game game) {
         // Card which has been manually set as caring about mana color.
         if (caresAboutManaColorManualOverride) {
             return true;
@@ -913,24 +913,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return true;
         }
 
-        // Handle abilities (ConditionalInterveningIfTriggeredAbility, and Modular
+        // Look at each individual ability
         //      ConditionalInterveningIfTriggeredAbility (e.g. Ogre Savant)
-        //      Sunburst (e.g. Pentad Prism)
+        //      Spellability with ManaWasSpentCondition (e.g. Firespout)
         //      Modular (only Arcbound Wanderer)
-        for (Ability ability : abilities) {
+        for (Ability ability : getAbilities(game)) {
             if (((AbilityImpl) ability).caresAboutManaColor()) {
                 return true;
-            }
-        }
-
-        // Handle spell abilities
-        //      E.g. Firespout
-        if (spellAbility != null) {
-            // Capture instant/sorcery spells which have set this using standard
-            for (Effect effect : spellAbility.getEffects()) {
-                if (effect.caresAboutManaColor()) {
-                    return true;
-                }
             }
         }
 
