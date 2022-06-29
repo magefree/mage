@@ -589,11 +589,4 @@ public interface Ability extends Controllable, Serializable {
     MageIdentifier getIdentifier();
 
     AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
-
-    /**
-     * Needed for disabling auto-mana payments for things like Sunburst.
-     *
-     * @return true if the ability is impact by the color of the mana used to pay for it.
-     */
-    boolean caresAboutManaColor();
 }

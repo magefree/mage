@@ -74,28 +74,6 @@ public interface Card extends MageObject {
 
     boolean isNightCard();
 
-    /**
-     * This is used for disabling auto-payments for any any cards which care about the color
-     * of the mana used to cast it beyond color requirements. E.g. Sunburst, Adamant, Flamespout.
-     * <p>
-     * This is <b>not</b> about which colors are in the mana costs.
-     * <p>
-     * E.g. "Pentad Prism" {2} will return true since it has Sunburst, but "Abbey Griffin" {3}{W} will
-     * return false since the mana spent on the generic cost has no impact on the card.
-     *
-     * @return Whether the given spell cares about the mana color used to pay for it.
-     */
-    boolean caresAboutManaColor();
-
-    /**
-     * Manually set if a card cares about the mana color.
-     * MUST be used for cards that implement custom abilities/effects that care about mana color (e.g. Cankerous Thirst)
-     * Does not have to be used for cards that use common abilities/effects (e.g. Ogre Savant).
-     *
-     * @param setCaresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
-     */
-    void setCaresAboutManaColorManualOverride(boolean setCaresAboutManaColorManualOverride);
-
     void assignNewId();
 
     void addInfo(String key, String value, Game game);

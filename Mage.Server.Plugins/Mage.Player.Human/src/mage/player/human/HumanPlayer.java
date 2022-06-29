@@ -474,7 +474,8 @@ public class HumanPlayer extends PlayerImpl {
             if (!game.getStack().isEmpty() && game.getStack().getFirst() instanceof Spell) {
                 Spell spellBeingCast = (Spell) game.getStack().getFirst();
                 if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
-                    caresAboutManaColor = spellBeingCast.caresAboutManaColor();
+                    CardImpl card = (CardImpl) game.getCard(spellBeingCast.getSourceId());
+                    caresAboutManaColor = card.caresAboutManaColor();
                 }
             }
             // If the spell
@@ -1513,11 +1514,10 @@ public class HumanPlayer extends PlayerImpl {
             if (!useableAbilities.isEmpty()) {
                 // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
                 // See https://github.com/magefree/mage/issues/9070
-                boolean caresAboutManaColor;
+                boolean caresAboutManaColor = false;
                 if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
-                    caresAboutManaColor = ((Spell) abilityToCast).caresAboutManaColor();
-                } else {
-                    caresAboutManaColor = false;
+                    CardImpl card = (CardImpl) game.getCard(abilityToCast.getSourceId());
+                    caresAboutManaColor = card.caresAboutManaColor();
                 }
 
                 // Don't auto-pay if the spell cares about the color
