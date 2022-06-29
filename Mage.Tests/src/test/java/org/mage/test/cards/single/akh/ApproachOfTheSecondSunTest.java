@@ -8,6 +8,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 import static org.mage.test.player.TestPlayer.TARGET_SKIP;
 
 /**
+ * Tests for {@link mage.cards.a.ApproachOfTheSecondSun}
+ * <p>
  * Basic functionality tests, bug test, and all Gatherer rulings as of 6/28/2022
  *
  * @author stravant
@@ -242,7 +244,7 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
                 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 0);
 
         //This casting should win the game and not gain life
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Approach of the Second Sun", true);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Approach of the Second Sun");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
