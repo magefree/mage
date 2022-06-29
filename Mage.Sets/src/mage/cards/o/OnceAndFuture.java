@@ -22,6 +22,7 @@ public final class OnceAndFuture extends CardImpl {
 
     public OnceAndFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.setCaresAboutManaColorManualOverride(true);
 
         // Return target card from your graveyard to your hand. Put up to one other target card from your graveyard on top of your library. Exile Once and Future.
         // Adamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile Once and Future.

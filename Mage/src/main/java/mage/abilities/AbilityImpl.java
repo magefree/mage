@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.MageIdentifier;
 import mage.MageObject;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -1440,7 +1441,7 @@ public abstract class AbilityImpl implements Ability {
     /**
      * Needed for disabling auto-mana payments for things like Sunburst.
      *
-     * @return true if the ability is impact by the color of the mana used to pay for it.
+     * @return true if the ability is impacted by the color of the mana used to pay for it.
      */
     public boolean caresAboutManaColor() {
         return false;

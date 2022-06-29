@@ -26,6 +26,7 @@ public final class CauldronsGift extends CardImpl {
 
     public CauldronsGift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        this.setCaresAboutManaColorManualOverride(true);
 
         // Adamant — If at least three black mana was spent to cast this spell, put the top four cards of your library into your graveyard.
         // You may choose a creature card in your graveyard. If you do, return it to the battlefield with an additional +1/+1 counter on it.
