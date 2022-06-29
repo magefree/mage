@@ -98,6 +98,19 @@ public class Spell extends StackObjectImpl implements Card {
         this.countered = false;
     }
 
+    public boolean caresAboutManaColor() {
+        for (Card card : spellCards) {
+            if (card.caresAboutManaColor()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setCaresAboutManaColor(boolean caresAboutManaColor) {
+        // This should not be called for a Spell, and is left blank on purpose.
+    }
+
     public Spell(final Spell spell) {
         this.id = spell.id;
         this.zoneChangeCounter = spell.zoneChangeCounter;

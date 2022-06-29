@@ -5,9 +5,9 @@ import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -30,7 +30,6 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import mage.abilities.keyword.ReconfigureAbility;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -53,6 +52,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
+    // True if the card has effects which care about the color of mana spent on it (e.g. Sunburst).
+    // This value is used for any cards which have custom ability/effects since these cannot be automatically found.
+    protected boolean setCaresAboutManaColorManualOverride;
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -130,6 +132,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
+        setCaresAboutManaColorManualOverride = card.setCaresAboutManaColorManualOverride;
 
         this.attachments.addAll(card.attachments);
     }
@@ -886,5 +889,52 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
+    }
+
+    public boolean caresAboutManaColor() {
+        // Card which has been manually set as caring about mana color.
+        if (setCaresAboutManaColorManualOverride) {
+            return true;
+        }
+
+        // SunburstAbility
+        if (abilities.containsClass(SunburstAbility.class)) {
+            return true;
+        }
+
+        // Handle abilities (ConditionalInterveningIfTriggeredAbility, and Modular
+        //      ConditionalInterveningIfTriggeredAbility (e.g. Ogre Savant)
+        //      Sunburst (e.g. Pentad Prism)
+        //      Modular (only Arcbound Wanderer)
+        for (Ability ability : abilities) {
+            if (ability.caresAboutManaColor()) {
+                return true;
+            }
+        }
+
+        // Handle spell abilities
+        //      E.g. Firespout
+        if (spellAbility != null) {
+            // Capture instant/sorcery spells which have set this using standard
+            for (Effect effect : spellAbility.getEffects()) {
+                if (effect.caresAboutManaColor()) {
+                    return true;
+                }
+            }
+        }
+
+        // Only way to get here is if none of the effects on the card care about mana color.
+        return false;
+    }
+
+    /**
+     * Manually set if a card cares about the mana color.
+     * MUST be used for cards that implement custom abilities/effects that care about mana color (e.g. Cankerous Thirst)
+     * Does not have to be used for cards that use common abilities/effects (e.g. Ogre Savant).
+     *
+     * @param setCaresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
+     */
+    public void setCaresAboutManaColorManualOverride(boolean setCaresAboutManaColorManualOverride) {
+        this.setCaresAboutManaColorManualOverride = setCaresAboutManaColorManualOverride;
     }
 }

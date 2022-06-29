@@ -1436,4 +1436,9 @@ public abstract class AbilityImpl implements Ability {
         this.identifier = identifier;
         return this;
     }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        return false;
+    }
 }

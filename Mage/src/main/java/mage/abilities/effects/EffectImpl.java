@@ -2,11 +2,13 @@ package mage.abilities.effects;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
+import mage.abilities.condition.Condition;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -124,5 +126,28 @@ public abstract class EffectImpl implements Effect {
     @Override
     public String getConcatPrefix() {
         return this.concatPrefix;
+    }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        Field conditionField = null;
+        try {
+            conditionField = this.getClass().getDeclaredField("condition");
+        } catch (NoSuchFieldException noSuchFieldException) {
+            // Intentionally ignored
+        }
+
+        // If the effect had a condition, check if it's an AdamantCondition of ManaWasSpentCondition
+        if (conditionField != null) {
+            try {
+                Condition condition = (Condition) conditionField.get(this);
+                if (condition.caresAboutManaColor()) {
+                    return true;
+                }
+            } catch (IllegalAccessException ex) {
+                // TODO: I don't think I should get to here
+            }
+        }
+        return false;
     }
 }

@@ -67,4 +67,6 @@ public interface Effect extends Serializable, Copyable<Effect> {
     Effect concatBy(String concatPrefix);
 
     String getConcatPrefix();
+
+    boolean caresAboutManaColor();
 }

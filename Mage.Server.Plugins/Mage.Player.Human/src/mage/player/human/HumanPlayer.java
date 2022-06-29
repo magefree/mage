@@ -468,27 +468,17 @@ public class HumanPlayer extends PlayerImpl {
 
         // Try to autopay for mana
         if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
-            // Check that the spell currently being paid for does NOT have sunburst
+            // Check check if the spell being paid for cares about the color of mana being paid
             // See: https://github.com/magefree/mage/issues/9070
-            boolean sunburst = false;
-            if (!game.getStack().isEmpty()) {
-                if (game.getStack().getFirst() instanceof Spell) {
-                    Spell spellBeingCast = (Spell) game.getStack().getFirst();
-                    if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
-                        Card cardBeingCast = game.getCard(spellBeingCast.getSourceId());
-                        if (cardBeingCast != null) {
-                            Abilities<Ability> abilities = cardBeingCast.getAbilities(game);
-                            for (Ability ability : abilities) {
-                                if (ability instanceof SunburstAbility) {
-                                    sunburst = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
+            boolean caresAboutManaColor = false;
+            if (!game.getStack().isEmpty() && game.getStack().getFirst() instanceof Spell) {
+                Spell spellBeingCast = (Spell) game.getStack().getFirst();
+                if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
+                    caresAboutManaColor = spellBeingCast.caresAboutManaColor();
                 }
             }
-            if (!sunburst && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
+            // If the spell
+            if (!caresAboutManaColor && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;
             }
         }
@@ -1521,21 +1511,17 @@ public class HumanPlayer extends PlayerImpl {
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
-                // Added to ensure that mana is not being autopaid for Sunburst cards since the color choices matter
+                // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
                 // See https://github.com/magefree/mage/issues/9070
-                boolean sunburst = false;
-                Card cardBeingCast = game.getCard(abilityToCast.getSourceId());
-                if (cardBeingCast != null) {
-                    Abilities<Ability> abilities = cardBeingCast.getAbilities(game);
-                    for (Ability ability : abilities) {
-                        if (ability instanceof SunburstAbility) {
-                            sunburst = true;
-                            break;
-                        }
-                    }
+                boolean caresAboutManaColor;
+                if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
+                    caresAboutManaColor = ((Spell) abilityToCast).caresAboutManaColor();
+                } else {
+                    caresAboutManaColor = false;
                 }
 
-                if (!sunburst) {
+                // Don't auto-pay if the spell cares about the color
+                if (!caresAboutManaColor) {
                     useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 }
                 currentlyUnpaidMana = unpaid;
