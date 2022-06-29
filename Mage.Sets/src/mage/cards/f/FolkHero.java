@@ -17,7 +17,6 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,8 +62,7 @@ enum FolkHeroPredicate implements ObjectSourcePlayerPredicate<Spell> {
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
         return Optional
-                .of(input.getSource().getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .ofNullable(input.getSource().getSourcePermanentIfItStillExists(game))
                 .map(permanent -> input.getObject().shareCreatureTypes(game, permanent))
                 .orElse(false);
     }

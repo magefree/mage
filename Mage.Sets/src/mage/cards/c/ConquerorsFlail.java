@@ -116,8 +116,7 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
         return game.isActivePlayer(source.getControllerId())
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
                 && Optional
-                .of(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
