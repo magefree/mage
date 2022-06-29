@@ -104,6 +104,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Signet", 365, Rarity.COMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Disciple of Bolas", 247, Rarity.RARE, mage.cards.d.DiscipleOfBolas.class));
         cards.add(new SetCardInfo("Dodgy Jalopy", 58, Rarity.RARE, mage.cards.d.DodgyJalopy.class));
+        cards.add(new SetCardInfo("Dogged Detective", 35, Rarity.RARE, mage.cards.d.DoggedDetective.class));
         cards.add(new SetCardInfo("Double Vision", 267, Rarity.RARE, mage.cards.d.DoubleVision.class));
         cards.add(new SetCardInfo("Dragonlord Ojutai", 337, Rarity.MYTHIC, mage.cards.d.DragonlordOjutai.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 248, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
