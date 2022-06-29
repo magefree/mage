@@ -751,9 +751,15 @@ public class TestPlayer implements Player {
 
                     // custom code execute
                     if (command.equals(RUN_COMMAND_CODE)) {
-                        action.getCodePayload().run(action.getActionName(), computerPlayer, game);
-                        actions.remove(action);
-                        return true;
+                        try {
+                            action.getCodePayload().run(action.getActionName(), computerPlayer, game);
+                            actions.remove(action);
+                            return true;
+                        } catch (AssertionError e) {
+                            //Add context
+                            throw new AssertionError("Assert failed for action\n Action:" + action.getActionName() + "\n"
+                                    + "Assertion message:" + e.getMessage(), e);
+                        }
                     }
 
                     Assert.fail("Unknown run command: " + command);

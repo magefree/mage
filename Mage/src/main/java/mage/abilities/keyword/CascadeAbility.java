@@ -153,7 +153,7 @@ class CascadeEffect extends OneShotEffect {
 
         // You may cast that spell without paying its mana cost if its converted mana cost is less than this spell's converted mana cost.
         FilterCard filter = new FilterCard();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, sourceCost + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, sourceCost));
         CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(cardToCast), filter);
 
         // Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.

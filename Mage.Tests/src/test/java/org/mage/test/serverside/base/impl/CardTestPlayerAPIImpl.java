@@ -1613,6 +1613,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName + "$targetPlayer=" + target.getName());
     }
 
+    public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target, boolean waitStackResolved) {
+        castSpell(turnNum, step, player, cardName, target);
+        if (waitStackResolved) {
+            waitStackResolved(turnNum, step, player);
+        }
+    }
+
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target, int manaInPool) {
         //Assert.assertNotEquals("", cardName);
         assertAliaseSupportInActivateCommand(cardName, false);
@@ -1661,7 +1668,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
-        waitStackResolved(1, step, player, false);
+        waitStackResolved(turnNum, step, player, false);
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean skipOneStackObjectOnly) {
