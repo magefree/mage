@@ -478,7 +478,7 @@ public class HumanPlayer extends PlayerImpl {
                     caresAboutManaColor = card.caresAboutManaColor();
                 }
             }
-            // If the spell
+
             if (!caresAboutManaColor && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;
             }
