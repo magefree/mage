@@ -19,7 +19,7 @@ public final class Wurm55Token extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
 
-        availableImageSetCodes = Arrays.asList("AKH", "NCC");
+        availableImageSetCodes = Arrays.asList("AKH", "NCC", "CLB");
     }
 
     public Wurm55Token(final Wurm55Token token) {

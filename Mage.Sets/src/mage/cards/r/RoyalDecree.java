@@ -32,7 +32,7 @@ public final class RoyalDecree extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Cumulative upkeep-Pay {W}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{W}")));
 
         // Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.
         this.addAbility(new RoyalDecreeAbility());

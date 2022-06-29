@@ -31,7 +31,7 @@ public final class Phthisis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Suspend 5-{1}{B}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{1}{B}"), this));
     }
 
     private Phthisis(final Phthisis card) {

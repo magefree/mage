@@ -17,7 +17,7 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
     
     static final private List<String> tokenImageSets = new ArrayList<>();
     static {
-        tokenImageSets.addAll(Arrays.asList("RTR", "C17"));
+        tokenImageSets.addAll(Arrays.asList("RTR", "C17", "GK2"));
     }
 
     public UtvaraHellkiteDragonToken() {

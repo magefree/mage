@@ -30,7 +30,7 @@ public final class RushwoodHerbalist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {tap}, Discard a card: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());

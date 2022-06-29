@@ -31,7 +31,7 @@ public final class OmenOfTheSea extends CardImpl {
         this.addAbility(ability);
 
         // {2}{U}, Sacrifice Omen of the Sea: Scry 2.
-        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{U}"));
+        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

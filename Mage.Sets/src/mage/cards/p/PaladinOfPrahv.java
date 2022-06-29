@@ -40,7 +40,7 @@ public final class PaladinOfPrahv extends CardImpl {
         
         // Forecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life.
         Ability ability = new ForecastAbility(new CreateDelayedTriggeredAbilityEffect(
-                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl("{1}{W}"));
+                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

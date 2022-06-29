@@ -12,6 +12,9 @@ import mage.constants.SubType;
 import mage.game.permanent.token.ThopterColorlessToken;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -32,7 +35,7 @@ public final class BarbedSpike extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private BarbedSpike(final BarbedSpike card) {

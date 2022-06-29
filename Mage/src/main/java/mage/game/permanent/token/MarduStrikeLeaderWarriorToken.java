@@ -21,7 +21,7 @@ public final class MarduStrikeLeaderWarriorToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("FRF");
+        availableImageSetCodes = Arrays.asList("FRF", "CLB");
     }
 
     public MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {

@@ -9,7 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -18,6 +21,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DisplacerKitten extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent you control");
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
 
     public DisplacerKitten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -32,9 +41,7 @@ public final class DisplacerKitten extends CardImpl {
                 new ExileTargetForSourceEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
-        ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
-        ));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Avoidance"));
     }
 

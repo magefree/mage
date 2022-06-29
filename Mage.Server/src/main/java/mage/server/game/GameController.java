@@ -538,7 +538,7 @@ public class GameController implements GameCallback {
                     }
                 }
                 break;
-            case DENY_PERMISSON_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
+            case DENY_PERMISSION_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
             {
                 UUID playerId = getPlayerId(userId);
                 if (playerId != null) {

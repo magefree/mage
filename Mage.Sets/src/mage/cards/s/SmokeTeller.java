@@ -44,7 +44,7 @@ public final class SmokeTeller extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 1U: Look at target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl("{1}{U}")); 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -262,6 +262,8 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 //-- Exile another card when a card is played that was exiled with Share the Spoils  --//
 class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
+    private UUID triggeringPlayerID;
+
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
         super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
         setRuleVisible(false);
@@ -269,6 +271,8 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
         super(ability);
+
+        triggeringPlayerID = ability.triggeringPlayerID;
     }
 
     @Override
@@ -290,6 +294,19 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     public String getTriggerPhrase() {
         return "When they do";
     }
+
+    @Override
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
+        // Keep track of who triggered this ability, so the effect can know later.
+        // Do this before the ability is copied in super.trigger()
+        triggeringPlayerID = triggeringEvent.getPlayerId();
+
+        super.trigger(game, controllerId, triggeringEvent);
+    }
+
+    public UUID getTriggeringPlayerID() {
+        return triggeringPlayerID;
+    }
 }
 
 class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
@@ -305,7 +322,7 @@ class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
             return false;
         }
 
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(((ShareTheSpoilsExileCardWhenPlayACardAbility) source).getTriggeringPlayerID());
         if (player == null) {
             return false;
         }

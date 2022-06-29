@@ -21,6 +21,8 @@ import mage.watchers.Watcher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -44,7 +46,7 @@ public final class WhispersteelDagger extends CardImpl {
         this.addAbility(ability, new WhispersteelDaggerWatcher());
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private WhispersteelDagger(final WhispersteelDagger card) {

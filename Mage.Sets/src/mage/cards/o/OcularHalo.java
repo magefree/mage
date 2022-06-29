@@ -46,7 +46,7 @@ public final class OcularHalo extends CardImpl {
         
         // {W}: Enchanted creature gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private OcularHalo(final OcularHalo card) {

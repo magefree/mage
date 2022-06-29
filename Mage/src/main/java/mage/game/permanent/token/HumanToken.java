@@ -19,7 +19,7 @@ public final class HumanToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20", "MID", "VOW", "NCC", "DDQ"));
+        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20", "MID", "VOW", "NCC", "DDQ", "CLB"));
     }
 
     public HumanToken(final HumanToken token) {

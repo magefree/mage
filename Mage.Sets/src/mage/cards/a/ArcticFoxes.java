@@ -68,6 +68,6 @@ enum ArcticFoxesCondition implements Condition {
         if (defenderId == null) {
             return false;
         }
-        return game.getBattlefield().contains(filter, source.getSourceId(), defenderId, source, game, 1);
+        return game.getBattlefield().contains(filter, defenderId, source, game, 1);
     }
 }

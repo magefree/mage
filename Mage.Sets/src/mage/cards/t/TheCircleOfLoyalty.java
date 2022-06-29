@@ -61,7 +61,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
 
         // {3}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl("{3}{W}")
+                new CreateTokenEffect(new KnightToken()), new ManaCostsImpl<>("{3}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

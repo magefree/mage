@@ -64,7 +64,7 @@ enum PassionateArchaeologistValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
-                .of(effect.getValue("spellCast"))
+                .ofNullable(effect.getValue("spellCast"))
                 .filter(Spell.class::isInstance)
                 .map(Spell.class::cast)
                 .map(Spell::getManaValue)
@@ -83,6 +83,6 @@ enum PassionateArchaeologistValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "";
     }
 }

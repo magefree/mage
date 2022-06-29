@@ -6,13 +6,15 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
  */
-public final class ElementalMasteryElementalToken extends TokenImpl {
+public final class Elemental11HasteToken extends TokenImpl {
 
-    public ElementalMasteryElementalToken() {
+    public Elemental11HasteToken() {
         super("Elemental Token", "1/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
@@ -20,6 +22,8 @@ public final class ElementalMasteryElementalToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("SHM");
     }
 
     @Override
@@ -31,11 +35,11 @@ public final class ElementalMasteryElementalToken extends TokenImpl {
         }
     }
 
-    public ElementalMasteryElementalToken(final ElementalMasteryElementalToken token) {
+    public Elemental11HasteToken(final Elemental11HasteToken token) {
         super(token);
     }
 
-    public ElementalMasteryElementalToken copy() {
-        return new ElementalMasteryElementalToken(this);
+    public Elemental11HasteToken copy() {
+        return new Elemental11HasteToken(this);
     }
 }

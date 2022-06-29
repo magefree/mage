@@ -26,7 +26,7 @@ public final class VituGhaziTheCityTree extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}{G}{W}, {tap}: Create a 1/1 green Saproling creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{2}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{2}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

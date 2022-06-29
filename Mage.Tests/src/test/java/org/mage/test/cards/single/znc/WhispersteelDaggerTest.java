@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.znc;
 
-import javafx.geometry.Pos;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;

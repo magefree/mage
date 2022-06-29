@@ -31,7 +31,7 @@ public final class SilvosRogueElemental extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {G}: Regenerate Silvos, Rogue Elemental.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private SilvosRogueElemental(final SilvosRogueElemental card) {

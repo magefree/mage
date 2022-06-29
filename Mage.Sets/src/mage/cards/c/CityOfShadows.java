@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -15,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -24,11 +24,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class CityOfShadows extends CardImpl {
 
     public CityOfShadows(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true)));
         this.addAbility(ability);
 
         // {T}: Add X mana of {C}, where X is the number of storage counters on City of Shadows.

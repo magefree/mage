@@ -40,7 +40,7 @@ public final class SilvanussInvoker extends CardImpl {
                         .withAbility(TrampleAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn
-        ));
+        ).setText("It becomes an 8/8 Elemental creature with trample and haste until end of turn. It's still a land"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability.withFlavorWord("Conjure Elemental"));
     }

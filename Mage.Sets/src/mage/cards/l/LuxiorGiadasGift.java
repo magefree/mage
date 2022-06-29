@@ -17,6 +17,7 @@ import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -46,7 +47,7 @@ public final class LuxiorGiadasGift extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter), false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private LuxiorGiadasGift(final LuxiorGiadasGift card) {
@@ -64,8 +65,7 @@ enum LuxiorGiadasGiftValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional.of(sourceAbility.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(sourceAbility.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
@@ -111,8 +111,7 @@ class LuxiorGiadasGiftEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.of(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .ifPresent(permanent -> {

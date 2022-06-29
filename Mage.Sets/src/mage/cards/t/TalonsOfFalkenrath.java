@@ -40,7 +40,7 @@ public final class TalonsOfFalkenrath extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // Enchanted creature has "{1}{R}: This creature gets +2/+0 until end of turn."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")),
+                new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")),
                 AttachmentType.AURA)));
     }
 

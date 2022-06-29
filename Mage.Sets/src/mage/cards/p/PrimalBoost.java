@@ -26,7 +26,7 @@ public final class PrimalBoost extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Cycling {2}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}")));
         // When you cycle Primal Boost, you may have target creature get +1/+1 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());

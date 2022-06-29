@@ -23,7 +23,7 @@ public final class RidgeRannet extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private RidgeRannet(final RidgeRannet card) {

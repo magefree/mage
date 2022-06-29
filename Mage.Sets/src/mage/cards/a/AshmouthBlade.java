@@ -13,6 +13,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class AshmouthBlade extends CardImpl {
         ability.addEffect(effect);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private AshmouthBlade(final AshmouthBlade card) {

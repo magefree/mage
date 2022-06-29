@@ -26,15 +26,15 @@ public final class TwilightMire extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {B/G}, {tap}: Add {B}{B}, {B}{G}, or {G}{G}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{B/G}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl<>("{B/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 1, 0, 0, 0), new ManaCostsImpl("{B/G}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 1, 0, 0, 0), new ManaCostsImpl<>("{B/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl("{B/G}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl<>("{B/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);        }
 

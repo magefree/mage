@@ -30,7 +30,7 @@ public final class TonicPeddler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, {tap}, Discard a card: Target player gains 3 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(3), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(3), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());

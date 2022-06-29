@@ -27,6 +27,8 @@ public final class LilianaDefiantNecromancerEmblem extends Emblem {
         this.setName("Emblem Liliana");
         Ability ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new LilianaDefiantNecromancerEmblemEffect(), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true);
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("ORI");
     }
 }
 

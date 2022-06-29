@@ -49,7 +49,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Arms of Hadar", 113, Rarity.COMMON, mage.cards.a.ArmsOfHadar.class));
         cards.add(new SetCardInfo("Artificer Class", 663, Rarity.RARE, mage.cards.a.ArtificerClass.class));
         cards.add(new SetCardInfo("Ascend from Avernus", 5, Rarity.RARE, mage.cards.a.AscendFromAvernus.class));
-        cards.add(new SetCardInfo("Ash Barrens", 880, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Ash Barrens", 880, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Astarion's Thirst", 114, Rarity.RARE, mage.cards.a.AstarionsThirst.class));
         cards.add(new SetCardInfo("Astarion, the Decadent", 265, Rarity.RARE, mage.cards.a.AstarionTheDecadent.class));
         cards.add(new SetCardInfo("Astral Confrontation", 6, Rarity.COMMON, mage.cards.a.AstralConfrontation.class));
@@ -63,6 +63,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Baba Lysaga, Night Witch", 266, Rarity.RARE, mage.cards.b.BabaLysagaNightWitch.class));
         cards.add(new SetCardInfo("Bag of Holding", 299, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baldur's Gate", 345, Rarity.RARE, mage.cards.b.BaldursGate.class));
+        cards.add(new SetCardInfo("Balor", 162, Rarity.MYTHIC, mage.cards.b.Balor.class));
         cards.add(new SetCardInfo("Band Together", 216, Rarity.COMMON, mage.cards.b.BandTogether.class));
         cards.add(new SetCardInfo("Bane's Contingency", 57, Rarity.UNCOMMON, mage.cards.b.BanesContingency.class));
         cards.add(new SetCardInfo("Bane's Invoker", 7, Rarity.COMMON, mage.cards.b.BanesInvoker.class));
@@ -151,7 +152,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Crippling Fear", 745, Rarity.RARE, mage.cards.c.CripplingFear.class));
         cards.add(new SetCardInfo("Crystal Dragon", 13, Rarity.UNCOMMON, mage.cards.c.CrystalDragon.class));
         cards.add(new SetCardInfo("Cultist of the Absolute", 123, Rarity.RARE, mage.cards.c.CultistOfTheAbsolute.class));
-        cards.add(new SetCardInfo("Cultivate", 821, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Cultivate", 821, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Curse of Opulence", 786, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Curse of Verbosity", 717, Rarity.UNCOMMON, mage.cards.c.CurseOfVerbosity.class));
         cards.add(new SetCardInfo("Curse of the Swine", 716, Rarity.RARE, mage.cards.c.CurseOfTheSwine.class));
@@ -394,6 +395,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 904, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Myrkul's Edict", 135, Rarity.COMMON, mage.cards.m.MyrkulsEdict.class));
         cards.add(new SetCardInfo("Myrkul's Invoker", 136, Rarity.COMMON, mage.cards.m.MyrkulsInvoker.class));
+        cards.add(new SetCardInfo("Myrkul, Lord of Bones", 287, Rarity.RARE, mage.cards.m.MyrkulLordOfBones.class));
         cards.add(new SetCardInfo("Mystery Key", 85, Rarity.UNCOMMON, mage.cards.m.MysteryKey.class));
         cards.add(new SetCardInfo("Nalia de'Arnise", 649, Rarity.MYTHIC, mage.cards.n.NaliaDeArnise.class));
         cards.add(new SetCardInfo("Natural Reclamation", 829, Rarity.COMMON, mage.cards.n.NaturalReclamation.class));
@@ -421,6 +423,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Outpost Siege", 804, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 729, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Overwhelming Encounter", 245, Rarity.UNCOMMON, mage.cards.o.OverwhelmingEncounter.class));
+        cards.add(new SetCardInfo("Owlbear Cub", 246, Rarity.RARE, mage.cards.o.OwlbearCub.class));
         cards.add(new SetCardInfo("Owlbear Shepherd", 247, Rarity.UNCOMMON, mage.cards.o.OwlbearShepherd.class));
         cards.add(new SetCardInfo("Pack Attack", 190, Rarity.COMMON, mage.cards.p.PackAttack.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 140, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
@@ -447,6 +450,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 730, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Prophetic Prism", 335, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Pseudodragon Familiar", 88, Rarity.COMMON, mage.cards.p.PseudodragonFamiliar.class));
+        cards.add(new SetCardInfo("Psionic Ritual", 668, Rarity.RARE, mage.cards.p.PsionicRitual.class));
         cards.add(new SetCardInfo("Psychic Impetus", 89, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 869, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 731, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));

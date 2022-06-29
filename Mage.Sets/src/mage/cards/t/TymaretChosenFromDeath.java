@@ -41,7 +41,7 @@ public final class TymaretChosenFromDeath extends CardImpl {
         );
 
         // {1}{B}: Exile up to two target cards from graveyards. You gain 1 life for each creature card exiled this way.
-        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetCardInGraveyard(0, 2, StaticFilters.FILTER_CARD));
         this.addAbility(ability);
     }

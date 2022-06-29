@@ -136,7 +136,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
-        // - affected controler can be different from target controller (another player makes choices for controller)
+        // - affected controller can be different from target controller (another player makes choices for controller)
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -2502,7 +2502,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
-            Collections.sort(pickedCards, new Comparator<PickedCard>() {
+            pickedCards.sort(new Comparator<PickedCard>() {
                 @Override
                 public int compare(PickedCard o1, PickedCard o2) {
                     if (o1.score.equals(o2.score)) {
@@ -2592,8 +2592,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
         FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
-        List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
-        return blockers;
+        return game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
     }
 
     protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {

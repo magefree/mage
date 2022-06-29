@@ -18,7 +18,6 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,10 +45,10 @@ public final class HauntedOne extends CardImpl {
         ).setTriggerPhrase("Whenever this creature becomes tapped, ");
         ability.addEffect(new GainAbilitySourceEffect(
                 new UndyingAbility(), Duration.EndOfTurn
-        ).setText("and other creatures you control that share a creature type with it"));
+        ).setText("and other creatures you control that share a creature type"));
         ability.addEffect(new BoostAllEffect(
                 2, 0, Duration.EndOfTurn, filter, true
-        ).setText("each get +2/+0"));
+        ).setText("with it each get +2/+0"));
         ability.addEffect(new GainAbilityAllEffect(
                 new UndyingAbility(), Duration.EndOfTurn, filter, true
         ).setText("and gain undying until end of turn"));
@@ -74,8 +73,7 @@ enum HauntedOnePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional.of(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
                 .map(permanent -> permanent.shareCreatureTypes(game, input.getObject()))
                 .orElse(false);
     }

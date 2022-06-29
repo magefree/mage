@@ -59,7 +59,7 @@ public final class ThassaDeepDwelling extends CardImpl {
                 new ExileTargetForSourceEffect(),
                 TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
         ability.addTarget(new TargetPermanent(
                 0, 1, filterOther, false
         ));
@@ -67,7 +67,7 @@ public final class ThassaDeepDwelling extends CardImpl {
 
         // {3}{U}: Tap another target creature.
         ability = new SimpleActivatedAbility(
-                new TapTargetEffect("tap another target creature"), new ManaCostsImpl("{3}{U}")
+                new TapTargetEffect("tap another target creature"), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetPermanent(filterAnother));
         this.addAbility(ability);

@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -16,8 +17,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.permanent.token.KnightToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -52,7 +55,7 @@ public final class SigiledSwordOfValeron extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private SigiledSwordOfValeron(final SigiledSwordOfValeron card) {

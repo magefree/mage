@@ -33,7 +33,7 @@ public final class SporebackTroll extends CardImpl {
         this.addAbility(new GraftAbility(this, 2));
         
         // {1}{G}: Regenerate target creature with a +1/+1 counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_A_CREATURE_P1P1));
         this.addAbility(ability);
     }

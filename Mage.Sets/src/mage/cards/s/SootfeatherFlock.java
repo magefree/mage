@@ -26,7 +26,7 @@ public final class SootfeatherFlock extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {3}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private SootfeatherFlock(final SootfeatherFlock card) {

@@ -33,7 +33,7 @@ public final class SabertoothCobra extends CardImpl {
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(effect, false, true);
         effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("That player gets another poison counter.");
-        ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{2}"), effect, PhaseStep.UPKEEP, true,
+        ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl<>("{2}"), effect, PhaseStep.UPKEEP, true,
             "That player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that turn."));
         this.addAbility(ability);
     }

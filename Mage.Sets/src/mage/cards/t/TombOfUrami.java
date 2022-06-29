@@ -36,7 +36,7 @@ public final class TombOfUrami extends CardImpl {
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
         // {2}{B}{B}, {tap}, Sacrifice all lands you control: Create a legendary 5/5 black Demon Spirit creature token with flying named Urami.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UramiToken()), new ManaCostsImpl("{2}{B}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UramiToken()), new ManaCostsImpl<>("{2}{B}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeAllLandCost());
         this.addAbility(ability2);

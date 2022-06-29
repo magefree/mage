@@ -76,7 +76,7 @@ public class TorbranThaneOfRedFellTest extends CardTestPlayerBase {
 
     @Test
     public void with3PlayersTest() throws GameException {
-        playerC = createPlayer(currentGame, playerC, "PlayerC");
+        playerC = createPlayer(currentGame, "PlayerC");
         setStrictChooseMode(true);
 
         // +1: Elementals you control get +2/+0 until end of turn.

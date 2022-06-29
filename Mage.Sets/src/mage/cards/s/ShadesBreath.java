@@ -32,7 +32,7 @@ public final class ShadesBreath extends CardImpl {
                 new GainAbilityControlledEffect(new SimpleActivatedAbility(
                         Zone.BATTLEFIELD,
                         new BoostSourceEffect(1, 1, Duration.EndOfTurn).setText("this creature gets +1/+1 until end of turn"),
-                        new ManaCostsImpl("{B}")
+                        new ManaCostsImpl<>("{B}")
                 ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_A_CREATURE)
                         .setText("and gains \"{B}: This creature gets +1/+1 until end of turn.\"")
         );

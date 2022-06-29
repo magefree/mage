@@ -39,7 +39,7 @@ public final class Pteramander extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard.
-        Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl("{7}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl<>("{7}{U}"));
         ability.setCostAdjuster(PteramanderAdjuster.instance);
         this.addAbility(ability.addHint(PteramanderAdjuster.getHint()));
     }

@@ -23,7 +23,7 @@ public final class ThassasIre extends CardImpl {
 
 
         // {3}{U}: You may tap or untap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

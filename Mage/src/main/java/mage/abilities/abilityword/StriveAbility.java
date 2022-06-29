@@ -19,7 +19,7 @@ public class StriveAbility extends SimpleStaticAbility {
     private final String striveCost;
 
     public StriveAbility(String manaString) {
-        super(Zone.STACK, new StriveCostIncreasingEffect(new ManaCostsImpl(manaString)));
+        super(Zone.STACK, new StriveCostIncreasingEffect(new ManaCostsImpl<>(manaString)));
         setRuleAtTheTop(true);
         this.striveCost = manaString;
         setAbilityWord(AbilityWord.STRIVE);
@@ -67,7 +67,7 @@ class StriveCostIncreasingEffect extends CostModificationEffectImpl {
                     sb.append(striveCosts.getText());
                 }
                 String finalCost = ManaUtil.condenseManaCostString(sb.toString());
-                abilityToModify.getManaCostsToPay().add(new ManaCostsImpl(finalCost));
+                abilityToModify.getManaCostsToPay().add(new ManaCostsImpl<>(finalCost));
                 return true;
             }
         }

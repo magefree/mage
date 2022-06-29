@@ -38,5 +38,7 @@ public final class ArlinnEmbracedByTheMoonEmblem extends Emblem {
         effect.setText("and '{T}: This creature deals damage equal to its power to any target");
         ability.addEffect(effect);
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("SOI");
     }
 }

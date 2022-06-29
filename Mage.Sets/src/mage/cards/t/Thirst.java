@@ -41,7 +41,7 @@ public final class Thirst extends CardImpl {
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // At the beginning of your upkeep, sacrifice Thirst unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}")),
             TargetController.YOU, false));
     }
 

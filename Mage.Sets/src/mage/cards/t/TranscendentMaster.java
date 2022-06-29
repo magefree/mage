@@ -31,7 +31,7 @@ public final class TranscendentMaster extends LevelerCard {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}")));
 
         // Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)
         // LEVEL 6-11

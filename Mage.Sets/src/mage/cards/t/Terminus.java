@@ -29,7 +29,7 @@ public final class Terminus extends CardImpl {
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new TerminusEffect());
         // Miracle {W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private Terminus(final Terminus card) {

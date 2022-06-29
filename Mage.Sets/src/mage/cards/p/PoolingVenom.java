@@ -38,7 +38,7 @@ public final class PoolingVenom extends CardImpl {
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
         // {3}{B}: Destroy enchanted land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedToEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedToEffect("enchanted land"), new ManaCostsImpl<>("{3}{B}")));
     }
 
     private PoolingVenom(final PoolingVenom card) {

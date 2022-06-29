@@ -32,7 +32,6 @@ public final class SaprolingToken extends TokenImpl {
                 "NEM",
                 "RTR",
                 "C15",
-                "MM3",
                 "INV",
                 "C16", // 2 different token images...
                 "CMA",
@@ -52,7 +51,10 @@ public final class SaprolingToken extends TokenImpl {
                 "2XM",
                 "NCC",
                 "CM2",
-                "PCA"
+                "PCA",
+                "GK1",
+                "GK2",
+                "CLB"
         ));
     }
 
@@ -90,6 +92,9 @@ public final class SaprolingToken extends TokenImpl {
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GK1")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 }

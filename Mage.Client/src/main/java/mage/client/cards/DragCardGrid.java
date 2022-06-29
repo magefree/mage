@@ -673,7 +673,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     s.separateCreatures = Boolean.valueOf(m.group(2));
                 }
                 if (m.groupCount() > 2) {
-                    s.cardSize = Integer.valueOf(m.group(3));
+                    s.cardSize = Integer.parseInt(m.group(3));
                 } else {
                     s.cardSize = 50;
                 }

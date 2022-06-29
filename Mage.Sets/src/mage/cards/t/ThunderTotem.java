@@ -33,7 +33,7 @@ public final class ThunderTotem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new BecomesCreatureSourceEffect(new ThunderTotemToken(), "", Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{W}{W}")));
+                new ManaCostsImpl<>("{1}{W}{W}")));
     }
 
     private ThunderTotem(final ThunderTotem card) {

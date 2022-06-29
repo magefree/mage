@@ -35,7 +35,7 @@ public final class ThunderbladeCharge extends CardImpl {
         // if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. 
         // If you do, you may cast it without paying its mana cost.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl("{2}{R}{R}{R}"))
+                new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl<>("{2}{R}{R}{R}"))
                         .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. "
                                 + "If you do, you may cast it without paying its mana cost")));
     }

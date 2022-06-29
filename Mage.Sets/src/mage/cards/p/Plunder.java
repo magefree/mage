@@ -31,7 +31,7 @@ public final class Plunder extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // Suspend 4-{1}{R}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{R}"), this));
     }
 
     private Plunder(final Plunder card) {

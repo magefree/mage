@@ -32,7 +32,7 @@ public final class WakeOfVultures extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{B}, Sacrifice a creature: Regenerate Wake of Vultures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }

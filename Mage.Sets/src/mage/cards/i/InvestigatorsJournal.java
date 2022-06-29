@@ -19,8 +19,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -66,25 +68,19 @@ enum InvestigatorsJournalValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        HashMap<UUID, Integer> creatureCounts = new HashMap<>();
-        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
-            creatureCounts.put(playerId, 0);
-        }
-        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-            if (permanent.isPhasedIn() && permanent.isCreature(game)) {
-                UUID controllerId = permanent.getControllerId();
-                Integer count = creatureCounts.get(controllerId);
-                if (count != null) {
-                    creatureCounts.put(controllerId, count + 1);
-                }
-            }
-        }
         int greatestCreatureCount = 0;
-        for (Integer count : creatureCounts.values()) {
-            if (count > greatestCreatureCount) {
-                greatestCreatureCount = count;
+
+        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
+
+            greatestCreatureCount = Math.max(
+                    greatestCreatureCount,
+                    game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game));
         }
+
         return greatestCreatureCount;
     }
 

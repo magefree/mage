@@ -37,19 +37,19 @@ public final class Phelddagrif extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}: Phelddagrif gains trample until end of turn. Target opponent creates a 1/1 green Hippo creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addEffect(new CreateTokenTargetEffect(new HippoToken()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // {W}: Phelddagrif gains flying until end of turn. Target opponent gains 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addEffect(new GainLifeTargetEffect(2));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // {U}: Return Phelddagrif to its owner's hand. Target opponent may draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{U}"));
         ability.addEffect(new DrawCardTargetEffect(1, true));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

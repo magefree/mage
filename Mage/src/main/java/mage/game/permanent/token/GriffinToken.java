@@ -23,7 +23,7 @@ public final class GriffinToken extends TokenImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("DDH", "DDL", "TSP", "M21", "TSR");
+        availableImageSetCodes = Arrays.asList("DDH", "DDL", "M21", "TSR");
     }
 
     public GriffinToken(final GriffinToken token) {

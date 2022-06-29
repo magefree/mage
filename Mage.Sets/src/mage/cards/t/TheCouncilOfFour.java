@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.game.permanent.token.KnightToken;
+import mage.game.permanent.token.WaylayToken;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class TheCouncilOfFour extends CardImpl {
 
         // Whenever a player casts their second spell during their turn, you create a 2/2 white Knight creature token.
         this.addAbility(new CastSecondSpellTriggeredAbility(
-                new CreateTokenEffect(new KnightToken())
+                new CreateTokenEffect(new WaylayToken())
                         .setText("you create a 2/2 white Knight creature token"),
                 TargetController.ACTIVE
         ));

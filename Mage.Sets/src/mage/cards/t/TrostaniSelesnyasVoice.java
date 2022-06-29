@@ -43,7 +43,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
         // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{1}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

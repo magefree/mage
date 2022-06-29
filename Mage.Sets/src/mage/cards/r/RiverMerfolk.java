@@ -29,7 +29,7 @@ public final class RiverMerfolk extends CardImpl {
         // {U}: River Merfolk gains mountainwalk until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(new MountainwalkAbility(false), Duration.EndOfTurn),
-                new ManaCostsImpl("{U}")));
+                new ManaCostsImpl<>("{U}")));
     }
 
     private RiverMerfolk(final RiverMerfolk card) {

@@ -77,7 +77,7 @@ class SquealingDevilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player != null) {
             if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);

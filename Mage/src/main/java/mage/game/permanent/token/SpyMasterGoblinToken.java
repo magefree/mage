@@ -9,6 +9,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -24,6 +26,8 @@ public final class SpyMasterGoblinToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
+
+        availableImageSetCodes = Arrays.asList("C16", "CLB");
     }
 
     public SpyMasterGoblinToken(final SpyMasterGoblinToken token) {

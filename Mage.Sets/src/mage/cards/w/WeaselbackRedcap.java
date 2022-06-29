@@ -27,7 +27,7 @@ public final class WeaselbackRedcap extends CardImpl {
 
         // {1}{R}: Weaselback Redcap gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         ));
     }
 

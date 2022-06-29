@@ -2,6 +2,7 @@
 package mage.game.permanent.token;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
@@ -14,12 +15,6 @@ import mage.constants.SubType;
  */
 public final class EldraziHorrorToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Collections.singletonList("EMN"));
-    }
-
     public EldraziHorrorToken() {
         super("Eldrazi Horror Token", "3/2 colorless Eldrazi Horror creature token");
         cardType.add(CardType.CREATURE);
@@ -27,7 +22,8 @@ public final class EldraziHorrorToken extends TokenImpl {
         subtype.add(SubType.HORROR);
         power = new MageInt(3);
         toughness = new MageInt(2);
-        availableImageSetCodes = tokenImageSets;
+
+        availableImageSetCodes = Arrays.asList("EMN", "CLB");
     }
 
     public EldraziHorrorToken(final EldraziHorrorToken token) {

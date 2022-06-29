@@ -39,7 +39,7 @@ public final class TheChainVeil extends CardImpl {
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TheChainVeilIncreaseLoyaltyUseEffect(),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

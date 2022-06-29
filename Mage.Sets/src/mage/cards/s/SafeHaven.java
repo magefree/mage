@@ -27,7 +27,7 @@ public final class SafeHaven extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {2}, {tap}: Exile target creature you control.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

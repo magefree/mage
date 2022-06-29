@@ -1,12 +1,13 @@
 package org.mage.test.serverside.base;
 
-import java.util.List;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.players.Player;
 import org.mage.test.player.TestPlayer;
+
+import java.util.List;
 
 /**
  * Interface for all test initialization and assertion operations.
@@ -22,13 +23,6 @@ public interface CardTestAPI {
         LOST,
         DRAW
     }
-
-    //******* INITIALIZATION METHODS *******/
-    /**
-     * Default game initialization params for red player (that plays with
-     * Mountains)
-     */
-    void useRedDefault();
 
     /**
      * Removes all cards from player's library from the game. Usually this

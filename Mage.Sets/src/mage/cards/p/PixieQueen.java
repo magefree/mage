@@ -33,7 +33,7 @@ public final class PixieQueen extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {G}{G}{G}, {tap}: Target creature gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}{G}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

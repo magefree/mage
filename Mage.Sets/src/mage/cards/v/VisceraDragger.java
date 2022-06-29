@@ -26,8 +26,8 @@ public final class VisceraDragger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private VisceraDragger(final VisceraDragger card) {

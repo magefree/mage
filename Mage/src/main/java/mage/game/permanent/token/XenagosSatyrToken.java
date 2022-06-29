@@ -25,7 +25,7 @@ public final class XenagosSatyrToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("THS");
+        availableImageSetCodes = Arrays.asList("THS", "CLB");
     }
     public XenagosSatyrToken(final XenagosSatyrToken token) {
         super(token);

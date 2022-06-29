@@ -30,7 +30,7 @@ public final class WallOfPineNeedles extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // {G}: Regenerate Wall of Pine Needles.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
         
     }
 

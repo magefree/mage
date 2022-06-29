@@ -88,7 +88,7 @@ class PuppetMasterEffect extends OneShotEffect {
         if (card == null || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
             return false;
         }
-        Cost cost = new ManaCostsImpl("{U}{U}{U}");
+        Cost cost = new ManaCostsImpl<>("{U}{U}{U}");
         if (!controller.chooseUse(Outcome.Neutral, "Pay " + cost.getText()
                 + " to return " + card.getLogName() + " to its owner's hand?", source, game)
                 || !cost.pay(source, game, source, controller.getId(), false, null)) {
