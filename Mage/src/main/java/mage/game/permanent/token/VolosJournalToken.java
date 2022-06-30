@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -45,13 +46,12 @@ public final class VolosJournalToken extends TokenImpl {
         return new VolosJournalToken(this);
     }
 
-    public static Set<String> getNotedTypes(Game game, Ability source) {
-        return getNotedTypes(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-    }
+    public static Set<String> getNotedTypes(Game game, Permanent permanent) {
+        if (permanent == null) {
+            return new HashSet<>();
+        }
 
-    public static Set<String> getNotedTypes(Game game, UUID sourceId, int zcc) {
-        // TODO: This returns different values depending on if it's being called by apply() or getText().
-        String key = "notedTypes_" + sourceId + '_' + zcc;
+        String key = "notedTypes_" + permanent.getId() + '_' + permanent.getZoneChangeCounter(game);
         Object value = game.getState().getValue(key);
         if (value == null) {
             Set<String> types = new HashSet<>();
@@ -67,7 +67,8 @@ enum VolosJournalTokenHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        Set<String> types = VolosJournalToken.getNotedTypes(game, ability);
+        Permanent permanent = game.getPermanent(ability.getSourceId());
+        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
         int size = types.size();
         if (size > 0) {
             return "Creature types noted: " + size + " (" + String.join(", ", types) + ')';
@@ -109,7 +110,9 @@ class VolosJournalTokenEffect extends OneShotEffect {
             return true;
         }
 
-        Set<String> types = VolosJournalToken.getNotedTypes(game, source);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+
+        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
 
         ChoiceCreatureType choice = new ChoiceCreatureType();
 

@@ -93,9 +93,8 @@ class VoloItinerantScholarEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        // TODO: I don't think this will work since the ID and ZCC don't look right.
         return player.drawCards(
-                VolosJournalToken.getNotedTypes(game, permanent.getId(), permanent.getZoneChangeCounter(game)).size(),
+                VolosJournalToken.getNotedTypes(game, permanent).size(),
                 source,
                 game) > 0;
     }
