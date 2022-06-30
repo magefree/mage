@@ -46,7 +46,7 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public HarmsWayPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 2, UsageType.ONE_USAGE_ABSOLUTE);
+        super(Duration.EndOfTurn, 2, UsageType.ACCORDING_DURATION);
         staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead";
         this.damageSource = new TargetSource();
     }
