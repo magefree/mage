@@ -9,9 +9,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Tests for {@link DelayedBlastFireball}
- * TODO
- * Bug test: Copy
- *  https://github.com/magefree/mage/issues/9180
+ * <ul>
+ *     <li>Bug test: Copy of spell <a href="https://github.com/magefree/mage/issues/9180">#9180</a></li>
+ *     <li>MTG Rules edge case: 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
+ *     rules for casting spells, except that the copy is created in the same zone the object is in and then cast
+ *     while another spell or ability is resolving. Casting a copy of an object follows steps 601.2a-h of rule 601,
+ *     "Casting Spells," and then the copy becomes cast. Once cast, the copy is a spell on the stack,
+ *     and just like any other spell it can resolve or be countered.</li>
+ * </ul>
  *
  * @author the-red-lily
  */
@@ -61,27 +66,6 @@ public class DelayedBlastFireballTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fork", "Delayed Blast Fireball", "Cast Delayed Blast Fireball"); //Copy Delayed Blast Fireball
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN); //Wait for Fork to copy and for copy to resolve
 
-//                        checkStackSize("Approach of the Second Sun on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
-//            checkLife("Copy of Approach of the Second Sun gains life", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 27);
-//            checkLibraryCount("Copy of Approach of the Second Sun does not put a card in library",
-//                    1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 0);
-//            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-//            checkLife("Approach of the Second Sun gains life", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 34);
-//            //checkLife("Approach of the Second Sun gains life - Begin Combat", 1, PhaseStep.BEGIN_COMBAT, playerA, 34); //For some reason this fails??
-//            checkLibraryCount("Approach of the Second Sun goes to library",
-//                    1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 1);
-//
-//            //Second copy doesn't win the game
-//            castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Approach of the Second Sun");
-//            castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fork", "Approach of the Second Sun", "Cast Approach of the Second Sun"); //Copy Approach of the Second Sun
-//            waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 2); //Wait for Fork to copy and for copy to resolve
-//            checkLife("Copy of 2nd Approach of the Second Sun gains life", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 41);
-//            checkLibraryCount("Copy of 2nd Approach of the Second Sun does not put a card in library",
-//                    1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Approach of the Second Sun", 1); //Already have 1 in library
-//            //Does not work, checks after game end do not execute
-////        checkLibraryCount("2nd cast of Approach of the Second Sun does not go to library",
-////                1, PhaseStep.END_TURN, playerA, "Approach of the Second Sun", 1);
-
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -91,6 +75,60 @@ public class DelayedBlastFireballTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 2 - 2);
     }
 
-    //TODO test Demilich
+    // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
+    // rules for casting spells, except that the copy is created in the same zone the object is in and then cast
+    // while another spell or ability is resolving. Casting a copy of an object follows steps 601.2a-h of rule 601,
+    // "Casting Spells," and then the copy becomes cast. Once cast, the copy is a spell on the stack,
+    // and just like any other spell it can resolve or be countered.
+    //
+    // Copy CARD not copy SPELL (copied cards are cast)
+    // TL;DR Copy was cast from exile, so we should see 5 damage not 2
+    @Test
+    public void testCastExiledCopyCard() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.GRAVEYARD, playerA, "Delayed Blast Fireball");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Demilich");
+
+        //Copied CARD counts as first Approach cast
+        attack(1, playerA, "Demilich");
+        //Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
+        addTarget(playerA, "Delayed Blast Fireball"); //exile up to one target instant or sorcery card from your graveyard. Copy it.
+        setChoice(playerA, "Yes"); //You may cast the copy.
+        //Before Demilich combat damage
+        checkLife("Copied Card Delayed Blast cast from exile deals 5 damage", 1, PhaseStep.DECLARE_BLOCKERS, playerB, 15);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+    }
+
+    // Card was cast from exile, so we should see 5 damage not 2
+    @Test
+    public void testNonForetoldCastExiledCard() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+        addCard(Zone.LIBRARY, playerB, "Delayed Blast Fireball");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.HAND, playerA, "Jace's Mindseeker");
+
+        // When Jace's Mindseeker enters the battlefield, target opponent mills five cards. You may cast an instant or sorcery spell from among them without paying its mana cost.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Mindseeker");
+        addTarget(playerA, playerB); //target opponent mills five cards
+        // Message: Cast spell without paying its mana cost (Delayed Blast Fireball [c38])?
+        setChoice(playerA, "Yes"); //You may cast an instant or sorcery spell from among them without paying its mana cost.
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        //checkLife("Non Foretold Delayed Blast cast from exile deals 5 damage", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 15);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+    }
 }
 
