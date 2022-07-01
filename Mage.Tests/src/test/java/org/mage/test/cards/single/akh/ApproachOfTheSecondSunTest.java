@@ -14,8 +14,13 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.HAND, playerA, "Approach of the Second Sun", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 14);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun");
+
+        // Example of how to use API:
+        // Note the readability and "built-in" comment about when the commands happen
+        // And automatic grouping of commands that happen during same phase
+        onTurn(1).onStep(PhaseStep.PRECOMBAT_MAIN)
+                .castSpell(playerA, "Approach of the Second Sun")
+                .castSpell(playerA, "Approach of the Second Sun");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

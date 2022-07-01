@@ -2159,6 +2159,82 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
     }
 
+    public OnTurn onTurn(int turnNum) {
+        return new OnTurn(turnNum);
+    }
+
+    public class OnTurn {
+
+        final int turnNum;
+
+        public OnTurn(int turnNum) {
+            this.turnNum = turnNum;
+        }
+
+        public int getTurnNum() {
+            return turnNum;
+        }
+
+        public OnTurn attack(TestPlayer player, String attacker) {
+            CardTestPlayerAPIImpl.this.attack(turnNum, player, attacker);
+            return this;
+        }
+
+        public OnTurn attack(TestPlayer player, String attacker, TestPlayer defendingPlayer) {
+            CardTestPlayerAPIImpl.this.attack(turnNum, player, attacker, defendingPlayer);
+            return this;
+        }
+
+        public OnTurn attack(TestPlayer player, String attacker, String planeswalker) {
+            CardTestPlayerAPIImpl.this.attack(turnNum, player, attacker, planeswalker);
+            return this;
+        }
+
+        public OnTurn attackSkip(TestPlayer player) {
+            CardTestPlayerAPIImpl.this.attackSkip(turnNum, player);
+            return this;
+        }
+
+        public OnTurn block(TestPlayer player, String blocker, String attacker) {
+            CardTestPlayerAPIImpl.this.block(turnNum, player, blocker, attacker);
+            return this;
+        }
+
+        public OnTurn blockSkip(TestPlayer player) {
+            CardTestPlayerAPIImpl.this.blockSkip(turnNum, player);
+            return this;
+        }
+
+        public OnStep onStep(PhaseStep step) {
+            return new OnStep(this, step);
+        }
+
+    }
+
+    public class OnStep {
+        final OnTurn onTurn;
+        final PhaseStep step;
+
+        public OnStep(int turnNum, PhaseStep step) {
+            this.onTurn = new OnTurn(turnNum);
+            this.step = step;
+        }
+
+        private OnStep(OnTurn onTurn, PhaseStep step) {
+            this.onTurn = onTurn;
+            this.step = step;
+        }
+
+        public OnTurn then() {
+            return onTurn;
+        }
+
+        public OnStep castSpell(TestPlayer player, String cardName) {
+            CardTestPlayerAPIImpl.this.castSpell(onTurn.getTurnNum(), step, player, cardName);
+            return this;
+        }
+    }
+
     protected enum ExpectedType {
         TURN_NUMBER,
         RESULT,
