@@ -104,9 +104,10 @@ public class AddCountersSourceEffect extends OneShotEffect {
             if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
                 permanent = game.getPermanentEntering(source.getSourceId());
             }
-            if (permanent == null || !permanent.isPhasedIn()) {
+            if (permanent == null) {
                 return false;
             }
+
             if ((source.getSourceObjectZoneChangeCounter() == 0 // from static ability
                     || source.getSourceObjectZoneChangeCounter() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
                 Counter newCounter = counter.copy();
