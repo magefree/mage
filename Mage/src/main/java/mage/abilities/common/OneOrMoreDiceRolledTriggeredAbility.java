@@ -38,7 +38,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
+        if (!isControlledBy(event.getTargetId())) {
             return false;
         }
         int maxRoll = ((DiceRolledEvent) event)
