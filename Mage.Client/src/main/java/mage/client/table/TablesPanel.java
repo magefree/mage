@@ -1694,11 +1694,17 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            MatchOptions options = new MatchOptions(gameName, gameType, false, 2);
+            boolean multiPlayer = gameType.contains("Commander");
+            int numSeats = multiPlayer ? 4 : 2;
+
+            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            options.setDeckType("Limited");
-            options.setAttackOption(MultiplayerAttackOption.LEFT);
+            for (int i=1 ; i < numSeats ; i++) {
+                options.getPlayerTypes().add(aiType);
+            }
+            options.setDeckType(multiPlayer ? "Variant Magic - Freeform Commander" : "Limited");
+            options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
             options.setRange(RangeOfInfluence.ALL);
             options.setWinsNeeded(1);
             options.setMatchTimeLimit(MatchTimeLimit.NONE);
@@ -1712,7 +1718,10 @@ public class TablesPanel extends javax.swing.JPanel {
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 5, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer0", aiType, 5, testDeck, "");
+            for (int i=1 ; i < numSeats ; i++) {
+                SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 5, testDeck, "");
+            }
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);
@@ -1759,7 +1768,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void btnQuickStartCommanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartCommanderActionPerformed
-        createTestGame("Test commander", "Commander Two Player Duel", false);
+        createTestGame("Test commander", "Commander Free For All", false);
     }//GEN-LAST:event_btnQuickStartCommanderActionPerformed
 
     private void btnQuickStartMCTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartMCTSActionPerformed
