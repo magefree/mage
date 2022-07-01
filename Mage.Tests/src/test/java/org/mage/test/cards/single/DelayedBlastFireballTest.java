@@ -11,9 +11,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Tests for {@link DelayedBlastFireball}
  * <ul>
  *     <li>Bug test: Copy of spell <a href="https://github.com/magefree/mage/issues/9180">#9180</a></li>
- *     <li>MTG Rules edge case: 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
+ *     <li>MTG Rules edge case: <a href="https://blogs.magicjudges.org/rules/cr706/">706.12</a>
+ *     An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
  *     rules for casting spells, except that the copy is created in the same zone the object is in and then cast
- *     while another spell or ability is resolving. Casting a copy of an object follows steps 601.2a-h of rule 601,
+ *     while another spell or ability is resolving. Casting a copy of an object follows steps
+ *     <a href ="http://blogs.magicjudges.org/rules/cr601/#2a">601.2a-h</a> of rule 601,
  *     "Casting Spells," and then the copy becomes cast. Once cast, the copy is a spell on the stack,
  *     and just like any other spell it can resolve or be countered.</li>
  * </ul>
@@ -75,7 +77,7 @@ public class DelayedBlastFireballTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 2 - 2);
     }
 
-    // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
+    // 706.12 An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the
     // rules for casting spells, except that the copy is created in the same zone the object is in and then cast
     // while another spell or ability is resolving. Casting a copy of an object follows steps 601.2a-h of rule 601,
     // "Casting Spells," and then the copy becomes cast. Once cast, the copy is a spell on the stack,
