@@ -2,7 +2,9 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -46,17 +48,14 @@ public enum DesertControlledOrGraveyardCondition implements Condition {
 
         @Override
         public String getText(Game game, Ability ability) {
-            StringBuilder sb = new StringBuilder();
-            if (game.getBattlefield().contains(filter, ability, game, 1)) {
-                sb.append("You control a Desert.");
-            }
             Player player = game.getPlayer(ability.getControllerId());
-            if (player != null && player.getGraveyard().count(filter2, game) > 0) {
-                if (sb.length() > 0) {
-                    sb.append("<br>");
-                }
-                sb.append("You have a Desert card in your graveyard.");
-            }
+
+            StringBuilder sb = new StringBuilder();
+            boolean controlDesert = game.getBattlefield().contains(filter, ability, game, 1);
+            boolean desertInGraveyard = player != null && player.getGraveyard().count(filter2, game) > 0;
+
+            sb.append(HintUtils.prepareText("You control a Desert.<br>", null, controlDesert ? HintUtils.HINT_ICON_GOOD : HintUtils.HINT_ICON_BAD));
+            sb.append(HintUtils.prepareText("You have a Desert card in your graveyard.", null, desertInGraveyard ? HintUtils.HINT_ICON_GOOD : HintUtils.HINT_ICON_BAD));
             return sb.toString();
         }
 
