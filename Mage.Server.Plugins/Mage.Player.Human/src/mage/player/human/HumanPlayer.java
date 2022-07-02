@@ -877,9 +877,9 @@ public class HumanPlayer extends PlayerImpl {
 
         // 1. Select targets
         while (canRespond()) {
-            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
+            Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
-            if (possibleTargets.isEmpty()
+            if (possibleTargetIds.isEmpty()
                     || target.getSize() >= target.getNumberOfTargets()) {
                 required = false;
             }
@@ -890,7 +890,7 @@ public class HumanPlayer extends PlayerImpl {
             options.put("chosen", (Serializable) chosen);
             // selectable
             java.util.List<UUID> choosable = new ArrayList<>();
-            for (UUID targetId : possibleTargets) {
+            for (UUID targetId : possibleTargetIds) {
                 if (target.canTarget(abilityControllerId, targetId, source, game)) {
                     choosable.add(targetId);
                 }
@@ -904,21 +904,38 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            updateGameStatePriority("chooseTargetAmount", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
-                String message = String.format("Select targets to distribute %d damage (selected %d)", amountTotal, target.getTargets().size());
-                game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargets, required, options);
+            UUID responseId = null;
+            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
+                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
+            if (canAutochoose) {
+                // Targets can be auto-chosen
+                for (UUID possibleTargetId : possibleTargetIds) {
+                    if (!target.getTargets().contains(possibleTargetId)) {
+                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
+                        responseId = possibleTargetId;
+                        break;
+                    }
+                }
             }
-            waitForResponse(game);
 
-            UUID responseId = getFixedResponseUUID(game);
+            if (responseId == null) {
+                updateGameStatePriority("chooseTargetAmount", game);
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
+                    String message = String.format("Select targets to distribute %d damage (selected %d)", amountTotal, target.getTargets().size());
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
+                }
+                waitForResponse(game);
+
+                responseId = getFixedResponseUUID(game);
+            }
+
             if (responseId != null) {
                 if (target.contains(responseId)) {
                     // unselect
                     target.remove(responseId);
-                } else if (possibleTargets.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                } else if (possibleTargetIds.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
                     // select
                     target.addTarget(responseId, source, game);
                 }
