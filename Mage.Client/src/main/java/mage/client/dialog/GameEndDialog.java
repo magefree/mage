@@ -108,7 +108,7 @@
                      PrintWriter out = new PrintWriter(fileName);
                      String log = gamePanel.getGameLog();
                      log = log.replace("<body>", "<body style=\"background-color:black\">");
-                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">");
+                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">"); //The color is TIMESTAMP_COLOR
                      out.print(log);
                      out.close();
                  }
