@@ -1937,6 +1937,8 @@ public class HumanPlayer extends PlayerImpl {
             return;
         }
 
+        UUID responseId = null;
+
         updateGameStatePriority("selectCombatGroup", game);
         prepareForResponse(game);
         if (!isExecutingMacro()) {
@@ -1950,12 +1952,19 @@ public class HumanPlayer extends PlayerImpl {
                     possibleTargets.add(attackerId);
                 }
             }
-            game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
-                    possibleTargets, false, getOptions(target, null));
+            if (possibleTargets.size() == 1) {
+                responseId = possibleTargets.stream().iterator().next();
+            } else {
+                game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
+                        possibleTargets, false, getOptions(target, null));
+            }
         }
         waitForResponse(game);
 
-        UUID responseId = getFixedResponseUUID(game);
+        if (responseId == null) {
+            responseId = getFixedResponseUUID(game);
+        }
+
         if (response.getBoolean() != null) {
             // do nothing
         } else if (responseId != null) {
