@@ -163,47 +163,4 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
-
-    /**
-     * 1. Kiki-Jiki copied Gilded Drake.
-     * 2. Gilded Drake copy is exchanged for another creature.
-     * 3. After the exchange occurs, Gilded Drake is killed by any means.
-     * 4. Exchange creature is returned to previous controller (possible owner) during the next phase.
-     *
-     * See https://github.com/magefree/mage/issues/8742
-     */
-    @Test
-    public void testGildedDrakeCopyExchange() {
-        addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker");
-        addCard(Zone.BATTLEFIELD, playerA, "Gilded Drake"); // Cheat out so we don't have to deal with the ETB on the original
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-
-        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
-
-        addCard(Zone.BATTLEFIELD, playerB, "Dwarven Trader"); // Exchange target
-
-        setStrictChooseMode(true);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
-        addTarget(playerA, "Gilded Drake"); // Target for Kiki-Jiki
-        addTarget(playerA, "Dwarven Trader"); // Target for Gilded Drake
-
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-
-        // Destroy both of the Drakes
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-        addTarget(playerA, "Gilded Drake");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-        addTarget(playerA, "Gilded Drake");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-        assertAllCommandsUsed();
-
-        assertPermanentCount(playerA, "Kiki-Jiki, Mirror Breaker", 1);
-        assertPermanentCount(playerA, "Dwarven Trader", 1);
-
-        assertPermanentCount(playerA, "Gilded Drake", 0); // The original
-        assertPermanentCount(playerB, "Gilded Drake", 0); // The copy
-    }
 }
