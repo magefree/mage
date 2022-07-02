@@ -108,7 +108,7 @@
                      PrintWriter out = new PrintWriter(fileName);
                      String log = gamePanel.getGameLog();
                      log = log.replace("<body>", "<body style=\"background-color:black\">");
-                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">"); //The color is TIMESTAMP_COLOR
+                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">"); //The color is TIMESTAMP_COLOR and we can utilize it to add line breaks to new lines
                      out.print(log);
                      out.close();
                  }
