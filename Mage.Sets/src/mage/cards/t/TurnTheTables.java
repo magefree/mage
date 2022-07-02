@@ -56,7 +56,7 @@ class TurnTheTablesEffect extends RedirectionEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        if (source.getControllerId() != null && game.getPermanent(source.getFirstTarget()) != null) {
+        if (game.getPlayer(source.getControllerId() != null && game.getPermanent(source.getFirstTarget()) != null) {
             if (damageEvent.isCombatDamage() && source.getControllerId().equals(damageEvent.getTargetId())) {
                 this.redirectTarget = source.getTargets().get(0);
                 return true;                
