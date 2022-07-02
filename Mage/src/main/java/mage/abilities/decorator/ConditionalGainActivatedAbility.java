@@ -18,7 +18,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
+public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl implements Conditional {
 
     private String staticText = "";
 
@@ -71,5 +71,10 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         return staticText;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

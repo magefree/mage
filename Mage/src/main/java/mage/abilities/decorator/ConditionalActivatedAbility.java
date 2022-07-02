@@ -19,7 +19,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
+public class ConditionalActivatedAbility extends ActivatedAbilityImpl implements Conditional{
 
     private static final Effects emptyEffects = new Effects();
 
@@ -79,5 +79,10 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
             additionalText = "";
         }
         return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

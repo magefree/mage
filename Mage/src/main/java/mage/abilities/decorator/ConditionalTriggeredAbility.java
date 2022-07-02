@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author noahg
  */
-public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
+public class ConditionalTriggeredAbility extends TriggeredAbilityImpl implements Conditional {
 
     protected TriggeredAbility ability;
     protected Condition condition;
@@ -108,4 +108,8 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         return ability.isOptional();
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

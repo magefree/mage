@@ -12,7 +12,7 @@ import mage.game.Game;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ConditionalOneShotEffect extends OneShotEffect {
+public class ConditionalOneShotEffect extends OneShotEffect implements Conditional {
 
     private final Effects effects = new Effects();
     private final Effects otherwiseEffects = new Effects();
@@ -81,5 +81,10 @@ public class ConditionalOneShotEffect extends OneShotEffect {
             return "if " + condition.toString() + ", " + effects.getText(mode);
         }
         return effects.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffects.getText(mode);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

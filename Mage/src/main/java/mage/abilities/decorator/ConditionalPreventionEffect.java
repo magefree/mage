@@ -14,7 +14,7 @@ import mage.game.events.GameEvent;
 /**
  * @author JayDi85
  */
-public class ConditionalPreventionEffect extends PreventionEffectImpl {
+public class ConditionalPreventionEffect extends PreventionEffectImpl implements Conditional {
 
     protected PreventionEffect effect;
     protected PreventionEffect otherwiseEffect;
@@ -137,4 +137,8 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
         return new ConditionalPreventionEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

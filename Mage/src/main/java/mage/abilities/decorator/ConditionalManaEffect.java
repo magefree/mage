@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author LevelX2
  */
-public class ConditionalManaEffect extends ManaEffect {
+public class ConditionalManaEffect extends ManaEffect implements Conditional {
 
     private BasicManaEffect effect;
     private BasicManaEffect otherwiseEffect;
@@ -84,5 +84,10 @@ public class ConditionalManaEffect extends ManaEffect {
             }
         }
         return mana;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

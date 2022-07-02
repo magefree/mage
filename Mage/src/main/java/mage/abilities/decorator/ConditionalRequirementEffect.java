@@ -16,7 +16,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 
-public class ConditionalRequirementEffect extends RequirementEffect {
+public class ConditionalRequirementEffect extends RequirementEffect implements Conditional {
 
     protected RequirementEffect effect;
     protected RequirementEffect otherwiseEffect;
@@ -150,4 +150,8 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         return new ConditionalRequirementEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

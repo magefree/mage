@@ -10,7 +10,7 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public class ConditionalCostModificationEffect extends CostModificationEffectImpl {
+public class ConditionalCostModificationEffect extends CostModificationEffectImpl implements Conditional {
 
     protected CostModificationEffect effect;
     protected CostModificationEffect otherwiseEffect;
@@ -82,5 +82,10 @@ public class ConditionalCostModificationEffect extends CostModificationEffectImp
     @Override
     public ConditionalCostModificationEffect copy() {
         return new ConditionalCostModificationEffect(this);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

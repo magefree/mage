@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author nantuko
  */
-public class ConditionalContinuousEffect extends ContinuousEffectImpl {
+public class ConditionalContinuousEffect extends ContinuousEffectImpl implements Conditional {
 
     protected ContinuousEffect effect;
     protected ContinuousEffect otherwiseEffect;
@@ -191,5 +191,10 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         if (this.effect != null) res.add(this.effect);
         if (this.otherwiseEffect != null) res.add(this.otherwiseEffect);
         return res;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

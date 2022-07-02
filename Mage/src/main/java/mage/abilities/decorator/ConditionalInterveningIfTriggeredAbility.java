@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author nantuko
  */
-public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityImpl {
+public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityImpl implements Conditional {
 
     protected TriggeredAbility ability;
     protected Condition condition;
@@ -127,5 +127,10 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }
