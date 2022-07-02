@@ -642,8 +642,8 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             UUID responseId = null;
-            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
-                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
+            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() &&         // Targets must be picked
+                                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
             if (canAutochoose) {
                 // Targets can be auto-chosen
                 for (UUID possibleTargetId : possibleTargetIds) {
@@ -733,32 +733,49 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            Map<String, Serializable> options = getOptions(target, null);
-            java.util.List<UUID> chosen = target.getTargets();
-            options.put("chosen", (Serializable) chosen);
-            java.util.List<UUID> choosable = new ArrayList<>();
+            List<UUID> chosen = target.getTargets();
+            List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
                 if (target.canTarget(abilityControllerId, cardId, null, cards, game)) {
                     choosable.add(cardId);
                 }
             }
-            if (!choosable.isEmpty()) {
-                options.put("choosable", (Serializable) choosable);
-            }
-
             // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
             if (required && choosable.isEmpty()) {
                 required = false;
             }
 
-            updateGameStatePriority("choose(4)", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
-            }
-            waitForResponse(game);
+            UUID responseId = null;
 
-            UUID responseId = getFixedResponseUUID(game);
+            boolean canAutoChoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
+                                    target.getNumberOfTargets() - target.getSize() == choosable.size(); // Available targets are equal to the number that must be picked
+
+            if (canAutoChoose) {
+                for (UUID possibleChooseId : choosable) {
+                    if (!chosen.contains(possibleChooseId)) {
+                        responseId = possibleChooseId;
+                        break;
+                    }
+                }
+            }
+
+            if (responseId == null) {
+                Map<String, Serializable> options = getOptions(target, null);
+                options.put("chosen", (Serializable) chosen);
+                if (!choosable.isEmpty()) {
+                    options.put("choosable", (Serializable) choosable);
+                }
+
+                updateGameStatePriority("choose(4)", game);
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
+                }
+                waitForResponse(game);
+
+                responseId = getFixedResponseUUID(game);
+            }
+
             if (responseId != null) {
                 if (target.getTargets().contains(responseId)) { // if already included remove it with
                     target.remove(responseId);
@@ -807,33 +824,49 @@ public class HumanPlayer extends PlayerImpl {
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-
-            Map<String, Serializable> options = getOptions(target, null);
-            java.util.List<UUID> chosen = target.getTargets();
-            options.put("chosen", (Serializable) chosen);
-            java.util.List<UUID> choosable = new ArrayList<>();
+            List<UUID> chosen = target.getTargets();
+            List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
                 if (target.canTarget(abilityControllerId, cardId, source, cards, game)) {
                     choosable.add(cardId);
                 }
             }
-            if (!choosable.isEmpty()) {
-                options.put("choosable", (Serializable) choosable);
-            }
-
             // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
             if (required && choosable.isEmpty()) {
                 required = false;
             }
 
-            updateGameStatePriority("chooseTarget(5)", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
-            }
-            waitForResponse(game);
+            UUID responseId = null;
 
-            UUID responseId = getFixedResponseUUID(game);
+            boolean canAutoChoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
+                                    target.getNumberOfTargets() - target.getSize() == choosable.size(); // Available targets are equal to the number that must be picked
+            if (canAutoChoose) {
+                for (UUID possibleChooseId : choosable) {
+                    if (!chosen.contains(possibleChooseId)) {
+                        responseId = possibleChooseId;
+                        break;
+                    }
+                }
+            }
+
+            if (responseId == null) {
+                Map<String, Serializable> options = getOptions(target, null);
+                options.put("chosen", (Serializable) chosen);
+
+                if (!choosable.isEmpty()) {
+                    options.put("choosable", (Serializable) choosable);
+                }
+
+                updateGameStatePriority("chooseTarget(5)", game);
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
+                }
+                waitForResponse(game);
+
+                responseId = getFixedResponseUUID(game);
+            }
+
             if (responseId != null) {
                 if (target.getTargets().contains(responseId)) { // if already included remove it
                     target.remove(responseId);
