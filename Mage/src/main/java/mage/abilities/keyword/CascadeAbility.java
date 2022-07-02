@@ -45,10 +45,10 @@ import mage.util.CardUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public class CascadeAbility extends TriggeredAbilityImpl {
-    //20091005 - 702.82
-    //20210215 - 702.84a - Updated Cascade rule
+    // 20091005 - 702.82
+    // 20210215 - 702.84a - Updated Cascade rule
 
-    // can't use singletone due rules:
+    // Can't use singleton due to rule:
     // 702.84c If a spell has multiple instances of cascade, each triggers separately.
     private static final String REMINDERTEXT = " <i>(When you cast this spell, "
             + "exile cards from the top of your library until you exile a "

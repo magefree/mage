@@ -8,8 +8,6 @@ import mage.constants.ComparisonType;
 import mage.filter.predicate.IntComparePredicate;
 
 /**
- * Dynamic version of {@link ManaValuePredicate}
- * <p>
  * Upon instantiation, choose {@link ComparisonType} and {@link DynamicValue}
  * as well as context for the DynamicValue if applicable ({@link Ability} and {@link Effect})
  * <p>

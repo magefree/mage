@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author the-red-lily
@@ -36,25 +36,38 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
     // 5/5
 
     private static final ArrayList<String> cardsByCMC = new ArrayList<>(Arrays.asList(
-            "Accorder's Shield", //0 CMC
-            "Aegis Turtle", //1 CMC, Creature
-            "Absolute Grace", //2 CMC, Enchantment
+            "Accorder's Shield", // 0 CMC
+            "Aegis Turtle", // 2 CMC, Creature
+            "Absolute Grace", // 3 CMC, Enchantment
             "Abandoned Sarcophagus",
             "Abattoir Ghoul",
             "Abbey Gargoyles",
-            "Book of Rass", //6 CMC, Artifact
+            "Book of Rass", // 6 CMC, Artifact
             "Accomplished Automaton",
-            "Coalition Victory", //8 CMC, Sorcery
-            "Apex Altisaur" //9 CMC
+            "Coalition Victory", // 8 CMC, Sorcery
+            "Apex Altisaur" // 9 CMC
     ));
 
-    //For IDE autocomplete
+    // For IDE autocomplete
     private final String abaddonTheDespoiler = "Abaddon the Despoiler";
     private final String lightningBolt = "Lightning Bolt";
     private final String mountain = "Mountain";
+    private final String island = "Island";
     private final String reliquaryTower = "Reliquary Tower";
-    private final String aetherize = "Aetherize"; //4 CMC instant
+    private final String aetherize = "Aetherize"; // 4 CMC instant (For testing cascade on opponent's turn)
 
+    /**
+     * Massive comprehensive test:
+     * <ul>
+     *     <li>Opponent dealing us damage doesn't give cascade</li>
+     *     <li>Opponent taking damage by lightning bolt gives our spells cascade</li>
+     *     <li>Doesn't give opponent cascade on our turn</li>
+     *     <li>Doesn't give opponents cascade on their turn</li>
+     *     <li>Doesn't give us cascade on opponent's turn</li>
+     *     <li>Opponent taking combat damage by combat gives our spells cascade</li>
+     *     <li>Opponent taking more damage by lightning bolt stacks with combat damage</li>
+     * </ul>
+     */
     @Test
     public void markOfTheChaosAscendantTest() {
         removeAllCardsFromLibrary(playerA);
@@ -62,21 +75,28 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, abaddonTheDespoiler);
         addCard(Zone.HAND, playerA, lightningBolt, 3 + 3 + 2);
-        addCard(Zone.HAND, playerB, lightningBolt, 3);
+        addCard(Zone.HAND, playerB, lightningBolt, 1 + 3);
+        addCard(Zone.HAND, playerA, aetherize, 1);
+        addCard(Zone.HAND, playerB, aetherize, 1);
         addCard(Zone.BATTLEFIELD, playerA, mountain, 3 + 3);
         addCard(Zone.BATTLEFIELD, playerB, mountain, 3);
-        addCard(Zone.BATTLEFIELD, playerA, reliquaryTower, 1); //Unlimited hand size
-        addCard(Zone.BATTLEFIELD, playerB, reliquaryTower, 1); //Unlimited hand size
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 4 + 4 * 9 * (9 + 1) / 2); //Cast spells CMC 1-9, 4 times
-        addCard(Zone.BATTLEFIELD, playerB, "Archway Commons", 4 + 2 * 9 * (9 + 1) / 2); //Cast spells CMC 1-9, 4 times
+        addCard(Zone.BATTLEFIELD, playerA, island, 4);
+        addCard(Zone.BATTLEFIELD, playerB, island, 4);
+        addCard(Zone.BATTLEFIELD, playerA, reliquaryTower, 1); // Unlimited hand size
+        addCard(Zone.BATTLEFIELD, playerB, reliquaryTower, 1); // Unlimited hand size
+        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 4 + 4 * 9 * (9 + 1) / 2); // Cast spells CMC 1-9, 4 times
+        addCard(Zone.BATTLEFIELD, playerB, "Archway Commons", 4 + 2 * 9 * (9 + 1) / 2); // Cast spells CMC 1-9, 4 times
         addCard(Zone.LIBRARY, playerA, mountain, 2);
         addCard(Zone.LIBRARY, playerB, mountain, 2);
-        cardsByCMC.forEach(c -> addCard(Zone.HAND, playerA, c, 4 + 3));
+        cardsByCMC.forEach(c -> addCard(Zone.HAND, playerA, c, 4 + 3)); //4 on turn 1, 3 on turn 3
         cardsByCMC.forEach(c -> addCard(Zone.HAND, playerB, c, 2));
-        playerB.initLife(100); //Let us deal opponent a lot of damage
+        playerB.initLife(100); // Let us deal opponent a lot of damage
 
-        //Opponent taking damage by lightning bolt gives cards in hand cascade
+        // Opponent dealing us damage doesn't give cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, lightningBolt, playerA, true);
         assertMarkOfTheChaosAscendant("No damage", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        // Opponent taking damage by lightning bolt gives our spells cascade
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
         assertMarkOfTheChaosAscendant("3 damage", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
@@ -84,7 +104,11 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
         assertMarkOfTheChaosAscendant("9 damage", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 9);
 
-        //Doesn't give opponents cascade on their turn
+        // Doesn't give opponent cascade on our turn
+        assertMarkOfTheChaosAscendant("Doesn't give opponent cascade on our turn",
+                1, PhaseStep.PRECOMBAT_MAIN, playerB, false, aetherize);
+
+        // Doesn't give opponents cascade on their turn
         assertMarkOfTheChaosAscendant("No damage, Opponent", 2, PhaseStep.PRECOMBAT_MAIN, playerB, -1);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, lightningBolt, playerA, true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
@@ -94,24 +118,29 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
         assertMarkOfTheChaosAscendant("9 damage, Opponent", 2, PhaseStep.PRECOMBAT_MAIN, playerB, -1);
 
-        //Opponent taking combat damage by combat gives cards in hand cascade
+        // Doesn't give us cascade on opponent's turn
+        assertMarkOfTheChaosAscendant("Doesn't give us cascade on opponent's turn",
+                2, PhaseStep.PRECOMBAT_MAIN, playerA, false, aetherize);
+
+        // Opponent taking combat damage by combat gives our spells cascade
         attack(3, playerA, abaddonTheDespoiler);
         assertMarkOfTheChaosAscendant("5 combat damage", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, 5);
 
-        //Opponent taking more damage by lightning bolt stacks with combat damage
+        // Opponent taking more damage by lightning bolt stacks with combat damage
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, playerB, true);
         assertMarkOfTheChaosAscendant("5 combat damage + 3 burn", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, 5 + 3);
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, playerB, true);
         assertMarkOfTheChaosAscendant("5 combat damage + 3 burn", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, 5 + 3 + 3);
 
         setStopAt(3, PhaseStep.END_TURN);
-        execute();  // possible bug: you can catch choose dialog for duplicated upkeep triggers
+        execute();
         assertAllCommandsUsed();
 
         assertLife(playerB, 100 - 3 * 3 - 3 * 3 - 5 - 3 * 2);
     }
 
-    private class TestCardInHandHasAbility implements CardTestCodePayload {
+    // Unused, but I spent the time to write it :(
+    private static class TestCardInHandHasAbility implements CardTestCodePayload {
 
         private final String cardName;
         private final Ability ability;
@@ -131,7 +160,7 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
             Set<Card> filteredCardsInHand = player.getHand().getCards(filter, game);
             Assert.assertFalse("Must have card named " + cardName, filteredCardsInHand.isEmpty());
             filteredCardsInHand.forEach(card ->
-                    assertTrue(getMessage(), hasAbility == card.getAbilities().containsRule(ability)));
+                    assertEquals(getMessage(), hasAbility, card.getAbilities().containsRule(ability)));
         }
 
         private String getMessage() {
@@ -139,25 +168,22 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
         }
     }
 
-    private class TestCardOnStackHasAbility implements CardTestCodePayload {
+    private static class TestCardOnStackHasAbility implements CardTestCodePayload {
 
         private final String cardName;
         private final Ability ability;
         private final boolean hasAbility;
-        private final FilterCard filter;
 
         public TestCardOnStackHasAbility(String cardName, Ability ability, boolean hasAbility) {
             this.cardName = cardName;
             this.ability = ability;
             this.hasAbility = hasAbility;
-            this.filter = new FilterCard(cardName);
-            this.filter.add(new NamePredicate(cardName));
         }
 
         @Override
         public void run(String info, Player player, Game game) {
             StackObject spell = game.getStack().peek();
-            assertTrue(getMessage(), hasAbility == spell.getAbilities().containsRule(ability));
+            assertEquals(getMessage(), hasAbility, spell.getAbilities().containsRule(ability));
         }
 
         private String getMessage() {
@@ -174,14 +200,14 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
 
     private void assertMarkOfTheChaosAscendant(String message, int turnNum, PhaseStep step, TestPlayer player, boolean shouldCascade, String cardName) {
         castSpell(turnNum, step, player, cardName);
-        //If shouldCascade, check that stack has 2 items. Otherwise, check it has 1
+        // If shouldCascade, check that stack has 2 items. Otherwise, check it has 1
         checkStackSize(message + " " + cardName + " " + (shouldCascade ? "and Cascade " : "") + "on stack",
                 turnNum, step, player, shouldCascade ? 2 : 1);
-        //If shouldCascade, check that cascade is on stack. Otherwise, check that cascade is not on stack
+        // If shouldCascade, check that cascade is on stack. Otherwise, check that cascade is not on stack
         runCode(message, turnNum, step, player,
                 new TestCardOnStackHasAbility(cardName, new CascadeAbility(false), shouldCascade));
-        //Drain Stack
+        // Drain Stack
         waitStackResolved(turnNum, step, player);
-        //No need to check effect of Cascade, implementation of Cascade is not in scope of test
+        // No need to check effect of Cascade, implementation of Cascade is not in scope of test
     }
 }

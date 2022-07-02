@@ -756,7 +756,7 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                             return true;
                         } catch (AssertionError e) {
-                            //Add context
+                            // Add context
                             throw new AssertionError("Assert failed for action\n Action:" + action.getActionName() + "\n"
                                     + "Assertion message:" + e.getMessage(), e);
                         }

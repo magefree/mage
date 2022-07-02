@@ -52,7 +52,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
         ));
         filter.add(new CastFromZonePredicate(Zone.HAND));
         filter.add(new DynamicManaValuePredicate(ComparisonType.FEWER_THAN,
-                new IntPlusDynamicValue(1, OpponentsLostLifeCount.instance), //Add one to convert <= to <
+                new IntPlusDynamicValue(1, OpponentsLostLifeCount.instance), // Add one to convert <= to <
                 markOfTheChaosAscendant, null));
         this.addAbility(markOfTheChaosAscendant.addHint(hint));
     }
