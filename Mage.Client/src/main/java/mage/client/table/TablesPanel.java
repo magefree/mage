@@ -756,7 +756,7 @@ public class TablesPanel extends javax.swing.JPanel {
         this.roomId = roomId;
         UUID chatRoomId = null;
         if (SessionHandler.getSession() != null) {
-            btnQuick2Player.setVisible(SessionHandler.isTestMode());
+            btnQuickStart2Player.setVisible(SessionHandler.isTestMode());
             btnQuickStart4Player.setVisible(SessionHandler.isTestMode());
             btnQuickStartMCTS.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
@@ -1051,7 +1051,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btnOpen = new javax.swing.JToggleButton();
         btnPassword = new javax.swing.JToggleButton();
-        btnQuick2Player = new javax.swing.JButton();
+        btnQuickStart2Player = new javax.swing.JButton();
         btnQuickStart4Player = new javax.swing.JButton();
         btnQuickStartMCTS = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
@@ -1503,11 +1503,11 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnPassword);
 
-        btnQuick2Player.setText("Quick 2 player");
-        btnQuick2Player.setFocusable(false);
-        btnQuick2Player.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuick2Player.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQuick2Player.addActionListener(new java.awt.event.ActionListener() {
+        btnQuickStart2Player.setText("Quick 2 player");
+        btnQuickStart2Player.setFocusable(false);
+        btnQuickStart2Player.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStart2Player.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStart2Player.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuickStart2PlayerActionPerformed(evt);
             }
@@ -1546,7 +1546,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                .addComponent(btnQuick2Player)
+                                                .addComponent(btnQuickStart2Player)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(btnQuickStartMCTS))
                                         .addComponent(btnQuickStart4Player))
@@ -1565,7 +1565,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                                         .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addGroup(jPanelTopLayout.createSequentialGroup()
                                                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(btnQuick2Player)
+                                                                        .addComponent(btnQuickStart2Player)
                                                                         .addComponent(btnQuickStartMCTS))
                                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1798,7 +1798,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnOpen;
     private javax.swing.JToggleButton btnPassword;
     private javax.swing.JButton btnQuickStart4Player;
-    private javax.swing.JButton btnQuick2Player;
+    private javax.swing.JButton btnQuickStart2Player;
     private javax.swing.JButton btnQuickStartMCTS;
     private javax.swing.JToggleButton btnRated;
     private javax.swing.JToggleButton btnSkillBeginner;
