@@ -606,6 +606,11 @@ public abstract class TargetImpl implements Target {
     public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = possibleTargets(abilityControllerId, source, game);
         possibleTargets.removeAll(this.targets.keySet());
+        return tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets) {
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() &&       // Targets must be picked
                                 possibleTargets.size() == this.getNumberOfTargets() - this.getSize(); // Available targets are equal to the number that must be picked
 
