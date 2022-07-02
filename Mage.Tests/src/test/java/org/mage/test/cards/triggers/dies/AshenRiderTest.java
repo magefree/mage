@@ -35,7 +35,6 @@ public class AshenRiderTest extends CardTestPlayerBase {
         // At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
         // {1}: Until your next turn, Volrath, the Shapestealer becomes a copy of target creature with a counter on it, except it's 7/5 and it has this ability.        
         addCard(Zone.HAND, playerA, "Volrath, the Shapestealer"); // Creature {2}{B}{G}{U}       
-        addTarget(playerA, "Ashen Rider");
 
         // Destroy target artifact or creature. It can't be regenerated.
         addCard(Zone.HAND, playerA, "Putrefy"); // Instant {1}{B}{G}
@@ -48,9 +47,9 @@ public class AshenRiderTest extends CardTestPlayerBase {
         addTarget(playerA,  "Ashen Rider");
         
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
-        
+
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Putrefy", "Ashen Rider[only copy]");
-        // addTarget(playerA, "Silvercoat Lion"); // Dies trigger of Volrath, the Shapestealer copied from Ashen Rider
+        addTarget(playerA, "Silvercoat Lion"); // Dies trigger of Volrath, the Shapestealer copied from Ashen Rider
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -58,10 +57,10 @@ public class AshenRiderTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
         
         assertPowerToughness(playerA, "Ashen Rider", 4,4);
-        
-        assertGraveyardCount(playerA, "Putrefy", 1);        
+
+        assertGraveyardCount(playerA, "Putrefy", 1);
         assertGraveyardCount(playerA, "Volrath, the Shapestealer", 1);
-        
+
         assertExileCount(playerB, "Silvercoat Lion", 1);
     }    
 }
