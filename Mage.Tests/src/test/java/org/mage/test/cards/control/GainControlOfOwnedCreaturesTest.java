@@ -38,9 +38,7 @@ public class GainControlOfOwnedCreaturesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dubious Challenge");
         setChoice(playerA, "Trostani Discordant^Void Winnower");
-
-        addTarget(playerA, playerB);
-
+        // addTarget(playerA, playerB); Autochosen only option
         setChoice(playerB, "Trostani Discordant");
 
         setStrictChooseMode(true);
@@ -92,9 +90,7 @@ public class GainControlOfOwnedCreaturesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dubious Challenge");
         setChoice(playerA, "Trostani Discordant^Void Winnower");
-
-        addTarget(playerA, playerB);
-
+        // addTarget(playerA, playerB); Autochosen only option
         setChoice(playerB, "Trostani Discordant");
 
         setStrictChooseMode(true);

@@ -40,6 +40,7 @@ public class AshenRiderTest extends CardTestPlayerBase {
         // Destroy target artifact or creature. It can't be regenerated.
         addCard(Zone.HAND, playerA, "Putrefy"); // Instant {1}{B}{G}
 
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volrath, the Shapestealer");
         
@@ -49,8 +50,7 @@ public class AshenRiderTest extends CardTestPlayerBase {
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Putrefy", "Ashen Rider[only copy]");
-
-        addTarget(playerA, "Silvercoat Lion"); // Dies trigger of Volrath, the Shapestealer copied from Ashen Rider
+        // addTarget(playerA, "Silvercoat Lion"); // Dies trigger of Volrath, the Shapestealer copied from Ashen Rider
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -63,6 +63,5 @@ public class AshenRiderTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Volrath, the Shapestealer", 1);
         
         assertExileCount(playerB, "Silvercoat Lion", 1);
-        
     }    
 }

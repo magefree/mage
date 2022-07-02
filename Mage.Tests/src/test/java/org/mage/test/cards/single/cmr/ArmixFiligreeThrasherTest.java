@@ -27,7 +27,7 @@ public class ArmixFiligreeThrasherTest extends CardTestPlayerBase {
         attack(1, playerA, "Armix, Filigree Thrasher", playerB);
         setChoice(playerA, true); // pay discard cost
         setChoice(playerA, "Alpha Myr");
-        addTarget(playerA, "Grizzly Bears"); // target for trigger (must kill)
+        // addTarget(playerA, "Grizzly Bears"); // Autochosen, target for trigger (must kill)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

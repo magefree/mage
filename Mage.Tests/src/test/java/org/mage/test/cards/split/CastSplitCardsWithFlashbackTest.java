@@ -22,7 +22,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
 
         // add flashback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Lightning Bolt");
+        // addTarget(playerA, "Lightning Bolt"); Autochosen only option
 
         // cast as flashback
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -54,7 +54,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
 
         // add flashback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Wear // Tear");
+        // addTarget(playerA, "Wear // Tear"); Autochosen only option
 
         // cast as flashback
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -91,7 +91,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         // add flashback
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Wear // Tear");
+        // addTarget(playerA, "Wear // Tear"); Autochosen only option
 
         // cast as flashback
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -124,7 +124,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
 
         // add flashback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Wear // Tear");
+        // addTarget(playerA, "Wear // Tear"); Autochosen only option
 
         // cast as flashback
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

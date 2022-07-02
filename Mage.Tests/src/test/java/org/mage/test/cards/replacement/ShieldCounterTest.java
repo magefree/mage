@@ -56,7 +56,7 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder");
-        addTarget(playerA, "Disciplined Duelist");
+        // addTarget(playerA, "Disciplined Duelist"); Autochosen only option
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

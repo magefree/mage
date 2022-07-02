@@ -38,7 +38,7 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, stinger);
-        addTarget(playerA, stinger); // place two -1/-1 counters on himself
+        // addTarget(playerA, stinger); // place two -1/-1 counters on himself (autochosen only option
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

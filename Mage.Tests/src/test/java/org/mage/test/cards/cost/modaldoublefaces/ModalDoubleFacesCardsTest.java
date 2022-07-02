@@ -314,7 +314,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // cast Snapcaster and give flashback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Emeria's Call");
+        // addTarget(playerA, "Emeria's Call"); Autochosen, only option
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("grave before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria's Call", 1);
         checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", true);
@@ -727,7 +727,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Akoum Warrior");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6); // cast from hostage taker for any color
-        //
+
         // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker
         // leaves the battlefield. You may cast that card as long as it remains exiled, and you may spend mana
         // as though it were mana of any type to cast that spell.
@@ -743,7 +743,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // exile by hostage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
-        addTarget(playerA, "Akoum Warrior");
+        // addTarget(playerA, "Akoum Warrior"); Autochosen, only option
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
         // play as creature for any color

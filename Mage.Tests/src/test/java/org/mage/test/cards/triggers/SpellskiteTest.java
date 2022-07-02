@@ -253,7 +253,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice");
         addTargetAmount(playerA, "Scute Mob", 1); // target 1
         addTargetAmount(playerA, "Spellskite", 4); // target 2
-        addTarget(playerA, playerB); // 5 life to B
+        // addTarget(playerA, playerB); // Autochosen, only option 5 life to B
 
         // B activate Spellskite, but can't change any targets cause it's already targeted
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");

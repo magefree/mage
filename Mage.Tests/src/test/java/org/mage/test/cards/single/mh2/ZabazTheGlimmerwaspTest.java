@@ -38,14 +38,15 @@ public class ZabazTheGlimmerwaspTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, atog);
         addCard(Zone.HAND, playerA, worker);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, worker);
 
-        setChoice(playerA, worker);
-        addTarget(playerA, zabaz);
-        setChoice(playerA, true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, worker); // Sacrifice target
+        setChoice(playerA, "Yes"); // Modular
+        // addTarget(playerA, zabaz); Autochosen, only option
 
-        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

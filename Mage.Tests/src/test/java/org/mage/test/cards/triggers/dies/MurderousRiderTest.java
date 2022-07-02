@@ -19,10 +19,10 @@ public class MurderousRiderTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Murder");
 
         castSpell(1, PhaseStep.UPKEEP, playerA,"Graceful Reprieve");
-        addTarget(playerA, "Murderous Rider");
+        // addTarget(playerA, "Murderous Rider"); Autochosen, only option
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder");
-        addTarget(playerB, "Murderous Rider");
+        // addTarget(playerB, "Murderous Rider"); Autochosen, only option
         setChoice(playerA, "When {this} dies");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -43,7 +43,7 @@ public class MurderousRiderTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Murder");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder");
-        addTarget(playerB, "Murderous Rider");
+        // addTarget(playerB, "Murderous Rider"); Autochosen, only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);

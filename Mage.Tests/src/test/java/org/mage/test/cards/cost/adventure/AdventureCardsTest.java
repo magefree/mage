@@ -724,7 +724,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Curious Pair");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2); // for prepare
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // cast from hostage taker for any color
-        //
+
         // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker
         // leaves the battlefield. You may cast that card as long as it remains exiled, and you may spend mana
         // as though it were mana of any type to cast that spell.
@@ -740,9 +740,10 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         // turn 1 - exile by hostage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
-        addTarget(playerA, "Curious Pair");
+        // addTarget(playerA, "Curious Pair"); Autochosen only option
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkExileCount("after exile 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+
         // play as creature for any color
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -756,6 +757,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addTarget(playerA, "Curious Pair");
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
         checkExileCount("after exile 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
+
         // play as adventure spell
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);

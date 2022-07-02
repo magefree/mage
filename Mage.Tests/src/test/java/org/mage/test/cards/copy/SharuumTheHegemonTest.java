@@ -51,6 +51,8 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
         // Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Blood Artist", 1);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
         setChoice(playerA, "Sharuum the Hegemon"); // what creature to clone
@@ -59,30 +61,30 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
-        addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
+        // addTarget(playerA, "Sharuum the Hegemon"); Autochosen, only option (return real sharuum)
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
-        addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
+        // addTarget(playerA, "Sharuum the Hegemon"); // Autochosen, only option (return real sharuum)
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
-        addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
+        // addTarget(playerA, "Sharuum the Hegemon"); // Autochosen, only option (return real sharuum)
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
+        setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
+        addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, false); // Don't use it anymore
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
         assertLife(playerB, 16);
-
-
     }
-
 }

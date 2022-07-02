@@ -116,7 +116,7 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
 
         // return to hand
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "return from graveyard");
-        addTarget(playerA, "Baleful Mastery");
+        // addTarget(playerA, "Baleful Mastery"); Autochosen only option
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkHandCardCount("after return", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", 1);
 

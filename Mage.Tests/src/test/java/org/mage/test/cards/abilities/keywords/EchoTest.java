@@ -46,7 +46,7 @@ public class EchoTest extends CardTestPlayerBase {
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
         castSpell(3, PhaseStep.UPKEEP, playerA, "Restoration Angel");
-        addTarget(playerA, "Avalanche Riders");
+        // addTarget(playerA, "Avalanche Riders"); Autochosen only option
         setChoice(playerA, true); // raider do restore
 
         // Avalanche Riders triggered again

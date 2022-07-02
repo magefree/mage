@@ -27,7 +27,7 @@ public class FerventChampionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sword of Fire and Ice", 1);        
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
-        addTarget(playerA, "Fervent Champion");
+        // addTarget(playerA, "Fervent Champion"); Autochosen only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

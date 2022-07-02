@@ -413,7 +413,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addTarget(playerA, "Mountain");
         setChoice(playerA, true); // Copy
         setChoice(playerA, true); // Choose new target
-        addTarget(playerA, "Island");
+        // addTarget(playerA, "Island"); Autochosen
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);

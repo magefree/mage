@@ -70,21 +70,16 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Knight of Grace");
         addCard(Zone.BATTLEFIELD, playerB, "Avatar of Woe");
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}");
-        addTarget(playerB, "Knight of Grace");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
-        try {
-            execute();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("setup good targets")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
-            }
-        }
+        execute();
+        assertAllCommandsUsed();
 
-        assertTapped("Avatar of Woe", false);
-        assertGraveyardCount(playerA, "Knight of Grace", 0);
+        assertGraveyardCount(playerA, "Knight of Grace", 0); // Hexproof from black
+        assertGraveyardCount(playerB, "Avatar of Woe", 1);   // Only target and autochosen, autokills itself.
     }
 
     @Test

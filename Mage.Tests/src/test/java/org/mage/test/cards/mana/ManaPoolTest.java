@@ -314,7 +314,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
         // counter by X=3
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}: Counter");
         setChoice(playerB, "X=3");
-        addTarget(playerB, "Lightning Bolt");
+        // addTarget(playerB, "Lightning Bolt"); Autochosen, only option
         // pay to prevent
         setChoice(playerA, true); // pay 3 to prevent counter
 
@@ -360,7 +360,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
         // counter by X=3
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}: Counter");
         setChoice(playerB, "X=3");
-        addTarget(playerB, "Lightning Bolt");
+        // addTarget(playerB, "Lightning Bolt"); Autochosen, only option
         // pay to prevent
         setChoice(playerA, true); // pay 3 to prevent counter
 

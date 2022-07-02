@@ -103,7 +103,7 @@ public class AssistTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Charging Binox");
         setChoice(playerA, "Green", 6); // normal pay x6
         setChoice(playerA, "Assist"); // activate assist
-        addTarget(playerA, playerB); // player to assist
+        // addTarget(playerA, playerB); // Autochosen, only option. player to assist
         setChoice(playerB, "X=2"); // can pay (auto-pay from B to A's mana pool as colorless x2)
         setChoice(playerA, "Colorless", 2 - 1); // assist pay x2, but 1 mana was unlocked in assist code (wtf)
 

@@ -25,7 +25,7 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         // cast fleet
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");
-        addTarget(playerA, "Lightning Bolt");
+        // addTarget(playerA, "Lightning Bolt"); Autochosen only option
 
         // cast bolt with blue mana
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -58,7 +58,7 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         // cast fleet
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");
-        addTarget(playerA, "Wear // Tear");
+        // addTarget(playerA, "Wear // Tear"); Autochosen only option
 
         // cast Wear with black mana
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -91,7 +91,7 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         // cast fleet
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");
-        addTarget(playerA, "Catch // Release");
+        // addTarget(playerA, "Catch // Release"); Autochosen only option
 
         // cast Catch with black mana
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

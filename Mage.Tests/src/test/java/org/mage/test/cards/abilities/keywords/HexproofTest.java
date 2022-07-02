@@ -121,7 +121,7 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerB, "Leyline of Sanctity", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
-        addTarget(playerA, playerA);
+        // addTarget(playerA, playerA); Autochosen, only option
         setChoice(playerA, "Swamp");
 
         setStrictChooseMode(true);
@@ -148,19 +148,15 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
-        addTarget(playerA, playerB);
+        // playerA is autochosen since they are the only valid target
+        setChoice(playerA, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
 
-        try {
-            execute();
-            assertAllCommandsUsed();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("setup good targets")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
-            }
-        }
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Balduvian Bears", 1);
     }
 
     @Test

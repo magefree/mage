@@ -74,9 +74,9 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blatant Thievery");
-        addTarget(playerA, "Silvercoat Lion");
-        addTarget(playerA, "Walking Corpse");
-        addTarget(playerA, "Pillarfield Ox");
+        // addTarget(playerA, "Silvercoat Lion"); Autochosen only option
+        // addTarget(playerA, "Walking Corpse"); Autochosen only option
+        // addTarget(playerA, "Pillarfield Ox"); Autochosen only option
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Aggression", "Pillarfield Ox", "Blatant Thievery");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

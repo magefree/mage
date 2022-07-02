@@ -20,7 +20,7 @@ public class BasrisLieutenantTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Wrath of God");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, basrisLieutenant);
-        addTarget(playerA, basrisLieutenant);
+        // addTarget(playerA, basrisLieutenant); Autochosen only option
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrath of God");
 
         setStrictChooseMode(true);

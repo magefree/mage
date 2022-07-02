@@ -23,7 +23,7 @@ public class ChaosWandTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Swamp", 3); // choose for exile
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: ");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, true); // cast for free
 
         setStrictChooseMode(true);

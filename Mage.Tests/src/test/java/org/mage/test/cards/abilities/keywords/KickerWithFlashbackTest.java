@@ -46,7 +46,7 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Lightning Bolt");
+        // addTarget(playerA, "Lightning Bolt"); Autochosen only option
 
         // cast bolt by flashback
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Flashback");
@@ -72,7 +72,7 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        addTarget(playerA, "Burst Lightning");
+        // addTarget(playerA, "Burst Lightning"); Autochosen only option
 
         // cast burst by flashback
         // showAvailableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);

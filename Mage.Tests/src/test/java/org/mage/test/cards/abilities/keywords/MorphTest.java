@@ -689,7 +689,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         // return to hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
-        addTarget(playerA, "Rattleclaw Mystic");
+        // addTarget(playerA, "Rattleclaw Mystic"); Autochosen only option
 
         // try cast as morph - must work
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");

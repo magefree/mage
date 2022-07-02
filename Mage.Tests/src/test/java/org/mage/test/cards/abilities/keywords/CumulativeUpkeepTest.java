@@ -85,7 +85,7 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         
         setChoice(playerA, "Cumulative upkeep"); // Triggered list (total 2) which trigger goes first on the stack
         addTarget(playerA, "Illusions of Grandeur"); // Own target permanent of Puca's Mischief
-        addTarget(playerA, "Kor Celebrant"); // Opponent's target permanent of Puca's Mischief
+        // addTarget(playerA, "Kor Celebrant"); // Opponent's target permanent of Puca's Mischief (autochosen only option)
         
         setChoice(playerA, true); // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
         setChoice(playerA, false); // Pay {2}{2}?
@@ -102,9 +102,5 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerA, "Kor Celebrant", 1);
         assertPermanentCount(playerB, "Illusions of Grandeur", 1);
-        
-
     }
-
-        
 }

@@ -82,8 +82,8 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
 
         // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Wear // Tear");
-        addTarget(playerA, "Juggernaut");
-        addTarget(playerA, "Absolute Grace");
+        // addTarget(playerA, "Juggernaut"); Autochosen only option
+        // addTarget(playerA, "Absolute Grace"); Autochosen only option
         //playerA.addTarget("Absolute Grace");
         // showBattlefield("after", 1, PhaseStep.BEGIN_COMBAT, playerB);
 

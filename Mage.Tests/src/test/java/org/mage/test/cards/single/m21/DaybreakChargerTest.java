@@ -13,9 +13,11 @@ public class DaybreakChargerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Daybreak Charger");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daybreak Charger");
-        addTarget(playerA, "Daybreak Charger");
         setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daybreak Charger");
+        // addTarget(playerA, "Daybreak Charger"); Autochosen, only option
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();

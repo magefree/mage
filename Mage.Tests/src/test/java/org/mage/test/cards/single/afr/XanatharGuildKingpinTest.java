@@ -35,7 +35,7 @@ public class XanatharGuildKingpinTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Grizzly Bears");
 
         // activate on opponent
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen only option
 
         // B can't cast spells
         checkPlayableAbility("B can't cast", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Lightning Bolt", false);

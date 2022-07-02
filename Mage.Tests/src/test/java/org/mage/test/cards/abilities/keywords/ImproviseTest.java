@@ -30,7 +30,7 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         setChoice(playerA, "Improvise");
         addTarget(playerA, "Alpha Myr"); // pay 5 as improvise
         setChoice(playerA, "Improvise");
-        addTarget(playerA, "Alpha Myr"); // pay 6 as improvise
+        // addTarget(playerA, "Alpha Myr"); // pay 6 as improvise, autochosen
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -25,7 +25,7 @@ public class EntwineTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, false); // not use Entwine
         setModeChoice(playerA, "1"); // target creature
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); autochosen only option
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -50,7 +50,7 @@ public class EntwineTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, true); // use Entwine
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); Autochosen only option
         addTarget(playerA, playerA);
 
         setStrictChooseMode(true);
@@ -78,7 +78,7 @@ public class EntwineTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, true); // use Entwine
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); autochosen only option
         addTarget(playerA, playerA);
 
         setStrictChooseMode(true);
@@ -106,7 +106,7 @@ public class EntwineTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, true); // use Entwine
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); Autochosen only option
         addTarget(playerA, playerA);
 
         setStrictChooseMode(true);
@@ -136,7 +136,7 @@ public class EntwineTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, true); // cast for free
         setChoice(playerA, true); // use Entwine
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); Autochosen only option
         addTarget(playerA, playerA);
 
         setStrictChooseMode(true);

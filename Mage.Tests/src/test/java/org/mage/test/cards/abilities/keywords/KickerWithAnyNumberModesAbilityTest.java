@@ -24,7 +24,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Inscription of Abundance");
         setChoice(playerA, false); // no kicker
         setModeChoice(playerA, "1");
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -52,7 +52,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
         addTarget(playerA, playerA); // gain x life
-        addTarget(playerA, "Balduvian Bears"); // get counters
+        // addTarget(playerA, "Balduvian Bears"); // Autochosen, only option get counters
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -82,7 +82,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
         addTarget(playerA, playerA); // gain x life
-        addTarget(playerA, "Balduvian Bears"); // get counters
+        // addTarget(playerA, "Balduvian Bears"); // Autochosen, only option get counters
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -112,7 +112,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
         addTarget(playerA, playerA); // gain x life
-        addTarget(playerA, "Balduvian Bears"); // get counters
+        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option get counters
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -144,7 +144,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
         addTarget(playerA, playerA); // gain x life
-        addTarget(playerA, "Balduvian Bears"); // get counters
+        // addTarget(playerA, "Balduvian Bears"); // Autochosen, only option get counters
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

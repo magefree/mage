@@ -73,7 +73,7 @@ public class BolsterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Scaleguard");
 
         attack(3, playerA, "Silvercoat Lion");
-        addTarget(playerA, "Pillarfield Ox"); // Tap from triggered ability of Elite Scaleguard
+        // addTarget(playerA, "Pillarfield Ox"); // Autochosen, only option (Tap from triggered ability of Elite Scaleguard)
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -106,10 +106,10 @@ public class BolsterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Scaleguard");
 
         attack(3, playerA, "Silvercoat Lion");
-        addTarget(playerA, "Pillarfield Ox"); // Tap from triggered ability of Elite Scaleguard
+        // addTarget(playerA, "Pillarfield Ox"); // Autochosen, only option (Tap from triggered ability of Elite Scaleguard)
 
         attack(5, playerA, "Silvercoat Lion");
-        addTarget(playerA, "Pillarfield Ox"); // Tap from triggered ability of Elite Scaleguard
+        // addTarget(playerA, "Pillarfield Ox"); // Autochosen, only option (Tap from triggered ability of Elite Scaleguard)
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
 

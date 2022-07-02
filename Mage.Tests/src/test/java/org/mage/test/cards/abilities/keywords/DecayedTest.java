@@ -32,7 +32,8 @@ public class DecayedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade");
-        addTarget(playerA, "Grizzly Bears");
+        // addTarget(playerA, "Grizzly Bears"); (autochosen only option)
+
         // Gisa - "If a creature an opponent controls would die, exile it instead."
         checkExileCount("Gisa Exile Ability", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Grizzly Bears", 1);
 

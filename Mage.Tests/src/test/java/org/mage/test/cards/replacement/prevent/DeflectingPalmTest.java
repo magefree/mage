@@ -65,15 +65,16 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Deflecting Palm");
         setChoice(playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dromoka's Command", null, "Deflecting Palm");
-
         setModeChoice(playerA, "1");
         addTarget(playerA, "Deflecting Palm");
         setModeChoice(playerA, "3");
-        addTarget(playerA, "Silvercoat Lion");
+        // addTarget(playerA, "Silvercoat Lion"); autochosen only option
 
         attack(1, playerA, "Silvercoat Lion");
 

@@ -65,7 +65,7 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
-        addTarget(playerB, "Goblin Deathraiders"); // target for new necro attach
+        // addTarget(playerB, "Goblin Deathraiders"); // target for new necro attach (autochosen only option)
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -83,5 +83,4 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 1);
         assertGraveyardCount(playerB, "Sejiri Merfolk", 1);
     }
-
 }

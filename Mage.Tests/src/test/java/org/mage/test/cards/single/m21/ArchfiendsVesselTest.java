@@ -67,7 +67,7 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exhume");
         addTarget(playerA, archfiendsVessel);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fatal Push");
-        addTarget(playerA, archfiendsVessel);
+        // addTarget(playerA, archfiendsVessel); Autochosen only option
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

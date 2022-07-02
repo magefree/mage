@@ -19,7 +19,7 @@ public class RakshasaDebaserTest extends CardTestPlayerBase {
 
         // attack and trigger
         attack(1, playerA, "Rakshasa Debaser", playerB);
-        addTarget(playerA, "Balduvian Bears");
+        // addTarget(playerA, "Balduvian Bears"); Autochosen only option
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
