@@ -15,7 +15,8 @@ import mage.target.common.TargetAttackingCreature;
 
 /**
  *
- * @author LevelX2, sprangg
+ * @author LevelX2
+ * @author sprangg
  */
 public final class TurnTheTables extends CardImpl {
 
