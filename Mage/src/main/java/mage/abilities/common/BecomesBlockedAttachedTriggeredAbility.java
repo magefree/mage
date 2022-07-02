@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,8 +40,7 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = Optional
-                .of(getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+                .ofNullable(getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .orElse(null);

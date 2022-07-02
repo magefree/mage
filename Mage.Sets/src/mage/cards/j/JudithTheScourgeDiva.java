@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class JudithTheScourgeDiva extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("nontoken creature you control");
+            = new FilterCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

@@ -63,7 +63,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         String targetText = getTargets().get(0) != null ? getTargets().get(0).getFilter().getMessage() : "creature";
-        String reminderText = " <i>(" + manaCosts.getText() + ": Attach to target " + targetText + ". Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)</i>";
+        String reminderText = " <i>(" + manaCosts.getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)</i>";
 
         StringBuilder sb = new StringBuilder("Equip");
         if (!targetText.equals("creature you control")) {

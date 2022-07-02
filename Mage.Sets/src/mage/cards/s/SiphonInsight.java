@@ -147,7 +147,7 @@ class SiphonInsightCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand(game)) {
+        if (theCard == null) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards

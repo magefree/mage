@@ -24,7 +24,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -79,8 +78,7 @@ enum BhaalLordOfMurderCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return Optional.of(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(game.getPlayer(source.getControllerId()))
                 .map(Player::getLife)
                 .map(x -> 2 * x >= game.getStartingLife())
                 .orElse(false);

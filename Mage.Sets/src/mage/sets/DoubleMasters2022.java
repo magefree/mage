@@ -25,6 +25,7 @@ public final class DoubleMasters2022 extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 2;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 332;
 
         cards.add(new SetCardInfo("Abbot of Keral Keep", 100, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abbot of Keral Keep", 446, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class, NON_FULL_USE_VARIOUS));

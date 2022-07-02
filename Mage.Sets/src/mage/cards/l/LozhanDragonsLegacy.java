@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -76,9 +75,8 @@ enum LozhanDragonsLegacyValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional.of(effect.getValue("spellCast"))
+        return Optional.ofNullable(effect.getValue("spellCast"))
                 .map(Spell.class::cast)
-                .filter(Objects::nonNull)
                 .map(Spell::getManaValue)
                 .orElse(0);
     }
