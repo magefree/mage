@@ -519,8 +519,8 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            Set<UUID> targetIds = target.possibleTargets(abilityControllerId, source, game);
-            if (targetIds == null || targetIds.isEmpty()) {
+            Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
+            if (possibleTargetIds == null || possibleTargetIds.isEmpty()) {
                 return target.getTargets().size() >= target.getNumberOfTargets();
             }
 
@@ -529,17 +529,33 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            java.util.List<UUID> chosen = target.getTargets();
-            options.put("chosen", (Serializable) chosen);
+            UUID responseId = null;
 
-            updateGameStatePriority("choose(5)", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), targetIds, required, getOptions(target, options));
+            if (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && target.getMinNumberOfTargets() == possibleTargetIds.size()) {
+                // Targets can be auto-chosen
+                for (UUID possibleTargetId : possibleTargetIds) {
+                    if (!target.getTargets().contains(possibleTargetId)) {
+                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
+                        responseId = possibleTargetId;
+                        break;
+                    }
+                }
             }
-            waitForResponse(game);
 
-            UUID responseId = getFixedResponseUUID(game);
+            if (responseId == null) {
+                java.util.List<UUID> chosen = target.getTargets();
+                options.put("chosen", (Serializable) chosen);
+
+                updateGameStatePriority("choose(5)", game);
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
+                }
+                waitForResponse(game);
+                responseId = getFixedResponseUUID(game);
+            }
+
+
             if (responseId != null) {
                 // selected some target
 
@@ -549,7 +565,7 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
 
-                if (!targetIds.contains(responseId)) {
+                if (!possibleTargetIds.contains(responseId)) {
                     continue;
                 }
 
@@ -617,25 +633,39 @@ public class HumanPlayer extends PlayerImpl {
         Map<String, Serializable> options = new HashMap<>();
 
         while (canRespond()) {
-            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
+            Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
-            if (possibleTargets.isEmpty()
+            if (possibleTargetIds.isEmpty()
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
 
-            java.util.List<UUID> chosen = target.getTargets();
-            options.put("chosen", (Serializable) chosen);
+            UUID responseId = null;
 
-            updateGameStatePriority("chooseTarget", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
-                        possibleTargets, required, getOptions(target, options));
+            if (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && target.getMinNumberOfTargets() == possibleTargetIds.size()) {
+                // Targets can be auto-chosen
+                for (UUID possibleTargetId : possibleTargetIds) {
+                    if (!target.getTargets().contains(possibleTargetId)) {
+                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
+                        responseId = possibleTargetId;
+                        break;
+                    }
+                }
             }
-            waitForResponse(game);
+            if (responseId == null) {
+                java.util.List<UUID> chosen = target.getTargets();
+                options.put("chosen", (Serializable) chosen);
 
-            UUID responseId = getFixedResponseUUID(game);
+                updateGameStatePriority("chooseTarget", game);
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
+                            possibleTargetIds, required, getOptions(target, options));
+                }
+                waitForResponse(game);
+                responseId = getFixedResponseUUID(game);
+            }
+
             if (responseId != null) {
                 // remove selected
                 if (target.getTargets().contains(responseId)) {
@@ -643,7 +673,7 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
 
-                if (possibleTargets.contains(responseId)) {
+                if (possibleTargetIds.contains(responseId)) {
                     if (target.canTarget(abilityControllerId, responseId, source, game)) {
                         target.addTarget(responseId, source, game);
                         if (target.doneChoosing()) {

@@ -317,6 +317,15 @@ public abstract class TargetImpl implements Target {
                         possibleTargets.remove(index);
                     }
                 }
+            } else if (minNumberOfTargets == maxNumberOfTargets && minNumberOfTargets == possibleTargets.size()) {
+                // Have to choose, make choices automatically
+                while (!possibleTargets.isEmpty()) {
+                    UUID targetId = possibleTargets.remove(0);
+                    if (this.canTarget(targetId, source, game)) {
+                        this.addTarget(targetId, source, game);
+                        break;
+                    }
+                }
             } else if (!targetController.chooseTarget(outcome, this, source, game)) {
                 return chosen;
             }
