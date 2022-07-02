@@ -529,20 +529,9 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = null;
-            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
-                                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
-            if (canAutochoose) {
-                // Targets can be auto-chosen
-                for (UUID possibleTargetId : possibleTargetIds) {
-                    if (!target.getTargets().contains(possibleTargetId)) {
-                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
-                        responseId = possibleTargetId;
-                        break;
-                    }
-                }
-            }
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
+            // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
                 java.util.List<UUID> chosen = target.getTargets();
                 options.put("chosen", (Serializable) chosen);
@@ -555,7 +544,6 @@ public class HumanPlayer extends PlayerImpl {
                 waitForResponse(game);
                 responseId = getFixedResponseUUID(game);
             }
-
 
             if (responseId != null) {
                 // selected some target
@@ -641,21 +629,13 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = null;
-            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() &&         // Targets must be picked
-                                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
-            if (canAutochoose) {
-                // Targets can be auto-chosen
-                for (UUID possibleTargetId : possibleTargetIds) {
-                    if (!target.getTargets().contains(possibleTargetId)) {
-                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
-                        responseId = possibleTargetId;
-                        break;
-                    }
-                }
-            }
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+
+            // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
-                java.util.List<UUID> chosen = target.getTargets();
+
+
+                List<UUID> chosen = target.getTargets();
                 options.put("chosen", (Serializable) chosen);
 
                 updateGameStatePriority("chooseTarget", game);
@@ -719,10 +699,12 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        UUID abilityControllerId = playerId;
+        UUID abilityControllerId;
         if (target.getTargetController() != null
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
+        } else {
+            abilityControllerId = playerId;
         }
 
         while (canRespond()) {
@@ -811,10 +793,12 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        UUID abilityControllerId = playerId;
+        UUID abilityControllerId;
         if (target.getTargetController() != null
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
+        } else {
+            abilityControllerId = playerId;
         }
 
         while (canRespond()) {
@@ -917,41 +901,29 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            // selected
-            Map<String, Serializable> options = getOptions(target, null);
-            java.util.List<UUID> chosen = target.getTargets();
-            options.put("chosen", (Serializable) chosen);
-            // selectable
-            java.util.List<UUID> choosable = new ArrayList<>();
-            for (UUID targetId : possibleTargetIds) {
-                if (target.canTarget(abilityControllerId, targetId, source, game)) {
-                    choosable.add(targetId);
-                }
-            }
-            if (!choosable.isEmpty()) {
-                options.put("choosable", (Serializable) choosable);
-            }
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
-            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
-            if (required && choosable.isEmpty()) {
-                required = false;
-            }
-
-            UUID responseId = null;
-            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
-                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
-            if (canAutochoose) {
-                // Targets can be auto-chosen
-                for (UUID possibleTargetId : possibleTargetIds) {
-                    if (!target.getTargets().contains(possibleTargetId)) {
-                        // Make sure to not autopick one that's already been picked, otherwise we may hit an infinite loop
-                        responseId = possibleTargetId;
-                        break;
+            // responseId is null if a choice couldn't be automatically made
+            if (responseId == null) {
+                List<UUID> chosen = target.getTargets();
+                List<UUID> choosable = new ArrayList<>();
+                for (UUID targetId : possibleTargetIds) {
+                    if (target.canTarget(abilityControllerId, targetId, source, game)) {
+                        choosable.add(targetId);
                     }
                 }
-            }
+                // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
+                if (required && choosable.isEmpty()) {
+                    required = false;
+                }
 
-            if (responseId == null) {
+                // selected
+                Map<String, Serializable> options = getOptions(target, null);
+                options.put("chosen", (Serializable) chosen);
+                if (!choosable.isEmpty()) {
+                    options.put("choosable", (Serializable) choosable);
+                }
+
                 updateGameStatePriority("chooseTargetAmount", game);
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {

@@ -159,4 +159,21 @@ public interface Target extends Serializable {
     int getSize();
 
     boolean contains(UUID targetId);
+
+    /**
+     * This function tries to auto-choose the next target.
+     * <p>
+     * It will NOT add it to the list of targets, it will ony choose the next target
+     * <p>
+     * It will auto-choosen if all of the following criteria are met:
+     * - The minimum and maximum number of targets is the same (i.e. effect does not have "up to" in its name)
+     * - The number of valid targets is equal to the number of targets still left to be specified
+     *
+     *
+     * @param abilityControllerId
+     * @param source
+     * @param game
+     * @return The UUID of the chosen option, or null if one could not be chosen
+     */
+    UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game);
 }

@@ -317,19 +317,14 @@ public abstract class TargetImpl implements Target {
                         possibleTargets.remove(index);
                     }
                 }
-            } else if (minNumberOfTargets == maxNumberOfTargets &&                      // Targets must be picked
-                       getNumberOfTargets() - targets.size() == possibleTargets.size()  // Available targets are equal to the number that must be picked
-            ) {
-                // Have to choose, make choices automatically
-                while (!possibleTargets.isEmpty()) {
-                    UUID targetId = possibleTargets.remove(0);
-                    if (!targets.containsKey(targetId) && this.canTarget(targetId, source, game)) {
-                        this.addTarget(targetId, source, game);
-                        break;
-                    }
+            } else {
+                // Try to autochoosen
+                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
+                if (autoChosenId != null) {
+                    addTarget(autoChosenId, source, game);
+                } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
+                    return chosen;
                 }
-            } else if (!targetController.chooseTarget(outcome, this, source, game)) {
-                return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
         } while (!isChosen() && !doneChoosing());
@@ -605,5 +600,23 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean contains(UUID targetId) {
         return targets.containsKey(targetId);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = possibleTargets(abilityControllerId, source, game);
+        possibleTargets.removeAll(this.targets.keySet());
+        boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() &&       // Targets must be picked
+                                possibleTargets.size() == this.getNumberOfTargets() - this.getSize(); // Available targets are equal to the number that must be picked
+
+        if (canAutoChoose) {
+            for (UUID possibleChooseId : possibleTargets) {
+                if (!this.targets.containsKey(possibleChooseId)) {
+                    return possibleChooseId;
+                }
+            }
+        }
+
+        return null;
     }
 }
