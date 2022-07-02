@@ -39,7 +39,7 @@ public final class SkyTether extends CardImpl {
         ));
         ability.addEffect(new LoseAbilityAttachedEffect(
                 FlyingAbility.getInstance(), AttachmentType.AURA
-        ).concatBy("and"));
+        ).concatBy("and").setText("loses flying"));
         this.addAbility(ability);
     }
 

@@ -23,11 +23,11 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.ManaUtil;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -45,10 +45,10 @@ public final class NimDeathmantle extends CardImpl {
         ).setText(", has intimidate"));
         ability.addEffect(new SetCardColorAttachedEffect(
                 ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
-        ).setText(", and is"));
+        ).setText(", and is a black"));
         ability.addEffect(new SetCardSubtypeAttachedEffect(
                 Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, SubType.ZOMBIE
-        ).setText("black Zombie").concatBy("a"));
+        ).setText("Zombie"));
         this.addAbility(ability);
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.

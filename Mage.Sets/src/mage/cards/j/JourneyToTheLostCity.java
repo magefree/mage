@@ -106,7 +106,7 @@ class JourneyToTheLostCityEffect extends RollDieWithResultTableEffect {
             int count = cards.count(StaticFilters.FILTER_CARD_CREATURE, game);
             if (count > 0) {
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
-                    Optional.of(game.getPermanent(tokenId))
+                    Optional.ofNullable(game.getPermanent(tokenId))
                             .ifPresent(permanent -> permanent.addCounters(
                                     CounterType.P1P1.createInstance(count), source, game
                             ));
@@ -123,7 +123,7 @@ class JourneyToTheLostCityEffect extends RollDieWithResultTableEffect {
                     StaticFilters.FILTER_CARD_PERMANENT, game
             ), Zone.BATTLEFIELD, source, game);
         }
-        Optional.of(source.getSourcePermanentIfItStillExists(game))
+        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .ifPresent(permanent -> permanent.sacrifice(source, game));
         return true;
     }

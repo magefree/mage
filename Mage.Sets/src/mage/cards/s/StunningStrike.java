@@ -24,7 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -93,8 +92,7 @@ class StunningStrikeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.of(source.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+        Optional.ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .ifPresent(permanent -> {

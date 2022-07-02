@@ -25,7 +25,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -87,8 +86,7 @@ enum MockingDoppelgangerPredicate implements ObjectSourcePlayerPredicate<Permane
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return Optional
-                .of(input.getSource().getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .ofNullable(input.getSource().getSourcePermanentIfItStillExists(game))
                 .map(permanent -> CardUtil.haveSameNames(permanent, input.getObject()))
                 .orElse(false);
     }
