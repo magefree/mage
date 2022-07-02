@@ -533,8 +533,8 @@ public class HumanPlayer extends PlayerImpl {
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
-                java.util.List<UUID> chosen = target.getTargets();
-                options.put("chosen", (Serializable) chosen);
+                List<UUID> chosenTargets = target.getTargets();
+                options.put("chosenTargets", (Serializable) chosenTargets);
 
                 updateGameStatePriority("choose(5)", game);
                 prepareForResponse(game);
@@ -635,8 +635,8 @@ public class HumanPlayer extends PlayerImpl {
             if (responseId == null) {
 
 
-                List<UUID> chosen = target.getTargets();
-                options.put("chosen", (Serializable) chosen);
+                List<UUID> chosenTargets = target.getTargets();
+                options.put("chosenTargets", (Serializable) chosenTargets);
 
                 updateGameStatePriority("chooseTarget", game);
                 prepareForResponse(game);
@@ -883,23 +883,23 @@ public class HumanPlayer extends PlayerImpl {
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
-                List<UUID> chosen = target.getTargets();
-                List<UUID> choosable = new ArrayList<>();
+                List<UUID> chosenTargets = target.getTargets();
+                List<UUID> possibleTargets = new ArrayList<>();
                 for (UUID targetId : possibleTargetIds) {
                     if (target.canTarget(abilityControllerId, targetId, source, game)) {
-                        choosable.add(targetId);
+                        possibleTargets.add(targetId);
                     }
                 }
                 // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
-                if (required && choosable.isEmpty()) {
+                if (required && possibleTargets.isEmpty()) {
                     required = false;
                 }
 
                 // selected
                 Map<String, Serializable> options = getOptions(target, null);
-                options.put("chosen", (Serializable) chosen);
-                if (!choosable.isEmpty()) {
-                    options.put("choosable", (Serializable) choosable);
+                options.put("chosenTargets", (Serializable) chosenTargets);
+                if (!possibleTargets.isEmpty()) {
+                    options.put("possibleTargets", (Serializable) possibleTargets);
                 }
 
                 updateGameStatePriority("chooseTargetAmount", game);
