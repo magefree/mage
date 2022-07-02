@@ -317,11 +317,13 @@ public abstract class TargetImpl implements Target {
                         possibleTargets.remove(index);
                     }
                 }
-            } else if (minNumberOfTargets == maxNumberOfTargets && minNumberOfTargets == possibleTargets.size()) {
+            } else if (minNumberOfTargets == maxNumberOfTargets &&                      // Targets must be picked
+                       getNumberOfTargets() - targets.size() == possibleTargets.size()  // Available targets are equal to the number that must be picked
+            ) {
                 // Have to choose, make choices automatically
                 while (!possibleTargets.isEmpty()) {
                     UUID targetId = possibleTargets.remove(0);
-                    if (this.canTarget(targetId, source, game)) {
+                    if (!targets.containsKey(targetId) && this.canTarget(targetId, source, game)) {
                         this.addTarget(targetId, source, game);
                         break;
                     }

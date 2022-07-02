@@ -530,8 +530,9 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             UUID responseId = null;
-
-            if (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && target.getMinNumberOfTargets() == possibleTargetIds.size()) {
+            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
+                                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
+            if (canAutochoose) {
                 // Targets can be auto-chosen
                 for (UUID possibleTargetId : possibleTargetIds) {
                     if (!target.getTargets().contains(possibleTargetId)) {
@@ -641,8 +642,9 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             UUID responseId = null;
-
-            if (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && target.getMinNumberOfTargets() == possibleTargetIds.size()) {
+            boolean canAutochoose = target.getMinNumberOfTargets() == target.getMaxNumberOfTargets() && // Targets must be picked
+                    target.getNumberOfTargets() - target.getSize() == possibleTargetIds.size(); // Available targets are equal to the number that must be picked
+            if (canAutochoose) {
                 // Targets can be auto-chosen
                 for (UUID possibleTargetId : possibleTargetIds) {
                     if (!target.getTargets().contains(possibleTargetId)) {
