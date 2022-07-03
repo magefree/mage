@@ -797,6 +797,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         cbTargetAutoChooseLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Off", "Most", "All" }));
         cbTargetAutoChooseLevel.setSelectedIndex(1);
+        cbTargetAutoChooseLevel.setToolTipText(lblTargetAutoChoose.getToolTipText());
         cbTargetAutoChooseLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTargetAutoChooseLevelActionPerformed(evt);
@@ -810,9 +811,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(lblTargetAutoChoose)
-                .add(70, 70, 70)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(main_gameLayout.createSequentialGroup()
                 .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -824,7 +825,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(showAbilityPickerForced)))
-                .add(0, 0, Short.MAX_VALUE))
+                .add(0, 315, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -851,6 +852,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+        cbTargetAutoChooseLevel.getAccessibleContext().setAccessibleName("Auto-choose targets for player combo box");
 
         main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
 
