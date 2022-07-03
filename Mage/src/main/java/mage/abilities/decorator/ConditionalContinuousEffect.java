@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author nantuko
  */
-public class ConditionalContinuousEffect extends ContinuousEffectImpl implements Conditional {
+public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     protected ContinuousEffect effect;
     protected ContinuousEffect otherwiseEffect;

@@ -14,7 +14,7 @@ import mage.game.events.GameEvent;
 /**
  * @author JayDi85
  */
-public class ConditionalPreventionEffect extends PreventionEffectImpl implements Conditional {
+public class ConditionalPreventionEffect extends PreventionEffectImpl {
 
     protected PreventionEffect effect;
     protected PreventionEffect otherwiseEffect;

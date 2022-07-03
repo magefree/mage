@@ -13,7 +13,7 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public class ConditionalAsThoughEffect extends AsThoughEffectImpl implements Conditional {
+public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
 
     protected AsThoughEffect effect;
     protected AsThoughEffect otherwiseEffect;

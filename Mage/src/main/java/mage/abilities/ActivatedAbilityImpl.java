@@ -293,4 +293,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         game.getState().setValue(CardUtil
                 .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

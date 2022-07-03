@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class ConditionalRestrictionEffect extends RestrictionEffect implements Conditional {
+public class ConditionalRestrictionEffect extends RestrictionEffect {
 
     protected RestrictionEffect effect;
     protected RestrictionEffect otherwiseEffect;

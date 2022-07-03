@@ -18,7 +18,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl implements Conditional {
+public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
     private String staticText = "";
 

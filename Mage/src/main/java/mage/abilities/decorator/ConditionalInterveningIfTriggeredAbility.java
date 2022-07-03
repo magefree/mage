@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author nantuko
  */
-public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityImpl implements Conditional {
+public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityImpl {
 
     protected TriggeredAbility ability;
     protected Condition condition;

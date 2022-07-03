@@ -16,7 +16,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ConditionalReplacementEffect extends ReplacementEffectImpl implements Conditional {
+public class ConditionalReplacementEffect extends ReplacementEffectImpl {
 
     protected ReplacementEffect effect;
     protected ReplacementEffect otherwiseEffect;

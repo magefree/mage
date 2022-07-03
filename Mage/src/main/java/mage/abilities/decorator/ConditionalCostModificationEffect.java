@@ -10,7 +10,7 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public class ConditionalCostModificationEffect extends CostModificationEffectImpl implements Conditional {
+public class ConditionalCostModificationEffect extends CostModificationEffectImpl {
 
     protected CostModificationEffect effect;
     protected CostModificationEffect otherwiseEffect;

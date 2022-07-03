@@ -12,7 +12,7 @@ import mage.game.Game;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ConditionalOneShotEffect extends OneShotEffect implements Conditional {
+public class ConditionalOneShotEffect extends OneShotEffect {
 
     private final Effects effects = new Effects();
     private final Effects otherwiseEffects = new Effects();

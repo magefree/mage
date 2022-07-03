@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author LevelX2
  */
-public class ConditionalManaEffect extends ManaEffect implements Conditional {
+public class ConditionalManaEffect extends ManaEffect {
 
     private BasicManaEffect effect;
     private BasicManaEffect otherwiseEffect;

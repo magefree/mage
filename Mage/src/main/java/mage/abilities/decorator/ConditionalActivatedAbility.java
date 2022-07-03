@@ -19,7 +19,7 @@ import mage.game.Game;
  *
  * @author LevelX
  */
-public class ConditionalActivatedAbility extends ActivatedAbilityImpl implements Conditional{
+public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 

@@ -15,7 +15,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl implements Conditional {
+public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     protected ContinuousRuleModifyingEffect effect;
     protected ContinuousRuleModifyingEffect otherwiseEffect;
