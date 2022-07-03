@@ -1064,4 +1064,6 @@ public interface Player extends MageItem, Copyable<Player> {
     public default boolean getStrictChooseMode() {
         return false;
     }
+
+    public UserData getControllingPlayersUserData(Game game);
 }

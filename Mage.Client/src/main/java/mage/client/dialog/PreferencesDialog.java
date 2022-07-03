@@ -31,7 +31,7 @@ import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import static mage.client.constants.Constants.AUTO_CHOOSE_TARGET_NON_FEEL_BAD;
+import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
 import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
 import static mage.constants.Constants.*;
 
@@ -238,7 +238,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
 
     // Settings for auto-choosing targets
-    public static final String KEY_AUTO_CHOOSE_TARGETS_LEVEL = "autoChooseTargetLevel";
+    public static final String KEY_AUTO_TARGET_LEVEL = "autoTargetLevel";
 
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
@@ -2928,9 +2928,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
 
-        String paramNameAutoTarget = KEY_AUTO_CHOOSE_TARGETS_LEVEL;
+        String paramNameAutoTarget = KEY_AUTO_TARGET_LEVEL;
         int paramValueAutoTarger = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
-        int paramDefaultAutoTarget = AUTO_CHOOSE_TARGET_NON_FEEL_BAD;
+        int paramDefaultAutoTarget = AUTO_TARGET_NON_FEEL_BAD;
         if (getCachedValue(paramNameAutoTarget, paramDefault) != paramValueAutoTarger) {
             prefs.putInt(paramNameAutoTarget, paramValueAutoTarger);
             if (UPDATE_CACHE_POLICY) {
@@ -3492,13 +3492,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         String autoTargetParam;
         try {
-            autoTargetParam = MageFrame.getPreferences().get(KEY_AUTO_CHOOSE_TARGETS_LEVEL, "1");
+            autoTargetParam = MageFrame.getPreferences().get(KEY_AUTO_TARGET_LEVEL, "1");
             int autoTargetMode = Integer.parseInt(autoTargetParam);
             dialog.cbTargetAutoChooseLevel.setSelectedIndex(autoTargetMode);
         } catch (Throwable e) {
             autoTargetParam = "";
-            dialog.cbTargetAutoChooseLevel.setSelectedIndex(AUTO_CHOOSE_TARGET_NON_FEEL_BAD);
-            logger.error("Can't Parse and setup param " + KEY_AUTO_CHOOSE_TARGETS_LEVEL + " = " + autoTargetParam, e);
+            dialog.cbTargetAutoChooseLevel.setSelectedIndex(AUTO_TARGET_NON_FEEL_BAD);
+            logger.error("Can't Parse and setup param " + KEY_AUTO_TARGET_LEVEL + " = " + autoTargetParam, e);
         }
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
@@ -4057,6 +4057,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_TARGET_LEVEL, 1),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 userStrId
