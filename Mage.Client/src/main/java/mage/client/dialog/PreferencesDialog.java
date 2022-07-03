@@ -31,6 +31,7 @@ import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import static mage.client.constants.Constants.AUTO_CHOOSE_TARGET_NON_FEEL_BAD;
 import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
 import static mage.constants.Constants.*;
 
@@ -235,6 +236,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
     public static final String KEY_NEW_TOURNAMENT_MINIMUM_RATING = "newTournamentMinimumRating";
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
+
+    // Settings for auto-choosing targets
+    public static final String KEY_AUTO_CHOOSE_TARGETS_LEVEL = "autoChooseTargetLevel";
 
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
@@ -2922,6 +2926,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
 
+        String paramNameAutoTarget = KEY_AUTO_CHOOSE_TARGETS_LEVEL;
+        int paramValueAutoTarger = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
+        int paramDefaultAutoTarget = AUTO_CHOOSE_TARGET_NON_FEEL_BAD;
+        if (getCachedValue(paramNameAutoTarget, paramDefault) != paramValueAutoTarger) {
+            prefs.putInt(paramNameAutoTarget, paramValueAutoTarger);
+            if (UPDATE_CACHE_POLICY) {
+                updateCache(paramNameAutoTarget, Integer.toString(paramValueAutoTarger));
+            }
+        }
+
         saveGUISize();
 
         // Phases & Priority
@@ -3472,6 +3486,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         } catch (Throwable e) {
             logger.error("Can't parse and setup param " + KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE + " = " + feedbackParam, e);
             dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
+        }
+
+        String autoTargetParam;
+        try {
+            autoTargetParam = MageFrame.getPreferences().get(KEY_AUTO_CHOOSE_TARGETS_LEVEL, "1");
+            int autoTargetMode = Integer.parseInt(autoTargetParam);
+            dialog.cbTargetAutoChooseLevel.setSelectedIndex(autoTargetMode);
+        } catch (Throwable e) {
+            autoTargetParam = "";
+            dialog.cbTargetAutoChooseLevel.setSelectedIndex(AUTO_CHOOSE_TARGET_NON_FEEL_BAD);
+            logger.error("Can't Parse and setup param " + KEY_AUTO_CHOOSE_TARGETS_LEVEL + " = " + autoTargetParam, e);
         }
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
