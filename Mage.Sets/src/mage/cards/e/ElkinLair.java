@@ -83,7 +83,7 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
                     String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled";
                     player.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                     if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-                        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
+                        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.OWNER, Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(card, game));
                         game.addEffect(effect, source);
                         DelayedTriggeredAbility delayed
