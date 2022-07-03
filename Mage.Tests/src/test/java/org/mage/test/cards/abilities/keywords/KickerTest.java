@@ -617,7 +617,7 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true, 2); // 2 x Multikicker
         setChoice(playerA, false); // stop the kicking
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Bloodhusk Ritualist");
-        // addTarget(playerA, playerB); // target for kicker's trigger (discard cards) (autochosen since only option)
+        addTarget(playerA, playerB); // target for kicker's trigger (discard cards)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -712,7 +712,7 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true); // cast for free
         setChoice(playerA, true); // use kicker
         setChoiceAmount(playerA, 2); // X=2 for Kicker X
-        // addTarget(playerA, "Brain in a Jar"); // kicker's target (take control of artifact) (autochosen only option)
+        addTarget(playerA, "Brain in a Jar"); // kicker's target (take control of artifact)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

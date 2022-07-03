@@ -283,7 +283,7 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
 
         checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Keeper of Tresserhorn", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Keeper of Tresserhorn");
-        addTarget(playerA, "Inspiring Statuary", 4); // (4th one is autochosen as only option left) as pay
+        addTarget(playerA, "Inspiring Statuary", 5); // as pay
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

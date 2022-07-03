@@ -17,7 +17,7 @@ public class BrashTaunterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Brash Taunter");
-        // addTarget(playerA, playerB); Autochosen, only option
+        addTarget(playerA, playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -36,7 +36,7 @@ public class BrashTaunterTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Balduvian Bears");
         block(1, playerB, "Brash Taunter", "Balduvian Bears");
-        // addTarget(playerB, playerA); Autochosen, only option
+        addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -55,7 +55,7 @@ public class BrashTaunterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Serra Angel");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}", "Serra Angel");
-        // addTarget(playerA, playerB); Autochosen, only option
+        addTarget(playerA, playerB);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);

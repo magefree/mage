@@ -113,7 +113,7 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
 
         // activate target effect
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Allow");
-        // addTarget(playerA, "Lightning Bolt"); Autochosen only option
+        addTarget(playerA, "Lightning Bolt");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // can't play grave after but without good condition

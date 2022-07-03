@@ -22,7 +22,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -40,7 +40,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
@@ -58,7 +58,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
@@ -80,7 +80,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Emrakul, the Promised End", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerA, playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -107,7 +107,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Emrakul, the Promised End", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerA, playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

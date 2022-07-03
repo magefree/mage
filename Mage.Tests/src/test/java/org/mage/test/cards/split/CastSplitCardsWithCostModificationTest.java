@@ -88,8 +88,8 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         checkPlayableAbility("all", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dangerous", false);
         checkPlayableAbility("all", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast fused Armed // Dangerous", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Armed // Dangerous");
-        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
-        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
+        addTarget(playerA, "Balduvian Bears");
+        addTarget(playerA, "Balduvian Bears");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -115,8 +115,8 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         checkPlayableAbility("all", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dangerous", true);
         checkPlayableAbility("all", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast fused Armed // Dangerous", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Armed // Dangerous");
-        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
-        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
+        addTarget(playerA, "Balduvian Bears");
+        addTarget(playerA, "Balduvian Bears");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

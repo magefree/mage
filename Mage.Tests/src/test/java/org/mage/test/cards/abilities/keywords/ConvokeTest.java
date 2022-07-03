@@ -111,7 +111,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setChoice(playerA, "Convoke");
         addTarget(playerA, "Goblin Racketeer"); // pay 3 as convoke
         setChoice(playerA, "Convoke");
-        // addTarget(playerA, "Goblin Racketeer"); // Autochosen, pay 4 as convoke
+        addTarget(playerA, "Goblin Racketeer"); // pay 4 as convoke
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -155,7 +155,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         // e.g. it must tap lands 2 times and convoke 2 times
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stoke the Flames", playerB);
         addTarget(playerA, "Goblin Racketeer"); // pay 1 as convoke
-        // addTarget(playerA, "Goblin Racketeer"); // Autochosen since only option left, pay 2 as convoke
+        addTarget(playerA, "Goblin Racketeer"); // pay 2 as convoke
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -197,7 +197,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         // AI automaticly use convoke to pay
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemeral Shields", "Silvercoat Lion");
         addTarget(playerA, "Silvercoat Lion"); // pay 1 as convoke
-        // addTarget(playerA, "Oreskos Swiftclaw"); // Autochosen, pay 2 as convoke
+        addTarget(playerA, "Oreskos Swiftclaw"); // pay 2 as convoke
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -226,7 +226,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         // convoke must be able to target card with protection (it's no target)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemeral Shields", "Silvercoat Lion");
         addTarget(playerA, "Silvercoat Lion");
-        // addTarget(playerA, "Black Knight"); Autochosen
+        addTarget(playerA, "Black Knight");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -307,7 +307,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 7);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
-        addTarget(playerA, "Balduvian Bears", 6); // Autochosen, convoke pay
+        addTarget(playerA, "Balduvian Bears", 7); // convoke pay
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -330,10 +330,8 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2); // convoke (you can't pay normal mana here)
         addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 5); // delve
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
-        addTarget(playerA, "Balduvian Bears"); // The 2nd is autochosen convoke pay
+        addTarget(playerA, "Balduvian Bears", 2); // convoke pay
         setChoice(playerA, "Balduvian Bears", 5); // delve pay
 
         setStrictChooseMode(true);

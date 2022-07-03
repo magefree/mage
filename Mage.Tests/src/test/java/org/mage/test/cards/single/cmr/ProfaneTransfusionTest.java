@@ -23,9 +23,9 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setLife(playerA, 24);
         setLife(playerB, 16);
 
+        addTarget(playerA, playerA);
+        addTarget(playerA, playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
-        // addTarget(playerA, playerA); Autochosen only option
-        // addTarget(playerA, playerB); Autochosen only option
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -49,12 +49,11 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setLife(playerA, 24);
         setLife(playerB, 16);
 
-        setStrictChooseMode(true);
-
+        addTarget(playerA, playerA);
+        addTarget(playerA, playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
-        // addTarget(playerA, playerA); Autochosen only option
-        // addTarget(playerA, playerB); Autochosen only option
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -76,12 +75,11 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setLife(playerA, 24);
         setLife(playerB, 16);
 
-        setStrictChooseMode(true);
-
+        addTarget(playerA, playerA);
+        addTarget(playerA, playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
-        // addTarget(playerA, playerA); Autochosen only option
-        // addTarget(playerA, playerB); Autochosen only option
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -100,14 +98,12 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, skullcrack);
         addCard(Zone.HAND, playerA, transfusion);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skullcrack, playerB);
-
+        addTarget(playerA, playerA);
+        addTarget(playerA, playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
-        // addTarget(playerA, playerA); Autochosen only option
-        // addTarget(playerA, playerB); Autochosen only option
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

@@ -42,6 +42,7 @@ public class FiendHunterTest extends CardTestPlayerBase {
 
         assertExileCount("Primeval Titan", 1);
         assertPermanentCount(playerA, "Fiend Hunter", 1);
+
     }
 
     @Test
@@ -62,15 +63,16 @@ public class FiendHunterTest extends CardTestPlayerBase {
 
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Restoration Angel");
-        // addTarget(playerA, "Fiend Hunter"); Autochosen, only option
+        addTarget(playerA, "Fiend Hunter");
 
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount("Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Fiend Hunter", 1);
         assertPermanentCount(playerA, "Restoration Angel", 1);
         assertPermanentCount(playerB, "Primeval Titan", 1);
+
     }
+
 }

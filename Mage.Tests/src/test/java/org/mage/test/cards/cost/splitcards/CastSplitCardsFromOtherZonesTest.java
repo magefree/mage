@@ -33,10 +33,10 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        // addTarget(playerA, playerB); Reveal hand (autochsen only option)
+        addTarget(playerA, playerB);
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast Tear"); // select tear side
-        // addTarget(playerA, "Sanguine Bond"); // target for tear (autochosen only option)
+        addTarget(playerA, "Sanguine Bond"); // target for tear
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -65,10 +65,10 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        // addTarget(playerA, playerB); Reveal hand (autochsen only option)
+        addTarget(playerA, playerB);
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast Wear"); // select wear side
-        // addTarget(playerA, "Icy Manipulator"); // target for wear (autochosen only option)
+        addTarget(playerA, "Icy Manipulator"); // target for wear
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -97,11 +97,11 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        // addTarget(playerA, playerB); Reveal hand (autochsen only option)
+        addTarget(playerA, playerB);
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast fused Wear // Tear"); // select fused
-        // addTarget(playerA, "Icy Manipulator"); // target for wear (autochosen only option)
-        // addTarget(playerA, "Sanguine Bond"); // target for tear (autochosen only option)
+        addTarget(playerA, "Icy Manipulator"); // target for wear
+        addTarget(playerA, "Sanguine Bond"); // target for tear
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

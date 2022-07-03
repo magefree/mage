@@ -30,7 +30,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setChoice(playerA, disenchant);
         setChoice(playerA, true);
-        // addTarget(playerA, courser); Autochosen, only option
+        addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);
@@ -75,7 +75,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setChoice(playerA, terror);
         setChoice(playerA, true);
-        // addTarget(playerA, courser); Autochosen, only option
+        addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);
@@ -117,7 +117,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setChoice(playerA, regrowth);
         setChoice(playerA, true);
-        // addTarget(playerA, courser); Autochosen, only option
+        addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
         setStrictChooseMode(true);

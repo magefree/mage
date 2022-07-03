@@ -27,15 +27,15 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         // in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Feldon of the Third Path", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-
+        //
         // When Highway Robber enters the battlefield, target opponent loses 2 life and you gain 2 life.
         addCard(Zone.GRAVEYARD, playerA, "Highway Robber", 1);
-
+        //
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}, {T}: Create a token", "Highway Robber");
-        // addTarget(playerA, playerB); // opponent to loses 2 life (autochosen only option)
+        addTarget(playerA, playerB); // opponent to loses 2 life
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("must have token", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Highway Robber", 1);
         checkPermanentCount("must have card", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Feldon of the Third Path", 1);

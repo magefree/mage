@@ -31,7 +31,7 @@ public class CommanderAsIndomitableCreativityCastTest extends CardTestCommander4
         // cast with X=1 and exile
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Indomitable Creativity");
         setChoice(playerA, "X=1");
-        // addTarget(playerA, "Balduvian Bears"); Autochosen, only option
+        addTarget(playerA, "Balduvian Bears");
 
         checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", 0);
 
@@ -52,7 +52,7 @@ public class CommanderAsIndomitableCreativityCastTest extends CardTestCommander4
         // cast with X=1 and exile
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Indomitable Creativity");
         setChoice(playerA, "X=1");
-        // addTarget(playerA, "Balduvian Bears"); Autochosen since only option.
+        addTarget(playerA, "Balduvian Bears");
         setChoice(playerA, true); // return spell as commander
 
         checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", 0);

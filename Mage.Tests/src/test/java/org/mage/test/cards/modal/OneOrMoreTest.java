@@ -36,8 +36,8 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         setModeChoice(playerA, "3");
         setModeChoice(playerA, "4");
         setModeChoice(playerA, "5");
-        // addTarget(playerA, "Silvercoat Lion"); for 3 (autochosen, since only options)
-        // addTarget(playerA, "Silvercoat Lion"); for 4 (autochosen, since only options)
+        addTarget(playerA, "Silvercoat Lion"); // for 3
+        addTarget(playerA, "Silvercoat Lion"); // for 4
         addTarget(playerA, playerB); // for 5
         setModeChoice(playerA, null);
 
@@ -74,8 +74,8 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         setModeChoice(playerA, "4");
         setModeChoice(playerA, "5");
         setModeChoice(playerA, "3");
-        // addTarget(playerA, "Silvercoat Lion"); for 3 (autochosen, since only options)
-        // addTarget(playerA, "Silvercoat Lion"); for 4 (autochosen, since only options)
+        addTarget(playerA, "Silvercoat Lion"); // for 3
+        addTarget(playerA, "Silvercoat Lion"); // for 4
         addTarget(playerA, playerB); // for 5
         setModeChoice(playerA, null);
 

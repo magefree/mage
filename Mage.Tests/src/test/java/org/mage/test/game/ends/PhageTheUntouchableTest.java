@@ -32,7 +32,7 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phage the Untouchable");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hero's Downfall", "Phage the Untouchable");
-        // addTarget(playerA, playerB); Autochosen only option
+        addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         

@@ -382,7 +382,7 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         // transform
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Accursed Witch");
-        // addTarget(playerA, playerB); // attach curse to (autochosen only option)
+        addTarget(playerA, playerB); // attach curse to
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("transformed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infectious Curse", 1);
         checkPlayableAbility("reduced, but no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);

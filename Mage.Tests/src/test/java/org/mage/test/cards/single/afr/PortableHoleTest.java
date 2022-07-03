@@ -17,12 +17,10 @@ public class PortableHoleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, portable_hole);
-        // addTarget(playerA, "Grizzly Bears"); Autochosen only option
+        addTarget(playerA, "Grizzly Bears");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertExileCount(playerB, "Grizzly Bears", 1);
@@ -36,16 +34,13 @@ public class PortableHoleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, portable_hole);
-        // addTarget(playerA, "Grizzly Bears"); Autochosen only option
+        addTarget(playerA, "Grizzly Bears");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shatter", portable_hole);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
-
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
-
         assertPermanentCount(playerB, "Grizzly Bears", 1);
     }
 }

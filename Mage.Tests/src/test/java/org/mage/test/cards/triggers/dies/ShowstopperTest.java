@@ -29,7 +29,7 @@ public class ShowstopperTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Showstopper");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
-        // addTarget(playerA, "Ornithopter"); Autochosen only option
+        addTarget(playerA, "Ornithopter");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

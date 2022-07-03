@@ -293,7 +293,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
         setChoice(playerA, true); // cast without cost
         setChoice(playerA, true); // pay Entwine
-        // addTarget(playerA, "Bog Wraith"); // Autochosen, only option target form mode 1
+        addTarget(playerA, "Bog Wraith"); // target form mode 1
         addTarget(playerA, playerB); // target for mode 2
 
         showBattlefield("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);

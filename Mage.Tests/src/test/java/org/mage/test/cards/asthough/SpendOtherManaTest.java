@@ -128,7 +128,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}.");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}.");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
-        // addTarget(playerA, "Silvercoat Lion"); Autochosen only option
+        addTarget(playerA, "Silvercoat Lion");
 
         // red mana must be used as any mana
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool

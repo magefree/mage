@@ -215,11 +215,10 @@ public class BestowTest extends CardTestPlayerBase {
         // Fuse (You may cast one or both halves of this card from your hand.)
         addCard(Zone.HAND, playerB, "Far // Away");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxborn Rollicker using bestow");
-        // "Cyclops of One-Eyed Pass" is autochosen since only target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxborn Rollicker using bestow", "Cyclops of One-Eyed Pass");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away");
-        // addTarget(playerB, "Cyclops of One-Eyed Pass"); // (Far) Autochosen, only option
+        addTarget(playerB, "Cyclops of One-Eyed Pass"); // Far
         addTarget(playerB, playerA); // Away
         addTarget(playerA, "Nyxborn Rollicker");
 
@@ -359,7 +358,7 @@ public class BestowTest extends CardTestPlayerBase {
         // attacks by Alesha and return card on trigger
         attack(2, playerB, "Alesha, Who Smiles at Death");
         setChoice(playerB, true); // use trigger
-        // addTarget(playerB, "Pillarfield Ox"); // target card to return (autochosen only option)
+        addTarget(playerB, "Pillarfield Ox"); // target card to return
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chandra's Outrage", "Alesha, Who Smiles at Death");
 

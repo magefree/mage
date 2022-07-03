@@ -139,7 +139,7 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Grizzly Bears", "Kiora, the Crashing Wave");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerB, "Despark");
-        // addTarget(playerB, "Kiora, the Crashing Wave"); Autochosen only option
+        addTarget(playerB, "Kiora, the Crashing Wave");
         block(2, playerA, "Grizzly Bears", "Grizzly Bears");
 
         setStrictChooseMode(true);

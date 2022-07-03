@@ -312,7 +312,7 @@ public class RegenerateTest extends CardTestPlayerBase {
 
         // re-attach to second
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aura Finesse");
-        // addTarget(playerA, "Regeneration"); // aura to move (autochosen only option)
+        addTarget(playerA, "Regeneration"); // aura to move
         addTarget(playerA, "Kitesail Corsair"); // attach to permanent 2
 
         // damage to one - have regens

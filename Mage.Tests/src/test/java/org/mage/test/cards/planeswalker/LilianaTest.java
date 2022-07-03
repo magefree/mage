@@ -48,17 +48,14 @@ public class LilianaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerB, yOx);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaDM);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:"); // Liliana -3
-        // addTarget(playerA, wShepherd); // returns to battlefield and become zombie on top of other types (autochosen only option)
-        addTarget(playerA, yOx); // tap the ox
+        addTarget(playerA, wShepherd); // returns to battlefield and become zombie on top of other types
         setChoice(playerA, true); // use Binding Mummy ability
+        addTarget(playerA, yOx); // tap the ox
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bMummy, 1);
         assertPermanentCount(playerA, liliannaDM, 1);

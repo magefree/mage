@@ -60,7 +60,7 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{B}");
         setChoice(playerA, "X=2");
-        // addTarget(playerA, lion); Authochosen only option
+        addTarget(playerA, lion);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -82,11 +82,11 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{B}");
         setChoice(playerA, "X=3");
-        // addTarget(playerA, zirda); Authochosen only option
+        addTarget(playerA, zirda);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}{B}");
         setChoice(playerA, "X=2");
-        // addTarget(playerA, lion); Authochosen only option
+        addTarget(playerA, lion);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

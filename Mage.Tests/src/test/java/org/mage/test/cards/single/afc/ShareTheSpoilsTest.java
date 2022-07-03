@@ -446,7 +446,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Helix");
         addTarget(playerA, shareTheSpoils);
-        // addTarget(playerA, "Aether Spellbomb"); Autochosen only option
+        addTarget(playerA, "Aether Spellbomb");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         checkPlayableAbility("before play", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Exotic Orchard", false);
@@ -497,7 +497,7 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         // Doing so exiles Exotic Orchard.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Helix");
         addTarget(playerA, shareTheSpoils);
-        // addTarget(playerA, "Aether Spellbomb"); Autochosen only option
+        addTarget(playerA, "Aether Spellbomb");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // Recast, exile a new set of cards
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);

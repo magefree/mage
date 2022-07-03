@@ -90,7 +90,7 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Mountain", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
-        // addTarget(playerA, "Concordant Crossroads"); Autochosen, only option
+        addTarget(playerA, "Concordant Crossroads");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Concordant Crossroads");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Oblivion Ring");
         addTarget(playerD, "Concordant Crossroads");

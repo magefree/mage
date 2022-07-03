@@ -61,16 +61,16 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Exquisite Blood", 1); // Enchantment {4}{B}
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Defiant Bloodlord");
-        // addTarget(playerA, playerB);  // Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
-        // addTarget(playerA, playerB);  All autochosen only option
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
+        addTarget(playerA, playerB);  // Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
+        addTarget(playerA, playerB);  
+        addTarget(playerA, playerB);  
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
         
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -106,16 +106,16 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Exquisite Blood", 1); // Enchantment {4}{B}
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:", "Silvercoat Lion");
-        // addTarget(playerA, playerB);  Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
-        // addTarget(playerA, playerB);  All autochosen since only option
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
-        // addTarget(playerA, playerB);
+        addTarget(playerA, playerB);  // Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
+        addTarget(playerA, playerB);  
+        addTarget(playerA, playerB);  
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
         
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -129,5 +129,7 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
 
         assertLife(playerB, 0); // Player B is dead, game ends
         assertLife(playerA, 40);
+        
+        
     }
 }

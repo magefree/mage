@@ -326,7 +326,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);  
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
-        // addTarget(playerA, "Pili-Pala"); // Autochosen, only option. Select a creature you control
+        addTarget(playerA, "Pili-Pala"); // Select a creature you control
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

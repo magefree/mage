@@ -18,14 +18,12 @@ public class PraetorsGraspTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.LIBRARY, playerB, "Mountain", 1);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Praetor's Grasp");
-        //addTarget(playerA, playerB); Autochosen since only option
+        addTarget(playerA, playerB);
         addTarget(playerA, "Mountain");
 
         // showAvailableAbilities("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

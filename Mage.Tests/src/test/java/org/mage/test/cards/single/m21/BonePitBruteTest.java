@@ -15,7 +15,7 @@ public class BonePitBruteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bone Pit Brute");
-        // addTarget(playerA, "Bone Pit Brute"); Autochosen since only option
+        addTarget(playerA, "Bone Pit Brute");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

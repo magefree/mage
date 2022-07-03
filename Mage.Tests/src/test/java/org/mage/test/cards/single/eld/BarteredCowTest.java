@@ -73,7 +73,7 @@ public class BarteredCowTest extends CardTestPlayerBase {
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}, Discard a creature card");
         setChoice(playerA, "Bartered Cow");
-        // addTarget(playerA, "Silvercoat Lion"); Autochosen only option
+        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -84,4 +84,5 @@ public class BarteredCowTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Food Token", 1);
     }
+
 }

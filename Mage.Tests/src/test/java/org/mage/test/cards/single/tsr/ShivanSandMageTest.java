@@ -73,7 +73,7 @@ public class ShivanSandMageTest extends CardTestPlayerBaseWithAIHelps {
         // add +2 time counters
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shivan Sand-Mage");
         setModeChoice(playerA, "2");
-        // addTarget(playerA, "Duskrider Peregrine"); Autochosen, only option
+        addTarget(playerA, "Duskrider Peregrine");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkCardCounters("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Duskrider Peregrine", CounterType.TIME, 3 + 2);
 

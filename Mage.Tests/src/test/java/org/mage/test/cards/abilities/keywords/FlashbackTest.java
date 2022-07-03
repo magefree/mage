@@ -628,10 +628,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         // cast mage and give flashback
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        // addTarget(playerA, "Fire // Ice"); Autochosen only option
-
+        addTarget(playerA, "Fire // Ice");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-
         checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
         checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", false);
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{R}{1}{U}", false); // no fuse

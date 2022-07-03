@@ -26,7 +26,7 @@ public class PalaceJailerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palace Jailer");
         setChoice(playerA, "When {this} enters the battlefield, you become the monarch.");
-        // addTarget(playerA, "Silvercoat Lion"); Autochosen, only option
+        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -72,7 +72,7 @@ public class PalaceJailerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Palace Jailer");
         setChoice(playerA, "When {this} enters the battlefield, you become the monarch.");
-        // addTarget(playerA, "Pillarfield Ox"); Autochosen, only option
+        addTarget(playerA, "Pillarfield Ox");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Palace Jailer");
         setChoice(playerB, "When {this} enters the battlefield, you become the monarch.");
