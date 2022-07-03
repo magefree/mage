@@ -42,7 +42,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tabsPanel" pref="554" max="32767" attributes="0"/>
+              <Component id="tabsPanel" pref="669" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -269,19 +269,26 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbAskMoveToGraveOrder" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="showAbilityPickerForced" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
                               <Component id="displayLifeOnAvatar" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbAskMoveToGraveOrder" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="showAbilityPickerForced" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblTargetAutoChoose" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="cbTargetAutoChooseLevel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -305,6 +312,11 @@
                           <Component id="cbConfirmEmptyManaPool" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbAskMoveToGraveOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblTargetAutoChoose" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbTargetAutoChooseLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -399,6 +411,30 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAskMoveToGraveOrderActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTargetAutoChoose">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Auto-choose targets for player:"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chose for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; You must choose all targets.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; Only targets which are not feel bad (discarding and sacrifing a creature)&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targets (including discarding and sacrifing of creatures)"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cbTargetAutoChooseLevel">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Off"/>
+                        <StringItem index="1" value="Most"/>
+                        <StringItem index="2" value="All"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="selectedIndex" type="int" value="1"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTargetAutoChooseLevelActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -4082,7 +4118,7 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" pref="291" max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" pref="354" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -4341,7 +4377,7 @@
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="98" max="32767" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6297,12 +6333,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="526" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="623" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="themesCategory" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="430" max="32767" attributes="0"/>
+                          <EmptySpace pref="523" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
