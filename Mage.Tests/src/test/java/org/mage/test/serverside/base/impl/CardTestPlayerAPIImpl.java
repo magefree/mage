@@ -365,13 +365,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Checks whether or not a given playable ability (someting that lets you cast a card) is available.
+     * Checks whether or not a given playable ability (something that lets you cast a card) is available.
      * This function will only check IF the ability is available or not, it does not check the number of times that it's available.
      * <p>
      * If using with mustHave = false be very careful about spelling and options, otherwise you may get a false negative.
-     * It is reccomended that you set up the test so that the ability is available at the point you wish to check it,
+     * It is recommended that you set up the test so that the ability is available at the point you wish to check it,
      * check it with checkPlayableAbility(..., mustHave = true), then add whatever condition would stop you from being
-     * able to activat the abiltiy
+     * able to activate the ability.
      * <p>
      * TODO: Currently does not work in all cases since some effects list abilities as available,
      *       only to then give a pop-up about how it can't be played.
@@ -534,7 +534,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * should be used once before initialization to form the library in certain
      * order.
      * <p>
-     * Warning, if you doesn't add cards to hand then player will lose the game
+     * Warning, if you don't add cards to hand then player will lose the game
      * on draw and test return unused actions (game ended too early)
      *
      * @param player {@link Player} to remove all library cards from.
@@ -619,7 +619,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             cardName = cardName.substring(0, cardName.indexOf(ALIAS_PREFIX));
         }
 
-        // one card = one aliase, massive adds can use auto-name
+        // one card = one alias, massive adds can use auto-name
         if (!useAliasMultiNames && !aliasName.isEmpty() && player.getAliasByName(aliasName) != null) {
             Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
         }
@@ -793,7 +793,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if
      *                  you want "at least one creature with given name should
      *                  have specified p\t" Use ALL, if you want "all creature
-     *                  with gived name should have specified p\t"
+     *                  with given name should have specified p\t"
      */
     @Override
     public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
@@ -1045,7 +1045,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert counter count on a player
      *
-     * @param player The player whos counters should be counted.
+     * @param player The player whose counters should be counted.
      * @param type   Type of the counter that should be counted.
      * @param count  Expected count.
      */
@@ -1203,7 +1203,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param cardName Name of the permanent that should be checked.
      * @param tapped   Whether the permanent is tapped or not
-     * @param count    The amount of this permanents that should be tapped
+     * @param count    The number of these permanents that should be tapped
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
@@ -1264,7 +1264,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         int actual;
-        if (cardName.contains("//")) { // special logic for cheched split cards, because in game logic of card name filtering is different than for test
+        if (cardName.contains("//")) { // special logic for checked split cards, because in game logic of card name filtering is different from in test
             actual = 0;
             for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
                 if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
@@ -1659,9 +1659,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Adds a number of actions that will be added to the to the start of the
+     * Adds a number of actions that will be added to the start of the
      * list of actions of the players but only after the rollback is executed
-     * because otherwis the actions are executed to early and would lead to
+     * because otherwise the actions are executed to early and would lead to
      * invalid actions (e.g. casting the same spell twice).
      */
     public void rollbackAfterActionsStart() throws IllegalStateException {
@@ -1672,7 +1672,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Ends a block of actions to be added after an rollback action
+     * Ends a block of actions to be added after a rollback action
      */
     public void rollbackAfterActionsEnd() throws IllegalStateException {
         if (!rollbackBlockActive || rollbackPlayer == null) {
@@ -1699,7 +1699,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param targetName for modes you can add "mode=3" before target name;
-     *                   multiple targets can be seperated by ^;
+     *                   multiple targets can be separated by ^;
      *                   no target marks as TestPlayer.NO_TARGET;
      *                   warning, do not support cards with target adjusters - use addTarget instead
      */
@@ -1902,7 +1902,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * For use choices set "Yes" or "No" the the choice string or use boolean.<br>
+     * For use choices set "Yes" or "No" the choice string or use boolean.<br>
      * For X values set "X=[xValue]" example: for X=3 set choice string to
      * "X=3".<br>
      * For ColorChoice use "Red", "Green", "Blue", "Black" or "White"<br>
@@ -1960,7 +1960,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Set next result of next flipCoin's try (one flipCoin event can call multiple tries under some effects)
-     * TestPlayer/ComputerPlayer always selects Heads in good winable events
+     * TestPlayer/ComputerPlayer always selects Heads in good winnable events
      *
      * @param player
      * @param result
