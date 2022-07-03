@@ -2,7 +2,6 @@ package mage.abilities;
 
 import mage.MageIdentifier;
 import mage.MageObject;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
@@ -590,5 +589,4 @@ public interface Ability extends Controllable, Serializable {
     MageIdentifier getIdentifier();
 
     AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
-
 }
