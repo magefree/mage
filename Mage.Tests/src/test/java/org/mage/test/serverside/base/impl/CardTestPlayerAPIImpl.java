@@ -316,11 +316,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     // check commands
     private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
-        String res = CHECK_PREFIX + command;
+        StringBuilder res = new StringBuilder(CHECK_PREFIX + command);
         for (String param : params) {
-            res += CHECK_PARAM_DELIMETER + param;
+            res.append(CHECK_PARAM_DELIMETER).append(param);
         }
-        addPlayerAction(player, checkName, turnNum, step, res);
+        addPlayerAction(player, checkName, turnNum, step, res.toString());
     }
 
     /**
