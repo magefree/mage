@@ -405,7 +405,7 @@
                 <Component class="javax.swing.JLabel" name="lblTargetAutoChoose">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Auto-choose targets for player:"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chose for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; You must choose all targets.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; Only targets which are not feel bad (discarding a card or sacrifing/destroying/exiling your own permanents)&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targets"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chose for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; All targeting must be done by the player.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targeting that can be automated will be."/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbTargetAutoChooseLevel">
