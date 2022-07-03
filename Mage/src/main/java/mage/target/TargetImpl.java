@@ -617,7 +617,7 @@ public abstract class TargetImpl implements Target {
             return null;
         }
         int playerAutoTargetLevel;
-        if (player.isHuman()) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
+        if (player.isHuman() && player.getControllingPlayersUserData(game) != null) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
             playerAutoTargetLevel = player.getControllingPlayersUserData(game).getAutoTargetLevel();
         } else {
             playerAutoTargetLevel = 2;

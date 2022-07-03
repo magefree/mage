@@ -4352,6 +4352,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
+    }
+
+    @Override
     public void addPhyrexianToColors(FilterMana colors) {
         computerPlayer.addPhyrexianToColors(colors);
     }
