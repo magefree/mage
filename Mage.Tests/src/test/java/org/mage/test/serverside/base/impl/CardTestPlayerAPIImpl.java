@@ -293,27 +293,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         return createPlayer(playerName, rangeOfInfluence);
     }
 
-    protected Player getPlayerFromName(String playerName, String line) {
-        Player player = null;
-        switch (playerName) {
-            case "ComputerA":
-                player = currentGame.getPlayer(playerA.getId());
-                break;
-            case "ComputerB":
-                player = currentGame.getPlayer(playerB.getId());
-                break;
-            case "ComputerC":
-                player = currentGame.getPlayer(playerC.getId());
-                break;
-            case "ComputerD":
-                player = currentGame.getPlayer(playerD.getId());
-                break;
-            default:
-                throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
-        }
-        return player;
-    }
-
     private void addPlayerAction(TestPlayer player, int turnNum, PhaseStep step, String action) {
         PlayerAction playerAction = new PlayerAction("", turnNum, step, action);
         addPlayerAction(player, playerAction);
