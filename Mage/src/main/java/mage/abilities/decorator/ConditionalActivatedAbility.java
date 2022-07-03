@@ -80,9 +80,4 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         }
         return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
     }
-
-    @Override
-    public Condition getCondition() {
-        return condition;
-    }
 }

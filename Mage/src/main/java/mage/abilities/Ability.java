@@ -591,17 +591,4 @@ public interface Ability extends Controllable, Serializable {
 
     AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
 
-    /**
-     * Used to check if this is a conditional version without needed any Java reflection hacks or chained instanceof checks.
-     * Only conditions on the activation of the ability are checked, and not on how the effects can be used.
-     * E.g. For a conditional mana ability this will only return the condition under which it can be activated,
-     *      and NOT the conditions on the mane produced.
-     *
-     * Assumed that if the returned condition is null then this is not a conditional version, or that it does not matter.
-     *
-     * @return
-     */
-    public default Condition getCondition() {
-        return null;
-    }
 }

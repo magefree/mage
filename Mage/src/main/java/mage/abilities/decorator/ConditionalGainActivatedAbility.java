@@ -72,9 +72,4 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
     public String getRule() {
         return staticText;
     }
-
-    @Override
-    public Condition getCondition() {
-        return condition;
-    }
 }
