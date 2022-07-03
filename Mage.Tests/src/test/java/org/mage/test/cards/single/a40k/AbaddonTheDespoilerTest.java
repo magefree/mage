@@ -55,6 +55,7 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
     private final String island = "Island";
     private final String reliquaryTower = "Reliquary Tower";
     private final String aetherize = "Aetherize"; // 4 CMC instant (For testing cascade on opponent's turn)
+    private final String gildedDrake = "Gilded Drake";
 
     /**
      * Massive comprehensive test:
@@ -137,6 +138,63 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerB, 100 - 3 * 3 - 3 * 3 - 5 - 3 * 2);
+    }
+
+    /**
+     * Test for exchange of ownership
+     */
+    @Test
+    public void exchangeOwnershipTest() {
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, abaddonTheDespoiler);
+        addCard(Zone.HAND, playerA, lightningBolt, 4);
+        addCard(Zone.HAND, playerB, lightningBolt, 2);
+        addCard(Zone.HAND, playerA, aetherize, 1);
+        addCard(Zone.HAND, playerB, gildedDrake, 1);
+        addCard(Zone.BATTLEFIELD, playerA, mountain, 3);
+        addCard(Zone.BATTLEFIELD, playerB, mountain, 3);
+        addCard(Zone.BATTLEFIELD, playerA, island, 4);
+        addCard(Zone.BATTLEFIELD, playerB, island, 2);
+        addCard(Zone.BATTLEFIELD, playerA, reliquaryTower, 1); // Unlimited hand size
+        addCard(Zone.BATTLEFIELD, playerB, reliquaryTower, 1); // Unlimited hand size
+        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 9 * (9 + 1) / 2); // Cast spells CMC 1-9, 4 times
+        addCard(Zone.BATTLEFIELD, playerB, "Archway Commons", 9 * (9 + 1) / 2); // Cast spells CMC 1-9, 4 times
+        addCard(Zone.LIBRARY, playerA, mountain, 1);
+        addCard(Zone.LIBRARY, playerB, mountain, 1);
+        cardsByCMC.forEach(c -> addCard(Zone.HAND, playerA, c, 1));
+        cardsByCMC.forEach(c -> addCard(Zone.HAND, playerB, c, 1));
+
+        // Doesn't give opponents cascade on their turn
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, lightningBolt, playerA, true);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, gildedDrake, true);
+        addTarget(playerB, abaddonTheDespoiler); //When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls.
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerB);
+        showBattlefield("after Gilded Drake", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showBattlefield("after Gilded Drake", 2, PhaseStep.PRECOMBAT_MAIN, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, lightningBolt, playerA, true);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB, true);
+        assertMarkOfTheChaosAscendant("6 damage, Opponent has Abaddon", 2, PhaseStep.PRECOMBAT_MAIN, playerB, 6);
+
+        // Doesn't give us cascade on their turn when opponent stole it
+        assertMarkOfTheChaosAscendant("Doesn't give us cascade on their turn when opponent stole it",
+                2, PhaseStep.PRECOMBAT_MAIN, playerA, false, aetherize);
+
+        // Doesn't give us cascade on our turn when opponent stole it
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, playerB, true);
+        assertMarkOfTheChaosAscendant("Doesn't give us cascade on our turn when opponent stole it",
+                3, PhaseStep.POSTCOMBAT_MAIN, playerA, -1);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20 - 2 * 3);
+        assertLife(playerB, 20 - 4 * 3);
     }
 
     // Unused, but I spent the time to write it :(
