@@ -793,7 +793,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         lblTargetAutoChoose.setText("Auto-choose targets for player:");
-        lblTargetAutoChoose.setToolTipText("<html>\nWhen there is only one possible outcome for targeting, the targets can be chose for you.\n<br>\n<b>None:</b> You must choose all targets.\n<br>\n<b>Most:</b> Only targets which are not feel bad (discarding and sacrifing a creature)\n<br>\n<b>All:</b> All targets (including discarding and sacrifing of creatures)");
+        lblTargetAutoChoose.setToolTipText("<html>\nWhen there is only one possible outcome for targeting, the targets can be chose for you.\n<br>\n<b>None:</b> You must choose all targets.\n<br>\n<b>Most:</b> Only targets which are not feel bad (discarding a card or sacrifing/destroying/exiling your own permanents)\n<br>\n<b>All:</b> All targets");
 
         cbTargetAutoChooseLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Off", "Most", "All" }));
         cbTargetAutoChooseLevel.setSelectedIndex(1);
