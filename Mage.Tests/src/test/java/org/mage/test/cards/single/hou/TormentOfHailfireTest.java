@@ -25,10 +25,10 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         // Start Life = 2
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 

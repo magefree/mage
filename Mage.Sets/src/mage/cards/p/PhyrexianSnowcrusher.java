@@ -32,7 +32,7 @@ public final class PhyrexianSnowcrusher extends CardImpl {
         // Phyrexian Snowcrusher attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // {1}{S}: Phyrexian Snowcrusher gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{S}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{S}")));
     }
 
     private PhyrexianSnowcrusher(final PhyrexianSnowcrusher card) {

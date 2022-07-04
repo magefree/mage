@@ -38,7 +38,7 @@ public final class SilentAssassin extends CardImpl {
                 new AtTheEndOfCombatDelayedTriggeredAbility(
                         new DestroyTargetEffect().setText("destroy target blocking creature")
                 ), true
-        ), new ManaCostsImpl("{3}{B}"));
+        ), new ManaCostsImpl<>("{3}{B}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -35,7 +35,7 @@ public final class HauntedDead extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
 
         // {1}{B}, Discard two cards: Return Haunted Dead from your graveyard to the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
         this.addAbility(ability);
     }

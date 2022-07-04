@@ -25,6 +25,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
 
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
@@ -54,7 +55,7 @@ public final class RakdosRiteknife extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RakdosRiteknife(final RakdosRiteknife card) {

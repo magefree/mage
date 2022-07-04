@@ -26,9 +26,9 @@ public class EchoAbility extends TriggeredAbilityImpl {
     private String rule;
 
     public EchoAbility(String manaString) {
-        super(Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl(manaString)), false);
+        super(Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl<>(manaString)), false);
         this.echoPaid = false;
-        this.echoCosts.add(new ManaCostsImpl(manaString));
+        this.echoCosts.add(new ManaCostsImpl<>(manaString));
         this.lastController = null;
         this.rule = null;
     }

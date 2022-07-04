@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -11,6 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class GunganCaptain extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Whenever Gungan Captain deals damage to a creture, tap that creature. That creature does not untap during it controlers untap step.
+        // Whenever Gungan Captain deals damage to a creture, tap that creature. That creature does not untap during its controllers untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("tap that creature"), false, false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
         this.addAbility(ability);

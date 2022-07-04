@@ -33,7 +33,7 @@ public final class NezumiBoneReader extends CardImpl {
         // {B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        ability.addCost(new ManaCostsImpl("{B}"));
+        ability.addCost(new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

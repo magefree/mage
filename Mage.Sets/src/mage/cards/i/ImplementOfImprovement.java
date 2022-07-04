@@ -24,7 +24,7 @@ public final class ImplementOfImprovement extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {W}, Sacrifice Implement of Improvement: You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

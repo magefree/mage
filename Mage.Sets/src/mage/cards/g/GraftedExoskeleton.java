@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class GraftedExoskeleton extends CardImpl {
         this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private GraftedExoskeleton(final GraftedExoskeleton card) {

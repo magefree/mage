@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public class AminatouTheFateshifter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent you own");
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());

@@ -41,7 +41,7 @@ public final class WardenOfTheFirstTree extends CardImpl {
         // {1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.HUMAN, SubType.WARRIOR
-        ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl("{1}{W/B}"));
+        ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl<>("{1}{W/B}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
                 3, 3, Duration.Custom, SubLayer.SetPT_7b
         ).setText("with base power and toughness 3/3"));
@@ -49,7 +49,7 @@ public final class WardenOfTheFirstTree extends CardImpl {
 
         // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
         this.addAbility(new SimpleActivatedAbility(
-                new WardenOfTheFirstTreeEffect(), new ManaCostsImpl("{2}{W/B}{W/B}")
+                new WardenOfTheFirstTreeEffect(), new ManaCostsImpl<>("{2}{W/B}{W/B}")
         ));
 
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
@@ -57,7 +57,7 @@ public final class WardenOfTheFirstTree extends CardImpl {
                 new ConditionalOneShotEffect(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
                         condition, "If {this} is a Spirit, put five +1/+1 counters on it"
-                ), new ManaCostsImpl("{3}{W/B}{W/B}{W/B}")
+                ), new ManaCostsImpl<>("{3}{W/B}{W/B}{W/B}")
         ));
     }
 

@@ -37,7 +37,7 @@ public final class IvySeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, {tap}: Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.
-        Ability ability = new SimpleActivatedAbility(new IvySeerEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new IvySeerEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

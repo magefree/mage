@@ -34,7 +34,7 @@ public final class UnlikelyAlliance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // {1}{W}: Target nonattacking, nonblocking creature gets +0/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

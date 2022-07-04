@@ -16,12 +16,7 @@ import java.util.Arrays;
 public final class DarettiConstructToken extends TokenImpl {
 
     public DarettiConstructToken() {
-        this("CNS");
-    }
-
-    public DarettiConstructToken(String setCode) {
         super("Construct Token", "1/1 colorless Construct artifact creature token with defender");
-        this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

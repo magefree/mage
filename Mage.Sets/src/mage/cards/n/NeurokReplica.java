@@ -27,7 +27,7 @@ public final class NeurokReplica extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

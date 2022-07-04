@@ -62,7 +62,7 @@ public final class RimefeatherOwl extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.ICE.createInstance())
                         .setText("Put an ice counter on target permanent."),
-                new ManaCostsImpl("{1}{S}")
+                new ManaCostsImpl<>("{1}{S}")
         );
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

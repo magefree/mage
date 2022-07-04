@@ -26,7 +26,7 @@ public final class GraspOfPhantoms extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {7}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{7}{U}")));
     }
 
     private GraspOfPhantoms(final GraspOfPhantoms card) {

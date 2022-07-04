@@ -47,7 +47,7 @@ public final class ShardPhoenix extends CardImpl {
         
         // {R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD, 
-                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));    
+                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private ShardPhoenix(final ShardPhoenix card) {

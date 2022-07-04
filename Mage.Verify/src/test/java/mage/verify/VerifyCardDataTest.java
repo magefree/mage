@@ -60,7 +60,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "NCC"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "2X2"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -83,7 +83,7 @@ public class VerifyCardDataTest {
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
             "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
-            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk"
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad"
     );
 
     static {
@@ -262,12 +262,12 @@ public class VerifyCardDataTest {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
-            if (card instanceof SplitCard) {
-                check(((SplitCard) card).getLeftHalfCard(), cardIndex);
-                check(((SplitCard) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
-                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
+            if (card instanceof CardWithHalves) {
+                check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
+                check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
+            } else if (card instanceof AdventureCard) {
+                check(card, cardIndex);
+                check(((AdventureCard) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -1403,14 +1403,15 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
+        // special check: transform ability in MDFC should only be on front and vice versa
         if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
             fail(card, "abilities", "double-faced cards should have transform ability on the front");
         }
-
         if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
             fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
+        // special check: back side in MDFC must be only night card
         if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
             fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
         }
@@ -1672,9 +1673,25 @@ public class VerifyCardDataTest {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
         }
 
+        if (ref.subtypes.contains("Adventure")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = new StringBuilder("Adventure ")
+                        .append(ref.types.get(0))
+                        .append(" - ")
+                        .append(ref.faceName)
+                        .append(' ')
+                        .append(ref.manaCost)
+                        .append(" - ")
+                        .append(refRules[i])
+                        .toString();
+            }
+        }
+
+
         String[] cardRules = card
                 .getRules()
                 .stream()
+                .filter(s -> !(card instanceof AdventureCard) || !s.startsWith("Adventure "))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")

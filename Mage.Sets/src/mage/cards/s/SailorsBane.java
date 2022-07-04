@@ -23,7 +23,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -81,8 +80,7 @@ enum SailorsBaneValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
-                .of(game.getPlayer(sourceAbility.getControllerId()))
-                .filter(Objects::nonNull)
+                .ofNullable(game.getPlayer(sourceAbility.getControllerId()))
                 .map(Player::getGraveyard)
                 .map(graveyard -> graveyard.count(filter, game))
                 .orElse(0)

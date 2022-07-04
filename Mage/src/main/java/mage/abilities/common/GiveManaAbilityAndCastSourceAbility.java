@@ -63,7 +63,7 @@ class CastExiledFromHandCardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.of(getValue("exiledHandCardRef"))
+        Optional.ofNullable(getValue("exiledHandCardRef"))
                 .filter(Objects::nonNull)
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getCard(game))

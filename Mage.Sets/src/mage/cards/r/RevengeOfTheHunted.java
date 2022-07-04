@@ -34,7 +34,7 @@ public final class RevengeOfTheHunted extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {G}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private RevengeOfTheHunted(final RevengeOfTheHunted card) {

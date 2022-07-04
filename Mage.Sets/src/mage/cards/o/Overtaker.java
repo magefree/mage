@@ -35,7 +35,7 @@ public final class Overtaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{U}, {tap}, Discard a card: Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);

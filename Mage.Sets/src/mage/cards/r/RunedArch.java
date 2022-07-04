@@ -41,7 +41,7 @@ public final class RunedArch extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(Duration.EndOfGame)
                         .setText("X target creatures with power 2 or less can't be blocked this turn."),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

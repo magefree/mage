@@ -37,7 +37,7 @@ public final class KnightOfTheHolyNimbus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new KnightOfTheHolyNimbusReplacementEffect()));
 
         // {2}: Knight of the Holy Nimbus can't be regenerated this turn. Only any opponent may activate this ability.
-        this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
 
     }
 

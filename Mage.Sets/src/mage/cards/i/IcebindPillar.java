@@ -25,7 +25,7 @@ public final class IcebindPillar extends CardImpl {
         this.addSuperType(SuperType.SNOW);
 
         // {S}, {T}: Tap target artifact or creature.
-        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl("{S}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{S}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);

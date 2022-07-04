@@ -41,7 +41,7 @@ public final class RuthlessKnave extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}, Sacrifice a creature: Create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken(), 2), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken(), 2), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
 

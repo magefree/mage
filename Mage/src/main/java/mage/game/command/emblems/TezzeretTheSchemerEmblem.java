@@ -31,5 +31,7 @@ public final class TezzeretTheSchemerEmblem extends Emblem {
         ability.addEffect(effect);
         ability.addTarget(new TargetPermanent(FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("AER");
     }
 }

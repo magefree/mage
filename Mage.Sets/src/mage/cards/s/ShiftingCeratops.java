@@ -46,7 +46,7 @@ public final class ShiftingCeratops extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
 
         // {G}: Shifting Ceratops gains your choice of reach, trample, or haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new ShiftingCeratopsEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(new ShiftingCeratopsEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private ShiftingCeratops(final ShiftingCeratops card) {

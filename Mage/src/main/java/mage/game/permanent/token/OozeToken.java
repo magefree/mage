@@ -16,8 +16,6 @@ public final class OozeToken extends TokenImpl {
         subtype.add(SubType.OOZE);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
-
-        availableImageSetCodes = Arrays.asList("M11", "PCA", "NCC");
     }
 
     public OozeToken() {
@@ -28,7 +26,7 @@ public final class OozeToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM");
+        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM", "M11", "PCA", "NCC");
     }
 
     @Override

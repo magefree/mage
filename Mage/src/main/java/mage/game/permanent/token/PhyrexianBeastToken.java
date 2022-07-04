@@ -20,7 +20,7 @@ public final class PhyrexianBeastToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("C21");
+        availableImageSetCodes = Arrays.asList("C21", "CLB");
     }
 
     public PhyrexianBeastToken(final PhyrexianBeastToken token) {

@@ -24,7 +24,7 @@ public final class ForgottenCave extends CardImpl {
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
     }
 
     private ForgottenCave(final ForgottenCave card) {

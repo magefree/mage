@@ -38,7 +38,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     public EntwineAbility(String manaString) {
         super(Zone.STACK, null);
-        addEntwineCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString)));
+        addEntwineCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl<>(manaString)));
     }
 
     public EntwineAbility(Cost cost) {

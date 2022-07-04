@@ -18,6 +18,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
@@ -30,6 +31,11 @@ import java.util.*;
  * @author LevelX2
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
+
+    @FunctionalInterface
+    public interface PermanentModifier {
+        void apply(Token token, Game game);
+    }
 
     private final Set<Class<? extends Ability>> abilityClazzesToRemove;
     private final List<Permanent> addedTokenPermanents;
@@ -54,7 +60,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-
+    private PermanentModifier permanentModifier = null;
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -235,6 +241,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getColor().setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
+        if (permanentModifier != null) {
+            permanentModifier.apply(token, game);
+        }
 
         if (!this.abilityClazzesToRemove.isEmpty()) {
             List<Ability> abilitiesToRemoveTmp = new ArrayList<>();
@@ -364,7 +373,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenCopyTargetEffect addAbilityClassesToRemoveFromTokens(Class<? extends Ability> clazz) {
-        this.abilityClazzesToRemove.add(clazz);return this;
+        this.abilityClazzesToRemove.add(clazz);
+        return this;
     }
 
     public CreateTokenCopyTargetEffect addAdditionalAbilities(Ability... abilities) {
@@ -375,6 +385,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
         this.savedPermanent = savedPermanent;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setPermanentModifier(PermanentModifier permanentModifier) {
+        this.permanentModifier = permanentModifier;
         return this;
     }
 

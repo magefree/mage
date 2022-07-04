@@ -31,7 +31,7 @@ public final class KraulWarrior extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {5}{G}: Kraul Warrior gets +3/+3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3,3,Duration.EndOfTurn), new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3,3,Duration.EndOfTurn), new ManaCostsImpl<>("{5}{G}")));
 
     }
 

@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class LeeringEmblem extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private LeeringEmblem(final LeeringEmblem card) {

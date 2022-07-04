@@ -32,7 +32,7 @@ public final class FloodedShoreline extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
         // {U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2,2, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

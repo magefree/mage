@@ -28,7 +28,7 @@ public final class LavafumeInvoker extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{8}")));
+                new BoostControlledEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{8}")));
     }
 
     private LavafumeInvoker(final LavafumeInvoker card) {

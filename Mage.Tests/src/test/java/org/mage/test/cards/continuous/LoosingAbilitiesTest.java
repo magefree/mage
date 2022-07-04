@@ -83,10 +83,10 @@ public class LoosingAbilitiesTest extends CardTestPlayerBase {
     }
 
     /**
-     * Yixlid Jailer works incorrectly with reanimation spelss - I cast Unearth
+     * Yixlid Jailer works incorrectly with reanimation spels - I cast Unearth
      * targeting Seasoned Pyromancer with a Yixlid Jailer in play, but didnt get
-     * the Pyromancer's ETB trigger. This is a bug as Jailer only affaects cards
-     * when they are on the battle field
+     * the Pyromancer's ETB trigger.
+     * This is a bug as Jailer only affaects cards when they are on the battlefield.
      */
     @Test
     public void testYixlidJailerAndETBEffects() {
@@ -103,9 +103,14 @@ public class LoosingAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Unearth", 1); // Sorcery {B}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yixlid Jailer");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unearth");
+        // Target card for Unearth
+        addTarget(playerB, "Seasoned Pyromancer");
+        // Discard 2 cards for Seasoned Pyromancer
         setChoice(playerB, "Lightning Bolt^Lightning Bolt");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

@@ -29,7 +29,7 @@ public final class WillOfTheAllHunter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private WillOfTheAllHunter(final WillOfTheAllHunter card) {

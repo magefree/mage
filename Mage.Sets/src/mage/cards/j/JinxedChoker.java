@@ -44,7 +44,7 @@ public final class JinxedChoker extends CardImpl {
         this.addAbility(upkeepAbility);
 
         // {3}: Put a charge counter on Jinxed Choker or remove one from it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedChokerCounterEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedChokerCounterEffect(), new ManaCostsImpl<>("{3}"));
         this.addAbility(ability);
     }
 

@@ -32,6 +32,8 @@ public final class VenserTheSojournerEmblem extends Emblem {
         Target target = new TargetPermanent();
         ability.addTarget(target);
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("DDI");
     }
 }
 

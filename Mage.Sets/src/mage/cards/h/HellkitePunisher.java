@@ -30,7 +30,7 @@ public final class HellkitePunisher extends CardImpl {
 
         // {R}: Hellkite Punisher gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")
         ));
     }
 

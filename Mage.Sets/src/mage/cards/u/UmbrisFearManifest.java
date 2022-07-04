@@ -128,8 +128,7 @@ class UmbrisFearManifestEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (int i = 0; i < 1000; i++) { // avoiding a loop
-            Card card = player.getLibrary().getFromTop(game);
+        for (Card card : player.getLibrary().getCards(game)) {
             player.moveCards(card, Zone.EXILED, source, game);
             if (card.isLand(game)) {
                 break;

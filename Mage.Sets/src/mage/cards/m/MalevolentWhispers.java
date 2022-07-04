@@ -40,7 +40,7 @@ public final class MalevolentWhispers extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Madness {3}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{R}")));
     }
 
     private MalevolentWhispers(final MalevolentWhispers card) {

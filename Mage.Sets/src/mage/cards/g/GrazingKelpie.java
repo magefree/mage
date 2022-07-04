@@ -31,7 +31,7 @@ public final class GrazingKelpie extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {GU}, Sacrifice Grazing Kelpie: Put target card from a graveyard on the bottom of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl("{G/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl<>("{G/U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);

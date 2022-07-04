@@ -31,7 +31,7 @@ public final class MyrIncubator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // {6}, {tap}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them, then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrIncubatorEffect(), new ManaCostsImpl("{6}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrIncubatorEffect(), new ManaCostsImpl<>("{6}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

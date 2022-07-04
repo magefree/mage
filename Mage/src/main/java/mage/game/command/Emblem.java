@@ -19,6 +19,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import mage.util.SubTypes;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Emblem implements CommandObject {
 
     private static List<CardType> emptySet = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl();
+    private static ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private String name = "";
     private UUID id;
@@ -44,6 +45,9 @@ public class Emblem implements CommandObject {
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
+
+    // list of set codes emblem images are available for
+    protected List<String> availableImageSetCodes = new ArrayList<>();
 
     public Emblem() {
         this.id = UUID.randomUUID();
@@ -59,6 +63,7 @@ public class Emblem implements CommandObject {
         this.copyFrom = (emblem.copyFrom != null ? emblem.copyFrom : null);
         this.abilites = emblem.abilites.copy();
         this.expansionSetCodeForImage = emblem.expansionSetCodeForImage;
+        this.availableImageSetCodes = emblem.availableImageSetCodes;
     }
 
     @Override
@@ -79,6 +84,11 @@ public class Emblem implements CommandObject {
             }
             if (expansionSetCodeForImage.isEmpty()) {
                 expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
+            }
+            if (!availableImageSetCodes.isEmpty()) {
+                if (expansionSetCodeForImage.equals("") || !availableImageSetCodes.contains(expansionSetCodeForImage)) {
+                        expansionSetCodeForImage = availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size()));
+                }
             }
         }
     }

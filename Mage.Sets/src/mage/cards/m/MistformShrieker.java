@@ -35,7 +35,7 @@ public final class MistformShrieker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new GenericManaCost(1)));
 
         // Morph {3}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{U}{U}")));
 
     }
 

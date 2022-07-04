@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -13,6 +14,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -74,7 +76,7 @@ public final class KaldraCompleat extends CardImpl {
         this.addAbility(ability);
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(7), new TargetControlledCreaturePermanent(), false));
     }
 
     private KaldraCompleat(final KaldraCompleat card) {

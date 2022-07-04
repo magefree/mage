@@ -39,7 +39,7 @@ public final class MosswortBridge extends CardImpl {
                 new HideawayPlayEffect(), MosswortBridgeTotalPowerCondition.instance,
                 "you may play the exiled card without paying its mana cost " +
                         "if creatures you control have total power 10 or greater"
-        ), new ManaCostsImpl("{G}"));
+        ), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

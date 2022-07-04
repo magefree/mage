@@ -29,12 +29,12 @@ public final class OrzhovGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}: Target player gains 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(1), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(1), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetPlayer(1));
         this.addAbility(ability);
 
         // {2}{B}: Each player loses 1 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private OrzhovGuildmage(final OrzhovGuildmage card) {

@@ -4,7 +4,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CreaturePutInYourGraveyardCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,12 +26,12 @@ public final class CloakwoodHermit extends CardImpl {
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "At the beginning of your end step, if a creature card was put into your graveyard from anywhere this turn, create two tapped 1/1 green Squirrel creature tokens."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(new SquirrelToken(), 2, true, false),
                         TargetController.YOU, CreaturePutInYourGraveyardCondition.instance, false
                 ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )).addHint(CreaturePutInYourGraveyardCondition.getHint()), new CreaturePutIntoGraveyardWatcher());
+        ).withForceQuotes()).addHint(CreaturePutInYourGraveyardCondition.getHint()), new CreaturePutIntoGraveyardWatcher());
     }
 
     private CloakwoodHermit(final CloakwoodHermit card) {

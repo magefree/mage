@@ -24,7 +24,7 @@ public final class SecludedSteppe extends CardImpl {
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private SecludedSteppe(final SecludedSteppe card) {

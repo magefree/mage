@@ -16,6 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,7 +35,7 @@ public final class UmbralMantle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip {0}
-        this.addAbility(new EquipAbility(0, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0), new TargetControlledCreaturePermanent(), false));
     }
 
     private UmbralMantle(final UmbralMantle card) {

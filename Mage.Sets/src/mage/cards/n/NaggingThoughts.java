@@ -22,7 +22,7 @@ public final class NaggingThoughts extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD));
 
         // Madness {1}{U}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private NaggingThoughts(final NaggingThoughts card) {

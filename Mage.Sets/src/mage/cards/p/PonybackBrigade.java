@@ -36,7 +36,7 @@ public final class PonybackBrigade extends CardImpl {
         this.addAbility(new PonybackBrigadeAbility(new GoblinToken()));
 
         // Morph {2}{R}{W}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{R}{W}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{R}{W}{B}")));
     }
 
     private PonybackBrigade(final PonybackBrigade card) {

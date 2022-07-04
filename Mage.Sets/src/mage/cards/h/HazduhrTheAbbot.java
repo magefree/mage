@@ -45,7 +45,7 @@ public final class HazduhrTheAbbot extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
@@ -66,7 +66,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
-        super(duration, 0, UsageType.ONE_USAGE_ABSOLUTE);
+        super(duration, 0, UsageType.ACCORDING_DURATION);
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 

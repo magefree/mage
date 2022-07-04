@@ -39,7 +39,7 @@ public final class SenselessRage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private SenselessRage(final SenselessRage card) {

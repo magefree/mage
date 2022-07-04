@@ -19,6 +19,7 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -126,12 +127,11 @@ class KomainuBattleArmorEffect extends OneShotEffect {
         if (playerId == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                playerId, source, game
-        )) {
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
-        }
+        game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTargets(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game
+                ), game
+        )), source);
         return true;
     }
 }

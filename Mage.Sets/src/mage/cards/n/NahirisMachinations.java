@@ -34,7 +34,7 @@ public final class NahirisMachinations extends CardImpl {
         this.addAbility(ability);
 
         // {1}{R}: Nahiri's Machinations deals 1 damage to target blocking creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature("blocking creature")));
         this.addAbility(ability);
     }

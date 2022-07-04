@@ -25,7 +25,7 @@ public final class JujuBubble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // When you play a card, sacrifice Juju Bubble.
         this.addAbility(new JujuBubbleTriggeredAbility());

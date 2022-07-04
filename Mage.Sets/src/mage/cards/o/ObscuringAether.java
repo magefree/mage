@@ -36,7 +36,7 @@ public final class ObscuringAether extends CardImpl {
         // {1}{G}: Turn Obscuring Aether face down.
         Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
         effect.setText("Turn {this} face down. <i>(It becomes a 2/2 creature.)</i>");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}")));
 
     }
 

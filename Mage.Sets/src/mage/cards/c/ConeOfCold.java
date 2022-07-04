@@ -45,6 +45,8 @@ public final class ConeOfCold extends CardImpl {
                         StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn
                 ).setText("Until your next turn, creatures your opponents control enter the battlefield tapped")
         );
+
+        this.getSpellAbility().addEffect(effect);
     }
 
     private ConeOfCold(final ConeOfCold card) {

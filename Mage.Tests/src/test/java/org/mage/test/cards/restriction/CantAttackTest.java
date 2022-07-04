@@ -3,6 +3,7 @@ package org.mage.test.cards.restriction;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -34,7 +35,17 @@ public class CantAttackTest extends CardTestPlayerBase {
         attack(3, playerA, "Myr Enforcer");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerA, 8); // 8 + 4
         assertLife(playerB, 14); // 4 + 2
@@ -53,15 +64,25 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Harbor Serpent"); // 5/5
 
-        attack(2, playerB, "Harbor Serpent");
+        attack(2, playerB, "Harbor Serpent");  // Can't attack since there are only 4 Islands
         attack(2, playerB, "Silvercoat Lion");
 
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
-        attack(3, playerA, "Harbor Serpent");
+        attack(3, playerA, "Harbor Serpent"); // Should be able to attack
         attack(3, playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerB, 13);
         assertLife(playerA, 18);
@@ -82,7 +103,17 @@ public class CantAttackTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion", playerA);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerA, 20);
 
@@ -114,7 +145,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertTapped("Battle-Mad Ronin", false);
     }
 
-    // Orzhov Advokist's ability does not work. Your opponents get the counters but they can still attack you.
+    /**
+     * Orzhov Advokist's ability does not work.
+     * Your opponents get the counters but they can still attack you.
+     */
     @Test
     public void testOrzhovAdvokist() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -127,11 +161,20 @@ public class CantAttackTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orzhov Advokist");
         setChoice(playerA, true);
         setChoice(playerB, true);
-        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Silvercoat Lion"); // Can't attack since they put a +1/+1 counter
         attack(4, playerB, "Silvercoat Lion");
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
 
-        execute();
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Orzhov Advokist", 1);
         assertPowerToughness(playerA, "Orzhov Advokist", 3, 6);
@@ -140,8 +183,8 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 4);
     }
 
-    /*
-    Reported bug: Medomai was able to attack on an extra turn when cheated into play.
+    /**
+     * Reported bug: Medomai was able to attack on an extra turn when cheated into play.
      */
     @Test
     public void testMedomaiShouldNotAttackOnExtraTurns() {
@@ -157,9 +200,14 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         /*
          Cauldron Dance {4}{B}{R} Instant
-        Cast Cauldron Dance only during combat.
-        Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
-        You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
+         Cast Cauldron Dance only during combat.
+         Return target creature card from your graveyard to the battlefield.
+         That creature gains haste.
+         Return it to your hand at the beginning of the next end step.
+
+         You may put a creature card from your hand onto the battlefield.
+         That creature gains haste.
+         Its controller sacrifices it at the beginning of the next end step.
          */
         String cDance = "Cauldron Dance";
         String dBlade = "Doom Blade"; // {1}{B} instant destroy target creature
@@ -178,9 +226,19 @@ public class CantAttackTest extends CardTestPlayerBase {
         addTarget(playerA, medomai);
         attack(2, playerA, medomai);
 
-        // medomai should not have been allowed to attack, but returned to hand at beginning of next end step still
+        // Medomai should not have been allowed to attack, but returned to hand at beginning of next end step still
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerB, 16); // one hit from medomai
         assertGraveyardCount(playerA, dBlade, 1);
@@ -217,7 +275,17 @@ public class CantAttackTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, eFirecraft, playerB);
 
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertLife(playerB, 12); // 1 hit from medomai and firecraft = 8 damage
         assertGraveyardCount(playerA, eFirecraft, 1);
@@ -394,7 +462,17 @@ public class CantAttackTest extends CardTestPlayerBase {
         attack(3, playerA, "Admiral Beckett Brass"); // Can't attack
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertPermanentCount(playerA, "Opportunistic Dragon", 1);
         assertPermanentCount(playerA, "Admiral Beckett Brass", 1);
@@ -430,7 +508,17 @@ public class CantAttackTest extends CardTestPlayerBase {
         attack(4, playerB, "Admiral Beckett Brass"); // Can attack again
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+
+        try {
+            execute();
+            assertAllCommandsUsed();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertGraveyardCount(playerB, "Terror", 1);
         assertGraveyardCount(playerA, "Opportunistic Dragon", 1);

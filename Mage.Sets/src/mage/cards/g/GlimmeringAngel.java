@@ -31,7 +31,7 @@ public final class GlimmeringAngel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Glimmering Angel gains shroud until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private GlimmeringAngel(final GlimmeringAngel card) {

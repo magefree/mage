@@ -41,7 +41,7 @@ public final class SenseiGoldenTail extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.TRAINING.createInstance()),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

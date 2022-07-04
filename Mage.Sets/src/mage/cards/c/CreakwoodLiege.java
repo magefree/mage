@@ -17,7 +17,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.CreakwoodLiegeToken;
+import mage.game.permanent.token.BlackGreenWormToken;
 
 /**
  *
@@ -45,7 +45,7 @@ public final class CreakwoodLiege extends CardImpl {
         // Other green creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreenCreature, true)));
         // At the beginning of your upkeep, you may create a 1/1 black and green Worm creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CreakwoodLiegeToken(), 1), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new BlackGreenWormToken(), 1), TargetController.YOU, true));
     }
 
     private CreakwoodLiege(final CreakwoodLiege card) {

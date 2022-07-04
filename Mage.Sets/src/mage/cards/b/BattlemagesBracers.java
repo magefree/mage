@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -38,7 +39,7 @@ public final class BattlemagesBracers extends CardImpl {
         this.addAbility(new BattlemagesBracersTriggeredAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private BattlemagesBracers(final BattlemagesBracers card) {

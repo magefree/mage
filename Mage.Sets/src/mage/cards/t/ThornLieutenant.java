@@ -38,7 +38,7 @@ public final class ThornLieutenant extends CardImpl {
         // {5}{G}: Thorn Lieutenant gets +4/+4 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(4, 4, Duration.EndOfTurn),
-                new ManaCostsImpl("{5}{G}")
+                new ManaCostsImpl<>("{5}{G}")
         ));
     }
 

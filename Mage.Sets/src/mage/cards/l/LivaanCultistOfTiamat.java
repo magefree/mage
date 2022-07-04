@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,8 +62,7 @@ enum LivaanCultistOfTiamatValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional.of(effect.getValue("spellCast"))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(effect.getValue("spellCast"))
                 .map(Spell.class::cast)
                 .map(Spell::getManaValue)
                 .orElse(0);

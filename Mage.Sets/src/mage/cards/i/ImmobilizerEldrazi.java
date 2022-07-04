@@ -42,7 +42,7 @@ public final class ImmobilizerEldrazi extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {2}{C}: Each creature with toughness greater than its power can't block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{2}{C}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{C}"));
 
         this.addAbility(ability);
 

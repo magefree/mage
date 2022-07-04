@@ -31,7 +31,7 @@ public final class ElvishHunter extends CardImpl {
 
         // {1}{G}, {tap}: Target creature doesn't untap during its controller's next untap step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect("Target creature"),
-            new ManaCostsImpl("{1}{G}"));
+            new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

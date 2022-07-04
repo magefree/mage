@@ -27,7 +27,7 @@ public final class VesselOfMalignity extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ExileFromZoneTargetEffect(
                         Zone.HAND, StaticFilters.FILTER_CARD_CARDS, 2, false
-                ), new ManaCostsImpl("{1}{B}")
+                ), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());

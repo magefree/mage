@@ -39,7 +39,7 @@ public final class LingeringMirage extends CardImpl {
         // Enchanted land is an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.ISLAND)));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private LingeringMirage(final LingeringMirage card) {

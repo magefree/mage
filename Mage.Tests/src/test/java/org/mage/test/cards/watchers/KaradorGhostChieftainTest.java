@@ -21,7 +21,7 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
      * Test that you can cast a spell from the graveyard.
      */
     @Test
-    public void testPlayFromGraveyard() {
+    public void testCastFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Karador, Ghost Chieftain");
         addCard(Zone.GRAVEYARD, playerA, "Raging Goblin");
@@ -33,25 +33,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
                 
         assertPermanentCount(playerA, "Raging Goblin", 1);
         assertGraveyardCount(playerA, "Raging Goblin", 0);
-    }
-
-    /**
-     * Test that you can cast from your graveyard.
-     */
-    @Test
-    public void testPlayOneFromGraveyard() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Karador, Ghost Chieftain");
-        addCard(Zone.GRAVEYARD, playerA, "Raging Goblin", 2);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raging Goblin");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raging Goblin");
-        
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-                
-        assertPermanentCount(playerA, "Raging Goblin", 1);
-        assertGraveyardCount(playerA, "Raging Goblin", 1);
     }
 
     /**

@@ -31,7 +31,7 @@ public final class EwokFiredancers extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // {1}{R}: Ewok Firedancers gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private EwokFiredancers(final EwokFiredancers card) {

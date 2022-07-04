@@ -46,7 +46,7 @@ public final class SinkingFeeling extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // Enchanted creature has "{1}, Put a -1/-1 counter on this creature: Untap this creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
         ability2.addCost(new PutCountersSourceCost(CounterType.M1M1.createInstance()).setText("put a -1/-1 counter on this creature"));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.Custom, "Enchanted creature has \"{1}, Put a -1/-1 counter on this creature: Untap this creature.\"")));
 

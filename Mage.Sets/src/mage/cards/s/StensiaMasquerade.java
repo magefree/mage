@@ -49,7 +49,7 @@ public final class StensiaMasquerade extends CardImpl {
         this.addAbility(new StensiaMasqueradeTriggeredAbility());
 
         // Madness {2}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{R}")));
     }
 
     private StensiaMasquerade(final StensiaMasquerade card) {

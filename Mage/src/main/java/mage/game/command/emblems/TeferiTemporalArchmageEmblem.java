@@ -17,5 +17,7 @@ public final class TeferiTemporalArchmageEmblem extends Emblem {
     public TeferiTemporalArchmageEmblem() {
         this.setName("Emblem Teferi");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(LoyaltyAbility.class, "loyalty abilities of planeswalkers you control on any player's turn")));
+
+        this.setExpansionSetCodeForImage("C14");
     }
 }

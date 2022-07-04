@@ -80,8 +80,7 @@ class PublicEnemyEffect extends RequirementEffect {
 
     @Override
     public UUID mustAttackDefender(Ability source, Game game) {
-        return Optional.of(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getControllerId)
                 .orElse(null);

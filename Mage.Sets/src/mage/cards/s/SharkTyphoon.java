@@ -35,7 +35,7 @@ public final class SharkTyphoon extends CardImpl {
         ));
 
         // Cycling {X}{1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{X}{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{X}{1}{U}")));
 
         // When you cycle Shark Typhoon, create an X/X blue Shark creature token with flying.
         this.addAbility(new SharkTyphoonTriggeredAbility());

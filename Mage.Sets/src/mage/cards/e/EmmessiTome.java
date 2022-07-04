@@ -22,7 +22,7 @@ public final class EmmessiTome extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {5}, {tap}: Draw two cards, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(2,1), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(2,1), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -35,8 +35,13 @@ public final class SnakeCultInitiation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has poisonous 3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-            new PoisonousAbility(3), AttachmentType.AURA)));
+        this.addAbility(
+                new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(new PoisonousAbility(3), AttachmentType.AURA)
+                        .setText("Enchanted creature has poisonous 3. " +
+                                "<i>(Whenever it deals combat damage to a player, that player gets three poison counters. " +
+                                "A player with ten or more poison counters loses the game.)</i>")
+        ));
     }
 
     private SnakeCultInitiation(final SnakeCultInitiation card) {

@@ -36,7 +36,7 @@ public final class IllusionaryTerrain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // As Illusionary Terrain enters the battlefield, choose two basic land types.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseTwoBasicLandTypesEffect(Outcome.Neutral)));

@@ -34,7 +34,7 @@ public final class FarrelitePriest extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}: Add {W}. If this ability has been activated four or more times this turn, sacrifice Farrelite Priest at the beginning of the next end step.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl("{1}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl<>("{1}"));
         ability.addEffect(new FarrelitePriestEffect());
         this.addAbility(ability);
     }

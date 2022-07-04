@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  */
 public final class EmrakulTheAeonsTorn extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("colored spells");
+    private static final FilterStackObject filter = new FilterStackObject("spells that are one or more colors");
 
     static {
         filter.add(Predicates.not(ColorlessPredicate.instance));

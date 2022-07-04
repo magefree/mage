@@ -32,7 +32,7 @@ public final class YewSpirit extends CardImpl {
         SourcePermanentPowerCount x = new SourcePermanentPowerCount();
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(x, x, Duration.EndOfTurn, true),
-                new ManaCostsImpl("{2}{G}{G}")));
+                new ManaCostsImpl<>("{2}{G}{G}")));
     }
 
     private YewSpirit(final YewSpirit card) {

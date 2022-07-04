@@ -32,7 +32,7 @@ public final class MidsummerRevel extends CardImpl {
             new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
         // {G}, Sacrifice Midsummer Revel: create X 3/3 green Beast creature tokens, where X is the number of verse counters on Midsummer Revel.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken(),
-            new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl("{G}"));
+            new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

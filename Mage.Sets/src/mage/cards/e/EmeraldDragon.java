@@ -45,7 +45,7 @@ public final class EmeraldDragon extends AdventureCard {
         // Dissonant Wave
         // Counter target activated or triggered ability from a noncreature source.
         this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
     }
 
     private EmeraldDragon(final EmeraldDragon card) {

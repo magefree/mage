@@ -73,7 +73,7 @@ class StringOfDisappearancesEffect extends OneShotEffect {
         if (!affectedPlayer.chooseUse(Outcome.Copy, "Pay {U}{U} to copy the spell?", source, game)) {
             return true;
         }
-        Cost cost = new ManaCostsImpl("{U}{U}");
+        Cost cost = new ManaCostsImpl<>("{U}{U}");
         if (!cost.pay(source, game, source, affectedPlayer.getId(), false, null)) {
             return true;
         }

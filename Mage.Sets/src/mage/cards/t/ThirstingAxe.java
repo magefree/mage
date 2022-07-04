@@ -27,6 +27,7 @@ import mage.watchers.Watcher;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 
 /**
@@ -52,7 +53,7 @@ public final class ThirstingAxe extends CardImpl {
         this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private ThirstingAxe(final ThirstingAxe card) {

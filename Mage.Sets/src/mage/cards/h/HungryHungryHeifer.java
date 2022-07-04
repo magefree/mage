@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.MageInt;

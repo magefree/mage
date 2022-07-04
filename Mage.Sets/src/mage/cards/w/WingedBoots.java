@@ -14,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 import java.util.UUID;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -37,7 +39,7 @@ public final class WingedBoots extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private WingedBoots(final WingedBoots card) {

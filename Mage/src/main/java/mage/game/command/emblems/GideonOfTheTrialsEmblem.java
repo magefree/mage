@@ -21,6 +21,8 @@ public final class GideonOfTheTrialsEmblem extends Emblem {
         this.setName("Emblem Gideon");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("AKH");
     }
 }
 

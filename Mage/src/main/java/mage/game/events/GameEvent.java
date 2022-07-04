@@ -102,6 +102,7 @@ public class GameEvent implements Serializable {
         DAMAGE_PLAYER,
         MILL_CARDS,
         MILLED_CARD,
+        MILLED_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage

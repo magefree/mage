@@ -40,7 +40,7 @@ public final class PetrifiedPlating extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         
         // Suspend 2-{G}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{G}"), this));
     }
 
     private PetrifiedPlating(final PetrifiedPlating card) {

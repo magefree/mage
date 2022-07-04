@@ -32,7 +32,7 @@ public final class ViashinoSandswimmer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Flip a coin. If you win the flip, return Viashino Sandswimmer to its owner's hand. If you lose the flip, sacrifice Viashino Sandswimmer.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private ViashinoSandswimmer(final ViashinoSandswimmer card) {

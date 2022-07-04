@@ -26,10 +26,10 @@ public final class MarangRiverSkeleton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Marang River Skeleton.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
 
         // Megamorph {3}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}"), true));
     }
 
     private MarangRiverSkeleton(final MarangRiverSkeleton card) {

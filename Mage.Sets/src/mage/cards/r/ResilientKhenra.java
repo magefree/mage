@@ -38,7 +38,7 @@ public final class ResilientKhenra extends CardImpl {
         this.addAbility(ability);
 
         // Eternalize {4}{G}{G}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{G}{G}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{G}{G}"), this));
 
     }
 

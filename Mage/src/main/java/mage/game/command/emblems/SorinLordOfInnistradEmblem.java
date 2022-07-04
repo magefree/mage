@@ -19,5 +19,7 @@ public final class SorinLordOfInnistradEmblem extends Emblem {
         BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("DKA");
     }
 }

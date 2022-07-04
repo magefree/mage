@@ -16,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -39,11 +40,13 @@ public final class RobeOfTheArchmagi extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, you draw that many cards.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new DrawCardSourceControllerEffect(SavedDamageValue.MANY), "equipped", false
+                new DrawCardSourceControllerEffect(SavedDamageValue.MANY)
+                        .setText("you draw that many cards"),
+                "equipped", false
         ));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
 
         // Equip Shaman, Warlock, or Wizard {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));

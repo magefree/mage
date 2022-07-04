@@ -33,7 +33,7 @@ public final class OjiTheExquisiteBlade extends CardImpl {
 
         // When Oji, the Exquisite Blade enters the battlefield, you gain 2 life and scry 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));
-        ability.addEffect(new ScryEffect(2, false));
+        ability.addEffect(new ScryEffect(2, false).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.

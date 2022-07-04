@@ -54,7 +54,7 @@ public final class TalonsOfWildwood extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{2}{G}")
+                new ManaCostsImpl<>("{2}{G}")
         ));
     }
 

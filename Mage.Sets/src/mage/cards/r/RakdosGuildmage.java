@@ -36,13 +36,13 @@ public final class RakdosGuildmage extends CardImpl {
 
         // <i>({BR} can be paid with either {B} or {R}.)</i>
         // {3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{3}{B}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 
         // {3}{R}: Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step.
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RakdosGuildmageEffect(), new ManaCostsImpl("{3}{R}"));
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RakdosGuildmageEffect(), new ManaCostsImpl<>("{3}{R}"));
         this.addAbility(ability2);
     }
 
