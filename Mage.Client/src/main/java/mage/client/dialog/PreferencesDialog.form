@@ -42,7 +42,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tabsPanel" pref="669" max="32767" attributes="0"/>
+              <Component id="tabsPanel" pref="554" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -405,7 +405,7 @@
                 <Component class="javax.swing.JLabel" name="lblTargetAutoChoose">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Auto-choose targets for player:"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chose for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; All targeting must be done by the player.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targeting that can be automated will be."/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chosen for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; All targeting must be done by the player.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targeting that can be automated will be."/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbTargetAutoChooseLevel">

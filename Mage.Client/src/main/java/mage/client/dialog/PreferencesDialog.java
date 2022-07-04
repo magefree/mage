@@ -793,7 +793,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         lblTargetAutoChoose.setText("Auto-choose targets for player:");
-        lblTargetAutoChoose.setToolTipText("<html>\nWhen there is only one possible outcome for targeting, the targets can be chose for you.\n<br>\n<b>None:</b> All targeting must be done by the player.\n<br>\n<b>Most:</b> All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.\n<br>\n<b>All:</b> All targeting that can be automated will be.");
+        lblTargetAutoChoose.setToolTipText("<html>\nWhen there is only one possible outcome for targeting, the targets can be chosen for you.\n<br>\n<b>None:</b> All targeting must be done by the player.\n<br>\n<b>Most:</b> All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.\n<br>\n<b>All:</b> All targeting that can be automated will be.");
 
         cbTargetAutoChooseLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Off", "Most", "All" }));
         cbTargetAutoChooseLevel.setSelectedIndex(1);
@@ -2887,7 +2887,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
