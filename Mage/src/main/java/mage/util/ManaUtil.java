@@ -442,9 +442,9 @@ public final class ManaUtil {
             }
         }
         if (baseObject != null) {
-            return unpaid.getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
+            return ManaUtil.condenseManaCostString(unpaid.getText()) + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
         } else {
-            return unpaid.getText();
+            return ManaUtil.condenseManaCostString(unpaid.getText());
         }
     }
 
