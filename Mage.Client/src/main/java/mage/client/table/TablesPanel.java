@@ -1706,7 +1706,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setDeckType("Variant Magic - Freeform Commander");
             options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
             options.setRange(RangeOfInfluence.ONE);
-            options.setWinsNeeded(1);
+            options.setWinsNeeded(2);
             options.setMatchTimeLimit(MatchTimeLimit.NONE);
             options.setFreeMulligans(2);
             options.setSkillLevel(SkillLevel.CASUAL);
