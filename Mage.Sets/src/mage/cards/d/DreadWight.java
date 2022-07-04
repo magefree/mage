@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -203,7 +204,7 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId() == permanentId
+        return Objects.equals(event.getTargetId(), permanentId)
                 && game.isActivePlayer(game.getPermanent(permanentId).getControllerId());
     }
 }

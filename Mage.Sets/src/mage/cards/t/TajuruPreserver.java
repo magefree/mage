@@ -70,11 +70,13 @@ class TajuruPreserverEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
         Permanent permanent = game.getPermanent(event.getTargetId());
+        if (controller == null || permanent == null) {
+            return false;
+        }
 
-        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
-            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
+        if (source.getControllerId().equals(permanent.getControllerId())) {
+            return game.getOpponents(source.getControllerId()).contains(game.getControllerId(event.getSourceId()));
         }
 
         return false;

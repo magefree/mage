@@ -91,7 +91,7 @@ public class TreeNode<T> {
             return false;
         }
         final TreeNode<T> other = (TreeNode<T>) obj;
-        return !(this.data != other.data && (this.data == null || !this.data.equals(other.data)));
+        return (this.data == other.data || (this.data != null && this.data.equals(other.data)));
     }
 
 }

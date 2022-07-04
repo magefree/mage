@@ -61,7 +61,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     @Override
     public void dragCardEnd(DragCardTarget target) {
-        if (target == this) {
+        if (this.equals(target)) {
             // Already handled by dragged onto handler
         } else if (target == null) {
             // Don't remove the cards, no target
@@ -208,7 +208,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // If we're dragging onto ourself, erase the old cards (just null them out, we will
         // compact the grid removing the null gaps / empty rows & cols later)
-        if (source == this) {
+        if (this.equals(source)) {
             for (List<List<CardView>> gridRow : cardGrid) {
                 for (List<CardView> stack : gridRow) {
                     for (int i = 0; i < stack.size(); ++i) {
@@ -323,7 +323,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             stack.addAll(stackInsertIndex, cards);
         }
 
-        if (source == this) {
+        if (this.equals(source)) {
             // Remove empty rows / cols / spaces in stacks
             trimGrid();
             layoutGrid();
@@ -2020,7 +2020,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private void selectCard(CardView targetCard) {
         // Set the selected card to the target card
         for (CardView card : allCards) {
-            if (card == targetCard) {
+            if (Objects.equals(card, targetCard)) {
                 if (!card.isSelected()) {
                     card.setSelected(true);
                     cardViews.get(card.getId()).update(card);

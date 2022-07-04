@@ -25,6 +25,7 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -101,7 +102,7 @@ class WakeToSlaughterEffect extends OneShotEffect {
                 cardToHand = game.getCard(target.getFirstTarget());
             }
             for (Card card : pickedCards.getCards(game)) {
-                if (card == cardToHand) {
+                if (Objects.equals(card, cardToHand)) {
                     player.moveCards(cardToHand, Zone.HAND, source, game);
                 } else {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);

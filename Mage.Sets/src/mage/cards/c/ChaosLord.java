@@ -157,7 +157,7 @@ class ChaosLordEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent chaosLord = game.getPermanent(objectId);
         return chaosLord != null
-                && objectId == source.getSourceId()
+                && objectId.equals(source.getSourceId())
                 && chaosLord.getTurnsOnBattlefield() > 0;
     }
 }

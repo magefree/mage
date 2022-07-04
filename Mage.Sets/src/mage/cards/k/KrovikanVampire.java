@@ -20,6 +20,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -113,12 +114,12 @@ class KrovikanVampireInterveningIfCondition implements Condition {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
             creaturesThatDiedThisTurn.stream().filter((mor) -> (watcherDamaged != null)).forEachOrdered((mor) -> {
                 watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
-                        && mor == mor2)).forEachOrdered((_item) -> {
+                        && mor2.equals(mor))).forEachOrdered((_item) -> {
                     creaturesAffected.add(mor);
                 });
             });
             if (creaturesAffected != null
-                    && creaturesAffected.size() > 0) {
+                    && !creaturesAffected.isEmpty()) {
                 game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
                 return true;
             }

@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -142,6 +143,6 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
                 && (game.getCard(targetPointer.getFirst(game, source)) != null)
-                && objectId == targetPointer.getFirst(game, source);
+                && Objects.equals(objectId,targetPointer.getFirst(game, source));
     }
 }

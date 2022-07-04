@@ -2883,7 +2883,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      */
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
         Outcome affectedOutcome;
-        if (abilityControllerId == this.playerId) {
+        if (playerId.equals(abilityControllerId)) {
             // selects for itself
             affectedOutcome = outcome;
         } else {

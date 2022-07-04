@@ -99,7 +99,7 @@ class CodespellClericWatcher extends Watcher {
         int index = 0;
         for (MageObjectReference mor : spellMap.getOrDefault(source.getControllerId(), emptyList)) {
             index++;
-            if (mor.getSourceId() == permanent.getId()
+            if (permanent.getId().equals(mor.getSourceId())
                     && mor.getZoneChangeCounter() + 1 == permanent.getZoneChangeCounter(game)) {
                 return index == 2;
             }

@@ -41,7 +41,7 @@ public class KeyBindButton extends JButton implements ActionListener {
     private void applyNewKeycode(int code, int modifier) {
         // clear used keys
         preferences.getKeybindButtons().stream()
-                .filter(b -> b != KeyBindButton.this)
+                .filter(b -> !KeyBindButton.this.equals(b))
                 .filter(b -> {
                     return b.keyCode == code && b.modifierCode == modifier;
                 })

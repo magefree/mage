@@ -85,7 +85,7 @@ class MagesContestEffect extends OneShotEffect {
                             highBid = newBid;
                             winner = currentPlayer;
                             game.informPlayers(currentPlayer.getLogName() + " has bet " + newBid + " life");
-                            currentPlayer = (winner == you ? spellController : you);
+                            currentPlayer = (Objects.equals(winner, you) ? spellController : you);
                         } else {
                             break;
                         }
@@ -93,7 +93,7 @@ class MagesContestEffect extends OneShotEffect {
                 } while (!Objects.equals(currentPlayer, winner));
                 game.informPlayers(winner.getLogName() + " has won the contest with a high bid of " + highBid + " life");
                 winner.loseLife(highBid, game, source, false);
-                if (winner == you) {
+                if (Objects.equals(winner, you)) {
                     game.getStack().counter(spell.getId(), source, game);
                 }
                 return true;

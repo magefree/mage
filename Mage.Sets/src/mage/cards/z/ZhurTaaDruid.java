@@ -69,7 +69,7 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
         return permanent != null
-                && permanent == getSourcePermanentOrLKI(game)
+                && permanent.equals(getSourcePermanentOrLKI(game))
                 && isControlledBy(event.getPlayerId());
     }
 

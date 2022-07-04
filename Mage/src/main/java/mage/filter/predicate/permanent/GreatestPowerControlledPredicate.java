@@ -6,6 +6,8 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  * @author jeffwadsworth
  */
@@ -20,6 +22,6 @@ public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredic
                 creatureWithGreatestPower = p;
             }
         }
-        return (creatureWithGreatestPower == input.getObject());
+        return Objects.equals(creatureWithGreatestPower, input.getObject());
     }
 }

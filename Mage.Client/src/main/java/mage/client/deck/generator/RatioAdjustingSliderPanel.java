@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.swing.*;
 
 /**
@@ -77,7 +78,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
                 // Get the currently indexed slider
                 JStorageSlider slider = storageSliders.get(sliderIndex);
                 // If it's not the slider that fired the event
-                if (slider != source) {
+                if (!Objects.equals(slider, source)) {
                     // Check we don't go over the upper and lower bounds
                     if (remaining < 0 || (remaining > 0 && slider.getValue() > 0)) {
                         // Adjust the currently selected slider by +/- 1

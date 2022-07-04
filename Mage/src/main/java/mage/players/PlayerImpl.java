@@ -3870,7 +3870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // from non hand mode (with affected controller)
-            if (canActivateAsHandZone && ability.getControllerId() != this.getId()) {
+            if (canActivateAsHandZone && !Objects.equals(getId(), ability.getControllerId())) {
                 UUID savedControllerId = ability.getControllerId();
                 ability.setControllerId(this.getId());
                 try {
@@ -4108,7 +4108,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // main card - must be marked playable in GUI
                 Card card = game.getCard(ability.getSourceId());
-                if (card != null && card.getMainCard().getId() != card.getId()) {
+                if (card != null && !card.getId().equals(card.getMainCard().getId())) {
                     putToPlayableObjects(playableObjects, card.getMainCard().getId(), ability);
                 }
 

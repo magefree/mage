@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.asthought;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -55,7 +56,7 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
         if (card != null) {
             switch (allowedCaster) {
                 case YOU:
-                    if (affectedControllerId != source.getControllerId()) {
+                    if (!Objects.equals(affectedControllerId, source.getControllerId())) {
                         return false;
                     }
                     break;

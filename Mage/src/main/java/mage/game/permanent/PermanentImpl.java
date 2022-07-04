@@ -744,7 +744,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         // For each control change compared to last controller send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
-        if (beforeResetControllerId != newControllerId) {
+        if (!newControllerId.equals(beforeResetControllerId)) {
             GameEvent gainControlEvent = GameEvent.getEvent(GameEvent.EventType.GAIN_CONTROL, this.getId(), null, newControllerId);
             if (game.replaceEvent(gainControlEvent)) {
                 return false;

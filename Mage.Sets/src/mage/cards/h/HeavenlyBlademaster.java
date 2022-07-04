@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -111,18 +112,14 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }
-        target.getTargets().stream().map(
-                attachmentId -> game.getPermanent(attachmentId)
-        ).filter(
-                attachment -> attachment != null
-        ).forEachOrdered((attachment) -> {
+        target.getTargets().stream().map(game::getPermanent).filter(Objects::nonNull)
+                .filter((attachemnt) -> attachemnt.getAttachedTo() != null)
+                .forEachOrdered((attachment) -> {
             if (!sourcePermanent.cantBeAttachedBy(attachment, source, game, true)) {
-                if (attachment.getAttachedTo() != sourcePermanent.getId()) {
-                    if (attachment.getAttachedTo() != null) {
-                        Permanent fromPermanent = game.getPermanent(attachment.getAttachedTo());
-                        if (fromPermanent != null) {
-                            fromPermanent.removeAttachment(attachment.getId(), source, game);
-                        }
+                if (!attachment.getAttachedTo().equals(sourcePermanent.getId())) {
+                    Permanent fromPermanent = game.getPermanent(attachment.getAttachedTo());
+                    if (fromPermanent != null) {
+                        fromPermanent.removeAttachment(attachment.getId(), source, game);
                     }
                 }
                 sourcePermanent.addAttachment(attachment.getId(), source, game);

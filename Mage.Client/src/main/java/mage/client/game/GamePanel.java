@@ -927,7 +927,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         if (gbc.gridx > 0) {
                             gbc.anchor = GridBagConstraints.EAST;
                         }
-                        if (otherPanel == playerLeftPanel) {
+                        if (otherPanel.equals(playerLeftPanel)) {
                             gbc.weightx = 0.01;
                             Dimension d = playerLeftPanel.getPreferredSize();
                             d.width = 95;

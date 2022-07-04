@@ -16,6 +16,7 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -127,7 +128,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             case EACH_PLAYER:
                 return true;
             case ACTIVE:
-                return game.getActivePlayerId() == playerId;
+                return Objects.equals(game.getActivePlayerId(), playerId);
             case NOT_YOU:
                 return !controlsAbility(playerId, game);
             case TEAM:

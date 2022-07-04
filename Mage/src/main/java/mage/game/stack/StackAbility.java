@@ -707,7 +707,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
             return false;
         }
 
-        return (this == ability)
+        return (this.equals(ability))
                 || (this.getId().equals(ability.getId()))
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));

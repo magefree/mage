@@ -78,7 +78,7 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
             UUID auraControllerId = martialImpetus.getControllerId();
             if (attachedTo != null // check the creature that the aura is attached to, not the aura itself
                     && input.getObject() != null // creature being checked for predicate
-                    && input.getObject() != attachedTo // must be other creature
+                    && !input.getObject().equals(attachedTo) // must be other creature
                     && input.getObject().isAttacking() // attacking
                     && game.getOpponents(auraControllerId) // check for opponents of aura's controller
                     .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game))) {

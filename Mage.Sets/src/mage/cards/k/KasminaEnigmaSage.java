@@ -89,7 +89,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {
-            if (permanent == null || permanent == perm) {
+            if (permanent == null || permanent.equals(perm)) {
                 continue;
             }
             for (Ability ability : loyaltyAbilities) {

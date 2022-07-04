@@ -21,6 +21,7 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageObject;
 import mage.util.CardUtil;
@@ -233,7 +234,7 @@ class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEff
 
         if (objectId != null
                 && game.getState().getZone(objectId) == Zone.STACK
-                && exileId == storedExileIdOfTheCard
+                && Objects.equals(exileId, storedExileIdOfTheCard)
                 && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             return card != null;

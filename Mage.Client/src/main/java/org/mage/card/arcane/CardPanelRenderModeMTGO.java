@@ -16,6 +16,7 @@ import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class CardPanelRenderModeMTGO extends CardPanel {
 
     private static boolean cardViewEquals(CardView a, CardView b) {
-        if (a == b) {
+        if (Objects.equals(a, b)) {
             return true;
         }
         if (a.getClass() != b.getClass()) {
@@ -71,18 +72,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {
             return false;
         }
-        // Expansion set code, with null checking:
-        // TODO: The null checks should not be necessary, but thanks to Issue #2260
-        // some tokens / commandobjects will be missing expansion set codes.
-        String expA = a.getExpansionSetCode();
-        if (expA == null) {
-            expA = "";
-        }
-        String expB = b.getExpansionSetCode();
-        if (expB == null) {
-            expB = "";
-        }
-        if (!expA.equals(expB)) {
+        // Null-safe expansion set code:
+        if (!Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())) {
             return false;
         }
         if (a.getFrameStyle() != b.getFrameStyle()) {
