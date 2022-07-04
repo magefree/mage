@@ -168,6 +168,8 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Signet", 369, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jailbreak", 17, Rarity.RARE, mage.cards.j.Jailbreak.class));
         cards.add(new SetCardInfo("Jenara, Asura of War", 343, Rarity.MYTHIC, mage.cards.j.JenaraAsuraOfWar.class));
+        cards.add(new SetCardInfo("Jolene, the Plunder Queen", 73, Rarity.RARE, mage.cards.j.JoleneThePlunderQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jolene, the Plunder Queen", 173, Rarity.RARE, mage.cards.j.JoleneThePlunderQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jund Panorama", 408, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Shrine", 409, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Kamiz, Obscura Oculus", 3, Rarity.MYTHIC, mage.cards.k.KamizObscuraOculus.class));
