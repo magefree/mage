@@ -6,8 +6,11 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.effects.common.ReplaceTreasureWithAdditionalEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +52,7 @@ public final class JoleneThePlunderQueen extends CardImpl {
         this.addAbility(new JoleneThePlunderQueenTriggeredAbility());
 
         // If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.
-        this.addAbility(new SimpleStaticAbility(new JoleneThePlunderQueenReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ReplaceTreasureWithAdditionalEffect()));
 
         // Sacrifice five Treasures: Put five +1/+1 counters on Jolene.
         this.addAbility(new SimpleActivatedAbility(
@@ -72,7 +75,7 @@ public final class JoleneThePlunderQueen extends CardImpl {
 class JoleneThePlunderQueenTriggeredAbility extends TriggeredAbilityImpl {
 
     JoleneThePlunderQueenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new JoleneThePlunderQueenCreateTreasureEffect(), false);
+        super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new TreasureToken(), StaticValue.get(1)), false);
     }
 
     private JoleneThePlunderQueenTriggeredAbility(final JoleneThePlunderQueenTriggeredAbility ability) {
@@ -96,9 +99,9 @@ class JoleneThePlunderQueenTriggeredAbility extends TriggeredAbilityImpl {
         Set<UUID> joleneOpponents = game.getOpponents(joleneController);
 
         // At most one trigger per combat.
-        if(!combat.getAttackers()
+        if(combat.getAttackers()
                   .stream()
-                  .anyMatch(attackerId -> {
+                  .noneMatch(attackerId -> {
                       // The trigger attempts to find at least one (attacker,defender)
                       //     for which the defender is one of jolene's controller opponent
                       UUID defenderId = combat.getDefenderId(attackerId);
@@ -115,85 +118,5 @@ class JoleneThePlunderQueenTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a player attacks one of your opponents, " +
                "that attacking player creates a Treasure token.";
-    }
-}
-
-class JoleneThePlunderQueenCreateTreasureEffect extends OneShotEffect {
-
-    JoleneThePlunderQueenCreateTreasureEffect() {
-        super(Outcome.Benefit);
-        staticText = "that attacking player creates a Treasure token";
-    }
-
-    private JoleneThePlunderQueenCreateTreasureEffect(final JoleneThePlunderQueenCreateTreasureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JoleneThePlunderQueenCreateTreasureEffect copy() {
-        return new JoleneThePlunderQueenCreateTreasureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : getTargetPointer().getTargets(game, source)){
-            new TreasureToken().putOntoBattlefield(1, game, source, playerId);
-        }
-        return true;
-    }
-}
-
-// Identical to "Xorn"'s Replacement Effect
-class JoleneThePlunderQueenReplacementEffect extends ReplacementEffectImpl {
-
-    public JoleneThePlunderQueenReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.staticText = "If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token";
-    }
-
-    private JoleneThePlunderQueenReplacementEffect(final JoleneThePlunderQueenReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JoleneThePlunderQueenReplacementEffect copy() {
-        return new JoleneThePlunderQueenReplacementEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREATE_TOKEN;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof CreateTokenEvent && source.isControlledBy(event.getPlayerId())) {
-            for (Token token : ((CreateTokenEvent) event).getTokens().keySet()) {
-                if (token.hasSubtype(SubType.TREASURE, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event instanceof CreateTokenEvent) {
-            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
-            TreasureToken treasureToken = null;
-            Map<Token, Integer> tokens = tokenEvent.getTokens();
-            for (Token token : tokens.keySet()) {
-                if (token instanceof TreasureToken) {
-                    treasureToken = (TreasureToken) token;
-                    break;
-                }
-            }
-            if (treasureToken == null) {
-                treasureToken = new TreasureToken();
-            }
-            tokens.put(treasureToken, tokens.getOrDefault(treasureToken, 0) + 1);
-        }
-        return false;
     }
 }
