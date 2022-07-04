@@ -2992,24 +2992,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Player obj = (Player) o;
-        if (this.getId() == null || obj.getId() == null) {
-            return false;
-        }
-
-        return this.getId().equals(obj.getId());
-    }
-
-    @Override
     public boolean isHuman() {
         if (human) {
             throw new IllegalStateException("Computer player can't be Human");

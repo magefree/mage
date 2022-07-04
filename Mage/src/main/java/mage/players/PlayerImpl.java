@@ -5048,20 +5048,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        Player that = (Player) o;
 
-        Player obj = (Player) o;
-        if (this.getId() == null || obj.getId() == null) {
-            return false;
-        }
-
-        return this.getId().equals(obj.getId());
+        return Objects.equals(this.getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.playerId);
-        return hash;
+        return 89 * 7 + Objects.hashCode(this.getId());
     }
 
     @Override
