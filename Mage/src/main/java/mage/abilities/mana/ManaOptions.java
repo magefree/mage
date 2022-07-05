@@ -470,15 +470,21 @@ public class ManaOptions extends ArrayList<Mana> {
      * @param manaAvailable
      * @return
      */
-    public static List<Mana> getPossiblePayCombinations(Mana manaCost, Mana manaAvailable) {
-        List<Mana> payCombinations = new ArrayList<>();
-        List<String> payCombinationsStrings = new ArrayList<>();
-        // handle fixed mana costs        
+    public static Set<Mana> getPossiblePayCombinations(Mana manaCost, Mana manaAvailable) {
+        Set<Mana> payCombinations = new HashSet<>();
+        Set<String> payCombinationsStrings = new HashSet<>();
+
         Mana fixedMana = manaCost.copy();
+
+        // TODO: What about Hybrid mana?
+        // If there is no generic costs, then there is only one combination of colors available to pay for it.
+        // That combination is itself (fixedMana)
         if (manaCost.getGeneric() == 0) {
             payCombinations.add(fixedMana);
             return payCombinations;
         }
+
+        // Get the available mana left to pay for the cost after subtracting the non-generic parts of the cost from it
         fixedMana.setGeneric(0);
         Mana manaAfterFixedPayment = manaAvailable.copy();
         manaAfterFixedPayment.subtract(fixedMana);
@@ -495,6 +501,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 } else {
                     existingManas.add(new Mana());
                 }
+
                 for (Mana existingMana : existingManas) {
                     Mana manaToPayFrom = manaAfterFixedPayment.copy();
                     manaToPayFrom.subtract(existingMana);
@@ -532,11 +539,13 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         } else {
+            // TODO: Is it guaranteed that there is enough colorless mana to satisfy this?
             payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric()));
         }
         for (Mana mana : payCombinations) {
             mana.add(fixedMana);
         }
+        // All mana values in here are of length 5
         return payCombinations;
     }
 
@@ -562,7 +571,7 @@ public class ManaOptions extends ArrayList<Mana> {
         return result;
     }
 
-    public static void addManaCombination(Mana mana, Mana existingMana, List<Mana> payCombinations, List<String> payCombinationsStrings) {
+    public static void addManaCombination(Mana mana, Mana existingMana, Set<Mana> payCombinations, Set<String> payCombinationsStrings) {
         Mana newMana = existingMana.copy();
         newMana.add(mana);
         payCombinations.add(newMana);
