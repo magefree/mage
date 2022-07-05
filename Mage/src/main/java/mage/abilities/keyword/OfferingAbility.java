@@ -115,7 +115,6 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
                         }
                 );
 
-        additionalManaOptionsForThisAbility.removeDuplicated();
         return additionalManaOptionsForThisAbility;
     }
 }

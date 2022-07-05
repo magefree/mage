@@ -3353,7 +3353,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     if (used) {
                         iterator.remove();
-                        availableMana.removeDuplicated();
                         anAbilityWasUsed = true;
                     }
                 }
@@ -3363,9 +3362,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 anAbilityWasUsed = true;
             }
         }
-
-        // remove duplicated variants (see ManaOptionsTest for info - when that rises)
-        availableMana.removeDuplicated();
 
         game.setCheckPlayableState(oldState);
         return availableMana;

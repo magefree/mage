@@ -82,7 +82,6 @@ class SquanderedResourcesEffect extends ManaEffect {
                 }
                 allPossibleMana.addMana(currentPossibleMana);
             }
-            allPossibleMana.removeDuplicated();
             return allPossibleMana.stream().collect(Collectors.toList());
         }
         return ManaType.getManaListFromManaTypes(getManaTypesFromSacrificedPermanent(game, source), false);
