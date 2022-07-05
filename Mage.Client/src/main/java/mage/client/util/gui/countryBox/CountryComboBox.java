@@ -198,7 +198,7 @@ public class CountryComboBox extends JComboBox {
         {"Palau", "pw"},
         {"Palestine, State of", "ps"},
         {"Panama", "pa"},
-        {"Pansexual","pan"}
+        {"Pansexual","pan"},
         {"Papua New Guinea", "pg"},
         {"Paraguay", "py"},
         {"Peru", "pe"},
