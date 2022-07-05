@@ -3,6 +3,7 @@ package mage.abilities;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -40,10 +41,7 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1444,6 +1442,10 @@ public abstract class AbilityImpl implements Ability {
      * @return true if the ability is impacted by the color of the mana used to pay for it.
      */
     public boolean caresAboutManaColor() {
-        return false;
+        return this.getEffects().stream()
+                .filter(Objects::nonNull)
+                .map(Effect::getCondition)
+                .filter(Objects::nonNull)
+                .anyMatch(Condition::caresAboutManaColor);
     }
 }
