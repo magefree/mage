@@ -455,8 +455,8 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      * @return
      */
     public static Set<Mana> getPossiblePayCombinations(Mana manaCost, Mana manaAvailable) {
-        Set<Mana> payCombinations = new HashSet<>();
-        Set<String> payCombinationsStrings = new HashSet<>(); // TODO: Get rid of this, don't use String.
+        Set<Mana> payCombinations = new LinkedHashSet<>();
+        Set<String> payCombinationsStrings = new LinkedHashSet<>(); // TODO: Get rid of this, don't use String.
 
         Mana fixedMana = manaCost.copy();
 

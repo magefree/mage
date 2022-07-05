@@ -3,15 +3,13 @@ package mage;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
+import mage.game.Game;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
@@ -1323,9 +1321,27 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 && any == mana.any;
     }
 
+    /**
+     * Hardcoding here versus using Objects.hash in order to increase performance since this is
+     * called thousands of times by {@link mage.abilities.mana.ManaOptions#addManaWithCost(List, Game)}
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(white, blue, black, red, green, generic, colorless, any, flag);
+        int result = 1;
+
+        result = 31 * result + white;
+        result = 31 * result + blue;
+        result = 31 * result + black;
+        result = 31 * result + red;
+        result = 31 * result + green;
+        result = 31 * result + generic;
+        result = 31 * result + colorless;
+        result = 31 * result + any;
+        result = 31 * result + (flag ? 1 : 0);
+
+        return result;
     }
 
     /**
