@@ -16,6 +16,7 @@ public class ManaOptionsTestUtils {
     public static String bear1G = "Balduvian Bears"; // {1}{G}
     public static String bear2C = "Matter Reshaper"; // {2}{C}
 
+    // TODO: Refactor to use ManaOptions.contains
     //mana info
     //logger.info(playerA.getManaPool().getMana().toString());
     //logger.info(playerA.getManaAvailable(currentGame).toString());
@@ -40,6 +41,8 @@ public class ManaOptionsTestUtils {
         }
     }
 
+    // No longer needed since ManaOptions has been re-implemented as a Set rather than a List.
+    @Deprecated
     public static void assertDuplicatedManaOptions(ManaOptions manaList) {
         Set<String> list = new HashSet<>();
         for (Mana mana : manaList) {

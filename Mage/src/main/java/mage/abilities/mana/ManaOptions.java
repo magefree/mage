@@ -19,10 +19,14 @@ import java.util.*;
  * be used to find all the ways to pay a mana cost or all the different mana
  * combinations available to a player
  * <p>
- * TODO: Conditional Mana is not supported yet. The mana adding removes the
- * condition of conditional mana
+ * TODO: Conditional Mana is not supported yet.
+ *       The mana adding removes the condition of conditional mana
+ * <p>
+ * A LinkedHashSet is used to get the performance benefits of automatic de-duplication of the Mana
+ * to avoid performance issues related with manual de-duplication (see https://github.com/magefree/mage/issues/7710).
+ *
  */
-public class ManaOptions extends HashSet<Mana> {
+public class ManaOptions extends LinkedHashSet<Mana> {
 
     private static final Logger logger = Logger.getLogger(ManaOptions.class);
 
@@ -599,5 +603,29 @@ public class ManaOptions extends HashSet<Mana> {
             }
             sb.append(',').append(' ');
         }
+    }
+
+    /**
+     * Utility function to get a Mana from ManaOptions at the specified position.
+     * Since the implementation uses a LinkedHashSet the ordering of the items is preserved.
+     *
+     * NOTE: Do not use in tight loops as performance of the lookup is much worse than
+     *       for ArrayList (the previous superclass of ManaOptions).
+     *
+     */
+    public Mana get(int i) {
+       if (i < 0 || i >= this.size()) {
+           throw new IndexOutOfBoundsException();
+       }
+       Iterator<Mana> itr = this.iterator();
+       while(itr.hasNext()) {
+           if (i == 0) {
+               return itr.next();
+           } else {
+               itr.next(); // Ignore the value
+               i--;
+           }
+       }
+       return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
     }
 }

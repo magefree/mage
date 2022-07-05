@@ -174,7 +174,7 @@ public final class CardUtil {
                 }
 
                 // ignore unknown mana
-                if (manaCost.getOptions().size() == 0) {
+                if (manaCost.getOptions().isEmpty()) {
                     continue;
                 }
 
