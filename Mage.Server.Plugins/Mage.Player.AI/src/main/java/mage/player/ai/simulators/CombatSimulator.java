@@ -120,6 +120,6 @@ public class CombatSimulator implements Serializable {
             return false;
         }
 
-        return Objects.equal(this.groups, that.groups);
+        return Objects.deepEquals(this.groups, that.groups);
     }
 }
