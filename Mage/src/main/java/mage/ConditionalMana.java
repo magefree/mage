@@ -189,11 +189,17 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     }
 
     public String getConditionString() {
-        String condStr = "[";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append('[');
         for (Condition condition : conditions) {
-            condStr += condition.getManaText();
+            sb.append('{');
+            sb.append(condition.getManaText());
+            sb.append('}');
         }
-        return condStr + "]";
+        sb.append(']');
+
+        return sb.toString();
     }
 
     public void add(ManaType manaType, int amount) {
