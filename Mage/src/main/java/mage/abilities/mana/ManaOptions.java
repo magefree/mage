@@ -43,47 +43,49 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         if (isEmpty()) {
             this.add(new Mana());
         }
-        if (!abilities.isEmpty()) {
-            if (abilities.size() == 1) {
-                //if there is only one mana option available add it to all the existing options
-                List<Mana> netManas = abilities.get(0).getNetMana(game);
-                if (netManas.size() == 1) {
-                    checkManaReplacementAndTriggeredMana(abilities.get(0), game, netManas.get(0));
-                    addMana(netManas.get(0));
-                    addTriggeredMana(game, abilities.get(0));
-                } else if (netManas.size() > 1) {
-                    addManaVariation(netManas, abilities.get(0), game);
-                }
+        if (abilities.isEmpty()) {
+            return; // Do nothing
+        }
 
-            } else { // mana source has more than 1 ability
-                //perform a union of all existing options and the new options
-                Set<Mana> copy = copy();
-                this.clear();
-                for (ActivatedManaAbilityImpl ability : abilities) {
-                    for (Mana netMana : ability.getNetMana(game)) {
-                        checkManaReplacementAndTriggeredMana(ability, game, netMana);
-                        for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
-                            SkipAddMana:
-                            for (Mana mana : copy) {
-                                Mana newMana = new Mana();
-                                newMana.add(mana);
-                                newMana.add(triggeredManaVariation);
-                                for (Mana existingMana : this) {
-                                    if (existingMana.equalManaValue(newMana)) {
-                                        continue SkipAddMana;
-                                    }
-                                    Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
-                                    if (moreValuable != null) {
-                                        // only keep the more valuable mana
-                                        existingMana.setToMana(moreValuable);
-                                        continue SkipAddMana;
-                                    }
+        if (abilities.size() == 1) {
+            //if there is only one mana option available add it to all the existing options
+            List<Mana> netManas = abilities.get(0).getNetMana(game);
+            if (netManas.size() == 1) {
+                checkManaReplacementAndTriggeredMana(abilities.get(0), game, netManas.get(0));
+                addMana(netManas.get(0));
+                addTriggeredMana(game, abilities.get(0));
+            } else if (netManas.size() > 1) {
+                addManaVariation(netManas, abilities.get(0), game);
+            }
+
+        } else { // mana source has more than 1 ability
+            //perform a union of all existing options and the new options
+            Set<Mana> copy = copy();
+            this.clear();
+            for (ActivatedManaAbilityImpl ability : abilities) {
+                for (Mana netMana : ability.getNetMana(game)) {
+                    checkManaReplacementAndTriggeredMana(ability, game, netMana);
+                    for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
+                        SkipAddMana:
+                        for (Mana mana : copy) {
+                            Mana newMana = new Mana();
+                            newMana.add(mana);
+                            newMana.add(triggeredManaVariation);
+                            for (Mana existingMana : this) {
+                                if (existingMana.equalManaValue(newMana)) {
+                                    continue SkipAddMana;
                                 }
-                                this.add(newMana);
+                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
+                                if (moreValuable != null) {
+                                    // only keep the more valuable mana
+                                    existingMana.setToMana(moreValuable);
+                                    continue SkipAddMana;
+                                }
                             }
+                            this.add(newMana);
                         }
-
                     }
+
                 }
             }
         }
@@ -154,7 +156,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 List<Mana> netManas = abilities.get(0).getNetMana(game);
-                if (netManas.size() > 0) { // ability can produce mana
+                if (!netManas.isEmpty()) { // ability can produce mana
                     ActivatedManaAbilityImpl ability = abilities.get(0);
                     // The ability has no mana costs
                     if (ability.getManaCosts().isEmpty()) { // No mana costs, so no mana to subtract from available
