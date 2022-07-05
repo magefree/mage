@@ -3353,6 +3353,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     if (used) {
                         iterator.remove();
+                        availableMana.removeFullyIncludedVariations();
                         anAbilityWasUsed = true;
                     }
                 }
@@ -3363,6 +3364,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
+        availableMana.removeFullyIncludedVariations();
+        availableMana.remove(new Mana()); // Remove any empty mana that was left over from the way the code is written
         game.setCheckPlayableState(oldState);
         return availableMana;
     }

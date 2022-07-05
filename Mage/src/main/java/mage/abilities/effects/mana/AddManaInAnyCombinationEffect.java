@@ -104,6 +104,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
                 allPossibleMana.addMana(currentPossibleMana);
             }
+            allPossibleMana.removeFullyIncludedVariations();
             return new ArrayList<>(allPossibleMana);
 
         } else {
