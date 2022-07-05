@@ -93,13 +93,19 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             ManaOptions allPossibleMana = new ManaOptions();
             for (int i = 0; i < count; ++i) {
                 ManaOptions currentPossibleMana = new ManaOptions();
-                for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                    currentPossibleMana.add(new Mana(coloredManaSymbol));
+
+                if (manaSymbols.size() == 5) { // If all colors available, then it's the same as any, but this is much faster
+                    currentPossibleMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
+                } else {
+                    for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+                        currentPossibleMana.add(new Mana(coloredManaSymbol));
+                    }
                 }
+
                 allPossibleMana.addMana(currentPossibleMana);
             }
             allPossibleMana.removeDuplicated();
-            return allPossibleMana.stream().collect(Collectors.toList());
+            return new ArrayList<>(allPossibleMana);
 
         } else {
             int amountOfManaLeft = amount.calculate(game, source, this);
