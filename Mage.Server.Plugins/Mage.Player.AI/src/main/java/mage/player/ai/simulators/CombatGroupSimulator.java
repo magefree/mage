@@ -6,6 +6,7 @@ import mage.game.permanent.Permanent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -16,7 +17,6 @@ public class CombatGroupSimulator implements Serializable {
     public List<CreatureSimulator> attackers = new ArrayList<>();
     public List<CreatureSimulator> blockers = new ArrayList<>();
     public UUID defenderId;
-    public boolean defenderIsPlaneswalker;
     public int unblockedDamage;
     private CreatureSimulator attacker;
 
@@ -144,5 +144,37 @@ public class CombatGroupSimulator implements Serializable {
             }
             return 3;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return 0; // TODO
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        CombatGroupSimulator that = (CombatGroupSimulator) o;
+
+        if (this.unblockedDamage != that.unblockedDamage) {
+            return false;
+        }
+        if (!Objects.equals(this.defenderId, that.defenderId)) {
+            return false;
+        }
+        if (!Objects.equals(this.attacker, that.attacker)) {
+            return false;
+        }
+        if (!Objects.deepEquals(this.attackers, that.attackers)) {
+            return false;
+        }
+
+        return Objects.deepEquals(this.blockers, that.blockers);
     }
 }

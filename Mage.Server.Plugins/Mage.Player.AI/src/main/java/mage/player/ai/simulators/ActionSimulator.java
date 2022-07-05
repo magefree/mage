@@ -12,6 +12,7 @@ import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -61,4 +62,31 @@ public class ActionSimulator {
         return value;
     }
 
+    @Override
+    public int hashCode() {
+        return 0; // TODO
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        ActionSimulator that = (ActionSimulator) o;
+
+        if (!Objects.equals(this.player, that.player)) {
+            return false;
+        }
+        if (!Objects.equals(this.game, that.game)) {
+            return false;
+        }
+        if (!Objects.deepEquals(this.playableInstants, that.playableInstants)) {
+            return false;
+        }
+
+        return Objects.deepEquals(this.playableAbilities, that.playableAbilities);
+    }
 }

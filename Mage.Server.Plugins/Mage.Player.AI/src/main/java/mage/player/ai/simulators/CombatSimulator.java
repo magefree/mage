@@ -19,7 +19,7 @@ public class CombatSimulator implements Serializable {
     public List<CombatGroupSimulator> groups = new ArrayList<>();
     public List<UUID> defenders = new ArrayList<>();
     public Map<UUID, Integer> playersLife = new HashMap<>();
-    public Map<UUID, Integer> planeswalkerLoyalty = new HashMap<>();
+    public Map<UUID, Integer> planeswalkerLoyalty = new HashMap<>(); // TODO: Doesn't seem to be used, needed?
     public UUID attackerId;
     public int rating = 0;
 
@@ -42,7 +42,9 @@ public class CombatSimulator implements Serializable {
         return simCombat;
     }
 
-    public CombatSimulator() {}
+    public CombatSimulator() {
+
+    }
 
     public void clear() {
         groups.clear();
@@ -82,5 +84,42 @@ public class CombatSimulator implements Serializable {
 
         rating = result;
         return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0; // TODO
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        CombatSimulator that = (CombatSimulator) o;
+
+        // Order below is in increasing order of complexity (and decreasing order of singal value)
+        if (this.rating != that.rating) {
+            return false;
+        }
+        if (!Objects.equals(this.attackerId, that.attackerId)) {
+            return false;
+        }
+        if (!Objects.equals(this.playersLife, that.playersLife)) {
+            return false;
+        }
+        if (!Objects.equals(this.planeswalkerLoyalty, that.planeswalkerLoyalty)) {
+            return false;
+        }
+
+        if (!Objects.deepEquals(this.defenders, that.defenders)) {
+            return false;
+        }
+
+        return Objects.equal(this.groups, that.groups);
     }
 }
