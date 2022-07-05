@@ -378,7 +378,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size()); // TODO: Why one, should there be {B} and {B}{U}?
         assertManaOptions("{W}{B}", manaOptions);
     }
 
