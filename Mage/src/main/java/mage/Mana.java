@@ -3,7 +3,6 @@ package mage;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
-import mage.game.Game;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;
