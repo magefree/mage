@@ -149,4 +149,8 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
         return new ConditionalRestrictionEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }
