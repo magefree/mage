@@ -90,11 +90,12 @@ class VoloItinerantScholarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return player != null && permanent != null
-                && player.drawCards(
-                VolosJournalToken.getNotedTypes(
-                        game, permanent.getId(), permanent.getZoneChangeCounter(game)
-                ).size(), source, game
-        ) > 0;
+        if (player == null || permanent == null) {
+            return false;
+        }
+        return player.drawCards(
+                VolosJournalToken.getNotedTypes(game, permanent).size(),
+                source,
+                game) > 0;
     }
 }
