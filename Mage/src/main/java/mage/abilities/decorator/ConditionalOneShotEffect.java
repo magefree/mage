@@ -82,4 +82,9 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         }
         return effects.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffects.getText(mode);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }
