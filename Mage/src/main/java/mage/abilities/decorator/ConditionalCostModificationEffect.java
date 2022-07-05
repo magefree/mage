@@ -83,4 +83,9 @@ public class ConditionalCostModificationEffect extends CostModificationEffectImp
     public ConditionalCostModificationEffect copy() {
         return new ConditionalCostModificationEffect(this);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }
