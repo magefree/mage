@@ -69,8 +69,6 @@ public interface Effect extends Serializable, Copyable<Effect> {
 
     String getConcatPrefix();
 
-    boolean caresAboutManaColor();
-
     /**
      * Used to check if this is a conditional version without needed any Java reflection hacks or chained instanceof checks.
      * Only conditions on the activation of the ability are checked, and not on how the effects can be used.

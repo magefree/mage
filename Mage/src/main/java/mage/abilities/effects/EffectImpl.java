@@ -128,26 +128,4 @@ public abstract class EffectImpl implements Effect {
         return this.concatPrefix;
     }
 
-    @Override
-    public boolean caresAboutManaColor() {
-        Field conditionField = null;
-        try {
-            conditionField = this.getClass().getDeclaredField("condition");
-        } catch (NoSuchFieldException noSuchFieldException) {
-            // Intentionally ignored
-        }
-
-        // If the effect had a condition, check if it's an AdamantCondition of ManaWasSpentCondition
-        if (conditionField != null) {
-            try {
-                Condition condition = (Condition) conditionField.get(this);
-                if (condition.caresAboutManaColor()) {
-                    return true;
-                }
-            } catch (IllegalAccessException ex) {
-                // TODO: I don't think I should get to here
-            }
-        }
-        return false;
-    }
 }
