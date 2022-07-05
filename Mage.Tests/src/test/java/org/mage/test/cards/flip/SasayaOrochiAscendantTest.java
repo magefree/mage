@@ -7,7 +7,6 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -45,7 +44,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertManaPool(playerA, ManaType.GREEN, 2);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
@@ -82,7 +80,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertManaOptions("{C}{C}{C}{G}{G}", manaOptions);
@@ -123,7 +120,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}{G}", manaOptions);

@@ -40,18 +40,4 @@ public class ManaOptionsTestUtils {
             Assert.fail("Can't find " + searchMana + " in " + manaList.toString());
         }
     }
-
-    // No longer needed since ManaOptions has been re-implemented as a Set rather than a List.
-    @Deprecated
-    public static void assertDuplicatedManaOptions(ManaOptions manaList) {
-        Set<String> list = new HashSet<>();
-        for (Mana mana : manaList) {
-            String s = mana.toString();
-            if (list.contains(s)) {
-                Assert.fail("Found duplicated mana option " + s + " in " + manaList.toString());
-            } else {
-                list.add(s);
-            }
-        }
-    }
 }
