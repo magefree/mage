@@ -115,10 +115,4 @@ public class PermanentToken extends PermanentImpl {
         // example: kicker ability of copied creature spell
         super.updateZoneChangeCounter(game, event);
     }
-
-    @Override
-    public Card getMainCard() {
-        // token don't have game card, so return itself
-        return this;
-    }
 }
