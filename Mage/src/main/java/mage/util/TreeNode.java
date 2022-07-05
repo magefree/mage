@@ -3,6 +3,7 @@ package mage.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -79,19 +80,24 @@ public class TreeNode<T> {
 
     @Override
     public int hashCode() {
-        return getData().hashCode();
+        return 0; // TODO
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TreeNode<T> other = (TreeNode<T>) obj;
-        return (this.data == other.data || (this.data != null && this.data.equals(other.data)));
-    }
 
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TreeNode<T> that = (TreeNode<T>) o;
+
+        if (!Objects.equals(this.data, that.data)) {
+            return false;
+        }
+
+        return Objects.equals(this.children, that.children);
+    }
 }
