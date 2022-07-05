@@ -1,5 +1,6 @@
 package mage;
 
+import mage.abilities.condition.Condition;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
@@ -1217,17 +1218,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return          The greater of the two manas, or null if they're the same
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
-        String conditionString1 = "";
-        String conditionString2 = "";
-        if (mana1 instanceof ConditionalMana) {
-            conditionString1 = ((ConditionalMana) mana1).getConditionString();
-        }
-        if (mana2 instanceof ConditionalMana) {
-            conditionString2 = ((ConditionalMana) mana2).getConditionString();
-        }
-        if (!conditionString1.equals(conditionString2)) {
+        boolean mana1IsConditional = mana1 instanceof ConditionalMana;
+        boolean mana2IsConditional = mana2 instanceof ConditionalMana;
+        if (mana1IsConditional != mana2IsConditional) {
             return null;
         }
+
+        if (mana1IsConditional && mana2IsConditional) {
+            List<Condition> conditions1 = ((ConditionalMana) mana1).getConditions();
+            List<Condition> conditions2 = ((ConditionalMana) mana2).getConditions();
+            if (!Objects.equals(conditions1, conditions2)) {
+                return null;
+            }
+        }
+
         Mana moreMana;
         Mana lessMana;
         if (mana2.countColored() > mana1.countColored() || mana2.getAny() > mana1.getAny() || mana2.count() > mana1.count()) {
