@@ -22,7 +22,7 @@ import java.util.*;
  * TODO: Conditional Mana is not supported yet. The mana adding removes the
  * condition of conditional mana
  */
-public class ManaOptions extends ArrayList<Mana> {
+public class ManaOptions extends HashSet<Mana> {
 
     private static final Logger logger = Logger.getLogger(ManaOptions.class);
 
@@ -53,7 +53,7 @@ public class ManaOptions extends ArrayList<Mana> {
 
             } else { // mana source has more than 1 ability
                 //perform a union of all existing options and the new options
-                List<Mana> copy = copy();
+                Set<Mana> copy = copy();
                 this.clear();
                 for (ActivatedManaAbilityImpl ability : abilities) {
                     for (Mana netMana : ability.getNetMana(game)) {
@@ -83,12 +83,10 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
-
-        forceManaDeduplication();
     }
 
     private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
-        List<Mana> copy = copy();
+        Set<Mana> copy = copy();
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
@@ -100,8 +98,6 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
-
-        forceManaDeduplication();
     }
 
     private static List<List<Mana>> getSimulatedTriggeredManaFromPlayer(Game game, Ability ability) {
@@ -163,7 +159,7 @@ public class ManaOptions extends ArrayList<Mana> {
                             addMana(netManas.get(0));
                             addTriggeredMana(game, ability);
                         } else {
-                            List<Mana> copy = copy();
+                            Set<Mana> copy = copy();
                             this.clear();
                             for (Mana netMana : netManas) {
                                 checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -179,7 +175,7 @@ public class ManaOptions extends ArrayList<Mana> {
                             }
                         }
                     } else {// The ability has mana costs
-                        List<Mana> copy = copy();
+                        Set<Mana> copy = copy();
                         this.clear();
                         for (Mana netMana : netManas) {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -204,7 +200,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             } else {
                 //perform a union of all existing options and the new options
-                List<Mana> copy = copy();
+                Set<Mana> copy = copy();
                 this.clear();
                 for (ActivatedManaAbilityImpl ability : abilities) {
                     List<Mana> netManas = ability.getNetMana(game);
@@ -245,7 +241,6 @@ public class ManaOptions extends ArrayList<Mana> {
             logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
             logger.trace("Abilities: " + abilities.toString());
         }
-        forceManaDeduplication();
 
         return wasUsable;
     }
@@ -255,7 +250,7 @@ public class ManaOptions extends ArrayList<Mana> {
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 ActivatedManaAbilityImpl ability = (ActivatedManaAbilityImpl) abilities.get(0);
-                List<Mana> copy = copy();
+                Set<Mana> copy = copy();
                 this.clear();
                 for (Mana previousMana : copy) {
                     Mana startingMana = previousMana.copy();
@@ -311,7 +306,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 addMana(triggeredNetMana.get(0));
             } else if (triggeredNetMana.size() > 1) {
                 // Add variations
-                List<Mana> copy = copy();
+                Set<Mana> copy = copy();
                 this.clear();
                 for (Mana triggeredMana : triggeredNetMana) {
                     for (Mana mana : copy) {
@@ -323,8 +318,6 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
-
-        forceManaDeduplication();
     }
 
     /**
@@ -351,8 +344,6 @@ public class ManaOptions extends ArrayList<Mana> {
                 mana.add(addMana);
             }
         }
-
-        forceManaDeduplication();
     }
 
     public void addMana(ManaOptions options) {
@@ -362,10 +353,10 @@ public class ManaOptions extends ArrayList<Mana> {
         if (!options.isEmpty()) {
             if (options.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
-                addMana(options.get(0));
+                addMana(options.iterator().next());
             } else {
                 //perform a union of all existing options and the new options
-                List<Mana> copy = copy();
+                Set<Mana> copy = copy();
                 this.clear();
                 for (Mana addMana : options) {
                     for (Mana mana : copy) {
@@ -376,17 +367,6 @@ public class ManaOptions extends ArrayList<Mana> {
                     }
                 }
             }
-        }
-
-        forceManaDeduplication();
-    }
-
-    private void forceManaDeduplication() {
-        // memory overflow protection - force de-duplication on too much mana sources
-        // bug example: https://github.com/magefree/mage/issues/6938
-        // use it after new mana adding
-        if (this.size() > 1000) {
-            this.removeDuplicated();
         }
     }
 
@@ -410,7 +390,7 @@ public class ManaOptions extends ArrayList<Mana> {
         boolean oldManaWasReplaced = false; // true if the newly created mana includes all mana possibilities of the old
         boolean repeatable = false;
         if (manaToAdd != null && (manaToAdd.countColored() > 0 || manaToAdd.getAny() > 0) && manaToAdd.count() > 0 && onlyManaCosts) {
-            repeatable = true; // only replace to any with mana costs only will be repeated if able
+            repeatable = true; // only replace to any with mana costs only will be repeated if able TODO: rewrite this comment
         }
 
         for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost, currentMana)) {
@@ -458,9 +438,7 @@ public class ManaOptions extends ArrayList<Mana> {
                     break;
                 }
             }
-
         }
-        forceManaDeduplication();
 
         return oldManaWasReplaced;
     }
@@ -472,7 +450,7 @@ public class ManaOptions extends ArrayList<Mana> {
      */
     public static Set<Mana> getPossiblePayCombinations(Mana manaCost, Mana manaAvailable) {
         Set<Mana> payCombinations = new HashSet<>();
-        Set<String> payCombinationsStrings = new HashSet<>();
+        Set<String> payCombinationsStrings = new HashSet<>(); // TODO: Get rid of this, don't use String.
 
         Mana fixedMana = manaCost.copy();
 
@@ -551,7 +529,7 @@ public class ManaOptions extends ArrayList<Mana> {
 
     private boolean isExistingManaCombination(Mana newMana) {
         for (Mana mana : this) {
-            Mana moreValuable = Mana.getMoreValuableMana(mana, newMana);
+            Mana moreValuable = Mana.getMoreValuableMana(mana, newMana);  // TODO: WTF is this
             if (mana.equals(moreValuable)) {
                 return true;
             }
@@ -576,41 +554,6 @@ public class ManaOptions extends ArrayList<Mana> {
         newMana.add(mana);
         payCombinations.add(newMana);
         payCombinationsStrings.add(newMana.toString());
-    }
-
-    public void removeDuplicated() {
-        Set<String> list = new HashSet<>();
-
-        for (int i = this.size() - 1; i >= 0; i--) {
-            String s;
-            if (this.get(i) instanceof ConditionalMana) {
-                s = this.get(i).toString() + ((ConditionalMana) this.get(i)).getConditionString();
-            } else {
-                s = this.get(i).toString();
-            }
-            if (s.isEmpty()) {
-                this.remove(i);
-            } else if (list.contains(s)) {
-                // remove duplicated
-                this.remove(i);
-            } else {
-                list.add(s);
-            }
-        }
-
-        // Remove fully included variations
-        // TODO: research too many manas and freeze (put 1 card to slow down, put 3 cards to freeze here)
-        //  battlefield:Human:Cascading Cataracts:1
-        for (int i = this.size() - 1; i >= 0; i--) {
-            for (int ii = 0; ii < i; ii++) {
-                Mana moreValuable = Mana.getMoreValuableMana(this.get(i), this.get(ii));
-                if (moreValuable != null) {
-                    this.get(ii).setToMana(moreValuable);
-                    this.remove(i);
-                    break;
-                }
-            }
-        }
     }
 
     /**
