@@ -49,7 +49,7 @@ public final class VoldarenPariah extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false))));
 
         // Madness {B}{B}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}{B}")));
     }
 
     private VoldarenPariah(final VoldarenPariah card) {

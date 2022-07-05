@@ -23,7 +23,7 @@ public final class ViolentEruption extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Madness {1}{R}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}{R}")));
     }
 
     private ViolentEruption(final ViolentEruption card) {

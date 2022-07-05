@@ -12,6 +12,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.command.Emblem;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -28,6 +30,6 @@ public final class ElspethKnightErrantEmblem extends Emblem {
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("Artifacts, creatures, enchantments, and lands you control have indestructible");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, effect));
-        this.setExpansionSetCodeForImage("MMA");
+        availableImageSetCodes = Arrays.asList("MMA", "MD1", "MED");
     }
 }

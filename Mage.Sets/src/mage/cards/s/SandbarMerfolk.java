@@ -23,7 +23,7 @@ public final class SandbarMerfolk extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SandbarMerfolk(final SandbarMerfolk card) {

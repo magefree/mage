@@ -554,8 +554,9 @@ public abstract class TargetImpl implements Target {
      * @param targetTag
      */
     @Override
-    public void setTargetTag(int targetTag) {
+    public TargetImpl setTargetTag(int targetTag) {
         this.targetTag = targetTag;
+        return this;
     }
 
     @Override

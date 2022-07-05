@@ -22,7 +22,7 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("GTC", "EVE", "MH1", "C15", "C21", "UMA"));
+        availableImageSetCodes.addAll(Arrays.asList("GTC", "EVE", "MH1", "C15", "C21", "UMA", "RNA"));
     }
 
     @Override

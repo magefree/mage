@@ -13,6 +13,8 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -24,6 +26,8 @@ public final class LilianaTheLastHopeEmblem extends Emblem {
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new ZombieToken(), new LilianaZombiesCount()),
                 TargetController.YOU, null, false);
         this.getAbilities().add(ability);
+
+        availableImageSetCodes = Arrays.asList("EMN", "MED");
     }
 }
 

@@ -11,9 +11,9 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
-public final class AkoumStonewakerElementalToken extends TokenImpl {
+public final class Elemental31TrampleHasteToken extends TokenImpl {
 
-    public AkoumStonewakerElementalToken() {
+    public Elemental31TrampleHasteToken() {
         super("Elemental Token", "3/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -22,7 +22,7 @@ public final class AkoumStonewakerElementalToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1"));
+        availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1", "DOM"));
     }
 
     @Override
@@ -38,12 +38,12 @@ public final class AkoumStonewakerElementalToken extends TokenImpl {
         }
     }
 
-    public AkoumStonewakerElementalToken(final AkoumStonewakerElementalToken token) {
+    public Elemental31TrampleHasteToken(final Elemental31TrampleHasteToken token) {
         super(token);
     }
 
-    public AkoumStonewakerElementalToken copy() {
-        return new AkoumStonewakerElementalToken(this);
+    public Elemental31TrampleHasteToken copy() {
+        return new Elemental31TrampleHasteToken(this);
     }
 }
 

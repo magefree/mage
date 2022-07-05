@@ -22,7 +22,7 @@ public final class AngelWarriorVigilanceToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(VigilanceAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("KHM");
+        availableImageSetCodes = Arrays.asList("KHM", "CLB");
     }
 
     private AngelWarriorVigilanceToken(final AngelWarriorVigilanceToken token) {

@@ -30,7 +30,7 @@ public final class StalkingDrone extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // {C}: Stalking Drone gets +1/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{C}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{C}")));
     }
 
     private StalkingDrone(final StalkingDrone card) {

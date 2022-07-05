@@ -37,7 +37,7 @@ public final class WindsOfAbandon extends CardImpl {
 
         // Overload {4}{W}{W}
         this.addAbility(new OverloadAbility(
-                this, new WindsOfAbandonOverloadEffect(), new ManaCostsImpl("{4}{W}{W}")
+                this, new WindsOfAbandonOverloadEffect(), new ManaCostsImpl<>("{4}{W}{W}")
         ));
     }
 

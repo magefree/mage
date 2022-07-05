@@ -24,7 +24,7 @@ public final class TemporalMastery extends CardImpl {
         this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private TemporalMastery(final TemporalMastery card) {

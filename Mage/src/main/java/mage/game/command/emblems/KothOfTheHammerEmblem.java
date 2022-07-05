@@ -25,6 +25,8 @@ public final class KothOfTheHammerEmblem extends Emblem {
     public KothOfTheHammerEmblem() {
         this.setName("Emblem Koth");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
+
+        this.setExpansionSetCodeForImage("DDI");
     }
 }
 

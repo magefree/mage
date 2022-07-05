@@ -49,7 +49,7 @@ public final class TitanHunter extends CardImpl {
         ).addHint(MorbidHint.instance));
 
         // {1}{B}, Sacrifice a creature: You gain 4 life.
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(4), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(4), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }

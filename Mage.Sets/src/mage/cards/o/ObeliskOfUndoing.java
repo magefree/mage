@@ -32,7 +32,7 @@ public final class ObeliskOfUndoing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {6}, {tap}: Return target permanent you both own and control to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{6}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{6}"));
         ability.addCost(new TapSourceCost());        
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

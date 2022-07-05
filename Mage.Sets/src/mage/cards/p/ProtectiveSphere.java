@@ -33,7 +33,7 @@ public final class ProtectiveSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // {1}, Pay 1 life: Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost.
-        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ProtectiveSphereEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
 

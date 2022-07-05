@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,8 +66,7 @@ class ViciousBattleragerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return Optional.of(game.getPlayer(game.getControllerId(getTargetPointer().getFirst(game, source))))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(game.getPlayer(game.getControllerId(getTargetPointer().getFirst(game, source))))
                 .map(player -> player.loseLife(5, game, source, false) > 0)
                 .orElse(false);
     }

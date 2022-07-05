@@ -34,7 +34,7 @@ public final class Resistance extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                         .setText("Target creature gains haste until end of turn"),
-                new ManaCostsImpl("{R}{W}"));
+                new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn).setText("and must attack"));
         //ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, "").setText(""));
         ability.addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn).setText("or block this turn if able"));

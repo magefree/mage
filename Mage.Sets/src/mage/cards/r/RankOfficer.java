@@ -41,7 +41,7 @@ public final class RankOfficer extends CardImpl {
 
         // {1}{B}, {T}, Exile a creature card from your graveyard: Each opponent loses 2 life.
         Ability ability = new SimpleActivatedAbility(
-                new LoseLifeOpponentsEffect(2), new ManaCostsImpl("{1}{B}")
+                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(

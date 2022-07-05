@@ -34,7 +34,7 @@ public final class SlumberingTora extends CardImpl {
 
         // {2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn,
         // where X is the discarded card's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new SlumberingToraEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         this.addAbility(ability);
     }

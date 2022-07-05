@@ -31,7 +31,7 @@ public final class TuskguardCaptain extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Outlast G
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{G}")));
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,

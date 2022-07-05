@@ -42,7 +42,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     public BuybackAbility(String manaString) {
         super(Zone.STACK, new BuybackEffect());
-        addBuybackCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString)));
+        addBuybackCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl<>(manaString)));
         setRuleAtTheTop(true);
     }
 

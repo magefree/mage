@@ -40,7 +40,7 @@ public final class PrismArray extends CardImpl {
         this.addAbility(ability);
 
         // {W}{U}{B}{R}{G}: Scry 3.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(3), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private PrismArray(final PrismArray card) {

@@ -39,10 +39,10 @@ public interface Target extends Serializable {
     /**
      * Returns a set of all possible targets that match the criteria of the implemented Target class.
      *
-     * @param sourceControllerId    UUID of the ability's controller
-     * @param source                Ability which requires the targets
-     * @param game                  Current game
-     * @return                      Set of the UUIDs of possible targets
+     * @param sourceControllerId UUID of the ability's controller
+     * @param source             Ability which requires the targets
+     * @param game               Current game
+     * @return Set of the UUIDs of possible targets
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
@@ -143,7 +143,7 @@ public interface Target extends Serializable {
 
     int getTargetTag();
 
-    void setTargetTag(int tag);
+    Target setTargetTag(int tag);
 
     Target getOriginalTarget();
 

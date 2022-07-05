@@ -27,7 +27,7 @@ public final class VampireOpportunist extends CardImpl {
 
         // {6}{B}: Each opponent loses 2 life and you gain 2 life.
         Ability ability = new SimpleActivatedAbility(
-                new LoseLifeOpponentsEffect(2), new ManaCostsImpl("{6}{B}")
+                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{6}{B}")
         );
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);

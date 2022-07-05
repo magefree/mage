@@ -32,7 +32,7 @@ public final class SenateCourier extends CardImpl {
         // {1}{W}: Senate Courier gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{1}{W}")));
+        ), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private SenateCourier(final SenateCourier card) {

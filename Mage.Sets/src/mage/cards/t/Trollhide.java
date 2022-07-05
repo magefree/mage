@@ -44,7 +44,7 @@ public final class Trollhide extends CardImpl {
         // Enchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")), AttachmentType.AURA);
+            new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")), AttachmentType.AURA);
         effect.setText("and has \"{1}{G}: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

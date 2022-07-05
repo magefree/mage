@@ -17,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -26,6 +28,7 @@ public final class DarettiScrapSavantEmblem extends Emblem {
 
     public DarettiScrapSavantEmblem() {
         setName("Emblem Daretti");
+        availableImageSetCodes = Arrays.asList("C14", "C16", "CM2");
 
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }

@@ -32,7 +32,7 @@ public final class VeilingOddity extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Suspend 4-{1}{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{U}"), this));
 
         // When the last time counter is removed from Veiling Oddity while it's exiled, creatures are unblockable this turn.
         this.addAbility(new VeilingOddityTriggeredAbility());

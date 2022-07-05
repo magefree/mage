@@ -26,7 +26,7 @@ public final class ReveredDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}: Regenerate Revered Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}")));
     }
 
     private ReveredDead(final ReveredDead card) {

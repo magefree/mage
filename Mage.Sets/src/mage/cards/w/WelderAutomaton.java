@@ -27,7 +27,7 @@ public final class WelderAutomaton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{R}: Welder Automaton deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new ManaCostsImpl<>("{3}{R}")));
     }
 
     private WelderAutomaton(final WelderAutomaton card) {

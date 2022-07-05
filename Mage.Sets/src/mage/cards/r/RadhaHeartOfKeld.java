@@ -59,7 +59,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
         BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
         bse.setText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
-        this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl("{4}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl<>("{4}{R}{G}")));
     }
 
     private RadhaHeartOfKeld(final RadhaHeartOfKeld card) {

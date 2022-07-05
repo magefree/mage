@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.HellionHasteToken;
+import mage.game.permanent.token.HellionToken;
 
 /**
  *
@@ -36,7 +36,7 @@ public final class HellionCrucible extends CardImpl {
         this.addAbility(ability);
 
         // {1}{R}, {tap}, Remove two pressure counters from Hellion Crucible and sacrifice it: Create a 4/4 red Hellion creature token with haste.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HellionHasteToken(), 1), new ManaCostsImpl<>("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HellionToken(true), 1), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.PRESSURE.createInstance(2)));
         ability.addCost(new SacrificeSourceCost());

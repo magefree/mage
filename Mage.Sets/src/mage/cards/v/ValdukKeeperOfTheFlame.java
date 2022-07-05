@@ -18,7 +18,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ValdukElementalToken;
+import mage.game.permanent.token.Elemental31TrampleHasteToken;
 
 /**
  *
@@ -73,7 +73,7 @@ class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
             int value = eamount.calculate(game, source, this);
             AuraAttachedCount aamount = new AuraAttachedCount();
             value += aamount.calculate(game, source, this);
-            CreateTokenEffect effect = new CreateTokenEffect(new ValdukElementalToken(), value);
+            CreateTokenEffect effect = new CreateTokenEffect(new Elemental31TrampleHasteToken(), value);
             if (effect.apply(game, source)) {
                 effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;

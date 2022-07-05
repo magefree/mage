@@ -31,9 +31,12 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
     protected OptionalAdditionalCost additionalCost;
 
     public ReplicateAbility(String manaString) {
+        this(new ManaCostsImpl<>(manaString));
+    }
+
+    public ReplicateAbility(Cost cost) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText,
-                reminderTextMana, new ManaCostsImpl(manaString));
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, cost);
         this.additionalCost.setRepeatable(true);
         setRuleAtTheTop(true);
         addSubAbility(new ReplicateTriggeredAbility());

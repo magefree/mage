@@ -3361,7 +3361,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             String port = getCachedValue(KEY_PROXY_PORT, "");
             if (!host.isEmpty() && !port.isEmpty()) {
                 connection.setProxyHost(host);
-                connection.setProxyPort(Integer.valueOf(port));
+                connection.setProxyPort(Integer.parseInt(port));
                 String username = getCachedValue(KEY_PROXY_USERNAME, "");
                 connection.setProxyUsername(username);
                 if (getCachedValue(KEY_PROXY_REMEMBER, "false").equals("true")) {
@@ -3620,7 +3620,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static int getSelectedAvatar() {
         try {
-            selectedAvatarId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
+            selectedAvatarId = Integer.parseInt(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
         } catch (NumberFormatException n) {
             selectedAvatarId = DEFAULT_AVATAR_ID;
         } finally {

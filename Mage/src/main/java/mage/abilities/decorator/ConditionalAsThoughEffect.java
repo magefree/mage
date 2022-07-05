@@ -95,4 +95,9 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     public ConditionalAsThoughEffect copy() {
         return new ConditionalAsThoughEffect(this);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

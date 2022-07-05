@@ -24,7 +24,7 @@ public final class OrzhovaTheChurchOfDeals extends CardImpl {
     public OrzhovaTheChurchOfDeals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{3}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{3}{W}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetPlayer(1));

@@ -10,6 +10,8 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -20,7 +22,7 @@ public final class ObNixilisReignitedEmblem extends Emblem {
         setName("Emblem Nixilis");
 
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
-        this.setExpansionSetCodeForImage("BFZ");
+        availableImageSetCodes = Arrays.asList("BFZ", "DDR", "C19");
     }
 }
 

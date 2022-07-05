@@ -36,7 +36,7 @@ public final class ThranTemporalGateway extends CardImpl {
                 new PutCardFromHandOntoBattlefieldEffect(filter)
                         .setText("You may put a historic permanent card from your hand onto the battlefield. "
                                 + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new ManaCostsImpl("{4}"));
+                new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

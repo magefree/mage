@@ -29,7 +29,7 @@ public final class PatagiaGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}: Patagia Golem gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}"));
         this.addAbility(ability);
         
     }

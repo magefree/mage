@@ -37,7 +37,7 @@ public final class PortOfKarfell extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {3}{U}{B}{B}, {T}, Sacrifice Port of Karfell: Mill four cards, then return a creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(new PortOfKarfellEffect(), new ManaCostsImpl("{3}{U}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new PortOfKarfellEffect(), new ManaCostsImpl<>("{3}{U}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

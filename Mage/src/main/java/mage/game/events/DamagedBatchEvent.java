@@ -40,6 +40,16 @@ public abstract class DamagedBatchEvent extends GameEvent {
                 .orElse(null);
     }
 
+    @Override
+    public UUID getSourceId() {
+        return events
+                .stream()
+                .map(GameEvent::getSourceId)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+    }
+
     public void addEvent(DamagedEvent event) {
         this.events.add(event);
     }

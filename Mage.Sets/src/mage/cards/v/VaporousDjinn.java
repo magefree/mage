@@ -69,7 +69,7 @@ class VaporousDjinnEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cost cost = new ManaCostsImpl("{U}{U}");
+            Cost cost = new ManaCostsImpl<>("{U}{U}");
             String message = "Pay {U}{U} to prevent this permanent from phasing out?";
             if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {

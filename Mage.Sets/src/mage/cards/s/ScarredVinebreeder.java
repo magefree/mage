@@ -39,7 +39,7 @@ public final class ScarredVinebreeder extends CardImpl {
         // {2}{B}, Exile an Elf card from your graveyard: Scarred Vinebreeder gets +3/+3 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 3, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{B}"));
+                new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         this.addAbility(ability);
     }

@@ -58,7 +58,7 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         
         // <i>Ferocious</i> &mdash; {2}{G/U}{G/U}: Draw a card for each creature you control with power 4 or greater.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl("{2}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl<>("{2}{G/U}{G/U}"));
         ability.setAbilityWord(AbilityWord.FEROCIOUS);
         this.addAbility(ability);
         

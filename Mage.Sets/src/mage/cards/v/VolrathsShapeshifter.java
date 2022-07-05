@@ -32,7 +32,7 @@ public final class VolrathsShapeshifter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsShapeshifterEffect()));
 
         // {2}: Discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl<>("{2}")));
     }
 
     private VolrathsShapeshifter(final VolrathsShapeshifter card) {

@@ -31,7 +31,7 @@ public final class RakdosTrumpeter extends CardImpl {
 
         // {3}{R}: Rakdos Trumpeter gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{3}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R}")
         ));
     }
 

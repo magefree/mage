@@ -78,7 +78,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
         // that triggers depends on stack order, so make each trigger unique with extra info
         return "Whenever a permanent enters the battlefield tapped and under your control, untap it."
                 + Optional
-                .of(this.getEffects().get(0).getTargetPointer())
+                .ofNullable(this.getEffects().get(0).getTargetPointer())
                 .map(targetPointer -> targetPointer.getData("triggeredName"))
                 .filter(s -> s != null && !s.isEmpty())
                 .map(s -> " Triggered permanent: " + s)

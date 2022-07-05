@@ -32,7 +32,7 @@ public final class RummagingWizard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Look at the top card of your library. You may put that card into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RummagingWizardLookLibraryEffect(), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RummagingWizardLookLibraryEffect(), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private RummagingWizard(final RummagingWizard card) {

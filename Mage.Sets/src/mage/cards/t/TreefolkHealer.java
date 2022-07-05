@@ -33,7 +33,7 @@ public final class TreefolkHealer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
-                new ManaCostsImpl("{2}{W}"));
+                new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

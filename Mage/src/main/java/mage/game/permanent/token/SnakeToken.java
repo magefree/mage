@@ -19,7 +19,7 @@ public final class SnakeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("6ED", "C15", "C19", "CHK", "CMD", "KTK", "MM2", "MMQ", "SOK",
+        availableImageSetCodes = Arrays.asList("6ED", "C15", "C19", "CHK", "KTK", "MM2", "MMQ", "SOK",
                 "VIS", "ZEN", "C20", "MIC");
     }
 

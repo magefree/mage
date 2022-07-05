@@ -57,7 +57,7 @@ public final class SpectralSteel extends CardImpl {
 
         // {1}{W}, Exile Spectral Steel from your graveyard: Return another target Aura or Equipment card from your graveyard to your hand.
         ability = new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{W}")
+                Zone.GRAVEYARD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

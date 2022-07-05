@@ -39,7 +39,7 @@ public final class SkarrganFirebird extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{R}{R}{R}"),
+                new ManaCostsImpl<>("{R}{R}{R}"),
                 new OpponentWasDealtDamageCondition(),
                 null));
     }

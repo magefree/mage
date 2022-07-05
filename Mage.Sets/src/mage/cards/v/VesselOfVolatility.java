@@ -22,7 +22,7 @@ public final class VesselOfVolatility extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // {1}{R}, Sacrifice Vessel of Volatility: Add {R}{R}{R}{R}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(4), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(4), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

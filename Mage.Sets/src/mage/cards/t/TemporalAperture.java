@@ -31,7 +31,7 @@ public final class TemporalAperture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {5}, {tap}: Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TemporalApertureEffect(), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TemporalApertureEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

@@ -41,7 +41,7 @@ public final class SacredWhiteDeer extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(4),
-                new ManaCostsImpl("{3}{G}"),
+                new ManaCostsImpl<>("{3}{G}"),
                 new PermanentsOnTheBattlefieldCondition(filter)
         );
         ability.addCost(new TapSourceCost());

@@ -14,6 +14,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -33,7 +36,7 @@ public final class MeteoricMace extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
 
         // Cascade
         this.addAbility(new CascadeAbility());

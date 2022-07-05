@@ -21,7 +21,7 @@ public final class TelekineticBonds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");
 
         // Whenever a player discards a card, you may pay {1}{U}. If you do, you may tap or untap target permanent.
-        Ability ability = new DiscardCardPlayerTriggeredAbility(new DoIfCostPaid(new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{1}{U}")), false);
+        Ability ability = new DiscardCardPlayerTriggeredAbility(new DoIfCostPaid(new MayTapOrUntapTargetEffect(), new ManaCostsImpl<>("{1}{U}")), false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 

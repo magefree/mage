@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
@@ -44,7 +45,7 @@ public final class Spellbinder extends CardImpl {
         this.addAbility(new SpellbinderTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private Spellbinder(final Spellbinder card) {
