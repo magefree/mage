@@ -10,9 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.function.BiFunction;
 
 /**
  * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
@@ -326,29 +324,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param manaType the type of mana to increase by one.
      */
     public void increase(ManaType manaType) {
-        switch (manaType) {
-            case WHITE:
-                white = CardUtil.overflowInc(white, 1);
-                break;
-            case BLUE:
-                blue = CardUtil.overflowInc(blue, 1);
-                break;
-            case BLACK:
-                black = CardUtil.overflowInc(black, 1);
-                break;
-            case RED:
-                red = CardUtil.overflowInc(red, 1);
-                break;
-            case GREEN:
-                green = CardUtil.overflowInc(green, 1);
-                break;
-            case COLORLESS:
-                colorless = CardUtil.overflowInc(colorless, 1);
-                break;
-            case GENERIC:
-                generic = CardUtil.overflowInc(generic, 1);
-                break;
-        }
+        increaseOrDecrease(manaType, true);
     }
 
     /**
@@ -357,6 +333,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param manaType the type of mana to increase by one.
      */
     public void decrease(ManaType manaType) {
+        increaseOrDecrease(manaType, false);
+    }
+
+    /**
+     * Helper function for increase and decrease to now have their code duplicated.
+     * @param manaType
+     * @param increase
+     */
+    private void increaseOrDecrease(ManaType manaType, boolean increase) {
+        BiFunction<Integer, Integer, Integer> overflowIncOrDec = increase ? CardUtil::overflowInc : CardUtil::overflowDec;
         switch (manaType) {
             case WHITE:
                 white = CardUtil.overflowDec(white, 1);
