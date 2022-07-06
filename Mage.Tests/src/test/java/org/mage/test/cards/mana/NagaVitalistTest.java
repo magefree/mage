@@ -49,8 +49,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        assertManaOptions("{B}", manaOptions);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{Any}{Any}", manaOptions);
     }
 
