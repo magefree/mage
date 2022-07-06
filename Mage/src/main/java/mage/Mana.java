@@ -1268,7 +1268,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             moreMana = mana1;
             lessMana = mana2;
         }
-        int anyDiff = CardUtil.overflowDec(mana2.getAny(), mana1.getAny());
+        int anyDiff = CardUtil.overflowDec(mana2.getAny(), mana1.getAny()); // TODO: This seems suspicious, why is it mana1 and mana2 and not moreMana/lessMana?
         if (lessMana.getWhite() > moreMana.getWhite()) {
             anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getWhite(), moreMana.getWhite()));
             if (anyDiff < 0) {
