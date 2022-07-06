@@ -495,7 +495,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                         existingMana.increase(manaType);
                         if (manaToPayFrom.get(manaType) > 0 && !payCombinations.contains(existingMana)) {
                             Mana newMana = existingMana.copy();
-                            newMana.increase(manaType);
                             payCombinations.add(newMana);
 
                             manaToPayFrom.decrease(manaType);
@@ -508,7 +507,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                     existingMana.increaseAny();
                     if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0) {
                         Mana newMana = existingMana.copy();
-                        newMana.increaseAny();
                         payCombinations.add(newMana);
 
                         manaToPayFrom.decreaseAny();
