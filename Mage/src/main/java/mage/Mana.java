@@ -502,14 +502,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all combined mana.
      */
     public int count() {
-        return white
-                + blue
-                + black
-                + red
-                + green
-                + generic
-                + colorless
-                + any;
+        int sum = countColored();
+        sum = CardUtil.overflowInc(sum, generic);
+        sum = CardUtil.overflowInc(sum, colorless);
+
+        return sum;
     }
 
     /**
@@ -518,12 +515,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all colored mana.
      */
     public int countColored() {
-        return white
-                + blue
-                + black
-                + red
-                + green
-                + any;
+        int sum = CardUtil.overflowInc(white, blue);
+        sum = CardUtil.overflowInc(sum, black);
+        sum = CardUtil.overflowInc(sum, red);
+        sum = CardUtil.overflowInc(sum, green);
+        sum = CardUtil.overflowInc(sum, any);
+
+        return sum;
     }
 
     /**
@@ -1261,50 +1259,63 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
         Mana moreMana;
         Mana lessMana;
-        if (mana2.getAny() > mana1.getAny() || mana2.countColored() > mana1.countColored() || mana2.count() > mana1.count()) {
+        if (mana2.any > mana1.any || mana2.countColored() > mana1.countColored() || mana2.count() > mana1.count()) {
             moreMana = mana2;
             lessMana = mana1;
         } else {
             moreMana = mana1;
             lessMana = mana2;
         }
-        int anyDiff = CardUtil.overflowDec(mana2.getAny(), mana1.getAny()); // TODO: This seems suspicious, why is it mana1 and mana2 and not moreMana/lessMana?
-        if (lessMana.getWhite() > moreMana.getWhite()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getWhite(), moreMana.getWhite()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getRed() > moreMana.getRed()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getRed(), moreMana.getRed()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getGreen() > moreMana.getGreen()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getGreen(), moreMana.getGreen()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getBlue() > moreMana.getBlue()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getBlue(), moreMana.getBlue()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getBlack() > moreMana.getBlack()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getBlack(), moreMana.getBlack()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getColorless() > moreMana.getColorless()) {
-            return null; // Any (color) can't produce colorless mana
-        }
-        if (lessMana.getAny() > moreMana.getAny()) {
+
+        if (lessMana.any > moreMana.any) {
             return null;
         }
+        if (lessMana.colorless > moreMana.colorless) {
+            return null; // Any (color) can't produce colorless mana
+        }
+
+        int anyDiff = CardUtil.overflowDec(moreMana.any, lessMana.any);
+
+        int whiteDiff = CardUtil.overflowDec(lessMana.white, moreMana.white);
+        if (whiteDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, whiteDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int redDiff = CardUtil.overflowDec(lessMana.red, moreMana.red);
+        if (redDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, redDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int greenDiff = CardUtil.overflowDec(lessMana.green, moreMana.green);
+        if (greenDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, greenDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int blueDiff = CardUtil.overflowDec(lessMana.blue, moreMana.blue);
+        if (blueDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, blueDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int blackDiff = CardUtil.overflowDec(lessMana.black, moreMana.black);
+        if (blackDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, blackDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
         return moreMana;
     }
 
