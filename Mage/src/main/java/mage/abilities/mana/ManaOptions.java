@@ -410,40 +410,27 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
                 newMana.setToMana(currentManaCopy);
                 newMana.subtract(payCombination);
-                if (manaToAdd == null) {
-                    for (Mana mana : manaAbility.getNetMana(game, newMana)) { // get the mana to add from the ability related to the currently generated possible mana pool
-                        newMana.add(mana);
-                        if (isExistingManaCombination(newMana)) {
-                            continue;
-                        }
-
-                        this.add(newMana.copy()); // add the new combination
-                        newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
-
-                        Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
-                        if (newMana.equals(moreValuable)) {
-                            oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
-                            if (!currentMana.equalManaValue(currentManaCopy)) {
-                                this.removeEqualMana(currentManaCopy);
-                            }
-                        }
-                        currentManaCopy.setToMana(newMana);
+                // Get the mana to iterate over.
+                // If manaToAdd is specified add it, otherwise add the mana produced by the mana ability
+                List<Mana> manasToAdd = (manaToAdd != null) ? Collections.singletonList(manaToAdd) : manaAbility.getNetMana(game, newMana);
+                for (Mana mana : manasToAdd) {
+                    newMana.add(mana);
+                    if (isExistingManaCombination(newMana)) {
+                        continue;
                     }
-                } else {
-                    newMana.add(manaToAdd);
-                    if (!isExistingManaCombination(newMana)) {
-                        this.add(newMana.copy()); // add the new combination
-                        newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
 
-                        Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
-                        if (newMana.equals(moreValuable)) {
-                            oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
-                            if (!currentMana.equalManaValue(currentManaCopy)) {
-                                this.removeEqualMana(currentManaCopy);
-                            }
+                    this.add(newMana.copy()); // add the new combination
+                    newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
+
+                    // TODO: Can this check be done at the end?
+                    Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
+                    if (newMana.equals(moreValuable)) {
+                        oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
+                        if (!currentMana.equalManaValue(currentManaCopy)) {
+                            this.removeEqualMana(currentManaCopy);
                         }
-                        currentManaCopy.setToMana(newMana);
                     }
+                    currentManaCopy.setToMana(newMana);
                 }
             } while (repeatable && newCombinations && currentManaCopy.includesMana(payCombination));
         }
