@@ -640,12 +640,20 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * Overriden here in order to avoid it silently failing if someone provides it
+     * Overriden here in order to avoid it silently failing if someone provides it an index
+     * thinking that this now works like an array
      *
      * @param o object to be removed from this set, if present
      * @return
      */
-    public boolean remove(Mana mana) {
-        return super.remove(mana);
+    @Override
+    public boolean remove(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Mana)) {
+            throw new ValueException("Can only remove Mana from ManaOptions, provided " + o);
+        }
+        return super.remove(o);
     }
 }
