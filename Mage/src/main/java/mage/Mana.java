@@ -10,6 +10,9 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
@@ -318,7 +321,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Increases the given mana by one.
+     * Increases this mana by onw of the passed in ManaType.
      *
      * @param manaType the type of mana to increase by one.
      */
@@ -344,6 +347,37 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 break;
             case GENERIC:
                 generic = CardUtil.overflowInc(generic, 1);
+                break;
+        }
+    }
+
+    /**
+     * Decreases this mana by onw of the passed in ManaType.
+     *
+     * @param manaType the type of mana to increase by one.
+     */
+    public void decrease(ManaType manaType) {
+        switch (manaType) {
+            case WHITE:
+                white = CardUtil.overflowDec(white, 1);
+                break;
+            case BLUE:
+                blue = CardUtil.overflowDec(blue, 1);
+                break;
+            case BLACK:
+                black = CardUtil.overflowDec(black, 1);
+                break;
+            case RED:
+                red = CardUtil.overflowDec(red, 1);
+                break;
+            case GREEN:
+                green = CardUtil.overflowDec(green, 1);
+                break;
+            case COLORLESS:
+                colorless = CardUtil.overflowDec(colorless, 1);
+                break;
+            case GENERIC:
+                generic = CardUtil.overflowDec(generic, 1);
                 break;
         }
     }
@@ -395,6 +429,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void increaseColorless() {
         colorless = CardUtil.overflowInc(colorless, 1);
+    }
+
+    public void increaseAny() {
+        any = CardUtil.overflowInc(any, 1);
+    }
+    public void decreaseAny() {
+        any = CardUtil.overflowDec(any, 1);
     }
 
     /**
@@ -1101,7 +1142,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             case GREEN:
                 return green;
             case COLORLESS:
-                return CardUtil.overflowInc(generic, colorless);
+                return CardUtil.overflowInc(generic, colorless); // TODO: This seems like a mistake
         }
         return 0;
     }

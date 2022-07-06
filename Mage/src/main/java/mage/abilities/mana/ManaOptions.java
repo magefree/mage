@@ -1,8 +1,10 @@
 package mage.abilities.mana;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
@@ -455,8 +457,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      * @return
      */
     public static Set<Mana> getPossiblePayCombinations(Mana manaCost, Mana manaAvailable) {
-        Set<Mana> payCombinations = new LinkedHashSet<>();
-        Set<String> payCombinationsStrings = new LinkedHashSet<>(); // TODO: Get rid of this, don't use String.
+        Set<Mana> payCombinations = new HashSet<>();
 
         Mana fixedMana = manaCost.copy();
 
@@ -474,14 +475,14 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         manaAfterFixedPayment.subtract(fixedMana);
 
         // handle generic mana costs
-        if (manaAvailable.countColored() > 0) {
-
+        if (manaAvailable.countColored() == 0) {
+            payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric())); // TODO: Is it guaranteed that there is enough colorless mana to satisfy this?
+        } else {
             for (int i = 0; i < manaCost.getGeneric(); i++) {
                 List<Mana> existingManas = new ArrayList<>();
                 if (i > 0) {
                     existingManas.addAll(payCombinations);
                     payCombinations.clear();
-                    payCombinationsStrings.clear();
                 } else {
                     existingManas.add(new Mana());
                 }
@@ -489,43 +490,34 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 for (Mana existingMana : existingManas) {
                     Mana manaToPayFrom = manaAfterFixedPayment.copy();
                     manaToPayFrom.subtract(existingMana);
-                    String manaString = existingMana.toString();
 
-                    if (manaToPayFrom.getBlack() > 0 && !payCombinationsStrings.contains(manaString + Mana.BlackMana(1))) {
-                        manaToPayFrom.subtract(Mana.BlackMana(1));
-                        ManaOptions.addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
+                    for (ManaType manaType : ManaType.values()) {
+                        existingMana.increase(manaType);
+                        if (manaToPayFrom.get(manaType) > 0 && !payCombinations.contains(existingMana)) {
+                            Mana newMana = existingMana.copy();
+                            newMana.increase(manaType);
+                            payCombinations.add(newMana);
+
+                            manaToPayFrom.decrease(manaType);
+                        }
+                        existingMana.decrease(manaType);
                     }
-                    if (manaToPayFrom.getBlue() > 0 && !payCombinationsStrings.contains(manaString + Mana.BlueMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.BlueMana(1));
-                        ManaOptions.addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
-                    }
-                    if (manaToPayFrom.getGreen() > 0 && !payCombinationsStrings.contains(manaString + Mana.GreenMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.GreenMana(1));
-                        ManaOptions.addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
-                    }
-                    if (manaToPayFrom.getRed() > 0 && !payCombinationsStrings.contains(manaString + Mana.RedMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.RedMana(1));
-                        ManaOptions.addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
-                    }
-                    if (manaToPayFrom.getWhite() > 0 && !payCombinationsStrings.contains(manaString + Mana.WhiteMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.WhiteMana(1));
-                        ManaOptions.addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
-                    }
-                    if (manaToPayFrom.getColorless() > 0 && !payCombinationsStrings.contains(manaString + Mana.ColorlessMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.ColorlessMana(1));
-                        ManaOptions.addManaCombination(Mana.ColorlessMana(1), existingMana, payCombinations, payCombinationsStrings);
-                    }
+
                     // Pay with any only needed if colored payment was not possible
-                    if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0 && !payCombinationsStrings.contains(manaString + Mana.AnyMana(1).toString())) {
-                        manaToPayFrom.subtract(Mana.AnyMana(1));
-                        ManaOptions.addManaCombination(Mana.AnyMana(1), existingMana, payCombinations, payCombinationsStrings);
+                    // NOTE: This isn't in the for loop since ManaType doesn't include ANY.
+                    existingMana.increaseAny();
+                    if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0) {
+                        Mana newMana = existingMana.copy();
+                        newMana.increaseAny();
+                        payCombinations.add(newMana);
+
+                        manaToPayFrom.decreaseAny();
                     }
+                    existingMana.decreaseAny();
                 }
             }
-        } else {
-            // TODO: Is it guaranteed that there is enough colorless mana to satisfy this?
-            payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric()));
         }
+
         for (Mana mana : payCombinations) {
             mana.add(fixedMana);
         }
@@ -559,6 +551,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     /**
      * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
      * TODO: Why is this needed
+     * TODO: This is HORRIBLY slow with the LinkedSet, likely not worth the effort if it's an optimization.
      */
     public void removeFullyIncludedVariations() {
         for (int i = this.size() - 1; i >= 0; i--) {
@@ -571,14 +564,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 }
             }
         }
-    }
-
-
-    public static void addManaCombination(Mana mana, Mana existingMana, Set<Mana> payCombinations, Set<String> payCombinationsStrings) {
-        Mana newMana = existingMana.copy();
-        newMana.add(mana);
-        payCombinations.add(newMana);
-        payCombinationsStrings.add(newMana.toString());
     }
 
     /**
@@ -633,7 +618,11 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      * NOTE: Do not use in tight loops as performance of the lookup is much worse than
      *       for ArrayList (the previous superclass of ManaOptions).
      *
+     * NOTE: Deprecated warning is there as a reminder for when this gets called that it's not
+     *       the usual get() function from an array.
+     *
      */
+    @Deprecated
     public Mana get(int i) {
        if (i < 0 || i >= this.size()) {
            throw new IndexOutOfBoundsException();
@@ -648,5 +637,15 @@ public class ManaOptions extends LinkedHashSet<Mana> {
            }
        }
        return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
+    }
+
+    /**
+     * Overriden here in order to avoid it silently failing if someone provides it
+     *
+     * @param o object to be removed from this set, if present
+     * @return
+     */
+    public boolean remove(Mana mana) {
+        return super.remove(mana);
     }
 }
