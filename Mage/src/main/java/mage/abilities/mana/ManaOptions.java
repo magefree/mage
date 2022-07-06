@@ -64,6 +64,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             //perform a union of all existing options and the new options
             Set<Mana> copy = copy();
             this.clear();
+            Mana moreValuable;
             for (ActivatedManaAbilityImpl ability : abilities) {
                 for (Mana netMana : ability.getNetMana(game)) {
                     checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -77,7 +78,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 if (existingMana.equalManaValue(newMana)) {
                                     continue SkipAddMana;
                                 }
-                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
+                                moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                 if (moreValuable != null) {
                                     // only keep the more valuable mana
                                     existingMana.setToMana(moreValuable);
@@ -94,13 +95,14 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
+        Mana newMana;
+
         Set<Mana> copy = copy();
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
                 if (!ability.hasTapCost() || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
-                    Mana newMana = new Mana();
-                    newMana.add(mana);
+                    newMana = mana.copy();
                     newMana.add(netMana);
                     this.add(newMana);
                 }
@@ -172,8 +174,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 checkManaReplacementAndTriggeredMana(ability, game, netMana);
                                 for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                     for (Mana mana : copy) {
-                                        Mana newMana = new Mana();
-                                        newMana.add(mana);
+                                        Mana newMana = new Mana(mana);
                                         newMana.add(triggeredManaVariation);
                                         this.add(newMana);
                                         wasUsable = true;
@@ -216,8 +217,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana mana : copy) {
-                                    Mana newMana = new Mana();
-                                    newMana.add(mana);
+                                    Mana newMana = new Mana(mana);
                                     newMana.add(triggeredManaVariation);
                                     this.add(newMana);
                                     wasUsable = true;
@@ -253,31 +253,32 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     public boolean addManaPoolDependant(List<ActivatedManaAbilityImpl> abilities, Game game) {
+        if (abilities.isEmpty() || abilities.size() != 1) {
+            return false;
+        }
+
         boolean wasUsable = false;
-        if (!abilities.isEmpty()) {
-            if (abilities.size() == 1) {
-                ActivatedManaAbilityImpl ability = (ActivatedManaAbilityImpl) abilities.get(0);
-                Set<Mana> copy = copy();
-                this.clear();
-                for (Mana previousMana : copy) {
-                    Mana startingMana = previousMana.copy();
-                    Mana manaCosts = ability.getManaCosts().getMana();
-                    if (startingMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
-                        for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
-                            if (!subtractCostAddMana(manaOption, null, ability.getCosts().isEmpty(), startingMana, ability, game)) {
-                                // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
-                                add(previousMana);
-                            }
-                        }
-                        wasUsable = true;
-                    } else {
-                        // mana costs can't be paid so keep starting mana
+        ActivatedManaAbilityImpl ability = (ActivatedManaAbilityImpl) abilities.get(0);
+        Mana manaCosts = ability.getManaCosts().getMana();
+
+        Set<Mana> copy = copy();
+        this.clear();
+
+        for (Mana previousMana : copy) {
+            if (previousMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
+                for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
+                    if (!subtractCostAddMana(manaOption, null, ability.getCosts().isEmpty(), previousMana, ability, game)) {
+                        // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
                         add(previousMana);
                     }
                 }
-
+                wasUsable = true;
+            } else {
+                // mana costs can't be paid so keep starting mana
+                add(previousMana);
             }
         }
+
         return wasUsable;
     }
 
@@ -317,8 +318,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 this.clear();
                 for (Mana triggeredMana : triggeredNetMana) {
                     for (Mana mana : copy) {
-                        Mana newMana = new Mana();
-                        newMana.add(mana);
+                        Mana newMana = new Mana(mana);
                         newMana.add(triggeredMana);
                         this.add(newMana);
                     }
@@ -367,8 +367,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 this.clear();
                 for (Mana addMana : options) {
                     for (Mana mana : copy) {
-                        Mana newMana = new Mana();
-                        newMana.add(mana);
+                        Mana newMana = new Mana(mana);
                         newMana.add(addMana);
                         this.add(newMana);
                     }
@@ -393,45 +392,48 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      * @param oldManaWasReplaced returns the info if the new complete mana does
      *                           replace the current mana completely
      */
-    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, Mana currentMana, ManaAbility manaAbility, Game game) {
+    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana currentMana, ManaAbility manaAbility, Game game) {
         boolean oldManaWasReplaced = false; // true if the newly created mana includes all mana possibilities of the old
         boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
                 && onlyManaCosts
                 && (manaToAdd.getAny() > 0 || manaToAdd.countColored() > 0)
                 && manaToAdd.count() > 0;
+        boolean newCombinations;
 
         Mana currentManaCopy = new Mana();
+        Mana newMana = new Mana();
         for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost, currentMana)) {
-            Mana currentManaCopy = currentMana.copy(); // copy start mana because in iteration it will be updated
-            while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
-                boolean newCombinations = false;
+            currentManaCopy.setToMana(currentMana); // copy start mana because in iteration it will be updated
 
+            do { // loop for multiple usage if possible
+                newCombinations = false;
+
+                newMana.setToMana(currentManaCopy);
+                newMana.subtract(payCombination);
                 if (manaToAdd == null) {
-                    Mana newMana = currentManaCopy.copy();
-                    newMana.subtract(payCombination);
+
                     for (Mana mana : manaAbility.getNetMana(game, newMana)) { // get the mana to add from the ability related to the currently generated possible mana pool
                         newMana.add(mana);
                         if (!isExistingManaCombination(newMana)) {
-                            this.add(newMana); // add the new combination
+                            this.add(newMana.copy()); // add the new combination
                             newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
 
                             Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
                             if (newMana.equals(moreValuable)) {
-                                oldManaWasReplaced = true; // the new mana includes all possibilities of the old one, so no need to add it after return
+                                oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
                                 if (!currentMana.equalManaValue(currentManaCopy)) {
                                     this.removeEqualMana(currentManaCopy);
                                 }
                             }
-                            currentManaCopy = newMana.copy();
+                            currentManaCopy.setToMana(newMana);
                         }
                     }
                 } else {
-                    Mana newMana = currentManaCopy.copy();
-                    newMana.subtract(payCombination);
                     newMana.add(manaToAdd);
                     if (!isExistingManaCombination(newMana)) {
-                        this.add(newMana); // add the new combination
-                        newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable                            
+                        this.add(newMana.copy()); // add the new combination
+                        newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
+
                         Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
                         if (newMana.equals(moreValuable)) {
                             oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
@@ -439,13 +441,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 this.removeEqualMana(currentManaCopy);
                             }
                         }
-                        currentManaCopy = newMana.copy();
+                        currentManaCopy.setToMana(newMana);
                     }
                 }
-                if (!newCombinations || !repeatable) {
-                    break;
-                }
-            }
+            } while (repeatable && newCombinations && currentManaCopy.includesMana(payCombination));
         }
 
         return oldManaWasReplaced;
@@ -478,8 +477,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         if (manaAvailable.countColored() == 0) {
             payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric())); // TODO: Is it guaranteed that there is enough colorless mana to satisfy this?
         } else {
+            ManaType[] manaTypes = ManaType.values(); // Do not move, here for optimization reasons.
+            Mana manaToPayFrom = new Mana();
             for (int i = 0; i < manaCost.getGeneric(); i++) {
-                List<Mana> existingManas = new ArrayList<>();
+                List<Mana> existingManas = new ArrayList<>(payCombinations.size());
                 if (i > 0) {
                     existingManas.addAll(payCombinations);
                     payCombinations.clear();
@@ -488,14 +489,13 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 }
 
                 for (Mana existingMana : existingManas) {
-                    Mana manaToPayFrom = manaAfterFixedPayment.copy();
+                    manaToPayFrom.setToMana(manaAfterFixedPayment);
                     manaToPayFrom.subtract(existingMana);
 
-                    for (ManaType manaType : ManaType.values()) {
+                    for (ManaType manaType : manaTypes) {
                         existingMana.increase(manaType);
                         if (manaToPayFrom.get(manaType) > 0 && !payCombinations.contains(existingMana)) {
-                            Mana newMana = existingMana.copy();
-                            payCombinations.add(newMana);
+                            payCombinations.add(existingMana.copy());
 
                             manaToPayFrom.decrease(manaType);
                         }
@@ -506,8 +506,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                     // NOTE: This isn't in the for loop since ManaType doesn't include ANY.
                     existingMana.increaseAny();
                     if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0) {
-                        Mana newMana = existingMana.copy();
-                        payCombinations.add(newMana);
+                        payCombinations.add(existingMana.copy());
 
                         manaToPayFrom.decreaseAny();
                     }
