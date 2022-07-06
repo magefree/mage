@@ -62,9 +62,8 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
         } else { // mana source has more than 1 ability
             //perform a union of all existing options and the new options
-            Set<Mana> copy = copy();
+            List<Mana> copy = new ArrayList<>(this);
             this.clear();
-            Mana moreValuable;
             for (ActivatedManaAbilityImpl ability : abilities) {
                 for (Mana netMana : ability.getNetMana(game)) {
                     checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -78,7 +77,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 if (existingMana.equalManaValue(newMana)) {
                                     continue SkipAddMana;
                                 }
-                                moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
+                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                 if (moreValuable != null) {
                                     // only keep the more valuable mana
                                     existingMana.setToMana(moreValuable);
@@ -97,7 +96,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
         Mana newMana;
 
-        Set<Mana> copy = copy();
+        List<Mana> copy = new ArrayList<>(this);
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
@@ -167,7 +166,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             addMana(netManas.get(0));
                             addTriggeredMana(game, ability);
                         } else {
-                            Set<Mana> copy = copy();
+                            List<Mana> copy = new ArrayList<>(this);
                             this.clear();
                             for (Mana netMana : netManas) {
                                 checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -182,7 +181,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             }
                         }
                     } else {// The ability has mana costs
-                        Set<Mana> copy = copy();
+                        List<Mana> copy = new ArrayList<>(this);
                         this.clear();
                         for (Mana netMana : netManas) {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
@@ -207,7 +206,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 }
             } else {
                 //perform a union of all existing options and the new options
-                Set<Mana> copy = copy();
+                List<Mana> copy = new ArrayList<>(this);
                 this.clear();
                 for (ActivatedManaAbilityImpl ability : abilities) {
                     List<Mana> netManas = ability.getNetMana(game);
@@ -313,7 +312,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 addMana(triggeredNetMana.get(0));
             } else if (triggeredNetMana.size() > 1) {
                 // Add variations
-                Set<Mana> copy = copy();
+                List<Mana> copy = new ArrayList<>(this);
                 this.clear();
                 for (Mana triggeredMana : triggeredNetMana) {
                     for (Mana mana : copy) {
@@ -336,7 +335,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             this.add(new Mana());
         }
         if (addMana instanceof ConditionalMana) {
-            ManaOptions copy = this.copy();
+            List<Mana> copy = new ArrayList<>(this);
             this.clear();
             for (Mana mana : copy) {
                 ConditionalMana condMana = ((ConditionalMana) addMana).copy();
@@ -359,10 +358,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         if (!options.isEmpty()) {
             if (options.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
-                addMana(options.iterator().next());
+                addMana(options.get(0));
             } else {
                 //perform a union of all existing options and the new options
-                Set<Mana> copy = copy();
+                List<Mana> copy = new ArrayList<>(this);
                 this.clear();
                 for (Mana addMana : options) {
                     for (Mana mana : copy) {
