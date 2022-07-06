@@ -3353,7 +3353,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     if (used) {
                         iterator.remove();
-                        availableMana.removeFullyIncludedVariations();
                         anAbilityWasUsed = true;
                     }
                 }
