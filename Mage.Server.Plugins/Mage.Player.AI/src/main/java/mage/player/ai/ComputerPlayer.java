@@ -1521,7 +1521,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
                     }
-                    colored += mana.countColored();
+                    colored += CardUtil.overflowInc(colored, mana.countColored());
                 }
                 if (colored > 1 && (cost instanceof ColoredManaCost)) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
@@ -1751,7 +1751,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             a2Max = netMana.count();
                         }
                     }
-                    return a2Max - a1Max;
+                    return CardUtil.overflowDec(a2Max, a1Max);
                 }
             });
         }
