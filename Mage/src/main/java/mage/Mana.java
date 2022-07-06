@@ -1251,7 +1251,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return null;
         }
 
-        if (mana1IsConditional && mana2IsConditional) {
+        if (mana1IsConditional) {
             List<Condition> conditions1 = ((ConditionalMana) mana1).getConditions();
             List<Condition> conditions2 = ((ConditionalMana) mana2).getConditions();
             if (!Objects.equals(conditions1, conditions2)) {
