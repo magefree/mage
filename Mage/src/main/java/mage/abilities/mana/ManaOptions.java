@@ -144,8 +144,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * This adds the mana the abilities can produce to the possible mana
-     * variabtion.
+     * This adds the mana the abilities can produce to the possible mana variation.
      *
      * @param abilities
      * @param game
@@ -423,8 +422,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                     newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
 
                     // TODO: Can this check be done at the end?
-                    Mana moreValuable = Mana.getMoreValuableMana(currentManaCopy, newMana);
-                    if (newMana.equals(moreValuable)) {
+                    if (newMana.isMoreValuableThan(currentManaCopy)) {
                         oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
                         if (!currentMana.equalManaValue(currentManaCopy)) {
                             this.removeEqualMana(currentManaCopy);
@@ -512,8 +510,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
     private boolean isExistingManaCombination(Mana newMana) {
         for (Mana mana : this) {
-            Mana moreValuable = Mana.getMoreValuableMana(mana, newMana);  // TODO: WTF is this
-            if (mana.equals(moreValuable)) {
+            if (mana.isMoreValuableThan(newMana)) {
                 return true;
             }
         }

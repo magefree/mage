@@ -1229,6 +1229,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     }
 
+    public boolean isMoreValuableThan(Mana that) {
+        return this.equals(Mana.getMoreValuableMana(this, that));
+    }
+
     /**
      * Returns the mana that is more colored or has a greater amount but does
      * not contain one less mana in any color but generic.
