@@ -395,11 +395,12 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      */
     private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, Mana currentMana, ManaAbility manaAbility, Game game) {
         boolean oldManaWasReplaced = false; // true if the newly created mana includes all mana possibilities of the old
-        boolean repeatable = false;
-        if (manaToAdd != null && (manaToAdd.countColored() > 0 || manaToAdd.getAny() > 0) && manaToAdd.count() > 0 && onlyManaCosts) {
-            repeatable = true; // only replace to any with mana costs only will be repeated if able TODO: rewrite this comment
-        }
+        boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
+                && onlyManaCosts
+                && (manaToAdd.getAny() > 0 || manaToAdd.countColored() > 0)
+                && manaToAdd.count() > 0;
 
+        Mana currentManaCopy = new Mana();
         for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost, currentMana)) {
             Mana currentManaCopy = currentMana.copy(); // copy start mana because in iteration it will be updated
             while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
