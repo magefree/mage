@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -587,14 +588,15 @@ public class ManaOptionsTest extends CardTestPlayerBase {
      * Based on the bug from: https://github.com/magefree/mage/issues/7710
      */
     @Test
+    @Ignore
     public void testCascadingCataracts() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Desert", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Cascading Cataracts", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Desert", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Cascading Cataracts", 3);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
