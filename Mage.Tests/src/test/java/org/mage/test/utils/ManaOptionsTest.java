@@ -581,4 +581,25 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertManaOptions("{G}{W}{U}", manaOptions);
         assertManaOptions("{G}{W}{W}", manaOptions);
     }
+
+    /**
+     * This is a stress test for the implementation of ManaUtils.
+     * Based on the bug from: https://github.com/magefree/mage/issues/7710
+     */
+    @Test
+    public void testCascadingCataracts() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Desert", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Cascading Cataracts", 10);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+    }
 }
