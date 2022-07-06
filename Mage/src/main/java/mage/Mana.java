@@ -345,25 +345,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         BiFunction<Integer, Integer, Integer> overflowIncOrDec = increase ? CardUtil::overflowInc : CardUtil::overflowDec;
         switch (manaType) {
             case WHITE:
-                white = CardUtil.overflowDec(white, 1);
+                white = overflowIncOrDec.apply(white, 1);
                 break;
             case BLUE:
-                blue = CardUtil.overflowDec(blue, 1);
+                blue = overflowIncOrDec.apply(blue, 1);
                 break;
             case BLACK:
-                black = CardUtil.overflowDec(black, 1);
+                black = overflowIncOrDec.apply(black, 1);
                 break;
             case RED:
-                red = CardUtil.overflowDec(red, 1);
+                red = overflowIncOrDec.apply(red, 1);
                 break;
             case GREEN:
-                green = CardUtil.overflowDec(green, 1);
+                green = overflowIncOrDec.apply(green, 1);
                 break;
             case COLORLESS:
-                colorless = CardUtil.overflowDec(colorless, 1);
+                colorless = overflowIncOrDec.apply(colorless, 1);
                 break;
             case GENERIC:
-                generic = CardUtil.overflowDec(generic, 1);
+                generic = overflowIncOrDec.apply(generic, 1);
                 break;
         }
     }
