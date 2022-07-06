@@ -151,7 +151,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      */
     public boolean addManaWithCost(List<ActivatedManaAbilityImpl> abilities, Game game) {
         boolean wasUsable = false;
-        int replaces = 0;
         if (isEmpty()) {
             this.add(new Mana()); // needed if this is the first available mana, otherwise looping over existing options woold not loop
         }
@@ -245,8 +244,8 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             }
         }
 
-        if (this.size() > 30 || replaces > 30) {
-            logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
+        if (logger.isTraceEnabled() && this.size() > 30) {
+            logger.trace("ManaOptionsCosts " + this.size());
             logger.trace("Abilities: " + abilities.toString());
         }
 
