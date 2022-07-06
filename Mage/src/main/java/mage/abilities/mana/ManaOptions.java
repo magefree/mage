@@ -551,15 +551,17 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     /**
      * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
      * TODO: Why is this needed
-     * TODO: This is HORRIBLY slow with the LinkedSet, likely not worth the effort if it's an optimization.
      */
     public void removeFullyIncludedVariations() {
-        for (int i = this.size() - 1; i >= 0; i--) {
+        ArrayList<Mana> m = new ArrayList<>(this); // Shallow
+
+        for (int i = m.size() - 1; i >= 0; i--) {
             for (int ii = 0; ii < i; ii++) {
-                Mana moreValuable = Mana.getMoreValuableMana(this.get(i), this.get(ii));
+                Mana moreValuable = Mana.getMoreValuableMana(m.get(i), m.get(ii));
                 if (moreValuable != null) {
-                    this.get(ii).setToMana(moreValuable);
-                    this.remove(this.get(i));
+                    m.get(ii).setToMana(moreValuable);
+                    this.remove(m.get(i));
+                    m.remove(i);
                     break;
                 }
             }
