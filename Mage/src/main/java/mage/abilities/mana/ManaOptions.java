@@ -412,14 +412,13 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 List<Mana> manasToAdd = (manaToAdd != null) ? Collections.singletonList(manaToAdd) : manaAbility.getNetMana(game, newMana);
                 for (Mana mana : manasToAdd) {
                     newMana.add(mana);
-                    if (isExistingManaCombination(newMana)) {
+                    if (this.contains(newMana)) {
                         continue;
                     }
 
                     this.add(newMana.copy()); // add the new combination
                     newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
 
-                    // TODO: Can this check be done at the end?
                     if (newMana.isMoreValuableThan(currentManaCopy)) {
                         oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
                         if (!currentMana.equalManaValue(currentManaCopy)) {
@@ -506,15 +505,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         return payCombinations;
     }
 
-    private boolean isExistingManaCombination(Mana newMana) {
-        for (Mana mana : this) {
-            if (mana.isMoreValuableThan(newMana)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean removeEqualMana(Mana manaToRemove) {
         boolean result = false;
         for (Iterator<Mana> iterator = this.iterator(); iterator.hasNext(); ) {
@@ -526,7 +516,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         }
         return result;
     }
-
 
     /**
      * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
