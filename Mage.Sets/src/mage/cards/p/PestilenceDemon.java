@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +30,11 @@ public final class PestilenceDemon extends CardImpl {
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // {B}: Pestilence Demon deals 1 damage to each creature and each player.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl<>("{B}")));
     }
 
@@ -57,16 +62,16 @@ class PestilenceDemonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : game.getBattlefield().getAllPermanentIds()) {
-            Permanent p = game.getPermanent(permanentId);
-            if (p != null && p.isCreature(game)) {
-                p.damage(1, source.getSourceId(), source, game, false, true);
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
+            if (creature != null) {
+                creature.damage(1, source.getSourceId(), source, game);
             }
         }
+
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player p = game.getPlayer(playerId);
-            if (p != null) {
-                p.damage(1, source.getSourceId(), source, game);
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.damage(1, source.getSourceId(), source, game);
             }
         }
         return true;

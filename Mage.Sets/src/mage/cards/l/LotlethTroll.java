@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -13,21 +11,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class LotlethTroll extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your hand");
-
     public LotlethTroll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.TROLL);
 
@@ -38,10 +34,13 @@ public final class LotlethTroll extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Discard a creature card: Put a +1/+1 counter on Lotleth Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new DiscardTargetCost(new TargetCardInHand(filter))));
+        this.addAbility(new SimpleActivatedAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A))
+        ));
 
         // {B}: Regenerate Lotleth Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private LotlethTroll(final LotlethTroll card) {

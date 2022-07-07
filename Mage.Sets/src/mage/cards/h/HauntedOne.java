@@ -18,7 +18,6 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -74,8 +73,7 @@ enum HauntedOnePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional.of(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
                 .map(permanent -> permanent.shareCreatureTypes(game, input.getObject()))
                 .orElse(false);
     }

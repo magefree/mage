@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,8 +66,7 @@ enum GreatswordOfTyrPredicate implements ObjectSourcePlayerPredicate<Permanent> 
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional.of(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
                 .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
                 .map(input.getObject()::isControlledBy)

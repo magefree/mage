@@ -699,6 +699,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        if (this instanceof Permanent) {
+            if (!((Permanent) this).isPhasedIn()) {
+                return false;
+            }
+        }
+
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, playerAddingCounters, counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);

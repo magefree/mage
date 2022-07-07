@@ -56,7 +56,7 @@ class CaptainsManeuverEffect extends RedirectionEffect {
     protected MageObjectReference redirectToObject;
 
     public CaptainsManeuverEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ACCORDING_DURATION);
         staticText = "The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.";
     }
 

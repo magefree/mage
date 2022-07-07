@@ -24,6 +24,7 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -51,7 +52,7 @@ public final class FainTheBroker extends CardImpl {
 
         // {T}, Remove a counter from a creature you control: Create a Treasure token.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new TreasureToken()), new TapSourceCost());
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
         this.addAbility(ability);
 
         // {T}, Sacrifice an artifact: Create a 2/1 white and black Inkling creature token with flying.

@@ -77,7 +77,7 @@ class SetClassLevelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
+        if (permanent == null || !permanent.isPhasedIn()) {
             return false;
         }
 

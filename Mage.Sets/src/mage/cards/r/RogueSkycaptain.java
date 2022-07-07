@@ -49,9 +49,13 @@ public class RogueSkycaptain extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RogueSkycaptainEffect(), TargetController.YOU, false));
     }
 
+    private RogueSkycaptain(final RogueSkycaptain card) {
+        super(card);
+    }
+
     @Override
     public Card copy() {
-        return null;
+        return new RogueSkycaptain(this);
     }
 
 }

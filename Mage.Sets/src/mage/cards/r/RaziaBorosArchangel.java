@@ -81,7 +81,7 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
     protected MageObjectReference redirectToObject;
 
     public RaziaBorosArchangelEffect(Duration duration, int amount) {
-        super(duration, 3, UsageType.ONE_USAGE_ABSOLUTE);
+        super(duration, amount, UsageType.ACCORDING_DURATION);
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 

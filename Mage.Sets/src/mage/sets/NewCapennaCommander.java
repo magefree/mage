@@ -47,6 +47,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 282, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 283, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Bedevil", 331, Rarity.RARE, mage.cards.b.Bedevil.class));
+        cards.add(new SetCardInfo("Bellowing Mauler", 33, Rarity.RARE, mage.cards.b.BellowingMauler.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Blasphemous Act", 264, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blighted Woodland", 388, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
@@ -103,6 +104,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Signet", 365, Rarity.COMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Disciple of Bolas", 247, Rarity.RARE, mage.cards.d.DiscipleOfBolas.class));
         cards.add(new SetCardInfo("Dodgy Jalopy", 58, Rarity.RARE, mage.cards.d.DodgyJalopy.class));
+        cards.add(new SetCardInfo("Dogged Detective", 35, Rarity.RARE, mage.cards.d.DoggedDetective.class));
         cards.add(new SetCardInfo("Double Vision", 267, Rarity.RARE, mage.cards.d.DoubleVision.class));
         cards.add(new SetCardInfo("Dragonlord Ojutai", 337, Rarity.MYTHIC, mage.cards.d.DragonlordOjutai.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 248, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
@@ -164,7 +166,10 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inkfathom Witch", 342, Rarity.UNCOMMON, mage.cards.i.InkfathomWitch.class));
         cards.add(new SetCardInfo("Intangible Virtue", 204, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Izzet Signet", 369, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jailbreak", 17, Rarity.RARE, mage.cards.j.Jailbreak.class));
         cards.add(new SetCardInfo("Jenara, Asura of War", 343, Rarity.MYTHIC, mage.cards.j.JenaraAsuraOfWar.class));
+        cards.add(new SetCardInfo("Jolene, the Plunder Queen", 73, Rarity.RARE, mage.cards.j.JoleneThePlunderQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jolene, the Plunder Queen", 173, Rarity.RARE, mage.cards.j.JoleneThePlunderQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jund Panorama", 408, Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Shrine", 409, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Kamiz, Obscura Oculus", 3, Rarity.MYTHIC, mage.cards.k.KamizObscuraOculus.class));
@@ -192,10 +197,12 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
         cards.add(new SetCardInfo("Mask of the Schemer", 28, Rarity.RARE, mage.cards.m.MaskOfTheSchemer.class));
+        cards.add(new SetCardInfo("Master of Ceremonies", 18, Rarity.RARE, mage.cards.m.MasterOfCeremonies.class));
         cards.add(new SetCardInfo("Mezzio Mugger", 49, Rarity.RARE, mage.cards.m.MezzioMugger.class));
         cards.add(new SetCardInfo("Midnight Clock", 226, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Migration Path", 301, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mimic Vat", 372, Rarity.RARE, mage.cards.m.MimicVat.class));
+        cards.add(new SetCardInfo("Misfortune Teller", 38, Rarity.RARE, mage.cards.m.MisfortuneTeller.class));
         cards.add(new SetCardInfo("Mitotic Slime", 302, Rarity.RARE, mage.cards.m.MitoticSlime.class));
         cards.add(new SetCardInfo("Mossfire Valley", 414, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 415, Rarity.RARE, mage.cards.m.MosswortBridge.class));
