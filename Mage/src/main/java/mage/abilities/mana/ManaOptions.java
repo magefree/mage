@@ -183,21 +183,20 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                     } else {// The ability has mana costs
                         List<Mana> copy = new ArrayList<>(this);
                         this.clear();
+                        Mana manaCosts = ability.getManaCosts().getMana();
                         for (Mana netMana : netManas) {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
-                                for (Mana prevMana : copy) {
-                                    Mana startingMana = prevMana.copy();
-                                    Mana manaCosts = ability.getManaCosts().getMana();
+                                for (Mana startingMana : copy) {
                                     if (startingMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
                                         if (!subtractCostAddMana(manaCosts, triggeredManaVariation, ability.getCosts().isEmpty(), startingMana, ability, game)) {
                                             // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
-                                            add(prevMana);
+                                            add(startingMana);
                                         }
                                         wasUsable = true;
                                     } else {
                                         // mana costs can't be paid so keep starting mana
-                                        add(prevMana);
+                                        add(startingMana);
                                     }
                                 }
                             }
@@ -227,9 +226,9 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana previousMana : copy) {
-                                    CombineWithExisting:
                                     for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
                                         if (previousMana.includesMana(manaOption)) { // costs can be paid
+                                            // subtractCostAddMana has side effects on {this}. Do not add wasUsable to the if-statement above
                                             wasUsable |= subtractCostAddMana(manaOption, triggeredManaVariation, ability.getCosts().isEmpty(), previousMana, ability, game);
                                         }
                                     }
