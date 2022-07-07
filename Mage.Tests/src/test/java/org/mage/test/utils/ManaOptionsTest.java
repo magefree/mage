@@ -588,7 +588,6 @@ public class ManaOptionsTest extends CardTestPlayerBase {
      * Based on the bug from: https://github.com/magefree/mage/issues/7710
      */
     @Test
-    @Ignore
     public void testCascadingCataracts() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
@@ -603,5 +602,6 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't match", 6902, manaOptions.size());
     }
 }
