@@ -1459,7 +1459,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            // as copy, tries to applie cost effects and pays
+            // as copy, tries to apply cost effects and pays
             Ability activatingAbility = ability.copy();
             if (activatingAbility.activate(game, false)) {
                 result = playLand(card, game, false);
