@@ -1230,7 +1230,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public boolean isMoreValuableThan(Mana that) {
-        return this.equals(Mana.getMoreValuableMana(this, that));
+        // Use of == is intentional since getMoreValuableMana returns one of its inputs.
+        return this == Mana.getMoreValuableMana(this, that);
     }
 
     /**
