@@ -3,7 +3,7 @@ package mage.client.cards;
 import mage.abilities.icon.*;
 import mage.abilities.icon.system.CombinedCountIcon;
 import mage.client.components.StretchIcon;
-import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeManager;
 import mage.client.util.GUISizeHelper;
 import mage.util.DebugUtil;
 import org.mage.card.arcane.CardRendererUtils;
@@ -303,7 +303,7 @@ public class CardIconsPanel extends JPanel {
             label.setToolTipText("<html>" + ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT));
             if (!icon.getText().isEmpty()) {
                 Graphics2D g2d = iconImageWithText.createGraphics();
-                g2d.setColor(PreferencesDialog.getCurrentTheme().getCardIconsTextColor(this.color));
+                g2d.setColor(this.color.getTextColor() != null ? this.color.getTextColor() : ThemeManager.getCurrentTheme().getCardIconsTextColor());
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 Rectangle rect = CardRendererUtils.reduceRect(new Rectangle(0, 0, iconImageWithText.getWidth(), iconImageWithText.getHeight()), 0.8f);
                 CardRendererUtils.drawCenteredText(g2d, icon.getText(), rect, this.font, true);

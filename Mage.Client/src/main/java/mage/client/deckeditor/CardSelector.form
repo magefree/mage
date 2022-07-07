@@ -54,8 +54,8 @@
       <SubComponents>
         <Component class="javax.swing.JToggleButton" name="tbRed">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_red_off.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_red_off.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -64,8 +64,8 @@
             <Property name="actionCommand" type="java.lang.String" value="Red"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_red.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_red.png&quot;))" type="code"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -75,8 +75,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbGreen">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_green_off.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_green_off.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -85,8 +85,8 @@
             <Property name="actionCommand" type="java.lang.String" value="Green"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_green.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_green.png&quot;))" type="code"/>
             </Property>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -97,8 +97,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbBlue">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_blueOff.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_blueOff.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -107,8 +107,8 @@
             <Property name="actionCommand" type="java.lang.String" value="Blue"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_blue.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_blue.png&quot;))" type="code"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -118,8 +118,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbBlack">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_black_off.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_black_off.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -128,8 +128,8 @@
             <Property name="actionCommand" type="java.lang.String" value="Black"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_black.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_black.png&quot;))" type="code"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -139,8 +139,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbWhite">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_white_off.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_white_off.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -149,8 +149,8 @@
             <Property name="actionCommand" type="java.lang.String" value="White"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/color_white.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/color_white.png&quot;))" type="code"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -160,8 +160,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbColorless">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/colorless_off.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/colorless_off.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -170,8 +170,8 @@
             <Property name="actionCommand" type="java.lang.String" value="Colorless"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/colorless.png"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/colorless.png&quot;))" type="code"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -206,8 +206,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExpansionSearch">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/search_32.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/search_32.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fast search set or expansion"/>
             <Property name="alignmentX" type="float" value="1.0"/>
@@ -275,8 +275,8 @@
       <SubComponents>
         <Component class="javax.swing.JToggleButton" name="tbLand">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_land.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_land.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -293,8 +293,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbCreatures">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_creatures.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_creatures.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -311,8 +311,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbArifiacts">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_artifact.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_artifact.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -329,8 +329,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbSorceries">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_sorcery.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_sorcery.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -347,8 +347,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbInstants">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_instant.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_instant.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -365,8 +365,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbEnchantments">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_enchantment.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_enchantment.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -383,8 +383,8 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="tbPlaneswalkers">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_planeswalker.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_planeswalker.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -444,8 +444,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgView"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/list_panel.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/list_panel.png&quot;))" type="code"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value="Shows the cards as a list."/>
@@ -474,8 +474,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgView"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/card_panel.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/card_panel.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Shows the card as images."/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -513,8 +513,8 @@
           <SubComponents>
             <Component class="javax.swing.JToggleButton" name="tbCommon">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/rarity_common_20.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/rarity_common_20.png&quot;))" type="code"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -531,8 +531,8 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="tbUncommon">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/rarity_uncommon_20.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/rarity_uncommon_20.png&quot;))" type="code"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -549,8 +549,8 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="tbRare">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/rarity_rare_20.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/rarity_rare_20.png&quot;))" type="code"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -567,8 +567,8 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="tbMythic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/rarity_mythic_20.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/rarity_mythic_20.png&quot;))" type="code"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -585,8 +585,8 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="tbSpecial">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/buttons/rarity_special_20.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/rarity_special_20.png&quot;))" type="code"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -688,8 +688,8 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonAddToMain">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/deck_in.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/deck_in.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Add selected cards to deck.&lt;br/&gt;&#xa;Alternative: &lt;strong&gt;Double click&lt;/strong&gt; the card in card selector to move a card to the deck."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -711,8 +711,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRemoveFromMain">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/deck_out.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/deck_out.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Remove selected cards from deck"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -734,8 +734,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAddToSideboard">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/sideboard_in.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/sideboard_in.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Add selected cards to sideboard.&lt;br/&gt;&#xa;Alternative: &lt;strong&gt;ALT key + Double click&lt;/strong&gt; the card in card selector to move a card to the sideboard."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -757,8 +757,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRemoveFromSideboard">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/sideboard_out.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/sideboard_out.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Remove selected cards from sideboard."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">

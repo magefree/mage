@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Carbon"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>

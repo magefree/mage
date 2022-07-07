@@ -5,6 +5,7 @@ import mage.cards.decks.DeckFormats;
 import mage.cards.decks.exporter.DeckExporter;
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
+import mage.client.themes.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -140,7 +141,7 @@ public class DeckExportClipboardDialog extends MageDialog {
             }
         });
 
-        buttonCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/copy_24.png"))); // NOI18N
+        buttonCopy.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/copy_24.png"))); // NOI18N
         buttonCopy.setToolTipText("Copy current text to clipboard");
         buttonCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

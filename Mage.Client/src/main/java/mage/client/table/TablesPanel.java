@@ -7,6 +7,7 @@ import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.dialog.*;
+import mage.client.themes.ThemeManager;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
 import mage.client.util.MageTableRowSorter;
@@ -210,7 +211,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // base panel to render
         private final JPanel renderPanel = new JPanel();
-        private final ImageIcon skillIcon = new ImageIcon(this.getClass().getResource("/info/yellow_star_16.png"));
+        private final ImageIcon skillIcon = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/info/yellow_star_16.png"));
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -614,28 +615,28 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPaneTablesActive.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPaneTablesActive.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
 
-        ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_waiting.png"));
+        ImageIcon icon = new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_waiting.png"));
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateWaiting.setIcon(new ImageIcon(newimg));
 
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"));
+        icon = new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_active.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateActive.setIcon(new ImageIcon(newimg));
 
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"));
+        icon = new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_finished.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateFinished.setIcon(new ImageIcon(newimg));
 
         int iconSize = 48 + GUISizeHelper.menuFont.getSize() * 2 - 15;
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"));
+        icon = new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/match_new.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
         btnNewTable.setIcon(new ImageIcon(newimg));
 
-        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"));
+        icon = new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/tourney_new.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
         btnNewTournament.setIcon(new ImageIcon(newimg));
@@ -1073,7 +1074,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTop.setBackground(java.awt.Color.white);
         jPanelTop.setOpaque(false);
 
-        btnNewTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"))); // NOI18N
+        btnNewTable.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/match_new.png"))); // NOI18N
         btnNewTable.setToolTipText("Creates a new match table.");
         btnNewTable.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
@@ -1082,7 +1083,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
 
-        btnNewTournament.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"))); // NOI18N
+        btnNewTournament.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/tourney_new.png"))); // NOI18N
         btnNewTournament.setToolTipText("Creates a new tourney table.");
         btnNewTournament.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTournament.addActionListener(new java.awt.event.ActionListener() {

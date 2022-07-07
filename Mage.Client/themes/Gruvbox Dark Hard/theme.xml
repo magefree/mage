@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Gruvbox Dark Hard"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkHardIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>

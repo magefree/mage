@@ -110,8 +110,8 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblCount">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/deck_pack.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/deck_pack.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="999"/>
             <Property name="toolTipText" type="java.lang.String" value="Number of all cards in this area."/>
@@ -127,8 +127,8 @@
         <Component class="javax.swing.JLabel" name="lblLandCount">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_land.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_land.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="999"/>
             <Property name="toolTipText" type="java.lang.String" value="Number of lands."/>
@@ -145,8 +145,8 @@
         <Component class="javax.swing.JLabel" name="lblCreatureCount">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/type_creatures.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/type_creatures.png&quot;))" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="999"/>
             <Property name="toolTipText" type="java.lang.String" value="Number of creatures."/>
@@ -204,8 +204,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgView"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/list_panel.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/list_panel.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Shows the cards as a list."/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -237,8 +237,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgView"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/card_panel.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/card_panel.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Shows the card as images."/>
             <Property name="horizontalTextPosition" type="int" value="10"/>

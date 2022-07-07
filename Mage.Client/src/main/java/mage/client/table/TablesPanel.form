@@ -93,8 +93,8 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnNewTable">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/match_new.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/match_new.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Creates a new match table."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -107,8 +107,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnNewTournament">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/buttons/tourney_new.png"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage(&quot;/buttons/tourney_new.png&quot;))" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Creates a new tourney table."/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">

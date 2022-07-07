@@ -16,6 +16,7 @@ import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
 import mage.client.dialog.AddLandDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.themes.ThemeManager;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
@@ -77,6 +78,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         fcExportDeck = new JFileChooser();
         fcExportDeck.setAcceptAllFileFilterUsed(false);
 
+        if (ThemeManager.getCurrentTheme().shouldShowBackground()) {
+            lblDeckName.setForeground(ThemeManager.getCurrentTheme().getTextOnBackgroundTextColor());
+        }
         deckArea.setOpaque(false);
         panelLeft.setOpaque(false);
         panelRight.setOpaque(false);
@@ -973,7 +977,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckName.setOpaque(false);
 
-        lblDeckName.setForeground(new java.awt.Color(255, 255, 255));
         lblDeckName.setLabelFor(txtDeckName);
         lblDeckName.setText("Deck Name:");
 
@@ -1001,7 +1004,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckCreate.setOpaque(false);
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_active.png"))); // NOI18N
         btnNew.setText("NEW");
         btnNew.setIconTextGap(2);
         btnNew.addActionListener(new java.awt.event.ActionListener() {
@@ -1010,7 +1013,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        btnGenDeck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
+        btnGenDeck.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/card_panel.png"))); // NOI18N
         btnGenDeck.setText("Random");
         btnGenDeck.setIconTextGap(1);
         btnGenDeck.setName("btnGenDeck"); // NOI18N
@@ -1044,7 +1047,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckLoad.setOpaque(false);
 
-        btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
+        btnLoad.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png"))); // NOI18N
         btnLoad.setText("LOAD");
         btnLoad.setIconTextGap(2);
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -1053,7 +1056,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
+        btnImport.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/deck_in.png"))); // NOI18N
         btnImport.setText("Import");
         btnImport.setIconTextGap(2);
         btnImport.setName("btnImport"); // NOI18N
@@ -1087,7 +1090,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckSave.setOpaque(false);
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/sideboard_out.png"))); // NOI18N
         btnSave.setText("SAVE");
         btnSave.setIconTextGap(2);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -1096,7 +1099,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_out.png"))); // NOI18N
+        btnExport.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/deck_out.png"))); // NOI18N
         btnExport.setText("Export");
         btnExport.setIconTextGap(2);
         btnExport.setName("btnImport"); // NOI18N
@@ -1130,7 +1133,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckDraft.setOpaque(false);
 
-        btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnSubmit.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_finished.png"))); // NOI18N
         btnSubmit.setText("SUBMIT");
         btnSubmit.setIconTextGap(2);
         btnSubmit.setName("btnSubmit"); // NOI18N
@@ -1141,7 +1144,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnSubmitTimer.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        btnSubmitTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnSubmitTimer.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/state_finished.png"))); // NOI18N
         btnSubmitTimer.setText("<html>Submit<br>in 1 min");
         btnSubmitTimer.setIconTextGap(2);
         btnSubmitTimer.setName("btnSubmitTimer"); // NOI18N
@@ -1178,7 +1181,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeckLands.setOpaque(false);
 
-        btnAddLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
+        btnAddLand.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_land.png"))); // NOI18N
         btnAddLand.setText("Lands");
         btnAddLand.setIconTextGap(2);
         btnAddLand.setName("btnAddLand"); // NOI18N

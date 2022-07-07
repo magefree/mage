@@ -9,6 +9,7 @@
  import mage.client.deckeditor.table.UpdateCountsCallback;
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.impl.Plugins;
+ import mage.client.themes.ThemeManager;
  import mage.client.util.Event;
  import mage.client.util.*;
  import mage.client.util.comparators.*;
@@ -516,7 +517,7 @@
          panelControl.setPreferredSize(new java.awt.Dimension(616, 23));
          panelControl.setRequestFocusEnabled(false);
 
-         lblCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_pack.png"))); // NOI18N
+         lblCount.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/deck_pack.png"))); // NOI18N
          lblCount.setText("999");
          lblCount.setToolTipText("Number of all cards in this area.");
          lblCount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -526,7 +527,7 @@
          lblCount.setVerifyInputWhenFocusTarget(false);
 
          lblLandCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-         lblLandCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
+         lblLandCount.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_land.png"))); // NOI18N
          lblLandCount.setText("999");
          lblLandCount.setToolTipText("Number of lands.");
          lblLandCount.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -537,7 +538,7 @@
          lblLandCount.setVerifyInputWhenFocusTarget(false);
 
          lblCreatureCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-         lblCreatureCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_creatures.png"))); // NOI18N
+         lblCreatureCount.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/type_creatures.png"))); // NOI18N
          lblCreatureCount.setText("999");
          lblCreatureCount.setToolTipText("Number of creatures.");
          lblCreatureCount.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -562,7 +563,7 @@
          cbSortBy.addActionListener(evt -> cbSortByActionPerformed(evt));
 
          bgView.add(jToggleListView);
-         jToggleListView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png"))); // NOI18N
+         jToggleListView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/list_panel.png"))); // NOI18N
          jToggleListView.setToolTipText("Shows the cards as a list.");
          jToggleListView.setBorder(null);
          jToggleListView.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -573,7 +574,7 @@
          jToggleListView.addActionListener(evt -> jToggleListViewActionPerformed(evt));
 
          bgView.add(jToggleCardView);
-         jToggleCardView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
+         jToggleCardView.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/card_panel.png"))); // NOI18N
          jToggleCardView.setToolTipText("Shows the card as images.");
          jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
          jToggleCardView.setMargin(new java.awt.Insets(2, 6, 2, 6));

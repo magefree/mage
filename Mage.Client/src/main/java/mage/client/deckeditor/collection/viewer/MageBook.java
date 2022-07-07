@@ -150,6 +150,7 @@ public class MageBook extends JComponent {
         setCaption.setHorizontalAlignment(SwingConstants.CENTER);
         setCaption.setFont(jLayeredPane.getFont().deriveFont(25f));
         setCaption.setText("EMPTY CAPTION");
+        setCaption.setForeground(TEXT_COLOR);
         jPanelCaption.add(setCaption, BorderLayout.NORTH);
 
         // set's info
@@ -157,6 +158,7 @@ public class MageBook extends JComponent {
         setInfo.setHorizontalAlignment(SwingConstants.CENTER);
         setInfo.setFont(jLayeredPane.getFont().deriveFont(17f));
         setInfo.setText("EMPTY STATS");
+        setInfo.setForeground(TEXT_COLOR);
         jPanelCaption.add(setInfo, BorderLayout.SOUTH);
 
         cardDimensions = new CardDimensions(0.45d);
@@ -427,6 +429,7 @@ public class MageBook extends JComponent {
             cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
             cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
             cardNumber.setText(card.getCardNumber());
+            cardNumber.setForeground(TEXT_COLOR);
             jLayeredPane.add(cardNumber);
 
             // draft rating label
@@ -440,6 +443,7 @@ public class MageBook extends JComponent {
             } else {
                 draftRating.setText("");
             }
+            draftRating.setForeground(TEXT_COLOR);
             jLayeredPane.add(draftRating);
         }
     }
@@ -546,7 +550,7 @@ public class MageBook extends JComponent {
         if (countNotHave > 0) {
             setInfo.setForeground(new Color(150, 0, 0));
         } else {
-            setInfo.setForeground(jLayeredPane.getForeground());
+            setInfo.setForeground(TEXT_COLOR);
         }
     }
 
@@ -723,6 +727,7 @@ public class MageBook extends JComponent {
     private static final int OFFSET_Y = 20;
     private static final int LEFT_RIGHT_PAGES_WIDTH = 40;
     private static final Color NOT_IMPLEMENTED = new Color(220, 220, 220, 150);
+    private static final Color TEXT_COLOR = Color.black;
 
     private Configuration conf;
 }

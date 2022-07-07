@@ -1,6 +1,9 @@
 
 package mage.client.util.gui.countryBox;
 
+import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeManager;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +29,9 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         labelItem.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
         labelItem.setBorder(new EmptyBorder(0, 5, 0, 0));
         labelItem.setOpaque(false);
-        labelItem.setForeground(Color.WHITE);
+        if (ThemeManager.getCurrentTheme().isNimbusLaf()) {
+            labelItem.setForeground(Color.WHITE);
+        }
 
         editValue = null;
     }
@@ -58,6 +63,6 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         editValue[1] = newItem[1];
 
         labelItem.setText(editValue[0]);
-        labelItem.setIcon(new ImageIcon(getClass().getResource("/flags/"+ editValue[1] + ".png")));
+        labelItem.setIcon(new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/"+ editValue[1] + ".png")));
     }  
 }

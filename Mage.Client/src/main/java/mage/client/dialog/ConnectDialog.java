@@ -6,6 +6,7 @@ import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
+import mage.client.themes.ThemeManager;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
@@ -344,7 +345,7 @@ public class ConnectDialog extends MageDialog {
         panelFlag.add(cbFlag);
         panelFlag.add(filler1);
 
-        btnFlagSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
+        btnFlagSearch.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_24.png"))); // NOI18N
         btnFlagSearch.setToolTipText("Fast search your flag");
         btnFlagSearch.setAlignmentX(1.0F);
         btnFlagSearch.setPreferredSize(new java.awt.Dimension(23, 23));
@@ -355,7 +356,7 @@ public class ConnectDialog extends MageDialog {
         });
         panelFlag.add(btnFlagSearch);
 
-        btnFindMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/de.png"))); // NOI18N
+        btnFindMain.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/de.png"))); // NOI18N
         btnFindMain.setText("X");
         btnFindMain.setToolTipText("Connect to xmage.de (first Europe server, most popular, registration needs)");
         btnFindMain.setAlignmentY(0.0F);
@@ -393,7 +394,7 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
+        btnFindUs.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/us.png"))); // NOI18N
         btnFindUs.setText("US");
         btnFindUs.setToolTipText("Connect to us.xmage.today (USA, use any username without registration)");
         btnFindUs.setAlignmentY(0.0F);
@@ -414,7 +415,7 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindEU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/europeanunion.png"))); // NOI18N
+        btnFindEU.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/europeanunion.png"))); // NOI18N
         btnFindEU.setText("EU");
         btnFindEU.setToolTipText("Connect to eu.xmage.today (second Europe server, use any username without registration)");
         btnFindEU.setAlignmentY(0.0F);
@@ -470,7 +471,7 @@ public class ConnectDialog extends MageDialog {
         lblPort.setLabelFor(txtPort);
         lblPort.setText("Port:");
 
-        btnCheckStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/world.png"))); // NOI18N
+        btnCheckStatus.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/flags/world.png"))); // NOI18N
         btnCheckStatus.setText("Check online status");
         btnCheckStatus.setToolTipText("Go to servers online statuses page");
         btnCheckStatus.setAlignmentY(0.0F);

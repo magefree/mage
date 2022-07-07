@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Light Flat"
+        resourcesParentTheme="FlatLaf Light"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme"
+        showBackground="false"
+    />
+</themeConfig>

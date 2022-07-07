@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
 import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
 import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
+
+import mage.client.themes.ThemeManager;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
 
@@ -37,7 +39,7 @@ public final class ImageHelper {
     public static BufferedImage loadImage(String ref) {
         if (!images.containsKey(ref)) {
             try {
-                images.put(ref, ImageIO.read(ImageHelper.class.getResourceAsStream(ref)));
+                images.put(ref, ThemeManager.getCurrentTheme().getResourceImage(ref));
             } catch (Exception e) {
                 return null;
             }
@@ -115,7 +117,7 @@ public final class ImageHelper {
      */
     public static Image getImageFromResources(String path) {
 
-        try(InputStream stream = UI.class.getResourceAsStream(path)) {
+        try(InputStream stream = ThemeManager.getCurrentTheme().getResourceStream(path)) {
             ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;

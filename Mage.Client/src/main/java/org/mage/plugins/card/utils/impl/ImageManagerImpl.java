@@ -1,7 +1,7 @@
 package org.mage.plugins.card.utils.impl;
 
 import mage.abilities.icon.CardIconColor;
-import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeManager;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.SvgUtils;
@@ -33,7 +33,7 @@ public enum ImageManagerImpl implements ImageManager {
         phasesImages = new HashMap<>();
         for (String name : phases) {
             Image image = getImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + name.toLowerCase(Locale.ENGLISH) + ".png"),
+                    "/phases/phase_" + name.toLowerCase(Locale.ENGLISH) + ".png",
                     new Rectangle(36, 36));
             phasesImages.put(name, image);
         }
@@ -267,8 +267,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getConcedeButtonImage() {
         if (imageConcedeButton == null) {
-            imageConcedeButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("concede.png"));
+            imageConcedeButton = getBufferedImageFromResource("/buttons/concede.png");
         }
         return imageConcedeButton;
     }
@@ -276,8 +275,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSwitchHandsButtonImage() {
         if (imageSwitchHandsButton == null) {
-            imageSwitchHandsButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("switch_hands.png"));
+            imageSwitchHandsButton = getBufferedImageFromResource("/buttons/switch_hands.png");
         }
         return imageSwitchHandsButton;
     }
@@ -285,8 +283,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getStopWatchButtonImage() {
         if (imageStopWatchingButton == null) {
-            imageStopWatchingButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("stop_watching.png"));
+            imageStopWatchingButton = getBufferedImageFromResource("/buttons/stop_watching.png");
         }
         return imageStopWatchingButton;
     }
@@ -294,8 +291,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getCancelSkipButtonImage() {
         if (imageCancelSkipButton == null) {
-            imageCancelSkipButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("cancel_skip.png"));
+            imageCancelSkipButton = getBufferedImageFromResource("/buttons/cancel_skip.png");
         }
         return imageCancelSkipButton;
     }
@@ -303,8 +299,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipNextTurnButtonImage() {
         if (imageSkipNextTurnButton == null) {
-            imageSkipNextTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_turn.png"));
+            imageSkipNextTurnButton = getBufferedImageFromResource("/buttons/skip_turn.png");
         }
         return imageSkipNextTurnButton;
     }
@@ -312,8 +307,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipEndTurnButtonImage() {
         if (imageSkipToEndTurnButton == null) {
-            imageSkipToEndTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_end.png"));
+            imageSkipToEndTurnButton = getBufferedImageFromResource("/buttons/skip_to_end.png");
         }
         return imageSkipToEndTurnButton;
     }
@@ -321,8 +315,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipMainButtonImage() {
         if (imageSkipToMainButton == null) {
-            imageSkipToMainButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_main.png"));
+            imageSkipToMainButton = getBufferedImageFromResource("/buttons/skip_to_main.png");
         }
         return imageSkipToMainButton;
     }
@@ -330,8 +323,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipStackButtonImage() {
         if (imageSkipStackButton == null) {
-            imageSkipStackButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_stack.png"));
+            imageSkipStackButton = getBufferedImageFromResource("/buttons/skip_stack.png");
         }
         return imageSkipStackButton;
     }
@@ -339,8 +331,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipEndStepBeforeYourTurnButtonImage() {
         if (imageSkipUntilEndStepBeforeYourTurnButton == null) {
-            imageSkipUntilEndStepBeforeYourTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_previous_end.png"));
+            imageSkipUntilEndStepBeforeYourTurnButton = getBufferedImageFromResource("/buttons/skip_to_previous_end.png");
         }
         return imageSkipUntilEndStepBeforeYourTurnButton;
     }
@@ -348,8 +339,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getSkipYourNextTurnButtonImage() {
         if (imageSkipYourNextTurnButton == null) {
-            imageSkipYourNextTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_all.png"));
+            imageSkipYourNextTurnButton = getBufferedImageFromResource("/buttons/skip_all.png");
         }
         return imageSkipYourNextTurnButton;
     }
@@ -357,8 +347,7 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public Image getToggleRecordMacroButtonImage() {
         if (imageToggleRecordMacroButton == null) {
-            imageToggleRecordMacroButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("toggle_macro.png"));
+            imageToggleRecordMacroButton = getBufferedImageFromResource("/buttons/toggle_macro.png");
         }
         return imageToggleRecordMacroButton;
     }
@@ -366,12 +355,12 @@ public enum ImageManagerImpl implements ImageManager {
     @Override
     public BufferedImage getCardIcon(String resourceName, int size, CardIconColor cardIconColor) {
         // icon must be same, but color can be changed by themes
-        InputStream data = ImageManager.class.getResourceAsStream(PreferencesDialog.getCurrentTheme().getCardIconsResourcePath(resourceName));
         try {
+            InputStream data = ThemeManager.getCurrentTheme().getResourceStream("/card/icons/" + resourceName);
             // no need to resize svg (lib already do it on load)
             return SvgUtils.loadSVG(data, "card icon = " + resourceName + "; " + cardIconColor.toString(),
-                    PreferencesDialog.getCurrentTheme().getCardIconsCssFile(cardIconColor),
-                    PreferencesDialog.getCurrentTheme().getCardIconsCssSettings(cardIconColor),
+                    ThemeManager.getCardIconsCssFile(cardIconColor),
+                    ThemeManager.getCardIconsCssSettings(cardIconColor),
                     size, size, false);
         } catch (Exception e) {
             logger.error("Can't load card icon: " + resourceName + " , reason: " + e.getMessage(), e);
@@ -384,11 +373,9 @@ public enum ImageManagerImpl implements ImageManager {
         Image imageCardTransparent;
         Image resized = null;
 
-        URL imageURL = ImageManager.class.getResource(path);
-
         try {
-            image = ImageIO.read(imageURL);
-            imageCardTransparent = Transparency.makeColorTransparent(image, mask);
+            image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
+            imageCardTransparent = Transparency.makeColorTransparent(image, ThemeManager.getCurrentTheme().isDark() ? Color.BLACK : mask);
 
             resized = imageCardTransparent.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
         } catch (Exception e) {
@@ -401,10 +388,8 @@ public enum ImageManagerImpl implements ImageManager {
     protected static Image getImageFromResource(String path, Rectangle rec) {
         Image resized = null;
 
-        URL imageURL = ImageManager.class.getResource(path);
-
         try {
-            BufferedImage image = ImageIO.read(imageURL);
+            BufferedImage image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
             resized = image.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
         } catch (Exception e) {
             e.printStackTrace();
@@ -414,11 +399,10 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     protected static BufferedImage getBufferedImageFromResource(String path) {
-        URL imageURL = ImageManager.class.getResource(path);
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(imageURL);
+            image = ImageIO.read(ThemeManager.getCurrentTheme().getResourceStream(path));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,7 +15,8 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.client.themes.ThemeType;
+import mage.client.themes.ThemeConfigSettings;
+import mage.client.themes.ThemeManager;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
@@ -72,8 +73,8 @@ public class TestCardRenderDialog extends MageDialog {
         this.comboRenderMode.setSelectedIndex(PreferencesDialog.getRenderMode());
 
         // init themes list
-        this.comboTheme.setModel(new DefaultComboBoxModel(ThemeType.values()));
-        this.comboTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+        this.comboTheme.setModel(new DefaultComboBoxModel(ThemeManager.getLoadedThemes()));
+        this.comboTheme.setSelectedItem(ThemeManager.getCurrentTheme());
         
         // init card icon colors list
         this.comboCardColor.setModel(new DefaultComboBoxModel(CardIconColor.values()));
@@ -204,7 +205,7 @@ public class TestCardRenderDialog extends MageDialog {
 
     private void reloadCards() {
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
-        PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+        ThemeManager.setCurrentTheme((ThemeConfigSettings) comboTheme.getSelectedItem());
 
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());

@@ -1,5 +1,7 @@
 package mage.client.components.ability;
 
+import mage.client.themes.ThemeManager;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,10 +26,10 @@ public class MageScrollButton extends MetalScrollButton {
     private int width;
 
     static {
-        buttonLeft = new ImageIcon(MageScrollButton.class.getResource("/buttons/left.png"));
-        buttonRight = new ImageIcon(MageScrollButton.class.getResource("/buttons/right.png"));
-        buttonUp = new ImageIcon(MageScrollButton.class.getResource("/buttons/up.png"));
-        buttonDown = new ImageIcon(MageScrollButton.class.getResource("/buttons/down.png"));
+        buttonLeft = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/left.png"));
+        buttonRight = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/right.png"));
+        buttonUp = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/up.png"));
+        buttonDown = new ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/down.png"));
     }
 
     public MageScrollButton(int direction, int width, boolean freeStanding) {

@@ -2,6 +2,7 @@ package mage.client.deckeditor;
 
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
+import mage.client.themes.ThemeManager;
 import mage.util.DeckUtil;
 
 import javax.swing.*;
@@ -127,7 +128,7 @@ public class DeckImportClipboardDialog extends MageDialog {
             }
         });
 
-        buttonPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/paste_24.png"))); // NOI18N
+        buttonPaste.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/paste_24.png"))); // NOI18N
         buttonPaste.setToolTipText("Paste text from clipboard");
         buttonPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

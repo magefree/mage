@@ -8,7 +8,7 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.themes.ThemeType;
+import mage.client.themes.ThemeManager;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -82,10 +82,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         initComponents();
         setGUISize();
 
-        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
-        inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
-        activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
-        deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
+        inactiveBackgroundColor = ThemeManager.getCurrentTheme().getPlayerPanelInactiveBackgroundColor();
+        activeBackgroundColor = ThemeManager.getCurrentTheme().getPlayerPanelActiveBackgroundColor();
+        deadBackgroundColor = ThemeManager.getCurrentTheme().getPlayerPanelDeadBackgroundColor();
     }
 
     public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {

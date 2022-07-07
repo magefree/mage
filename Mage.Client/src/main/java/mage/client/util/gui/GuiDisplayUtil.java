@@ -3,6 +3,7 @@ package mage.client.util.gui;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.table.PlayersChatPanel;
+import mage.client.themes.ThemeManager;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
 import mage.view.CardView;
@@ -12,8 +13,12 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.*;
 
@@ -24,6 +29,9 @@ public final class GuiDisplayUtil {
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
     private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
+
+    // To store temporary files since html doesn't accept InputStream or Image
+    private static final HashMap<String, File> tempImageFiles = new HashMap<>();
 
     public static class TextLines {
 
@@ -224,7 +232,7 @@ public final class GuiDisplayUtil {
     }
 
     public static String getHintIconHtml(String iconName, int symbolSize) {
-        return "<img src='" + getResourcePath("hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
+        return "<img src='" + getResourcePath("/hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
     }
 
     public static StringBuilder getRulesFromCardView(CardView card, TextLines textLines) {
@@ -268,19 +276,19 @@ public final class GuiDisplayUtil {
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
         String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + '>';
         if (card.getColor().isWhite()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
         if (card.getColor().isBlue()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
         }
         if (card.getColor().isBlack()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
         }
         if (card.getColor().isRed()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
         }
         if (card.getColor().isGreen()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("/card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
         }
         if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -402,7 +410,22 @@ public final class GuiDisplayUtil {
     }
 
     private static String getResourcePath(String image) {
-        return GuiDisplayUtil.class.getClassLoader().getResource(image).toString();
+        // Necessary work-around since themes can only give resources as InputStream or Image
+        // since the resources can be contained within a zip file
+        if (tempImageFiles.containsKey(image)) {
+            return tempImageFiles.get(image).toURI().toString();
+        } else {
+            try {
+                int extIndex = image.lastIndexOf('.');
+                File tempFile = File.createTempFile(image.substring(0, extIndex).replace('/','_'), image.substring(extIndex));
+                tempFile.deleteOnExit();
+                ImageIO.write(ThemeManager.getCurrentTheme().getResourceImage(image), image.substring(extIndex + 1), tempFile);
+                tempImageFiles.put(image, tempFile);
+                return tempFile.toURI().toString();
+            } catch (IOException e) {
+                return GuiDisplayUtil.class.getClassLoader().getResource(image.startsWith("/") ? image.substring(1) : image).toString();
+            }
+        }
     }
 
     private static String getTypes(CardView card) {

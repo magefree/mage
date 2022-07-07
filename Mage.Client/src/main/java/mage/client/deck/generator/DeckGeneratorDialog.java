@@ -3,6 +3,7 @@ package mage.client.deck.generator;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeManager;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
@@ -103,7 +104,7 @@ public class DeckGeneratorDialog {
         }
 
         JButton btn = new JButton();
-        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png")));
+        btn.setIcon(new javax.swing.ImageIcon(ThemeManager.getCurrentTheme().getResourceImage("/buttons/search_32.png")));
         btn.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
         btn.setAlignmentX(1.0F);
         btn.setPreferredSize(new java.awt.Dimension(32, 32));

@@ -75,7 +75,8 @@ public class UpdateMemUsageTask extends SwingWorker<Void, MemoryStats> {
                             + "Application memory limit almost reached. Errors and freezes are very possible.";
 
                 }else{
-                    jLabelToDisplayInfo.setForeground(Color.black);
+                    Color defaultColor = UIManager.getColor("Label.foreground");
+                    jLabelToDisplayInfo.setForeground(defaultColor != null ? defaultColor : Color.black);
                 }
 
                 this.jLabelToDisplayInfo.setToolTipText("<html>Memory usage statistics" + warning + optimizeHint);

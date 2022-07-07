@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<themeConfig>
+    <theme 
+        name="Arc Dark - Orange"
+        resourcesParentTheme="FlatLaf Dark"
+        lafClassPath="com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme"
+        dark="true"
+        showBackground="false"
+    />
+</themeConfig>
