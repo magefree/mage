@@ -1242,12 +1242,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
      *      {G}{W}{R} and {G}{W}{R} -> {G}{W}{R}
      *      {G}{W}{B} and {G}{W}{R} -> null
+     *      {C}       and {ANY}     -> null
      *
      * @param mana1     The 1st mana to compare.
      * @param mana2     The 2nd mana to compare.
-     * @return          The greater of the two manas, or null if they're the same
+     * @return          The greater of the two manas, or null if they're the same OR they cannot be compared
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
+        if (mana1.equals(mana2)) {
+            return null;
+        }
+
         boolean mana1IsConditional = mana1 instanceof ConditionalMana;
         boolean mana2IsConditional = mana2 instanceof ConditionalMana;
         if (mana1IsConditional != mana2IsConditional) {
