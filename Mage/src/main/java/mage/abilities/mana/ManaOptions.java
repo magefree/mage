@@ -521,51 +521,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * Remove fully included variations.
-     * If both {R} and {R}{W} are in this, then {R} will be removed.
-     */
-    public void removeFullyIncludedVariations() {
-        List<Mana> valuableManas = new ArrayList<>(this.size());
-
-        Mana testMana;
-        Mana childMana;
-        Mana moreValuableMana;
-
-        for (Iterator<Mana> itr = this.iterator(); itr.hasNext(); ) {
-            testMana = itr.next();
-
-            // If first iteration, add the Mana to valuableMana in order bootstrap
-            // This is done in here rather than above in order to make use of the already created iterator
-            if (valuableManas.isEmpty()) {
-                valuableManas.add(testMana);
-                continue;
-            }
-
-            boolean needToAddMana = true; // True if testMana is not comparable to any of the other mana.
-            for (Mana valuableMana : valuableManas) {
-                moreValuableMana = Mana.getMoreValuableMana(testMana, valuableMana);
-
-                if (moreValuableMana == testMana) { // testMana is greater
-                    // Replace the childMana with testMana
-                    // This way we don't have to remove an already added mana
-                    valuableMana.setToMana(testMana);
-                    itr.remove();
-                    needToAddMana = false;
-                    break;
-                } else if (moreValuableMana == valuableMana) { // testMana is smaller than an already seen and kept mana, delete test mana.
-                    itr.remove();
-                    needToAddMana = false;
-                    break;
-                }
-            }
-
-            if (needToAddMana) {
-                valuableManas.add(testMana);
-            }
-        }
-    }
-
-    /**
      * Checks if the given mana (cost) is already included in one available mana
      * option
      *
