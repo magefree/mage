@@ -10,9 +10,12 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.players.Player;
+import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+
+// For .contains problem? https://stackoverflow.com/questions/44062636/hashset-remove-not-working/44062875#44062875
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -390,7 +393,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      *                           replace the current mana completely
      */
     private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana currentMana, ManaAbility manaAbility, Game game) {
-        boolean oldManaWasReplaced = false; // true if the newly created mana includes all mana possibilities of the old
+        boolean oldManaWasReplaced = false; // Rrue if the newly created mana includes all mana possibilities of the old
         boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
                 && onlyManaCosts
                 && (manaToAdd.getAny() > 0 || manaToAdd.countColored() > 0)
@@ -518,21 +521,46 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
-     * TODO: Why is this needed
+     * Remove fully included variations.
+     * If both {R} and {R}{W} are in this, then {R} will be removed.
      */
     public void removeFullyIncludedVariations() {
-        ArrayList<Mana> m = new ArrayList<>(this); // Shallow
+        List<Mana> valuableManas = new ArrayList<>(this.size());
 
-        for (int i = m.size() - 1; i >= 0; i--) {
-            for (int ii = 0; ii < i; ii++) {
-                Mana moreValuable = Mana.getMoreValuableMana(m.get(i), m.get(ii));
-                if (moreValuable != null) {
-                    m.get(ii).setToMana(moreValuable);
-                    this.remove(m.get(i));
-                    m.remove(i);
+        Mana testMana;
+        Mana childMana;
+        Mana moreValuableMana;
+
+        for (Iterator<Mana> itr = this.iterator(); itr.hasNext(); ) {
+            testMana = itr.next();
+
+            // If first iteration, add the Mana to valuableMana in order bootstrap
+            // This is done in here rather than above in order to make use of the already created iterator
+            if (valuableManas.isEmpty()) {
+                valuableManas.add(testMana);
+                continue;
+            }
+
+            boolean needToAddMana = true; // True if testMana is not comparable to any of the other mana.
+            for (Mana valuableMana : valuableManas) {
+                moreValuableMana = Mana.getMoreValuableMana(testMana, valuableMana);
+
+                if (moreValuableMana == testMana) { // testMana is greater
+                    // Replace the childMana with testMana
+                    // This way we don't have to remove an already added mana
+                    valuableMana.setToMana(testMana);
+                    itr.remove();
+                    needToAddMana = false;
+                    break;
+                } else if (moreValuableMana == valuableMana) { // testMana is smaller than an already seen and kept mana, delete test mana.
+                    itr.remove();
+                    needToAddMana = false;
                     break;
                 }
+            }
+
+            if (needToAddMana) {
+                valuableManas.add(testMana);
             }
         }
     }

@@ -604,4 +604,27 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't match", 6902, manaOptions.size());
     }
+
+    /**
+     * Similar to above, except without a hardcoded expected result, and used to check scaling.
+     * Leave the @Ignore added when pushing commits.
+     */
+    @Test
+    @Ignore
+    public void testCascadingCataractsN() {
+        int n = 5;
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Desert", n);
+        addCard(Zone.BATTLEFIELD, playerA, "Cascading Cataracts", n);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+    }
 }
