@@ -2,7 +2,6 @@ package mage.cards.repository;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -30,7 +29,7 @@ public enum CardRepository {
 
     private static final Logger logger = Logger.getLogger(CardRepository.class);
 
-    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
+    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 54;
@@ -352,17 +351,14 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive) {
-        return findPreferredCoreExpansionCard(name, caseInsensitive, null);
+    public CardInfo findPreferredCoreExpansionCard(String name) {
+        return findPreferredCoreExpansionCard(name, null);
     }
 
-    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive, String preferredSetCode) {
+    public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
         List<CardInfo> cards;
-        if (caseInsensitive) {
-            cards = findCardsCaseInsensitive(name);
-        } else {
-            cards = findCards(name);
-        }
+        cards = findCards(name);
+
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
@@ -399,13 +395,19 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findCardWPreferredSet(String name, String expansion, boolean caseInsensitive) {
+    /**
+     * Function to find a card by name from a specific set.
+     * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from the same set.
+     *
+     * @param name      name of the card, or side of the card, to find
+     * @param expansion the set name from which to find the card
+     * @return
+     */
+    public CardInfo findCardWPreferredSet(String name, String expansion) {
         List<CardInfo> cards;
-        if (caseInsensitive) {
-            cards = findCardsCaseInsensitive(name);
-        } else {
-            cards = findCards(name);
-        }
+
+        cards = findCards(name);
+
         if (!cards.isEmpty()) {
             for (CardInfo cardinfo : cards) {
                 if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
@@ -413,7 +415,7 @@ public enum CardRepository {
                 }
             }
         }
-        return findPreferredCoreExpansionCard(name, true);
+        return findPreferredCoreExpansionCard(name);
     }
 
     public List<CardInfo> findCards(String name) {
@@ -421,34 +423,84 @@ public enum CardRepository {
     }
 
     /**
-     * Find card's reprints from all sets
+     * Find a card's reprints from all sets.
+     * It allows for cards to be searched by their full name, or in the case of multi-name cards of the type "A // B"
+     * To search for them using "A", "B", or "A // B".
      *
-     * @param name
-     * @param limitByMaxAmount return max amount of different cards (if 0 then return card from all sets)
-     * @return
+     * Note of how the function works:
+     *      Out of all card types (Split, MDFC, Adventure, Flip, Transform)
+     *      ONLY Split cards (Fire // Ice) MUST be queried in the DB by the full name when querying by "name".
+     *      Searching for it by either half will return an incorrect result.
+     *      ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
+     *      when querying by "name".
+     *
+     * @param name              the name of the card to search for
+     * @param limitByMaxAmount  return max amount of different cards (if 0 then return card from all sets)
+     * @return                  A list of the reprints of the card if it was found (up to limitByMaxAmount number), or
+     *                          an empty list if the card was not found.
      */
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
+        List<CardInfo> results;
+        QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+        if (limitByMaxAmount > 0) {
+            queryBuilder.limit(limitByMaxAmount);
+        }
+
         try {
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.where().eq("name", new SelectArg(name));
-            if (limitByMaxAmount > 0) {
-                queryBuilder.limit(limitByMaxAmount);
+            if (name.contains(" // ")) { //
+                // Try to see if it's a split card first. (Split card stored in DB under full card name)
+                // Could be made faster by searching assuming it's NOT a split card and first searching by the first
+                // half of the name, but this is easier to understand.
+                queryBuilder.where().eq("name", new SelectArg(name));
+                results = cardDao.query(queryBuilder.prepare());
+
+                // Result comes back empty, try to search using the first half (could be Adventure, MDFC, etc.)
+                if (results.isEmpty()) {
+                    String mainCardName = name.split(" // ", 2)[0];
+                    queryBuilder.where().eq("name", new SelectArg(mainCardName));
+                    results = cardDao.query(queryBuilder.prepare());  // If still empty, then card can't be found
+                }
+            } else { // Cannot tell if string represents the full name of a card or only part of it.
+                // Assume it is the full card name
+                queryBuilder.where().eq("name", new SelectArg(name));
+                results = cardDao.query(queryBuilder.prepare());
+
+                if (results.isEmpty()) {
+                    // Nothing found when looking for main name, try looking under the other names
+                    queryBuilder.where()
+                            .eq("flipCardName",                     new SelectArg(name)).or()
+                            .eq("secondSideName",                   new SelectArg(name)).or()
+                            .eq("adventureSpellName",               new SelectArg(name)).or()
+                            .eq("modalDoubleFacesSecondSideName",   new SelectArg(name));
+                    results = cardDao.query(queryBuilder.prepare());
+                } else {
+                    // Check that a full card was found and not a SplitCardHalf
+                    // Can be caused by searching for "Fire" instead of "Fire // Ice"
+                    CardInfo firstCardInfo = results.get(0);
+                    if (firstCardInfo.isSplitCardHalf()) {
+                        // Find the main card by it's setCode and CardNumber
+                        queryBuilder.where()
+                                .eq("setCode", new SelectArg(firstCardInfo.setCode)).and()
+                                .eq("cardNumber", new SelectArg(firstCardInfo.cardNumber));
+                        List<CardInfo> tmpResults = cardDao.query(queryBuilder.prepare());
+
+                        String fullSplitCardName = null;
+                        for (CardInfo cardInfo : tmpResults) {
+                            if (cardInfo.isSplitCard()) {
+                                fullSplitCardName = cardInfo.name;
+                                break;
+                            }
+                        }
+                        if (fullSplitCardName == null) {
+                            return Collections.emptyList();
+                        }
+
+                        queryBuilder.where().eq("name", new SelectArg(fullSplitCardName));
+                        results = cardDao.query(queryBuilder.prepare());
+                    }
+                }
             }
-
-            List<CardInfo> result = cardDao.query(queryBuilder.prepare());
-
-            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
-            if (result.isEmpty() && name.contains(" // ")) {
-                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
-                // OR a split card (e.g. Assault // Battery).
-                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
-                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
-                queryBuilder.where().eq("name", new SelectArg(name.split(" // ", 2)[0]));
-
-                result = cardDao.query(queryBuilder.prepare());
-            }
-
-            return result;
+            return results;
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
@@ -464,38 +516,6 @@ public enum CardRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
-        return Collections.emptyList();
-    }
-
-    public List<CardInfo> findCardsCaseInsensitive(String name) {
-        try {
-            String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("'", "''");
-            GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
-                    cardDao.getRawRowMapper());
-
-            List<CardInfo> result = rawResults.getResults();
-
-            // Got no results, could be because the name referred to a double-face cards (e.g. Malakir Rebirth // Malakir Mire)
-            if (result.isEmpty() && sqlName.contains(" // ")) {
-                // If there IS a " // " then the card could be either a double-face card (e.g. Malakir Rebirth // Malakir Mire)
-                // OR a split card (e.g. Assault // Battery).
-                // Since you can't tell based on the name, we split the text based on " // " and try the operation again with
-                // the string on the left side of " // " (double-faced cards are stored under the name on the left of the " // ").
-                String leftCardName = sqlName.split(" // ", 2)[0];
-
-                GenericRawResults<CardInfo> rawResults2 = cardDao.queryRaw(
-                        "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + leftCardName + '\'',
-                        cardDao.getRawRowMapper());
-
-                result = rawResults2.getResults();
-            }
-
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
-        }
-
         return Collections.emptyList();
     }
 
