@@ -10,7 +10,6 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
@@ -105,40 +104,6 @@ public enum CardRepository {
         } catch (Exception ex) {
             //
         }
-    }
-
-    public boolean cardExists(String className) {
-        try {
-            if (classNames == null) {
-                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-                qb.distinct().selectColumns("className").where().isNotNull("className");
-                List<CardInfo> results = cardDao.query(qb.prepare());
-                classNames = new TreeSet<>();
-                for (CardInfo card : results) {
-                    classNames.add(card.getClassName());
-                }
-            }
-            return classNames.contains(className);
-        } catch (SQLException ex) {
-        }
-        return false;
-    }
-
-    public boolean cardExists(CardSetInfo className) {
-        try {
-            if (classNames == null) {
-                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-                qb.distinct().selectColumns("className").where().isNotNull("className");
-                List<CardInfo> results = cardDao.query(qb.prepare());
-                classNames = new TreeSet<>();
-                for (CardInfo card : results) {
-                    classNames.add(card.getClassName());
-                }
-            }
-            return classNames.contains(className.getName());
-        } catch (SQLException ex) {
-        }
-        return false;
     }
 
     private void addNewNames(CardInfo card, Set<String> namesList) {
