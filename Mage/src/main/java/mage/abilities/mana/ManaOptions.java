@@ -446,7 +446,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
         Mana fixedMana = manaCost.copy();
 
-        // TODO: What about Hybrid mana?
         // If there is no generic costs, then there is only one combination of colors available to pay for it.
         // That combination is itself (fixedMana)
         if (manaCost.getGeneric() == 0) {
@@ -461,7 +460,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
         // handle generic mana costs
         if (manaAvailable.countColored() == 0) {
-            payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric())); // TODO: Is it guaranteed that there is enough colorless mana to satisfy this?
+            payCombinations.add(Mana.ColorlessMana(manaCost.getGeneric()));
         } else {
             ManaType[] manaTypes = ManaType.values(); // Do not move, here for optimization reasons.
             Mana manaToPayFrom = new Mana();
