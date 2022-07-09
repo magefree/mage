@@ -23,10 +23,6 @@ public class DatabaseBuild {
         this.entity = entity;
     }
 
-    public String getLastBuild() {
-        return lastBuild;
-    }
-
     public void setLastBuild(String lastBuild) {
         this.lastBuild = lastBuild;
     }
