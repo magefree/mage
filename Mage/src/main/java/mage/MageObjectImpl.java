@@ -313,7 +313,13 @@ public abstract class MageObjectImpl implements MageObject {
         return getIdName() + " (" + super.getClass().getSuperclass().getSimpleName() + " -> " + this.getClass().getSimpleName() + ")";
     }
 
-
+    /**
+     * String checking of equality by ID.
+     * Use this version when
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -329,6 +335,6 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public int hashCode() {
-        return 89 * 7 + Objects.hashCode(this.getId());
+        return Objects.hashCode(this.getId());
     }
 }
