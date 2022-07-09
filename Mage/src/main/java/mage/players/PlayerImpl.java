@@ -4268,6 +4268,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return this.userData;
     }
 
+    @Override
     public UserData getControllingPlayersUserData(Game game) {
         if (!isGameUnderControl()) {
             Player player = game.getPlayer(getTurnControlledBy());

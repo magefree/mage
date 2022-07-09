@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
@@ -317,8 +318,14 @@ public abstract class TargetImpl implements Target {
                         possibleTargets.remove(index);
                     }
                 }
-            } else if (!targetController.chooseTarget(outcome, this, source, game)) {
-                return chosen;
+            } else {
+                // Try to autochoosen
+                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
+                if (autoChosenId != null) {
+                    addTarget(autoChosenId, source, game);
+                } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
+                    return chosen;
+                }
             }
             chosen = targets.size() >= getNumberOfTargets();
         } while (!isChosen() && !doneChoosing());
@@ -594,5 +601,83 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean contains(UUID targetId) {
         return targets.containsKey(targetId);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = possibleTargets(abilityControllerId, source, game);
+        possibleTargets.removeAll(this.targets.keySet());
+        return tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets) {
+        Player player = game.getPlayer(abilityControllerId);
+        if (player == null) {
+            return null;
+        }
+        int playerAutoTargetLevel;
+        if (player.isHuman() && player.getControllingPlayersUserData(game) != null) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
+            playerAutoTargetLevel = player.getControllingPlayersUserData(game).getAutoTargetLevel();
+        } else {
+            playerAutoTargetLevel = 2;
+        }
+        boolean strictModeEnabled = player.getStrictChooseMode();
+        boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() &&         // Targets must be picked
+                                possibleTargets.size() == this.getNumberOfTargets() - this.getSize() && // Available targets are equal to the number that must be picked
+                                !strictModeEnabled &&       // Test AI is not set to strictChooseMode(true)
+                                playerAutoTargetLevel > 0;  // Human player has enabled auto-choose in settings
+
+        if (canAutoChoose) {
+            boolean autoTargetAll = playerAutoTargetLevel == 2;
+            for (UUID possibleChooseId : possibleTargets) {
+                // Don't pick a target that's already been chosen, this will lead to an infinite loop of
+                // choosen and unchoosing the same target.
+                if (this.targets.containsKey(possibleChooseId)) {
+                    continue;
+                }
+                if (autoTargetAll) { // No need for further checks since all targeting is to be automated
+                    return possibleChooseId;
+                }
+
+                // Check if you control the target (or own the card)
+                boolean targetingOwnThing;
+                if (possibleChooseId == abilityControllerId) {
+                    targetingOwnThing = true;
+                } else {
+                    Permanent targetPermanent = game.getPermanent(possibleChooseId);
+                    Card targetCard = game.getCard(possibleChooseId);
+                    Spell targetSpell = game.getSpell(possibleChooseId);
+                    if (targetPermanent != null) {
+                        targetingOwnThing = abilityControllerId == targetPermanent.getControllerId();
+                    } else if (targetCard != null) {
+                        targetingOwnThing = abilityControllerId == targetCard.getOwnerId();
+                    } else if (targetSpell != null) {
+                        targetingOwnThing = abilityControllerId == targetSpell.getControllerId();
+                    } else {
+                        // No point further checking
+                        continue;
+                    }
+                }
+
+                // If you control (or own the card) the target, check if it's one of the feel-bad effects.
+                if (targetingOwnThing) {
+                    String abilityText = source.getRule(true).toLowerCase();
+
+                    if (abilityText.contains("discard")
+                            || abilityText.contains("sacrifice")
+                            || abilityText.contains("destroy")
+                            || abilityText.contains("exile")) {
+                        continue;
+                    }
+                    // Otherwise return the target with the return statement below.
+                }
+
+                // If we get here then it means that the target UUID passes the checks.
+                return possibleChooseId;
+            }
+        }
+
+        return null;
     }
 }
