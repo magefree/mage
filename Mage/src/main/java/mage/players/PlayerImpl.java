@@ -3513,8 +3513,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
+    /**
+     * Returns a boolean indicating if the minimum mana cost of a given ability can be paid.
+     *
+     * @param ability       The ability to pay for.
+     * @param availableMana The available mana.
+     * @param game          The game to calculate this for.
+     * @return              Boolean. True if the minimum can be paid, false otherwise.
+     */
     protected boolean canPayMinimumManaCost(ActivatedAbility ability, ManaOptions availableMana, Game game) {
-        ManaOptions abilityOptions = ability.getMinimumCostToActivate(playerId, game);
+        ManaOptions abilityOptions = ability.getMinimumCostToActivate(playerId, game); // All possible combinations of mana costs
         if (abilityOptions.isEmpty()) {
             return true;
         } else {
@@ -3526,22 +3534,30 @@ public abstract class PlayerImpl implements Player, Serializable {
                 addPhyrexianLikePayOptions(abilityOptions, availableMana, game);
             }
 
+            // Get the ability, if any, which allows for spending many as if it were another color.
+            // TODO: This needs to be improved to handle multiple approving objects.
+            //       See https://github.com/magefree/mage/issues/8584
             ApprovingObject approvingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
                     AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
             for (Mana mana : abilityOptions) {
                 if (mana.count() == 0) {
                     return true;
                 }
+                // Iterate through combinations of available mana
                 for (Mana avail : availableMana) {
                     // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
                     //  but that code processing it as any color, need to test and fix another use cases
                     //  (example: Sunglasses of Urza - may spend white mana as though it were red mana)
 
-                    //
-                    //  add tests for non any color like Sunglasses of Urza
+                    // TODO: add tests for non any color like Sunglasses of Urza
+                    // TODO: Describe this
+                    // Abilities that let us spend mana as if it were any (or other colors/types) must be handled seperately
+                    // and can't be incorporated into calculating availableMana since the number of combinations would explode.
                     if (approvingObject != null && mana.count() <= avail.count()) {
+                        // TODO: I think this is wrong for spell that require colorless
                         return true;
                     }
+                    // TODO: Why is this second? Shouldn't conditional mana be checked before the above line?
                     if (avail instanceof ConditionalMana && !((ConditionalMana) avail).apply(ability, game, getId(), ability.getManaCosts())) {
                         continue;
                     }
@@ -3597,7 +3613,17 @@ public abstract class PlayerImpl implements Player, Serializable {
         return availableLifeMana;
     }
 
+    /**
+     * Returns a boolean inidicating if any of the alternative mana costs for the given card can be afforded.
+     *
+     * @param sourceObject  The card
+     * @param availableMana The mana available for payments.
+     * @param ability       The ability to play it by.
+     * @param game          The game to check for.
+     * @return              Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
+     */
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
+        // TODO: Why is the "sourceObject instanceof Permanent" in there?
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             Ability copyAbility; // for alternative cost and reduce tries
             for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
@@ -3668,9 +3694,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
+                            // Add a copy of the dynamic cost for this ability if there is one.
+                            // E.g. from Kentaro, the Smiling Cat
+                            if (alternateSourceCosts instanceof AlternativeCostSourceAbility) {
+                                DynamicCost dynamicCost = ((AlternativeCostSourceAbility) alternateSourceCosts).getDynamicCost();
+                                if (dynamicCost != null) {
+                                    Cost cost = dynamicCost.getCost(ability, game);
+                                    // TODO: I don't know if this first if-check is needed, I don't think any of the dynamics values are alternative costs.
+                                    if (cost instanceof AlternativeCost) {
+                                        cost = ((AlternativeCost) cost).getCost();
+                                    }
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
+                                }
+                            }
+
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
+                                // TODO: Why is it returning true if availableMana == null, one would think it should return false
                                 if (availableMana == null) {
                                     return true;
                                 }
@@ -3678,6 +3721,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 // alternative cost reduce
                                 copyAbility = ability.copy();
                                 copyAbility.getManaCostsToPay().clear();
+                                // TODO: IDE warning:
+                                //              Unchecked assignment: 'mage.abilities.costs.mana.ManaCosts' to
+                                //              'java.util.Collection<? extends mage.abilities.costs.mana.ManaCost>'.
+                                //              Reason: 'manaCosts' has raw type, so result of copy is erased
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
                                 copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
