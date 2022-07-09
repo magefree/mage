@@ -612,6 +612,10 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets) {
+        if (possibleTargets == null || game == null) {
+            return null;
+        }
+
         Player player = game.getPlayer(abilityControllerId);
         if (player == null) {
             return null;
@@ -626,7 +630,8 @@ public abstract class TargetImpl implements Target {
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() &&         // Targets must be picked
                                 possibleTargets.size() == this.getNumberOfTargets() - this.getSize() && // Available targets are equal to the number that must be picked
                                 !strictModeEnabled &&       // Test AI is not set to strictChooseMode(true)
-                                playerAutoTargetLevel > 0;  // Human player has enabled auto-choose in settings
+                                playerAutoTargetLevel > 0 && // Human player has enabled auto-choose in settings
+                                !(playerAutoTargetLevel == 1 && source == null);  // Is source is null, then the
 
         if (canAutoChoose) {
             boolean autoTargetAll = playerAutoTargetLevel == 2;
@@ -663,6 +668,7 @@ public abstract class TargetImpl implements Target {
                 // If you control (or own the card) the target, check if it's one of the feel-bad effects.
                 if (targetingOwnThing) {
                     String abilityText = source.getRule(true).toLowerCase();
+
 
                     if (abilityText.contains("discard")
                             || abilityText.contains("sacrifice")
