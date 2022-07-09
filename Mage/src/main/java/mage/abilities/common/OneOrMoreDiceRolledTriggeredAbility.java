@@ -8,6 +8,8 @@ import mage.game.events.DiceRolledEvent;
 import mage.game.events.GameEvent;
 
 /**
+ * Controller rolls one or more dice.
+ *
  * @author weirddan455
  */
 public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
@@ -36,7 +38,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
+        if (!isControlledBy(event.getTargetId())) {
             return false;
         }
         int maxRoll = ((DiceRolledEvent) event)
