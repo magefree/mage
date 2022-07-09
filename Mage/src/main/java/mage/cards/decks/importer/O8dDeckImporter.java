@@ -16,9 +16,9 @@ import java.util.stream.Stream;
 public class O8dDeckImporter extends XmlDeckImporter {
 
     /**
-     * @param filename
+     * @param fileName
      * @param errorMessages
-     * @param saveAutoFixedFile do not supported for current format
+     * @param saveAutoFixedFile not supported for current format
      * @return
      */
     @Override
