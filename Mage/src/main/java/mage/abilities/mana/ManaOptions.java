@@ -1,6 +1,5 @@
 package mage.abilities.mana;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,8 +13,6 @@ import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
 import java.util.*;
-
-// For .contains problem? https://stackoverflow.com/questions/44062636/hashset-remove-not-working/44062875#44062875
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -360,7 +357,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         if (!options.isEmpty()) {
             if (options.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
-                addMana(options.get(0));
+                addMana(options.getAtIndex(0));
             } else {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = new ArrayList<>(this);
@@ -576,7 +573,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      *
      */
     @Deprecated
-    public Mana get(int i) {
+    public Mana getAtIndex(int i) {
        if (i < 0 || i >= this.size()) {
            throw new IndexOutOfBoundsException();
        }
@@ -590,23 +587,5 @@ public class ManaOptions extends LinkedHashSet<Mana> {
            }
        }
        return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
-    }
-
-    /**
-     * Overriden here in order to avoid it silently failing if someone provides it an index
-     * thinking that this now works like an array
-     *
-     * @param o object to be removed from this set, if present
-     * @return
-     */
-    @Override
-    public boolean remove(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof Mana)) {
-            throw new ValueException("Can only remove Mana from ManaOptions, provided " + o);
-        }
-        return super.remove(o);
     }
 }
