@@ -153,28 +153,28 @@ class ImproviseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (controller != null && spell != null) {
-            for (UUID artifactId : this.getTargetPointer().getTargets(game, source)) {
-                Permanent perm = game.getPermanent(artifactId);
-                if (perm == null) {
-                    continue;
-                }
-                if (!perm.isTapped() && perm.tap(source, game)) {
-                    ManaPool manaPool = controller.getManaPool();
-                    manaPool.addMana(Mana.ColorlessMana(1), game, source);
-                    manaPool.unlockManaType(ManaType.COLORLESS);
-                    if (!game.isSimulation()) {
-                        game.informPlayers("Improvise: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay {1}");
-                    }
-
-                    // can't use mana abilities after that (improvise cost must be payed after mana abilities only)
-                    spell.setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.AFTER);
-                }
-
-            }
-            return true;
+        if (controller == null || spell == null) {
+            return false;
         }
-        return false;
+        for (UUID artifactId : this.getTargetPointer().getTargets(game, source)) {
+            Permanent perm = game.getPermanent(artifactId);
+            if (perm == null) {
+                continue;
+            }
+            if (!perm.isTapped() && perm.tap(source, game)) {
+                ManaPool manaPool = controller.getManaPool();
+                manaPool.addMana(Mana.ColorlessMana(1), game, source);
+                manaPool.unlockManaType(ManaType.COLORLESS);
+                if (!game.isSimulation()) {
+                    game.informPlayers("Improvise: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay {1}");
+                }
+
+                // can't use mana abilities after that (improvise cost must be payed after mana abilities only)
+                spell.setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.AFTER);
+            }
+
+        }
+        return true;
     }
 
 }
