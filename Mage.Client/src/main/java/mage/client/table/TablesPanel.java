@@ -756,8 +756,8 @@ public class TablesPanel extends javax.swing.JPanel {
         this.roomId = roomId;
         UUID chatRoomId = null;
         if (SessionHandler.getSession() != null) {
-            btnQuickStartDuel.setVisible(SessionHandler.isTestMode());
-            btnQuickStartCommander.setVisible(SessionHandler.isTestMode());
+            btnQuickStart2Player.setVisible(SessionHandler.isTestMode());
+            btnQuickStart4Player.setVisible(SessionHandler.isTestMode());
             btnQuickStartMCTS.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
             chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
@@ -1051,8 +1051,8 @@ public class TablesPanel extends javax.swing.JPanel {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btnOpen = new javax.swing.JToggleButton();
         btnPassword = new javax.swing.JToggleButton();
-        btnQuickStartDuel = new javax.swing.JButton();
-        btnQuickStartCommander = new javax.swing.JButton();
+        btnQuickStart2Player = new javax.swing.JButton();
+        btnQuickStart4Player = new javax.swing.JButton();
         btnQuickStartMCTS = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanelTables = new javax.swing.JPanel();
@@ -1503,23 +1503,23 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnPassword);
 
-        btnQuickStartDuel.setText("Quick start duel");
-        btnQuickStartDuel.setFocusable(false);
-        btnQuickStartDuel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuickStartDuel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQuickStartDuel.addActionListener(new java.awt.event.ActionListener() {
+        btnQuickStart2Player.setText("Quick 2 player");
+        btnQuickStart2Player.setFocusable(false);
+        btnQuickStart2Player.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStart2Player.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStart2Player.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuickStartDuelActionPerformed(evt);
+                btnQuickStart2PlayerActionPerformed(evt);
             }
         });
 
-        btnQuickStartCommander.setText("Quick start commander");
-        btnQuickStartCommander.setFocusable(false);
-        btnQuickStartCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuickStartCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQuickStartCommander.addActionListener(new java.awt.event.ActionListener() {
+        btnQuickStart4Player.setText("Quick 4 player");
+        btnQuickStart4Player.setFocusable(false);
+        btnQuickStart4Player.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStart4Player.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStart4Player.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuickStartCommanderActionPerformed(evt);
+                btnQuickStart4PlayerActionPerformed(evt);
             }
         });
 
@@ -1546,10 +1546,10 @@ public class TablesPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                .addComponent(btnQuickStartDuel)
+                                                .addComponent(btnQuickStart2Player)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(btnQuickStartMCTS))
-                                        .addComponent(btnQuickStartCommander))
+                                        .addComponent(btnQuickStart4Player))
                                 .addContainerGap(540, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
@@ -1565,14 +1565,14 @@ public class TablesPanel extends javax.swing.JPanel {
                                                         .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addGroup(jPanelTopLayout.createSequentialGroup()
                                                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(btnQuickStartDuel)
+                                                                        .addComponent(btnQuickStart2Player)
                                                                         .addComponent(btnQuickStartMCTS))
                                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                                .addComponent(btnQuickStartCommander)
+                                                                .addComponent(btnQuickStart4Player)
                                                                 .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addContainerGap())
         );
@@ -1694,13 +1694,19 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            MatchOptions options = new MatchOptions(gameName, gameType, false, 2);
+            int numSeats = gameName.contains("2") ? 2 : 4;
+            boolean multiPlayer = numSeats > 2;
+
+            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            options.setDeckType("Limited");
-            options.setAttackOption(MultiplayerAttackOption.LEFT);
-            options.setRange(RangeOfInfluence.ALL);
-            options.setWinsNeeded(1);
+            for (int i=2 ; i < numSeats ; i++) {
+                options.getPlayerTypes().add(aiType);
+            }
+            options.setDeckType("Variant Magic - Freeform Commander");
+            options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
+            options.setRange(RangeOfInfluence.ONE);
+            options.setWinsNeeded(2);
             options.setMatchTimeLimit(MatchTimeLimit.NONE);
             options.setFreeMulligans(2);
             options.setSkillLevel(SkillLevel.CASUAL);
@@ -1712,16 +1718,15 @@ public class TablesPanel extends javax.swing.JPanel {
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 5, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer 0", aiType, 5, testDeck, "");
+            for (int i=2 ; i < numSeats ; i++) {
+                SessionHandler.joinTable(roomId, table.getTableId(), "Computer " + i, aiType, 5, testDeck, "");
+            }
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);
         }
     }
-
-    private void btnQuickStartDuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed
-        createTestGame("Test duel", "Two Player Duel", false);
-    }//GEN-LAST:event_btnQuickStartDuelActionPerformed
 
     private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
         newTableDialog.showDialog(roomId);
@@ -1758,8 +1763,12 @@ public class TablesPanel extends javax.swing.JPanel {
         MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
-    private void btnQuickStartCommanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartCommanderActionPerformed
-        createTestGame("Test commander", "Commander Two Player Duel", false);
+    private void btnQuickStart2PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed
+        createTestGame("Test 2 player", "Commander Free For All", false);
+    }//GEN-LAST:event_btnQuickStartDuelActionPerformed
+
+    private void btnQuickStart4PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartCommanderActionPerformed
+        createTestGame("Test 4 player", "Commander Free For All", false);
     }//GEN-LAST:event_btnQuickStartCommanderActionPerformed
 
     private void btnQuickStartMCTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartMCTSActionPerformed
@@ -1788,8 +1797,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JToggleButton btnOpen;
     private javax.swing.JToggleButton btnPassword;
-    private javax.swing.JButton btnQuickStartCommander;
-    private javax.swing.JButton btnQuickStartDuel;
+    private javax.swing.JButton btnQuickStart4Player;
+    private javax.swing.JButton btnQuickStart2Player;
     private javax.swing.JButton btnQuickStartMCTS;
     private javax.swing.JToggleButton btnRated;
     private javax.swing.JToggleButton btnSkillBeginner;

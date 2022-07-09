@@ -35,6 +35,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -459,7 +460,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             } else {
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
-                defendersForcedToAttack.addAll(defenders);
+                // Filter out the planeswalkers
+                defendersForcedToAttack.addAll(defenders.stream().map(game::getPlayer).filter(Objects::nonNull).map(Player::getId).collect(Collectors.toSet()));
+//                defendersForcedToAttack.addAll(defenders);
             }
             if (!mustAttack) {
                 continue;
@@ -488,11 +491,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                     break;
                 }
             }
-            // if creature can attack someone other than a player that goaded them
-            // then they attack one of those players, otherwise they attack any player
-            if (!defendersForcedToAttack.stream().allMatch(creature.getGoadingPlayers()::contains)) {
-                defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
-            }
+            // Remove all the players which have goaded the attacker
+            defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
+
             // force attack only if a defender can be attacked without paying a cost
             if (defendersCostlessAttackable.isEmpty()) {
                 continue;

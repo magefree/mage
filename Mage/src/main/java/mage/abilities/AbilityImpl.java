@@ -788,7 +788,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public String getRule(boolean all) {
         StringBuilder sbRule = threadLocalBuilder.get();
-        if (all || this.abilityType != AbilityType.SPELL) {
+        if (all || this.abilityType != AbilityType.SPELL) { // TODO: Why the override for non-spells?
             if (!manaCosts.isEmpty()) {
                 sbRule.append(manaCosts.getText());
             }

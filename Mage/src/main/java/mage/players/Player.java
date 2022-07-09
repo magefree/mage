@@ -1054,4 +1054,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
+
+    /**
+     * Function to query if the player has strictChooseMode enabled. Only the test player can have it.
+     * Function is added here so that the test suite project does not have to be imported into the client/server project.
+     *
+     * @return whether the player has strictChooseMode enabled
+     */
+    public default boolean getStrictChooseMode() {
+        return false;
+    }
+
+    public UserData getControllingPlayersUserData(Game game);
 }
