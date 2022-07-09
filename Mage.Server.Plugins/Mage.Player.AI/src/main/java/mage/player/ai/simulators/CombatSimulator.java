@@ -116,7 +116,7 @@ public class CombatSimulator implements Serializable {
             return false;
         }
 
-        if (!Objects.deepEquals(this.defenders, that.defenders)) {
+        if (!Objects.deepEquals(this.defenders, that.defenders)) { // TODO: This is not correct. Can't use UUID to compare. Remove other .deepEquals
             return false;
         }
 
