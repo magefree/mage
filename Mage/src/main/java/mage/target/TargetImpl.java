@@ -1,5 +1,6 @@
 package mage.target;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -16,6 +17,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -679,5 +681,88 @@ public abstract class TargetImpl implements Target {
         }
 
         return null;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0; // TODO
+    }
+
+    public boolean equals(Target t, Game game) {
+        if (this == t) {
+            return true;
+        }
+
+        if (this.getClass() != t.getClass()) {
+            return false;
+        }
+        TargetImpl that = (TargetImpl) t;
+        // Note can't use Objects.equals or Object.deepEquals. Using it will directly compare UUIDs
+        // We want to compare the objects those UUIDs refer to.
+        // E.g. Two 1/1 tokens are identical but have different UUIDs.
+        //      Using Objects.equals would result in their UUIDs being compared, and returning false
+        //      We need to compare the objects and have it return true.
+        if (this.targets.size() != that.targets.size()) {
+            return false;
+        }
+
+        // Sorts them and puts them into a list
+        List<UUID> thisTargetIds = this.targets.keySet().stream().sorted().collect(Collectors.toList());
+        List<UUID> thatTargetIds = that.targets.keySet().stream().sorted().collect(Collectors.toList());
+
+        // NOTE: This assumes that the
+        for (int i = 0; i < thisTargetIds.size(); i++) {
+            UUID thisTargetId = thisTargetIds.get(i);
+            UUID thatTargetId = thatTargetIds.get(i);
+
+            Permanent permThis = game.getPermanent(thisTargetId);
+            Permanent permThat = game.getPermanent(thatTargetId);
+            if (permThis != null) {
+                if (permThis.equals(permThat, game)) { // TODO
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (permThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            Player playerThis = game.getPlayer(thisTargetId);
+            Player playerThat = game.getPlayer(thatTargetId);
+            if (playerThis != null) {
+                if (playerThis.equals(playerThat)) {
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (playerThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            Card cardThis = game.getCard(thisTargetId);
+            Card cardThat = game.getCard(thatTargetId);
+            if (cardThis != null) {
+                if (cardThis.equals(cardThat)) { // TODO
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (cardThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            // TODO: What to do if all three return null?
+            //       How to tell the difference between those permanents no longer existing and the UUIDs
+            //       being incorrect from the beginning?
+            throw new ValueException("UUID in TargImpl should represent a Player, Permanent, or Card");
+        }
+
+        return true;
     }
 }
