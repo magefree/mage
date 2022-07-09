@@ -105,7 +105,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Liliana, Defiant Necromancer", 1);
 
         attack(1, playerA, "Alesha, Who Smiles at Death");
-        addTarget(playerA, "Clever Impersonator");
+        // addTarget(playerA, "Clever Impersonator"); (Autochosen, only target)
         setChoice(playerA, "Liliana, Defiant Necromancer");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2: Each player discards a card");

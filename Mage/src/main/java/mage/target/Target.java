@@ -1,6 +1,7 @@
 package mage.target;
 
 import mage.abilities.Ability;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -159,4 +161,35 @@ public interface Target extends Serializable {
     int getSize();
 
     boolean contains(UUID targetId);
+
+    /**
+     * This function tries to auto-choose the next target.
+     * <p>
+     * It will NOT add it to the list of targets, it will ony choose the next target
+     * <p>
+     * Use this version when the targets is selected from targets.getTargets.
+     * <p>
+     * It will auto-choosen if all of the following criteria are met:
+     * - The minimum and maximum number of targets is the same (i.e. effect does not have "up to" in its name)
+     * - The number of valid targets is equal to the number of targets still left to be specified
+     *
+     *
+     * @param abilityControllerId
+     * @param source
+     * @param game
+     * @return The UUID of the chosen option, or null if one could not be chosen
+     */
+    UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game);
+
+    /**
+     * Use this version when the target is chosen from a specified collection.
+     * E.g. {@link Player#chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)}
+     *
+     * @param abilityControllerId
+     * @param source
+     * @param game
+     * @param possibleTargets
+     * @return
+     */
+    UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets);
 }
