@@ -3062,7 +3062,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     private List<Object> rollDiceInner(Outcome outcome, Ability source, Game game, RollDieType rollDieType,
                                        int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
                                        int rollsAmount, int ignoreLowestAmount) {
-        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, this.getId(), rollDieType, sidesAmount, rollsAmount);
         if (ignoreLowestAmount > 0) {
             rollDiceEvent.incIgnoreLowestAmount(ignoreLowestAmount);
         }
@@ -3079,7 +3079,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<RollDieResult> dieRolls = new ArrayList<>();
         for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
             // ROLL SINGLE die
-            RollDieEvent rollDieEvent = new RollDieEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
+            RollDieEvent rollDieEvent = new RollDieEvent(source, this.getId(), rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
             game.replaceEvent(rollDieEvent);
 
             Object rollResult;
@@ -3186,7 +3186,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (RollDieResult result : dieRolls) {
             game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
-        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
+        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source, this.getId()));
 
         String resultString = dieResults
                 .stream()
