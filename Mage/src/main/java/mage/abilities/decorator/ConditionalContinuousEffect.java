@@ -192,4 +192,9 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         if (this.otherwiseEffect != null) res.add(this.otherwiseEffect);
         return res;
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

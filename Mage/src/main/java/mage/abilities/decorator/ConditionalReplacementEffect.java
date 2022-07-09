@@ -16,7 +16,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
+public class ConditionalReplacementEffect extends ReplacementEffectImpl {
 
     protected ReplacementEffect effect;
     protected ReplacementEffect otherwiseEffect;
@@ -126,5 +126,10 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
     @Override
     public ConditionalReplacementEffect copy() {
         return new ConditionalReplacementEffect(this);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

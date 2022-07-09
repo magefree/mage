@@ -66,7 +66,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
-        super(duration, 0, UsageType.ONE_USAGE_ABSOLUTE);
+        super(duration, 0, UsageType.ACCORDING_DURATION);
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 

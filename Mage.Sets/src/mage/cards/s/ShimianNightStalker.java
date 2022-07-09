@@ -62,7 +62,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public ShimianNightStalkerRedirectDamageEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ACCORDING_DURATION);
         this.staticText = "All damage that would be dealt to you this turn by target attacking creature is dealt to {this} instead";
     }
 

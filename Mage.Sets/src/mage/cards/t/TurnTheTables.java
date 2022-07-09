@@ -3,20 +3,20 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.common.PreventDamageToControllerEffect;
+import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
 
 /**
  *
  * @author LevelX2
+ * @author sprangg
  */
 public final class TurnTheTables extends CardImpl {
 
@@ -38,10 +38,10 @@ public final class TurnTheTables extends CardImpl {
     }
 }
 
-class TurnTheTablesEffect extends PreventDamageToControllerEffect {
+class TurnTheTablesEffect extends RedirectionEffect {
 
     public TurnTheTablesEffect() {
-        super(Duration.EndOfTurn, true, false, Integer.MAX_VALUE);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ACCORDING_DURATION);
         staticText = "All combat damage that would be dealt to you this turn is dealt to target attacking creature instead";
     }
 
@@ -55,16 +55,16 @@ class TurnTheTablesEffect extends PreventDamageToControllerEffect {
     }
 
     @Override
-    protected PreventionEffectData preventDamageAction(GameEvent event, Ability source, Game game) {
-        PreventionEffectData preventionEffectData = super.preventDamageAction(event, source, game);
-        int damage = preventionEffectData.getPreventedDamage();
-        if (damage > 0) {
-            Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (attackingCreature != null) {
-                attackingCreature.damage(damage, source.getSourceId(), source, game, false, true);
-            }
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getPlayer(source.getControllerId()) == null || game.getPermanent(source.getFirstTarget()) == null) {
+            return false;
         }
-        return preventionEffectData;
+        DamageEvent damageEvent = (DamageEvent) event;
+        if (!damageEvent.isCombatDamage() || !source.getControllerId().equals(damageEvent.getTargetId())) {
+            return false;
+        }
+        this.redirectTarget = source.getTargets().get(0);
+        return true;
     }
 
 }

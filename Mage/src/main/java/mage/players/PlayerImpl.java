@@ -1459,7 +1459,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            // as copy, tries to applie cost effects and pays
+            // Copy, and try to pay for and apply effects
             Ability activatingAbility = ability.copy();
             if (activatingAbility.activate(game, false)) {
                 result = playLand(card, game, false);
@@ -1542,7 +1542,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                             GameEvent.EventType.TRIGGERED_ABILITY,
                             ability.getId(), ability, ability.getControllerId()
                     ));
-                    triggerId = ability.getId();
                 }
                 game.removeBookmark(bookmark);
                 return true;
@@ -1551,7 +1550,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
         GameEvent event = new GameEvent(
                 GameEvent.EventType.ABILITY_TRIGGERED,
-                triggerId, ability, ability.getControllerId()
+                ability.getId(), ability, ability.getControllerId()
         );
         game.getState().setValue(event.getId().toString(), ability.getTriggerEvent());
         game.fireEvent(event);
@@ -3063,7 +3062,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     private List<Object> rollDiceInner(Outcome outcome, Ability source, Game game, RollDieType rollDieType,
                                        int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
                                        int rollsAmount, int ignoreLowestAmount) {
-        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, this.getId(), rollDieType, sidesAmount, rollsAmount);
         if (ignoreLowestAmount > 0) {
             rollDiceEvent.incIgnoreLowestAmount(ignoreLowestAmount);
         }
@@ -3080,7 +3079,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<RollDieResult> dieRolls = new ArrayList<>();
         for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
             // ROLL SINGLE die
-            RollDieEvent rollDieEvent = new RollDieEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
+            RollDieEvent rollDieEvent = new RollDieEvent(source, this.getId(), rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
             game.replaceEvent(rollDieEvent);
 
             Object rollResult;
@@ -3187,7 +3186,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (RollDieResult result : dieRolls) {
             game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
-        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
+        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source, this.getId()));
 
         String resultString = dieResults
                 .stream()
