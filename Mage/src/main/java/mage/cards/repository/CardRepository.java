@@ -36,7 +36,6 @@ public enum CardRepository {
     private static final long CARD_CONTENT_VERSION = 241;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
-    private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
@@ -64,7 +63,6 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
@@ -94,7 +92,6 @@ public enum CardRepository {
             });
 
             setContentVersion(newContentVersion);
-            eventSource.fireRepositoryDbUpdated();
         } catch (Exception ex) {
             //
         }
