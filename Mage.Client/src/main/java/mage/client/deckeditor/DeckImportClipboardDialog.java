@@ -68,7 +68,13 @@ public class DeckImportClipboardDialog extends MageDialog {
     }
 
     private void onOK() {
-        tmpPath = DeckUtil.writeTextToTempFile(editData.getText());
+        String decklist = editData.getText();
+        decklist = decklist.replace(FORMAT_TEXT, "");
+        if (decklist.startsWith("Deck\n")) {
+            tmpPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
+        } else {
+            tmpPath = DeckUtil.writeTextToTempFile(decklist);
+        }
         this.removeDialog();
     }
 
