@@ -32,8 +32,14 @@ public class MtgaImporter extends PlainTextDeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+        
+        line = line.trim();
+        
+        if (line.equals("Deck")) {
+            return;
+        }
 
-        if (line.trim().equals("")) {
+        if (line.equals("") || line.equals("Sideboard")) {
             sideboard = true;
             return;
         }
