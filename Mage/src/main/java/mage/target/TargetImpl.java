@@ -1,9 +1,9 @@
 package mage.target;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -743,10 +743,10 @@ public abstract class TargetImpl implements Target {
                 }
             }
 
-            Card cardThis = game.getCard(thisTargetId);
-            Card cardThat = game.getCard(thatTargetId);
+            CardImpl cardThis = (CardImpl) game.getCard(thisTargetId);
+            CardImpl cardThat = (CardImpl) game.getCard(thatTargetId);
             if (cardThis != null) {
-                if (cardThis.equals(cardThat)) { // TODO
+                if (cardThis.equals(cardThat, game)) { // TODO
                     continue;
                 } else {
                     return false;
@@ -760,7 +760,7 @@ public abstract class TargetImpl implements Target {
             // TODO: What to do if all three return null?
             //       How to tell the difference between those permanents no longer existing and the UUIDs
             //       being incorrect from the beginning?
-            throw new ValueException("UUID in TargImpl should represent a Player, Permanent, or Card");
+            return false;
         }
 
         return true;
