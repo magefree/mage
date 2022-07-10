@@ -5102,7 +5102,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int hashCode() {
-        return 89 * 7 + Objects.hashCode(this.getId());
+        return Objects.hash(this.getId(), this.name);
     }
 
     @Override
