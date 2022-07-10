@@ -718,7 +718,7 @@ public abstract class TargetImpl implements Target {
             Permanent permThis = game.getPermanent(thisTargetId);
             Permanent permThat = game.getPermanent(thatTargetId);
             if (permThis != null) {
-                if (permThis.equals(permThat, game)) { // TODO
+                if (permThis.equivalent(permThat, game)) {
                     continue;
                 } else {
                     return false;
@@ -743,10 +743,10 @@ public abstract class TargetImpl implements Target {
                 }
             }
 
-            CardImpl cardThis = (CardImpl) game.getCard(thisTargetId);
-            CardImpl cardThat = (CardImpl) game.getCard(thatTargetId);
+            Card cardThis = (Card) game.getCard(thisTargetId);
+            Card cardThat = (Card) game.getCard(thatTargetId);
             if (cardThis != null) {
-                if (cardThis.equals(cardThat, game)) { // TODO
+                if (cardThis.equivalent(cardThat, game)) {
                     continue;
                 } else {
                     return false;
