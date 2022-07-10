@@ -22,14 +22,15 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
 
     public DealsDamageToACreatureAttachedTriggeredAbility(Effect effect, boolean combatOnly, String attachedDescription, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.combatOnly = combatOnly;
         this.setTargetPointer = setTargetPointer;
         this.attachedDescription = attachedDescription;
     }
 
     public DealsDamageToACreatureAttachedTriggeredAbility(final DealsDamageToACreatureAttachedTriggeredAbility ability) {
         super(ability);
-        this.setTargetPointer = ability.setTargetPointer;
         this.combatOnly = ability.combatOnly;
+        this.setTargetPointer = ability.setTargetPointer;
         this.attachedDescription = ability.attachedDescription;
     }
 
@@ -45,29 +46,29 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!combatOnly || ((DamagedEvent) event).isCombatDamage()) {
-            Permanent attachment = game.getPermanent(this.getSourceId());
-            if (attachment != null
-                    && attachment.isAttachedTo(event.getSourceId())) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                        effect.setValue("damage", event.getAmount());
-                    }
-                }
-                return true;
-            }
-
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null || !permanent.isCreature(game)) {
+            return false;
         }
-        return false;
+        if (combatOnly && !((DamagedEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Permanent attachment = game.getPermanent(this.getSourceId());
+        if (attachment == null || !attachment.isAttachedTo(event.getSourceId())) {
+            return false;
+        }
+        if (setTargetPointer) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                effect.setValue("damage", event.getAmount());
+            }
+        }
+        return true;
     }
 
     @Override
     public String getTriggerPhrase() {
-        return new StringBuilder("Whenever ").append(attachedDescription)
-                .append(" deals ")
-                .append(combatOnly ? "combat " : "")
-                .append("damage to a creature, ").toString();
+        return "Whenever " + attachedDescription + " deals "
+                + (combatOnly ? "combat " : "") + "damage to a creature, ";
     }
-
 }
