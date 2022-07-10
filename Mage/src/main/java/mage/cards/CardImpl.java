@@ -928,7 +928,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      * @param game
      * @return
      */
-    public boolean equals(Object obj, Game game) {
+    @Override
+    public boolean equivalent(Object obj, Game game) {
         if (!this.equalsInternal(obj)) {
             return false;
         }
