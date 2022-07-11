@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -185,5 +186,31 @@ public class Targets extends ArrayList<Target> {
 
     public Targets copy() {
         return new Targets(this);
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Targets that = (Targets) obj;
+        for (int i = 0; i < this.size(); i++) {
+            Target thisTarget = this.get(i);
+            Target thatTarget = that.get(i);
+
+            if (thisTarget == null || !thisTarget.equivalent(thatTarget, game)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return Objects.deepEquals(this, obj);
     }
 }
