@@ -192,4 +192,6 @@ public interface Target extends Serializable {
      * @return
      */
     UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets);
+
+    public boolean equivalent(Object obj, Game game);
 }
