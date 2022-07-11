@@ -36,4 +36,5 @@ public interface Cost extends Serializable, Copyable<Cost> {
 
     Cost copy();
 
+    boolean equivalent(Object obj, Game game);
 }

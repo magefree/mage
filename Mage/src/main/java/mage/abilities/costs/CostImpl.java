@@ -4,7 +4,9 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
+import org.checkerframework.checker.units.qual.C;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class CostImpl implements Cost {
@@ -72,5 +74,57 @@ public abstract class CostImpl implements Cost {
     @Override
     public UUID getId() {
         return this.id;
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!this.equalsInner(obj)) {
+            return false;
+        }
+        CostImpl that = (CostImpl) obj;
+        // this.id is not checked since that WILL be different for different costs
+        if (!(this.targets != null && that.targets != null)) {
+            return false;
+        }
+
+        if (!(this.targets != null && that.targets != null) || this.targets == null) {
+            return false;
+        }
+
+        return this.targets.equivalent(that.targets, game);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!this.equalsInner(obj)) {
+            return false;
+        }
+        CostImpl that = (CostImpl) obj;
+
+        // TODO: If id is compared it will always return false since each instance has a unique id
+//        if (!Objects.equals(this.id, that.id)) {
+//            return false;
+//        }
+
+        return Objects.deepEquals(this.targets, that.targets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, text, paid, targets);
+    }
+
+    private boolean equalsInner(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        CostImpl that = (CostImpl) obj;
+
+        return this.paid == that.paid && Objects.equals(this.text, that.text);
     }
 }
