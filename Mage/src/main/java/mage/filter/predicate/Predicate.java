@@ -30,4 +30,12 @@ public interface Predicate <T> extends Serializable {
      *     arguments
      */
     boolean apply(T input, Game game);
+
+    default boolean equivalent(Object obj) {
+        if (this == obj) {
+            return false;
+        }
+
+        return obj != null && this.getClass() == obj.getClass();
+    }
 }

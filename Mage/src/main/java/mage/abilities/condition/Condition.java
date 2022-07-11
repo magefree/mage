@@ -25,4 +25,12 @@ public interface Condition extends Serializable {
     default String getManaText() {
         return "{" + this.getClass().getSimpleName() + "}";
     }
+
+    default boolean equivalent(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        return obj != null && this.getClass() == obj.getClass();
+    }
 }
