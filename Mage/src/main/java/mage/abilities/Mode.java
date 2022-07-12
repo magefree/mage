@@ -2,10 +2,12 @@ package mage.abilities;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -84,5 +86,57 @@ public class Mode implements Serializable {
     public Mode withFlavorWord(String flavorWord) {
         this.flavorWord = flavorWord;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Mode that = (Mode) obj;
+
+        if (!Objects.equals(this.id, that.id)) {
+            return false;
+        }
+
+        if (!Objects.equals(this.flavorWord, that.flavorWord)) {
+            return false;
+        }
+
+        if (!Objects.equals(this.targets, that.targets)) {
+            return false;
+        }
+
+        return Objects.equals(this.effects, that.effects);
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Mode that = (Mode) obj;
+
+        if (!Objects.equals(this.flavorWord, that.flavorWord)) {
+            return false;
+        }
+
+        if (!this.targets.equivalent(that.targets, game)) {
+            return false;
+        }
+
+        return this.effects != null && this.effects.equivalent(that.effects, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, targets, effects, flavorWord);
     }
 }
