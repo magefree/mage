@@ -910,14 +910,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (!this.equalsInternal(obj)) {
             return false;
         }
-
         CardImpl that = (CardImpl) obj;
 
-        if (!Objects.equals(this.spellAbility, that.spellAbility)) { // TODO
-            return false;
-        }
-
-        return Objects.deepEquals(this.attachments, that.attachments);
+        return Objects.equals(this.spellAbility, that.spellAbility)
+                && Objects.equals(this.attachments, that.attachments);
     }
 
     /**
@@ -930,6 +926,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      */
     @Override
     public boolean equivalent(Object obj, Game game) {
+        if (!super.equivalent(obj, game)) {
+            return false;
+        }
         if (!this.equalsInternal(obj)) {
             return false;
         }
@@ -947,8 +946,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         for (int i = 0; i< this.attachments.size(); i++) {
             Permanent thisAttachment = game.getPermanent(this.attachments.get(i));
             Permanent thatAttachment = game.getPermanent(that.attachments.get(i));
-
-            if (!Objects.equals(thisAttachment, thatAttachment)) {
+            if (!(thisAttachment == null ^ thatAttachment == null)
+                    || thisAttachment == null
+                    || !thisAttachment.equivalent(thatAttachment, game)) {
                 return false;
             }
         }

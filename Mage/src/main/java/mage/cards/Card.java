@@ -213,13 +213,4 @@ public interface Card extends MageObject {
      * @return
      */
     boolean hasSubTypeForDeckbuilding(SubType subType);
-
-    /**
-     * Checks equality using equivalency.
-     *
-     * @param p     The permanent to compare against
-     * @param game  The game to check equality in
-     * @return
-     */
-    boolean equivalent(Object obj, Game game);
 }
