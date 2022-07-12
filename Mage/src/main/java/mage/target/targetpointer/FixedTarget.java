@@ -7,11 +7,9 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class FixedTarget extends TargetPointerImpl {
 
@@ -179,5 +177,63 @@ public class FixedTarget extends TargetPointerImpl {
             return (Permanent) mageObject;
         }
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        FixedTarget that = (FixedTarget) obj;
+
+        return this.zoneChangeCounter == that.zoneChangeCounter
+                && this.initialized == that.initialized
+                && Objects.equals(this.targetId, that.targetId);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!super.equivalent(obj, game)) {
+            return false;
+        }
+        FixedTarget that = (FixedTarget) obj;
+
+        if (this.zoneChangeCounter != that.zoneChangeCounter
+                || this.initialized != that.initialized) {
+            return false;
+        }
+
+        if (Objects.equals(this.targetId, that.targetId)) {
+            return true;
+        }
+
+        Permanent permThis = game.getPermanent(this.targetId);
+        Permanent permThat = game.getPermanent(that.targetId);
+        if (!(permThis == null ^ permThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (permThis != null && !permThis.equivalent(permThat, game)) {
+            return false;
+        }
+
+        Player playerThis = game.getPlayer(this.targetId);
+        Player playerThat = game.getPlayer(that.targetId);
+        if (!(playerThis == null ^ playerThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (playerThis != null && !playerThis.equals(playerThat)) {
+            return false;
+        }
+
+        Card cardThis = (Card) game.getCard(this.targetId);
+        Card cardThat = (Card) game.getCard(that.targetId);
+        if (!(cardThis == null ^ cardThat == null)) {
+            return false; // Only one is them is null
+        }
+        if (cardThis != null && !cardThis.equivalent(cardThat, game)) {
+            return false;
+        }
+
+        return true;
     }
 }

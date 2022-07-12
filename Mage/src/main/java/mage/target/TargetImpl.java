@@ -766,7 +766,7 @@ public abstract class TargetImpl implements Target {
                 && Objects.equals(this.abilityController, that.abilityController);
     }
 
-    private static boolean mapsEquivalent(Map<UUID, Integer> thisMap, Map<UUID, Integer> thatMap, Game game) {
+    public static boolean mapsEquivalent(Map<UUID, Integer> thisMap, Map<UUID, Integer> thatMap, Game game) {
         if (thisMap.size() != thatMap.size()) {
             return false;
         }
