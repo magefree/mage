@@ -390,7 +390,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      *                           replace the current mana completely
      */
     private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana currentMana, ManaAbility manaAbility, Game game) {
-        boolean oldManaWasReplaced = false; // Rrue if the newly created mana includes all mana possibilities of the old
+        boolean oldManaWasReplaced = false; // True if the newly created mana includes all mana possibilities of the old
         boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
                 && onlyManaCosts
                 && (manaToAdd.getAny() > 0 || manaToAdd.countColored() > 0)
@@ -443,7 +443,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
         Mana fixedMana = manaCost.copy();
 
-        // If there is no generic costs, then there is only one combination of colors available to pay for it.
+        // If there are no generic costs, then there is only one combination of colors available to pay for it.
         // That combination is itself (fixedMana)
         if (manaCost.getGeneric() == 0) {
             payCombinations.add(fixedMana);
@@ -567,12 +567,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      *
      * NOTE: Do not use in tight loops as performance of the lookup is much worse than
      *       for ArrayList (the previous superclass of ManaOptions).
-     *
-     * NOTE: Deprecated warning is there as a reminder for when this gets called that it's not
-     *       the usual get() function from an array.
-     *
      */
-    @Deprecated
     public Mana getAtIndex(int i) {
        if (i < 0 || i >= this.size()) {
            throw new IndexOutOfBoundsException();

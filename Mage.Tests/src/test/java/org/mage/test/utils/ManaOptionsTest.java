@@ -602,6 +602,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        // The size below is based on no optimization to remove any mana possibilities beyond exact duplicates.
         Assert.assertEquals("mana variations don't match", 6902, manaOptions.size());
     }
 

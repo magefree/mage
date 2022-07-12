@@ -16,6 +16,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
+ * If subclassing and adding extra field, you must be sure to override equals() and hashCode to include the new fields.
+ *
  * @author nantuko
  */
 public class ConditionalMana extends Mana implements Serializable, Emptiable {
