@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.TargetImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -128,5 +129,40 @@ public class EachTargetPointer extends TargetPointerImpl {
             }
         }
         return permanent;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        EachTargetPointer that = (EachTargetPointer) obj;
+
+        List<UUID> thisZCCIds = this.zoneChangeCounter.keySet().stream().sorted().collect(Collectors.toList());
+        List<UUID> thatZCCIds = that.zoneChangeCounter.keySet().stream().sorted().collect(Collectors.toList());
+        for (int i = 0; i < thisZCCIds.size(); i++) {
+            UUID thisId = thisZCCIds.get(i);
+            UUID thatId = thatZCCIds.get(i);
+            if (!Objects.equals(thisId, thatId)
+                    || !Objects.equals(this.zoneChangeCounter.get(thisId), that.zoneChangeCounter.get(thatId))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!super.equivalent(obj, game)) {
+            return false;
+        }
+        EachTargetPointer that = (EachTargetPointer) obj;
+
+        return TargetImpl.mapsEquivalent(this.zoneChangeCounter, that.zoneChangeCounter, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), zoneChangeCounter);
     }
 }
