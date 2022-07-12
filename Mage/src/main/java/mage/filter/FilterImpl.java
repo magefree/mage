@@ -97,8 +97,8 @@ public abstract class FilterImpl<E> implements Filter<E> {
             return false;
         }
 
-        if (!(this.predicates != null && that.predicates != null)
-                && this.predicates == null
+        if (!(this.predicates != null ^ that.predicates != null)
+                || this.predicates == null
                 && this.predicates.size() != that.predicates.size()) {
             return false;
         }
