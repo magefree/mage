@@ -87,7 +87,7 @@ public abstract class CostImpl implements Cost {
             return false;
         }
 
-        if (!(this.targets != null && that.targets != null) || this.targets == null) {
+        if (!(this.targets != null && that.targets != null) && this.targets == null) {
             return false;
         }
 
