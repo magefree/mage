@@ -83,7 +83,7 @@ public abstract class CostImpl implements Cost {
         }
         CostImpl that = (CostImpl) obj;
         // this.id is not checked since that WILL be different for different costs
-        if (!(this.targets == null ^ that.targets == null)
+        if ((this.targets == null ^ that.targets == null)
                 || this.targets == null) {
             return false;
         }

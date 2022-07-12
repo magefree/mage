@@ -141,8 +141,8 @@ public abstract class EffectImpl implements Effect {
         if (this.targetPointer == null || !this.targetPointer.equals(that.targetPointer)) {
             return false;
         }
-        if (!(this.values == null ^ that.values == null)
-                && this.values == null) {
+        if ((this.values == null ^ that.values == null)
+                || this.values == null) {
             return false;
         }
         if (this.values.size() != that.values.size()) {
@@ -175,8 +175,8 @@ public abstract class EffectImpl implements Effect {
             return false;
         }
 
-        if (!(this.values != null ^ that.values != null)
-                && this.values == null) {
+        if ((this.values == null ^ that.values == null)
+                || this.values == null) {
             return false;
         }
         if (this.values.size() != that.values.size()) {
