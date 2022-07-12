@@ -1,9 +1,12 @@
 package mage.watchers;
 
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.players.PlayerList;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;
@@ -191,5 +194,78 @@ public abstract class Watcher implements Serializable {
 
     public WatcherScope getScope() {
         return scope;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(controllerId, sourceId, condition, scope);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!equalsInner(obj)) {
+            return false;
+        }
+
+        Watcher that = (Watcher) obj;
+        return this.sourceId.equals(that.sourceId);
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (!equalsInner(obj)) {
+            return false;
+        }
+
+        Watcher that = (Watcher) obj;
+        if (Objects.equals(this.sourceId, that.sourceId)) {
+            return true;
+        }
+
+        Permanent permThis = game.getPermanent(this.sourceId);
+        Permanent permThat = game.getPermanent(that.sourceId);
+        if (!(permThis == null ^ permThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (permThis != null && !permThis.equivalent(permThat, game)) {
+            return false;
+        }
+
+        Player playerThis = game.getPlayer(this.sourceId);
+        Player playerThat = game.getPlayer(that.sourceId);
+        if (!(playerThis == null ^ playerThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (playerThis != null && !playerThis.equals(playerThat)) {
+            return false;
+        }
+
+        Card cardThis = (Card) game.getCard(this.sourceId);
+        Card cardThat = (Card) game.getCard(that.sourceId);
+        if (!(cardThis == null ^ cardThat == null)) {
+            return false; // Only one is them is null
+        }
+        if (cardThis != null && !cardThis.equivalent(cardThat, game)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean equalsInner(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Watcher that = (Watcher) obj;
+
+        if (this.scope != that.scope
+                || this.condition != that.condition) {
+            return false;
+        }
+
+        return Objects.equals(this.controllerId, that.controllerId);
     }
 }
