@@ -893,10 +893,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
     }
-
     @Override
     public int hashCode() {
-        return 1; // TODO
+        return Objects.hash(
+                super.hashCode(),
+                ownerId, cardNumber, expansionSetCode, tokenSetCode, tokenDescriptor, rarity,
+                secondSideCardClazz, secondSideCard, nightCard, spellAbility, flipCard,
+                flipCardName, usesVariousArt, morphCard, attachments
+        );
     }
 
     /**
