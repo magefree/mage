@@ -80,7 +80,7 @@ public class SweepTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Plow Through Reito");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
-        addTarget(playerA, "Raging Goblin"); // target to boost
+        // addTarget(playerA, "Raging Goblin"); // Autochosen (target to boost)
         addTarget(playerA, TestPlayer.TARGET_SKIP); // targets to sweep (zero)
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
