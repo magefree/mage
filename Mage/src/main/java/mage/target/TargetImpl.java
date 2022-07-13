@@ -612,7 +612,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets) {
-        if (possibleTargets == null || game == null) {
+        if (possibleTargets == null || game == null || source == null) {
             return null;
         }
 
@@ -626,12 +626,14 @@ public abstract class TargetImpl implements Target {
         } else {
             playerAutoTargetLevel = 2;
         }
+        String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
-        boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() &&         // Targets must be picked
-                                possibleTargets.size() == this.getNumberOfTargets() - this.getSize() && // Available targets are equal to the number that must be picked
-                                !strictModeEnabled &&       // Test AI is not set to strictChooseMode(true)
-                                playerAutoTargetLevel > 0 && // Human player has enabled auto-choose in settings
-                                !(playerAutoTargetLevel == 1 && source == null);  // Is source is null, then the
+        boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
+                                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
+                                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
+                                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
+
 
         if (canAutoChoose) {
             boolean autoTargetAll = playerAutoTargetLevel == 2;
@@ -667,9 +669,6 @@ public abstract class TargetImpl implements Target {
 
                 // If you control (or own the card) the target, check if it's one of the feel-bad effects.
                 if (targetingOwnThing) {
-                    String abilityText = source.getRule(true).toLowerCase();
-
-
                     if (abilityText.contains("discard")
                             || abilityText.contains("sacrifice")
                             || abilityText.contains("destroy")
