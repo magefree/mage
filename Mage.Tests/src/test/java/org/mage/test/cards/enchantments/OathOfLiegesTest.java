@@ -24,7 +24,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         // turn 1 - A
         // oath A triggers for A and activates
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
@@ -56,7 +56,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         // turn 2 - B
         // oath A triggers for B and activates
-        // addTarget(playerB, playerA); // who control more lands (Autochosen, only target)
+        addTarget(playerB, playerA); // who control more lands
         setChoice(playerB, true); // search library
         addTarget(playerB, "Plains"); // card from library
 
@@ -80,7 +80,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         // turn 1 - A
         // oath B triggers for A and activates
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
@@ -105,11 +105,11 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // oath A triggers for A and activates
         // oath B triggers for A and activates
         // 1
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
         // 2
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
@@ -212,11 +212,11 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // oath A triggers for A and activates
         // copy oath B triggers for A and activates
         // 1
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
         // 2
-        // addTarget(playerA, playerB); // who control more lands (Autochosen, only target)
+        addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
