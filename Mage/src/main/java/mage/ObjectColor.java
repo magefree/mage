@@ -347,47 +347,26 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     @Override
-    public boolean equals(Object color) {
-        if (this == color) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(color instanceof ObjectColor)) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
-        ObjectColor test = (ObjectColor) color;
-        if (test.white != this.white) {
-            return false;
-        }
-        if (test.blue != this.blue) {
-            return false;
-        }
-        if (test.black != this.black) {
-            return false;
-        }
-        if (test.red != this.red) {
-            return false;
-        }
-        if (test.green != this.green) {
-            return false;
-        }
-        if (test.gold != this.gold) {
-            return false;
-        }
+        ObjectColor that = (ObjectColor) obj;
 
-        return true;
+        return this.white == that.white
+                && this.blue == that.blue
+                && this.black == that.black
+                && this.red == that.red
+                && this.green == that.green
+                && this.gold == that.gold;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + (this.white ? 1 : 0);
-        hash = 23 * hash + (this.blue ? 1 : 0);
-        hash = 23 * hash + (this.black ? 1 : 0);
-        hash = 23 * hash + (this.red ? 1 : 0);
-        hash = 23 * hash + (this.green ? 1 : 0);
-
-        hash = 23 * hash + (this.gold ? 1 : 0);
-        return hash;
+        return Objects.hash(this.white, this.blue, this.black, this.red, this.green, this.gold);
     }
 
     public boolean contains(ObjectColor color) {
