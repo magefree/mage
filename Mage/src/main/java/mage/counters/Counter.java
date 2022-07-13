@@ -2,6 +2,8 @@
 package mage.counters;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -115,24 +117,20 @@ public class Counter implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-
-        Counter counter = (Counter) o;
-
-        return count == counter.count && !(name != null ? !name.equals(counter.name) : counter.name != null);
-
+        Counter that = (Counter) obj;
+        return this.count == that.count
+                && Objects.equals(this.name, that.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + count;
-        return result;
+        return Objects.hash(name, count);
     }
 }
