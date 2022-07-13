@@ -31,6 +31,7 @@ import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
 import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
 import static mage.constants.Constants.*;
 
@@ -236,6 +237,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_MINIMUM_RATING = "newTournamentMinimumRating";
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
 
+    // Settings for auto-choosing targets
+    public static final String KEY_AUTO_TARGET_LEVEL = "autoTargetLevel";
+
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
     public static final String KEY_NEW_DECK_GENERATOR_SET = "newDeckGeneratorSet";
@@ -435,6 +439,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbShowStormCounter = new javax.swing.JCheckBox();
         cbConfirmEmptyManaPool = new javax.swing.JCheckBox();
         cbAskMoveToGraveOrder = new javax.swing.JCheckBox();
+        lblTargetAutoChoose = new javax.swing.JLabel();
+        cbTargetAutoChooseLevel = new javax.swing.JComboBox<>();
         main_battlefield = new javax.swing.JPanel();
         cbBattlefieldFeedbackColorizingMode = new javax.swing.JComboBox();
         lblBattlefieldFeedbackColorizingMode = new javax.swing.JLabel();
@@ -689,15 +695,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
+                .add(tooltipDelayLabel)
+                .addContainerGap(383, Short.MAX_VALUE))
+            .add(main_cardLayout.createSequentialGroup()
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(main_cardLayout.createSequentialGroup()
                         .add(showCardName)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(showFullImagePath)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(showFullImagePath))
+                    .add(tooltipDelay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 522, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(0, 0, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -725,7 +732,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showPlayerNamesPermanently.setSelected(true);
         showPlayerNamesPermanently.setText("Show player names on avatar permanently");
         showPlayerNamesPermanently.setToolTipText("Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time.");
-        showPlayerNamesPermanently.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showPlayerNamesPermanentlyActionPerformed(evt);
@@ -735,7 +741,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         displayLifeOnAvatar.setSelected(true);
         displayLifeOnAvatar.setText("Display life on avatar image");
         displayLifeOnAvatar.setToolTipText("Display the player's life over its avatar image.");
-        displayLifeOnAvatar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         displayLifeOnAvatar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 displayLifeOnAvatarActionPerformed(evt);
@@ -745,7 +750,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showAbilityPickerForced.setSelected(true);
         showAbilityPickerForced.setText("Show ability picker for 1 available option (spells without costs, mdf/split side, adventure)");
         showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities what you don't want (example: if you haven't mana to cast main side, but clicks on mdf card and play land instead)");
-        showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showAbilityPickerForcedActionPerformed(evt);
@@ -755,7 +759,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbAllowRequestToShowHandCards.setSelected(true);
         cbAllowRequestToShowHandCards.setText("Allow requests from players and spectators to show your hand cards");
         cbAllowRequestToShowHandCards.setToolTipText("<html>This is the default setting used for your matches. If activated other players or spectators<br>\nof your match can send a request so you can allow them to see your hand cards.");
-        cbAllowRequestToShowHandCards.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbAllowRequestToShowHandCards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAllowRequestToShowHandCardsActionPerformed(evt);
@@ -765,7 +768,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbShowStormCounter.setSelected(true);
         cbShowStormCounter.setText("Show the number of spell casts during the current turn");
         cbShowStormCounter.setToolTipText("<html>Adds a little box left to the short keys line with the number<br>\nof spells already cast during the current turn (storm counter).");
-        cbShowStormCounter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbShowStormCounter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbShowStormCounterActionPerformed(evt);
@@ -775,7 +777,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbConfirmEmptyManaPool.setSelected(true);
         cbConfirmEmptyManaPool.setText("Confirm if you want to pass a phase/step but there is still mana in your mana pool");
         cbConfirmEmptyManaPool.setToolTipText("<html>If activated you get a confirm message if you pass priority while stack is empty<br>\n and you still have mana in your mana pool.");
-        cbConfirmEmptyManaPool.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbConfirmEmptyManaPool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbConfirmEmptyManaPoolActionPerformed(evt);
@@ -785,10 +786,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbAskMoveToGraveOrder.setSelected(true);
         cbAskMoveToGraveOrder.setText("Ask player for setting order cards go to graveyard");
         cbAskMoveToGraveOrder.setToolTipText("<html>If activated and multiple cards go to the graveyard at the same time<br>\nthe player is asked to set the order of the cards.");
-        cbAskMoveToGraveOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbAskMoveToGraveOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAskMoveToGraveOrderActionPerformed(evt);
+            }
+        });
+
+        lblTargetAutoChoose.setText("Auto-choose targets for player:");
+        lblTargetAutoChoose.setToolTipText("<html>\nWhen there is only one possible outcome for targeting, the targets can be chosen for you.\n<br>\n<b>None:</b> All targeting must be done by the player.\n<br>\n<b>Most:</b> All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.\n<br>\n<b>All:</b> All targeting that can be automated will be.");
+
+        cbTargetAutoChooseLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Off", "Most", "All" }));
+        cbTargetAutoChooseLevel.setSelectedIndex(1);
+        cbTargetAutoChooseLevel.setToolTipText(lblTargetAutoChoose.getToolTipText());
+        cbTargetAutoChooseLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTargetAutoChooseLevelActionPerformed(evt);
             }
         });
 
@@ -798,19 +810,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
+                .add(lblTargetAutoChoose)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(main_gameLayout.createSequentialGroup()
                 .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(main_gameLayout.createSequentialGroup()
-                        .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 596, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(showAbilityPickerForced)))
+                .add(0, 315, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -829,10 +844,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cbConfirmEmptyManaPool)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbAskMoveToGraveOrder))
+                .add(cbAskMoveToGraveOrder)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(lblTargetAutoChoose)
+                    .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+        cbTargetAutoChooseLevel.getAccessibleContext().setAccessibleName("Auto-choose targets for player combo box");
 
         main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
 
@@ -889,7 +909,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1627,7 +1647,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(jLabelEndOfTurn)
                     .add(checkBoxEndTurnOthers))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1852,7 +1872,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2819,12 +2839,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
         tabThemesLayout.setVerticalGroup(
             tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 526, Short.MAX_VALUE)
+            .add(0, 623, Short.MAX_VALUE)
             .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(tabThemesLayout.createSequentialGroup()
                     .add(21, 21, 21)
                     .add(themesCategory, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(430, Short.MAX_VALUE)))
+                    .addContainerGap(523, Short.MAX_VALUE)))
         );
 
         tabsPanel.addTab("Themes", tabThemes);
@@ -2833,7 +2853,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -2844,7 +2863,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -2869,8 +2887,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(tabsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 554, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -2907,6 +2925,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.putInt(paramName, paramValue);
             if (UPDATE_CACHE_POLICY) {
                 updateCache(paramName, Integer.toString(paramValue));
+            }
+        }
+
+        String paramNameAutoTarget = KEY_AUTO_TARGET_LEVEL;
+        int paramValueAutoTarger = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
+        int paramDefaultAutoTarget = AUTO_TARGET_NON_FEEL_BAD;
+        if (getCachedValue(paramNameAutoTarget, paramDefault) != paramValueAutoTarger) {
+            prefs.putInt(paramNameAutoTarget, paramValueAutoTarger);
+            if (UPDATE_CACHE_POLICY) {
+                updateCache(paramNameAutoTarget, Integer.toString(paramValueAutoTarger));
             }
         }
 
@@ -3327,6 +3355,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbUseSameSettingsForReplacementEffectActionPerformed
 
+    private void cbTargetAutoChooseLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTargetAutoChooseLevelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTargetAutoChooseLevelActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3456,6 +3488,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         } catch (Throwable e) {
             logger.error("Can't parse and setup param " + KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE + " = " + feedbackParam, e);
             dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
+        }
+
+        String autoTargetParam;
+        try {
+            autoTargetParam = MageFrame.getPreferences().get(KEY_AUTO_TARGET_LEVEL, "1");
+            int autoTargetMode = Integer.parseInt(autoTargetParam);
+            dialog.cbTargetAutoChooseLevel.setSelectedIndex(autoTargetMode);
+        } catch (Throwable e) {
+            autoTargetParam = "";
+            dialog.cbTargetAutoChooseLevel.setSelectedIndex(AUTO_TARGET_NON_FEEL_BAD);
+            logger.error("Can't Parse and setup param " + KEY_AUTO_TARGET_LEVEL + " = " + autoTargetParam, e);
         }
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
@@ -4014,6 +4057,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_TARGET_LEVEL, 1),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_SAME_SETTINGS_FOR_SAME_REPLACEMENT_EFFECTS, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 userStrId
@@ -4083,6 +4127,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbStopOnAllEnd;
     private javax.swing.JCheckBox cbStopOnAllMain;
     private javax.swing.JCheckBox cbStopOnNewStackObjects;
+    private javax.swing.JComboBox<String> cbTargetAutoChooseLevel;
     private javax.swing.JComboBox<ThemeType> cbTheme;
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
@@ -4192,6 +4237,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyServer;
     private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
+    private javax.swing.JLabel lblTargetAutoChoose;
     private javax.swing.JLabel lblURLServerList;
     private javax.swing.JLabel lebelSkip;
     private javax.swing.JPanel main_battlefield;

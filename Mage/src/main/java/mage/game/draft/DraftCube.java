@@ -84,9 +84,9 @@ public abstract class DraftCube {
                 if (!cardId.getName().isEmpty()) {
                     CardInfo cardInfo = null;
                     if (!cardId.getExtension().isEmpty()) {
-                        cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension(), false);
+                        cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension());
                     } else {
-                        cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardId.getName(), false);
+                        cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardId.getName());
                     }
 
                     if (cardInfo != null) {

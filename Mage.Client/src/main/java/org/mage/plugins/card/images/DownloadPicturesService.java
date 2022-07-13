@@ -455,7 +455,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
 
-                        CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false);
+                        CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode());
                         if (secondSideCard == null) {
                             throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
                         }

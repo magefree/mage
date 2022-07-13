@@ -32,6 +32,7 @@ public final class Nihiloor extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Nihiloor(UUID ownerId, CardSetInfo setInfo) {
