@@ -1717,10 +1717,10 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
-            SessionHandler.joinTable(roomId, table.getTableId(), "H", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "C1", aiType, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
             for (int i=2 ; i < numSeats ; i++) {
-                SessionHandler.joinTable(roomId, table.getTableId(), "C" + i, aiType, 1, testDeck, "");
+                SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
