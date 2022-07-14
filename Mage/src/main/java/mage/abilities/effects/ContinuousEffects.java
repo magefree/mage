@@ -522,8 +522,8 @@ public class ContinuousEffects implements Serializable {
             throw new IllegalArgumentException("ERROR, you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
         }
 
-        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
-        if (asThoughEffectsList.isEmpty()) {
+        Set<AsThoughEffect> asThoughEffects = getApplicableAsThoughEffects(type, game);
+        if (asThoughEffects.isEmpty()) {
             return null;
         }
         MageObject objectToCheck;
@@ -558,8 +558,8 @@ public class ContinuousEffects implements Serializable {
         // Save the consumable and non-consumable objects seperately
         Set<ApprovingObject> approvingObjects = new LinkedHashSet<>();  // Only the non-consumable effects go here
         Set<ApprovingObject> consumableApprovingObjects = new HashSet<>();
-
-        for (AsThoughEffect effect : asThoughEffectsList) {
+        Map<Ability, AsThoughEffect> abilityAsThoughEffectMap = new HashMap<>();
+        for (AsThoughEffect effect : asThoughEffects) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) { // applies to full object (one effect can be used in multiple abilities)
@@ -579,6 +579,7 @@ public class ContinuousEffects implements Serializable {
                 } else {
                     approvingObjects.add(new ApprovingObject(ability, game));
                 }
+                abilityAsThoughEffectMap.put(ability, effect);
             }
         }
         // If only checking for playable, return the first available choice.
@@ -593,10 +594,23 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        Player controller = game.getPlayer(controllerId);
+        // Each call to effect.applies will keep adding to the alternative costs for the card
+        // Clear them all out and add back only the one that is being used.
+        controller.clearCastSourceIdManaCosts();
+
         // Combine consumable and non-consumable together since the player must be able to choose from both
         approvingObjects.addAll(consumableApprovingObjects);
-        if (approvingObjects.size() == 1) {
-            return approvingObjects.iterator().next();
+        if (approvingObjects.isEmpty()) {
+            return null;
+        } else if (approvingObjects.size() == 1) {
+            ApprovingObject approvingObject = approvingObjects.iterator().next();
+            // Get the effect associated with the approving ability
+            AsThoughEffect asThoughEffect = abilityAsThoughEffectMap.get(approvingObject.getApprovingAbility());
+            // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
+            // E.g. see Bolas's Citadel
+            asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
+            return approvingObject;
         }
 
         // Select the ability that you use to permit the action
@@ -612,13 +626,24 @@ public class ContinuousEffects implements Serializable {
             }
             keyChoices.put(choiceKey, choiceValue);
         }
+        // TODO: Workaround until all classes have proper .equals and .hashCode implemented.
+        //       Caused by aprovingObjects having multiple duplicates of the same ability, which are not de-duplicated.
+        //       When keyChoices is created, those objects are properly deduplicated.
         Choice choicePermitting = new ChoiceImpl(true);
         choicePermitting.setMessage("Choose the permitting object");
         choicePermitting.setKeyChoices(keyChoices);
-        Player player = game.getPlayer(controllerId);
-        player.choose(Outcome.Detriment, choicePermitting, game);
+        if (keyChoices.size() == 1) {
+            choicePermitting.setChoiceByKey(keyChoices.keySet().iterator().next());
+        } else {
+            controller.choose(Outcome.Detriment, choicePermitting, game);
+        }
         for (ApprovingObject approvingObject : approvingObjects) {
             if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
+                // Get the effect associated with the approving ability
+                AsThoughEffect asThoughEffect = abilityAsThoughEffectMap.get(approvingObject.getApprovingAbility());
+                // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
+                // E.g. see Bolas's Citadel
+                asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
                 return approvingObject;
             }
         }
@@ -645,7 +670,7 @@ public class ContinuousEffects implements Serializable {
      */
     public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
         // First check existing only effects
-        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
+        Set<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
             for (Ability ability : abilities) {
@@ -681,8 +706,8 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return
      */
-    public List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
-        List<AsThoughEffect> asThoughEffectsList = new ArrayList<>();
+    public Set<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
+        Set<AsThoughEffect> asThoughEffectsList = new LinkedHashSet<>();
         if (asThoughEffectsMap.containsKey(type)) {
             for (AsThoughEffect effect : asThoughEffectsMap.get(type)) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
