@@ -1,11 +1,13 @@
 
 package mage.cards.r;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -47,7 +49,6 @@ public final class RisenExecutioner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // You may cast Risen Executioner from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
-        // TODO: cost increase does not happen if Risen Executioner is cast grom graveyard because of other effects
         Ability ability = new SimpleStaticAbility(Zone.ALL, new RisenExecutionerCastEffect());
         ability.addEffect(new RisenExecutionerCostIncreasingEffect());
         this.addAbility(ability);
@@ -127,7 +128,13 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!abilityToModify.getSourceId().equals(source.getSourceId())) {
+        UUID cardId = abilityToModify.getSourceId();
+        if (!cardId.equals(source.getSourceId())) {
+            return false;
+        }
+
+        Object obj = game.getState().getValue("asThoughEffect used for " + cardId);
+        if (obj == null || !(obj instanceof RisenExecutionerCastEffect)) {
             return false;
         }
 

@@ -610,6 +610,7 @@ public class ContinuousEffects implements Serializable {
             // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
             // E.g. see Bolas's Citadel
             asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
+            game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect);
             return approvingObject;
         }
 
@@ -644,6 +645,7 @@ public class ContinuousEffects implements Serializable {
                 // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
                 // E.g. see Bolas's Citadel
                 asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
+                game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect);
                 return approvingObject;
             }
         }
