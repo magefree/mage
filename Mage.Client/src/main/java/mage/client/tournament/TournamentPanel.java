@@ -490,8 +490,8 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
         UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the tournament?");
-        message.setButton1("No", null);
-        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        message.setButton1("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        message.setButton2("No", null);
         message.setTournamentId(tournamentId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed

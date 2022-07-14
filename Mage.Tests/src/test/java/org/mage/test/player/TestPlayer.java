@@ -4347,6 +4347,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean getStrictChooseMode() {
+        return this.strictChooseMode;
+    }
+
+    @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
+    }
+
+    @Override
     public void addPhyrexianToColors(FilterMana colors) {
         computerPlayer.addPhyrexianToColors(colors);
     }

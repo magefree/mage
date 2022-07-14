@@ -69,62 +69,68 @@ public class AddCountersSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (counter == null) {
+            return false;
+        }
+
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (putOnCard) {
-                Card card = game.getCard(source.getSourceId());
-                if (card != null) {
-                    if (counter != null) {
-                        Counter newCounter = counter.copy();
-                        int countersToAdd = amount.calculate(game, source, this);
-                        if (countersToAdd > 0 && newCounter.getCount() == 1) {
-                            countersToAdd--;
-                        }
-                        newCounter.add(countersToAdd);
-                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        card.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects);
-                        if (informPlayers && !game.isSimulation()) {
-                            Player player = game.getPlayer(source.getControllerId());
-                            if (player != null) {
-                                game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + card.getLogName());
-                            }
-                        }
+        if (controller == null) {
+            return false;
+        }
+
+        if (putOnCard) {
+            Card card = game.getCard(source.getSourceId());
+            if (card == null) {
+                return false;
+            }
+
+            Counter newCounter = counter.copy();
+            int countersToAdd = amount.calculate(game, source, this);
+            if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                countersToAdd--;
+            }
+            newCounter.add(countersToAdd);
+            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+            card.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects);
+            if (informPlayers && !game.isSimulation()) {
+                Player player = game.getPlayer(source.getControllerId());
+                if (player != null) {
+                    game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + card.getLogName());
+                }
+            }
+            return true;
+        } else {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
+                permanent = game.getPermanentEntering(source.getSourceId());
+            }
+            if (permanent == null) {
+                return false;
+            }
+
+            if ((source.getSourceObjectZoneChangeCounter() == 0 // from static ability
+                    || source.getSourceObjectZoneChangeCounter() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
+                Counter newCounter = counter.copy();
+                int countersToAdd = amount.calculate(game, source, this);
+                if (amount instanceof StaticValue || countersToAdd > 0) {
+                    if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                        countersToAdd--;
                     }
-                    return true;
-                }
-            } else {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
-                    permanent = game.getPermanentEntering(source.getSourceId());
-                }
-                if (permanent != null
-                        && (source.getSourceObjectZoneChangeCounter() == 0 // from static ability
-                        || source.getSourceObjectZoneChangeCounter() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
-                    if (counter != null) {
-                        Counter newCounter = counter.copy();
-                        int countersToAdd = amount.calculate(game, source, this);
-                        if (amount instanceof StaticValue || countersToAdd > 0) {
-                            if (countersToAdd > 0 && newCounter.getCount() == 1) {
-                                countersToAdd--;
-                            }
-                            newCounter.add(countersToAdd);
-                            int before = permanent.getCounters(game).getCount(newCounter.getName());
-                            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                            permanent.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
-                            if (informPlayers && !game.isSimulation()) {
-                                int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
-                                Player player = game.getPlayer(source.getControllerId());
-                                if (player != null) {
-                                    game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
-                                }
-                            }
+                    newCounter.add(countersToAdd);
+                    int before = permanent.getCounters(game).getCount(newCounter.getName());
+                    List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                    permanent.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
+                    if (informPlayers && !game.isSimulation()) {
+                        int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
+                        Player player = game.getPlayer(source.getControllerId());
+                        if (player != null) {
+                            game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
                         }
                     }
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     private void setText() {

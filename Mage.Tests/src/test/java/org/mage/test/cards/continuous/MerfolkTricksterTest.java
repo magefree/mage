@@ -32,7 +32,7 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Flying Men");
         castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerB, mTrickster);
-        addTarget(playerB, "Flying Men");
+        // addTarget(playerB, "Flying Men"); Autochosen, only option
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -60,7 +60,7 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Flying Men");
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, mTrickster);
-        addTarget(playerB, "Flying Men");
+        // addTarget(playerB, "Flying Men"); Autochosen, only target
         block(1, playerB, mTrickster, "Flying Men");
 
         setStopAt(1, PhaseStep.END_COMBAT);

@@ -70,7 +70,7 @@ enum MyrkulLordOfBonesCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional.ofNullable(game.getPlayer(source.getControllerId()))
                 .map(Player::getLife)
-                .map(x -> 2 * x >= game.getStartingLife())
+                .map(x -> (2 * x) <= game.getStartingLife())
                 .orElse(false);
     }
 }

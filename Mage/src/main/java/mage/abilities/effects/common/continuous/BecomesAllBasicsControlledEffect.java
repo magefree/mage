@@ -8,6 +8,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
@@ -36,27 +39,32 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game)) {
-            permanent.addSubType(game, 
-                    SubType.PLAINS, 
-                    SubType.ISLAND, 
-                    SubType.SWAMP, 
-                    SubType.MOUNTAIN, 
+            permanent.addSubType(game,
+                    SubType.PLAINS,
+                    SubType.ISLAND,
+                    SubType.SWAMP,
+                    SubType.MOUNTAIN,
                     SubType.FOREST);
-
-            if (!permanent.getAbilities().containsRule(new WhiteManaAbility())) {
-                permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+            // Optimization.
+            // Remove basic mana abilities since they are redundant with AnyColorManaAbility
+            // and keeping them will only produce too many combinations inside ManaOptions
+            Ability[] basicManaAbilities = new Ability[]{
+                    new WhiteManaAbility(),
+                    new BlueManaAbility(),
+                    new BlackManaAbility(),
+                    new RedManaAbility(),
+                    new GreenManaAbility()
+            };
+            for (Ability basicManaAbility : basicManaAbilities) {
+                if (permanent.getAbilities(game).containsRule(basicManaAbility)) {
+                    permanent.removeAbility(basicManaAbility, source.getSourceId(), game);
+                }
             }
-            if (!permanent.getAbilities().containsRule(new BlueManaAbility())) {
-                permanent.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-            }
-            if (!permanent.getAbilities().containsRule(new BlackManaAbility())) {
-                permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-            }
-            if (!permanent.getAbilities().containsRule(new RedManaAbility())) {
-                permanent.addAbility(new RedManaAbility(), source.getSourceId(), game);
-            }
-            if (!permanent.getAbilities().containsRule(new GreenManaAbility())) {
-                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+            // Add the {T}: Add one mana of any color ability
+            // This is functionally equivalent to having five "{T}: Add {COLOR}" for each COLOR in {W}{U}{B}{R}{G}
+            AnyColorManaAbility ability = new AnyColorManaAbility();
+            if (!permanent.getAbilities(game).containsRule(ability)) {
+                permanent.addAbility(ability, source.getSourceId(), game);
             }
         }
         return true;

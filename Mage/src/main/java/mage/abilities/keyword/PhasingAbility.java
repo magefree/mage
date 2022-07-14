@@ -29,7 +29,7 @@ public class PhasingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>";
+        return "phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>";
     }
 
     @Override
