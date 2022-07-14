@@ -87,15 +87,13 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId())) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null
-                    && card.isOwnedBy(affectedControllerId)
-                    && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                return true;
-            }
+        if (!sourceId.equals(source.getSourceId())) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(source.getSourceId());
+        return card != null
+                && card.isOwnedBy(affectedControllerId)
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
 }
 
@@ -119,19 +117,22 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getControllerId(), source, game));
+        if (controller == null) {
+            return false;
         }
+
+        CardUtil.increaseCost(abilityToModify, controller.getGraveyard().count(filter, source.getControllerId(), source, game));
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getSourceId().equals(source.getSourceId())) {
-            Spell spell = game.getStack().getSpell(abilityToModify.getSourceId());
-            return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
+        if (!abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return false;
         }
-        return false;
+
+        Spell spell = game.getStack().getSpell(abilityToModify.getSourceId());
+        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
     }
 
     @Override
