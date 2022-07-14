@@ -556,100 +556,109 @@ public class ContinuousEffects implements Serializable {
         }
 
         // Save the consumable and non-consumable objects seperately
-        Set<ApprovingObject> approvingObjects = new LinkedHashSet<>();  // Only the non-consumable effects go here
-        Set<ApprovingObject> consumableApprovingObjects = new HashSet<>();
-        Map<Ability, AsThoughEffect> abilityAsThoughEffectMap = new HashMap<>();
-        for (AsThoughEffect effect : asThoughEffects) {
-            Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if (affectedAbility == null) { // applies to full object (one effect can be used in multiple abilities)
-                    if (!effect.applies(idToCheck, ability, controllerId, game)) {
-                        continue;
-                    }
-                } else { // applies to one affected ability
-                    // filter play abilities (no need to check it in every effect's code)
-                    if (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility()
-                            || !effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                        continue;
-                    }
-                }
+        Set<ApprovingObject> approvingObjects;  // Only the non-consumable effects go here
+        Map<Ability, AsThoughEffect> abilityAsThoughEffectMap;
 
-                if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                    consumableApprovingObjects.add(new ApprovingObject(ability, game));
-                } else {
-                    approvingObjects.add(new ApprovingObject(ability, game));
-                }
-                abilityAsThoughEffectMap.put(ability, effect);
-            }
-        }
-        // If only checking for playable, return the first available choice.
-        // The choice doesn't matter as long as something makes it playable.
+        String keyAprovingObjects = "approvingObjects " + idToCheck;
+        String keyAbilityAsThoughEffectMap = "abilityAsThoughEffectMap " + idToCheck;
+
         if (game.inCheckPlayableState()) {
+            approvingObjects = new LinkedHashSet<>();
+            abilityAsThoughEffectMap = new HashMap<>();
+
+            for (AsThoughEffect effect : asThoughEffects) {
+                Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (affectedAbility == null) { // applies to full object (one effect can be used in multiple abilities)
+                        if (!effect.applies(idToCheck, ability, controllerId, game)) {
+                            continue;
+                        }
+                    } else { // applies to one affected ability
+                        // filter play abilities (no need to check it in every effect's code)
+                        if (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility()
+                                || !effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
+                            continue;
+                        }
+                    }
+
+                    approvingObjects.add(new ApprovingObject(ability, game));
+                    abilityAsThoughEffectMap.put(ability, effect);
+                }
+            }
+
+            Set<ApprovingObject> tmpApprovingObjects = (Set<ApprovingObject>) game.getState().getValue(keyAprovingObjects);
+            if (tmpApprovingObjects != null) {
+                approvingObjects.addAll(tmpApprovingObjects);
+            }
+            game.getState().setValue(keyAprovingObjects, approvingObjects);
+
+            Map<Ability, AsThoughEffect> tmpAbilityAsThoughEffectMap = (Map<Ability, AsThoughEffect>) game.getState().getValue(keyAbilityAsThoughEffectMap);
+            if (tmpAbilityAsThoughEffectMap != null) {
+                abilityAsThoughEffectMap.putAll(tmpAbilityAsThoughEffectMap);
+            }
+            game.getState().setValue(keyAbilityAsThoughEffectMap, abilityAsThoughEffectMap);
+
+            // If only checking for playable, return the first available choice.
+            // The choice doesn't matter as long as something makes it playable.
             if (!approvingObjects.isEmpty()) {
                 return approvingObjects.iterator().next();
-            } else if (!consumableApprovingObjects.isEmpty()) {
-                return consumableApprovingObjects.iterator().next();
             } else {
                 return null;
             }
-        }
-
-        Player controller = game.getPlayer(controllerId);
-        // Each call to effect.applies will keep adding to the alternative costs for the card
-        // Clear them all out and add back only the one that is being used.
-        controller.clearCastSourceIdManaCosts();
-
-        // Combine consumable and non-consumable together since the player must be able to choose from both
-        approvingObjects.addAll(consumableApprovingObjects);
-        if (approvingObjects.isEmpty()) {
-            return null;
-        } else if (approvingObjects.size() == 1) {
-            ApprovingObject approvingObject = approvingObjects.iterator().next();
-            // Get the effect associated with the approving ability
-            AsThoughEffect asThoughEffect = abilityAsThoughEffectMap.get(approvingObject.getApprovingAbility());
-            // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
-            // E.g. see Bolas's Citadel
-            asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
-            game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect);
-            return approvingObject;
-        }
-
-        // Select the ability that you use to permit the action
-        Map<String, String> keyChoices = new HashMap<>();
-        for (ApprovingObject approvingObject : approvingObjects) {
-            MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-            String choiceKey = approvingObject.getApprovingAbility().getId().toString();
-            String choiceValue;
-            if (mageObject == null) {
-                choiceValue = approvingObject.getApprovingAbility().getRule();
-            } else {
-                choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
-            }
-            keyChoices.put(choiceKey, choiceValue);
-        }
-        // TODO: Workaround until all classes have proper .equals and .hashCode implemented.
-        //       Caused by aprovingObjects having multiple duplicates of the same ability, which are not de-duplicated.
-        //       When keyChoices is created, those objects are properly deduplicated.
-        Choice choicePermitting = new ChoiceImpl(true);
-        choicePermitting.setMessage("Choose the permitting object");
-        choicePermitting.setKeyChoices(keyChoices);
-        if (keyChoices.size() == 1) {
-            choicePermitting.setChoiceByKey(keyChoices.keySet().iterator().next());
         } else {
-            controller.choose(Outcome.Detriment, choicePermitting, game);
-        }
-        for (ApprovingObject approvingObject : approvingObjects) {
-            if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
-                // Get the effect associated with the approving ability
+            // Load values back from state saved during the pass-through when game.inCheckPlayableState() was true
+            approvingObjects = (Set<ApprovingObject>) game.getState().getValue(keyAprovingObjects);
+            game.getState().removeValue(keyAprovingObjects); // TODO: Where is the right place to remove them?
+
+            abilityAsThoughEffectMap = (Map<Ability, AsThoughEffect>) game.getState().getValue(keyAbilityAsThoughEffectMap);
+            game.getState().removeValue(keyAbilityAsThoughEffectMap); // TODO: Where is the right place to remove them?
+
+            if (approvingObjects.isEmpty()) {
+                return null;
+            } else if (approvingObjects.size() == 1) {
+                ApprovingObject approvingObject = approvingObjects.iterator().next();
+                // Get the effect associated with the approving ability and apply it
                 AsThoughEffect asThoughEffect = abilityAsThoughEffectMap.get(approvingObject.getApprovingAbility());
-                // Apply it again before returning in order to add any alternative costs with setCastSourceIdWithAlternateMana
-                // E.g. see Bolas's Citadel
                 asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
-                game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect);
+                game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect); // Needed for Risen Executioner
                 return approvingObject;
             }
-        }
 
+            // Select the ability that you use to permit the action
+            Map<String, String> keyChoices = new HashMap<>();
+            for (ApprovingObject approvingObject : approvingObjects) {
+                MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
+                String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                String choiceValue;
+                if (mageObject == null) {
+                    choiceValue = approvingObject.getApprovingAbility().getRule();
+                } else {
+                    choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
+                }
+                keyChoices.put(choiceKey, choiceValue);
+            }
+            // TODO: Workaround until all classes have proper .equals and .hashCode implemented.
+            //       Caused by aprovingObjects having multiple duplicates of the same ability, which are not de-duplicated.
+            //       When keyChoices is created, those objects are properly deduplicated.
+            Choice choicePermitting = new ChoiceImpl(true);
+            choicePermitting.setMessage("Choose the permitting object");
+            choicePermitting.setKeyChoices(keyChoices);
+            if (keyChoices.size() == 1) {
+                choicePermitting.setChoiceByKey(keyChoices.keySet().iterator().next());
+            } else {
+                Player controller = game.getPlayer(controllerId);
+                controller.choose(Outcome.Detriment, choicePermitting, game);
+            }
+            for (ApprovingObject approvingObject : approvingObjects) {
+                if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
+                    // Get the effect associated with the approving ability and apply it
+                    AsThoughEffect asThoughEffect = abilityAsThoughEffectMap.get(approvingObject.getApprovingAbility());
+                    asThoughEffect.applies(idToCheck, affectedAbility, approvingObject.getApprovingAbility(), game, controllerId);
+                    game.getState().setValue("asThoughEffect used for " + objectId, asThoughEffect); // Needed for Risen Executioner
+                    return approvingObject;
+                }
+            }
+        }
         return null;
     }
 
