@@ -28,10 +28,13 @@ public final class DreamsGrip extends CardImpl {
         //Tap target permanent; 
         TargetPermanent target1 = new TargetPermanent(new FilterPermanent("Permanent to tap"));
         Effect tapEffect = new TapTargetEffect();
+        tapEffect.setText("Tap target permanent");
         this.getSpellAbility().addTarget(target1);
         this.getSpellAbility().addEffect(tapEffect);
         //or untap target permanent.
-        Mode mode = new Mode(new UntapTargetEffect());
+        Effect untapEffect = new UntapTargetEffect();
+        untapEffect.setText("Untap target permanent");
+        Mode mode = new Mode(untapEffect);
         TargetPermanent target2 = new TargetPermanent(new FilterPermanent("Permanent to untap"));
         mode.addTarget(target2);
         this.getSpellAbility().addMode(mode);
