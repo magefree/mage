@@ -25,7 +25,7 @@ public class MultipleAsThoughEffects extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
         // Random creature card to play with mana value of 3
         addCard(Zone.LIBRARY, playerA, "Abzan Beastmaster",3); // 1 for draw, 2 to play
-        addCard(Zone.LIBRARY, playerA, "Forest",4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest",4);
 
         skipInitShuffling();
         setStrictChooseMode(true);
@@ -57,9 +57,9 @@ public class MultipleAsThoughEffects extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Risen Executioner");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Risen Executioner"); // Should cost {2}{B}{B} since cast with Gisa
         setChoice(playerA, "Gisa");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Risen Executioner");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Risen Executioner"); // Should cost {2}{B}{B} when cast with own ability since now only card
 
         execute();
         assertAllCommandsUsed();
