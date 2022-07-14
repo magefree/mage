@@ -26,7 +26,7 @@ public class MtgaImporter extends PlainTextDeckImporter {
                     "(?:\\p{javaWhitespace}+\\()?" +
                     "(\\p{Alnum}+)?" +
                     "(?:\\)\\p{javaWhitespace}+)?" +
-                    "(\\p{Digit}+)?");
+                    "(\\p{Alnum}+)?");
 
     private final CardLookup lookup = getCardLookup();
     private boolean sideboard = false;
