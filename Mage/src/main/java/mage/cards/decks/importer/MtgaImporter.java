@@ -5,6 +5,7 @@ import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,10 +23,10 @@ public class MtgaImporter extends PlainTextDeckImporter {
             "(\\p{Digit}+)" +
                     "\\p{javaWhitespace}+" +
                     "(" + CARD_NAME_PATTERN.pattern() + ")" +
-                    "\\p{javaWhitespace}+" +
-                    "\\((\\p{Alnum}+)\\)" +
-                    "\\p{javaWhitespace}+" +
-                    "(\\p{Digit}+)");
+                    "(?:\\p{javaWhitespace}+\\()?" +
+                    "(\\p{Alnum}+)?" +
+                    "(?:\\)\\p{javaWhitespace}+)?" +
+                    "(\\p{Digit}+)?");
 
     private final CardLookup lookup = getCardLookup();
     private boolean sideboard = false;
@@ -39,18 +40,26 @@ public class MtgaImporter extends PlainTextDeckImporter {
             return;
         }
 
-        if (line.equals("") || line.equals("Sideboard")) {
+        if (line.equals("Sideboard") || line.equals("")) {
             sideboard = true;
             return;
         }
 
         Matcher m = MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(line));
-        if (m.matches()) {
-            int count = Integer.parseInt(m.group(1));
-            String name = m.group(2);
+        
+        if (!m.matches()) {
+            sbMessage.append("Error reading '").append(line).append("'\n");
+            return;
+        }
+        
+        final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
+        
+        int count = Integer.parseInt(m.group(1));
+        String name = m.group(2);
+               
+        if (m.group(3) != "" && m.group(4) != "") {
             String set = SET_REMAPPING.getOrDefault(m.group(3), m.group(3));
             String cardNumber = m.group(4);
-            final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
             Optional<CardInfo> found = lookup.lookupCardInfo(name, set, cardNumber);
             if (!found.isPresent()) {
                 sbMessage.append("Cound not find card for '").append(line).append("'\n");
@@ -59,7 +68,14 @@ public class MtgaImporter extends PlainTextDeckImporter {
                         new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
             }
         } else {
-            sbMessage.append("Error reading '").append(line).append("'\n");
+            CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(name, true);
+            if (cardInfo == null) {
+                sbMessage.append("Cound not find card for '").append(line).append("'\n");
+            }
+            else {
+                zone.addAll(Collections.nCopies(count,
+                        new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode())));
+            }
         }
     }
 
