@@ -33,7 +33,7 @@ public abstract class RoleAssignment<T> implements Serializable {
         }
         Set<T> attributes1 = attributeSetMap.get(uuid1);
         for (T attribute1 : attributes1) {
-            if (attribute == attribute1) {
+            if (Objects.equals(attribute, attribute1)) {
                 continue;
             }
             if (!attributeUUIDMap.containsKey(attribute1)) {
@@ -43,7 +43,7 @@ public abstract class RoleAssignment<T> implements Serializable {
             }
         }
         for (T attribute1 : attributes1) {
-            if (attribute == attribute1) {
+            if (Objects.equals(attribute, attribute1)) {
                 continue;
             }
             if (attemptRearrange(attribute1, uuid1, attributes, attributeUUIDMap, attributeSetMap)) {

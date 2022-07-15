@@ -82,4 +82,6 @@ public interface Effect extends Serializable, Copyable<Effect> {
     public default Condition getCondition() {
         return null;
     }
+
+    public boolean equivalent(Object obj, Game game);
 }

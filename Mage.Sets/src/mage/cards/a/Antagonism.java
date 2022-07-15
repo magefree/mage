@@ -26,7 +26,7 @@ public final class Antagonism extends CardImpl {
 
         // At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of their opponents was dealt damage this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ConditionalOneShotEffect(new DamageTargetEffect(2),
-                new OpponentWasNotDealtDamageCondition(), rule), TargetController.ANY, false));
+                OpponentWasNotDealtDamageCondition.instance, rule), TargetController.ANY, false));
 
     }
 
@@ -40,21 +40,20 @@ public final class Antagonism extends CardImpl {
     }
 }
 
-class OpponentWasNotDealtDamageCondition implements Condition {
-
-    public OpponentWasNotDealtDamageCondition() {
-    }
+enum OpponentWasNotDealtDamageCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         UUID activePlayer = game.getState().getActivePlayerId();
-        if (activePlayer != null) {
-            BloodthirstWatcher watcher = game.getState().getWatcher(BloodthirstWatcher.class, activePlayer);
-            if (watcher != null) {
-                return !watcher.conditionMet();
-            }
+        if (activePlayer == null) {
+            return false;
         }
-        return false;
+        BloodthirstWatcher watcher = game.getState().getWatcher(BloodthirstWatcher.class, activePlayer);
+        if (watcher == null) {
+            return false;
+        }
+        return !watcher.conditionMet();
     }
 
     @Override

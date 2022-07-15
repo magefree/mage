@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -99,7 +100,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
                     = new BecomesBasicLandTargetEffect(Duration.Custom, SubType.ISLAND);
             ConditionalContinuousEffect effect
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
-                    new LandHasFloodCounterCondition(), staticText);
+                    LandHasFloodCounterCondition.instance, staticText);
             // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
             SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
             gainAbility.setSourceId(landChosen.getId());
@@ -161,12 +162,27 @@ class AllLandsAreSubtypeCondition implements Condition {
     public String toString() {
         return "if all lands on the battlefield are " + subtype + "s";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        AllLandsAreSubtypeCondition that = (AllLandsAreSubtypeCondition) obj;
+        return this.subtype == that.subtype;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subtype);
+    }
 }
 
-class LandHasFloodCounterCondition implements Condition {
-
-    public LandHasFloodCounterCondition() {
-    }
+enum LandHasFloodCounterCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

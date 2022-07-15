@@ -36,9 +36,9 @@ public final class BloodfireEnforcers extends CardImpl {
         // Bloodfire Enforcers has first strike and trample as long as an instant card and a sorcery card are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                new BloodfireEnforcersCondition(), "{this} has first strike"));
+                BloodfireEnforcersCondition.instance, "{this} has first strike"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new BloodfireEnforcersCondition(), "and trample as long as an instant card and a sorcery card are in your graveyard"));
+                BloodfireEnforcersCondition.instance, "and trample as long as an instant card and a sorcery card are in your graveyard"));
         this.addAbility(ability);
      
     }
@@ -54,7 +54,8 @@ public final class BloodfireEnforcers extends CardImpl {
 }
 
 
-class BloodfireEnforcersCondition implements Condition {
+enum BloodfireEnforcersCondition implements Condition {
+    instance;
 
     private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard();
 

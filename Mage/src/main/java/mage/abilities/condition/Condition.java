@@ -25,4 +25,8 @@ public interface Condition extends Serializable {
     default String getManaText() {
         return "{" + this.getClass().getSimpleName() + "}";
     }
+
+    default public boolean equivalent(Object obj, Game game) { // TODO: Go through all Conditions and add equivalent
+        return this.equals(obj);
+    }
 }

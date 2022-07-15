@@ -44,7 +44,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected Class<?> secondSideCardClazz;
+    protected Class<? extends Card> secondSideCardClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -901,5 +901,108 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                super.hashCode(),
+                ownerId, cardNumber, expansionSetCode, tokenSetCode, tokenDescriptor, rarity,
+                secondSideCardClazz, secondSideCard, nightCard, spellAbility, flipCard,
+                flipCardName, usesVariousArt, morphCard, attachments
+        );
+    }
+
+    /**
+     * Strict version of equals.
+     *
+     * @param obj The object to compare to
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!this.equalsInternal(obj)) {
+            return false;
+        }
+        CardImpl that = (CardImpl) obj;
+
+        return Objects.equals(this.spellAbility, that.spellAbility)
+                && Objects.equals(this.attachments, that.attachments);
+    }
+
+    /**
+     * Equivalent version of equals. Unlike {@link CardImpl#equals(Object)} this version checks
+     * If the
+     *
+     * @param obj
+     * @param game
+     * @return
+     */
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!super.equivalent(obj, game)) {
+            return false;
+        }
+        if (!this.equalsInternal(obj)) {
+            return false;
+        }
+
+        CardImpl that = (CardImpl) obj;
+
+        if (!Objects.equals(this.spellAbility, that.spellAbility)) { // TODO
+            return false;
+        }
+
+        if (this.attachments == null || that.attachments == null || this.attachments.size() != that.attachments.size()) {
+            return false;
+        }
+
+        for (int i = 0; i< this.attachments.size(); i++) {
+            Permanent thisAttachment = game.getPermanent(this.attachments.get(i));
+            Permanent thatAttachment = game.getPermanent(that.attachments.get(i));
+            if (!(thisAttachment == null ^ thatAttachment == null)
+                    || thisAttachment == null
+                    || !thisAttachment.equivalent(thatAttachment, game)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Internal method for both .equals() methods to handle the checks
+     * that are common to both.
+     *
+     * @param obj
+     * @return
+     */
+    private boolean equalsInternal(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        CardImpl that = (CardImpl) obj;
+        if (!Objects.equals(this.ownerId, that.ownerId)) {
+            return false;
+        }
+
+        if (this.rarity != that.rarity
+                || this.usesVariousArt != that.usesVariousArt
+                || !Objects.equals(this.cardNumber, that.cardNumber)
+                || !Objects.equals(this.expansionSetCode, that.expansionSetCode)
+                || !Objects.equals(this.tokenSetCode, that.tokenSetCode)
+                || !Objects.equals(this.tokenDescriptor, that.tokenDescriptor)) {
+            return false;
+        }
+
+        return this.nightCard != that.nightCard
+                || this.flipCard != that.flipCard
+                || this.morphCard != that.morphCard
+                || !Objects.equals(this.secondSideCardClazz, that.secondSideCardClazz)
+                || !Objects.equals(this.secondSideCard, that.secondSideCard)
+                || !Objects.equals(this.flipCardName, that.flipCardName);
     }
 }

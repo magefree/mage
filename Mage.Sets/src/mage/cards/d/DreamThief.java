@@ -38,7 +38,7 @@ public final class DreamThief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)),
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), CastBlueSpellThisTurnCondition.instance, rule)),
                 new SpellsCastWatcher());
 
     }
@@ -53,19 +53,24 @@ public final class DreamThief extends CardImpl {
     }
 }
 
-class CastBlueSpellThisTurnCondition implements Condition {
+enum CastBlueSpellThisTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher != null) {
-            List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
-            if (spells != null) {
-                for (Spell spell : spells) {
-                    if (!spell.getSourceId().equals(source.getSourceId()) && spell.getColor(game).isBlue()) {
-                        return true;
-                    }
-                }
+        if (watcher == null) {
+            return false;
+        }
+
+        List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
+        if (spells == null) {
+            return false;
+        }
+
+        for (Spell spell : spells) {
+            if (!spell.getSourceId().equals(source.getSourceId()) && spell.getColor(game).isBlue()) {
+                return true;
             }
         }
         return false;

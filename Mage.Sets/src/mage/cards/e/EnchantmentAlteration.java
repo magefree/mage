@@ -83,7 +83,7 @@ class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<Ma
                 return false;
             }
             newPermanentToAttachAuraTo = game.getPermanent(input.getObject().getId()); // the new target creature or land to enchant
-            if (newPermanentToAttachAuraTo == auraIsAttachedToThisPermanent) {
+            if (auraIsAttachedToThisPermanent.equals(newPermanentToAttachAuraTo)) {
                 return false;  // must be another permanent
             }
             if (auraIsAttachedToThisPermanent.isCreature(game)

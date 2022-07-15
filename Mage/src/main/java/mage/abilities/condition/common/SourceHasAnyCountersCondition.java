@@ -3,9 +3,13 @@ package mage.abilities.condition.common;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import sun.font.CreatedFontTracker;
 
-// @author jeffwadsworth
+import java.util.Objects;
 
+/**
+ * @author jeffwadsworth
+ */
 public class SourceHasAnyCountersCondition implements Predicate<Permanent> {
 
     final int count;
@@ -24,4 +28,21 @@ public class SourceHasAnyCountersCondition implements Predicate<Permanent> {
         return "any counter";
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(count);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceHasAnyCountersCondition that = (SourceHasAnyCountersCondition) obj;
+
+        return this.count == that.count;
+    }
 }

@@ -28,7 +28,7 @@ public final class NowIKnowMyABCs extends CardImpl {
         // At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new NowIKnowMyABCsCondition(),
+                NowIKnowMyABCsCondition.instance,
                 "At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game."));
     }
 
@@ -42,10 +42,8 @@ public final class NowIKnowMyABCs extends CardImpl {
     }
 }
 
-class NowIKnowMyABCsCondition implements Condition {
-
-    public NowIKnowMyABCsCondition() {
-    }
+enum NowIKnowMyABCsCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

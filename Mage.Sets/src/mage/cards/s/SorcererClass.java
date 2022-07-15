@@ -8,7 +8,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -111,7 +110,7 @@ class SorcererClassConditionalMana extends ConditionalMana {
     }
 }
 
-class SorcererClassManaCondition extends ManaCondition implements Condition {
+class SorcererClassManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -8,6 +8,7 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * @author LevelX2
@@ -40,4 +41,21 @@ public class IsPhaseCondition implements Condition {
             .toLowerCase(Locale.ENGLISH);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(turnPhase, yourTurn);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final IsPhaseCondition other = (IsPhaseCondition) obj;
+        return this.yourTurn == other.yourTurn
+                && this.turnPhase == other.turnPhase;
+    }
 }

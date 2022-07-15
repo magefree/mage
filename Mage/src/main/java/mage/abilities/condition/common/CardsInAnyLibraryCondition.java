@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -54,5 +55,23 @@ public class CardsInAnyLibraryCondition implements Condition {
                 break;
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        CardsInAnyLibraryCondition other = (CardsInAnyLibraryCondition) obj;
+
+        return this.type == other.type && this.value == other.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, value);
     }
 }

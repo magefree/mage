@@ -36,7 +36,7 @@ public final class FelidarSovereign extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         // At the beginning of your upkeep, if you have 40 or more life, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new FortyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 40 or more life, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FortyOrMoreLifeCondition.instance, "At the beginning of your upkeep, if you have 40 or more life, you win the game."));
 
     }
 
@@ -50,7 +50,8 @@ public final class FelidarSovereign extends CardImpl {
     }
 }
 
-class FortyOrMoreLifeCondition implements Condition {
+enum FortyOrMoreLifeCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

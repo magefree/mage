@@ -409,7 +409,7 @@ public final class SystemUtil {
                         // WARNING, maybe very bugged if called in wrong priority
                         // uses choose triggered ability dialog to select it
                         UUID savedPriorityPlayer = null;
-                        if (game.getActivePlayerId() != opponent.getId()) {
+                        if (!opponent.getId().equals(game.getActivePlayerId())) {
                             savedPriorityPlayer = game.getActivePlayerId();
                         }
 
@@ -457,7 +457,7 @@ public final class SystemUtil {
             // insert group refs as extra commands (only user defined groups allowed, no special)
             Map<String, CommandGroup> otherGroupRefs = new HashMap<>();
             for (CommandGroup group : groups) {
-                if (group != runGroup) {
+                if (!Objects.equals(group, runGroup)) {
                     otherGroupRefs.putIfAbsent(COMMAND_REF_PREFIX + group.name, group);
                 }
             }

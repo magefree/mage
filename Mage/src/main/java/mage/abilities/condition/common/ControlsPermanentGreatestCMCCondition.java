@@ -1,9 +1,7 @@
 package mage.abilities.condition.common;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
@@ -51,4 +49,20 @@ public class ControlsPermanentGreatestCMCCondition implements Condition {
         return "you control the " + filter.getMessage() + " with the highest mana value or tied for the highest mana value";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        ControlsPermanentGreatestCMCCondition other = (ControlsPermanentGreatestCMCCondition) obj;
+        return Objects.equals(this.filter, other.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
 }

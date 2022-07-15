@@ -3,6 +3,7 @@ package mage.target;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -16,6 +17,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -684,5 +686,164 @@ public abstract class TargetImpl implements Target {
         }
 
         return null;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!this.equalsInner(obj)) {
+            return false;
+        }
+        TargetImpl that = (TargetImpl) obj;
+
+        // Sorts them and puts them into a list
+        List<UUID> thisTargetIds = this.targets.keySet().stream().sorted().collect(Collectors.toList());
+        List<UUID> thatTargetIds = that.targets.keySet().stream().sorted().collect(Collectors.toList());
+        // NOTE: This assumes that the order in which the targets where chosen in has no impact
+        for (int i = 0; i < thisTargetIds.size(); i++) {
+            UUID thisId = thisTargetIds.get(i);
+            UUID thatId = thatTargetIds.get(i);
+            if (!Objects.equals(thisId, thatId)
+                    || !Objects.equals(this.targets.get(thisId), that.targets.get(thatId))) {
+                return false;
+            }
+        }
+
+        List<UUID> thisZCCIds = this.zoneChangeCounters.keySet().stream().sorted().collect(Collectors.toList());
+        List<UUID> thatZCCIds = that.zoneChangeCounters.keySet().stream().sorted().collect(Collectors.toList());
+        for (int i = 0; i < thisZCCIds.size(); i++) {
+            UUID thisId = thisZCCIds.get(i);
+            UUID thatId = thatZCCIds.get(i);
+            if (!Objects.equals(thisId, thatId)
+                    || !Objects.equals(this.zoneChangeCounters.get(thisId), that.zoneChangeCounters.get(thatId))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (!this.equalsInner(obj)) {
+            return false;
+        }
+        TargetImpl that = (TargetImpl) obj;
+
+        // Note can't use Objects.equals or Object.deepEquals. Using it will directly compare UUIDs
+        // We want to compare the objects those UUIDs refer to.
+        // E.g. Two 1/1 tokens are identical but have different UUIDs.
+        //      Using Objects.equals would result in their UUIDs being compared, and returning false
+        //      We need to compare the objects and have it return true.
+        if (!TargetImpl.mapsEquivalent(this.targets, that.targets, game)) {
+            return false;
+        }
+
+        if (!TargetImpl.mapsEquivalent(this.zoneChangeCounters, that.zoneChangeCounters, game)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean equalsInner(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        TargetImpl that = (TargetImpl) obj;
+
+        return Objects.equals(this.targetName, that.targetName)
+                && Objects.equals(this.chooseHint, that.chooseHint)
+                && this.zone == that.zone
+                && this.minNumberOfTargets == that.minNumberOfTargets
+                && this.maxNumberOfTargets == that.maxNumberOfTargets
+                && this.required == that.required
+                && this.requiredExplicitlySet == that.requiredExplicitlySet
+                && this.chosen == that.chosen
+                && this.notTarget == that.notTarget
+                && this.atRandom == that.atRandom
+                && this.targetTag == that.targetTag
+                && this.shouldReportEvents == that.shouldReportEvents
+                && Objects.equals(this.targetController, that.targetController)
+                && Objects.equals(this.abilityController, that.abilityController);
+    }
+
+    public static boolean mapsEquivalent(Map<UUID, Integer> thisMap, Map<UUID, Integer> thatMap, Game game) {
+        if (thisMap.size() != thatMap.size()) {
+            return false;
+        }
+
+        // Sorts them and puts them into a list
+        List<UUID> thisTargetIds = thisMap.keySet().stream().sorted().collect(Collectors.toList());
+        List<UUID> thatTargetIds = thatMap.keySet().stream().sorted().collect(Collectors.toList());
+        // NOTE: This assumes that the order in which the targets where chosen in has no impact
+        for (int i = 0; i < thisTargetIds.size(); i++) {
+            UUID thisTargetId = thisTargetIds.get(i);
+            UUID thatTargetId = thatTargetIds.get(i);
+
+            Permanent permThis = game.getPermanent(thisTargetId);
+            Permanent permThat = game.getPermanent(thatTargetId);
+            if (permThis != null) {
+                if (permThis.equivalent(permThat, game)
+                        && Objects.equals(thisMap.get(thisTargetId), thatMap.get(thatTargetId))) {
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (permThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            Player playerThis = game.getPlayer(thisTargetId);
+            Player playerThat = game.getPlayer(thatTargetId);
+            if (playerThis != null) {
+                if (playerThis.equals(playerThat)
+                        && Objects.equals(thisMap.get(thisTargetId), thatMap.get(thatTargetId))) {
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (playerThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            Card cardThis = (Card) game.getCard(thisTargetId);
+            Card cardThat = (Card) game.getCard(thatTargetId);
+            if (cardThis != null) {
+                if (cardThis.equivalent(cardThat, game)
+                        && Objects.equals(thisMap.get(thisTargetId), thatMap.get(thatTargetId))) {
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                if (cardThat != null) { // If one is null but the other is not, then the targets are not equal
+                    return false;
+                }
+            }
+
+            // TODO: What to do if all three return null?
+            //       How to tell the difference between those permanents no longer existing and the UUIDs
+            //       being incorrect from the beginning?
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                targets, zoneChangeCounters, targetName, zone, maxNumberOfTargets,
+                minNumberOfTargets, required, requiredExplicitlySet, chosen, notTarget,
+                atRandom, targetController, abilityController, targetTag, chooseHint, shouldReportEvents
+        );
     }
 }

@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.mock.MockCard;
 import mage.constants.*;
@@ -310,5 +311,30 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public String toString() {
         return getIdName() + " (" + super.getClass().getSuperclass().getSimpleName() + " -> " + this.getClass().getSimpleName() + ")";
+    }
+
+    /**
+     * String checking of equality by ID.
+     * Use this version when
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+
+        return Objects.equals(this.getId(), this.getClass().cast(o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.getId());
     }
 }

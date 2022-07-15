@@ -8,6 +8,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -114,5 +115,26 @@ public class CardsInHandCondition implements Condition {
         }
         sb.append(" cards in hand");
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        CardsInHandCondition that = (CardsInHandCondition) obj;
+
+        return this.type == that.type
+                && this.count == that.count
+                && this.targetController == that.targetController
+                && Objects.equals(this.condition, that.condition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.type, this.count, this.condition, this.targetController);
     }
 }

@@ -15,6 +15,7 @@ import mage.game.command.Commander;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -49,7 +50,7 @@ class SpellCastConditionalMana extends ConditionalMana {
     }
 }
 
-class SpellCastManaCondition extends ManaCondition implements Condition {
+class SpellCastManaCondition extends ManaCondition {
 
     private final FilterSpell filter;
 
@@ -84,4 +85,18 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
         return apply(game, source);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        SpellCastManaCondition that = (SpellCastManaCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), filter);
+    }
 }

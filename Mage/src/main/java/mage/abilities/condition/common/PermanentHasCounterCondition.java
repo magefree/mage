@@ -10,18 +10,17 @@ import mage.filter.FilterPermanent;
 import mage.game.permanent.Permanent;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author jeffwadsworth
  */
 public class PermanentHasCounterCondition implements Condition {
 
-
-
     private CounterType counterType;
     private int amount;
     private FilterPermanent filter;
-    private ComparisonType counttype;
+    private ComparisonType countType;
     private boolean anyPlayer;
 
     public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter) {
@@ -33,7 +32,7 @@ public class PermanentHasCounterCondition implements Condition {
         this.counterType = counterType;
         this.amount = amount;
         this.filter = filter;
-        this.counttype = type;
+        this.countType = type;
         this.anyPlayer = false;
     }
 
@@ -41,7 +40,7 @@ public class PermanentHasCounterCondition implements Condition {
         this.counterType = counterType;
         this.amount = amount;
         this.filter = filter;
-        this.counttype = type;
+        this.countType = type;
         this.anyPlayer = any; 
     }
     @Override
@@ -51,11 +50,32 @@ public class PermanentHasCounterCondition implements Condition {
             permanents = game.getBattlefield().getAllActivePermanents(this.filter, game);
         }
         for (Permanent permanent : permanents) {
-            if(ComparisonType.compare(permanent.getCounters(game).getCount(this.counterType), counttype, this.amount))
+            if(ComparisonType.compare(permanent.getCounters(game).getCount(this.counterType), countType, this.amount))
             {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PermanentHasCounterCondition that = (PermanentHasCounterCondition) obj;
+        return this.anyPlayer == that.anyPlayer
+                && this.counterType == that.counterType
+                && this.countType == that.countType
+                && this.amount == that.amount
+                && Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counterType, amount, filter, countType, anyPlayer);
     }
 }

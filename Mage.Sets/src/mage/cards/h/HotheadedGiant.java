@@ -39,7 +39,7 @@ public final class HotheadedGiant extends CardImpl {
         // Hotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
-                HotheadedGiantWatcher::checkSpell, null,
+                HotheadedGiantWatcher::checkSpell, null, // TODO ????
                 "with two -1/-1 counters on it unless you've cast another red spell this turn"
         ), new HotheadedGiantWatcher());
     }

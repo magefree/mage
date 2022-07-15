@@ -35,7 +35,7 @@ public final class CourtHomunculus extends CardImpl {
         // Court Homunculus gets +1/+1 as long as you control another artifact.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                new ControlsAnotherArtifactCondition(), "{this} gets +1/+1 as long as you control another artifact")));
+                ControlsAnotherArtifactCondition.instance, "{this} gets +1/+1 as long as you control another artifact")));
     }
 
     private CourtHomunculus(final CourtHomunculus card) {
@@ -48,7 +48,8 @@ public final class CourtHomunculus extends CardImpl {
     }
 }
 
-class ControlsAnotherArtifactCondition implements Condition {
+enum ControlsAnotherArtifactCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

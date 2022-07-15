@@ -79,7 +79,7 @@ class GodEternalRhonasEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent == null
                     || godEternalRhonas != null
-                    && permanent == godEternalRhonas) {
+                    && permanent.equals(godEternalRhonas)) {
                 continue;
             }
             ContinuousEffect effect = new BoostTargetEffect(

@@ -3916,7 +3916,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // from non hand mode (with affected controller)
-            if (canActivateAsHandZone && ability.getControllerId() != this.getId()) {
+            if (canActivateAsHandZone && !Objects.equals(getId(), ability.getControllerId())) {
                 UUID savedControllerId = ability.getControllerId();
                 ability.setControllerId(this.getId());
                 try {
@@ -4154,7 +4154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // main card - must be marked playable in GUI
                 Card card = game.getCard(ability.getSourceId());
-                if (card != null && card.getMainCard().getId() != card.getId()) {
+                if (card != null && !card.getId().equals(card.getMainCard().getId())) {
                     putToPlayableObjects(playableObjects, card.getMainCard().getId(), ability);
                 }
 
@@ -5095,20 +5095,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        Player that = (Player) o;
 
-        Player obj = (Player) o;
-        if (this.getId() == null || obj.getId() == null) {
-            return false;
-        }
-
-        return this.getId().equals(obj.getId());
+        return Objects.equals(this.getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.playerId);
-        return hash;
+        return Objects.hash(this.getId(), this.name);
     }
 
     @Override

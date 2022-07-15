@@ -176,7 +176,7 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                 boolean sameBlocked = false;
                 for (CombatGroup group : game.getCombat().getGroups()) {
                     if (group.getBlocked() && group.getBlockers().contains(blocker.getId())) {
-                        if (group == chosenGroup1 || group == chosenGroup2) {
+                        if (group.equals(chosenGroup1) || group.equals(chosenGroup2)) {
                             if (sameBlocked) {
                                 continue blockerIteration;
                             }

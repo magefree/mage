@@ -1,6 +1,7 @@
 
 package mage.cards.n;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -147,5 +148,39 @@ class CardsInTargetOpponentHandCondition implements Condition {
         }
 
         return conditionApplies;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        CardsInTargetOpponentHandCondition that = (CardsInTargetOpponentHandCondition) obj;
+        return this.type == that.type
+                && this.count == that.count
+                && Objects.equals(this.condition, that.condition);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        CardsInTargetOpponentHandCondition that = (CardsInTargetOpponentHandCondition) obj;
+        return this.type == that.type
+                && this.count == that.count
+                && this.condition != null
+                && this.condition.equivalent(that.condition, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(condition, type, count);
     }
 }

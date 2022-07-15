@@ -100,11 +100,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             UUID targetID = damagedEvent.getTargetId();
-            if (targetID == null) {
-                continue;
-            }
-
-            if (targetID == attachedCreature) {
+            if (attachedCreature.equals(targetID)) {
                 return true;
             }
         }

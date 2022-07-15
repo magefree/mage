@@ -29,7 +29,7 @@ public final class Impatience extends CardImpl {
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player.");
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY,
-            new ImpatienceCondition(), false));
+            ImpatienceCondition.instance, false));
     }
 
     private Impatience(final Impatience card) {
@@ -42,7 +42,8 @@ public final class Impatience extends CardImpl {
     }
 }
 
-class ImpatienceCondition implements Condition {
+enum ImpatienceCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

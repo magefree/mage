@@ -113,7 +113,7 @@ public class LinePool {
                         line.open();
                         line.addLineListener(event -> {
                             logger.debug("Event: " + event);
-                            if (event.getType() != Type.STOP) {
+                            if (!Type.STOP.equals(event.getType())) {
                                 return;
                             }
                             synchronized (LinePool.this) {

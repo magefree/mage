@@ -7,7 +7,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -118,7 +117,7 @@ class KlauthUnrivaledAncientConditionalMana extends ConditionalMana {
     }
 }
 
-class KlauthUnrivaledAncientManaCondition extends ManaCondition implements Condition {
+class KlauthUnrivaledAncientManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

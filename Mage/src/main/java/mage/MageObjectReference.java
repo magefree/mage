@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -117,20 +118,67 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     @Override
-    public boolean equals(Object v) {
-        if (v instanceof MageObjectReference) {
-            if (Objects.equals(((MageObjectReference) v).getSourceId(), this.sourceId)) {
-                return ((MageObjectReference) v).getZoneChangeCounter() == this.zoneChangeCounter;
-            }
+    public boolean equals(Object obj) {
+        if (!this.equalsInner(obj)) {
+            return false;
         }
-        return false;
+        MageObjectReference that = (MageObjectReference) obj;
+
+        return Objects.equals(this.sourceId, that.sourceId);
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (!this.equalsInner(obj)) {
+            return false;
+        }
+        MageObjectReference that = (MageObjectReference) obj;
+
+        Permanent permThis = game.getPermanent(this.sourceId);
+        Permanent permThat = game.getPermanent(that.sourceId);
+        if (!(permThis == null ^ permThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (permThis != null && !permThis.equivalent(permThat, game)) {
+            return false;
+        }
+
+        Player playerThis = game.getPlayer(this.sourceId);
+        Player playerThat = game.getPlayer(that.sourceId);
+        if (!(playerThis == null ^ playerThat == null)) {
+            return false; // Only one of them is null
+        }
+        if (playerThis != null && !playerThis.equals(playerThat)) {
+            return false;
+        }
+
+        Card cardThis = (Card) game.getCard(this.sourceId);
+        Card cardThat = (Card) game.getCard(that.sourceId);
+        if (!(cardThis == null ^ cardThat == null)) {
+            return false; // Only one is them is null
+        }
+        if (cardThis != null && !cardThis.equivalent(cardThat, game)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean equalsInner(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        MageObjectReference that = (MageObjectReference) obj;
+
+        return this.zoneChangeCounter == that.zoneChangeCounter;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + (this.sourceId != null ? this.sourceId.hashCode() + this.zoneChangeCounter : 0);
-        return hash;
+        return Objects.hash(this.sourceId, this.zoneChangeCounter);
     }
 
     public boolean refersTo(UUID id, Game game) {

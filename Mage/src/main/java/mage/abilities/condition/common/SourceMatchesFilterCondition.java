@@ -7,6 +7,8 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  * Describes condition when source matches specified filter
  *
@@ -14,7 +16,7 @@ import mage.game.permanent.Permanent;
  */
 public class SourceMatchesFilterCondition implements Condition {
 
-    private FilterPermanent FILTER;
+    private FilterPermanent filter;
     private String text;
 
     public SourceMatchesFilterCondition(FilterPermanent filter) {
@@ -22,14 +24,14 @@ public class SourceMatchesFilterCondition implements Condition {
     }
 
     public SourceMatchesFilterCondition(String text, FilterPermanent filter) {
-        this.FILTER = filter;
+        this.filter = filter;
         this.text = text;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (FILTER.match(permanent, permanent.getControllerId(), source, game)) {
+        if (filter.match(permanent, permanent.getControllerId(), source, game)) {
             return true;
         }
 
@@ -42,5 +44,23 @@ public class SourceMatchesFilterCondition implements Condition {
             return text;
         }
         return super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SourceMatchesFilterCondition other = (SourceMatchesFilterCondition) obj;
+        return Objects.equals(this.filter, other.filter)
+                && Objects.equals(this.text, other.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter, text);
     }
 }

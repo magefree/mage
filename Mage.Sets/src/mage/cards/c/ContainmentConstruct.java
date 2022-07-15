@@ -6,6 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -70,7 +71,7 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId() == this.getControllerId()
+        if (Objects.equals(this.getControllerId(), event.getPlayerId())
                 && game.getState().getZone(event.getTargetId()) == Zone.GRAVEYARD) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;

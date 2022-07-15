@@ -415,7 +415,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         Set<UUID> onceSelectedModes = new HashSet<>();
         for (UUID modeId : this.keySet()) {
             Object exist = game.getState().getValue(getKey(source, game, modeId));
-            if (exist == Boolean.TRUE) {
+            if (Boolean.TRUE.equals(exist)) {
                 onceSelectedModes.add(modeId);
             }
         }

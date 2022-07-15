@@ -75,7 +75,7 @@ public final class DivineIntervention extends CardImpl {
             return (event.getData().equals(CounterType.INTERVENTION.getName())
                     && event.getTargetId().equals(this.getSourceId())
                     && event.getPlayerId() != null
-                    && event.getPlayerId() == this.getControllerId());  // the controller of this removed the counter 
+                    && event.getPlayerId().equals(this.getControllerId()));  // the controller of this removed the counter
         }
 
         @Override

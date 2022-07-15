@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -67,6 +68,24 @@ class BlowflyInfestationCondition implements Condition {
             return permanent.getCounters(game).containsKey(CounterType.M1M1);
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        BlowflyInfestationCondition other = (BlowflyInfestationCondition) obj;
+
+        return Objects.equals(this.permanent, other.permanent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permanent);
     }
 }
 

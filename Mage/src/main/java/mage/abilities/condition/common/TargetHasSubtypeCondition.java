@@ -7,6 +7,8 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -29,5 +31,22 @@ public class TargetHasSubtypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TargetHasSubtypeCondition other = (TargetHasSubtypeCondition) obj;
+        return this.subtype == other.subtype;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subtype);
     }
 }

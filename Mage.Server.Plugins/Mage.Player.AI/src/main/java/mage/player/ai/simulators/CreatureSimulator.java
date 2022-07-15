@@ -9,6 +9,7 @@ import mage.game.permanent.Permanent;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -53,5 +54,36 @@ public class CreatureSimulator implements Serializable {
                 // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
                 Math.max(power, 1) : toughness;
         return Math.max(lethalDamageThreshold - damage, 0);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0; // TODO: IntelliJ suggests the line below
+//        return Objects.hash(id, damage, power, toughness, hasFirstStrike, hasDoubleStrike, hasTrample, permanent);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CreatureSimulator that = (CreatureSimulator) o;
+
+        if (!Objects.equals(this.id, that.id)) {
+            return false;
+        }
+        if (this.damage != that.damage
+                || this.power != that.power
+                || this.toughness != that.toughness
+                || this.hasFirstStrike != that.hasFirstStrike
+                || this.hasDoubleStrike != that.hasDoubleStrike
+                || this.hasTrample != that.hasTrample) {
+            return false;
+        }
+
+        return Objects.equals(this.permanent, that.permanent);
     }
 }

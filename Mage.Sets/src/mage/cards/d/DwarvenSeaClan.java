@@ -47,7 +47,7 @@ public final class DwarvenSeaClan extends CardImpl {
                 Zone.BATTLEFIELD,
                 effect,
                 new TapSourceCost(),
-                BeforeEndCombatCondition.getInstance()
+                BeforeEndCombatCondition.instance
         );
         ability.addTarget(new TargetAttackingOrBlockingCreature(1, 1, filter, false));
         addAbility(ability);
@@ -63,12 +63,8 @@ public final class DwarvenSeaClan extends CardImpl {
     }
 }
 
-class BeforeEndCombatCondition implements Condition {
-    private static final BeforeEndCombatCondition instance = new BeforeEndCombatCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+enum BeforeEndCombatCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

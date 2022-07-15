@@ -75,7 +75,7 @@ class CultivatorDroneConditionalMana extends ConditionalMana {
     }
 }
 
-class CultivatorDroneManaCondition extends ManaCondition implements Condition {
+class CultivatorDroneManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {

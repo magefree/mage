@@ -58,18 +58,20 @@ enum LavaballTrapCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
-                if (permanents != null) {
-                    int count = 0;
-                    for (Permanent permanent : permanents) {
-                        if (permanent.isLand(game)) {
-                            count++;
-                            if (count == 2) {
-                                return true;
-                            }
-                        }
+        if (watcher == null) {
+            return false;
+        }
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
+            if (permanents == null) {
+                continue;
+            }
+            int count = 0;
+            for (Permanent permanent : permanents) {
+                if (permanent.isLand(game)) {
+                    count++;
+                    if (count == 2) {
+                        return true;
                     }
                 }
             }

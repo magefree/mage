@@ -50,7 +50,7 @@ public final class CoalitionVictory extends CardImpl {
 
         // You win the game if you control a land of each basic land type and a creature of each color.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new WinGameSourceControllerEffect(),
-                new CoalitionVictoryCondition(),
+                CoalitionVictoryCondition.instance,
                 "You win the game if you control a land of each basic land type and a creature of each color."));
     }
 
@@ -64,7 +64,8 @@ public final class CoalitionVictory extends CardImpl {
     }
 }
 
-class CoalitionVictoryCondition implements Condition {
+enum CoalitionVictoryCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -81,14 +81,17 @@ class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
+        if (controller == null) {
+            return false;
+        }
 
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
+        if (permanent != null && source.getControllerId().equals(permanent.getControllerId())) {
             return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
 
         Card cardInHand = game.getCard(event.getTargetId());
-        if (controller != null && cardInHand != null && cardInHand.getOwnerId() == source.getControllerId()) {
+        if (cardInHand != null && source.getControllerId().equals(cardInHand.getOwnerId())) {
             return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
         return false;

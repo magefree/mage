@@ -57,21 +57,20 @@ public final class HeroicDefiance extends CardImpl {
     }
 }
 
-class HeroicDefianceCondition implements Condition {
-
-    public HeroicDefianceCondition() {
-    }
+enum HeroicDefianceCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                Condition condition = new MostCommonColorCondition(creature.getColor(game));
-                return !condition.apply(game, source);
-            }
+        if (enchantment == null) {
+            return false;
         }
-        return false;
+        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (creature == null) {
+            return false;
+        }
+        Condition condition = new MostCommonColorCondition(creature.getColor(game));
+        return !condition.apply(game, source);
     }
 }

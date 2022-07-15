@@ -41,7 +41,7 @@ public final class DivinityOfPride extends CardImpl {
         // Divinity of Pride gets +4/+4 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
-                        new DivinityOfPrideCondition(),
+                        DivinityOfPrideCondition.instance,
                         "{this} gets +4/+4 as long as you have 25 or more life")));
     }
 
@@ -55,7 +55,8 @@ public final class DivinityOfPride extends CardImpl {
     }
 }
 
-class DivinityOfPrideCondition implements Condition {
+enum DivinityOfPrideCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

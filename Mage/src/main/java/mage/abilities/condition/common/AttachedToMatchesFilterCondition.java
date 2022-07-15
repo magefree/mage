@@ -8,6 +8,8 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  * Describes condition when equipped permanent has superType
  *
@@ -42,4 +44,21 @@ public class AttachedToMatchesFilterCondition implements Condition {
         return filter.getMessage();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        AttachedToMatchesFilterCondition other = (AttachedToMatchesFilterCondition) obj;
+
+        return Objects.equals(this.filter, other.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
 }

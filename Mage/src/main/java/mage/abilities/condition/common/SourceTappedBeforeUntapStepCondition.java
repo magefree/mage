@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -19,11 +20,9 @@ import java.util.UUID;
 
 public class SourceTappedBeforeUntapStepCondition implements Condition {
 
-    UUID permanentId = null;
+    UUID permanentId;
     boolean permanentWasTappedBeforeUntapStep = false;
     int lastTurnNum = -1;
-    
-
 
     public void setPermanentId(UUID permanentId) {
         this.permanentId = permanentId;
@@ -48,5 +47,24 @@ public class SourceTappedBeforeUntapStepCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceTappedBeforeUntapStepCondition that = (SourceTappedBeforeUntapStepCondition) obj;
+        return this.lastTurnNum == that.lastTurnNum
+                && this.permanentWasTappedBeforeUntapStep == that.permanentWasTappedBeforeUntapStep
+                && Objects.equals(this.permanentId, that.permanentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permanentId, permanentWasTappedBeforeUntapStep, lastTurnNum);
     }
 }

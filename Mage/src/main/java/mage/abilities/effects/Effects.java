@@ -3,6 +3,7 @@ package mage.abilities.effects;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
+import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
@@ -197,5 +198,52 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect : this) {
             effect.setValue(key, value);
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Effects that = (Effects) obj;
+
+        if (this.size() != that.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.size(); i++) {
+            if (!this.get(i).equals(that.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Effects that = (Effects) obj;
+
+        if (this.size() != that.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.size(); i++) {
+            if (!this.get(i).equivalent(that.get(i), game)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

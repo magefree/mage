@@ -114,7 +114,7 @@ class ElementalExpressionistTriggeredAbility extends ZoneChangeTriggeredAbility 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null || zEvent.getTarget() != getSourcePermanentOrLKI(game)) {
+        if (zEvent.getTarget() == null || !zEvent.getTarget().equals(getSourcePermanentOrLKI(game))) {
             return false;
         }
         // custom check cause ZoneChangeTriggeredAbility for source object only

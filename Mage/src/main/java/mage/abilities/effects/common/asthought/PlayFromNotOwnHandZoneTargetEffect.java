@@ -13,10 +13,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -105,7 +102,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         // invalid caster
         switch (allowedCaster) {
             case YOU:
-                if (playerId != source.getControllerId()) {
+                if (!Objects.equals(playerId, source.getControllerId())) {
                     return false;
                 }
                 break;
@@ -115,7 +112,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
                 }
                 break;
             case OWNER:
-                if (playerId != game.getCard(objectId).getOwnerId()) {
+                if (!Objects.equals(playerId, game.getCard(objectId).getOwnerId())) {
                     return false;
                 }
                 break;

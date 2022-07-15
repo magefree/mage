@@ -37,7 +37,7 @@ public final class AngusMackenzie extends CardImpl {
                 Zone.BATTLEFIELD, 
                 effect,
                 new ManaCostsImpl<>("{G}{W}{U}"), 
-                BeforeCombatDamageCondition.getInstance()
+                BeforeCombatDamageCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -53,12 +53,8 @@ public final class AngusMackenzie extends CardImpl {
     }
 }
 
-class BeforeCombatDamageCondition implements Condition {
-    private static final BeforeCombatDamageCondition instance = new BeforeCombatDamageCondition();
-
-    public static Condition getInstance() {
-        return instance;
-    }
+enum BeforeCombatDamageCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

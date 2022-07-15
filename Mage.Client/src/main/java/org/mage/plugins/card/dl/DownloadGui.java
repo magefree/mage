@@ -9,6 +9,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -87,7 +88,7 @@ public class DownloadGui extends JPanel {
                         }
                         break;
                 }
-            } else if (evt.getSource() == downloader) {
+            } else if (Objects.equals(downloader, evt.getSource())) {
                 // all jobs changes (add/delete)
                 if ("jobs".equals(name)) {
                     IndexedPropertyChangeEvent ev = (IndexedPropertyChangeEvent) evt;
@@ -117,7 +118,7 @@ public class DownloadGui extends JPanel {
     }
 
     private synchronized void removeJob(int index, DownloadJob job) {
-        assert jobPanels.get(job) == basicPanel.getComponent(index);
+        assert Objects.equals(jobPanels.get(job), basicPanel.getComponent(index));
         job.removePropertyChangeListener(listener);
         changeProgress(0, -1);
         jobPanels.remove(job);

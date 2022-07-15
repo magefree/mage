@@ -35,7 +35,6 @@ public final class GoblinWizard extends CardImpl {
 
     public GoblinWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.rarity = Rarity.RARE;
 
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WIZARD);

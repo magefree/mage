@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -73,6 +74,24 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
         return object != null
                 && !object.isLand(game)
                 && object.getManaValue() <= counters;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        SpellWithManaCostLessThanOrEqualToCondition that = (SpellWithManaCostLessThanOrEqualToCondition) obj;
+        return this.counters == that.counters;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counters);
     }
 }
 

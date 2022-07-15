@@ -1420,7 +1420,7 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
-        return (this == ability)
+        return (this.equals(ability))
                 || (this.getId().equals(ability.getId()))
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule(true).equals(ability.getRule(true)));

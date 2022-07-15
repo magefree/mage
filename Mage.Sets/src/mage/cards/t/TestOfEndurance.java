@@ -25,7 +25,7 @@ public final class TestOfEndurance extends CardImpl {
 
         // At the beginning of your upkeep, if you have 50 or more life, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new FiftyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 50 or more life, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FiftyOrMoreLifeCondition.instance, "At the beginning of your upkeep, if you have 50 or more life, you win the game."));
     }
 
     private TestOfEndurance(final TestOfEndurance card) {
@@ -39,7 +39,8 @@ public final class TestOfEndurance extends CardImpl {
 }
 
 
-class FiftyOrMoreLifeCondition implements Condition {
+enum FiftyOrMoreLifeCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -60,6 +60,25 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.sourceObject = sourceObject;
             this.addCounters = addCounters;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return false;
+            }
+            if (obj == null || this.getClass() != obj.getClass()) {
+                return false;
+            }
+            MarkedDamageInfo that = (MarkedDamageInfo) obj;
+
+            return this.addCounters == that.addCounters
+                    && Objects.equals(this.counter, that.counter);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(counter, sourceObject, addCounters);
+        }
     }
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
@@ -744,7 +763,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         // For each control change compared to last controller send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
-        if (beforeResetControllerId != newControllerId) {
+        if (!newControllerId.equals(beforeResetControllerId)) {
             GameEvent gainControlEvent = GameEvent.getEvent(GameEvent.EventType.GAIN_CONTROL, this.getId(), null, newControllerId);
             if (game.replaceEvent(gainControlEvent)) {
                 return false;
@@ -1758,20 +1777,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
-            ZoneChangeInfo zoneChangeInfo;
-            if (toZone == Zone.LIBRARY) {
-                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
-            } else {
-                zoneChangeInfo = new ZoneChangeInfo(event);
-            }
-            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
-            //20180810 - 701.3d
-            detachAllAttachments(game);
-            return successfullyMoved;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
+        ZoneChangeInfo zoneChangeInfo;
+        if (toZone == Zone.LIBRARY) {
+            zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+        } else {
+            zoneChangeInfo = new ZoneChangeInfo(event);
+        }
+        boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
+        //20180810 - 701.3d
+        detachAllAttachments(game);
+        return successfullyMoved;
     }
 
     @Override

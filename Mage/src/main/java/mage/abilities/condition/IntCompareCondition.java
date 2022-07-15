@@ -5,6 +5,8 @@ import mage.abilities.Ability;
 import mage.constants.ComparisonType;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -30,5 +32,24 @@ public abstract class IntCompareCondition implements Condition {
     @Override
     public String toString() {
         return type.toString() + value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        IntCompareCondition that = (IntCompareCondition) obj;
+
+        return this.value == that.value
+                && this.type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, value);
     }
 }

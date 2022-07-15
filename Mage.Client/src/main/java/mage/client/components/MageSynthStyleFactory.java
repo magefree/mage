@@ -22,7 +22,7 @@ public class MageSynthStyleFactory extends SynthStyleFactory {
 
     public SynthStyle getStyle(JComponent c, Region id) {
         SynthStyle s = wrappedFactory.getStyle(c, id);
-        if (id == Region.INTERNAL_FRAME) {
+        if (Region.INTERNAL_FRAME.equals(id)) {
             s = new TranslucentSynthSytle(s);
         }
         return s;

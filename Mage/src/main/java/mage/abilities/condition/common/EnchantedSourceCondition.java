@@ -1,6 +1,7 @@
 
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -43,5 +44,22 @@ public class EnchantedSourceCondition implements Condition {
     @Override
     public String toString() {
         return "enchanted";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        EnchantedSourceCondition that = (EnchantedSourceCondition) obj;
+        return numberOfEnchantments == that.numberOfEnchantments;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberOfEnchantments);
     }
 }

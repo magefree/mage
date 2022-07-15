@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -68,6 +69,23 @@ class MoreThanXCreaturesOnBFCondition implements Condition {
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter);
         int count = amount.calculate(game, source, null);
         return count > value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        MoreThanXCreaturesOnBFCondition that = (MoreThanXCreaturesOnBFCondition) obj;
+        return this.value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
 

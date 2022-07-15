@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -203,12 +204,12 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId() == permanentId
+        return Objects.equals(event.getTargetId(), permanentId)
                 && game.isActivePlayer(game.getPermanent(permanentId).getControllerId());
     }
 }
 
-class DreadWightCounterCondition implements Condition {
+class DreadWightCounterCondition implements Condition { // TODO Needs copy constructor?
 
     UUID permanentId;
 
@@ -228,5 +229,22 @@ class DreadWightCounterCondition implements Condition {
     @Override
     public String toString() {
         return "has counter on it";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if(obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        DreadWightCounterCondition that = (DreadWightCounterCondition) obj;
+        return Objects.equals(this.permanentId, that.permanentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permanentId);
     }
 }

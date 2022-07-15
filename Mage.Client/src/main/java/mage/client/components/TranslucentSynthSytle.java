@@ -90,7 +90,7 @@ class TranslucentSynthSytle extends SynthStyle {
 
     @Override
     public boolean isOpaque(SynthContext context) {
-        if (context.getRegion() == Region.INTERNAL_FRAME) {
+        if (Region.INTERNAL_FRAME.equals(context.getRegion())) {
             return false;
         } else {
             return style.isOpaque(context);

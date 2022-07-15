@@ -55,7 +55,7 @@ enum TheBiblioplexCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && (player.getHand().size() == 0 || player.getHand().size() == 7);
+        return player != null && (player.getHand().isEmpty() || player.getHand().size() == 7);
     }
 
     @Override

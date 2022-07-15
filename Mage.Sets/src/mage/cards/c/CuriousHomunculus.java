@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.MageInt;
@@ -71,5 +72,22 @@ class InstantOrSorceryCardsInControllerGraveyardCondition implements Condition {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        InstantOrSorceryCardsInControllerGraveyardCondition that = (InstantOrSorceryCardsInControllerGraveyardCondition) obj;
+        return this.value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

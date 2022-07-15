@@ -29,7 +29,6 @@ import java.util.UUID;
 public final class AvatarOfWoe extends CardImpl {
 
     protected static final DynamicValue graveyardCount = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
-    private static final Condition condition = new AvatarOfWoeCondition();
 
     public AvatarOfWoe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
@@ -38,7 +37,7 @@ public final class AvatarOfWoe extends CardImpl {
         this.toughness = new MageInt(5);
 
         // If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, condition)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfWoeCondition.instance)
                 .setText("If there are ten or more creature cards total in all graveyards, this spell costs {6} less to cast"))
                 .addHint(new ValueHint("Creature cards in all graveyards", graveyardCount))
         );
@@ -62,7 +61,8 @@ public final class AvatarOfWoe extends CardImpl {
     }
 }
 
-class AvatarOfWoeCondition implements Condition {
+enum AvatarOfWoeCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

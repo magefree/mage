@@ -169,7 +169,7 @@ public class CardDraggerGlassPane {
             if (mouseOver instanceof DragCardTarget) {
                 DragCardTarget target = (DragCardTarget) mouseOver;
                 MouseEvent targetEvent = SwingUtilities.convertMouseEvent(eventRootPane, rootEvent, mouseOver);
-                if (target != currentTarget) {
+                if (!target.equals(currentTarget)) {
                     if (currentTarget != null) {
                         MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(eventRootPane, rootEvent, (Component) currentTarget);
                         currentTarget.dragCardExit(oldTargetEvent);

@@ -37,7 +37,7 @@ public final class GoblinCaves extends CardImpl {
         // As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false),
-                new AttachedToBasicMountainCondition(),
+                AttachedToBasicMountainCondition.instance,
                 "As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2"
         )));
     }
@@ -52,19 +52,16 @@ public final class GoblinCaves extends CardImpl {
     }
 }
 
-class AttachedToBasicMountainCondition implements Condition {
+enum AttachedToBasicMountainCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                if (enchanted.hasSubtype(SubType.MOUNTAIN, game) && enchanted.isBasic()) {
-                    return true;
-                }
-            }
+        if (enchantment == null) {
+            return false;
         }
-        return false;
+        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+        return enchanted != null && enchanted.hasSubtype(SubType.MOUNTAIN, game) && enchanted.isBasic();
     }
 }

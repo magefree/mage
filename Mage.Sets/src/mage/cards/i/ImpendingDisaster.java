@@ -30,8 +30,7 @@ public final class ImpendingDisaster extends CardImpl {
         // At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice Impending Disaster and destroy all lands.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new DestroyAllEffect(new FilterLandPermanent()));
-        ImpendingDisasterCondition contition = new ImpendingDisasterCondition();
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice {this} and destroy all lands"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ImpendingDisasterCondition.instance, "At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice {this} and destroy all lands"));
         
     }
 
@@ -43,12 +42,13 @@ public final class ImpendingDisaster extends CardImpl {
     public ImpendingDisaster copy() {
         return new ImpendingDisaster(this);
     }
-    
-    class ImpendingDisasterCondition implements Condition {
+}
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return game.getBattlefield().count(new FilterLandPermanent(), source.getControllerId(), source, game) >= 7;
-        }
+enum ImpendingDisasterCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getBattlefield().count(new FilterLandPermanent(), source.getControllerId(), source, game) >= 7;
     }
 }

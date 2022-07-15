@@ -60,7 +60,7 @@ public final class FavorableDestiny extends CardImpl {
                                 ShroudAbility.getInstance(),
                                 AttachmentType.AURA
                         ),
-                        new FavorableDestinyCondition(),
+                        FavorableDestinyCondition.instance,
                         "Enchanted creature has shroud as long as its controller controls another creature."
                 )
         ));
@@ -76,27 +76,26 @@ public final class FavorableDestiny extends CardImpl {
     }
 }
 
-class FavorableDestinyCondition implements Condition {
-
-    public FavorableDestinyCondition() {
-    }
+enum FavorableDestinyCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                Player controller = game.getPlayer(creature.getControllerId());
-                if (controller != null) {
-                    for (Permanent perm : game.getBattlefield().getActivePermanents(controller.getId(), game)) {
-                        if (perm.isControlledBy(controller.getId())
-                                && perm.isCreature(game)
-                                && !perm.equals(creature)) {
-                            return true;
-                        }
-                    }
-                }
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (creature == null) {
+            return false;
+        }
+        Player controller = game.getPlayer(creature.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        for (Permanent perm : game.getBattlefield().getActivePermanents(controller.getId(), game)) {
+            if (perm.isControlledBy(controller.getId()) && perm.isCreature(game) && !perm.equals(creature)) {
+                return true;
             }
         }
         return false;

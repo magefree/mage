@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -143,7 +144,7 @@ class DiseasedVerminWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                && event.getSourceId() == sourceId) {
+                && Objects.equals(sourceId, event.getSourceId())) {
             damagedPlayers.add(event.getTargetId());
         }
     }

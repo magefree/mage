@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -72,7 +73,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getPlayerId() == this.controllerId;
+                && Objects.equals(event.getPlayerId(), controllerId);
     }
 
     @Override

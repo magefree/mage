@@ -4,11 +4,16 @@ import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -124,5 +129,109 @@ public abstract class EffectImpl implements Effect {
     @Override
     public String getConcatPrefix() {
         return this.concatPrefix;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!this.innerEquals(obj)) {
+            return false;
+        }
+        EffectImpl that = (EffectImpl) obj;
+
+        if (this.targetPointer == null || !this.targetPointer.equals(that.targetPointer)) {
+            return false;
+        }
+        if ((this.values == null ^ that.values == null)
+                || this.values == null) {
+            return false;
+        }
+        if (this.values.size() != that.values.size()) {
+            return false;
+        }
+        for (String key : this.values.keySet()) {
+            if (!that.values.containsKey(key)) {
+                return false;
+            }
+            Object thisObject = this.values.get(key);
+            Object thatObject = that.values.get(key);
+
+            if (!Objects.equals(thisObject, thatObject)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!this.innerEquals(obj)) {
+            return false;
+        }
+        EffectImpl that = (EffectImpl) obj;
+
+        if (this.targetPointer == null
+                || !this.targetPointer.equivalent(that.targetPointer, game)) {
+            return false;
+        }
+
+        if ((this.values == null ^ that.values == null)
+                || this.values == null) {
+            return false;
+        }
+        if (this.values.size() != that.values.size()) {
+            return false;
+        }
+        for (String key : this.values.keySet()) {
+            if (!that.values.containsKey(key)) {
+                return false;
+            }
+            Object thisObject = this.values.get(key);
+            Object thatObject = that.values.get(key);
+
+            Method equivalent = null;
+            try {
+                equivalent = thisObject.getClass().getMethod("equivalent", (Class<?>[]) new Class[]{Object.class, Game.class});
+            } catch (NoSuchMethodException | SecurityException e) {
+                // If we're here then the object does not have an equivalent method.
+                // Check with equals instead.
+                if (!Objects.equals(thisObject, thatObject)) {
+                    return false;
+                } else {
+                    continue;
+                }
+            }
+            // If we get here, then the object has an `equivalent` method
+            try {
+                if (!((Boolean)equivalent.invoke(thisObject, thatObject, game))) {
+                    return false;
+                }
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return true;
+    }
+
+    private boolean innerEquals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        EffectImpl that = (EffectImpl) obj;
+
+        return Objects.equals(this.id, that.id)
+                && this.outcome == that.outcome
+                && this.effectType == that.effectType
+                && Objects.equals(this.staticText, that.staticText)
+                && Objects.equals(this.concatPrefix, that.concatPrefix);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, outcome, effectType, targetPointer, staticText, values, concatPrefix);
     }
 }

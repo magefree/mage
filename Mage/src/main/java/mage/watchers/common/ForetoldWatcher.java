@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.cards.Card;
@@ -29,7 +30,7 @@ public class ForetoldWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.FORETELL) {
             Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && controllerId == event.getPlayerId()) {
+                    && Objects.equals(controllerId, event.getPlayerId())) {
                 foretellCardsThisTurn.add(card.getId());
                 foretoldCards.add(card.getId());
             }

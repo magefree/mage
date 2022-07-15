@@ -31,7 +31,7 @@ public final class BurningEyeZubera extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Burning-Eye Zubera dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new DamageTargetEffect(3)),new SourceGotFourDamage(),
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new DamageTargetEffect(3)), SourceGotFourDamage.instance,
                 "When {this} dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -47,7 +47,9 @@ public final class BurningEyeZubera extends CardImpl {
     }
 }
 
-class SourceGotFourDamage implements Condition {
+enum SourceGotFourDamage implements Condition {
+    instance;
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());

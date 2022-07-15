@@ -1,6 +1,7 @@
 
 package mage.cards.u;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
@@ -109,5 +110,19 @@ class UnclaimedTerritoryManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        UnclaimedTerritoryManaCondition that = (UnclaimedTerritoryManaCondition) obj;
+        return this.creatureType == that.creatureType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creatureType);
     }
 }

@@ -10,6 +10,8 @@ import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author emerald000
@@ -36,5 +38,22 @@ public class MeldCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(meldWithName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MeldCondition other = (MeldCondition) obj;
+        return Objects.equals(this.meldWithName, other.meldWithName);
     }
 }

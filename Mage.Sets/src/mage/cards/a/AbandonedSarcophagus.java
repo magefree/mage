@@ -140,7 +140,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
         boolean cardWasCycledThisTurn = false;
 
         for (Card cardCycledThisTurn : cards.getCards(game)) {
-            if (cardCycledThisTurn == card) {
+            if (card.equals(cardCycledThisTurn)) {
                 cardWasCycledThisTurn = true;
                 watcher.getCardsCycledThisTurn(controller.getId()).remove(card); //remove reference to the card as it is no longer needed
             }

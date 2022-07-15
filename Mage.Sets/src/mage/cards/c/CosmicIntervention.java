@@ -105,7 +105,7 @@ class CosmicInterventionReplacementEffect extends ReplacementEffectImpl {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null
                     || controller == null
-                    || permanent.getControllerId() == controller.getId()) {
+                    || controller.getId().equals(permanent.getControllerId())) {
                 return true;
             }
         }

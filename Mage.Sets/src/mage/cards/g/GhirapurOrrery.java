@@ -56,9 +56,6 @@ class GhirapurOrreryCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        if (activePlayer != null) {
-            return activePlayer.getHand().size();
-        }
-        return 0;
+        return activePlayer != null ? activePlayer.getHand().size() : 0;
     }
 }

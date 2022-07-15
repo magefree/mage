@@ -73,7 +73,7 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
         UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
         Permanent permanent = game.getPermanent(event.getTargetId());
 
-        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
+        if (controller != null && permanent != null && source.getControllerId().equals(permanent.getControllerId())) {
             return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
         return false;

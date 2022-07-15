@@ -67,7 +67,7 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
         for (UUID attackersId : game.getCombat().getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackersId);
             if (attackingCreature != null
-                    && game.getCombat().getDefenderId(attackersId) == this.getControllerId()) {
+                    && game.getCombat().getDefenderId(attackersId).equals(this.getControllerId())) {
                 numberAttackingController += 1;
                 applied = true;
             }

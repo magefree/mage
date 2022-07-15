@@ -1183,6 +1183,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 && this.green == mana.green
                 && this.colorless == mana.colorless
                 && this.generic == mana.generic;
+        // TODO: Why is this neglecting flag?
     }
 
     /**
@@ -1306,21 +1307,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Mana mana = (Mana) o;
-        return flag == mana.flag
-                && white == mana.white
-                && blue == mana.blue
-                && black == mana.black
-                && red == mana.red
-                && green == mana.green
-                && generic == mana.generic
-                && colorless == mana.colorless
-                && any == mana.any;
+        Mana that = (Mana) obj;
+
+        return this.flag == that.flag && this.equalManaValue(that);
     }
 
     @Override

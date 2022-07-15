@@ -13,7 +13,7 @@ import mage.game.Game;
 
 public enum  SourceIsSpellCondition implements Condition {
 
-instance;
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

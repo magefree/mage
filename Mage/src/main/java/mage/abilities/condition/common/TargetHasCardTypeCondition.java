@@ -6,6 +6,8 @@ import mage.abilities.condition.Condition;
 import mage.constants.CardType;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -27,5 +29,25 @@ public class TargetHasCardTypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TargetHasCardTypeCondition that = (TargetHasCardTypeCondition) obj;
+        return cardType == that.cardType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardType);
     }
 }

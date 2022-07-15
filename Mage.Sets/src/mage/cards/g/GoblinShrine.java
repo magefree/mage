@@ -1,6 +1,7 @@
 
 package mage.cards.g;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -80,13 +81,11 @@ class EnchantedPermanentSubtypeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null) {
-                return filter.match(permanent, enchantment.getControllerId(), source, game);
-                }
-            }
-        return false;
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        return permanent != null && filter.match(permanent, enchantment.getControllerId(), source, game);
     }
 
     @Override
@@ -94,4 +93,20 @@ class EnchantedPermanentSubtypeCondition implements Condition {
         return filter.getMessage();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final EnchantedPermanentSubtypeCondition that = (EnchantedPermanentSubtypeCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
 }

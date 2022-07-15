@@ -194,7 +194,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void updateConnectedDialog(MageDialog newDialog) {
-        if (this.connectedDialog != null && this.connectedDialog != newDialog) {
+        if (this.connectedDialog != null && !this.connectedDialog.equals(newDialog)) {
             // remove old
             this.connectedDialog.removeDialog();
         }

@@ -7,6 +7,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+
 /**
  * Condition for - Controller has X or more cards in their graveyard
  *
@@ -42,4 +44,21 @@ public class CardsInControllerGraveyardCondition implements Condition {
                 + " in your graveyard";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CardsInControllerGraveyardCondition that = (CardsInControllerGraveyardCondition) o;
+        return value == that.value &&
+                Objects.equals(filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, filter);
+    }
 }

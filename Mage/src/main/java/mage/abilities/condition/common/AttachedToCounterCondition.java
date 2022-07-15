@@ -7,6 +7,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -52,5 +54,26 @@ public class AttachedToCounterCondition implements Condition {
         } else { // single compare (lte)
             return attachedTo.getCounters(game).getCount(counterType) >= amount;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return false;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        AttachedToCounterCondition that = (AttachedToCounterCondition) obj;
+
+        return this.counterType == that.counterType
+                && this.amount == that.amount
+                && this.from == that.from
+                && this.to == that.to;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counterType, amount, from, to);
     }
 }

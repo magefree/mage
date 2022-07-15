@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -66,4 +67,21 @@ public class XorLessLifeCondition implements Condition {
         return conditionApplies;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        XorLessLifeCondition that = (XorLessLifeCondition) obj;
+        return this.type == that.type
+                && this.amount == that.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, amount);
+    }
 }

@@ -19,6 +19,7 @@ import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -236,7 +237,7 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
         UUID targetUUID = ((FixedTarget) getTargetPointer()).getTarget();
 
         // Not the right card
-        if (mainCardId != targetUUID) {
+        if (!Objects.equals(mainCardId, targetUUID)) {
             return false;
         }
 

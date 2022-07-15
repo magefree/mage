@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -163,5 +164,89 @@ public class FixedTargets extends TargetPointerImpl {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        FixedTargets that = (FixedTargets) obj;
+
+        if (!Objects.deepEquals(this.targets, that.targets)) {
+            return false;
+        }
+
+        return Objects.deepEquals(this.targetsNotInitialized, that.targetsNotInitialized);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (!super.equivalent(obj, game)) {
+            return false;
+        }
+        FixedTargets that = (FixedTargets) obj;
+
+        if ((this.targets == null ^ that.targets == null)
+                || this.targets == null) {
+            return false;
+        }
+        if (this.targets.size() != that.targets.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.targets.size(); i++) {
+            MageObjectReference thisMOR = this.targets.get(i);
+            MageObjectReference thatMOR = that.targets.get(i);
+            if ((thisMOR == null ^ thatMOR == null) || thisMOR == null) {
+                return false;
+            }
+            if (!thisMOR.equivalent(thatMOR, game)) {
+                return false;
+            }
+        }
+
+        if ((this.targetsNotInitialized == null ^ that.targetsNotInitialized == null)
+                || this.targetsNotInitialized == null) {
+            return false;
+        }
+        if (this.targetsNotInitialized.size() != that.targetsNotInitialized.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.targetsNotInitialized.size(); i++) {
+            Permanent permThis = game.getPermanent(this.targetsNotInitialized.get(i));
+            Permanent permThat = game.getPermanent(that.targetsNotInitialized.get(i));
+            if (!(permThis == null ^ permThat == null)) {
+                return false; // Only one of them is null
+            }
+            if (permThis != null && !permThis.equivalent(permThat, game)) {
+                return false;
+            }
+
+            Player playerThis = game.getPlayer(this.targetsNotInitialized.get(i));
+            Player playerThat = game.getPlayer(that.targetsNotInitialized.get(i));
+            if (!(playerThis == null ^ playerThat == null)) {
+                return false; // Only one of them is null
+            }
+            if (playerThis != null && !playerThis.equals(playerThat)) {
+                return false;
+            }
+
+            Card cardThis = (Card) game.getCard(this.targetsNotInitialized.get(i));
+            Card cardThat = (Card) game.getCard(that.targetsNotInitialized.get(i));
+            if (!(cardThis == null ^ cardThat == null)) {
+                return false; // Only one is them is null
+            }
+            if (cardThis != null && !cardThis.equivalent(cardThat, game)) {
+                return false;
+            }
+        }
+        final ArrayList<UUID> targetsNotInitialized = new ArrayList<>();
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), targets, targetsNotInitialized, initialized);
     }
 }

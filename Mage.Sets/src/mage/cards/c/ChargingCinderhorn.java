@@ -39,7 +39,7 @@ public final class ChargingCinderhorn extends CardImpl {
         ChargingCinderhornDamageTargetEffect effect = new ChargingCinderhornDamageTargetEffect();
         effect.setText("put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
         BeginningOfEndStepTriggeredAbility ability
-                = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
+                = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, ChargingCinderhornCondition.instance, false);
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
@@ -53,7 +53,8 @@ public final class ChargingCinderhorn extends CardImpl {
     }
 }
 
-class ChargingCinderhornCondition implements Condition {
+enum ChargingCinderhornCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

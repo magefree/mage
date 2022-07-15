@@ -99,7 +99,7 @@ public class MusicPlayer {
                 audioInputStream = AudioSystem.getAudioInputStream(file);
                 audioFormat = audioInputStream.getFormat();
                 // mp3 decode
-                if (audioFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
+                if (!AudioFormat.Encoding.PCM_SIGNED.equals(audioFormat.getEncoding())) {
                     audioFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
                             audioFormat.getSampleRate(), 16, audioFormat.getChannels(), audioFormat.getChannels() * 2,
                             audioFormat.getSampleRate(), false);

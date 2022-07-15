@@ -46,7 +46,7 @@ public final class ThirstingAxe extends CardImpl {
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new SacrificeEquippedEffect(), false);
         Condition condition = new CompoundCondition(
                 AttachedCondition.instance,
-                new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));
+                new InvertCondition(EquippedDealtCombatDamageToCreatureCondition.instance));
         String triggeredAbilityText = "At the beginning of your end step, if equipped creature " +
                 "didn't deal combat damage to a creature this turn, sacrifice it.";
         ConditionalInterveningIfTriggeredAbility sacrificeTriggeredAbility = new ConditionalInterveningIfTriggeredAbility(ability, condition, triggeredAbilityText);
@@ -66,7 +66,8 @@ public final class ThirstingAxe extends CardImpl {
     }
 }
 
-class EquippedDealtCombatDamageToCreatureCondition implements Condition {
+enum EquippedDealtCombatDamageToCreatureCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

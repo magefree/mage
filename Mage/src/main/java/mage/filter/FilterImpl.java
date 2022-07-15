@@ -6,6 +6,7 @@ import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @param <E>
@@ -79,5 +80,39 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     public List<Predicate<? super E>> getPredicates() {
         return predicates;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        FilterImpl that = (FilterImpl) obj;
+
+        if (this.lockedFilter != that.lockedFilter || !Objects.equals(this.message, that.message)) {
+            return false;
+        }
+
+        if ((this.predicates == null ^ that.predicates == null)
+                || this.predicates == null
+                || this.predicates.size() != that.predicates.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.predicates.size(); i++) {
+            if (!this.predicates.get(i).equivalent(that.predicates.get(i))) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(predicates, message, lockedFilter);
     }
 }

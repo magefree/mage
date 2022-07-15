@@ -6,6 +6,8 @@ import mage.abilities.condition.Condition;
 import mage.constants.SuperType;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -27,5 +29,22 @@ public class TargetHasSuperTypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TargetHasSuperTypeCondition that = (TargetHasSuperTypeCondition) obj;
+        return this.superType == that.superType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(superType);
     }
 }

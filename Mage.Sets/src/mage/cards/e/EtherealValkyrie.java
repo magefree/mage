@@ -86,11 +86,11 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
         Permanent p = game.getPermanent(event.getSourceId());
         Permanent pETB = game.getPermanent(event.getTargetId());
         if (p != null
-                && p.getId() == sourceId) {
+                && p.getId().equals(sourceId)) {
             return true;
         }
         if (pETB != null
-                && pETB.getId() == sourceId) {
+                && pETB.getId().equals(sourceId)) {
             return true;
         }
         return false;

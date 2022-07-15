@@ -89,6 +89,6 @@ class SaddledRimestagWatcher extends Watcher {
 
     boolean enteredCreatureForPlayer(UUID playerId, UUID creatureId) {
         Set<UUID> s = playerMap.getOrDefault(playerId, null);
-        return s != null && s.stream().anyMatch((UUID id) -> (id != creatureId));
+        return s != null && s.stream().anyMatch((UUID id) -> (!Objects.equals(id, creatureId)));
     }
 }

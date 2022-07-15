@@ -258,7 +258,7 @@ public class MageLayer extends MageCard {
         // * only the main panel (child) can do a calcs for the animation (so send parent sizes to recalc it)
 
         // if (this.getTopPanelRef() == this && this.getOriginal().getName().equals("Kathari Remnant")) { // for debug only
-        if (this.getTopPanelRef() == this) { // TODO: is it support multi layer drawing?
+        if (this.equals(getTopPanelRef())) { // TODO: is it support multi layer drawing?
 
             // scale inner card and create space for additional drawing like icons
             MageCardSpace innerSpace = getAdditionalSpaces(width, height);
@@ -455,7 +455,7 @@ public class MageLayer extends MageCard {
     @Override
     public MageCardLocation getCardLocation() {
         // TODO: is it support multi layers?
-        if (this.getTopPanelRef() == this) {
+        if (this.equals(getTopPanelRef())) {
             //noinspection deprecation (it's ok to call native getLocation here)
             return new MageCardLocation(this.getLocation(), this.getOuterSpace(), this.getBounds());
         } else {
@@ -466,7 +466,7 @@ public class MageLayer extends MageCard {
     @Override
     public void setCardLocation(int x, int y) {
         // TODO: is it support multi layers?
-        if (this.getTopPanelRef() == this) {
+        if (this.equals(getTopPanelRef())) {
             // see setCardBounds for more coords cals
             //noinspection deprecation - it's ok to use inner setLocation here
             this.setLocation(x - lastOuterSpace.getLeft(), y - lastOuterSpace.getTop());
@@ -478,7 +478,7 @@ public class MageLayer extends MageCard {
     @Override
     public MageCardLocation getCardLocationOnScreen() {
         // TODO: is it support multi layers?
-        if (this.getTopPanelRef() == this) {
+        if (this.equals(getTopPanelRef())) {
             //noinspection deprecation - it's ok to use inner getLocation here
             return new MageCardLocation(this.getLocationOnScreen(), this.getOuterSpace(), this.getBounds());
         } else {

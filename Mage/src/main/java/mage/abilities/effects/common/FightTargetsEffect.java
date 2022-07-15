@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -46,7 +47,7 @@ public class FightTargetsEffect extends OneShotEffect {
                 }
                 target1Id = getTargetPointer().getFirst(game, source);
                 target2Id = source.getTargets().getFirstTarget();
-                if (target1Id == target2Id) {
+                if (Objects.equals(target1Id, target2Id)) {
                     return false;
                 }
                 // two normal targets available, only if both targets are legal the effect will be applied

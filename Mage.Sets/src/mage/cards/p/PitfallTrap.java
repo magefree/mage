@@ -53,7 +53,7 @@ public final class PitfallTrap extends CardImpl {
 }
 
 enum PitfallTrapCondition implements Condition {
-
+    // TODO: Do I need to do anything for hashcode
     instance;
 
     @Override

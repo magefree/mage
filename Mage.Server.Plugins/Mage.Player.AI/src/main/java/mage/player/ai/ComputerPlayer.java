@@ -2883,7 +2883,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      */
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
         Outcome affectedOutcome;
-        if (abilityControllerId == this.playerId) {
+        if (playerId.equals(abilityControllerId)) {
             // selects for itself
             affectedOutcome = outcome;
         } else {
@@ -2989,24 +2989,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
         return useable.values().stream().findFirst().orElse(null);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Player obj = (Player) o;
-        if (this.getId() == null || obj.getId() == null) {
-            return false;
-        }
-
-        return this.getId().equals(obj.getId());
     }
 
     @Override

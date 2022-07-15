@@ -149,6 +149,35 @@ class KotoseTheSilentSpiderCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return KotoseTheSilentSpiderWatcher.checkCard(game, source, mor);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        KotoseTheSilentSpiderCondition that = (KotoseTheSilentSpiderCondition) obj;
+        return Objects.equals(this.mor, that.mor);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        KotoseTheSilentSpiderCondition that = (KotoseTheSilentSpiderCondition) obj;
+        return this.mor.equivalent(that.mor, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mor);
+    }
 }
 
 class KotoseTheSilentSpiderWatcher extends Watcher {

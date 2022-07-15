@@ -8,7 +8,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.PayLifeCost;
@@ -103,7 +102,7 @@ class VoldarenEstateConditionalMana extends ConditionalMana {
     }
 }
 
-class VoldarenEstateManaCondition extends ManaCondition implements Condition {
+class VoldarenEstateManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

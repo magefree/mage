@@ -11,6 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -72,7 +73,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         // The regeneration effect is discarded if the permanent is blinked or changes zone
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId() == source.getSourceId()) {
+                && Objects.equals(source.getSourceId(), event.getTargetId())) {
             discard();
             return false;
         }

@@ -9,6 +9,7 @@ import mage.game.permanent.Permanent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Quercitron
@@ -33,5 +34,22 @@ public class SourceHasSubtypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceHasSubtypeCondition that = (SourceHasSubtypeCondition) obj;
+        return Objects.equals(this.subtypes, that.subtypes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subtypes);
     }
 }

@@ -10,6 +10,7 @@ import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Describes condition when equipped permanent has subType
@@ -25,7 +26,6 @@ public class EquippedHasSubtypeCondition implements Condition {
             this.subTypes.add(subType);
         }
     }
-
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -46,5 +46,22 @@ public class EquippedHasSubtypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subTypes);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        EquippedHasSubtypeCondition that = (EquippedHasSubtypeCondition) obj;
+        return Objects.equals(this.subTypes, that.subTypes);
     }
 }

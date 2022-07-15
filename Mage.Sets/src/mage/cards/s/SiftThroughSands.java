@@ -48,7 +48,7 @@ public final class SiftThroughSands extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), new SiftThroughSandsCondition(), rule));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), SiftThroughSandsCondition.instance, rule));
         this.getSpellAbility().addWatcher(new SiftThroughSandsWatcher());
     }
 
@@ -62,7 +62,8 @@ public final class SiftThroughSands extends CardImpl {
     }
 }
 
-class SiftThroughSandsCondition implements Condition {
+enum SiftThroughSandsCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

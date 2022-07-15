@@ -48,7 +48,7 @@ public final class ShapeOfTheWiitigo extends CardImpl {
         Ability triggeredAbility = new BeginningOfUpkeepTriggeredAbility(
                 new ConditionalOneShotEffect(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(1), "enchanted creature"),
                         new RemoveCountersAttachedEffect(CounterType.P1P1.createInstance(1), "it"),
-                        new AttachedAttackedOrBlockedSinceYourLastUpkeepCondition(),
+                        AttachedAttackedOrBlockedSinceYourLastUpkeepCondition.instance,
                         "put a +1/+1 counter on enchanted creature if it attacked or blocked since your last " +
                                 "upkeep. Otherwise, remove a +1/+1 counter from it"), TargetController.YOU, false);
         triggeredAbility.addWatcher(new AttackedOrBlockedSinceYourLastUpkeepWatcher());
@@ -65,7 +65,8 @@ public final class ShapeOfTheWiitigo extends CardImpl {
     }
 }
 
-class AttachedAttackedOrBlockedSinceYourLastUpkeepCondition implements Condition {
+enum AttachedAttackedOrBlockedSinceYourLastUpkeepCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -617,7 +617,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         // Nothing to do
-        if (activeFrame == frame) {
+        if (Objects.equals(activeFrame, frame)) {
             return;
         }
 
@@ -663,7 +663,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void deactivate(MagePane frame) {
         frame.setVisible(false);
         setActive(getTopMost(frame));
-        if (activeFrame != frame) {
+        if (!Objects.equals(activeFrame, frame)) {
             frame.deactivated();
         }
     }
@@ -1170,7 +1170,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         // Show the tables pane if there wasn't already an active pane
         MagePane topPanebefore = getTopMost(tablesPane);
         setActive(tablesPane);
-        if (topPanebefore != null && topPanebefore != tablesPane) {
+        if (topPanebefore != null && !topPanebefore.equals(tablesPane)) {
             setActive(topPanebefore);
         }
     }

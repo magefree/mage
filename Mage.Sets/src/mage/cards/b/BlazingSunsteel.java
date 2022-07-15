@@ -99,7 +99,7 @@ class BlazingSunsteelTriggeredAbility extends TriggeredAbilityImpl {
                 continue;
             }
 
-            if (targetID == attachedCreature) {
+            if (targetID.equals(attachedCreature)) {
                 damage += damagedEvent.getAmount();
             }
         }
