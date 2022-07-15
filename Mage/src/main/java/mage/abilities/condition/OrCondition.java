@@ -3,6 +3,8 @@ package mage.abilities.condition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
+
 import mage.abilities.Ability;
 import mage.game.Game;
 
@@ -34,5 +36,24 @@ public class OrCondition implements Condition {
     @Override
     public String toString() {
         return text;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        OrCondition that = (OrCondition) obj;
+
+        return Objects.equals(this.text, that.text)
+                && Objects.equals(this.conditions, that.conditions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(conditions, text);
     }
 }

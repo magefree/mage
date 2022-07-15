@@ -27,7 +27,7 @@ public final class BattleOfWits extends CardImpl {
 
         // At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new BattleOfWitsCondition(), "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, BattleOfWitsCondition.instance, "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
     }
 
     private BattleOfWits(final BattleOfWits card) {
@@ -40,7 +40,8 @@ public final class BattleOfWits extends CardImpl {
     }
 }
 
-class BattleOfWitsCondition implements Condition {
+enum BattleOfWitsCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

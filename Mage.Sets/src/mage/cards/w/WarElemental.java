@@ -36,7 +36,7 @@ public final class WarElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When War Elemental enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new OpponentWasDealtDamageCondition())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(OpponentWasDealtDamageCondition.instance)));
 
         // Whenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
         this.addAbility(new WarElementalTriggeredAbility());
@@ -109,10 +109,8 @@ class WarElementalEffect extends OneShotEffect {
     }
 }
 
-class OpponentWasDealtDamageCondition implements Condition {
-
-    public OpponentWasDealtDamageCondition() {
-    }
+enum OpponentWasDealtDamageCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

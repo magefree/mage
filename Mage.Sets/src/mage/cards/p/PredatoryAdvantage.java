@@ -29,7 +29,7 @@ public final class PredatoryAdvantage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");
 
         // At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, create a 2/2 green Lizard creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LizardToken()), TargetController.OPPONENT, new DidNotCastCreatureCondition(), false), new CastCreatureWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LizardToken()), TargetController.OPPONENT, DidNotCastCreatureCondition.instance, false), new CastCreatureWatcher());
     }
 
     private PredatoryAdvantage(final PredatoryAdvantage card) {
@@ -42,18 +42,17 @@ public final class PredatoryAdvantage extends CardImpl {
     }
 }
 
-class DidNotCastCreatureCondition implements Condition {
+enum DidNotCastCreatureCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            Watcher watcher = game.getState().getWatcher(CastCreatureWatcher.class, source.getSourceId());
-            if (watcher != null && !watcher.conditionMet()) {
-                return true;
-            }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        Watcher watcher = game.getState().getWatcher(CastCreatureWatcher.class, source.getSourceId());
+        return watcher != null && !watcher.conditionMet();
     }
 
     @Override

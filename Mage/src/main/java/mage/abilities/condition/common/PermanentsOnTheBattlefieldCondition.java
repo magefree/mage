@@ -7,6 +7,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  * Battlefield checking condition. This condition can decorate other conditions
  * as well as be used standalone.
@@ -75,5 +77,25 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     @Override
     public String toString() {
         return filter.getMessage();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PermanentsOnTheBattlefieldCondition that = (PermanentsOnTheBattlefieldCondition) obj;
+        return this.type == that.type
+                && this.count == that.count
+                && this.onlyControlled == that.onlyControlled
+                && Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter, type, count, onlyControlled);
     }
 }

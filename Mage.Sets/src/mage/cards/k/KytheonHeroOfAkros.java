@@ -46,7 +46,7 @@ public final class KytheonHeroOfAkros extends CardImpl {
         // then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Pronoun.HE), false),
-                new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
+                KytheonHeroOfAkrosCondition.instance, "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
                 + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
 
         // {2}{W}: Kytheon gains indestructible until end of turn.
@@ -64,27 +64,29 @@ public final class KytheonHeroOfAkros extends CardImpl {
     }
 }
 
-class KytheonHeroOfAkrosCondition implements Condition {
+enum KytheonHeroOfAkrosCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject != null) {
-            AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-            if (watcher != null) {
-                boolean sourceFound = false;
-                int number = 0;
-                for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
-                    if (mor.refersTo(sourceObject, game)) {
-                        sourceFound = true;
-                    } else {
-                        number++;
-                    }
-                }
-                return sourceFound && number >= 2;
+        if (sourceObject == null) {
+            return false;
+        }
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
+        boolean sourceFound = false;
+        int number = 0;
+        for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
+            if (mor.refersTo(sourceObject, game)) {
+                sourceFound = true;
+            } else {
+                number++;
             }
         }
-        return false;
+        return sourceFound && number >= 2;
     }
 
     @Override

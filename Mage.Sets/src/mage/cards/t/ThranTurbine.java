@@ -97,7 +97,7 @@ class ThranTurbineConditionalMana extends ConditionalMana {
     }
 }
 
-class ThranTurbineManaCondition extends ManaCondition implements Condition {
+class ThranTurbineManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {

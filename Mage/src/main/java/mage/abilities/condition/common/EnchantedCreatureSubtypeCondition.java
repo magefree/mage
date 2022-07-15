@@ -9,6 +9,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author fireshoes
@@ -39,4 +41,20 @@ public class EnchantedCreatureSubtypeCondition implements Condition {
         return filter.getMessage();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        EnchantedCreatureSubtypeCondition that = (EnchantedCreatureSubtypeCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
 }

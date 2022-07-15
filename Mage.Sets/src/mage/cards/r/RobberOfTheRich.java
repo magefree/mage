@@ -110,6 +110,35 @@ class RogueAttackedThisTurnCondition implements Condition {
     public String toString() {
         return "During that turn you attacked with a Rogue";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        RogueAttackedThisTurnCondition that = (RogueAttackedThisTurnCondition) obj;
+        return Objects.equals(this.ability, that.ability);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        RogueAttackedThisTurnCondition that = (RogueAttackedThisTurnCondition) obj;
+        return this.ability != null && this.ability.equivalent(that.ability, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ability);
+    }
 }
 
 class RobberOfTheRichEffect extends OneShotEffect {

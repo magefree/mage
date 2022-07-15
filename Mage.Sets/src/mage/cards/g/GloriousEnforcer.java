@@ -66,12 +66,13 @@ enum GloriousEnforcerCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null && controller.getLife() > opponent.getLife()) {
-                    return true;
-                }
+        if (controller == null) {
+            return false;
+        }
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && controller.getLife() > opponent.getLife()) {
+                return true;
             }
         }
         return false;

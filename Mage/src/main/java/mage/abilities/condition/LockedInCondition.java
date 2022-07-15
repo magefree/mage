@@ -4,6 +4,8 @@ package mage.abilities.condition;
 import mage.abilities.Ability;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  * The use of this class must be handled carefully because conditions don't
  * have a copy method, the condition state is kept when the effect or ability
@@ -42,4 +44,23 @@ public class LockedInCondition implements Condition {
         return condition;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        LockedInCondition that = (LockedInCondition) obj;
+
+        return this.result == that.result
+                && this.conditionChecked == that.conditionChecked
+                && Objects.equals(this.condition, that.condition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(conditionChecked, result, condition);
+    }
 }

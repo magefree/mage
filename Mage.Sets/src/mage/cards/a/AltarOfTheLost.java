@@ -62,11 +62,12 @@ class AltarOfTheLostConditionalMana extends ConditionalMana {
     public AltarOfTheLostConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast spells with flashback from a graveyard";
-        addCondition(new AltarOfTheLostManaCondition());
+        addCondition(AltarOfTheLostManaCondition.instance);
     }
 }
 
-class AltarOfTheLostManaCondition implements Condition {
+enum AltarOfTheLostManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

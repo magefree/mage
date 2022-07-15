@@ -68,11 +68,12 @@ class VedalkenEngineerConditionalMana extends ConditionalMana {
 
     public VedalkenEngineerConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new VedalkenEngineerManaCondition());
+        addCondition(VedalkenEngineerManaCondition.instance);
     }
 }
 
-class VedalkenEngineerManaCondition implements Condition {
+enum VedalkenEngineerManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

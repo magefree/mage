@@ -1,6 +1,7 @@
 
 package mage.cards.b;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -73,6 +74,23 @@ class TargetMatchesFilterCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final TargetMatchesFilterCondition that = (TargetMatchesFilterCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
     }
 }
 

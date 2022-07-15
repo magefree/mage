@@ -34,7 +34,7 @@ public final class LandGrant extends CardImpl {
 
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new LandGrantCondition(),
+        this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), LandGrantCondition.instance,
             "If you have no land cards in hand, you may reveal your hand rather than pay this spell's mana cost."));
 
         // Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
@@ -51,7 +51,8 @@ public final class LandGrant extends CardImpl {
     }
 }
 
-class LandGrantCondition implements Condition {
+enum LandGrantCondition implements Condition {
+    instance;
  
     @Override
     public boolean apply(Game game, Ability source) {   

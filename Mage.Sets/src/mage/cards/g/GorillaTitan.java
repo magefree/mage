@@ -36,7 +36,7 @@ public final class GorillaTitan extends CardImpl {
         // Gorilla Titan gets +4/+4 as long as there are no cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(4,4, Duration.WhileInGraveyard),
-                new GorillaTitanCondition(),
+                GorillaTitanCondition.instance,
                 "{this} gets +4/+4 as long as there are no cards in your graveyard"
                 )));
     }
@@ -51,15 +51,12 @@ public final class GorillaTitan extends CardImpl {
     }
 }
 
-class GorillaTitanCondition implements Condition {
+enum GorillaTitanCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player p = game.getPlayer(source.getControllerId());
-        if (p != null)
-        {
-                    return p.getGraveyard().isEmpty();
-        }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.getGraveyard().isEmpty();
     }
 }

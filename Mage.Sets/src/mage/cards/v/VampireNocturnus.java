@@ -66,14 +66,14 @@ class VampireNocturnusAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, null);
         this.addEffect(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
-                new VampireNocturnusCondition(), ""));
+                VampireNocturnusCondition.instance, ""));
         this.addEffect(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, true),
-                new VampireNocturnusCondition(), ""));
+                VampireNocturnusCondition.instance, ""));
         this.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
-                new VampireNocturnusCondition(), ""));
+                VampireNocturnusCondition.instance, ""));
         this.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, true),
-                new VampireNocturnusCondition(), ""));
+                VampireNocturnusCondition.instance, ""));
     }
 
     public VampireNocturnusAbility(VampireNocturnusAbility ability) {
@@ -91,7 +91,8 @@ class VampireNocturnusAbility extends StaticAbility {
     }
 }
 
-class VampireNocturnusCondition implements Condition {
+enum VampireNocturnusCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

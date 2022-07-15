@@ -48,7 +48,7 @@ public final class Wiitigo extends CardImpl {
                 new ConditionalOneShotEffect(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                         new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)),
-                        new BlockedOrBeenBlockedSinceYourLastUpkeepCondition(),
+                        BlockedOrBeenBlockedSinceYourLastUpkeepCondition.instance,
                         "put a +1/+1 counter on enchanted creature if it blocked or been blocked since your last "
                         + "upkeep. Otherwise, remove a +1/+1 counter from it"),
                 TargetController.YOU,
@@ -67,7 +67,8 @@ public final class Wiitigo extends CardImpl {
     }
 }
 
-class BlockedOrBeenBlockedSinceYourLastUpkeepCondition implements Condition {
+enum BlockedOrBeenBlockedSinceYourLastUpkeepCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

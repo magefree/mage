@@ -209,7 +209,7 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
     }
 }
 
-class DreadWightCounterCondition implements Condition {
+class DreadWightCounterCondition implements Condition { // TODO Needs copy constructor?
 
     UUID permanentId;
 
@@ -229,5 +229,22 @@ class DreadWightCounterCondition implements Condition {
     @Override
     public String toString() {
         return "has counter on it";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if(obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        DreadWightCounterCondition that = (DreadWightCounterCondition) obj;
+        return Objects.equals(this.permanentId, that.permanentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permanentId);
     }
 }

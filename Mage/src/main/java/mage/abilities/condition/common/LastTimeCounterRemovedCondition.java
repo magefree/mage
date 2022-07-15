@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
  */
 public enum LastTimeCounterRemovedCondition implements Condition{
 
-instance;
+  instance;
 
   @Override
   public boolean apply(Game game, Ability source) {

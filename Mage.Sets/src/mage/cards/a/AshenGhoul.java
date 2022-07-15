@@ -61,26 +61,27 @@ enum AshenGhoulCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         if (game.getStep().getType() != PhaseStep.UPKEEP
                 || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }
-        if (controller != null) {
-            int cardsAbove = 0;
-            boolean aboveCards = false;
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                if (aboveCards && card.isCreature(game)) {
-                    cardsAbove++;
-                    if (cardsAbove > 2) {
-                        return true;
-                    }
-                }
-                if (card.getId().equals(source.getSourceId())) {
-                    aboveCards = true;
+
+        int cardsAbove = 0;
+        boolean aboveCards = false;
+        for (Card card : controller.getGraveyard().getCards(game)) {
+            if (aboveCards && card.isCreature(game)) {
+                cardsAbove++;
+                if (cardsAbove > 2) {
+                    return true;
                 }
             }
+            if (card.getId().equals(source.getSourceId())) {
+                aboveCards = true;
+            }
         }
-        return false;
     }
 
     @Override

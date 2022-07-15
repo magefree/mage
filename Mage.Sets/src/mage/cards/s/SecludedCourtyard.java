@@ -5,6 +5,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
@@ -114,5 +115,22 @@ class SecludedCourtyardManaCondition implements Condition {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        SecludedCourtyardManaCondition that = (SecludedCourtyardManaCondition) obj;
+        return Objects.equals(this.creatureType, that.creatureType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creatureType);
     }
 }

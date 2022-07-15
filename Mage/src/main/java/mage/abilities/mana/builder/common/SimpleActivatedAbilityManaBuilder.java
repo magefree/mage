@@ -4,7 +4,6 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
@@ -39,7 +38,7 @@ class SimpleActivatedAbilityConditionalMana extends ConditionalMana {
     }
 }
 
-class SimpleActivatedAbilityManaCondition extends ManaCondition implements Condition {
+class SimpleActivatedAbilityManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

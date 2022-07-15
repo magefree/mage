@@ -31,8 +31,7 @@ public final class DefenseOfTheHeart extends CardImpl {
         // At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURE), false, Outcome.PutLandInPlay));
-        DefenseOfTheHeartCondition contition = new DefenseOfTheHeartCondition();
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, DefenseOfTheHeartCondition.instance, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle"));
 
     }
 
@@ -44,18 +43,19 @@ public final class DefenseOfTheHeart extends CardImpl {
     public DefenseOfTheHeart copy() {
         return new DefenseOfTheHeart(this);
     }
+}
 
-    static class DefenseOfTheHeartCondition implements Condition {
+enum DefenseOfTheHeartCondition implements Condition {
+    instance;
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Set<UUID> opponents = game.getOpponents(source.getControllerId());
-            for (UUID uuid : opponents) {
-                if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, uuid, game) >= 3) {
-                    return true;
-                }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+        for (UUID uuid : opponents) {
+            if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, uuid, game) >= 3) {
+                return true;
             }
-            return false;
         }
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -47,4 +48,20 @@ public class ControlsPermanentsComparedToOpponentsCondition implements Condition
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        ControlsPermanentsComparedToOpponentsCondition that = (ControlsPermanentsComparedToOpponentsCondition) obj;
+        return this.type == that.type && Objects.equals(this.filterPermanent, that.filterPermanent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, filterPermanent);
+    }
 }

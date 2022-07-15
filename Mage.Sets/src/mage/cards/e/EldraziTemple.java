@@ -60,11 +60,12 @@ class EldraziTempleConditionalMana extends ConditionalMana {
 
     public EldraziTempleConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new EldraziTempleCondition());
+        addCondition(EldraziTempleCondition.instance);
     }
 }
 
-class EldraziTempleCondition implements Condition {
+enum EldraziTempleCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -115,6 +115,20 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        CavernOfSoulsManaCondition that = (CavernOfSoulsManaCondition) obj;
+        return this.creatureType == that.creatureType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creatureType);
+    }
 }
 
 class CavernOfSoulsWatcher extends Watcher {

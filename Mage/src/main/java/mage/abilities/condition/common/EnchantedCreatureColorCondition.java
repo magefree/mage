@@ -11,6 +11,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author Plopman
@@ -35,5 +37,22 @@ public class EnchantedCreatureColorCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        EnchantedCreatureColorCondition that = (EnchantedCreatureColorCondition) obj;
+        return Objects.equals(this.filter, that.filter);
     }
 }

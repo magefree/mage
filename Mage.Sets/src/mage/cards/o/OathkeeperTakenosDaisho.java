@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -107,24 +108,38 @@ class OathkeeperEquippedMatchesFilterCondition implements Condition {
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (permanent != null) {
-            Permanent attachedTo = null;
-            if (permanent.getAttachedTo() != null) {
-                attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-                if (attachedTo == null) {
-                    attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
-                }
-            }
+        if (permanent == null) {
+            return false;
+        }
+        Permanent attachedTo = null;
+        if (permanent.getAttachedTo() != null) {
+            attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
             if (attachedTo == null) {
-                for (Effect effect : source.getEffects()) {
-                    attachedTo = (Permanent) effect.getValue("attachedTo");
-                }
-            }
-            if (attachedTo != null) {
-                return filter.match(attachedTo, attachedTo.getControllerId(), source, game);
-
+                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }
         }
-        return false;
+        if (attachedTo == null) {
+            for (Effect effect : source.getEffects()) {
+                attachedTo = (Permanent) effect.getValue("attachedTo");
+            }
+        }
+        return attachedTo != null && filter.match(attachedTo, attachedTo.getControllerId(), source, game);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        OathkeeperEquippedMatchesFilterCondition that = (OathkeeperEquippedMatchesFilterCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
     }
 }

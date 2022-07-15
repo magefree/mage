@@ -12,6 +12,7 @@ import mage.game.Game;
  * @author nantuko
  */
 public enum MetalcraftCondition implements Condition {
+
     instance;
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

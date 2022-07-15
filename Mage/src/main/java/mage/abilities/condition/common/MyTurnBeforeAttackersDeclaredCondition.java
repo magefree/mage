@@ -11,7 +11,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public enum  MyTurnBeforeAttackersDeclaredCondition implements Condition {
+public enum MyTurnBeforeAttackersDeclaredCondition implements Condition {
     instance;
 
     @Override

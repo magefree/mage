@@ -8,6 +8,8 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  *
  * @author TheElk801
@@ -79,5 +81,24 @@ public class MostCommonColorCondition implements Condition {
         } else {
             return "it shares a color with the most common color among all permanents or a color tied for most common";
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(compareColor, isMono, predicate);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MostCommonColorCondition that = (MostCommonColorCondition) obj;
+        return this.isMono == that.isMono
+                && Objects.equals(this.compareColor, that.compareColor)
+                && Objects.equals(this.predicate, that.predicate);
     }
 }

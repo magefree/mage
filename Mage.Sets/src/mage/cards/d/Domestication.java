@@ -46,7 +46,7 @@ public final class Domestication extends CardImpl {
         
         // At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
         TriggeredAbility ability2 = new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new DomesticationCondition(), "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, DomesticationCondition.instance, "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
     }
 
     private Domestication(final Domestication card) {
@@ -59,19 +59,16 @@ public final class Domestication extends CardImpl {
     }
 }
 
-class DomesticationCondition implements Condition {
+enum DomesticationCondition implements Condition {
+    instance;
     
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                if (enchanted.getPower().getValue() >= 4) {
-                    return true;
-                }
-            }
+        if (enchantment == null) {
+            return false;
         }
-        return false;
+        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+        return enchanted != null && enchanted.getPower().getValue() >= 4;
     }
 }

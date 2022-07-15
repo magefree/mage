@@ -18,4 +18,17 @@ public abstract class ManaCondition implements Condition {
     }
 
     public abstract boolean apply(Game game, Ability source, UUID originalId, Cost costToPay);
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        return obj != null && this.getClass() == obj.getClass();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
+    }
 }

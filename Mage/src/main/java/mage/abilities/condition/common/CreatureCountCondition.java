@@ -1,5 +1,6 @@
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -79,5 +80,24 @@ public class CreatureCountCondition implements Condition {
         sb.append(creatureCount != 1 ? "s" : "");
 
         return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter, creatureCount, targetController);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        CreatureCountCondition that = (CreatureCountCondition) obj;
+        return this.creatureCount == that.creatureCount
+                && this.targetController == that.targetController
+                && Objects.equals(this.filter, that.filter);
     }
 }

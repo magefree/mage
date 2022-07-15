@@ -1,6 +1,7 @@
 
 package mage.cards.b;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -60,5 +61,22 @@ class TargetHasCounterCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        final TargetHasCounterCondition that = (TargetHasCounterCondition) obj;
+        return this.counterType == that.counterType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counterType);
     }
 }

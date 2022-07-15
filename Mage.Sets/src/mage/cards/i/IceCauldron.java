@@ -31,6 +31,7 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -255,5 +256,36 @@ class IceCauldronManaCondition implements Condition {
             return card != null && card.equals(exiledCard);
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        IceCauldronManaCondition that = (IceCauldronManaCondition) obj;
+        return Objects.equals(this.exiledCard, that.exiledCard);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        IceCauldronManaCondition that = (IceCauldronManaCondition) obj;
+        return (this.exiledCard == null ^ that.exiledCard == null)
+                && this.exiledCard != null
+                && this.exiledCard.equivalent(that.exiledCard, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(exiledCard);
     }
 }

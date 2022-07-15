@@ -39,7 +39,7 @@ public final class BurningCinderFuryOfCrimsonChaosFire extends CardImpl {
 
         // At the beginning of each player’s end step, if that player didn’t tap any nonland permanents that turn, Burning Cinder Fury of Crimson Chaos Fire deals 3 damage to that player.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
-                TargetController.ANY, new BurningCinderFuryOfCrimsonChaosFireCondition(), false), new BurningCinderFuryOfCrimsonChaosFireWatcher());
+                TargetController.ANY, BurningCinderFuryOfCrimsonChaosFireCondition.instance, false), new BurningCinderFuryOfCrimsonChaosFireWatcher());
     }
 
     private BurningCinderFuryOfCrimsonChaosFire(final BurningCinderFuryOfCrimsonChaosFire card) {
@@ -176,7 +176,8 @@ class BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect extends Conti
     }
 }
 
-class BurningCinderFuryOfCrimsonChaosFireCondition implements Condition {
+enum BurningCinderFuryOfCrimsonChaosFireCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

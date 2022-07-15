@@ -2,6 +2,7 @@
 
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -19,7 +20,6 @@ import mage.game.Game;
  */
 
 public class OpponentControlsPermanentCondition implements Condition {
-
 
     private FilterPermanent filter;
     private ComparisonType type;
@@ -66,5 +66,24 @@ public class OpponentControlsPermanentCondition implements Condition {
     @Override
     public String toString() {
         return filter.getMessage();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OpponentControlsPermanentCondition that = (OpponentControlsPermanentCondition) obj;
+        return this.count == that.count
+                && this.type == that.type
+                && Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter, type, count);
     }
 }

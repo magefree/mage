@@ -6,6 +6,8 @@ import mage.abilities.condition.Condition;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -42,4 +44,21 @@ public class IsStepCondition implements Condition {
         return sb.toString();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(phaseStep, onlyDuringYourSteps);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final IsStepCondition other = (IsStepCondition) obj;
+        return this.onlyDuringYourSteps == other.onlyDuringYourSteps
+                && this.phaseStep == other.phaseStep;
+    }
 }

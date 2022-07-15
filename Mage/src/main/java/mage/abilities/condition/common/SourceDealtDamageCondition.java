@@ -5,6 +5,8 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.watchers.common.DamageDoneWatcher;
 
+import java.util.Objects;
+
 /**
  *
  * @author LevelX2
@@ -28,5 +30,20 @@ public class SourceDealtDamageCondition implements Condition {
         return "{this} has dealt " + value + " or more damage this turn" ;
     }
     
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceDealtDamageCondition that = (SourceDealtDamageCondition) obj;
+        return this.value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }

@@ -31,7 +31,7 @@ public final class PatriciansScorn extends CardImpl {
 
 
         // If you've cast another white spell this turn, you may cast this spell without paying its mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()), new PatriciansScornWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(CastWhiteSpellThisTurnCondition.instance), new PatriciansScornWatcher());
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENTS));
     }
@@ -47,7 +47,9 @@ public final class PatriciansScorn extends CardImpl {
 }
 
 
-class CastWhiteSpellThisTurnCondition implements Condition {
+enum CastWhiteSpellThisTurnCondition implements Condition {
+    instance;
+
 
     @Override
     public boolean apply(Game game, Ability source) {

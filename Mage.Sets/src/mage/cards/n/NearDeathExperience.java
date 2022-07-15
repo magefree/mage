@@ -26,7 +26,7 @@ public final class NearDeathExperience extends CardImpl {
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new OneLifeCondition(), "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, OneLifeCondition.instance, "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
     }
 
     private NearDeathExperience(final NearDeathExperience card) {
@@ -39,7 +39,8 @@ public final class NearDeathExperience extends CardImpl {
     }
 }
 
-class OneLifeCondition implements Condition {
+enum OneLifeCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

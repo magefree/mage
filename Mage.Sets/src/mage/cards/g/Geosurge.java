@@ -42,11 +42,12 @@ class GeosurgeConditionalMana extends ConditionalMana {
     public GeosurgeConditionalMana() {
         super(Mana.RedMana(7));
         staticText = "Spend this mana only to cast artifact or creature spells";
-        addCondition(new GeosurgeManaCondition());
+        addCondition(GeosurgeManaCondition.instance);
     }
 }
 
-class GeosurgeManaCondition implements Condition {
+enum GeosurgeManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

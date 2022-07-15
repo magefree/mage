@@ -60,7 +60,7 @@ public final class HelmOfKaldra extends CardImpl {
                 Zone.BATTLEFIELD,
                 new HelmOfKaldraEffect(),
                 new GenericManaCost(1),
-                new HelmOfKaldraCondition(),
+                HelmOfKaldraCondition.instance,
                 "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it."));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{2}"), false));
@@ -76,7 +76,8 @@ public final class HelmOfKaldra extends CardImpl {
     }
 }
 
-class HelmOfKaldraCondition implements Condition {
+enum HelmOfKaldraCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

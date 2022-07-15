@@ -38,7 +38,7 @@ public final class SeekerOfInsight extends CardImpl {
                         Zone.BATTLEFIELD,
                         new DrawDiscardControllerEffect(),
                         new TapSourceCost(),
-                        new CastNonCreatureSpellCondition()),
+                        CastNonCreatureSpellCondition.instance),
                 new SpellsCastWatcher());
     }
 
@@ -52,7 +52,8 @@ public final class SeekerOfInsight extends CardImpl {
     }
 }
 
-class CastNonCreatureSpellCondition implements Condition {
+enum CastNonCreatureSpellCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

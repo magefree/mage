@@ -21,6 +21,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -67,7 +68,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent != null && opponent.getHand().size() > 0) {
+        if (opponent != null && !opponent.getHand().isEmpty()) {
             Card revealedCard = opponent.getHand().getRandom(game);
             if (revealedCard == null) {
                 return false;
@@ -150,11 +151,44 @@ class PlaneswalkersMischiefCondition implements Condition {
             if (spells != null) {
                 for (Spell spell : spells) {
                     if (spell.getSourceId().equals(cardId)) {
-                        return false;
+                        return false; // TODO: Why is this reversed?
                     }
                 }
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        PlaneswalkersMischiefCondition that = (PlaneswalkersMischiefCondition) obj;
+        return Objects.equals(this.exileId, that.exileId)
+                && Objects.equals(this.cardId, that.cardId);
+    }
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        PlaneswalkersMischiefCondition that = (PlaneswalkersMischiefCondition) obj;
+        if (!Objects.equals(this.exileId, that.exileId)) {
+            return false;
+        }
+        Card card = game.getCard(cardId);
+        return card != null && card.equivalent(game.getCard(that.cardId), game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(exileId, cardId);
     }
 }

@@ -6,7 +6,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -162,7 +161,7 @@ class NikoDefiesDestinyConditionalMana extends ConditionalMana {
     }
 }
 
-class NikoDefiesDestinyManaCondition extends ManaCondition implements Condition {
+class NikoDefiesDestinyManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

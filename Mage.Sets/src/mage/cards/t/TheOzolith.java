@@ -133,8 +133,7 @@ enum TheOzolithCondition implements Condition {
         if (permanent == null) {
             return false;
         }
-        return permanent != null
-                && permanent
+        return permanent
                 .getCounters(game)
                 .values()
                 .stream()

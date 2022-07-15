@@ -7,7 +7,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -90,7 +89,7 @@ class CrypticTrilobiteConditionalMana extends ConditionalMana {
     }
 }
 
-class CrypticTrilobiteManaCondition extends ManaCondition implements Condition {
+class CrypticTrilobiteManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

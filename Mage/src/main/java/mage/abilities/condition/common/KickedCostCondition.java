@@ -7,6 +7,8 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  * Describes condition when specific KickerCosts were paid.
  *
@@ -16,7 +18,7 @@ public class KickedCostCondition implements Condition {
 
     protected String kickerCostText;
 
-    public  KickedCostCondition(String kickerCostText) {
+    public KickedCostCondition(String kickerCostText) {
         this.kickerCostText = kickerCostText;
     }
 
@@ -31,5 +33,22 @@ public class KickedCostCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(kickerCostText);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KickedCostCondition other = (KickedCostCondition) obj;
+        return Objects.equals(this.kickerCostText, other.kickerCostText);
     }
 }

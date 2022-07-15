@@ -31,7 +31,7 @@ public final class RushingTideZubera extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rushing-Tide Zubera dies, if 4 or more damage was dealt to it this turn, draw three cards.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(3)), new RushingTideZuberaCondition(),
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(3)), RushingTideZuberaCondition.instance,
                 "When {this} dies, if 4 or more damage was dealt to it this turn, draw three cards.");
         this.addAbility(ability);
     }
@@ -46,7 +46,8 @@ public final class RushingTideZubera extends CardImpl {
     }
 }
 
-class RushingTideZuberaCondition implements Condition {
+enum RushingTideZuberaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

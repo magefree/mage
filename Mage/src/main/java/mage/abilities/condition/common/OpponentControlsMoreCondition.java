@@ -2,6 +2,7 @@
 
 package mage.abilities.condition.common;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -35,5 +36,22 @@ public class OpponentControlsMoreCondition implements Condition {
     @Override
     public String toString() {
         return "an opponent controls more " + filter.getMessage() +" than you";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OpponentControlsMoreCondition that = (OpponentControlsMoreCondition) obj;
+        return Objects.equals(this.filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
     }
 }

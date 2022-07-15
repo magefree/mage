@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.EnumSet;
+import java.util.Objects;
 
 /**
  *
@@ -51,5 +52,22 @@ public class EquippedHasSupertypeCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EquippedHasSupertypeCondition that = (EquippedHasSupertypeCondition) obj;
+        return this.superType == that.superType && Objects.equals(this.superTypes, that.superTypes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(superType, superTypes);
     }
 }

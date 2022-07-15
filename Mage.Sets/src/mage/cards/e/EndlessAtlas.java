@@ -31,7 +31,7 @@ public final class EndlessAtlas extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new GenericManaCost(2),
-                new EndlessAtlasCondition()
+                EndlessAtlasCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -47,7 +47,8 @@ public final class EndlessAtlas extends CardImpl {
     }
 }
 
-class EndlessAtlasCondition implements Condition {
+enum EndlessAtlasCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

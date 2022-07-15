@@ -19,10 +19,8 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author jeffwadsworth
@@ -60,7 +58,7 @@ public final class KrovikanVampire extends CardImpl {
 
 class KrovikanVampireEffect extends OneShotEffect {
 
-    Set<UUID> creaturesAffected = new HashSet<>();
+    transient Set<UUID> creaturesAffected = new HashSet<>();
 
     KrovikanVampireEffect() {
         super(Outcome.Neutral);
@@ -104,25 +102,26 @@ class KrovikanVampireEffect extends OneShotEffect {
 
 class KrovikanVampireInterveningIfCondition implements Condition {
 
-    Set<UUID> creaturesAffected = new HashSet<>();
+    Set<UUID> creaturesAffected = new HashSet<>(); // TODO: This never seems to get cleared
 
     @Override
     public boolean apply(Game game, Ability source) {
         KrovikanVampireCreaturesDiedWatcher watcherDied = game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
         KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
-        if (watcherDied != null) {
-            Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
-            creaturesThatDiedThisTurn.stream().filter((mor) -> (watcherDamaged != null)).forEachOrdered((mor) -> {
-                watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
-                        && mor2.equals(mor))).forEachOrdered((_item) -> {
-                    creaturesAffected.add(mor);
-                });
+        if (watcherDied == null || watcherDamaged == null) {
+            return false;
+        }
+        Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
+        creaturesThatDiedThisTurn.stream().forEachOrdered((mor) -> {
+            watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
+                    && mor2.equals(mor))).forEachOrdered((_item) -> {
+                creaturesAffected.add(mor);
             });
-            if (creaturesAffected != null
-                    && !creaturesAffected.isEmpty()) {
-                game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
-                return true;
-            }
+        });
+        if (creaturesAffected != null
+                && !creaturesAffected.isEmpty()) {
+            game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);
+            return true;
         }
         return false;
     }
@@ -130,6 +129,51 @@ class KrovikanVampireInterveningIfCondition implements Condition {
     @Override
     public String toString() {
         return "if a creature dealt damage by Krovikan Vampire this turn died";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        KrovikanVampireInterveningIfCondition that = (KrovikanVampireInterveningIfCondition) obj;
+        return Objects.equals(this.creaturesAffected, that.creaturesAffected);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        KrovikanVampireInterveningIfCondition that = (KrovikanVampireInterveningIfCondition) obj;
+        if (!(this.creaturesAffected == null ^ that.creaturesAffected == null)
+                || this.creaturesAffected == null) {
+            return false;
+        }
+        List<Permanent> thisPermanents = this.creaturesAffected.stream().sorted().map(uuid -> game.getPermanent(uuid)).filter(Objects::nonNull).collect(Collectors.toList());
+        // TODO: Why does this think that.creaturesAffected is null?
+        List<Permanent> thatPermanents = that.creaturesAffected.stream().sorted().map(uuid -> game.getPermanent(uuid)).filter(Objects::nonNull).collect(Collectors.toList());
+        if (thisPermanents.size() != thatPermanents.size()) {
+            return false;
+        }
+        for (int i = 0; i < thisPermanents.size(); i++) {
+            if (!thisPermanents.get(i).equivalent(thatPermanents.get(i), game)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creaturesAffected);
     }
 }
 

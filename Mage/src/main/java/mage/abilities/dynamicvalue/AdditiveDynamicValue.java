@@ -45,4 +45,21 @@ public class AdditiveDynamicValue implements DynamicValue {
     public String getMessage() {
         return this.dynamicValues.stream().map(DynamicValue::getMessage).collect(Collectors.joining(" "));
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dynamicValues);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        AdditiveDynamicValue that = (AdditiveDynamicValue) obj;
+        return Objects.equals(this.dynamicValues, that.dynamicValues);
+    }
 }

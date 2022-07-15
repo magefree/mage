@@ -38,7 +38,7 @@ public final class RelicRunner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.WhileOnBattlefield),
-                        new CastHistoricSpellThisTurnCondition(),
+                        CastHistoricSpellThisTurnCondition.instance,
                         "{this} can't be blocked if you've cast an historic spell this turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"
                 )
         ), new SpellsCastWatcher());
@@ -54,7 +54,8 @@ public final class RelicRunner extends CardImpl {
     }
 }
 
-class CastHistoricSpellThisTurnCondition implements Condition {
+enum CastHistoricSpellThisTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

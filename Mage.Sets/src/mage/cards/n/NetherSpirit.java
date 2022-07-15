@@ -34,7 +34,7 @@ public final class NetherSpirit extends CardImpl {
 
         // At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, true);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NetherSpiritCondition.instance, "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
     }
 
     private NetherSpirit(final NetherSpirit card) {
@@ -47,17 +47,20 @@ public final class NetherSpirit extends CardImpl {
     }
 }
 
-class NetherSpiritCondition implements Condition {
+enum NetherSpiritCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                return player.getGraveyard().contains(card.getId()) && player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) == 1;
-            }
+        if (player == null) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+
+        return player.getGraveyard().contains(card.getId()) && player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) == 1;
     }
 }

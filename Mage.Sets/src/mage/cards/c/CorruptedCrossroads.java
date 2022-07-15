@@ -62,11 +62,13 @@ class BlightedCrossroadsConditionalMana extends ConditionalMana {
     public BlightedCrossroadsConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast a spell with devoid";
-        addCondition(new BlightedCrossroadsManaCondition());
+        addCondition(BlightedCrossroadsManaCondition.instance);
     }
 }
 
-class BlightedCrossroadsManaCondition implements Condition {
+enum BlightedCrossroadsManaCondition implements Condition {
+    instance;
+
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);

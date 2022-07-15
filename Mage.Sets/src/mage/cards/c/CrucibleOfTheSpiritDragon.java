@@ -81,11 +81,12 @@ class CrucibleOfTheSpiritDragonConditionalMana extends ConditionalMana {
     public CrucibleOfTheSpiritDragonConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast Dragon spells or activate abilities of Dragons";
-        addCondition(new CrucibleOfTheSpiritDragonManaCondition());
+        addCondition(CrucibleOfTheSpiritDragonManaCondition.instance);
     }
 }
 
-class CrucibleOfTheSpiritDragonManaCondition implements Condition {
+enum CrucibleOfTheSpiritDragonManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

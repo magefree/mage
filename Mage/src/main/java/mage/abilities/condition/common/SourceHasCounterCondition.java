@@ -9,6 +9,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+
 /**
  * @author nantuko
  */
@@ -76,5 +78,25 @@ public class SourceHasCounterCondition implements Condition {
         } else {
             return "{this} has " + CardUtil.numberToText(amount) + " or more " + this.counterType.toString() + " counters on it";
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceHasCounterCondition that = (SourceHasCounterCondition) obj;
+        return this.counterType == that.counterType
+                && this.amount == that.amount
+                && this.from == that.from
+                && this.to == that.to;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counterType, amount, from, to);
     }
 }

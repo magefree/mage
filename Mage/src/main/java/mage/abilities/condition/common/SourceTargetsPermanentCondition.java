@@ -9,6 +9,7 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * @author TheElk801
@@ -42,4 +43,20 @@ public class SourceTargetsPermanentCondition implements Condition {
         return "it targets " + filter.getMessage();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        SourceTargetsPermanentCondition that = (SourceTargetsPermanentCondition) obj;
+        return Objects.equals(filter, that.filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filter);
+    }
 }

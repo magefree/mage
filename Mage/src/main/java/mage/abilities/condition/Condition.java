@@ -26,11 +26,7 @@ public interface Condition extends Serializable {
         return "{" + this.getClass().getSimpleName() + "}";
     }
 
-    default boolean equivalent(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        return obj != null && this.getClass() == obj.getClass();
+    default public boolean equivalent(Object obj, Game game) { // TODO: Go through all Conditions and add equivalent
+        return this.equals(obj);
     }
 }

@@ -40,7 +40,7 @@ public final class SkarrganFirebird extends CardImpl {
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{R}{R}{R}"),
-                new OpponentWasDealtDamageCondition(),
+                OpponentWasDealtDamageCondition.instance,
                 null));
     }
 
@@ -54,10 +54,8 @@ public final class SkarrganFirebird extends CardImpl {
     }
 }
 
-class OpponentWasDealtDamageCondition implements Condition {
-
-    public OpponentWasDealtDamageCondition() {
-    }
+enum OpponentWasDealtDamageCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -10,10 +10,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.util.ManaUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * For Oathbreaker game mode
@@ -70,5 +67,27 @@ public class OathbreakerOnBattlefieldCondition implements Condition {
     @Override
     public String toString() {
         return filter.getMessage();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerId, filter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        OathbreakerOnBattlefieldCondition that = (OathbreakerOnBattlefieldCondition) obj;
+        return Objects.equals(playerId, that.playerId)
+                && Objects.equals(filter, that.filter)
+                && Objects.equals(compatibleNames, that.compatibleNames);
     }
 }

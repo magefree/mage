@@ -6,6 +6,8 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  * 
  * @author noxx
@@ -39,5 +41,23 @@ public class TransformedCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TransformedCondition that = (TransformedCondition) obj;
+        return this.notCondition == that.notCondition;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(notCondition);
     }
 }

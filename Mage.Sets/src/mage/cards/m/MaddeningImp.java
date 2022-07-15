@@ -51,7 +51,7 @@ public final class MaddeningImp extends CardImpl {
 
         // {T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn),
-                new TapSourceCost(), new MaddeningImpTurnCondition(),
+                new TapSourceCost(), MaddeningImpTurnCondition.instance,
                 "{T}: Non-Wall creatures the active player controls attack this turn if able. "
                 + "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. "
                 + "Activate only during an opponent's turn and only before combat.");
@@ -70,7 +70,8 @@ public final class MaddeningImp extends CardImpl {
     }
 }
 
-class MaddeningImpTurnCondition implements Condition {
+enum MaddeningImpTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

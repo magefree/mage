@@ -35,7 +35,7 @@ public final class KorDuelist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         GainAbilitySourceEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new SourceIsEquiped(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, SourceIsEquiped.instance, ruleText)));
     }
 
     private KorDuelist(final KorDuelist card) {
@@ -48,20 +48,20 @@ public final class KorDuelist extends CardImpl {
     }
 }
 
-class SourceIsEquiped implements Condition {
+enum SourceIsEquiped implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            List<UUID> attachments = permanent.getAttachments();
-            for (UUID attachmentUUID : attachments) {
-                Permanent attachment = game.getPermanent(attachmentUUID);
-                if (attachment != null) {
-                    if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                        return true;
-                    }
-                }
+        if (permanent == null) {
+            return false;
+        }
+        List<UUID> attachments = permanent.getAttachments();
+        for (UUID attachmentUUID : attachments) {
+            Permanent attachment = game.getPermanent(attachmentUUID);
+            if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
+                return true;
             }
         }
         return false;

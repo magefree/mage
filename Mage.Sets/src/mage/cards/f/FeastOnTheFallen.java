@@ -55,11 +55,12 @@ enum FeastOnTheFallenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                if (watcher.getLifeLostLastTurn(opponentId) > 0) {
-                    return true;
-                }
+        if (watcher == null) {
+            return false;
+        }
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            if (watcher.getLifeLostLastTurn(opponentId) > 0) {
+                return true;
             }
         }
         return false;

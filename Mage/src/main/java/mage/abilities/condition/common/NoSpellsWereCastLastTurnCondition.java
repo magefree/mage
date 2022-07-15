@@ -13,8 +13,6 @@ public enum NoSpellsWereCastLastTurnCondition implements Condition {
 
     instance;
 
-
-
     @Override
     public boolean apply(Game game, Ability source) {
         // Do not check at start of game.

@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -66,7 +67,24 @@ class testCondition implements Condition {
             return (xValue.calculate(game, spell.getSpellAbility(), null) >= limit);
         }
         return false;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        testCondition that = (testCondition) obj;
+        return this.limit == that.limit && Objects.equals(this.xValue, that.xValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xValue, limit);
     }
 }
 

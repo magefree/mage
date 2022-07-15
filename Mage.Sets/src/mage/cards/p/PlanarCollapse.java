@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -28,8 +29,7 @@ public final class PlanarCollapse extends CardImpl {
         // At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice Planar Collapse and destroy all creatures. They can't be regenerated.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE, true));
-        PlanarCollapseCondition contition = new PlanarCollapseCondition();
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice {this} and destroy all creatures. They can't be regenerated"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, PlanarCollapseCondition.instance, "At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice {this} and destroy all creatures. They can't be regenerated"));
 
     }
 
@@ -41,12 +41,13 @@ public final class PlanarCollapse extends CardImpl {
     public PlanarCollapse copy() {
         return new PlanarCollapse(this);
     }
+}
 
-    static class PlanarCollapseCondition implements mage.abilities.condition.Condition {
+enum PlanarCollapseCondition implements Condition {
+    instance;
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game) >= 4;
-        }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game) >= 4;
     }
 }

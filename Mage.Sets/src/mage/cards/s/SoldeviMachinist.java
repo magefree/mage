@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
@@ -70,7 +69,7 @@ class ArtifactAbilityConditionalMana extends ConditionalMana {
     }
 }
 
-class ArtifactAbilityManaCondition extends ManaCondition implements Condition {
+class ArtifactAbilityManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

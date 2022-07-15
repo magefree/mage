@@ -36,7 +36,7 @@ public final class IsolatedWatchtower extends CardImpl {
                 Zone.BATTLEFIELD,
                 new IsolatedWatchtowerEffect(),
                 new GenericManaCost(2),
-                new IsolatedWatchtowerCondition()
+                IsolatedWatchtowerCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -94,7 +94,8 @@ class IsolatedWatchtowerEffect extends OneShotEffect {
     }
 }
 
-class IsolatedWatchtowerCondition implements Condition {
+enum IsolatedWatchtowerCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

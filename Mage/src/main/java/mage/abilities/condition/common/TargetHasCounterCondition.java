@@ -8,6 +8,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+
 /**
  *
  * @author Styxo
@@ -68,5 +70,25 @@ public class TargetHasCounterCondition implements Condition {
     @Override
     public String toString() {
         return "if it has a " + counterType.getName() + " on it";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        TargetHasCounterCondition that = (TargetHasCounterCondition) obj;
+        return this.amount == that.amount
+                && this.from == that.from
+                && this.to == that.to
+                && this.counterType == that.counterType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counterType, amount, from, to);
     }
 }

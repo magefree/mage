@@ -116,6 +116,35 @@ class PsychicTheftCondition implements Condition {
         PsychicTheftWatcher watcher = game.getState().getWatcher(PsychicTheftWatcher.class);
         return watcher != null && !watcher.checkPlayer(source.getSourceId(), mor);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        PsychicTheftCondition that = (PsychicTheftCondition) obj;
+        return Objects.equals(this.mor, that.mor);
+    }
+
+    @Override
+    public boolean equivalent(Object obj, Game game) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        PsychicTheftCondition that = (PsychicTheftCondition) obj;
+        return this.mor != null && this.mor.equivalent(that.mor, game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mor);
+    }
 }
 
 class PsychicTheftWatcher extends Watcher {

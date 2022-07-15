@@ -53,7 +53,7 @@ class ReconfigureUnattachAbility extends ActivatedAbilityImpl {
 
     protected ReconfigureUnattachAbility(String manaString) {
         super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), new ManaCostsImpl<>(manaString));
-        this.condition = ReconfigureUnattachAbility::checkForCreature;
+        this.condition = ReconfigureUnattachAbility::checkForCreature; // TODO ?????
         this.timing = TimingRule.SORCERY;
         this.setRuleVisible(false);
     }

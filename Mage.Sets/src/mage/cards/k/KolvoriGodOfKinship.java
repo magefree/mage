@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.ConditionalMana;
@@ -155,5 +156,19 @@ class TheRinghartCrestManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        TheRinghartCrestManaCondition that = (TheRinghartCrestManaCondition) obj;
+        return this.creatureType == that.creatureType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(creatureType);
     }
 }
