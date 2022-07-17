@@ -44,7 +44,7 @@ public final class MockingDoppelganger extends CardImpl {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
             blueprint.getAbilities().add(new SimpleStaticAbility(new GoadAllEffect(
-                    Duration.WhileOnBattlefield, filter
+                    Duration.WhileOnBattlefield, filter, false
             ).setText("other creatures with the same name as this creature are goaded")));
             return true;
         }
