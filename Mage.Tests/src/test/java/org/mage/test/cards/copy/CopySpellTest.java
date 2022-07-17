@@ -12,6 +12,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.util.CardUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -748,6 +749,40 @@ public class CopySpellTest extends CardTestPlayerBase {
         abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/7655
+     * Thieving Skydiver is kicked and then copied, but the copied version does not let you gain control of anything.
+     */
+    @Test
+    @Ignore
+    public void copySpellWithKicker() {
+        // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less.
+        // If that artifact is an Equipment, attach it to Thieving Skydiver.
+        addCard(Zone.HAND, playerA, "Thieving Skydiver");
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // Original price, + 1 kicker, + 1 for Double Major
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 2);
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieving Skydiver");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Thieving Skydiver", "Thieving Skydiver");
+        addTarget(playerA, "Sol Ring"); // Choice for copy
+        addTarget(playerA, "Sol Ring"); // Choice for original
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Sol Ring", 2); // 1 taken by original, one by copy
+        assertPermanentCount(playerB, "Sol Ring", 0);
     }
 
     private void abilitySourceMustBeSame(Card card, String infoPrefix) {
