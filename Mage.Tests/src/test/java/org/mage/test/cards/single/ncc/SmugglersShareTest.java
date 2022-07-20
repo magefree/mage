@@ -71,6 +71,22 @@ public class SmugglersShareTest extends CardTestCommander4Players {
     */
     String island = "Island";
 
+    /*
+        Plains
+        Basic Land - Plains
+
+        ({T}: Add {W}.)
+    */
+    String plains = "Plains";
+
+    /*
+        Treasure
+        Token Artifact - Treasure
+
+        {T}, Sacrifice this artifact: Add one mana of any color.
+    */
+    String treasureToken = "Treasure Token";
+
     /**
      * Test with two players:
      * A with Cultivate
@@ -99,7 +115,7 @@ public class SmugglersShareTest extends CardTestCommander4Players {
         assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
-        assertPermanentCount(playerB, "Treasure Token", 1);
+        assertPermanentCount(playerB, treasureToken, 1);
     }
 
     /**
@@ -167,7 +183,7 @@ public class SmugglersShareTest extends CardTestCommander4Players {
         assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
-        assertPermanentCount(playerB, "Treasure Token", 1);
+        assertPermanentCount(playerB, treasureToken, 1);
 
         // More than 2 cards were drawn by an opponent, draw a card.
         assertHandCount(playerB, 1);
@@ -187,22 +203,22 @@ public class SmugglersShareTest extends CardTestCommander4Players {
         assertHandCount(playerB, 0);
 
         removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, forest, 6);
+
         removeAllCardsFromLibrary(playerB);
+        addCard(Zone.LIBRARY, playerB, island, 2);
+
         removeAllCardsFromLibrary(playerC);
+        addCard(Zone.LIBRARY, playerC, forest, 2);
 
         addCard(Zone.BATTLEFIELD, playerA, forest, 6);
         addCard(Zone.BATTLEFIELD, playerB, island, 4);
         addCard(Zone.BATTLEFIELD, playerC, forest, 4);
         addCard(Zone.BATTLEFIELD, playerD, smugglersShare, 1);
 
-        addCard(Zone.LIBRARY, playerA, forest, 6);
         addCard(Zone.HAND, playerA, cultivate, 1);
         addCard(Zone.HAND, playerA, harmonize, 1);
-
-        addCard(Zone.LIBRARY, playerB, island, 2);
         addCard(Zone.HAND, playerB, chemistersInsight, 1);
-
-        addCard(Zone.LIBRARY, playerC, forest, 2);
         addCard(Zone.HAND, playerC, harrow, 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cultivate);
@@ -223,8 +239,64 @@ public class SmugglersShareTest extends CardTestCommander4Players {
         assertAllCommandsUsed();
 
         // 2 lands entered the battlefield for 2 different opponents, create 2 Treasure tokens.
-        assertPermanentCount(playerD, "Treasure Token", 2);
+        assertPermanentCount(playerD, treasureToken, 2);
+
         // More than 2 cards were drawn by 2 opponents, draw 2 cards.
         assertHandCount(playerD, 2);
+    }
+
+    /**
+     * Test with two players:
+     * A with Smuggler's Share
+     * B with Harrow and Chemister's Insight
+     *
+     * B plays Harrow and Chemister's Insight, A plays Smuggler's Share, A draws 1 card and creates 1 Treasure token
+     */
+    @Test
+    public void testDrawAndTreasureEarly() {
+        assertHandCount(playerA, 0);
+
+
+        addCard(Zone.BATTLEFIELD, playerB, forest, 4);
+        addCard(Zone.BATTLEFIELD, playerB, island, 4);
+
+        addCard(Zone.BATTLEFIELD, playerA, plains, 3);
+
+        removeAllCardsFromLibrary(playerB);
+        addCard(Zone.LIBRARY, playerB, forest, 5);
+
+        addCard(Zone.HAND, playerB, harrow, 1);
+        addCard(Zone.HAND, playerB, chemistersInsight, 1);
+
+        addCard(Zone.HAND, playerA, smugglersShare, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, harrow);
+        setChoice(playerB, forest);
+        addTarget(playerB, forest + "^" + forest);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, chemistersInsight);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, smugglersShare);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        // 1 card drawn for turn
+        assertHandCount(playerA, 1);
+        // No treasure tokens created yet
+        assertPermanentCount(playerA, treasureToken, 0);
+
+        setStopAt(1, PhaseStep.CLEANUP);
+        execute();
+        assertAllCommandsUsed();
+
+        // 2 lands entered the battlefield under opponent's control, create Treasure token.
+        assertPermanentCount(playerA, treasureToken, 1);
+
+        // More than 2 cards were drawn by an opponent, draw a card.
+        assertHandCount(playerA, 2);
     }
 }
