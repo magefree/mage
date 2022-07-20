@@ -34,6 +34,8 @@ public final class SmugglersShare extends CardImpl {
         // At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then create a Treasure token for each opponent who had two or more lands enter the battlefield under their control this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(SmugglersShareDrawValue.instance), TargetController.EACH_PLAYER, false);
         ability.addEffect((new CreateTokenEffect(new TreasureToken(), SmugglersShareTreasureValue.instance)).concatBy(", then"));
+        ability.addWatcher(new CardsAmountDrawnThisTurnWatcher());
+        ability.addWatcher(new PermanentsEnteredBattlefieldWatcher());
         this.addAbility(ability);
     }
 
