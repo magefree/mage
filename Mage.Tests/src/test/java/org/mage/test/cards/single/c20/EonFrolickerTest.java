@@ -27,7 +27,7 @@ public class EonFrolickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eon Frolicker");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
 
         // AI can targets only Eon Frolicker (cause A protected from B)
         checkPlayableAbility("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Chandra's Fury", true);

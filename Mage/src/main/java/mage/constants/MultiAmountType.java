@@ -12,7 +12,8 @@ import java.util.stream.IntStream;
 public enum MultiAmountType {
 
     MANA("Add mana", "Distribute mana among colors"),
-    DAMAGE("Assign damage", "Assign damage among targets");
+    DAMAGE("Assign damage", "Assign damage among targets"),
+    P1P1("Add +1/+1 counters", "Distribute +1/+1 counters among creatures");
 
     private final String title;
     private final String header;

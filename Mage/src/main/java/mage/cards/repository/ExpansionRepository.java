@@ -206,22 +206,6 @@ public enum ExpansionRepository {
         return Collections.emptyList();
     }
 
-    public List<String> getAllSetNames() {
-        try {
-            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
-            qb.orderBy("releaseDate", true);
-            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            List<String> setNames = new LinkedList<>();
-            for (ExpansionInfo expansionInfo : expansions) {
-                setNames.add(expansionInfo.getName());
-            }
-            return setNames;
-        } catch (SQLException ex) {
-            logger.error(ex);
-        }
-        return Collections.emptyList();
-    }
-
     public long getContentVersionFromDB() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);

@@ -637,6 +637,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public SpellAbility getSecondFaceSpellAbility() {
+        Card secondFace = getSecondCardFace();
+        if (secondFace == null || secondFace.getClass().equals(getClass())) {
+            throw new IllegalArgumentException("Wrong code usage. getSecondFaceSpellAbility can only be used for double faced card (main side).");
+        }
+        return secondFace.getSpellAbility();
+    }
+
+    @Override
     public boolean isNightCard() {
         return this.nightCard;
     }
@@ -699,6 +708,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        if (this instanceof Permanent) {
+            if (!((Permanent) this).isPhasedIn()) {
+                return false;
+            }
+        }
+
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, playerAddingCounters, counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);
