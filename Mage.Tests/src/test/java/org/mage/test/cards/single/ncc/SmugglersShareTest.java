@@ -38,28 +38,33 @@ public class SmugglersShareTest extends CardTestCommander4Players {
     String forest = "Forest";
 
     /**
-     * test with three players:
-     * A with a Jolene and an Elite Vanguard
-     * B, C other players.
+     * Test with two players:
+     * A with Cultivate
+     * B with Smuggler's Share
      *
-     * A attacks both B & C, get two treasures.
+     * A plays Cultivate, B gets 1 Treasure token
      */
     @Test
     public void testCreateTreasureToken() {
-        addCard(Zone.BATTLEFIELD, playerA, smugglersShare, 1);
-        addCard(Zone.HAND, playerB, cultivate, 1);
-        addCard(Zone.HAND, playerB, forest, 3);
+        removeAllCardsFromLibrary(playerA);
 
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerB, forest);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, cultivate);
-        addTarget(playerB, forest + "^" + forest);
-        setChoice(playerB, forest);
+        addCard(Zone.BATTLEFIELD, playerB, smugglersShare, 1);
+        addCard(Zone.BATTLEFIELD, playerA, forest, 3);
+        addCard(Zone.LIBRARY, playerA, forest, 3);
+        addCard(Zone.HAND, playerA, cultivate, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cultivate);
+        addTarget(playerA, forest + "^" + forest);
+        setChoice(playerA, forest);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, forest);
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
         assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
-        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertPermanentCount(playerB, "Treasure Token", 1);
     }
 }
