@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,8 +32,8 @@ public final class SmugglersShare extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then create a Treasure token for each opponent who had two or more lands enter the battlefield under their control this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardAllEffect(SmugglersShareDrawValue.instance), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new TreasureToken(), SmugglersShareTreasureValue.instance).concatBy(", then"));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(SmugglersShareDrawValue.instance), TargetController.EACH_PLAYER, false);
+        ability.addEffect((new CreateTokenEffect(new TreasureToken(), SmugglersShareTreasureValue.instance)).concatBy(", then"));
         this.addAbility(ability);
     }
 
@@ -99,7 +99,7 @@ enum SmugglersShareTreasureValue implements DynamicValue {
                     List<Permanent> enteredPermanents = watcher.getThisTurnEnteringPermanents(opponentId);
                     if (enteredPermanents != null) {
                         int enteredLandCount = 0;
-                        for (Permanent permanent: enteredPermanents) {
+                        for (Permanent permanent : enteredPermanents) {
                             if (permanent.isLand(game)) {
                                 enteredLandCount++;
                             }
