@@ -132,6 +132,6 @@ class EndlessEvilBounceEffect extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted creature dies, if that creature was a Horror, return {this} to its owner’s hand.";
+        return "When enchanted creature dies, if that creature was a Horror, return {this} to its owner's hand.";
     }
 }
