@@ -24,7 +24,7 @@ public final class DrakeToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("AKH", "C15", "C19", "M13", "C20", "ZNR", "C21", "UMA", "NCC", "DDS");
+        availableImageSetCodes = Arrays.asList("AKH", "C15", "C19", "M13", "C20", "ZNR", "C21", "UMA", "NCC", "DDS", "2X2");
     }
 
     public DrakeToken(final DrakeToken token) {

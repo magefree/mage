@@ -23,7 +23,7 @@ public final class FaerieRogueToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("MOR", "MM2", "ZNC", "UMA", "SLD");
+        availableImageSetCodes = Arrays.asList("MOR", "MM2", "ZNC", "UMA", "SLD", "2X2");
     }
 
     @Override
