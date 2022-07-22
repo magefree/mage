@@ -50,7 +50,7 @@ public final class EndlessEvil extends CardImpl {
         this.addAbility(CloneAbility);
 
         // When enchanted creature dies, if that creature was a Horror, return Endless Evil to its owner’s hand.
-        this.addAbility(new EndlessEvilBounceEffect());
+        this.addAbility(new EndlessEvilBounceAbility());
     }
 
     private EndlessEvil(final EndlessEvil card) {
@@ -99,19 +99,19 @@ class EndlessEvilCloneEffect extends OneShotEffect {
     }
 }
 
-class EndlessEvilBounceEffect extends TriggeredAbilityImpl {
+class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
 
-    public EndlessEvilBounceEffect() {
+    public EndlessEvilBounceAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(false, true));
     }
 
-    public EndlessEvilBounceEffect(final EndlessEvilBounceEffect effect) {
+    public EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
         super(effect);
     }
 
     @Override
-    public EndlessEvilBounceEffect copy() {
-        return new EndlessEvilBounceEffect(this);
+    public EndlessEvilBounceAbility copy() {
+        return new EndlessEvilBounceAbility(this);
     }
 
     @Override
@@ -123,9 +123,7 @@ class EndlessEvilBounceEffect extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.getAttachments().contains(this.getSourceId()) && permanent.hasSubtype(SubType.HORROR, game)) {
-                return true;
-            }
+            return permanent.getAttachments().contains(this.getSourceId()) && permanent.hasSubtype(SubType.HORROR, game);
         }
         return false;
     }
