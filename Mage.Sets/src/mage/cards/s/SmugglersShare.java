@@ -58,13 +58,13 @@ enum SmugglersShareDrawValue implements DynamicValue {
     public int calculate(Game game, Ability source, Effect effect) {
         Player controller = game.getPlayer(source.getControllerId());
         CardsAmountDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
-        if (watcher == null) {
+        if (watcher == null || controller == null) {
             return 0;
         }
         int drawCount = 0;
-        for (UUID playerId : game.getOpponents(controller.getId())) {
-            Player opponent = game.getPlayer(playerId);
-            if (opponent != null && watcher.getAmountCardsDrawn(playerId) >= 2) {
+        for (UUID opponentId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && watcher.getAmountCardsDrawn(opponentId) >= 2) {
                 drawCount++;
             }
         }
@@ -94,22 +94,28 @@ enum SmugglersShareTreasureValue implements DynamicValue {
     public int calculate(Game game, Ability source, Effect effect) {
         Player controller = game.getPlayer(source.getControllerId());
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
-        if (watcher == null) {
+        if (watcher == null || controller == null) {
             return 0;
         }
         int treasureCount = 0;
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) continue;
+            if (opponent == null) {
+                continue;
+            }
 
             List<Permanent> enteredPermanents = watcher.getThisTurnEnteringPermanents(opponentId);
-            if (enteredPermanents == null) continue;
+            if (enteredPermanents == null) {
+                continue;
+            }
 
             int enteredLandCount = 0;
             for (Permanent permanent : enteredPermanents) {
                 if (permanent.isLand(game)) enteredLandCount++;
             }
-            if (enteredLandCount >= 2) treasureCount++;
+            if (enteredLandCount >= 2) {
+                treasureCount++;
+            }
         }
         return treasureCount;
     }
