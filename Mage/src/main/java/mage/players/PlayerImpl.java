@@ -4167,10 +4167,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
-
-        // collect stats
-        PlayableObjectsList playableObjectsList = new PlayableObjectsList(playableObjects);
-        return playableObjectsList;
+        return new PlayableObjectsList(playableObjects);
     }
 
     private void putToPlayableObjects(Map<UUID, List<ActivatedAbility>> playableObjects, UUID objectId, ActivatedAbility ability) {
