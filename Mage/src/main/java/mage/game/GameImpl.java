@@ -3325,7 +3325,7 @@ public abstract class GameImpl implements Game {
                                 String[] s = command.getValue().split(":");
                                 if (s.length == 2) {
                                     try {
-                                        Integer amount = Integer.parseInt(s[1]);
+                                        int amount = Integer.parseInt(s[1]);
                                         player.setLife(amount, this, null);
                                         logger.debug("Setting player's life: ");
                                     } catch (NumberFormatException e) {
@@ -3747,7 +3747,7 @@ public abstract class GameImpl implements Game {
     public boolean isGameStopped() {
         return gameStopped;
     }
-    
+
     @Override
     public boolean isTurnOrderReversed() {
         return state.getReverseTurnOrder();
