@@ -111,16 +111,17 @@ class EvolvedSleeperPhyrexianEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent == null || !permanent.hasSubtype(SubType.PHYREXIAN, game)) {
             return false;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(1, source, game);
-            player.loseLife(1, game, source, false);
+        if (source.getSourcePermanentIfItStillExists(game) != null) {
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
+        Player player = game.getPlayer(source.getControllerId());
+        game.applyEffects();
+        player.drawCards(1, source, game);
+        player.loseLife(1, game, source, false);
         return true;
     }
 }
