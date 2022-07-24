@@ -651,20 +651,32 @@ public abstract class GameImpl implements Game {
         return state.getStack().getSpell(spellId);
     }
 
+    /**
+     * Given the UUID of a spell, this method returns the spell object. If the current game
+     * state does not contain a spell with the given UUID, this method checks the last known
+     * information on the stack to look for the spell.
+     *
+     * @param spellId - The UUID of a spell to retrieve from the current game state
+     * @return - The spell object with the given UUID, or null if no spell with the given UUID
+     * is found
+     */
     @Override
     public Spell getSpellOrLKIStack(UUID spellId) {
         Spell spell = state.getStack().getSpell(spellId);
         if (spell == null) {
             MageObject obj = this.getLastKnownInformation(spellId, Zone.STACK);
+            // Copied activated abilities may also be retrieved from the stack here.
+            // This check that obj is instanceof Spell is necessary to avoid throwing
+            // a ClassCastException, as a StackAbility cannot be cast to Spell. See
+            // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else {
-                if (obj != null) {
-                    // copied activated abilities is StackAbility (not spell) and must be ignored here
-                    // if not then java.lang.ClassCastException: mage.game.stack.StackAbility cannot be cast to mage.game.stack.Spell
-                    // see SyrCarahTheBoldTest as example
-                    // logger.error("getSpellOrLKIStack got non spell id - " + obj.getClass().getName() + " - " + obj.getName(), new Throwable());
-                }
+            } else if (obj != null) {
+                logger.error(String.format(
+                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                        obj.getClass().getName(),obj.getName()),
+                        new Throwable()
+                );
             }
         }
         return spell;
