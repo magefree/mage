@@ -68,7 +68,7 @@ public class MtgaImporter extends PlainTextDeckImporter {
                         new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
             }
         } else {
-            CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(name, true);
+            CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(name);
             if (cardInfo == null) {
                 sbMessage.append("Cound not find card for '").append(line).append("'\n");
             }
