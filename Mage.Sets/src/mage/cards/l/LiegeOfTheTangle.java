@@ -1,12 +1,11 @@
-
-
 package mage.cards.l;
 
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -16,17 +15,14 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.Iterator;
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author awjackson
  */
 public final class LiegeOfTheTangle extends CardImpl {
 
@@ -36,8 +32,19 @@ public final class LiegeOfTheTangle extends CardImpl {
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
+
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LiegeOfTheTangleTriggeredAbility());
+
+        // Whenever Liege of the Tangle deals combat damage to a player, you may choose any number of target lands you control
+        // and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature
+        // for as long as it has an awakening counter on it. They're still lands.
+        Effect effect = new AddCountersTargetEffect(CounterType.AWAKENING.createInstance());
+        effect.setText("you may choose any number of target lands you control and put an awakening counter on each of them");
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false);
+        ability.addEffect(new LiegeOfTheTangleEffect());
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
+        this.addAbility(ability);
     }
 
     private LiegeOfTheTangle(final LiegeOfTheTangle card) {
@@ -50,45 +57,11 @@ public final class LiegeOfTheTangle extends CardImpl {
     }
 }
 
-class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
-    LiegeOfTheTangleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
-        this.addEffect(new LiegeOfTheTangleEffect());
-        Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_LANDS, true);
-        this.addTarget(target);
-    }
-
-    public LiegeOfTheTangleTriggeredAbility(final LiegeOfTheTangleTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LiegeOfTheTangleTriggeredAbility copy() {
-        return new LiegeOfTheTangleTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.";
-    }
-}
-
 class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
     public LiegeOfTheTangleEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
+        staticText = "each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands";
     }
 
     public LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {
