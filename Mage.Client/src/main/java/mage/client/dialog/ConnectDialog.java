@@ -817,7 +817,7 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnCheckStatusActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.getInstance().showWhatsNewDialog();
+        MageFrame.showWhatsNewDialog();
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     private void btnFindMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindMainActionPerformed
