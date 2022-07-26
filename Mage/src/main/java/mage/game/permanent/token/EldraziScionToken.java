@@ -23,7 +23,7 @@ public final class EldraziScionToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BFZ", "OGW", "DDR"));
+        tokenImageSets.addAll(Arrays.asList("BFZ", "OGW", "DDR", "2X2"));
     }
 
     public EldraziScionToken() {

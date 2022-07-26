@@ -86,6 +86,7 @@
 |Generate|EMBLEM!:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
 |Generate|EMBLEM!:CLB|Emblem Rowan Kenrith|||RowanKenrithEmblem|
 |Generate|EMBLEM!:CLB|Emblem Will Kenrith|||WillKenrithEmblem|
+|Generate|EMBLEM!:2X2|Emblem Liliana|||LilianaTheLastHopeEmblem|
 |Generate|EMBLEM:THS|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
@@ -133,6 +134,7 @@
 |Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
 |Generate|EMBLEM:NEO|Kaito Shizuki||Emblem Kaito|KaitoShizukiEmblem|
 |Generate|EMBLEM:NEO|Tezzeret, Betrayer of Flesh||Emblem Tezzeret|TezzeretBetrayerOfFleshEmblem|
+|Generate|EMBLEM:2X2|Wrenn and Six||Emblem Wrenn|WrennAndSixEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1836,3 +1838,26 @@
 |Generate|TOK:CLB|Wizard|||MagesAttendantToken|
 |Generate|TOK:CLB|Wolf|||WolfToken|
 |Generate|TOK:CLB|Wurm|||Wurm55Token|
+
+# 2X2
+|Generate|TOK:2X2|Angel|||AngelVigilanceToken|
+|Generate|TOK:2X2|Bear|||BearsCompanionBearToken|
+|Generate|TOK:2X2|Boar|||BoarToken|
+|Generate|TOK:2X2|Cat Dragon|||WasitoraCatDragonToken|
+|Generate|TOK:2X2|Drake|||DrakeToken|
+|Generate|TOK:2X2|Egg|||AtlaPalaniToken|
+|Generate|TOK:2X2|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:2X2|Elemental|||RedElementalToken|
+|Generate|TOK:2X2|Faerie Rogue|||FaerieRogueToken|
+|Generate|TOK:2X2|Knight|||KnightToken|
+|Generate|TOK:2X2|Monk|||MonasteryMentorToken|
+|Generate|TOK:2X2|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:2X2|Saproling|||SaprolingToken|
+|Generate|TOK:2X2|Soldier|||SoldierToken|
+|Generate|TOK:2X2|Spider|||SpiderToken|
+|Generate|TOK:2X2|Spirit|1||SpiritToken|
+|Generate|TOK:2X2|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:2X2|Treasure|||TreasureToken|
+|Generate|TOK:2X2|Vampire|||IxalanVampireToken|
+|Generate|TOK:2X2|Worm|||BlackGreenWormToken|
+|Generate|TOK:2X2|Zombie|||ZombieToken|
