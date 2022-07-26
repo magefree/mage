@@ -15,6 +15,14 @@ import java.util.List;
  * @author TheElk801
  */
 public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
+    // Used only for Permanent.containsRule() to check if the permanent has a basic mana ability that should be removed
+    private static final Ability[] basicManaAbilities = {
+            new WhiteManaAbility(),
+            new BlueManaAbility(),
+            new BlackManaAbility(),
+            new RedManaAbility(),
+            new GreenManaAbility()
+    };
 
     public BecomesAllBasicsControlledEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
@@ -45,16 +53,8 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
                     SubType.SWAMP,
                     SubType.MOUNTAIN,
                     SubType.FOREST);
-            // Optimization.
-            // Remove basic mana abilities since they are redundant with AnyColorManaAbility
-            // and keeping them will only produce too many combinations inside ManaOptions
-            Ability[] basicManaAbilities = new Ability[]{
-                    new WhiteManaAbility(),
-                    new BlueManaAbility(),
-                    new BlackManaAbility(),
-                    new RedManaAbility(),
-                    new GreenManaAbility()
-            };
+            // Optimization: Remove basic mana abilities since they are redundant with AnyColorManaAbility
+            //               and keeping them will only produce too many combinations inside ManaOptions
             for (Ability basicManaAbility : basicManaAbilities) {
                 if (permanent.getAbilities(game).containsRule(basicManaAbility)) {
                     permanent.removeAbility(basicManaAbility, source.getSourceId(), game);
