@@ -5,7 +5,6 @@ import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -52,30 +51,27 @@ public class MtgaImporter extends PlainTextDeckImporter {
             return;
         }
         
-        final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
+        //sbMessage.append("Added card with set info: '").append(line).append("'\n"); //REMOVE
+        //sbMessage.append("Group 3: '").append(m.group(3)).append("'\n"); //REMOVE
+        //sbMessage.append("Group 4: '").append(m.group(4)).append("'\n"); //REMOVE
         
+        Optional<CardInfo> found;
         int count = Integer.parseInt(m.group(1));
-        String name = m.group(2);
-               
-        if (m.group(3) != "" && m.group(4) != "") {
+        String name = m.group(2);    
+        if (m.group(3) != null && m.group(4) != null) {
             String set = SET_REMAPPING.getOrDefault(m.group(3), m.group(3));
             String cardNumber = m.group(4);
-            Optional<CardInfo> found = lookup.lookupCardInfo(name, set, cardNumber);
-            if (!found.isPresent()) {
-                sbMessage.append("Cound not find card for '").append(line).append("'\n");
-            } else {
-                found.ifPresent(card -> zone.addAll(Collections.nCopies(count,
-                        new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
-            }
+            found = lookup.lookupCardInfo(name, set, cardNumber);
         } else {
-            CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(name);
-            if (cardInfo == null) {
-                sbMessage.append("Cound not find card for '").append(line).append("'\n");
-            }
-            else {
-                zone.addAll(Collections.nCopies(count,
-                        new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode())));
-            }
+            found = lookup.lookupCardInfo(name);
+        }
+        
+        if (!found.isPresent()) {
+            sbMessage.append("Cound not find card for '").append(line).append("'\n");
+        } else {
+            final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
+            found.ifPresent(card -> zone.addAll(Collections.nCopies(count,
+                    new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
         }
     }
 
