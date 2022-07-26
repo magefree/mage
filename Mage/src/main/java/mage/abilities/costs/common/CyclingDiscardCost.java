@@ -16,13 +16,14 @@ import java.util.UUID;
  */
 public class CyclingDiscardCost extends CostImpl {
 
-    private MageObjectReference cycledCard = null;
+    private MageObjectReference cycledCard;
 
     public CyclingDiscardCost() {
     }
 
     private CyclingDiscardCost(CyclingDiscardCost cost) {
         super(cost);
+        this.cycledCard = cost.cycledCard;
     }
 
     @Override

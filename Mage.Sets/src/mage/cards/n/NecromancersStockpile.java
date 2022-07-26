@@ -60,6 +60,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
 
     public NecromancersStockpileDiscardTargetCost(NecromancersStockpileDiscardTargetCost cost) {
         super(cost);
+        this.isZombieCard = cost.isZombieCard;
     }
 
     @Override

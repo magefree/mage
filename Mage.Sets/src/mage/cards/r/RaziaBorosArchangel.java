@@ -87,6 +87,7 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
 
     public RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
         super(effect);
+        this.redirectToObject = effect.redirectToObject;
     }
 
     @Override

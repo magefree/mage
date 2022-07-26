@@ -158,6 +158,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
+        this.turnId = state.turnId;
         this.extraTurn = state.extraTurn;
         this.legendaryRuleActive = state.legendaryRuleActive;
         this.effects = state.effects.copy();
@@ -200,6 +201,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay.addAll(state.commandersToStay);
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
+        this.manaBurn = state.manaBurn;
         this.reverseTurnOrder = state.reverseTurnOrder;
     }
 

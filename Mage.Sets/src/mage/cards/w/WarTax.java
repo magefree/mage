@@ -54,6 +54,7 @@ class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
     WarTaxCantAttackUnlessPaysEffect(WarTaxCantAttackUnlessPaysEffect effect) {
         super(effect);
+        this.xCosts = effect.xCosts.copy();
     }
 
     @Override

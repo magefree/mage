@@ -67,8 +67,9 @@ class UrzasAvengerEffect extends ContinuousEffectImpl {
         this.staticText = "{this} gets -1/-1 and gains your choice of banding, flying, first strike, or trample until end of turn";
     }
 
-    public UrzasAvengerEffect(final UrzasAvengerEffect effect) {
+    private UrzasAvengerEffect(final UrzasAvengerEffect effect) {
         super(effect);
+        this.gainedAbility = effect.gainedAbility;
     }
 
     @Override
