@@ -25,7 +25,7 @@ public class MtgaImporter extends PlainTextDeckImporter {
                     "(?:\\p{javaWhitespace}+\\()?" +
                     "(\\p{Alnum}+)?" +
                     "(?:\\)\\p{javaWhitespace}+)?" +
-                    "(\\p{Alnum}+)?");
+                    "(\\p{Graph}+)?");
 
     private final CardLookup lookup = getCardLookup();
     private boolean sideboard = false;
@@ -50,10 +50,6 @@ public class MtgaImporter extends PlainTextDeckImporter {
             sbMessage.append("Error reading '").append(line).append("'\n");
             return;
         }
-        
-        //sbMessage.append("Added card with set info: '").append(line).append("'\n"); //REMOVE
-        //sbMessage.append("Group 3: '").append(m.group(3)).append("'\n"); //REMOVE
-        //sbMessage.append("Group 4: '").append(m.group(4)).append("'\n"); //REMOVE
         
         Optional<CardInfo> found;
         int count = Integer.parseInt(m.group(1));
