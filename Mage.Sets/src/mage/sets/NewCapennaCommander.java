@@ -268,6 +268,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skyship Plunderer", 232, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
         cards.add(new SetCardInfo("Slippery Bogbonder", 312, Rarity.RARE, mage.cards.s.SlipperyBogbonder.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 428, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Smuggler's Share", 21, Rarity.RARE, mage.cards.s.SmugglersShare.class));
         cards.add(new SetCardInfo("Sol Ring", 379, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 380, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Spellbinding Soprano", 53, Rarity.RARE, mage.cards.s.SpellbindingSoprano.class));

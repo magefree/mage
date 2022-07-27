@@ -1431,6 +1431,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
+    }
+
+    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
     }

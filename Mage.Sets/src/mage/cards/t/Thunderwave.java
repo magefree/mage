@@ -79,7 +79,7 @@ class ThunderwaveEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game
         )) {
             if (!permanent.getId().equals(target.getFirstTarget())) {
-                permanent.damage(6, source, game);
+                permanent.damage(3, source, game);
             }
         }
         return true;

@@ -16,7 +16,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean combatDamageOnly;
+    private final boolean combatOnly;
     private final FilterPermanent filterPermanent;
     private final SetTargetPointer setTargetPointer;
 
@@ -32,19 +32,19 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
      *                         - PLAYER = player controlling the damage source.<br>
      *                         - PERMANENT = source permanent.<br>
      *                         - PERMANENT_TARGET = damaged creature.
-     * @param combatDamageOnly The flag to determine if only combat damage has
+     * @param combatOnly       The flag to determine if only combat damage has
      *                         to trigger
      */
-    public DealsDamageToACreatureAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filterPermanent, SetTargetPointer setTargetPointer, boolean combatDamageOnly) {
+    public DealsDamageToACreatureAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filterPermanent, SetTargetPointer setTargetPointer, boolean combatOnly) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.combatDamageOnly = combatDamageOnly;
+        this.combatOnly = combatOnly;
         this.setTargetPointer = setTargetPointer;
         this.filterPermanent = filterPermanent;
     }
 
     public DealsDamageToACreatureAllTriggeredAbility(final DealsDamageToACreatureAllTriggeredAbility ability) {
         super(ability);
-        this.combatDamageOnly = ability.combatDamageOnly;
+        this.combatOnly = ability.combatOnly;
         this.filterPermanent = ability.filterPermanent;
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -65,7 +65,7 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
         if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
-        if (combatDamageOnly && !((DamagedEvent) event).isCombatDamage()) {
+        if (combatOnly && !((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
         permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
@@ -94,6 +94,6 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
     @Override
     public String getTriggerPhrase() {
         return "Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatDamageOnly ? "combat " : "") + "damage to a creature, ";
+                + (combatOnly ? "combat " : "") + "damage to a creature, ";
     }
 }

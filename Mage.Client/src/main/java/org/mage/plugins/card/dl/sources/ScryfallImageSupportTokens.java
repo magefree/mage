@@ -1715,6 +1715,32 @@ public class ScryfallImageSupportTokens {
             put ("LRW/Shapeshifter", "https://api.scryfall.com/cards/tlrw/11/en?format=image");
             put ("LRW/Wolf", "https://api.scryfall.com/cards/tlrw/10/en?format=image");
 
+            // 2X2
+            put ("2X2/Angel", "https://api.scryfall.com/cards/t2x2/3/en?format=image");
+            put ("2X2/Bear", "https://api.scryfall.com/cards/t2x2/14/en?format=image");
+            put ("2X2/Boar", "https://api.scryfall.com/cards/t2x2/15/en?format=image");
+            put ("2X2/Cat Dragon", "https://api.scryfall.com/cards/t2x2/19/en?format=image");
+            put ("2X2/Drake", "https://api.scryfall.com/cards/t2x2/10/en?format=image");
+            put ("2X2/Egg", "https://api.scryfall.com/cards/t2x2/16/en?format=image");
+            put ("2X2/Eldrazi Scion", "https://api.scryfall.com/cards/t2x2/1/en?format=image");
+            put ("2X2/Elemental", "https://api.scryfall.com/cards/t2x2/13/en?format=image");
+            put ("2X2/Faerie Rogue", "https://api.scryfall.com/cards/t2x2/11/en?format=image");
+            put ("2X2/Knight", "https://api.scryfall.com/cards/t2x2/5/en?format=image");
+            put ("2X2/Emblem Liliana", "https://api.scryfall.com/cards/t2x2/23/en?format=image");
+            put ("2X2/Monk", "https://api.scryfall.com/cards/t2x2/6/en?format=image");
+            put ("2X2/Phyrexian Golem", "https://api.scryfall.com/cards/t2x2/21/en?format=image");
+            put ("2X2/Saproling", "https://api.scryfall.com/cards/t2x2/17/en?format=image");
+            put ("2X2/Soldier", "https://api.scryfall.com/cards/t2x2/7/en?format=image");
+            put ("2X2/Spider", "https://api.scryfall.com/cards/t2x2/18/en?format=image");
+            put ("2X2/Spirit/1", "https://api.scryfall.com/cards/t2x2/2/en?format=image");
+            put ("2X2/Spirit/2", "https://api.scryfall.com/cards/t2x2/8/en?format=image");
+            put ("2X2/Treasure", "https://api.scryfall.com/cards/t2x2/22/en?format=image");
+            put ("2X2/Vampire", "https://api.scryfall.com/cards/t2x2/9/en?format=image");
+            put ("2X2/Worm", "https://api.scryfall.com/cards/t2x2/20/en?format=image");
+            put ("2X2/Emblem Wrenn and Six", "https://api.scryfall.com/cards/t2x2/24/en?format=image");
+            put ("2X2/Zombie", "https://api.scryfall.com/cards/t2x2/12/en?format=image");
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

@@ -661,6 +661,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // TODO: implemented findBestPlayerTargets
         // TODO: add findBest*Targets for all target types
+        // TODO: Much of this code needs to be re-written to move code into Target.possibleTargets
+        //       A) Having it here makes this function ridiculously long
+        //       B) Each time a new target type is added, people must remember to add it here
         if (target.getOriginalTarget() instanceof TargetPermanent) {
 
             FilterPermanent filter = null;
@@ -1039,6 +1042,15 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.addTarget(pick.getId(), source, game);
                     stackObjects.remove(0);
                 }
+            }
+            return target.isChosen();
+        }
+
+        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility
+                || target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbilityOrLegendarySpell) {
+            Iterator<UUID> iterator = target.possibleTargets(source.getControllerId(), source, game).iterator();
+            while (!target.isChosen() && iterator.hasNext()) {
+                target.addTarget(iterator.next(), source, game);
             }
             return target.isChosen();
         }

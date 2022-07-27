@@ -46,4 +46,8 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
         return new DealsDamageToOneOrMoreCreaturesTriggeredAbility(this);
     }
 
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to one or more creatures, ";
+    }
 }

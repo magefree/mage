@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.constants.RollDieType;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -16,8 +18,19 @@ public class RollDieEvent extends GameEvent {
     private int rollsAmount = 1; // rolls X times and choose result from it
     private int bigIdeaRollsAmount = 0; // rolls 2x and sum result
 
-    public RollDieEvent(Ability source, RollDieType rollDieType, int sides) {
-        super(EventType.ROLL_DIE, source.getControllerId(), source, source.getControllerId());
+    /**
+     * The target ID is used to keep track of the distinction between the player who controls the ability that
+     * started the dice roll and the player who does the rolling.
+     * <p>
+     * The only times this distinction matters is for Chaos Dragon and Ricochet.
+     *
+     * @param source
+     * @param targetId      The player rolling the die
+     * @param rollDieType
+     * @param sides
+     */
+    public RollDieEvent(Ability source, UUID targetId, RollDieType rollDieType, int sides) {
+        super(EventType.ROLL_DIE, targetId, source, source.getControllerId());
         this.rollDieType = rollDieType;
         this.sides = sides;
     }
