@@ -30,13 +30,19 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            ExileTargetEffect effect = new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-            if (targetPointer != null) {  // Grasping Giant
-                effect.setTargetPointer(targetPointer);
-            }
-            return effect.apply(game, source);
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        // If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled.
+        // (2021-03-19)
+        if (game.getPermanent(source.getSourceId()) == null) {
+            return false;
+        }
+
+        ExileTargetEffect effect = new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
+        if (targetPointer != null) {  // Grasping Giant
+            effect.setTargetPointer(targetPointer);
+        }
+        return effect.apply(game, source);
     }
 }

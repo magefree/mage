@@ -51,7 +51,7 @@ class RoguesGalleryTarget extends TargetCardInYourGraveyard {
     }
 
     RoguesGalleryTarget() {
-        super(0, Integer.MAX_VALUE, filter, true);
+        super(0, Integer.MAX_VALUE, filter);
     }
 
     private RoguesGalleryTarget(final RoguesGalleryTarget target) {

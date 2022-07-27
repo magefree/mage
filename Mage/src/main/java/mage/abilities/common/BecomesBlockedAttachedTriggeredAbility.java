@@ -9,7 +9,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author L_J
@@ -39,16 +39,21 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = Optional
-                .ofNullable(getSourcePermanentOrLKI(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .orElse(null);
-        if (permanent == null) {
+        Permanent enchantment = getSourcePermanentOrLKI(game);
+        UUID blockedId = event.getTargetId();
+        if (enchantment == null || !blockedId.equals(enchantment.getAttachedTo())) {
             return false;
         }
-        if (setTargetPointer == SetTargetPointer.PERMANENT) {
-            this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        switch (setTargetPointer) {
+            case PERMANENT:
+                getEffects().setTargetPointer(new FixedTarget(blockedId, game));
+                break;
+            case PLAYER:
+                UUID playerId = game.getCombat().getDefendingPlayerId(blockedId, game);
+                if (playerId != null) {
+                    getEffects().setTargetPointer(new FixedTarget(playerId));
+                }
+                break;
         }
         return true;
     }
