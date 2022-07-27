@@ -24,7 +24,6 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean keepAbilities;
     protected boolean removeSubtypes = false;
 
-
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         this(token, loseAllAbilities, stillALand, duration, false);
     }
@@ -36,19 +35,21 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     /**
      * @param token
      * @param loseAllAbilities loses all subtypes, colors and abilities
-     * @param stillALand       add rule text, "it's still a land"
-     * @param loseName         permanent lose name and get's it from token
-     * @param keepAbilities    lose types/colors, but keep abilities (example: Scale Up)
+     * @param stillALand add rule text, "it's still a land"
+     * @param loseName permanent lose name and get's it from token
+     * @param keepAbilities lose types/colors, but keep abilities (example:
+     * Scale Up)
      * @param duration
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-                                       boolean keepAbilities) {
+            boolean keepAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
         this.addStillALandText = stillALand;
         this.loseName = loseName;
         this.keepAbilities = keepAbilities;
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
@@ -58,6 +59,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.addStillALandText = effect.addStillALandText;
         this.loseName = effect.loseName;
         this.keepAbilities = effect.keepAbilities;
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     @Override
