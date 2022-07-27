@@ -18,14 +18,13 @@ public final class WasitoraCatDragonToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C17"));
+        tokenImageSets.addAll(Arrays.asList("C17", "2X2"));
     }
     
     public WasitoraCatDragonToken() {
         super("Cat Dragon Token", "3/3 black, red, and green Cat Dragon creature token with flying");
         
         availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode("C17");
 
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.CAT);

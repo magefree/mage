@@ -22,7 +22,7 @@ public final class SpiderToken extends TokenImpl {
 
         this.addAbility(ReachAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("C15", "EMN", "ISD", "SHM", "MH1", "THB", "MID", "UMA", "NCC", "CMA", "CLB"));
+        availableImageSetCodes.addAll(Arrays.asList("C15", "EMN", "ISD", "SHM", "MH1", "THB", "MID", "UMA", "NCC", "CMA", "CLB", "2X2"));
     }
 
     public SpiderToken(final SpiderToken token) {

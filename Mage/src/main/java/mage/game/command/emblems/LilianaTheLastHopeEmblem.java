@@ -27,7 +27,7 @@ public final class LilianaTheLastHopeEmblem extends Emblem {
                 TargetController.YOU, null, false);
         this.getAbilities().add(ability);
 
-        availableImageSetCodes = Arrays.asList("EMN", "MED");
+        availableImageSetCodes = Arrays.asList("EMN", "MED", "2X2");
     }
 }
 

@@ -1945,9 +1945,9 @@ public class HumanPlayer extends PlayerImpl {
             } else {
                 game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
                         possibleTargets, false, getOptions(target, null));
+                waitForResponse(game);
             }
         }
-        waitForResponse(game);
 
         if (responseId == null) {
             responseId = getFixedResponseUUID(game);

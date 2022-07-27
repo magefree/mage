@@ -80,7 +80,7 @@ public class GameController implements GameCallback {
     private boolean useTimeout = true;
     private final GameOptions gameOptions;
 
-    private UUID userReqestingRollback;
+    private UUID userRequestingRollback;
     private int turnsToRollback;
     private int requestsOpen;
 
@@ -91,7 +91,7 @@ public class GameController implements GameCallback {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = managerFactory.chatManager().createChatSession("Game " + game.getId());
-        this.userReqestingRollback = null;
+        this.userRequestingRollback = null;
         this.game = game;
         this.game.setSaveGame(managerFactory.configSettings().isSaveGameActivated());
         this.tableId = tableId;
@@ -508,7 +508,7 @@ public class GameController implements GameCallback {
                                 turnsToRollback = -1;
                                 requestsOpen = -1;
                             } else {
-                                userReqestingRollback = userId;
+                                userRequestingRollback = userId;
                             }
                         } else {
                             Player player = game.getPlayer(playerId);
@@ -528,12 +528,12 @@ public class GameController implements GameCallback {
                 }
                 break;
             case ADD_PERMISSION_TO_ROLLBACK_TURN:
-                if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                     requestsOpen--;
                     if (requestsOpen == 0) {
                         game.rollbackTurns(turnsToRollback);
                         turnsToRollback = -1;
-                        userReqestingRollback = null;
+                        userRequestingRollback = null;
                         requestsOpen = -1;
                     }
                 }
@@ -544,9 +544,9 @@ public class GameController implements GameCallback {
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                        if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                             turnsToRollback = -1;
-                            userReqestingRollback = null;
+                            userRequestingRollback = null;
                             requestsOpen = -1;
                             game.informPlayers("Rollback request denied by " + player.getLogName());
                         }

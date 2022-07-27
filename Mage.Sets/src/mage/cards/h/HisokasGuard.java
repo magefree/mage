@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -12,19 +11,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 
 /**
@@ -32,10 +24,15 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class HisokasGuard extends CardImpl {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control other than Hisoka's Guard");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     public HisokasGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -44,14 +41,10 @@ public final class HisokasGuard extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(AnotherPredicate.instance);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-
     }
 
     private HisokasGuard(final HisokasGuard card) {

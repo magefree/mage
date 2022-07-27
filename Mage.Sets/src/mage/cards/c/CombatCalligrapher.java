@@ -18,6 +18,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.InklingToken;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -78,10 +80,14 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+        Player attacker = game.getPlayer(event.getPlayerId());
+        Player defender = game.getPlayer(event.getTargetId());
+        if (!game.getOpponents(getControllerId()).contains(attacker.getId())
+                || !game.getOpponents(getControllerId()).contains(defender.getId())) {
             return false;
         }
-        getEffects().setValue("playerToAttack", event.getPlayerId());
+        getEffects().setValue("playerToAttack", defender.getId());
+        getEffects().setTargetPointer(new FixedTarget(attacker.getId()));
         return true;
     }
 

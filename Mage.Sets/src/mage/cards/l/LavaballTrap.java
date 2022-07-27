@@ -15,6 +15,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
@@ -57,9 +58,10 @@ enum LavaballTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        if (watcher != null && controller != null) {
+            for (UUID opponentId : game.getOpponents(controller.getId())) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     int count = 0;

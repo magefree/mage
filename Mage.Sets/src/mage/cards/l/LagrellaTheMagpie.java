@@ -87,6 +87,11 @@ class LagrellaTheMagpieEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        // Like other Banishing Light effects, no permanents get exiled if Lagrella is not in the battlefield when this ability resolves.
+        if (game.getPermanent(source.getSourceId()) == null) {
+            return false;
+        }
+
         Cards cards = new CardsImpl();
         this.getTargetPointer()
                 .getTargets(game, source)
