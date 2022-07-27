@@ -20,6 +20,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Aether Snap", 241, Rarity.RARE, mage.cards.a.AetherSnap.class));
+        cards.add(new SetCardInfo("Aerial Extortionist", 11, Rarity.RARE, mage.cards.a.AerialExtortionist.class));
         cards.add(new SetCardInfo("Agitator Ant", 263, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 324, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 325, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
