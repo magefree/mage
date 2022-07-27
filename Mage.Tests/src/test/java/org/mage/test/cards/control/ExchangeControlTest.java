@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -284,9 +285,10 @@ public class ExchangeControlTest extends CardTestPlayerBase {
      * 2. Gilded Drake copy is exchanged for another creature.
      * 3. After the exchange occurs, Gilded Drake is killed by any means.
      * 4. Exchange creature is returned to previous controller (possible owner) during the next phase.
-     *
+     * <p>
      * See https://github.com/magefree/mage/issues/8742
      */
+    @Ignore
     @Test
     public void testGildedDrakeCopyExchange() {
         addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker");
