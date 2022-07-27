@@ -1380,7 +1380,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     @Override
     public int hashCode() {
-        int result = 1;
+        long result = 1;
 
         result = 31 * result + white;
         result = 31 * result + blue;
@@ -1392,7 +1392,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         result = 31 * result + any;
         result = 31 * result + (flag ? 1 : 0);
 
-        return result;
+        return Long.hashCode(result);
     }
 
     /**
