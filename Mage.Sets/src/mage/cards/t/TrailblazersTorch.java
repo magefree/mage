@@ -8,9 +8,7 @@ import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +31,7 @@ public final class TrailblazersTorch extends CardImpl {
 
         // Whenever equipped creature becomes blocked, it deals 2 damage to each creature blocking it.
         this.addAbility(new BecomesBlockedAttachedTriggeredAbility(
-                new TrailblazersTorchEffect(), false
+                new TrailblazersTorchEffect(), false, SetTargetPointer.PERMANENT
         ).setTriggerPhrase("Whenever equipped creature becomes blocked, "));
 
         // Equip {1}
