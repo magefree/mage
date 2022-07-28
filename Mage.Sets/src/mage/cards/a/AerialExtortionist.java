@@ -67,7 +67,7 @@ class AerialExtortionistExileEffect extends OneShotEffect {
     public AerialExtortionistExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile up to one target nonland permanent. " +
-                "For as long as that card remains exiled, its owner may cast it without paying its mana cost";
+                "For as long as that card remains exiled, its owner may cast it";
     }
 
     public AerialExtortionistExileEffect(final AerialExtortionistExileEffect effect) {

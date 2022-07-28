@@ -54,7 +54,12 @@ public class BessSoulNourisher extends CardImpl {
 
         // Whenever Bess attacks, each other creature you control with base power and toughness 1/1 gets
         // +X/+X until end of turn, where X is the number of +1/+1 counters on Bess.
-        this.addAbility(new AttacksTriggeredAbility(new BessSoulNourisherAddCountersEffect()));
+        this.addAbility(new AttacksTriggeredAbility(
+                new BessSoulNourisherAddCountersEffect(),
+                false,
+                "whenever Bess attacks, each other creature you control with base power and toughness 1/1 " +
+                        "gets +X/+X until end of turn, where X is the number of +1/+1 counters on Bess")
+        );
     }
 
     private BessSoulNourisher(final BessSoulNourisher card) {

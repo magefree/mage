@@ -56,7 +56,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rememberSource = rememberSource;
         this.rememberSourceAsCard = rememberSourceAsCard;
-        setTriggerPhrase("Whenever you cast " + filter.getMessage() + ", ");
+        setTriggerPhrase("Whenever you cast " + filter.getMessage() + (fromZone != Zone.ALL ? "from your " + fromZone.toString().toLowerCase() : "") + ", ");
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {

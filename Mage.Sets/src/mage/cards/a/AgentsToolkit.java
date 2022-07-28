@@ -42,10 +42,10 @@ public class AgentsToolkit extends CardImpl {
         this.subtype.add(SubType.CLUE);
 
         // Agent’s Toolkit enters the battlefield with a +1/+1 counter, a flying counter, a deathtouch counter, and a shield counter on it.
-        Ability counterETBAbility = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
-        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.FLYING.createInstance(1)));
-        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.DEATHTOUCH.createInstance(1)));
-        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)));
+        Ability counterETBAbility = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)).setText("with a +1/+1 counter"));
+        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.FLYING.createInstance(1)).setText("a flying counter").concatBy(", "));
+        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.DEATHTOUCH.createInstance(1)).setText("a deathtouch counter").concatBy(", "));
+        counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)).setText("and a shield counter on it").concatBy(", "));
         this.addAbility(counterETBAbility);
 
         // Whenever a creature enters the battlefield under your control,
@@ -75,6 +75,7 @@ class AgentToolkitMoveCounterEffect extends OneShotEffect {
 
     public AgentToolkitMoveCounterEffect() {
         super(Outcome.Benefit);
+        this.staticText = "you may move a counter from Agent’s Toolkit onto that creature";
     }
 
     private AgentToolkitMoveCounterEffect(final AgentToolkitMoveCounterEffect effect) {
