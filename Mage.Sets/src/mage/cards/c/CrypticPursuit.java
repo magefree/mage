@@ -69,7 +69,7 @@ class CrypticPursuitExileAndPlayEffect extends OneShotEffect {
 
     CrypticPursuitExileAndPlayEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile it if it’s an instant or sorcery card. " +
+        this.staticText = "exile it if it's an instant or sorcery card. " +
                           "You may cast that card until the end of your next turn.";
     }
 
