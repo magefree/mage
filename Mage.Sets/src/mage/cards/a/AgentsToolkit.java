@@ -75,7 +75,7 @@ class AgentToolkitMoveCounterEffect extends OneShotEffect {
 
     public AgentToolkitMoveCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may move a counter from Agent’s Toolkit onto that creature";
+        this.staticText = "you may move a counter from Agent's Toolkit onto that creature";
     }
 
     private AgentToolkitMoveCounterEffect(final AgentToolkitMoveCounterEffect effect) {
