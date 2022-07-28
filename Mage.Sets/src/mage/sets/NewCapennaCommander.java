@@ -23,6 +23,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Extortionist", 11, Rarity.RARE, mage.cards.a.AerialExtortionist.class));
         cards.add(new SetCardInfo("Agent's Toolkit", 66, Rarity.RARE, mage.cards.a.AgentsToolkit.class));
         cards.add(new SetCardInfo("Agitator Ant", 263, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
+        cards.add(new SetCardInfo("Anhelo, the Painter", 1, Rarity.MYTHIC, mage.cards.a.AnheloThePainter.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 324, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 325, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
         cards.add(new SetCardInfo("Angelic Sleuth", 12, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
