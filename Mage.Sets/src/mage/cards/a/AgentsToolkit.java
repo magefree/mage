@@ -36,8 +36,8 @@ import java.util.UUID;
  * @author Alex-Vasile
  */
 public class AgentsToolkit extends CardImpl {
-    public AgentsToolkit(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}{U}");
+    public AgentsToolkit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}{U}");
 
         this.subtype.add(SubType.CLUE);
 

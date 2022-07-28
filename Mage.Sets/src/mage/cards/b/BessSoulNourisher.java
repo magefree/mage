@@ -37,8 +37,8 @@ public class BessSoulNourisher extends CardImpl {
         filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
-    public BessSoulNourisher(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "");
+    public BessSoulNourisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.CITIZEN);

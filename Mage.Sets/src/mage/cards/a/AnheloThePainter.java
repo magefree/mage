@@ -31,8 +31,8 @@ import java.util.stream.Stream;
  * @author Alex-Vasile
  */
 public class AnheloThePainter extends CardImpl {
-    public AnheloThePainter(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
+    public AnheloThePainter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);

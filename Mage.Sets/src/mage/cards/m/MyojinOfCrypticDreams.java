@@ -34,8 +34,8 @@ public class MyojinOfCrypticDreams extends CardImpl {
         permanentSpellFilter.add(PermanentPredicate.instance);
     }
 
-    public MyojinOfCrypticDreams(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
+    public MyojinOfCrypticDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);

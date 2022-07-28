@@ -38,8 +38,8 @@ public class DonalHeraldOfWings extends CardImpl {
         filterSpell.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public DonalHeraldOfWings(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+    public DonalHeraldOfWings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
 

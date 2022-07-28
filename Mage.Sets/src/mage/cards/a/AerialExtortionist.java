@@ -24,8 +24,8 @@ import java.util.UUID;
  * @author Alex-Vasile
  */
 public class AerialExtortionist extends CardImpl {
-    public AerialExtortionist(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public AerialExtortionist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.SOLDIER);
