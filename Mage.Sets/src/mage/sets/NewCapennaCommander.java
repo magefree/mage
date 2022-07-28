@@ -52,6 +52,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 331, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Bellowing Mauler", 33, Rarity.RARE, mage.cards.b.BellowingMauler.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
+        cards.add(new SetCardInfo("Bess, Soul Nourisher", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Blasphemous Act", 264, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blighted Woodland", 388, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
         cards.add(new SetCardInfo("Bloodsoaked Champion", 243, Rarity.RARE, mage.cards.b.BloodsoakedChampion.class));
