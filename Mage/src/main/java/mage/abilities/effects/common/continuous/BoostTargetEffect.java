@@ -83,24 +83,25 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode == null || mode.getTargets().isEmpty()) {
-            return "no target";
-        }
-        Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder();
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
+        if (mode == null || mode.getTargets().isEmpty()) {
+            sb.append("it gets ");
         } else {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+            Target target = mode.getTargets().get(0);
+            if (target.getMaxNumberOfTargets() > 1) {
+                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                    sb.append("up to ");
+                }
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
+            } else {
+                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                    sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+                }
+                if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
+                    sb.append("target ");
+                }
+                sb.append(target.getTargetName()).append(" gets ");
             }
-            if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
-                sb.append("target ");
-            }
-            sb.append(target.getTargetName()).append(" gets ");
         }
         sb.append(CardUtil.getBoostText(power, toughness, duration));
         return sb.toString();

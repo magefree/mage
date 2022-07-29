@@ -40,7 +40,7 @@ public final class DarkSalvation extends CardImpl {
                 Duration.EndOfTurn
         );
         effect.setTargetPointer(new SecondTargetPointer());
-        effect.concatBy(", then");
+        effect.setText(", then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls");
         this.getSpellAbility().addEffect(effect);
     }
 

@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.dynamicvalue.common.DevotionCount;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,6 +21,7 @@ public final class AspectOfHydra extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is your devotion to green.
         this.getSpellAbility().addEffect(new BoostTargetEffect(DevotionCount.G, DevotionCount.G, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new InfoEffect(DevotionCount.G.getReminder()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }
