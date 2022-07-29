@@ -855,12 +855,14 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_CREATURE_NON_TOKEN.add(TargetController.YOU.getControllerPredicate());
         FILTER_CONTROLLED_CREATURE_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CONTROLLED_CREATURE_NON_TOKEN.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_NON_TOKEN = new FilterCreaturePermanent("a nontoken creature");
 
     static {
         FILTER_CREATURE_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CREATURE_NON_TOKEN.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
