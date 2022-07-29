@@ -34,7 +34,7 @@ public final class AltarOfTheGoyf extends CardImpl {
         this.addAbility(new AttacksAloneControlledTriggeredAbility(new BoostTargetEffect(
                 CardTypesInGraveyardCount.ALL,
                 CardTypesInGraveyardCount.ALL,
-                Duration.EndOfTurn, true
+                Duration.EndOfTurn
         ).setText("it gets +X/+X until end of turn, where X is " +
                 "the number of card types among cards in all graveyards."), true, false).addHint(CardTypesInGraveyardHint.ALL));
 

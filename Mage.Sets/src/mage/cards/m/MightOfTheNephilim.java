@@ -24,9 +24,9 @@ public final class MightOfTheNephilim extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Target creature gets +2/+2 until end of turn for each of its colors.
-        DynamicValue boostValue = MightOfTheNephilimValue.instance;
-        Effect effect = new BoostTargetEffect(boostValue, boostValue, Duration.EndOfTurn, true);
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(
+                MightOfTheNephilimValue.instance, MightOfTheNephilimValue.instance, Duration.EndOfTurn
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

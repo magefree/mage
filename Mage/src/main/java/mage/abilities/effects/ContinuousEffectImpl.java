@@ -301,9 +301,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             // count this class as used for "-{something_positive}"
             return true;
         }
-        if (toughness instanceof DomainValue) {
-            return ((DomainValue) toughness).getAmount() < 0;
-        }
         return false;
     }
 

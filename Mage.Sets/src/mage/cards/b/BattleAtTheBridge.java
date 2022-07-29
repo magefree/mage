@@ -20,6 +20,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BattleAtTheBridge extends CardImpl {
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+
     public BattleAtTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
 
@@ -27,8 +29,8 @@ public final class BattleAtTheBridge extends CardImpl {
         addAbility(new ImproviseAbility());
 
         // Target creature gets -X/-X until end of turn. You gain X life.
-        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
+        
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
     }

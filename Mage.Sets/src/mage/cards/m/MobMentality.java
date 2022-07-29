@@ -59,7 +59,7 @@ public final class MobMentality extends CardImpl {
 
 class MobMentalityTriggeredAbility extends TriggeredAbilityImpl {
     MobMentalityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(new AttackingCreatureCount(), StaticValue.get(0), Duration.EndOfTurn, true));
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(new AttackingCreatureCount(), StaticValue.get(0), Duration.EndOfTurn));
     }
 
     private MobMentalityTriggeredAbility(final MobMentalityTriggeredAbility ability) {

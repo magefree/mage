@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -7,7 +6,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -26,6 +24,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class TezzeretTheSchemer extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control"), null);
+    private static final DynamicValue xValue2 = new SignInversionDynamicValue(xValue);
+
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -38,10 +39,7 @@ public final class TezzeretTheSchemer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new EtheriumCellToken()), 1));
 
         // -2: Target creature gets +X/-X until end of turn, where X is the number of artifacts you control.
-        DynamicValue count = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control"));
-        Effect effect = new BoostTargetEffect(count, new SignInversionDynamicValue(count), Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +X/-X until end of turn, where X is the number of artifacts you control");
-        Ability ability = new LoyaltyAbility(effect, -2);
+        Ability ability = new LoyaltyAbility(new BoostTargetEffect(xValue, xValue2, Duration.EndOfTurn), -2);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -58,4 +56,3 @@ public final class TezzeretTheSchemer extends CardImpl {
         return new TezzeretTheSchemer(this);
     }
 }
-

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -17,13 +16,13 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class DeathWind extends CardImpl {
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+
     public DeathWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}");
 
-
         // Target creature gets -X/-X until end of turn.
-        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

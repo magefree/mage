@@ -46,7 +46,7 @@ public final class TheTriumphOfAnax extends CardImpl {
                         TrampleAbility.getInstance(), Duration.EndOfTurn,
                         "Until end of turn, target creature gains trample"
                 ), new BoostTargetEffect(
-                        xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                        xValue, StaticValue.get(0), Duration.EndOfTurn
                 ).setText("and gets +X/+0, where X is the number of lore counters on {this}")),
                 new TargetCreaturePermanent()
         );

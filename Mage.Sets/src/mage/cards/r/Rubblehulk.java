@@ -36,7 +36,7 @@ public final class Rubblehulk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
 
         // Bloodrush - 1{R}{G}, Discard Rubblehulk: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.
-        this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true)));
+        this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn)));
     }
 
     private Rubblehulk(final Rubblehulk card) {

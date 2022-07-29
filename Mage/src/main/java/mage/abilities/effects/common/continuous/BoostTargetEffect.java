@@ -24,39 +24,30 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private final boolean lockedIn;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
     }
 
     public BoostTargetEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, false);
-    }
-
-    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, false);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
     /**
      * @param power
      * @param toughness
      * @param duration
-     * @param lockedIn  if true, power and toughness will be calculated only
-     *                  once, when the ability resolves
      */
-    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        this.lockedIn = lockedIn;
     }
 
     public BoostTargetEffect(final BoostTargetEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
-        this.lockedIn = effect.lockedIn;
     }
 
     @Override
@@ -67,7 +58,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (lockedIn) {
+        if (affectedObjectsSet) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }

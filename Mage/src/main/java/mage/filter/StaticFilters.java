@@ -675,7 +675,7 @@ public final class StaticFilters {
         FILTER_PERMANENT_ALL_SLIVERS.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("a Samurai or Warrior you control");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("Samurai or Warrior you control");
 
     static {
         FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.add(Predicates.or(

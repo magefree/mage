@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -69,6 +70,6 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " attacks alone, ";
+        return "Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks alone, ";
     }
 }
