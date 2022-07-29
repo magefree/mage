@@ -1,25 +1,22 @@
 package mage.cards.i;
 
-import mage.MageItem;
+import java.util.ArrayList;
+import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanentSameController;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.target.TargetPermanent;
 
 /**
  * @author TheElk801
@@ -47,7 +44,7 @@ public final class Incriminate extends CardImpl {
 class IncriminateEffect extends OneShotEffect {
 
     IncriminateEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "choose two target creatures controlled by the same player. That player sacrifices one of them";
     }
 
@@ -62,40 +59,24 @@ class IncriminateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = this
-                .getTargetPointer()
-                .getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        Permanent permanent;
-        switch (permanents.size()) {
-            case 0:
-                return false;
-            case 1:
-                permanent = permanents.get(0);
-                break;
-            case 2:
-                Player player = game.getPlayer(permanents.get(0).getControllerId());
-                if (player == null) {
-                    return false;
-                }
-                FilterPermanent filter = new FilterPermanent("creature to sacrifice");
-                filter.add(Predicates.or(
-                        permanents
-                                .stream()
-                                .map(MageItem::getId)
-                                .map(ControllerIdPredicate::new)
-                                .collect(Collectors.toList())
-                ));
-                TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
-                player.choose(Outcome.Sacrifice, target, source, game);
-                permanent = game.getPermanent(target.getFirstTarget());
-            default:
-                throw new UnsupportedOperationException("This shouldn't have happened");
+        // the OP can fix the stream to match this working setup if so desired
+        Player player = null;
+        FilterPermanent filter = new FilterPermanent("creature to sacrifice");
+        List<PermanentIdPredicate> permanentIdPredicates = new ArrayList<>();
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+            permanentIdPredicates.add(new PermanentIdPredicate(game.getPermanent(targetId).getId()));
+            player = game.getPlayer(game.getPermanent(targetId).getControllerId());
         }
-        return permanent != null && permanent.sacrifice(source, game);
+        if (permanentIdPredicates.isEmpty()
+                || player == null) {
+            return false;
+        }
+        filter.add(mage.filter.predicate.Predicates.or(permanentIdPredicates));
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setNotTarget(true);
+        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+        Permanent sacrificeCreature = game.getPermanent(target.getFirstTarget());
+        return sacrificeCreature != null
+                && sacrificeCreature.sacrifice(source, game);
     }
 }
