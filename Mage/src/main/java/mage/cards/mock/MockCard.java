@@ -63,8 +63,9 @@ public class MockCard extends CardImpl {
         this.flipCard = card.isFlipCard();
 
         this.nightCard = card.isNightCard();
+
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode()));
         }
 
         if (card.isAdventureCard()) {

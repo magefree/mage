@@ -23,7 +23,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Bloodflow Connoisseur", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brain Maggot");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -46,7 +46,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         // exile
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brain Maggot");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
 //        showExile("exile", 1, PhaseStep.BEGIN_COMBAT, playerB);
         checkExileCount("blood must be in exile", 1, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 1);
@@ -77,7 +77,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mesmeric Fiend");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
         //
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Mesmeric Fiend");

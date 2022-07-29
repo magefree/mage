@@ -769,6 +769,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public SpellAbility getSecondFaceSpellAbility() {
+        return null;
+    }
+
+    @Override
     public boolean isNightCard() {
         return false;
     }

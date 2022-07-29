@@ -20,7 +20,7 @@ public final class AngelVigilanceToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(VigilanceAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("NEC", "MH1", "WAR", "GRN", "M19");
+        availableImageSetCodes = Arrays.asList("NEC", "MH1", "WAR", "GRN", "M19", "2X2");
     }
 
     public AngelVigilanceToken(final AngelVigilanceToken token) {

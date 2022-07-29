@@ -637,6 +637,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public SpellAbility getSecondFaceSpellAbility() {
+        Card secondFace = getSecondCardFace();
+        if (secondFace == null || secondFace.getClass().equals(getClass())) {
+            throw new IllegalArgumentException("Wrong code usage. getSecondFaceSpellAbility can only be used for double faced card (main side).");
+        }
+        return secondFace.getSpellAbility();
+    }
+
+    @Override
     public boolean isNightCard() {
         return this.nightCard;
     }

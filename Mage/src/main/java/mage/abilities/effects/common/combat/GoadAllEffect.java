@@ -24,8 +24,13 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     }
 
     public GoadAllEffect(Duration duration, FilterPermanent filter) {
+        this(duration, filter, true);
+    }
+
+    public GoadAllEffect(Duration duration, FilterPermanent filter, boolean affectedObjectsSet) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
+        this.affectedObjectsSet = affectedObjectsSet;
     }
 
     private GoadAllEffect(final GoadAllEffect effect) {

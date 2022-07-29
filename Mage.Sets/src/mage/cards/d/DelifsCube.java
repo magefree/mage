@@ -6,9 +6,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -59,7 +58,7 @@ public final class DelifsCube extends CardImpl {
 class DelifsCubeTriggeredAbility extends DelayedTriggeredAbility {
 
     DelifsCubeTriggeredAbility() {
-        super(new DelifsCubePreventEffect(), Duration.EndOfTurn, false, false);
+        super(new AssignNoCombatDamageTargetEffect(Duration.EndOfTurn, "it assigns no combat damage this turn"), Duration.EndOfTurn, false, false);
         this.addEffect(new AddCountersSourceEffect(CounterType.CUBE.createInstance()));
     }
 
@@ -86,47 +85,5 @@ class DelifsCubeTriggeredAbility extends DelayedTriggeredAbility {
     public String getRule() {
         return "This turn, when target creature you control attacks and isn't blocked, " +
                 "it assigns no combat damage this turn and you put a cube counter on {this}.";
-    }
-}
-
-class DelifsCubePreventEffect extends ReplacementEffectImpl {
-
-    DelifsCubePreventEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
-    }
-
-    private DelifsCubePreventEffect(final DelifsCubePreventEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DelifsCubePreventEffect copy() {
-        return new DelifsCubePreventEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PERMANENT:
-            case DAMAGE_PLAYER:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((DamageEvent) event).isCombatDamage() && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 }

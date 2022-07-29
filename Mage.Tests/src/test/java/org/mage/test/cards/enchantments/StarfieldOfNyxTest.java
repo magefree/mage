@@ -45,7 +45,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Starfield of Nyx");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudform");
 
-        addTarget(playerA, "Cloudform");
+        // addTarget(playerA, "Cloudform"); Autochosen, only target
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();

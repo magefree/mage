@@ -1382,8 +1382,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         List<UUID> needChosen;
-        if (lastGameData.options != null && lastGameData.options.containsKey("chosen")) {
-            needChosen = (List<UUID>) lastGameData.options.get("chosen");
+        if (lastGameData.options != null && lastGameData.options.containsKey("chosenTargets")) {
+            needChosen = (List<UUID>) lastGameData.options.get("chosenTargets");
         } else {
             needChosen = new ArrayList<>();
         }
