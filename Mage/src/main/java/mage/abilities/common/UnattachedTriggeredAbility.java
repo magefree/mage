@@ -17,6 +17,7 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public UnattachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} becomes unattached from a permanent, ");
     }
 
     public UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
@@ -35,11 +36,6 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} becomes unattached from a permanent, " ;
     }
 
     @Override

@@ -34,6 +34,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " attacks alone, ");
     }
 
     private AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
@@ -65,10 +66,5 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
             this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " attacks alone, ";
     }
 }

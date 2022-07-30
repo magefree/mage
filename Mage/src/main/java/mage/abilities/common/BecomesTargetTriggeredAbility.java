@@ -25,6 +25,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
         this(effect, filter, SetTargetPointer.NONE);
+        setTriggerPhrase("When {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer) {
@@ -75,10 +76,5 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
                 break;
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " ;
     }
 }

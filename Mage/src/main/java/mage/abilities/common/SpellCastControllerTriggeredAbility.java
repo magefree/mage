@@ -15,7 +15,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterSpell filter;
+    protected FilterSpell filter; // TODO: This sould be final, but is not because of the telescoping contructors
     protected String rule;
 
     // The source SPELL that triggered the ability will be set as target to effect
@@ -49,6 +49,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rememberSource = rememberSource;
         this.rememberSourceAsCard = rememberSourceAsCard;
+        setTriggerPhrase("Whenever you cast " + filter.getMessage() + ", ");
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
@@ -86,15 +87,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast " + filter.getMessage() + ", ";
+        return rule != null ? rule : super.getRule();
     }
 
     @Override

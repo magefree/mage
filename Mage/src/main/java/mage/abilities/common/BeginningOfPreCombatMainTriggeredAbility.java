@@ -29,6 +29,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
@@ -81,8 +82,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your precombat main phase, " + generateZoneString();

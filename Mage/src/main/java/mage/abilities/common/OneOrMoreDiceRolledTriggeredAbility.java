@@ -20,6 +20,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever you roll one or more dice, ");
     }
 
     private OneOrMoreDiceRolledTriggeredAbility(final OneOrMoreDiceRolledTriggeredAbility effect) {
@@ -59,11 +60,6 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
         this.getEffects().setValue("maxDieRoll", maxRoll);
         this.getEffects().setValue("totalDieRoll", totalRoll);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll one or more dice, ";
     }
 
     @Override

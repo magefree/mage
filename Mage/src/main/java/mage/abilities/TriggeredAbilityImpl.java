@@ -186,6 +186,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         sb.append(prefix);
 
+        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
+
         String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
@@ -223,8 +225,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-
-        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
 
         return sb.toString();
     }

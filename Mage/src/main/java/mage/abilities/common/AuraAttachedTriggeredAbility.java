@@ -17,6 +17,7 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public AuraAttachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever an Aura becomes attached to {this}, ");
     }
 
     public AuraAttachedTriggeredAbility(final AuraAttachedTriggeredAbility ability) {
@@ -37,11 +38,6 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an Aura becomes attached to {this}, " ;
     }
 
     @Override

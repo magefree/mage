@@ -19,6 +19,7 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} blocks, ");
     }
 
     public BlocksSourceTriggeredAbility(final BlocksSourceTriggeredAbility ability) {
@@ -34,11 +35,6 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
         return permanent != null && permanent.getBlocking() > 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} blocks, ";
     }
 
     @Override

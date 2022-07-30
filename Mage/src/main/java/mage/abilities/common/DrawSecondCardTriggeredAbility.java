@@ -38,6 +38,7 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
         this.addWatcher(new DrawSecondCardWatcher());
         this.targetController = targetController;
         this.addHint(hint);
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     private DrawSecondCardTriggeredAbility(final DrawSecondCardTriggeredAbility ability) {
@@ -75,8 +76,7 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
         return DrawSecondCardWatcher.checkEvent(event.getPlayerId(), event, game);
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    public String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "Whenever you draw your second card each turn, ";

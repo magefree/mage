@@ -34,6 +34,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setWorksFaceDown(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " is turned face up, ");
     }
 
     public TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
@@ -76,11 +77,6 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " is turned face up, " ;
     }
 }
 

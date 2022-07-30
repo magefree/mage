@@ -98,6 +98,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         return text;
     }
 
+    // TODO: This class needs refactoring to specify onlyOppontns and OrPLaneswalkers in constructor
     @Override
     public String getTriggerPhrase() {
         return "Whenever {this} deals combat damage to "

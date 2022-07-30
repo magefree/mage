@@ -23,6 +23,7 @@ public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksCreatureTriggeredAbility(Effect effect, boolean optional) {
         this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional);
+        setTriggerPhrase("Whenever {this} blocks " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
     public BlocksCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
@@ -50,11 +51,6 @@ public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} blocks " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override
