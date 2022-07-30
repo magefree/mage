@@ -263,6 +263,8 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.UNCOMMON, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 311, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 352, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
+        cards.add(new SetCardInfo("Skyboon Evangelist", 20, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyboon Evangelist", 121, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyclave Shade", 260, Rarity.RARE, mage.cards.s.SkyclaveShade.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 427, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skyship Plunderer", 232, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
