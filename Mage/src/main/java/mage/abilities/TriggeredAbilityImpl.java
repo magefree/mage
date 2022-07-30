@@ -26,7 +26,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private boolean triggersOnce = false;
     private boolean doOnlyOnce = false;
     private GameEvent triggerEvent = null;
-    private String triggerPhrase = null;
+    private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -175,8 +175,18 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public String getRule() {
-        String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
+        }
+        sb.append(prefix);
+
+        String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
             if (isOptional()) {
@@ -213,18 +223,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
 
-        return prefix + (triggerPhrase == null ? getTriggerPhrase() : triggerPhrase) + sb;
+        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
+
+        return sb.toString();
     }
 
+    // TODO: Many (all?) of these overrides are not needed and can be replaced with a call to setTriggerPhrase
     @Override
     public String getTriggerPhrase() {
         return "";
