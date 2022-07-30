@@ -309,6 +309,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 437, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 436, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur Sabertooth", 315, Rarity.UNCOMMON, mage.cards.t.TemurSabertooth.class));
+        cards.add(new SetCardInfo("Tenuous Truce", 87, Rarity.RARE, mage.cards.t.TenuousTruce.class));
         cards.add(new SetCardInfo("Terminate", 353, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 235, Rarity.RARE, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("The Beamtown Bullies", 6, Rarity.MYTHIC, mage.cards.t.TheBeamtownBullies.class));
