@@ -193,6 +193,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Luminarch Aspirant", 205, Rarity.RARE, mage.cards.l.LuminarchAspirant.class));
         cards.add(new SetCardInfo("Maestros Confluence", 75, Rarity.RARE, mage.cards.m.MaestrosConfluence.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 271, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
+        cards.add(new SetCardInfo("Make an Example", 37, Rarity.RARE, mage.cards.m.MakeAnExample.class));
         cards.add(new SetCardInfo("March of the Multitudes", 346, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
