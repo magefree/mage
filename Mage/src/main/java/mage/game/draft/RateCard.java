@@ -80,6 +80,15 @@ public final class RateCard {
         if (card == null) {
             return 0;
         }
+        
+        String name = card.getName();
+        if (name.equals("Plains")
+                || name.equals("Island")
+                || name.equals("Swamp")
+                || name.equals("Mountain")
+                || name.equals("Forest")) {
+            return 1;
+        }
 
         if (useCache && allowedColors == null && rated.containsKey(card.getName())) {
             int rate = rated.get(card.getName());
