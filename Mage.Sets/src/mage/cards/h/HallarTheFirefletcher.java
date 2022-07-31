@@ -49,6 +49,8 @@ public final class HallarTheFirefletcher extends CardImpl {
 
 class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast a spell, if that spell was kicked, ";
+
     HallarTheFirefletcherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on {this}"), true);
         this.addEffect(new DamagePlayersEffect(Outcome.Benefit, new CountersSourceCount(CounterType.P1P1), TargetController.OPPONENT)
@@ -79,7 +81,7 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell, if that spell was kicked, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -43,6 +43,8 @@ public final class TheRack extends CardImpl {
 
 class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "At the beginning of the chosen player's upkeep, ";
+
     public TheRackTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TheRackEffect(), false);
     }
@@ -67,10 +69,9 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }
 
 class TheRackEffect extends OneShotEffect {

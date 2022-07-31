@@ -46,6 +46,7 @@ public final class CultOfTheWaxingMoon extends CardImpl {
 
 class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent you control transforms into a non-Human creature, ";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
@@ -77,7 +78,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control transforms into a non-Human creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

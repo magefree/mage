@@ -48,6 +48,8 @@ public final class VerdantSunsAvatar extends CardImpl {
 
 class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} or another creature enters the battlefield under your control, ";
+
     public VerdantSunsAvatarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VerdantSunsAvatarEffect(), false);
     }
@@ -76,8 +78,8 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another creature enters the battlefield under your control, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

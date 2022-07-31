@@ -98,6 +98,7 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
 
     private final UUID watchedCreatureId;
     private final int zoneChangeCounter;
+    private static final String staticTriggerPhrase = "When that creature dies this turn, ";
 
     public TimeToFeedDiesTriggeredAbility(UUID watchedCreatureId, int zoneChangeCounter) {
         super(new GainLifeEffect(3), Duration.EndOfTurn, false);
@@ -135,7 +136,7 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When that creature dies this turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

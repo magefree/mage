@@ -103,6 +103,8 @@ class CurseOfSilenceCostEffect extends CostModificationEffectImpl {
 
 class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever enchanted player casts a spell with the chosen name, ";
+
     public CurseOfSilenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
@@ -138,7 +140,7 @@ class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player casts a spell with the chosen name, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

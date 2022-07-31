@@ -58,6 +58,8 @@ public final class EnigmaSphinx extends CardImpl {
 
 class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} is put into your graveyard from the battlefield, ";
+
     public EnigmaSphinxTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -95,8 +97,8 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When {this} is put into your graveyard from the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

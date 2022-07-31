@@ -53,6 +53,8 @@ public final class OniCultAnvil extends CardImpl {
 
 class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more artifacts you control leave the battlefield during your turn, ";
+
     public OniCultAnvilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ConstructToken()));
         this.setTriggersOnce(true);
@@ -85,7 +87,7 @@ class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more artifacts you control leave the battlefield during your turn, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

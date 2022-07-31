@@ -99,6 +99,8 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
 
 class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
+    private static final String staticTriggerPhrase = "Whenever a land with the same name as the exiled card is tapped for mana, ";
+
     public ExtraplanarLensTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
     }
@@ -138,8 +140,8 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

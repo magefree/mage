@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,7 +30,6 @@ public final class RiteOfPassage extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("put a +1/+1 counter on it");
         this.addAbility(new RiteOfPassageTriggeredAbility(effect));
-
     }
 
     private RiteOfPassage(final RiteOfPassage card) {
@@ -44,7 +44,7 @@ public final class RiteOfPassage extends CardImpl {
 
 class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final String staticTriggerPhrase = "Whenever a creature you control is dealt damage, ";
 
     public RiteOfPassageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -68,7 +68,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
+        if (permanent != null && StaticFilters.FILTER_CONTROLLED_A_CREATURE.match(permanent, getControllerId(), this, game)) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
@@ -76,7 +76,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control is dealt damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -43,6 +43,8 @@ public final class PunishingFire extends CardImpl {
 
 class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an opponent gains life, ";
+
     public PunishingFireTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{R}")));
     }
@@ -67,7 +69,7 @@ class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent gains life, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

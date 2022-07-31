@@ -108,6 +108,8 @@ class CounterSourceEffect extends OneShotEffect {
 
 class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When there are no lands on the battlefield, ";
+
     public ManaVortexStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
@@ -127,8 +129,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When there are no lands on the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

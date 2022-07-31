@@ -42,6 +42,8 @@ public final class DragonAppeasement extends CardImpl {
 
 class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a creature, ";
+
     public DragonAppeasementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
         setLeavesTheBattlefieldTrigger(true);
@@ -68,7 +70,7 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

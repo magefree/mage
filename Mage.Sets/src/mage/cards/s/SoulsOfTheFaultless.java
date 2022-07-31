@@ -51,6 +51,8 @@ public final class SoulsOfTheFaultless extends CardImpl {
 
 class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} is dealt combat damage, ";
+
     public SoulsOfTheFaultlessTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SoulsOfTheFaultlessEffect());
     }
@@ -88,8 +90,8 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

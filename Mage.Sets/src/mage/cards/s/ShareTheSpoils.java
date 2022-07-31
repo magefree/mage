@@ -262,6 +262,7 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 //-- Exile another card when a card is played that was exiled with Share the Spoils  --//
 class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When they do";
     private UUID triggeringPlayerID;
 
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
@@ -271,7 +272,6 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
         super(ability);
-
         triggeringPlayerID = ability.triggeringPlayerID;
     }
 
@@ -291,8 +291,8 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When they do";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

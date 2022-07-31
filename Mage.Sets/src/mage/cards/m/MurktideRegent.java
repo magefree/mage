@@ -98,6 +98,8 @@ enum MurktideRegentValue implements DynamicValue {
 
 class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an instant or sorcery card leaves your graveyard, ";
+
     public MurktideRegentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
@@ -127,7 +129,7 @@ class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an instant or sorcery card leaves your graveyard, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

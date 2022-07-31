@@ -84,6 +84,8 @@ class SearchTheCityExileEffect extends OneShotEffect {
 
 class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you play a card with the same name as one of the exiled cards, ";
+
     public SearchTheCityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);
 
@@ -129,8 +131,8 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you play a card with the same name as one of the exiled cards, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

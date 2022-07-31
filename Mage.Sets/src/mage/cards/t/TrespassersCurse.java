@@ -55,6 +55,8 @@ public final class TrespassersCurse extends CardImpl {
 
 class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature enters the battlefield under enchanted player's control, ";
+
     public TrespassersCurseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrespassersCurseEffect(), false); // false because handled in effect
     }
@@ -84,8 +86,8 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

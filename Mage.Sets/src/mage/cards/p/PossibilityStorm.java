@@ -50,6 +50,8 @@ public final class PossibilityStorm extends CardImpl {
 
 class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player casts a spell from their hand, ";
+
     public PossibilityStormTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PossibilityStormEffect(), false);
     }
@@ -82,8 +84,8 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell from their hand, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 
@@ -159,5 +161,4 @@ class PossibilityStormEffect extends OneShotEffect {
     public PossibilityStormEffect copy() {
         return new PossibilityStormEffect(this);
     }
-
 }

@@ -46,6 +46,9 @@ public final class Sangromancer extends CardImpl {
 }
 
 class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final String staticTriggerPhrase = "Whenever a creature an opponent controls dies, ";
+
     SangromancerFirstTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }
@@ -76,12 +79,15 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls dies, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 
 class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final String staticTriggerPhrase = "Whenever an opponent discards a card, ";
+
     SangromancerSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }
@@ -106,7 +112,7 @@ class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent discards a card, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

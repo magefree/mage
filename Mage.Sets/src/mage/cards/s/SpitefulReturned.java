@@ -55,6 +55,8 @@ public final class SpitefulReturned extends CardImpl {
 
 class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} or enchanted creature attacks, ";
+
     public SpitefulReturnedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -96,7 +98,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or enchanted creature attacks, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

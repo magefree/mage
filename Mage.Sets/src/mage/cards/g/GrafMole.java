@@ -43,6 +43,8 @@ public final class GrafMole extends CardImpl {
 
 class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a Clue, ";
+
     public GrafMoleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3));
         setLeavesTheBattlefieldTrigger(true);
@@ -69,7 +71,7 @@ class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

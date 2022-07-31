@@ -49,6 +49,8 @@ public final class TrailOfCrumbs extends CardImpl {
 
 class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a Food, ";
+
     TrailOfCrumbsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new LookLibraryAndPickControllerEffect(
                 2, 1, StaticFilters.FILTER_CARD_PERMANENT, PutCards.HAND, PutCards.BOTTOM_ANY
@@ -78,7 +80,7 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Food, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

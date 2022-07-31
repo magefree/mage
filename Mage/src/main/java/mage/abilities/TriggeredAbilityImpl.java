@@ -186,7 +186,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         sb.append(prefix);
 
-        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
+        sb.append(triggerPhrase == null ? getStaticTriggerPhrase() : triggerPhrase);
 
         String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
@@ -229,9 +229,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return sb.toString();
     }
 
-    // TODO: Many (all?) of these overrides are not needed and can be replaced with a call to setTriggerPhrase
     @Override
-    public String getTriggerPhrase() {
+    public String getStaticTriggerPhrase() {
         return "";
     }
 

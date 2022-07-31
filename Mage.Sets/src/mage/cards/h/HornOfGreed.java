@@ -38,6 +38,8 @@ public final class HornOfGreed extends CardImpl {
 
 class HornOfGreedAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player plays a land, ";
+
     public HornOfGreedAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), false);
     }
@@ -63,7 +65,7 @@ class HornOfGreedAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player plays a land, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

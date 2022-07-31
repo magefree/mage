@@ -50,6 +50,8 @@ public final class Spitemare extends CardImpl {
 
 class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} is dealt damage, ";
+
     public SpitemareTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SpitemareEffect());
     }
@@ -78,8 +80,8 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

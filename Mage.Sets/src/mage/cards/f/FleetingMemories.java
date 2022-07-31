@@ -54,6 +54,8 @@ public final class FleetingMemories extends CardImpl {
 
 class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a Clue, ";
+
     public FleetingMemoriesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(3));
         setLeavesTheBattlefieldTrigger(true);
@@ -80,7 +82,7 @@ class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

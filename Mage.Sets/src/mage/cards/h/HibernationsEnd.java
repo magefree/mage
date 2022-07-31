@@ -49,6 +49,8 @@ public final class HibernationsEnd extends CardImpl {
 
 class HibernationsEndAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you pay {this}'s cumulative upkeep, ";
+
     public HibernationsEndAbility() {
         super(Zone.BATTLEFIELD, new HibernationsEndEffect(), true);
     }
@@ -73,8 +75,8 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you pay {this}'s cumulative upkeep, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

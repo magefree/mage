@@ -55,6 +55,8 @@ public final class GontisMachinations extends CardImpl {
 
 class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you lose life for the first time each turn, ";
+
     public GontisMachinationsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), false);
     }
@@ -87,8 +89,8 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you lose life for the first time each turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

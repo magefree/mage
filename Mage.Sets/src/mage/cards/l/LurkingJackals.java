@@ -39,6 +39,8 @@ public final class LurkingJackals extends CardImpl {
 
 class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When an opponent has 10 or less life, if {this} is an enchantment, ";
+
     public LurkingJackalsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), "", Duration.Custom, true, false));
     }
@@ -54,11 +56,13 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(getControllerId()) != null) {
-            for (UUID opponentId : game.getOpponents(getControllerId())) {
-                if (game.getPlayer(opponentId).getLife() <= 10) {
-                    return true;
-                }
+        if (game.getOpponents(getControllerId()) == null) {
+            return false;
+        }
+
+        for (UUID opponentId : game.getOpponents(getControllerId())) {
+            if (game.getPlayer(opponentId).getLife() <= 10) {
+                return true;
             }
         }
         return false;
@@ -99,10 +103,9 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When an opponent has 10 or less life, if {this} is an enchantment, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }
 
 class LurkingJackalsToken extends TokenImpl {

@@ -61,6 +61,8 @@ public final class MagusOfTheBridge extends CardImpl {
 
 class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When a creature is put into an opponent's graveyard from the battlefield, ";
+
     public MagusOfTheBridgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileSourceEffect());
     }
@@ -92,7 +94,7 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When a creature is put into an opponent's graveyard from the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

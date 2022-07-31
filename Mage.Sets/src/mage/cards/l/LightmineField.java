@@ -46,6 +46,8 @@ public final class LightmineField extends CardImpl {
 
 class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more creatures attack, ";
+
     public LightmineFieldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LightmineFieldEffect());
     }
@@ -80,8 +82,8 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures attack, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

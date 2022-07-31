@@ -40,6 +40,8 @@ public final class FurnaceCelebration extends CardImpl {
 
 class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice another permanent, ";
+
     public FurnaceCelebrationAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new ManaCostsImpl<>("{2}")));
         this.addTarget(new TargetAnyTarget());
@@ -65,9 +67,7 @@ class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice another permanent, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
-
 }

@@ -52,6 +52,8 @@ public final class PrinceOfThralls extends CardImpl {
 
 class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent an opponent controls is put into a graveyard, ";
+
     PrinceOfThrallsTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -86,8 +88,8 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent an opponent controls is put into a graveyard, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -49,6 +49,8 @@ public final class OwlbearCub extends CardImpl {
 
 class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever Owlbear Cub attacks a player who controls eight or more lands, ";
+
     OwlbearCubTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OwlbearCubEffect());
         this.withFlavorWord("Mama's Coming");
@@ -85,8 +87,8 @@ class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever Owlbear Cub attacks a player who controls eight or more lands, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -60,6 +60,7 @@ public final class EssenceSymbiote extends CardImpl {
 
 class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature you control mutates, ";
     private final FilterPermanent filter;
 
     public EssenceSymbioteTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter) {
@@ -108,8 +109,7 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control mutates, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

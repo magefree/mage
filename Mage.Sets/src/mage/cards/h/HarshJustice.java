@@ -55,6 +55,7 @@ public final class HarshJustice extends CardImpl {
 
 class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "This turn, whenever an attacking creature deals combat damage to you, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
 
     static {
@@ -97,8 +98,8 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "This turn, whenever an attacking creature deals combat damage to you, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

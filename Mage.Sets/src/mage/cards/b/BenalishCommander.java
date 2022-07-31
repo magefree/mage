@@ -66,6 +66,7 @@ class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     public BenalishCommanderTriggeredAbility() {
         super(Zone.EXILED, new CreateTokenEffect(new SoldierToken()), false);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public BenalishCommanderTriggeredAbility(final BenalishCommanderTriggeredAbility ability) {
@@ -86,10 +87,4 @@ class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }

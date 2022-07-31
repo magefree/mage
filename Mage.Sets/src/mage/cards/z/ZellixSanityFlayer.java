@@ -62,6 +62,8 @@ public final class ZellixSanityFlayer extends CardImpl {
 
 class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player mills one or more creature cards, you ";
+
     ZellixSanityFlayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new Horror2Token()));
         this.withFlavorWord("Hive Mind");
@@ -87,7 +89,7 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player mills one or more creature cards, you ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

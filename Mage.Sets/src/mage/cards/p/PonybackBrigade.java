@@ -51,6 +51,8 @@ public final class PonybackBrigade extends CardImpl {
 
 class PonybackBrigadeAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} enters the battlefield or is turned face up, ";
+
     public PonybackBrigadeAbility(Token token) {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(token, 3), false);
         this.setWorksFaceDown(true);
@@ -85,7 +87,7 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters the battlefield or is turned face up, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

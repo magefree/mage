@@ -53,6 +53,7 @@ public final class PyromancersGoggles extends CardImpl {
 
 class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When that mana is used to cast a red instant or sorcery spell, ";
     private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     static {
@@ -96,7 +97,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When that mana is used to cast a red instant or sorcery spell, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

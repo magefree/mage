@@ -52,6 +52,8 @@ public final class ScrapTrawler extends CardImpl {
 
 class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} or another artifact you control is put into a graveyard from the battlefield, ";
+
     public ScrapTrawlerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
         getEffects().get(0).setText("return to your hand target artifact card in your graveyard with lesser mana value");
@@ -91,8 +93,7 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another artifact you control is put into a graveyard from the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

@@ -86,6 +86,8 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
 class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you roll a die, ";
+
     public HammerJammerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HammerJammerEffect(), false);
     }
@@ -117,8 +119,8 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a die, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

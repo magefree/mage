@@ -57,6 +57,8 @@ public final class SmotheringAbomination extends CardImpl {
 
 class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a creature, ";
+
     public SmotheringAbominationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         setLeavesTheBattlefieldTrigger(true);
@@ -83,7 +85,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

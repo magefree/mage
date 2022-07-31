@@ -54,6 +54,8 @@ public final class GuardianOfTazeem extends CardImpl {
 
 class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, ";
+
     public GuardianOfTazeemTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
         addEffect(new GuardianOfTazeemEffect());
@@ -90,8 +92,8 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

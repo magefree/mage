@@ -47,6 +47,8 @@ public final class GenerousPatron extends CardImpl {
 
 class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you put one or more counters on a creature you don't control, ";
+
     GenerousPatronTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
@@ -80,7 +82,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you put one or more counters on a creature you don't control, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

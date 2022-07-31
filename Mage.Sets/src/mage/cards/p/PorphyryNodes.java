@@ -112,6 +112,8 @@ class PorphyryNodesEffect extends OneShotEffect {
 
 class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When there are no creatures on the battlefield, ";
+
     public PorphyryNodesStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
@@ -131,8 +133,7 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

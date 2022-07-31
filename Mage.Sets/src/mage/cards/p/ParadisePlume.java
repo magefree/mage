@@ -53,6 +53,8 @@ public final class ParadisePlume extends CardImpl {
 
 class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player casts a spell of the chosen color, ";
+
     public ParadisePlumeSpellCastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
@@ -85,7 +87,7 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell of the chosen color, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

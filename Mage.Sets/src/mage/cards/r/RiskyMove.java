@@ -100,6 +100,8 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
 
 class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you gain control of {this} from another player, ";
+
     public RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
     }
@@ -124,8 +126,8 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When you gain control of {this} from another player, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

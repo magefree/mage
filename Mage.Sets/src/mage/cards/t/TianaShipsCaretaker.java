@@ -62,6 +62,8 @@ public final class TianaShipsCaretaker extends CardImpl {
 
 class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ";
+
     TianaShipsCaretakerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TianaShipsCaretakerEffect(), true);
     }
@@ -99,8 +101,8 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

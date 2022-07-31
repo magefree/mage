@@ -72,6 +72,8 @@ public final class TaigamOjutaiMaster extends CardImpl {
 
 class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, ";
+
     public TaigamOjutaiMasterTriggeredAbility() {
         super(new TaigamOjutaiMasterGainReboundEffect(), Duration.EndOfTurn, true);
     }
@@ -108,9 +110,8 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " ;
-
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

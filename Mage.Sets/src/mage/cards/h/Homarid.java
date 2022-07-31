@@ -67,6 +67,8 @@ public final class Homarid extends CardImpl {
 
 class HomaridTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "Whenever there are four tide counters on {this}, ";
+
     public HomaridTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -86,8 +88,7 @@ class HomaridTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever there are four tide counters on {this}, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

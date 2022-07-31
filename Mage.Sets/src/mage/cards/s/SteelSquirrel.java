@@ -52,6 +52,8 @@ public final class SteelSquirrel extends CardImpl {
 
 class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you roll a 5 or higher on a die, ";
+
     public SteelSquirrelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SteelSquirrelEffect());
     }
@@ -82,8 +84,8 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a 5 or higher on a die, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

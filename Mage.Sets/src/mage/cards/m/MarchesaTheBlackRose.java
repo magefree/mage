@@ -64,6 +64,8 @@ public final class MarchesaTheBlackRose extends CardImpl {
 
 class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature you control with a +1/+1 counter on it dies, ";
+
     public MarchesaTheBlackRoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarchesaTheBlackRoseEffect());
     }
@@ -101,8 +103,8 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

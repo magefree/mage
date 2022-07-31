@@ -145,6 +145,7 @@ class DhalsimPliablePacifistBlockEffect extends RestrictionEffect {
 
 class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more creatures you control deal combat damage to a player, ";
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
     DhalsimPliablePacifistTriggeredAbility() {
@@ -154,6 +155,7 @@ class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
 
     private DhalsimPliablePacifistTriggeredAbility(final DhalsimPliablePacifistTriggeredAbility ability) {
         super(ability);
+        this.damagedPlayerIds.addAll(ability.damagedPlayerIds);
     }
 
     @Override
@@ -192,7 +194,7 @@ class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures you control deal combat damage to a player, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

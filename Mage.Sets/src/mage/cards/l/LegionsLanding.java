@@ -50,6 +50,8 @@ public final class LegionsLanding extends CardImpl {
 
 class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you attack with three or more creatures, ";
+
     public LegionsLandingTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -74,7 +76,7 @@ class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When you attack with three or more creatures, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

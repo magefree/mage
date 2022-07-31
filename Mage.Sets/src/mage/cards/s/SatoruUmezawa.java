@@ -55,6 +55,8 @@ public final class SatoruUmezawa extends CardImpl {
 
 class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you activate a ninjutsu ability, ";
+
     SatoruUmezawaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.setTriggersOnce(true);
@@ -84,8 +86,8 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate a ninjutsu ability, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

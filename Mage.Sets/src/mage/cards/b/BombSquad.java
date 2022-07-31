@@ -65,6 +65,7 @@ public final class BombSquad extends CardImpl {
 
 class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature has four or more fuse counters on it, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BombSquadTriggeredAbility() {
@@ -102,8 +103,8 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature has four or more fuse counters on it, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

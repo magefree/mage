@@ -79,7 +79,8 @@ class SaffiEriksdotterEffect extends OneShotEffect {
 
 class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    protected FixedTarget fixedTarget;
+    private static final String staticTriggerPhrase = "When target creature is put into your graveyard from the battlefield this turn, ";
+    private final FixedTarget fixedTarget;
 
     public SaffiEriksdotterDelayedTriggeredAbility(FixedTarget fixedTarget) {
         super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
@@ -115,7 +116,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When target creature is put into your graveyard from the battlefield this turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

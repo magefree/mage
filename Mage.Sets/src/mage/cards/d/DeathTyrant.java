@@ -59,6 +59,8 @@ public final class DeathTyrant extends CardImpl {
 
 class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an attacking creature you control or a blocking creature an opponent controls dies, ";
+
     public DeathTyrantTriggeredAbility() {
         super(Zone.ALL, new CreateTokenEffect(new ZombieToken()));
     }
@@ -98,7 +100,7 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an attacking creature you control or a blocking creature an opponent controls dies, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

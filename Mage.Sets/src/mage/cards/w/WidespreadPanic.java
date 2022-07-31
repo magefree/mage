@@ -43,6 +43,8 @@ public final class WidespreadPanic extends CardImpl {
 
 class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a spell or ability causes its controller to shuffle their library, ";
+
     public WidespreadPanicTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WidespreadPanicEffect(), false);
     }
@@ -74,8 +76,8 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell or ability causes its controller to shuffle their library, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

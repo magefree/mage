@@ -56,6 +56,8 @@ public final class CanalCourier extends CardImpl {
 
 class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} and another creature attack different players, ";
+
     public CanalCourierTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -98,8 +100,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} and another creature attack different players, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

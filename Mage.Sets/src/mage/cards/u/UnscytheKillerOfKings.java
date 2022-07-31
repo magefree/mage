@@ -62,6 +62,8 @@ public final class UnscytheKillerOfKings extends CardImpl {
 
 class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature dealt damage by equipped creature this turn dies, ";
+
     public UnscytheKillerOfKingsTriggeredAbility(Effect effect) {
         super(Zone.ALL, effect, true);
     }
@@ -105,8 +107,8 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -47,6 +47,8 @@ public final class WakeThrasher extends CardImpl {
 
 class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent you control becomes untapped, ";
+
     public BecomesUntappedControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -71,8 +73,8 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control becomes untapped, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
 }

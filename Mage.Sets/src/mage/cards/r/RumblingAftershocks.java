@@ -24,21 +24,13 @@ import java.util.UUID;
  */
 public final class RumblingAftershocks extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public RumblingAftershocks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-
 
         // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to any target equal to the number of times that spell was kicked.
         Ability ability = new RumblingAftershocksTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-
     }
 
     private RumblingAftershocks(final RumblingAftershocks card) {
@@ -51,7 +43,9 @@ public final class RumblingAftershocks extends CardImpl {
     }
 }
 
-class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
+class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl { // TODO: Can this be changed to use common ability like LullmagesFamiliar?
+
+    private static final String staticTriggerPhrase = "Whenever you cast a kicked spell, ";
 
     RumblingAftershocksTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RumblingAftershocksDealDamageEffect(), true);
@@ -82,8 +76,8 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a kicked spell, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

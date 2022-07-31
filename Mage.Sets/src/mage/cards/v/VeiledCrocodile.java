@@ -40,6 +40,8 @@ public final class VeiledCrocodile extends CardImpl {
 
 class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When a player has no cards in hand, if {this} is an enchantment, ";
+
     public VeiledCrocodileStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), "", Duration.Custom, true, false));
     }
@@ -100,10 +102,9 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When a player has no cards in hand, if {this} is an enchantment, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }
 
 class VeilCrocodileToken extends TokenImpl {

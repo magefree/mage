@@ -50,6 +50,8 @@ public final class WallOfEssence extends CardImpl {
 
 class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} is dealt combat damage, ";
+
     public WallOfEssenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
     }
@@ -82,8 +84,8 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

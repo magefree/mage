@@ -63,6 +63,8 @@ public final class SwarmbornGiant extends CardImpl {
 
 class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you're dealt combat damage, ";
+
     public SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
@@ -91,7 +93,7 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When you're dealt combat damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

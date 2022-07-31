@@ -43,6 +43,8 @@ public final class HiveMind extends CardImpl {
 
 class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player casts an instant or sorcery spell, ";
+
     public HiveMindTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HiveMindEffect());
     }
@@ -77,8 +79,8 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts an instant or sorcery spell, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

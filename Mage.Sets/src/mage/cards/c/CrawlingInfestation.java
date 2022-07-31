@@ -45,6 +45,8 @@ public final class CrawlingInfestation extends CardImpl {
 
 class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ";
+
     public CrawlingInfestationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()));
         this.setTriggersOnce(true);
@@ -75,7 +77,7 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

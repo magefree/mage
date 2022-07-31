@@ -56,7 +56,9 @@ public final class PaladinOfPrahv extends CardImpl {
 }
 
 class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
-    
+
+    private static final String staticTriggerPhrase = "Whenever target creature deals damage this turn, ";
+
     public PaladinOfPrahvTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
     }
@@ -93,7 +95,7 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage this turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

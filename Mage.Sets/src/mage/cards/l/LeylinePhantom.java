@@ -43,6 +43,8 @@ public final class LeylinePhantom extends CardImpl {
 
 class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} deals combat damage, ";
+
     public LeylinePhantomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), false);
     }
@@ -68,8 +70,7 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }

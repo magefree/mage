@@ -61,6 +61,8 @@ public final class WharfInfiltrator extends CardImpl {
 
 class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you discard a creature card, ";
+
     WharfInfiltratorDiscardAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -89,7 +91,7 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a creature card, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -62,6 +62,8 @@ public final class ZaxaraTheExemplary extends CardImpl {
 
 class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast a spell with {X} in its mana cost";
+
     public ZaxaraTheExemplaryHydraTokenAbility() {
         super(Zone.BATTLEFIELD, new ZaxaraTheExemplaryHydraTokenEffect(), false);
     }
@@ -77,19 +79,23 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
-                        return true;
-                    }
-                }
-            }
-
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
         }
-        return false;
+
+        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
+            return false;
+        }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null) {
+            return false;
+        }
+        if (!spell.getSpellAbility().getManaCostsToPay().containsX()) {
+            return false;
+        }
+
+        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
+        return true;
     }
 
     @Override
@@ -98,8 +104,8 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell with {X} in its mana cost" ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

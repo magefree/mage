@@ -53,6 +53,8 @@ public final class TectonicGiant extends CardImpl {
 
 class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks or becomes the target of a spell an opponent controls, ";
+
     TectonicGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false);
         this.addMode(new Mode(new TectonicGiantEffect()));
@@ -87,8 +89,8 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

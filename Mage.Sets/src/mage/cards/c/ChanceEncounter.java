@@ -49,6 +49,8 @@ public final class ChanceEncounter extends CardImpl {
 
 class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you win a coin flip, ";
+
     ChanceEncounterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LUCK.createInstance()), false);
     }
@@ -76,7 +78,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you win a coin flip, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -59,6 +59,8 @@ public final class HowlpackAvenger extends CardImpl {
 
 class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent you control is dealt damage, ";
+
     HowlpackAvengerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
         this.addTarget(new TargetAnyTarget());
@@ -95,7 +97,7 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control is dealt damage, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -48,6 +48,8 @@ public final class CloakedCadet extends CardImpl {
 
 class CloakedCadetTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more +1/+1 counters are put on one or more Humans you control, ";
+
     CloakedCadetTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.setTriggersOnce(true);
@@ -77,7 +79,7 @@ class CloakedCadetTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more +1/+1 counters are put on one or more Humans you control, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

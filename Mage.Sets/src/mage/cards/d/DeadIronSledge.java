@@ -51,6 +51,8 @@ public final class DeadIronSledge extends CardImpl {
 
 class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever equipped creature blocks or becomes blocked by a creature, ";
+
     public DeadIronSledgeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -90,8 +92,8 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature blocks or becomes blocked by a creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

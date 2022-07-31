@@ -72,6 +72,8 @@ public final class TravelingPlague extends CardImpl {
 
 class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When enchanted creature leaves the battlefield, ";
+
     public TravelingPlagueTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TravelingPlagueEffect(), false);
     }
@@ -106,8 +108,8 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When enchanted creature leaves the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

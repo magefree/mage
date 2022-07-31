@@ -103,6 +103,8 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
 
 class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player sacrifices a creature, ";
+
     public PlayerSacrificesCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -123,8 +125,8 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player sacrifices a creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

@@ -49,6 +49,7 @@ public final class WindreaderSphinx extends CardImpl {
 
 class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature with flying attacks, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -74,8 +75,8 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature with flying attacks, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

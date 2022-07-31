@@ -51,6 +51,8 @@ public final class HeraldOfAnafenza extends CardImpl {
 
 class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you activate {this}'s outlast ability, ";
+
     public HeraldOfAnafenzaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorToken()), false);
     }
@@ -81,7 +83,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate {this}'s outlast ability, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

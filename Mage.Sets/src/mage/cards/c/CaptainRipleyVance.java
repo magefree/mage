@@ -49,6 +49,8 @@ public final class CaptainRipleyVance extends CardImpl {
 
 class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast your third spell each turn, ";
+
     public CaptainRipleyVanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("it deals damage equal to its power to any target").concatBy(", then"));
@@ -79,7 +81,7 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast your third spell each turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

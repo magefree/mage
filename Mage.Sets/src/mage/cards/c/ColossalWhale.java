@@ -57,6 +57,8 @@ public final class ColossalWhale extends CardImpl {
 
 class ColossalWhaleAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
+
     public ColossalWhaleAbility() {
         super(Zone.BATTLEFIELD, null);
         this.addEffect(new ColossalWhaleExileEffect());
@@ -88,8 +90,8 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

@@ -40,6 +40,8 @@ public final class MultanisPresence extends CardImpl {
 
 class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a spell you've cast is countered, ";
+
     public MultanisPresenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
@@ -65,8 +67,8 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell you've cast is countered, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

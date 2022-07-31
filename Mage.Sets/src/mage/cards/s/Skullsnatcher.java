@@ -63,6 +63,8 @@ public final class Skullsnatcher extends CardImpl {
 
 class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} deals combat damage to a player, ";
+
     SkullsnatcherTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -97,7 +99,7 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to a player, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
    }
 }

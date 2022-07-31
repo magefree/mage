@@ -92,6 +92,10 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
 
 class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase =
+            "Whenever you cast an instant or sorcery spell or activate an ability, " +
+            "if that spell's mana cost or that ability's activation cost contains {X}";
+
     UnboundFlourishingCopyAbility() {
         super(Zone.BATTLEFIELD, new UnboundFlourishingCopyEffect(), false);
     }
@@ -142,8 +146,8 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an instant or sorcery spell or activate an ability, if that spell's mana cost or that ability's activation cost contains {X}" ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

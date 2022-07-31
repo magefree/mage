@@ -62,6 +62,7 @@ public final class CherishedHatchling extends CardImpl {
 
 class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "and whenever you cast a Dinosaur spell this turn, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
@@ -107,7 +108,7 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "and whenever you cast a Dinosaur spell this turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

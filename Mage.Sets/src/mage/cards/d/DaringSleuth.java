@@ -46,6 +46,8 @@ public final class DaringSleuth extends CardImpl {
 
 class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you sacrifice a Clue, ";
+
     public DaringSleuthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
@@ -71,7 +73,7 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When you sacrifice a Clue, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

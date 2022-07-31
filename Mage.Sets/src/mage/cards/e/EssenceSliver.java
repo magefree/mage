@@ -49,6 +49,8 @@ public final class EssenceSliver extends CardImpl {
 
 class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a Sliver deals damage, ";
+
     public EssenceSliverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new EssenceSliverEffect(), false);
     }
@@ -84,8 +86,8 @@ class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a Sliver deals damage, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

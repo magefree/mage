@@ -62,6 +62,8 @@ public final class FaldornDreadWolfHerald extends CardImpl {
 
 class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, ";
+
     FaldornDreadWolfHeraldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
     }
@@ -101,7 +103,7 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

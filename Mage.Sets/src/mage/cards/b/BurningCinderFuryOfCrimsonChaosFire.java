@@ -54,6 +54,8 @@ public final class BurningCinderFuryOfCrimsonChaosFire extends CardImpl {
 
 class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever any player taps a permanent, ";
+
     public BurningCinderFuryOfCrimsonChaosFireAbility() {
         super(Zone.BATTLEFIELD, new BurningCinderFuryOfCrimsonChaosFireEffect(), false);
     }
@@ -85,8 +87,8 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever any player taps a permanent, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

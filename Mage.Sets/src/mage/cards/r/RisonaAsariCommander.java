@@ -64,6 +64,8 @@ public final class RisonaAsariCommander extends CardImpl {
 
 class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever combat damage is dealt to you, ";
+
     public RisonaAsariCommanderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()));
     }
@@ -100,8 +102,8 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever combat damage is dealt to you, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

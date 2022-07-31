@@ -62,6 +62,8 @@ public final class KelsFightFixer extends CardImpl {
 
 class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you sacrifice a creature, ";
+
     KelsFightFixerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U/B}")), false);
         setLeavesTheBattlefieldTrigger(true);
@@ -88,7 +90,7 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

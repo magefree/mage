@@ -47,6 +47,9 @@ public final class CarpetOfFlowers extends CardImpl {
 
 class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "At the beginning of each of your main phases, if " +
+                                                      "you haven't added mana with this ability this turn, ";
+
     CarpetOfFlowersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
         this.addTarget(new TargetOpponent());
@@ -100,12 +103,9 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, if "
-                + "you haven't added mana with this ability this turn, "
-                ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
-
 }
 
 class CarpetOfFlowersEffect extends ManaEffect {

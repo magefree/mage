@@ -53,7 +53,9 @@ public final class HotSoup extends CardImpl {
 }
 
 class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
-    
+
+    private static final String staticTriggerPhrase = "Whenever equipped creature is dealt damage, ";
+
     HotSoupTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
@@ -85,7 +87,7 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature is dealt damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

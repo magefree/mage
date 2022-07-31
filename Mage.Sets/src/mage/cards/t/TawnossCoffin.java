@@ -64,6 +64,8 @@ public final class TawnossCoffin extends CardImpl {
 
 class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When {this} leaves the battlefield or becomes untapped, ";
+
     public TawnossCoffinTriggeredAbility(Effect effect, boolean isOptional) {
         super(effect, isOptional);
     }
@@ -92,8 +94,8 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When {this} leaves the battlefield or becomes untapped, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

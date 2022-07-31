@@ -49,6 +49,8 @@ public final class WallOfHope extends CardImpl {
 
 class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} is dealt damage, ";
+
     public WallOfHopeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WallOfHopeGainLifeEffect());
     }
@@ -77,8 +79,8 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -64,6 +64,8 @@ public final class DragonlordKolaghan extends CardImpl {
 
 class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, ";
+
     public DragonlordKolaghanTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -108,7 +110,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

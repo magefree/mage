@@ -61,6 +61,8 @@ public final class IdentityThief extends CardImpl {
 
 class IdentityThiefAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
+
     public IdentityThiefAbility() {
         super(Zone.BATTLEFIELD, null, true);
         this.addEffect(new IdentityThiefEffect());
@@ -81,8 +83,8 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

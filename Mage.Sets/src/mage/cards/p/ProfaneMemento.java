@@ -37,7 +37,9 @@ public final class ProfaneMemento extends CardImpl {
 }
 
 class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
-    
+
+    private static final String staticTriggerPhrase = "Whenever a creature card is put into an opponent's graveyard from anywhere, ";
+
     public ProfaneMementoTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
@@ -68,7 +70,7 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature card is put into an opponent's graveyard from anywhere, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

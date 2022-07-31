@@ -60,6 +60,8 @@ public final class GrolnokTheOmnivore extends CardImpl {
 
 class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent card is put into your graveyard from your library, ";
+
     public GrolnokTheOmnivoreTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrolnokTheOmnivoreExileEffect());
     }
@@ -91,8 +93,8 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent card is put into your graveyard from your library, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

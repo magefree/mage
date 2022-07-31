@@ -50,6 +50,8 @@ public final class PerimeterCaptain extends CardImpl {
 
 class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature you control with defender blocks, ";
+
     public PerimeterCaptainTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -75,8 +77,8 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with defender blocks, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

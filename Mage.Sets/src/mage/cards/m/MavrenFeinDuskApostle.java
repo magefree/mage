@@ -50,6 +50,7 @@ public final class MavrenFeinDuskApostle extends CardImpl {
 
 class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more nontoken Vampires you control attack, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Vampires you control");
 
     static {
@@ -88,7 +89,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more nontoken Vampires you control attack, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

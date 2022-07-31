@@ -64,6 +64,8 @@ public final class MortalObstinacy extends CardImpl {
 
 class MortalObstinacyAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever enchanted creature deals combat damage to a player, ";
+
     public MortalObstinacyAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));
         addTarget(new TargetEnchantmentPermanent());
@@ -91,8 +93,8 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature deals combat damage to a player, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

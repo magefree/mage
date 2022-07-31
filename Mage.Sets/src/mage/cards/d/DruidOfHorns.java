@@ -48,6 +48,8 @@ public final class DruidOfHorns extends CardImpl {
 
 class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast an Aura spell that targets {this}, ";
+
     public DruidOfHornsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), false);
     }
@@ -100,7 +102,7 @@ class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an Aura spell that targets {this}, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

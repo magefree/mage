@@ -47,6 +47,8 @@ public final class VengefulWarchief extends CardImpl {
 
 class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you lose life for the first time each turn, ";
+
     VengefulWarchiefTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
@@ -75,8 +77,8 @@ class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you lose life for the first time each turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -97,6 +97,8 @@ public final class PerplexingChimera extends CardImpl {
 
 class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an opponent casts a spell, ";
+
     public PerplexingChimeraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PerplexingChimeraControlExchangeEffect(), true);
     }
@@ -122,8 +124,8 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
     @Override

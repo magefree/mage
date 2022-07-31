@@ -47,6 +47,8 @@ public final class TerritorialGorger extends CardImpl {
 
 class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you get one or more {E} <i>(energy counters)</i>, ";
+
     TerritorialGorgerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), false);
     }
@@ -74,7 +76,7 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever you get one or more {E} <i>(energy counters)</i>, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

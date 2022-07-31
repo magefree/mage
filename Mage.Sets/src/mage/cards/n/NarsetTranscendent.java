@@ -104,6 +104,8 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
 
 class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When you cast your next instant or sorcery spell from your hand this turn, ";
+
     public NarsetTranscendentTriggeredAbility() {
         super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
     }
@@ -140,8 +142,8 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When you cast your next instant or sorcery spell from your hand this turn, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

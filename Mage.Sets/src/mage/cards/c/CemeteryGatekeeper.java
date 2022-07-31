@@ -98,6 +98,8 @@ class CemeteryGatekeeperEffect extends OneShotEffect {
 
 class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ";
+
     public CemeteryGatekeeperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
     }
@@ -163,7 +165,7 @@ class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ";
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

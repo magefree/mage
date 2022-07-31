@@ -64,6 +64,8 @@ public final class GrenzoHavocRaiser extends CardImpl {
 
 class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature you control deals combat damage to a player, ";
+
     String damagedPlayerName = null;
 
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
@@ -119,8 +121,8 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control deals combat damage to a player, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

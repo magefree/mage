@@ -55,6 +55,8 @@ public final class PutridWarrior extends CardImpl {
 
 class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} deals damage, ";
+
     public PutridWarriorDealsDamageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -80,8 +82,8 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -51,6 +51,8 @@ public final class SatyrFiredancer extends CardImpl {
 
 class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an instant or sorcery spell you control deals damage to an opponent, ";
+
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
         targetAdjuster = SatyrFiredancerAdjuster.instance;
@@ -95,8 +97,8 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an instant or sorcery spell you control deals damage to an opponent, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

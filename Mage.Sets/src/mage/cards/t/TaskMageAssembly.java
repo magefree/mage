@@ -50,6 +50,8 @@ public final class TaskMageAssembly extends CardImpl {
 
 class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When there are no creatures on the battlefield, ";
+
     public TaskMageAssemblyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
@@ -69,8 +71,8 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 
 }
