@@ -84,4 +84,9 @@ enum ZombiesControlledByTargetPlayerCount implements DynamicValue {
     public String getMessage() {
         return "Zombie that player controls";
     }
+
+    @Override
+    public int getSign() {
+        return -1;
+    }
 }

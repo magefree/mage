@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -13,8 +12,8 @@ import mage.game.Game;
  */
 public class PermanentsOnBattlefieldCount implements DynamicValue {
 
-    private FilterPermanent filter;
-    private Integer multiplier;
+    private final FilterPermanent filter;
+    private final Integer multiplier;
 
     public PermanentsOnBattlefieldCount() {
         this(new FilterPermanent(), 1);
@@ -55,14 +54,16 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (multiplier != null) {
-            return multiplier.toString();
-        }
-        return "X";
+        return multiplier == null ? "X" : multiplier.toString();
     }
 
     @Override
     public String getMessage() {
         return multiplier == null ? "the number of " + filter.getMessage() : filter.getMessage();
+    }
+
+    @Override
+    public int getSign() {
+        return multiplier == null ? 1 : multiplier;
     }
 }

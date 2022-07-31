@@ -293,17 +293,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return sublayer;
     }
 
-    protected static boolean isCanKill(DynamicValue toughness) {
-        if (toughness instanceof StaticValue) {
-            return toughness.calculate(null, null, null) < 0;
-        }
-        if (toughness instanceof SignInversionDynamicValue) {
-            // count this class as used for "-{something_positive}"
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public List<MageObjectReference> getAffectedObjects() {
         return affectedObjectList;

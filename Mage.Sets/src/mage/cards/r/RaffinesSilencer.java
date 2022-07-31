@@ -80,4 +80,9 @@ enum RaffinesSilencerValue implements DynamicValue {
     public String getMessage() {
         return "{this}'s power";
     }
+
+    @Override
+    public int getSign() {
+        return -1;
+    }
 }

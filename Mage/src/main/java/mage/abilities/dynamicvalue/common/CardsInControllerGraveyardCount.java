@@ -64,4 +64,9 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     public String getMessage() {
         return (multiplier == null ? "the number of " : "") + filter.getMessage() + " in your graveyard";
     }
+
+    @Override
+    public int getSign() {
+        return multiplier == null ? 1 : multiplier;
+    }
 }

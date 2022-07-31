@@ -92,4 +92,9 @@ enum AllSeeingArbiterValue implements DynamicValue {
     public String getMessage() {
         return "the number of different mana values among cards in your graveyard";
     }
+
+    @Override
+    public int getSign() {
+        return -1;
+    }
 }

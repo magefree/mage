@@ -102,4 +102,9 @@ enum VishKalBloodArbiterDynamicValue implements DynamicValue {
     public String getMessage() {
         return "+1/+1 counter removed this way";
     }
+
+    @Override
+    public int getSign() {
+        return -1;
+    }
 }
