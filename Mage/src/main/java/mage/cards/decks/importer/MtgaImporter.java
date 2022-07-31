@@ -44,19 +44,19 @@ public class MtgaImporter extends PlainTextDeckImporter {
             return;
         }
 
-        Matcher m = MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(line));
+        Matcher pattern = MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(line));
         
-        if (!m.matches()) {
+        if (!pattern.matches()) {
             sbMessage.append("Error reading '").append(line).append("'\n");
             return;
         }
         
         Optional<CardInfo> found;
-        int count = Integer.parseInt(m.group(1));
-        String name = m.group(2);    
-        if (m.group(3) != null && m.group(4) != null) {
-            String set = SET_REMAPPING.getOrDefault(m.group(3), m.group(3));
-            String cardNumber = m.group(4);
+        int count = Integer.parseInt(pattern.group(1));
+        String name = pattern.group(2);    
+        if (pattern.group(3) != null && pattern.group(4) != null) {
+            String set = SET_REMAPPING.getOrDefault(pattern.group(3), pattern.group(3));
+            String cardNumber = pattern.group(4);
             found = lookup.lookupCardInfo(name, set, cardNumber);
         } else {
             found = lookup.lookupCardInfo(name);
