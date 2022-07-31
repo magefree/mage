@@ -3,8 +3,8 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.ControllerAttackedThisTurnCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -22,7 +22,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +54,7 @@ public final class SeeRed extends CardImpl {
 
         // At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice See Red.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU),
+                new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false),
                 new InvertCondition(ControllerAttackedThisTurnCondition.instance),
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."), new AttackedThisTurnWatcher());
     }
