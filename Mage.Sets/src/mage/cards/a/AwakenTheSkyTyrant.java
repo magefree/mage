@@ -39,10 +39,9 @@ public final class AwakenTheSkyTyrant extends CardImpl {
 
 class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When a source an opponent controls deals damage to you, ";
-
     public AwakenTheSkyTyrantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new DragonToken2(), 1), new SacrificeSourceCost(), null, false), false);
+        setTriggerPhrase("When a source an opponent controls deals damage to you, ");
     }
 
     public AwakenTheSkyTyrantTriggeredAbility(final AwakenTheSkyTyrantTriggeredAbility ability) {
@@ -68,10 +67,5 @@ class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

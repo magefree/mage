@@ -16,7 +16,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} deals combat damage to a creature, ";
     private final boolean setTargetPointer;
 
     public DealsCombatDamageToACreatureTriggeredAbility(Effect effect, boolean optional) {
@@ -26,6 +25,7 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     public DealsCombatDamageToACreatureTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} deals combat damage to a creature, ");
     }
 
     public DealsCombatDamageToACreatureTriggeredAbility(final DealsCombatDamageToACreatureTriggeredAbility ability) {
@@ -59,10 +59,5 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
             }
         }
         return true;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

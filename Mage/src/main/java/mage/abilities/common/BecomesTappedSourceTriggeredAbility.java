@@ -13,14 +13,13 @@ import mage.game.events.GameEvent;
  */
 public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} becomes tapped, ";
-
-    public BecomesTappedSourceTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
     public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
+    }
+
+    public BecomesTappedSourceTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} becomes tapped, ");
     }
 
     public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
@@ -40,10 +39,5 @@ public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(sourceId);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

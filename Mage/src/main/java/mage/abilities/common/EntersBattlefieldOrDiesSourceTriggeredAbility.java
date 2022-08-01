@@ -12,9 +12,7 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When {this} enters the battlefield or is put into a graveyard from the battlefield, ";
-    private static final String staticTriggerPhraseDies = "When {this} enters the battlefield or dies, ";
-    private final boolean dies;
+    private final boolean diesText;
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, true);
@@ -22,13 +20,15 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(Effect effect, boolean optional, boolean diesText) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.dies = diesText;
+        this.diesText = diesText;
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("When {this} enters the battlefield or " +
+                (diesText ? "dies" : "is put into a graveyard from the battlefield") + ", ");
     }
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(final EntersBattlefieldOrDiesSourceTriggeredAbility ability) {
         super(ability);
-        this.dies = ability.dies;
+        this.diesText = ability.diesText;
     }
 
     @Override
@@ -55,10 +55,5 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return dies ? staticTriggerPhraseDies : staticTriggerPhrase;
     }
 }

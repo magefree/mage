@@ -69,10 +69,9 @@ public final class BattleOfFrostAndFire extends CardImpl {
 
 class BattleOfFrostAndFireTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "Whenever you cast a spell with mana value 5 or greater this turn, ";
-
     public BattleOfFrostAndFireTriggeredAbility() {
         super(new DrawDiscardControllerEffect(2, 1), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever you cast a spell with mana value 5 or greater this turn, ");
     }
 
     private BattleOfFrostAndFireTriggeredAbility(BattleOfFrostAndFireTriggeredAbility ability) {
@@ -96,10 +95,5 @@ class BattleOfFrostAndFireTriggeredAbility extends DelayedTriggeredAbility {
             return spell != null && spell.getManaValue() >= 5;
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

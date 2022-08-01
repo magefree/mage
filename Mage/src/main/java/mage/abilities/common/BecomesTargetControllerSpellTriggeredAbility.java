@@ -14,10 +14,9 @@ import mage.game.stack.Spell;
  */
 public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When you become the target of a spell, ";
-
     public BecomesTargetControllerSpellTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When you become the target of a spell, ");
     }
 
     public BecomesTargetControllerSpellTriggeredAbility(final BecomesTargetControllerSpellTriggeredAbility ability) {
@@ -42,10 +41,5 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

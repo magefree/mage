@@ -16,12 +16,12 @@ import mage.game.events.GameEvent;
  */
 public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} deals combat damage, ";
     private boolean usedInPhase;
 
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedInPhase = false;
+        setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
     public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
@@ -53,10 +53,5 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
             usedInPhase = false;
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

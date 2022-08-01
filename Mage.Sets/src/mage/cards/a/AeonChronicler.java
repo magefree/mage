@@ -57,10 +57,9 @@ public final class AeonChronicler extends CardImpl {
 
 class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a time counter is removed from {this} while it's exiled, ";
-
     public AeonChroniclerTriggeredAbility() {
         super(Zone.EXILED, new DrawCardSourceControllerEffect(1), false);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
@@ -80,10 +79,5 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return Objects.equals(event.getData(), CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

@@ -13,14 +13,13 @@ import mage.game.permanent.Permanent;
  */
 public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} blocks, ";
-
     public BlocksSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public BlocksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} blocks, ");
     }
 
     public BlocksSourceTriggeredAbility(final BlocksSourceTriggeredAbility ability) {
@@ -41,10 +40,5 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BlocksSourceTriggeredAbility copy() {
         return new BlocksSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

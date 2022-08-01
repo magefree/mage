@@ -69,11 +69,10 @@ public final class AnjeMaidOfDishonor extends CardImpl {
 
 class AnjeMaidOfDishonorTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} and/or one or more other Vampires enter the battlefield under your control, ";
-
     public AnjeMaidOfDishonorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()));
         this.setTriggersOnce(true);
+        setTriggerPhrase("Whenever {this} and/or one or more other Vampires enter the battlefield under your control, ");
     }
 
     private AnjeMaidOfDishonorTriggeredAbility(final AnjeMaidOfDishonorTriggeredAbility ability) {
@@ -97,11 +96,6 @@ class AnjeMaidOfDishonorTriggeredAbility extends TriggeredAbilityImpl {
             return permanent.getId().equals(sourceId) || permanent.hasSubtype(SubType.VAMPIRE, game);
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }
 

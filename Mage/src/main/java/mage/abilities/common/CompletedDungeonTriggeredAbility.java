@@ -11,8 +11,6 @@ import mage.game.events.GameEvent;
  */
 public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you complete a dungeon, ";
-
     public CompletedDungeonTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -23,6 +21,7 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
 
     public CompletedDungeonTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever you complete a dungeon, ");
     }
 
     private CompletedDungeonTriggeredAbility(final CompletedDungeonTriggeredAbility ability) {
@@ -42,10 +41,5 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CompletedDungeonTriggeredAbility copy() {
         return new CompletedDungeonTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

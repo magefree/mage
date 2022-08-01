@@ -9,10 +9,9 @@ import mage.game.permanent.Permanent;
 
 public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature you control explores, ";
-
     public CreatureExploresTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control explores, ");
     }
 
     public CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
@@ -36,10 +35,5 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CreatureExploresTriggeredAbility copy() {
         return new CreatureExploresTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

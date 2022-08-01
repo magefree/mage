@@ -24,6 +24,8 @@ import java.util.UUID;
  */
 public final class AsLuckWouldHaveIt extends CardImpl {
 
+    static final String rule = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
+
     public AsLuckWouldHaveIt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
@@ -46,10 +48,9 @@ public final class AsLuckWouldHaveIt extends CardImpl {
 
 class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you roll a die, ";
-
     public AsLuckWouldHaveItTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AsLuckWouldHaveItEffect(), false);
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     public AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
@@ -79,11 +80,6 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
-    }
 }
 
 class AsLuckWouldHaveItEffect extends OneShotEffect {
@@ -106,21 +102,22 @@ class AsLuckWouldHaveItEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller == null || permanent == null) {
-            return false;
-        }
-        if (getValue("rolled") == null) {
-            return false;
-        }
-        int amount = (Integer) getValue("rolled");
-        permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
+        if (controller != null && permanent != null) {
+            if (getValue("rolled") != null) {
+                int amount = (Integer) getValue("rolled");
+                permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
 
-        if (permanent.getCounters(game).getCount("luck") >= 100) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.won(game);
+                if (permanent.getCounters(game).getCount("luck") >= 100) {
+                    Player player = game.getPlayer(permanent.getControllerId());
+                    if (player != null) {
+                        player.won(game);
+                    }
+                }
+
+                return true;
             }
         }
-        return true;
+        return false;
+
     }
 }

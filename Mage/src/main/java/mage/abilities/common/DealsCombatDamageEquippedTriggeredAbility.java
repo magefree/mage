@@ -14,14 +14,13 @@ import mage.game.permanent.Permanent;
  */
 public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever equipped creature deals combat damage, ";
-
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
     public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
@@ -57,10 +56,5 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         }
         this.getEffects().setValue("damage", amount);
         return true;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

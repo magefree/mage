@@ -12,10 +12,6 @@ import mage.game.permanent.Permanent;
  */
 public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When this creature transforms into {this}, ";
-    private static final String staticTriggerPhraseWhenever = "Whenever this creature transforms into {this}, ";
-    private final boolean whenever;
-
     public TransformIntoSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -26,12 +22,11 @@ public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TransformIntoSourceTriggeredAbility(Effect effect, boolean optional, boolean whenever) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.whenever = whenever;
+        setTriggerPhrase("When" + (whenever ? "ever" : "") + " this creature transforms into {this}, ");
     }
 
     private TransformIntoSourceTriggeredAbility(final TransformIntoSourceTriggeredAbility ability) {
         super(ability);
-        this.whenever = ability.whenever;
     }
 
     @Override
@@ -51,10 +46,5 @@ public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         return permanent != null && permanent.isTransformed();
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return whenever ? staticTriggerPhraseWhenever : staticTriggerPhrase;
     }
 }

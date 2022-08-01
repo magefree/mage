@@ -14,8 +14,6 @@ import mage.game.events.GameEvent;
  */
 public class InspiredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} becomes untapped, ";
-
     public InspiredAbility(Effect effect) {
         this(effect, false);
     }
@@ -29,6 +27,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
         if (isInspired) {
             setAbilityWord(AbilityWord.INSPIRED);
         }
+        setTriggerPhrase("Whenever {this} becomes untapped, ");
     }
 
     public InspiredAbility(final InspiredAbility ability) {
@@ -48,10 +47,5 @@ public class InspiredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

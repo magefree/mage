@@ -14,13 +14,13 @@ import mage.game.stack.StackObject;
  */
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When a spell or ability an opponent controls causes you to discard this card, ";
     public DiscardedByOpponentTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public DiscardedByOpponentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.GRAVEYARD, effect, optional);
+        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 
     public DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
@@ -46,10 +46,5 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

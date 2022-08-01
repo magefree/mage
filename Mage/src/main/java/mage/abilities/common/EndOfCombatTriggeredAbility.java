@@ -11,7 +11,6 @@ import mage.game.events.GameEvent;
  */
 public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "At end of combat, ";
     private final String rule;
 
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional) {
@@ -21,6 +20,7 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.rule = rule;
+        setTriggerPhrase("At end of combat, ");
     }
 
     public EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
@@ -49,10 +49,5 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
             return rule;
         }
         return super.getRule();
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

@@ -6,11 +6,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    private static final String staticTriggerPhrase = " At the beginning of the next combat, ";
-
     public AtTheBeginOfCombatDelayedTriggeredAbility(Effect effect) {
         super(effect);
+        setTriggerPhrase(" At the beginning of the next combat, ");
     }
 
     public AtTheBeginOfCombatDelayedTriggeredAbility(final AtTheBeginOfCombatDelayedTriggeredAbility ability) {
@@ -30,10 +28,5 @@ public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

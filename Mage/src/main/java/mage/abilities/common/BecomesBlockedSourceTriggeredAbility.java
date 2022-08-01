@@ -13,8 +13,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} becomes blocked, ";
-    private final boolean setTargetPointer;
+    boolean setTargetPointer;
 
     public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -23,6 +22,7 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
     public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} becomes blocked, ");
     }
 
     public BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
@@ -48,10 +48,5 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BecomesBlockedSourceTriggeredAbility copy() {
         return new BecomesBlockedSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

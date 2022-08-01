@@ -16,12 +16,12 @@ import mage.target.targetpointer.FixedTarget;
 
 public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent draws a card, ";
     boolean setTargetPointer;
 
     public DrawCardOpponentTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent draws a card, ");
     }
 
     public DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
@@ -50,10 +50,5 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

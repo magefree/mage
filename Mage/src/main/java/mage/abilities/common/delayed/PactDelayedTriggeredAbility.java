@@ -14,10 +14,9 @@ import mage.players.Player;
  */
 public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "<br>At the beginning of your next upkeep, ";
-
     public PactDelayedTriggeredAbility(ManaCosts cost) {
         super(new PactEffect(cost));
+        setTriggerPhrase("<br>At the beginning of your next upkeep, ");
     }
 
     public PactDelayedTriggeredAbility(PactDelayedTriggeredAbility ability) {
@@ -37,11 +36,6 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.isActivePlayer(this.getControllerId());
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }
 

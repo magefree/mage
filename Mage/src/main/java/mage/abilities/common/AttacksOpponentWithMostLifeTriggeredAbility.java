@@ -14,10 +14,9 @@ import java.util.Objects;
  */
 public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever this creature attacks a player, if no opponent has more life than that player, ";
-
     public AttacksOpponentWithMostLifeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever this creature attacks a player, if no opponent has more life than that player, ");
     }
 
     private AttacksOpponentWithMostLifeTriggeredAbility(final AttacksOpponentWithMostLifeTriggeredAbility ability) {
@@ -54,10 +53,5 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
     @Override
     public AttacksOpponentWithMostLifeTriggeredAbility copy() {
         return new AttacksOpponentWithMostLifeTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

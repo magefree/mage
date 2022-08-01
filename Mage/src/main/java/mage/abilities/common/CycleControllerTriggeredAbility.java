@@ -15,8 +15,6 @@ import mage.game.stack.StackObject;
 public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean excludeSource;
-    private static final String staticTriggerPhrase = "Whenever you cycle a card, ";
-    private static final String staticTriggerPhraseExcludeSource = "Whenever you cycle another card, ";
 
     public CycleControllerTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -29,6 +27,7 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
     public CycleControllerTriggeredAbility(Effect effect, boolean optional, boolean excludeSource) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.excludeSource = excludeSource;
+        setTriggerPhrase("Whenever you cycle " + (excludeSource ? "another" : "a") + " card, ");
     }
 
     private CycleControllerTriggeredAbility(final CycleControllerTriggeredAbility ability) {
@@ -56,10 +55,5 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CycleControllerTriggeredAbility copy() {
         return new CycleControllerTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return excludeSource ? staticTriggerPhraseExcludeSource : staticTriggerPhrase;
     }
 }

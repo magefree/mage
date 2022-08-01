@@ -104,7 +104,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    private String generateTriggerPhrase() { // TODO: memoize this and similarly named methods
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your end step, " + generateConditionString();

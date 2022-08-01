@@ -14,11 +14,10 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When {this} enters or leaves the battlefield, ";
-
     public EntersBattlefieldOrLeavesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("When {this} enters or leaves the battlefield, ");
     }
 
     public EntersBattlefieldOrLeavesSourceTriggeredAbility(final EntersBattlefieldOrLeavesSourceTriggeredAbility ability) {
@@ -48,10 +47,5 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

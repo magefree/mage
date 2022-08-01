@@ -15,14 +15,13 @@ import mage.game.stack.StackObject;
  */
 public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a spell or ability you control counters a spell, ";
-
     public SpellCounteredControllerTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public SpellCounteredControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a spell or ability you control counters a spell, ");
     }
 
     public SpellCounteredControllerTriggeredAbility(final SpellCounteredControllerTriggeredAbility ability) {
@@ -50,10 +49,5 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
             return (counteredStackObject instanceof Spell);
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

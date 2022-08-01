@@ -50,10 +50,9 @@ public final class AzorsElocutors extends CardImpl {
 
 class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a source deals damage to you, ";
-
     public AzorsElocutorsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.FILIBUSTER.createInstance()), false);
+        setTriggerPhrase("Whenever a source deals damage to you, ");
     }
 
     public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
@@ -74,11 +73,6 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.controllerId);
     }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
-    }
 }
 
 class AzorsElocutorsEffect extends OneShotEffect {
@@ -95,18 +89,17 @@ class AzorsElocutorsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-
-        permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source.getControllerId(), source, game);
-        if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.won(game);
+        if (permanent != null) {
+            permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source.getControllerId(), source, game);
+            if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {
+                Player player = game.getPlayer(permanent.getControllerId());
+                if (player != null) {
+                    player.won(game);
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -16,7 +16,6 @@ import java.util.UUID;
  */
 public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever enchanted creature becomes blocked, ";
     private final SetTargetPointer setTargetPointer;
 
     public BecomesBlockedAttachedTriggeredAbility(Effect effect, boolean optional) {
@@ -26,6 +25,7 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     public BecomesBlockedAttachedTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever enchanted creature becomes blocked, ");
     }
 
     public BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
@@ -62,10 +62,5 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public BecomesBlockedAttachedTriggeredAbility copy() {
         return new BecomesBlockedAttachedTriggeredAbility(this);
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

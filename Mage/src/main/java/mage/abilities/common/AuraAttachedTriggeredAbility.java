@@ -15,11 +15,9 @@ import mage.game.permanent.Permanent;
  */
 public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an Aura becomes attached to {this}, ";
-
     public AuraAttachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-
+        setTriggerPhrase("Whenever an Aura becomes attached to {this}, ");
     }
 
     public AuraAttachedTriggeredAbility(final AuraAttachedTriggeredAbility ability) {
@@ -46,9 +44,5 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public AuraAttachedTriggeredAbility copy() {
         return new AuraAttachedTriggeredAbility(this);
     }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
-    }
+    
 }

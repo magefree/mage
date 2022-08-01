@@ -13,14 +13,13 @@ import mage.game.events.GameEvent;
  */
 public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} enters the battlefield or attacks, ";
-
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} enters the battlefield or attacks, ");
     }
 
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(final EntersBattlefieldOrAttacksSourceTriggeredAbility ability) {
@@ -44,10 +43,5 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
             return true;
         }
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

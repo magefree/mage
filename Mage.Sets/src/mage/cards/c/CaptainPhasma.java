@@ -46,7 +46,7 @@ public final class CaptainPhasma extends CardImpl {
         // Nontoken Trooper creatures you control have "When this creature enters the battlefield, create 1/1/ white Trooper creature token."
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TrooperToken())
                 .setText("When this creature enters the battlefield, create a 1/1 white Trooper creature token"),
-                false);
+                false, true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 

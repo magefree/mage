@@ -15,10 +15,9 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} becomes unattached from a permanent, ";
-
     public UnattachedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} becomes unattached from a permanent, ");
     }
 
     public UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
@@ -44,8 +43,5 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
         return new UnattachedTriggeredAbility(this);
     }
 
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
-    }
+
 }

@@ -15,7 +15,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class LandfallAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a land enters the battlefield under your control, ";
     protected SetTargetPointer setTargetPointer;
     protected Permanent triggeringLand;
 
@@ -35,6 +34,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.setAbilityWord(AbilityWord.LANDFALL);
+        setTriggerPhrase("Whenever a land enters the battlefield under your control, ");
     }
 
     public LandfallAbility(final LandfallAbility ability) {
@@ -72,10 +72,5 @@ public class LandfallAbility extends TriggeredAbilityImpl {
 
     public Permanent getTriggeringPermanent() {
         return triggeringLand;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

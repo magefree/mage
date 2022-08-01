@@ -18,7 +18,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever enchanted creature is dealt damage, ";
     protected SetTargetPointer setTargetPointer;
 
     public DealtDamageAttachedTriggeredAbility(Effect effect, boolean optional) {
@@ -28,6 +27,7 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever enchanted creature is dealt damage, ");
     }
 
     public DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {
@@ -64,10 +64,5 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

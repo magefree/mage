@@ -21,8 +21,6 @@ import java.util.UUID;
  */
 public class HeroicAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you cast a spell that targets {this}, ";
-
     public HeroicAbility(Effect effect) {
         this(effect, false);
     }
@@ -36,6 +34,7 @@ public class HeroicAbility extends TriggeredAbilityImpl {
         if (isHeroic) {
             this.setAbilityWord(AbilityWord.HEROIC);
         }
+        setTriggerPhrase("Whenever you cast a spell that targets {this}, ");
     }
 
     public HeroicAbility(final HeroicAbility ability) {
@@ -84,10 +83,5 @@ public class HeroicAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }

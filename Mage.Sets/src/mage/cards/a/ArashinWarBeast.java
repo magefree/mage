@@ -47,7 +47,6 @@ public final class ArashinWarBeast extends CardImpl {
 
 class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} deals combat damage to one or more blockers, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("one or more blockers");
     
     static {
@@ -59,6 +58,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     public ArashinWarBeastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedForCombatDamageStep = false;
+        setTriggerPhrase("Whenever {this} deals combat damage to one or more blockers, ");
     }
 
     public ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
@@ -95,10 +95,5 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
             usedForCombatDamageStep = false;
         }        
         return false;
-    }
-
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
     }
 }
