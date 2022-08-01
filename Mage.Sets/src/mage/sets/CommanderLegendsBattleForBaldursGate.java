@@ -427,6 +427,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Owlbear Cub", 246, Rarity.RARE, mage.cards.o.OwlbearCub.class));
         cards.add(new SetCardInfo("Owlbear Shepherd", 247, Rarity.UNCOMMON, mage.cards.o.OwlbearShepherd.class));
         cards.add(new SetCardInfo("Pack Attack", 190, Rarity.COMMON, mage.cards.p.PackAttack.class));
+        cards.add(new SetCardInfo("Pact Weapon", 139, Rarity.MYTHIC, mage.cards.p.PactWeapon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pact Weapon", 576, Rarity.MYTHIC, mage.cards.p.PactWeapon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Parasitic Impetus", 140, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Passageway Seer", 141, Rarity.UNCOMMON, mage.cards.p.PassagewaySeer.class));
         cards.add(new SetCardInfo("Passionate Archaeologist", 656, Rarity.MYTHIC, mage.cards.p.PassionateArchaeologist.class));
