@@ -13,11 +13,11 @@ import mage.game.events.GameEvent;
  */
 public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} becomes monstrous, ";
     private int monstrosityValue;
 
     public BecomesMonstrousSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("When {this} becomes monstrous, ");
     }
 
     public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
@@ -50,5 +50,10 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
 
     public int getMonstrosityValue() {
         return monstrosityValue;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

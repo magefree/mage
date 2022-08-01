@@ -13,9 +13,10 @@ import mage.game.permanent.Permanent;
  */
 public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you play a land, ";
+
     public ControllerPlaysLandTriggeredAbility(Zone zone, Effect effect, Boolean optional) {
         super(zone, effect, optional);
-        setTriggerPhrase("Whenever you play a land, ");
     }
 
     public ControllerPlaysLandTriggeredAbility(ControllerPlaysLandTriggeredAbility ability) {
@@ -36,5 +37,10 @@ public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ControllerPlaysLandTriggeredAbility copy() {
         return new ControllerPlaysLandTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

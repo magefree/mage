@@ -15,10 +15,11 @@ import java.util.UUID;
  */
 public class PackTacticsAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks, if you attacked with creatures with total power 6 or greater this combat, ";
+
     public PackTacticsAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         this.setAbilityWord(AbilityWord.PACK_TACTICS);
-        setTriggerPhrase("Whenever {this} attacks, if you attacked with creatures with total power 6 or greater this combat, ");
     }
 
     private PackTacticsAbility(final PackTacticsAbility ability) {
@@ -48,5 +49,10 @@ public class PackTacticsAbility extends TriggeredAbilityImpl {
     @Override
     public PackTacticsAbility copy() {
         return new PackTacticsAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

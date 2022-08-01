@@ -19,6 +19,8 @@ import java.util.UUID;
  */
 public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more creatures you control deal combat damage to a player, ";
+    private static final String staticTriggerPhraseOnlyOpponents = "Whenever one or more creatures you control deal combat damage to an opponent, ";
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
     private final boolean setTargetPointer;
     private final boolean onlyOpponents;
@@ -39,8 +41,6 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
         super(zone, effect, false);
         this.setTargetPointer = setTargetPointer;
         this.onlyOpponents = onlyOpponents;
-        setTriggerPhrase("Whenever one or more creatures you control deal combat damage to "
-                              + (onlyOpponents ? "an opponent" : "a player") + ", ");
     }
 
     public DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
@@ -85,5 +85,10 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
             this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return onlyOpponents ? staticTriggerPhraseOnlyOpponents : staticTriggerPhrase;
     }
 }

@@ -94,12 +94,12 @@ class AdarkarValkyrieEffect extends OneShotEffect {
 
 class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "When target creature other than {this} dies this turn, ";
     private final MageObjectReference mor;
 
     public AdarkarValkyrieDelayedTriggeredAbility(MageObjectReference mor) {
         super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
         this.mor = mor;
-        setTriggerPhrase("When target creature other than {this} dies this turn, ");
     }
 
     public AdarkarValkyrieDelayedTriggeredAbility(final AdarkarValkyrieDelayedTriggeredAbility ability) {
@@ -130,5 +130,10 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
         getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
 
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

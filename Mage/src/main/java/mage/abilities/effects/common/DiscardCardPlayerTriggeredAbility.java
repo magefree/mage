@@ -13,6 +13,7 @@ import mage.game.events.GameEvent;
 
 public class DiscardCardPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player discards a card, ";
     private SetTargetPointer setTargetPointer;
 
     public DiscardCardPlayerTriggeredAbility(Effect effect, boolean isOptional) {
@@ -22,7 +23,6 @@ public class DiscardCardPlayerTriggeredAbility extends TriggeredAbilityImpl {
     public DiscardCardPlayerTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever a player discards a card, ");
     }
 
     private DiscardCardPlayerTriggeredAbility(final DiscardCardPlayerTriggeredAbility ability) {
@@ -43,5 +43,10 @@ public class DiscardCardPlayerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

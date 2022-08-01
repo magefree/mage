@@ -13,6 +13,8 @@ import mage.game.permanent.Permanent;
  */
 public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} is put into a graveyard from the battlefield, ";
+    private static final String staticTriggerPhraseOnlyController = "When {this} is put into your graveyard from the battlefield, ";
     private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect) {
@@ -23,7 +25,6 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         super(Zone.ALL, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
-        setTriggerPhrase("When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");
     }
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
@@ -54,5 +55,10 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         }
         this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return onlyToControllerGraveyard ? staticTriggerPhraseOnlyController : staticTriggerPhrase;
     }
 }

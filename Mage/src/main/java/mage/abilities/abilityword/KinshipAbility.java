@@ -2,6 +2,7 @@ package mage.abilities.abilityword;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -24,10 +25,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KinshipAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "At the beginning of your upkeep, ";
+
     public KinshipAbility(Effect kinshipEffect) {
         super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);
         this.setAbilityWord(AbilityWord.KINSHIP);
-        setTriggerPhrase("At the beginning of your upkeep, ");
     }
 
     public KinshipAbility(final KinshipAbility ability) {
@@ -56,6 +58,11 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

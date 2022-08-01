@@ -21,6 +21,9 @@ import java.util.UUID;
  */
 public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you gain life for the first time each turn, ";
+    private static final String staticTriggerPhraseWhen = "When you gain life for the first time each turn, ";
+
     private static final Hint hint = new ConditionHint(GainLifeCondition.instance);
     private final boolean when;
 
@@ -33,7 +36,6 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         this.when = when;
         this.addWatcher(new GainLifeFirstTimeWatcher());
         this.addHint(hint);
-        setTriggerPhrase("When" + (when ? "" : "ever") + " you gain life for the first time each turn, ");
     }
 
     private GainLifeFirstTimeTriggeredAbility(final GainLifeFirstTimeTriggeredAbility ability) {
@@ -55,6 +57,11 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public GainLifeFirstTimeTriggeredAbility copy() {
         return new GainLifeFirstTimeTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return when ? staticTriggerPhraseWhen : staticTriggerPhrase;
     }
 }
 

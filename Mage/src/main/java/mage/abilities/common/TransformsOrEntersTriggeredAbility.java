@@ -12,9 +12,10 @@ import mage.game.permanent.Permanent;
  */
 public class TransformsOrEntersTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever this creature enters the battlefield or transforms into {this}, ";
+
     public TransformsOrEntersTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever this creature enters the battlefield or transforms into {this}, ");
     }
 
     private TransformsOrEntersTriggeredAbility(final TransformsOrEntersTriggeredAbility ability) {
@@ -45,5 +46,10 @@ public class TransformsOrEntersTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

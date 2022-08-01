@@ -13,6 +13,7 @@ import mage.game.stack.Spell;
  */
 public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you cast this spell, ";
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public CastSourceTriggeredAbility(Effect effect) {
@@ -22,7 +23,6 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     public CastSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.STACK, effect, optional);
         this.ruleAtTheTop = true;
-        setTriggerPhrase("When you cast this spell, ");
     }
 
     public CastSourceTriggeredAbility(final CastSourceTriggeredAbility ability) {
@@ -54,5 +54,10 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue("spellCast", spell);
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

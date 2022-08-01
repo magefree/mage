@@ -28,13 +28,6 @@ import java.util.UUID;
  */
 public final class BoneyardScourge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Dragon you control");
-
-    static {
-        filter.add(SubType.DRAGON.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public BoneyardScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
@@ -46,9 +39,10 @@ public final class BoneyardScourge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay 1B. If you do, return Boneyard Scourge from your graveyard to the battlefield.
-        TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")),
-                filter);
+        TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(new DoIfCostPaid(
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ManaCostsImpl<>("{1}{B}"))
+        );
         this.addAbility(ability);
     }
 
@@ -64,17 +58,20 @@ public final class BoneyardScourge extends CardImpl {
 
 class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterCreaturePermanent filter;
+    private static final String staticTriggerPhrase = "Whenever a Dragon you control dies while {this} is in your graveyard, ";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Dragon you control");
 
-    public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
+    static {
+        filter.add(SubType.DRAGON.getPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
+
+    public DiesWhileInGraveyardTriggeredAbility(Effect effect) {
         super(Zone.GRAVEYARD, effect, false);
-        this.filter = filter;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
     }
 
     public DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -99,5 +96,10 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         return filter.match(zEvent.getTarget(), controllerId,this, game);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

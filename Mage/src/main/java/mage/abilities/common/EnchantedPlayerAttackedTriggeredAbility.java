@@ -13,9 +13,10 @@ import mage.players.Player;
  */
 public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever enchanted player is attacked, ";
+
     public EnchantedPlayerAttackedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever enchanted player is attacked, ");
     }
 
     public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
@@ -42,4 +43,8 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
         return new EnchantedPlayerAttackedTriggeredAbility(this);
     }
 
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
+    }
 }

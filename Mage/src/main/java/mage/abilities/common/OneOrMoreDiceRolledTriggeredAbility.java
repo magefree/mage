@@ -14,13 +14,14 @@ import mage.game.events.GameEvent;
  */
 public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you roll one or more dice, ";
+
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever you roll one or more dice, ");
     }
 
     private OneOrMoreDiceRolledTriggeredAbility(final OneOrMoreDiceRolledTriggeredAbility effect) {
@@ -65,5 +66,10 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return super.getRule();
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

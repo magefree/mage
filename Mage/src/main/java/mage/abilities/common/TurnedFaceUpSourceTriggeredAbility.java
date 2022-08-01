@@ -15,6 +15,7 @@ import mage.target.targetpointer.FixedTarget;
 
 public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} is turned face up, ";
     private boolean setTargetPointer;
 
     public TurnedFaceUpSourceTriggeredAbility(Effect effect) {
@@ -30,7 +31,6 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         // has to be set so the ability triggers if card is turn faced up
         this.setWorksFaceDown(true);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When {this} is turned face up, ");
     }
 
     public TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {
@@ -59,5 +59,10 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

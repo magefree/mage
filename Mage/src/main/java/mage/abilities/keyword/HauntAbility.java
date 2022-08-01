@@ -38,20 +38,21 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HauntAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When the creature {this} haunts dies, ";
+    private static final String staticTriggerPhraseCreatureHaunt = "When {this} enters the battlefield or the creature it haunts dies, ";
     private boolean usedFromExile = false;
+    private boolean creatureHaunt;
 
     public HauntAbility(Card card, Effect effect) {
         super(Zone.ALL, effect, false);
-        boolean creatureHaunt = card.isCreature();
+        this.creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
-        setTriggerPhrase((creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
-                                        : "When the creature {this} haunts dies, ")
-        );
     }
 
     private HauntAbility(final HauntAbility ability) {
         super(ability);
         this.usedFromExile = ability.usedFromExile;
+        this.creatureHaunt = ability.creatureHaunt;
     }
 
     @Override
@@ -103,6 +104,11 @@ public class HauntAbility extends TriggeredAbilityImpl {
                 }
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return creatureHaunt ? staticTriggerPhraseCreatureHaunt : staticTriggerPhrase;
     }
 }
 

@@ -10,6 +10,7 @@ import mage.target.targetpointer.FixedTarget;
 
 public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks and isn't blocked, ";
     private final boolean setTargetPointer;
 
     public AttacksAndIsNotBlockedTriggeredAbility(Effect effect) {
@@ -23,7 +24,6 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
     public AttacksAndIsNotBlockedTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever {this} attacks and isn't blocked, ");
     }
 
     public AttacksAndIsNotBlockedTriggeredAbility(final AttacksAndIsNotBlockedTriggeredAbility ability) {
@@ -52,5 +52,10 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
             ));
         }
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

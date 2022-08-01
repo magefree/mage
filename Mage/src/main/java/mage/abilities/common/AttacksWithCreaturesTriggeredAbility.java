@@ -14,6 +14,7 @@ import mage.util.CardUtil;
  */
 public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you attack, ";
     private final FilterCreaturePermanent filter;
     private final int minAttackers;
 
@@ -29,9 +30,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect);
         this.filter = filter;
         this.minAttackers = minAttackers;
-        if (minAttackers == 1) {
-            setTriggerPhrase("Whenever you attack, ");
-        } else {
+        if (minAttackers != 1) {
             StringBuilder sb = new StringBuilder("Whenever you attack with ");
             sb.append(CardUtil.numberToText(minAttackers));
             sb.append(" or more ");
@@ -75,5 +74,10 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue("attackers", attackers);
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return minAttackers != 1 ? staticTriggerPhrase : super.getStaticTriggerPhrase();
     }
 }

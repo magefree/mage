@@ -15,9 +15,10 @@ import mage.game.events.GameEvent;
 
 public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} deals damage, ";
+
     public DealsDamageGainLifeSourceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
-        setTriggerPhrase("Whenever {this} deals damage, ");
     }
 
     public DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
@@ -43,5 +44,10 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

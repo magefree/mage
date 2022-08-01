@@ -13,13 +13,14 @@ import mage.game.events.GameEvent;
  */
 public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you draw a card, ";
+
     public DrawCardControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, optional);
     }
 
     public DrawCardControllerTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
-        setTriggerPhrase("Whenever you draw a card, ");
     }
 
     public DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
@@ -39,5 +40,10 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public DrawCardControllerTriggeredAbility copy() {
         return new DrawCardControllerTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

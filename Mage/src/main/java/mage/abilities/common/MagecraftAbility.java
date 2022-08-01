@@ -13,6 +13,7 @@ import mage.game.stack.Spell;
  */
 public class MagecraftAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast or copy an instant or sorcery spell, ";
     public static final String SPELL_KEY = "castCopiedSpell";
 
     public MagecraftAbility(Effect effect) {
@@ -22,7 +23,6 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     public MagecraftAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setAbilityWord(AbilityWord.MAGECRAFT);
-        setTriggerPhrase("Whenever you cast or copy an instant or sorcery spell, ");
     }
 
     private MagecraftAbility(final MagecraftAbility ability) {
@@ -50,5 +50,10 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     @Override
     public MagecraftAbility copy() {
         return new MagecraftAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

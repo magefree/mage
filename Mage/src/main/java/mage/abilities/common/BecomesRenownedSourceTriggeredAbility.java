@@ -12,11 +12,11 @@ import mage.game.events.GameEvent;
  */
 public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} becomes renowned, ";
     private int renownValue;
 
     public BecomesRenownedSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("When {this} becomes renowned, ");
     }
 
     public BecomesRenownedSourceTriggeredAbility(final BecomesRenownedSourceTriggeredAbility ability) {
@@ -45,5 +45,10 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
 
     public int getRenownValue() {
         return renownValue;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

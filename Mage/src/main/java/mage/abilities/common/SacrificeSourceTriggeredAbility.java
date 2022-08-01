@@ -13,6 +13,7 @@ import mage.target.targetpointer.FixedTarget;
 
 public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you sacrifice {this}, ";
     private final boolean setTargetPointer;
 
     public SacrificeSourceTriggeredAbility(Effect effect, boolean optional) {
@@ -22,7 +23,6 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
     public SacrificeSourceTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.ALL, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When you sacrifice {this}, ");
     }
 
     public SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
@@ -49,5 +49,10 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         }
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

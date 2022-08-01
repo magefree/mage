@@ -11,13 +11,14 @@ import mage.game.events.GameEvent;
  */
 public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever day becomes night or night becomes day, ";
+
     public BecomesDayOrNightTriggeredAbility(Effect effect) {
         this(Zone.BATTLEFIELD, effect);
     }
 
     public BecomesDayOrNightTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
-        setTriggerPhrase("Whenever day becomes night or night becomes day, ");
     }
 
     private BecomesDayOrNightTriggeredAbility(final BecomesDayOrNightTriggeredAbility ability) {
@@ -37,5 +38,10 @@ public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BecomesDayOrNightTriggeredAbility copy() {
         return new BecomesDayOrNightTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

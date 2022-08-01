@@ -13,9 +13,10 @@ import mage.game.events.GameEvent;
  */
 public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When {this} becomes exerted, ";
+
     public BecomesExertSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("When {this} becomes exerted, ");
     }
 
     public BecomesExertSourceTriggeredAbility(final BecomesExertSourceTriggeredAbility ability) {
@@ -35,5 +36,10 @@ public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

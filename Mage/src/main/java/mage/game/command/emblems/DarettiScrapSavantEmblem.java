@@ -36,9 +36,10 @@ public final class DarettiScrapSavantEmblem extends Emblem {
 
 class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an artifact is put into your graveyard from the battlefield, ";
+
     DarettiScrapSavantTriggeredAbility() {
         super(Zone.COMMAND, new DarettiScrapSavantEffect(), false);
-        setTriggerPhrase("Whenever an artifact is put into your graveyard from the battlefield, ");
     }
 
     DarettiScrapSavantTriggeredAbility(final DarettiScrapSavantTriggeredAbility ability) {
@@ -65,6 +66,11 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

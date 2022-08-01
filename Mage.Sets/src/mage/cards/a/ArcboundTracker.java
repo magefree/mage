@@ -51,9 +51,10 @@ public final class ArcboundTracker extends CardImpl {
 
 class ArcboundTrackerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast a spell other than your first spell each turn, ";
+
     public ArcboundTrackerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        setTriggerPhrase("Whenever you cast a spell other than your first spell each turn, ");
     }
 
     private ArcboundTrackerTriggeredAbility(final ArcboundTrackerTriggeredAbility ability) {
@@ -77,5 +78,10 @@ class ArcboundTrackerTriggeredAbility extends TriggeredAbilityImpl {
             return watcher != null && watcher.getSpellsCastThisTurn(event.getPlayerId()).size() > 1;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

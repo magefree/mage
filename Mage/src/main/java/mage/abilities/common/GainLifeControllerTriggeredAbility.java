@@ -12,6 +12,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you gain life, ";
     private final boolean setTargetPointer;
 
     public GainLifeControllerTriggeredAbility(Effect effect) {
@@ -25,7 +26,6 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever you gain life, ");
     }
 
     public GainLifeControllerTriggeredAbility(final GainLifeControllerTriggeredAbility ability) {
@@ -53,5 +53,10 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

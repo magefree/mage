@@ -49,9 +49,10 @@ public final class AzoriusAethermage extends CardImpl {
 
 class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent is returned to your hand, ";
+
     public AzoriusAEthermageAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever a permanent is returned to your hand, ");
     }
 
     private AzoriusAEthermageAbility(final AzoriusAEthermageAbility ability) {
@@ -85,5 +86,10 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
     @Override
     public AzoriusAEthermageAbility copy() {
         return new AzoriusAEthermageAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

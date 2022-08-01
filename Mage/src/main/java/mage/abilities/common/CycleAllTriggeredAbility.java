@@ -16,9 +16,10 @@ import mage.game.stack.StackObject;
  */
 public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player cycles a card, ";
+
     public CycleAllTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever a player cycles a card, ");
     }
 
     public CycleAllTriggeredAbility(final CycleAllTriggeredAbility ability) {
@@ -43,5 +44,10 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CycleAllTriggeredAbility copy() {
         return new CycleAllTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

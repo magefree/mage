@@ -43,9 +43,10 @@ public final class BlackVise extends CardImpl {
 
 class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "At the beginning of the chosen player's upkeep, ";
+
     public BlackViseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BlackViseEffect(), false);
-        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
     public BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
@@ -65,6 +66,11 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 
@@ -88,13 +94,14 @@ class BlackViseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         Player chosenPlayer = game.getPlayer(playerId);
-        if (chosenPlayer != null) {
-            int damage = chosenPlayer.getHand().size() - 4;
-            if (damage > 0) {
-                chosenPlayer.damage(damage, source.getSourceId(), source, game);
-            }
-            return true;
+        if (chosenPlayer == null) {
+            return false;
         }
-        return false;
+
+        int damage = chosenPlayer.getHand().size() - 4;
+        if (damage > 0) {
+            chosenPlayer.damage(damage, source.getSourceId(), source, game);
+        }
+        return true;
     }
 }

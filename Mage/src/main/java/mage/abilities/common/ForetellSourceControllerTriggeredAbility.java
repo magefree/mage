@@ -13,9 +13,10 @@ import mage.players.Player;
  */
 public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you foretell a card, ";
+
     public ForetellSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever you foretell a card, ");
     }
 
     public ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
@@ -41,4 +42,8 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
         return new ForetellSourceControllerTriggeredAbility(this);
     }
 
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
+    }
 }

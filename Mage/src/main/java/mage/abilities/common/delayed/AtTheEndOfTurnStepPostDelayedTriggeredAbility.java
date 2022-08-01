@@ -11,6 +11,8 @@ import mage.game.events.GameEvent;
  */
 public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "At end of turn ";
+
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -18,7 +20,6 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
         super(effect);
         this.usesStack = usesStack;
-        setTriggerPhrase("At end of turn ");
     }
 
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(AtTheEndOfTurnStepPostDelayedTriggeredAbility ability) {
@@ -38,5 +39,10 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

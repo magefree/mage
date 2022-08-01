@@ -12,9 +12,10 @@ import mage.target.targetpointer.FixedTarget;
 
 public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an opponent sacrifices a nontoken permanent, ";
+
     public OpponentSacrificesPermanentTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever an opponent sacrifices a nontoken permanent, ");
     }
 
     public OpponentSacrificesPermanentTriggeredAbility(final OpponentSacrificesPermanentTriggeredAbility ability) {
@@ -45,4 +46,8 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
         return new OpponentSacrificesPermanentTriggeredAbility(this);
     }
 
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
+    }
 }

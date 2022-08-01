@@ -54,41 +54,41 @@ public final class AAT1 extends CardImpl {
     public AAT1 copy() {
         return new AAT1(this);
     }
-
-    private static class AAT1TriggeredAbility extends TriggeredAbilityImpl {
-
-        public AAT1TriggeredAbility(Effect effect) {
-            super(Zone.BATTLEFIELD, effect);
-            setTriggerPhrase("Whenever a repair counter is removed from a creature card in your graveyard ");
-        }
-
-        public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null
-                    && event.getPlayerId().equals(game.getControllerId(sourceId))
-                    && card.isCreature(game)
-                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && event.getData().equals("repair")) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public AAT1TriggeredAbility copy() {
-            return new AAT1TriggeredAbility(this);
-        }
-    }
 }
 
+class AAT1TriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a repair counter is removed from a creature card in your graveyard ";
+    public AAT1TriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Card card = game.getCard(event.getTargetId());
+        return card != null
+                && event.getPlayerId().equals(game.getControllerId(sourceId))
+                && card.isCreature(game)
+                && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                && event.getData().equals("repair");
+    }
+
+    @Override
+    public AAT1TriggeredAbility copy() {
+        return new AAT1TriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
+    }
+}

@@ -38,22 +38,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         this.filter = filter.copy();
         this.setTargetPointer = setTargetPointer;
         this.filter.add(targetController.getOwnerPredicate());
-        StringBuilder sb = new StringBuilder("Whenever ");
-        sb.append(filter.getMessage());
-        sb.append(filter.getMessage().startsWith("one or more") ? " are" : " is");
-        sb.append(" put into ");
-        switch (targetController) {
-            case OPPONENT:
-                sb.append("an opponent's");
-                break;
-            case YOU:
-                sb.append("your");
-                break;
-            default:
-                sb.append('a');
-        }
-        sb.append(" graveyard from anywhere, ");
-        setTriggerPhrase(sb.toString());
+        setTriggerPhrase(generateTriggerPhrase(targetController));
     }
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
@@ -92,5 +77,25 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
         }
         return true;
+    }
+
+    private String generateTriggerPhrase(TargetController targetController) {
+        StringBuilder sb = new StringBuilder("Whenever ");
+        sb.append(filter.getMessage());
+        sb.append(filter.getMessage().startsWith("one or more") ? " are" : " is");
+        sb.append(" put into ");
+        switch (targetController) {
+            case OPPONENT:
+                sb.append("an opponent's");
+                break;
+            case YOU:
+                sb.append("your");
+                break;
+            default:
+                sb.append('a');
+        }
+        sb.append(" graveyard from anywhere, ");
+
+        return sb.toString();
     }
 }

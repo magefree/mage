@@ -13,6 +13,8 @@ import mage.game.events.GameEvent;
  */
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} is dealt damage, ";
+
     public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
@@ -22,7 +24,6 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (enrage) {
             this.setAbilityWord(AbilityWord.ENRAGE);
         }
-        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
@@ -53,5 +54,10 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

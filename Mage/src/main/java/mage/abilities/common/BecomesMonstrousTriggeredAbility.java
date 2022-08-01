@@ -14,9 +14,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a creature you control becomes monstrous, ";
+
     public BecomesMonstrousTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever a creature you control becomes monstrous, ");
     }
 
     public BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
@@ -42,5 +43,10 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

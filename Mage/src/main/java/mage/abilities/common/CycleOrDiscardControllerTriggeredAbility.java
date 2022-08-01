@@ -13,13 +13,14 @@ import mage.game.events.GameEvent;
  */
 public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cycle or discard a card, ";
+
     public CycleOrDiscardControllerTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public CycleOrDiscardControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever you cycle or discard a card, ");
     }
 
     public CycleOrDiscardControllerTriggeredAbility(final CycleOrDiscardControllerTriggeredAbility ability) {
@@ -39,5 +40,10 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
     @Override
     public CycleOrDiscardControllerTriggeredAbility copy() {
         return new CycleOrDiscardControllerTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

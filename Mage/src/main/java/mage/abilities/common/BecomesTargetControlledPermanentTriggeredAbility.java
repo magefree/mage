@@ -16,9 +16,10 @@ import java.util.*;
  */
 public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a permanent you control becomes the target of a spell or ability an opponent controls, ";
+
     public BecomesTargetControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever a permanent you control becomes the target of a spell or ability an opponent controls, ");
     }
 
     private BecomesTargetControlledPermanentTriggeredAbility(final BecomesTargetControlledPermanentTriggeredAbility ability) {
@@ -69,5 +70,10 @@ public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredA
         targetMap.put(event.getTargetId(), sourceObjects);
         game.getState().setValue("targetMap" + this.id, targetMap);
         return true;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

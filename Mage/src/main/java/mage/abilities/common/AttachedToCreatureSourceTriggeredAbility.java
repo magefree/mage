@@ -12,9 +12,10 @@ import mage.game.permanent.Permanent;
  */
 public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "As {this} becomes attached to a creature, ";
+
     public AttachedToCreatureSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("As {this} becomes attached to a creature, ");
     }
 
     public AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
@@ -37,5 +38,10 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
     @Override
     public AttachedToCreatureSourceTriggeredAbility copy() {
         return new AttachedToCreatureSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

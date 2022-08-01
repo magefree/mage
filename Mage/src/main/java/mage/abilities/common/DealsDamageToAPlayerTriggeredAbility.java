@@ -14,6 +14,9 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeff
  */
 public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final String staticTriggerPhrase = "Whenever {this} deals damage to a player, ";
+    private static final String staticTriggerPhraseOrPlaneswalker = "Whenever {this} deals damage to a player or planeswalker, ";
     private final boolean setTargetPointer;
     private final boolean orPlaneswalker;
 
@@ -29,7 +32,6 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.orPlaneswalker = orPlaneswalker;
-        setTriggerPhrase("Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", ");
     }
 
     public DealsDamageToAPlayerTriggeredAbility(final DealsDamageToAPlayerTriggeredAbility ability) {
@@ -67,5 +69,11 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
             getEffects().setValue("damage", event.getAmount());
         }
         return true;
+    }
+
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return orPlaneswalker ? staticTriggerPhraseOrPlaneswalker : staticTriggerPhrase;
     }
 }

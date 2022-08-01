@@ -16,10 +16,11 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} attacks for the first time each turn, ";
+
     public AttacksFirstTimeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.addWatcher(new AttackedThisTurnWatcher());
-        setTriggerPhrase("Whenever {this} attacks for the first time each turn, ");
     }
 
     public AttacksFirstTimeTriggeredAbility(final AttacksFirstTimeTriggeredAbility ability) {
@@ -56,5 +57,10 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AttacksFirstTimeTriggeredAbility copy() {
         return new AttacksFirstTimeTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

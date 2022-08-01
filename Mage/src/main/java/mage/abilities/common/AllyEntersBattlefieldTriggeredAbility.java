@@ -15,10 +15,11 @@ import mage.game.events.GameEvent;
  */
 public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} or another Ally enters the battlefield under your control, ";
+
     public AllyEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setAbilityWord(AbilityWord.RALLY);
-        setTriggerPhrase("Whenever {this} or another Ally enters the battlefield under your control, ");
     }
 
     public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {
@@ -41,5 +42,10 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public AllyEntersBattlefieldTriggeredAbility copy() {
         return new AllyEntersBattlefieldTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -44,9 +44,10 @@ public final class BlindCreeper extends CardImpl {
 
 class BlindCreeperAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever a player casts a spell, ";
+
     public BlindCreeperAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false);
-        setTriggerPhrase("Whenever a player casts a spell, ");
     }
 
     public BlindCreeperAbility(final BlindCreeperAbility ability) {
@@ -66,5 +67,10 @@ class BlindCreeperAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getStack().getSpell(event.getTargetId()) != null;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

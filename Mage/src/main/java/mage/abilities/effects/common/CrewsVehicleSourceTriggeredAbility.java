@@ -10,10 +10,11 @@ import mage.target.targetpointer.FixedTarget;
 
 public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever {this} crews a Vehicle, ";
+
     public CrewsVehicleSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         this.addIcon(CrewAbilityIcon.instance);
-        setTriggerPhrase("Whenever {this} crews a Vehicle, ");
     }
 
     public CrewsVehicleSourceTriggeredAbility(final CrewsVehicleSourceTriggeredAbility ability) {
@@ -40,5 +41,10 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

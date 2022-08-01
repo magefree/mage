@@ -53,11 +53,11 @@ public final class BlazeCommando extends CardImpl {
 
 class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever an instant or sorcery spell you control deals damage, ";
     private final List<UUID> handledStackObjects = new ArrayList<>();
 
     public BlazeCommandoTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste(), 2), false);
-        setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage, ");
     }
 
     public BlazeCommandoTriggeredAbility(final BlazeCommandoTriggeredAbility ability) {
@@ -90,17 +90,24 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(game.getControllerId(event.getSourceId()))) {
-            MageObject damageSource = game.getObject(event.getSourceId());
-            if (damageSource != null) {
-                if (damageSource.isInstantOrSorcery(game)) {
-                    if (!handledStackObjects.contains(damageSource.getId())) {
-                        handledStackObjects.add(damageSource.getId());
-                        return true;
-                    }
-                }
-            }
+        if (!isControlledBy(game.getControllerId(event.getSourceId()))) {
+            return false;
+        }
+
+        MageObject damageSource = game.getObject(event.getSourceId());
+        if (damageSource == null || !damageSource.isInstantOrSorcery(game)) {
+            return false;
+        }
+
+        if (!handledStackObjects.contains(damageSource.getId())) {
+            handledStackObjects.add(damageSource.getId());
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

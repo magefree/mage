@@ -27,6 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private boolean doOnlyOnce = false;
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
+    private static final String staticTriggerPhraseEmpty = "";
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -231,7 +232,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public String getStaticTriggerPhrase() {
-        return "";
+        return staticTriggerPhraseEmpty;
     }
 
     @Override

@@ -20,10 +20,6 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
     protected final Zone fromZone;
     protected final Zone toZone;
 
-    public ZoneChangeAllTriggeredAbility(Zone zone, Zone toZone, Effect effect, FilterPermanent filter, String triggerPhrase, boolean optional) {
-        this(zone, null, toZone, effect, filter, triggerPhrase, optional);
-    }
-
     public ZoneChangeAllTriggeredAbility(Zone zone, Zone fromZone, Zone toZone, Effect effect, FilterPermanent filter, String triggerPhrase, boolean optional) {
         super(zone, effect, optional);
         if (fromZone == Zone.BATTLEFIELD) {

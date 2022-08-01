@@ -123,6 +123,7 @@ public class DungeonRoom {
 
 class RoomTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When you enter this room, ";
     private final DungeonRoom room;
 
     RoomTriggeredAbility(DungeonRoom room, Effect... effects) {
@@ -132,7 +133,6 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
             this.addEffect(effect);
         }
         this.setRuleVisible(false);
-        setTriggerPhrase("When you enter this room, ");
     }
 
     RoomTriggeredAbility(DungeonRoom room, final RoomTriggeredAbility ability) {
@@ -164,5 +164,10 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return super.getRule() + " <i>(" + room.getName() + ")</i>";
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

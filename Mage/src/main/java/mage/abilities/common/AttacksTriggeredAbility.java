@@ -17,6 +17,7 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     protected final String text;
     protected final SetTargetPointer setTargetPointer;
+    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
 
     public AttacksTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -34,7 +35,6 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.text = text;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
     public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
@@ -73,5 +73,10 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AttacksTriggeredAbility copy() {
         return new AttacksTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

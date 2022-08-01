@@ -15,9 +15,10 @@ import java.util.Objects;
  */
 public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever one or more cards leave your graveyard, ";
+
     public CardsLeaveGraveyardTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("Whenever one or more cards leave your graveyard, ");
     }
 
     private CardsLeaveGraveyardTriggeredAbility(final CardsLeaveGraveyardTriggeredAbility ability) {
@@ -46,5 +47,10 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CardsLeaveGraveyardTriggeredAbility copy() {
         return new CardsLeaveGraveyardTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

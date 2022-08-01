@@ -34,7 +34,7 @@ public final class RocketTrooper extends CardImpl {
         // Trooper creatures you control have "Whenever this creature enters the battlefield, it deals 1 damage to target creature an opponent controls".
         Effect effect = new DamageTargetEffect(1);
         effect.setText("Whenever this creature enters the battlefield, it deals 1 damage to target creature an opponent controls");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield,

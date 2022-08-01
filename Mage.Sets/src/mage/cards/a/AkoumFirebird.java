@@ -59,9 +59,10 @@ public final class AkoumFirebird extends CardImpl {
 
 class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, ";
+
     public AkoumFirebirdLandfallAbility(Effect effect, boolean optional) {
         this(Zone.GRAVEYARD, effect, optional);
-        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, ");
     }
 
     public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {
@@ -86,5 +87,10 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
     @Override
     public AkoumFirebirdLandfallAbility copy() {
         return new AkoumFirebirdLandfallAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }

@@ -74,24 +74,29 @@ class BaronVonCountPutCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
             mageObject = game.getObject(source);
-        }
-        if (controller != null && mageObject != null) {
-            Integer doomNumber = 5;
-            game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
-                // This isn't exactly correct - from what I understand from Maro's rulings, the game "can't see" the counter on Baron (i.e. the original counter can't be removed by Vampire Hexmage etc.), 
-                // but it can still be proliferated to put an additional doom counter on itself (the new counters can be removed and aren't placed on the "numbers" - i.e. they don't influence the card's 
-                // functionality in any direct way). To simplify things, I merely put a do-nothing Doom counter on Baron that can be proliferated, etc., in addition to the value that tracks the 
-                // the placement of the functional "counter". This only has fringe incorrect interactions with a few cards like Thief of Blood which now gets an extra counter from Baron.
-                new AddCountersSourceEffect(CounterType.DOOM.createInstance()).apply(game, source);
+            if (mageObject == null) {
+                return false;
             }
-            return true;
         }
-        return false;
+
+        Integer doomNumber = 5;
+        game.getState().setValue(mageObject.getId() + "_doom", doomNumber);
+        if (mageObject instanceof Permanent) {
+            ((Permanent) mageObject).addInfo("doom counter", CardUtil.addToolTipMarkTags("Doom counter at: " + doomNumber), game);
+            // This isn't exactly correct - from what I understand from Maro's rulings, the game "can't see" the counter on Baron (i.e. the original counter can't be removed by Vampire Hexmage etc.),
+            // but it can still be proliferated to put an additional doom counter on itself (the new counters can be removed and aren't placed on the "numbers" - i.e. they don't influence the card's
+            // functionality in any direct way). To simplify things, I merely put a do-nothing Doom counter on Baron that can be proliferated, etc., in addition to the value that tracks the
+            // the placement of the functional "counter". This only has fringe incorrect interactions with a few cards like Thief of Blood which now gets an extra counter from Baron.
+            new AddCountersSourceEffect(CounterType.DOOM.createInstance()).apply(game, source);
+        }
+        return true;
     }
 
     @Override
@@ -102,9 +107,10 @@ class BaronVonCountPutCounterEffect extends OneShotEffect {
 
 class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ";
+
     public BaronVonCountTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountMoveDoomCounterEffect());
-        setTriggerPhrase("Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ");
     }
 
     public BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
@@ -123,33 +129,43 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Permanent sourcePermanent = game.getPermanent(getSourceId());
-            MageObject mageObject = game.getObject(getSourceId());
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell == null || sourcePermanent == null || mageObject == null) {
-                return false;
-            }
-            Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
-            if (doomNumber == null || doomNumber == 0) {
-                return false;
-            }
-            if (!spell.isFaceDown(game)) {
-                String doomString = doomNumber.toString();
-                if (spell.getCard().getManaCost().getText().contains(doomString)
-                        || String.valueOf(spell.getPower().getBaseValue()).contains(doomString)
-                        || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
+        if (!event.getPlayerId().equals(this.getControllerId())) {
+            return false;
+        }
+
+        Permanent sourcePermanent = game.getPermanent(getSourceId());
+        MageObject mageObject = game.getObject(getSourceId());
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || sourcePermanent == null || mageObject == null) {
+            return false;
+        }
+
+        Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
+        if (doomNumber == null || doomNumber == 0) {
+            return false;
+        }
+
+        if (spell.isFaceDown(game)) {
+            return false;
+        }
+        String doomString = doomNumber.toString();
+        if (spell.getCard().getManaCost().getText().contains(doomString)
+                || String.valueOf(spell.getPower().getBaseValue()).contains(doomString)
+                || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
+            return true;
+        } else {
+            for (String string : spell.getCard().getRules()) {
+                if (string.contains(doomString)) {
                     return true;
-                } else {
-                    for (String string : spell.getCard().getRules()) {
-                        if (string.contains(doomString)) {
-                            return true;
-                        }
-                    }
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 
@@ -196,10 +212,11 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
 
 class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final String staticTriggerPhrase = "When the doom counter moves from \"1,\" ";
+
     public BaronVonCountSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountDestroyPlayerEffect());
         this.addTarget(new TargetPlayer());
-        setTriggerPhrase("When the doom counter moves from \"1,\" ");
     }
 
     public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
@@ -219,6 +236,11 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BaronVonCountSecondTriggeredAbility copy() {
         return new BaronVonCountSecondTriggeredAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
 

@@ -12,6 +12,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class BountyAbility extends DiesCreatureTriggeredAbility {
 
+    private static final String staticTriggerPhrase = "<i>Bounty</i> &mdash; ";
     private static final FilterCreaturePermanent bountyCounterFilter = new FilterCreaturePermanent("creature an opponent controls with a bounty counter on it");
 
     static {
@@ -29,7 +30,6 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
 
     public BountyAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(effect, optional, bountyCounterFilter, setTargetPointer);
-        setTriggerPhrase("<i>Bounty</i> &mdash; ");
     }
 
     public BountyAbility(final BountyAbility ability) {
@@ -39,5 +39,10 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     @Override
     public BountyAbility copy() {
         return new BountyAbility(this);
+    }
+
+    @Override
+    public String getStaticTriggerPhrase() {
+        return staticTriggerPhrase;
     }
 }
