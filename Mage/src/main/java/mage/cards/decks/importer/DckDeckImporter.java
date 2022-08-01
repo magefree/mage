@@ -1,5 +1,6 @@
 package mage.cards.decks.importer;
 
+import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
@@ -38,6 +39,8 @@ public class DckDeckImporter extends PlainTextDeckImporter {
         if (line.isEmpty() || line.startsWith("#")) {
             return;
         }
+        
+        line = CardNameUtil.normalizeCardName(line);
 
         // AUTO-FIX apply (if card number was fixed before then it can be replaced in layout or other lines too)
         for (Map.Entry<String, String> fix : this.possibleFixes.entrySet()) {
